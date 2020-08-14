@@ -1,0 +1,92 @@
+[
+  {
+    "lang": "Dansk",
+    "locale": "da",
+    "title": "Aktiv Kristendom",
+    "url": "https://aktivkristendom.dk/"
+  },
+  {
+    "lang": "Deutsch",
+    "locale": "de",
+    "title": "Aktives Christentum",
+    "url": "https://aktiveschristentum.de/"
+  },
+  {
+    "lang": "English",
+    "locale": "en",
+    "title": "ActiveChristianity",
+    "url": "https://activechristianity.org/"
+  },
+  {
+    "lang": "Español",
+    "locale": "es",
+    "title": "Christianismo Activo",
+    "url": "https://cristianismoactivo.org/"
+  },
+  {
+    "lang": "Suomi",
+    "locale": "fi",
+    "title": "Aktiivikristinusko",
+    "url": "https://aktiivikristinusko.fi/"
+  },
+  {
+    "lang": "Français",
+    "locale": "fr",
+    "title": "Christianisme Actif",
+    "url": "https://christianismeactif.fr/"
+  },
+  {
+    "lang": "Magyar",
+    "locale": "hu",
+    "title": "Aktivkeresztenyseg",
+    "url": "https://aktivkeresztenyseg.hu/"
+  },
+  {
+    "lang": "Italiano",
+    "locale": "it",
+    "title": "CristianesimoAttivo",
+    "url": "https://cristianesimoattivo.it/"
+  },
+  {
+    "lang": "Norsk",
+    "locale": "nb",
+    "title": "AktivKristendom",
+    "url": "https://aktivkristendom.no/"
+  },
+  {
+    "lang": "Nederlands",
+    "locale": "nl",
+    "title": "Christen Zijn",
+    "url": "https://christenzijn.nl/"
+  },
+  {
+    "lang": "Polski",
+    "locale": "pl",
+    "title": "Aktywne Chrześcijaństwo",
+    "url": "https://aktywnechrzescijanstwo.pl/"
+  },
+  {
+    "lang": "Português",
+    "locale": "pt",
+    "title": "Cristianismo Ativo",
+    "url": "https://cristianismoativo.org/"
+  },
+  {
+    "lang": "Română",
+    "locale": "ro",
+    "title": "Crestinism Activ",
+    "url": "https://crestinismactiv.ro/"
+  },
+  {
+    "lang": "Русский",
+    "locale": "ru",
+    "title": "Активное христианство",
+    "url": "https://aktivnoyekhristianstvo.ru/"
+  },
+  {
+    "lang": "Svenska",
+    "locale": "sv",
+    "title": "AktivKristendom",
+    "url": "https://aktivkristendom.se/"
+  }
+]

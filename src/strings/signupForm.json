@@ -1,0 +1,22 @@
+{
+    "signUpOptions": {
+        "title": "Register to continue",
+        "subTitle": "Follow topics, bookmarks, download wallpapers & much more",
+        "facebook": "Sign up with Facebook",
+        "email": "Sign up with e-mail",
+        "optionText": "Already have an account? ",
+        "optionButton": "Sign In",
+        "disclaimer": "Disclaimer about user data",
+        "action": "Sign up with"
+    },
+    "signInOptions": {
+        "title": "Welcome back",
+        "subTitle": "Access your topics, bookmarks, wallpapers & much more",
+        "facebook": "Sign in with Facebook",
+        "email": "Sign in with e-mail",
+        "optionText": "No account? ",
+        "optionButton": "Create one",
+        "disclaimer": "Disclaimer about user data",
+        "action": "Sign in with"
+    }
+}

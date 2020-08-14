@@ -1,0 +1,48 @@
+.ac-content h1 {
+    line-height: 1.25;
+    color: inherit;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.7rem;
+}
+
+.ac-content h2 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    /*     margin-top: 1rem; */
+    margin-bottom: 1rem;
+}
+
+.ac-content-except {
+    font-size: 1.35rem;
+    margin-bottom: 1em;
+    text-align: left;
+    line-height: 1, 5rem;
+}
+
+.ac-content p,
+.ac-content ul,
+.ac-content ol {
+    font-family: 'Merriweather', '-apple-system', 'BlinkMacSystemFont', 'serif';
+    font-weight: 300;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    list-style-position: inside;
+    list-style-type: decimal;
+}
+
+.ac-content p,
+.ac-content li {
+    margin-bottom: 1rem;
+}
+
+.ac-content h1,
+.ac-content h2,
+.ac-content h3,
+.ac-content h4,
+.ac-content h5,
+.ac-content h6 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
