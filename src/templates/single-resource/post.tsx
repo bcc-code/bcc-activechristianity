@@ -10,7 +10,7 @@ const Post: React.FC<IPostProp> = (props) => {
     const postRes = data.acNodePost
 
     const post = normalizePostRes(postRes)
-    console.log(post)
+
     const { title, excerpt, date, topics, types, image, format } = post
     const { id, langs, content } = postRes
     const breadcrumb: INavItem[] = []

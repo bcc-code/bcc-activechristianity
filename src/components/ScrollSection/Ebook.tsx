@@ -28,7 +28,6 @@ const Ebook: React.FC<IEbook> = (ebook) => {
             related */
 
     } = ebook
-    console.log(excerpt)
     const id = ""
     const imageUrl = getImage(title, "640x320", image)
     let languageOptions: INavItem[] = []

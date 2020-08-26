@@ -40,7 +40,7 @@ const Watch: React.FC<IProps> = (props) => {
 
     const setLatestPosts = (posts: IPostItem[]) => {
         setHeaderPost(posts[0])
-        console.log(posts)
+
         setLatest(posts)
         setPopular(posts.slice(5, 10))
     }

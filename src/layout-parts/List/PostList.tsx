@@ -17,7 +17,7 @@ const PostList: React.FC<IPostList> = (props) => {
 
     const { paginate, posts } = props
     const { currentPage, totalPages, hasRecommendPage } = paginate
-    console.log(paginate)
+
     const [postList, setPostList] = React.useState<IPostItem[]>([])
     React.useEffect(() => {
         fetchLocalPostsFromSlugs(posts)

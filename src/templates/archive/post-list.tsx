@@ -8,7 +8,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
 
     const { title, slug, breadcrumb, description, posts } = pageContext
-    console.log(pageContext)
+
     return (
         <div className="mx-auto max-w-sm mt-16 px-4 sm:p-0">
             <MetaTag

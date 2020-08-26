@@ -99,7 +99,7 @@ module.exports = function generatePages(actions, graphql) {
       
       _.each(themePages,page=>{
         const themePagePath=`${ac_strings.slug_theme}/${page.slug}`
-        console.log(themePagePath)
+
         createPage({
           path: themePagePath,
           component: path.resolve(`./src/templates/page/theme-page.tsx`),

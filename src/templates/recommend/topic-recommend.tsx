@@ -13,7 +13,7 @@ import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
-    console.log(props)
+
     const { pageContext, path } = props
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
     const [latest, setLatest] = React.useState<IPostItem[]>([])
@@ -98,7 +98,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     }, [props.pageContext])
 
     const setLatestPosts = (posts: IPostItem[]) => {
-        console.log(posts)
+
         setHeaderPost(posts[0])
         setLatest(posts)
         setPopular(posts.slice(5, 10))

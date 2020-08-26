@@ -11,8 +11,6 @@ import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItem
 import { fetchPostslistFromArchivePage } from '@/helpers'
 
 const Read: React.FC<IProps> = (props) => {
-    console.log(props)
-
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
     const [latest, setLatest] = React.useState<IPostItem[]>([])
     const [popular, setPopular] = React.useState<IPostItem[]>([])

@@ -35,6 +35,7 @@ module.exports = function generatePosts(actions, graphql) {
 
     // Iterate over the array of posts
     _.each(posts, (post) => {
+      console.log(post.slug)
       createPage({
         path: `${post.slug}`,
         component: path.resolve(template),
@@ -56,7 +57,6 @@ module.exports = function generatePosts(actions, graphql) {
     const totalPages = Math.ceil(totalCount / perPage)
     for (let i = 0; i < totalCount; i += perPage, currentPage++) {
       let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-      console.log(pagePath)
       createPage({
         path:pagePath,
         component,

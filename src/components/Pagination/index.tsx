@@ -7,8 +7,6 @@ interface IProps {
 }
 const StaticPagination: React.SFC<IProps> = (props) => {
     const { currentPage, totalPages, onChange, } = props
-    console.log(props)
-    console.log(totalPages)
     const hasPrevPage = currentPage - 1 > 0;
     const hasNextPage = currentPage + 1 <= totalPages;
 

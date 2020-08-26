@@ -33,7 +33,7 @@ const Section: React.FC<ISection> = ({ sectionItems, title, titlePath }) => {
 
 
 const Resource: React.FC<IResource> = (props) => {
-    console.log(props)
+
     const { path, pageContext } = props
 
     const { title, resource: { general, format, ...types } } = pageContext
