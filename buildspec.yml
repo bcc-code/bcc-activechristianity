@@ -1,28 +1,17 @@
 version: 0.2
-env:
-    #https://stackoverflow.com/questions/42712542/how-to-auto-deploying-git-repositories-with-submodules-on-aws
-    parameter-store:
-        # The SSH RSA Key used by our machine user
-        ssh_key: "ac-dev-build-ac-sdk-bitbucket-ssh"
 phases:
     install:
         runtime-versions:
-            nodejs: 10
+            nodejs: 12
         commands:
-            - 'mkdir -p ~/.ssh'
-            - echo "$ssh_key" > ~/.ssh/ssh_key
-            - chmod 600 ~/.ssh/ssh_key
-            - eval "$(ssh-agent -s)"
-            - ssh-add ~/.ssh/ssh_key
-            - 'git submodule update --recursive --init'
             - 'touch .npmignore'
-            - 'npm install -g gatsby'
+            - 'npm install -g gatsby gatsby-cli'
     pre_build:
         commands:
             - 'npm install'
     build:
         commands:
-            - 'npm run build'
+            - 'gatsby build'
     post_build:
         commands:
             - 'npm run deploy'
@@ -33,6 +22,6 @@ artifacts:
     discard-paths: no
 cache:
     paths:
-        - '.cache/*'
-        - 'node_modules/*'
-        - 'public/*'
+        - '.cache/**/*'
+        - 'node_modules/**/*'
+        - 'public/**/*'

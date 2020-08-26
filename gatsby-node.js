@@ -29,7 +29,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.API_URL': JSON.stringify(process.env.API_URL),
           'process.env.API_HOST': JSON.stringify(process.env.API_HOST),
           'process.env.SITE_URL': JSON.stringify(process.env.SITE_URL),
-          'process.env.MEDIA_CDN_URL': JSON.stringify(process.env.MEDIA_CDN_URL ),
           'process.env.URL': JSON.stringify(process.env.URL),
           'process.env.LANG': JSON.stringify(process.env.LANG),
           'process.env.LANG_CODE': JSON.stringify(process.env.LANG_CODE),
@@ -38,16 +37,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.ALGOLIA_APP_ID': JSON.stringify(process.env.ALGOLIA_APP_ID),
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
-          'process.env.EDIFICATION_FILTER_ID': JSON.stringify(process.env.EDIFICATION_FILTER_ID),
-          'process.env.TESTIMONY_FILTER_ID': JSON.stringify(process.env.TESTIMONY_FILTER_ID),
-          'process.env.QUESTION_FILTER_ID': JSON.stringify(process.env.QUESTION_FILTER_ID),
-          'process.env.COMMENTARY_FILTER_ID': JSON.stringify(process.env.COMMENTARY_FILTER_ID),
-          'process.env.MESSAGE_FILTER_ID': JSON.stringify(process.env.MESSAGE_FILTER_ID),
-          'process.env.SONG_FILTER_ID': JSON.stringify(process.env.SONG_FILTER_ID),
-          'process.env.PODCAST_FILTER_ID': JSON.stringify(process.env.PODCAST_FILTER_ID),
-          'process.env.LISTEN_POSTS_FILTER_ID': JSON.stringify(process.env.LISTEN_POSTS_FILTER_ID),
-          'process.env.WATCH_POSTS_FILTER_ID': JSON.stringify(process.env.WATCH_POSTS_FILTER_ID),
-          'process.env.READ_POSTS_FILTER_ID': JSON.stringify(process.env.READ_POSTS_FILTER_ID),
+          'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
+
         })
       ]
     })
