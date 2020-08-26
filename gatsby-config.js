@@ -1,13 +1,12 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 
-const checkEnvVar = require('./check_env_var')
 /* const generateFeed = require('./generators/Other/generateFeed') */
-
+console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
 })
 
-
+const checkEnvVar = require('./check_env_var')
 checkEnvVar()
 
 
