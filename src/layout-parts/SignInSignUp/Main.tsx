@@ -1,9 +1,32 @@
 import * as React from 'react'
 import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
-import formText from '@/strings/signupForm.json'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
+
+const formText = {
+    "signUpOptions": {
+        "title": ac_strings.signup_options_title,
+        "subTitle": ac_strings.signup_options_sub_title,
+        "facebook": ac_strings.signup_options_facebook,
+        "email": ac_strings.signup_options_email,
+        "optionText": ac_strings.signup_options_option_text,
+        "optionButton": ac_strings.signup_options_option_button,
+        "disclaimer": ac_strings.signup_options_disclaimer,
+        "action": ac_strings.signup_options_action
+    },
+    "signInOptions": {
+        "title": ac_strings.signin_options_title,
+        "subTitle": ac_strings.signin_options_sub_title,
+        "facebook": ac_strings.signin_options_facebook,
+        "email": ac_strings.signin_options_email,
+        "optionText": ac_strings.signin_options_option_text,
+        "optionButton": ac_strings.signin_options_option_button,
+        "disclaimer": ac_strings.signin_options_disclaimer,
+        "action": ac_strings.signin_options_action
+    }
+}
+
 const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> = ({ type }) => {
     const dispatch = useDispatch();
     const toggleOptions = () => {

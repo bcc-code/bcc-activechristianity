@@ -1,6 +1,6 @@
 import React from "react"
 import Link from '@/components/CustomLink'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 import ArrowRight from '@/components/Icons/ArrowRight'
 
 

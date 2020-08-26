@@ -32,7 +32,7 @@ import { IRootState } from '@/state/types'
 
 // mock data
 
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 interface IPostProps extends IPostItem {
     content: string
     langs: ITranslations[]
@@ -236,7 +236,7 @@ export const PostLayout: React.SFC<IPostProps> = (post) => {
             </div>
             {topics && (
                 <p className="border-d4gray border-t py-8 flex">
-                    <div>{newStrings.topics}:</div> {<PostMetaLinks links={topics} />}
+                    <div>{ac_strings.topics}:</div> {<PostMetaLinks links={topics} />}
                 </p>
             )}
 

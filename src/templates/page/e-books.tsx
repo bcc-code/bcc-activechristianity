@@ -5,21 +5,20 @@ import FeaturedCard from '@/components/PostItem/FeaturedCard'
 import { LayoutH1Wide } from '@/layout-parts'
 import MetaTag from '@/components/Meta'
 
-import TS from '@/strings'
-import { read } from '@/strings/menu'
+import ac_strings from '@/strings/ac_strings.json'
+
 import { ebookResToPost } from '@/helpers'
 import { INavItem, IEbook } from '@/types'
 
 
 const EbookOverview: React.FC<IProps> = (props) => {
-    console.log(props)
+
     const { data, pageContext, path } = props
     const { ac: { ebooks } } = data
     if (!ebooks) {
         return null
     } else {
-        const { slug } = pageContext
-        const title = read["E-books"].name
+        const { slug, title } = pageContext
         return (
             <div>
                 <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={pageContext.breadcrumb} path={path} />
@@ -28,7 +27,7 @@ const EbookOverview: React.FC<IProps> = (props) => {
                     {
                         ebooks.map((ebook) => {
                             const { slug } = ebook;
-                            const pageSlug = `/${TS.slug_ac_ebook}/${slug}`
+                            const pageSlug = `/${ac_strings.slug_ebook}/${slug}`
 
                             return (
                                 <div className="div-content">

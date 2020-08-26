@@ -20,7 +20,7 @@ const getPostsQuery = (pageNr)=>`
                     url
                 }
                 track {
-                src
+                url
                 title
                 post {
                     title
@@ -93,7 +93,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
               metadata[s.key] = s.value
             })
   
-            console.log()
+
               // Data can come from anywhere, but for now create it manually
   
             const nodeContent = JSON.stringify(metadata)

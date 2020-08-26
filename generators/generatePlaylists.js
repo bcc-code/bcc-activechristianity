@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const TS = require('../src/strings/NewStrings.json')
+const TS = require('../src/strings/ac_strings.json')
 const template = 'src/templates/single-resource/playlist.tsx'
 
 const query = `
@@ -11,7 +11,7 @@ const query = `
         slug
         excerpt
         tracks {
-          src
+          url
           title
           post {
             title
@@ -19,7 +19,24 @@ const query = `
           }
           
         }
+        image {
+          src
+          srcset
+          dataUri
+          alt
+        }
       }
+
+      resource:page(id:${process.env.RESOURCE_PAGE_ID}){
+        title
+        slug
+      }
+
+      playlistMain:page(id:${process.env.PLAYLIST_PAGE_ID}){
+        title
+        slug
+      }
+
     }
   }
 `
@@ -34,11 +51,13 @@ module.exports = function generatePlaylists(actions, graphql) {
       }
   
       const playlists = result.data.ac.playlists
-  
+      const resourcePage = result.data.ac.resource
+      const playlistMain= result.data.ac.playlistMain
+      const navTopItem={name:resourcePage.title,to:resourcePage.slug}
   
       _.each(playlists, (playlist) => {
         const basePath = `/${TS.playlist}/${playlist.slug}`
-        console.log(basePath)
+
         createPage({
           path: basePath,
           component: path.resolve(template),
@@ -46,7 +65,7 @@ module.exports = function generatePlaylists(actions, graphql) {
             title:playlist.title,
             slug: playlist.slug,
             playlist,
-            breadcrumb:[]
+            breadcrumb:[navTopItem,{name:playlistMain.title,to:playlistMain.slug}]
           },
         })
       })

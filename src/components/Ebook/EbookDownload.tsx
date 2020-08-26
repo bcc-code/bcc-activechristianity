@@ -11,8 +11,7 @@ import ModalWProps from '@/components/Modal/ModalWProps'
 
 import { IRootState } from '@/state/types'
 import { INavItem } from '@/types'
-import hardcodedurls from '@/strings/hardcodedurls.json'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 
 interface IEbookDOwnload {
@@ -80,7 +79,7 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
             className="flex items-center justify-center py-2 mr-2"
         >
             <EyeIcon />
-            <span className="px-2">{newStrings.preview}</span>
+            <span className="px-2">{ac_strings.preview}</span>
         </button>
     )
 
@@ -102,11 +101,11 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
                     <div className="p-4 w-11/12 flex flex-col items-center justify-center">
                         {authInfo.loggedIn !== "success" ? (
                             <div className="w-full">
-                                <div className="text-center">{replaceTextWithLink(TS.please_login_download, props.closeModal, hardcodedurls.login, hardcodedurls.register,)}</div>
+                                <div className="text-center">{replaceTextWithLink(TS.please_login_download, props.closeModal, ac_strings.login_slug, ac_strings.register_slug,)}</div>
                                 <p className="text-center mt-4">{TS.also_available_in} </p>
                                 {languageOptions.map(item => {
                                     return (
-                                        <span className="block text-gray-600 text-center">{item.name}</span>
+                                        <button className="block text-gray-600 text-center py-2">{item.name}</button>
                                     )
                                 })}
                             </div>
@@ -114,7 +113,7 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
                                 <div className="py-8">
                                     {languageOptions.map(item => {
                                         return (
-                                            <button onClick={() => handleSelect(item)}>{item.name}</button >
+                                            <button className="block text-gray-600 text-center py-2" onClick={() => handleSelect(item)}>{item.name}</button >
                                         )
                                     })}
                                 </div>

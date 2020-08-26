@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from '@/components/CustomLink'
 
 import { IPostItem } from '@/types'
-import { LazysizesFeaturedImage } from '@/components/Images/LazysizesImage'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 
 import { PostTitle, PostExcerpt, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import { PostItemMediaImg } from '@/components/Buttons/PlayButton'
@@ -21,6 +21,7 @@ const RightImgWDes: React.SFC<IRightImgNoDes> = (props) => {
         title,
         image,
         types,
+        format,
         bookmarked,
         excerpt,
         border,
@@ -40,14 +41,14 @@ const RightImgWDes: React.SFC<IRightImgNoDes> = (props) => {
         postAuthors = []
         postReadingTime = media.audio.duration
     }
-    console.log(props)
+
     return (
         <div className={`${border !== false ? 'border-b border-b-1 border-gray-300 last:border-b-1 mr-4 sm:border-none pb-4' : ''}`}>
             <div className="flex items-center sm:items-stretch w-full cursor-pointer mt-2">
                 <div className={`sm:pr-4 pb-5 flex flex-col w-8/12 sm:w-6/12 md:w-8/12 items-start ${border !== false ? 'sm:border-b sm:border-b-1 sm:border-gray-300 last:sm:border-b-1 mr-4' : ''}`}>
-                    {types && types[0] && (
+                    {format && format[0] && (
                         <div className="pb-2">
-                            <span className="rounded uppercase p-1 text-xxs font-bold bg-gray-100 text-gray-600">{types[0].name}</span>
+                            <span className="rounded uppercase p-1 text-xxs font-bold bg-gray-100 text-gray-600">{format[0].name}</span>
                         </div>
                     )}
                     {media && media.audio && media.audio.playlistSlug === "podcast" && date && (

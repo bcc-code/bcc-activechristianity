@@ -7,7 +7,7 @@ import AudioIcon from '@/components/Icons/Audio';
 import FileIcon from '@/components/Icons/File'
 
 import TS from '@/strings'
-import NewString from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import { IMedia } from '@/types'
 
 
@@ -64,7 +64,7 @@ const PostAudio: React.SFC<IPlaylist> = ({
                                         <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
                                             <AudioIcon />
                                         </div>
-                                        <span className="uppercase ">{NewString.listen}</span>
+                                        <span className="uppercase ">{ac_strings.listen}</span>
                                     </button>
                                     {audio.article && hideRead !== true && (
                                         <a className="flex justify-center mr-4" href={`/${audio.article.url}`} target="_blank">
@@ -72,7 +72,7 @@ const PostAudio: React.SFC<IPlaylist> = ({
                                                 <FileIcon />
                                             </div>
 
-                                            <span className="uppercase ">{NewString.read}</span>
+                                            <span className="uppercase ">{ac_strings.read}</span>
                                         </a>
                                     )}
                                 </div>

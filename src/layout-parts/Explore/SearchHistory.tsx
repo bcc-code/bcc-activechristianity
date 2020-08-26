@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CloseIcon from '@/components/Icons/Close'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 
 interface ISearchHistory {
     searches: string[]

@@ -1,15 +1,19 @@
 const _ = require('lodash')
 const path = require('path')
-const TS = require('../src/strings/index.js')
+
 const template = 'src/templates/single-resource/e-book.tsx'
 
 const query = `
     {
     ac {
         ebooks {
+            id
             title
             excerpt
-            sources
+            sources {
+              locale
+              preview
+            }
             slug
             authors {
               name
@@ -21,11 +25,24 @@ const query = `
             image {
               src
               srcset
+              dataUri
               alt
             }
           }
+
+          resource:page(id:${process.env.RESOURCE_PAGE_ID}){
+            title
+            slug
+          }
+    
+          ebook:page(id:${process.env.EBOOK_PAGE_ID}){
+            title
+            slug
+          }
             
       }
+
+
   }
 `
 
@@ -39,11 +56,12 @@ module.exports = function generateEbooks(actions, graphql) {
       }
   
       const eBooks = result.data.ac.ebooks
-
-  
+      const resourcePage = result.data.ac.resource
+      const ebookPage = result.data.ac.ebook
+      const navTopItem={name:resourcePage.title,to:resourcePage.slug}
+      const navParentItem={name:ebookPage.title,to: ebookPage.slug}
       _.each(eBooks, (ebook) => {
-        const basePath = `/${TS.slug_ac_ebook}/${ebook.slug}`  
-        console.log(basePath)
+        const basePath = `/${ebookPage.slug}/${ebook.slug}`  
 
         createPage({
           path: basePath,
@@ -52,7 +70,7 @@ module.exports = function generateEbooks(actions, graphql) {
             title:ebook.title,
             slug: ebook.slug,
             ebook,
-            breadcrumb:[{name:TS["e-books"],to:TS.slug_ac_ebook}]
+            breadcrumb:[navTopItem,navParentItem]
           },
         })
       })

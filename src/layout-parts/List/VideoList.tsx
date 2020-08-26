@@ -19,7 +19,7 @@ export interface IPostList {
 }
 const PostList: React.FC<IPostList> = ({ title, path, paginate, posts }) => {
     const [postList, setPostList] = React.useState<IPostItem[]>([])
-    console.log(posts)
+
     React.useEffect(() => {
         fetchLocalPostsFromSlugs(posts)
             .then(res => {

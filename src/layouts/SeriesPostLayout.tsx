@@ -4,7 +4,6 @@ import Link from '@/components/CustomLink'
 import LeftSidebarLayout, { ISiderbar } from './LeftSidebarLayout/index'
 import { DesktopPostMain } from '@/layout-parts'
 import Content from '@/components/Content'
-import { all } from '@/strings/menu'
 import { INavItem, IPostRes } from '@/types'
 
 interface IProps {

@@ -5,18 +5,19 @@ import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
 
 import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
 /* import MockRelatedContentMedia from '@/layout-parts/RelatedContent' */
-import ContentPlaylist from '@/components/Playlist/ContentPlaylist'
+import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
 import { PlaylistBackground } from '@/components/PostItem/PostItemParts'
 
 import { blog as blogApi } from '@/util/sdk'
 
-import { debounce, } from '@/helpers'
+import { normalizeAuthors, normalizeTracks } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 
 import { IRootState } from '@/state/types'
 import { IPlaylist, IMedia } from '@/types'
 
 import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings.json'
 
 export const PostLayout: React.SFC<IPlaylist> = (post) => {
 
@@ -24,7 +25,6 @@ export const PostLayout: React.SFC<IPlaylist> = (post) => {
 
     const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
     const id = ''
-
     const {
         image,
         title,
@@ -33,27 +33,10 @@ export const PostLayout: React.SFC<IPlaylist> = (post) => {
         excerpt,
     } = post
 
-
-
     const imageUrl = getImage(title, '640x320', image)
-    const shareSlug = `${TS.slug_ac_media}/${slug}`
+    const shareSlug = `${ac_strings.playlist}/${slug}`
 
-    const allTracks: IMedia[] = tracks.map(track => (
-        {
-            path: track.post.slug,
-            audio: {
-
-                src: track.src,
-                title: track.title,
-                type: "audio",
-                article: {
-                    title: track.post.title,
-                    url: track.post.slug
-                }
-
-            }
-        }
-    ))
+    const allTracks: IMedia[] = normalizeTracks(tracks)
     return (
         <article className="overflow-scroll">
             <MobileHeaderBackground imgUrl={imageUrl.src}>

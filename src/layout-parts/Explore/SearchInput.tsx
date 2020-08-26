@@ -7,7 +7,7 @@ import SearchHistory from '@/layout-parts/Explore/SearchHistory'
 import localStorageHelper from '@/helpers/localStorage'
 import SearchIcon from '@/components/Icons/Search';
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 
 interface ICustomerSearchBox {
     setQuery: (query: string) => void

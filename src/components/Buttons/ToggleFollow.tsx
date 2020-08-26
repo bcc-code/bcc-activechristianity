@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setNewFollowTopic, setNewFollowTag } from '@/state/action/userAction'
 
 import TS from '@/strings'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 
 interface IProps {
     wrapperClassName?: string

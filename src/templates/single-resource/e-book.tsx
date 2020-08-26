@@ -16,9 +16,8 @@ import { debounce, normalizeAuthors, normalizeAvailableLanguages } from '@/helpe
 import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 
-
-
-import TS from '@/strings'
+import languages from '@/strings/languages.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 interface IProps {
     path: string
@@ -33,9 +32,9 @@ interface IProps {
 
 const Ebook: React.FC<IProps> = ({ pageContext: { breadcrumb, ebook }, path }) => {
 
-    console.log(ebook)
 
     const {
+        id,
         content,
         title,
         image,
@@ -49,13 +48,19 @@ const Ebook: React.FC<IProps> = ({ pageContext: { breadcrumb, ebook }, path }) =
 
     } = ebook
 
-    const id = ""
     const imageUrl = getImage(title, "640x320", image)
     let languageOptions: INavItem[] = []
 
-    if (Array.isArray(langs) && langs.length > 0) {
+    if (Array.isArray(sources) && sources.length > 0) {
 
-        languageOptions = normalizeAvailableLanguages(langs, false)
+
+
+        languages.forEach(item => {
+            const find = sources.find(lang => lang === item.locale)
+            if (find) {
+                languageOptions.push({ to: `https://ac2.day4.live/ebooks/${id}/download/${find}`, name: item.lang })
+            }
+        })
     }
     const ebookDownload = (
         <EbookDownload
@@ -98,7 +103,7 @@ const Ebook: React.FC<IProps> = ({ pageContext: { breadcrumb, ebook }, path }) =
         </div>
       )
      */
-    const pageSlug = `${TS.slug_ac_ebook}/${slug}`
+    const pageSlug = `${ac_strings.slug_ebook}/${slug}`
     return (
         <article className="overflow-scroll">
             <MetaTag

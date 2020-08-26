@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { IIconProps } from '@/types'
+
 const HeartOutline: React.FC<IIconProps> = ({ customSize }) => {
     const size = customSize ? `${customSize}` : "24"
     return (

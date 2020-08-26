@@ -2,7 +2,7 @@ import * as React from 'react';
 import { navigate } from "gatsby"
 import { generate as generateId } from 'shortid'
 import { connectRefinementList } from 'react-instantsearch-dom'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 interface IByTaxonomyProps {
     isShowingResult: boolean
     viewAll: boolean

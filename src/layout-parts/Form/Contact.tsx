@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import TS from '@/strings'
-import hardcodedurls from '@/strings/hardcodedurls.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 import { LayoutH1 } from '@/layout-parts'
@@ -185,7 +185,7 @@ const ContactForm = () => {
             />
             <div className="flex flex-col justify-center w-full text-sm sm:text-base">
                 <div className="flex justify-center py-4">
-                    <a className='underline text-d4secondary' href={hardcodedurls.privacyPolicy || "/"} target="_blank">{TS.consent_read_policy}</a>
+                    <a className='underline text-d4secondary' href={`${ac_strings.privacy_policy_slug}` || "/"} target="_blank">{TS.consent_read_policy}</a>
                 </div>
                 <div className="flex justify-center">
                     <FormSubmitButton

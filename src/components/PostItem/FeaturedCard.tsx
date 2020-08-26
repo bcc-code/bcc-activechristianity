@@ -21,7 +21,7 @@ const FeaturedCard: React.SFC<IFeaturedCard> = ({ type, title, id, authors, like
 
 
     let bgStyle: any = {
-        backgroundImage: `url(${image.dataUri})`
+        backgroundImage: `url(${image.src})`
     }
 
     if (type === "podcast" || type === "playlist" || type === "ebook") {
@@ -36,15 +36,6 @@ const FeaturedCard: React.SFC<IFeaturedCard> = ({ type, title, id, authors, like
 
     let ImgTag: any = Link
     let props: any = { to: slug }
-    if (type === "podcast") {
-        ImgTag = PlayButtonTrack
-        props = { track: media }
-    }
-
-    if (type === "playlist") {
-        ImgTag = PlayButtonList
-        props = { slug }
-    }
 
     //|| type === "playlist"
     return (

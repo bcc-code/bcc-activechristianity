@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from '@/components/CustomLink'
 
 import { IPostItem } from '@/types'
-import { LazysizesFeaturedImage } from '@/components/Images/LazysizesImage'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import PlayButtonTrack from '@/components/Buttons/PlayButtonTrack'
 import SpeakerIcon from '@/components/Icons/Speaker'

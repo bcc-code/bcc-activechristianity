@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
-import newsStrings from '@/strings/NewStrings.json'
+import newsStrings from '@/strings/ac_strings.json'
 import { openSignInModal } from '@/state/action'
 import { all } from '@/strings/menu'
 

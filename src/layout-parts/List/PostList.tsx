@@ -16,9 +16,9 @@ export interface IPostList {
 const PostList: React.FC<IPostList> = (props) => {
 
     const { paginate, posts } = props
-    const { currentPage, totalPages } = paginate
+    const { currentPage, totalPages, hasRecommendPage } = paginate
+    console.log(paginate)
     const [postList, setPostList] = React.useState<IPostItem[]>([])
-    console.log(posts)
     React.useEffect(() => {
         fetchLocalPostsFromSlugs(posts)
             .then(res => {
@@ -53,7 +53,8 @@ const PostList: React.FC<IPostList> = (props) => {
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onChange={(activePage: number) => {
-                        const fullPath = activePage > 1 ? `${paginate.baseUrl}/${activePage}` : paginate.baseUrl
+                        const firstPagePath = paginate.baseUrl + `${hasRecommendPage === true ? '/1' : ''}`
+                        const fullPath = activePage > 1 ? `${paginate.baseUrl}/${activePage}` : firstPagePath
                         scrollToTop()
                         navigate(fullPath)
                     }}

@@ -1,6 +1,6 @@
 import React from 'react'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import "./SigninSignUp.css"
 export const Seperator = () => (
-    <span className="uppercase text-gray-400 text-xs separator py-2">{newStrings.or}</span>
+    <span className="uppercase text-gray-400 text-xs separator py-2">{ac_strings.or}</span>
 )

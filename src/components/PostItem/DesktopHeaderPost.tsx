@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-import { LazysizesFeaturedImage } from '@/components/Images/LazysizesImage'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
+import VideoHeader from '@/components/Images/Video16to9'
 import { IPostItem } from '@/types'
 import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/Buttons/ToggleBookmark'
@@ -15,8 +16,8 @@ const rbgToString = (colors: number[], alpha?: number) => {
     }
 }
 
-const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, excerpt, authors, reading_time, id, slug }) => {
-    console.log(image)
+const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, excerpt, authors, reading_time, id, slug, media }) => {
+
     /* const {  muted } = palette; */
     const darkMuted = image.colors && image.colors[0]
     const vibrant = image.colors && image.colors[1]
@@ -26,6 +27,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
         { 'backgroundImage': `linear-gradient(0, #fff 30%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%), linear-gradient(90deg, ${rbgToString(darkMuted, .5)}, ${rbgToString(vibrant, .5)} 50%, ${rbgToString(muted, .5)} 100%)` }
     ) : {}
 
+    console.log(media)
     return (
         <div>
             <div
@@ -35,12 +37,24 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
             </div>
             <div className="z-10 grid-home-header-5-3 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
                 <Link to={`/${slug}`} className="div1 relative sm:pr-12">
-                    <div className="m-0 relative w-full pb-square sm:pb-half">
-                        <LazysizesFeaturedImage
-                            {...image}
-                            className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+
+
+                    {media.video ? (
+                        <VideoHeader
+                            src={media.video.src}
+                            className={`rounded-xxl sm:rounded-xl overflow-hidden`}
                         />
-                    </div>
+
+                    ) : (
+                            <div className="m-0 relative w-full pb-square sm:pb-half">
+                                <LazysizesFeaturedImage
+                                    {...image}
+                                    className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                                />
+                            </div>
+                        )
+                    }
+
                 </Link>
                 <div className="div2 ml-5 flex flex-col justify-center pt-0">
                     <Link

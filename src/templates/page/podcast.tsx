@@ -25,7 +25,7 @@ import { INavItem, IPostItem, IAuthor } from '@/types'
 
 
 import TS from '@/strings'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 // mock data
 import '@/styles/react-tabs.css'
 

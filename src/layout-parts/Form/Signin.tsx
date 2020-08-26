@@ -5,7 +5,7 @@ import { openSignInModal } from '@/state/action'
 import { initiateLogIn } from '@/state/action/authAction'
 import { InputText, InputCheckbox } from '@/components/Input'
 import TS from '@/strings'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Buttons"
 import { IRootState } from '@/state/types'
@@ -126,7 +126,7 @@ const SignInForm: React.FC = () => {
                     onClick={handleSigninOpionts}
                     onKeyDown={handleSigninOpionts}
                 >
-                    {newStrings.allSigninOptions}
+                    {ac_strings.allSigninOptions}
                 </button>
             </div>
         </div>

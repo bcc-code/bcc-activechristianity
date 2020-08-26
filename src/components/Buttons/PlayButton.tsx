@@ -7,7 +7,7 @@ import PlaySmallIcon from '@/components/Icons/PlaySmall'
 
 import PlayButtonTrack from './PlayButtonTrack'
 import PlayButtonList from './PlayButtonList'
-import NewString from '@/strings/NewStrings.json'
+import NewString from '@/strings/ac_strings.json'
 export interface IPlayButtonProps {
     track: IMedia
 

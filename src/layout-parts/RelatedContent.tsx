@@ -1,13 +1,13 @@
 import * as React from 'react'
 
 
-import PlaylistItem from '@/components/PostItem/SimplePlaylist'
+import PlaylistItem from '@/components/Playlist/SimplePlaylistCover'
 import QLatestPlaylist from '@/queries/QLatestPlaylist'
 import QLatestVideo from '@/queries/QLatestVideo'
 import QLatestSongs from '@/queries/QLatestSongs'
 import VideoPost from '@/components/PostItem/TopImg'
 import { PostRelatedContentHeader } from '@/layout-parts'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 type IRelatedContent = "podcast" | "playlist" | "video" | "music" | string
 
 export const MockRelatedContentMedia: React.FC<{ type: IRelatedContent }> = ({ type }) => {

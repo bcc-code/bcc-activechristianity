@@ -6,14 +6,15 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-const generatePostsAndFormats = require('./generators/generatePostsAndFormats.js')
+const generatePosts = require('./generators/generatePosts.js')
+const generateTopics = require('./generators/TopicsFormatsTypes/generateTopics.js')
 const generatePages = require('./generators/generatePages.js')
-const generateTopics = require('./generators/generateTopics.js')
 const generateAuthors = require('./generators/generateAuthors.js')
 const generateEbooks = require('./generators/generateEbooks.js')
 const generatePlaylists = require('./generators/generatePlaylists.js')
-const generateSeries = require('./generators/generateSeries.js')
+/* const generateSeries = require('./generators/generateSeries.js') */
 const generateGlossary = require('./generators/generateGlossary.js')
+const generateFormatsTypesResource = require('./generators/TopicsFormatsTypes/generateFormatsTypes.js')
 
 const buildTranslations = require('./generators/json/build-translations')
 
@@ -26,6 +27,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       plugins: [
         plugins.define({
           'process.env.API_URL': JSON.stringify(process.env.API_URL),
+          'process.env.API_HOST': JSON.stringify(process.env.API_HOST),
           'process.env.SITE_URL': JSON.stringify(process.env.SITE_URL),
           'process.env.MEDIA_CDN_URL': JSON.stringify(process.env.MEDIA_CDN_URL ),
           'process.env.URL': JSON.stringify(process.env.URL),
@@ -62,14 +64,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   exports.createPages = ({ page,actions, graphql }) => {
 
      const generators = [
-      generatePostsAndFormats(actions, graphql),
-      generatePages(actions, graphql),
-      generateTopics(actions, graphql),
+      generatePosts(actions, graphql),
       generateAuthors(actions, graphql),
       generateEbooks(actions, graphql),
       generatePlaylists(actions, graphql),
-      generateSeries(actions, graphql),
-      generateGlossary(actions, graphql)
+      generateGlossary(actions, graphql),
+      generatePages(actions, graphql),
+      generateTopics(actions, graphql),
+      generateFormatsTypesResource(actions, graphql)
     ]
 
     return Promise.all(generators)

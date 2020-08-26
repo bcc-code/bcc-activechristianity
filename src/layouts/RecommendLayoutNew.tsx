@@ -19,7 +19,7 @@ import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow
 import { IQuoteBlock } from '@/components/QuoteBlock'
 
 import { IPostItem, INavItem } from "@/types"
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import '@/styles/react-tabs.css'
 
 
@@ -27,15 +27,15 @@ interface IRecommandLayout {
     parent?: INavItem
     name: string
     latestSlug: string
-    postTypes: ITypeCount[]
     headerPost: IPostItem
     latestPosts: IPostItem[]
     popularPosts: IPostItem[]
-    postsByTypesRow1: IOnePostByType[]
-    postsByTypes: IOnePostByTypeRow[]
-    postsByTypesRow2: IOnePostByType[]
-    relatedTopics: ITypeCount[]
-    quoteBlock: IQuoteBlock
+    postTypes?: ITypeCount[]
+    postsByTypesRow1?: IOnePostByType[]
+    postsByTypes?: IOnePostByTypeRow[]
+    postsByTypesRow2?: IOnePostByType[]
+    relatedTopics?: ITypeCount[]
+    quoteBlock?: IQuoteBlock
 }
 
 const RecommendLayout: React.FC<IRecommandLayout> = ({
@@ -52,6 +52,68 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     quoteBlock,
     latestSlug
 }) => {
+
+
+    const lowerSection: JSX.Element[] = []
+    if (postTypes) {
+        lowerSection.push(<ByTaxonomies types={postTypes} title={ac_strings.exploreType} />)
+    }
+    if (postsByTypes) {
+        lowerSection.push(
+            <div className="sm:hidden">
+                {postsByTypes.map((item, k) => {
+                    let postThumnailType = "topImage"
+                    if (item.type.to.indexOf('playlist') > 0) {
+                        postThumnailType = "playlist"
+                    }
+                    if (item.type.to.indexOf('e-book') > 0) {
+                        postThumnailType = 'ebook'
+                    }
+
+                    return (
+                        /*  <PostsByTypesRow {...item} key={k} /> */
+                        < HorizontalScrollSection
+                            key={k}
+                            name={item.type.name}
+
+                            posts={item.postsRow}
+                            postThumnailType={postThumnailType}
+                        />
+                    )
+                })}
+            </div>
+        )
+    }
+
+    if (postsByTypesRow1) {
+        lowerSection.push(
+            <div className="standard-max-w-px">
+                <PostsByTypes types={postsByTypesRow1} />
+            </div>
+        )
+    }
+
+    if (quoteBlock) {
+        lowerSection.push(
+            <div className="standard-max-w-px py-4 hidden sm:block">
+                <QuoteBlock {...quoteBlock} />
+            </div>
+        )
+    }
+
+    if (postsByTypesRow2) {
+        lowerSection.push(
+            <div className="standard-max-w-px py-4">
+                <PostsByTypes types={postsByTypesRow2} />
+            </div>
+        )
+    }
+
+    if (relatedTopics) {
+        lowerSection.push(
+            <ByTaxonomies types={relatedTopics} title={ac_strings.exploreType} />
+        )
+    }
 
     return (
         <div>
@@ -89,44 +151,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             />
 
 
-            {[
-                <ByTaxonomies types={postTypes} title={newStrings.exploreType} />,
-
-                <div className="sm:hidden">
-                    {postsByTypes.map((item, k) => {
-                        let postThumnailType = "topImage"
-                        if (item.type.to.indexOf('playlist') > 0) {
-                            postThumnailType = "playlist"
-                        }
-                        if (item.type.to.indexOf('e-book') > 0) {
-                            postThumnailType = 'ebook'
-                        }
-
-                        return (
-                            /*  <PostsByTypesRow {...item} key={k} /> */
-                            < HorizontalScrollSection
-                                key={k}
-                                name={item.type.name}
-
-                                posts={item.postsRow}
-                                postThumnailType={postThumnailType}
-                            />
-                        )
-                    })}
-                </div>,
-                <div className="standard-max-w-px">
-                    <PostsByTypes types={postsByTypesRow1} />
-                </div>,
-                <div className="standard-max-w-px py-4 hidden sm:block">
-                    <QuoteBlock {...quoteBlock} />
-                </div>
-                ,
-                <div className="standard-max-w-px py-4">
-
-                    <PostsByTypes types={postsByTypesRow2} />
-                </div>,
-                <ByTaxonomies types={relatedTopics} title={newStrings.relatedTopics} arrow />
-            ].map((item, i) => (
+            {lowerSection.map((item, i) => (
                 <LazyLoad key={i}>
                     {item}
                 </LazyLoad>

@@ -3,20 +3,19 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
-import { ITaxonomy } from '@/types/wpPostType'
-import { IPostItem } from '@/types'
-import newString from '@/strings/NewStrings.json'
+import { IPostItem, ITopic } from '@/types'
+import newString from '@/strings/ac_strings.json'
 const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
 /* const NewForYouDesktop = loadable(() => import('@/layout-parts/Home/NewForYou/Vertical')) */
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
 const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsForYou'))
-const PopularPost = loadable(() => import('@/layout-parts/Home/PopularOnAC'))
+import { PostlistHorizontalSimple } from '@/layout-parts/PostsRow/HorizontalScroll'
 const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
 
 interface IHomeLowerSection {
     lists: (IPostListSection | undefined)[]
     newPostsForYou: INewForYou[]
-    topicsForYou: ITaxonomy[]
+    topicsForYou: ITopic[]
     popularPosts: IPostItem[]
 }
 const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou, topicsForYou, popularPosts }) => {
@@ -50,7 +49,8 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
             <div className="div7 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
                 <LazyLoad>
                     <h6 className="text-d4slate-dark text-lg font-bold sm:hidden mx-4 mb-6">{newString.popular}</h6>
-                    <PopularPost
+                    <PostlistHorizontalSimple
+
                         posts={popularPosts}
                     />
                     <div className="hidden sm:flex">

@@ -34,9 +34,17 @@ export interface ITrack {
 export type ITrackType = "audio" | "video"
 
 export interface INavItem {
-    name: string
+    name: string | JSX.Element
     to: string;
     order?: number
+}
+
+export interface INavItemCount extends INavItem {
+    count: number
+}
+
+export interface ISubtopicLinks extends INavItemCount {
+    key: string
 }
 
 export type ScreenSizeType = 'sm' | 'md' | 'lg' | 'xl'
@@ -78,6 +86,7 @@ export interface IPaginate {
     currentPage: number
     totalPages: number
     baseUrl: string
+    hasRecommendPage?: boolean
 }
 
 export interface IPostItemCard extends IPostItem {
@@ -214,7 +223,8 @@ export interface ITrackRes {
     id: string
     post: IPostRes
     title: string
-    src: string
+    duration: string
+    url: string
 }
 
 
@@ -293,7 +303,7 @@ export interface IPlaylist {
     title: string
     slug: string
     excerpt: string
-    image?: IImage
+    image: IImage
     featured: boolean
     tracks: ITrackRes[]
 }
@@ -360,7 +370,7 @@ export interface IBible {
 export interface IPostsByFormat {
     keyName?: string
     type: {
-        name: string
+        name: string | JSX.Element
         to: string
     }
     postsRow: IPostItem[]

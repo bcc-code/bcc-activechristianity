@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Link from '@/components/CustomLink'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 import menu from '@/strings/menu'
 
 export const SubSection: React.FC<{ title: string, to?: string, className?: string, icon?: JSX.Element }> = ({ title, children, to, className, icon }) => {

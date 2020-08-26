@@ -4,7 +4,7 @@ import { IPostRes } from '@/types'
 
 import PostItem from '@/components/PostItem/RightImgWDes'
 import { normalizePostRes } from '@/helpers'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 
 interface IExploreSearchResult {
     hits: IPostRes[]

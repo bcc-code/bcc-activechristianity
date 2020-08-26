@@ -67,6 +67,11 @@ export const pageQuery = graphql`
             playlists {
                 title
                 slug
+                image {
+                    src
+                    srcset
+                    dataUri
+                }
             }
         }
     }

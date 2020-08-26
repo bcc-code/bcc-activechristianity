@@ -6,9 +6,9 @@ import PostList from '@/layout-parts/List/PostList'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
-    console.log(pageContext)
-    const { title, slug, breadcrumb, description, posts } = pageContext
 
+    const { title, slug, breadcrumb, description, posts } = pageContext
+    console.log(pageContext)
     return (
         <div className="mx-auto max-w-sm mt-16 px-4 sm:p-0">
             <MetaTag
@@ -37,6 +37,7 @@ export default TaxonomyPage
 interface ITaxonomyPageProps {
 
     pageContext: {
+        type?: string
         slug: string
         title: string
         description?: string

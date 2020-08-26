@@ -6,7 +6,7 @@ import 'lazysizes';
 interface ILazysizes extends IImage {
     className: string
 }
-export const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
+const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
 
     const { src, srcset, dataUri, alt, className } = props
     return (
@@ -18,3 +18,5 @@ export const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
         />
     )
 }
+
+export default LazysizesFeaturedImage

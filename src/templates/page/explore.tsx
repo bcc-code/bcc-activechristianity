@@ -12,7 +12,7 @@ import { LayoutH1 } from '@/layout-parts'
 
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
 
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 import { all } from '@/strings/menu'
 
 import "react-placeholder/lib/reactPlaceholder.css";

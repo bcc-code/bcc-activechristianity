@@ -80,17 +80,17 @@ const MetaTag: React.SFC<MetaTagProps> = ({ wpId, title, type, meta, translatedU
                         <meta name="og:description" content={description} />
                         <meta property="og:type" content={mediaTypes[type] ? mediaTypes[type] : type} />
                         {authors ? (
-                            authors.map((a: INavItem, k: number) => <meta key={a.to} property="book:author" content={`${process.env.URL}/${TS.slug_ac_author}/${a.to}`} />)
+                            authors.map((a: INavItem, k: number) => <meta key={k} property="book:author" content={`${process.env.URL}/${TS.slug_ac_author}/${a.to}`} />)
                         ) : null}
                         {imageUrl ? [
-                            (<meta property="og:image" content={imageUrl.src} />),
-                            (<meta name="twitter:image" content={imageUrl.src} />),
-                            (<meta property="og:image:secure_url" content={imageUrl.src} />),
-                            (<meta property="og:image:width" content="800" />),
-                            (<meta property="og:image:height" content="400" />),
-                            (<meta property="og:image:alt" content={title} />),
+                            (<meta key={1} property="og:image" content={imageUrl.src} />),
+                            (<meta key={2} name="twitter:image" content={imageUrl.src} />),
+                            (<meta key={3} property="og:image:secure_url" content={imageUrl.src} />),
+                            (<meta key={4} property="og:image:width" content="800" />),
+                            (<meta key={5} property="og:image:height" content="400" />),
+                            (<meta key={7} property="og:image:alt" content={title} />),
 
-                            (<meta name="twitter:image" content={imageUrl.src} />)
+                            (<meta key={9} name="twitter:image" content={imageUrl.src} />)
                         ] : null}
                         {translatedUrls ? (translatedUrls.map(url => {
                             if (process.env.LANG_CODE === url.lang) {

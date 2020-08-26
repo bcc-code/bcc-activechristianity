@@ -3,7 +3,7 @@ import { IPostItem } from "@/types"
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import RightImgWDes from '@/components/PostItem/RightImgSimple'
 import LeftImgVideo from '@/components/PostItem/VideoLefttImg'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import MoreLatestButton from '@/components/Buttons/MoreLatest'
 
 interface ILatestDesktopRow {
@@ -20,8 +20,8 @@ const LatestPopularTab: React.FC<ILatestDesktopRow> = ({ latestPosts, popularPos
         <div className="relative px-4 sm:hidden mt-8 pb-2">
             <Tabs >
                 <TabList>
-                    <Tab>{newStrings.latest}</Tab>
-                    <Tab>{newStrings.popular}</Tab>
+                    <Tab>{ac_strings.latest}</Tab>
+                    <Tab>{ac_strings.popular}</Tab>
                 </TabList>
                 <TabPanel>
                     {latestPosts.slice(0, 4).map((item, i) => {

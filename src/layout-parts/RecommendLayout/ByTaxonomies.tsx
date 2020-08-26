@@ -14,9 +14,10 @@ interface IByTaxonomies {
     count?: number | string
     arrow?: boolean
     col?: number
+    icon?: JSX.Element
 }
 
-const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title, arrow, col }) => {
+const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title, arrow, col, icon }) => {
     return (
         <div className="bg-d4athens sm:bg-white py-4">
             <div className="standard-max-w-px">

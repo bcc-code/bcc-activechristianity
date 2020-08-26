@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { IPostItem } from '@/types'
 import { PostBase, IPostBase } from '@/components/PostItem/PostItemParts'
-import { LazysizesFeaturedImage } from '@/components/Images/LazysizesImage'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostItemMediaImg } from '@/components/Buttons/PlayButton'
 import "./style/leftverticle.css"
 

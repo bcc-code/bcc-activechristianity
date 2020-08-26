@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { StaticQuery, graphql } from "gatsby";
+import HomeIcon from '@/components/Icons/Home'
 import SearchIcon from '@/components/Icons/Search';
 import WatchIcon from '@/components/Icons/Screen';
 import AudioIcon from '@/components/Icons/Audio';
@@ -9,8 +10,8 @@ import { navigate } from "gatsby"
 import { IDrawerNav } from '@/layouts/App';
 import { IMenusQuery } from '@/types'
 
-import HomeIcon from '@/components/Icons/Home'
-import newStrings from '@/strings/NewStrings.json'
+import { typeIcons } from '@/layout-parts'
+import ac_strings from '@/strings/ac_strings.json'
 const BottomNavMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, isModalOpen }) => {
 
     const handlePathClick = (path: string, name: string) => {
@@ -25,9 +26,9 @@ const BottomNavMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, 
     const iconMap: { [key: string]: JSX.Element } = {
         'home': <HomeIcon className="w-5 h-5" />,
         'explore': <SearchIcon className="pt-1 w-5 h-5" />,
-        'listen-recommend': <AudioIcon />,
-        'read-recommend': <FileIcon className="w-6 h-6" />,
-        'watch-recommend': <WatchIcon className="pt-1 w-5 h-5" />
+        'hide-listen-recommend': typeIcons.listen,
+        'hide-read-recommend': typeIcons.read,
+        'hide-watch-recommend': typeIcons.watch
 
     }
 
@@ -42,6 +43,7 @@ const BottomNavMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, 
         <StaticQuery
             query={query}
             render={(data: IResData) => {
+
                 const bottomMenuMobile = data.ac && data.ac.menus[0].menuItems ? data.ac && data.ac.menus[0].menuItems : []
 
                 const allLabels = data.ac.allPages
@@ -52,16 +54,18 @@ const BottomNavMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, 
                             <Link
 
                                 to="/"
-                                onClick={() => { handlePathClick("/", newStrings.home) }}
+                                onClick={() => { handlePathClick("/", ac_strings.home) }}
                                 className="flex flex-col items-center justify-between text-gray-600 pt-4 pb-3 flex-1"
                                 activeClassName="bg-gray-300 "
                             >
                                 {iconMap.home}
-                                <p className="block mt-1 text-sm font-semibold">{newStrings.home}</p>
+                                <p className="block mt-1 text-sm font-semibold">{ac_strings.home}</p>
                             </Link>
 
                             {bottomMenuMobile.map((item, i) => {
                                 const page = allLabels.find(page => page.slug === item.value)
+
+
                                 const icon = page ? iconMap[page?.label] : undefined
 
                                 return (
@@ -111,8 +115,6 @@ const query = graphql`
                         name
                         value
                     }
-                
-
             }
 
                 allPages {

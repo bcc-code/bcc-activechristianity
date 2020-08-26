@@ -5,8 +5,14 @@ import ArrowRight from '@/components/Icons/ArrowRight'
 import h2p from 'html2plaintext'
 import ShareButton from '@/components/Buttons/SharePopover'
 import ToogleBookmark from '@/components/Buttons/ToggleBookmark'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
+
+import WatchIcon from '@/components/Icons/Screen';
+import AudioIcon from '@/components/Icons/Audio';
+import FileIcon from '@/components/Icons/File'
+
+
 interface IPostMain {
     id: string
     title: string
@@ -36,9 +42,20 @@ interface IDesktopPostMain extends IPostMain {
 
 }
 
+export const typeIcons: { [key: string]: JSX.Element } = {
+    'listen': <AudioIcon />,
+    'read': <FileIcon className="w-6 h-6" />,
+    'watch': <WatchIcon className="pt-1 w-5 h-5" />
 
-export const LayoutH1: React.FC<{ title: string }> = ({ title }) => (
-    <h1 className="font-semibold sm:text-2xl md:text-3xl py-6">{title}</h1>
+}
+
+export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
+    <span className="flex">
+        <span className="pr-4">{icon}</span> {title}
+    </span>
+)
+export const LayoutH1: React.FC<{ title: string | JSX.Element }> = ({ title }) => (
+    <h1 className="font-semibold sm:text-2xl md:text-3xl py-6"> {title}</h1>
 )
 
 export const PostH1: React.FC<{ title: string }> = ({ title }) => (
@@ -48,7 +65,7 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
 export const PostRelatedContentHeader: React.FC<{ title: string }> = ({ title }) => (
     <div className="py-6 font-semibold text-sm sm:text-base text-d4secondary">{title}</div>
 )
-export const LayoutH1Wide: React.FC<{ title: string }> = ({ title }) => (
+export const LayoutH1Wide: React.FC<{ title: string | JSX.Element }> = ({ title }) => (
     <div className="standard-max-w-px sm:block">
         <LayoutH1 title={title} />
     </div>
@@ -111,7 +128,7 @@ const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrl
 
         return (
             <div className="border-d4gray border-t py-8 text-gray-600">
-                <h6>{newStrings.postAvailable}</h6>
+                <h6>{ac_strings.postAvailable}</h6>
                 <div className="flex flex-wrap text-sm pt-4">
                     {translatedUrls.map(item => (
                         <a className="w-1/2 sm:w-1/3 md:w-1/4 pb-2" href={item.to}>{item.name}</a>
@@ -124,8 +141,8 @@ const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrl
     }
 }
 
-export const ShareSection: React.FC<IShareProps> = ({ id, shareSlug, text, simple, bookmarked, size }) => {
-
+export const ShareSection: React.FC<IShareProps> = (props) => {
+    const { id, shareSlug, text, simple, bookmarked, size } = props
     return (
         <div className={simple ? "mr-2 flex" : "relative bg-white border-d4gray border-t flex justify-between py-8 px-4"}>
             <div className={simple ? "mr-4 flex" : "flex items-center text-d4gray-dark"}>
@@ -139,7 +156,7 @@ export const ShareSection: React.FC<IShareProps> = ({ id, shareSlug, text, simpl
             </div>
             <ShareButton
                 shareUrl={shareSlug}
-                text={text}
+                text={text ? text : ""}
                 label={simple ? undefined : "Share"}
                 size={size}
             />

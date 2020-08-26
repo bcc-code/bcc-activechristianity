@@ -48,7 +48,7 @@ export const PostHorizontalScrollTypes: React.FC<IPostHorizontalScroll> = ({ pos
 }
 
 interface IProps extends IPostHorizontalScroll {
-    name: string
+    name: string | JSX.Element
     slug: string
     video?: boolean
 }

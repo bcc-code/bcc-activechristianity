@@ -1,43 +1,39 @@
 import * as React from 'react';
 import loadable from '@loadable/component'
-import { LayoutH1Wide } from '@/layout-parts'
+
 import { fetchPostslistFromArchivePage } from '@/helpers'
 import MetaTag from '@/components/Meta'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import TopImgPost from '@/components/PostItem/TopImg'
 
-import { UnderlineTitleLink } from '@/layout-parts'
+import { UnderlineTitleLink, typeIcons, LayoutH1Wide, TitleWithIcon } from '@/layout-parts'
 import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScroll'
+
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 import ContentPlaylist from '@/components/Playlist/SimplePlaylist'
-import { formatToTypeLinks } from '@/strings/types-formats.json'
-import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, ITopic } from '@/types'
-import newString from '@/strings/NewStrings.json'
 
-interface IFormatProps {
-    path: string
-    pageContext: {
-        id: string
-        node: ITopic
-        title: string
-    }
-}
-const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
-    const { title, id, node } = pageContext
-    const { slug } = node
+import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, ITopic, INavItemCount, ISubtopicLinks } from '@/types'
+import newString from '@/strings/ac_strings.json'
+import { title } from '@/strings/podcastProperties';
+
+
+const Format: React.FC<IProps> = ({ path, pageContext }) => {
+    const { formatType, breadcrumb } = pageContext
+
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
     const [latestPosts, setLatestPosts] = React.useState<IPostItem[]>([])
     const [types, setTypes] = React.useState<INavItem[]>([])
     const [readPosts, setReadPosts] = React.useState<IPostsByFormat | null>(null)
     const [listenPosts, setListenPosts] = React.useState<IPostsByFormat | null>(null)
     const [watchPosts, setWatchPosts] = React.useState<IPostsByFormat | null>(null)
-    const { info, ...rest } = formatToTypeLinks[id]
-    const latestSlug = `${info.slug}/${newString.latest_slug}`
+    const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
+    const { info, items } = formatType
+    const latestSlug = `${info.to}/${newString.latest_slug}`
 
     React.useEffect(() => {
 
         fetchPostslistFromArchivePage(latestSlug).then(posts => {
-            console.log(posts)
+
             if (posts) {
                 setHeaderPost(posts[0])
                 setLatestPosts(posts.slice(5, 10))
@@ -51,31 +47,38 @@ const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
     }, [])
 
     const getAllFormat = () => {
+
+
+        const postTypesLinks: INavItemCount[] = []
+
+        setTypeLinks(items)
         Promise
-            .all(Object.keys(rest)
-                .map(id => {
-                    const slug = `${rest[id].slug}/${info.slug}`
+            .all(items
+                .map(link => {
+
+
+                    const slug = `${link.to}/${info.to}`
+                    postTypesLinks.push({ ...link, to: slug, name: <TitleWithIcon icon={typeIcons[link.key]} title={link.name} /> })
                     return fetchPostslistFromArchivePage(slug)
                         .then(res => {
 
                             if (res) {
                                 const toReturn: IPostsByFormat = {
                                     type: {
-                                        name: rest[id].name,
-                                        to: rest[id].slug
+                                        name: link.name,
+                                        to: link.to
                                     },
-                                    keyName: rest[id].slug,
                                     postsRow: res
                                 }
-                                if (id === process.env.READ_POSTS_FILTER_ID) {
+                                if (link.key === "read") {
                                     setReadPosts(toReturn)
                                 }
-                                if (id === process.env.LISTEN_POSTS_FILTER_ID) {
+                                if (link.key === "listen") {
 
                                     setListenPosts(toReturn)
                                 }
 
-                                if (id === process.env.WATCH_POSTS_FILTER_ID) {
+                                if (link.key === "watch") {
                                     setWatchPosts(toReturn)
                                 }
                                 return toReturn
@@ -89,6 +92,7 @@ const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
                         allTypes.push(c.type)
                     }
                 })
+                setTypeLinks(postTypesLinks)
                 setTypes(allTypes)
             })
 
@@ -96,8 +100,8 @@ const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
 
     return (
         <div>
-            <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
-            <div className="bg-d4athens sm:bg-white"> <LayoutH1Wide title={title} /></div>
+            <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
+            <div className="bg-d4athens sm:bg-white"> <LayoutH1Wide title={info.name} /></div>
             {
                 headerPost && latestPosts && (
                     <div className="standard-max-w-px">
@@ -114,7 +118,7 @@ const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
 
 
             <div className="standard-max-w">
-                <ByTaxonomies col={3} title={newString.byCategories} types={types} />
+                <ByTaxonomies col={typeLinks.length} title={newString.byCategories} types={typeLinks} />
             </div>
             <div className="px-4">
                 {readPosts && (
@@ -135,8 +139,8 @@ const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
                             <UnderlineTitleLink name={listenPosts.type.name} to={listenPosts.type.to} />
                         </div>
                         <div className="grid sm:grid-cols-2 gap-4">
-                            <ContentPlaylist hideRead tracks={listenPosts.postsRow.slice(0, 3).map(post => post.media)} />
-                            <ContentPlaylist hideRead tracks={listenPosts.postsRow.slice(3, 6).map(post => post.media)} />
+                            <ContentPlaylist tracks={listenPosts.postsRow.slice(0, 3).map(post => post.media)} />
+                            <ContentPlaylist tracks={listenPosts.postsRow.slice(3, 6).map(post => post.media)} />
                         </div>
                     </div>
                 )}
@@ -159,4 +163,21 @@ const Format: React.FC<IFormatProps> = ({ path, pageContext }) => {
 
 }
 
-export default Format 
+export default Format
+
+
+interface IProps {
+    path: string
+    pageContext: {
+        id: string
+        node: ITopic
+        title: string
+        breadcrumb: INavItem[]
+        formatType: {
+            info: INavItemCount
+            items: ISubtopicLinks[]
+
+        }
+    }
+
+}

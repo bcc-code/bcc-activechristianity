@@ -34,6 +34,7 @@ function stringToImage(str: string, size: TSize, bg?: string, fc?: string): stri
 
 
 export function getImage(title: string, size: TSize, image?: IImage): IImage {
+
   let toReturn: IImage = {
     id: "",
     src: "",

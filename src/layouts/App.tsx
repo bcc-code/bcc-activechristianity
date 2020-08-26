@@ -4,6 +4,7 @@ import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import BottomMobile from '@/layout-parts/Nav/BottomMobile'
 import SideNav from '@/layout-parts/Nav/SideNav'
 import Helmet from 'react-helmet'
+const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink';
 import { useDispatch, useSelector } from "react-redux"
@@ -14,7 +15,7 @@ import { getUserFollowing, getUserHistory, getUserLiked, getUserUnfinished } fro
 import SignInSignUpModal from '@/layout-parts/SignInSignUp'
 // string
 import TS from '@/strings';
-import hardcodedurls from '@/strings/hardcodedurls.json'
+import ac_strings from '@/strings/ac_strings.json'
 import { auth as authApi } from '@/util/sdk'
 
 // type 
@@ -107,7 +108,7 @@ const App: React.FC<any> = (props) => {
                     )}
                     {currentMedia.audio ? (
                         <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                            {/* <MediaPlayer /> */}
+                            <MediaPlayer />
                         </div>
                     ) : null}
 
@@ -134,7 +135,7 @@ const App: React.FC<any> = (props) => {
             >
                 {TS.consent_general_main}
                 {" "}
-                <Link style={{ fontSize: "11px" }} to={hardcodedurls.cookiePolicy}>
+                <Link style={{ fontSize: "11px" }} to={ac_strings.cookie_policy_slug}>
                     {TS.consent_general_link}
                 </Link>
             </CookieConsent>

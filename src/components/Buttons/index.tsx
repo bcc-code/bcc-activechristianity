@@ -2,7 +2,7 @@ import * as React from "react"
 import Link from '@/components/CustomLink'
 import RightArrow from '@/components/Icons/ArrowRight'
 import TS from '@/strings'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 interface IButton {
     className?: string
     disabledClassName?: string
@@ -64,7 +64,7 @@ export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClic
             disabledClassName="bg-gray-500"
             enabledClassName="bg-d4secondary "
         >
-            {loading ? newStrings.loading : TS.send}
+            {loading ? ac_strings.loading : TS.send}
         </Button>
     )
 }

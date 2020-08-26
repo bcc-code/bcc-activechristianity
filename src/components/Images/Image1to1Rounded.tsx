@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IImage } from '@/types'
-import { LazysizesFeaturedImage } from './LazysizesImage'
+import LazysizesFeaturedImage from './LazysizesImage'
 
 const SquareRoundedImage: React.SFC<IImage> = (props) => {
     return (

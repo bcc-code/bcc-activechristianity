@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LazysizesFeaturedImage } from './LazysizesImage'
+import LazysizesFeaturedImage from './LazysizesImage'
 import { IImage } from '@/types'
 
 interface IProps {

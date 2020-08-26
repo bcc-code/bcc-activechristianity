@@ -4,7 +4,7 @@ import Link from '@/components/CustomLink'
 import { IRootState } from '@/state/types'
 
 import TS from '@/strings'
-import hardcodedurls from '@/strings/hardcodedurls.json'
+import ac_strings from '@/strings/ac_strings.json'
 import { initials } from '@/helpers'
 
 export const UserInitial: React.FC<{ name: string, className?: string }> = ({ name, className }) => (
@@ -23,7 +23,7 @@ const User: React.SFC = () => {
             <h6 className="m-2">{auth.user.name}</h6>
         </div>
     ) : (
-            <Link to={hardcodedurls.login}>{TS.please_login}</Link>
+            <Link to={ac_strings.login_slug}>{TS.please_login}</Link>
         )
 }
 

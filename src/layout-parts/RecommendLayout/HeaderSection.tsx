@@ -5,7 +5,7 @@ import PopularPosts from '@/layout-parts/PopularPosts'
 import VideoLefttImg from '@/components/PostItem/VideoLefttImg'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
 import { PostItemPlayButton } from '@/components/Buttons/PlayButton'
-import newString from '@/strings/NewStrings.json'
+import newString from '@/strings/ac_strings.json'
 interface ISectionHeader {
     headerPost: IPostItem
     listPosts: IPostItem[]

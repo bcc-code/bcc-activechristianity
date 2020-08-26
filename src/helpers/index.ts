@@ -1,9 +1,10 @@
-import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopic, IPlaylist } from '@/types'
+import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopic, IPlaylist, ITrackRes, IMedia } from '@/types'
 import h2p from 'html2plaintext'
 import TS from '@/strings'
-import NewStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
+import { title } from '@/strings/podcastProperties'
 
 export function debounce(fn: Function, ms: number) {
     let timer: any
@@ -22,23 +23,7 @@ export function initials(name: string) {
     return ((initials.shift() || '') + (initials.pop() || '')).toUpperCase()
 }
 
-export const playlistToPost = (playlist: IPlaylist): IPostItem => {
-    const { title, slug, image, excerpt } = playlist
-    return (
-        {
-            id: '',
-            title,
-            slug: `${NewStrings.playlist}/${slug}`,
-            image: getImage(title, "640x320", image),
-            excerpt,
-            date: new Date(),
-            media: {
-                path: '',
-            }
 
-        }
-    )
-}
 
 export const normalizeAvailableLanguages = (langs: ITranslations[], showAllLanguages: boolean) => {
     let translatedLinks: INavItem[] = []
@@ -79,18 +64,47 @@ export const normalizeAuthors = (authors: IAuthorRes[]) => {
     return toReturn
 }
 
+export const normalizeTracks = (tracks: ITrackRes[]) => {
+    const toReturn = tracks.map(track => {
+        const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
+        const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+        const toAdd: IMedia = (
+            {
+                path: track.post.slug,
+                audio: {
+                    duration: track.duration,
+                    src: `${process.env.API_HOST}${track.url}`,
+                    title: track.title,
+                    type: "audio",
+                    article: {
+                        title: track.post.title,
+                        url: track.post.slug,
+
+                    },
+                    contributor: trackPostAuthor
+                },
+
+            }
+        )
+
+        return toAdd
+    })
+
+    return toReturn
+}
 export const transformTopicsRes = (topics: ITopic[]) => {
     const types: INavItem[] = []
     const filteredTopics: INavItem[] = []
     const format: INavItem[] = []
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: t.name, to: `${TS.slug_topic}/${t.slug}` }
+        const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
         if (t.group.name === 'Type') {
             types.push(toAdd)
 
         } else if (t.group.name === 'Format') {
             format.push(toAdd)
         } else {
+            toAdd.to = `${TS.slug_topic}/${t.slug}`
             filteredTopics.push(toAdd)
         }
     })
@@ -148,6 +162,25 @@ export const ebookResToPost = (ebook: IEbook) => {
 
     return post
 }
+
+export const playlistToPost = (playlist: IPlaylist): IPostItem => {
+    const { title, slug, image, excerpt } = playlist
+    return (
+        {
+            id: '',
+            title,
+            slug: `${ac_strings.playlist}/${slug}`,
+            image: getImage(title, "640x320", image),
+            excerpt,
+            date: new Date(),
+            media: {
+                path: '',
+            }
+
+        }
+    )
+}
+
 export const normalizePostRes = (post: IPostRes) => {
     const { id, authors, title, excerpt, image, slug, readtime, track, topics, created_at, meta, glossary } = post
 
@@ -177,7 +210,7 @@ export const normalizePostRes = (post: IPostRes) => {
     const { media } = postItem
     if (track) {
         media["audio"] = {
-            src: track.src,
+            src: `${process.env.API_HOST}${track.url}`,
             title: track.title,
             type: "audio",
             article: {
@@ -195,8 +228,6 @@ export const normalizePostRes = (post: IPostRes) => {
         }
     }
 
-
-
     return postItem
 }
 
@@ -211,24 +242,61 @@ export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
                     toReturn.push(post)
                 }
             })
+
             return toReturn
+        })
+        .catch(error => {
+            console.log(error.message)
         })
 }
 
 type setPosts = (post: IPostItem[]) => void
 
 export const fetchPostslistFromArchivePage = (slug: string) => {
+
     return fetch(`/page-data/${slug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: string[] = res.result.pageContext.posts
+
                 return fetchLocalPostsFromSlugs(posts)
 
             }
             return undefined
         })
 }
+
+export const fetchPlaylistFromSlug = (slug: string) => {
+
+    return fetch(`/page-data/${ac_strings.playlist}/${slug}/page-data.json`)
+        .then(res => res.json())
+        .then(res => {
+            if (res.result && res.result && res.result.pageContext) {
+                const playlist: IPlaylist = res.result.pageContext.playlist
+
+                return playlist
+
+            }
+            return undefined
+        })
+}
+
+export const fetchEbookFromSlug = (slug: string) => {
+
+    return fetch(`/page-data/${ac_strings.slug_ebook}/${slug}/page-data.json`)
+        .then(res => res.json())
+        .then(res => {
+            if (res.result && res.result && res.result.pageContext) {
+                const ebook: IEbook = res.result.pageContext.ebook
+
+                return ebook
+
+            }
+            return undefined
+        })
+}
+
 
 export const fetchOneLocalPostsFromSlug = (slug: string) => {
     return fetch(`/page-data/${slug}/page-data.json`)

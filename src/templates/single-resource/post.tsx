@@ -7,13 +7,20 @@ import { normalizePostRes } from '@/helpers'
 
 const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
-    console.log(props)
     const postRes = data.acNodePost
 
     const post = normalizePostRes(postRes)
+    console.log(post)
     const { title, excerpt, date, topics, types, image, format } = post
     const { id, langs, content } = postRes
-    const { breadcrumb } = pageContext
+    const breadcrumb: INavItem[] = []
+    if (types) {
+        breadcrumb.push(types[0])
+    }
+
+    if (format) {
+        breadcrumb.push(format[0])
+    }
 
     return (
         <div>
@@ -67,13 +74,13 @@ export const pageQuery = graphql`
                     url
                 }
                 track {
-                src
-                title
-                post {
+                    url
                     title
-                    slug
+                    post {
+                        title
+                        slug
+                        }
                     }
-                }
                 authors {
                     name
                     slug

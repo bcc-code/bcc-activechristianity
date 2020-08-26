@@ -2,7 +2,7 @@ import React from 'react'
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItem/FeaturedCardNew'
 import FeatureIcon from '@/components/Icons/Feature'
 import MobileFeatureCard from '@/components/PostItem/WTopicFollowCard'
-import newStrings from '@/strings/NewStrings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featuredPosts }) => {
     return (
@@ -10,7 +10,7 @@ const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featured
             <h3 className="relative mt-8 sm:mt-16 mx-4 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
                 <div className="flex items-center">
                     <FeatureIcon className="w-4 h-4" />
-                    <span className="block mx-2">{newStrings.featured}</span>
+                    <span className="block mx-2">{ac_strings.featured}</span>
                 </div>
             </h3>
             <div className="scroll-4col-h mx-4 my-4 hidden sm:grid">
