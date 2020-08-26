@@ -2,13 +2,9 @@ const core = [
     "TITLE",
     "API_URL",
     "SITE_URL",
-/*     "URL", */
-    "MEDIA_CDN_URL",
     "LANG",
     "LANG_CODE",
     "LOCALE",
-    "MAIN_NAV_ID",
-    "TOP_NAV_ID",
     "ALGOLIA_APP_ID",
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",
