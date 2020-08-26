@@ -56,6 +56,21 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
+  {
+    resolve: `gatsby-plugin-s3`,
+    options: {
+        bucketName: process.env.S3_BUCKET_NAME,
+        region: process.env.S3_BUCKET_REGION,
+        protocol: targetAddress.protocol.slice(0, -1),
+        hostname: targetAddress.hostname,
+        acl: null,
+        params: {
+            // In case you want to add any custom content types: https://github.com/jariz/gatsby-plugin-s3/blob/master/recipes/custom-content-type.md
+        },
+        generateRoutingRules: false,
+        generateRedirectObjectsForPermanentRedirects: true,
+    },
+},
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
   // 'gatsby-plugin-offline',
