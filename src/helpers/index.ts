@@ -6,6 +6,11 @@ import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
 import { title } from '@/strings/podcastProperties'
 
+export function trimSlug(slug: string) {
+    const regex = /^[/]*/gm
+    let updatedTo = slug.replace(regex, '');
+    return updatedTo
+}
 export function debounce(fn: Function, ms: number) {
     let timer: any
     return _ => {
@@ -250,11 +255,10 @@ export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
         })
 }
 
-type setPosts = (post: IPostItem[]) => void
-
 export const fetchPostslistFromArchivePage = (slug: string) => {
+    let processSlug = trimSlug(slug)
 
-    return fetch(`/page-data/${slug}/page-data.json`)
+    return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext.posts) {
@@ -268,8 +272,8 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
 }
 
 export const fetchPlaylistFromSlug = (slug: string) => {
-
-    return fetch(`/page-data/${ac_strings.playlist}/${slug}/page-data.json`)
+    let processSlug = trimSlug(slug)
+    return fetch(`/page-data/${ac_strings.playlist}/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
@@ -283,8 +287,8 @@ export const fetchPlaylistFromSlug = (slug: string) => {
 }
 
 export const fetchEbookFromSlug = (slug: string) => {
-
-    return fetch(`/page-data/${ac_strings.slug_ebook}/${slug}/page-data.json`)
+    let processSlug = trimSlug(slug)
+    return fetch(`/page-data/${ac_strings.slug_ebook}/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
@@ -299,7 +303,8 @@ export const fetchEbookFromSlug = (slug: string) => {
 
 
 export const fetchOneLocalPostsFromSlug = (slug: string) => {
-    return fetch(`/page-data/${slug}/page-data.json`)
+    let processSlug = trimSlug(slug)
+    return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result.data && res.result.data['acNodePost']) {
