@@ -5,6 +5,7 @@ const core = [
     "LANG",
     "LANG_CODE",
     "LOCALE",
+
     "ALGOLIA_APP_ID",
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",

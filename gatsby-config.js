@@ -6,6 +6,8 @@ require("dotenv").config({
   path: `.env.${activeEnv}`,
 })
 
+const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
+
 const checkEnvVar = require('./check_env_var')
 checkEnvVar()
 
