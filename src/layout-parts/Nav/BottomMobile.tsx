@@ -26,9 +26,9 @@ const BottomNavMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, 
     const iconMap: { [key: string]: JSX.Element } = {
         'home': <HomeIcon className="w-5 h-5" />,
         'explore': <SearchIcon className="pt-1 w-5 h-5" />,
-        'hide-listen-recommend': typeIcons.listen,
-        'hide-read-recommend': typeIcons.read,
-        'hide-watch-recommend': typeIcons.watch
+        'listen-recommend': typeIcons.listen,
+        'read-recommend': typeIcons.read,
+        'watch-recommend': typeIcons.watch
 
     }
 

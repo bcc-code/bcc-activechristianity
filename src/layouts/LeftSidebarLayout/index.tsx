@@ -67,7 +67,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIc
                     {sidebar({ closeMobileNav })}
                 </div>
             </StickyBox>
-            <div className="relative w-full sm:w-2/3 flex flex-col scroll-layout-main pt-12 sm:p-0">
+            <div className="relative w-full flex flex-col scroll-layout-main pt-64 sm:p-0">
                 <div className="z-10 w-full">
                     {content}
                 </div>

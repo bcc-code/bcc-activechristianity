@@ -4,7 +4,7 @@ const path = require('path')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate ='src/templates/archive/video-list.tsx'
 const resourceTemplate = 'src/templates/page/resources.tsx'
-const podcastTemplate = 'src/templates/page/podcast.tsx'
+
 const exploreTemplate='src/templates/page/explore.tsx'
 const formatTemplate= 'src/templates/recommend/format-recommend.tsx'
 
@@ -87,6 +87,7 @@ module.exports = function generateTopics(actions, graphql) {
             const pageInfo = result.data.ac.allPages
             const ebooksAll = result.data.ac.ebooks
             const playlistsAll = result.data.ac.playlists
+            const podcastCount = result.data.ac.podcasts.noOfPosts
             const explorePage = pageInfo.find(page=>`${page.id}`===process.env.EXPLORE_PAGE_ID)
             const resourcePage = pageInfo.find(page=>`${page.id}`===process.env.RESOURCE_PAGE_ID)
             const resourceNavItem = {
@@ -194,7 +195,7 @@ module.exports = function generateTopics(actions, graphql) {
                         // create format overview 
                         createPage({
                             path:format.slug,
-                            component:`${format.id}`!==process.env.PODCAST_FILTER_ID?path.resolve(formatTemplate):path.resolve(podcastTemplate),
+                            component:path.resolve(formatTemplate),
                             context: {
                               id:format.id,
                               title:format.name,
@@ -276,12 +277,14 @@ module.exports = function generateTopics(actions, graphql) {
 
                         if(`${type.id}`===typesAll.listen.keyId){
                             const playlistPage = pageInfo.find(page=>page.id===process.env.PLAYLIST_PAGE_ID);
-                            
+                            const podcastPage = pageInfo.find(page=>page.id===process.env.PODCAST_PAGE_ID);
                             if(playlistPage){
-                                const playlistItem = {name:playlistPage .title,to:playlistPage .slug,count:playlistsAll.length}
+                                const playlistItem = {name:playlistPage .title,to:playlistPage.slug,count:playlistsAll.length}
+                                const podcastItem = {name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
                                 typeFormatEach["playlist"]=playlistItem
-                                resource_grouped["format"].items.push(playlistItem)
-                                typeMenu.push(playlistItem)
+                                typeFormatEach["podcast"]=podcastItem
+                                resource_grouped["format"].items.push(playlistItem,podcastItem)
+                                typeMenu.push(playlistItem,podcastItem)
                             }
                             
                         }
@@ -352,15 +355,9 @@ module.exports = function generateTopics(actions, graphql) {
                     },
                   })
             }
-
-
             
         }
             
-
-
-
-         
     })
 
 }

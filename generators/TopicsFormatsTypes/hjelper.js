@@ -30,10 +30,10 @@ const formatsAll = {
       keyId: process.env.COMMENTARY_FILTER_ID,
       keyname: "commentary",
   },
-  "podcast":{
+/*   "podcast":{
       keyId: process.env.PODCAST_FILTER_ID,
       keyname: "podcast",
-  }
+  } */
 }
 module.exports.formatsAll=formatsAll
 

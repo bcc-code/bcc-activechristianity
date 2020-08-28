@@ -70,5 +70,6 @@
     "signin_options_disclaimer": "Disclaimer about user data",
     "signin_options_action": "Sign in with",
     "slug_theme": "theme",
-    "slug_ebook": "e-book"
+    "slug_ebook": "e-book",
+    "slug_host": "host"
 }

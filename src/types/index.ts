@@ -162,6 +162,7 @@ export interface IPage {
     label: string
     is_active: Boolean
     content: string
+    flexibleContent: string
     meta: {
         post_types: string[]
     }

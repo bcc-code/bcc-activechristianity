@@ -25,16 +25,17 @@ import { INavItem, IPostItem, IAuthor } from '@/types'
 
 
 import TS from '@/strings'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 // mock data
 import '@/styles/react-tabs.css'
 
 
 const Listen: React.FC<IListenPageProps> = (props) => {
     const { data, pageContext, path } = props
+    console.log(pageContext)
     const { posts } = data.ac.topics[0]
     const postSlugList = posts.map(p => p.slug)
-    const { breadcrumb } = pageContext
+    const { breadcrumb, hosts: hostSlugs } = pageContext
     const [postList, setPostList] = React.useState<IPostItem[]>([])
     const [latestPageNr, setLatestPageNr] = React.useState(1)
     const [popularPost, setPopularPost] = React.useState<IPostItem[]>([])
@@ -55,20 +56,31 @@ const Listen: React.FC<IListenPageProps> = (props) => {
     }
 
     const getHosts = () => {
-        const getAuthors = livingTheGospel.hosts.map(slug => {
-            const authorSlug = `${TS.slug_ac_author}/${slug}`
+        const getAuthors = hostSlugs.map(slug => {
+            const trimmedSlug = slug.replace(`${ac_strings.slug_host}/`, '')
+            const authorSlug = `${TS.slug_ac_author}/${trimmedSlug}`
             return fetch(`/page-data/${authorSlug}/page-data.json`)
                 .then(res => res.json())
                 .then((res: any) => {
                     const { author } = res.result.pageContext
-                    return ({
-                        as: 'host',
-                        name: author.name,
-                        to: authorSlug,
-                        image: author.image,
-                        excerpt: author.excerpt
+                    return fetch(`/page-data/${ac_strings.slug_host}/${trimmedSlug}/page-data.json`)
+                        .then(res => res.json())
+                        .then(hostRes => {
 
-                    })
+                            const hostInfo = hostRes.result.data.ac.page
+
+                            const contentInfo = JSON.parse(hostInfo.flexibleContent)
+
+                            return ({
+                                as: 'host',
+                                name: hostInfo.title,
+                                to: authorSlug,
+                                image: author.image,
+                                excerpt: contentInfo[0].data.content
+
+                            })
+                        })
+
                 })
         })
         return Promise
@@ -101,7 +113,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
 
     const hostsBlock = {
-        title: <h6 className="text-d4slate-dark text-lg font-bold pb-4">{newString.meetTheHost}</h6>,
+        title: <h6 className="text-d4slate-dark text-lg font-bold pb-4">{ac_strings.meetTheHost}</h6>,
         content: (
             <div>
                 {hosts.map((item, i) => {
@@ -112,10 +124,16 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                                 contentLabel={item.name}
                                 content={(props) => {
                                     return (
-                                        <div className="p-8">
-
+                                        <div className="p-8 flex flex-col align-center justify-center">
+                                            <div className="text-lg font-bold">{item.name}</div>
+                                            {item.image && (
+                                                <div className="max-w-18 my-8">
+                                                    <img src={item.image.src} alt="" style={{ borderRadius: "50%", filter: 'grayscale(100%)' }} />
+                                                </div>
+                                            )}
                                             {item.excerpt ? (
-                                                <Content content={item.excerpt} />
+                                                <div className="text-sm leading-normal" dangerouslySetInnerHTML={{ __html: item.excerpt }} />
+
                                             ) : (
                                                     <div>{item.name}</div>
                                                 )}
@@ -124,7 +142,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                                 }}
                                 trigger={
                                     (
-                                        <div className="flex items-center mb-4">
+                                        <div className="flex items-center mb-4 cursor-pointer">
                                             {item.image && (
                                                 <div className="max-w-12 mb-4">
                                                     <img src={item.image.src} alt="" style={{ borderRadius: "50%", filter: 'grayscale(100%)' }} />
@@ -150,7 +168,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                 <PostItem {...post} key={i} />
             ))}
             <div className="w-full flex justify-center py-16">
-                <OutlineButton name={newString.moreLatest} onClick={showMoreLatest} />
+                <OutlineButton name={ac_strings.moreLatest} onClick={showMoreLatest} />
 
             </div>
         </div>
@@ -165,7 +183,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
     )
     return (
         <div>
-            <MetaTag title={newString.podcast} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
+            <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <div className="relative py-8">
 
                 <div className="standard-max-w grid md:grid-cols-4 px-4 mb-20  relative z-10">
@@ -219,9 +237,9 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                     <div className="md:hidden">
                         <Tabs >
                             <TabList>
-                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{newString.latest}</Tab>
-                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{newString.popular}</Tab>
-                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{newString.hosts}</Tab>
+                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{ac_strings.latest}</Tab>
+                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{ac_strings.popular}</Tab>
+                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{ac_strings.hosts}</Tab>
                             </TabList>
                             <TabPanel>
                                 {latestPanel}
@@ -239,11 +257,11 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
 
                         <div className="w-full sm:w-1/2 px-4">
-                            <UnderlineTitleLink name={newString.latest} />
+                            <UnderlineTitleLink name={ac_strings.latest} />
                             {latestPanel}
                         </div>
                         <div className="w-full sm:w-1/2 px-4">
-                            <UnderlineTitleLink name={newString.popular} />
+                            <UnderlineTitleLink name={ac_strings.popular} />
                             {popularPanel}
                         </div>
                     </div>
@@ -281,6 +299,7 @@ interface IListenPageProps {
     }
     pageContext: {
         breadcrumb: INavItem[]
+        hosts: string[]
     }
     path: string
 }

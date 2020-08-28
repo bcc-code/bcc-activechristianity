@@ -4,7 +4,8 @@ import { fetchEbookFromSlug, fetchPlaylistFromSlug, fetchOneLocalPostsFromSlug }
 import Ebook from '@/components/ScrollSection/Ebook'
 import DesktopHeaderPost from '@/components/PostItem/DesktopHeaderPost'
 import Playlist from '@/components/ScrollSection/Playlist'
-interface IPageFeaturedPost {
+
+export interface IPageFeaturedPost {
     type: "playlist" | "ebook" | "post"
     id: number
     image: IImage
@@ -13,11 +14,38 @@ interface IPageFeaturedPost {
     title: string
 }
 
-interface IModifiedFields {
+export interface IModifiedFields {
     exceprt?: string
     title?: string
     image?: IImage
 }
+
+export interface IPageTextComp {
+    type: "text"
+    data: {
+        content: string
+    }
+}
+
+export interface IPageFeaturedItems {
+    type: "featured_items"
+    data: IPageFeaturedPost[]
+}
+
+export interface IPagePost {
+    type: "article_banner"
+    data: {
+        author: string
+        id: number
+        image: IImage
+        slug: string
+        title: string
+
+    }
+}
+
+export type IPageCompTypes = IPagePost | IPageFeaturedItems | IPageTextComp
+
 const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
     type,
     id,

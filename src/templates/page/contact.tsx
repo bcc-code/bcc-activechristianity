@@ -41,7 +41,7 @@ const ContactPage = () => {
 export default ContactPage
 
 
-const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({ className, style, imageUrl }) => {
+export const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({ className, style, imageUrl }) => {
     const socialPlatforms = [
         {
             icon: <FacebookIcon />,

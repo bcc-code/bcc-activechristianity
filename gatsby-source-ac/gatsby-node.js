@@ -1,4 +1,6 @@
 const fetch = require('node-fetch');
+const { graphql } = require('gatsby');
+const { array } = require('prop-types');
 
 const getPostsQuery = (pageNr)=>`
     {
@@ -92,8 +94,31 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             settings.forEach(s => {
               metadata[s.key] = s.value
             })
-  
+            if (metadata["featured_posts"]){
 
+                const arraySlug = JSON.parse(metadata["featured_posts"])
+
+                const featured_slug=await fetch(baseUrl, { 
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query:
+                        `{
+                            posts(ids: [${arraySlug.join(",")}]) {
+                                data {
+                                 slug
+                                }
+                              }
+                        }` 
+                     })
+                  })
+                  .then(response => response.json())
+                  metadata["featured_posts"]=featured_slug.data.posts.data.map(p=>p.slug)
+                  /* metadata["featured_posts"]=featured_slug. */
+ 
+            }
+  
               // Data can come from anywhere, but for now create it manually
   
             const nodeContent = JSON.stringify(metadata)

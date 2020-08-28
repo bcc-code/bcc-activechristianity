@@ -24,7 +24,7 @@ module.exports = function generatePosts(actions, graphql) {
   const { createPage } = actions
 
   return graphql(query)
-  .then((result) => {
+  .then(async (result) => {
     if (result.errors) {
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)

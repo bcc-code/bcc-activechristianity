@@ -13,8 +13,6 @@ import { fetchPostslistFromArchivePage } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.json'
 // types'
 
-import livingTheGospel from '@/strings/podcastProperties'
-
 const Listen: React.FC<IProps> = (props) => {
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
     const [latest, setLatest] = React.useState<IPostItem[]>([])
@@ -25,7 +23,7 @@ const Listen: React.FC<IProps> = (props) => {
     const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
 
     const { pageContext, path } = props
-
+    console.log(pageContext)
     const { title, breadcrumb, items, playlist, menu } = pageContext
 
     const latestSlug = `${path}/${ac_strings.latest_slug}`
@@ -161,15 +159,6 @@ const Listen: React.FC<IProps> = (props) => {
             setDesktopRow2(postsByTypesRow2)
         })
     }, [pageContext])
-
-
-
-
-
-
-
-
-
 
     return (
         <div>
