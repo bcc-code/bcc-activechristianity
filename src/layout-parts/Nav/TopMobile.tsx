@@ -8,7 +8,7 @@ import LogoSmall from '@/images/AC_Logo_sm.png'
 import HamburgerIcon from '@/components/Icons/Menu'
 import ReactPlaceholder from 'react-placeholder'
 import { UserInitial } from '@/layout-parts/User/UserInitial'
-import { all } from '@/strings/menu'
+import ac_strings from '@/strings/ac_strings.json'
 import { IDrawerNav } from '@/layouts/App'
 import { INavItem } from '@/types'
 
@@ -104,7 +104,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                         {authInfo.loggedIn === 'success' ? (
                             <Link
                                 className=""
-                                to={all.user.to}
+                                to={ac_strings.slug_user}
                             >
                                 <UserInitial className="w-8 h-8" name={authInfo.user ? authInfo.user.name : ""} />
                             </Link>

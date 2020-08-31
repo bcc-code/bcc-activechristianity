@@ -1,7 +1,8 @@
 import * as React from 'react'
+import { StaticQuery, graphql } from "gatsby"
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
-import BottomMobile from '@/layout-parts/Nav/BottomMobile'
+import BottomMobile, { iconMap, IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
 import SideNav from '@/layout-parts/Nav/SideNav'
 import Helmet from 'react-helmet'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
@@ -20,7 +21,7 @@ import { auth as authApi } from '@/util/sdk'
 
 // type 
 import { IRootState } from '@/state/types'
-import { IUser } from '@/types'
+import { IUser, IMenusQuery, INavItem } from '@/types'
 
 
 import "@/styles/tailwind-output.css"
@@ -31,6 +32,7 @@ export interface IDrawerNav {
     isSideNavOpen: boolean
     setSideNavOpen: (status: boolean) => void
     isModalOpen?: boolean
+    menu: INavItem[]
 }
 
 const App: React.FC<any> = (props) => {
@@ -85,63 +87,144 @@ const App: React.FC<any> = (props) => {
 
 
     return (
-        <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
-            <Helmet>
-                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-            </Helmet>
-            <SignInSignUpModal />
-            <SideNav {...NavProps} />
-            <TopMobile {...NavProps} breadcrumb={breadcrumb} />
-            <TopDesktop {...NavProps} />
+        <StaticQuery query={query}
+            render={(ghdata: IAppQueryProps) => {
+                const { menus, allPages } = ghdata.ac
 
-            <div>
+                let sideMenu: INavItem[] = []
+                let desktopMenu: INavItem[] = []
+                let mobileMenu: IMenuWithIcon[] = []
+                let explorePage: INavItem | undefined = undefined
+                Object.keys(iconMap).forEach(label => {
+
+                    const page = allPages.find(page => {
+                        /* console.log(page) */
+                        return page.label === label
+                    })
+                    if (page) {
+
+                        if (page.label === "explore") {
+                            explorePage = { name: page.title, to: page.slug }
+                        }
+                        mobileMenu.push(({ name: page.title, to: page.slug, icon: iconMap[page.label] }))
+                    }
+
+                })
+                menus.forEach(m => {
+                    if (`${m.id}` === "6") {
+                        desktopMenu = m.menuItems
+
+                    }
+
+                    if (`${m.id}` === "10") {
+                        sideMenu = m.menuItems
+
+                    }
+                })
+                return (
+                    <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
+                        <Helmet>
+                            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                            <meta name="viewport" content="width=device-width, initial-scale=1" />
+                        </Helmet>
+                        <SignInSignUpModal />
+
+                        <SideNav {...NavProps} menu={sideMenu} />
+                        <TopMobile {...NavProps} breadcrumb={breadcrumb} menu={mobileMenu} />
+                        <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
+
+                        <div>
 
 
-                <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
-                    {breadcrumb.length > 0 && (
-                        <div className="relative z-50 w-full bg-white pt-2 px-2 hidden sm:block">
-                            <Breadcrumb
-                                items={breadcrumb}
-                            />
+                            <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
+                                {breadcrumb.length > 0 && (
+                                    <div className="relative z-50 w-full bg-white pt-2 px-2 hidden sm:block">
+                                        <Breadcrumb
+                                            items={breadcrumb}
+                                        />
+                                    </div>
+                                )}
+                                {currentMedia.audio ? (
+                                    <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
+                                        <MediaPlayer />
+                                    </div>
+                                ) : null}
+
+                                {children}
+                                {/*   <Footer /> */}
+                            </div>
+
+                            <BottomMobile  {...NavProps} menu={mobileMenu} />
+
                         </div>
-                    )}
-                    {currentMedia.audio ? (
-                        <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                            <MediaPlayer />
-                        </div>
-                    ) : null}
+                        <CookieConsent
+                            location="bottom"
+                            buttonText={TS.consent_general_accept}
+                            cookieName="myAwesomeCookieName2"
+                            style={{ background: "#2B373B" }}
+                            buttonStyle={{
+                                color: "#2B373B",
+                                fontSize: "12px",
+                                background: "#F1AD2C",
+                                borderRadius: "25px",
+                                padding: "0.5rem 1rem"
+                            }}
+                            expires={150}
+                        >
+                            {TS.consent_general_main}
+                            {" "}
+                            <Link style={{ fontSize: "11px" }} to={ac_strings.cookie_policy_slug}>
+                                {TS.consent_general_link}
+                            </Link>
+                        </CookieConsent>
+                    </div>
+                )
+            }}
 
-                    {children}
-                    {/*   <Footer /> */}
-                </div>
 
-                <BottomMobile  {...NavProps} />
 
-            </div>
-            <CookieConsent
-                location="bottom"
-                buttonText={TS.consent_general_accept}
-                cookieName="myAwesomeCookieName2"
-                style={{ background: "#2B373B" }}
-                buttonStyle={{
-                    color: "#2B373B",
-                    fontSize: "12px",
-                    background: "#F1AD2C",
-                    borderRadius: "25px",
-                    padding: "0.5rem 1rem"
-                }}
-                expires={150}
-            >
-                {TS.consent_general_main}
-                {" "}
-                <Link style={{ fontSize: "11px" }} to={ac_strings.cookie_policy_slug}>
-                    {TS.consent_general_link}
-                </Link>
-            </CookieConsent>
-        </div>
+        />
     )
 
 }
 
 export default App
+
+interface IAppQueryProps {
+    ac: {
+        menus: {
+            id: string
+            slug: string
+            menuItems: INavItem[]
+        }[]
+
+        allPages: {
+            title: string
+            slug: string
+            label: string
+        }[]
+    }
+}
+const query = graphql`
+    query LayoutQuery {
+        ac {
+            menus {
+                id
+                slug
+                menuItems {
+                    name
+                    to:value
+                }
+            }
+
+            allPages {
+                    title
+                    slug
+                    label
+            }
+        }
+
+        
+    }
+
+`

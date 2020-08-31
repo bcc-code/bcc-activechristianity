@@ -63,6 +63,7 @@ const pagesContext = {
 module.exports = function generatePages(actions, graphql) {
   const { createPage } = actions
   const themePages=[]
+  const userPages=[]
   const podcastHosts=[]
   const aboutUsChildren=[]
   return graphql(query).then(result=>{
@@ -89,12 +90,19 @@ module.exports = function generatePages(actions, graphql) {
           podcastHosts.push(page)
         } else if (page && page.label.indexOf("about-us-") >-1){
           aboutUsChildren.push(page)
-        }
-        else if (page && page.label.indexOf("build-") >-1){
+        } else if ("user-"){
+          userPages.push(page)
+        }else if (page && page.label.indexOf("build-") >-1){
           const templateName=page.label.replace("build-","")
           let context = {
             title:page.title,
-              breadcrumb:[navTopItem,{name:page.title,to:page.slug}]
+              breadcrumb:[
+                navTopItem,
+                {
+                  name:page.title,
+                  to:page.slug
+                }
+              ]
           }
 
           if (pagesContext[page.label]){
@@ -145,7 +153,7 @@ module.exports = function generatePages(actions, graphql) {
               navTopicsItem,
               {
                 name:page.title,
-                slug:themePagePath
+                to:themePagePath
               }
             ]
           },
@@ -205,8 +213,20 @@ module.exports = function generatePages(actions, graphql) {
 
         },
       })
+
+      console.log(ac_strings.slug_user)
+      createPage({
+        path: ac_strings.slug_user,
+        component: path.resolve(`src/templates/page/user.tsx`),
+        context:{
+          title:ac_strings.title_user,
+          userPages:userPages.map(page=>({component:page.label.replace("user-",""),path:page.slug}))
+        },
+      })
     }
   })
+
+  
 
 }
 

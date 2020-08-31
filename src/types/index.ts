@@ -133,6 +133,7 @@ export interface IImageProps {
 
 export interface IMenusQuery {
     menus: {
+        id: string
         name: string
         slug: string
         menuItems: IMenuItem[]
@@ -198,7 +199,7 @@ export interface ITopic {
     id: string
     name: string
     slug: string
-    excerpt: string
+    excerpt?: string
     image: IImage[]
     group: ITopicGroup
     posts: IPostRes[]

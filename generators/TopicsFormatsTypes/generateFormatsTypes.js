@@ -152,6 +152,7 @@ module.exports = function generateTopics(actions, graphql) {
                         const subTopics = subTRes.data.ac.topic.subTopics
                         const formatType={
                             info:{
+                                key:find.keyname,
                                 name:format.name,
                                 to:format.slug,
                                 count:format.noOfPosts
@@ -224,7 +225,7 @@ module.exports = function generateTopics(actions, graphql) {
                         
                         const subTopics = subTRes.data.ac.topic.subTopics
                         const typeFormatEach={
-                            info:{name:type.name,to:type.slug,count:type.noOfPosts},
+                            info:{key:findType.keyname,name:type.name,to:type.slug,count:type.noOfPosts},
                             items:[]}
 
 
@@ -267,7 +268,7 @@ module.exports = function generateTopics(actions, graphql) {
                             
                             const ebookPage = pageInfo.find(page=>`${page.id}`===process.env.EBOOK_PAGE_ID)
                             if (ebookPage){
-                                const ebookItem={name:ebookPage.title,to:ebookPage.slug,count:ebooksAll.length}
+                                const ebookItem={key:"ebook",name:ebookPage.title,to:ebookPage.slug,count:ebooksAll.length}
                                 typeFormatEach["ebook"]=ebookItem
                                 resource_grouped["format"].items.push(ebookItem)
                                 typeMenu.push(ebookItem)
@@ -279,8 +280,8 @@ module.exports = function generateTopics(actions, graphql) {
                             const playlistPage = pageInfo.find(page=>page.id===process.env.PLAYLIST_PAGE_ID);
                             const podcastPage = pageInfo.find(page=>page.id===process.env.PODCAST_PAGE_ID);
                             if(playlistPage){
-                                const playlistItem = {name:playlistPage .title,to:playlistPage.slug,count:playlistsAll.length}
-                                const podcastItem = {name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
+                                const playlistItem = {key:"playlist",name:playlistPage .title,to:playlistPage.slug,count:playlistsAll.length}
+                                const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
                                 typeFormatEach["playlist"]=playlistItem
                                 typeFormatEach["podcast"]=podcastItem
                                 resource_grouped["format"].items.push(playlistItem,podcastItem)

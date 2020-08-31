@@ -51,27 +51,28 @@ const Read: React.FC<IProps> = (props) => {
             if (type) {
                 const slug = `${path}/${type.to}`
                 postTypesLinks.push({ ...count, to: slug })
-                getTypes.push(fetchPostslistFromArchivePage(slug).then(posts => {
-                    if (posts) {
-                        const postsByFormat: IPostsByFormat = {
-                            keyName: key,
-                            type: {
-                                name: type.name,
-                                to: slug,
-                            },
-                            postsRow: posts
+                getTypes.push(fetchPostslistFromArchivePage(slug)
+                    .then(posts => {
+                        if (posts) {
+                            const postsByFormat: IPostsByFormat = {
+                                keyname: key,
+                                type: {
+                                    name: type.name,
+                                    to: slug,
+                                },
+                                postsRow: posts
+                            }
+                            return postsByFormat
                         }
-                        return postsByFormat
-                    }
-                }))
+                    }))
             }
         })
 
         Promise.all(getTypes).then(res => {
             const collection: IPostsByFormatCollection = {}
             res.forEach(c => {
-                if (c && c.keyName) {
-                    collection[c.keyName] = c
+                if (c && c.keyname) {
+                    collection[c.keyname] = c
                 }
             })
 

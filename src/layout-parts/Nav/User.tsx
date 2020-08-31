@@ -3,9 +3,8 @@ import Link from '@/components/CustomLink'
 import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
-import newsStrings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import { openSignInModal } from '@/state/action'
-import { all } from '@/strings/menu'
 
 import { setLogout, setUser } from '@/state/action/authAction'
 
@@ -50,7 +49,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
             <Link
                 className="p-2 uppdercase text-small"
                 onClick={onClick}
-                to={`/${all.user.to}`}
+                to={`/${ac_strings.slug_user}`}
             >
                 {TS.account}
             </Link>
@@ -60,7 +59,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     ) : (
             authInfo.loggedIn === "loading" ? (
                 <div className="px-2">
-                    {newsStrings.loading}
+                    {ac_strings.loading}
                 </div>
             ) : (
                     <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>

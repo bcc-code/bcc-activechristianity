@@ -11,13 +11,12 @@ import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/layout-parts'
 
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
-
-import newString from '@/strings/ac_strings.json'
-import { all } from '@/strings/menu'
+import { fetchTopicFromSlug } from '@/helpers'
+import ac_strings from '@/strings/ac_strings.json'
 
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Stats } from 'react-instantsearch-dom';
-
+import { ITopic, INavItemCount, INavItem } from "@/types"
 
 const ExploreByType = loadable(() => import('@/layout-parts/Explore/ExploreByType'))
 const RefinementListByType = loadable(() => import('@/layout-parts/Explore/RefinementByType'))
@@ -34,9 +33,10 @@ import ArrowRight from '@/components/Icons/ArrowRight'
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
-const SideMobile: React.FC = () => {
-
+const ExplorePage: React.FC<any> = (props) => {
+    console.log(props)
     const [query, setQuery] = React.useState('');
+    const [popularTopics, setPopularTopics] = React.useState<INavItem[]>([])
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
 
     const [typeFilter, setTypeFilter] = React.useState<string[] | null>(null);
@@ -45,6 +45,29 @@ const SideMobile: React.FC = () => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
+    const topicSlugs = [
+        "covid-19-coronavirus-resources",
+        "relationships-and-sexuality",
+        "the-holy-spirit",
+        "the-end-times",
+        "prayer",
+        "salvation-and-sanctification"
+    ]
+
+    React.useEffect(() => {
+        const receivedTopics: INavItem[] = []
+        Promise.all(topicSlugs.map(slug => {
+            return fetchTopicFromSlug(slug)
+        })).then(res => {
+            res.forEach(c => {
+                if (c) {
+                    receivedTopics.push(c)
+                }
+            })
+            setPopularTopics(receivedTopics)
+        })
+
+    }, [])
     React.useEffect(() => {
         localStorageHelper.storeQuery(query)
     }, [query])
@@ -151,34 +174,6 @@ const SideMobile: React.FC = () => {
     const topSearches = ['Anxiety', 'The end times', 'God\'s plan for me',
         'Self-image', 'Forgive others', 'Fear']
 
-    const trendingTopics = [
-        {
-            label: 'Convid 19',
-            value: "covid-19-coronavirus-resources"
-        },
-        {
-            label: 'Relationship',
-            value: "relationships-and-sexuality"
-        },
-        {
-            label: 'The Holy Spirit',
-            value: "the-holy-spirit"
-        },
-        {
-            label: 'The end times',
-            value: "the-end-times"
-        },
-        {
-            label: 'Prayer',
-            value: "prayer"
-        },
-        {
-            label: 'Salvation',
-            value: "salvation-and-sanctification"
-        },
-    ]
-
-
 
     const customSearchBoxProps = {
         query,
@@ -195,7 +190,8 @@ const SideMobile: React.FC = () => {
         topSearches
     }
 
-    const title = newString.explore
+    const title = ac_strings.explore
+
     return (
 
         <InstantSearch
@@ -225,15 +221,15 @@ const SideMobile: React.FC = () => {
                 {showExploreHome && (
                     <div className="max-w-tablet mx-auto">
 
-                        <SubSection title={newString.trendingTopics} to={`/${TS.slug_topic}`} icon={<TopicIcon customSize={16} />}>
+                        <SubSection title={ac_strings.trendingTopics} to={`/${TS.slug_topic}`} icon={<TopicIcon customSize={16} />}>
                             <div className="grid grid-cols-2 gap-2 text-xs sm:text-base text-d4secondary">
-                                {trendingTopics.map(item => {
+                                {popularTopics.map(item => {
                                     return (
                                         <Link
                                             className="text-center my-1 border border-d4secondary rounded py-1"
-                                            to={`/${TS.slug_post_tag}/${item.value}/recommend`}
+                                            to={`/${TS.slug_topic}/${item.to}`}
                                         >
-                                            {item.label}
+                                            {item.name}
                                         </Link>
                                     )
                                 })}
@@ -244,10 +240,10 @@ const SideMobile: React.FC = () => {
                         </LazyLoad>
                         <LazyLoad>
                             <SubSection title='' >
-                                <Link to={`/${all.scripture.to}`} className="flex text-d4secondary justify-between items-center w-full">
+                                <Link to={`/`} className="flex text-d4secondary justify-between items-center w-full">
                                     <div className="flex justify-center items-center">
                                         <BibleIcon customSize={35} className="-mb-1" />
-                                        <span className="font-semibold ml-4">{newString.byScripture}</span>
+                                        <span className="font-semibold ml-4">{ac_strings.byScripture}</span>
                                     </div>
                                     <ArrowRight className="w-4 h-4" />
                                 </Link>
@@ -255,7 +251,7 @@ const SideMobile: React.FC = () => {
                             </SubSection>
                         </LazyLoad>
                         <LazyLoad>
-                            <SubSection title={newString.editorPick} to={`${TS.slug_post_tag}`} className="border-none">
+                            <SubSection title={ac_strings.editorPick} to={`${TS.slug_post_tag}`} className="border-none">
 
                                 {/*                                 <QLatestPosts >
                                     {(posts) => {
@@ -319,5 +315,45 @@ const SideMobile: React.FC = () => {
     )
 }
 
-export default SideMobile
+export default ExplorePage
 
+interface IResource {
+    path: string
+
+    pageContext: {
+        title: string
+        resource: {
+            format: {
+                name: string
+                info: INavItemCount
+                menu: INavItemCount[]
+                items: INavItemCount[]
+            }
+            general: {
+                name: string
+                info: INavItemCount
+                menu: INavItemCount[]
+                items: INavItemCount[]
+            }
+            read: {
+                name: string
+                slug: string
+                info: INavItemCount
+                ebook?: INavItemCount
+                menu: INavItemCount[]
+            }
+            listen?: {
+                name: string
+                slug: string
+                info: INavItemCount
+                menu: INavItemCount[]
+            }
+            watch?: {
+                name: string
+                slug: string
+                info: INavItemCount
+                menu: INavItemCount[]
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Link from '@/components/CustomLink'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import menu from '@/strings/menu'
 
 export const SubSection: React.FC<{ title: string, to?: string, className?: string, icon?: JSX.Element }> = ({ title, children, to, className, icon }) => {
@@ -10,7 +10,7 @@ export const SubSection: React.FC<{ title: string, to?: string, className?: stri
             <div className="font-semibold text-xs sm:text-base py-2 flex justify-between">
                 <h5 className="text-d4secondary flex items-center">{icon && <span className="pr-2">{icon}</span>} <div className="inline-block">{title}</div></h5>
                 {to && (
-                    <Link className="text-xxs text-d4secondary" to={to}>{newString.more} </Link>
+                    <Link className="text-xxs text-d4secondary" to={to}>{ac_strings.more} </Link>
                 )}
             </div>
 
@@ -31,7 +31,7 @@ export const ExploreByType: React.FC = () => {
 
     const option = [
         {
-            name: newString.mostView,
+            name: ac_strings.mostView,
             value: "most-viewed",
             icon: <FeatureIcon className="w-4 h-4" />,
         },
@@ -52,7 +52,7 @@ export const ExploreByType: React.FC = () => {
             icon: <AudioIcon className="w-4 h-4" />,
         },
         {
-            name: newString.general,
+            name: ac_strings.general,
             value: "general",
             icon: <ArchiveIcon className="w-4 h-4" />,
             types: general

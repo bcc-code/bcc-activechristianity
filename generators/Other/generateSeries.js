@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
 const TS = require('../../src/strings/index')
-const menu = require('../../src/strings/menu')
+
 const templateOverview = 'src/templates/resource-sections/series-overview.tsx'
 const templateChild= 'src/templates/single-resource/series-child.tsx'
 
@@ -97,7 +97,7 @@ module.exports = function generateKeyTeachingParents(actions, graphql) {
                         slug: children[0].node.slug,
                         wordpressParent: children[0].node.wordpress_parent,
                         wordpressId: children[0].node.wordpress_id,
-                        breadcrumb:[menu.all.explore,menu.all.series]
+                        breadcrumb:[]
                     },
                 })
 

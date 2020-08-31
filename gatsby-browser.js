@@ -20,7 +20,6 @@ import "./src/styles/reset.css"
 
 import wrapWithProvider,{preloadedState} from "./provider"
 
-import { getScreenSize } from '@/util'
 export const wrapRootElement = wrapWithProvider
 
 export const wrapPageElement = ({ element, props }) => <Layout {...props}>{element}</Layout>

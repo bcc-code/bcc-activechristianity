@@ -71,5 +71,7 @@
     "signin_options_action": "Sign in with",
     "slug_theme": "theme",
     "slug_ebook": "e-book",
-    "slug_host": "host"
+    "slug_host": "host",
+    "slug_user": "user",
+    "title_user": "Profile"
 }

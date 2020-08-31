@@ -101,7 +101,7 @@ module.exports = function generateTopics(actions, graphql) {
                             navParentItem, 
                             {
                             name:node.name,
-                            to:node.slug
+                            to:baseUrl
                           }]
                         },
                       })
@@ -122,6 +122,7 @@ module.exports = function generateTopics(actions, graphql) {
                         const topicType = []
 
                         const subTRes = await graphql(querySubTopics)
+
                         const subTopics = subTRes.data.ac.topic.subTopics
 
                         for (let i =0;i<subTopics.length;i++){
@@ -206,7 +207,7 @@ module.exports = function generateTopics(actions, graphql) {
                                 navTopItem, 
                                 navParentItem,{
                                 name:topic.name,
-                                to:topic.slug
+                                to:pagePath
                               }
                             ]
                             },

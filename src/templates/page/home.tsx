@@ -26,11 +26,10 @@ import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 
 // Helpers
 import { blog as blogApi, auth } from '@/util/sdk'
-import menu from '@/strings/menu'
 import { normalizePostRes, fetchLocalPostsFromSlugs } from '@/helpers'
 import TS from '@/strings'
 import languages from '@/strings/languages.json'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 import User from "@/layout-parts/User/UserInitial";
 
 
@@ -161,12 +160,12 @@ const IndexPage: React.FC<IHome> = (props) => {
               }],
               latestPosts: initialData.latestPosts.edges.slice(0, 6).map(item => convertPosts(item.node)),
               featuredPostRow: initialData.featuredPosts.edges.map(item => WPItemtoPostItem(item)),
-              listSlotOne: initialData.popularPosts.edges[0] ? getTopicFromPost(initialData.popularPosts.edges[0], newString.popularTopic) : defaultUserContent.listSlotOne,
-              listSlotTwo: initialData.popularPosts.edges[1] ? getTopicFromPost(initialData.popularPosts.edges[1], newString.popularTopic) : defaultUserContent.listSlotTwo,
+              listSlotOne: initialData.popularPosts.edges[0] ? getTopicFromPost(initialData.popularPosts.edges[0], ac_strings.popularTopic) : defaultUserContent.listSlotOne,
+              listSlotTwo: initialData.popularPosts.edges[1] ? getTopicFromPost(initialData.popularPosts.edges[1], ac_strings.popularTopic) : defaultUserContent.listSlotTwo,
               newPostsForYou: getNewForYou(initialData.latestPosts.edges.slice(6, 10).map(item => item.node)),
-              listSlotThree: initialData.popularPosts.edges[2] ? getTopicFromPost(initialData.popularPosts.edges[2], newString.popularTopic) : defaultUserContent.listSlotThree,
-              listSlotFour: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], newString.popularTopic) : defaultUserContent.listSlotFour,
-              listSlotFive: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], newString.popularTopic) : defaultUserContent.listSlotFive,
+              listSlotThree: initialData.popularPosts.edges[2] ? getTopicFromPost(initialData.popularPosts.edges[2], ac_strings.popularTopic) : defaultUserContent.listSlotThree,
+              listSlotFour: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFour,
+              listSlotFive: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFive,
               topicsForYou: initialData.featuredTopics.edges,
               popularPosts: initialData.popularPosts.edges.map(item => convertPosts(item))
             }) */
@@ -210,7 +209,7 @@ const IndexPage: React.FC<IHome> = (props) => {
             <TopImgPost noBorder {...userContent.latestPosts[0]} showType />
           </div>
         )}
-        <LatestSection latestPosts={latestPosts} latestSlug={menu.all.resourceLatest.to} />
+        <LatestSection latestPosts={latestPosts} latestSlug={ac_strings.latest_slug} />
         {userContent.featuredPostRow && <FeatureSection featuredPosts={userContent.featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
         <LowerSections
           lists={[
@@ -255,7 +254,7 @@ const IndexPage: React.FC<IHome> = (props) => {
           </div>
         </LazyLoad>
         <div className="w-full flex justify-center py-16">
-          <OutlineButton name={newString.showMore} onClick={showMorePosts} />
+          <OutlineButton name={ac_strings.showMore} onClick={showMorePosts} />
 
         </div>
 

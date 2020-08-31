@@ -301,7 +301,24 @@ export const fetchEbookFromSlug = (slug: string) => {
         })
 }
 
+export const fetchTopicFromSlug = (slug: string) => {
+    let processSlug = trimSlug(slug)
+    return fetch(`/page-data/${TS.slug_topic}/${processSlug}/page-data.json`)
+        .then(res => res.json())
+        .then(res => {
+            if (res.result && res.result && res.result.pageContext) {
+                const topicContext = res.result.pageContext
+                const topicNav: INavItem = {
+                    name: topicContext.title,
+                    to: topicContext.slug
+                }
 
+                return topicNav
+
+            }
+            return undefined
+        })
+}
 export const fetchOneLocalPostsFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
     return fetch(`/page-data/${processSlug}/page-data.json`)

@@ -15,7 +15,7 @@ const generatePlaylists = require('./generators/generatePlaylists.js')
 /* const generateSeries = require('./generators/generateSeries.js') */
 const generateGlossary = require('./generators/generateGlossary.js')
 const generateFormatsTypesResource = require('./generators/TopicsFormatsTypes/generateFormatsTypes.js')
-
+const ac_strings = require('./src/strings/ac_strings.json')
 const buildTranslations = require('./generators/json/build-translations')
 
 const fetch = require('node-fetch');
@@ -79,7 +79,7 @@ exports.onCreatePage = async ({ page, actions }) => {
   if (page.path.match(/^\/user/)) {
     // page.matchPath is a special key that's used for matching pages
     // with corresponding routes only on the client.
-    page.matchPath = "/user/*"
+    page.matchPath = `/${ac_strings.slug_user}/*`
 
     // Update the page.
     createPage(page)

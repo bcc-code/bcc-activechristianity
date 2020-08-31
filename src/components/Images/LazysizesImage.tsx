@@ -12,8 +12,9 @@ const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
     return (
         <img
             className={`lazyload ${className}`}
+            src={dataUri}
             data-sizes="auto"
-            data-src={dataUri || src}
+            data-src={src}
             data-srcset={srcset || src}
         />
     )
