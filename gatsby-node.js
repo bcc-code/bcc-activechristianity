@@ -38,6 +38,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
           'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
+          'process.env.DESKTOP_NAV_SLUG':JSON.stringify(process.env.DESKTOP_NAV_SLUG),
+          'process.env.SIDE_NAV_SLUG':JSON.stringify(process.env.SIDE_NAV_SLUG),
 
         })
       ]
