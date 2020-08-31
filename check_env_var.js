@@ -2,8 +2,6 @@ const core = [
     "TITLE",
     "API_URL",
     "SITE_URL",
-/*     "URL", */
-    "MEDIA_CDN_URL",
     "LANG",
     "LANG_CODE",
     "LOCALE",
