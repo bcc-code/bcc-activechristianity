@@ -58,7 +58,7 @@ const Watch: React.FC<IProps> = (props) => {
 
             if (type) {
 
-                const slug = `${path}/${type.to}`
+                const slug = `${type.to}`
                 postTypesLinks.push({ ...count, to: slug })
                 getTypes.push(fetchPostslistFromArchivePage(slug).then(posts => {
                     if (posts) {

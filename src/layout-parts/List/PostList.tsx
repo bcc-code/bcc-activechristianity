@@ -1,11 +1,10 @@
 import React from 'react'
-import LazyLoad from '@/components/LazyLoad';
 import { navigate } from "gatsby"
 import { IPaginate, IPostItem } from "@/types"
 
 import RightImgWDes from '@/components/PostItem/RightImgWDes'
 import Pagination from '@/components/Pagination'
-import { fetchLocalPostsFromSlugs } from '@/helpers'
+import { fetchLocalPostsFromSlugs, } from '@/helpers'
 
 export interface IPostList {
     audio?: boolean
@@ -41,9 +40,7 @@ const PostList: React.FC<IPostList> = (props) => {
         <div className="max-w-sm" >
             {postList.map((p, k) => {
                 return (
-                    <LazyLoad >
-                        <RightImgWDes key={k} {...p} />
-                    </LazyLoad>
+                    <RightImgWDes key={k} {...p} />
 
                 )
             })}

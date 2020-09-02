@@ -90,6 +90,7 @@ module.exports = function generateTopics(actions, graphql) {
             const podcastCount = result.data.ac.podcasts.noOfPosts
             const explorePage = pageInfo.find(page=>`${page.id}`===process.env.EXPLORE_PAGE_ID)
             const resourcePage = pageInfo.find(page=>`${page.id}`===process.env.RESOURCE_PAGE_ID)
+            const scripturePage = pageInfo.find(page=>`${page.id}`===process.env.SCRIPTURE_PAGE_ID)
             const resourceNavItem = {
                 name:resourcePage.title,
                 to:resourcePage.slug
@@ -180,14 +181,7 @@ module.exports = function generateTopics(actions, graphql) {
                                             to:stTopic.slug,
                                             count:allPosts.length
                                         })
-/*                                         createSubTopicPages({
-                                            type:findType.keyname,
-                                            breadcrumb:[resourceNavItem],
-                                            createPage,
-                                            allPosts,
-                                            topic:format,
-                                            subTopic:stTopic
-                                        }) */
+
                                     })  
                                 }
                                     
@@ -210,7 +204,6 @@ module.exports = function generateTopics(actions, graphql) {
             }
 
             if(types){
-                //read 
                 
                 for(let j=0;j<types.length;j++){
                     const type=types[j]
@@ -241,10 +234,15 @@ module.exports = function generateTopics(actions, graphql) {
                                 await graphql( geFormatPostsQuery)
                                     .then(subTopicPostRes=>{
                                         const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
-                                        typeFormatEach.items.push({key:find.keyname,name:subTopic.name,to:subTopic.slug,count:allPosts.length})
+                                        typeFormatEach.items.push({
+                                            key:find.keyname,
+                                            name:subTopic.name,
+                                            to:`${type.slug}/${subTopic.slug}`,
+                                            count:allPosts.length
+                                        })
                                         
                                         createSubTopicPages({
-                                            type:find.keyname,
+                                            type:findType.keyname,
                                             breadcrumb:[resourceNavItem],
                                             createPage,allPosts,
                                             topic:type,
@@ -324,6 +322,7 @@ module.exports = function generateTopics(actions, graphql) {
                         path: `${eachType.slug}`,
                         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),
                         context:{
+                            typekey,
                             title:eachType.name,
                             ...eachType
                             
@@ -346,17 +345,18 @@ module.exports = function generateTopics(actions, graphql) {
             }
 
             if(explorePage){
+                console.log(scripturePage)
                 createPage({
                     path: explorePage.slug,
                     component: path.resolve(exploreTemplate),
                     context: {
                       title:explorePage.title,
                       slug: explorePage.slug,
-                      resource:resource_grouped
+                      resource:resource_grouped,
+                      scripturePage:({name: scripturePage.title,to: scripturePage.slug})
                     },
                   })
             }
-            
         }
             
     })

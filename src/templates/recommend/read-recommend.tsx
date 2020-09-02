@@ -49,7 +49,7 @@ const Read: React.FC<IProps> = (props) => {
             const { key, ...count } = type
 
             if (type) {
-                const slug = `${path}/${type.to}`
+                const slug = `${type.to}`
                 postTypesLinks.push({ ...count, to: slug })
                 getTypes.push(fetchPostslistFromArchivePage(slug)
                     .then(posts => {

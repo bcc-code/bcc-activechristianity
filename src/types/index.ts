@@ -1,3 +1,6 @@
+
+
+
 export interface ITaxonomy {
     id?: string
     name: string
@@ -5,6 +8,11 @@ export interface ITaxonomy {
     count?: number
 }
 
+export interface IApiItem {
+    id: string
+    slug: string
+    ts: string
+}
 export interface IApiPost {
     id: string
     slug: string
@@ -156,6 +164,7 @@ export interface ITranslations {
 }
 
 export interface IPage {
+    id: string
     title: string
     slug: string
     path: string
@@ -167,7 +176,7 @@ export interface IPage {
     meta: {
         post_types: string[]
     }
-    parent: string
+    parent: IPage
     created_at: string
     updated_at: string
 }

@@ -5,8 +5,6 @@ const core = [
     "LANG",
     "LANG_CODE",
     "LOCALE",
-    "DESKTOP_NAV_SLUG",
-    "SIDE_NAV_SLUG",
     "PODCAST_PLAYLIST_SLUG",
     "ALGOLIA_APP_ID",
     "ALGOLIA_SEARCH_KEY",
@@ -19,8 +17,6 @@ const core = [
 
     "FORMAT_GROUP_ID",
     "TYPE_GROUP_ID",
-
-    "PODCAST_FILTER_ID",
     "EDIFICATION_FILTER_ID",
     "TESTIMONY_FILTER_ID",
     "QUESTION_FILTER_ID",
@@ -32,17 +28,22 @@ const core = [
     "EBOOK_PAGE_ID",
     "SERIES_PAGE_ID",
     "PLAYLIST_PAGE_ID",
-    "PODCAST_PAGE_ID",
+
     "RESOURCE_PAGE_ID",
     "EXPLORE_PAGE_ID",
     "GLOSSARY_PAGE_ID",
     "ABOUT_PAGE_ID",
-    "PODCAST_PLAYLIST_SLUG"
-
-
+    "SCRIPTURE_PAGE_ID",
+    "USER_PAGE_ID",
+    "DESKTOP_NAV_ID",
+    "SIDE_NAV_ID"
 ]
 const english=[
-    "BIBLE_VERSION"
+    "BIBLE_VERSION",
+    "PODCAST_PLAYLIST_SLUG",
+    "PODCAST_PAGE_ID",
+    "PODCAST_FILTER_ID",
+    
 ]
 
 module.exports = function (){

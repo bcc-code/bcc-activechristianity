@@ -16,8 +16,8 @@ import ac_strings from '@/strings/ac_strings.json'
 
 import "react-placeholder/lib/reactPlaceholder.css";
 import { Stats } from 'react-instantsearch-dom';
-import { ITopic, INavItemCount, INavItem } from "@/types"
-
+import { INavItem } from "@/types"
+import { IResourceOverview } from '@/layout-parts/Explore/ExploreByType'
 const ExploreByType = loadable(() => import('@/layout-parts/Explore/ExploreByType'))
 const RefinementListByType = loadable(() => import('@/layout-parts/Explore/RefinementByType'))
 const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTaxonomy'))
@@ -33,8 +33,8 @@ import ArrowRight from '@/components/Icons/ArrowRight'
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
-const ExplorePage: React.FC<any> = (props) => {
-    console.log(props)
+const ExplorePage: React.FC<IResource> = (props) => {
+
     const [query, setQuery] = React.useState('');
     const [popularTopics, setPopularTopics] = React.useState<INavItem[]>([])
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
@@ -45,6 +45,7 @@ const ExplorePage: React.FC<any> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
+    const { resource, scripturePage } = props.pageContext
     const topicSlugs = [
         "covid-19-coronavirus-resources",
         "relationships-and-sexuality",
@@ -236,11 +237,11 @@ const ExplorePage: React.FC<any> = (props) => {
                             </div>
                         </SubSection>
                         <LazyLoad>
-                            <ExploreByType />
+                            <ExploreByType resource={resource} />
                         </LazyLoad>
                         <LazyLoad>
                             <SubSection title='' >
-                                <Link to={`/`} className="flex text-d4secondary justify-between items-center w-full">
+                                <Link to={scripturePage.to} className="flex text-d4secondary justify-between items-center w-full">
                                     <div className="flex justify-center items-center">
                                         <BibleIcon customSize={35} className="-mb-1" />
                                         <span className="font-semibold ml-4">{ac_strings.byScripture}</span>
@@ -322,38 +323,7 @@ interface IResource {
 
     pageContext: {
         title: string
-        resource: {
-            format: {
-                name: string
-                info: INavItemCount
-                menu: INavItemCount[]
-                items: INavItemCount[]
-            }
-            general: {
-                name: string
-                info: INavItemCount
-                menu: INavItemCount[]
-                items: INavItemCount[]
-            }
-            read: {
-                name: string
-                slug: string
-                info: INavItemCount
-                ebook?: INavItemCount
-                menu: INavItemCount[]
-            }
-            listen?: {
-                name: string
-                slug: string
-                info: INavItemCount
-                menu: INavItemCount[]
-            }
-            watch?: {
-                name: string
-                slug: string
-                info: INavItemCount
-                menu: INavItemCount[]
-            }
-        }
+        scripturePage: INavItem
+        resource: IResourceOverview
     }
 }

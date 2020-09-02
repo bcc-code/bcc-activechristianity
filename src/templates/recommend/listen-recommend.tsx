@@ -35,6 +35,8 @@ const Listen: React.FC<IProps> = (props) => {
                 setLatestPosts(res)
             }
         })
+
+        setPosts()
     }, [pageContext])
 
     const setLatestPosts = (posts: IPostItem[]) => {
@@ -43,18 +45,16 @@ const Listen: React.FC<IProps> = (props) => {
         setPopular(posts.slice(5, 10))
     }
 
-    React.useEffect(() => {
-
-
+    const setPosts = () => {
         const getTypes: Promise<IPostsByFormat | undefined>[] = []
         const postTypesLinks: INavItemCount[] = []
-
+        console.log(items)
         items.forEach(type => {
 
             if (type) {
                 const { key, ...count } = type
 
-                const slug = `${path}/${type.to}`
+                const slug = `${type.to}`
                 postTypesLinks.push({ ...count, to: slug })
                 getTypes.push(fetchPostslistFromArchivePage(slug).then(posts => {
                     if (posts) {
@@ -153,12 +153,13 @@ const Listen: React.FC<IProps> = (props) => {
             }
 
             const withIcons = menu.map(item => ({ ...item, name: < TitleWithIcon title={item.name} icon={typeIcons["listen"]} /> }))
+            console.log(withIcons)
             setTypeLinks(withIcons)
             setMobilePostRows(postsByTypesRow)
             setDesktopRow1(postsByTypesRow1)
             setDesktopRow2(postsByTypesRow2)
         })
-    }, [pageContext])
+    }
 
     return (
         <div>

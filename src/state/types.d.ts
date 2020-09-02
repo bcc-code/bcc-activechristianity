@@ -1,6 +1,6 @@
 import { Dispatch, Action } from 'redux'
-import { ITrack, IUser, IMedia, ITrackType, INavItem, ITranslations } from '@/types'
-import { IApiItem } from "@/types/apiResType"
+import { ITrack, IUser, IMedia, ITrackType, INavItem, ITranslations, IApiItem } from '@/types'
+
 
 export interface StateAction extends Action {
   dispatch: Dispatch

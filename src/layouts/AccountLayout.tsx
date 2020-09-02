@@ -7,20 +7,21 @@ import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
 import UserInitials from '@/layout-parts/User/UserInitial'
 import { LayoutH1 } from '@/layout-parts'
+import { INavItem } from '@/types'
 
-const AccountLayout: React.SFC<{ pathname: string }> = ({ children, pathname }) => {
+const AccountLayout: React.SFC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
 
     const dispatch = useDispatch()
     const [currentPageTitle, setCurrentPageTitle] = React.useState<null | string>(null)
 
     React.useEffect(() => {
         if (currentPageTitle === null) {
-            /*             const page = userLinks.find(item => {
-                            return `/${item.to}` === pathname
-                        })
-                        if (page) {
-                            setCurrentPageTitle(page.name)
-                        } */
+            const page = userLinks.find(item => {
+                return `/${item.to}` === pathname
+            })
+            if (page) {
+                setCurrentPageTitle(page.name)
+            }
 
         }
     }, [pathname])
@@ -45,7 +46,7 @@ const AccountLayout: React.SFC<{ pathname: string }> = ({ children, pathname }) 
                     <UserInitials />
                 </div>
                 <div className="flex flex-col pb-8">
-                    {/*                     {userLinks.map((item, i) => (
+                    {userLinks.map((item, i) => (
                         <Link
                             key={i}
                             activeClassName="font-bold"
@@ -57,7 +58,7 @@ const AccountLayout: React.SFC<{ pathname: string }> = ({ children, pathname }) 
                             <div>{item.name}</div>
                         </Link>
                     )
-                    )} */}
+                    )}
                     <button
                         className={menuItemClassName}
                         onClick={handleLogout}

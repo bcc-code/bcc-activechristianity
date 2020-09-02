@@ -3,6 +3,7 @@ import * as React from 'react';
 import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.json'
 import menu from '@/strings/menu'
+import { INavItemCount } from "@/types"
 
 export const SubSection: React.FC<{ title: string, to?: string, className?: string, icon?: JSX.Element }> = ({ title, children, to, className, icon }) => {
     return (
@@ -26,75 +27,69 @@ import FileIcon from '@/components/Icons/File'
 import FeatureIcon from '@/components/Icons/Feature'
 
 
-export const ExploreByType: React.FC = () => {
-    const [resourceTypeGroup, setResourceTypeGroup] = React.useState<"most-viewed" | "listen" | "read" | "watch" | "general">('most-viewed');
-
-    const option = [
-        {
-            name: ac_strings.mostView,
-            value: "most-viewed",
-            icon: <FeatureIcon className="w-4 h-4" />,
-        },
-        {
-            name: menu.all.read.name,
-            value: "read",
-            icon: <FileIcon className="w-4 h-4" />,
-
-        },
-        {
-            name: menu.all.watch.name,
-            value: "watch",
-            icon: <WatchIcon className="w-3 h-3" />,
-        },
-        {
-            name: menu.all.listen.name,
-            value: "listen",
-            icon: <AudioIcon className="w-4 h-4" />,
-        },
-        {
-            name: ac_strings.general,
-            value: "general",
-            icon: <ArchiveIcon className="w-4 h-4" />,
-            types: general
-        },
-
-    ]
-
+export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resource }) => {
+    const [resourceTypeGroup, setResourceTypeGroup] = React.useState<"types" | "listen" | "read" | "watch" | "general">('types');
+    console.log(resource)
     const listMap = {
-        "most-viewed": typeList,
-        "read": read,
-        "watch": watch,
-        "listen": listen,
-        "general": general
+        "types": {
+            icon: <FeatureIcon className="w-4 h-4" />,
+            name: resource.format ? resource.format.name : "",
+            menu: resource.format ? resource.format.items : []
+        },
+        "read": {
+            icon: <FileIcon className="w-4 h-4" />,
+            name: resource.read ? resource.read.name : "",
+            menu: resource.read ? resource.read.menu : []
+        },
+        "watch": {
+            icon: <WatchIcon className="w-3 h-3" />,
+            name: resource.watch ? resource.watch.name : "",
+            menu: resource.watch ? resource.watch.menu : []
+        },
+        "listen": {
+            icon: <AudioIcon className="w-4 h-4" />,
+            name: resource.listen ? resource.listen.name : "",
+            menu: resource.listen ? resource.listen.menu : []
+        },
+        "general": {
+            icon: <ArchiveIcon className="w-4 h-4" />,
+            name: resource.general ? resource.general.name : "",
+            menu: resource.general ? resource.general.items : []
+        }
     }
 
-
+    const activeList = listMap[resourceTypeGroup]
+    console.log(activeList)
     return (
         <SubSection title="">
             <div className="flex justify-evenly">
-                {option.map(item => {
-
-                    const isActive = resourceTypeGroup === item.value
+                {Object.keys(listMap).map(item => {
+                    const isActive = resourceTypeGroup === item
+                    const name = listMap[item] ? listMap[item].name : ""
+                    const icon = listMap[item].icon ? listMap[item].icon : ""
                     return (
                         <div
                             className={`flex-1 flex flex-col justify-start items-center border-b ${isActive ? 'border-d4secondary text-d4secondary' : 'border-d4gray'} pb-4`}
-                            onClick={() => setResourceTypeGroup(item.value)}
+                            onClick={() => setResourceTypeGroup(item)}
                         >
                             <div className={`w-8 h-8 rounded-full flex justify-center items-center ${isActive ? 'bg-d4secondary text-white' : 'bg-d4gray-light '} `} >
-                                {item.icon}
+                                {icon}
                             </div>
-                            <span className="text-xs pt-2 text-center flex-1 flex justify-center align-middle">{item.name}</span>
+                            <span className="text-xs pt-2 text-center flex-1 flex justify-center align-middle">{name}</span>
                         </div>
                     )
                 })}
             </div>
             <div className="grid grid-cols-4 gap-2 pt-6">
-                {listMap[resourceTypeGroup].map((item, i) => {
+                {activeList && activeList.menu.map((item, i) => {
+
+                    const imgSettings = typesImageColors[item.key] || typesImageColors["other"]
+
                     return (
 
-                        <Link className="flex flex-col items-center" key={i} to={item.to}>
-                            <div className={`${item.color} sm:h-40 sm:w-32 text-center rounded-lg mb-2 flex justify-center items-center`}>
-                                <img alt={item.name} src={item.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 sm:h-20 px-4'} />
+                        <Link className="flex flex-col items-center" key={item.key} to={item.to}>
+                            <div className={`${imgSettings.color} sm:h-40 sm:w-32 text-center rounded-lg mb-2 flex justify-center items-center`}>
+                                <img alt={item.name} src={imgSettings.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 sm:h-20 px-4'} />
 
                             </div>
                             <span className={`text-sm leading-none text-center py-2`}>{item.name}</span>
@@ -127,91 +122,82 @@ export const typesImageColors: {
         image: string
     }
 } = {
-    "Edification": {
+    "edification": {
         "color": "bg-d4primary",
         "image": EdificationImg
     },
-    "Testimonies": {
+    "testimony": {
         "color": "bg-d4secondary",
         "image": TestimoniesImg
     },
-    "Questions": {
+    "question": {
         "color": "bg-pink-500",
         "image": QuestionsImg
     },
-    "Commentary": {
+    "commentary": {
         "color": "bg-green-500",
         "image": CommentaryImg
     },
-    "Songs": {
+    "song": {
         "color": "bg-blue-500",
         "image": SongsImg
     },
-    "Podcast": {
+    "podcast": {
         "color": "bg-yellow-500",
         "image": PodcastImg
     },
-    "Messages": {
+    "message": {
         "color": "bg-d4red",
         "image": MessagesImg
     },
-    "Video": {
-        "color": "bg-d4green",
-        "image": VideoImg
-    },
-    "Audio Playlists": {
+    /*     "podcast": {
+            "color": "bg-d4green",
+            "image": VideoImg
+        }, */
+    "playlist": {
         "color": "bg-d4primary",
         "image": PlaylistImg
     },
-    "Other": {
+    "other": {
         "color": "bg-gray-500",
         "image": FoldersImg
     }
 }
 
-const read = Object.keys(menu.read).map(key => ({
-    ...menu.read[key],
-    ...typesImageColors[key] || typesImageColors.Other
-}))
 
-const watch = Object.keys(menu.watch).map(key => ({
-    ...menu.watch[key],
-    ...typesImageColors[key] || typesImageColors.Other
-}))
-
-const listen = Object.keys(menu.listen).map(key => ({
-    ...menu.listen[key],
-    ...typesImageColors[key] || typesImageColors.Other
-}))
-
-const general = menu.resourceMenu.resource.map(item => ({
-    ...item,
-    ...typesImageColors[item.name] || typesImageColors.Other
-}))
-
-const typeList = [
-    {
-        parent: 'read',
-        name: "E-books"
-    },
-    {
-        parent: 'listen',
-        name: "Podcast"
-    },
-    {
-        parent: 'read',
-        name: "Edification"
-    },
-    {
-        parent: 'listen',
-        name: "Audio Playlists"
+export interface IResourceOverview {
+    format: {
+        name: string
+        info: INavItemCount
+        menu: INavItemCount[]
+        items: INavItemCount[]
     }
-].map(item => {
-    const img = typesImageColors[item.name] || typesImageColors.Other
-    return ({
-        ...menu[item.parent][item.name],
-        ...img
-    })
-})
+    general: {
+        name: string
+        info: INavItemCount
 
-
+        items: INavItemCount[]
+    }
+    read: {
+        name: string
+        slug: string
+        info: INavItemCount
+        ebook?: INavItemCount
+        menu: INavItemCount[]
+        items: INavItemCount[]
+    }
+    listen?: {
+        name: string
+        slug: string
+        info: INavItemCount
+        menu: INavItemCount[]
+        items: INavItemCount[]
+    }
+    watch?: {
+        name: string
+        slug: string
+        info: INavItemCount
+        menu: INavItemCount[]
+        items: INavItemCount[]
+    }
+}

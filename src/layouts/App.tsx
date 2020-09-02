@@ -111,12 +111,12 @@ const App: React.FC<any> = (props) => {
 
                 })
                 menus.forEach(m => {
-                    if (`${m.id}` === "6") {
+                    if (`${m.id}` === process.env.DESKTOP_NAV_ID) {
                         desktopMenu = m.menuItems
 
                     }
 
-                    if (`${m.id}` === "10") {
+                    if (`${m.id}` === process.env.SIDE_NAV_ID) {
                         sideMenu = m.menuItems
 
                     }

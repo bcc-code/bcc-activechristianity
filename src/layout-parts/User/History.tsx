@@ -1,20 +1,27 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { fetchLocalPost } from '@/helpers'
+import { fetchLocalPostsFromSlugs } from '@/helpers'
 import { IRootState } from '@/state/types'
-import { IPostItem } from '@/types'
+import { IPostItem, IApiItem } from '@/types'
 import PostItem from '@/components/PostItem/RightImgWDes'
 
 const UserHistory = () => {
     const [historyPosts, setHistoryPosts] = React.useState<IPostItem[]>([])
-    const userLibrary = useSelector((state: IRootState) => state.userLibrary);
+    const { history } = useSelector((state: IRootState) => ({ history: state.userLibrary.historyPosts }));
+
     React.useEffect(() => {
-        fetchLocalPost(userLibrary.historyPosts).then(res => {
-            console.log(res)
-            return setHistoryPosts(res)
-        })
-    }, [userLibrary.historyPosts])
-    console.log('history')
+
+        if (history.length > 0) {
+            fetchLocalPostsFromSlugs(history.map(item => item.slug))
+                .then(res => {
+                    console.log(res)
+                    if (res) {
+                        return setHistoryPosts(res)
+                    }
+                })
+        }
+
+    }, [history])
     return (
         <div className="flex flex-col">
             {historyPosts.map((item, i) => (

@@ -3,11 +3,13 @@ import { IPaginate, INavItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/layout-parts'
 import PostList from '@/layout-parts/List/PostList'
-
+import { typeIcons } from '@/layout-parts'
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
 
-    const { title, slug, breadcrumb, description, posts } = pageContext
+    const { title, slug, breadcrumb, description, type } = pageContext
+
+    const icon = typeIcons[type]
 
     return (
         <div className="mx-auto max-w-sm mt-16 px-4 sm:p-0">
@@ -18,7 +20,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 breadcrumb={breadcrumb}
                 path={path}
             />
-            <LayoutH1 title={title} />
+            <LayoutH1 title={title} icon={icon} />
             {description && (
                 <div className="w-ful py-4" dangerouslySetInnerHTML={{ __html: description }} />
             )}
@@ -37,7 +39,7 @@ export default TaxonomyPage
 interface ITaxonomyPageProps {
 
     pageContext: {
-        type?: string
+        type: string
         slug: string
         title: string
         description?: string

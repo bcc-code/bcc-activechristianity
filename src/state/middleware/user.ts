@@ -6,7 +6,7 @@ import {
 import { IRootState } from '../types'
 import { blog as blogApi } from '../../util/sdk'
 import { setUserLiked, setUserHistory, setUserFollowing, getUserLiked, getUserFollowing } from '@/state/action/userAction'
-import { IHistory, ILiked, IUnfinished, IFollowing } from '@/types/apiResType'
+import { IHistory, ILiked, IUnfinished, IFollowing } from '@/types'
 const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) => {
     switch (action.type) {
         // only catch a specific action
@@ -28,8 +28,11 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             blogApi
                 .following()
                 .then((res: IFollowing) => {
-                    if (Array.isArray(res.topics) || Array.isArray(res.tags)) {
-                        store.dispatch(setUserFollowing(res))
+                    console.log(res)
+                    if (Array.isArray(res.topics)) {
+                        if (res.topics) {
+                            store.dispatch(setUserFollowing(res.topics))
+                        }
                     }
 
                 })
@@ -44,6 +47,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 .then((res: IHistory) => {
                     console.log(res)
                     if (Array.isArray(res.history)) {
+                        console.log(res.history)
                         store.dispatch(setUserHistory(res.history))
                     }
 
@@ -58,8 +62,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             blogApi
                 .unfinishedPosts()
                 .then((res: IUnfinished) => {
+                    console.log(res)
                     if (Array.isArray(res.unfinishedPosts)) {
-                        store.dispatch(setUserHistory(res.unfinishedPosts))
+                        /* store.dispatch(setUserHistory(res.unfinishedPosts)) */
                     }
                 })
                 .catch((err: any) => {
@@ -74,7 +79,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             blogApi
                 .likePost(postId, !bookmarked)
                 .then((res) => {
-
+                    console.log(res)
                     store.dispatch(getUserLiked())
                 })
                 .catch((err: any) => {

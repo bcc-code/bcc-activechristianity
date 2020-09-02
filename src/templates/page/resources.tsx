@@ -51,7 +51,6 @@ const Resource: React.FC<IResource> = (props) => {
                     <Section sectionItems={general.items} title={general.name} />
                     {Object.keys(types).map(tKey => {
                         const type = types[tKey]
-
                         const typeLinks = type.menu.map(t => ({ ...t, name: < TitleWithIcon title={t.name} icon={typeIcons[tKey]} /> }))
 
                         return <Section sectionItems={typeLinks} title={type.name} />

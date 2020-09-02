@@ -70,7 +70,7 @@
   "reset_password_text": "To reset your password, please enter your email address or username below",
   "reset_password_sent": "A link to reset your password has been sent to your email address",
   "reset_password_fail": "We can't find an account registered with that address or username",
-  "scripture_copyright": "Scripture taken from the New King James Version®. Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved.",
+  "scripture_copyright": "Scripture taken from the New King James Version®, unless otherwise specified. Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved.",
   "search_for": "Search for",
   "search": "Search",
   "send": "Send",
