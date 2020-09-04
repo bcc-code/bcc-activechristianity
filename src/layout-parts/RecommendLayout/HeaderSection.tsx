@@ -1,7 +1,7 @@
 import React from "react"
 import Link from '@/components/CustomLink'
 import { IPostItem } from "@/types"
-import LazyLoad from '@/components/Images/LazysizesImage'
+import LazysizeBg from '@/components/Images/LazysizeBg'
 import PopularPosts from '@/layout-parts/PopularPosts'
 import VideoLefttImg from '@/components/PostItem/VideoLefttImg'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
@@ -42,11 +42,14 @@ const SectionHeader: React.FC<ISectionHeader> = ({ headerPost, listPosts, listTi
                         </div>
                     )}
                 </Link>
-                {headerPost.image && <LazyLoad
+                {/*                 {headerPost.image && <LazyLoad
                     {...headerPost.image}
-                    className="-0 absolute inset-0 overflow-hidden bg-center bg-cover w-full h-auto"
-                />}
-                {/*  {headerPost.image && <div className="z-0 absolute inset-0 overflow-hidden bg-center bg-cover w-full" style={{ backgroundImage: `url(${headerPost.image.src})` }}></div>} */}
+                    className="z-0 absolute inset-0 overflow-hidden bg-center bg-cover w-full h-auto"
+                />} */}
+                {/* {headerPost.image && <LazysizeBg
+                    {...headerPost.image}
+                />} */}
+                {headerPost.image && <div className="z-0 absolute inset-0 overflow-hidden bg-center bg-cover w-full" style={{ backgroundImage: `url(${headerPost.image.src})` }}></div>}
                 <div className="z-0 absolute left-0 top-0 bottom-0 right-0 rounded-lg" style={{ background }}></div>
             </div>
             <div className="flex flex-col justify-start" style={{ width: "350px", minWidth: "350px", minHeight: "350px" }}>

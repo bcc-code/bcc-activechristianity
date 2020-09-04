@@ -78,10 +78,7 @@ module.exports = function generatePages(actions, graphql) {
       const aboutMain = result.data.ac.about
       const navTopItem={name:resourcePage.title,to:resourcePage.slug}
       const navTopicsItem={name:topicsMain.title,to:topicsMain.slug}
-      createPage({
-        path: `/`,
-        component: path.resolve('./src/templates/page/home.tsx'),
-      })
+     
 
       _.each(pageInfo,(page)=>{
         if (page && page.label==="theme-page"){

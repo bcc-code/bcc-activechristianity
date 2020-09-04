@@ -17,15 +17,19 @@ const rbgToString = (colors: number[], alpha?: number) => {
 }
 
 const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, excerpt, authors, reading_time, id, slug, media }) => {
-
+    console.log(slug)
+    console.log(image)
     /* const {  muted } = palette; */
-    const darkMuted = image.colors && image.colors[0]
-    const vibrant = image.colors && image.colors[1]
-    const muted = image.colors && image.colors[2]
-    const bgGradientStyle = darkMuted && vibrant && muted ? (
+    const bgGradientStyle = { 'backgroundImage': '' }
+    if (image) {
+        const darkMuted = image.colors && image.colors[0]
+        const vibrant = image.colors && image.colors[1]
+        const muted = image.colors && image.colors[2]
+        if (darkMuted && vibrant && muted) {
+            bgGradientStyle.backgroundImage = `linear-gradient(0, #fff 30%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%), linear-gradient(90deg, ${rbgToString(darkMuted, .5)}, ${rbgToString(vibrant, .5)} 50%, ${rbgToString(muted, .5)} 100%)`
+        }
+    }
 
-        { 'backgroundImage': `linear-gradient(0, #fff 30%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%), linear-gradient(90deg, ${rbgToString(darkMuted, .5)}, ${rbgToString(vibrant, .5)} 50%, ${rbgToString(muted, .5)} 100%)` }
-    ) : {}
 
 
     return (
@@ -39,7 +43,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
                 <Link to={`/${slug}`} className="div1 relative sm:pr-12">
 
 
-                    {media.video ? (
+                    {media && media.video && media.video.src ? (
                         <VideoHeader
                             src={media.video.src}
                             className={`rounded-xxl sm:rounded-xl overflow-hidden`}

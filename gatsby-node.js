@@ -15,6 +15,7 @@ const generatePlaylists = require('./generators/generatePlaylists.js')
 /* const generateSeries = require('./generators/generateSeries.js') */
 const generateGlossary = require('./generators/generateGlossary.js')
 const generateFormatsTypesResource = require('./generators/TopicsFormatsTypes/generateFormatsTypes.js')
+const generateHome = require('./generators/generateHome.js')
 const ac_strings = require('./src/strings/ac_strings.json')
 const buildTranslations = require('./generators/json/build-translations')
 
@@ -64,7 +65,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       generateGlossary(actions, graphql),
       generatePages(actions, graphql),
       generateTopics(actions, graphql),
-      generateFormatsTypesResource(actions, graphql)
+      generateFormatsTypesResource(actions, graphql),
+      generateHome(actions, graphql)
     ]
 
     return Promise.all(generators)

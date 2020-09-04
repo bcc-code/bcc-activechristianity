@@ -1,18 +1,23 @@
 import * as React from 'react';
+import Lazysizes from '@/components/Images/LazysizesImage'
+import { IImage } from '@/types';
 interface IEbookCover {
     title: string
-    featured_media_url: string
+    image: IImage
     full?: boolean
 }
-export const EbookHardCover: React.SFC<IEbookCover & { className: string }> = ({ title, featured_media_url, full, className }) => (
+export const EbookHardCover: React.SFC<IEbookCover & { className: string }> = ({ title, image, full, className }) => (
     <div className={className}>
         <div className="absolute h-full w-2" style={{ left: "-3px", background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.56) 50%, rgba(255, 255, 255, 0) 100%)" }} ></div>
         <div className={`absolute h-full w-2 ${full ? '' : 'hidden'} sm:block`} style={{ left: "5px", background: "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.56) 50%, rgba(255, 255, 255, 0) 100%)" }} ></div>
-        <img src={featured_media_url} alt={title} />
+        <Lazysizes
+            {...image}
+            className=""
+        />
     </div>
 )
 const Ebook: React.SFC<IEbookCover> = (props) => {
-    const { title, featured_media_url, full } = props
+    const { full } = props
     return (
         <div className=" flex flex-col items-center">
             <EbookHardCover

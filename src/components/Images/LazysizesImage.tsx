@@ -15,7 +15,7 @@ const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
             src={dataUri}
             data-sizes="auto"
             data-src={src}
-            data-srcset={srcset || src}
+            data-srcset={srcset}
         />
     )
 }

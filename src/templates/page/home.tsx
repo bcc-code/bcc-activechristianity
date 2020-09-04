@@ -26,7 +26,7 @@ import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 
 // Helpers
 import { blog as blogApi, auth } from '@/util/sdk'
-import { normalizePostRes, fetchLocalPostsFromSlugs } from '@/helpers'
+import { fetchPostslistFromArchivePage, fetchLocalPostsFromSlugs } from '@/helpers'
 import TS from '@/strings'
 import languages from '@/strings/languages.json'
 import ac_strings from '@/strings/ac_strings.json'
@@ -34,18 +34,9 @@ import User from "@/layout-parts/User/UserInitial";
 
 
 
-interface IHome {
-  path: string
-  pageContext: {
-
-  },
-  data: {
-
-  }
-}
 
 interface IUserContent {
-  featuredPostTop: IPostItem[]
+  featuredPostTop: IPostItem | undefined
   latestPosts: IPostItem[]
   featuredPostRow: IPostItem[]
   listSlotOne: IPostListSection | undefined
@@ -66,7 +57,7 @@ interface IUserContent {
 }
 
 const defaultUserContent: IUserContent = {
-  featuredPostTop: [],
+  featuredPostTop: undefined,
   latestPosts: [],
   featuredPostRow: [],
   listSlotOne: undefined,
@@ -86,53 +77,81 @@ const defaultUserContent: IUserContent = {
   featuredEbook: undefined
 }
 
-const IndexPage: React.FC<IHome> = (props) => {
-  const { pageContext, data: initialData, path } = props
+const IndexPage: React.FC<IHomeProps> = (props) => {
+  const { pageContext, path } = props
+  const {
+    featuredPosts: featuredPostsSlug,
+    popularTopics: popularTopicsSlug,
+    popularPosts: popularPostsSlug
+  } = pageContext
+  const [latestPageNr, setLatestPageNr] = React.useState(1)
   const { bookmarkedPosts, historyPosts } = useSelector((state: IRootState) => state.userLibrary)
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
   const [infinitePosts, setInfinitePosts] = React.useState<IPostItem[]>([])
   const [popularPosts, setPopularPosts] = React.useState<IPostItem[]>([])
+  const [featuredPosts, setFeaturedPosts] = React.useState<IPostItem[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
   const [userContent, setUserContent] = React.useState<IUserContent>({
     ...defaultUserContent
   })
 
+  const latestSlug = `${ac_strings.slug_latest}`
   React.useEffect(() => {
-    setInfinitePosts(userContent.popularPosts)
+    fetchPostslistFromArchivePage(latestSlug).then(res => {
+      if (res) {
+        setInfinitePosts(res)
+      }
+    })
+
+    fetchLocalPostsFromSlugs(featuredPostsSlug).then(res => {
+      if (res) {
+        setFeaturedPosts(res)
+      }
+    })
+
+    fetchLocalPostsFromSlugs(popularPostsSlug).then(res => {
+      if (res) {
+        setPopularPosts(res)
+      }
+    })
   }, [userContent.popularPosts])
 
   const showMorePosts = () => {
-    setInfinitePosts([...infinitePosts, ...userContent.latestPosts])
+    if (latestPageNr > 1) {
+      setLatestPageNr(latestPageNr + 1)
+      fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr}`)
+        .then(res => {
+          if (res) {
+            setInfinitePosts([...infinitePosts, ...res])
+          }
+        })
+    }
+
   }
-
-
-
 
   React.useEffect(() => {
 
     getUserContent()
   }, [loggedIn, path])
 
-  const getPopularContent = () => {
-    blogApi
-      .popularPosts(5)
-      .then((res: any) => {
-
-        if (Array.isArray(res.popularPosts)) {
-          const slugArray = res.popularPosts.map(item => item.slug)
-          return fetchLocalPostsFromSlugs(slugArray).then(res => {
-            console.log(res)
-            setPopularPosts(res)
-
-          })
-
-        }
-      })
-  }
 
   const getUserContent = () => {
     setIsLoading(true)
-    getPopularContent()
+
+    setUserContent({
+      ...userContent,
+      featuredPostTop: featuredPosts[0],
+      latestPosts: infinitePosts.slice(2, 6),
+      featuredPostRow: featuredPosts.slice(1),
+      /*       listSlotOne: initialData.popularPosts.edges[0] ? getTopicFromPost(initialData.popularPosts.edges[0], ac_strings.popularTopic) : defaultUserContent.listSlotOne,
+            listSlotTwo: initialData.popularPosts.edges[1] ? getTopicFromPost(initialData.popularPosts.edges[1], ac_strings.popularTopic) : defaultUserContent.listSlotTwo,
+            newPostsForYou: getNewForYou(initialData.latestPosts.edges.slice(6, 10).map(item => item.node)),
+            listSlotThree: initialData.popularPosts.edges[2] ? getTopicFromPost(initialData.popularPosts.edges[2], ac_strings.popularTopic) : defaultUserContent.listSlotThree,
+            listSlotFour: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFour,
+            listSlotFive: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFive,
+            topicsForYou: initialData.featuredTopics.edges, */
+      popularPosts: popularPosts
+    })
     if (loggedIn === "success") {
       /*       setUserContent({
               ...userContent,
@@ -187,7 +206,8 @@ const IndexPage: React.FC<IHome> = (props) => {
     topicsForYou } = userContent
 
 
-
+  console.log(featuredPosts)
+  console.log(featuredPostTop)
   return (
 
     <div className="standard-max-w">
@@ -199,14 +219,14 @@ const IndexPage: React.FC<IHome> = (props) => {
         breadcrumb={[]}
       />
       <Placeholder loading={loggedIn == "loading"}>
-        {userContent.latestPosts.length > 0 && (
+        {featuredPostTop !== undefined && (
           <div className="hidden sm:block">
-            <HomeTopFeaturePost {...userContent.latestPosts[0]} />
+            <HomeTopFeaturePost {...featuredPostTop} />
           </div>
         )}
-        {userContent.latestPosts.length > 0 && (
+        {featuredPostTop !== undefined && (
           <div className="w-full sm:hidden">
-            <TopImgPost noBorder {...userContent.latestPosts[0]} showType />
+            <TopImgPost noBorder {...featuredPostTop} showType />
           </div>
         )}
         <LatestSection latestPosts={latestPosts} latestSlug={ac_strings.slug_latest} />
@@ -267,14 +287,14 @@ const IndexPage: React.FC<IHome> = (props) => {
 
 export default IndexPage
 
-export const pageQuery = graphql`{
-    allAcNodeSetting {
-      nodes {
-        popular_posts
-        featured_posts
-        about
-      }
-    }
-  
+
+interface IHomeProps {
+  path: string
+  pageContext: {
+
+    featuredPosts: string[]
+    popularPosts: string[]
+    popularTopics: string[]
   }
-`
+
+}

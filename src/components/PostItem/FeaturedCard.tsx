@@ -21,7 +21,7 @@ const FeaturedCard: React.SFC<IFeaturedCard> = ({ type, title, id, authors, like
 
 
     let bgStyle: any = {
-        backgroundImage: `url(${image.src})`
+        backgroundImage: image ? `url(${image.src})` : ''
     }
 
     if (type === "podcast" || type === "playlist" || type === "ebook") {
@@ -29,7 +29,7 @@ const FeaturedCard: React.SFC<IFeaturedCard> = ({ type, title, id, authors, like
             ...bgStyle,
             filter: 'blur(15px)',
             opacity: '0.9',
-            transform: 'scale(1.2)'
+
             /*             backgroundSize: '120% 120%' */
         }
     }
@@ -58,7 +58,7 @@ const FeaturedCard: React.SFC<IFeaturedCard> = ({ type, title, id, authors, like
                     )}
                     {
                         type === "ebook" && (
-                            <Ebook featured_media_url={image.src} title={title} full={showOnMobile} />
+                            <Ebook image={image} title={title} full={showOnMobile} />
                         )
                     }
                 </ImgTag>
