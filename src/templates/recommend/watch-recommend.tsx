@@ -5,6 +5,7 @@ import { LayoutH1Wide } from '@/layout-parts'
 import MetaTag from '@/components/Meta'
 
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
+import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
 import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScroll'
 const LatestPopularTab = loadable(() => import('@/layout-parts/RecommendLayout/LatestPopularTab'))
@@ -97,48 +98,50 @@ const Watch: React.FC<IProps> = (props) => {
         <div>
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
             <div className="bg-d4athens sm:bg-white"> <LayoutH1Wide title={title} /></div>
-            {
-                headerPost && postsByFormat.edification && (
-                    <div className="standard-max-w-px">
-                        <HeaderSection
-                            headerPost={headerPost}
-                            listPosts={postsByFormat.edification.postsRow}
-                            video
-                        />
-                    </div>
-                )
-            }
-            <div className="w-full sm:hidden">
-                {headerPost && <TopImgPost noBorder {...headerPost} showType />}
-            </div>
-            <LatestDesktopRow posts={latest} latestSlug={latestSlug} />
-            <LatestPopularTab
-                latestSlug={latestSlug}
-                popularPosts={popular}
-                latestPosts={latest}
-                video
-            />
-
-            <div className="standard-max-w">
-                <ByTaxonomies
-                    title={ac_strings.byCategories}
-                    types={typeLinks}
-                />
-            </div>
-            <div className="standard-max-w-px">
-                {postsByTypesRow.map(item => {
-                    return (
-                        <HorizontalScrollSection
-                            name={item.type.name}
-                            slug={item.type.to}
-                            postThumnailType="video"
-                            posts={item.postsRow}
-                            postProps={true}
-                        />
-
+            <Placeholder loading={headerPost === null}>
+                {
+                    headerPost && postsByFormat.edification && (
+                        <div className="standard-max-w-px">
+                            <HeaderSection
+                                headerPost={headerPost}
+                                listPosts={postsByFormat.edification.postsRow}
+                                video
+                            />
+                        </div>
                     )
-                })}
-            </div>
+                }
+                <div className="w-full sm:hidden">
+                    {headerPost && <TopImgPost noBorder {...headerPost} showType />}
+                </div>
+                <LatestDesktopRow posts={latest} latestSlug={latestSlug} />
+                <LatestPopularTab
+                    latestSlug={latestSlug}
+                    popularPosts={popular}
+                    latestPosts={latest}
+                    video
+                />
+
+                <div className="standard-max-w">
+                    <ByTaxonomies
+                        title={ac_strings.byCategories}
+                        types={typeLinks}
+                    />
+                </div>
+                <div className="standard-max-w-px">
+                    {postsByTypesRow.map(item => {
+                        return (
+                            <HorizontalScrollSection
+                                name={item.type.name}
+                                slug={item.type.to}
+                                postThumnailType="video"
+                                posts={item.postsRow}
+                                postProps={true}
+                            />
+
+                        )
+                    })}
+                </div>
+            </Placeholder>
         </div>
     )
 
