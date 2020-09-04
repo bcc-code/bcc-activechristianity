@@ -5,6 +5,7 @@ import ScrollSectionChild, { IScrollSectionChildProps } from '@/components/Scrol
 import LeftSidebarLayout, { ISiderbar } from './index'
 import Content from '@/components/Content'
 import { Section } from 'react-scroll-section'
+const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
 interface IProps {
     sections: IScrollSectionChildProps[]
     title: string
@@ -57,14 +58,25 @@ const ScrollSectionLayout: React.FC<IProps> = ({ sections, title }) => {
 
     const content = (
         <div className="z-10 w-full">
-            <Section id={"about-us"} className={`py-16`} >
-                <div className="w-tablet">
+            <Section id={"about-us"} className={`pb-16 relative`} >
+                <div
+                    className="background-image w-full flex flex-col justify-center px-4 py-12"
+                    style={{
+                        top: "50px",
+                        background: `url(${imageUrl}) center center no-repeat`,
+                        backgroundSize: "cover",
+                        zIndex: 200,
+                        minHeight: "250px",
+                        /*  backgroundPositionY: "30%", */
+                    }}
+                >
+                    <div className="standard-max-w-px w-full ">
+                        <h1 className="sm:text-lg lg:text-4xl xl:text-5xl font-bold mb-4" >{title}</h1>
 
-                    <Content content="<p>ActiveChristianity® by Brunstad Christian Church explores how God’s Word challenges and empowers us to live 100% according to His will, so we no longer need to fall in sin, but can come to a life of victory.</p>" />
-                    <Video16to9
-                        src="https://www.youtube.com/embed/sAbW36EzKIc"
-                        className={`rounded-xxl sm:rounded-xl overflow-hidden mt-8`}
-                    />
+                    </div>
+                </div>
+                <div className="w-tablet px-4 pt-4">
+                    <p className="leading-loose italic">ActiveChristianity® by Brunstad Christian Church explores how God’s Word challenges and empowers us to live 100% according to His will, so we no longer need to fall in sin, but can come to a life of victory.</p>
                 </div>
             </Section>
             {sections.map((item, k) =>

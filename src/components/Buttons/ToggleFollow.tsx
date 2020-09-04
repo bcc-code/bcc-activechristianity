@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setNewFollowTopic, setNewFollowTag } from '@/state/action/userAction'
 
 import TS from '@/strings'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 interface IProps {
     wrapperClassName?: string
@@ -34,7 +34,7 @@ const FollowButton: React.SFC<IProps> = ({ followed, topicClassName, buttonClass
     }
     return (
         <div className="flex flex-col mr-1">
-            <div className="text-sm text-d4gray-dark">{newString.topic}</div>
+            <div className="text-sm text-d4gray-dark">{ac_strings.topic}</div>
             <Link className={topicClassName ? topicClassName : "uppercase"} to={`/${TS.slug_post_tag}/${slug}`}>
                 <PostExcerpt
                     rawText={name}

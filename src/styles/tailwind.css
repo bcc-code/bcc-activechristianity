@@ -52,11 +52,27 @@ body {
     color: #3a4154;
 }
 
+@screen sm {
+
+    html,
+    body {
+        font-size: 14px;
+    }
+}
+
 @screen md {
 
     html,
     body {
-        font-size: 18px;
+        font-size: 15px;
+    }
+}
+
+@screen lg {
+
+    html,
+    body {
+        font-size: 16px;
     }
 }
 

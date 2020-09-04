@@ -26,7 +26,7 @@ const Listen: React.FC<IProps> = (props) => {
     console.log(pageContext)
     const { title, breadcrumb, items, playlist, menu } = pageContext
 
-    const latestSlug = `${path}/${ac_strings.latest_slug}`
+    const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     React.useEffect(() => {
 

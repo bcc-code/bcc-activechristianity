@@ -20,7 +20,7 @@ import { INavItem } from "@/types"
 import { IResourceOverview } from '@/layout-parts/Explore/ExploreByType'
 const ExploreByType = loadable(() => import('@/layout-parts/Explore/ExploreByType'))
 const RefinementListByType = loadable(() => import('@/layout-parts/Explore/RefinementByType'))
-const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTaxonomy'))
+const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTopics'))
 
 import Link from '@/components/CustomLink';
 import TS from '@/strings'
@@ -90,8 +90,8 @@ const ExplorePage: React.FC<IResource> = (props) => {
             setTypeFilter(state.refinementList["categories.name"])
         }
 
-        if (state.refinementList && state.refinementList["tags.name"]) {
-            setTaxonomyFilter(state.refinementList["tags.name"])
+        if (state.refinementList && state.refinementList["topics.name"]) {
+            setTaxonomyFilter(state.refinementList["topics.name"])
         }
         setSearchState(state)
     }
@@ -148,10 +148,10 @@ const ExplorePage: React.FC<IResource> = (props) => {
 
             if (filter === undefined || index < 0 || newFiltlerList.length === 0) {
                 setTaxonomyFilter(null)
-                delete refinementState["tags.name"]
+                delete refinementState["topics.name"]
 
             } else {
-                refinementState["tags.name"] = newFiltlerList
+                refinementState["topics.name"] = newFiltlerList
                 setTaxonomyFilter(newFiltlerList)
             }
 
@@ -275,16 +275,17 @@ const ExplorePage: React.FC<IResource> = (props) => {
 
                 {hasSearchProps && (
                     <div className="max-w-tablet m-auto">
-                        <RefinementListByType
+                        {/*                         <RefinementListByType
                             attribute={"categories.name"}
                             setTypeFilter={setTypeFilter}
-                        />
+                        /> */}
                         <RefinementListByTaxonomy
-                            attribute={"tags.name"}
+                            attribute={"topics.name"}
                             isShowingResult={typeFilter !== null || isInputFocus === true}
                             setTaxonomyFilter={setTaxonomyFilter}
                             showMore
                             showMoreLimit={30}
+                            resource={resource}
                         />
                     </div>
                 )}

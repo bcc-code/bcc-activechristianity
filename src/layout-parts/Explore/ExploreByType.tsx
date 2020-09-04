@@ -59,7 +59,7 @@ export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resou
     }
 
     const activeList = listMap[resourceTypeGroup]
-    console.log(activeList)
+
     return (
         <SubSection title="">
             <div className="flex justify-evenly">
@@ -164,40 +164,46 @@ export const typesImageColors: {
     }
 }
 
+interface INavItemWKey {
+    key: string
+    count: number
+    name: string
+    to: string
+}
 
 export interface IResourceOverview {
     format: {
         name: string
-        info: INavItemCount
-        menu: INavItemCount[]
-        items: INavItemCount[]
+        info: INavItemWKey
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
     }
     general: {
         name: string
-        info: INavItemCount
+        info: INavItemWKey
 
         items: INavItemCount[]
     }
     read: {
         name: string
         slug: string
-        info: INavItemCount
+        info: INavItemWKey
         ebook?: INavItemCount
-        menu: INavItemCount[]
-        items: INavItemCount[]
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
     }
     listen?: {
         name: string
         slug: string
-        info: INavItemCount
-        menu: INavItemCount[]
-        items: INavItemCount[]
+        info: INavItemWKey
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
     }
     watch?: {
         name: string
         slug: string
-        info: INavItemCount
-        menu: INavItemCount[]
-        items: INavItemCount[]
+        info: INavItemWKey
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
     }
 }

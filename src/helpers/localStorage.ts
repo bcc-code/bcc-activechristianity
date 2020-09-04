@@ -31,13 +31,13 @@ const ACLocalStorage = {
     },
     removeQuery: (query: string) => {
         if (isClient) {
-            localStorage.removeItem(localStorageKey)
-        }
-        const searchHistory = ACLocalStorage.getStoredHistory()
+            const searchHistory = ACLocalStorage.getStoredHistory()
 
-        const findQuery = searchHistory.findIndex((elt: string) => elt === query)
-        searchHistory.splice(findQuery, 1)[0]
-        localStorage.setItem(localStorageKey, JSON.stringify(searchHistory));
+            const findQuery = searchHistory.findIndex((elt: string) => elt === query)
+            searchHistory.splice(findQuery, 1)[0]
+            localStorage.setItem(localStorageKey, JSON.stringify(searchHistory));
+        }
+
     },
     clearHistory: () => {
         if (isClient) {

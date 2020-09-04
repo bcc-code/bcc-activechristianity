@@ -37,23 +37,9 @@ const Page: React.SFC<IAboutProps> = ({ pageContext, path }) => {
                 path={path}
                 breadcrumb={[]}
             />
-            <div
-                className="mt-8 sm:fixed background-image w-full flex flex-col justify-center px-4 py-12"
-                style={{
-                    top: "50px",
-                    background: `url(${imageUrl}) center center no-repeat`,
-                    backgroundSize: "cover",
-                    zIndex: 200,
-                    minHeight: "250px",
-                    backgroundPositionY: "30%"
-                }}
-            >
-                <div className="standard-max-w-px w-full ">
-                    <h1 className="sm:text-lg lg:text-4xl xl:text-5xl font-bold mb-4" >{title}</h1>
-                </div>
-            </div>
 
-            <div className="mt-64">
+
+            <div className="">
                 <ScrollSectionLayout
                     title={title}
                     sections={allPages}

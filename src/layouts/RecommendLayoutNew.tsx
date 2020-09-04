@@ -7,6 +7,7 @@ const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveC
 const LatestDesktopRow = loadable(() => import('@/layout-parts/PostsRow/Latest'))
 const LatestPopularTab = loadable(() => import('@/layout-parts/RecommendLayout/LatestPopularTab'))
 const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/PostsByTypes'))
+import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 const QuoteBlock = loadable(() => import('@/components/QuoteBlock'))
 import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScroll'
 import { Button } from '@/components/Buttons'
@@ -118,46 +119,34 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     return (
         <div>
             <div className={`${parent ? 'hidden sm:block' : 'bg-d4athens sm:bg-white'}`}> <LayoutH1Wide title={name} /></div>
-            {parent && (
-                <div className="py-4 px-2 bg-d4athens sm:hidden uppercase">
-                    <div className="flex bg-white relative w-full mb-4 uppercase tracking-widest text-xs rounded-lg overflow-hidden">
+            <Placeholder loading={headerPost === null}>
 
-                        <Button className="border rounded-lg flex items-center font-roboto p-2 overflow-hidden" to={parent.to}>
-                            {parent.name}
-                        </Button >
-                        <div className="-ml-2 pl-4 border-r border-t border-b rounded-r-lg flex-1 flex justify-center items-center overflow-hidden" >
-                            {name}
-                        </div>
+                {headerPost && (
+                    <div className="standard-max-w-px">
 
+                        <HeaderSection headerPost={headerPost} listPosts={popularPosts} />
                     </div>
+
+                )}
+                <div className="w-full sm:hidden">
+                    {headerPost && <TopImgPost noBorder {...headerPost} showType />}
                 </div>
-            )}
-
-            {headerPost && (
-                <div className="standard-max-w-px">
-
-                    <HeaderSection headerPost={headerPost} listPosts={popularPosts} />
-                </div>
-
-            )}
-            <div className="w-full sm:hidden">
-                {headerPost && <TopImgPost noBorder {...headerPost} showType />}
-            </div>
-            <LatestDesktopRow posts={latestPosts} latestSlug={latestSlug} />
-            <LatestPopularTab
-                latestSlug={latestSlug}
-                popularPosts={popularPosts}
-                latestPosts={latestPosts}
-            />
+                <LatestDesktopRow posts={latestPosts} latestSlug={latestSlug} />
+                <LatestPopularTab
+                    latestSlug={latestSlug}
+                    popularPosts={popularPosts}
+                    latestPosts={latestPosts}
+                />
 
 
-            {lowerSection.map((item, i) => (
-                <LazyLoad key={i}>
-                    {item}
-                </LazyLoad>
-            ))}
+                {lowerSection.map((item, i) => (
+                    <LazyLoad key={i}>
+                        {item}
+                    </LazyLoad>
+                ))}
 
-            <ExclusiveContent />
+                <ExclusiveContent />
+            </Placeholder>
         </div>
     )
 }

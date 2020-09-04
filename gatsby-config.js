@@ -8,6 +8,121 @@ require("dotenv").config({
 
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
 
+const queries = [
+  {
+    query: `{
+      ac {
+        allPosts {
+          objectID: id
+          title
+          slug
+          excerpt
+          image {
+              src
+              srcset
+              dataUri
+
+          }
+          readtime
+          track {
+              url
+              title
+              post {
+                  title
+                  slug
+                  }
+              }
+          authors {
+              name
+              slug
+              id
+              pivot {
+                  as
+              }
+          }
+          topics {
+              name
+              slug
+              id
+              group {
+                  name
+                  slug
+              }
+          }
+          published
+        }
+      }
+    }`,
+    transformer: ({ data }) => data.ac && data.ac.allPosts.map((node) => {
+      return { ...node, type: 'post' }
+    }), // (optional)
+    //index: ''// (optional) override default
+  },
+  {
+    query: `{
+      ac {
+        ebooks {
+          objectID: id
+              title
+              slug
+              image {
+                src
+                srcset
+                dataUri
+  
+              }
+              authors {
+                      name
+                      slug
+                      id
+                      pivot {
+                          as
+                      }
+              }
+            
+            topics {
+                    name
+                    slug
+                    id
+                    group {
+                        name
+                        slug
+                    }
+                }
+    
+          
+        }
+      }
+    }`,
+    transformer: ({ data }) => data.ac && data.ac.ebooks.map((node) => {
+      return { ...node, type: 'ebook' }
+    })
+  },
+  {
+    query: `{
+      ac {
+        playlists {    
+          objectID: slug
+          title
+          slug
+          excerpt
+          image {
+            src
+            srcset
+            dataUri
+
+        }
+        }
+      }
+    }`,
+    transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
+      return { ...node, type: 'playlist' }
+    }), // (optional)
+    //index: ''// (optional) override default
+  }
+];
+
+
 const checkEnvVar = require('./check_env_var')
 checkEnvVar()
 
@@ -66,10 +181,27 @@ const plugins = [
     showSpinner: true,
   },
   "gatsby-plugin-webpack-bundle-analyser-v2",
-  'gatsby-plugin-loadable-components-ssr'
+  'gatsby-plugin-loadable-components-ssr',
+  {
+    resolve: `gatsby-plugin-algolia-search`,
+    options: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_ADMIN_KEY,
+      indexName: 'dev_posts', // for all queries
+      queries,
+      enablePartialUpdates: true
+    },
+  }
 ];
 
+/* if (process.env.ALGOLIA_ADMIN_KEY && process.env.ENABLE_ALGOLIA === 'yes') {
+  console.log('pushing algolia')
+  plugins.push()
+} */
+
 if (activeEnv === 'production') {
+  
+
   plugins.push(
     {
       resolve: `gatsby-plugin-s3`,

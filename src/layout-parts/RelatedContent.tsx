@@ -7,13 +7,13 @@ import QLatestVideo from '@/queries/QLatestVideo'
 import QLatestSongs from '@/queries/QLatestSongs'
 import VideoPost from '@/components/PostItem/TopImg'
 import { PostRelatedContentHeader } from '@/layout-parts'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 type IRelatedContent = "podcast" | "playlist" | "video" | "music" | string
 
 export const MockRelatedContentMedia: React.FC<{ type: IRelatedContent }> = ({ type }) => {
 
 
-    const title = <PostRelatedContentHeader title={newString.youMightBeInterestedIn} />
+    const title = <PostRelatedContentHeader title={ac_strings.youMightBeInterestedIn} />
     if (type === "playlist") {
         return (
             <QLatestPlaylist >

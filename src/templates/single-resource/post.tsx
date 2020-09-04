@@ -70,9 +70,6 @@ export const pageQuery = graphql`
 
                 }
                 readtime
-                meta {
-                    url
-                }
                 track {
                     url
                     title

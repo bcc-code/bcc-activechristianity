@@ -43,16 +43,12 @@
     "home": "Home",
     "postAvailable": "This post is available in",
     "playlist": "playlist",
-    "latest_slug": "latest",
+
     "play": "Play",
     "listen": "Listen",
     "read": "Read",
     "watch": "Watch",
-    "cookie_policy_slug": "cookie-policy",
-    "privacy_policy_slug": "privacy-policy",
-    "account_slug": "account",
-    "register_slug": "register",
-    "login_slug": "login",
+
     "signup_options_title": "Register to continue",
     "signup_options_sub_title": "Follow topics, bookmarks, download wallpapers & much more",
     "signup_options_facebook": "Sign up with Facebook",
@@ -73,5 +69,11 @@
     "slug_ebook": "e-book",
     "slug_host": "host",
     "slug_user": "user",
-    "title_user": "Profile"
+    "slug_latest": "latest",
+    "title_user": "Profile",
+    "slug_cookie_policy": "cookie-policy",
+    "slug_privacy_policy": "privacy-policy",
+    "slug_account": "account",
+    "slug_register": "register",
+    "slug_login": "login"
 }

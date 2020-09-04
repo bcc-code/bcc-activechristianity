@@ -1,7 +1,7 @@
 import * as React from 'react'
 import CloseButtonRound from '@/components/Buttons/CloseButtonRound'
 import ReactModal from 'react-modal'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 interface IModal {
     isOpen: boolean
@@ -29,7 +29,7 @@ const Modal: React.FC<IModal> = ({ content, closeModal, isOpen }) => {
             onRequestClose={closeModal}
             className="flex flex-col bg-white text-grey-500 rounded-lg shadow-md relative w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-scroll"
             overlayClassName="absolute top-0 left-0 h-screen w-screen p-2 flex justify-center items-center"
-            contentLabel={newString["ebookPreview"]}
+            contentLabel={ac_strings["ebookPreview"]}
             style={customStyles}
         >
             <button

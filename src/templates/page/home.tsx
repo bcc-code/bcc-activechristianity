@@ -209,7 +209,7 @@ const IndexPage: React.FC<IHome> = (props) => {
             <TopImgPost noBorder {...userContent.latestPosts[0]} showType />
           </div>
         )}
-        <LatestSection latestPosts={latestPosts} latestSlug={ac_strings.latest_slug} />
+        <LatestSection latestPosts={latestPosts} latestSlug={ac_strings.slug_latest} />
         {userContent.featuredPostRow && <FeatureSection featuredPosts={userContent.featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
         <LowerSections
           lists={[

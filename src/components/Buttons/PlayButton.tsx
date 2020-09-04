@@ -7,7 +7,7 @@ import PlaySmallIcon from '@/components/Icons/PlaySmall'
 
 import PlayButtonTrack from './PlayButtonTrack'
 import PlayButtonList from './PlayButtonList'
-import NewString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 export interface IPlayButtonProps {
     track: IMedia
 
@@ -82,7 +82,7 @@ export const PlaylistPlayOutlineButton: React.FC<{ slug: string }> = ({ slug }) 
     return (
         <PlayButtonList slug={slug}>
             <button className="rounded-full bg-d4slate-dark text-sm text-white font-semibold py-2 px-4">
-                {NewString.play}
+                {ac_strings.play}
             </button>
         </PlayButtonList>
     )

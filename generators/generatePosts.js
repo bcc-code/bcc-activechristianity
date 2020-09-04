@@ -35,7 +35,6 @@ module.exports = function generatePosts(actions, graphql) {
 
     // Iterate over the array of posts
     _.each(posts, (post) => {
-      console.log(post.slug)
       createPage({
         path: `${post.slug}`,
         component: path.resolve(template),
@@ -47,7 +46,7 @@ module.exports = function generatePosts(actions, graphql) {
     })
 
     const component = path.resolve(listTemplate)
-    const baseUrl = `${ac_strings.latest_slug}`
+    const baseUrl = `${ac_strings.slug_latest}`
     
 
     let currentPage = 1

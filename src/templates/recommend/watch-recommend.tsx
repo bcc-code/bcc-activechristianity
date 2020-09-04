@@ -13,7 +13,7 @@ const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTax
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 
 
@@ -28,7 +28,7 @@ const Watch: React.FC<IProps> = (props) => {
     const { title, items, menu } = pageContext
 
 
-    const latestSlug = `${path}/${newString.latest}`
+    const latestSlug = `${path}/${ac_strings.slug_latest}`
     React.useEffect(() => {
 
         fetchPostslistFromArchivePage(latestSlug).then(res => {
@@ -121,7 +121,7 @@ const Watch: React.FC<IProps> = (props) => {
 
             <div className="standard-max-w">
                 <ByTaxonomies
-                    title={newString.byCategories}
+                    title={ac_strings.byCategories}
                     types={typeLinks}
                 />
             </div>

@@ -145,10 +145,10 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
       if (firstQueryRes.data.posts){
           
         const {count,total}=firstQueryRes.data.posts.paginatorInfo
-        const pages = Math.ceil(total/count)
-        console.log(`starting with ${pages} requests`)
+        const pageCount = Math.ceil(total/count)
+        console.log(`starting with ${pageCount} requests`)
 
-        for (let i = 1; i <=pages;i++){
+        for (let i = 1; i <=pageCount; i++){
             console.log(i)
             const response = await fetch(baseUrl, { 
                 method: 'POST',

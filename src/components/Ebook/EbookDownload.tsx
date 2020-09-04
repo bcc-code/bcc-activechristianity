@@ -101,7 +101,7 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
                     <div className="p-4 w-11/12 flex flex-col items-center justify-center">
                         {authInfo.loggedIn !== "success" ? (
                             <div className="w-full">
-                                <div className="text-center">{replaceTextWithLink(TS.please_login_download, props.closeModal, ac_strings.login_slug, ac_strings.register_slug,)}</div>
+                                <div className="text-center">{replaceTextWithLink(TS.please_login_download, props.closeModal, ac_strings.slug_login, ac_strings.slug_register,)}</div>
                                 <p className="text-center mt-4">{TS.also_available_in} </p>
                                 {languageOptions.map(item => {
                                     return (

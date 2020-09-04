@@ -99,7 +99,7 @@ module.exports = function generateTopics(actions, graphql) {
 
             all.forEach((node) => {
 
-                const baseUrl = `${node.slug}/${ac_strings.latest_slug}`
+                const baseUrl = `${node.slug}/${ac_strings.slug_latest}`
                 
         
                 let currentPage = 1

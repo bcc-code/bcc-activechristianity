@@ -7,7 +7,7 @@ import SearchHistory from '@/layout-parts/Explore/SearchHistory'
 import localStorageHelper from '@/helpers/localStorage'
 import SearchIcon from '@/components/Icons/Search';
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 interface ICustomerSearchBox {
     setQuery: (query: string) => void
@@ -96,7 +96,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
             <div className={`flex w-full px-4 sm:px-0 pb-4 sm:pb-8 ${isInputFocus ? 'pt-4 sm:pt-8' : ''}`}>
                 <div className="w-full">
                     <SearchInput
-                        placedholderText={newString.searchPlaceHolder}
+                        placedholderText={ac_strings.searchPlaceHolder}
                         setInputFocus={setInputFocus}
                         clearInput={clearInput}
                         value={localQuery}
@@ -111,7 +111,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
                         onClick={cancelSearch}
                         onKeyDown={cancelSearch}
                     >
-                        {newString.cancel}
+                        {ac_strings.cancel}
                     </button>
                 )}
             </div>

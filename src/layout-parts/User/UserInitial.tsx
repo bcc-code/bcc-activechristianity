@@ -23,7 +23,7 @@ const User: React.SFC = () => {
             <h6 className="m-2">{auth.user.name}</h6>
         </div>
     ) : (
-            <Link to={ac_strings.login_slug}>{TS.please_login}</Link>
+            <Link to={ac_strings.slug_login}>{TS.please_login}</Link>
         )
 }
 

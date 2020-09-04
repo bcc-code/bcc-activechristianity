@@ -4,7 +4,7 @@ import { generate as generateId } from 'shortid'
 import TypeCard from '@/components/Cards/TypeCard'
 import { ISearchFilter } from '@/types'
 import { typesImageColors } from '@/layout-parts/Explore/ExploreByType'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 interface IByTypeProps {
     isShowingResult: boolean
@@ -72,7 +72,7 @@ const ByTypeRefinementList: React.FC<IByTypeProps & any> = (props) => {
 
     return (
         <div className={`flex overflow-x-scroll sm:flex-wrap snap px-2 content-between items-center whitespace-no-wrap`}>
-            <h6 className="mb-2 font-bold text-sm sm:text-base">{newString.type}</h6>
+            <h6 className="mb-2 font-bold text-sm sm:text-base">{ac_strings.type}</h6>
             {Array.isArray(items) && typeList}
 
         </div>

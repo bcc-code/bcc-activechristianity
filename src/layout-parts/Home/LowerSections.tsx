@@ -4,7 +4,7 @@ import LazyLoad from '@/components/LazyLoad';
 import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 import { IPostItem, ITopic } from '@/types'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
 /* const NewForYouDesktop = loadable(() => import('@/layout-parts/Home/NewForYou/Vertical')) */
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
@@ -41,20 +41,20 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
                         <NewForYou topics={newPostsForYou} />
                     </div>
                     <div className="hidden sm:flex mt-8">
-                        <PopularPostVertical title={newString.newForYou} posts={popularPosts} small />
+                        <PopularPostVertical title={ac_strings.newForYou} posts={popularPosts} small />
 
                     </div>
                 </LazyLoad>
             </div>
             <div className="div7 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
                 <LazyLoad>
-                    <h6 className="text-d4slate-dark text-lg font-bold sm:hidden mx-4 mb-6">{newString.popular}</h6>
+                    <h6 className="text-d4slate-dark text-lg font-bold sm:hidden mx-4 mb-6">{ac_strings.popular}</h6>
                     <PostlistHorizontalSimple
 
                         posts={popularPosts}
                     />
                     <div className="hidden sm:flex">
-                        <PopularPostVertical title={newString.popularOnAC} posts={popularPosts} small />
+                        <PopularPostVertical title={ac_strings.popularOnAC} posts={popularPosts} small />
                     </div>
                 </LazyLoad>
 

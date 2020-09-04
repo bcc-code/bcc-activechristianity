@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CloseIcon from '@/components/Icons/Close'
-import newString from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.json'
 
 interface ISearchHistory {
     searches: string[]
@@ -11,11 +11,11 @@ interface ISearchHistory {
 const SearchHistory: React.FC<ISearchHistory> = ({ searches, removeSearchHistory, useSearchHistory, clearSearchHistory }) => {
     return (
         <div className="p-4 bg-white min-h-screen">
-            <h6 className="font-semibold text-d4slate-dark pb-6">{newString.recentSearches}</h6>
+            <h6 className="font-semibold text-d4slate-dark pb-6">{ac_strings.recentSearches}</h6>
             {searches.length === 0 ? (
                 <div>
                     <p className="text-sm text-gray-800 pb-4">
-                        <i>{newString.searchHistoryEmpty}</i>
+                        <i>{ac_strings.searchHistoryEmpty}</i>
                     </p>
                 </div>
             ) : (
@@ -39,7 +39,7 @@ const SearchHistory: React.FC<ISearchHistory> = ({ searches, removeSearchHistory
                 className="text-d4black text-sm rounded-xl border border-d4gray py-2 px-4 w-content m-auto uppercase"
                 onClick={clearSearchHistory}
             >
-                {newString.clearRecentSearches}
+                {ac_strings.clearRecentSearches}
             </button>
         </div >
 

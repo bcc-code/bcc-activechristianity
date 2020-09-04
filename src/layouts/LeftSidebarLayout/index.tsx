@@ -37,7 +37,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIc
         dispatch(setIsModalOpen(!openMobileNav))
     }
     return (
-        <div className="standard-max-w relative mt-12 flex items-start ">
+        <div className="relative mt-12 flex items-start ">
             <div className={`bg-white font-roboto fixed w-full h-full sm:hidden overflow-y-scroll z-50 sm:w-1/3 pt-4 px-6 sm:pl-12 pb-32 scroll-layout-sidebar scroll-layout-sidebar-${openMobileNav ? 'active' : 'close'}`}>
                 <div
                     className="flex justify-end"

@@ -173,7 +173,7 @@ const App: React.FC<any> = (props) => {
                         >
                             {TS.consent_general_main}
                             {" "}
-                            <Link style={{ fontSize: "11px" }} to={ac_strings.cookie_policy_slug}>
+                            <Link style={{ fontSize: "11px" }} to={ac_strings.slug_cookie_policy}>
                                 {TS.consent_general_link}
                             </Link>
                         </CookieConsent>

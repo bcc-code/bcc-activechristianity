@@ -22,7 +22,7 @@ const Read: React.FC<IProps> = (props) => {
 
     const { title, menu, info, items } = pageContext
 
-    const latestSlug = `${path}/${ac_strings.latest_slug}`
+    const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     React.useEffect(() => {
 

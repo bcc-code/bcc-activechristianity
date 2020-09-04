@@ -50,7 +50,7 @@ export const typeIcons: { [key: string]: JSX.Element } = {
 }
 
 export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
-    <span className="flex">
+    <span className="flex items-center">
         <span className="pr-4">{icon}</span> {title}
     </span>
 )
