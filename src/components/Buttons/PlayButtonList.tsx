@@ -2,7 +2,8 @@ import React from 'react'
 import { setCurrentMedia, setAutoPlay, addTracks, floatPlayer } from '@/state/action'
 
 import { IMedia } from '@/types'
-import { fetchPlaylistFromSlug, normalizeTracks } from '@/helpers'
+import { normalizeTracks } from '@/helpers/'
+import { fetchPlaylistFromSlug } from '@/helpers/fetchLocalData'
 import { useDispatch } from 'react-redux'
 
 interface IPlayButtonList {

@@ -23,7 +23,7 @@ const SocialPlatforms: React.FC<{ col?: boolean }> = ({ col }) => {
         <StaticQuery
             query={query}
             render={(data: IFooterData) => {
-                const { social_facebook, social_instagram } = data.acNodeSetting
+                const { social_facebook, social_instagram, social_youtube } = data.acNodeSetting
                 const colLinks = [
                     {
                         url: social_facebook,
@@ -36,7 +36,7 @@ const SocialPlatforms: React.FC<{ col?: boolean }> = ({ col }) => {
                         name: 'Instagram'
                     },
                     {
-                        url: social_instagram,
+                        url: social_youtube,
                         icon: <YoutubeIcon />,
                         name: 'Youtube'
                     }
@@ -77,6 +77,7 @@ const query = graphql`
         acNodeSetting {
             social_facebook
             social_instagram
+            social_youtube
             
         }
     }
@@ -86,6 +87,7 @@ interface IFooterData {
     acNodeSetting: {
         social_facebook: string
         social_instagram: string
+        social_youtube: string
     }
 
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
-import { fetchPostslistFromArchivePage } from '@/helpers'
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import { LayoutH1Wide } from '@/layout-parts'
 import MetaTag from '@/components/Meta'
 

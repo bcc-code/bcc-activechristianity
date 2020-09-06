@@ -11,7 +11,7 @@ import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/layout-parts'
 
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
-import { fetchTopicFromSlug } from '@/helpers'
+import { fetchTopicFromSlug } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
 
 import "react-placeholder/lib/reactPlaceholder.css";

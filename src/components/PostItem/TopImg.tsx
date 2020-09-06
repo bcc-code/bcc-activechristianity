@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { IPostItem } from '@/types'
-import { PostBase, IPostBase } from '@/components/PostItem/PostItemParts'
+import { PostBase, IPostBase, PostLabel } from '@/components/PostItem/PostItemParts'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostItemMediaImg } from '@/components/Buttons/PlayButton'
 import "./style/leftverticle.css"
@@ -24,7 +24,8 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
         image,
         noBorder,
         media,
-        showType
+        showType,
+        format
     } = props
 
     const topImgClasses = {
@@ -86,9 +87,9 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 track={media}
                 slug={props.slug}
             >
-                {showType && types && types[0] && (
-                    <div className="absolute p-3  top-0 left-0">
-                        <span className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75">{types[0].name}</span>
+                {showType && format && format[0] && (
+                    <div className="absolute p-3  top-0 left-0 flex">
+                        <PostLabel text={format[0].name}></PostLabel>
                     </div>
                 )}
 

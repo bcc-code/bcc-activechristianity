@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITopic, IPostItem } from '@/types'
+import { ITopic, IPostItem, ITopicNavItem } from '@/types'
 import ToggleFollow from '@/components/Buttons/ToggleFollow'
 import Two2OneImage from '../Images/Image2To1'
 import TopicIcon from '@/components/Icons/Topics'
@@ -7,7 +7,7 @@ import { PostTitle, ReadMore } from '@/components/PostItem/PostItemParts'
 import Link from '@/components/CustomLink'
 
 export interface IPostsByTypes {
-    topic?: ITopic | undefined
+    topic?: ITopicNavItem | undefined
     post: IPostItem
 }
 const WTopicFollowCard: React.FC<IPostsByTypes> = ({ topic, post }) => {
@@ -22,8 +22,6 @@ const WTopicFollowCard: React.FC<IPostsByTypes> = ({ topic, post }) => {
                         topicClassName={"text-sm font-semibold leading-5 mb-2"}
                         buttonClassName="text-xs rounded-md bg-blue-100 text-d4secondary font-semibold p-1"
                         {...topic}
-                        type="tag"
-                        id={topic.id}
                     />
                 </div>
             )}

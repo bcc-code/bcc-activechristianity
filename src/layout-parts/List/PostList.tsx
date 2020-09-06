@@ -4,7 +4,7 @@ import { IPaginate, IPostItem } from "@/types"
 
 import RightImgWDes from '@/components/PostItem/RightImgWDes'
 import Pagination from '@/components/Pagination'
-import { fetchLocalPostsFromSlugs, } from '@/helpers'
+import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 
 export interface IPostList {
     audio?: boolean

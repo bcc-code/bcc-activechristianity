@@ -1,7 +1,7 @@
 import * as React from 'react';
 import loadable from '@loadable/component'
 
-import { fetchPostslistFromArchivePage } from '@/helpers'
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import ContentPlaylist from '@/components/Playlist/SimplePlaylist'
 import MetaTag from '@/components/Meta'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'

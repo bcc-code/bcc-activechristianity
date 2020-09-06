@@ -7,7 +7,7 @@ import { normalizePostRes } from '@/helpers'
 import VideoItem from '@/components/PostItem/TopImg'
 import Pagination from '@/components/Pagination'
 import { LayoutH1Wide } from '@/layout-parts'
-import { fetchLocalPostsFromSlugs, } from '@/helpers'
+import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 
 interface ITaxonomyPageProps {
 

@@ -7,6 +7,7 @@ import MetaTag from '@/components/Meta'
 import { normalizeAuthors, normalizeAvailableLanguages, } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
+import { PostLabel } from '@/components/PostItem/PostItemParts'
 import { PostH1 } from '@/layout-parts'
 import ac_strings from '@/strings/ac_strings.json'
 
@@ -64,7 +65,7 @@ const Ebook: React.FC<IEbook> = (ebook) => {
                     {desktopCover}
                 </div>
                 <div className="flex-1">
-                    <span className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75">{TS["e-book"]}</span>
+                    <PostLabel text={TS["e-book"]} />
                     <PostH1 title={title} />
                     <div className="border-b w-1/6 my-8 border-d4gray"></div>
 

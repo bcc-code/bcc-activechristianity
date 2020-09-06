@@ -80,6 +80,7 @@ const RightImgWDes: React.SFC<IRightImgNoDes> = (props) => {
                             bookmarked={bookmarked}
                             id={id}
                             simple
+                            size={16}
 
                         />
 

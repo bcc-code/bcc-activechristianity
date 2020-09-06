@@ -20,13 +20,14 @@ import TopImgPost from '@/components/PostItem/TopImg'
 
 // Type
 import { IRootState } from '@/state/types'
-import { IPostItem, ITopic, IEbook } from '@/types'
+import { IPostItem, ITopic, IEbook, INavItem } from '@/types'
 import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 
 // Helpers
 import { blog as blogApi, auth } from '@/util/sdk'
-import { fetchPostslistFromArchivePage, fetchLocalPostsFromSlugs } from '@/helpers'
+import { fetchPostslistFromArchivePage, fetchLocalPostsFromSlugs, fetchLatestEbooks, fetchLatestPlaylists } from '@/helpers/fetchLocalData'
+import { ebookResToPost, playlistToPost } from '@/helpers'
 import TS from '@/strings'
 import languages from '@/strings/languages.json'
 import ac_strings from '@/strings/ac_strings.json'
@@ -37,28 +38,26 @@ import User from "@/layout-parts/User/UserInitial";
 
 interface IUserContent {
   featuredPostTop: IPostItem | undefined
-  latestPosts: IPostItem[]
-  featuredPostRow: IPostItem[]
+  featuredPostRow: IFeaturedCard[]
   listSlotOne: IPostListSection | undefined
   listSlotTwo: IPostListSection | undefined
   newPostsForYou: INewForYou[],
   listSlotThree: IPostListSection | undefined
   listSlotFour: IPostListSection | undefined
-  topicsForYou: ITopic[]
+  topicsForYou: INavItem[]
   listSlotFive: IPostListSection | undefined
-  listSix: IPostListSection | undefined
-  listSeven: IPostListSection | undefined
+  listSlotSix: IPostListSection | undefined
+  listSlotSeven: IPostListSection | undefined
   popularPosts: IPostItem[]
-  listEight: IPostListSection | undefined
-  listNine: IPostListSection | undefined
-  listTen: IPostListSection | undefined
+  listSlotEight: IPostListSection | undefined
+  listSlotNine: IPostListSection | undefined
+  listSlotTen: IPostListSection | undefined
   featuredPodcast: IPostItem | undefined
   featuredEbook: IEbook | undefined
 }
 
 const defaultUserContent: IUserContent = {
   featuredPostTop: undefined,
-  latestPosts: [],
   featuredPostRow: [],
   listSlotOne: undefined,
   listSlotTwo: undefined,
@@ -67,147 +66,170 @@ const defaultUserContent: IUserContent = {
   listSlotFour: undefined,
   topicsForYou: [],
   listSlotFive: undefined,
-  listSix: undefined,
-  listSeven: undefined,
+  listSlotSix: undefined,
+  listSlotSeven: undefined,
   popularPosts: [],
-  listEight: undefined,
-  listNine: undefined,
-  listTen: undefined,
+  listSlotEight: undefined,
+  listSlotNine: undefined,
+  listSlotTen: undefined,
   featuredPodcast: undefined,
   featuredEbook: undefined
 }
 
 const IndexPage: React.FC<IHomeProps> = (props) => {
   const { pageContext, path } = props
+  console.log(pageContext)
   const {
     featuredPosts: featuredPostsSlug,
-    popularTopics: popularTopicsSlug,
+    popularTopics: popularTopics,
     popularPosts: popularPostsSlug
   } = pageContext
   const [latestPageNr, setLatestPageNr] = React.useState(1)
   const { bookmarkedPosts, historyPosts } = useSelector((state: IRootState) => state.userLibrary)
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
   const [infinitePosts, setInfinitePosts] = React.useState<IPostItem[]>([])
-  const [popularPosts, setPopularPosts] = React.useState<IPostItem[]>([])
-  const [featuredPosts, setFeaturedPosts] = React.useState<IPostItem[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
-  const [userContent, setUserContent] = React.useState<IUserContent>({
-    ...defaultUserContent
-  })
+  const [isFetchingMore, setIsFetchingMore] = React.useState(false)
+  const [userContent, setUserContent] = React.useState<IUserContent>({ ...defaultUserContent })
 
   const latestSlug = `${ac_strings.slug_latest}`
   React.useEffect(() => {
-    fetchPostslistFromArchivePage(latestSlug).then(res => {
-      if (res) {
-        setInfinitePosts(res)
-      }
-    })
 
-    fetchLocalPostsFromSlugs(featuredPostsSlug).then(res => {
-      if (res) {
-        setFeaturedPosts(res)
-      }
-    })
+    Promise.all([
+      fetchPostslistFromArchivePage(latestSlug),
+      fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr + 1}`),
+      fetchLocalPostsFromSlugs(featuredPostsSlug),
+      fetchLocalPostsFromSlugs(popularPostsSlug.slice(0, 8)),
+      Promise.all(popularTopics
+        .map(t => fetchLocalPostsFromSlugs(t.posts)
+          .then(res => {
+            if (res) {
+              return (
+                ({ name: t.name, to: t.to, posts: res })
+              )
+            }
+          })
+        )),
+      fetchLatestEbooks(), //6
+      fetchLatestPlaylists(), // 7
+    ],
 
-    fetchLocalPostsFromSlugs(popularPostsSlug).then(res => {
-      if (res) {
-        setPopularPosts(res)
+    ).then(res => {
+      const content = {
+        ...userContent
       }
+      const latest1 = res[0]
+      const latest2 = res[1]
+      const featured = res[2]
+      const popular = res[3]
+      const topics = res[4]
+      const ebooks = res[5]
+      const playlists = res[6]
+
+      let latest: IPostItem[] = []
+      const featuredRowMix: IFeaturedCard[] = []
+      if (latest1) {
+        latest = [...latest1]
+      }
+
+      if (latest2) {
+        latest.push(...latest2)
+      }
+      if (featured) {
+        content.featuredPostTop = featured[0]
+        /* content.featuredPostRow = featured.slice(1, 6) */
+        featuredRowMix.push({ ...featured[1], likes: 23 }, { ...featured[2], likes: 23 })
+      }
+      if (popular) {
+        content.popularPosts = popular
+      }
+
+      if (ebooks) {
+        featuredRowMix.push({ ...ebookResToPost(ebooks[0]), likes: 23, type: "ebook" })
+      }
+
+      if (playlists) {
+        featuredRowMix.push({ ...playlistToPost(playlists[0]), likes: 23, type: "playlist" })
+      }
+      if (topics) {
+        const toAddTopics: INavItem[] = []
+        topics.forEach(t => {
+          if (t) {
+            toAddTopics.push({ name: t.name, to: t.to })
+          }
+        })
+        content.topicsForYou = toAddTopics
+        const row1 = topics[0]
+        const row2 = topics[1]
+        const row3 = topics[2]
+        const row4 = topics[3]
+        const row5 = topics[4]
+        const row6 = topics[5]
+        const row7 = topics[6]
+        const row8 = topics[7]
+        const row9 = topics[8]
+        const row10 = topics[9]
+        if (row1) { content.listSlotOne = getPopularTopic(row1) }
+        if (row2) { content.listSlotTwo = getPopularTopic(row2) }
+        if (row3) { content.listSlotThree = getPopularTopic(row3) }
+        if (row4) { content.listSlotFour = getPopularTopic(row4) }
+        if (row5) { content.listSlotFive = getPopularTopic(row5) }
+        if (row6) { content.listSlotSix = getPopularTopic(row6) }
+        if (row7) { content.listSlotSeven = getPopularTopic(row7) }
+        if (row8) { content.listSlotEight = getPopularTopic(row8) }
+        if (row9) { content.listSlotNine = getPopularTopic(row9) }
+        if (row10) { content.listSlotTen = getPopularTopic(row10) }
+      }
+      content.featuredPostRow = featuredRowMix
+      setLatestPageNr(latestPageNr + 1)
+      setInfinitePosts(latest)
+      setUserContent(content)
+
     })
-  }, [userContent.popularPosts])
+  }, [loggedIn, path])
 
   const showMorePosts = () => {
-    if (latestPageNr > 1) {
+
+    if (latestPageNr > 0) {
+      setIsFetchingMore(true)
+      const nextPage = latestPageNr + 1
       setLatestPageNr(latestPageNr + 1)
-      fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr}`)
+      fetchPostslistFromArchivePage(`${latestSlug}/${nextPage}`)
         .then(res => {
           if (res) {
+
             setInfinitePosts([...infinitePosts, ...res])
+            setIsFetchingMore(false)
           }
         })
     }
 
   }
 
-  React.useEffect(() => {
-
-    getUserContent()
-  }, [loggedIn, path])
-
-
-  const getUserContent = () => {
-    setIsLoading(true)
-
-    setUserContent({
-      ...userContent,
-      featuredPostTop: featuredPosts[0],
-      latestPosts: infinitePosts.slice(2, 6),
-      featuredPostRow: featuredPosts.slice(1),
-      /*       listSlotOne: initialData.popularPosts.edges[0] ? getTopicFromPost(initialData.popularPosts.edges[0], ac_strings.popularTopic) : defaultUserContent.listSlotOne,
-            listSlotTwo: initialData.popularPosts.edges[1] ? getTopicFromPost(initialData.popularPosts.edges[1], ac_strings.popularTopic) : defaultUserContent.listSlotTwo,
-            newPostsForYou: getNewForYou(initialData.latestPosts.edges.slice(6, 10).map(item => item.node)),
-            listSlotThree: initialData.popularPosts.edges[2] ? getTopicFromPost(initialData.popularPosts.edges[2], ac_strings.popularTopic) : defaultUserContent.listSlotThree,
-            listSlotFour: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFour,
-            listSlotFive: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFive,
-            topicsForYou: initialData.featuredTopics.edges, */
-      popularPosts: popularPosts
-    })
-    if (loggedIn === "success") {
-      /*       setUserContent({
-              ...userContent,
-              featuredPostTop: [{
-                ...WPItemtoPostWBookmark(pageContext.featuredPosts[0], bookmarkedPosts),
-                palette: pageContext.featuredPosts[0].palette
-              }],
-              latestPosts: initialData.latestPosts.edges.slice(0, 6).map(item => convertPosts(item.node)),
-              featuredPostRow: initialData.featuredPosts.edges.map(item => WPItemtoPostItem(item)),
-              listSlotOne: initialData.popularPosts.edges[0] ? getTopicFromPost(initialData.popularPosts.edges[0], 'Popular Topic') : defaultUserContent.listSlotOne,
-              listSlotTwo: initialData.popularPosts.edges[1] ? getTopicFromPost(initialData.popularPosts.edges[1], 'Popular Topic') : defaultUserContent.listSlotTwo,
-              newPostsForYou: getNewForYou(initialData.latestPosts.edges.slice(6, 10).map(item => item.node)),
-              listSlotThree: initialData.popularPosts.edges[2] ? getTopicFromPost(initialData.popularPosts.edges[2], 'Popular Topic') : defaultUserContent.listSlotThree,
-              listSlotFour: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], 'Popular Topic') : defaultUserContent.listSlotFour,
-              listSlotFive: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], 'Popular Topic') : defaultUserContent.listSlotFive,
-              topicsForYou: initialData.featuredTopics.edges
-            })
-            setIsLoading(false) */
-    } else if (loggedIn === "notLoggedIn") {
-      /*       setUserContent({
-              ...userContent,
-              featuredPostTop: [{
-                ...WPItemtoPostWBookmark(pageContext.featuredPosts[0], bookmarkedPosts),
-                palette: pageContext.featuredPosts[0].palette
-              }],
-              latestPosts: initialData.latestPosts.edges.slice(0, 6).map(item => convertPosts(item.node)),
-              featuredPostRow: initialData.featuredPosts.edges.map(item => WPItemtoPostItem(item)),
-              listSlotOne: initialData.popularPosts.edges[0] ? getTopicFromPost(initialData.popularPosts.edges[0], ac_strings.popularTopic) : defaultUserContent.listSlotOne,
-              listSlotTwo: initialData.popularPosts.edges[1] ? getTopicFromPost(initialData.popularPosts.edges[1], ac_strings.popularTopic) : defaultUserContent.listSlotTwo,
-              newPostsForYou: getNewForYou(initialData.latestPosts.edges.slice(6, 10).map(item => item.node)),
-              listSlotThree: initialData.popularPosts.edges[2] ? getTopicFromPost(initialData.popularPosts.edges[2], ac_strings.popularTopic) : defaultUserContent.listSlotThree,
-              listSlotFour: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFour,
-              listSlotFive: initialData.popularPosts.edges[3] ? getTopicFromPost(initialData.popularPosts.edges[3], ac_strings.popularTopic) : defaultUserContent.listSlotFive,
-              topicsForYou: initialData.featuredTopics.edges,
-              popularPosts: initialData.popularPosts.edges.map(item => convertPosts(item))
-            }) */
-
-
-    }
-  }
+  /*   React.useEffect(() => {
+      console.log(path)
+      console.log('updating user')
+      getUserContent()
+    }, [loggedIn, path, featuredPostsSlug, popularPosts])
+  
+   */
 
   const {
     featuredPostTop,
-    latestPosts,
     featuredPostRow,
+    popularPosts,
     listSlotOne,
     listSlotTwo,
     newPostsForYou,
     listSlotThree,
     listSlotFour,
     listSlotFive,
+    listSlotSix,
     topicsForYou } = userContent
 
-
-  console.log(featuredPosts)
-  console.log(featuredPostTop)
+  const latest1 = infinitePosts.slice(0, 6)
+  const latest2 = infinitePosts.slice(6, 12)
+  const latest3 = infinitePosts.slice(12)
   return (
 
     <div className="standard-max-w">
@@ -229,15 +251,16 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             <TopImgPost noBorder {...featuredPostTop} showType />
           </div>
         )}
-        <LatestSection latestPosts={latestPosts} latestSlug={ac_strings.slug_latest} />
-        {userContent.featuredPostRow && <FeatureSection featuredPosts={userContent.featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
+        <LatestSection latestPosts={latest1} latestSlug={ac_strings.slug_latest} />
+        {featuredPostRow && <FeatureSection featuredPosts={featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
         <LowerSections
           lists={[
             listSlotOne,
             listSlotTwo,
             listSlotThree,
             listSlotFour,
-            listSlotFive
+            listSlotFive,
+
           ]}
           newPostsForYou={newPostsForYou}
           topicsForYou={topicsForYou}
@@ -245,20 +268,20 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         />
         <LazyLoad>
           <div className="grid-2 my-4 mx-4 hidden sm:grid">
-            {latestPosts.slice(1).map((item, i) => {
+            {latest2.map((item, i) => {
               return (
                 <div className={`div${i + 1}`}>
                   < TopImgPost {...item} showType />
                 </div>
               )
             })}
-            <FeaturedCard className="bg-blue-800" {...latestPosts[0]} likes={99} />
+
           </div>
         </LazyLoad>
         <LazyLoad >
           <div className="grid-home-end sm:mx-4">
             <div className="div1">
-              {infinitePosts.map((item, i) => {
+              {latest3.map((item, i) => {
                 return (
                   <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
                     <RightImgWDes key={i} {...item} />
@@ -266,15 +289,13 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 )
               })}
             </div>
-
-
             <div className="div2 overflow-hidden mt-12 hidden sm:block">
               <FollowUs />
             </div>
           </div>
         </LazyLoad>
         <div className="w-full flex justify-center py-16">
-          <OutlineButton name={ac_strings.showMore} onClick={showMorePosts} />
+          <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={showMorePosts} />
 
         </div>
 
@@ -287,6 +308,14 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
 export default IndexPage
 
+const getPopularTopic = (topic: IPopularTopic) => {
+  return ({
+    posts: topic.posts.slice(0, 1),
+    header: topic.name,
+    subHeader: ac_strings.popularTopic
+
+  })
+}
 
 interface IHomeProps {
   path: string
@@ -294,7 +323,20 @@ interface IHomeProps {
 
     featuredPosts: string[]
     popularPosts: string[]
-    popularTopics: string[]
+    popularTopics: IPopularTopicContext[]
+
   }
 
+}
+
+interface IPopularTopicContext {
+  name: string
+  to: string
+  posts: string[]
+}
+
+interface IPopularTopic {
+  name: string
+  to: string
+  posts: IPostItem[]
 }

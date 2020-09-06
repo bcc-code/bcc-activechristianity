@@ -12,7 +12,7 @@ import { IBibleBook, IBible, IApiPost } from '@/types'
 
 // Helper
 import { other as otherApi } from '@/util/sdk'
-import { fetchLocalPostsFromSlugs } from '@/helpers'
+import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
 
 interface IBibleNavProps {

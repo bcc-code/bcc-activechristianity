@@ -34,7 +34,7 @@ export const PostLayout: React.SFC<IPlaylist> = (post) => {
     } = post
 
     const imageUrl = getImage(title, '640x320', image)
-    const shareSlug = `${ac_strings.playlist}/${slug}`
+    const shareSlug = `${ac_strings.slug_playlist}/${slug}`
 
     const allTracks: IMedia[] = normalizeTracks(tracks)
     return (

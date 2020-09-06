@@ -29,7 +29,7 @@ import FeatureIcon from '@/components/Icons/Feature'
 
 export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resource }) => {
     const [resourceTypeGroup, setResourceTypeGroup] = React.useState<"types" | "listen" | "read" | "watch" | "general">('types');
-    console.log(resource)
+
     const listMap = {
         "types": {
             icon: <FeatureIcon className="w-4 h-4" />,
@@ -88,8 +88,8 @@ export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resou
                     return (
 
                         <Link className="flex flex-col items-center" key={item.key} to={item.to}>
-                            <div className={`${imgSettings.color} sm:h-40 sm:w-32 text-center rounded-lg mb-2 flex justify-center items-center`}>
-                                <img alt={item.name} src={imgSettings.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 sm:h-20 px-4'} />
+                            <div className={`${imgSettings.color} py-4 text-center rounded-lg mb-2 flex justify-center items-center`}>
+                                <img alt={item.name} src={imgSettings.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 px-4'} />
 
                             </div>
                             <span className={`text-sm leading-none text-center py-2`}>{item.name}</span>

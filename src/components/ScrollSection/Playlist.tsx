@@ -1,12 +1,13 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { PlaylistBackground } from '@/components/PostItem/PostItemParts'
+import { PlaylistBackground, PostLabel } from '@/components/PostItem/PostItemParts'
 import SimplePlaylist from '@/components/Playlist/SimplePlaylist'
 import { getImage } from '@/helpers/imageHelpers'
 import { normalizeTracks } from "@/helpers"
 import { IRootState } from '@/state/types'
 import { IPlaylist, IMedia } from '@/types'
 import { PostH1, ShareSection } from '@/layout-parts'
+import { } from '@/components/PostItem/PostItemParts'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 export const PostLayout: React.SFC<IPlaylist> = (post) => {
@@ -41,7 +42,7 @@ export const PostLayout: React.SFC<IPlaylist> = (post) => {
                 </div>
             </div>
             <div className="flex-1">
-                <span className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75">{ac_strings.playlist}</span>
+                <PostLabel text={ac_strings.playlist} />
                 <PostH1 title={title} />
                 <p className="text-d4slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
                 <div className="border-b w-1/6 my-8 border-d4gray"></div>

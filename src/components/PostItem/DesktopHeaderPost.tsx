@@ -5,7 +5,7 @@ import VideoHeader from '@/components/Images/Video16to9'
 import { IPostItem } from '@/types'
 import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/Buttons/ToggleBookmark'
-import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
+import { PostTitle, ReadingTimingAuthor, PostLabel } from '@/components/PostItem/PostItemParts'
 
 
 const rbgToString = (colors: number[], alpha?: number) => {
@@ -17,8 +17,6 @@ const rbgToString = (colors: number[], alpha?: number) => {
 }
 
 const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, excerpt, authors, reading_time, id, slug, media }) => {
-    console.log(slug)
-    console.log(image)
     /* const {  muted } = palette; */
     const bgGradientStyle = { 'backgroundImage': '' }
     if (image) {
@@ -66,7 +64,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
 
                     >
                         {format && format[0] && (
-                            <span className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75">{format[0].name}</span>
+                            <PostLabel text={format[0].name} />
                         )}
                         <PostTitle
                             rawText={title}

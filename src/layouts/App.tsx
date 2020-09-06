@@ -1,19 +1,21 @@
 import * as React from 'react'
 import { StaticQuery, graphql } from "gatsby"
-import TopMobile from '@/layout-parts/Nav/TopMobile'
-import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import BottomMobile, { iconMap, IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
-import SideNav from '@/layout-parts/Nav/SideNav'
-import Helmet from 'react-helmet'
-const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
-import loadable from '@loadable/component'
-import Link from '@/components/CustomLink';
-import { useDispatch, useSelector } from "react-redux"
 import Breadcrumb from '@/components/Breadcrumb'
 import CookieConsent from "react-cookie-consent";
+import Footer from '@/layout-parts/Footer'
+import Helmet from 'react-helmet'
+import Link from '@/components/CustomLink';
+const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
+import TopMobile from '@/layout-parts/Nav/TopMobile'
+import TopDesktop from '@/layout-parts/Nav/TopDesktop'
+import SideNav from '@/layout-parts/Nav/SideNav'
+import SignInSignUpModal from '@/layout-parts/SignInSignUp'
+import loadable from '@loadable/component'
+import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserFollowing, getUserHistory, getUserLiked, getUserUnfinished } from '@/state/action/userAction'
-import SignInSignUpModal from '@/layout-parts/SignInSignUp'
+
 // string
 import TS from '@/strings';
 import ac_strings from '@/strings/ac_strings.json'
@@ -151,7 +153,7 @@ const App: React.FC<any> = (props) => {
                                 ) : null}
 
                                 {children}
-                                {/*   <Footer /> */}
+                                <Footer />
                             </div>
 
                             <BottomMobile  {...NavProps} menu={mobileMenu} />

@@ -68,7 +68,7 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu })
                         <Link
                             key={i}
                             to={item.to}
-                            onClick={() => { handlePathClick(item.to, item.name) }}
+                            /* onClick={() => { handlePathClick(item.to, item.name) }} */
                             className="flex flex-col items-center justify-between text-gray-600 pt-4 pb-3 flex-1"
                             activeClassName="bg-gray-300 "
                         >

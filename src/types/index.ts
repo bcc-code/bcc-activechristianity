@@ -47,6 +47,14 @@ export interface INavItem {
     order?: number
 }
 
+export interface IElementNavItem extends INavItem {
+    name: string | JSX.Element
+}
+
+export interface ITopicNavItem extends INavItem {
+    id: string
+}
+
 export interface INavItemCount extends INavItem {
     count: number
 }
@@ -75,9 +83,9 @@ export interface IPostItem {
     image: IImage
     excerpt: string
     date: Date
-    types?: INavItem[]
-    format?: INavItem[]
-    topics?: INavItem[]
+    types?: ITopicNavItem[]
+    format?: ITopicNavItem[]
+    topics?: ITopicNavItem[]
     authors?: IPostAuthors[]
     bookmarked?: boolean,
     reading_time?: {

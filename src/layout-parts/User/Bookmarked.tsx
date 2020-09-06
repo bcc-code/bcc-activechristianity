@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { fetchLocalPostsFromSlugs } from '@/helpers'
+import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { IPostItem } from '@/types'
 import { IRootState } from '@/state/types'
 

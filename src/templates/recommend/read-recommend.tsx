@@ -8,7 +8,7 @@ import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
-import { fetchPostslistFromArchivePage } from '@/helpers'
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 
 const Read: React.FC<IProps> = (props) => {
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)

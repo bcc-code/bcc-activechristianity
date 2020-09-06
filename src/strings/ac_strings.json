@@ -33,7 +33,7 @@
     "byCategories": "By Categories",
     "youMightBeInterestedIn": "You might be interested in ",
     "ebookPreview": "Ebook preview",
-    "loading": "loading",
+    "loading": "Loading",
     "learnMoreAC": "Learn more about ActiveChristianity",
     "exclusiveContent": "Exclusive content",
     "subscribe": "Subscribe",
@@ -70,6 +70,8 @@
     "slug_host": "host",
     "slug_user": "user",
     "slug_latest": "latest",
+    "slug_playlist": "playlist",
+    "slug_podcast": "podcast",
     "title_user": "Profile",
     "slug_cookie_policy": "cookie-policy",
     "slug_privacy_policy": "privacy-policy",
@@ -77,5 +79,7 @@
     "slug_register": "register",
     "slug_login": "login",
     "old_testimony": "Old Testament",
-    "new_testimony": "New Testament"
+    "new_testimony": "New Testament",
+    "topics_for_you": "Topics for you",
+    "topics_for_you_text": "Looking for a topic? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer erat urna, aliquam ac massa vel, dictum rhoncus mi. Sed blandit."
 }

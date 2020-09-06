@@ -174,7 +174,7 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
         {
             id: '',
             title,
-            slug: `${ac_strings.playlist}/${slug}`,
+            slug: `${ac_strings.slug_playlist}/${slug}`,
             image: getImage(title, "640x320", image),
             excerpt,
             date: new Date(),
@@ -234,102 +234,6 @@ export const normalizePostRes = (post: IPostRes) => {
     }
 
     return postItem
-}
-
-
-export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
-    return Promise
-        .all(slugs.map(item => fetchOneLocalPostsFromSlug(item)))
-        .then(list => {
-            const toReturn: IPostItem[] = []
-            list.map(post => {
-                if (post !== undefined) {
-                    toReturn.push(post)
-                }
-            })
-
-            return toReturn
-        })
-        .catch(error => {
-            console.log(error.message)
-        })
-}
-
-export const fetchPostslistFromArchivePage = (slug: string) => {
-    let processSlug = trimSlug(slug)
-
-    return fetch(`/page-data/${processSlug}/page-data.json`)
-        .then(res => res.json())
-        .then(res => {
-            if (res.result && res.result && res.result.pageContext.posts) {
-                const posts: string[] = res.result.pageContext.posts
-
-                return fetchLocalPostsFromSlugs(posts)
-
-            }
-            return undefined
-        })
-}
-
-export const fetchPlaylistFromSlug = (slug: string) => {
-    let processSlug = trimSlug(slug)
-    return fetch(`/page-data/${ac_strings.playlist}/${processSlug}/page-data.json`)
-        .then(res => res.json())
-        .then(res => {
-            if (res.result && res.result && res.result.pageContext) {
-                const playlist: IPlaylist = res.result.pageContext.playlist
-
-                return playlist
-
-            }
-            return undefined
-        })
-}
-
-export const fetchEbookFromSlug = (slug: string) => {
-    let processSlug = trimSlug(slug)
-    return fetch(`/page-data/${ac_strings.slug_ebook}/${processSlug}/page-data.json`)
-        .then(res => res.json())
-        .then(res => {
-            if (res.result && res.result && res.result.pageContext) {
-                const ebook: IEbook = res.result.pageContext.ebook
-
-                return ebook
-
-            }
-            return undefined
-        })
-}
-
-export const fetchTopicFromSlug = (slug: string) => {
-    let processSlug = trimSlug(slug)
-    return fetch(`/page-data/${TS.slug_topic}/${processSlug}/page-data.json`)
-        .then(res => res.json())
-        .then(res => {
-            if (res.result && res.result && res.result.pageContext) {
-                const topicContext = res.result.pageContext
-                const topicNav: INavItem = {
-                    name: topicContext.title,
-                    to: topicContext.slug
-                }
-
-                return topicNav
-
-            }
-            return undefined
-        })
-}
-export const fetchOneLocalPostsFromSlug = (slug: string) => {
-    let processSlug = trimSlug(slug)
-    return fetch(`/page-data/${processSlug}/page-data.json`)
-        .then(res => res.json())
-        .then(res => {
-            if (res.result && res.result.data && res.result.data['acNodePost']) {
-                const updatePost = normalizePostRes(res.result.data['acNodePost'])
-                return updatePost
-            }
-            return undefined
-        })
 }
 
 

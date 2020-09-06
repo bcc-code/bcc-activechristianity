@@ -3,7 +3,7 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
-import { IPostItem, ITopic } from '@/types'
+import { IPostItem, ITopic, INavItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
 const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
 /* const NewForYouDesktop = loadable(() => import('@/layout-parts/Home/NewForYou/Vertical')) */
@@ -15,11 +15,11 @@ const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts')
 interface IHomeLowerSection {
     lists: (IPostListSection | undefined)[]
     newPostsForYou: INewForYou[]
-    topicsForYou: ITopic[]
+    topicsForYou: INavItem[]
     popularPosts: IPostItem[]
 }
 const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou, topicsForYou, popularPosts }) => {
-    const listSlotOne = lists[0]
+
     return (
         <div className="grid-home-posts-layout sm:px-4">
             {lists.map((slot, i) => {
@@ -35,18 +35,8 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
                 )
             })}
 
-            <div className="div6 overflow-hidden">
-                <LazyLoad>
-                    <div className="my-4 bg-gray-200 sm:hidden" >
-                        <NewForYou topics={newPostsForYou} />
-                    </div>
-                    <div className="hidden sm:flex mt-8">
-                        <PopularPostVertical title={ac_strings.newForYou} posts={popularPosts} small />
 
-                    </div>
-                </LazyLoad>
-            </div>
-            <div className="div7 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
                 <LazyLoad>
                     <h6 className="text-d4slate-dark text-lg font-bold sm:hidden mx-4 mb-6">{ac_strings.popular}</h6>
                     <PostlistHorizontalSimple
@@ -60,30 +50,18 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
 
 
             </div>
+            {newPostsForYou && newPostsForYou.length > 0 && <div className="div7 overflow-hidden">
+                <LazyLoad>
+                    {<div className="my-4 bg-gray-200 sm:hidden" >
+                        <NewForYou topics={newPostsForYou} />
+                    </div>}
+                    <div className="hidden sm:flex mt-8">
+                        <PopularPostVertical title={ac_strings.newForYou} posts={newPostsForYou.map(item => item.post)} small />
+                    </div>
+                </LazyLoad>
+            </div>}
             < TopicsForYouSection topics={topicsForYou} />
-            {/*           <div className="div8 bg-gray-200 sm:bg-transparent pt-6 overflow-hidden hidden sm:block">
-                <div className="flex">
-                    <PopularPostVertical posts={popularPosts} />
-                </div>
 
-            </div> */}
-            <div className={`div10 sm:hidden mx-4 sm:mx-0 mt-4`}>
-                <LazyLoad>
-                    {listSlotOne && <PostListSection {...listSlotOne} />}
-                    {listSlotOne && <PostListSection {...listSlotOne} />}
-                    {listSlotOne && <PostListSection {...listSlotOne} />}
-                </LazyLoad>
-            </div>
-
-
-            <div className={`div11 sm:hidden mx-4 sm:mx-0 mt-4`}>
-                <LazyLoad>
-                    {listSlotOne && <PostListSection {...listSlotOne} />}
-                    {listSlotOne && <PostListSection {...listSlotOne} />}
-                    {listSlotOne && <PostListSection {...listSlotOne} />}
-                </LazyLoad>
-
-            </div>
 
 
         </div>

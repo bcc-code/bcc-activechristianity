@@ -9,7 +9,7 @@ import { TitleWithIcon, typeIcons } from '@/layout-parts'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 // helper
 
-import { fetchPostslistFromArchivePage } from '@/helpers'
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
 // types'
 

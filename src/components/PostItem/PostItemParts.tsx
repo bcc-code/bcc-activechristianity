@@ -224,3 +224,7 @@ export const PostBase: React.FC<IPostBase> = (props) => {
         </div>
     )
 }
+
+export const PostLabel: React.FC<{ text: string | JSX.Element }> = ({ text }) => (
+    <span className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75">{text}</span>
+)

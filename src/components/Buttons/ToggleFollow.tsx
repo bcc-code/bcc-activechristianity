@@ -14,28 +14,23 @@ interface IProps {
     buttonClassName?: string
     id: string
     name: string
-    slug: string
-    type: 'topic' | 'tag'
+    to: string
     followed?: boolean
     size?: number | string
     className?: string
 }
 
-const FollowButton: React.SFC<IProps> = ({ followed, topicClassName, buttonClassName, id, slug, name, type }) => {
+const FollowButton: React.SFC<IProps> = ({ followed, topicClassName, buttonClassName, id, to, name }) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {
-        dispatch(
-            type === 'topic' ?
-                setNewFollowTopic({ id, followed: followed === true }) :
-                setNewFollowTag({ id, followed: followed === true })
-        )
+        dispatch(setNewFollowTopic({ id, followed: followed === true }))
 
     }
     return (
         <div className="flex flex-col mr-1">
             <div className="text-sm text-d4gray-dark">{ac_strings.topic}</div>
-            <Link className={topicClassName ? topicClassName : "uppercase"} to={`/${TS.slug_post_tag}/${slug}`}>
+            <Link className={topicClassName ? topicClassName : "uppercase"} to={`/${TS.slug_topic}/${to}`}>
                 <PostExcerpt
                     rawText={name}
                     clamp={1}

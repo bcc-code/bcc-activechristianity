@@ -6,7 +6,7 @@ import { UnderlineTitleLink, typeIcons, LayoutH1Wide, TitleWithIcon } from '@/la
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
-import { fetchPostslistFromArchivePage } from '@/helpers'
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import getPostByTypesLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 // Types 
 import ac_strings from '@/strings/ac_strings.json'

@@ -11,7 +11,7 @@ export interface IPostListSection {
 const PostListSection: React.FC<IPostListSection> = ({ header, subHeader, posts }) => (
     <div className="md:h-full md:flex md:flex-col">
         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
-            {header && <h4 className="text-d4slate-dark mr-2">{header}</h4>}
+            {header && <h4 className="font-roboto text-d4slate-dark mr-2">{header}</h4>}
             {subHeader && <span className="text-sm italic text-d4slate-light">{subHeader}</span>}
         </div>
         <div className="flex-1">

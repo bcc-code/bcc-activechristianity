@@ -18,7 +18,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { UnderlineTitleLink } from '@/layout-parts'
 
 // helpers
-import { fetchLocalPostsFromSlugs } from '@/helpers'
+import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import livingTheGospel from '@/strings/podcastProperties'
 
 import { INavItem, IPostItem, IAuthor } from '@/types'

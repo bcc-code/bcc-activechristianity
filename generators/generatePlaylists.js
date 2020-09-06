@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const TS = require('../src/strings/ac_strings.json')
+const ac_strings = require('../src/strings/ac_strings.json')
 const template = 'src/templates/single-resource/playlist.tsx'
 
 const query = `
@@ -56,7 +56,7 @@ module.exports = function generatePlaylists(actions, graphql) {
       const navTopItem={name:resourcePage.title,to:resourcePage.slug}
   
       _.each(playlists, (playlist) => {
-        const basePath = `/${TS.playlist}/${playlist.slug}`
+        const basePath = `/${ac_strings.slug_playlist}/${playlist.slug}`
 
         createPage({
           path: basePath,
