@@ -2,7 +2,7 @@ import React from "react"
 
 import MetaTag from '@/components/Meta'
 import RecommendLayout from '@/layouts/RecommendLayoutNew'
-
+import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
@@ -21,7 +21,7 @@ const Listen: React.FC<IProps> = (props) => {
     const [desktopRow1, setDesktopRow1] = React.useState<IOnePostByType[]>([])
     const [desktopRow2, setDesktopRow2] = React.useState<IOnePostByType[]>([])
     const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
-
+    const [isLoading, setIsLoading] = React.useState(false)
     const { pageContext, path } = props
     console.log(pageContext)
     const { title, breadcrumb, items, playlist, menu } = pageContext
@@ -29,10 +29,12 @@ const Listen: React.FC<IProps> = (props) => {
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     React.useEffect(() => {
-
+        setIsLoading(true)
         fetchPostslistFromArchivePage(latestSlug).then(res => {
+
             if (res) {
                 setLatestPosts(res)
+                setIsLoading(false)
             }
         })
 
@@ -164,20 +166,23 @@ const Listen: React.FC<IProps> = (props) => {
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
-            {headerPost && (
-                <RecommendLayout
-                    latestSlug={latestSlug}
-                    name={title}
-                    headerPost={headerPost}
-                    latestPosts={latest}
-                    popularPosts={popular}
-                    postsByTypesRow1={desktopRow1}
-                    postsByTypesRow2={desktopRow2}
-                    postsByTypes={mobilePostRows}
-                    postTypes={typeLinks}
+            <Placeholder loading={isLoading || !headerPost}>
+                {headerPost && (
+                    <RecommendLayout
+                        latestSlug={latestSlug}
+                        name={title}
+                        headerPost={headerPost}
+                        latestPosts={latest}
+                        popularPosts={popular}
+                        postsByTypesRow1={desktopRow1}
+                        postsByTypesRow2={desktopRow2}
+                        postsByTypes={mobilePostRows}
+                        postTypes={typeLinks}
 
-                />
-            )}
+                    />
+                )}
+            </Placeholder>
+
 
         </div>
     )

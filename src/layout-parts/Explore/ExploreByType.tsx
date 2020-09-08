@@ -92,7 +92,7 @@ export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resou
                                 <img alt={item.name} src={imgSettings.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 px-4'} />
 
                             </div>
-                            <span className={`text-sm leading-none text-center py-2`}>{item.name}</span>
+                            <span className={`leading-none text-center py-2 text-xs sm:text-sm`}>{item.name}</span>
                         </Link>
                     )
                 })}

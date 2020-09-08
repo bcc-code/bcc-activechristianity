@@ -94,7 +94,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   const latestSlug = `${ac_strings.slug_latest}`
   React.useEffect(() => {
-
+    setIsLoading(true)
     Promise.all([
       fetchPostslistFromArchivePage(latestSlug),
       fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr + 1}`),
@@ -184,7 +184,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       setLatestPageNr(latestPageNr + 1)
       setInfinitePosts(latest)
       setUserContent(content)
-
+      setIsLoading(false)
     })
   }, [loggedIn, path])
 
@@ -240,7 +240,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         translatedUrls={[]}
         breadcrumb={[]}
       />
-      <Placeholder loading={loggedIn == "loading"}>
+      <Placeholder loading={loggedIn == "loading" || isLoading === true}>
         {featuredPostTop !== undefined && (
           <div className="hidden sm:block">
             <HomeTopFeaturePost {...featuredPostTop} />

@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
 import RecommendLayout from '@/layouts/RecommendLayoutNew'
 import { UnderlineTitleLink, typeIcons, LayoutH1Wide, TitleWithIcon } from '@/layout-parts'
+import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
@@ -18,6 +19,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
     const [latest, setLatest] = React.useState<IPostItem[]>([])
     const [popular, setPopular] = React.useState<IPostItem[]>([])
+    const [isLoading, setIsLoading] = React.useState(false)
     const [mobilePostRows, setMobilePostRows] = React.useState<IOnePostByTypeRow[] | undefined>(undefined)
     const [desktopRow1, setDesktopRow1] = React.useState<IOnePostByType[] | undefined>(undefined)
     const [desktopRow2, setDesktopRow2] = React.useState<IOnePostByType[] | undefined>(undefined)
@@ -112,21 +114,24 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 breadcrumb={breadcrumb}
                 path={path}
             />
-            {headerPost && (
-                <RecommendLayout
-                    latestSlug={latestSlug}
-                    name={title}
-                    headerPost={headerPost}
-                    latestPosts={latest}
-                    popularPosts={popular}
-                    postsByTypes={mobilePostRows}
-                    postsByTypesRow1={desktopRow1}
-                    postsByTypesRow2={desktopRow2}
-                    postTypes={formatLinks}
-                    relatedTopics={typeLinks}
+            <Placeholder loading={isLoading || !headerPost}>
+                {headerPost && (
+                    <RecommendLayout
+                        latestSlug={latestSlug}
+                        name={title}
+                        headerPost={headerPost}
+                        latestPosts={latest}
+                        popularPosts={popular}
+                        postsByTypes={mobilePostRows}
+                        postsByTypesRow1={desktopRow1}
+                        postsByTypesRow2={desktopRow2}
+                        postTypes={formatLinks}
+                        relatedTopics={typeLinks}
 
-                />
-            )}
+                    />
+                )}
+            </Placeholder>
+
         </div>
     )
 

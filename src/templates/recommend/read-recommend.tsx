@@ -3,7 +3,7 @@ import MetaTag from '@/components/Meta'
 import RecommendLayout from '@/layouts/RecommendLayoutNew'
 
 import ac_strings from '@/strings/ac_strings.json'
-
+import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
@@ -18,6 +18,7 @@ const Read: React.FC<IProps> = (props) => {
     const [desktopRow1, setDesktopRow1] = React.useState<IOnePostByType[]>([])
     const [desktopRow2, setDesktopRow2] = React.useState<IOnePostByType[]>([])
     const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
+    const [isLoading, setIsLoading] = React.useState(false)
     const { pageContext, path } = props
 
     const { title, menu, info, items } = pageContext
@@ -26,9 +27,13 @@ const Read: React.FC<IProps> = (props) => {
 
     React.useEffect(() => {
 
+
+        setIsLoading(true)
         fetchPostslistFromArchivePage(latestSlug).then(res => {
+
             if (res) {
                 setLatestPosts(res)
+                setIsLoading(false)
             }
         })
     }, [pageContext])
@@ -168,20 +173,24 @@ const Read: React.FC<IProps> = (props) => {
                 path={path}
             />
 
-            {headerPost && (
-                <RecommendLayout
-                    latestSlug={latestSlug}
-                    name={title}
-                    headerPost={headerPost}
-                    latestPosts={latest}
-                    popularPosts={popular}
-                    postsByTypes={mobilePostRows}
-                    postsByTypesRow1={desktopRow1}
-                    postsByTypesRow2={desktopRow2}
-                    postTypes={typeLinks}
+            <Placeholder loading={isLoading || !headerPost}>
 
-                />
-            )}
+                {headerPost && (
+                    <RecommendLayout
+                        latestSlug={latestSlug}
+                        name={title}
+                        headerPost={headerPost}
+                        latestPosts={latest}
+                        popularPosts={popular}
+                        postsByTypes={mobilePostRows}
+                        postsByTypesRow1={desktopRow1}
+                        postsByTypesRow2={desktopRow2}
+                        postTypes={typeLinks}
+
+                    />
+
+                )}
+            </Placeholder>
         </div>
     )
 }
