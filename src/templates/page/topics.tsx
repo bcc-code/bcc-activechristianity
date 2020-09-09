@@ -18,7 +18,7 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
     const sortedTopics = sortTopicsByGroups(props.data.ac.allTopics)
 
     const { Topic, Format, Type, ...rest } = sortedTopics
-    const topicGroups = Object.keys(rest).map(k => ({ name: rest[k].info.name, items: rest[k].topics }))
+    const topicGroups = Object.keys(rest).map(k => ({ name: rest[k].info.name, items: rest[k].topics.map(item => ({ ...item })) }))
     return (
         <ResourceLayout
             title={title}
@@ -77,6 +77,7 @@ export const pageQuery = graphql`
                 name
                 slug
             }
+            noOfPosts
             name
             slug
             id

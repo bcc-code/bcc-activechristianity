@@ -42,7 +42,7 @@ export interface ITrack {
 export type ITrackType = "audio" | "video"
 
 export interface INavItem {
-    name: string | JSX.Element
+    name: string
     to: string;
     order?: number
 }
@@ -216,10 +216,18 @@ export interface ITopic {
     id: string
     name: string
     slug: string
+    noOfPosts: number
     excerpt?: string
     image: IImage[]
     group: ITopicGroup
     posts: IPostRes[]
+    somePosts: IPaginate
+    subTopics: {
+        id: string
+        name: string
+        slug: string
+        group_id: number
+    }
 }
 
 export interface IAuthor extends INavItem {

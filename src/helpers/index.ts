@@ -125,7 +125,7 @@ export const sortTopicsByGroups = (topics: ITopic[]) => {
     } = {}
 
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: t.name, to: `${TS.slug_topic}/${t.slug}` }
+        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${TS.slug_topic}/${t.slug}` }
         if (t.group.name !== 'Type' && t.group.name !== 'Format') {
         }
         if (sortedTags[t.group.name]) {
