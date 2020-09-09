@@ -26,13 +26,13 @@ const WTopicFollowCard: React.FC<IPostsByTypes> = ({ topic, post }) => {
                 </div>
             )}
 
-            <Link className="flex flex-col" to={slug}>
+            <Link className="flex flex-col leading-normal" to={slug}>
                 <PostTitle
                     rawText={title}
                     fontKey="simple-lg"
                     clamp={2}
                     bold="font-semibold"
-                    className="block mt-2 mb-4"
+                    className="block mb-4"
                 />
 
                 <Two2OneImage image={image} alt={title} />

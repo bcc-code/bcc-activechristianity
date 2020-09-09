@@ -8,7 +8,9 @@ const ScreenIcon: React.FC<IIconProps> = ({ className }) => (
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <path d="M3 17H9H15M9 13H17V1H1V13H9Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+
+        <path d="M3 17H9H15M9 13H17V1H1V13H9Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12.5 7L7 4V10L12.5 7Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 )
 export default ScreenIcon

@@ -27,7 +27,7 @@ const getPostsQuery = (pageNr)=>`
                 post {
                     title
                     slug
-                }
+                    }
                 }
                 authors {
                     name

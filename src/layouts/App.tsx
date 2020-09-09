@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StaticQuery, graphql } from "gatsby"
-import BottomMobile, { iconMap, IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
+import BottomMobile, { iconMapNav, IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
 import Breadcrumb from '@/components/Breadcrumb'
 import CookieConsent from "react-cookie-consent";
 import Footer from '@/layout-parts/Footer'
@@ -97,7 +97,8 @@ const App: React.FC<any> = (props) => {
                 let desktopMenu: INavItem[] = []
                 let mobileMenu: IMenuWithIcon[] = []
                 let explorePage: INavItem | undefined = undefined
-                Object.keys(iconMap).forEach(label => {
+                mobileMenu.push({ name: ac_strings.home, to: "/", icon: iconMapNav["home"] })
+                Object.keys(iconMapNav).forEach(label => {
 
                     const page = allPages.find(page => {
                         /* console.log(page) */
@@ -108,7 +109,7 @@ const App: React.FC<any> = (props) => {
                         if (page.label === "explore") {
                             explorePage = { name: page.title, to: page.slug }
                         }
-                        mobileMenu.push(({ name: page.title, to: page.slug, icon: iconMap[page.label] }))
+                        mobileMenu.push(({ name: page.title, to: page.slug, icon: iconMapNav[page.label] }))
                     }
 
                 })
