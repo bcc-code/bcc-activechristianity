@@ -4,9 +4,6 @@ import loadable from '@loadable/component'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { useSelector } from "react-redux";
 
-const FeaturedBanner = loadable(() => import('@/layout-parts/PostsRow/FeaturedBanner'))
-const DesktopPopularRow = loadable(() => import('@/layout-parts/PostsRow/DesktopPopular'))
-const ScrollNavTabs = loadable(() => import('@/layout-parts/Tabs/ScrollNavTabs'))
 const FeatureSection = loadable(() => import('@/layout-parts/Home/FeatureSection'))
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItem/FeaturedCard'
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
@@ -232,22 +229,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
   const latest1 = infinitePosts.slice(0, 6)
   const latest2 = infinitePosts.slice(6, 12)
   const latest3 = infinitePosts.slice(12)
-
-  const topicPosts = [
-    listSlotOne,
-    listSlotTwo,
-    listSlotThree,
-    listSlotFour,
-    listSlotFive,
-
-  ]
-
-  const tabs: IPostListSection[] = []
-  topicPosts.forEach(element => {
-    if (element) {
-      tabs.push(element)
-    }
-  });
   return (
 
     <div className="standard-max-w">
@@ -265,26 +246,10 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           </div>
         )}
         {featuredPostTop !== undefined && (
-          <div className="w-full pb-4 sm:hidden pt-8">
-            <div className="font-semibold pb-4 px-4 font-sm">{ac_strings.featured}</div>
-            <FeaturedBanner featured={featuredPostRow} />
+          <div className="w-full sm:hidden">
+            <TopImgPost noBorder  {...featuredPostTop} showType />
           </div>
         )}
-        {
-          <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-            <LazyLoad>
-              <h6 className="text-d4slate-dark font-semibold pb-4 px-4 font-sm">{ac_strings.popular}</h6>
-              <DesktopPopularRow
-
-                posts={popularPosts}
-              />
-            </LazyLoad>
-
-
-          </div>
-
-        }
-        {<ScrollNavTabs tabs={tabs} />}
         <LatestSection latestPosts={latest1} latestSlug={ac_strings.slug_latest} />
         {featuredPostRow && <FeatureSection featuredPosts={featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
         <LowerSections
@@ -344,7 +309,7 @@ export default IndexPage
 
 const getPopularTopic = (topic: IPopularTopic) => {
   return ({
-    posts: topic.posts.slice(0, 2),
+    posts: topic.posts.slice(0, 1),
     header: topic.name,
     subHeader: ac_strings.popularTopic
 

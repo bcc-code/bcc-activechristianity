@@ -9,7 +9,7 @@ const LatestPopularTab = loadable(() => import('@/layout-parts/RecommendLayout/L
 const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/PostsByTypes'))
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 const QuoteBlock = loadable(() => import('@/components/QuoteBlock'))
-import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScroll'
+import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScrollAll'
 import { Button } from '@/components/Buttons'
 import { LayoutH1Wide } from '@/layout-parts'
 

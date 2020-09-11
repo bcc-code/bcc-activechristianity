@@ -5,7 +5,7 @@ import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import ContentPlaylist from '@/components/Playlist/SimplePlaylist'
 import MetaTag from '@/components/Meta'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
-import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScroll'
+import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScrollAll'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
 

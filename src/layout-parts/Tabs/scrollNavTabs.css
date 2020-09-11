@@ -1,0 +1,65 @@
+.marker-links {
+    position: relative;
+    margin: 0 -1rem;
+}
+
+.cards>div {
+    width: 100%;
+}
+
+.icon-tab-marker {
+    left: 0;
+    transition: .3s left ease-in;
+}
+
+.icon-tab-card-wrapper {
+    position: relative;
+}
+
+.icon-tab-card {
+    transition: transform 1s, 1s opacity 1s;
+    /*     padding: 0 1rem; */
+    width: 100%;
+}
+
+.icon-tab-current {
+    opacity: 1;
+    transform: translateX(0);
+    transform-origin: center left;
+}
+
+.icon-tab-next {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*     opacity: 0; */
+    transform: translateX(100%);
+    transform-origin: center left;
+}
+
+.icon-tab-prev {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*     opacity: 0; */
+    transform: translateX(-100%);
+    transform-origin: center left;
+}
+
+.scroll-tabs-background:after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 64px;
+    width: 100px;
+    background: linear-gradient(-90deg, white, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+    pointer-events: none;
+}
+
+.scroll-tabs-background-arrow:after {
+    content: "\f110";
+    position: absolute;
+    top: 0;
+    right: 0;
+}

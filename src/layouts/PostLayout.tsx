@@ -317,7 +317,7 @@ export const PostLayout: React.SFC<IPostProps> = (post) => {
                 )}
             >
                 {!isCurrentMedia.video && <div className="relative sm:pt-10 mb-12 ">
-                    <TwoToOneImg image={image} />
+                    <TwoToOneImg image={image} rounded />
                     {types && types[0] && types[0].name === "podcast" && (
                         <div>
                             <SubscribePodcast />

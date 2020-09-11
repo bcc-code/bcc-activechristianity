@@ -2,15 +2,16 @@ import * as React from 'react';
 import LazysizesFeaturedImage from './LazysizesImage'
 import { IImage } from '@/types'
 interface IProps {
+    className?: string
     image: IImage
     imageClassName?: string
-    roundedTop?: boolean
+    rounded?: boolean
     alt?: string
 }
 
-const TwoToOneImage: React.SFC<IProps> = ({ image, imageClassName, roundedTop, alt }) => {
+const TwoToOneImage: React.SFC<IProps> = ({ image, imageClassName, rounded, alt, className }) => {
     return (
-        <div className={`pointer-events-none relative w-full pb-half overflow-hidden ${roundedTop ? 'rounded-t-lg' : 'rounded-lg'}`}>
+        <div className={`pointer-events-none relative w-full pb-half overflow-hidden ${rounded ? 'rounded-lg' : ''} ${className ? className : ''}`}>
             <LazysizesFeaturedImage {...image} alt={alt ? alt : ''} className={`w-full max-w-full absolute h-auto bg-center bg-cover ${imageClassName ? imageClassName : ''}`} />
         </div>
     )

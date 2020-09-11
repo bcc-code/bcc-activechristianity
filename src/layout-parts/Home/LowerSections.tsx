@@ -9,7 +9,7 @@ const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
 /* const NewForYouDesktop = loadable(() => import('@/layout-parts/Home/NewForYou/Vertical')) */
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
 const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsForYou'))
-import { PostlistHorizontalSimple } from '@/layout-parts/PostsRow/HorizontalScroll'
+import { PostlistHorizontalSimple } from '@/layout-parts/PostsRow/HorizontalScrollAll'
 const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
 
 interface IHomeLowerSection {
