@@ -10,7 +10,6 @@ import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
 
 const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
 import LazyLoad from '@/components/LazyLoad';
-import BibleIcon from '@/components/Icons/Bible'
 import { OutlineButton } from '@/components/Buttons'
 import LowerSections from '@/layout-parts/Home/LowerSections'
 import MetaTag from '@/components/Meta'

@@ -3,8 +3,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { setAutoPlay, setCurrentMedia, addTracks, floatPlayer } from '@/state/action'
 
-import AudioIcon from '@/components/Icons/Audio';
-import FileIcon from '@/components/Icons/File'
+import Icon from '@/components/Icons'
 
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
@@ -62,14 +61,14 @@ const PostAudio: React.SFC<IPlaylist> = ({
                                         onKeyDown={() => handleTrackClick(media, i)}
                                     >
                                         <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
-                                            <AudioIcon />
+                                            <Icon name="listen" size="lg" />
                                         </div>
                                         <span className="uppercase ">{ac_strings.listen}</span>
                                     </button>
                                     {audio.article && hideRead !== true && (
                                         <a className="flex justify-center mr-4" href={`/${audio.article.url}`} target="_blank">
                                             <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
-                                                <FileIcon />
+                                                <Icon name="file" size="lg" />
                                             </div>
 
                                             <span className="uppercase ">{ac_strings.read}</span>

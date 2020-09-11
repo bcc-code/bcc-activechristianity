@@ -1,6 +1,6 @@
 import * as React from "react"
 import Link from '@/components/CustomLink'
-import RightArrow from '@/components/Icons/ArrowRight'
+import Icons from '@/components/Icons'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 interface IButton {
@@ -112,7 +112,7 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
             <div className="text-xs sm:text:sm">
                 {count ? count : ''}
                 {arrow && (
-                    <RightArrow />
+                    <Icons name="right-arrow" size="base" />
                 )}
             </div>
         </Button>

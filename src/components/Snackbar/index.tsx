@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CloseIcon from '@/components/Icons/Close'
+import Icons from '@/components/Icons'
 
 interface ISnackbar {
     text: string
@@ -12,7 +12,7 @@ const Snackbar: React.FC<ISnackbar> = ({ text, onClick }) => {
                 {text}
             </div>
             {onClick && <button onClick={onClick}>
-                <CloseIcon className="w-2 h-2" />
+                <Icons name="search" size="sm" />
             </button>}
         </div>
     )

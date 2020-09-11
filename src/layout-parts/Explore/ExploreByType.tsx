@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.json'
-import menu from '@/strings/menu'
+import Icon from '@/components/Icons'
+import ArchiveIcon from '@/components/Icons/Archive';
 import { INavItemCount } from "@/types"
 
 export const SubSection: React.FC<{ title: string, to?: string, className?: string, icon?: JSX.Element }> = ({ title, children, to, className, icon }) => {
@@ -20,34 +21,28 @@ export const SubSection: React.FC<{ title: string, to?: string, className?: stri
     )
 }
 
-import ArchiveIcon from '@/components/Icons/Archive';
-import WatchIcon from '@/components/Icons/Screen';
-import AudioIcon from '@/components/Icons/Audio';
-import FileIcon from '@/components/Icons/File'
-import FeatureIcon from '@/components/Icons/Feature'
-
 
 export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resource }) => {
     const [resourceTypeGroup, setResourceTypeGroup] = React.useState<"types" | "listen" | "read" | "watch" | "general">('types');
 
     const listMap = {
         "types": {
-            icon: <FeatureIcon className="w-4 h-4" />,
+            icon: <Icon name="star" size="lg" />,
             name: resource.format ? resource.format.name : "",
             menu: resource.format ? resource.format.items : []
         },
         "read": {
-            icon: <FileIcon className="w-4 h-4" />,
+            icon: <Icon name="file" size="lg" />,
             name: resource.read ? resource.read.name : "",
             menu: resource.read ? resource.read.menu : []
         },
         "watch": {
-            icon: <WatchIcon className="w-3 h-3" />,
+            icon: <Icon name="watch" size="lg" />,
             name: resource.watch ? resource.watch.name : "",
             menu: resource.watch ? resource.watch.menu : []
         },
         "listen": {
-            icon: <AudioIcon className="w-4 h-4" />,
+            icon: <Icon name="listen" size="lg" />,
             name: resource.listen ? resource.listen.name : "",
             menu: resource.listen ? resource.listen.menu : []
         },
@@ -72,7 +67,7 @@ export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resou
                             className={`flex-1 flex flex-col justify-start items-center border-b ${isActive ? 'border-d4secondary text-d4secondary' : 'border-d4gray'} pb-4`}
                             onClick={() => setResourceTypeGroup(item)}
                         >
-                            <div className={`w-8 h-8 rounded-full flex justify-center items-center ${isActive ? 'bg-d4secondary text-white' : 'bg-d4gray-light '} `} >
+                            <div className={`w-10 h-10 rounded-full flex justify-center items-center ${isActive ? 'bg-d4secondary text-white' : 'bg-d4gray-light '} `} >
                                 {icon}
                             </div>
                             <span className="text-xs pt-2 text-center flex-1 flex justify-center align-middle">{name}</span>

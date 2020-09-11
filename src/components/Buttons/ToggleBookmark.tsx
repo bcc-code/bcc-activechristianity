@@ -1,10 +1,9 @@
 import * as React from 'react';
-import HeartIcon from '../Icons/Heart'
-import HeartBorderIcon from '../Icons/HeartBorder'
 import { useDispatch, useSelector } from 'react-redux'
 import { openSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { setNewLike } from '@/state/action/userAction'
+import Icons from '@/components/Icons'
 
 interface IProps {
     id: string
@@ -32,21 +31,21 @@ const Bookmark: React.SFC<IProps> = ({ bookmarked, size, className, color, id })
             {bookmarked === true ?
                 (
                     <button
-                        className={`${color ? color : 'text-red-700'} ${className ? className : ''}`}
+                        className={`${color ? color : 'bg-d4secondary text-white rounded-25 p-2'} ${className ? className : ''}`}
                         onClick={handleClick}
                         onKeyDown={handleClick}
 
                     >
-                        <HeartIcon customSize={size ? size : undefined} />
+                        <Icons name="heart" size="base" />
                     </button>
                 ) :
                 (
                     <button
-                        className={`${color ? color : 'text-blue-600'} ${className ? className : ''}`}
+                        className={`${color ? color : 'text-d4secondary'} ${className ? className : ''}`}
                         onClick={handleClick}
                         onKeyDown={handleClick}
                     >
-                        <HeartBorderIcon customSize={size ? size : undefined} />
+                        <Icons name="heart" size="base" />
                     </button>
                 )}
         </span>

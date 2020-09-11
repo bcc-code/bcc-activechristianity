@@ -1,7 +1,7 @@
 import React from "react"
 import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.json'
-import ArrowRight from '@/components/Icons/ArrowRight'
+import Icon from '@/components/Icons'
 
 
 const MoreLatest: React.FC<{ latestSlug: string }> = ({ latestSlug }) => (
@@ -11,7 +11,7 @@ const MoreLatest: React.FC<{ latestSlug: string }> = ({ latestSlug }) => (
             to={`/${latestSlug}`}
         >
             <span>{ac_strings.moreLatest}</span>
-            <ArrowRight className="h-3 w-3 ml-4" />
+            <Icon name="chev-right" size="sm" />
         </Link>
     </div>
 )

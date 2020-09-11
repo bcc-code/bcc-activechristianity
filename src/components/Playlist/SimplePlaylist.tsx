@@ -3,8 +3,7 @@ import Link from '@/components/CustomLink'
 import { useDispatch } from 'react-redux'
 import { setAutoPlay, setCurrentMedia, addTracks, floatPlayer } from '@/state/action'
 
-import AudioIcon from '@/components/Icons/Speaker';
-
+import Icon from '@/components/Icons'
 
 import TS from '@/strings'
 
@@ -53,11 +52,11 @@ const PostAudio: React.SFC<IPlaylist> = ({
                                     onKeyDown={() => handleTrackClick(media, i)}
                                 >
                                     <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
-                                        <AudioIcon customSize={40} />
+                                        <Icon name="speaker" size="lg" />
                                     </div>
                                 </button>
 
-                                <Link className="w-full sm:w-auto flex-1 mt-2" to={media.path ? media.path : ''}>
+                                <Link className="w-full sm:w-auto flex-1" to={media.path ? media.path : ''}>
                                     <div className="font-semibold text">{audio.title}</div>
                                     <div className="flex justify-between text-gray-600 text-sm">
                                         <div className=" ">{audio.playlist}</div>

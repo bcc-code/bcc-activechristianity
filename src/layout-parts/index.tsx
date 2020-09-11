@@ -1,17 +1,15 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { ITranslations, INavItem } from '@/types'
-import ArrowRight from '@/components/Icons/ArrowRight'
+
 import h2p from 'html2plaintext'
 import ShareButton from '@/components/Buttons/SharePopover'
 import ToogleBookmark from '@/components/Buttons/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
 
-import WatchIcon from '@/components/Icons/Screen';
-import AudioIcon from '@/components/Icons/Audio';
-import FileIcon from '@/components/Icons/File'
 
+import Icon from '@/components/Icons'
 
 interface IPostMain {
     id: string
@@ -43,9 +41,9 @@ interface IDesktopPostMain extends IPostMain {
 }
 
 export const typeIcons: { [key: string]: JSX.Element } = {
-    'listen': <AudioIcon />,
-    'read': <FileIcon className="w-6 h-6" />,
-    'watch': <WatchIcon className="pt-1 w-5 h-5" />
+    'listen': <Icon name="listen" size="lg" />,
+    'read': <Icon name="file" size="lg" />,
+    'watch': <Icon name="watch" size="lg" />
 
 }
 

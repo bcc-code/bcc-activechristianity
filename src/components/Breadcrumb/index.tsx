@@ -1,25 +1,21 @@
 import React from 'react';
 import Link from '@/components/CustomLink';
 import { IBreadcrumb } from '@/types';
-import HomeIcon from '@/components/Icons/Home'
-
+import Icon from '@/components/Icons'
 // https://developers.google.com/search/docs/data-types/breadcrumb
 
 import './breadcrumb.css'
 
-interface IProps {
-    items: INavItem[]
-}
 const Breadcrumb: React.SFC<IBreadcrumb> = ({ items }) => {
     const breadcrumb = items.length > 0 ? [
         {
-            name: <HomeIcon className="w-4 h-4" />,
+            name: <Icon size="base" name="home" />,
             to: '/'
         },
         ...items
     ] : items
     return (
-        <ol className="flex pb-2 text-xs text-gray-500">
+        <ol className="flex pb-2 text-sm text-gray-500">
 
             {breadcrumb.map((item, i) => {
                 if (item) {

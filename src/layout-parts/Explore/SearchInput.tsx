@@ -5,7 +5,7 @@ import * as React from 'react';
 import SearchInput from '@/components/Search'
 import SearchHistory from '@/layout-parts/Explore/SearchHistory'
 import localStorageHelper from '@/helpers/localStorage'
-import SearchIcon from '@/components/Icons/Search';
+import Icon from '@/components/Icons'
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
 import ac_strings from '@/strings/ac_strings.json'
 
@@ -132,7 +132,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
             }
             {showExploreHome && (
                 <div className="max-w-tablet m-auto">
-                    <SubSection title="Popular Searchs" icon={<SearchIcon className="w-4 h-4" />}>
+                    <SubSection title="Popular Searchs" icon={<Icon size="base" name="search" />}>
                         <div className="grid grid-cols-2 gap-2 text-xs sm:text-base">
                             {topSearches.map((item, i) => {
                                 return (

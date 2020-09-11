@@ -4,8 +4,7 @@ import { openSignInModal } from '@/state/action'
 
 import Carousel from '@/components/Carousel'
 import DownloadFile, { API_URL } from '@/helpers/download'
-import DownloadIcon from '@/components/Icons/Download'
-import EyeIcon from '@/components/Icons/Eye'
+import Icon from '@/components/Icons'
 
 import ModalWProps from '@/components/Modal/ModalWProps'
 
@@ -78,14 +77,14 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
         <button
             className="flex items-center justify-center py-2 mr-2"
         >
-            <EyeIcon />
+            <Icon name="eye" size="xl" />
             <span className="px-2">{ac_strings.preview}</span>
         </button>
     )
 
     const downloadButton = (
         <button className="flex items-center justify-center py-2 mr-2">
-            <DownloadIcon />
+            <Icon name="download" size="xl" />
             <div className="px-2">
                 {TS.download}
             </div>

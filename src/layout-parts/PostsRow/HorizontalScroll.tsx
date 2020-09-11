@@ -56,7 +56,7 @@ export const HorizontalScrollSection: React.FC<IProps> = ({ name, slug, ...rest 
 
     return (
         <div className="standard-max-w pb-8">
-            <UnderlineTitleLink name={name} to={slug} />
+            <div className="px-4"><UnderlineTitleLink name={name} to={slug} /></div>
             <PostHorizontalScrollTypes {...rest} />
             <div className="hidden sm:block">
                 <PostsRow {...rest} />

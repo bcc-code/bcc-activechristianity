@@ -1,7 +1,5 @@
 import React from 'react'
-import LeftArrow from '@/components/Icons/ArrowLeft'
-import HamburgerIcon from '@/components/Icons/Menu';
-import CloseIcon from '@/components/Icons/Close';
+import Icon from '@/components/Icons'
 import StickyBox from "react-sticky-box";
 import { useDispatch } from 'react-redux'
 import { setIsModalOpen } from '@/state/action'
@@ -45,7 +43,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIc
                     onKeyDown={toggleNav}
                 >
                     <button className="p-2 text-gray-600 rounded-md border">
-                        <CloseIcon className="w-4 h-4" />
+                        <Icon name="cancel" size="base" />
                     </button>
                 </div>
                 {sidebar({ closeMobileNav })}
@@ -58,7 +56,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIc
             >
                 <div className="flex items-center">
                     <button className="p-1 text-gray-600 rounded-md border flex items-center">
-                        {menuIcon ? <HamburgerIcon className="h-4 w-4" /> : <LeftArrow />} <span className="px-2">{title}</span>
+                        {menuIcon ? <Icon name="menu" size="base" /> : <Icon name="chev-left" size="base" />} <span className="px-2">{title}</span>
                     </button>
                 </div>
             </div>

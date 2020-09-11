@@ -1,10 +1,7 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
 import { IMedia } from '@/types'
-import PlayIcon from '@/components/Icons/Play'
-import SpeakerIcon from '@/components/Icons/Speaker'
-import PlaySmallIcon from '@/components/Icons/PlaySmall'
-
+import Icon from '@/components/Icons'
 import PlayButtonTrack from './PlayButtonTrack'
 import PlayButtonList from './PlayButtonList'
 import ac_strings from '@/strings/ac_strings.json'
@@ -36,7 +33,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                     id="play-button"
                     className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
                 >
-                    {track.video ? <PlayIcon /> : <SpeakerIcon className="w-16 h-16" />}
+                    {track.video ? <Icon name="play" size="4xl" /> : <Icon name="speaker" size="4xl" />}
                 </div>
             )}
             {children}
@@ -49,7 +46,7 @@ export const PostItemPlayButton: React.FC<IPlayButtonProps> = ({ track }) => {
 
         return (
             <PlayButtonTrack track={track}>
-                {track.video ? <PlayIcon /> : <SpeakerIcon className="w-16 h-16" />}
+                {track.video ? <Icon name="play" size="3xl" /> : <Icon name="speaker" size="3xl" />}
             </PlayButtonTrack>
         )
     } else {
@@ -62,7 +59,7 @@ export const PostItemPlayButtonSmall: React.FC<IPlayButtonProps> = ({ track }) =
 
         return (
             <PlayButtonTrack track={track}>
-                {track.video ? <PlaySmallIcon /> : <SpeakerIcon className="w-10 h-10" />}
+                {track.video ? <Icon name="play" size="base" /> : <Icon name="speaker" size="sm" />}
             </PlayButtonTrack>
         )
     } else {
@@ -73,7 +70,7 @@ export const PostItemPlayButtonSmall: React.FC<IPlayButtonProps> = ({ track }) =
 export const PlaylistPlayButton: React.FC<{ slug: string }> = ({ slug }) => {
     return (
         <PlayButtonList slug={slug}>
-            <SpeakerIcon className="w-16 h-16" />
+            <Icon name="speaker" size="base" />
         </PlayButtonList>
     )
 }

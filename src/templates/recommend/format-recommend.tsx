@@ -124,43 +124,41 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                 <div className="standard-max-w">
                     <ByTaxonomies col={typeLinks.length} title={ac_strings.byCategories} types={typeLinks} />
                 </div>
-                <div className="px-4">
-                    {readPosts && (
-                        <div>
-                            <HorizontalScrollSection
-                                name={readPosts.type.name}
-                                slug={readPosts.type.to}
-                                postThumnailType="topImage"
-                                posts={readPosts.postsRow}
-                                postProps={true}
-                            />
-                        </div>
-                    )}
+                {readPosts && (
+                    <div>
+                        <HorizontalScrollSection
+                            name={readPosts.type.name}
+                            slug={readPosts.type.to}
+                            postThumnailType="topImage"
+                            posts={readPosts.postsRow}
+                            postProps={true}
+                        />
+                    </div>
+                )}
 
-                    {listenPosts && (
-                        <div className="standard-max-w pb-8">
-                            <div className="" >
-                                <UnderlineTitleLink name={listenPosts.type.name} to={listenPosts.type.to} />
-                            </div>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <ContentPlaylist tracks={listenPosts.postsRow.slice(0, 3).map(post => post.media)} />
-                                <ContentPlaylist tracks={listenPosts.postsRow.slice(3, 6).map(post => post.media)} />
-                            </div>
+                {listenPosts && (
+                    <div className="standard-max-w pb-8 px-4">
+                        <div className="" >
+                            <UnderlineTitleLink name={listenPosts.type.name} to={listenPosts.type.to} />
                         </div>
-                    )}
-                    {watchPosts && (
-                        <div>
-                            <HorizontalScrollSection
-                                name={watchPosts.type.name}
-                                slug={watchPosts.type.to}
-                                postThumnailType="topImage"
-                                posts={watchPosts.postsRow}
-                                postProps={true}
-                                video
-                            />
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            <ContentPlaylist tracks={listenPosts.postsRow.slice(0, 3).map(post => post.media)} />
+                            <ContentPlaylist tracks={listenPosts.postsRow.slice(3, 6).map(post => post.media)} />
                         </div>
-                    )}
-                </div>
+                    </div>
+                )}
+                {watchPosts && (
+                    <div>
+                        <HorizontalScrollSection
+                            name={watchPosts.type.name}
+                            slug={watchPosts.type.to}
+                            postThumnailType="topImage"
+                            posts={watchPosts.postsRow}
+                            postProps={true}
+                            video
+                        />
+                    </div>
+                )}
             </Placeholder>
         </div>
     )

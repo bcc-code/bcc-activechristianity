@@ -2,10 +2,10 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
-import LeftArrow from '@/components/Icons/ArrowLeft'
 import TS from '@/strings'
 import LogoSmall from '@/images/AC_Logo_sm.png'
-import HamburgerIcon from '@/components/Icons/Menu'
+import Icon from '@/components/Icons'
+
 import ReactPlaceholder from 'react-placeholder'
 import { UserInitial } from '@/layout-parts/User/UserInitial'
 import ac_strings from '@/strings/ac_strings.json'
@@ -73,7 +73,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                         <div className=" min-w-20 font-roboto">
                             {showMobileSteps && mobileLastStep ? (
                                 <Link className="flex items-center" to={mobileLastStep.to}>
-                                    <LeftArrow className="h-4 w-4" />
+                                    <Icon name="chev-left" size="sm" className="pl-2" />
                                     <span className="text-sm pl-2">
                                         {mobileLastStep.name}
                                     </span>
@@ -85,9 +85,9 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                                 )
                             }
                         </div>
-                        <div className='pr-4'>
+                        <Link className='pr-4' to="/">
                             <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />
-                        </div>
+                        </Link>
                         <div className="flex items-center">
                             <ReactPlaceholder
                                 className="m-2 w-8 h-8"
@@ -108,14 +108,14 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 
                             </ReactPlaceholder>
                             <button
-                                className="p-2 pl-4 uppdercase text-small text-gray-400 hover:text-gray-800"
+                                className="p-2 px-4 uppdercase text-small"
                                 onClick={() => { setSideNavOpen(true) }}
                             >
-                                <HamburgerIcon />
+                                <Icon name="menu" size="lg" />
                             </button>
                         </div>
                     </div>
-                    <div className="cube-front flex justify-between items-center py-2 w-full">
+                    <div className="cube-front flex justify-center items-center py-2 w-full">
                         <Link className='flex items-center' to="/">
                             <div className='pr-4'>
                                 <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />

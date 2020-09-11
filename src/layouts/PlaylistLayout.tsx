@@ -83,7 +83,7 @@ export const PostLayout: React.SFC<IPlaylist> = (post) => {
                     </div>
                 )}
             >
-                <div className="my-4">
+                <div className="mx-4">
                     <ContentPlaylist tracks={allTracks} />
                 </div>
                 {/* <MockRelatedContentMedia type="playlist" /> */}

@@ -29,7 +29,7 @@ const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'
 import localStorageHelper from '@/helpers/localStorage'
 import BibleIcon from '@/components/Icons/BibleSmall'
 import TopicIcon from '@/components/Icons/Topics';
-import ArrowRight from '@/components/Icons/ArrowRight'
+import Icon from '@/components/Icons'
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
@@ -246,7 +246,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                                         <BibleIcon customSize={35} className="-mb-1" />
                                         <span className="font-semibold ml-4">{ac_strings.byScripture}</span>
                                     </div>
-                                    <ArrowRight className="w-4 h-4" />
+                                    <Icon name="chev-right" size="lg" />
                                 </Link>
 
                             </SubSection>

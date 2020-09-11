@@ -2,7 +2,8 @@ import * as React from 'react';
 import { StaticQuery, graphql } from "gatsby";
 import Link from '@/components/CustomLink'
 import { IDrawerNav } from '@/layouts/App'
-import CloseIcon from '@/components/Icons/Close'
+import Icon from '@/components/Icons'
+
 import UserNav from '@/layout-parts/Nav/User'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
@@ -17,7 +18,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, menu 
             className={`bg-d4gray-light w-full h-full px-4 py-8 sm:py-16 flex flex-col justify-between xs:w-mobile xs:left-auto xs:shadow overflow-y-scroll fixed top-0 right-0 bottom-0 z-50 drawer-side drawer-side-${isSideNavOpen ? 'open' : 'close'}`}
         >
             <div className="absolute right-0 top-0 p-4 py-6" onClick={close}>
-                <CloseIcon className="w-4 h-4" />
+                <Icon name="cancel" size="base" />
             </div>
             <div className="w-full flex justify-center sm:hidden">
                 <LanguageDropdown className="border px-4 py-2 rounded mb-4" />

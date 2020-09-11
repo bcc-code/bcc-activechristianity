@@ -1,0 +1,102 @@
+:root {
+    --main-bg-color: brown;
+    --text-mini: 0.6rem;
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 4rem;
+}
+
+.ac-icon-mini {
+    font-size: var(--text-mini);
+}
+
+.ac-icon-mini:before {
+    font-size: var(--text-mini);
+}
+
+.ac-icon-xs {
+    font-size: var(--text-xs);
+}
+
+.ac-icon-xs:before {
+    font-size: var(--text-xs);
+}
+
+.ac-icon-sm {
+    font-size: var(--text-sm);
+}
+
+.ac-icon-sm:before {
+    font-size: var(--text-sm);
+}
+
+.ac-icon-base {
+    font-size: var(--text-base);
+}
+
+.ac-icon-base:before {
+    font-size: var(--text-base);
+}
+
+.ac-icon-lg {
+    font-size: var(--text-lg);
+}
+
+.ac-icon-lg:before {
+    font-size: var(--text-lg);
+}
+
+.ac-icon-xl {
+    font-size: var(--text-xl);
+}
+
+.ac-icon-xl:before {
+    font-size: var(--text-xl);
+}
+
+.ac-icon-2xl {
+    font-size: var(--text-2xl);
+}
+
+.ac-icon-2xl:before {
+    font-size: var(--text-2xl);
+}
+
+.ac-icon-3xl {
+    font-size: var(--text-3xl);
+}
+
+.ac-icon-3xl:before {
+    font-size: var(--text-3xl);
+}
+
+.ac-icon-4xl {
+    font-size: var(--text-4xl);
+}
+
+.ac-icon-4xl:before {
+    font-size: var(--text-4xl);
+}
+
+.ac-icon-5xl {
+    font-size: var(--text-5xl);
+}
+
+.ac-icon-5xl:before {
+    font-size: var(--text-5xl);
+}
+
+.ac-icon-6xl {
+    font-size: var(--text-6xl);
+}
+
+.ac-icon-6xl:before {
+    font-size: var(--text-6xl);
+}

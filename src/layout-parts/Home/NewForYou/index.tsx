@@ -4,7 +4,7 @@ import { useSwipeable } from "react-swipeable"
 import { ITaxonomy } from '@/types/wpPostType'
 
 import RightImg from '@/components/PostItem/RightImgWDes'
-import ArrowRight from '@/components/Icons/ArrowRightAlt'
+import Icon from '@/components/Icons'
 import NewForYouHeader from './header'
 import TS from '@/strings'
 import { IPostItem } from '@/types'
@@ -82,7 +82,7 @@ const NewForYou: React.FC<IProps> = ({ topics }) => {
                                             <div>
                                                 <span className="rounded uppercase p-1 text-xs">{tags[0].name}</span>
                                             </div>
-                                            <ArrowRight />
+                                            <Icon name="right-arrow" size="lg" />
                                         </Link >
                                     )}
                                     <div className="flex py-2 w-full">

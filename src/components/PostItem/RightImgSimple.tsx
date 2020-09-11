@@ -5,7 +5,7 @@ import { IPostItem } from '@/types'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import PlayButtonTrack from '@/components/Buttons/PlayButtonTrack'
-import SpeakerIcon from '@/components/Icons/Speaker'
+import Icon from '@/components/Icons'
 import 'lazysizes';
 const RightImgNoDes: React.SFC<IPostItem & { border?: boolean }> = (props) => {
     const { title, image, types, bookmarked, excerpt, border, slug, id, reading_time, authors, media, date } = props
@@ -18,7 +18,7 @@ const RightImgNoDes: React.SFC<IPostItem & { border?: boolean }> = (props) => {
                     {media && (media.audio || media.video) && (
                         <div className="pt-2 text-gray-600">
                             <PlayButtonTrack track={media}>
-                                <SpeakerIcon className="w-10 h-10 sm:w-10 sm:h-10" />
+                                <Icon name="speaker" size="2xl" />
                             </PlayButtonTrack>
                         </div>
                     )}
