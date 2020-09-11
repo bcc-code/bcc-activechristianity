@@ -213,7 +213,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
             >
                 <div className={`max-w-tablet m-auto`}>
                     {isInputFocus === false && (
-                        <div className={`px-4 sm:px-0`}>
+                        <div className={`px-4 sm:px-0 hidden sm:block`}>
                             <LayoutH1 title={title} />
                         </div>
                     )}

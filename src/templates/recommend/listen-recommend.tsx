@@ -155,7 +155,6 @@ const Listen: React.FC<IProps> = (props) => {
             }
 
             const withIcons = menu.map(item => ({ ...item, name: < TitleWithIcon title={item.name} icon={typeIcons["listen"]} /> }))
-            console.log(withIcons)
             setTypeLinks(withIcons)
             setMobilePostRows(postsByTypesRow)
             setDesktopRow1(postsByTypesRow1)
@@ -169,6 +168,7 @@ const Listen: React.FC<IProps> = (props) => {
             <Placeholder loading={isLoading || !headerPost}>
                 {headerPost && (
                     <RecommendLayout
+                        hideTitleOnMobile={true}
                         latestSlug={latestSlug}
                         name={title}
                         headerPost={headerPost}

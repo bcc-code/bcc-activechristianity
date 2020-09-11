@@ -177,6 +177,7 @@ const Read: React.FC<IProps> = (props) => {
 
                 {headerPost && (
                     <RecommendLayout
+                        hideTitleOnMobile={true}
                         latestSlug={latestSlug}
                         name={title}
                         headerPost={headerPost}

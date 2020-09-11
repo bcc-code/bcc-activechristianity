@@ -8,7 +8,6 @@ import { normalizePostRes } from '@/helpers'
 const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
     const postRes = data.acNodePost
-    console.log(postRes)
     const post = normalizePostRes(postRes)
 
     const { title, excerpt, date, topics, types, image, format } = post

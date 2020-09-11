@@ -140,11 +140,9 @@ const App: React.FC<any> = (props) => {
 
 
                             <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
-                                {breadcrumb.length > 0 && (
+                                {breadcrumb.items.length > 0 && (
                                     <div className="relative z-50 w-full bg-white pt-2 px-2 hidden sm:block">
-                                        <Breadcrumb
-                                            items={breadcrumb}
-                                        />
+                                        <Breadcrumb {...breadcrumb} />
                                     </div>
                                 )}
                                 {currentMedia.audio ? (

@@ -1,13 +1,16 @@
 import { Reducer } from 'redux'
-import { INavItem } from '@/types'
+import { IBreadcrumb } from '@/types'
 
 interface UpdateBreadcrumbAction {
     type: 'UPDATE_BREADCRUMB',
-    payload: INavItem[]
+    payload: IBreadcrumb
 }
 
 
-const updateBreadcrumb: Reducer<INavItem[], UpdateBreadcrumbAction> = (state = [], action: UpdateBreadcrumbAction) => {
+const updateBreadcrumb: Reducer<IBreadcrumb, UpdateBreadcrumbAction> = (state = {
+    items: [],
+    title: ''
+}, action: UpdateBreadcrumbAction) => {
 
     switch (action.type) {
         case 'UPDATE_BREADCRUMB': {

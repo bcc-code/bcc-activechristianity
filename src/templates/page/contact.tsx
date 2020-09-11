@@ -4,11 +4,11 @@ import MetaTag from '@/components/Meta'
 import TS from '@/strings'
 import { MobileMainWrapper, LayoutH1 } from '@/layout-parts'
 import { FacebookIcon, InstagramIcon } from '@/components/Icons/SocialMedia'
-import ContactFrom from '@/layout-parts/Form/Contact'
+import ContactForm from '@/layout-parts/Form/Contact'
 
 const ContactPage = () => {
     const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
-    const height = 250
+    const height = 150
     return (
         <div className="">
             <MetaTag title={TS.contact} type="page" breadcrumb={[]} />
@@ -18,7 +18,7 @@ const ContactPage = () => {
                 style={{ top: "50px", height }}
             />
             <MobileMainWrapper height={height}>
-                <ContactFrom />
+                <ContactForm />
             </MobileMainWrapper>
             <div className="w-full hidden sm:flex justify-center p-12 bg-gray-200" >
                 <div className="max-w-tablet m-auto bg-white rounded-xl overflow-hidden shadow-lg">
@@ -29,7 +29,7 @@ const ContactPage = () => {
                     />
 
                     <div className="p-4">
-                        <ContactFrom />
+                        <ContactForm />
                     </div>
                 </div>
             </div>
@@ -60,7 +60,9 @@ export const Header: React.FC<{ className: string, style: any, imageUrl: string 
             className={className}
             style={{ top: "50px", background: `url(${imageUrl}) center center no-repeat`, backgroundSize: "cover", ...style }}
         >
-            <LayoutH1 title={TS.contact} />
+            <div className="hidden sm:block">
+                <LayoutH1 title={TS.contact} />
+            </div>
             <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
                 {socialPlatforms.map(item => {
                     return (

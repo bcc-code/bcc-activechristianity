@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@/components/CustomLink';
-import { INavItem } from '@/types';
+import { IBreadcrumb } from '@/types';
 import HomeIcon from '@/components/Icons/Home'
 
 // https://developers.google.com/search/docs/data-types/breadcrumb
@@ -10,7 +10,7 @@ import './breadcrumb.css'
 interface IProps {
     items: INavItem[]
 }
-const Breadcrumb: React.SFC<IProps> = ({ items }) => {
+const Breadcrumb: React.SFC<IBreadcrumb> = ({ items }) => {
     const breadcrumb = items.length > 0 ? [
         {
             name: <HomeIcon className="w-4 h-4" />,

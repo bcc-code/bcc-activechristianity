@@ -97,7 +97,7 @@ const Watch: React.FC<IProps> = (props) => {
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
-            <div className="bg-d4athens sm:bg-white"> <LayoutH1Wide title={title} /></div>
+            <div className="hidden sm:block bg-white"> <LayoutH1Wide title={title} /></div>
             <Placeholder loading={headerPost === null}>
                 {
                     headerPost && postsByFormat.edification && (

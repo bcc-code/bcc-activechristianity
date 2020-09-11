@@ -1,5 +1,5 @@
 import { Dispatch, Action } from 'redux'
-import { ITrack, IUser, IMedia, ITrackType, INavItem, ITranslations, IApiItem } from '@/types'
+import { ITrack, IUser, IMedia, ITrackType, INavItem, ITranslations, IApiItem, IBreadcrumb } from '@/types'
 
 
 export interface StateAction extends Action {
@@ -19,7 +19,7 @@ export interface IRootState {
   userLibrary: IUserLibrary
   currentMedia: IMedia
   mpHeight: number
-  breadcrumb: INavItem[]
+  breadcrumb: IBreadcrumb
 }
 
 export interface IUserLibrary {

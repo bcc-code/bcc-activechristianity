@@ -1,7 +1,7 @@
 
 import { Action } from 'redux'
 import { ADD_T_URLS_Payload, ISignInModalContentType } from '../types'
-import { IMedia, INavItem } from '@/types'
+import { IMedia, IBreadcrumb } from '@/types'
 
 interface ILogin {
   email: string
@@ -13,7 +13,7 @@ export type logout = () => Action
 export type openSignInModal = (payload: ISignInModalContentType) => Action
 export type closeSignInModal = () => Action
 export type fixPlayer = () => Action
-export type updateBreadcrumb = (payload: INavItem[]) => Action
+export type updateBreadcrumb = (payload: IBreadcrumb) => Action
 
 export const setIsPlaying = (payload: boolean) => ({
   type: 'SET_IS_PLAYING',
@@ -42,7 +42,7 @@ export const floatPlayer: fixPlayer = () => ({
   type: 'FLOAT_PLAYER'
 })
 
-export const updateBreadcrumb: updateBreadcrumb = (payload: INavItem[]) => ({
+export const updateBreadcrumb: updateBreadcrumb = (payload: IBreadcrumb) => ({
   type: 'UPDATE_BREADCRUMB',
   payload
 })

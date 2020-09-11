@@ -93,7 +93,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
     }
     return (
         <div>
-            <div className={`flex w-full px-4 sm:px-0 pb-4 sm:pb-8 ${isInputFocus ? 'pt-4 sm:pt-8' : ''}`}>
+            <div className={`flex w-full px-4 sm:px-0 py-4 sm:pb-8 sm:pt-0 ${isInputFocus ? 'pt-4 sm:pt-8' : ''}`}>
                 <div className="w-full">
                     <SearchInput
                         placedholderText={ac_strings.searchPlaceHolder}

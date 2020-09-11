@@ -26,7 +26,10 @@ export const preloadedState = {
         historyPosts: []
     },
     mpHeight:0,
-    breadcrumb:[]
+    breadcrumb:{
+        items:[],
+        title:''
+    }
 }
 
 export default ({ element }) => {

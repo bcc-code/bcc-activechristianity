@@ -1,0 +1,42 @@
+.glyph .glyph-icon:before {
+    font-size: 64px;
+    color: #222;
+    margin-left: 0;
+}
+
+.cube-wrapper {
+    width: 100%;
+    height: 58px;
+    position: absolute;
+    box-shadow: 5px 5px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.cube,
+.cube-front,
+.cube-top {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease-in-out;
+    background: #fff
+}
+
+.cube-front {
+    background-size: 100%;
+}
+
+.cube-top {
+    transform: translate(0, -100%) rotateX(90deg);
+    transform-origin: bottom;
+}
+
+.cube-row {
+    transform: translate(0, 50%) rotateX(-90deg);
+}
+
+.cube-row .cube-front {
+    background: #ebebeb
+}

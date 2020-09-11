@@ -8,7 +8,7 @@ import h2p from 'html2plaintext'
 import { Location } from '@reach/router'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
-
+import ac_strings from "@/strings/ac_strings.json"
 import { INavItem, ITranslations } from '@/types'
 
 function shorten(str: string, length: number) {
@@ -57,7 +57,11 @@ const MetaTag: React.SFC<MetaTagProps> = ({ wpId, title, type, meta, translatedU
         } else {
             dispatch(updateTranslationUrl({ translated: [] }))
         }
-        dispatch(updateBreadcrumb(breadcrumb ? breadcrumb : []))
+        dispatch(updateBreadcrumb({
+            items: breadcrumb ? breadcrumb : [],
+            title: path === "/" ? ac_strings.home : title
+
+        }))
     }, [translatedUrls, path])
 
     return (

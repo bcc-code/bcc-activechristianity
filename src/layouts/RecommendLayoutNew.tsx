@@ -25,7 +25,7 @@ import '@/styles/react-tabs.css'
 
 
 interface IRecommandLayout {
-    parent?: INavItem
+    hideTitleOnMobile?: boolean
     name: string
     latestSlug: string
     headerPost: IPostItem
@@ -40,7 +40,7 @@ interface IRecommandLayout {
 }
 
 const RecommendLayout: React.FC<IRecommandLayout> = ({
-    parent,
+    hideTitleOnMobile,
     name,
     headerPost,
     latestPosts,
@@ -118,7 +118,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
     return (
         <div>
-            <div className={`${parent ? 'hidden sm:block' : 'bg-d4athens sm:bg-white'}`}> <LayoutH1Wide title={name} /></div>
+            <div className={`${hideTitleOnMobile ? 'hidden sm:block' : 'bg-d4athens sm:bg-white'}`}> <LayoutH1Wide title={name} /></div>
             <Placeholder loading={headerPost === null}>
 
                 {headerPost && (

@@ -1,4 +1,8 @@
 
+export interface IBreadcrumb {
+    items: INavItem[]
+    title: string
+}
 
 
 export interface ITaxonomy {

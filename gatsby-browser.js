@@ -17,8 +17,9 @@ import Layout from "./src/layouts/App"
 import "react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"
 import "./src/styles/reset.css"
+import "./src/styles/font/flaticon.css"
 
-import wrapWithProvider,{preloadedState} from "./provider"
+import wrapWithProvider from "./provider"
 
 export const wrapRootElement = wrapWithProvider
 
