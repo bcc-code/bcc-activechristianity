@@ -96,7 +96,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             })
             if (metadata["featured_posts"]){
 
-                const arraySlug = JSON.parse(metadata["featured_posts"])
+                const featuredArraySlug = JSON.parse(metadata["featured_posts"])
 
                 const featured_slug=await fetch(baseUrl, { 
                     method: 'POST',
@@ -105,7 +105,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     },
                     body: JSON.stringify({ query:
                         `{
-                            posts(ids: [${arraySlug.join(",")}]) {
+                            posts(ids: [${featuredArraySlug.join(",")}]) {
                                 data {
                                  slug
                                 }
@@ -117,6 +117,28 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                   metadata["featured_posts"]=featured_slug.data.posts.data.map(p=>p.slug)
                   /* metadata["featured_posts"]=featured_slug. */
  
+            }
+
+            if (metadata["popular_posts"]){
+                const popularArraySlug = JSON.parse(metadata["popular_posts"])
+
+                const popular_slug=await fetch(baseUrl, { 
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query:
+                        `{
+                            posts(ids: [${popularArraySlug.join(",")}]) {
+                                data {
+                                 slug
+                                }
+                              }
+                        }` 
+                     })
+                  })
+                  .then(response => response.json())
+                  metadata["popular_posts"]=popular_slug.data.posts.data.map(p=>p.slug)
             }
   
               // Data can come from anywhere, but for now create it manually

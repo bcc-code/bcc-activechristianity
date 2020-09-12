@@ -22,7 +22,7 @@ import TopImgPost from '@/components/PostItem/TopImg'
 
 // Type
 import { IRootState } from '@/state/types'
-import { IPostItem, ITopic, IEbook, INavItem } from '@/types'
+import { IPostItem, ITopic, IEbook, INavItem, ITopicWithPosts, IPopularTopicContext } from '@/types'
 import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 
@@ -41,16 +41,19 @@ import User from "@/layout-parts/User/UserInitial";
 interface IUserContent {
   featuredPostTop: IPostItem | undefined
   featuredPostRow: IFeaturedCard[]
+  featuredFormats: ITopicWithPosts[]
+  newPostsForYou: INewForYou[]
+  popularPosts: IPostItem[]
   listSlotOne: IPostListSection | undefined
   listSlotTwo: IPostListSection | undefined
-  newPostsForYou: INewForYou[],
+
   listSlotThree: IPostListSection | undefined
   listSlotFour: IPostListSection | undefined
   topicsForYou: INavItem[]
   listSlotFive: IPostListSection | undefined
   listSlotSix: IPostListSection | undefined
   listSlotSeven: IPostListSection | undefined
-  popularPosts: IPostItem[]
+
   listSlotEight: IPostListSection | undefined
   listSlotNine: IPostListSection | undefined
   listSlotTen: IPostListSection | undefined
@@ -64,6 +67,7 @@ const defaultUserContent: IUserContent = {
   listSlotOne: undefined,
   listSlotTwo: undefined,
   newPostsForYou: [],
+  featuredFormats: [],
   listSlotThree: undefined,
   listSlotFour: undefined,
   topicsForYou: [],
@@ -80,11 +84,12 @@ const defaultUserContent: IUserContent = {
 
 const IndexPage: React.FC<IHomeProps> = (props) => {
   const { pageContext, path } = props
-  console.log(pageContext)
+  console.log('rendering')
   const {
     featuredPosts: featuredPostsSlug,
-    popularTopics: popularTopics,
-    popularPosts: popularPostsSlug
+    popularTopics: popularTopicsAll,
+    popularPosts: popularPostsAll,
+    formats
   } = pageContext
   const [latestPageNr, setLatestPageNr] = React.useState(1)
   const { bookmarkedPosts, historyPosts } = useSelector((state: IRootState) => state.userLibrary)
@@ -97,13 +102,15 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
   const latestSlug = `${ac_strings.slug_latest}`
   React.useEffect(() => {
     setIsLoading(true)
+    const popularPostsSlugs = popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
+    const popularTopics = popularTopicsAll.dynamic.length > 0 ? popularTopicsAll.dynamic : popularTopicsAll.static
     Promise.all([
-      fetchPostslistFromArchivePage(latestSlug),
-      fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr + 1}`),
-      fetchLocalPostsFromSlugs(featuredPostsSlug),
-      fetchLocalPostsFromSlugs(popularPostsSlug.slice(0, 8)),
+      fetchPostslistFromArchivePage(latestSlug), //0
+      fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr + 1}`),//1
+      fetchLocalPostsFromSlugs(featuredPostsSlug), //2
+      fetchLocalPostsFromSlugs(popularPostsSlugs.slice(0, 8)), //3
       Promise.all(popularTopics
-        .map(t => fetchLocalPostsFromSlugs(t.posts)
+        .map(t => fetchLocalPostsFromSlugs(t.posts.map(item => (item.slug ? item.slug : item)))
           .then(res => {
             if (res) {
               return (
@@ -111,9 +118,28 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               )
             }
           })
-        )),
-      fetchLatestEbooks(), //6
-      fetchLatestPlaylists(), // 7
+        )), //4
+      fetchLatestEbooks(), //5
+      fetchLatestPlaylists(), // 6
+      Promise.all(formats.map(item => {
+        const formatSlug = `${item.slug}/${latestSlug}`
+        return fetchPostslistFromArchivePage(formatSlug)
+          .then(result => {
+            const posts: IPostItem[] = []
+            if (result) {
+              result.slice(0, 4).forEach(post => {
+                if (post) {
+                  posts.push(post)
+                }
+              })
+            }
+            return ({
+              name: item.name,
+              to: formatSlug,
+              posts
+            })
+          })
+      }))//7
     ],
 
     ).then(res => {
@@ -127,7 +153,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       const topics = res[4]
       const ebooks = res[5]
       const playlists = res[6]
-
+      const formats = res[7]
       let latest: IPostItem[] = []
       const featuredRowMix: IFeaturedCard[] = []
       if (latest1) {
@@ -153,6 +179,11 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       if (playlists) {
         featuredRowMix.push({ ...playlistToPost(playlists[0]), likes: 23, type: "playlist" })
       }
+
+      if (formats) {
+        content.featuredFormats = formats
+        //content.featuredFormats
+      }
       if (topics) {
         const toAddTopics: INavItem[] = []
         topics.forEach(t => {
@@ -160,6 +191,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             toAddTopics.push({ name: t.name, to: t.to })
           }
         })
+
         content.topicsForYou = toAddTopics
         const row1 = topics[0]
         const row2 = topics[1]
@@ -227,7 +259,9 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     listSlotFour,
     listSlotFive,
     listSlotSix,
-    topicsForYou } = userContent
+    topicsForYou,
+    featuredFormats
+  } = userContent
 
   const latest1 = infinitePosts.slice(0, 6)
   const latest2 = infinitePosts.slice(6, 12)
@@ -242,12 +276,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   ]
 
-  const tabs: IPostListSection[] = []
-  topicPosts.forEach(element => {
-    if (element) {
-      tabs.push(element)
-    }
-  });
+
   return (
 
     <div className="standard-max-w">
@@ -284,7 +313,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           </div>
 
         }
-        {<ScrollNavTabs tabs={tabs} />}
+        {<ScrollNavTabs tabs={featuredFormats} />}
         <LatestSection latestPosts={latest1} latestSlug={ac_strings.slug_latest} />
         {featuredPostRow && <FeatureSection featuredPosts={featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
         <LowerSections
@@ -342,11 +371,20 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
 export default IndexPage
 
-const getPopularTopic = (topic: IPopularTopic) => {
+const getPopularTopic = (topic: ITopicWithPosts) => {
   return ({
     posts: topic.posts.slice(0, 2),
     header: topic.name,
     subHeader: ac_strings.popularTopic
+
+  })
+}
+
+const getFeaturedFormats = (topic: ITopicWithPosts) => {
+  return ({
+    posts: topic.posts.slice(0, 2),
+    header: topic.name,
+    slug: topic.to
 
   })
 }
@@ -356,21 +394,18 @@ interface IHomeProps {
   pageContext: {
 
     featuredPosts: string[]
-    popularPosts: string[]
-    popularTopics: IPopularTopicContext[]
+    popularPosts: {
+      static: string[]
+      dynamic: string[]
+    }
+    popularTopics: {
+      static: IPopularTopicContext[]
+      dynamic: IPopularTopicContext[]
+    }
+    formats: ITopic[]
 
   }
 
 }
 
-interface IPopularTopicContext {
-  name: string
-  to: string
-  posts: string[]
-}
 
-interface IPopularTopic {
-  name: string
-  to: string
-  posts: IPostItem[]
-}

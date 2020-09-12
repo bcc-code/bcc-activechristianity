@@ -1,19 +1,18 @@
 import * as React from "react"
 import Link from '@/components/CustomLink'
 import { useSwipeable } from "react-swipeable"
-import { ITaxonomy } from '@/types/wpPostType'
 
 import RightImg from '@/components/PostItem/RightImgWDes'
 import Icon from '@/components/Icons'
 import NewForYouHeader from './header'
 import TS from '@/strings'
-import { IPostItem } from '@/types'
+import { IPostItem, ITopic } from '@/types'
 
 import './NewForYou.css'
 
 export interface INewForYou {
     icon: () => JSX.Element,
-    topic: ITaxonomy,
+    topic: ITopic,
     post: IPostItem
 }
 

@@ -408,3 +408,15 @@ export interface IPostsByFormat {
 }
 
 export interface IPostsByFormatCollection { [key: string]: IPostsByFormat }
+
+export interface IPopularTopicContext {
+    name: string
+    to: string
+    posts: string[]
+}
+
+export interface ITopicWithPosts {
+    name: string
+    to: string
+    posts: IPostItem[]
+}

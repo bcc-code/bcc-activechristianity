@@ -114,6 +114,7 @@ export const fetchTopicFromSlug = (slug: string) => {
             return undefined
         })
 }
+
 export const fetchOneLocalPostsFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
     return fetch(`/page-data/${processSlug}/page-data.json`)
