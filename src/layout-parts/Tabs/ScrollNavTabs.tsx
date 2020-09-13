@@ -8,7 +8,7 @@ import Icon from '@/components/Icons'
 
 import TS from '@/strings'
 import { IPostItem, ITopicWithPosts } from '@/types'
-import { IPostListSection } from '@/layout-parts/Home/PostListSection'
+import { SmoothHorizontalScrolling } from '@/helpers'
 import './scrollNavTabs.css'
 
 
@@ -17,12 +17,30 @@ interface IProps {
 }
 const NewForYou: React.FC<IProps> = ({ tabs }) => {
     const [activeTab, setActiveTab] = React.useState<number>(0)
-    const activeTabEl = React.useRef<HTMLDivElement>(null);
+    const menuEl = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
-        console.log(activeTab.current)
+
+
+
     }, [activeTab])
-    const handleTabClick = (index: number) => {
+    const handleTabClick = (index: number, e: any) => {
+
         setActiveTab(index)
+        console.log(e.target.clientWidth)
+        console.log(e.target.offsetLeft)
+
+        if (menuEl && menuEl.current) {
+            const menu = menuEl.current
+            const activeMidPoint = e.target.clientWidth / 2
+            const menuMidPoint = menu.clientWidth / 2
+            const activeOffset = e.target.offsetLeft
+            const currentLeftScroll = menu.scrollLeft
+            const distanceToMid = activeOffset - (menuMidPoint + currentLeftScroll) + activeMidPoint
+            SmoothHorizontalScrolling(menu, 200, currentLeftScroll, distanceToMid)
+            /*  menu.scrollLeft = currentLeftScroll + distanceToMid */
+
+        }
+
     }
     const nextIndex = (activeTab + 1) % tabs.length
     const lastIndex = activeTab - 1 < 0 ? tabs.length - 1 : activeTab - 1
@@ -39,26 +57,24 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
             <div className="absolute right-0 z-40 pt-6 pr-2">
                 <Icon name="chev-right" size="xs" />
             </div>
-            <div className="scroll-snap-x-container scroll-snap-x-container-start overflow-x-auto whitespace-no-wrap flex items-center relative pt-4 pb-2">
+            <div
+                ref={menuEl}
+                className="scroll-snap-x-container scroll-snap-x-container-start overflow-x-auto whitespace-no-wrap flex items-center relative pt-4 pb-2"
+                style={{ scrollBehavior: 'smooth' }}
+            >
 
                 {tabs.map((item, i) => {
-                    const isActive = activeTab === i
-                    const refProp: any = {}
-                    if (isActive) {
-                        refProp.ref = activeTabEl
-                    }
                     return (
                         <button
-                            className={`scroll-snap-x-child-start py-1 px-2 bg-white ml-2 text-sm focus:outline-none ${activeTab === i ? 'bg-gray-200 rounded-lg font-semibold' : ''}`}
-                            onClick={() => { handleTabClick(i) }}
+                            className={`scroll-snap-x-child-start font-roboto py-1 px-2 bg-white ml-2 text-sm focus:outline-none ${activeTab === i ? 'bg-gray-200 rounded-lg font-semibold' : ''}`}
+                            onClick={(e) => { handleTabClick(i, e) }}
                             key={i}
-                            {...refProp}
                         >
                             {item.name}
                         </button>
                     )
                 })}
-                <div className="scroll-snap-x-child-start min-w-8 min-h-4">
+                <div className="scroll-snap-x-child-start min-w-20 min-h-4">
 
                 </div>
             </div>

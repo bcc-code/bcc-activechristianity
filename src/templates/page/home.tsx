@@ -127,7 +127,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           .then(result => {
             const posts: IPostItem[] = []
             if (result) {
-              result.slice(0, 4).forEach(post => {
+              result.slice(0, 3).forEach(post => {
                 if (post) {
                   posts.push(post)
                 }
@@ -181,7 +181,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       }
 
       if (formats) {
-        content.featuredFormats = formats
+        content.featuredFormats = [{ name: ac_strings.latest, to: '/', posts: latest.slice(0, 4) }, ...formats]
         //content.featuredFormats
       }
       if (topics) {

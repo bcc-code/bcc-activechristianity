@@ -22,6 +22,38 @@ export function debounce(fn: Function, ms: number) {
     };
 }
 
+export function SmoothVerticalScrolling(e: any, time: number, where: string) {
+    var eTop = e.getBoundingClientRect().top;
+    var eAmt = eTop / 100;
+    var curTime = 0;
+    while (curTime <= time) {
+        window.setTimeout(SVS_B, curTime, eAmt, where);
+        curTime += time / 100;
+    }
+}
+
+export function SVS_B(eAmt: number, where: string) {
+    if (where == "center" || where == "")
+        window.scrollBy(0, eAmt / 2);
+    if (where == "top")
+        window.scrollBy(0, eAmt);
+}
+
+export function SmoothHorizontalScrolling(e: any, time: number, amount: number, start: number) {
+    var eAmt = amount / 100;
+    var curTime = 0;
+    var scrollCounter = 0;
+    while (curTime <= time) {
+        window.setTimeout(SHS_B, curTime, e, scrollCounter, eAmt, start);
+        curTime += time / 100;
+        scrollCounter++;
+    }
+}
+
+export function SHS_B(e: any, sc: number, eAmt: number, start: number) {
+    e.scrollLeft = (eAmt * sc) + start;
+}
+
 export function initials(name: string) {
     let nameSet = name.indexOf(' ') > 0 || name.length < 2 ? name : name.slice(0, 2).split('').join(' ')
     let initials = nameSet.match(/\b\w/g) || [];
