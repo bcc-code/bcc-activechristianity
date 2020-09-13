@@ -26,8 +26,6 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
     const handleTabClick = (index: number, e: any) => {
 
         setActiveTab(index)
-        console.log(e.target.clientWidth)
-        console.log(e.target.offsetLeft)
 
         if (menuEl && menuEl.current) {
             const menu = menuEl.current

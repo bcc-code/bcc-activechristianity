@@ -17,6 +17,9 @@ const query =`{
             id
             slug
             name
+            posts {
+                slug
+          }
         }
 
         featuredTopics:topics(featured:true) {
