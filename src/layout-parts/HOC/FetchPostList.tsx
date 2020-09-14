@@ -21,7 +21,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
             .catch(res => {
                 console.log(res)
             })
-    }, postItems)
+    }, [])
 
     return (
         <Placeholder

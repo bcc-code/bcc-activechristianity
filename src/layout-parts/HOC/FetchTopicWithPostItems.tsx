@@ -36,7 +36,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
             .catch(res => {
                 console.log(res)
             })
-    }, topics)
+    }, [])
 
     return (
         <Placeholder
