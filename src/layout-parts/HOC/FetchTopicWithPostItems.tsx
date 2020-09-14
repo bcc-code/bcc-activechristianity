@@ -39,11 +39,12 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
     }, topics)
 
     return (
-        <Placeholder
-            loading={topicPostItems.length === 0}
-        >
-            {render({ topicPostItems })}
-        </Placeholder>
+        render({ topicPostItems })
+        /*         <Placeholder
+                    loading={topicPostItems.length === 0}
+                >
+                    {render({ topicPostItems })}
+                </Placeholder> */
     )
 
 }
