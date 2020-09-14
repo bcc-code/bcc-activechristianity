@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connectHits } from 'react-instantsearch-dom'
-import { IPostRes, IAuthor, IAuthorRes, ITopic } from '@/types'
+import { IPostRes, IAuthor, IAuthorRes, ITopicRes } from '@/types'
 import FeaturedCard from '@/components/PostItem/FeaturedCard'
 import PostItem from '@/components/PostItem/RightImgWDes'
 import { normalizePostRes, ebookResToPost, playlistToPost } from '@/helpers'
@@ -15,7 +15,7 @@ interface IHitEbook {
     title: string
     slug: string
     authors: IAuthorRes[]
-    topics: ITopic[]
+    topics: ITopicRes[]
 }
 
 interface IHitPlaylist {

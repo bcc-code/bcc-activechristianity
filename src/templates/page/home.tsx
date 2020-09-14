@@ -4,10 +4,13 @@ import loadable from '@loadable/component'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { useSelector } from "react-redux";
 
-const FeaturedBanner = loadable(() => import('@/layout-parts/PostsRow/FeaturedBanner'))
-const DesktopPopularRow = loadable(() => import('@/layout-parts/PostsRow/DesktopPopular'))
-const ScrollNavTabs = loadable(() => import('@/layout-parts/Tabs/ScrollNavTabs'))
+const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
+const DesktopPopularRow = loadable(() => import('@/layout-parts/HorizontalScroll/DesktopPopular'))
+
+const ScrollNavTabs = loadable(() => import('@/layout-parts/Tabs/TopicScrollNav'))
 const FeatureSection = loadable(() => import('@/layout-parts/Home/FeatureSection'))
+const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
+
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItem/FeaturedCard'
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
 
@@ -22,8 +25,7 @@ import TopImgPost from '@/components/PostItem/TopImg'
 
 // Type
 import { IRootState } from '@/state/types'
-import { IPostItem, ITopic, IEbook, INavItem, ITopicWithPosts, IPopularTopicContext } from '@/types'
-import { INewForYou } from '@/layout-parts/Home/NewForYou'
+import { IPostItem, ITopicRes, IEbook, INavItem, ITopic, ITopicPostSlugs, ITopicPostItems } from '@/types'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 
 // Helpers
@@ -35,21 +37,23 @@ import languages from '@/strings/languages.json'
 import ac_strings from '@/strings/ac_strings.json'
 import User from "@/layout-parts/User/UserInitial";
 
-
-
+const SectionTitle: React.FC<{ title: string }> = ({ title }) => (
+  <div className="font-semibold pb-4 px-4 font-sm">{title}</div>
+)
 
 interface IUserContent {
   featuredPostTop: IPostItem | undefined
   featuredPostRow: IFeaturedCard[]
-  featuredFormats: ITopicWithPosts[]
-  newPostsForYou: INewForYou[]
+  featuredFormats: ITopicPostItems[]
+  topicsForYou: ITopic[]
+  newPostsForYou: ITopicPostItems[]
   popularPosts: IPostItem[]
   listSlotOne: IPostListSection | undefined
   listSlotTwo: IPostListSection | undefined
 
   listSlotThree: IPostListSection | undefined
   listSlotFour: IPostListSection | undefined
-  topicsForYou: INavItem[]
+
   listSlotFive: IPostListSection | undefined
   listSlotSix: IPostListSection | undefined
   listSlotSeven: IPostListSection | undefined
@@ -84,7 +88,7 @@ const defaultUserContent: IUserContent = {
 
 const IndexPage: React.FC<IHomeProps> = (props) => {
   const { pageContext, path } = props
-  console.log('rendering')
+  console.log(pageContext)
   const {
     featuredPosts: featuredPostsSlug,
     popularTopics: popularTopicsAll,
@@ -92,37 +96,40 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     formats
   } = pageContext
   const [latestPageNr, setLatestPageNr] = React.useState(1)
-  const { bookmarkedPosts, historyPosts } = useSelector((state: IRootState) => state.userLibrary)
+  const { bookmarkedPosts, historyPosts, followedTopics } = useSelector((state: IRootState) => state.userLibrary)
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
   const [infinitePosts, setInfinitePosts] = React.useState<IPostItem[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
   const [isFetchingMore, setIsFetchingMore] = React.useState(false)
   const [userContent, setUserContent] = React.useState<IUserContent>({ ...defaultUserContent })
 
-  const latestSlug = `${ac_strings.slug_latest}`
   React.useEffect(() => {
     setIsLoading(true)
     const popularPostsSlugs = popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
     const popularTopics = popularTopicsAll.dynamic.length > 0 ? popularTopicsAll.dynamic : popularTopicsAll.static
     Promise.all([
-      fetchPostslistFromArchivePage(latestSlug), //0
-      fetchPostslistFromArchivePage(`${latestSlug}/${latestPageNr + 1}`),//1
+      fetchPostslistFromArchivePage(ac_strings.slug_latest), //0
+      fetchPostslistFromArchivePage(`${ac_strings.slug_latest}/${latestPageNr + 1}`),//1
       fetchLocalPostsFromSlugs(featuredPostsSlug), //2
       fetchLocalPostsFromSlugs(popularPostsSlugs.slice(0, 8)), //3
       Promise.all(popularTopics
-        .map(t => fetchLocalPostsFromSlugs(t.posts.map(item => (item.slug ? item.slug : item)))
-          .then(res => {
-            if (res) {
-              return (
-                ({ name: t.name, to: t.to, posts: res })
-              )
-            }
-          })
-        )), //4
+        .map(t => {
+          const { posts: tPosts, ...topic } = t
+          return fetchLocalPostsFromSlugs(tPosts)
+            .then(res => {
+              if (res) {
+
+                return (
+                  ({ ...topic, posts: res })
+                )
+              }
+            })
+        })), //4
       fetchLatestEbooks(), //5
       fetchLatestPlaylists(), // 6
       Promise.all(formats.map(item => {
-        const formatSlug = `${item.slug}/${latestSlug}`
+        const { posts, ...rest } = item
+        const formatSlug = `${item.slug}/${ac_strings.slug_latest}`
         return fetchPostslistFromArchivePage(formatSlug)
           .then(result => {
             const posts: IPostItem[] = []
@@ -134,8 +141,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               })
             }
             return ({
-              name: item.name,
-              to: formatSlug,
+              ...rest,
               posts
             })
           })
@@ -181,14 +187,23 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       }
 
       if (formats) {
-        content.featuredFormats = [{ name: ac_strings.latest, to: '/', posts: latest.slice(0, 4) }, ...formats]
+        content.featuredFormats = [
+          {
+            id: '',
+            name: ac_strings.latest,
+            slug: '/',
+            posts: latest.slice(0, 4)
+          },
+          ...formats
+        ]
         //content.featuredFormats
       }
       if (topics) {
-        const toAddTopics: INavItem[] = []
+        const toAddTopics: ITopic[] = []
         topics.forEach(t => {
           if (t) {
-            toAddTopics.push({ name: t.name, to: t.to })
+            toAddTopics.push(t)
+
           }
         })
 
@@ -228,7 +243,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       setIsFetchingMore(true)
       const nextPage = latestPageNr + 1
       setLatestPageNr(latestPageNr + 1)
-      fetchPostslistFromArchivePage(`${latestSlug}/${nextPage}`)
+      fetchPostslistFromArchivePage(`${ac_strings.slug_latest}/${nextPage}`)
         .then(res => {
           if (res) {
 
@@ -295,14 +310,14 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         )}
         {featuredPostTop !== undefined && (
           <div className="w-full pb-4 sm:hidden pt-8">
-            <div className="font-semibold pb-4 px-4 font-sm">{ac_strings.featured}</div>
+            <SectionTitle title={ac_strings.featured} />
             <FeaturedBanner featured={featuredPostRow} />
           </div>
         )}
         {
           <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
             <LazyLoad>
-              <h6 className="text-d4slate-dark font-semibold pb-4 px-4 font-sm">{ac_strings.popular}</h6>
+              <SectionTitle title={ac_strings.popular} />
               <DesktopPopularRow
 
                 posts={popularPosts}
@@ -314,8 +329,13 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
         }
         {<ScrollNavTabs tabs={featuredFormats} />}
+        <div className="py-6">
+          <SectionTitle title={ac_strings.topics_for_you} />
+          <FeaturedTopics featured={topicsForYou} />
+        </div>
         <LatestSection latestPosts={latest1} latestSlug={ac_strings.slug_latest} />
         {featuredPostRow && <FeatureSection featuredPosts={featuredPostRow.map(item => ({ ...item, likes: 23 }))} />}
+        <FeaturedTopics featured={newPostsForYou} />
         <LowerSections
           lists={[
             listSlotOne,
@@ -371,20 +391,11 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
 export default IndexPage
 
-const getPopularTopic = (topic: ITopicWithPosts) => {
+const getPopularTopic = (topic: ITopicPostItems) => {
   return ({
     posts: topic.posts.slice(0, 2),
     header: topic.name,
     subHeader: ac_strings.popularTopic
-
-  })
-}
-
-const getFeaturedFormats = (topic: ITopicWithPosts) => {
-  return ({
-    posts: topic.posts.slice(0, 2),
-    header: topic.name,
-    slug: topic.to
 
   })
 }
@@ -399,11 +410,10 @@ interface IHomeProps {
       dynamic: string[]
     }
     popularTopics: {
-      static: IPopularTopicContext[]
-      dynamic: IPopularTopicContext[]
+      static: ITopicPostSlugs[]
+      dynamic: ITopicPostSlugs[]
     }
-    formats: ITopic[]
-
+    formats: ITopicPostSlugs[]
   }
 
 }

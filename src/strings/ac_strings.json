@@ -48,7 +48,9 @@
     "listen": "Listen",
     "read": "Read",
     "watch": "Watch",
-
+    "follow": "Follow",
+    "following": "Following",
+    "unfollow": "Unfollow",
     "signup_options_title": "Register to continue",
     "signup_options_sub_title": "Follow topics, bookmarks, download wallpapers & much more",
     "signup_options_facebook": "Sign up with Facebook",

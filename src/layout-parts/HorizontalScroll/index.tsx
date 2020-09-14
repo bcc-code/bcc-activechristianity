@@ -3,7 +3,7 @@ import { IPostItem } from '@/types'
 import { UnderlineTitleLink } from '@/layout-parts'
 import TopImgPost from '@/components/PostItem/TopImg'
 import FeaturedCard from '@/components/PostItem/FeaturedCardNew'
-import PostsRow from '.'
+import PostRow from '@/layout-parts/List/PostRow4Col'
 import './horizontal-scroll.css';
 
 interface IPostHorizontalScroll {
@@ -58,9 +58,7 @@ export const HorizontalScrollSection: React.FC<IProps> = ({ name, slug, ...rest 
         <div className="standard-max-w pb-8">
             <div className="px-4"><UnderlineTitleLink name={name} to={slug} /></div>
             <PostHorizontalScrollTypes {...rest} />
-            <div className="hidden sm:block">
-                <PostsRow {...rest} />
-            </div>
+            <PostRow posts={rest.posts} />
 
         </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react'
 import TopImgPost from '@/components/PostItem/TopImg'
-import XScroll from './HorizontalScrollLarge'
+import XScroll from './BaseLarge'
 import './horizontal-scroll.css';
 import { IImage } from '@/types'
 

@@ -4,12 +4,12 @@ import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/PostsRow/Latest'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const LatestPopularTab = loadable(() => import('@/layout-parts/RecommendLayout/LatestPopularTab'))
 const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/PostsByTypes'))
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 const QuoteBlock = loadable(() => import('@/components/QuoteBlock'))
-import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScrollAll'
+import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
 import { Button } from '@/components/Buttons'
 import { LayoutH1Wide } from '@/layout-parts'
 

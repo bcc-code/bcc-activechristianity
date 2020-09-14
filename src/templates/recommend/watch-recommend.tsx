@@ -7,9 +7,9 @@ import MetaTag from '@/components/Meta'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
-import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScrollAll'
+import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
 const LatestPopularTab = loadable(() => import('@/layout-parts/RecommendLayout/LatestPopularTab'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/PostsRow/Latest'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'

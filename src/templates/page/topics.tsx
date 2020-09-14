@@ -8,7 +8,7 @@ import SimpleInstanceSearch, { getFilteredResult } from '@/components/Search/Sim
 import { IPaginate, INavItem, IPage } from "@/types"
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-import { ITopic } from '@/types'
+import { ITopicRes } from '@/types'
 import { sortTopicsByGroups } from '@/helpers'
 const AllTopic: React.FC<IAllTopic> = (props) => {
 
@@ -63,7 +63,7 @@ interface IAllTopic {
     }
     data: {
         ac: {
-            allTopics: ITopic[]
+            allTopics: ITopicRes[]
         }
     }
 }

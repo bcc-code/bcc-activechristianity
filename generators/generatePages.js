@@ -107,16 +107,13 @@ module.exports = function generatePages(actions, graphql) {
             }
             
           }
-
-
+          console.log(page.slug)
           createPage({
             path: `${page.slug}`,
             component: path.resolve(`./src/templates/page/${templateName}.tsx`),
             context,
           })
-        } else {
-          console.log(page)
-        }
+        } 
       })
 
       // topic

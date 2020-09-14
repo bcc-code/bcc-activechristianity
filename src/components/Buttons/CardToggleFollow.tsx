@@ -20,7 +20,7 @@ interface IProps {
     className?: string
 }
 
-const FollowButton: React.SFC<IProps> = ({ followed, topicClassName, buttonClassName, id, to, name }) => {
+const FollowButton: React.FC<IProps> = ({ followed, topicClassName, buttonClassName, id, to, name }) => {
     const dispatch = useDispatch()
 
     const handleClick = () => {

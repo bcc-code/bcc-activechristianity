@@ -19,7 +19,7 @@ import TopImgPost from '@/components/PostItem/TopImg'
 
 // Type
 import { IRootState } from '@/state/types'
-import { IPostItem, ITopic, IEbook, INavItem } from '@/types'
+import { IPostItem, ITopicRes, IEbook, INavItem } from '@/types'
 import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 

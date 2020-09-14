@@ -2,12 +2,12 @@ import * as React from "react"
 import { useSelector } from 'react-redux'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { IRootState } from '@/state/types'
-import { ITopic } from '@/types'
+import { ITopicRes } from '@/types'
 import { OutlineRightIcon } from "@/components/Buttons"
 
 const UserHistory = () => {
 
-    const [followedTopic, setFollowedTopics] = React.useState<ITopic[]>([])
+    const [followedTopic, setFollowedTopics] = React.useState<ITopicRes[]>([])
     const userLibrary = useSelector((state: IRootState) => state.userLibrary);
 
     React.useEffect(() => {

@@ -209,20 +209,22 @@ export interface IImage {
     updated_at: string
 }
 
+
+
 export interface ITopicGroup {
     name: string
     slug: string
     icon: string
-    topics: ITopic[]
+    topics: ITopicRes[]
 }
 
-export interface ITopic {
+export interface ITopicRes {
     id: string
     name: string
     slug: string
     noOfPosts: number
     excerpt?: string
-    image: IImage[]
+    image: IImage
     group: ITopicGroup
     posts: IPostRes[]
     somePosts: IPaginate
@@ -277,7 +279,7 @@ export interface IPostRes {
     }
     track: ITrackRes
     authors: IAuthorRes[]
-    topics: ITopic[]
+    topics: ITopicRes[]
     published: string
     created_at: string
     updated_at: string
@@ -327,7 +329,7 @@ export interface IEbook {
     image: IImage
     content: string
     authors: IAuthorRes[]
-    topics: ITopic[]
+    topics: ITopicRes[]
 }
 
 export interface IPlaylist {
@@ -409,14 +411,22 @@ export interface IPostsByFormat {
 
 export interface IPostsByFormatCollection { [key: string]: IPostsByFormat }
 
-export interface IPopularTopicContext {
+export interface ITopic {
+    id: string
     name: string
-    to: string
+    slug: string
+    noOfPosts?: number
+    excerpt?: string
+    image?: IImage
+    followed?: boolean
+}
+
+
+export interface ITopicPostSlugs extends ITopic {
     posts: string[]
 }
 
-export interface ITopicWithPosts {
-    name: string
-    to: string
+
+export interface ITopicPostItems extends ITopic {
     posts: IPostItem[]
 }

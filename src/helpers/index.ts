@@ -1,4 +1,4 @@
-import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopic, IPlaylist, ITrackRes, IMedia } from '@/types'
+import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia } from '@/types'
 import h2p from 'html2plaintext'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
@@ -129,7 +129,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
     return toReturn
 }
-export const transformTopicsRes = (topics: ITopic[]) => {
+export const transformTopicsRes = (topics: ITopicRes[]) => {
     const types: INavItem[] = []
     const filteredTopics: INavItem[] = []
     const format: INavItem[] = []
@@ -148,7 +148,7 @@ export const transformTopicsRes = (topics: ITopic[]) => {
     return ({ types, filteredTopics, format })
 }
 
-export const sortTopicsByGroups = (topics: ITopic[]) => {
+export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     const sortedTags: {
         [key: string]: {
             info: INavItem

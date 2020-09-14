@@ -5,7 +5,7 @@ import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import ContentPlaylist from '@/components/Playlist/SimplePlaylist'
 import MetaTag from '@/components/Meta'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
-import { HorizontalScrollSection } from '@/layout-parts/PostsRow/HorizontalScrollAll'
+import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
 
@@ -15,7 +15,7 @@ import { UnderlineTitleLink, typeIcons, LayoutH1Wide, TitleWithIcon } from '@/la
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 
 
-import { INavItem, IPostsByFormat, IPostItem, ITopic, INavItemCount, ISubtopicLinks } from '@/types'
+import { INavItem, IPostsByFormat, IPostItem, ITopicRes, INavItemCount, ISubtopicLinks } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
 
 
@@ -172,7 +172,7 @@ interface IProps {
     path: string
     pageContext: {
         id: string
-        node: ITopic
+        node: ITopicRes
         title: string
         breadcrumb: INavItem[]
         formatType: {

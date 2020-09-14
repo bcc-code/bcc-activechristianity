@@ -1,21 +1,20 @@
 import * as React from "react"
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import { INewForYou } from '@/layout-parts/Home/NewForYou'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
-import { IPostItem, ITopic, INavItem } from '@/types'
+import { IPostItem, ITopicPostItems, INavItem, ITopic } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
 const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
 /* const NewForYouDesktop = loadable(() => import('@/layout-parts/Home/NewForYou/Vertical')) */
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
 const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsForYou'))
-import { PostlistHorizontalSimple } from '@/layout-parts/PostsRow/HorizontalScrollAll'
+import { PostlistHorizontalSimple } from '@/layout-parts/HorizontalScroll'
 const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
 
 interface IHomeLowerSection {
     lists: (IPostListSection | undefined)[]
-    newPostsForYou: INewForYou[]
-    topicsForYou: INavItem[]
+    newPostsForYou: ITopicPostItems[]
+    topicsForYou: ITopic[]
     popularPosts: IPostItem[]
 }
 const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou, topicsForYou, popularPosts }) => {
@@ -56,7 +55,7 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
                         <NewForYou topics={newPostsForYou} />
                     </div>}
                     <div className="hidden sm:flex mt-8">
-                        <PopularPostVertical title={ac_strings.newForYou} posts={newPostsForYou.map(item => item.post)} small />
+                        <PopularPostVertical title={ac_strings.newForYou} posts={newPostsForYou.map(item => item.posts[0])} small />
                     </div>
                 </LazyLoad>
             </div>}

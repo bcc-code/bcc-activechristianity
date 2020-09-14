@@ -6,18 +6,18 @@ import RightImg from '@/components/PostItem/RightImgWDes'
 import Icon from '@/components/Icons'
 import NewForYouHeader from './header'
 import TS from '@/strings'
-import { IPostItem, ITopic } from '@/types'
+import { IPostItem, ITopicRes, ITopicPostItems } from '@/types'
 
 import './NewForYou.css'
 
 export interface INewForYou {
     icon: () => JSX.Element,
-    topic: ITopic,
+    topic: ITopicRes,
     post: IPostItem
 }
 
 interface IProps {
-    topics: INewForYou[]
+    topics: ITopicPostItems[]
 }
 const NewForYou: React.FC<IProps> = ({ topics }) => {
     const [activeTab, setActiveTab] = React.useState<number>(0)
@@ -43,14 +43,15 @@ const NewForYou: React.FC<IProps> = ({ topics }) => {
                 </div>
                 <span className="px-4 flex items-center pb-6 relative">
                     {topics.map((item, i) => {
-                        const TabIcon = item.icon
+                        /* const TabIcon = item.icon */
                         return (
                             <button
                                 className="w-12 h-12 p-2 rounded-full bg-white mr-4 focus:outline-none"
                                 onClick={() => { handleTabClick(i) }}
                                 key={i}
                             >
-                                <TabIcon />
+                                {item.name}
+                                {/* <TabIcon /> */}
                             </button>
                         )
                     })}
@@ -71,21 +72,18 @@ const NewForYou: React.FC<IProps> = ({ topics }) => {
                             postClassName = 'prev'
                         }
 
-                        const tags = topic.post.tags ? topic.post.tags : []
 
                         return (
                             <div className={`icon-tab-${postClassName} icon-tab-card px-4`}>
                                 <div className="bg-white flex flex-col items-center px-2 border border-gray-300 rounded-lg sm:max-w-sm cursor-pointer">
-                                    {tags.length > 0 && (
-                                        <Link className="flex justify-between w-full border-b border-gray-200 py-2" to={`${TS.slug_post_tag}/${tags[0].slug}`}>
-                                            <div>
-                                                <span className="rounded uppercase p-1 text-xs">{tags[0].name}</span>
-                                            </div>
-                                            <Icon name="right-arrow" size="lg" />
-                                        </Link >
-                                    )}
+                                    <Link className="flex justify-between w-full border-b border-gray-200 py-2" to={`${TS.slug_topic}/${topic.slug}`}>
+                                        <div>
+                                            <span className="rounded uppercase p-1 text-xs">{topic.name}</span>
+                                        </div>
+                                        <Icon name="right-arrow" size="lg" />
+                                    </Link >
                                     <div className="flex py-2 w-full">
-                                        <RightImg  {...topic.post} />
+                                        <RightImg  {...topic.posts[0]} />
 
                                     </div>
                                 </div >

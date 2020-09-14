@@ -1,5 +1,17 @@
 const path = require('path')
 const {formatScope} = require('./TopicsFormatsTypes/hjelper')
+
+
+const topicQuery=`
+    id
+    name
+    slug
+    noOfPosts
+    excerpt
+    posts {
+        slug
+    }
+`
 const query =`{
     allAcNodeSetting {
         nodes {
@@ -14,20 +26,11 @@ const query =`{
             id
         }
         format:topics(group_id:${process.env.FORMAT_GROUP_ID}){
-            id
-            slug
-            name
-            posts {
-                slug
-          }
+            ${topicQuery}
         }
 
         featuredTopics:topics(featured:true) {
-        	name
-        	slug
-        	posts {
-                slug
-          }
+        	${topicQuery}
       }
     }
 }`
@@ -35,11 +38,7 @@ const query =`{
 const getTopic = (id)=>`{
     ac {
         topic(id:${id}){
-            slug
-            name
-            posts{
-                slug
-            }
+            ${topicQuery}
         }
     }
 }`
@@ -75,7 +74,7 @@ module.exports = function generatePages(actions, graphql) {
             ac.format.forEach(node=>{
                 const find = formatScope.find(f=>f.keyId===`${node.id}`)
                 if(find){
-                    filteredFormats.push({...node,posts:node.posts.map(item=>item.slug)})
+                    filteredFormats.push({...node,posts:node.posts.slice(0,10).map(item=>item.slug)})
                 }
             })
             
@@ -87,9 +86,8 @@ module.exports = function generatePages(actions, graphql) {
             const popularTopics = {
                 "dynamic":[],
                 "static":ac.featuredTopics.map(item=>({
-                    name:item.name,
-                    to:item.slug,
-                    posts:item.posts.slice(0,2)
+                    ...item,
+                    posts:item.posts.slice(0,2).map(item=>item.slug)
                 }))
             }
 
@@ -113,11 +111,10 @@ module.exports = function generatePages(actions, graphql) {
                                 await graphql(getTopicQuery)
                                 .then(res=>{
                                     const topic = res.data.ac.topic
-                                    const allPosts = topic.posts.map(item=>item.slug)
+                                    const allPosts = topic.posts.slice(0,2).map(item=>item.slug)
                                     popularTopics["dynamic"].push({
-                                        name:topic.name,
-                                        to:topic.slug,
-                                        posts:allPosts.slice(0,2)
+                                        ...topic,
+                                        posts:allPosts
                                     })
                                 })
                             }

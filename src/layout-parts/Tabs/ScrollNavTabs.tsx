@@ -1,21 +1,17 @@
 import * as React from "react"
-import Link from '@/components/CustomLink'
 import { useSwipeable } from "react-swipeable"
-
-
-import RightImg from '@/components/PostItem/RightImgWDes'
 import Icon from '@/components/Icons'
-
-import TS from '@/strings'
-import { IPostItem, ITopicWithPosts } from '@/types'
+import { INavItem } from '@/types'
 import { SmoothHorizontalScrolling } from '@/helpers'
 import './scrollNavTabs.css'
 
-
-interface IProps {
-    tabs: ITopicWithPosts[]
+interface ITab extends INavItem {
+    content: JSX.Element
 }
-const NewForYou: React.FC<IProps> = ({ tabs }) => {
+interface IProps {
+    tabs: ITab[]
+}
+const HScrollNav: React.FC<IProps> = ({ tabs }) => {
     const [activeTab, setActiveTab] = React.useState<number>(0)
     const menuEl = React.useRef<HTMLDivElement>(null);
     React.useEffect(() => {
@@ -91,15 +87,7 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
 
                     return (
                         <div className={`icon-tab-${postClassName} icon-tab-card px-4`}>
-                            <div className="bg-white flex flex-col items-center sm:max-w-sm">
-
-                                {tab.posts.map(item => (
-                                    <div className="py-2 w-full">
-                                        <RightImg  {...item} />
-
-                                    </div>
-                                ))}
-                            </div >
+                            {tab.content}
                         </div>
                     )
                 })}
@@ -109,4 +97,4 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
     )
 }
 
-export default NewForYou
+export default HScrollNav
