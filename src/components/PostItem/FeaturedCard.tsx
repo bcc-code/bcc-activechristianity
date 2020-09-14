@@ -15,7 +15,7 @@ export interface IFeaturedCard extends IPostItem {
     type?: "podcast" | "playlist" | "ebook"
 }
 
-const FeaturedCard: React.SFC<IFeaturedCard> = ({ type, title, id, authors, likes, image, className, slug, media, showOnMobile }) => {
+const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes, image, className, slug, media, showOnMobile }) => {
 
 
     let bgStyle: any = {

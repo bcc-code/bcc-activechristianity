@@ -12,7 +12,7 @@ interface IPlayPauseProps {
 const fillColor = "#9ca6be"
 
 
-const PlayPauseButton: React.SFC<IPlayPauseProps> = ({ media, className }) => {
+const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
     const dispatch = useDispatch()
     const { isPlaying, playPause } = media
 
@@ -59,7 +59,7 @@ export const AudioButton = () => (
     </svg>
 )
 
-const VolumeBarGroup: React.SFC<IPlayPauseProps> = ({ media: { volume, muteUnmute, setVolume } }) => {
+const VolumeBarGroup: React.FC<IPlayPauseProps> = ({ media: { volume, muteUnmute, setVolume } }) => {
     const updateVolume = (e: any) => {
         setVolume(e.target.value / 100)
     }
@@ -81,7 +81,7 @@ const VolumeBarGroup: React.SFC<IPlayPauseProps> = ({ media: { volume, muteUnmut
 
 export const VolumeBar = withMediaProps(VolumeBarGroup)
 
-const MuteUnmuteButton: React.SFC<IPlayPauseProps> = ({ media: { volume, muteUnmute }, className }) => (
+const MuteUnmuteButton: React.FC<IPlayPauseProps> = ({ media: { volume, muteUnmute }, className }) => (
     <svg width="36px" height="36px" viewBox="0 0 36 36" className={className} onClick={muteUnmute}>
         {/* <circle fill={fillColor} cx="18" cy="18" r="18" /> */}
         <polygon fill={fillColor} points="11,14.844 11,21.442 14.202,21.442 17.656,25 17.656,11 14.074,14.844" />
@@ -111,7 +111,7 @@ interface IRepeatProps {
     className: string
 }
 
-export const Repeat: React.SFC<IRepeatProps> = (props) => {
+export const Repeat: React.FC<IRepeatProps> = (props) => {
 
     const { isActive, ...rest } = props
     const fill = isActive ? '#8bb955' : fillColor
@@ -128,33 +128,33 @@ interface INextTrackProps {
     onClick: () => void
     className: string
 }
-export const PrevTrack: React.SFC<INextTrackProps> = (props) => (
+export const PrevTrack: React.FC<INextTrackProps> = (props) => (
     <svg width="10px" height="12px" viewBox="0 0 10 12" {...props}>
         <polygon fill={fillColor} points="10,0 2,4.8 2,0 0,0 0,12 2,12 2,7.2 10,12" />
     </svg>
 )
 
-export const NextTrack: React.SFC<INextTrackProps> = (props) => (
+export const NextTrack: React.FC<INextTrackProps> = (props) => (
     <svg width="10px" height="12px" viewBox="0 0 10 12" {...props}>
         <polygon fill={fillColor} points="8,0 8,4.8 0,0 0,12 8,7.2 8,12 10,12 10,0" />
     </svg>
 )
 
-export const ArrowDown: React.SFC = (props) => (
+export const ArrowDown: React.FC = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
         <path fill={fillColor} d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
         <path fill="none" d="M0 0h24v24H0V0z" />
     </svg>
 )
 
-export const FullScreenIcon: React.SFC = (props) => (
+export const FullScreenIcon: React.FC = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
         <path d="M0 0h24v24H0z" fill="none" />
         <path fill={fillColor} d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
     </svg>
 )
 
-export const Playlist: React.SFC<INextTrackProps> = (props) => (
+export const Playlist: React.FC<INextTrackProps> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
         <path fill="none" d="M0 0h24v24H0V0z" />
         <path fill={fillColor} d="M4 10h12v2H4zm0-4h12v2H4zm0 8h8v2H4zm10 0v6l5-3z" />

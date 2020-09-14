@@ -4,7 +4,7 @@ import { IRootState } from '@/state/types'
 import { useSelector } from 'react-redux'
 import { navigate } from "gatsby"
 import ac_strings from '@/strings/ac_strings.json'
-const PrivateRoute: React.SFC<any> = ({ component: Component, location, ...rest }) => {
+const PrivateRoute: React.FC<any> = ({ component: Component, location, ...rest }) => {
     const auth = useSelector((state: IRootState) => state.auth)
 
 

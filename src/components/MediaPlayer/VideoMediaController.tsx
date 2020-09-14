@@ -39,7 +39,7 @@ export interface IMediaProps {
     muteUnmute: () => void
     setVolume: (v: number) => void
 }
-const MediaControl: React.SFC<IWithMediaProps> = (props) => {
+const MediaControl: React.FC<IWithMediaProps> = (props) => {
     const { src, repeatTrack, autoPlay, isVideo } = props
 
 

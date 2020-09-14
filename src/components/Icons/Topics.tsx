@@ -1,7 +1,7 @@
 import * as React from "react"
 import { IIconProps } from "@/types"
 
-const Topics: React.SFC<IIconProps> = ({ customSize, className }) => {
+const Topics: React.FC<IIconProps> = ({ customSize, className }) => {
   // To be changed
   const size = customSize ? `${customSize}` : "24"
   return (

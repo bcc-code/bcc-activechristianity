@@ -14,7 +14,7 @@ interface IProps {
     onClick?: (e: any) => void
 }
 
-const Bookmark: React.SFC<IProps> = ({ bookmarked, size, className, color, id }) => {
+const Bookmark: React.FC<IProps> = ({ bookmarked, size, className, color, id }) => {
     const dispatch = useDispatch()
     const auth = useSelector((state: IRootState) => state.auth)
 

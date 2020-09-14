@@ -9,7 +9,7 @@ interface IProps {
     posts: IPostItem[]
     playIcon?: boolean
 }
-const PopularPosts: React.SFC<IProps> = ({ posts, title, playIcon, small }) => {
+const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
     return (
         <div className="p-4 rounded-lg" style={{ backgroundImage: 'linear-gradient(#edf2f7,#fff)' }}>
             <div className="flex flex-col pb-4">

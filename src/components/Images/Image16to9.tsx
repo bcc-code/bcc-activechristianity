@@ -9,7 +9,7 @@ interface IProps {
 
 }
 
-const TwoToOneImage: React.SFC<IProps> = ({ image, imageClassName, roundedTop }) => {
+const TwoToOneImage: React.FC<IProps> = ({ image, imageClassName, roundedTop }) => {
     return (
         <div className={`pointer-events-none relative w-full pb-16/9 overflow-hidden ${roundedTop ? 'rounded-t-lg' : 'rounded-lg'}`}>
             <LazysizesFeaturedImage {...image} className={`w-full max-w-full h-full absolute h-auto bg-center bg-cover ${imageClassName ? imageClassName : ''}`} />

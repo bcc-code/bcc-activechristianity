@@ -14,7 +14,7 @@ interface IFetchPost {
     slug: string
     type?: "header"
 }
-const FetchPost: React.SFC<IFetchPost> = ({ slug, type }) => {
+const FetchPost: React.FC<IFetchPost> = ({ slug, type }) => {
     useEffect(() => {
         getPost()
     }, [])

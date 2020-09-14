@@ -138,5 +138,5 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
     )
 }
 
-export default TopNavMobile
+export default React.memo(TopNavMobile)
 

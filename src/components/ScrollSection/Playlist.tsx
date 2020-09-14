@@ -10,7 +10,7 @@ import { PostH1, ShareSection } from '@/layout-parts'
 import { } from '@/components/PostItem/PostItemParts'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
-export const PostLayout: React.SFC<IPlaylist> = (post) => {
+export const PostLayout: React.FC<IPlaylist> = (post) => {
 
     const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
 

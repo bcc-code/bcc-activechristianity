@@ -7,7 +7,7 @@ import { IPostItem } from '@/types'
 interface IBgOverlaidPost extends IPostItem {
     type: "sectionHeader" | "postEnd"
 }
-const BgOverlaidPost: React.SFC<IBgOverlaidPost> = (props) => {
+const BgOverlaidPost: React.FC<IBgOverlaidPost> = (props) => {
     const { title, image, slug, excerpt, media, type, authors, reading_time } = props
     let className = "div1  m-0 relative overflow-hidden rounded-xxl sm:rounded-xl"
     let background = 'linear-gradient(90deg, rgba(33, 34, 54, 0.88) 0%, rgba(33, 34, 54, 0) 100%)'

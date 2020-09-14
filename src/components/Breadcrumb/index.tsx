@@ -6,7 +6,7 @@ import Icon from '@/components/Icons'
 
 import './breadcrumb.css'
 
-const Breadcrumb: React.SFC<IBreadcrumb> = ({ items }) => {
+const Breadcrumb: React.FC<IBreadcrumb> = ({ items }) => {
     const breadcrumb = items.length > 0 ? [
         {
             name: <Icon size="base" name="home" />,
@@ -35,5 +35,5 @@ const Breadcrumb: React.SFC<IBreadcrumb> = ({ items }) => {
     )
 }
 
-export default Breadcrumb;
+export default React.memo(Breadcrumb);
 

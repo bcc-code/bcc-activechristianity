@@ -10,7 +10,7 @@ interface IPostMetaProps {
     authors: IPostAuthors[]
     showCategory?: boolean
 }
-const PostMeta: React.SFC<IPostMetaProps> = ({ categories, authors, showCategory }) => {
+const PostMeta: React.FC<IPostMetaProps> = ({ categories, authors, showCategory }) => {
 
     return (
         <div>

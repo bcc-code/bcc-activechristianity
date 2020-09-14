@@ -9,7 +9,7 @@ import UserInitials from '@/layout-parts/User/UserInitial'
 import { LayoutH1 } from '@/layout-parts'
 import { INavItem } from '@/types'
 
-const AccountLayout: React.SFC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
+const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
 
     const dispatch = useDispatch()
     const [currentPageTitle, setCurrentPageTitle] = React.useState<null | string>(null)

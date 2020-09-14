@@ -38,7 +38,7 @@ export interface IMediaProps {
     muteUnmute: () => void
     setVolume: (v: number) => void
 }
-const MediaControl: React.SFC<IProps> = (props) => {
+const MediaControl: React.FC<IProps> = (props) => {
     const { src, audioTitle, repeatTrack, autoPlay, floating, isVideo, expanded, isOnPost } = props
 
     const minimized = !expanded && floating

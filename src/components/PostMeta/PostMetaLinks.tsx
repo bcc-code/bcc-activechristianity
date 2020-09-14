@@ -8,7 +8,7 @@ interface Iprops {
     prefix?: string
 }
 
-const MetaLinks: React.SFC<Iprops> = ({ links, prefix }) => {
+const MetaLinks: React.FC<Iprops> = ({ links, prefix }) => {
 
     /*     const hasComma = links.length > 1; */
     return (

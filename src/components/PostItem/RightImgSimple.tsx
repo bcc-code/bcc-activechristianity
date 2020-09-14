@@ -7,7 +7,7 @@ import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemPa
 import PlayButtonTrack from '@/components/Buttons/PlayButtonTrack'
 import Icon from '@/components/Icons'
 import 'lazysizes';
-const RightImgNoDes: React.SFC<IPostItem & { border?: boolean }> = (props) => {
+const RightImgNoDes: React.FC<IPostItem & { border?: boolean }> = (props) => {
     const { title, image, types, bookmarked, excerpt, border, slug, id, reading_time, authors, media, date } = props
 
     return (

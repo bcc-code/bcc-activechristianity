@@ -16,7 +16,7 @@ interface IPlaylist {
 }
 
 
-const PostAudio: React.SFC<IPlaylist> = ({
+const PostAudio: React.FC<IPlaylist> = ({
     tracks: allTracks,
     hideRead
 }) => {

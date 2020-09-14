@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { IIconProps } from '@/types'
 
-const ArchiveIcon: React.SFC<IIconProps> = ({ customSize, className }) => {
+const ArchiveIcon: React.FC<IIconProps> = ({ customSize, className }) => {
     const size = customSize ? `${customSize}` : "24"
     return (
 

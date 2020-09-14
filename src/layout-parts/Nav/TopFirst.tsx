@@ -37,7 +37,7 @@ const TopDesktop: React.FC = () => {
     )
 }
 
-export default TopDesktop
+export default React.memo(TopDesktop)
 
 export interface ITagline {
     text: string;

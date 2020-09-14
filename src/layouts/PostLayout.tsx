@@ -37,7 +37,7 @@ interface IPostProps extends IPostItem {
     content: string
     langs: ITranslations[]
 }
-export const PostLayout: React.SFC<IPostProps> = (post) => {
+export const PostLayout: React.FC<IPostProps> = (post) => {
     const dispatch = useDispatch()
     const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
     const [featuredInPlaylist, setFeaturedInPlaylist] = React.useState<IPostRes | null>(null)

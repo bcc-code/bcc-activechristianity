@@ -13,7 +13,7 @@ import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import { divide } from 'lodash'
 import { Header } from './contact'
 const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
-const Page: React.SFC<IAboutProps> = ({ pageContext, path }) => {
+const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 
 
     const aboutUs: IScrollSectionChildProps[] = []

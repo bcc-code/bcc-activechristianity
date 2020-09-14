@@ -11,7 +11,7 @@ type IAllProps = {
     defaultMedia?: "audio" | "video"
 }
 const mod = (num: number, max: number) => ((num % max) + max) % max
-const ACMediaPlayer: React.SFC<IAllProps> = ({ defaultMedia }) => {
+const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
 
     const inputEl = React.useRef(null);
     const dispatch = useDispatch();
@@ -136,6 +136,6 @@ const ACMediaPlayer: React.SFC<IAllProps> = ({ defaultMedia }) => {
 }
 
 
-export default ACMediaPlayer
+export default React.memo(ACMediaPlayer)
 
 

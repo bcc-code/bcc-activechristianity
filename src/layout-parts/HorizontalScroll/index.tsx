@@ -12,7 +12,7 @@ interface IPostHorizontalScroll {
     postProps?: any
 }
 
-export const PostlistHorizontalSimple: React.SFC<{ posts: IPostItem[] }> = ({ posts }) => {
+export const PostlistHorizontalSimple: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
     return (
         <div className="scroll-snap-x-container h-full">
             {posts.map(item => (

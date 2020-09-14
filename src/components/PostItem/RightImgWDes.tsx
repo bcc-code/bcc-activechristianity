@@ -15,7 +15,7 @@ interface IRightImgNoDes extends IPostItem {
     audioDuration?: boolean
     noDes?: boolean
 }
-const RightImgWDes: React.SFC<IRightImgNoDes> = (props) => {
+const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
 
     const {
         title,

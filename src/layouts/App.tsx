@@ -1,4 +1,5 @@
 import * as React from 'react'
+import loadable from '@loadable/component'
 import { StaticQuery, graphql } from "gatsby"
 import BottomMobile, { iconMapNav, IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
 import Breadcrumb from '@/components/Breadcrumb'
@@ -11,10 +12,10 @@ import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import SideNav from '@/layout-parts/Nav/SideNav'
 import SignInSignUpModal from '@/layout-parts/SignInSignUp'
-import loadable from '@loadable/component'
+
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
-import { getUserFollowing, getUserHistory, getUserLiked, getUserUnfinished } from '@/state/action/userAction'
+import { getUserLibrary } from '@/state/action/userAction'
 
 // string
 import TS from '@/strings';
@@ -66,12 +67,11 @@ const App: React.FC<any> = (props) => {
                 if (res && res.id) {
 
                     dispatch(setUser(res))
-                    dispatch(getUserFollowing())
-                    dispatch(getUserLiked())
-                    dispatch(getUserHistory())
-                    dispatch(getUserUnfinished())
-                } else {
-                    dispatch(setLogout())
+                    dispatch(getUserLibrary())
+                    /*                     dispatch(getUserFollowing())
+                                        dispatch(getUserLiked())
+                                        dispatch(getUserHistory())
+                                        dispatch(getUserUnfinished()) */
                 }
             })
             .catch((err: any) => {
@@ -80,12 +80,21 @@ const App: React.FC<any> = (props) => {
             })
     }
 
-    const NavProps = {
+    const NavProps = React.useMemo(() => (
+        {
+            isSideNavOpen,
+            setSideNavOpen,
+            isModalOpen,
+            isSignInModalOpen
+        }
+    ), [
+
         isSideNavOpen,
         setSideNavOpen,
         isModalOpen,
         isSignInModalOpen
-    }
+
+    ])
 
 
     return (

@@ -13,7 +13,7 @@ export const UserInitial: React.FC<{ name: string, className?: string }> = ({ na
         <text x="50" y="68" fontSize="50" fontWeight="500" textAnchor="middle">{initials(name)}</text>
     </svg>
 )
-const User: React.SFC = () => {
+const User: React.FC = () => {
     const auth = useSelector((state: IRootState) => state.auth)
     return auth.loggedIn === "success" && auth.user ? (
         <div className="m-auto text-center">

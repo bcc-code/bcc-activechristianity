@@ -7,7 +7,7 @@ import MediaPlayer from './VideoMediaController'
 import "./style/madia-player.css"
 
 const youtubeRegex = /src=("|')(https:\/\/www\.youtube\.com)([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)("|')/i
-const ACVideoPlayer: React.SFC<{ src: string, showControl: boolean }> = ({ src, showControl }) => {
+const ACVideoPlayer: React.FC<{ src: string, showControl: boolean }> = ({ src, showControl }) => {
 
     const inputEl = React.useRef(null);
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { IIconProps } from "@/types"
 
-const Home: React.SFC<IIconProps> = ({ customSize, className }) => {
+const Home: React.FC<IIconProps> = ({ customSize, className }) => {
   let customeClassName = className ? className : `w-6 h-6`
   return (
     <svg

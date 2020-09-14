@@ -1,7 +1,7 @@
 import * as React from "react"
 import { IIconProps } from "@/types"
 
-const Bookmark: React.SFC<IIconProps> = ({ customSize, className }) => {
+const Bookmark: React.FC<IIconProps> = ({ customSize, className }) => {
   const size = customSize ? `${customSize}` : "24"
   return (
     <svg

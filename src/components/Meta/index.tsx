@@ -34,7 +34,7 @@ export interface MetaTagProps {
     translatedUrls?: ITranslations[]
 }
 
-const MetaTag: React.SFC<MetaTagProps> = ({ wpId, title, type, meta, translatedUrls, breadcrumb, path }) => {
+const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUrls, breadcrumb, path }) => {
 
     const dispatch = useDispatch()
     const auth = useSelector((state: IRootState) => state.auth)

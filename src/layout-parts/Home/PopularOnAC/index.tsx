@@ -7,7 +7,7 @@ import './popular-on-ac.css';
 interface IPostlistXScroll {
     posts: IPostItem[]
 }
-const PostlistHorizontalCards: React.SFC<IPostlistXScroll> = ({ posts }) => {
+const PostlistHorizontalCards: React.FC<IPostlistXScroll> = ({ posts }) => {
     return (
         <div className="scroll-snap-x-container h-full">
             {posts.map(item => (

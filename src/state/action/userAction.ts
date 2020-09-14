@@ -1,5 +1,5 @@
 import { IUserLibrary, } from '@/state/types'
-import { IApiItem } from "@/types/apiResType"
+import { IApiItem } from "@/types"
 
 
 export const setUserLibrary = (payload: IUserLibrary) => ({
@@ -25,6 +25,11 @@ export const setUserFollowing = (payload: IApiItem[]) => ({
 export const setUserUnfinished = (payload: IApiItem[]) => ({
     type: 'SET_USER_UNFINISHED',
     payload
+})
+
+export const getUserLibrary = () => ({
+    type: 'FETCH_USER_LIBRARY',
+
 })
 
 export const getUserLiked = () => ({

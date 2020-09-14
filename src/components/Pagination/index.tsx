@@ -5,7 +5,7 @@ interface IProps {
     totalPages: number;
     onChange: Function
 }
-const StaticPagination: React.SFC<IProps> = (props) => {
+const StaticPagination: React.FC<IProps> = (props) => {
     const { currentPage, totalPages, onChange, } = props
     const hasPrevPage = currentPage - 1 > 0;
     const hasNextPage = currentPage + 1 <= totalPages;

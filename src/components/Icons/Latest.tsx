@@ -1,7 +1,7 @@
 import * as React from "react"
 import { IIconProps } from "@/types"
 
-const Latest: React.SFC<IIconProps> = ({ customSize }) => {
+const Latest: React.FC<IIconProps> = ({ customSize }) => {
     const size = customSize ? `${customSize}` : "24"
     return (
         <svg
