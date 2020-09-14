@@ -23,7 +23,7 @@ const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featured
                     )
                 })}
             </div>
-            <div className="scroll-4col-h flex mb-4 sm:hidden">
+            {/*             <div className="scroll-4col-h flex mb-4 sm:hidden">
                 {featuredPosts.map((item, i) => {
                     const topic = item.topics && Array.isArray(item.topics) ? item.topics[0] : undefined
                     if (item.type) {
@@ -45,7 +45,7 @@ const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featured
                 <div className="min-w-4">
 
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

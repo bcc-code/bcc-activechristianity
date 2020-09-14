@@ -60,7 +60,7 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
                 {tabs.map((item, i) => {
                     return (
                         <button
-                            className={`scroll-snap-x-child-start font-roboto py-1 px-2 bg-white ml-2 text-sm focus:outline-none ${activeTab === i ? 'bg-gray-200 rounded-lg font-semibold' : ''}`}
+                            className={`scroll-snap-x-child-start font-roboto py-1 px-2 sm:py-2 sm:px-4 bg-white ml-2 text-sm focus:outline-none ${activeTab === i ? 'bg-gray-200 rounded-lg font-semibold' : ''}`}
                             onClick={(e) => { handleTabClick(i, e) }}
                             key={i}
                         >

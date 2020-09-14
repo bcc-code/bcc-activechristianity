@@ -1,7 +1,8 @@
 import * as React from "react"
 import Link from '@/components/CustomLink'
 import { useSwipeable } from "react-swipeable"
-
+import TopImgPost from '@/components/PostItem/TopImg'
+import { IPostItem } from '@/types'
 import ScrollNavTabs from '@/layout-parts/Tabs/ScrollNavTabs'
 import RightImg from '@/components/PostItem/RightImgWDes'
 import { ITopicPostItems } from '@/types'
@@ -19,14 +20,15 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
                 name: tab.name,
                 to: tab.slug,
                 content: (
-                    <div className="bg-white flex flex-col items-center sm:max-w-sm">
-                        {tab.posts.slice(0, 3).map(item => (
-                            <div className="py-2 w-full">
-                                <RightImg  {...item} />
-
-                            </div>
-                        ))}
-                    </div >
+                    <div className="grid-home-latest-scroll-4col my-4 sm:grid">
+                        {tab.posts.slice(0, 6).map((item, i) => {
+                            return (
+                                <div className={`div${i + 1}`}>
+                                    < TopImgPost {...item} showType />
+                                </div>
+                            )
+                        })}
+                    </div>
                 )
             }))}
         />
