@@ -19,12 +19,12 @@ const FetchPosts: React.FC<IFetchPost> = ({ slugs, render }) => {
             })
     }, slugs)
     return (
-        render({ posts })
-        /*         <Placeholder
-                    loading={posts.length === 0}
-                >
-                    {render({ posts })}
-                </Placeholder> */
+
+        <Placeholder
+            loading={posts.length === 0}
+        >
+            {render({ posts })}
+        </Placeholder>
     )
 
 }

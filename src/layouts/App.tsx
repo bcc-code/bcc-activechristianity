@@ -72,6 +72,8 @@ const App: React.FC<any> = (props) => {
                                         dispatch(getUserLiked())
                                         dispatch(getUserHistory())
                                         dispatch(getUserUnfinished()) */
+                } else {
+                    dispatch(setLogout())
                 }
             })
             .catch((err: any) => {
