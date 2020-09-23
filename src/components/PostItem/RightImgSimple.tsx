@@ -4,7 +4,7 @@ import Link from '@/components/CustomLink'
 import { IPostItem } from '@/types'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
-import PlayButtonTrack from '@/components/Buttons/PlayButtonTrack'
+import PlayButtonTrack from '@/layout-parts/Buttons/PlayButtonTrack'
 import Icon from '@/components/Icons'
 import 'lazysizes';
 const RightImgNoDes: React.FC<IPostItem & { border?: boolean }> = (props) => {

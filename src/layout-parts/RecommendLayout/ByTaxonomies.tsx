@@ -1,7 +1,7 @@
 
 import React from "react"
 import Link from '@/components/CustomLink'
-import { OutlineRightIcon } from "@/components/Buttons"
+import { OutlineRightIcon } from "@/layout-parts/Buttons"
 import { INavItem } from "@/types"
 import Icons from '@/components/Icons'
 export interface ITypeCount extends INavItem {

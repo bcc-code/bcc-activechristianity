@@ -1,7 +1,7 @@
 import React from "react"
 import { IPostItem } from "@/types"
 import TopImgPost from '@/components/PostItem/TopImg'
-import MoreLatestButton from '@/components/Buttons/MoreLatest'
+import MoreLatestButton from '@/layout-parts/Buttons/MoreLatest'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import PostRow from '@/layout-parts/List/PostRow4Col'
 interface ILatestDesktopRow {

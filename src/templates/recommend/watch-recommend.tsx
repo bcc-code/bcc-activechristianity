@@ -8,7 +8,7 @@ import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
 import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
-const LatestPopularTab = loadable(() => import('@/layout-parts/RecommendLayout/LatestPopularTab'))
+const LatestPopularTab = loadable(() => import('@/layout-parts/Tabs/LatestPopularTabs'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 import { TitleWithIcon, typeIcons } from '@/layout-parts'

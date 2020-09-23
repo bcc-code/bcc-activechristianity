@@ -378,9 +378,11 @@ export interface IUnfinished {
 }
 
 export interface IFollowing {
-    topics: IResourceRef[]
-    tags: IResourceRef[]
-    authors: IResourceRef[]
+    following: {
+        topics: IResourceRef[]
+        tags: IResourceRef[]
+        authors: IResourceRef[]
+    }
 }
 
 export interface IPopularPosts {
@@ -429,4 +431,8 @@ export interface ITopicPostSlugs extends ITopic {
 
 export interface ITopicPostItems extends ITopic {
     posts: IPostItem[]
+}
+
+export interface ITab extends INavItem {
+    content: JSX.Element
 }

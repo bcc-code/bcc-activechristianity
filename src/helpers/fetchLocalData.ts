@@ -1,4 +1,4 @@
-import { IPostItem, INavItem, IEbook, IPlaylist, } from '@/types'
+import { IPostItem, INavItem, IEbook, IPlaylist, ITopicNavItem } from '@/types'
 import { trimSlug, normalizePostRes } from './index'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
@@ -103,7 +103,8 @@ export const fetchTopicFromSlug = (slug: string) => {
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
                 const topicContext = res.result.pageContext
-                const topicNav: INavItem = {
+                const topicNav: ITopicNavItem = {
+                    id: topicContext.id,
                     name: topicContext.title,
                     to: topicContext.slug
                 }

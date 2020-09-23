@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import MetaTag from '@/components/Meta'
 // components
 import ResourceLayout from "@/layouts/ResourceLayout"
-import CloseButtonRound from '@/components/Buttons/CloseButtonRound'
+import CloseButtonRound from '@/layout-parts/Buttons/CloseButtonRound'
 import PlaceHolder from '@/layout-parts/Loader/ScripturePlaceholder'
 // Type
 import { IPostItem, INavItem } from '@/types'

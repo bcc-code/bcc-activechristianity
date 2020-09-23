@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITopicRes, IPostItem, ITopicNavItem } from '@/types'
-import ToggleFollow from '@/components/Buttons/CardToggleFollow'
+import ToggleFollow from '@/layout-parts/Buttons/CardToggleFollow'
 import Two2OneImage from '../Images/Image2To1'
 import TopicIcon from '@/components/Icons/Topics'
 import { PostTitle, ReadMore } from '@/components/PostItem/PostItemParts'

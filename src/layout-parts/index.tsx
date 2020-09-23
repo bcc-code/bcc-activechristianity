@@ -3,8 +3,8 @@ import Link from '@/components/CustomLink'
 import { ITranslations, INavItem } from '@/types'
 
 import h2p from 'html2plaintext'
-import ShareButton from '@/components/Buttons/SharePopover'
-import ToogleBookmark from '@/components/Buttons/ToggleBookmark'
+import ShareButton from '@/layout-parts/Buttons/SharePopover'
+import ToogleBookmark from '@/layout-parts/Buttons/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
 

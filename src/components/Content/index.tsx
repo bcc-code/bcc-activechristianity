@@ -1,6 +1,6 @@
 import * as React from "react"
 import ReactHtmlParser from "react-html-parser"
-import FetchPost from '@/components/FetchPost'
+import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import shareThis from "share-this";
 import "./content.css"
 import h2p from 'html2plaintext'

@@ -1,17 +1,28 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { fetchLocalPostsFromSlugs, fetchTopicFromSlug } from '@/helpers/fetchLocalData'
 import { IRootState } from '@/state/types'
-import { ITopicRes } from '@/types'
-import { OutlineRightIcon } from "@/components/Buttons"
+import { ITopicNavItem } from '@/types'
+import { OutlineRightIcon } from "@/layout-parts/Buttons"
 
 const UserHistory = () => {
 
-    const [followedTopic, setFollowedTopics] = React.useState<ITopicRes[]>([])
+    const [followedTopic, setFollowedTopics] = React.useState<ITopicNavItem[]>([])
     const userLibrary = useSelector((state: IRootState) => state.userLibrary);
 
     React.useEffect(() => {
-        fetchLocalPostsFromSlugs(userLibrary.followedTopics).then(res => setFollowedTopics(res))
+        Promise.all(userLibrary.followedTopics.map(item => fetchTopicFromSlug(item.slug)))
+            .then(res => {
+                const topics: ITopicNavItem[] = []
+                res.forEach(item => {
+                    if (item) {
+                        topics.push(item)
+                    }
+                })
+                setFollowedTopics(topics)
+            })
+
+
     }, [userLibrary.followedTopics])
 
     return (

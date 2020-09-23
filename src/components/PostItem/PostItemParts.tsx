@@ -1,13 +1,13 @@
 import * as React from 'react';
 import h2p from 'html2plaintext'
 import SquareImg from '@/components/Images/Image1to1Rounded'
-import { PlaylistPlayButton } from '@/components/Buttons/PlayButton'
+import { PlaylistPlayButton } from '@/layout-parts/Buttons/PlayButton'
 
 import Link from '@/components/CustomLink'
 import { IPostItem, IImage, IPostAuthors } from '@/types'
 import TS from '@/strings'
 
-import Bookmark from '@/components/Buttons/ToggleBookmark'
+import Bookmark from '@/layout-parts/Buttons/ToggleBookmark'
 
 import './style/parts.css'
 

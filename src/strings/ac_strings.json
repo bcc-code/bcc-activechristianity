@@ -83,5 +83,8 @@
     "old_testimony": "Old Testament",
     "new_testimony": "New Testament",
     "topics_for_you": "Topics for you",
-    "topics_for_you_text": "Looking for a topic? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer erat urna, aliquam ac massa vel, dictum rhoncus mi. Sed blandit."
+    "topics_for_you_text": "Looking for a topic? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer erat urna, aliquam ac massa vel, dictum rhoncus mi. Sed blandit.",
+    "episode_notes": "Episode Notes",
+    "transcript": "Transcript",
+    "more_from": "More from"
 }

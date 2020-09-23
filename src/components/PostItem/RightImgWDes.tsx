@@ -5,7 +5,7 @@ import { IPostItem } from '@/types'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 
 import { PostTitle, PostExcerpt, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
-import { PostItemMediaImg } from '@/components/Buttons/PlayButton'
+import { PostItemMediaImg } from '@/layout-parts/Buttons/PlayButton'
 import { ShareSection } from '@/layout-parts'
 
 import 'lazysizes';

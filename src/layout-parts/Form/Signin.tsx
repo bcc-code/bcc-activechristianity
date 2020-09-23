@@ -7,7 +7,7 @@ import { InputText, InputCheckbox } from '@/components/Input'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import Snackbar from '@/components/Snackbar'
-import { FormSubmitButton } from "@/components/Buttons"
+import { FormSubmitButton } from "@/layout-parts/Buttons"
 import { IRootState } from '@/state/types'
 
 const initialFieldsState = {

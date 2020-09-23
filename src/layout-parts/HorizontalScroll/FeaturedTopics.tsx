@@ -4,7 +4,7 @@ import XScrollCustomSize from './BaseCustomSize'
 import './horizontal-scroll.css';
 import { ITopic } from '@/types'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
-import { SlateDarkFollowButton } from '@/components/Buttons/ToggleFollowWrapper'
+import SlateDarkFollowButton from '@/layout-parts/Buttons/ToggleFollow'
 import { getImage } from '@/helpers/imageHelpers'
 import TS from '@/strings'
 const placeHolderImage = {
@@ -24,8 +24,6 @@ const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
                         </Link>
                         <SlateDarkFollowButton
                             id={id}
-                            followed={followed === true}
-                            className="w-full"
                         />
 
                     </div>

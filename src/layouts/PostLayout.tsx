@@ -14,7 +14,7 @@ const MockRelatedContentMedia = loadable(() => import('@/layout-parts/RelatedCon
 const PlaylistItem = loadable(() => import('@/components/PostItem/LeftImgPlaylist')) */
 
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-import FetchPost from '@/components/FetchPost'
+import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import { MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
 
 import TwoToOneImg from "@/components/Images/Image2To1"
@@ -141,6 +141,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         image,
         types,
         topics,
+        format,
         reading_time,
         content,
         langs,
@@ -168,11 +169,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         readMore = [...new Set(readMore)]
     }
 
+    const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
     const body = (
 
         <div>
 
-            {types && types[0] && types[0].name === "podcast" ? (
+            {isPodcast ? (
                 <ContentPodcast
                     episodeNotes={"<p>Peter the disciple might be the apostle that we know the most about from the accounts written in the Bible. And what we find when we read these stories about him is that he is a very relatable man. In this episode Kathy and Julia have an animated discussion about Peter – Julia’s self-proclaimed “favorite apostle” – and how what we read about him as a man and a disciple, can fill us with hope for our own lives.</p>\n<p>Read the article “The Apostle Peter: A completely new man” here: <a href=\"https://bit.ly/2X1ogq9\">https://bit.ly/2X1ogq9</a></p>\n"}
                     transcript={content}
@@ -318,7 +320,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             >
                 {!isCurrentMedia.video && <div className="relative sm:pt-10 mb-12 ">
                     <TwoToOneImg image={image} rounded />
-                    {types && types[0] && types[0].name === "podcast" && (
+                    {isPodcast && (
                         <div>
                             <SubscribePodcast />
                         </div>

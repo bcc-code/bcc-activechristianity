@@ -57,11 +57,11 @@ const NewForYou: React.FC<IProps> = ({ topics }) => {
                     })}
 
                     <span
-                        className="block absolute bottom-0 mb-3 ml-4 w-4 h-1 block bg-gray-600 rounded icon-tab-marker"
+                        className="block absolute bottom-0 mb-3 ml-4 w-4 h-1 block bg-gray-600 rounded ac-tab-marker"
                         style={{ left: `${activeTab * 64}px` }}
                     />
                 </span>
-                <div className='icon-tab-card-wrapper overflow-hidden' {...handlers}>
+                <div className='ac-tab-card-wrapper overflow-hidden' {...handlers}>
                     {topics.map((topic, i) => {
                         let postClassName = ''
                         if (i === activeTab) {
@@ -74,7 +74,7 @@ const NewForYou: React.FC<IProps> = ({ topics }) => {
 
 
                         return (
-                            <div className={`icon-tab-${postClassName} icon-tab-card px-4`}>
+                            <div className={`ac-tab-${postClassName} ac-tab-card px-4`}>
                                 <div className="bg-white flex flex-col items-center px-2 border border-gray-300 rounded-lg sm:max-w-sm cursor-pointer">
                                     <Link className="flex justify-between w-full border-b border-gray-200 py-2" to={`${TS.slug_topic}/${topic.slug}`}>
                                         <div>

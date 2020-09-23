@@ -1,13 +1,10 @@
 import * as React from "react"
 import { useSwipeable } from "react-swipeable"
 import Icon from '@/components/Icons'
-import { INavItem } from '@/types'
+import { ITab } from '@/types'
 import { SmoothHorizontalScrolling } from '@/helpers'
 import './scrollNavTabs.css'
 
-interface ITab extends INavItem {
-    content: JSX.Element
-}
 interface IProps {
     tabs: ITab[]
 }
@@ -54,7 +51,6 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
             <div
                 ref={menuEl}
                 className="scroll-snap-x-container scroll-snap-x-container-start overflow-x-auto whitespace-no-wrap flex items-center relative pt-4 pb-2"
-                style={{ scrollBehavior: 'smooth' }}
             >
 
                 {tabs.map((item, i) => {
@@ -68,11 +64,8 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
                         </button>
                     )
                 })}
-                <div className="scroll-snap-x-child-start min-w-20 min-h-4">
-
-                </div>
             </div>
-            <div className='icon-tab-card-wrapper overflow-hidden' {...handlers}>
+            <div className='ac-tab-card-wrapper overflow-hidden' {...handlers}>
                 {tabs.map((tab, i) => {
                     let postClassName = ''
                     if (i === activeTab) {
@@ -86,7 +79,7 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
 
 
                     return (
-                        <div className={`icon-tab-${postClassName} icon-tab-card px-4`}>
+                        <div className={`ac-tab-${postClassName} ac-tab-card px-4`}>
                             {tab.content}
                         </div>
                     )

@@ -58,8 +58,3 @@ export const setNewFollowTopic = (payload: { id: string, followed: boolean }) =>
     payload
 })
 
-export const setNewFollowTag = (payload: { id: string, followed: boolean }) => ({
-    type: 'NEW_USER_FOLLLOW_TAG',
-    payload
-})
-

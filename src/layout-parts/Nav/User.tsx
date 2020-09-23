@@ -6,7 +6,7 @@ import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import { openSignInModal } from '@/state/action'
 
-import { setLogout, setUser } from '@/state/action/authAction'
+import { initiateLogout } from '@/state/action/authAction'
 
 interface IUserNav {
     className?: string
@@ -38,7 +38,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     }
 
     const handleLogout = () => {
-        dispatch(setLogout())
+        dispatch(initiateLogout())
         if (callback) {
             callback()
         }

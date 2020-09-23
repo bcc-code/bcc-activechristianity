@@ -20,8 +20,8 @@ import { getUserLibrary } from '@/state/action/userAction'
 // string
 import TS from '@/strings';
 import ac_strings from '@/strings/ac_strings.json'
-import { auth as authApi } from '@/util/sdk'
-
+/* import { auth as authApi } from '@/util/sdk' */
+import acApi from '@/util/api'
 // type 
 import { IRootState } from '@/state/types'
 import { IUser, IMenusQuery, INavItem } from '@/types'
@@ -61,17 +61,15 @@ const App: React.FC<any> = (props) => {
 
 
     const checkUser = () => {
-        authApi
+        acApi
             .profile()
             .then((res: IUser) => {
+                console.log(res)
                 if (res && res.id) {
 
                     dispatch(setUser(res))
                     dispatch(getUserLibrary())
-                    /*                     dispatch(getUserFollowing())
-                                        dispatch(getUserLiked())
-                                        dispatch(getUserHistory())
-                                        dispatch(getUserUnfinished()) */
+
                 } else {
                     dispatch(setLogout())
                 }

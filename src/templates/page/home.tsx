@@ -43,7 +43,7 @@ const SectionTitle: React.FC<{ title: string }> = ({ title }) => (
 
 const IndexPage: React.FC<IHomeProps> = (props) => {
   const { pageContext, path } = props
-  console.log(pageContext)
+  const { bookmarkedPosts, historyPosts } = useSelector((state: IRootState) => state.userLibrary)
   const {
     featuredPosts: featuredPostSlugs,
     popularTopics: popularTopicsAll,
@@ -103,8 +103,28 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
 
         </div>
+        <div>
+          <FetchPostList
+            slug={latestPostAsTopic.slug}
+            layout="list"
+            render={({ posts }) => {
+              return (
+                <div className="">
+                  {posts.slice(0, 6).map((item, i) => {
+                    return (
+                      <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
+                        <RightImgWDes key={i} {...item} />
+                      </div>
+                    )
+                  })}
+                </div>
+              )
 
-        <LazyLoad>
+            }}
+
+          />
+        </div>
+        {/*         <LazyLoad>
           <FetchTopicPostItems
             topics={tabs}
             layout="list"
@@ -121,7 +141,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             )}
 
           />
-        </LazyLoad>
+        </LazyLoad> */}
         <LazyLoad>
           <div className="py-6">
             <SectionTitle title={ac_strings.topics_for_you} />
@@ -139,6 +159,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <div className="grid-home-end sm:mx-4">
             <div className="div1">
               <FetchPostList
+                slug={latestPostAsTopic.slug}
                 layout="list"
                 render={({ posts }) => {
                   return (
@@ -153,7 +174,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                     </div>
                   )
 
-                }} slug={latestPostAsTopic.slug}
+                }}
 
               />
               <ShowMore

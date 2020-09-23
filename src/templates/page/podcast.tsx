@@ -4,24 +4,23 @@ import { graphql } from "gatsby"
 // Components
 import Link from '@/components/CustomLink'
 import Content from '@/components/Content'
-import { OutlineButton } from '@/components/Buttons'
+import { OutlineButton } from '@/layout-parts/Buttons'
 import MetaTag from '@/components/Meta'
 import Modal from '@/components/Modal/ModalWProps'
 
 
 import PostItem from '@/components/PostItem/RightImgSimple'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
-import { PlaylistPlayOutlineButton } from '@/components/Buttons/PlayButton'
-import Square from '@/components/Images/Image1to1Rounded'
+import { PlaylistPlayOutlineButton } from '@/layout-parts/Buttons/PlayButton'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import TwoToThreeTabs from '@/components/Tabs/TwoToThreeTabs'
 import { UnderlineTitleLink } from '@/layout-parts'
 
 // helpers
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import livingTheGospel from '@/strings/podcastProperties'
 
-import { INavItem, IPostItem, IAuthor } from '@/types'
+import { INavItem, IPostItem, IAuthor, ITab } from '@/types'
 
 
 import TS from '@/strings'
@@ -173,7 +172,6 @@ const Listen: React.FC<IListenPageProps> = (props) => {
             </div>
         </div>
     )
-
     const popularPanel = (
         <div>
             {popularPost.map((post, i) => (
@@ -181,6 +179,25 @@ const Listen: React.FC<IListenPageProps> = (props) => {
             ))}
         </div>
     )
+
+
+    const tabs: ITab[] = [
+        {
+            name: ac_strings.latest,
+            to: '',
+            content: latestPanel
+        },
+        {
+            name: ac_strings.popular,
+            to: '',
+            content: popularPanel
+        },
+        {
+            name: ac_strings.hosts,
+            to: '',
+            content: hostsBlock.content
+        }
+    ]
     return (
         <div>
             <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
@@ -235,23 +252,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
                 <div className="standard-max-w-px pt-8">
                     <div className="md:hidden">
-                        <Tabs >
-                            <TabList>
-                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{ac_strings.latest}</Tab>
-                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{ac_strings.popular}</Tab>
-                                <Tab className="react-tabs__tab react-tabs__tab__1/3">{ac_strings.hosts}</Tab>
-                            </TabList>
-                            <TabPanel>
-                                {latestPanel}
-                            </TabPanel>
-                            <TabPanel>
-                                {popularPanel}
-                            </TabPanel>
-                            <TabPanel>
-                                {hostsBlock.content}
-                            </TabPanel>
-
-                        </Tabs>
+                        <TwoToThreeTabs tabs={tabs} />
                     </div>
                     <div className="hidden md:flex flex-wrap p-2 ">
 

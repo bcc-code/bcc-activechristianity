@@ -2,7 +2,7 @@
 import * as React from "react"
 import FetchPostList from '@/layout-parts/HOC/FetchPostList'
 import RightImgWDes from '@/components/PostItem/RightImgWDes'
-import { OutlineButton } from '@/components/Buttons'
+import { OutlineButton } from '@/layout-parts/Buttons'
 import ac_strings from '@/strings/ac_strings.json'
 import { ITopic, IPostItem } from '@/types'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
@@ -39,7 +39,7 @@ const ShowMorePosts: React.FC<{ startNr: number, slug: string }> = ({ startNr, s
                     </div>
                 )
             })}
-            <div className="flex justify-center">
+            <div className="flex justify-center py-4">
                 <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={showMorePosts} />
             </div>
 

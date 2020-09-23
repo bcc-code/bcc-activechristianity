@@ -1,6 +1,6 @@
 import * as React from 'react'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import FetchPost from '@/components/FetchPost'
+import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import Content from '@/components/Content'
 
 

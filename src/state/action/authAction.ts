@@ -1,6 +1,6 @@
 
 import { Action } from 'redux'
-import { IProfileRes } from '@/types/apiResType'
+import { IUser } from '@/types'
 
 interface ILogin {
     email: string
@@ -27,7 +27,7 @@ export const initiateRegister = (payload: IRegister) => ({
     payload
 });
 
-export const setUser = (payload: IProfileRes) => ({
+export const setUser = (payload: IUser) => ({
     type: 'SET_USER',
     payload
 })

@@ -49,11 +49,11 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
                 })}
 
                 <span
-                    className="absolute bottom-0 mb-3 ml-4 w-4 h-1 block bg-gray-600 rounded icon-tab-marker"
+                    className="absolute bottom-0 mb-3 ml-4 w-4 h-1 block bg-gray-600 rounded ac-tab-marker"
                     style={{ left: `${activeTab * 64}px` }}
                 />
             </span>
-            <div className='icon-tab-card-wrapper overflow-hidden' {...handlers}>
+            <div className='ac-tab-card-wrapper overflow-hidden' {...handlers}>
                 {tabs.map((tab, i) => {
                     let postClassName = ''
                     if (i === activeTab) {
@@ -67,7 +67,7 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
 
 
                     return (
-                        <div className={`icon-tab-${postClassName} icon-tab-card px-4`}>
+                        <div className={`ac-tab-${postClassName} ac-tab-card px-4`}>
                             <div className="bg-white flex flex-col items-center px-2 border border-gray-300 rounded-lg sm:max-w-sm cursor-pointer">
 
                                 {tab.posts.map(item => (

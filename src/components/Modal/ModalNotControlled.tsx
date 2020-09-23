@@ -1,5 +1,5 @@
 import * as React from 'react'
-import CloseButtonRound from '@/components/Buttons/CloseButtonRound'
+import CloseButtonRound from '@/layout-parts/Buttons/CloseButtonRound'
 import ReactModal from 'react-modal'
 import ac_strings from '@/strings/ac_strings.json'
 

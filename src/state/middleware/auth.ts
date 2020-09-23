@@ -4,9 +4,10 @@ import { Middleware } from 'redux'
 import { setUser, setLogInError, setRegisterError, setLogout, setLogoutError } from '@/state/action/authAction'
 import { closeSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
-import { IProfileRes } from '@/types/apiResType'
+/* import { IProfileRes } from '@/types/apiResType' */
 
 import { auth as authApi } from '@/util/sdk'
+import acApi from '@/util/api'
 
 const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action) => {
     switch (action.type) {
@@ -17,10 +18,8 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             next(action)
             const { email: login_email, password: login_password, remember } = action.payload
             // fetch data from an API that may take a while to respond
-            authApi
-                .login(login_email, login_password, remember)
-
-                .then((res: IProfileRes) => {
+            acApi.login(login_email, login_password, remember)
+                .then((res: any) => {
                     if (res) {
                         console.log(res)
                         store.dispatch(setUser(res))
@@ -35,6 +34,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                     store.dispatch(setLogout())
                     store.dispatch(setLogInError(message))
                 })
+
             break
         case 'INITIATE_REGISTER':
 
@@ -42,9 +42,9 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
             const { name: register_fullname, email: register_email, password: register_password, remember: register_remember } = action.payload
             /* const reguster_data = { register_fullname, register_email, register_password, register_remember } */
-            authApi
+            acApi
                 .register(register_fullname, register_email, register_password, register_remember)
-                .then((res: IProfileRes) => {
+                .then((res: any) => {
                     store.dispatch(setUser(res))
                     store.dispatch(closeSignInModal())
                 })
@@ -55,7 +55,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                 })
             break
         case 'INITIATE_LOGOUT':
-            authApi
+            acApi
                 .logout()
                 .then(() => {
                     store.dispatch(setLogout())

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux"
 import TS from '@/strings'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
-import { OutlineButton } from "@/components/Buttons"
+import { OutlineButton } from "@/layout-parts/Buttons"
 
 import { InputText } from '@/components/Input'
 

@@ -57,7 +57,7 @@ interface IPostProp {
 
 export const pageQuery = graphql`
     fragment PostMain on ac_node_post {
-                id
+                id:acId
                 title
                 slug
                 meta {

@@ -7,13 +7,64 @@ import { IRootState, IUserLibrary } from '../types'
 import { blog as blogApi } from '../../util/sdk'
 import { setUserLiked, setUserHistory, setUserFollowing, setUserUnfinished, setUserLibrary } from '@/state/action/userAction'
 import { IHistory, ILiked, IUnfinished, IFollowing } from '@/types'
+import acApi from '@/util/api'
+
 const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) => {
     switch (action.type) {
         // only catch a specific action
+        case 'NEW_USER_FOLLLOW_TOPIC':
+            console.log(action)
+            acApi
+                .followTopic(action.payload.id, false)
+                .then((resNewFollow: any) => {
+                    console.log(resNewFollow)
+                    return acApi
+                        .following()
+                        .then((res: IFollowing) => {
+                            console.log(res)
+                            if (res.following && Array.isArray(res.following.topics)) {
+                                store.dispatch(setUserFollowing(res.following.topics))
+                            } else {
+                                console.log('reset topics')
+                                store.dispatch(setUserFollowing([]))
+                            }
 
+                        })
+                        .catch((error: any) => {
+                            console.log(error)
+                        })
+
+                }).catch((error: any) => {
+                    console.log(error)
+                })
+            break;
+        case 'NEW_USER_LIKED':
+            acApi
+                .likePost(action.payload.id, action.payload.bookmarked)
+                .then((resNewLike: any) => {
+                    if (resNewLike.likePost && resNewLike.likePost.success === true) {
+                        return acApi.liked()
+                            .then((res: ILiked) => {
+                                console.log(res)
+                                if (Array.isArray(res.liked)) {
+                                    store.dispatch(setUserLiked(res.liked))
+                                }
+
+                            })
+
+                    } else {
+                        throw Error('feil to set new like')
+                    }
+
+                })
+                .catch((err: any) => {
+                    console.log(err)
+                })
+            break;
         case 'FETCH_USER_LIKED':
 
-            blogApi.liked()
+            acApi
+                .liked()
                 .then((res: ILiked) => {
                     console.log(res)
                     if (Array.isArray(res.liked)) {
@@ -26,13 +77,13 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 })
             break
         case 'FETCH_USER_FOLLOWING':
-            blogApi
+            acApi
                 .following()
                 .then((res: IFollowing) => {
                     console.log(res)
-                    if (Array.isArray(res.topics)) {
-                        if (res.topics) {
-                            store.dispatch(setUserFollowing(res.topics))
+                    if (Array.isArray(res.following.topics)) {
+                        if (res.following.topics) {
+                            store.dispatch(setUserFollowing(res.following.topics))
                         }
                     }
 
@@ -43,8 +94,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             break
 
         case 'FETCH_USER_HISTORY':
-            blogApi
-                .history(20)
+            acApi
+                .history()
                 .then((res: IHistory) => {
                     console.log(res)
                     if (Array.isArray(res.history)) {
@@ -60,7 +111,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             break
 
         case 'FETCH_USER_UNFINISHED':
-            blogApi
+            acApi
                 .unfinishedPosts()
                 .then((res: IUnfinished) => {
                     console.log(res)
@@ -77,7 +128,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
 
         case 'FETCH_USER_LIBRARY':
             Promise.all([
-                blogApi.liked()
+                acApi.liked()
                     .then((res: ILiked) => {
                         console.log(res)
                         if (Array.isArray(res.liked)) {
@@ -89,7 +140,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     .catch((err: any) => {
                         // set_FOLLOWING_ERROR
                     }), //0
-                blogApi
+                acApi
                     .following()
                     .then((res: IFollowing) => {
                         console.log(res)
@@ -106,8 +157,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     .catch((err: any) => {
                         // set_FOLLOWING_ERROR
                     }), //3
-                blogApi
-                    .history(20)
+                acApi
+                    .history()
                     .then((res: IHistory) => {
                         console.log(res)
                         if (Array.isArray(res.history)) {
@@ -122,7 +173,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         console.log(err)
                         // set_FOLLOWING_ERROR
                     }), //4
-                blogApi.unfinishedPosts()
+                acApi
+                    .unfinishedPosts()
                     .then((res: IUnfinished) => {
                         console.log(res)
                         if (Array.isArray(res.unfinishedPosts)) {
@@ -136,36 +188,37 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         // set_FOLLOWING_ERROR
                     }) //5
 
-            ]).then(res => {
-                const userLibrary: IUserLibrary = {
-                    bookmarkedPosts: [],
-                    followedTopics: [],
-                    historyPosts: [],
-                    unfinishedPosts: []
-                }
-                if (res[0] && res[0].length > 0) {
-                    userLibrary.bookmarkedPosts = res[0]
-                }
+            ])
+                .then(res => {
+                    const userLibrary: IUserLibrary = {
+                        bookmarkedPosts: [],
+                        followedTopics: [],
+                        historyPosts: [],
+                        unfinishedPosts: []
+                    }
+                    if (res[0] && res[0].length > 0) {
+                        userLibrary.bookmarkedPosts = res[0]
+                    }
 
-                if (res[1] && res[1].length > 0) {
-                    userLibrary.followedTopics = res[1]
-                }
+                    if (res[1] && res[1].length > 0) {
+                        userLibrary.followedTopics = res[1]
+                    }
 
-                if (res[2] && res[2].length > 0) {
-                    userLibrary.historyPosts = res[2]
-                }
+                    if (res[2] && res[2].length > 0) {
+                        userLibrary.historyPosts = res[2]
+                    }
 
-                if (res[3] && res[3].length > 0) {
-                    userLibrary.unfinishedPosts = res[3]
-                }
-                store.dispatch(setUserLibrary(userLibrary))
-                /*
-                  followedTopics: IApiItem[]
-  unfinishedPosts: IApiItem[]
-  bookmarkedPosts: IApiItem[]
-  historyPosts: IApiItem[]*/
-                //)
-            })
+                    if (res[3] && res[3].length > 0) {
+                        userLibrary.unfinishedPosts = res[3]
+                    }
+                    store.dispatch(setUserLibrary(userLibrary))
+                    /*
+                      followedTopics: IApiItem[]
+      unfinishedPosts: IApiItem[]
+      bookmarkedPosts: IApiItem[]
+      historyPosts: IApiItem[]*/
+                    //)
+                })
 
             break;
         // if we don't need to handle this action, we still need to pass it along

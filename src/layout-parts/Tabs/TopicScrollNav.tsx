@@ -1,8 +1,6 @@
 import * as React from "react"
-import Link from '@/components/CustomLink'
-import { useSwipeable } from "react-swipeable"
 
-import ScrollNavTabs from '@/layout-parts/Tabs/ScrollNavTabs'
+import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 import RightImg from '@/components/PostItem/RightImgWDes'
 import { ITopicPostItems } from '@/types'
 
