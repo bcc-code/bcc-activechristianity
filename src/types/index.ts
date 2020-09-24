@@ -285,6 +285,7 @@ export interface IPostRes {
     updated_at: string
     glossary?: IGlossary[]
     recommendPosts: string[]
+    readMorePosts: string[]
 }
 
 export interface IUser {

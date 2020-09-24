@@ -5,6 +5,7 @@ import shareThis from "share-this";
 import "./content.css"
 import h2p from 'html2plaintext'
 import TooltipTrigger from '@/components/ToolTip';
+import RightImgPost from '@/components/PostItem/RightImgWDes'
 import "share-this/style/scss/share-this.scss"
 import * as twitterSharer from "share-this/dist/sharers/twitter"
 import * as facebookSharer from "share-this/dist/sharers/facebook"
@@ -68,21 +69,8 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
                                     shorten = parts.join(' ')
                                 }
                                 return (
-                                    <TooltipTrigger
+                                    <div className="rtBibleRef"> {word}</div>
 
-                                        tooltip={(
-                                            <span className="">
-                                                <span className="text-sm leading-normal font-normal font-sans" >
-                                                    {shorten}
-                                                    <a target="_blank" href={`${TS.glossary}/${g.slug}`}> ... </a>
-                                                </span>
-
-                                            </span>
-                                        )}
-                                    >
-                                        {word}
-
-                                    </TooltipTrigger>
                                 )
                             }
 
@@ -128,7 +116,23 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
 
                         const alink = node.children[0].children[0].attribs.href
                         if (!alink) return
-                        return <FetchPost url={`${alink}`} />
+                        return (
+                            <div className="">
+                                <FetchPost
+                                    slugs={[alink]}
+                                    layout="list"
+                                    render={({ posts }) => {
+                                        return (
+                                            <div>
+                                                {posts.map(post => (
+                                                    <RightImgPost {...post} />
+                                                ))}
+                                            </div>
+                                        )
+                                    }}
+                                />
+                            </div>
+                        )
                     }
 
                 }

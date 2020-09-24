@@ -29,7 +29,7 @@ const Bookmark: React.FC<IFetchPost> = ({ id, render }) => {
             dispatch(openSignInModal("signInOptions"))
         }
     }
-
+    console.log('rendering bookmark')
     return (
         <div
             onClick={handleClick}

@@ -200,7 +200,7 @@ export const MobilePostMain: React.FC<IMobilePostMain> = ({ id, height, title, e
 export const DesktopPostMain: React.FC<IDesktopPostMain> = ({ id, title, excerpt, headerLeft, headerMeta, children, shareSlug, translatedUrls, notHide }) => {
 
     return (
-        <div className={`${notHide ? '' : 'hidden'} sm:block mt-16 sm:mt-24`}>
+        <div className={`${notHide ? '' : 'hidden'} sm:block mt-16 sm:mt-24 px-4`}>
             <div className="max-w-tablet m-auto">
                 <div className="flex">
                     {headerLeft && (

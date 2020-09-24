@@ -38,6 +38,7 @@ interface IPostProps extends IPostItem {
     content: string
     langs: ITranslations[]
     recommendPosts: string[]
+    readMorePosts: string[]
 }
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const dispatch = useDispatch()
@@ -145,7 +146,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         content,
         langs,
         glossary,
-        recommendPosts
+        recommendPosts,
+        readMorePosts
     } = post
 
     const postId = id
@@ -155,6 +157,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const contributor = authors && <PostMetaWLabel authors={authors} />
 
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
+    console.log(readMorePosts)
+    console.log(recommendPosts)
     let readMore: string[] = []
     if (recommendPosts) {
         let randName = [];
@@ -176,19 +180,16 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         } */
     // remove dupicates in readmores 
     if (readMore.length > 0) {
-        readMore = [...new Set(readMore)]
+        readMore = [...new Set(readMorePosts), ...new Set(readMore)]
     }
 
-    const isPodcast = format?.findIndex(f => {
-        console.log(f.id)
-        console.log(process.env.PODCAST_FILTER_ID)
-        return `${f.id}` === process.env.PODCAST_FILTER_ID
-    })
+    const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
+
     const body = (
 
         <div>
 
-            {isPodcast ? (
+            {isPodcast && isPodcast > -1 ? (
                 <ContentPodcast
                     episodeNotes={"<p>Peter the disciple might be the apostle that we know the most about from the accounts written in the Bible. And what we find when we read these stories about him is that he is a very relatable man. In this episode Kathy and Julia have an animated discussion about Peter – Julia’s self-proclaimed “favorite apostle” – and how what we read about him as a man and a disciple, can fill us with hope for our own lives.</p>\n<p>Read the article “The Apostle Peter: A completely new man” here: <a href=\"https://bit.ly/2X1ogq9\">https://bit.ly/2X1ogq9</a></p>\n"}
                     transcript={content}
@@ -220,7 +221,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                             <RightImgPost key={item.slug} {...item} />
                                         ))}
                                     </div>
-                                    <div className="sm:hidden">
+                                    <div className="sm:hidden -ml-4 -mr-4">
                                         <DesktopPopularRow posts={posts} />
                                     </div>
                                 </div>

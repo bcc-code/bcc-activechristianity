@@ -45,8 +45,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         return acApi.liked()
                             .then((res: ILiked) => {
                                 console.log(res)
-                                if (Array.isArray(res)) {
-                                    store.dispatch(setUserLiked(res))
+                                if (Array.isArray(res.liked)) {
+                                    store.dispatch(setUserLiked(res.liked))
                                 }
 
                             })

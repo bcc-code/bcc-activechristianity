@@ -93,6 +93,7 @@ query {
 export const likedPostsQuery = `
   query {
     liked {
+      id
       slug
     }
   }
@@ -101,6 +102,7 @@ export const followedTopicsQuery = `
   query {
     following {
       tags {
+        id
         slug
       }
     } 
@@ -109,6 +111,7 @@ export const followedTopicsQuery = `
 export const latestHistoryQuery = `
   query {
     history(limit:10) {
+      id
       slug
     }
   }
@@ -117,6 +120,7 @@ export const latestHistoryQuery = `
 export const unfinishedQuery = `
   query {
     unfinishedPosts {
+      id
       slug
     }
   }
