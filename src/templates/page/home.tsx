@@ -4,19 +4,13 @@ import loadable from '@loadable/component'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { useSelector } from "react-redux";
 import FetchPosts from '@/layout-parts/HOC/FetchPosts'
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
 import FetchPostList from '@/layout-parts/HOC/FetchPostList'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const DesktopPopularRow = loadable(() => import('@/layout-parts/HorizontalScroll/DesktopPopular'))
 
-const ScrollNavTabs = loadable(() => import('@/layout-parts/Tabs/TopicScrollNav'))
-const ScrollNavTabsDesktop = loadable(() => import('@/layout-parts/Tabs/TopicScrollNavDesktop'))
-const FeatureSection = loadable(() => import('@/layout-parts/Home/FeatureSection'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
 
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
-import TopImgPost from '@/components/PostItem/TopImg'
-const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
 import LazyLoad from '@/components/LazyLoad';
 
 import LowerSections from '@/layout-parts/Home/LowerSections'
@@ -27,7 +21,7 @@ const RightImgWDes = loadable(() => import('@/components/PostItem/RightImgWDes')
 
 // Type
 import { IRootState } from '@/state/types'
-import { ITopicPostSlugs, ITopicPostItems } from '@/types'
+import { ITopicPostSlugs } from '@/types'
 
 
 // Helpers

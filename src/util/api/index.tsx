@@ -3,7 +3,6 @@ import * as request from './requests';
 
 const baseUrl = process.env.API_URL || "API_URL"
 const sendQuery = (query: string) => {
-    console.log(query)
     return fetch(baseUrl, {
         method: 'POST',
         'credentials': 'include',
@@ -45,7 +44,7 @@ export default {
             return res
         })
     },
-    likePost: (id: number, toggle: boolean) => {
+    likePost: (id: string, toggle: boolean) => {
         const query = request.likePostMutation(id, toggle)
         return sendQuery(query).then(res => {
             console.log(res)
@@ -66,10 +65,9 @@ export default {
             return res
         })
     },
-    visitsPost: (id: number) => {
-        const query = request.readingPostMutation(id)
+    visitsPost: (id: string) => {
+        const query = request.visitsPostMutation(id)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
@@ -80,15 +78,23 @@ export default {
             return res
         })
     },
-    readingPost: (id: number) => {
+    readingPost: (id: string) => {
         const query = request.readingPostMutation(id)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
     unfinishedPosts: () => {
         const query = request.unfinishedQuery
+        return sendQuery(query).then(res => {
+            console.log(res)
+            return res
+        })
+    },
+    biblePosts: (bookId: number, chapter: number) => {
+        console.log(bookId, chapter)
+        const query = request.biblePostsQuery(bookId, chapter)
+        console.log(query)
         return sendQuery(query).then(res => {
             console.log(res)
             return res

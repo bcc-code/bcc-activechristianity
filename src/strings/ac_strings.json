@@ -86,5 +86,7 @@
     "topics_for_you_text": "Looking for a topic? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer erat urna, aliquam ac massa vel, dictum rhoncus mi. Sed blandit.",
     "episode_notes": "Episode Notes",
     "transcript": "Transcript",
-    "more_from": "More from"
+    "more_from": "More from",
+    "author": "Authors",
+    "speaker": "Speaker"
 }

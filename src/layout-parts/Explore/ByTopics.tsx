@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { navigate } from "gatsby"
 import { generate as generateId } from 'shortid'
-import { IResourceOverview, typesImageColors } from './ExploreByType'
+import { IResourceOverview } from './ExploreByType'
 import { connectRefinementList } from 'react-instantsearch-dom'
-import ac_strings from '@/strings/ac_strings.json'
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
-import TypeCard from '@/components/Cards/TypeCard'
-import { divide } from 'lodash';
 
 interface IByTaxonomyProps {
     resource: IResourceOverview

@@ -8,9 +8,7 @@ import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection }
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
 import { PlaylistBackground } from '@/components/PostItem/PostItemParts'
 
-import { blog as blogApi } from '@/util/sdk'
-
-import { normalizeAuthors, normalizeTracks } from '@/helpers'
+import { normalizeTracks } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 
 import { IRootState } from '@/state/types'

@@ -20,7 +20,6 @@ import { getUserLibrary } from '@/state/action/userAction'
 // string
 import TS from '@/strings';
 import ac_strings from '@/strings/ac_strings.json'
-/* import { auth as authApi } from '@/util/sdk' */
 import acApi from '@/util/api'
 // type 
 import { IRootState } from '@/state/types'
@@ -54,7 +53,6 @@ const App: React.FC<any> = (props) => {
 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
-
     React.useEffect(() => {
         checkUser()
     }, [])
@@ -64,7 +62,6 @@ const App: React.FC<any> = (props) => {
         acApi
             .profile()
             .then((res: IUser) => {
-                console.log(res)
                 if (res && res.id) {
 
                     dispatch(setUser(res))

@@ -98,7 +98,10 @@ module.exports.createSubTopicPages=({
 
     const totalCount = allPosts.length
 
-    if (!totalCount) return Promise.error('No posts')
+    if (!totalCount) {
+      console.log(topic.slug)
+      console.log('No posts for this topic')
+    }
     const totalPages = Math.ceil(totalCount / perPage)
     const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
 

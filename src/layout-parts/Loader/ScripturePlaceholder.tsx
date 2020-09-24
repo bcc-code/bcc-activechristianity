@@ -5,9 +5,9 @@ import { ScriptureBookBlock } from './PlaceHolders'
 const customerPlaceholder = (
     <div className="flex flex-wrap w-full">
 
-        {["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map(item => {
+        {["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""].map((item, k) => {
             return (
-                <div className="w-1/2 sm:1/4 md:1/6 p-2 inline-block">
+                <div className="w-1/2 sm:1/4 md:1/6 p-2 inline-block" key={k}>
                     <ScriptureBookBlock />
                 </div>
             )
@@ -18,7 +18,11 @@ const customerPlaceholder = (
 const ScripturePlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
 
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={customerPlaceholder}>
+        <ReactPlaceholder
+            showLoadingAnimation
+            ready={!loading}
+            customPlaceholder={customerPlaceholder}
+        >
             {children}
         </ReactPlaceholder>
 

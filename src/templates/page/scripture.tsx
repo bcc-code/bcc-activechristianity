@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from "gatsby"
 import Link from '@/components/CustomLink'
 import { CSSTransition } from 'react-transition-group'
 import MetaTag from '@/components/Meta'
@@ -11,7 +12,8 @@ import { IPostItem, INavItem } from '@/types'
 import { IBibleBook, IBible, IApiPost } from '@/types'
 
 // Helper
-import { other as otherApi } from '@/util/sdk'
+/* import { other as otherApi } from '@/util/sdk' */
+import acApi from '@/util/api'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
 
@@ -21,6 +23,12 @@ interface IBibleNavProps {
     pageContext: {
         title: string
         breadcrumb: INavItem[]
+    }
+
+    data: {
+        ac: {
+            bible: IBible
+        }
     }
 }
 
@@ -33,16 +41,14 @@ interface IActiveBook extends IBibleBook {
     availableChapters?: IAvailableChapter[]
 }
 
-const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }, path }) => {
-    const [bibleIndex, setBibleIndex] = React.useState<IBible>({ old: [], new: [] })
+const BibleNav: React.FC<IBibleNavProps> = (props) => {
+
+    const { pageContext: { breadcrumb, title }, data: { ac: { bible } }, path } = props
     const [activeChapter, setActiveChapter] = React.useState<undefined | number>(undefined)
     const [activeBook, setActiveBook] = React.useState<undefined | IActiveBook>(undefined)
     const [activeBookOrder, setActiveBookOrder] = React.useState<undefined | number>(undefined)
     const [searchResult, setSearchResult] = React.useState<IPostItem[]>([])
-    const [fetchingPosts, setFetchingPosts] = React.useState(false)
-    React.useEffect(() => {
-        fetchBible()
-    }, [])
+
 
     const clearSearch = () => {
         setSearchResult([])
@@ -70,47 +76,23 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
     }
 
     const handleSelectChapter = (book: any, chapter: any) => {
+        console.log(book)
         setActiveChapter(chapter.v)
-        setFetchingPosts(true)
-        return otherApi
+        return acApi
             .biblePosts(book.id, chapter.v)
-            .then((res: IApiPost[]) => {
-                const postsSlugs = res.map(i => i.slug)
+            .then((res: { biblePosts: IApiPost[] }) => {
+                console.log(res)
+                const postsSlugs = res.biblePosts.map(i => i.slug)
                 return fetchLocalPostsFromSlugs(postsSlugs)
                     .then((posts) => {
                         if (posts) {
                             setSearchResult(posts)
 
                         }
-                        setFetchingPosts(false)
                     })
             })
     }
 
-
-    const fetchBible = () => {
-
-        return otherApi
-            .bibleState()
-            .then((bibleIndex: IBible) => {
-                setBibleIndex(bibleIndex)
-            })
-            .catch((error: any) => {
-                console.log(error)
-            })
-    }
-
-    /*     const getBody = () => {
-            if (!bibleIndex) {
-                return (
-                    <div className="standard-max-w-px">
-                        Loading
-                    </div>
-                )
-            } else {
-       
-            }
-        } */
 
     const result = (
         <div className="w-full rounded-lg  flex flex-wrap justify-start">
@@ -139,7 +121,7 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
                 )
             }
             )}
-            <div></div>
+
             {searchResult.length > 0 && (
                 <div
                     className="w-full p-2 flex flex-col bg-d4athens"
@@ -166,11 +148,6 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
         </div>
     )
 
-    const bible: IBible = {
-        old: bibleIndex.old,
-        new: bibleIndex.new
-    }
-
 
     return (
         <ResourceLayout title={title}>
@@ -188,7 +165,7 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
                         <div
                             className="flex w-full items-center justify-between pt-4 pb-2 text-lg border-b border-gray-300 mb-4 sticky top-0 bg-white"
                         >
-                            <h2>{ac_strings.old_testimony}</h2>
+                            <h2 className="font-roboto">{ac_strings.old_testimony}</h2>
 
                         </div>
                         <PlaceHolder loading={bible.old.length === 0}>
@@ -212,7 +189,7 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
                                 timeout={500}
                                 classNames="fade"
                                 style={{ order: activeBookOrder }}
-                                in={activeBookOrder !== undefined && activeBookOrder < bibleIndex.old.length}
+                                in={activeBookOrder !== undefined && activeBookOrder < bible.old.length}
                                 unmountOnExit
                             >
 
@@ -227,9 +204,9 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
                     <div className="flex flex-wrap">
                         <div
                             className="flex w-full items-center justify-between pt-4 pb-2 text-lg border-b border-gray-300 mb-4 bg-white"
-                            style={{ order: bibleIndex.old.length }}
+                            style={{ order: bible.old.length }}
                         >
-                            <h2>{ac_strings.new_testimony}</h2>
+                            <h2 className="font-roboto">{ac_strings.new_testimony}</h2>
                         </div>
                         <PlaceHolder loading={bible.old.length === 0}>
                             {bible && bible.new.map((book, i) => {
@@ -252,7 +229,7 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
                                 timeout={500}
                                 classNames="fade"
                                 style={{ order: activeBookOrder }}
-                                in={activeBookOrder !== undefined && activeBookOrder > bibleIndex.old.length}
+                                in={activeBookOrder !== undefined && activeBookOrder > bible.old.length}
                                 unmountOnExit
                             >
                                 {result}
@@ -267,4 +244,28 @@ const BibleNav: React.FC<IBibleNavProps> = ({ pageContext: { breadcrumb, title }
     )
 }
 
-export default BibleNav 
+export default BibleNav
+
+export const pageQuery = graphql`
+    query BiblePosts {
+        ac {
+            bible {
+                old {
+                    chapters
+                    id
+                    no
+                    total
+                    name
+                }
+                new {
+                    chapters
+                    id
+                    no
+                    total
+                    name
+                }
+            }
+        }
+    }
+`
+

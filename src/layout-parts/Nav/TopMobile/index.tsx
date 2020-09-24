@@ -41,6 +41,12 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                 setMobileLastStep(null)
             }
         }
+
+        return () => {
+            if (timerId.current) {
+                clearTimeout(timerId.current);
+            }
+        }
     }, [breadcrumb])
 
     const getLastStep = () => {

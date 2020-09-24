@@ -19,7 +19,6 @@ import { Stats } from 'react-instantsearch-dom';
 import { INavItem } from "@/types"
 import { IResourceOverview } from '@/layout-parts/Explore/ExploreByType'
 const ExploreByType = loadable(() => import('@/layout-parts/Explore/ExploreByType'))
-const RefinementListByType = loadable(() => import('@/layout-parts/Explore/RefinementByType'))
 const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTopics'))
 
 import Link from '@/components/CustomLink';

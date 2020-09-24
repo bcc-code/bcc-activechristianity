@@ -47,7 +47,7 @@ export const logoutMutation = `
   }
 `
 
-export const likePostMutation = (id: number, toggle: boolean) => `
+export const likePostMutation = (id: string, toggle: boolean) => `
   mutation {
     likePost(postId:${id}, toggle:${toggle}){
       success
@@ -65,7 +65,7 @@ export const followTopicMutation = (id: number, toggle: boolean) => `
   }
 `
 
-export const readingPostMutation = (id: number) => `
+export const readingPostMutation = (id: string) => `
   mutation {
     readingPost(postId:${id}){
       success
@@ -75,14 +75,21 @@ export const readingPostMutation = (id: number) => `
 
 `
 
-export const vistsPostMutation = (id: number) => `
+export const visitsPostMutation = (id: string) => `
   mutation {
     visitsPost(postId:${id}){
       success
     }
   }
 `
+export const biblePostsQuery = (bookId: number, ch: number) => `
+query {
+    biblePosts(id:"${bookId}", ch:${ch}){
+      slug
+    }
+  }
 
+`
 export const likedPostsQuery = `
   query {
     liked {

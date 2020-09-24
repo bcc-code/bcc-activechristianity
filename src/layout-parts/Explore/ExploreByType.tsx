@@ -84,8 +84,8 @@ export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resou
 
                         <Link className="flex flex-col items-center" key={item.key} to={item.to}>
                             <div className={`${imgSettings.color} py-4 text-center rounded-lg mb-2 flex justify-center items-center`}>
-                                <img alt={item.name} src={imgSettings.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 px-4'} />
-
+                                {/*                                 <img alt={item.name} src={imgSettings.image} className={'pointer-events-none w-full rounded-t-xl object-contain h-12 px-4'} />
+ */}
                             </div>
                             <span className={`leading-none text-center py-2 text-xs sm:text-sm`}>{item.name}</span>
                         </Link>
@@ -99,63 +99,43 @@ export const ExploreByType: React.FC<{ resource: IResourceOverview }> = ({ resou
 
 export default ExploreByType;
 
-import FoldersImg from '@/images/Explore/Folders.png'
-import CommentaryImg from '@/images/Explore/Commentary.png'
-import EdificationImg from '@/images/Explore/Edification.png'
-import MessagesImg from '@/images/Explore/Messages.png'
-import PlaylistImg from '@/images/Explore/Playlist.png'
-import PodcastImg from '@/images/Explore/Podcast.png'
-import QuestionsImg from '@/images/Explore/Questions.png'
-import SongsImg from '@/images/Explore/Songs.png'
-import TestimoniesImg from '@/images/Explore/Testimonies.png'
-import VideoImg from '@/images/Explore/Videos.png'
 
 //"Podcast","Ebook","Edification","Audio Playlists","Messages","Video","Testimonies","Questions"
 export const typesImageColors: {
     [key: string]: {
         color: string
-        image: string
     }
 } = {
     "edification": {
         "color": "bg-d4primary",
-        "image": EdificationImg
     },
     "testimony": {
         "color": "bg-d4secondary",
-        "image": TestimoniesImg
     },
     "question": {
         "color": "bg-pink-500",
-        "image": QuestionsImg
     },
     "commentary": {
         "color": "bg-green-500",
-        "image": CommentaryImg
     },
     "song": {
-        "color": "bg-blue-500",
-        "image": SongsImg
+        "color": "bg-blue-500"
     },
     "podcast": {
-        "color": "bg-yellow-500",
-        "image": PodcastImg
+        "color": "bg-yellow-500"
     },
     "message": {
-        "color": "bg-d4red",
-        "image": MessagesImg
+        "color": "bg-d4red"
     },
     /*     "podcast": {
             "color": "bg-d4green",
             "image": VideoImg
         }, */
     "playlist": {
-        "color": "bg-d4primary",
-        "image": PlaylistImg
+        "color": "bg-d4primary"
     },
     "other": {
-        "color": "bg-gray-500",
-        "image": FoldersImg
+        "color": "bg-gray-500"
     }
 }
 

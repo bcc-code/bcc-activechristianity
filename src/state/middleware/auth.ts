@@ -6,7 +6,6 @@ import { closeSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 /* import { IProfileRes } from '@/types/apiResType' */
 
-import { auth as authApi } from '@/util/sdk'
 import acApi from '@/util/api'
 
 const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action) => {

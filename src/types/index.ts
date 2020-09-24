@@ -284,6 +284,7 @@ export interface IPostRes {
     created_at: string
     updated_at: string
     glossary?: IGlossary[]
+    recommendPosts: string[]
 }
 
 export interface IUser {

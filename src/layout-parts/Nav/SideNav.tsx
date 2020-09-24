@@ -10,7 +10,7 @@ import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
 import { IMenusQuery } from '@/types'
 
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, menu }) => {
-    console.log('render side nav')
+
     const close = () => setSideNavOpen(false)
 
     return (

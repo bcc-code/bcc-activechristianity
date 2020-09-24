@@ -42,8 +42,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.DESKTOP_NAV_ID':JSON.stringify(process.env.DESKTOP_NAV_ID),
           'process.env.SIDE_NAV_ID':JSON.stringify(process.env.SIDE_NAV_ID),
           'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
-          'PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
-          //process.env.PODCAST_FILTER_I
+          'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID)
         })
       ]
     })

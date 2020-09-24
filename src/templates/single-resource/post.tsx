@@ -11,7 +11,7 @@ const Post: React.FC<IPostProp> = (props) => {
     const post = normalizePostRes(postRes)
 
     const { title, excerpt, date, topics, types, image, format } = post
-    const { id, langs, content } = postRes
+    const { id, langs, content, recommendPosts } = postRes
     const breadcrumb: INavItem[] = []
     if (types) {
         breadcrumb.push(types[0])
@@ -38,7 +38,12 @@ const Post: React.FC<IPostProp> = (props) => {
                 path={props.path}
             />
 
-            <PostLayout {...post} langs={langs} content={content} />
+            <PostLayout
+                {...post}
+                langs={langs}
+                content={content}
+                recommendPosts={recommendPosts}
+            />
         </div>
     )
 }
@@ -116,6 +121,7 @@ export const pageQuery = graphql`
                     content
                     word
                 }
+                recommendPosts
             }
     }
 `

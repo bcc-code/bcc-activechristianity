@@ -79,11 +79,21 @@ export const normalizeAvailableLanguages = (langs: ITranslations[], showAllLangu
     return translatedLinks
 }
 
+
+const authorMap: { [key: string]: string } = {
+    "wr": ac_strings.author,
+    "vo": TS.vocals,
+    "ly": TS.lyrics,
+    "sp": TS.speaker,
+    "co": TS.with,
+    "ho": ac_strings.hosts
+
+}
 export const normalizeAuthors = (authors: IAuthorRes[]) => {
     const sortedAuthors: { [key: string]: IAuthor[] } = {}
     authors.forEach((a) => {
 
-        const key = a.pivot && typeof a.pivot.as === "string" ? a.pivot.as : TS.by
+        const key = a.pivot && typeof a.pivot.as === "string" ? authorMap[a.pivot.as] ? authorMap[a.pivot.as] : TS.by : TS.by
         const toAdd = { name: a.name, to: a.slug, as: key }
 
         if (sortedAuthors[key]) {

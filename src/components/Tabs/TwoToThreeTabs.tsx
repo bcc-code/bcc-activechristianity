@@ -60,7 +60,9 @@ const TwoToThreeTabs: React.FC<IProps> = ({ tabs }) => {
 
 
                     return (
-                        <div className={`ac-tab-${postClassName} ac-tab-card `}>
+                        <div
+                            key={i}
+                            className={`ac-tab-${postClassName} ac-tab-card `}>
                             {tab.content}
                         </div>
                     )

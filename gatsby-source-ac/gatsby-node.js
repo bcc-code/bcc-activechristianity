@@ -1,7 +1,29 @@
 const fetch = require('node-fetch');
-const { graphql } = require('gatsby');
-const { array } = require('prop-types');
 
+const settingsQuery = `
+{
+    settings {
+        key
+        value
+    }
+
+    posts {
+        paginatorInfo {
+          total
+          count
+        }
+      }
+}
+`
+
+const getRecommendPosts = (postId)=>`
+
+    {
+        recommendedByPost(postId:${postId}){
+            slug
+          }
+    }
+`
 const getPostsQuery = (pageNr)=>`
     {
         posts(page:${pageNr}) {
@@ -22,11 +44,11 @@ const getPostsQuery = (pageNr)=>`
                     url
                 }
                 track {
-                url
-                title
-                post {
+                    url
                     title
-                    slug
+                    post {
+                        title
+                        slug
                     }
                 }
                 authors {
@@ -48,7 +70,9 @@ const getPostsQuery = (pageNr)=>`
                     }
                 }
                 published 
-            
+                readMorePosts:posts {
+                    slug
+                }
                 langs {
                     lang
                     slug
@@ -60,32 +84,24 @@ const getPostsQuery = (pageNr)=>`
 `
 
 
+
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
     const {fieldName,typeName,baseUrl} = options
-  
-      const firstQueryRes = await fetch(baseUrl, { 
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query:`
-            {
-                settings {
-                    key
-                    value
-                }
-
-                posts {
-                    paginatorInfo {
-                      total
-                      count
-                    }
-                  }
-            }
-      ` })
-      })
-      .then(response => response.json())
+    const sendQuery = (query) => {
+        return fetch(baseUrl, {
+            method: 'POST',
+            'credentials': 'include',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                /*              */
+            },
+            body: JSON.stringify({ query })
+        })
+            .then(response => response.json())
+    }
+      const firstQueryRes = await sendQuery(settingsQuery)
 
       if (firstQueryRes.data) {
         if (firstQueryRes.data.settings && Array.isArray(firstQueryRes.data.settings)){
@@ -97,23 +113,14 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             if (metadata["featured_posts"]){
 
                 const featuredArraySlug = JSON.parse(metadata["featured_posts"])
-
-                const featured_slug=await fetch(baseUrl, { 
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ query:
-                        `{
-                            posts(ids: [${featuredArraySlug.join(",")}]) {
-                                data {
-                                 slug
-                                }
-                              }
-                        }` 
-                     })
-                  })
-                  .then(response => response.json())
+                const featuredPostsQuery = `{
+                    posts(ids: [${featuredArraySlug.join(",")}]) {
+                        data {
+                         slug
+                        }
+                      }
+                }`
+                const featured_slug=await sendQuery(featuredPostsQuery)
                   metadata["featured_posts"]=featured_slug.data.posts.data.map(p=>p.slug)
                   /* metadata["featured_posts"]=featured_slug. */
  
@@ -122,22 +129,15 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             if (metadata["popular_posts"]){
                 const popularArraySlug = JSON.parse(metadata["popular_posts"])
 
-                const popular_slug=await fetch(baseUrl, { 
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ query:
-                        `{
-                            posts(ids: [${popularArraySlug.join(",")}]) {
-                                data {
-                                 slug
-                                }
-                              }
-                        }` 
-                     })
-                  })
-                  .then(response => response.json())
+                const popularPostsQuery = `{
+                    posts(ids: [${popularArraySlug.join(",")}]) {
+                        data {
+                         slug
+                        }
+                      }
+                }`
+                
+                const popular_slug=await sendQuery(popularPostsQuery)
                   metadata["popular_posts"]=popular_slug.data.posts.data.map(p=>p.slug)
             }
   
@@ -171,15 +171,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         console.log(`starting with ${pageCount} requests`)
 
         for (let i = 1; i <=pageCount; i++){
-            console.log(i)
-            const response = await fetch(baseUrl, { 
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-                body:JSON.stringify({ query:getPostsQuery(i)})
-            })
-            .then(response => response.json())
+            console.log(i)//sendQuery(getPostsQuery(i))
+            const response = await sendQuery(getPostsQuery(i))
 
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
@@ -194,22 +187,15 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         }
 
             const words = {}
-
-            const glossaryRes = await fetch(baseUrl, { 
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body:JSON.stringify({ query:`{
-                    glossary {
-                        word
-                        content
-                        slug
-                        id
-                      }
-                }`})
-            })
-            .then(response => response.json())            
+            const glossaryQuery = `{
+                glossary {
+                    word
+                    content
+                    slug
+                    id
+                  }
+            }`
+            const glossaryRes = await sendQuery(glossaryQuery)           
             
             const glossary = glossaryRes.data.glossary
             glossary.forEach(g=>{
@@ -261,13 +247,30 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 throw new Error('Replacer not working!')
             }
 
-            entities.forEach(post=>{
-                
+            for(let k=0;k<entities.length;k++){
+                const post = entities[k]
                 const transformedPost = Object.assign({},post)
                 const glossaryContent = scanForAllGlossary(transformedPost.content)
                 transformedPost.acId = post.id
                 transformedPost.content = glossaryContent.text
                 transformedPost.glossary = glossaryContent.postGlossaries
+                transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
+                const recommendByPostQuery = getRecommendPosts(post.id)
+                
+                const recommendByPostRes = await sendQuery(recommendByPostQuery)
+                .catch(error=>{
+                    console.log(error)
+                    return null
+                })
+                /* await  */
+                if(recommendByPostRes && recommendByPostRes.errors){
+                    console.log(recommendByPostQuery)
+                    console.log(recommendByPostRes)
+                    
+                } else if(recommendByPostRes){
+                    transformedPost.recommendPosts = recommendByPostRes.data.recommendedByPost.map(post=>post.slug)
+                }
+
                 const nodeContent = JSON.stringify(transformedPost)
                 const nodeMeta = {
                     id: createNodeId(`ac-post-${post.id}`),
@@ -283,7 +286,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
     
                 const node = Object.assign({}, transformedPost, nodeMeta)
                 createNode(node)
-            })
+            }
+
             
       }
 

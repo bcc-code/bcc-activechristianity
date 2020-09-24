@@ -4,7 +4,6 @@ import {
 } from 'redux'
 
 import { IRootState, IUserLibrary } from '../types'
-import { blog as blogApi } from '../../util/sdk'
 import { setUserLiked, setUserHistory, setUserFollowing, setUserUnfinished, setUserLibrary } from '@/state/action/userAction'
 import { IHistory, ILiked, IUnfinished, IFollowing } from '@/types'
 import acApi from '@/util/api'
@@ -40,14 +39,14 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             break;
         case 'NEW_USER_LIKED':
             acApi
-                .likePost(action.payload.id, action.payload.bookmarked)
+                .likePost(action.payload.id, !action.payload.bookmarked)
                 .then((resNewLike: any) => {
                     if (resNewLike.likePost && resNewLike.likePost.success === true) {
                         return acApi.liked()
                             .then((res: ILiked) => {
                                 console.log(res)
-                                if (Array.isArray(res.liked)) {
-                                    store.dispatch(setUserLiked(res.liked))
+                                if (Array.isArray(res)) {
+                                    store.dispatch(setUserLiked(res))
                                 }
 
                             })

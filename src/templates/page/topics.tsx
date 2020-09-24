@@ -4,8 +4,7 @@ import Link from '@/components/CustomLink'
 import MetaTag from '@/components/Meta'
 import ResourceLayout from "@/layouts/ResourceLayout"
 import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
-import SimpleInstanceSearch, { getFilteredResult } from '@/components/Search/SimpleInstanceSearch'
-import { IPaginate, INavItem, IPage } from "@/types"
+import { INavItem, IPage } from "@/types"
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 import { ITopicRes } from '@/types'

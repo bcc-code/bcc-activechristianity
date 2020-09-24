@@ -1,18 +1,15 @@
 import React from 'react'
-import { graphql } from "gatsby"
 
 import { EbookHardCover } from '@/components/Ebook/EbookItem'
 import EbookDownload from '@/components/Ebook/EbookDownload'
-import FeatureCard from '@/components/PostItem/FeaturedCard'
 import Content from '@/components/Content'
-import { IOption } from '@/components/Dropdown'
 import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
 import MetaTag from '@/components/Meta'
 import { MobileHeaderBackground, MobilePostMain, DesktopPostMain } from '@/layout-parts'
 
 import PostMetaWLabel from '@/components/PostMeta/PostMeta'
-import { blog as blogApi } from '@/util/sdk'
-import { debounce, normalizeAuthors, normalizeAvailableLanguages } from '@/helpers'
+
+import { normalizeAuthors } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 
@@ -73,7 +70,7 @@ const Ebook: React.FC<IProps> = ({ pageContext: { breadcrumb, ebook }, path }) =
     const mobileCover = (
         <div className="flex flex-col items-center justify-center">
             <EbookHardCover
-                featured_media_url={imageUrl.src}
+                image={image}
                 title={title}
                 className={"z-10 relative rounded w-4/12"}
             />

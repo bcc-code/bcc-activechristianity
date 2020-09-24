@@ -15,8 +15,8 @@ const PostMeta: React.FC<IPostMetaProps> = ({ categories, authors, showCategory 
     return (
         <div>
 
-            {authors && authors.length > 0 && authors.map(a => (
-                <div className="flex">
+            {authors && authors.length > 0 && authors.map((a, i) => (
+                <div className="flex" key={i}>
                     <span>{a.as}:</span>  <PostMetaLinks prefix={TS.slug_ac_author} links={a.authors} />
                 </div>
             ))

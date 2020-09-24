@@ -6,7 +6,7 @@ import { setCurrentMedia, fixPlayer, floatPlayer, setMpHeight } from '@/state/ac
 const VideoMediaPlay = loadable(() => import('@/components/MediaPlayer/VideoPlayerLocal'))
 const Content = loadable(() => import('@/components/Content'))
 const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
-
+const DesktopPopularRow = loadable(() => import('@/layout-parts/HorizontalScroll/DesktopPopular'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 
 /* const EbookFooterBanner = loadable(() => import('@/layout-parts/Banner/EbookFooterBanner'))
@@ -20,10 +20,10 @@ import { MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
 import TwoToOneImg from "@/components/Images/Image2To1"
 import PostMetaWLabel from '@/components/PostMeta/PostMeta'
 import PostMetaLinks from '@/components/PostMeta/PostMetaLinks'
-
+import RightImgPost from '@/components/PostItem/RightImgWDes'
 import TS from '@/strings'
 
-import { blog as blogApi } from '@/util/sdk'
+import acApi from '@/util/api'
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 
@@ -33,9 +33,11 @@ import { IRootState } from '@/state/types'
 // mock data
 
 import ac_strings from '@/strings/ac_strings.json'
+import { read } from '@/strings/menu';
 interface IPostProps extends IPostItem {
     content: string
     langs: ITranslations[]
+    recommendPosts: string[]
 }
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const dispatch = useDispatch()
@@ -54,11 +56,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 setLastScroll(Date.now() + 5000)
                 const { id } = post
                 if (id) {
-                    blogApi
+                    acApi
                         .readingPost(id)
-                        .then((res: any) => {
-                            console.log(res)
-                        })
                         .catch((err: any) => {
                             console.log(err)
                         })
@@ -113,7 +112,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         } */
 
         if (id) {
-            blogApi.visitsPost(id)
+            acApi.visitsPost(id)
                 .then((res: any) => {
                     console.log(res)
                 })
@@ -145,7 +144,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         reading_time,
         content,
         langs,
-        glossary
+        glossary,
+        recommendPosts
     } = post
 
     const postId = id
@@ -156,6 +156,16 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
     let readMore: string[] = []
+    if (recommendPosts) {
+        let randName = [];
+        let recommendPostsSlugs = [...recommendPosts]
+        do {
+            randName[randName.length] = recommendPostsSlugs.splice(
+                Math.floor(Math.random() * recommendPostsSlugs.length)
+                , 1)[0];
+        } while (randName.length < 3);
+        readMore = randName
+    }
     /*   if (read_more_posts) {
           readMore = read_more_posts.posts.map(item => item.replace(/^\/|\/$/g, ''))
       } */
@@ -169,7 +179,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         readMore = [...new Set(readMore)]
     }
 
-    const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
+    const isPodcast = format?.findIndex(f => {
+        console.log(f.id)
+        console.log(process.env.PODCAST_FILTER_ID)
+        return `${f.id}` === process.env.PODCAST_FILTER_ID
+    })
     const body = (
 
         <div>
@@ -195,24 +209,26 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
             {readMore.length > 0 ? (
                 <LazyLoad>
-                    <div className="pb-8">
-                        {/* {read_more_posts && read_more_posts.main_text ? (
-                            <div className="main-content">
-                                <p
-                                    className="my-4"
-                                    dangerouslySetInnerHTML={{
-                                        __html: read_more_posts.main_text
-                                    }} />
-                            </div>
-                        ) : null} */}
-                        {readMore.map((url, k) => (
-                            <div className="mb-6">
-                                <FetchPost key={k} url={url} />
-                            </div>
-                        )
-                        )}
+                    <FetchPost
+                        slugs={readMore}
+                        layout="list"
+                        render={({ posts }) => {
+                            return (
+                                <div>
+                                    <div className="hidden sm:block pb-8">
+                                        {posts.map(item => (
+                                            <RightImgPost key={item.slug} {...item} />
+                                        ))}
+                                    </div>
+                                    <div className="sm:hidden">
+                                        <DesktopPopularRow posts={posts} />
+                                    </div>
+                                </div>
+                            )
+                        }}
+                    />
 
-                    </div>
+
                 </LazyLoad>
             ) : null}
 
@@ -238,7 +254,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
             {topics && (
                 <p className="border-d4gray border-t py-8 flex">
-                    <div>{ac_strings.topics}:</div> {<PostMetaLinks links={topics} />}
+                    <span>{ac_strings.topics}:</span> {<PostMetaLinks links={topics} />}
                 </p>
             )}
 
