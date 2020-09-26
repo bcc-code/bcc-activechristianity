@@ -1,12 +1,14 @@
 import * as React from 'react';
-import Icons from '@/components/Icons'
+import Icon, { IButtonColour } from '@/components/Icons/Icon'
+
 import FetchAndSetBookmark from '@/layout-parts/HOC/FetchAndSetBookmarked'
 interface IProps {
     id: string
+    color?: IButtonColour
 }
 
-const Bookmark: React.FC<IProps> = ({ id }) => {
-
+const Bookmark: React.FC<IProps> = ({ id, color }) => {
+    const buttonColor = color ? color : "secondary"
     return (
         <FetchAndSetBookmark
             id={id}
@@ -14,20 +16,24 @@ const Bookmark: React.FC<IProps> = ({ id }) => {
 
                 return (
                     <div>
-                        {bookmarked === "false" ?
-                            (
-                                <button className={`text-d4secondary`} >
-                                    <Icons name="heart" size="base" />
-                                </button>
-                            ) : (
-                                (
-                                    <button
-                                        className={`${bookmarked === "loading" ? 'bg-d4cadet-blue' : 'bg-d4secondary'} text-white rounded-25 p-1`}
-                                    >
-                                        <Icons name="heart" size="sm" />
-                                    </button>
-                                )
-                            )}
+                        {bookmarked === "loading" && <Icon
+                            name="Cached"
+                            color={buttonColor}
+                            size="6"
+                        />}
+                        {bookmarked === "false" && <Icon
+                            name="BookmarkBorder"
+                            color="secondary"
+                            size="6"
+                        />}
+                        {
+                            bookmarked === "true" && <Icon
+                                name="Bookmark"
+                                color="secondary"
+                                size="6"
+                            />
+                        }
+
                     </div>
                 )
             }}

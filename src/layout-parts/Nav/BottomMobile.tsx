@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { StaticQuery, graphql } from "gatsby";
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
 
 import { IMenusQuery, INavItem } from '@/types'
@@ -37,56 +37,87 @@ export const iconMapNav: {
 } = {
     'home': {
         selected: (
-            <Icon size="lg" name="home" />
+            <Icon
+                name="Home"
+                color="slate-light"
+            />
         ),
         default: (
-            <Icon size="lg" name="home" />
+            <Icon
+                name="Home"
+                color="slate-light"
+            />
 
         )
     },
     'explore': {
         selected: (
-            <Icon size="lg" name="search" />
+            <Icon
+                name="Explore"
+                color="slate-light"
+            />
 
 
         ),
         default: (
-            <Icon size="lg" name="search" />
+            <Icon
+                name="Explore"
+                color="slate-light"
+
+            />
 
         )
     },
     'listen-recommend': {
         selected: (
-            <Icon size="lg" name="listen" />
+            <Icon
+                name="Headset"
+                color="slate-light"
+            />
 
 
 
         ),
         default: (
-            <Icon size="lg" name="listen" />
+            <Icon
+                name="Headset"
+                color="slate-light"
+            />
 
         )
     },
     'read-recommend': {
         selected: (
-            <Icon size="lg" name="file" />
+            <Icon
+                name="Description"
+                color="slate-light"
+            />
 
 
         ),
         default: (
-            <Icon size="lg" name="file" />
+            <Icon
+                name="Description"
+                color="slate-light"
+            />
 
 
         )
     },
     'watch-recommend': {
         selected: (
-            <Icon size="lg" name="watch" />
+            <Icon
+                name="OndemandVideo"
+                color="slate-light"
+            />
 
 
         ),
         default: (
-            <Icon size="lg" name="watch" />
+            <Icon
+                name="OndemandVideo"
+                color="slate-light"
+            />
 
 
         )
@@ -126,7 +157,7 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu })
                             activeClassName="bg-gray-300"
                         >
                             <span className="flex-1 flex items-center pb-1">{item.icon.default}</span>
-                            <span className="block" style={{ "fontSize": "9px" }}>{item.name}</span>
+                            <span className="block font-semibold" style={{ "fontSize": "9px" }}>{item.name}</span>
                         </Link>
 
                     )

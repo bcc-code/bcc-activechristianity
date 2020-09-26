@@ -5,7 +5,7 @@ import * as facebookSharer from "share-this/dist/sharers/facebook"
 import * as emailSharer from "share-this/dist/sharers/email"
 import render from "share-this/src/render"
 import * as popover from "share-this/src/popover"
-import Icon from "@/components/Icons"
+import Icon from "@/components/Icons/Icon"
 import "./share-pop-over-scss/share-this.scss"
 import "./share-popover.css"
 
@@ -56,7 +56,7 @@ const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, size }) => {
                 onClick={handleShareClick}
                 onKeyDown={handleIconClick}
             >
-                {label && <span className="px-4 uppercase hidden sm:block">{label}</span>}<Icon name="share" size="base" />
+                {label && <span className="px-4 uppercase hidden sm:block">{label}</span>}<Icon name="ShareOutline" color="secondary" />
             </button>
         </div>
 

@@ -30,9 +30,13 @@ const userLibrary = (state: IUserLibrary = initialState, action: authAction) => 
                 bookmarkedPosts: action.payload
             })
         }
+        case 'SET_USER_FOLLOW': {
+            return ({
+                ...state,
+                followedTopics: action.payload
+            })
+        }
         case 'SET_USER_HISTORY': {
-            console.log('setting history')
-            console.log(action.payload)
             return ({
                 ...state,
                 historyPosts: action.payload

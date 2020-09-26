@@ -8,6 +8,7 @@ const getPageCountQuery = `
     ac {
       authors {
         paginatorInfo {
+          total
           count
         }
       }
@@ -49,8 +50,9 @@ module.exports = function generateTaxonomies(actions, graphql) {
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)
     }
-    const pageCount = result.data.ac.authors.paginatorInfo.count
-
+    const {count,total}= result.data.ac.authors.paginatorInfo
+    const pageCount=Math.ceil(total/count)
+    console.log(pageCount)
     const pageIndex= [];
 
     for (let i = 1; i <= pageCount; i++) {

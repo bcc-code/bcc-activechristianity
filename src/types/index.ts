@@ -51,10 +51,6 @@ export interface INavItem {
     order?: number
 }
 
-export interface IElementNavItem extends INavItem {
-    name: string | JSX.Element
-}
-
 export interface ITopicNavItem extends INavItem {
     id: string
 }
@@ -98,6 +94,8 @@ export interface IPostItem {
     }
     media: IMedia
     glossary?: IGlossary[]
+    likes?: number
+    views?: number
 }
 
 export interface IPaginate {
@@ -286,6 +284,8 @@ export interface IPostRes {
     glossary?: IGlossary[]
     recommendPosts: string[]
     readMorePosts: string[]
+    likes: number
+    views: number
 }
 
 export interface IUser {

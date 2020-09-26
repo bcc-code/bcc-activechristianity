@@ -1,6 +1,5 @@
 
 import * as React from "react"
-import FetchPostList from '@/layout-parts/HOC/FetchPostList'
 import RightImgWDes from '@/components/PostItem/RightImgWDes'
 import { OutlineButton } from '@/layout-parts/Buttons'
 import ac_strings from '@/strings/ac_strings.json'

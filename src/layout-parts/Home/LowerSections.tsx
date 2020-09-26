@@ -21,7 +21,6 @@ interface IHomeLowerSection {
     popularPosts: string[]
 }
 const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou, topicsForYou, popularPosts }) => {
-    console.log('lower')
     return (
         <div className="grid-home-posts-layout sm:px-4">
             {lists.slice(0, 4).map((slot, i) => {

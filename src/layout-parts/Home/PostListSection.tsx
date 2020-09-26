@@ -15,9 +15,9 @@ const PostListSection: React.FC<IPostListSection> = ({ header, subHeader, posts 
             {subHeader && <span className="text-sm italic text-d4slate-light">{subHeader}</span>}
         </div>
         <div className="flex-1">
-            {posts.map(item => {
+            {posts.map((item, k) => {
                 return (
-                    <RightImgWDes border={true} {...item} />
+                    <RightImgWDes border={true} {...item} key={k} />
                 )
             })}
         </div>

@@ -1,4 +1,4 @@
-import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia } from '@/types'
+import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
 import h2p from 'html2plaintext'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
@@ -140,9 +140,9 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
     return toReturn
 }
 export const transformTopicsRes = (topics: ITopicRes[]) => {
-    const types: INavItem[] = []
-    const filteredTopics: INavItem[] = []
-    const format: INavItem[] = []
+    const types: ITopicNavItem[] = []
+    const filteredTopics: ITopicNavItem[] = []
+    const format: ITopicNavItem[] = []
     topics.forEach((t) => {
         const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
         if (t.group.name === 'Type') {

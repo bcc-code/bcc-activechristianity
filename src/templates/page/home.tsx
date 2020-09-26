@@ -106,8 +106,8 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 <div className="">
                   {posts.slice(0, 6).map((item, i) => {
                     return (
-                      <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
-                        <RightImgWDes key={i} {...item} />
+                      <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`} key={i} >
+                        <RightImgWDes {...item} />
                       </div>
                     )
                   })}

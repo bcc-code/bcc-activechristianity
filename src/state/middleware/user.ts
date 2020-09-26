@@ -14,15 +14,15 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
         case 'NEW_USER_FOLLLOW_TOPIC':
             console.log(action)
             acApi
-                .followTopic(action.payload.id, false)
+                .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
                     console.log(resNewFollow)
                     return acApi
                         .following()
                         .then((res: IFollowing) => {
                             console.log(res)
-                            if (res.following && Array.isArray(res.following.topics)) {
-                                store.dispatch(setUserFollowing(res.following.topics))
+                            if (res.following && Array.isArray(res.following.tags)) {
+                                store.dispatch(setUserFollowing(res.following.tags))
                             } else {
                                 console.log('reset topics')
                                 store.dispatch(setUserFollowing([]))
@@ -80,9 +80,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 .following()
                 .then((res: IFollowing) => {
                     console.log(res)
-                    if (Array.isArray(res.following.topics)) {
-                        if (res.following.topics) {
-                            store.dispatch(setUserFollowing(res.following.topics))
+                    if (Array.isArray(res.following.tags)) {
+                        if (res.following.tags) {
+                            store.dispatch(setUserFollowing(res.following.tags))
                         }
                     }
 
@@ -143,10 +143,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     .following()
                     .then((res: IFollowing) => {
                         console.log(res)
-                        if (Array.isArray(res.topics)) {
-                            if (res.topics) {
-                                console.log(res.topics)
-                                return res.topics
+                        if (Array.isArray(res.following.tags)) {
+                            if (res.following.tags) {
+                                return res.following.tags
                             } else {
                                 throw new Error('Error res.topics')
                             }

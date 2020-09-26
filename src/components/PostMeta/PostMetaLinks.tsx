@@ -15,7 +15,7 @@ const MetaLinks: React.FC<Iprops> = ({ links, prefix }) => {
         <div className="">
             {links.map((item, i) => (
                 <Link
-                    className={'inline-block text-d4slate underline px-2'}
+                    className={'inline-block px-2'}
                     to={`${prefix ? '/' + prefix : ''}/${item.to}`}
                     key={i}
                 >

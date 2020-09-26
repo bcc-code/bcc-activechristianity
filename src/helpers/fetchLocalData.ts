@@ -6,8 +6,9 @@ import ac_strings from '@/strings/ac_strings.json'
 
 
 export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
+    const filteredSlugs = slugs.filter(s => typeof s === "string" && s.trim() !== "")
     return Promise
-        .all(slugs.map(item => fetchOneLocalPostsFromSlug(item)))
+        .all(filteredSlugs.map(item => fetchOneLocalPostsFromSlug(item)))
         .then(list => {
             const toReturn: IPostItem[] = []
             list.map(post => {
@@ -125,6 +126,10 @@ export const fetchOneLocalPostsFromSlug = (slug: string) => {
                 const updatePost = normalizePostRes(res.result.data['acNodePost'])
                 return updatePost
             }
+            return undefined
+        })
+        .catch(error => {
+            console.log(error)
             return undefined
         })
 }

@@ -59,7 +59,7 @@ export default {
         })
     },
     followTopic: (id: number, toggle: boolean) => {
-        const query = request.followTopicMutation(id, toggle)
+        const query = request.followTopicMutation(id, !toggle)
         return sendQuery(query).then(res => {
             console.log(res)
             return res

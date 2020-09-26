@@ -6,6 +6,7 @@ import ac_strings from '@/strings/ac_strings.json'
 
 interface IProps {
     id: string
+    text?: string
 
 
 }
@@ -25,7 +26,7 @@ const map = {
     },
 }
 
-const SlateDarkFollowButton: React.FC<IProps> = ({ id }) => {
+const SlateDarkFollowButton: React.FC<IProps> = ({ id, text }) => {
 
     return (
         <FetchAndSetFollowed
@@ -35,7 +36,7 @@ const SlateDarkFollowButton: React.FC<IProps> = ({ id }) => {
                 const config = map[followed]
                 return (
                     <div className={`py-1 px-2 my-2 w-full text-center text-xs rounded-full font-semibold ${config.color}`}>
-                        {config.text}
+                        {text ? text : config.text}
                     </div>
                 )
             }}

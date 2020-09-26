@@ -4,18 +4,20 @@ import { openSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { setNewFollowTopic } from '@/state/action/userAction'
 
-type bookmarkStatus = "loading" | "true" | "false"
+type followStatus = "loading" | "true" | "false"
 interface IFetchPost {
     id: string,
     className?: string
-    render: (data: { followed: bookmarkStatus }) => JSX.Element
+    render: (data: { followed: followStatus }) => JSX.Element
 }
 
-const Bookmark: React.FC<IFetchPost> = ({ id, className, render }) => {
+const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
-    const [followed, setFollowed] = React.useState<bookmarkStatus>("loading")
+    const [followed, setFollowed] = React.useState<followStatus>("loading")
     const dispatch = useDispatch()
+
     React.useEffect(() => {
+        console.log('render following')
         const found = followedTopics.findIndex(p => p.id === id)
         const followed = found > -1
         setFollowed(followed ? "true" : "false")
@@ -43,4 +45,4 @@ const Bookmark: React.FC<IFetchPost> = ({ id, className, render }) => {
     )
 }
 
-export default Bookmark
+export default FollowTopic

@@ -13,11 +13,11 @@ interface IPostMetaProps {
 const PostMeta: React.FC<IPostMetaProps> = ({ categories, authors, showCategory }) => {
 
     return (
-        <div>
+        <div className="font-roboto ">
 
             {authors && authors.length > 0 && authors.map((a, i) => (
                 <div className="flex" key={i}>
-                    <span>{a.as}:</span>  <PostMetaLinks prefix={TS.slug_ac_author} links={a.authors} />
+                    <span className=" text-gray-500">{a.as}</span>  <PostMetaLinks prefix={TS.slug_ac_author} links={a.authors} />
                 </div>
             ))
 

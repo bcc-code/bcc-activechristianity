@@ -5,9 +5,9 @@ const MainpageLoadingPeplacer: React.FC<{ loading: boolean }> = ({ loading, chil
     const customerPlaceholder = (
         <div className="standard-max-w sm:px-4 grid sm:grid-cols-2 md:grid-cols-4 gap-4 pb-16 w-full">
 
-            {["", "", "", "", "", "", "", "", ""].map(item => {
+            {["", "", "", "", "", "", "", "", ""].map((item, k) => {
                 return (
-                    <TopImgPlaceholder />
+                    <TopImgPlaceholder key={k} />
                 )
             })}
         </div>

@@ -8,14 +8,18 @@ const Content = loadable(() => import('@/components/Content'))
 const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
 const DesktopPopularRow = loadable(() => import('@/layout-parts/HorizontalScroll/DesktopPopular'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
-
+import SlateDarkFollowButton from '@/layout-parts/Buttons/ToggleFollow'
 /* const EbookFooterBanner = loadable(() => import('@/layout-parts/Banner/EbookFooterBanner'))
 const MockRelatedContentMedia = loadable(() => import('@/layout-parts/RelatedContent'))
 const PlaylistItem = loadable(() => import('@/components/PostItem/LeftImgPlaylist')) */
-
+import FetchAndSetFollowed from '@/layout-parts/HOC/FetchAndSetFollowed'
+import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
+
 import FetchPost from '@/layout-parts/HOC/FetchPosts'
-import { MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
+import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
+import ShareButton from '@/layout-parts/Buttons/ToggleBookmark'
+import { MobilePostMain, DesktopPostMain } from '@/layout-parts'
 
 import TwoToOneImg from "@/components/Images/Image2To1"
 import PostMetaWLabel from '@/components/PostMeta/PostMeta'
@@ -33,7 +37,7 @@ import { IRootState } from '@/state/types'
 // mock data
 
 import ac_strings from '@/strings/ac_strings.json'
-import { read } from '@/strings/menu';
+
 interface IPostProps extends IPostItem {
     content: string
     langs: ITranslations[]
@@ -80,7 +84,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         return () => window.removeEventListener('scroll', debounceScroll);
     }, [post.slug])
 
-
+    const scrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
     React.useEffect(() => {
         const { id } = post
 
@@ -147,7 +159,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         langs,
         glossary,
         recommendPosts,
-        readMorePosts
+        readMorePosts,
+        views,
+        likes
     } = post
 
     const postId = id
@@ -157,9 +171,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const contributor = authors && <PostMetaWLabel authors={authors} />
 
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
-    console.log(readMorePosts)
-    console.log(recommendPosts)
+
     let readMore: string[] = []
+    if (readMorePosts.length > 0) {
+        const procssedReadMore = readMorePosts.map(item => item.replace(/^\/|\/$/g, ''))
+        readMore = procssedReadMore
+    }
+
+    let randomRecommendPosts: string[] = []
     if (recommendPosts) {
         let randName = [];
         let recommendPostsSlugs = [...recommendPosts]
@@ -168,20 +187,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 Math.floor(Math.random() * recommendPostsSlugs.length)
                 , 1)[0];
         } while (randName.length < 3);
-        readMore = randName
+        // prepare to remove dupicates in readmores 
+        randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
     }
-    /*   if (read_more_posts) {
-          readMore = read_more_posts.posts.map(item => item.replace(/^\/|\/$/g, ''))
-      } */
 
-    // prepare to remove dupicates in readmores 
-    /*     if (post.related_posts) {
-            readMore = [...post.related_posts.map(item => item.slug.replace(/^\/|\/$/g, '')), ...readMore]
-        } */
-    // remove dupicates in readmores 
-    if (readMore.length > 0) {
-        readMore = [...new Set(readMorePosts), ...new Set(readMore)]
-    }
+    readMore = [...new Set([...randomRecommendPosts, ...readMore])]
+
 
     const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
 
@@ -199,6 +210,83 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <Content content={content} glossary={glossary} />
                 )
             }
+            <div className="flex flex-wrap border-d4gray py-6">
+                {topics && topics?.map(item => (
+                    <FetchAndSetFollowed
+                        id={item.id}
+                        className=""
+                        render={({ followed }) => {
+                            return (
+                                <div className={`flex py-1 p-2 pr-0 mb-2 mr-2 text-center text-xs rounded-full font-semibold items-center bg-gray-300`}>
+                                    <span className="">{item.name}</span>
+                                    <span className="px-2">
+                                        {followed === "loading" && <Icon name="Cached" size="3" />}
+                                        {followed === "true" && <Icon name="Check" size="3" />}
+                                        {followed === "false" && <Icon name="Add" size="3" />}
+                                    </span>
+                                </div>
+                            )
+                        }}
+                    />
+                ))}
+            </div>
+            <div className="border-b pb-6">
+                {}
+            </div>
+            <div className="border-d4gray border-b py-6">
+                {authors?.map(item => {
+                    return (
+                        <div className="flex flex-col">
+                            <span className="uppercase font-roboto text-gray-500 font-semibold text-sm">
+                                {item.as}
+                            </span>
+                            <span>{item.authors.map(a => (
+                                <div className="w-full flex justify-between items-center">
+                                    <div className="font-roboto text-sm">{a.name}</div>
+                                    <div>{a.excerpt}</div>
+                                    <div className="font-roboto text-d4secondary text-sm border border-d4secondary rounded px-2 py-1">{ac_strings.follow}</div>
+                                </div>
+
+                            ))}</span>
+                        </div>
+                    )
+                })}
+            </div>
+
+            {authors?.map(item => {
+                return (
+
+                    <div>
+                        {item.authors.map(a => (
+                            <div>
+                                <div className="">More from {a.name}</div>
+                                <FetchPostFromList
+                                    slug={`${TS.slug_ac_author}/${a.to}`}
+                                    layout="list"
+                                    render={({ posts }) => {
+                                        const sixPosts = posts.slice(0, 6)
+                                        return posts.length > 0 ? (
+                                            <div>
+                                                <div className="hidden sm:block pb-8">
+                                                    {sixPosts.map(item => (
+                                                        <RightImgPost key={item.slug} {...item} />
+                                                    ))}
+                                                </div>
+                                                <div className="sm:hidden -ml-4 -mr-4 py-6">
+                                                    <DesktopPopularRow posts={sixPosts} />
+                                                </div>
+                                            </div>
+                                        ) : <div></div>
+                                    }}
+
+                                />
+                            </div>
+
+                        ))}
+                    </div>
+
+                )
+            })}
 
             {/* Mock related media */}
             {/* {mediaType && (
@@ -207,7 +295,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 </LazyLoad>
             )} */}
             {/* end of Mock related media*/}
-
+            <div>You might also be interested</div>
             {readMore.length > 0 ? (
                 <LazyLoad>
                     <FetchPost
@@ -221,7 +309,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                             <RightImgPost key={item.slug} {...item} />
                                         ))}
                                     </div>
-                                    <div className="sm:hidden -ml-4 -mr-4">
+                                    <div className="sm:hidden -ml-4 -mr-4 py-6">
                                         <DesktopPopularRow posts={posts} />
                                     </div>
                                 </div>
@@ -239,25 +327,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <PlaylistItem tagline={"Featured in playlist"} {...featuredInPlaylist} />
                 </LazyLoad> */}
             )}
-            {/*           {!featuredInPlaylist && ac_ebook ? (
-                <LazyLoad>
-                    <div className="mb-8">
-                        <EbookFooterBanner
-                            {...WPItemtoPostItem(ac_ebook)}
-                        />
-                    </div>
-                </LazyLoad>
-
-            ) : null} */}
-
-            <div className="main-content py-8">
-                <p className=""><em>{TS.scripture_copyright}</em></p>
-            </div>
-            {topics && (
-                <p className="border-d4gray border-t py-8 flex">
-                    <span>{ac_strings.topics}:</span> {<PostMetaLinks links={topics} />}
-                </p>
-            )}
 
         </div>
     )
@@ -271,7 +340,30 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     )
     return (
-        <article className="overflow-scroll w-full">
+        <article className="overflow-scroll w-full relative">
+            <div className="flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
+                <button className="px-2 py-1">
+                    <ShareButton
+                        id={id}
+                    />
+                </button>
+                <button className="px-2 py-1">
+                    <Icon
+                        name="Share"
+                        color="secondary"
+                        size="6"
+                    />
+
+                </button>
+                <button className="px-2 py-1" onClick={scrollToTop}>
+                    <Icon
+                        name="Publish"
+                        color="secondary"
+                        size="6"
+                    />
+                </button>
+
+            </div>
             {hasMedia === "video" && videoSrc !== '' && (
                 <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
                     <VideoMediaPlay src={videoSrc} showControl={showControl} />
@@ -287,7 +379,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 ) : (
                         <div
                             className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "50px", background: `url(${imageUrl}) center center no-repeat`, backgroundSize: "cover", height: "300px" }}
+                            style={{ top: "50px", background: `url(${imageUrl.src}) center center no-repeat`, backgroundSize: "cover", height: "300px" }}
                         >
                         </div>
 
@@ -302,18 +394,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 shareSlug={slug}
                 translatedUrls={tranlsatedUrl}
             >
-                <div className="flex items-center pb-6">
+                <div className="flex items-center justify-between pb-6 bg-white border-d4gray border-b text-sm">
                     {contributor}
                     <span className="ml-4 text-d4gray-dark">{reading_time?.text}</span>
                 </div>
-                <ShareSection shareSlug={slug} id={postId} text={excerpt} />
                 {isCurrentMedia.audio && (
                     <div className="relative sm:pt-10 mb-12 ">
                         <TwoToOneImg image={image} />
-                        {types && types[0] && types[0].name === "podcast" && (
-                            <div>
-                                <SubscribePodcast />
-                            </div>
+                        {isPodcast && isPodcast > -1 && (
+                            <SubscribePodcast />
                         )}
                     </div>
                 )}
@@ -331,13 +420,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             {contributor}
                             <span className="ml-4 text-d4gray-dark">{reading_time?.text}</span>
                         </div>
-                        <ShareSection shareSlug={slug} id={postId} text={excerpt} simple />
                     </div>
                 )}
             >
                 {!isCurrentMedia.video && <div className="relative sm:pt-10 mb-12 ">
                     <TwoToOneImg image={image} rounded />
-                    {isPodcast && (
+                    {isPodcast && isPodcast > -1 && (
                         <div>
                             <SubscribePodcast />
                         </div>
@@ -346,6 +434,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 {body}
             </DesktopPostMain>
+            <div className="main-content py-8 relative bg-white px-4">
+                <p className=""><em>{TS.scripture_copyright}</em></p>
+            </div>
             {postFooter}
         </article >
     )

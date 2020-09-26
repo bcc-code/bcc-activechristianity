@@ -15,7 +15,7 @@ const VideoHeader: React.FC<IVideoHeader> = (props) => {
             <iframe
 
                 src={src}
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
             >

@@ -146,11 +146,7 @@ export const ShareSection: React.FC<IShareProps> = (props) => {
             <div className={simple ? "mr-4 flex" : "flex items-center text-d4gray-dark"}>
                 <ToogleBookmark
                     id={id}
-                    bookmarked={bookmarked}
-                    className={simple ? "text-d4gray-dark" : ""}
-                    size={size}
                 />
-                {simple !== true && <span className="px-4 uppercase">28 likes</span>}
             </div>
             <ShareButton
                 shareUrl={shareSlug}
@@ -186,10 +182,9 @@ export const MobilePostMain: React.FC<IMobilePostMain> = ({ id, height, title, e
             <MobileMainWrapper height={height} >
                 <PostH1 title={title} />
 
-                <p className="text-d4gray-dark text-lg mb-6 leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
+                <p className="text-d4gray-dark mb-6 leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
 
                 {children}
-                <ShareSection id={id} shareSlug={shareSlug} text={excerpt} />
                 <Translations translatedUrls={translatedUrls || []} />
             </MobileMainWrapper>
 
@@ -217,7 +212,6 @@ export const DesktopPostMain: React.FC<IDesktopPostMain> = ({ id, title, excerpt
 
                 </div>
                 {children}
-                <ShareSection id={id} shareSlug={shareSlug} text={h2p(excerpt)} />
                 <Translations translatedUrls={translatedUrls} />
             </div>
 

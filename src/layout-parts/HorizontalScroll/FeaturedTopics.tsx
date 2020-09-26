@@ -38,8 +38,7 @@ const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
                         </Link>
                         <SlateDarkFollowButton
                             id={id}
-                            followed={followed === true}
-                            className="w-full"
+
                         />
 
                     </div>

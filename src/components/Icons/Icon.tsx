@@ -1,14 +1,15 @@
 import * as Icons from '@material-ui/icons';
 import * as React from 'react';
 
+export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light"
 interface IIconProps {
     name: string
     size?: string
-    color?: "primary" | "secondary" | "slate-dark" | "slate-light"
+    color?: IButtonColour
 }
 const IconWrapper: React.FC<IIconProps> = ({ name, size, color }) => {
-
-    const Icon = Icons.FavoriteBorder
+    console.log(name)
+    const Icon = Icons[name]
     const style: any = {}
     if (size) {
         style.fontSize = `${sizeMap[size]}rem`
@@ -30,7 +31,7 @@ const colorMap = {
     "primary": "#FFAE0C",
     "secondary": "#4A75D1",
     "slate-dark": "#384156",
-    "slate-light": "9CA6BE"
+    "slate-light": "#9CA6BE"
 }
 const sizeMap = {
     '0': 0,
