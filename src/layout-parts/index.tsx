@@ -146,6 +146,7 @@ export const ShareSection: React.FC<IShareProps> = (props) => {
             <div className={simple ? "mr-4 flex" : "flex items-center text-d4gray-dark"}>
                 <ToogleBookmark
                     id={id}
+                    color="slate-dark"
                 />
             </div>
             <ShareButton

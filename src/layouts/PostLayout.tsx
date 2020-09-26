@@ -19,7 +19,7 @@ import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
 import ShareButton from '@/layout-parts/Buttons/ToggleBookmark'
-import { MobilePostMain, DesktopPostMain } from '@/layout-parts'
+import { MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
 
 import TwoToOneImg from "@/components/Images/Image2To1"
 import PostMetaWLabel from '@/components/PostMeta/PostMeta'
