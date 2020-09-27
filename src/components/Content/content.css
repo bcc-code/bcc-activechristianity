@@ -1,48 +1,163 @@
-.ac-content h1 {
-    line-height: 1.25;
-    color: inherit;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    font-size: 1.7rem;
+/*  */
+
+.glossary-tooltip {
+    display: inline;
+    position: relative;
+    z-index: 30;
 }
 
-.ac-content h2 {
-    font-size: 1.375rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-    /*     margin-top: 1rem; */
-    margin-bottom: 1rem;
+/* Trigger text */
+
+.glossary-tooltip a,
+.glossary-tooltip-media a {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    padding: 0 10px;
+    border: 0px !important;
 }
 
-.ac-content-except {
-    font-size: 1.35rem;
-    margin-bottom: 1em;
+.glossary-tooltip a.glossary-external-link::after {
+    content: "";
+    display: inline-block;
+    margin-left: 5px;
+    width: 14px;
+    height: 16px;
+    background-size: 14px 16px;
+    mask: url("data:image/svg+xml,%3Csvg%20height%3D%221024%22%20width%3D%22768%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%3Cpath%20d%3D%22M640%20768H128V257.90599999999995L256%20256V128H0v768h768V576H640V768zM384%20128l128%20128L320%20448l128%20128%20192-192%20128%20128V128H384z%22%20%2F%3E%0A%3C%2Fsvg%3E%0A");
+    mask-size: cover;
+    background: black;
+}
+
+/* Gap filler */
+
+.glossary-tooltip::after {
+    content: '';
+    position: absolute;
+    width: 360px;
+    height: 20px;
+    bottom: 100%;
+    left: 50%;
+    pointer-events: none;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.glossary-tooltip:hover .glossary-tooltip::after {
+    pointer-events: auto;
+}
+
+/* Tooltip */
+
+.glossary-tooltip-content {
+    font-size: 16px;
+    position: absolute;
+    z-index: 9999;
+    left: 50%;
+    margin: 0 0 20px -180px;
+    bottom: 100%;
     text-align: left;
-    line-height: 1, 5rem;
+    box-shadow: -5px -5px 15px rgba(48, 54, 61, 0.2);
+    background: #2a3035;
+    opacity: 0;
+    cursor: default;
+    pointer-events: none;
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0);
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
 }
 
-.ac-content p,
-.ac-content ul,
-.ac-content ol {
-    font-family: 'Merriweather', '-apple-system', 'BlinkMacSystemFont', 'serif';
-    font-weight: 300;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    list-style-position: inside;
-    list-style-type: decimal;
+.glossary-tooltip:hover .glossary-tooltip-content {
+    pointer-events: auto;
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0) rotate3d(0, 0, 0, 0);
+    transform: translate3d(0, 0, 0) rotate3d(0, 0, 0, 0);
 }
 
-.ac-content p,
-.ac-content li {
-    margin-bottom: 1rem;
+/* Arrow */
+
+.glossary-tooltip-content::after {
+    content: '';
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-top-color: #2a3035;
+    border-width: 10px;
+    margin-left: -10px;
 }
 
-.ac-content h1,
-.ac-content h2,
-.ac-content h3,
-.ac-content h4,
-.ac-content h5,
-.ac-content h6 {
-    margin-top: 1em;
-    margin-bottom: 1em;
+/* Tooltip content*/
+
+.glossary-tooltip-content img {
+    position: relative;
+    height: 150px;
+    display: block;
+    float: left;
+    margin-right: 1em;
+}
+
+/* .glossary-tooltip-text {
+    display: block;
+    padding: 1.31em 1.21em 1.21em 1.31em;
+    color: #fff;
+}
+ */
+.glossary-tooltip-text a {
+    font-weight: bold;
+}
+
+.glossary-underline {
+    text-decoration: underline;
+}
+
+/* main.css */
+
+.ac-glossary-link .glossary-tooltip .glossary-link,
+.rtBibleRef {
+    text-decoration: none;
+    display: inline;
+    background: transparent;
+    font-weight: inherit;
+    color: currentColor;
+    padding: 0;
+    border-bottom: 1px dotted !important;
+    padding: 0 !important;
+}
+
+/* .ac-glossary-link .glossary-tooltip-content,
+.ac-glossary-link .glossary-tooltip-content-mobile {
+    font-weight: normal;
+    font-size: 1.0rem;
+}
+ */
+.ac-glossary-link .glossary-tooltip-content,
+.tooltip-container {
+    color: #eff1f5;
+    background-color: #384156;
+}
+
+.ac-glossary-link .glossary-tooltip-content::after {
+    border-top-color: #384156;
+}
+
+.glossary-tooltip-content-mobile {
+    background: #eff1f5;
+    color: #384156;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin: 14px 0 10px;
+    display: none;
+    width: 100%;
+}
+
+.glossary-mobile .glossary-show-tooltip {
+    display: inline-block;
 }

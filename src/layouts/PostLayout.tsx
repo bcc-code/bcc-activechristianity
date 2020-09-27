@@ -5,31 +5,32 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentMedia, fixPlayer, floatPlayer, setMpHeight } from '@/state/action'
 const VideoMediaPlay = loadable(() => import('@/components/MediaPlayer/VideoPlayerLocal'))
 const Content = loadable(() => import('@/components/Content'))
+
 const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
-const DesktopPopularRow = loadable(() => import('@/layout-parts/HorizontalScroll/DesktopPopular'))
+
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
-import SlateDarkFollowButton from '@/layout-parts/Buttons/ToggleFollow'
+const ToggleFollowWithName = loadable(() => import('@/layout-parts/Buttons/ToggleFollowWithName'))
+const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 /* const EbookFooterBanner = loadable(() => import('@/layout-parts/Banner/EbookFooterBanner'))
 const MockRelatedContentMedia = loadable(() => import('@/layout-parts/RelatedContent'))
 const PlaylistItem = loadable(() => import('@/components/PostItem/LeftImgPlaylist')) */
-import FetchAndSetFollowed from '@/layout-parts/HOC/FetchAndSetFollowed'
+
 import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
 import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
 import ShareButton from '@/layout-parts/Buttons/ToggleBookmark'
-import { MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
+import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts } from '@/layout-parts'
 
+import { ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import TwoToOneImg from "@/components/Images/Image2To1"
-import PostMetaWLabel from '@/components/PostMeta/PostMeta'
-import PostMetaLinks from '@/components/PostMeta/PostMetaLinks'
-import RightImgPost from '@/components/PostItem/RightImgWDes'
+
 import TS from '@/strings'
 
 import acApi from '@/util/api'
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
-import { getImage } from '@/helpers/imageHelpers'
+
 
 import { IPostItem, IPostRes, ITranslations } from '@/types'
 import { IRootState } from '@/state/types'
@@ -84,15 +85,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         return () => window.removeEventListener('scroll', debounceScroll);
     }, [post.slug])
 
-    const scrollToTop = () => {
-        if (typeof window !== 'undefined') {
-            window.scroll({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            })
-        }
-    }
     React.useEffect(() => {
         const { id } = post
 
@@ -111,18 +103,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
         dispatch(setCurrentMedia(media))
         dispatch(fixPlayer())
-
-        /*get featured in playlist*/
-
-        /* if (media && media.audio && media.audio.playlistSlug) {
-            fetchOneLocalMediaFromSlug(media.audio.playlistSlug)
-                .then(res => {
-                    if (res) {
-                        setFeaturedInPlaylist(res)
-                    }
-
-                })
-        } */
 
         if (id) {
             acApi.visitsPost(id)
@@ -168,8 +148,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const imageUrl = image;
 
-    const contributor = authors && <PostMetaWLabel authors={authors} />
-
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
 
     let readMore: string[] = []
@@ -212,71 +190,52 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             }
             <div className="flex flex-wrap border-d4gray py-6">
                 {topics && topics?.map(item => (
-                    <FetchAndSetFollowed
-                        id={item.id}
-                        className=""
-                        render={({ followed }) => {
-                            return (
-                                <div className={`flex py-1 p-2 pr-0 mb-2 mr-2 text-center text-xs rounded-full font-semibold items-center bg-gray-300`}>
-                                    <span className="">{item.name}</span>
-                                    <span className="px-2">
-                                        {followed === "loading" && <Icon name="Cached" size="3" />}
-                                        {followed === "true" && <Icon name="Check" size="3" />}
-                                        {followed === "false" && <Icon name="Add" size="3" />}
-                                    </span>
-                                </div>
-                            )
-                        }}
-                    />
+                    <ToggleFollowWithName {...item} />
                 ))}
             </div>
             <div className="border-b pb-6">
-                {}
-            </div>
-            <div className="border-d4gray border-b py-6">
-                {authors?.map(item => {
-                    return (
-                        <div className="flex flex-col">
-                            <span className="uppercase font-roboto text-gray-500 font-semibold text-sm">
-                                {item.as}
-                            </span>
-                            <span>{item.authors.map(a => (
-                                <div className="w-full flex justify-between items-center">
-                                    <div className="font-roboto text-sm">{a.name}</div>
-                                    <div>{a.excerpt}</div>
-                                    <div className="font-roboto text-d4secondary text-sm border border-d4secondary rounded px-2 py-1">{ac_strings.follow}</div>
-                                </div>
+                <AuthorBookmarkShareSection
+                    id={id}
+                    text={excerpt || title}
+                    shareSlug={slug}
+                    views={views}
+                    likes={likes}
+                    authors={authors}
 
-                            ))}</span>
-                        </div>
-                    )
-                })}
+                />
             </div>
+            {/*             <div className="border-b pb-6">
+                <ShareSection
+                    id={id}
+                    text={excerpt || title}
+                    shareSlug={slug}
+                    views={views}
+                    likes={likes}
 
+                />
+            </div>
+            {authors && <AuthorsFollowAndPosts
+                authors={authors}
+                postId={id}
+            />
+            } */}
             {authors?.map(item => {
                 return (
 
                     <div>
                         {item.authors.map(a => (
-                            <div>
-                                <div className="">More from {a.name}</div>
+                            <div className="py-6">
                                 <FetchPostFromList
                                     slug={`${TS.slug_ac_author}/${a.to}`}
                                     layout="list"
                                     render={({ posts }) => {
-                                        const sixPosts = posts.slice(0, 6)
-                                        return posts.length > 0 ? (
-                                            <div>
-                                                <div className="hidden sm:block pb-8">
-                                                    {sixPosts.map(item => (
-                                                        <RightImgPost key={item.slug} {...item} />
-                                                    ))}
-                                                </div>
-                                                <div className="sm:hidden -ml-4 -mr-4 py-6">
-                                                    <DesktopPopularRow posts={sixPosts} />
-                                                </div>
-                                            </div>
-                                        ) : <div></div>
+                                        const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
+                                        return fourPosts.length > 0 ? (
+                                            <Row2ColAndXScroll
+                                                title={`${ac_strings.more_from} ${a.name}`}
+                                                posts={posts}
+                                            />
+                                        ) : null
                                     }}
 
                                 />
@@ -288,14 +247,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 )
             })}
 
-            {/* Mock related media */}
-            {/* {mediaType && (
-                <LazyLoad>
-                    <MockRelatedContentMedia type={mediaType?.value} />
-                </LazyLoad>
-            )} */}
-            {/* end of Mock related media*/}
-            <div>You might also be interested</div>
             {readMore.length > 0 ? (
                 <LazyLoad>
                     <FetchPost
@@ -303,16 +254,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         layout="list"
                         render={({ posts }) => {
                             return (
-                                <div>
-                                    <div className="hidden sm:block pb-8">
-                                        {posts.map(item => (
-                                            <RightImgPost key={item.slug} {...item} />
-                                        ))}
-                                    </div>
-                                    <div className="sm:hidden -ml-4 -mr-4 py-6">
-                                        <DesktopPopularRow posts={posts} />
-                                    </div>
-                                </div>
+                                <Row2ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
                             )
                         }}
                     />
@@ -341,29 +283,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     )
     return (
         <article className="overflow-scroll w-full relative">
-            <div className="flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
-                <button className="px-2 py-1">
-                    <ShareButton
-                        id={id}
-                    />
-                </button>
-                <button className="px-2 py-1">
-                    <Icon
-                        name="Share"
-                        color="secondary"
-                        size="6"
-                    />
+            <ShareBookmarkTopShortCuts
+                id={id}
+                text={excerpt || title}
+                shareSlug={slug}
+                views={views}
+                likes={likes}
+            />
 
-                </button>
-                <button className="px-2 py-1" onClick={scrollToTop}>
-                    <Icon
-                        name="Publish"
-                        color="secondary"
-                        size="6"
-                    />
-                </button>
-
-            </div>
             {hasMedia === "video" && videoSrc !== '' && (
                 <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
                     <VideoMediaPlay src={videoSrc} showControl={showControl} />
@@ -394,9 +321,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 shareSlug={slug}
                 translatedUrls={tranlsatedUrl}
             >
-                <div className="flex items-center justify-between pb-6 bg-white border-d4gray border-b text-sm">
-                    {contributor}
-                    <span className="ml-4 text-d4gray-dark">{reading_time?.text}</span>
+                <div className="pb-6 bg-white border-d4gray border-b text-sm">
+                    <ReadingTimingAuthor
+                        readingTime={reading_time?.text}
+                        authors={authors}
+
+                    />
                 </div>
                 {isCurrentMedia.audio && (
                     <div className="relative sm:pt-10 mb-12 ">
@@ -415,12 +345,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 shareSlug={slug}
                 translatedUrls={tranlsatedUrl}
                 headerMeta={(
-                    <div className="flex justify-between">
-                        <div className="flex">
-                            {contributor}
-                            <span className="ml-4 text-d4gray-dark">{reading_time?.text}</span>
-                        </div>
-                    </div>
+                    <ReadingTimingAuthor
+                        readingTime={reading_time?.text}
+                        authors={authors}
+
+                    />
                 )}
             >
                 {!isCurrentMedia.video && <div className="relative sm:pt-10 mb-12 ">
@@ -434,7 +363,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 {body}
             </DesktopPostMain>
-            <div className="main-content py-8 relative bg-white px-4">
+            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 ">
                 <p className=""><em>{TS.scripture_copyright}</em></p>
             </div>
             {postFooter}

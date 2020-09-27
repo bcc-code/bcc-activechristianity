@@ -5,7 +5,7 @@ import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 interface IFetchPost {
     slug: string
     layout: "row" | "list",
-    render: (data: { posts: IPostItem[] }) => JSX.Element
+    render: (data: { posts: IPostItem[] }) => JSX.Element | null
 }
 const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
     const [postItems, setPostItems] = React.useState<IPostItem[]>([])

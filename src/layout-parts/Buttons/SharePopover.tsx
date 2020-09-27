@@ -5,16 +5,18 @@ import * as facebookSharer from "share-this/dist/sharers/facebook"
 import * as emailSharer from "share-this/dist/sharers/email"
 import render from "share-this/src/render"
 import * as popover from "share-this/src/popover"
-import Icon from "@/components/Icons/Icon"
+import Icon, { IButtonColour } from "@/components/Icons/Icon"
 import "./share-pop-over-scss/share-this.scss"
 import "./share-popover.css"
 
 //popoverClick
 interface IProps {
+
     shareUrl: string
     text: string,
     label?: string
-    size?: number
+    size?: string
+    color?: IButtonColour
 }
 
 const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, size }) => {
@@ -38,11 +40,23 @@ const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, size }) => {
     }
 
     const handleShareClick = () => {
-        setActive(!active)
-        document.addEventListener('click', closeOnClick);
+
+        if (navigator && navigator.share) {
+            navigator.share({
+                title: 'WebShare API Demo',
+                url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
+            }).then(() => {
+                console.log('Thanks for sharing!');
+            })
+                .catch(console.error);
+        } else {
+            setActive(!active)
+            document.addEventListener('click', closeOnClick);
+        }
+
     }
     return (
-        <div className="relative text-d4gray-dark" ref={popoverEl}>
+        <div className="relative flex items-center font-roboto" ref={popoverEl}>
             {active && (
                 <button
                     className="custom-share-this-popover"
@@ -52,11 +66,11 @@ const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, size }) => {
                 />
             )}
             <button
-                className="flex"
+                className="flex items-center"
                 onClick={handleShareClick}
-                onKeyDown={handleIconClick}
+                onKeyDown={handleShareClick}
             >
-                {label && <span className="px-4 uppercase hidden sm:block">{label}</span>}<Icon name="ShareOutline" color="secondary" />
+                <Icon name="ShareOutlined" color="slate-light" size="5" />{label && <span className="px-2 hidden sm:block text-d4slate-light text-xs">{label}</span>}
             </button>
         </div>
 

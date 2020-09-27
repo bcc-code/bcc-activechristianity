@@ -1,16 +1,19 @@
 import * as React from 'react'
+import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { ITranslations, INavItem } from '@/types'
+import { ITranslations, INavItem, IAuthor, IPostAuthors } from '@/types'
 
-import h2p from 'html2plaintext'
+import Icon from '@/components/Icons'
+import IconMUI from '@/components/Icons/Icon'
+import PostRow2Col from '@/layout-parts/List/PostRow2Col'
+const TopImgHorizontalScrollRow = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 import ShareButton from '@/layout-parts/Buttons/SharePopover'
 import ToogleBookmark from '@/layout-parts/Buttons/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
-import languages from '@/strings/languages.json'
-
-
-import Icon from '@/components/Icons'
-
+import TS from '@/strings'
+import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
+import { OutlineSmallRounded } from '@/components/Button'
 interface IPostMain {
     id: string
     title: string
@@ -24,14 +27,15 @@ interface IMobilePostMain extends IPostMain {
     height: number
 }
 
-interface IShareProps {
-    id: string
+interface IShareLikesViewsProps extends ILikesViewsProps {
     shareSlug: string
     text: string
-    simple?: boolean
-    bookmarked?: boolean
-    size?: number
+}
 
+interface ILikesViewsProps {
+    id: string
+    likes?: number
+    views?: number
 }
 
 interface IDesktopPostMain extends IPostMain {
@@ -60,6 +64,11 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
     <h1 className=" font-semibold text-d4slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
 )
 
+export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (
+    <span className="uppercase font-roboto text-gray-500 font-semibold text-sm">
+        {title}
+    </span>
+)
 export const PostRelatedContentHeader: React.FC<{ title: string }> = ({ title }) => (
     <div className="py-6 font-semibold text-sm sm:text-base text-d4secondary">{title}</div>
 )
@@ -126,7 +135,7 @@ const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrl
 
         return (
             <div className="border-d4gray border-t py-8 text-gray-600">
-                <h6>{ac_strings.postAvailable}</h6>
+                <PageSectionHeaderUpperCaseGray title={ac_strings.postAvailable} />
                 <div className="flex flex-wrap text-sm pt-4">
                     {translatedUrls.map(item => (
                         <a className="w-1/2 sm:w-1/3 md:w-1/4 pb-2" href={item.to}>{item.name}</a>
@@ -139,27 +148,186 @@ const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrl
     }
 }
 
-export const ShareSection: React.FC<IShareProps> = (props) => {
-    const { id, shareSlug, text, simple, bookmarked, size } = props
+export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
+    const { id, likes, views } = props
     return (
-        <div className={simple ? "mr-2 flex" : "relative bg-white border-d4gray border-t flex justify-between py-8 px-4"}>
-            <div className={simple ? "mr-4 flex" : "flex items-center text-d4gray-dark"}>
+        <div className="font-roboto flex">
+            <div className="mr-2 flex items-center">
+                {typeof views === "number" && (
+                    <div className="mr-4 flex items-center">
+                        <IconMUI
+                            name="VisibilityOutlined"
+                            color="slate-light"
+                            size="5"
+                        />
+                        <span className="text-xs text-d4slate-light pl-2">
+                            {views}
+                        </span>
+                    </div>
+                )}
+
                 <ToogleBookmark
                     id={id}
-                    color="slate-dark"
+                    color="slate-light"
+                    size="5"
+                />
+                <span className="text-xs text-d4slate-light pl-2">
+                    {likes}
+                </span>
+            </div>
+
+
+        </div>
+    )
+}
+
+export const AuthoerFollowSection: React.FC<{ authors: IPostAuthors }> = ({ authors }) => {
+    return (
+        <div className="flex flex-col">
+            <PageSectionHeaderUpperCaseGray title={authors.as} />
+
+            <span>{authors.authors.map(a => (
+                <div className="text-sm">
+                    <div className="font-roboto ">{a.name}</div>
+                    <div className="text-gray-500">{a.excerpt}</div>
+                </div>
+                /*                 <div className="w-full flex justify-between items-center text-sm">
+                                    <div>
+                                        <div className="font-roboto ">{a.name}</div>
+                                        <div className="text-gray-500">{a.excerpt}</div>
+                                    </div>
+                                    <OutlineSmallRounded>{ac_strings.follow}</OutlineSmallRounded>
+                                </div> */
+
+            ))}
+            </span>
+        </div>
+    )
+}
+export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: string }> = ({ authors, postId }) => {
+    return (
+        <div>
+            <div className="border-d4gray border-b py-6">
+                {authors?.map(item => {
+                    return (
+                        <AuthoerFollowSection authors={item} />
+                    )
+                })}
+            </div>
+
+            {authors?.map(item => {
+                return (
+
+                    <div>
+                        {item.authors.map(a => (
+                            <div className="py-6">
+                                <FetchPostFromList
+                                    slug={`${TS.slug_ac_author}/${a.to}`}
+                                    layout="list"
+                                    render={({ posts }) => {
+                                        const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
+                                        return fourPosts.length > 0 ? (
+                                            <Row2ColAndXScroll
+                                                title={`${ac_strings.more_from} ${a.name}`}
+                                                posts={posts}
+                                            />
+                                        ) : null
+                                    }}
+
+                                />
+                            </div>
+
+                        ))}
+                    </div>
+
+                )
+            })}
+        </div>
+    )
+}
+
+export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { authors?: IPostAuthors[] }> = (props) => {
+    const { id, shareSlug, text, views, likes, authors } = props
+    return (
+        <div className="relative bg-white border-d4gray flex justify-between">
+            <div className="flex">
+                {authors?.map(item => {
+                    return (
+                        <AuthoerFollowSection authors={item} />
+                    )
+                })}
+            </div>
+            <div className="flex">
+                <BookmarksAndViews
+                    id={id}
+                    views={views}
+                    likes={likes}
+                />
+                <ShareButton
+                    shareUrl={shareSlug}
+                    text={text ? text : ""}
+                    label={ac_strings.share}
                 />
             </div>
-            <ShareButton
-                shareUrl={shareSlug}
-                text={text ? text : ""}
-                label={simple ? undefined : "Share"}
-                size={size}
-            />
         </div>
     )
 }
 
 
+export const ShareSection: React.FC<IShareLikesViewsProps> = (props) => {
+    const { id, shareSlug, text, views, likes } = props
+    return (
+        <div className="relative bg-white border-d4gray flex justify-between">
+            <BookmarksAndViews
+                id={id}
+                views={views}
+                likes={likes}
+            />
+            <ShareButton
+                shareUrl={shareSlug}
+                text={text ? text : ""}
+                label={ac_strings.share}
+            />
+        </div>
+    )
+}
+
+export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id, shareSlug, text, views, likes }) => {
+    const scrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
+
+    return (
+        <div className="flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
+            <button className="px-2 py-1">
+                <ToogleBookmark
+                    id={id}
+                />
+            </button>
+            <button className="px-2 py-1">
+                <IconMUI
+                    name="Share"
+                    color="secondary"
+                    size="6"
+                />
+
+            </button>
+            <button className="px-2 py-1" onClick={scrollToTop}>
+                <IconMUI
+                    name="Publish"
+                    color="secondary"
+                    size="6"
+                />
+            </button>
+        </div>
+    )
+}
 
 export const MobileMainWrapper: React.FC<{ height: number }> = ({ height, children }) => {
     return (

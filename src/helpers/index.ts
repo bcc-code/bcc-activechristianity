@@ -229,7 +229,7 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
 }
 
 export const normalizePostRes = (post: IPostRes) => {
-    const { id, authors, title, excerpt, image, slug, readtime, track, topics, created_at, meta, glossary } = post
+    const { id, authors, title, excerpt, image, slug, readtime, track, topics, created_at, meta, glossary, views, likes } = post
 
     const { filteredTopics, types, format } = transformTopicsRes(topics)
 
@@ -245,12 +245,14 @@ export const normalizePostRes = (post: IPostRes) => {
         topics: filteredTopics,
         types,
         format,
-        reading_time: { text: `${readingTimeMinutes} mins read`, minutes: readingTimeMinutes },
+        reading_time: { text: `${readingTimeMinutes} ${ac_strings.mins}`, minutes: readingTimeMinutes },
         date: new Date(created_at),
         media: {
             path: slug,
         },
-        glossary
+        glossary,
+        views,
+        likes
 
     }
 

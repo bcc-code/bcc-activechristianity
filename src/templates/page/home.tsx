@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import FetchPosts from '@/layout-parts/HOC/FetchPosts'
 import FetchPostList from '@/layout-parts/HOC/FetchPostList'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
-const DesktopPopularRow = loadable(() => import('@/layout-parts/HorizontalScroll/DesktopPopular'))
+const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
 
@@ -91,7 +91,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             slugs={popularPostsAll.static}
             layout="row"
             render={
-              ({ posts }) => <DesktopPopularRow posts={posts} />
+              ({ posts }) => <TopImgHorizontalScroll posts={posts} />
             }
           />
 

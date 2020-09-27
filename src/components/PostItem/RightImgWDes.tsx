@@ -6,7 +6,7 @@ import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 
 import { PostTitle, PostExcerpt, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import { PostItemMediaImg } from '@/layout-parts/Buttons/PlayButton'
-import { ShareSection } from '@/layout-parts'
+import { BookmarksAndViews } from '@/layout-parts'
 
 import 'lazysizes';
 
@@ -32,7 +32,9 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
         media,
         date,
         audioDuration,
-        noDes
+        noDes,
+        likes,
+        views
     } = props
     let postAuthors = authors
     let postReadingTime = reading_time?.text
@@ -41,7 +43,8 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
         postAuthors = []
         postReadingTime = media.audio.duration
     }
-
+    console.log(likes)
+    console.log(views)
     return (
         <div className={`${border !== false ? 'border-b border-b-1 border-gray-300 last:border-b-1 mr-4 sm:border-none pb-4' : ''}`}>
             <div className="flex items-center sm:items-stretch w-full cursor-pointer mt-2">
@@ -74,15 +77,15 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     <div className="items-center w-full hidden sm:flex  sm:mt-12">
 
                         <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden md:block" readingTime={postReadingTime} authors={postAuthors} />
-                        <ShareSection
-                            shareSlug={slug}
-                            text={title}
-                            bookmarked={bookmarked}
-                            id={id}
-                            simple
-                            size={16}
-
-                        />
+                        <div>
+                            {typeof likes === "number" && typeof views === "number" && (
+                                <BookmarksAndViews
+                                    id={id}
+                                    likes={likes}
+                                    views={views}
+                                />
+                            )}
+                        </div>
 
                     </div>
                 </div>
@@ -107,15 +110,13 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
             <div className="items-center w-full flex sm:hidden  sm:mt-12">
 
                 <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark lg:block" readingTime={reading_time?.text} authors={authors} />
-                <ShareSection
-                    shareSlug={slug}
-                    text={title}
-                    bookmarked={bookmarked}
-                    id={id}
-                    simple
-                    size={16}
-
-                />
+                {typeof likes === "number" && typeof views === "number" && (
+                    <BookmarksAndViews
+                        id={id}
+                        views={views}
+                        likes={likes}
+                    />
+                )}
 
             </div>
         </div>

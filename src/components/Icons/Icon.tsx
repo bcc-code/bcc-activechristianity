@@ -7,8 +7,10 @@ interface IIconProps {
     size?: string
     color?: IButtonColour
 }
+
+
 const IconWrapper: React.FC<IIconProps> = ({ name, size, color }) => {
-    console.log(name)
+
     const Icon = Icons[name]
     const style: any = {}
     if (size) {
@@ -18,12 +20,19 @@ const IconWrapper: React.FC<IIconProps> = ({ name, size, color }) => {
     if (color) {
         style.color = `${colorMap[color]}`
     }
-    return (
-        <Icon
-            style={style}
+    if (Icon) {
+        return (
+            <Icon
+                style={style}
 
-        />
-    )
+            />
+        )
+    } else {
+        console.log('Cannot find this Icon')
+        console.log(name)
+        return null
+    }
+
 }
 
 export default IconWrapper

@@ -78,6 +78,8 @@ const getPostsQuery = (pageNr)=>`
                     slug
                 }
                 content
+                likes
+                views
             }
         }
     }
@@ -255,14 +257,15 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 transformedPost.content = glossaryContent.text
                 transformedPost.glossary = glossaryContent.postGlossaries
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
+                transformedPost.recommendPosts=[]
                 const recommendByPostQuery = getRecommendPosts(post.id)
                 
-                const recommendByPostRes = await sendQuery(recommendByPostQuery)
+/*                 const recommendByPostRes = await sendQuery(recommendByPostQuery)
                 .catch(error=>{
                     console.log(error)
                     return null
                 })
-                /* await  */
+
                 if(recommendByPostRes && recommendByPostRes.errors){
                     console.log(recommendByPostQuery)
                     console.log(recommendByPostRes)
@@ -270,7 +273,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 } else if(recommendByPostRes){
                     transformedPost.recommendPosts = recommendByPostRes.data.recommendedByPost.map(post=>post.slug)
                 }
-
+ */
                 const nodeContent = JSON.stringify(transformedPost)
                 const nodeMeta = {
                     id: createNodeId(`ac-post-${post.id}`),

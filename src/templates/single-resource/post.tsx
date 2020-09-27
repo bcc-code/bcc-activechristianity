@@ -104,6 +104,8 @@ export const pageQuery = graphql`
                     }
                 }
                 published
+                likes
+                views
 
     }
 
@@ -122,7 +124,6 @@ export const pageQuery = graphql`
                     content
                     word
                 }
-                recommendPosts
                 readMorePosts
             }
     }

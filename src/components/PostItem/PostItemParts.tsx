@@ -6,9 +6,9 @@ import { PlaylistPlayButton } from '@/layout-parts/Buttons/PlayButton'
 import Link from '@/components/CustomLink'
 import { IPostItem, IImage, IPostAuthors } from '@/types'
 import TS from '@/strings'
-
+import Icon from '@/components/Icons/Icon'
 import Bookmark from '@/layout-parts/Buttons/ToggleBookmark'
-
+import { BookmarksAndViews } from '@/layout-parts'
 import './style/parts.css'
 
 interface ITextConfig {
@@ -150,7 +150,7 @@ export const ReadMore: React.FC<{ slug: string, bookmarked?: boolean, id: string
     return (
         <div className="flex justify-between">
             <Link className="block text-indigo-500 text-sm" to={slug}>{TS.read_more}</Link>
-            <Bookmark id={id} bookmarked={bookmarked} size={20} />
+            <Bookmark id={id} color="slate-light" size="4" />
         </div>
     )
 }
@@ -160,13 +160,33 @@ interface IProps {
     readingTime?: string
     authors?: IPostAuthors[]
 }
+
+export const AuthorLink: React.FC<{ authors?: IPostAuthors[] }> = ({ authors }) => {
+    return <span>{authors && authors[0] ? authors[0].authors.map(item => <Link className="inline-block post-meta-commar" to={item.to}>{item.name}</Link>) : ''}</span>
+}
 export const ReadingTimingAuthor: React.FC<IProps> = ({ readingTime, authors, className }) => {
 
     return (
         <span className={className ? className : 'text-sm text-gray-600'}>
             <span>{readingTime ? readingTime : ''}</span>
             {readingTime && authors && <span> · </span>}
-            <span>{authors && authors[0] ? authors[0].authors.map(item => <Link className="inline-block post-meta-commar" to={item.slug}>{item.name}</Link>) : ''}</span>
+            <AuthorLink authors={authors} />
+        </span>
+    )
+}
+
+export const ReadingTimingIcon: React.FC<IProps> = ({ readingTime, authors, className }) => {
+
+    return (
+        <span className={"text-sm text-gray-600 mr-2 flex items-center"}>
+            <Icon
+                name="AccessTime"
+                color="slate-light"
+                size="5"
+            />
+            <span className="text-xs text-d4slate-light pl-2">
+                {readingTime}
+            </span>
         </span>
     )
 }
@@ -210,14 +230,20 @@ export const PostBase: React.FC<IPostBase> = (props) => {
             <Link to={`/${slug}`} className="flex flex-col flex-1 leading-normal">
                 <PostTitle {...postTitleProps} />
                 <PostExcerpt {...postExcerptProps} />
-
+                <div className="text-sm text-gray-500 mb-4"> <AuthorLink authors={authors} /></div>
             </Link>
-            {hasReadingTime && (
-                <span className="flex justify-between items-center pb-4">
-                    <ReadingTimingAuthor readingTime={postReadingTime} authors={postAuthors} />
-                    <Bookmark bookmarked={bookmarked} id={id} size={16} />
-                </span>
-            )}
+
+
+            <div className="pb-4 flex">
+                <ReadingTimingIcon
+                    readingTime={postReadingTime}
+                />
+                <BookmarksAndViews
+                    id={id}
+                    likes={post.likes}
+                    views={post.views}
+                />
+            </div>
             {hasReadMore && (
                 <ReadMore slug={slug} bookmarked={bookmarked} id={id} />
             )}

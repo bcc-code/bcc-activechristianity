@@ -84,7 +84,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
             rawText: excerpt,
             fontKey: "top-img-exceprt",
             clamp: 3,
-            className: "flex items-stretch mb-8"
+            className: "flex items-stretch mb-4"
         },
         hasReadingTime: hideReadingTime ? false : true
 

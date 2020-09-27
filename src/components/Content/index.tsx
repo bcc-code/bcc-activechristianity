@@ -4,6 +4,7 @@ import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import shareThis from "share-this";
 import "./content.css"
 import h2p from 'html2plaintext'
+import SelectionPopper from '@/components/TextSelectPopper'
 import TooltipTrigger from '@/components/ToolTip';
 import RightImgPost from '@/components/PostItem/RightImgWDes'
 import "share-this/style/scss/share-this.scss"
@@ -32,14 +33,14 @@ const selectionShare = typeof window !== 'undefined' ? shareThis({
 
 
 const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ content, glossary }) => {
-    React.useEffect(() => {
-
-        selectionShare.init();
-        return () => {
-            selectionShare.destroy();
-        }
-    }, [])
-
+    /*     React.useEffect(() => {
+    
+            selectionShare.init();
+            return () => {
+                selectionShare.destroy();
+            }
+        }, [])
+     */
     const generateBody = () => {
         if (content) {
             let updated = ReactHtmlParser(content, {
@@ -69,7 +70,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
                                     shorten = parts.join(' ')
                                 }
                                 return (
-                                    <div className="rtBibleRef"> {word}</div>
+                                    <span className="rtBibleRef"> {word}</span>
 
                                 )
                             }
@@ -145,12 +146,12 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
     }
 
     const body = generateBody()
-
+    console.log(body)
 
     return (
-        <div className="main-content leading-normal">
+        <SelectionPopper className="main-content leading-normal">
             {body}
-        </div>
+        </SelectionPopper>
     )
 }
 
