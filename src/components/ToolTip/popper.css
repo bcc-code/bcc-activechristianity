@@ -1,0 +1,13 @@
+.ac-popper,
+.ac-popper::before {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    z-index: -1;
+}
+
+.ac-popper::before {
+    content: '';
+    transform: rotate(45deg);
+    background: #384156;
+}

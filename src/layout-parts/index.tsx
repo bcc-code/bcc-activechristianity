@@ -5,15 +5,13 @@ import { ITranslations, INavItem, IAuthor, IPostAuthors } from '@/types'
 
 import Icon from '@/components/Icons'
 import IconMUI from '@/components/Icons/Icon'
-import PostRow2Col from '@/layout-parts/List/PostRow2Col'
-const TopImgHorizontalScrollRow = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 import ShareButton from '@/layout-parts/Buttons/SharePopover'
 import ToogleBookmark from '@/layout-parts/Buttons/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
-import { OutlineSmallRounded } from '@/components/Button'
+
 interface IPostMain {
     id: string
     title: string
@@ -287,6 +285,7 @@ export const ShareSection: React.FC<IShareLikesViewsProps> = (props) => {
                 shareUrl={shareSlug}
                 text={text ? text : ""}
                 label={ac_strings.share}
+                size="5"
             />
         </div>
     )
@@ -311,11 +310,14 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id,
                 />
             </button>
             <button className="px-2 py-1">
-                <IconMUI
-                    name="Share"
+                <ShareButton
+                    shareUrl={shareSlug}
+                    text={text ? text : ""}
                     color="secondary"
                     size="6"
+                    placement="right"
                 />
+
 
             </button>
             <button className="px-2 py-1" onClick={scrollToTop}>

@@ -185,7 +185,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     hosts={authors || []}
                 />
             ) : (
-                    <Content content={content} glossary={glossary} />
+                    <Content
+                        content={content}
+                        glossary={glossary}
+                        slug={slug}
+                        title={title}
+                    />
                 )
             }
             <div className="flex flex-wrap border-d4gray py-6">

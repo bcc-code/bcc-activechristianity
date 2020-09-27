@@ -1,22 +1,66 @@
-import React from 'react';
-import './tooltip.css'
+import * as React from 'react'
 
-const Tooltip: React.FC<{ tooltip: string | JSX.Element }> = ({ tooltip, children }) => {
-    const [isShowing, setIsShowing] = React.useState(false)
+import { usePopper } from 'react-popper';
+
+
+import './popper.css'
+
+interface IProps {
+
+    popperContent: JSX.Element
+    placement?: 'top' | 'right'
+}
+
+
+const ShareIconPopper: React.FC<IProps> = ({ popperContent, children, placement }) => {
+
+    const [referenceElement, setReferenceElement] = React.useState<HTMLDivElement | null>(null);
+    const [popperElement, setPopperElement] = React.useState<HTMLDivElement | null>(null);
+    const [arrowElement, setArrowElement] = React.useState<HTMLDivElement | null>(null);
+    const [showPopper, setShowPopper] = React.useState(false)
+    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+        placement: placement ? placement : 'top',
+        modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
+    });
+    const PopperEl = React.useRef<HTMLDivElement>(null);
+
+    const closeOnClick = (e: any) => {
+        /*      if (PopperEl && PopperEl.current && !PopperEl.current.contains(e.target)) {
+                 
+             }
+      */
+        setShowPopper(false)
+        document.removeEventListener('click', closeOnClick);
+
+    }
+    const handleShowPopper = (e: any) => {
+        e.preventDefault()
+        setShowPopper(!showPopper)
+        document.addEventListener('click', closeOnClick);
+    }
+
     return (
-        <span className="ac-glossary-link">
-            <span className="glossary-tooltip">
-                <span className="glossary-link" onClick={() => { setIsShowing(true) }}>
-                    {children}
-                </span>
-                <span className={`${isShowing ? '' : 'hidden'} glossary-tooltip-content clearfix w-64 sm:w-mobile px-8 py-4`} >
-                    <span>{tooltip}
-                    </span>
-                </span>
-            </span>
-        </span>
+        <>
+            <button onClick={handleShowPopper} onKeyDown={handleShowPopper} type="button" ref={setReferenceElement} style={{ height: 0 }}>
+                {children}
+            </button>
 
-    )
+            {showPopper && (
+                <div
+                    className="bg-d4slate-dark text-white rounded-lg px-2 mx-2"
+                    ref={setPopperElement}
+                    style={styles.popper} {...attributes.popper}
+
+                >
+                    <div className="flex" ref={PopperEl}>
+                        {popperContent}
+                    </div>
+                    {/*          <div className="ac-popper" ref={setArrowElement} style={{ ...styles.arrow, bottom: "-5px" }} /> */}
+
+                </div>
+            )}
+        </>
+    );
 };
 
-export default Tooltip;
+export default ShareIconPopper

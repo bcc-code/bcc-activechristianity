@@ -1,18 +1,16 @@
 import * as React from "react"
 import ReactHtmlParser from "react-html-parser"
 import FetchPost from '@/layout-parts/HOC/FetchPosts'
-import shareThis from "share-this";
-import "./content.css"
+
 import h2p from 'html2plaintext'
 import SelectionPopper from '@/components/TextSelectPopper'
-import TooltipTrigger from '@/components/ToolTip';
 import RightImgPost from '@/components/PostItem/RightImgWDes'
-import "share-this/style/scss/share-this.scss"
-import * as twitterSharer from "share-this/dist/sharers/twitter"
-import * as facebookSharer from "share-this/dist/sharers/facebook"
-import * as emailSharer from "share-this/dist/sharers/email"
+
 import { IGlossary } from '@/types'
+import ToolTipGlossary from '@/components/ToolTip'
 import TS from '@/strings'
+import "./content.css"
+
 interface HTMLNode {
     type: string
     name: string
@@ -24,15 +22,8 @@ interface HTMLNode {
     parent: HTMLNode
 }
 
-const selectionShare = typeof window !== 'undefined' ? shareThis({
-    sharers: [twitterSharer, facebookSharer, emailSharer]
-}) : {
-        init: () => { },
-        destroy: () => { }
-    }
 
-
-const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ content, glossary }) => {
+const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string, slug: string }> = ({ content, glossary, title, slug }) => {
     /*     React.useEffect(() => {
     
             selectionShare.init();
@@ -41,6 +32,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
             }
         }, [])
      */
+    console.log(content)
     const generateBody = () => {
         if (content) {
             let updated = ReactHtmlParser(content, {
@@ -70,7 +62,14 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
                                     shorten = parts.join(' ')
                                 }
                                 return (
-                                    <span className="rtBibleRef"> {word}</span>
+                                    <ToolTipGlossary popperContent={
+                                        <span className="text-sm leading-normal font-normal font-sans max-w-64 py-6" >
+                                            {shorten}...
+                                            <a target="_blank" href={`${TS.slug_glossary}/${g.slug}`}> {TS.read_more} </a>
+                                        </span>
+                                    }>
+                                        <span className="rtBibleRef"> {word}</span>
+                                    </ToolTipGlossary>
 
                                 )
                             }
@@ -146,10 +145,13 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[] }> = ({ conten
     }
 
     const body = generateBody()
-    console.log(body)
 
     return (
-        <SelectionPopper className="main-content leading-normal">
+        <SelectionPopper
+            className="main-content leading-normal font-serif"
+            slug={slug}
+            title={title}
+        >
             {body}
         </SelectionPopper>
     )
