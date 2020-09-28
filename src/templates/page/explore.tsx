@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { graphql } from "gatsby"
 import loadable from '@loadable/component'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch, connectStats } from 'react-instantsearch-dom'
@@ -19,7 +19,7 @@ import "react-placeholder/lib/reactPlaceholder.css";
 import { Stats } from 'react-instantsearch-dom';
 import { INavItem } from "@/types"
 import { IResourceOverview } from '@/layout-parts/Explore/ExploreByType'
-const ExploreByType = loadable(() => import('@/layout-parts/Explore/ExploreByType'))
+
 const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTopics'))
 
 import Link from '@/components/CustomLink';
@@ -27,14 +27,11 @@ import TS from '@/strings'
 const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'))
 
 import localStorageHelper from '@/helpers/localStorage'
-import BibleIcon from '@/components/Icons/BibleSmall'
-import TopicIcon from '@/components/Icons/Topics';
-import Icon from '@/components/Icons'
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
 const ExplorePage: React.FC<IResource> = (props) => {
-
+    console.log(props)
     const [query, setQuery] = React.useState('');
     const [popularTopics, setPopularTopics] = React.useState<INavItem[]>([])
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
@@ -46,20 +43,13 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [searchState, setSearchState] = React.useState<any>({})
 
     const { resource, scripturePage } = props.pageContext
-    const topicSlugs = [
-        "covid-19-coronavirus-resources",
-        "relationships-and-sexuality",
-        "the-holy-spirit",
-        "the-end-times",
-        "prayer",
-        "salvation-and-sanctification"
-    ]
+    const topicSlugs = props.data.ac.popularTopics
 
     React.useEffect(() => {
         const receivedTopics: INavItem[] = []
-        Promise.all(topicSlugs.map(slug => {
-            return fetchTopicFromSlug(slug)
-        })).then(res => {
+
+        Promise.all(topicSlugs.map(({ slug }) => fetchTopicFromSlug(slug))).then(res => {
+            console.log(res)
             res.forEach(c => {
                 if (c) {
                     receivedTopics.push(c)
@@ -94,22 +84,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
             setTaxonomyFilter(state.refinementList["topics.name"])
         }
         setSearchState(state)
-    }
-
-    const addTypeFilter = (filter: string) => {
-        const refinementState = {
-            ...searchState.refinementList,
-        }
-        const newFiltlerList = [filter]
-
-        refinementState["categories.name"] = newFiltlerList
-        setTypeFilter(newFiltlerList)
-
-        const updateState = {
-            ...searchState,
-            refinementList: refinementState
-        }
-        setSearchState(updateState)
     }
 
     const removeTypeFilter = (filter?: string) => {
@@ -172,9 +146,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const showExploreHome = !isInputFocus && !hasSearchProps
     const showSearchHistory = isInputFocus && !hasSearchProps
 
-    const topSearches = ['Anxiety', 'The end times', 'God\'s plan for me',
-        'Self-image', 'Forgive others', 'Fear']
-
 
     const customSearchBoxProps = {
         query,
@@ -187,12 +158,11 @@ const ExplorePage: React.FC<IResource> = (props) => {
         searchHistory,
         setSearchHistory,
         showExploreHome,
-        showSearchHistory,
-        topSearches
+        showSearchHistory
     }
 
     const title = ac_strings.explore
-
+    console.log(popularTopics)
     return (
 
         <InstantSearch
@@ -225,13 +195,16 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             <PageSectionHeader title={ac_strings.topics} />
                             <XScrollCustomSize
                                 childeClassName=""
-                                items={popularTopics.map(({ name, to }) => (
-                                    <div className="flex flex-col items-center">
-                                        <div className="min-h-24 h-24 w-18" >
-                                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                items={popularTopics.map(({ name, to }) => {
+                                    console.log(to)
+                                    return (
+                                        <div className="flex flex-col items-center">
+                                            <div className="min-h-24 h-24 w-18" >
+                                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    )
+                                })}
                             />
                             <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
                                 {popularTopics.map(({ name, to }) => (
@@ -273,9 +246,22 @@ const ExplorePage: React.FC<IResource> = (props) => {
                                 ))}
                             </div>
                         </div>
+                        <div className="pt-6 pb-8">
+                            <PageSectionHeader title={ac_strings.byScripture} />
+                            <XScrollCustomSize
+                                childeClassName=""
+                                items={["1 Corinthians", "Philippians", "Matthew", "Psalms"].map(name => {
+                                    return (
+                                        <button
+                                            className={`whitespace-no-wrap border border-d4gray hover:border-d4slate-dark rounded-lg py-1 px-2 font-semibold text-d4slate-dark bg-white`}
 
-
-
+                                        >
+                                            {name}
+                                        </button>
+                                    )
+                                })}
+                            />
+                        </div>
                     </div>
                 )}
 
@@ -333,4 +319,24 @@ interface IResource {
         scripturePage: INavItem
         resource: IResourceOverview
     }
+
+    data: {
+        ac: {
+            popularTopics: {
+                slug: string
+            }[]
+        }
+    }
 }
+
+
+export const pageQuery = graphql`
+query PpularTopics{
+  ac {
+    popularTopics {
+    slug
+  }
+  }
+}
+`
+

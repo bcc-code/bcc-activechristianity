@@ -75,7 +75,6 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 
     }
 
-    console.log(showMobileSteps)
     return (
 
         <div className={`fixed w-full top-0 z-50 sm:hidden  drawer-main drawer-main-${isSideNavOpen ? 'mobile-open' : 'close'}`}>

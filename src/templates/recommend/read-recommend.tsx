@@ -1,14 +1,22 @@
 import React from "react"
 import MetaTag from '@/components/Meta'
+import LazyLoad from '@/components/LazyLoad';
 import RecommendLayout from '@/layouts/RecommendLayoutNew'
-
+import loadable from '@loadable/component'
 import ac_strings from '@/strings/ac_strings.json'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
+const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
+const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+
 import { TitleWithIcon, typeIcons } from '@/layout-parts'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
+import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
+import RightImgPostItem from '@/components/PostItem/RightImgWDes'
+import { LayoutH1Wide, PageSectionHeader } from '@/layout-parts'
 
 const Read: React.FC<IProps> = (props) => {
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
@@ -44,122 +52,6 @@ const Read: React.FC<IProps> = (props) => {
         setPopular(posts.slice(5, 10))
     }
 
-    React.useEffect(() => {
-
-
-        const getTypes: Promise<IPostsByFormat | undefined>[] = []
-        const postTypesLinks: INavItemCount[] = []
-        items.forEach(type => {
-
-            const { key, ...count } = type
-
-            if (type) {
-                const slug = `${type.to}`
-                postTypesLinks.push({ ...count, to: slug })
-                getTypes.push(fetchPostslistFromArchivePage(slug)
-                    .then(posts => {
-                        if (posts) {
-                            const postsByFormat: IPostsByFormat = {
-                                keyname: key,
-                                type: {
-                                    name: type.name,
-                                    to: slug,
-                                },
-                                postsRow: posts
-                            }
-                            return postsByFormat
-                        }
-                    }))
-            }
-        })
-
-        Promise.all(getTypes).then(res => {
-            const collection: IPostsByFormatCollection = {}
-            res.forEach(c => {
-                if (c && c.keyname) {
-                    collection[c.keyname] = c
-                }
-            })
-
-            /* setPostsByFormat(collection) */
-
-            const postsByTypesRow: IOnePostByTypeRow[] = []
-            const postsByTypesRow1: IOnePostByType[] = []
-            const postsByTypesRow2: IOnePostByType[] = []
-
-
-            if (collection.edification) {
-
-                postsByTypesRow.push(collection.edification)
-                postsByTypesRow1.push(
-                    {
-                        type: collection.edification.type,
-                        post: collection.edification.postsRow[0],
-                        position: '1-wide',
-                        postThumnailType: 'leftImage'
-                    },
-                )
-            }
-
-            if (collection.testimony) {
-                postsByTypesRow.push(collection.testimony)
-                postsByTypesRow1.push(
-                    {
-                        type: collection.testimony.type,
-                        post: collection.testimony.postsRow[0],
-                        position: '3',
-                        postThumnailType: 'topImage'
-                    }
-                )
-
-                postsByTypesRow1.push(
-                    {
-                        type: {
-                            name: "",
-                            to: ""
-                        },
-                        post: collection.testimony.postsRow[1],
-                        position: '4',
-                        postThumnailType: 'topImage'
-                    }
-                )
-            }
-
-            if (collection.commentary) {
-                postsByTypesRow.push(collection.commentary)
-                postsByTypesRow2.push(
-                    {
-                        type: collection.commentary.type,
-                        post: collection.commentary.postsRow[0],
-                        position: '1-wide',
-                        postThumnailType: 'leftImage'
-                    },
-                )
-            }
-
-            if (collection.question) {
-                postsByTypesRow.push(collection.question)
-                postsByTypesRow2.push(
-                    {
-                        type: collection.question.type,
-                        post: collection.question.postsRow[0],
-                        position: '2-wide',
-                        postThumnailType: 'leftImage'
-                    },
-                )
-            }
-
-
-            const withIcons = menu.map(item => ({
-                ...item, name: <TitleWithIcon icon={typeIcons["read"]} title={item.name} />
-            }))
-            setTypeLinks(withIcons)
-            setMobilePostRows(postsByTypesRow)
-            setDesktopRow1(postsByTypesRow1)
-            setDesktopRow2(postsByTypesRow2)
-
-        })
-    }, [pageContext])
 
 
 
@@ -175,22 +67,44 @@ const Read: React.FC<IProps> = (props) => {
 
             <Placeholder loading={isLoading || !headerPost}>
 
-                {headerPost && (
-                    <RecommendLayout
-                        hideTitleOnMobile={true}
-                        latestSlug={latestSlug}
-                        name={title}
-                        headerPost={headerPost}
-                        latestPosts={latest}
-                        popularPosts={popular}
-                        postsByTypes={mobilePostRows}
-                        postsByTypesRow1={desktopRow1}
-                        postsByTypesRow2={desktopRow2}
-                        postTypes={typeLinks}
+                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+
+                    <div className="w-full pb-4 sm:hidden pt-8">
+                        <PageSectionHeader title={ac_strings.featured} />
+                        <FeaturedBanner featured={popular} />
+                    </div>
+                </div>
+                <div className="sm:bg-transparent py-6 overflow-hidden sm:hidden">
+                    <PageSectionHeader title={ac_strings.popular} />
+                    <TopImgHorizontalScroll posts={popular} />
+                </div>
+                <LazyLoad>
+                    <FetchTopicPostItems
+                        topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                        layout="list"
+                        render={({ topicPostItems }) => (
+                            <div>
+                                <div className="sm:hidden">
+                                    <ScrollNavTabs tabs={topicPostItems.map(item => ({
+                                        name: item.name,
+                                        to: item.slug,
+                                        content: (
+                                            <div>
+                                                {item.posts.map(p => {
+                                                    return (
+                                                        <RightImgPostItem {...p} />
+                                                    )
+                                                })}
+                                            </div>
+                                        )
+                                    }))} />
+                                </div>
+
+                            </div>
+                        )}
 
                     />
-
-                )}
+                </LazyLoad>
             </Placeholder>
         </div>
     )

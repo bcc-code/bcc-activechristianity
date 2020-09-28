@@ -1,11 +1,16 @@
 import React from 'react'
+import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
-import RecommendLayout from '@/layouts/RecommendLayoutNew'
-import { UnderlineTitleLink, typeIcons, LayoutH1Wide, TitleWithIcon } from '@/layout-parts'
+import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
+import RightImgPostItem from '@/components/PostItem/RightImgWDes'
+import { LayoutH1Wide, PageSectionHeader } from '@/layout-parts'
+
+const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
+const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+import LazyLoad from '@/components/LazyLoad';
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
-import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import getPostByTypesLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
@@ -20,14 +25,9 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const [latest, setLatest] = React.useState<IPostItem[]>([])
     const [popular, setPopular] = React.useState<IPostItem[]>([])
     const [isLoading, setIsLoading] = React.useState(false)
-    const [mobilePostRows, setMobilePostRows] = React.useState<IOnePostByTypeRow[] | undefined>(undefined)
-    const [desktopRow1, setDesktopRow1] = React.useState<IOnePostByType[] | undefined>(undefined)
-    const [desktopRow2, setDesktopRow2] = React.useState<IOnePostByType[] | undefined>(undefined)
-    const [typeLinks, setTypeLinks] = React.useState<INavItemCount[] | undefined>(undefined)
-    const [formatLinks, setFormatLinks] = React.useState<INavItemCount[] | undefined>(undefined)
+
     const {
         title,
-        types,
         formats,
         breadcrumb
     } = pageContext
@@ -43,61 +43,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         })
     }, [props.pageContext])
 
-    React.useEffect(() => {
-        if (types.length > 1) {
-            setTypeLinks(types.map(link => ({ ...link, name: <TitleWithIcon icon={typeIcons[link.key]} title={link.name} /> })))
-        }
 
-        const nrOfFormats = formats.length
-
-
-        if (nrOfFormats > 1) {
-            setFormatLinks(formats)
-            const getTypes: Promise<IPostsByFormat | undefined>[] = []
-            formats.forEach(f => {
-                const slug = `${TS.slug_topic}/${f.to}`
-                getTypes.push(fetchPostslistFromArchivePage(slug).then(posts => {
-                    if (posts) {
-                        const postsByFormat: IPostsByFormat = {
-                            keyName: f.key,
-                            type: {
-                                name: f.name,
-                                to: slug,
-                            },
-                            postsRow: posts
-                        }
-                        return postsByFormat
-                    }
-                }))
-            })
-
-            Promise.all(getTypes).then(res => {
-                const collection: IPostsByFormat[] = []
-                res.forEach(r => {
-                    if (r) {
-                        collection.push(r)
-                    }
-                })
-
-                const { postsByTypesRow, postsByTypesRow1, postsByTypesRow2 } = getPostByTypesLayout(collection)
-                if (postsByTypesRow1.length > 0) {
-                    setMobilePostRows(postsByTypesRow)
-                }
-
-                if (postsByTypesRow1.length > 1) {
-                    setDesktopRow1(postsByTypesRow1)
-                }
-
-                if (postsByTypesRow2.length > 2) {
-                    setDesktopRow2(postsByTypesRow2)
-                }
-
-
-            })
-
-        }
-
-    }, [props.pageContext])
 
     const setLatestPosts = (posts: IPostItem[]) => {
 
@@ -114,8 +60,50 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 breadcrumb={breadcrumb}
                 path={path}
             />
+
+
             <Placeholder loading={isLoading || !headerPost}>
-                {headerPost && (
+                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+                    <LayoutH1Wide
+                        title={title}
+                    />
+                </div>
+                <div className="w-full pb-4 sm:hidden pt-8">
+                    <PageSectionHeader title={ac_strings.featured} />
+                    <FeaturedBanner featured={popular} />
+                </div>
+                <div className="div6 bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden sm:hidden">
+                    <PageSectionHeader title={ac_strings.popular} />
+                    <TopImgHorizontalScroll posts={popular} />
+                </div>
+                <LazyLoad>
+                    <FetchTopicPostItems
+                        topics={formats.map(f => ({ name: f.name, slug: `${TS.slug_topic}/${f.to}`, id: '' }))}
+                        layout="list"
+                        render={({ topicPostItems }) => (
+                            <div>
+                                <div className="sm:hidden">
+                                    <ScrollNavTabs tabs={topicPostItems.map(item => ({
+                                        name: item.name,
+                                        to: item.slug,
+                                        content: (
+                                            <div>
+                                                {item.posts.map(p => {
+                                                    return (
+                                                        <RightImgPostItem {...p} />
+                                                    )
+                                                })}
+                                            </div>
+                                        )
+                                    }))} />
+                                </div>
+
+                            </div>
+                        )}
+
+                    />
+                </LazyLoad>
+                {/*                 {headerPost && (
                     <RecommendLayout
                         latestSlug={latestSlug}
                         name={title}
@@ -129,7 +117,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                         relatedTopics={typeLinks}
 
                     />
-                )}
+                )} */}
             </Placeholder>
 
         </div>

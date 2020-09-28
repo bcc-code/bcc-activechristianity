@@ -28,7 +28,7 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
             const currentLeftScroll = menu.scrollLeft
             const distanceToMid = activeOffset - (menuMidPoint + currentLeftScroll) + activeMidPoint
             SmoothHorizontalScrolling(menu, 200, currentLeftScroll, distanceToMid)
-            /*  menu.scrollLeft = currentLeftScroll + distanceToMid */
+
 
         }
 
@@ -64,6 +64,7 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
                         </button>
                     )
                 })}
+                <div className="min-w-24 h-4"></div>
             </div>
             <div className='ac-tab-card-wrapper overflow-hidden' {...handlers}>
                 {tabs.map((tab, i) => {

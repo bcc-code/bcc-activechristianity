@@ -22,7 +22,6 @@ interface ICustomerSearchBox {
     setSearchHistory: (string: []) => void
     showExploreHome: boolean
     showSearchHistory: boolean
-    topSearches: string[]
 }
 
 const SearchBox: React.FC<ICustomerSearchBox> = ({
@@ -34,10 +33,8 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
     isInputFocus,
     searchHistory,
     setSearchHistory,
-    isSearchStalled,
-    showExploreHome,
+
     showSearchHistory,
-    topSearches
 
 }) => {
 

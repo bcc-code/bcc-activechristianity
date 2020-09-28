@@ -30,7 +30,8 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
         media,
         showType,
         format,
-        hideReadingTime
+        hideReadingTime,
+        reading_time
     } = props
 
     const topImgClasses = {

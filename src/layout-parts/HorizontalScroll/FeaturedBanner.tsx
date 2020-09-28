@@ -12,7 +12,7 @@ interface IFeaturedBanner {
 }
 const FeatureSection: React.FC<{ featured: IFeaturedBanner[] }> = ({ featured }) => {
     return (
-        <XScroll items={featured.map(({ title, excerpt, image, slug }) => (
+        <XScroll items={featured.map(({ title, excerpt, image, slug, }) => (
             <TopImgPost
                 key={slug}
                 id=''

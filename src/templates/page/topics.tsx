@@ -11,7 +11,6 @@ import { ITopicRes } from '@/types'
 import { sortTopicsByGroups } from '@/helpers'
 const AllTopic: React.FC<IAllTopic> = (props) => {
 
-    const [featuredTopics, setFeaturedTopic] = React.useState<INavItem[]>([])
     const { title, themes } = props.pageContext
     const path = props.path
     const sortedTopics = sortTopicsByGroups(props.data.ac.allTopics)

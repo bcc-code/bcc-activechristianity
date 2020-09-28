@@ -104,10 +104,11 @@ export const fetchTopicFromSlug = (slug: string) => {
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
                 const topicContext = res.result.pageContext
+                console.log(res.result.pageContext)
                 const topicNav: ITopicNavItem = {
                     id: topicContext.id,
                     name: topicContext.title,
-                    to: topicContext.slug
+                    to: processSlug
                 }
 
                 return topicNav

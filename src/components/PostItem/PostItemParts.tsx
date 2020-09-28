@@ -214,6 +214,7 @@ export interface IPostBase {
 
 }
 export const PostBase: React.FC<IPostBase> = (props) => {
+
     const { wrapperClass, postExcerptProps, postTitleProps, hasReadMore, post, hasReadingTime, audioDuration } = props
     const { slug, reading_time, bookmarked, id, authors, media } = post
 
@@ -236,16 +237,18 @@ export const PostBase: React.FC<IPostBase> = (props) => {
             </div>
 
 
-            <div className="pb-4 flex">
-                <ReadingTimingIcon
-                    readingTime={postReadingTime}
-                />
-                <BookmarksAndViews
-                    id={id}
-                    likes={post.likes}
-                    views={post.views}
-                />
-            </div>
+            {hasReadingTime !== false && (
+                <div className="pb-4 flex">
+                    <ReadingTimingIcon
+                        readingTime={postReadingTime}
+                    />
+                    <BookmarksAndViews
+                        id={id}
+                        likes={post.likes}
+                        views={post.views}
+                    />
+                </div>
+            )}
             {hasReadMore && (
                 <ReadMore slug={slug} bookmarked={bookmarked} id={id} />
             )}

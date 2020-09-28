@@ -8,6 +8,7 @@ interface IFetchPost {
     render: (data: { topicPostItems: ITopicPostItems[] }) => JSX.Element
 }
 const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
+    console.log(topics)
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])
     const [loading, setLoading] = React.useState(false)
     React.useEffect(() => {
