@@ -2,7 +2,7 @@ import * as React from 'react'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import FetchPost from '@/layout-parts/HOC/FetchPosts'
 import Content from '@/components/Content'
-
+import RightImgPostItem from '@/components/PostItem/RightImgWDes'
 
 const CustomizedPage: React.FC<IPageCompTypes & { isFirst?: boolean }> = (item) => {
 
@@ -17,7 +17,22 @@ const CustomizedPage: React.FC<IPageCompTypes & { isFirst?: boolean }> = (item) 
         const post = item.data
 
         return (
-            <FetchPost slug={post.slug} />
+            <FetchPost
+                slugs={[post.slug]}
+                layout="list"
+                render={({ posts }) => {
+                    return (
+                        <div>
+                            {posts.map(p => {
+                                return (
+                                    <RightImgPostItem {...p} />
+                                )
+                            })}
+                        </div>
+                    )
+                }}
+
+            />
         )
     } else if (item.type === "featured_items") {
         const childItems = item.data

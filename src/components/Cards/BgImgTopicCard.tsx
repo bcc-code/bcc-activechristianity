@@ -1,12 +1,14 @@
 import * as React from 'react';
+import Link from '@/components/CustomLink'
 import { IImage } from '@/types'
 import Lazysizes from '@/components/Images/LazysizesImage'
 export interface IBgImgTopicCard {
     name: string
+    to: string
     image?: IImage
 
 }
-const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image }) => {
+const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image, to }) => {
     let background = 'rgba(33, 34, 54, 0.5)'
 
     const dummayImage = {
@@ -18,11 +20,13 @@ const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image }) => {
 
     const useImage: IImage = image || dummayImage
     return (
-        <div className={`w-full h-full rounded-xl p-2 overflow-hidden flex items-center justify-center relative ${image ? '' : 'bg-gray-800'}`}>
+        <Link
+            to={to}
+            className={`w-full h-full rounded-xl p-2 overflow-hidden flex items-center justify-center relative ${image ? '' : 'bg-gray-800'}`}>
             <h6 className="text-white leading-tight text-sm font-bold content-end break-words z-10 text-center">{name}</h6>
             {useImage && <div className="z-0 absolute inset-0 overflow-hidden bg-center bg-cover w-full" style={{ backgroundImage: `url(${useImage.src})` }}></div>}
             <div className="z-0 absolute left-0 top-0 bottom-0 right-0 rounded-lg" style={{ background }}></div>
-        </div>
+        </Link>
     )
 }
 

@@ -79,6 +79,7 @@
     "slug_privacy_policy": "privacy-policy",
     "slug_account": "account",
     "slug_register": "register",
+    "slug_explore": "explore",
     "slug_login": "login",
     "old_testimony": "Old Testament",
     "new_testimony": "New Testament",
@@ -92,5 +93,6 @@
     "speaker": "Speaker",
     "share": "Share",
     "mins": "mins",
-    "continue": "Continue"
+    "continue": "Continue",
+    "browse_resource": "Browse Resource"
 }

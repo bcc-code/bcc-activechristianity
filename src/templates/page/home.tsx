@@ -9,7 +9,7 @@ const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/Fe
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
-
+import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
 import LazyLoad from '@/components/LazyLoad';
 
@@ -183,8 +183,11 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               />
             </div>
             <div className="w-full p-4">
-              <div className=''>
-                Browse Resource
+              <div className='w-full'>
+                <BgImgTopicCard
+                  name={ac_strings.browse_resource}
+                  to={ac_strings.slug_explore}
+                />
               </div>
             </div>
           </>
