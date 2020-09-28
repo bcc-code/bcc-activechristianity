@@ -14,6 +14,7 @@ const FeatureSection: React.FC<{ featured: IFeaturedBanner[] }> = ({ featured })
     return (
         <XScroll items={featured.map(({ title, excerpt, image, slug }) => (
             <TopImgPost
+                key={slug}
                 id=''
                 title={title}
                 excerpt={excerpt}

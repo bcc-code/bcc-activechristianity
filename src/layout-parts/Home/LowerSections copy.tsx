@@ -24,8 +24,8 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
             {lists.map((slot, i) => {
                 return (
                     slot && (
-                        <div className={`div${1 + i} mt-4 mx-4 sm:mr-10 sm:ml-0`}>
-                            <LazyLoad key={i}>
+                        <div key={i} className={`div${1 + i} mt-4 mx-4 sm:mr-10 sm:ml-0`}>
+                            <LazyLoad >
                                 <PostListSection {...slot} />
                             </LazyLoad>
 

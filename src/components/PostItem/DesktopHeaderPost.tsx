@@ -83,7 +83,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
                     )}
                     <div className="flex items-center sm:py-3 py-1">
                         <span className="pr-2">
-                            <Bookmark bookmarked={bookmarked} id={id} size={18} />
+                            <Bookmark id={id} size={"6"} />
                         </span>
                         {reading_time && <p className="ml-1 text-sm text-d4gray-dark lg:hidden">{reading_time.text}</p>}
                         <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden lg:block" readingTime={reading_time?.text} authors={authors} />

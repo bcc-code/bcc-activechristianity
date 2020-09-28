@@ -162,7 +162,7 @@ interface IProps {
 }
 
 export const AuthorLink: React.FC<{ authors?: IPostAuthors[] }> = ({ authors }) => {
-    return <span>{authors && authors[0] ? authors[0].authors.map(item => <Link className="inline-block post-meta-commar" to={item.to}>{item.name}</Link>) : ''}</span>
+    return <span>{authors && authors[0] ? authors[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={item.to}>{item.name}</Link>) : ''}</span>
 }
 export const ReadingTimingAuthor: React.FC<IProps> = ({ readingTime, authors, className }) => {
 
@@ -184,7 +184,7 @@ export const ReadingTimingIcon: React.FC<IProps> = ({ readingTime, authors, clas
                 color="slate-light"
                 size="5"
             />
-            <span className="text-xs text-d4slate-light pl-2">
+            <span className="text-xs text-d4slate-light pl-2 whitespace-no-wrap">
                 {readingTime}
             </span>
         </span>
@@ -227,11 +227,13 @@ export const PostBase: React.FC<IPostBase> = (props) => {
 
     return (
         <div className={`flex flex-col flex-1 ${wrapperClass}`}>
-            <Link to={`/${slug}`} className="flex flex-col flex-1 leading-normal">
-                <PostTitle {...postTitleProps} />
-                <PostExcerpt {...postExcerptProps} />
+            <div className="flex flex-col flex-1 leading-normal">
+                <Link to={`/${slug}`} >
+                    <PostTitle {...postTitleProps} />
+                    <PostExcerpt {...postExcerptProps} />
+                </Link>
                 <div className="text-sm text-gray-500 mb-4"> <AuthorLink authors={authors} /></div>
-            </Link>
+            </div>
 
 
             <div className="pb-4 flex">

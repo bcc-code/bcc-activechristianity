@@ -12,8 +12,8 @@ interface IFeaturedBanner {
 }
 const FeatureSection: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
     return (
-        <XScroll items={posts.map((item) => (
-            <TopImgPost  {...item} />
+        <XScroll items={posts.map((item, i) => (
+            <TopImgPost  {...item} key={i} />
         ))}
         />
     )

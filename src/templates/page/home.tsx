@@ -7,7 +7,7 @@ import FetchPosts from '@/layout-parts/HOC/FetchPosts'
 import FetchPostList from '@/layout-parts/HOC/FetchPostList'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-
+const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
 
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
@@ -45,7 +45,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     formats
   } = pageContext
 
-
+  console.log(historyPosts)
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
 
   const latestPostAsTopic = {
@@ -85,29 +85,47 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             }
           />
         </div>
-        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden sm:hidden">
-          <SectionTitle title={ac_strings.popular} />
-          <FetchPosts
-            slugs={popularPostsAll.static}
-            layout="row"
-            render={
-              ({ posts }) => <TopImgHorizontalScroll posts={posts} />
-            }
-          />
 
+        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden sm:hidden">
+          {loggedIn !== "success" ? (
+            <>
+              <SectionTitle title={ac_strings.popular} />
+              <FetchPosts
+                slugs={popularPostsAll.static}
+                layout="row"
+                render={
+                  ({ posts }) => <TopImgHorizontalScroll posts={posts} />
+                }
+              />
+            </>
+          ) : (
+              <>
+                <SectionTitle title={ac_strings.latest} />
+
+                <FetchPostList
+                  slug={latestPostAsTopic.slug}
+                  layout="row"
+                  render={
+                    ({ posts }) => <TopImgHorizontalScroll posts={posts} />
+                  }
+                />
+              </>
+            )}
 
         </div>
-        <div>
+
+        <div className="sm:hidden py-6">
+          <SectionTitle title={ac_strings.recommend_for_you} />
           <FetchPostList
             slug={latestPostAsTopic.slug}
             layout="list"
             render={({ posts }) => {
               return (
                 <div className="">
-                  {posts.slice(0, 6).map((item, i) => {
+                  {posts.slice(0, 3).map((item, i) => {
                     return (
                       <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`} key={i} >
-                        <RightImgWDes {...item} />
+                        <RightImgWDes {...item} noDes withTopics />
                       </div>
                     )
                   })}
@@ -118,6 +136,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
           />
         </div>
+
         {/*         <LazyLoad>
           <FetchTopicPostItems
             topics={tabs}
@@ -142,15 +161,51 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             <FeaturedTopics featured={popularTopicsAll.static} />
           </div>
         </LazyLoad>
-        <LowerSections
-          lists={popularTopicsAll.static}
-          newPostsForYou={[]}
-          topicsForYou={popularTopicsAll.static}
-          popularPosts={popularPostsAll.static}
-        />
+        <div className="hidden sm:block">
+          <LowerSections
+            lists={popularTopicsAll.static}
+            newPostsForYou={[]}
+            topicsForYou={popularTopicsAll.static}
+            popularPosts={popularPostsAll.static}
+          />
+        </div>
+
+        {loggedIn !== "success" ? (
+          <>
+            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden sm:hidden">
+              <SectionTitle title={ac_strings.latest} />
+              <FetchPostList
+                slug={latestPostAsTopic.slug}
+                layout="row"
+                render={
+                  ({ posts }) => <TopImgHorizontalScroll posts={posts} />
+                }
+              />
+            </div>
+            <div className="w-full p-4">
+              <div className=''>
+                Browse Resource
+              </div>
+            </div>
+          </>
+        ) : (
+            <>
+              <SectionTitle title={ac_strings.continue} />
+              <FetchPosts
+                slugs={historyPosts.map(item => item.slug)}
+                layout="list"
+                render={
+                  ({ posts }) => <TopImgHorizontalScroll posts={posts} />
+                }
+
+              />
+
+            </>
+          )}
+
 
         <LazyLoad >
-          <div className="grid-home-end sm:mx-4">
+          <div className="grid-home-end sm:mx-4 hidden sm:grid">
             <div className="div1">
               <FetchPostList
                 slug={latestPostAsTopic.slug}

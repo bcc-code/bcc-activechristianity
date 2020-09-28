@@ -242,7 +242,7 @@ export const normalizePostRes = (post: IPostRes) => {
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,
-        topics: filteredTopics,
+        topics: filteredTopics.sort((a, b) => a.name.length - b.name.length),
         types,
         format,
         reading_time: { text: `${readingTimeMinutes} ${ac_strings.mins}`, minutes: readingTimeMinutes },

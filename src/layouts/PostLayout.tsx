@@ -152,7 +152,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     let readMore: string[] = []
     if (readMorePosts.length > 0) {
-        const procssedReadMore = readMorePosts.filter(item => item !== null || item !== undefined).map(item => item.replace(/^\/|\/$/g, ''))
+        const procssedReadMore = readMorePosts.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
         readMore = procssedReadMore
     }
 

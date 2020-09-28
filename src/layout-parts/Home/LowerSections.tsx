@@ -3,7 +3,7 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import FetchPosts from '@/layout-parts/HOC/FetchPosts'
 import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
-import { IPostListSection } from '@/layout-parts/Home/PostListSection'
+
 import { IPostItem, ITopicPostItems, INavItem, ITopic, ITopicPostSlugs } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
@@ -27,22 +27,10 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
 
                 return (
                     slot && (
-                        <div className={`div${1 + i} mt-4 mx-4 sm:mr-10 sm:ml-0`}>
-                            <LazyLoad key={i}>
-                                <FetchPosts
-                                    slugs={slot.posts.slice(0, 1)}
-                                    layout="row"
-                                    render={({ posts }) => {
-                                        return (
-                                            <PostListSection
-                                                posts={posts}
-                                                header={slot.name}
-                                                subHeader={ac_strings.popularTopic}
-                                            />
-                                        )
-                                    }}
+                        <div key={i} className={`div${1 + i} mt-4 mx-4 sm:mr-10 sm:ml-0`}>
+                            <LazyLoad>
+                                <PostListSection {...slot} />
 
-                                />
                             </LazyLoad>
 
                         </div>

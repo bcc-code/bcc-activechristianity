@@ -63,7 +63,7 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
 )
 
 export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (
-    <span className="uppercase font-roboto text-gray-500 font-semibold text-sm">
+    <span className="uppercase font-roboto text-d4slate-light font-semibold text-xs">
         {title}
     </span>
 )

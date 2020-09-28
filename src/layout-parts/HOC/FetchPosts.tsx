@@ -11,21 +11,19 @@ interface IFetchPost {
 }
 const FetchPosts: React.FC<IFetchPost> = ({ slugs, render }) => {
     const [posts, setPosts] = React.useState<IPostItem[]>([])
-    const [loading, setLoading] = React.useState(false)
-    const { bookmarkedPosts } = useSelector((state: IRootState) => state.userLibrary)
     React.useEffect(() => {
         fetchLocalPostsFromSlugs(slugs)
             .then(res => {
                 if (res) {
-                    /*  const found = bookmarkedPosts.find(item=) */
-                    const posts = res.map(item => {
-                        const bookmarkedIndex = bookmarkedPosts.findIndex(p => p.id === item.id)
-                        return ({ ...item, bookmarked: bookmarkedIndex > -1 })
-                    })
+                    console.log(res)
                     setPosts(res)
                 }
             })
-    }, [])
+            .catch(error => {
+                console.log(error)
+            })
+    }, [slugs])
+
     return (
 
         <Placeholder
