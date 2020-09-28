@@ -19,9 +19,6 @@ const SlateDarkFollowButton: React.FC<ITopicNavItem> = ({ id, name, to }) => {
                         <span className="px-2">
                             {config.icon}
                         </span>
-                        <span className="pl-2 flex items-center">
-                            {config.icon}
-                        </span>
                     </div>
                 )
             }}

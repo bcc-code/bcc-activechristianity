@@ -3,12 +3,13 @@ import * as React from 'react';
 import loadable from '@loadable/component'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch, connectStats } from 'react-instantsearch-dom'
-
+import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import CustomSearchBox from '@/layout-parts/Explore/SearchInput'
 import CustomePagination from '@/layout-parts/Explore/Pagination'
+import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import LazyLoad from '@/components/LazyLoad';
 import MetaTag from '@/components/Meta'
-import { LayoutH1 } from '@/layout-parts'
+import { LayoutH1, PageSectionHeader } from '@/layout-parts'
 
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
 import { fetchTopicFromSlug } from '@/helpers/fetchLocalData'
@@ -219,56 +220,62 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     <CustomSearchBox {...customSearchBoxProps} />
                 </div>
                 {showExploreHome && (
-                    <div className="max-w-tablet mx-auto">
-
-                        <SubSection title={ac_strings.trendingTopics} to={`/${TS.slug_topic}`} icon={<TopicIcon customSize={16} />}>
-                            <div className="grid grid-cols-2 gap-2 text-xs sm:text-base text-d4secondary">
-                                {popularTopics.map(item => {
-                                    return (
-                                        <Link
-                                            className="text-center my-1 border border-d4secondary rounded py-1"
-                                            to={`/${TS.slug_topic}/${item.to}`}
-                                        >
-                                            {item.name}
-                                        </Link>
-                                    )
-                                })}
-                            </div>
-                        </SubSection>
-                        <LazyLoad>
-                            <ExploreByType resource={resource} />
-                        </LazyLoad>
-                        <LazyLoad>
-                            <SubSection title='' >
-                                <Link to={scripturePage.to} className="flex text-d4secondary justify-between items-center w-full">
-                                    <div className="flex justify-center items-center">
-                                        <BibleIcon customSize={35} className="-mb-1" />
-                                        <span className="font-semibold ml-4">{ac_strings.byScripture}</span>
+                    <div className="bg-white max-w-tablet mx-auto">
+                        <div className="pt-6">
+                            <PageSectionHeader title={ac_strings.topics} />
+                            <XScrollCustomSize
+                                childeClassName=""
+                                items={popularTopics.map(({ name, to }) => (
+                                    <div className="flex flex-col items-center">
+                                        <div className="min-h-24 h-24 w-18" >
+                                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                        </div>
                                     </div>
-                                    <Icon name="chev-right" size="lg" />
-                                </Link>
+                                ))}
+                            />
+                            <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
+                                {popularTopics.map(({ name, to }) => (
+                                    <div className="min-h-36 h-36" >
+                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="pt-6">
+                            <PageSectionHeader title={ac_strings.resource} />
+                            <XScrollCustomSize
+                                childeClassName=""
+                                items={resource.format.items.slice(0, 5).map(({ name, to }) => (
+                                    <div className="flex flex-col items-center">
+                                        <div className="min-h-24 h-24 w-24" >
+                                            <ImgBgTopicCard name={name} to={`${to}`} />
 
-                            </SubSection>
-                        </LazyLoad>
-                        <LazyLoad>
-                            <SubSection title={ac_strings.editorPick} to={`${TS.slug_post_tag}`} className="border-none">
+                                        </div>
+                                    </div>
+                                ))}
+                            />
+                            <XScrollCustomSize
+                                childeClassName=""
+                                items={resource.format.items.slice(5).map(({ name, to }) => (
+                                    <div className="flex flex-col items-center">
+                                        <div className="min-h-24 h-24 w-36" >
+                                            <ImgBgTopicCard name={name} to={`${to}`} />
 
-                                {/*                                 <QLatestPosts >
-                                    {(posts) => {
-                                        return (
-                                            <div className="flex flex-col">
-                                                {posts && posts.slice(0, 3).map(item => {
-                                                    return (
-                                                        <RightImgWDesPost {...item} />
-                                                    )
-                                                })}
-                                            </div>
-                                        )
-                                    }
-                                    }
-                                </QLatestPosts > */}
-                            </SubSection>
-                        </LazyLoad>
+                                        </div>
+                                    </div>
+                                ))}
+                            />
+                            <div className="hidden sm:grid grid-cols-4 gap-4 px-4">
+                                {resource.format.items.map(({ name, to }) => (
+                                    <div className="min-h-24 h-24" >
+                                        <ImgBgTopicCard name={name} to={`${to}`} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+
+
                     </div>
                 )}
 

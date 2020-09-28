@@ -12,7 +12,7 @@ const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/Fe
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
 import LazyLoad from '@/components/LazyLoad';
-
+import { PageSectionHeader } from '@/layout-parts'
 import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
@@ -29,10 +29,6 @@ import { ITopicPostSlugs } from '@/types'
 import TS from '@/strings'
 
 import ac_strings from '@/strings/ac_strings.json'
-
-const SectionTitle: React.FC<{ title: string }> = ({ title }) => (
-  <div className="font-semibold pb-4 px-4 font-sm">{title}</div>
-)
 
 
 const IndexPage: React.FC<IHomeProps> = (props) => {
@@ -76,7 +72,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           />
         </div>
         <div className="w-full pb-4 sm:hidden pt-8">
-          <SectionTitle title={ac_strings.featured} />
+          <PageSectionHeader title={ac_strings.featured} />
           <FetchPosts
             slugs={featuredPostSlugs}
             layout="row"
@@ -89,7 +85,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden sm:hidden">
           {loggedIn !== "success" ? (
             <>
-              <SectionTitle title={ac_strings.popular} />
+              <PageSectionHeader title={ac_strings.popular} />
               <FetchPosts
                 slugs={popularPostsAll.static}
                 layout="row"
@@ -100,7 +96,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             </>
           ) : (
               <>
-                <SectionTitle title={ac_strings.latest} />
+                <PageSectionHeader title={ac_strings.latest} />
 
                 <FetchPostList
                   slug={latestPostAsTopic.slug}
@@ -115,7 +111,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         </div>
 
         <div className="sm:hidden py-6">
-          <SectionTitle title={ac_strings.recommend_for_you} />
+          <PageSectionHeader title={ac_strings.recommend_for_you} />
           <FetchPostList
             slug={latestPostAsTopic.slug}
             layout="list"
@@ -157,7 +153,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         </LazyLoad> */}
         <LazyLoad>
           <div className="py-6">
-            <SectionTitle title={ac_strings.topics_for_you} />
+            <PageSectionHeader title={ac_strings.topics_for_you} />
             <FeaturedTopics featured={popularTopicsAll.static} />
           </div>
         </LazyLoad>
@@ -173,7 +169,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         {loggedIn !== "success" ? (
           <>
             <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden sm:hidden">
-              <SectionTitle title={ac_strings.latest} />
+              <PageSectionHeader title={ac_strings.latest} />
               <FetchPostList
                 slug={latestPostAsTopic.slug}
                 layout="row"
@@ -193,7 +189,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           </>
         ) : (
             <>
-              <SectionTitle title={ac_strings.continue} />
+              <PageSectionHeader title={ac_strings.continue} />
               <FetchPosts
                 slugs={historyPosts.map(item => item.slug)}
                 layout="list"

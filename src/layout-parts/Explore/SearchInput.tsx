@@ -130,26 +130,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
                 )
 
             }
-            {showExploreHome && (
-                <div className="max-w-tablet m-auto">
-                    <SubSection title="Popular Searchs" icon={<Icon size="base" name="search" />}>
-                        <div className="grid grid-cols-2 gap-2 text-xs sm:text-base">
-                            {topSearches.map((item, i) => {
-                                return (
-                                    <button
-                                        className="text-left pb-1"
-                                        key={i}
-                                        onClick={() => { useSearchHistory(item) }}
-                                    >
-                                        {item}
-                                    </button>
-                                )
-                            })}
-                        </div>
-                    </SubSection>
-                </div>
 
-            )}
         </div>
 
     );
