@@ -23,7 +23,7 @@ const Listen: React.FC<IProps> = (props) => {
     const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
     const [isLoading, setIsLoading] = React.useState(false)
     const { pageContext, path } = props
-    console.log(pageContext)
+
     const { title, breadcrumb, items, playlist, menu } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
@@ -50,7 +50,6 @@ const Listen: React.FC<IProps> = (props) => {
     const setPosts = () => {
         const getTypes: Promise<IPostsByFormat | undefined>[] = []
         const postTypesLinks: INavItemCount[] = []
-        console.log(items)
         items.forEach(type => {
 
             if (type) {

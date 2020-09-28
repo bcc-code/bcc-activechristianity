@@ -41,7 +41,6 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
         setTaxonomyFilter,
         resource
     } = props
-    console.log(currentRefinement)
     // move this to buid process
     React.useEffect(() => {
         const allResource: IResourceOverview = resource

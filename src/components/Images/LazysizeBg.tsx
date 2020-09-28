@@ -38,20 +38,15 @@ class LazysizesImg extends React.Component<IImage, IState> {
 
 const LazySizeImageBg: React.FC<IImage> = (image) => {
     const [isFullWidth, setIsFullWidth] = React.useState<null | boolean>(null)
-    const refElem = React.useRef(null)
+    const refElem = React.useRef<HTMLDivElement | null>(null)
     React.useEffect(() => {
         if (refElem.current) {
             const height = refElem.current.clientHeight
             const width = refElem.current.clientWidth
-            console.log()
-            console.log(refElem.current.clientHeight)
-            console.log(refElem.current.scrollWidth)
-            console.log(refElem.current.offsetWidth)
-            console.log(height / width)
+
             setIsFullWidth((height / width) <= 0.7)
         }
     }, [refElem.current])
-    console.log(refElem)
     return (
         <div ref={refElem} className="absolute inset-0">
             <Lazysizes

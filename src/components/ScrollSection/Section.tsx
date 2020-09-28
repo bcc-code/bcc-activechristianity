@@ -17,7 +17,6 @@ export interface IScrollSectionChildProps {
 
 
 const ScrollSectionChild: React.FC<IScrollSectionChildProps> = ({ slug, background, title, childPage }) => {
-    console.log(slug)
     return (
         <Section id={slug} className={`py-16 ${background ? '' : 'bg-d4athens'}`} >
             <div className="w-tablet px-4">

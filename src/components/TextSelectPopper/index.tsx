@@ -63,7 +63,6 @@ const TextSelectPopper: React.FC<{ className?: string, slug: string, title: stri
 
                     if (position.top < 105) {
                         /* toSetPostion.top =  */
-                        console.log(position.bottom - position.top)
                         toSetPostion.top = toSetPostion.top + (position.bottom - position.top)
                     } else {
                         toSetPostion.top = toSetPostion.top - 30

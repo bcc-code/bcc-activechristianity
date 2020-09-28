@@ -92,7 +92,6 @@ export default {
         })
     },
     biblePosts: (bookId: number, chapter: number) => {
-        console.log(bookId, chapter)
         const query = request.biblePostsQuery(bookId, chapter)
         console.log(query)
         return sendQuery(query).then(res => {

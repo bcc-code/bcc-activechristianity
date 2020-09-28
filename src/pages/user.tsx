@@ -24,7 +24,6 @@ const componentMap = {
     DeleteProfile
 }
 const User: React.FC<IUserProps> = ({ data }) => {
-    console.log(data)
     const [userPages, setUserPages] = React.useState<IPage[]>([])
     const [profilePage, setProfilePage] = React.useState<IPage | undefined>(undefined)
 

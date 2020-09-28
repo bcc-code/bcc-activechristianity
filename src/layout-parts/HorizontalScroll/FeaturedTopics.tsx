@@ -11,7 +11,6 @@ const placeHolderImage = {
 
 }
 const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
-    console.log(featured)
     return (
         <div>
             <XScrollCustomSize

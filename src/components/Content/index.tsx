@@ -32,7 +32,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
             }
         }, [])
      */
-    console.log(content)
+
     const generateBody = () => {
         if (content) {
             let updated = ReactHtmlParser(content, {

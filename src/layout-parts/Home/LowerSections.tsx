@@ -33,7 +33,6 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
                                     slugs={slot.posts.slice(0, 1)}
                                     layout="row"
                                     render={({ posts }) => {
-                                        console.log(posts)
                                         return (
                                             <PostListSection
                                                 posts={posts}

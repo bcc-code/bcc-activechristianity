@@ -31,7 +31,6 @@ import '@/styles/react-tabs.css'
 
 const Listen: React.FC<IListenPageProps> = (props) => {
     const { data, pageContext, path } = props
-    console.log(pageContext)
     const { posts } = data.ac.topics[0]
     const postSlugList = posts.map(p => p.slug)
     const { breadcrumb, hosts: hostSlugs } = pageContext
