@@ -1,9 +1,10 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import { LayoutH1Wide } from '@/layout-parts'
+import { UnderlineLinkViewAll } from '@/components/Button'
 import MetaTag from '@/components/Meta'
-
+const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideo'))
+const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
@@ -11,7 +12,8 @@ import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
 const LatestPopularTab = loadable(() => import('@/layout-parts/Tabs/LatestPopularTabs'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
-import { TitleWithIcon, typeIcons } from '@/layout-parts'
+import { TitleWithIcon, typeIcons, PageSectionHeader, LayoutH1Wide } from '@/layout-parts'
+import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 
 import ac_strings from '@/strings/ac_strings.json'
@@ -27,7 +29,6 @@ const Watch: React.FC<IProps> = (props) => {
     const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
     const { pageContext, path } = props
     const { title, items, menu } = pageContext
-
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
     React.useEffect(() => {
@@ -46,101 +47,78 @@ const Watch: React.FC<IProps> = (props) => {
         setPopular(posts.slice(5, 10))
     }
 
-    React.useEffect(() => {
-
-
-
-        const getTypes: Promise<IPostsByFormat | undefined>[] = []
-        const postTypesLinks: INavItemCount[] = []
-
-        items.forEach(type => {
-            const { key, ...count } = type
-
-
-            if (type) {
-
-                const slug = `${type.to}`
-                postTypesLinks.push({ ...count, to: slug })
-                getTypes.push(fetchPostslistFromArchivePage(slug).then(posts => {
-                    if (posts) {
-                        const postsByFormat: IPostsByFormat = {
-                            keyName: type.key,
-                            type: {
-                                name: type.name,
-                                to: slug,
-                            },
-                            postsRow: posts
-                        }
-                        return postsByFormat
-                    }
-                }))
-            }
-        })
-        Promise.all(getTypes).then(res => {
-            const collection: IPostsByFormatCollection = {}
-            res.forEach(c => {
-                if (c && c.keyName) {
-                    collection[c.keyName] = c
-                }
-            })
-            const withIcons = menu.map(item => ({
-                ...item, name: <TitleWithIcon icon={typeIcons["watch"]} title={item.name} />
-            }))
-            setTypeLinks(withIcons)
-            setPostsByFormat(collection)
-
-        })
-    }, [])
-
-
-    const postsByTypesRow = Object.keys(postsByFormat).map(key => postsByFormat[key])
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
             <div className="hidden sm:block bg-white"> <LayoutH1Wide title={title} /></div>
             <Placeholder loading={headerPost === null}>
-                {
-                    headerPost && postsByFormat.edification && (
-                        <div className="standard-max-w-px">
-                            <HeaderSection
-                                headerPost={headerPost}
-                                listPosts={postsByFormat.edification.postsRow}
-                                video
-                            />
-                        </div>
-                    )
-                }
-                <div className="w-full sm:hidden">
-                    {headerPost && <TopImgPost noBorder {...headerPost} showType />}
+
+                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+
+                    <div className="w-full pb-4 sm:hidden pt-8">
+                        <PageSectionHeader title={ac_strings.featured} />
+                        <FeaturedBanner featured={popular} />
+                    </div>
                 </div>
                 <LatestDesktopRow posts={latest} latestSlug={latestSlug} />
-                <LatestPopularTab
+                {/*                 <LatestPopularTab
                     latestSlug={latestSlug}
                     popularPosts={popular}
                     latestPosts={latest}
                     video
-                />
+                /> */}
 
-                <div className="standard-max-w">
+                {/*                 <div className="standard-max-w">
                     <ByTaxonomies
                         title={ac_strings.byCategories}
                         types={typeLinks}
                     />
-                </div>
-                <div className="standard-max-w-px">
-                    {postsByTypesRow.map(item => {
-                        return (
-                            <HorizontalScrollSection
-                                name={item.type.name}
-                                slug={item.type.to}
-                                postThumnailType="video"
-                                posts={item.postsRow}
-                                postProps={true}
-                            />
+                </div> */}
+                <div>
+                    <div className="w-full flex justify-between pt-6 pr-4">
+                        <PageSectionHeader title={ac_strings.latest} />
+                        <UnderlineLinkViewAll to={latestSlug} />
 
-                        )
-                    })}
+                    </div>
+                    <FeaturedBanner
+                        featured={latest.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
+                        smallTitle
+                    />
                 </div>
+                <div>
+                    <div className="w-full flex justify-between pt-6 pr-4">
+                        <PageSectionHeader title={ac_strings.popular} />
+
+                    </div>
+                    <FeaturedBanner
+                        featured={popular.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
+                        smallTitle
+                    />
+                </div>
+                <FetchTopicPostItems
+                    topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                    layout="list"
+                    render={({ topicPostItems }) => (
+                        <div>
+
+                            {topicPostItems.map(item => (
+                                <div>
+                                    <div className="w-full flex justify-between pt-6 pr-4">
+                                        <PageSectionHeader title={item.name} />
+                                        <UnderlineLinkViewAll to={`${item.slug}`} />
+
+                                    </div>
+                                    <FeaturedBanner
+                                        featured={item.posts.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
+                                        smallTitle
+                                    />
+                                </div>
+
+                            ))}
+                        </div>
+                    )}
+
+                />
             </Placeholder>
         </div>
     )

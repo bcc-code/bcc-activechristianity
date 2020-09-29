@@ -6,12 +6,12 @@ import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 import RightImgPostItem from '@/components/PostItem/RightImgWDes'
 import { LayoutH1Wide, PageSectionHeader } from '@/layout-parts'
-
+import { UnderlineLinkViewAll } from '@/components/Button'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import LazyLoad from '@/components/LazyLoad';
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
+import { INavItem, IPostItem, ISubtopicLinks } from '@/types'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import getPostByTypesLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 // Types 
@@ -88,11 +88,14 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                                         to: item.slug,
                                         content: (
                                             <div>
-                                                {item.posts.map(p => {
+                                                {item.posts.slice(0, 6).map(p => {
                                                     return (
                                                         <RightImgPostItem {...p} />
                                                     )
                                                 })}
+                                                <div className="w-full flex justify-center py-6">
+                                                    <UnderlineLinkViewAll to={`${item.slug}`} />
+                                                </div>
                                             </div>
                                         )
                                     }))} />

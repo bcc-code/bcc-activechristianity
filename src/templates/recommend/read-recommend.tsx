@@ -1,7 +1,7 @@
 import React from "react"
 import MetaTag from '@/components/Meta'
 import LazyLoad from '@/components/LazyLoad';
-import RecommendLayout from '@/layouts/RecommendLayoutNew'
+import { UnderlineLinkViewAll } from '@/components/Button'
 import loadable from '@loadable/component'
 import ac_strings from '@/strings/ac_strings.json'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
@@ -90,11 +90,14 @@ const Read: React.FC<IProps> = (props) => {
                                         to: item.slug,
                                         content: (
                                             <div>
-                                                {item.posts.map(p => {
+                                                {item.posts.slice(0, 6).map(p => {
                                                     return (
                                                         <RightImgPostItem {...p} />
                                                     )
                                                 })}
+                                                <div className="w-full flex justify-center py-6">
+                                                    <UnderlineLinkViewAll to={`${item.slug}`} />
+                                                </div>
                                             </div>
                                         )
                                     }))} />

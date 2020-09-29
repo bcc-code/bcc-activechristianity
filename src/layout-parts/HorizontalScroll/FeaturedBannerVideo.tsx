@@ -1,5 +1,5 @@
 import React from 'react'
-import TopImgPost from '@/components/PostItem/TopImg'
+import TopImgPost from '@/components/PostItem/TopImgVideo'
 import XScroll from './BaseLarge'
 import './horizontal-scroll.css';
 import { IImage } from '@/types'
@@ -11,7 +11,8 @@ interface IFeaturedBanner {
     image: IImage
 
 }
-const FeatureSection: React.FC<{ featured: IFeaturedBanner[] }> = ({ featured }) => {
+
+const FeatureSection: React.FC<{ featured: IFeaturedBanner[], smallTitle?: boolean }> = ({ featured, smallTitle }) => {
     return (
         <XScroll items={featured.map(({ title, excerpt, image, slug, }) => (
             <TopImgPost
@@ -25,9 +26,9 @@ const FeatureSection: React.FC<{ featured: IFeaturedBanner[] }> = ({ featured })
                 date={new Date}
                 noBorder
                 roundedImage
-                hideReadingTime
                 noBg
                 showType
+                smallTitle={smallTitle}
             />
         ))}
         />
