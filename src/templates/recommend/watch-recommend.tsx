@@ -4,15 +4,13 @@ import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import { UnderlineLinkViewAll } from '@/components/Button'
 import MetaTag from '@/components/Meta'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideo'))
+const FeaturedBannerSmall = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideoSmall'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import TopImgPost from '@/components/PostItem/TopImg'
-import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
-const LatestPopularTab = loadable(() => import('@/layout-parts/Tabs/LatestPopularTabs'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
-const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
-import { TitleWithIcon, typeIcons, PageSectionHeader, LayoutH1Wide } from '@/layout-parts'
+import { PageSectionHeader, LayoutH1Wide } from '@/layout-parts'
 import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 
@@ -80,7 +78,7 @@ const Watch: React.FC<IProps> = (props) => {
                         <UnderlineLinkViewAll to={latestSlug} />
 
                     </div>
-                    <FeaturedBanner
+                    <FeaturedBannerSmall
                         featured={latest.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
                         smallTitle
                     />
@@ -90,7 +88,7 @@ const Watch: React.FC<IProps> = (props) => {
                         <PageSectionHeader title={ac_strings.popular} />
 
                     </div>
-                    <FeaturedBanner
+                    <FeaturedBannerSmall
                         featured={popular.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
                         smallTitle
                     />
@@ -108,7 +106,7 @@ const Watch: React.FC<IProps> = (props) => {
                                         <UnderlineLinkViewAll to={`${item.slug}`} />
 
                                     </div>
-                                    <FeaturedBanner
+                                    <FeaturedBannerSmall
                                         featured={item.posts.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
                                         smallTitle
                                     />

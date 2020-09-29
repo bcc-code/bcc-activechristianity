@@ -1,12 +1,22 @@
 import React from "react"
-
+import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
-import RecommendLayout from '@/layouts/RecommendLayoutNew'
+import SquareImage from '@/components/Images/Image1to1Rounded'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
-import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
-import { TitleWithIcon, typeIcons } from '@/layout-parts'
-import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
+import XScroll from '@/layout-parts/HorizontalScroll/BaseCustomSize'
+import Link from '@/components/CustomLink'
+import { INavItem, IPostsByFormat, IPostItem, IPlaylist, INavItemCount, ISubtopicLinks } from '@/types'
+const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideo'))
+const FeaturedBannerPosts = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
+const FeaturedBannerSmall = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideoSmall'))
+import FetchPosts from '@/layout-parts/HOC/FetchPosts'
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
+const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
+import { UnderlineLinkViewAll } from '@/components/Button'
+import { PageSectionHeader, LayoutH1Wide } from '@/layout-parts'
+import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+
 // helper
 
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
@@ -17,29 +27,41 @@ const Listen: React.FC<IProps> = (props) => {
     const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
     const [latest, setLatest] = React.useState<IPostItem[]>([])
     const [popular, setPopular] = React.useState<IPostItem[]>([])
-    const [mobilePostRows, setMobilePostRows] = React.useState<IOnePostByTypeRow[]>([])
-    const [desktopRow1, setDesktopRow1] = React.useState<IOnePostByType[]>([])
-    const [desktopRow2, setDesktopRow2] = React.useState<IOnePostByType[]>([])
-    const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
+    const [podcastEps, setPodcastEps] = React.useState<string[]>([])
+    const [playlists, setPlaylist] = React.useState<IPlaylist[]>([])
     const [isLoading, setIsLoading] = React.useState(false)
-    const { pageContext, path } = props
+    const { pageContext, path, } = props
 
-    const { title, breadcrumb, items, playlist, menu } = pageContext
+    const { title, breadcrumb, items, playlist, podcast } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     React.useEffect(() => {
         setIsLoading(true)
-        fetchPostslistFromArchivePage(latestSlug).then(res => {
+        Promise.all([
+            fetchPostslistFromArchivePage(latestSlug).then(res => {
+                if (res) {
+                    setLatestPosts(res)
+                    setIsLoading(false)
+                }
+            }),
+            fetch(`/page-data/${podcast.to}/page-data.json`)
+                .then(res => res.json())
+                .then(res => {
+                    const posts = res.result.data.ac.topics[0].posts.slice(0, 6).map(item => item.slug)
+                    setPodcastEps(posts)
+                }),
 
-            if (res) {
-                setLatestPosts(res)
-                setIsLoading(false)
-            }
-        })
+            fetch(`/page-data/${playlist.to}/page-data.json`)
+                .then(res => res.json())
+                .then(res => {
+                    setPlaylist(res.result.data.ac.playlists)
+                })
+        ])
 
-        setPosts()
+
     }, [pageContext])
+
 
     const setLatestPosts = (posts: IPostItem[]) => {
         setHeaderPost(posts[0])
@@ -47,125 +69,33 @@ const Listen: React.FC<IProps> = (props) => {
         setPopular(posts.slice(5, 10))
     }
 
-    const setPosts = () => {
-        const getTypes: Promise<IPostsByFormat | undefined>[] = []
-        const postTypesLinks: INavItemCount[] = []
-        items.forEach(type => {
-
-            if (type) {
-                const { key, ...count } = type
-
-                const slug = `${type.to}`
-                postTypesLinks.push({ ...count, to: slug })
-                getTypes.push(fetchPostslistFromArchivePage(slug).then(posts => {
-                    if (posts) {
-                        const postsByFormat: IPostsByFormat = {
-                            keyName: key,
-                            type: {
-                                name: type.name,
-                                to: slug,
-                            },
-                            postsRow: posts
-                        }
-                        return postsByFormat
-                    }
-                }))
-            }
-        })
-        Promise.all(getTypes).then(res => {
-            const collection: IPostsByFormatCollection = {}
-            res.forEach(c => {
-                if (c && c.keyName) {
-                    collection[c.keyName] = c
-                }
-            })
-
-            const postsByTypesRow: IOnePostByTypeRow[] = []
-            const postsByTypesRow1: IOnePostByType[] = []
-            const postsByTypesRow2: IOnePostByType[] = []
-
-            if (collection.podcast) {
-                postsByTypesRow.push(collection.podcast)
-                postsByTypesRow1.push(
-                    {
-                        type: collection.podcast.type,
-                        post: collection.podcast.postsRow[0],
-                        position: '1',
-                        postThumnailType: 'topImage'
-                    },
-                    {
-                        type: {
-                            name: "",
-                            to: "",
-                        },
-                        post: collection.podcast.postsRow[1],
-                        position: '2',
-                        postThumnailType: 'topImage'
-                    }
-                )
-            }
-
-            if (collection.edification) {
-
-                postsByTypesRow.push(collection.edification)
-                postsByTypesRow2.push(
-                    {
-                        type: collection.edification.type,
-                        post: collection.edification.postsRow[0],
-                        position: '1',
-                        postThumnailType: 'topImage'
-                    },
-                    {
-                        type: {
-                            name: "",
-                            to: "",
-                        },
-                        post: collection.edification.postsRow[1],
-                        position: '2',
-                        postThumnailType: 'topImage'
-                    },
-
-                )
-            }
-
-            if (collection.question) {
-                postsByTypesRow.push(collection.question)
-                postsByTypesRow2.push(
-                    {
-                        type: collection.question.type,
-                        post: collection.question.postsRow[0],
-                        position: '3',
-                        postThumnailType: 'topImage'
-                    },
-                )
-            }
-
-            if (collection.commentary) {
-
-                postsByTypesRow.push(collection.commentary)
-                postsByTypesRow2.push(
-                    {
-                        type: collection.commentary.type,
-                        post: collection.commentary.postsRow[0],
-                        position: '4',
-                        postThumnailType: 'topImage'
-                    },
-                )
-            }
-
-            const withIcons = menu.map(item => ({ ...item, name: < TitleWithIcon title={item.name} icon={typeIcons["listen"]} /> }))
-            setTypeLinks(withIcons)
-            setMobilePostRows(postsByTypesRow)
-            setDesktopRow1(postsByTypesRow1)
-            setDesktopRow2(postsByTypesRow2)
-        })
-    }
-
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
             <Placeholder loading={isLoading || !headerPost}>
-                {headerPost && (
+                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+
+                    <div className="w-full pb-4 sm:hidden pt-8">
+                        <PageSectionHeader title={ac_strings.featured} />
+                        <FeaturedBanner featured={popular} />
+                    </div>
+                </div>
+                <div className="py-6">
+                    <FetchPosts
+
+                        slugs={podcastEps}
+                        layout="list"
+                        render={({ posts }) => {
+                            return (
+                                <TopImgHorizontalScroll
+                                    posts={posts}
+                                />
+                            )
+                        }}
+
+                    />
+                </div>
+                {/* {headerPost && (
                     <RecommendLayout
                         hideTitleOnMobile={true}
                         latestSlug={latestSlug}
@@ -179,7 +109,43 @@ const Listen: React.FC<IProps> = (props) => {
                         postTypes={typeLinks}
 
                     />
-                )}
+                )} */}
+                <PageSectionHeader title={ac_strings.playlist} />
+                <XScroll
+                    childeClassName="w-3/12 min-w-3/12"
+                    items={playlists.map(({ title, excerpt, image, slug, }) => (
+                        <Link
+                            to={`${playlist.to}/${slug}`}
+                            className="flex flex-col">
+                            <SquareImage {...image} />
+                            <div className="">{title}</div>
+                        </Link>
+                    ))}
+                />
+                <FetchTopicPostItems
+                    topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                    layout="list"
+                    render={({ topicPostItems }) => (
+                        <div>
+
+                            {topicPostItems.map(item => (
+                                <div>
+                                    <div className="w-full flex justify-between pt-6 pr-4">
+                                        <PageSectionHeader title={item.name} />
+                                        <UnderlineLinkViewAll to={`${item.slug}`} />
+
+                                    </div>
+                                    <FeaturedBannerSmall
+                                        featured={item.posts.map(p => ({ title: p.title, excerpt: p.excerpt, image: p.image, slug: p.slug }))}
+                                        smallTitle
+                                    />
+                                </div>
+
+                            ))}
+                        </div>
+                    )}
+
+                />
             </Placeholder>
 
 
@@ -194,6 +160,7 @@ interface IProps {
         title: string
         breadcrumb: INavItem[]
         playlist: INavItemCount
+        podcast: INavItemCount
         info: INavItemCount
         items: ISubtopicLinks[]
         menu: INavItemCount[]
