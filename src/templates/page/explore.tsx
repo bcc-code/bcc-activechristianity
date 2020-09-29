@@ -7,10 +7,9 @@ import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import CustomSearchBox from '@/layout-parts/Explore/SearchInput'
 import CustomePagination from '@/layout-parts/Explore/Pagination'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
-import LazyLoad from '@/components/LazyLoad';
 import MetaTag from '@/components/Meta'
 import { LayoutH1, PageSectionHeader } from '@/layout-parts'
-
+import { OutlineScriptureChapter, UnderlineLink } from '@/components/Button'
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
 import { fetchTopicFromSlug } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
@@ -34,6 +33,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     console.log(props)
     const [query, setQuery] = React.useState('');
     const [popularTopics, setPopularTopics] = React.useState<INavItem[]>([])
+    const [mostUsedScriptures, setPopularScriptures] = React.useState<INavItem[]>([])
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
 
     const [typeFilter, setTypeFilter] = React.useState<string[] | null>(null);
@@ -44,6 +44,19 @@ const ExplorePage: React.FC<IResource> = (props) => {
 
     const { resource, scripturePage } = props.pageContext
     const topicSlugs = props.data.ac.popularTopics
+
+    React.useEffect(() => {
+        const receivedTopics: INavItem[] = []
+        console.log(scripturePage.to)
+        fetch(`/page-data/${scripturePage.to}/page-data.json`)
+            .then(res => res.json())
+            .then(res => {
+                const mostUsedScriptures: INavItem[] = res.result.pageContext.mostPopular
+                setPopularScriptures(mostUsedScriptures)
+            })
+            .catch(error => console.log(error))
+
+    }, [])
 
     React.useEffect(() => {
         const receivedTopics: INavItem[] = []
@@ -162,7 +175,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     }
 
     const title = ac_strings.explore
-    console.log(popularTopics)
+    console.log()
     return (
 
         <InstantSearch
@@ -192,11 +205,14 @@ const ExplorePage: React.FC<IResource> = (props) => {
                 {showExploreHome && (
                     <div className="bg-white max-w-tablet mx-auto">
                         <div className="pt-6">
-                            <PageSectionHeader title={ac_strings.topics} />
+                            <div className="w-full flex justify-between">
+                                <PageSectionHeader title={ac_strings.topics} />
+                                <div className="pr-4"><UnderlineLink to={TS.slug_topic}>{ac_strings.see_all}</UnderlineLink></div>
+                            </div>
+
                             <XScrollCustomSize
                                 childeClassName=""
                                 items={popularTopics.map(({ name, to }) => {
-                                    console.log(to)
                                     return (
                                         <div className="flex flex-col items-center">
                                             <div className="min-h-24 h-24 w-18" >
@@ -247,17 +263,20 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             </div>
                         </div>
                         <div className="pt-6 pb-8">
-                            <PageSectionHeader title={ac_strings.byScripture} />
+                            <div className="w-full flex justify-between">
+                                <PageSectionHeader title={ac_strings.byScripture} />
+                                <div className="pr-4"><UnderlineLink to={scripturePage.to}>{ac_strings.see_all}</UnderlineLink></div>
+
+                            </div>
                             <XScrollCustomSize
                                 childeClassName=""
-                                items={["1 Corinthians", "Philippians", "Matthew", "Psalms"].map(name => {
+                                items={mostUsedScriptures.map(s => {
                                     return (
-                                        <button
-                                            className={`whitespace-no-wrap border border-d4gray hover:border-d4slate-dark rounded-lg py-1 px-2 font-semibold text-d4slate-dark bg-white`}
-
-                                        >
-                                            {name}
-                                        </button>
+                                        <Link to={s.to}>
+                                            < OutlineScriptureChapter>
+                                                {s.name}
+                                            </ OutlineScriptureChapter>
+                                        </Link>
                                     )
                                 })}
                             />

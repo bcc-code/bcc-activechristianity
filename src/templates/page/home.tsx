@@ -145,7 +145,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 <div className="hidden sm:block">
                   <ScrollNavTabsDesktop tabs={topicPostItems} />
                 </div>
-
               </div>
             )}
 

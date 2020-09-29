@@ -67,6 +67,7 @@ module.exports = function generatePages(actions, graphql) {
   const podcastHosts=[]
   const aboutUsChildren=[]
   return graphql(query).then(result=>{
+    console.log("Generating pages")
     if (result.errors){
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)

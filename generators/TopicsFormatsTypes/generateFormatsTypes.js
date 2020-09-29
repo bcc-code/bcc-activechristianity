@@ -137,10 +137,10 @@ module.exports = function generateTopics(actions, graphql) {
                     name:ac_strings.type,
                     items:[]
                 }
-
+                console.log("generating formats")
                 for(let j=0;j<formats.length;j++){
                     const format=formats[j]
-                    
+                   
                     const find = formatScope.find(f=>f.keyId===`${format.id}`)
                     
                     if (find){
@@ -204,7 +204,7 @@ module.exports = function generateTopics(actions, graphql) {
             }
 
             if(types){
-                
+                console.log("generating types")
                 for(let j=0;j<types.length;j++){
                     const type=types[j]
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from "react-redux"
 
-import { OutlineButton } from "@/layout-parts/Buttons"
+import { OutlineButton } from '@/components/Button'
 import { InputText } from '@/components/Input'
 import TS from '@/strings'
 

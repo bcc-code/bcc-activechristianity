@@ -394,7 +394,7 @@ export interface IPopularPosts {
 
 export interface IBibleBook {
     no: number
-    id: number
+    id: string
     name: string
     chapters: number[]
     total: number

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { fetchLocalPostsFromSlugs, fetchTopicFromSlug } from '@/helpers/fetchLocalData'
 import { IRootState } from '@/state/types'
 import { ITopicNavItem } from '@/types'
-import { OutlineRightIcon } from "@/layout-parts/Buttons"
+import { OutlineRightIcon } from "@/components/Button"
 
 const UserHistory = () => {
 
@@ -27,9 +27,9 @@ const UserHistory = () => {
 
     return (
         <div className="grid-1-2col mx-4 mt-4 sm:mt-12 mb-4">
-            {followedTopic.map(({ name, slug }) => {
+            {followedTopic.map(({ name, to }) => {
                 return (
-                    <OutlineRightIcon name={name} to={slug} key={slug} />
+                    <OutlineRightIcon name={name} to={to} key={to} />
                 )
             })}
         </div>

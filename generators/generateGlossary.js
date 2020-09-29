@@ -31,6 +31,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
   const { createPage } = actions
 
   return graphql(getGlossaryQuery).then((result) => {
+    console.log("Generating glossary")
     if (result.errors) {
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)

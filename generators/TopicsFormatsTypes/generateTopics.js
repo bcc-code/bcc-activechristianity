@@ -54,6 +54,7 @@ module.exports = function generateTopics(actions, graphql) {
             result.errors.forEach(e => console.error(e.toString()))
             return Promise.reject(result.errors)
           } else {
+            console.log("generating topics")
             const topicInfo = result.data.ac.topics
             const resourcePage = result.data.ac.page
             const topicsMain= result.data.ac.topicMain

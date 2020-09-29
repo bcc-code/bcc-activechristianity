@@ -8,7 +8,7 @@ import { LayoutH1 } from '@/layout-parts'
 import { FacebookIcon, InstagramIcon } from '@/components/Icons/SocialMedia'
 
 import Snackbar from '@/components/Snackbar'
-import { FormSubmitButton } from "@/layout-parts/Buttons"
+import { FormSubmitButton } from "@/components/Button"
 
 const siteUrl = process.env.SITE_URL
 const contactFormTo = process.env.CONTACT_FROM_TO

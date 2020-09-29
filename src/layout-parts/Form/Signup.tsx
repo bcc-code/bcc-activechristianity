@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { initiateRegister } from '@/state/action/authAction'
 import { openSignInModal } from '@/state/action'
 import { InputText, InputCheckbox } from '@/components/Input'
-import { OutlineButton } from "@/layout-parts/Buttons"
 import TS from '@/strings'
 
 import ac_strings from '@/strings/ac_strings.json'
 import Snackbar from '@/components/Snackbar'
-import { FormSubmitButton } from "@/layout-parts/Buttons"
+import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
 const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
 const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")

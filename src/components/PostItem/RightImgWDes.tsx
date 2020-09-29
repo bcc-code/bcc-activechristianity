@@ -94,16 +94,15 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                         {/* <PostExcerpt {...postBaseProps.postExcerptProps} /> */}
                     </Link>
                     <div className="text-sm text-gray-500 mb-4"> <AuthorLink authors={authors} /></div>
-                    <div className="pb-4 flex">
-                        <ReadingTimingIcon
-                            readingTime={postReadingTime}
-                        />
-                        <BookmarksAndViews
-                            id={id}
-                            likes={likes}
-                            views={views}
-                        />
+                    <div className="mb-4 flex flex-wrap">
+                        {topics && topics.map(item => {
+                            return (
+                                <TopicWithIcons {...item} />
+                            )
+                        })}
                     </div>
+
+
                 </div>
                 <div className="w-4/12 sm:w-6/12 md:w-4/12 flex justify-center">
                     <PostItemMediaImg
@@ -123,6 +122,16 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                 </div>
 
 
+            </div>
+            <div className="py-4 flex w-full justify-between">
+                <ReadingTimingIcon
+                    readingTime={postReadingTime}
+                />
+                <BookmarksAndViews
+                    id={id}
+                    likes={likes}
+                    views={views}
+                />
             </div>
             {/*             <div className="w-full justify-between flex">
 

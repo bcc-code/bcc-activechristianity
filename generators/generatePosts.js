@@ -31,7 +31,7 @@ module.exports = function generatePosts(actions, graphql) {
     }
 
     const posts = result.data.allAcNodePost.nodes
-  
+    console.log("Generating posts")
 
     // Iterate over the array of posts
     _.each(posts, (post) => {

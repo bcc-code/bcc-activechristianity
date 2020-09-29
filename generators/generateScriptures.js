@@ -4,9 +4,14 @@ const listTemplate = 'src/templates/archive/post-list.tsx'
 const TS = require('../src/strings')
 const ac_strings=require('../src/strings/ac_strings.json')
 
-const allBooks =  `
+const allBooksQuery =  `
 {
     ac {
+      page(id:${process.env.SCRIPTURE_PAGE_ID}){
+        title
+        slug
+        label
+      }
         bible {
             old {
                 chapters
@@ -27,7 +32,7 @@ const allBooks =  `
 }
 `
 
-const perChapter =  (bookId, ch) => `
+const perChapterQuery =  (bookId, ch) => `
     {
         ac {
             biblePosts(id:"${bookId}", ch:${ch}){
@@ -41,64 +46,53 @@ const perChapter =  (bookId, ch) => `
 module.exports = function generateTaxonomies(actions, graphql) {
     const { createPage } = actions
   
-    return graphql(getPageCountQuery).then((result) => {
+    return graphql(allBooksQuery).then(async (result) => {
       if (result.errors) {
         result.errors.forEach(e => console.error(e.toString()))
         return Promise.reject(result.errors)
       }
-      const {count,total}= result.data.ac.authors.paginatorInfo
-      const pageCount=Math.ceil(total/count)
-      console.log(pageCount)
-      const pageIndex= [];
-  
-      for (let i = 1; i <= pageCount; i++) {
-        pageIndex.push(i);
+      const {bible,page} = result.data.ac
+      const chaptersCounts = []
+      console.log("Generating scriptures")
+      if (bible.new && bible.old){
+        const allChapters=[...bible.old,...bible.new]
+        for (let i = 0; i < allChapters.length; i++) {
+          const book=allChapters[i]
+          for (let j=0;j<book.chapters.length;j++){
+            const chapter=book.chapters[j]
+            const chapterQuery = perChapterQuery(book.id,chapter)
+            const chapterRes = await graphql(chapterQuery).catch(err=>console.log(err))
+            const pagePath=`${page.slug}/${book.id}/${chapter}`
+            const posts=chapterRes.data.ac.biblePosts.map(i=>i.slug)
+            chaptersCounts.push({
+              name:`${book.name} ${chapter}`,
+              to:pagePath,
+              count:posts.length
+            })
+            createPage({
+              path:pagePath,
+              component:path.resolve(listTemplate),
+              context: {
+                posts,
+                title:`${book.name} ${chapter}`,
+                slug:pagePath,
+                breadcrumb:[{name:page.title,to:page.slug}]
+              }
+            })
+          }
+        }
+
+        const mostPopular=chaptersCounts.sort((a,b)=>b.count-a.count).slice(0,10)
+        console.log(mostPopular)
+        createPage({
+          path: `${page.slug}`,
+          component: path.resolve(`./src/templates/page/${page.label}.tsx`),
+          context:{
+            bible,
+            mostPopular,
+            title:page.title
+          },
+        })
       }
-      return Promise.all(pageIndex.map(i=>{
-        const eachPageQuery=getEachPagePosts(i)
-            return graphql(eachPageQuery)
-                    .then(res =>{
-             
-                      if (res.data.ac && res.data.ac.authors.data && res.data.ac.authors.data[0]){
-                        const allAuthors = res.data.ac.authors.data
-                        _.each(allAuthors, (author)=>{
-                          const {name,id,slug,posts} =author
-  
-                          const totalCount = posts.length
-                          const perPage = 12
-                          if (!totalCount) return null
-                          const totalPages = Math.ceil(totalCount / perPage)
-                          const allPosts=posts.map(p=>p.slug)
-                          let currentPage = 1
-    
-                          const baseUrl = `/${TS.slug_ac_author}/${author.slug}`
-  
-                          for (let i = 0; i < totalCount; i += perPage, currentPage++) {
-                            let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-    
-                            createPage({
-                              path:pagePath,
-                              component:path.resolve(template),
-                              context: {
-                                posts: allPosts.slice(i,i+perPage),
-                                paginate: {
-                                  currentPage,
-                                  totalPages,
-                                  baseUrl
-                                },
-                                author,
-                                title:name,
-                                slug:slug,
-                                id:id,
-                                breadcrumb:[]
-                              }
-                            })
-                          }
-                        })
-                      }
-              })
-          }))
-  
-  
     })
   }

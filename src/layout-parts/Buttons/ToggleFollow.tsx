@@ -19,6 +19,7 @@ const SlateDarkFollowButton: React.FC<IProps> = ({ id, text }) => {
             className="w-full"
             render={({ followed }) => {
                 const config = toggleFollowStatusMap[followed]
+                console.log(config)
                 return (
                     <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-xs rounded-full font-semibold ${config.color}`}>
                         <span>{text ? text : config.text}</span>

@@ -8,21 +8,23 @@ import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 
 export interface IPostList {
     audio?: boolean
-    paginate: IPaginate
+    paginate?: IPaginate
     posts: string[],
 
 }
 const PostList: React.FC<IPostList> = (props) => {
 
     const { paginate, posts } = props
-    const { currentPage, totalPages, hasRecommendPage } = paginate
+
 
     const [postList, setPostList] = React.useState<IPostItem[]>([])
     React.useEffect(() => {
         fetchLocalPostsFromSlugs(posts)
             .then(res => {
+                if (res) {
+                    setPostList(res)
+                }
 
-                setPostList(res)
             })
     }, posts)
 
@@ -45,18 +47,18 @@ const PostList: React.FC<IPostList> = (props) => {
                 )
             })}
 
-            <div className="flex justify-item py-4">
+            {paginate && <div className="flex justify-item py-4">
                 <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
+                    currentPage={paginate.currentPage}
+                    totalPages={paginate.totalPages}
                     onChange={(activePage: number) => {
-                        const firstPagePath = paginate.baseUrl + `${hasRecommendPage === true ? '/1' : ''}`
+                        const firstPagePath = paginate.baseUrl + `${paginate.hasRecommendPage === true ? '/1' : ''}`
                         const fullPath = activePage > 1 ? `${paginate.baseUrl}/${activePage}` : firstPagePath
                         scrollToTop()
                         navigate(fullPath)
                     }}
                 />
-            </div>
+            </div>}
 
         </div>
     )

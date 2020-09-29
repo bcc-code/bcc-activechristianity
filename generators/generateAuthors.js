@@ -52,7 +52,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
     }
     const {count,total}= result.data.ac.authors.paginatorInfo
     const pageCount=Math.ceil(total/count)
-    console.log(pageCount)
+    console.log("Generating authros")
     const pageIndex= [];
 
     for (let i = 1; i <= pageCount; i++) {

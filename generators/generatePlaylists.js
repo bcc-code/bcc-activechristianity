@@ -54,7 +54,7 @@ module.exports = function generatePlaylists(actions, graphql) {
       const resourcePage = result.data.ac.resource
       const playlistMain= result.data.ac.playlistMain
       const navTopItem={name:resourcePage.title,to:resourcePage.slug}
-  
+      console.log("Generating playlist")
       _.each(playlists, (playlist) => {
         const basePath = `/${ac_strings.slug_playlist}/${playlist.slug}`
 

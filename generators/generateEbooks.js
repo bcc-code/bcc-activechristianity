@@ -54,7 +54,7 @@ module.exports = function generateEbooks(actions, graphql) {
         result.errors.forEach(e => console.error(e.toString()))
         return Promise.reject(result.errors)
       }
-  
+      console.log("Generating ebooks")
       const eBooks = result.data.ac.ebooks
       const resourcePage = result.data.ac.resource
       const ebookPage = result.data.ac.ebook

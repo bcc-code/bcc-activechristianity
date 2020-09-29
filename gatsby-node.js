@@ -9,10 +9,12 @@ const _ = require('lodash')
 const generatePosts = require('./generators/generatePosts.js')
 const generateTopics = require('./generators/TopicsFormatsTypes/generateTopics.js')
 const generatePages = require('./generators/generatePages.js')
+
 const generateAuthors = require('./generators/generateAuthors.js')
 const generateEbooks = require('./generators/generateEbooks.js')
 const generatePlaylists = require('./generators/generatePlaylists.js')
 /* const generateSeries = require('./generators/generateSeries.js') */
+const generateScriptures=require('./generators/generateScriptures.js')
 const generateGlossary = require('./generators/generateGlossary.js')
 const generateFormatsTypesResource = require('./generators/TopicsFormatsTypes/generateFormatsTypes.js')
 const generateHome = require('./generators/generateHome.js')
@@ -67,7 +69,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       generatePages(actions, graphql),
       generateTopics(actions, graphql),
       generateFormatsTypesResource(actions, graphql),
-      generateHome(actions, graphql)
+      generateHome(actions, graphql),
+      generateScriptures(actions, graphql),
     ]
 
     return Promise.all(generators)

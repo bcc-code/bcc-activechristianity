@@ -1,7 +1,7 @@
 
 import * as React from "react"
 import RightImgWDes from '@/components/PostItem/RightImgWDes'
-import { OutlineButton } from '@/layout-parts/Buttons'
+import { OutlineButton } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.json'
 import { ITopic, IPostItem } from '@/types'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'

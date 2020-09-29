@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 // Components
 import Link from '@/components/CustomLink'
 import Content from '@/components/Content'
-import { OutlineButton } from '@/layout-parts/Buttons'
+import { OutlineButton } from '@/components/Button'
 import MetaTag from '@/components/Meta'
 import Modal from '@/components/Modal/ModalWProps'
 
