@@ -23,6 +23,7 @@
     "@types/sprintf-js": "^1.1.2",
     "ac-sdk": "file:ac-api-sdk",
     "algoliasearch": "^4.4.0",
+    "cli-progress": "^3.8.2",
     "csv-parser": "^2.3.2",
     "flickity": "^2.2.1",
     "gatsby": "^2.22.11",

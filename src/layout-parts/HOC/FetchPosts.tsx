@@ -10,13 +10,11 @@ interface IFetchPost {
     render: (data: { posts: IPostItem[] }) => JSX.Element
 }
 const FetchPosts: React.FC<IFetchPost> = ({ slugs, render }) => {
-    console.log(slugs)
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     React.useEffect(() => {
         fetchLocalPostsFromSlugs(slugs)
             .then(res => {
                 if (res) {
-                    console.log(res)
                     setPosts(res)
                 }
             })

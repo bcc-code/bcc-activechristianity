@@ -22,6 +22,7 @@ const query = `{
           }
           posts {
             slug
+            views
           }
 
         }
@@ -74,6 +75,7 @@ module.exports = function generateTopics(actions, graphql) {
                     let currentPage = 1
                     const totalCount=node.posts.length
                     const allPosts= node.posts.map(p=>p.slug)
+                    
                     // create achive of each topic, type, format
                     const totalPages = Math.ceil(totalCount / perPage)
                     const firstPageNr=allPosts.length>20?'/1':''
@@ -194,6 +196,7 @@ module.exports = function generateTopics(actions, graphql) {
                         }
                         // create recommend
                         const pagePath = `${TS.slug_topic}/${topic.slug}`
+                        const mostPopular=topic.posts.sort((a,b)=>b.views-a.views).slice(0,10)
 
                         createPage({
                             path:pagePath,
@@ -204,6 +207,7 @@ module.exports = function generateTopics(actions, graphql) {
                               slug:topic.slug,
                               types:topicType,
                               formats:topicFormat,
+                              mostPopular,
                               breadcrumb:[
                                 navTopItem, 
                                 navParentItem,{

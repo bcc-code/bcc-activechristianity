@@ -206,7 +206,7 @@ export const PlaylistBackground: React.FC<{ slug: string, imageUrl: IImage }> = 
 export interface IPostBase {
     wrapperClass?: string
     postTitleProps: IPostItemTitle
-    postExcerptProps: IPostItemTitle
+    postExcerptProps?: IPostItemTitle
     hasReadMore?: boolean
     hasReadingTime?: boolean
     audioDuration?: boolean
@@ -231,7 +231,7 @@ export const PostBase: React.FC<IPostBase> = (props) => {
             <div className="flex flex-col flex-1 leading-normal">
                 <Link to={`/${slug}`} >
                     <PostTitle {...postTitleProps} />
-                    <PostExcerpt {...postExcerptProps} />
+                    {postExcerptProps && <PostExcerpt {...postExcerptProps} />}
                 </Link>
                 <div className="text-sm text-gray-500 mb-4"> <AuthorLink authors={authors} /></div>
             </div>

@@ -10,7 +10,6 @@ const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/Posts
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 const QuoteBlock = loadable(() => import('@/components/QuoteBlock'))
 import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
-import { Button } from '@/layout-parts/Buttons'
 import { LayoutH1Wide } from '@/layout-parts'
 
 import TopImgPost from '@/components/PostItem/TopImg'
@@ -76,7 +75,6 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                         < HorizontalScrollSection
                             key={k}
                             name={item.type.name}
-
                             posts={item.postsRow}
                             postThumnailType={postThumnailType}
                         />

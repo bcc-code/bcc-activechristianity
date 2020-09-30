@@ -3,6 +3,8 @@ import Link from '@/components/CustomLink'
 import { PostItemPlayButtonSmall } from '@/layout-parts/Buttons/PlayButton'
 import { IPostItem } from '@/types'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
+import ac_string from '@/strings/ac_strings.json'
+
 interface IProps {
     title: string
     small?: boolean
@@ -20,7 +22,7 @@ const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
                         return (
                             <div className="flex" key={post.slug}>
                                 <div className="flex items-center">
-                                    <div className="bg-white w-8 h-8 flex justify-center items-center pt-1 mt-1" style={{ borderRadius: 9999 }}>
+                                    <div className="bg-white w-8 h-8 flex justify-center items-center mt-1" style={{ borderRadius: 9999 }}>
                                         <div className="mx-4 text-gray-300 ">
                                             {!small && (post.media.audio || post.media.video) ?
                                                 (
@@ -54,6 +56,8 @@ const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
 
                                         </span>
                                     )}
+                                    <div className="text-d4slate-light text-xs py-2">
+                                        {post.views} {ac_string.views}</div>
                                     {playIcon && (
                                         <ReadingTimingAuthor readingTime={post.reading_time?.text} authors={post.authors} />
                                     )}

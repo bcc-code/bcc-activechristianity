@@ -27,6 +27,7 @@ const query = `{
             }
             posts {
                 slug
+                views
             }
         }
 
@@ -42,6 +43,7 @@ const query = `{
             }
             posts {
                 slug
+                views
             }
         }
 
@@ -76,6 +78,7 @@ const perPage= 12
 module.exports = function generateTopics(actions, graphql) {
     const { createPage } = actions
     const resource_grouped = {}
+    const typesPopular={}
     return graphql(query)
     .then(async (result)=>{
         if (result.errors){
@@ -137,8 +140,9 @@ module.exports = function generateTopics(actions, graphql) {
                     name:ac_strings.type,
                     items:[]
                 }
-                console.log("generating formats")
+                console.log(" formats")
                 for(let j=0;j<formats.length;j++){
+                    console.log(`generating formats ${j}/${formats.length}`)
                     const format=formats[j]
                    
                     const find = formatScope.find(f=>f.keyId===`${format.id}`)
@@ -146,7 +150,7 @@ module.exports = function generateTopics(actions, graphql) {
                     if (find){
                         resource_grouped["format"].items.push(({key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts}))
                         const querySubTopics = getSubTopics(format.id)
-                        
+                        const mostPopular=format.posts.sort((a,b)=>b.views-a.views).slice(0,10)
 
                         const subTRes = await graphql(querySubTopics)
 
@@ -187,6 +191,7 @@ module.exports = function generateTopics(actions, graphql) {
                                     
                             }
                         }
+
                         // create format overview 
                         createPage({
                             path:format.slug,
@@ -195,6 +200,7 @@ module.exports = function generateTopics(actions, graphql) {
                               id:format.id,
                               title:format.name,
                               formatType,
+                              mostPopular,
                               breadcrumb:[resourceNavItem, {name:format.name ,to:format.slug}]
                             },
                           })
@@ -206,6 +212,7 @@ module.exports = function generateTopics(actions, graphql) {
             if(types){
                 console.log("generating types")
                 for(let j=0;j<types.length;j++){
+                    console.log(`generating types ${j}/${types.length}`)
                     const type=types[j]
 
                     const findType=typeScope.find(t=>t.keyId===`${type.id}`)
@@ -213,7 +220,7 @@ module.exports = function generateTopics(actions, graphql) {
                     if (findType){
                         
                         const querySubTopics = getSubTopics(type.id)
-
+                        
                         const subTRes = await graphql(querySubTopics)
                         
                         const subTopics = subTRes.data.ac.topic.subTopics
@@ -255,7 +262,10 @@ module.exports = function generateTopics(actions, graphql) {
                         }
 
                         const typeBreadcrumb = [resourceNavItem, {name:type.name ,to:type.slug}]
+
                         let typeMenu=[...typeFormatEach.items]
+
+                        typesPopular[findType.keyname]=type.posts.sort((a,b)=>b.views-a.views).slice(0,10)
                         resource_grouped[findType.keyname]={
                             name:type.name,
                             slug:type.slug,
@@ -287,7 +297,7 @@ module.exports = function generateTopics(actions, graphql) {
                             }
                             
                         }
-                        typeMenu = typeMenu.sort((a,b)=>a.count<b.count)
+                        typeMenu = typeMenu.sort((a,b)=>b.count-a.count)
  
                         resource_grouped[findType.keyname]={
                             name:type.name,
@@ -317,6 +327,7 @@ module.exports = function generateTopics(actions, graphql) {
             
                 Object.keys(sortedTypes).forEach(typekey=>{
                     const eachType=resource_grouped[typekey]
+                    const mostPopular=typesPopular[typekey]
 
                     createPage({
                         path: `${eachType.slug}`,
@@ -324,6 +335,7 @@ module.exports = function generateTopics(actions, graphql) {
                         context:{
                             typekey,
                             title:eachType.name,
+                            mostPopular,
                             ...eachType
                             
                             

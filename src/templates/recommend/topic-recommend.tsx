@@ -1,56 +1,50 @@
 import React from 'react'
 import loadable from '@loadable/component'
-import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
+import LazyLoad from '@/components/LazyLoad';
 import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+import FetchPosts from '@/layout-parts/HOC/FetchPosts'
+import FetchPostList from '@/layout-parts/HOC/FetchPostList'
+const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
+const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 import RightImgPostItem from '@/components/PostItem/RightImgWDes'
 import { LayoutH1Wide, PageSectionHeader } from '@/layout-parts'
+
 import { UnderlineLinkViewAll } from '@/components/Button'
-const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
-const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-import LazyLoad from '@/components/LazyLoad';
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { INavItem, IPostItem, ISubtopicLinks } from '@/types'
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import getPostByTypesLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
+
+import { INavItem, ISubtopicLinks } from '@/types'
+
 // Types 
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
+import PopularPosts from '@/layout-parts/PopularPosts';
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const { pageContext, path } = props
-    const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
-    const [latest, setLatest] = React.useState<IPostItem[]>([])
-    const [popular, setPopular] = React.useState<IPostItem[]>([])
-    const [isLoading, setIsLoading] = React.useState(false)
 
     const {
         title,
         formats,
-        breadcrumb
+        breadcrumb,
+        mostPopular
     } = pageContext
 
-    const latestSlug = `${path}/1`
     React.useEffect(() => {
 
-        fetchPostslistFromArchivePage(latestSlug).then(res => {
-            if (res) {
-                setLatestPosts(res)
+        const nrOfFormats = formats.length
+        if (nrOfFormats > 1) {
 
-            }
-        })
-    }, [props.pageContext])
+        }
 
 
+    })
 
-    const setLatestPosts = (posts: IPostItem[]) => {
 
-        setHeaderPost(posts[0])
-        setLatest(posts)
-        setPopular(posts.slice(5, 10))
-    }
+    console.log(formats)
+    const latestSlug = `${path}/1`
 
     return (
         <div>
@@ -61,52 +55,82 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 path={path}
             />
 
-
-            <Placeholder loading={isLoading || !headerPost}>
+            <div className="sm:hidden">
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
                     <LayoutH1Wide
                         title={title}
                     />
                 </div>
-                <div className="w-full pb-4 sm:hidden pt-8">
+                <div className="w-full pb-4 pt-8">
                     <PageSectionHeader title={ac_strings.featured} />
-                    <FeaturedBanner featured={popular} />
+                    <FetchPosts
+                        slugs={mostPopular.slice(5).map(p => p.slug)}
+                        layout="row"
+                        render={({ posts }) => {
+                            return <FeaturedBanner featured={posts} />
+                        }}
+                    />
                 </div>
-                <div className="div6 bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden sm:hidden">
+                <div className="bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} />
-                    <TopImgHorizontalScroll posts={popular} />
+                    <FetchPosts
+                        slugs={mostPopular.slice(0, 5).map(p => p.slug)}
+                        layout="row"
+                        render={({ posts }) => {
+                            return (<TopImgHorizontalScroll posts={posts} />)
+                        }}
+                    />
+
                 </div>
+
+
+                <div className="sm:bg-transparent py-6 overflow-hidden">
+                    <PageSectionHeader title={ac_strings.latest} />
+
+                    <FetchPostList
+                        slug={latestSlug}
+                        layout="row" render={({ posts }) => {
+                            return (<TopImgHorizontalScroll posts={posts} />)
+                        }}
+                    />
+
+                </div>
+
                 <LazyLoad>
                     <FetchTopicPostItems
                         topics={formats.map(f => ({ name: f.name, slug: `${TS.slug_topic}/${f.to}`, id: '' }))}
                         layout="list"
                         render={({ topicPostItems }) => (
-                            <div>
-                                <div className="sm:hidden">
-                                    <ScrollNavTabs tabs={topicPostItems.map(item => ({
-                                        name: item.name,
-                                        to: item.slug,
-                                        content: (
-                                            <div>
-                                                {item.posts.slice(0, 6).map(p => {
-                                                    return (
-                                                        <RightImgPostItem {...p} />
-                                                    )
-                                                })}
-                                                <div className="w-full flex justify-center py-6">
-                                                    <UnderlineLinkViewAll to={`${item.slug}`} />
-                                                </div>
-                                            </div>
-                                        )
-                                    }))} />
-                                </div>
-
-                            </div>
+                            <ScrollNavTabs tabs={topicPostItems.map(item => ({
+                                name: item.name,
+                                to: item.slug,
+                                content: (
+                                    <div>
+                                        {item.posts.slice(0, 6).map(p => {
+                                            return (
+                                                <RightImgPostItem {...p} />
+                                            )
+                                        })}
+                                        <div className="w-full flex justify-center py-6">
+                                            <UnderlineLinkViewAll to={`${item.slug}`} />
+                                        </div>
+                                    </div>
+                                )
+                            }))} />
                         )}
 
                     />
                 </LazyLoad>
-                {/*                 {headerPost && (
+            </div>
+            <RecommendDesktopLayout
+                latestSlug={latestSlug}
+                popularPosts={mostPopular.map(item => item.slug)}
+                topics={formats}
+                name={title}
+
+
+            />
+            {/*                 {headerPost && (
                     <RecommendLayout
                         latestSlug={latestSlug}
                         name={title}
@@ -121,7 +145,6 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
                     />
                 )} */}
-            </Placeholder>
 
         </div>
     )
@@ -136,6 +159,10 @@ interface ITaxonomyPageProps {
         breadcrumb: INavItem[]
         types: ISubtopicLinks[]
         formats: ISubtopicLinks[]
+        mostPopular: {
+            slug: string
+            views: number
+        }[]
     }
     path: string
 }

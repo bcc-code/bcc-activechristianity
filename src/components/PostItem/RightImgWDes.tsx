@@ -91,16 +91,16 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     )}
                     <Link to={`/${slug}`} >
                         <PostTitle {...postBaseProps.postTitleProps} />
-                        {/* <PostExcerpt {...postBaseProps.postExcerptProps} /> */}
+                        <PostExcerpt {...postBaseProps.postExcerptProps} />
                     </Link>
                     <div className="text-sm text-gray-500 mb-4"> <AuthorLink authors={authors} /></div>
-                    <div className="mb-4 flex flex-wrap">
+                    {/*                     <div className="mb-4 flex flex-wrap">
                         {topics && topics.map(item => {
                             return (
                                 <TopicWithIcons {...item} />
                             )
                         })}
-                    </div>
+                    </div> */}
 
 
                 </div>

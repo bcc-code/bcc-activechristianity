@@ -175,9 +175,6 @@ export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
                     color="slate-light"
                     size="5"
                 />
-                <span className="text-xs text-d4slate-light pl-2">
-                    {likes}
-                </span>
             </div>
 
 

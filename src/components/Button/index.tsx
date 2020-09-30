@@ -77,7 +77,7 @@ export const UnderlineLink: React.FC<{ to: string }> = ({ to, children }) => {
 }
 
 export const UnderlineLinkViewAll: React.FC<{ to: string }> = ({ to, children }) => {
-    return <Button to={to} className="text-d4slate-dark underline text-sm font-semibold">
+    return <Button to={to} className="text-d4slate-dark underline text-sm">
         {ac_strings.see_all}
     </Button>
 }

@@ -57,6 +57,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
       if (bible.new && bible.old){
         const allChapters=[...bible.old,...bible.new]
         for (let i = 0; i < allChapters.length; i++) {
+          console.log(`Generating scripture ${i}/${allChapters.length}`)
           const book=allChapters[i]
           for (let j=0;j<book.chapters.length;j++){
             const chapter=book.chapters[j]
@@ -83,7 +84,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
         }
 
         const mostPopular=chaptersCounts.sort((a,b)=>b.count-a.count).slice(0,10)
-        console.log(mostPopular)
+
         createPage({
           path: `${page.slug}`,
           component: path.resolve(`./src/templates/page/${page.label}.tsx`),
