@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-
+const cliProgress = require('cli-progress');
 const settingsQuery = `
 {
     settings {
@@ -15,6 +15,9 @@ const settingsQuery = `
       }
 }
 `
+
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.legacy);
+ 
 
 const getRecommendPosts = (postId)=>`
 
@@ -170,10 +173,11 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
           
         const {count,total}=firstQueryRes.data.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-        console.log(`starting with ${pageCount} requests`)
-
+        console.log(`Source ac_post`)
+        bar1.start(pageCount, 0);
         for (let i = 1; i <=pageCount; i++){
-            console.log(i)//sendQuery(getPostsQuery(i))
+            console.log(i)
+            bar1.update(i);
             const response = await sendQuery(getPostsQuery(i))
 
                 if (Array.isArray(response) && response[0]){
@@ -187,6 +191,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     entities=entities.concat(posts)
                 }
         }
+        bar1.stop();
 
             const words = {}
             const glossaryQuery = `{
