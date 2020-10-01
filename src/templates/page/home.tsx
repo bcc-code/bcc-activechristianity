@@ -41,7 +41,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     formats
   } = pageContext
 
-  console.log(historyPosts)
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
 
   const latestPostAsTopic = {

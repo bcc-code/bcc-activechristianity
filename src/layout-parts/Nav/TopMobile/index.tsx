@@ -5,47 +5,104 @@ import { IRootState } from '@/state/types'
 import TS from '@/strings'
 import LogoSmall from '@/images/AC_Logo_sm.png'
 import Icon from '@/components/Icons'
-
+import { navigate } from "gatsby"
 import ReactPlaceholder from 'react-placeholder'
 import { UserInitial } from '@/layout-parts/User/UserInitial'
 import ac_strings from '@/strings/ac_strings.json'
 import { IDrawerNav } from '@/layouts/App'
 import { INavItem, IBreadcrumb } from '@/types'
 import './topmobile.css'
+
+interface IHistoryPage { name?: string, to: string }
 interface ITopNavMobile extends IDrawerNav {
     breadcrumb: IBreadcrumb
+    currentPage: IHistoryPage
 }
-const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, breadcrumb }) => {
+
+/*
+    React.useEffect(() => {
+
+        if (location.pathname) {
+            setHistory([...history, { to: location.pathname, name: pageContext.title }])
+        }
+    }, [pageContext])
+*/
+const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, breadcrumb, currentPage }) => {
+
     /*     const [showMobileSteps, setShowMobileSteps] = React.useState(false) */
     const [hasDelayedOnce, setHasDelayedOnce] = React.useState(false)
     const [showMobileSteps, setShowMobileSteps] = React.useState(false)
-
+    const [history, setHistory] = React.useState<IHistoryPage[]>([])
+    const [isBack, setIsback] = React.useState(false)
     const authInfo = useSelector((state: IRootState) => state.auth);
     const timerId = React.useRef<NodeJS.Timeout | null>(null)
     const [mobileLastStep, setMobileLastStep] = React.useState<null | INavItem>(null)
     const languageLogoSrc = "https://media.activechristianity.org/2020/04/activechristianity_en_logo_200px.png"
+
+
     React.useEffect(() => {
         if (!hasDelayedOnce) {
             setHasDelayedOnce(true)
             delayShowSteps()
         }
     }, [hasDelayedOnce])
-
     React.useEffect(() => {
 
-        let lastStep = getLastStep()
-        if (typeof window !== "undefined") {
+        if (isBack) {
+            if (history.length > 0) {
+                let updateHistory = history.slice(0, history.length - 1)
+                updateHistory = updateHistory.length === 1 ? [] : updateHistory
+                setHistory(updateHistory)
+                setTimeout(() => {
+                    setIsback(false)
+                }, 200)
+            }
+
+        } else {
+            if (history.length < 2) {
+                setHistory([...history, currentPage])
+            } else {
+                const lastStep = history[history.length - 2]
+                if (lastStep.to && lastStep.to !== currentPage.to) {
+                    setHistory([...history, currentPage])
+                }
+            }
+        }
+        /*         if (history.length < 2) {
+                    setHistory([...history, currentPage])
+                } else if (history[history.length - 1].to && history[history.length - 1].to !== currentPage.to) {
+                    setTimeout(() => {
+                        if (isBack) {
+        
+                            setHistory(history.slice(-1))
+                        } else {
+                            setHistory([...history, currentPage])
+                        }
+                        setIsback(false)
+                    }, 200)
+                } */
+
+    }, [currentPage.to])
+    React.useEffect(() => {
+
+        if (history.length > 1) {
+            console.log(history)
+            const lastStep = history[history.length - 2]
+            setMobileLastStep({
+                name: lastStep.name ? lastStep.name : 'Back',
+                to: ''
+            })
+        } else {
+            let lastStep = getLastStep()
             if (lastStep && lastStep.to) {
-
-
+                setMobileLastStep(lastStep)
                 delayShowSteps()
             } else {
                 setMobileLastStep(null)
-
-
             }
-            delayShowSteps()
         }
+
+        delayShowSteps()
 
 
         return () => {
@@ -54,6 +111,18 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
             }
         }
     }, [breadcrumb])
+    const handleBackClick = () => {
+
+        if (typeof window !== "undefined") {
+            if (history.length > 1) {
+                setIsback(true)
+                navigate(-1)
+            } else if (mobileLastStep) {
+                navigate(`/${mobileLastStep.to}`)
+            }
+        }
+
+    }
 
     const getLastStep = () => {
         let lastStep = breadcrumb && breadcrumb.items.length > 0 && breadcrumb.items[breadcrumb.items.length - 1]
@@ -83,15 +152,15 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                     <div className="cube-top flex justify-between items-center w-full">
                         <div className=" min-w-20 font-roboto">
                             {showMobileSteps && mobileLastStep ? (
-                                <Link className="flex items-center" to={mobileLastStep.to}>
+                                <button className="flex items-center" onClick={handleBackClick}>
                                     <Icon name="chev-left" size="sm" className="pl-2" />
                                     <span className="text-sm pl-2">
                                         {mobileLastStep.name}
                                     </span>
-                                </Link>
+                                </button>
                             ) : (
                                     <div className="text-sm pl-6 font-semibold">
-                                        {breadcrumb.title}
+                                        {breadcrumb.title.length > 16 ? '' : breadcrumb.title}
                                     </div>
                                 )
                             }

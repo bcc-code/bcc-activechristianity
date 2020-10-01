@@ -37,8 +37,9 @@ export interface IDrawerNav {
     menu: INavItem[]
 }
 
-const App: React.FC<any> = (props) => {
-    const { children } = props
+
+const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: { pathname: string } }> = (props) => {
+    const { children, pageContext, location } = props
 
     const dispatch = useDispatch();
 
@@ -53,6 +54,9 @@ const App: React.FC<any> = (props) => {
 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
+
+
+
     React.useEffect(() => {
         checkUser()
     }, [])
@@ -139,7 +143,12 @@ const App: React.FC<any> = (props) => {
                         <SignInSignUpModal />
 
                         <SideNav {...NavProps} menu={sideMenu} />
-                        <TopMobile {...NavProps} breadcrumb={breadcrumb} menu={mobileMenu} />
+                        <TopMobile
+                            {...NavProps}
+                            breadcrumb={breadcrumb}
+                            menu={mobileMenu}
+                            currentPage={{ name: pageContext.title, to: location.pathname }}
+                        />
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
 
                         <div>

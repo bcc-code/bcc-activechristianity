@@ -30,7 +30,6 @@ import localStorageHelper from '@/helpers/localStorage'
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
 const ExplorePage: React.FC<IResource> = (props) => {
-    console.log(props)
     const [query, setQuery] = React.useState('');
     const [popularTopics, setPopularTopics] = React.useState<INavItem[]>([])
     const [mostUsedScriptures, setPopularScriptures] = React.useState<INavItem[]>([])

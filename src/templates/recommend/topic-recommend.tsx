@@ -42,8 +42,6 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     })
 
-
-    console.log(formats)
     const latestSlug = `${path}/1`
 
     return (

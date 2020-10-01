@@ -11,7 +11,7 @@ const playlist: Reducer<IMedia[], TPlaylistStateAction> = (state = defaultState,
     switch (action.type) {
         case 'ADD_TRACKS': {
             const { payload } = action
-            console.log(payload)
+
             return payload ? [...payload] : state
         }
         case 'REMOVE_TRACKS': {

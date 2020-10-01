@@ -33,8 +33,8 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
                 })
                 setTopicPostItems(toAdd)
             })
-            .catch(res => {
-                console.log(res)
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 

@@ -35,7 +35,6 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
     React.useEffect(() => {
 
         fetchPostslistFromArchivePage(latestSlug).then(posts => {
-            console.log(posts)
             if (posts) {
                 setHeaderPost(posts[0])
                 setLatestPosts(posts.slice(1, 5))

@@ -39,7 +39,6 @@ interface IActiveBook extends IBibleBook {
 }
 
 const BibleNav: React.FC<IBibleNavProps> = (props) => {
-    console.log(props)
     const { pageContext: { breadcrumb, title, bible }, path } = props
 
     const [activeBook, setActiveBook] = React.useState<undefined | IActiveBook>(undefined)

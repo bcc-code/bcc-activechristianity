@@ -33,35 +33,30 @@ export default {
     logout: () => {
         const query = request.logoutMutation
         return sendQuery(query).then(res => {
-            console.log(res)
             return res.signOut
         })
     },
     liked: () => {
         const query = request.likedPostsQuery
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
     likePost: (id: string, toggle: boolean) => {
         const query = request.likePostMutation(id, toggle)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
     following: () => {
         const query = request.followedTopicsQuery
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
     followTopic: (id: number, toggle: boolean) => {
         const query = request.followTopicMutation(id, !toggle)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
@@ -74,7 +69,6 @@ export default {
     history: () => {
         const query = request.latestHistoryQuery
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
@@ -87,15 +81,12 @@ export default {
     unfinishedPosts: () => {
         const query = request.unfinishedQuery
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
     biblePosts: (bookId: number, chapter: number) => {
         const query = request.biblePostsQuery(bookId, chapter)
-        console.log(query)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     }
