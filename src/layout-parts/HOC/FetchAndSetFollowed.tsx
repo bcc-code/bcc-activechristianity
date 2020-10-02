@@ -4,16 +4,16 @@ import { openSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { setNewFollowTopic } from '@/state/action/userAction'
 
-type followStatus = "loading" | "true" | "false"
+export type IFollowStatus = "loading" | "true" | "false"
 interface IFetchPost {
     id: string,
     className?: string
-    render: (data: { followed: followStatus }) => JSX.Element
+    render: (data: { followed: IFollowStatus }) => JSX.Element
 }
 
 const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
-    const [followed, setFollowed] = React.useState<followStatus>("loading")
+    const [followed, setFollowed] = React.useState<IFollowStatus>("loading")
     const dispatch = useDispatch()
 
     React.useEffect(() => {

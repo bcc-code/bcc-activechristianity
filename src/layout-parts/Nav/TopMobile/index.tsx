@@ -62,14 +62,13 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                 let updateHistory = history.slice(0, history.length - 1)
                 console.log(updateHistory)
                 setHistory(updateHistory)
-                setTimeout(() => {
-                    setIsback(false)
-                }, 200)
+                setIsback(false)
             }
 
         } else {
-            // if user keep browsing. of the current page is not the same as last stored history
+            // if user keep browsing. 
             if (history.length > 0) {
+                //
                 if (history[history.length - 1].to !== currentPage.to) {
                     setHistory([...history, currentPage])
                 }
@@ -88,7 +87,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 
             const lastStep = history[history.length - 2]
             setMobileLastStep({
-                name: lastStep.name ? lastStep.name : 'Back',
+                name: lastStep.name ? lastStep.name : ac_strings.back,
                 to: ''
             })
         } else {

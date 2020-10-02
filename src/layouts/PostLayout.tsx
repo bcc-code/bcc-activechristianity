@@ -234,11 +234,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                     slug={`${TS.slug_ac_author}/${a.to}`}
                                     layout="list"
                                     render={({ posts }) => {
-                                        const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
-                                        return fourPosts.length > 0 ? (
+                                        const filteredPosts = posts.filter(p => `${p.id}` !== `${postId}`).slice(0, 6)
+                                        return filteredPosts.length > 0 ? (
                                             <Row2ColAndXScroll
                                                 title={`${ac_strings.more_from} ${a.name}`}
-                                                posts={posts}
+                                                posts={filteredPosts}
                                             />
                                         ) : null
                                     }}

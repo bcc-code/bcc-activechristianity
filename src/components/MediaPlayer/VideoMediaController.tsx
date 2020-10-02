@@ -56,7 +56,7 @@ const MediaControl: React.FC<IWithMediaProps> = (props) => {
 
                         {/* extra margin top if it is showing video at the top (not floating) */}
                         <div
-                            className={`flex justify-center bg-mp-background mp--video`}
+                            className={`flex justify-center bg-mp-background mp--video pb-16/9`}
                             onClick={() => mediaProps.playPause()}
                         >
                             <Player
