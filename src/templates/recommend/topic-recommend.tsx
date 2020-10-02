@@ -24,7 +24,6 @@ import PopularPosts from '@/layout-parts/PopularPosts';
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const { pageContext, path } = props
-
     const {
         title,
         formats,
@@ -32,15 +31,6 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         mostPopular
     } = pageContext
 
-    React.useEffect(() => {
-
-        const nrOfFormats = formats.length
-        if (nrOfFormats > 1) {
-
-        }
-
-
-    })
 
     const latestSlug = `${path}/1`
 

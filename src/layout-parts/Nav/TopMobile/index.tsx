@@ -27,7 +27,7 @@ interface ITopNavMobile extends IDrawerNav {
         }
     }, [pageContext])
 */
-const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, breadcrumb, currentPage }) => {
+const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, breadcrumb, currentPage, menu }) => {
 
     /*     const [showMobileSteps, setShowMobileSteps] = React.useState(false) */
     const [hasDelayedOnce, setHasDelayedOnce] = React.useState(false)
@@ -46,12 +46,21 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
             delayShowSteps()
         }
     }, [hasDelayedOnce])
-    React.useEffect(() => {
 
-        if (isBack) {
+    React.useEffect(() => {
+        // remove all history if visit one of the 4 main pages
+        const find = menu.find(item => item.to === location.pathname || `/${item.to}` === location.pathname)
+
+        if (find) {
+            setHistory([currentPage])
+        } else if (isBack) {
+            // if user clicked the back button, update the history accordingly
+            console.log('isBack')
+            console.log(history)
             if (history.length > 0) {
+                console.log(history)
                 let updateHistory = history.slice(0, history.length - 1)
-                updateHistory = updateHistory.length === 1 ? [] : updateHistory
+                console.log(updateHistory)
                 setHistory(updateHistory)
                 setTimeout(() => {
                     setIsback(false)
@@ -59,34 +68,24 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
             }
 
         } else {
-            if (history.length < 2) {
-                setHistory([...history, currentPage])
-            } else {
-                const lastStep = history[history.length - 2]
-                if (lastStep.to && lastStep.to !== currentPage.to) {
+            // if user keep browsing. of the current page is not the same as last stored history
+            if (history.length > 0) {
+                if (history[history.length - 1].to !== currentPage.to) {
                     setHistory([...history, currentPage])
                 }
+            } else {
+                setHistory([...history, currentPage])
             }
+
+
         }
-        /*         if (history.length < 2) {
-                    setHistory([...history, currentPage])
-                } else if (history[history.length - 1].to && history[history.length - 1].to !== currentPage.to) {
-                    setTimeout(() => {
-                        if (isBack) {
-        
-                            setHistory(history.slice(-1))
-                        } else {
-                            setHistory([...history, currentPage])
-                        }
-                        setIsback(false)
-                    }, 200)
-                } */
+
 
     }, [currentPage.to])
     React.useEffect(() => {
 
         if (history.length > 1) {
-            console.log(history)
+
             const lastStep = history[history.length - 2]
             setMobileLastStep({
                 name: lastStep.name ? lastStep.name : 'Back',
@@ -118,6 +117,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                 setIsback(true)
                 navigate(-1)
             } else if (mobileLastStep) {
+                setHistory([])
                 navigate(`/${mobileLastStep.to}`)
             }
         }

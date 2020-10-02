@@ -45,8 +45,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const topicSlugs = props.data.ac.popularTopics
 
     React.useEffect(() => {
-        const receivedTopics: INavItem[] = []
-        console.log(scripturePage.to)
+
         fetch(`/page-data/${scripturePage.to}/page-data.json`)
             .then(res => res.json())
             .then(res => {
@@ -61,7 +60,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
         const receivedTopics: INavItem[] = []
 
         Promise.all(topicSlugs.map(({ slug }) => fetchTopicFromSlug(slug))).then(res => {
-            console.log(res)
             res.forEach(c => {
                 if (c) {
                     receivedTopics.push(c)
