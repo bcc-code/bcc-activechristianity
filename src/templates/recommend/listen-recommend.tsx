@@ -64,7 +64,7 @@ const Listen: React.FC<IProps> = (props) => {
                         />
                     </div>
                 </div>
-                <div className="sm:bg-transparent py-6 overflow-hidden">
+                {/*                 <div className="sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} />
                     <FetchPosts
                         slugs={mostPopular.slice(0, 5).map(p => p.slug)}
@@ -73,7 +73,7 @@ const Listen: React.FC<IProps> = (props) => {
                             return <HSCardList posts={posts} />
                         }}
                     />
-                </div>
+                </div> */}
                 <div className="sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={podcastProperties.title} />
                     <FetchPosts
