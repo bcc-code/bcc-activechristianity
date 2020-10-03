@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Icon, { IButtonColour } from '@/components/Icons/Icon'
 
-import FetchAndSetBookmark from '@/layout-parts/HOC/FetchAndSetBookmarked'
+import FetchAndSetBookmark from '@/HOC/FetchAndSetBookmarked'
 interface IProps {
     id: string
     color?: IButtonColour

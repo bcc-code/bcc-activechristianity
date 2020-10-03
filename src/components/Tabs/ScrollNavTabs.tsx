@@ -12,31 +12,33 @@ interface IProps {
 const HScrollNav: React.FC<IProps> = ({ tabs }) => {
     const [activeTab, setActiveTab] = React.useState<number>(0)
     const menuEl = React.useRef<HTMLDivElement>(null);
+    const activeEl = React.useRef<HTMLButtonElement>(null);
     React.useEffect(() => {
 
-
+        moveActiveTab()
 
     }, [activeTab])
-    const handleTabClick = (index: number, e: any) => {
-
+    const handleTabClick = (index: number) => {
         setActiveTab(index)
-
-        if (menuEl && menuEl.current) {
-            const menu = menuEl.current
-            const activeMidPoint = e.target.clientWidth / 2
-            const menuMidPoint = menu.clientWidth / 2
-            const activeOffset = e.target.offsetLeft
-            const currentLeftScroll = menu.scrollLeft
-            const distanceToMid = activeOffset - (menuMidPoint + currentLeftScroll) + activeMidPoint
-            SmoothHorizontalScrolling(menu, 200, currentLeftScroll, distanceToMid)
-
-
-        }
-
     }
     const nextIndex = (activeTab + 1) % tabs.length
     const lastIndex = activeTab - 1 < 0 ? tabs.length - 1 : activeTab - 1
 
+    const moveActiveTab = () => {
+        if (menuEl && menuEl.current) {
+            const menu = menuEl.current
+            if (activeEl.current) {
+                const active = activeEl.current
+                const activeMidPoint = active.clientWidth / 2
+                const menuMidPoint = menu.clientWidth / 2
+                const activeOffset = active.offsetLeft
+                const currentLeftScroll = menu.scrollLeft
+                const distanceToMid = activeOffset - (menuMidPoint + currentLeftScroll) + activeMidPoint
+                SmoothHorizontalScrolling(menu, 200, currentLeftScroll, distanceToMid)
+
+            }
+        }
+    }
     const handlers = useSwipeable({
         onSwipedLeft: () => setActiveTab(nextIndex),
         onSwipedRight: () => setActiveTab(lastIndex),
@@ -58,8 +60,9 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
                     return (
                         <button
                             className={`scroll-snap-x-child-start font-roboto ml-2`}
-                            onClick={(e) => { handleTabClick(i, e) }}
+                            onClick={() => { handleTabClick(i) }}
                             key={i}
+                            ref={activeTab === i ? activeEl : undefined}
                         >
                             < SolidDarkBgToggleActive
                                 active={activeTab === i}
@@ -81,9 +84,6 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
                     } else if (i < activeTab) {
                         postClassName = 'prev'
                     }
-
-
-
                     return (
                         <div className={`ac-tab-${postClassName} ac-tab-card px-4`}>
                             {tab.content}

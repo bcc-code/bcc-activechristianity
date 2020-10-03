@@ -1,8 +1,8 @@
 import React from 'react'
 import { setCurrentMedia, setAutoPlay, addTracks, floatPlayer } from '@/state/action'
 
-import { IMedia } from '@/types'
-import { getTrackListFromPlaylist } from '@/helpers'
+import { IMedia, ITrack } from '@/types'
+import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
 import { useDispatch } from 'react-redux'
 
 export interface IPlayButtonProps {
@@ -24,22 +24,23 @@ const PlayButton: React.FC<IPlayButtonProps> = ({ track, children, className, st
     }
 
     const handlePlaylist = () => {
-        let tracks: IMedia[] = []
+
         if (track.audio && track.audio.playlistSlug) {
             const playlistSlug = track.audio.playlistSlug
 
-            tracks = getTrackListFromPlaylist(playlistSlug)
+            return fetchTracksFromSlug(playlistSlug).then(tracks => {
+                let toUpdate = [...tracks]
+                if (tracks.length > 0) {
+                    const index = tracks.findIndex(item => item.audio?.src === track.audio?.src)
+                    if (index > -1) {
+                        toUpdate = [...tracks.slice(index), ...tracks.slice(0, index)]
+                    }
+                    dispatch(addTracks(toUpdate))
+                }
+            })
         }
 
-        const index = tracks.findIndex(item => item.audio?.src === track.audio?.src)
 
-        if (index > -1) {
-
-            tracks = [...tracks.slice(index), ...tracks.slice(0, index)]
-
-        }
-
-        dispatch(addTracks(tracks))
 
     }
     return (

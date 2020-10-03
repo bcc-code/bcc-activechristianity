@@ -2,12 +2,11 @@ import * as React from 'react';
 import Link from '@/components/CustomLink'
 
 import { IPostItem } from '@/types'
-import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
-import TopicWithIcons from '@/layout-parts/Buttons/TopicWithIcon'
-import { PostTitle, PostExcerpt, ReadingTimingAuthor, ReadingTimingIcon, AuthorLink, PostBase, IPostBase } from '@/components/PostItem/PostItemParts'
-import { PostItemMediaImg } from '@/layout-parts/Buttons/PlayButton'
-import { BookmarksAndViews } from '@/layout-parts'
 
+import { PostTitle, PostExcerpt, ReadingTimingAuthor, ReadingTimingIcon, AuthorLink, PostBase, IPostBase } from '@/components/PostItem/PostItemParts'
+import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
+import { BookmarksAndViews } from '@/components/PostElements'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import 'lazysizes';
 
 interface IRightImgNoDes extends IPostItem {
@@ -62,14 +61,12 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
         post: props,
         wrapperClass: topImgClasses.postbaseWrapperClass,
         postTitleProps: {
-            rawText: title,
             fontKey: "top-img",
             clamp: 3,
             bold: "font-semibold",
             className: "mb-2"
         },
         postExcerptProps: {
-            rawText: excerpt,
             fontKey: "top-img-exceprt",
             clamp: 2,
             className: "flex items-stretch mb-4"
@@ -91,18 +88,9 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     )}
                     <Link to={`/${slug}`} >
                         <PostTitle {...postBaseProps.postTitleProps} />
-                        <PostExcerpt {...postBaseProps.postExcerptProps} />
+                        {postBaseProps.postExcerptProps && <PostExcerpt {...postBaseProps.postExcerptProps} />}
                     </Link>
                     <div className="text-sm text-gray-500 mb-4"> <AuthorLink authors={authors} /></div>
-                    {/*                     <div className="mb-4 flex flex-wrap">
-                        {topics && topics.map(item => {
-                            return (
-                                <TopicWithIcons {...item} />
-                            )
-                        })}
-                    </div> */}
-
-
                 </div>
                 <div className="w-4/12 sm:w-6/12 md:w-4/12 flex justify-center">
                     <PostItemMediaImg

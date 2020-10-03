@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from "gatsby";
-import { LayoutH1Wide } from '@/layout-parts'
+
 import ResourceLayout from "@/layouts/ResourceLayout"
 // components
 import MetaTag from '@/components/Meta';

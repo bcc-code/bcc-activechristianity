@@ -4,7 +4,7 @@ import { Media, Player, controls, utils } from 'react-media-player'
 import { PlayPause, VolumeBar } from './ControlElements'
 import { withMediaProps } from 'react-media-player'
 import { setCurrentMedia, fixPlayer } from '@/state/action'
-import CloseButton from '@/layout-parts/Buttons/CloseButtonRound'
+import CloseButton from '@/components/Button/CloseButtonRound'
 const { CurrentTime, Progress, SeekBar, Duration } = controls
 const { keyboardControls } = utils
 

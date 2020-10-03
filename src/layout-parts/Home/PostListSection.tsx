@@ -2,12 +2,12 @@ import * as React from "react"
 import RightImgWDes from '@/components/PostItem/RightImgWDes'
 import Link from '@/components/CustomLink'
 import { IPostItem, ITopicPostSlugs } from '@/types'
-import { PageSectionHeaderUpperCaseGray } from '@/layout-parts'
-import ToggleFollowOutlineBtn from '@/layout-parts/Buttons/ToggleFollowOutlineBtn'
+import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
+import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { OutlineSmallRounded } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-import FetchPosts from '@/layout-parts/HOC/FetchPosts'
+import FetchPosts from '@/HOC/FetchPosts'
 const PostListSection: React.FC<ITopicPostSlugs> = ({ posts: slugs, ...topic }) => (
     <div className="md:h-full md:flex md:flex-col">
         {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">

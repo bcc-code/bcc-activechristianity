@@ -5,7 +5,7 @@ import { Media, Player, controls, utils } from 'react-media-player'
 import { withMediaProps } from 'react-media-player'
 import { setCurrentMedia, setMpHeight } from '@/state/action'
 import ControlBar from './ControlBar'
-import CloseButton from '@/layout-parts/Buttons/CloseButtonRound'
+import CloseButton from '@/components/Button/CloseButtonRound'
 import isPlayerFloating from '@/state/reducer/mp_floating'
 
 const { keyboardControls } = utils

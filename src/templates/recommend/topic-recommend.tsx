@@ -2,15 +2,15 @@ import React from 'react'
 import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 import LazyLoad from '@/components/LazyLoad';
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
-import FetchPosts from '@/layout-parts/HOC/FetchPosts'
-import FetchPostList from '@/layout-parts/HOC/FetchPostList'
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
+import FetchPosts from '@/HOC/FetchPosts'
+import FetchPostList from '@/HOC/FetchPostList'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 import RightImgPostItem from '@/components/PostItem/RightImgWDes'
-import { LayoutH1Wide, PageSectionHeader } from '@/layout-parts'
+import { LayoutH1Wide, PageSectionHeader } from '@/components/Headers'
 
 import { UnderlineLinkViewAll } from '@/components/Button'
 
@@ -19,7 +19,6 @@ import { INavItem, ISubtopicLinks } from '@/types'
 // Types 
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-import PopularPosts from '@/layout-parts/PopularPosts';
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
@@ -113,26 +112,11 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
                 popularPosts={mostPopular.map(item => item.slug)}
-                topics={formats}
+                topics={formats.map(f => ({ ...f, slug: `${TS.slug_topic}/${f.to}` }))}
                 name={title}
 
 
             />
-            {/*                 {headerPost && (
-                    <RecommendLayout
-                        latestSlug={latestSlug}
-                        name={title}
-                        headerPost={headerPost}
-                        latestPosts={latest}
-                        popularPosts={popular}
-                        postsByTypes={mobilePostRows}
-                        postsByTypesRow1={desktopRow1}
-                        postsByTypesRow2={desktopRow2}
-                        postTypes={formatLinks}
-                        relatedTopics={typeLinks}
-
-                    />
-                )} */}
 
         </div>
     )

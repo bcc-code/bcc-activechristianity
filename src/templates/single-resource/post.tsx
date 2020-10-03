@@ -81,6 +81,7 @@ export const pageQuery = graphql`
                 track {
                     url
                     title
+                    duration
                     post {
                         title
                         slug

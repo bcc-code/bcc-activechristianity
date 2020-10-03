@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ToggleBookmark from '@/layout-parts/Buttons/ToggleBookmark'
+import ToggleBookmark from '@/components/PostElements/ToggleBookmark'
 
 import Link from '@/components/CustomLink'
 import Ebook from '@/components/Ebook/EbookItem'
@@ -7,8 +7,8 @@ import { IPostItem } from '@/types'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 
-import PlayButtonList from '@/layout-parts/Buttons/PlayButtonList'
-import PlayButtonTrack from '@/layout-parts/Buttons/PlayButtonTrack'
+import PlayButtonList from '@/components/PostElements/PlayBtnWrapperByPlaylistSlug'
+import PlayButtonTrack from '@/components/PostElements/PlayBtnWrapperByTrackSlug'
 import Icon from '@/components/Icons'
 
 export interface IFeaturedCard extends IPostItem {

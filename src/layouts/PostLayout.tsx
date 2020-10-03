@@ -9,7 +9,7 @@ const Content = loadable(() => import('@/components/Content'))
 const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
 
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
-const ToggleFollowWithName = loadable(() => import('@/layout-parts/Buttons/ToggleFollowWithName'))
+import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 /* const EbookFooterBanner = loadable(() => import('@/layout-parts/Banner/EbookFooterBanner'))
 const MockRelatedContentMedia = loadable(() => import('@/layout-parts/RelatedContent'))
@@ -18,10 +18,10 @@ const PlaylistItem = loadable(() => import('@/components/PostItem/LeftImgPlaylis
 import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
-import FetchPost from '@/layout-parts/HOC/FetchPosts'
-import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
-import ShareButton from '@/layout-parts/Buttons/ToggleBookmark'
-import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts } from '@/layout-parts'
+import FetchPost from '@/HOC/FetchPosts'
+import FetchPostFromList from '@/HOC/FetchPostList'
+import ShareButton from '@/components/PostElements/ToggleBookmark'
+import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts } from '@/layout-parts/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import TwoToOneImg from "@/components/Images/Image2To1"

@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { PostTitle, PostExcerpt } from '@/components/PostItem/PostItemParts'
 import { IPostItem } from '@/types'
 import SquareImg from '@/components/Images/Image1to1Rounded'
-import { PostItemPlayButton } from '@/layout-parts/Buttons/PlayButton'
+import { PostItemPlayButton } from '@/components/PostElements/PlayButton'
 
 interface IPlaylistPostItemProps extends IPostItem {
     tagline?: string

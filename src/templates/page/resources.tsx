@@ -4,7 +4,7 @@ import Link from '@/components/CustomLink'
 import MetaTag from '@/components/Meta'
 
 import { INavItem, INavItemCount } from "@/types"
-import { UnderlineTitleLink, LayoutH1Wide, typeIcons, TitleWithIcon } from '@/layout-parts'
+import { UnderlineTitleLink, LayoutH1Wide, TitleWithIcon } from '@/components/Headers'
 
 interface ISection {
     sectionItems: INavItemCount[]

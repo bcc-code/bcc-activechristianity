@@ -1,5 +1,5 @@
 import * as React from "react"
-import MoreLatestButton from '@/layout-parts/Buttons/MoreLatest'
+import { MoreLatestLink } from '@/layout-parts/PostSections'
 import TopImgPost from '@/components/PostItem/TopImg'
 import { IPostItem } from '@/types'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
@@ -21,7 +21,7 @@ const HomeLatest: React.FC<{ latestPosts: IPostItem[], latestSlug: string }> = (
             {/* <div className="relative mx-4 sm:hidden">
                 <LatestPostsStackedCard cards={latestPosts} />
             </div> */}
-            <MoreLatestButton latestSlug={latestSlug} />
+            <MoreLatestLink latestSlug={latestSlug} />
         </div>
     )
 }

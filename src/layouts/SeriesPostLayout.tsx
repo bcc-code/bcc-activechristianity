@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '@/components/CustomLink'
 
 import LeftSidebarLayout, { ISiderbar } from './LeftSidebarLayout/index'
-import { DesktopPostMain } from '@/layout-parts'
+import { DesktopPostMain } from '@/layout-parts/PostSections'
 import Content from '@/components/Content'
 import { INavItem, IPostRes } from '@/types'
 

@@ -1,6 +1,6 @@
 import React from "react"
 import { IPostItem, INavItem } from "@/types"
-import { UnderlineTitleLink } from '@/layout-parts'
+import { UnderlineTitleLink } from '@/components/Headers'
 import TopImgRowScroll from '@/layout-parts/Home/PopularOnAC'
 
 export interface IOnePostByTypeRow {

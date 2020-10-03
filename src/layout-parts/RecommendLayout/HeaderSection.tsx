@@ -5,7 +5,7 @@ import LazysizeBg from '@/components/Images/LazysizeBg'
 import PopularPosts from '@/layout-parts/PopularPosts'
 import VideoLefttImg from '@/components/PostItem/VideoLefttImg'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
-import { PostItemPlayButton } from '@/layout-parts/Buttons/PlayButton'
+import { PostItemPlayButton } from '@/components/PostElements/PlayButton'
 import ac_strings from '@/strings/ac_strings.json'
 interface ISectionHeader {
     headerPost: IPostItem

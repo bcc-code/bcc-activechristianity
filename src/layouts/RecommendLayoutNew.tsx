@@ -10,7 +10,7 @@ const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/Posts
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 const QuoteBlock = loadable(() => import('@/components/QuoteBlock'))
 import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
-import { LayoutH1Wide } from '@/layout-parts'
+import { LayoutH1Wide } from '@/components/Headers'
 
 import TopImgPost from '@/components/PostItem/TopImg'
 import { ITypeCount } from '@/layout-parts/RecommendLayout/ByTaxonomies'

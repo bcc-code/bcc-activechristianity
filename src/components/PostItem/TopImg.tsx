@@ -4,7 +4,7 @@ import { IPostItem } from '@/types'
 import { PostBase, IPostBase, PostLabel } from '@/components/PostItem/PostItemParts'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import Image2To1 from '@/components/Images/Image2To1'
-import { PostItemMediaImg } from '@/layout-parts/Buttons/PlayButton'
+import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import "./style/leftverticle.css"
 
 

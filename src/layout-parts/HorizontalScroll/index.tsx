@@ -1,6 +1,6 @@
 import React from "react"
 import { IPostItem } from '@/types'
-import { UnderlineTitleLink } from '@/layout-parts'
+import { UnderlineTitleLink } from '@/components/Headers'
 import TopImgPost from '@/components/PostItem/TopImg'
 import FeaturedCard from '@/components/PostItem/FeaturedCardNew'
 import PostRow from '@/layout-parts/List/PostRow4Col'

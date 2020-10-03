@@ -3,7 +3,7 @@ import * as React from 'react';
 import { IPostItem } from '@/types'
 import { PostBase, IPostBase, PostLabel, PostTitle, PostExcerpt } from '@/components/PostItem/PostItemParts'
 import Image16to9 from '@/components/Images/Image16to9'
-import { PostItemMediaImg } from '@/layout-parts/Buttons/PlayButton'
+import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import Link from '@/components/CustomLink'
 import "./style/leftverticle.css"
 

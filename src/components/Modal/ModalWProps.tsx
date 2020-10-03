@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import { setIsModalOpen } from '@/state/action'
-import CloseButtonRound from '@/layout-parts/Buttons/CloseButtonRound'
+import CloseButtonRound from '@/components/Button/CloseButtonRound'
 import loadable from '@loadable/component'
 const ReactModal = loadable(() => import('react-modal'))
 

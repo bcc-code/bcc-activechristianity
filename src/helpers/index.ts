@@ -4,7 +4,6 @@ import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
-import { title } from '@/strings/podcastProperties'
 
 export function trimSlug(slug: string) {
     const regex = /^[/]*/gm
@@ -228,13 +227,15 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
     )
 }
 
+const secondesToMinutes = (seconds: number) => `${Math.round(seconds / 60)} ${ac_strings.mins}`
+
 export const normalizePostRes = (post: IPostRes) => {
+
     const { id, authors, title, excerpt, image, slug, readtime, track, topics, created_at, meta, glossary, views, likes } = post
 
     const { filteredTopics, types, format } = transformTopicsRes(topics)
 
-    const readingTimeMinutes = Math.round(readtime / 60);
-
+    const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem: IPostItem = {
         id,
         title,
@@ -245,19 +246,27 @@ export const normalizePostRes = (post: IPostRes) => {
         topics: filteredTopics.sort((a, b) => a.name.length - b.name.length),
         types,
         format,
-        reading_time: { text: `${readingTimeMinutes} ${ac_strings.mins}`, minutes: readingTimeMinutes },
+        duration: {
+            read: readingTimeMinutes
+        },
+        reading_time: { text: readingTimeMinutes, minutes: 0 },
         date: new Date(created_at),
         media: {
             path: slug,
         },
-        glossary,
-        views,
+        glossary,//Math.round(num * 100) / 100
+        views: views > 999 ? `${(views / 1000).toFixed(1)}K` : `${views}`,
         likes
 
     }
 
     const { media } = postItem
     if (track) {
+        if (postItem.duration) {
+            postItem.duration["listen"] = secondesToMinutes(track.duration)
+        } else {
+            postItem.duration = { listen: secondesToMinutes(track.duration) }
+        }
         media["audio"] = {
             src: `${process.env.API_HOST}${track.url}`,
             title: track.title,
@@ -276,7 +285,6 @@ export const normalizePostRes = (post: IPostRes) => {
             type: "video"
         }
     }
-
     return postItem
 }
 

@@ -6,10 +6,10 @@ const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTax
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/PostsByTypes'))
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
-import FetchPosts from '@/layout-parts/HOC/FetchPosts'
-import FetchPostList from '@/layout-parts/HOC/FetchPostList'
-import { LayoutH1Wide } from '@/layout-parts'
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
+import FetchPosts from '@/HOC/FetchPosts'
+import FetchPostList from '@/HOC/FetchPostList'
+import { LayoutH1Wide } from '@/components/Headers'
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 
 import { ISubtopicLinks } from "@/types"
@@ -63,7 +63,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
             <LazyLoad >
                 <FetchTopicPostItems
-                    topics={topics.map(f => ({ name: f.name, slug: `${TS.slug_topic}/${f.to}`, id: '' }))}
+                    topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)

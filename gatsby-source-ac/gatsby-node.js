@@ -49,6 +49,7 @@ const getPostsQuery = (pageNr)=>`
                 track {
                     url
                     title
+                    duration
                     post {
                         title
                         slug

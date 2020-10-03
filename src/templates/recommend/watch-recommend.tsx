@@ -10,8 +10,8 @@ const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalS
 
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { PageSectionHeader, LayoutH1Wide } from '@/layout-parts'
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+import { PageSectionHeader, LayoutH1Wide } from '@/components/Headers'
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
 
 import ac_strings from '@/strings/ac_strings.json'

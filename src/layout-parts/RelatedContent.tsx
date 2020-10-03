@@ -6,7 +6,7 @@ import QLatestPlaylist from '@/queries/QLatestPlaylist'
 import QLatestVideo from '@/queries/QLatestVideo'
 import QLatestSongs from '@/queries/QLatestSongs'
 import VideoPost from '@/components/PostItem/TopImg'
-import { PostRelatedContentHeader } from '@/layout-parts'
+import { PostRelatedContentHeader } from '@/components/Headers'
 import ac_strings from '@/strings/ac_strings.json'
 type IRelatedContent = "podcast" | "playlist" | "video" | "music" | string
 

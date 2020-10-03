@@ -8,7 +8,7 @@ import { normalizeAuthors, normalizeAvailableLanguages, } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 import { PostLabel } from '@/components/PostItem/PostItemParts'
-import { PostH1 } from '@/layout-parts'
+import { PostH1 } from '@/components/Headers'
 import ac_strings from '@/strings/ac_strings.json'
 
 import TS from '@/strings'

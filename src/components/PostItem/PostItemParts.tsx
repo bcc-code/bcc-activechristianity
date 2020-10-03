@@ -1,14 +1,14 @@
 import * as React from 'react';
 import h2p from 'html2plaintext'
 import SquareImg from '@/components/Images/Image1to1Rounded'
-import { PlaylistPlayButton } from '@/layout-parts/Buttons/PlayButton'
+import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'
 
 import Link from '@/components/CustomLink'
 import { IPostItem, IImage, IPostAuthors } from '@/types'
 import TS from '@/strings'
 import Icon from '@/components/Icons/Icon'
-import Bookmark from '@/layout-parts/Buttons/ToggleBookmark'
-import { BookmarksAndViews } from '@/layout-parts'
+import Bookmark from '@/components/PostElements/ToggleBookmark'
+import { BookmarksAndViews } from '@/components/PostElements'
 import './style/parts.css'
 
 interface ITextConfig {

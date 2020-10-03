@@ -1,7 +1,7 @@
 import * as React from "react"
 import PostRow2Col from '@/layout-parts/List/PostRow2Col'
 import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
-import { PageSectionHeaderUpperCaseGray } from '@/layout-parts'
+import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 
 import { IPostItem } from '@/types'
 

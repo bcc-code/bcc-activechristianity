@@ -1,5 +1,5 @@
 import * as React from 'react'
-import ToggleBookmark from '@/layout-parts/Buttons/ToggleBookmark'
+import ToggleBookmark from '@/components/PostElements/ToggleBookmark'
 
 import Link from '@/components/CustomLink'
 import Ebook from '@/components/Ebook/EbookItem'

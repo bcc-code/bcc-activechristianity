@@ -4,7 +4,7 @@ import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
-import { LayoutH1 } from '@/layout-parts'
+import { LayoutH1 } from '@/components/Headers'
 import { FacebookIcon, InstagramIcon } from '@/components/Icons/SocialMedia'
 
 import Snackbar from '@/components/Snackbar'

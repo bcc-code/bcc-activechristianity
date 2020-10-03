@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
 
-import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts'
+import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts/PostSections'
 /* import MockRelatedContentMedia from '@/layout-parts/RelatedContent' */
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
 import { PlaylistBackground } from '@/components/PostItem/PostItemParts'

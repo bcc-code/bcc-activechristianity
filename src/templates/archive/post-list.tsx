@@ -1,9 +1,9 @@
 import React from 'react'
 import { IPaginate, INavItem } from "@/types"
 import MetaTag from '@/components/Meta'
-import { LayoutH1 } from '@/layout-parts'
+import { LayoutH1 } from '@/components/Headers'
 import PostList from '@/layout-parts/List/PostList'
-import { typeIcons } from '@/layout-parts'
+import { typeIcons } from '@/layout-parts/PostSections'
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
 

@@ -88,6 +88,10 @@ export interface IPostItem {
     topics?: ITopicNavItem[]
     authors?: IPostAuthors[]
     bookmarked?: boolean,
+    duration?: {
+        read?: string
+        listen?: string
+    }
     reading_time?: {
         text: string
         minutes: number
@@ -95,7 +99,7 @@ export interface IPostItem {
     media: IMedia
     glossary?: IGlossary[]
     likes?: number
-    views?: number
+    views?: string
 }
 
 export interface IPaginate {
@@ -254,7 +258,7 @@ export interface ITrackRes {
     id: string
     post: IPostRes
     title: string
-    duration: string
+    duration: number
     url: string
 }
 

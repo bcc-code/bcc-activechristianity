@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
-import { PostItemPlayButton } from '@/layout-parts/Buttons/PlayButton'
+import { PostItemPlayButton } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
 
 interface IBgOverlaidPost extends IPostItem {

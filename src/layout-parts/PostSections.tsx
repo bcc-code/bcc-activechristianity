@@ -1,16 +1,17 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { ITranslations, INavItem, IAuthor, IPostAuthors } from '@/types'
-
+import { INavItem, IPostAuthors } from '@/types'
+import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
+import { BookmarksAndViews } from '@/components/PostElements'
 import Icon from '@/components/Icons'
 import IconMUI from '@/components/Icons/Icon'
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
-import ShareButton from '@/layout-parts/Buttons/SharePopover'
-import ToogleBookmark from '@/layout-parts/Buttons/ToggleBookmark'
+import ShareButton from '@/components/PostElements/SharePopover'
+import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-import FetchPostFromList from '@/layout-parts/HOC/FetchPostList'
+import FetchPostFromList from '@/HOC/FetchPostList'
 
 interface IPostMain {
     id: string
@@ -49,69 +50,11 @@ export const typeIcons: { [key: string]: JSX.Element } = {
 
 }
 
-export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
-    <span className="flex items-center">
-        <span className="pr-4">{icon}</span> {title}
-    </span>
-)
-export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Element }> = ({ title, icon }) => (
-    <h1 className="font-semibold sm:text-2xl md:text-3xl py-6 flex items-center">{icon && <div className="pr-4">{icon} </div>}<div>{title}</div></h1>
-)
-
-export const PostH1: React.FC<{ title: string }> = ({ title }) => (
-    <h1 className=" font-semibold text-d4slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
-)
-
-export const PageSectionHeader: React.FC<{ title: string }> = ({ title }) => (
-    <div className="font-semibold pb-4 px-4 font-sm">{title}</div>
-)
-
-
-
-export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (
-    <span className="uppercase font-roboto text-d4slate-light font-semibold text-xs">
-        {title}
-    </span>
-)
-export const PostRelatedContentHeader: React.FC<{ title: string }> = ({ title }) => (
-    <div className="py-6 font-semibold text-sm sm:text-base text-d4secondary">{title}</div>
-)
-export const LayoutH1Wide: React.FC<{ title: string | JSX.Element }> = ({ title }) => (
-    <div className="standard-max-w-px sm:block">
-        <LayoutH1 title={title} />
-    </div>
-)
-
-interface IUnderlineTitleLink {
-    name: string;
-    to?: string;
-}
-
-export const UnderlineTitleLink: React.FC<IUnderlineTitleLink> = ({ name, to }) => {
-    const mainClass = "border-b w-full pb-1 relative text-xl h-12 mb-10"
-    const text = <span className="block text-sm sm:text-base border-b border-d4primary pb-1 absolute uppercase font-roboto " style={{ bottom: "-1px" }}>{name}</span>
-    if (to) {
-        return (
-            <Link className={`${mainClass} flex justify-between`} to={to} >
-                {text}
-            </Link>
-        )
-    } else {
-        return (
-            <div className={mainClass}>
-                {text}
-            </div>
-        )
-    }
-
-}
-
 const bgStyle = {
     filter: 'blur(15px)',
     opacity: '0.9',
     transform: 'scale(1.2)',
 
-    backgroundSize: "cover",
     height: "300px",
     top: "-20px"
 
@@ -152,37 +95,8 @@ const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrl
     }
 }
 
-export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
-    const { id, likes, views } = props
-    return (
-        <div className="font-roboto flex">
-            <div className="mr-2 flex items-center">
-                {typeof views === "number" && (
-                    <div className="mr-4 flex items-center">
-                        <IconMUI
-                            name="VisibilityOutlined"
-                            color="slate-light"
-                            size="5"
-                        />
-                        <span className="text-xs text-d4slate-light pl-2">
-                            {views}
-                        </span>
-                    </div>
-                )}
 
-                <ToogleBookmark
-                    id={id}
-                    color="slate-light"
-                    size="5"
-                />
-            </div>
-
-
-        </div>
-    )
-}
-
-export const AuthoerFollowSection: React.FC<{ authors: IPostAuthors }> = ({ authors }) => {
+export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ authors }) => {
     return (
         <div className="flex flex-col">
             <PageSectionHeaderUpperCaseGray title={authors.as} />
@@ -192,14 +106,6 @@ export const AuthoerFollowSection: React.FC<{ authors: IPostAuthors }> = ({ auth
                     <div className="font-roboto ">{a.name}</div>
                     <div className="text-gray-500">{a.excerpt}</div>
                 </div>
-                /*                 <div className="w-full flex justify-between items-center text-sm">
-                                    <div>
-                                        <div className="font-roboto ">{a.name}</div>
-                                        <div className="text-gray-500">{a.excerpt}</div>
-                                    </div>
-                                    <OutlineSmallRounded>{ac_strings.follow}</OutlineSmallRounded>
-                                </div> */
-
             ))}
             </span>
         </div>
@@ -211,7 +117,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
             <div className="border-d4gray border-b py-6">
                 {authors?.map(item => {
                     return (
-                        <AuthoerFollowSection authors={item} />
+                        <AuthorFollowSection authors={item} />
                     )
                 })}
             </div>
@@ -254,7 +160,7 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
             <div className="flex">
                 {authors?.map(item => {
                     return (
-                        <AuthoerFollowSection authors={item} />
+                        <AuthorFollowSection authors={item} />
                     )
                 })}
             </div>
@@ -392,3 +298,15 @@ export const DesktopPostMain: React.FC<IDesktopPostMain> = ({ id, title, excerpt
         </div >
     )
 }
+
+export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug }) => (
+    <div className="w-full flex justify-center py-4">
+        <Link
+            className="flex items-center px-2 py-1 text-d4secondary text-sm"
+            to={`/${latestSlug}`}
+        >
+            <span>{ac_strings.moreLatest}</span>
+            <Icon name="chev-right" size="sm" />
+        </Link>
+    </div>
+)

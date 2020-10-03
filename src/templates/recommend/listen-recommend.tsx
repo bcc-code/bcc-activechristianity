@@ -9,13 +9,13 @@ import { INavItem, IPostsByFormat, IPostItem, IPlaylist, INavItemCount, ISubtopi
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideo'))
 const FeaturedBannerPosts = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const FeaturedBannerSmall = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideoSmall'))
-import FetchPosts from '@/layout-parts/HOC/FetchPosts'
+import FetchPosts from '@/HOC/FetchPosts'
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import { UnderlineLinkViewAll } from '@/components/Button'
-import { PageSectionHeader, LayoutH1Wide } from '@/layout-parts'
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+import { PageSectionHeader } from '@/components/Headers'
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 
 // helper
 

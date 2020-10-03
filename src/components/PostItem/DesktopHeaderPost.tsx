@@ -4,7 +4,7 @@ import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import VideoHeader from '@/components/Images/Video16to9'
 import { IPostItem } from '@/types'
 import PostMeta from '@/components/PostMeta/PostMeta'
-import Bookmark from '@/layout-parts/Buttons/ToggleBookmark'
+import Bookmark from '@/components/PostElements/ToggleBookmark'
 import { PostTitle, ReadingTimingAuthor, PostLabel } from '@/components/PostItem/PostItemParts'
 
 

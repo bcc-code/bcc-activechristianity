@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { useSwipeable } from "react-swipeable"
 
 
-import RightImg from '@/components/PostItem/RightImgWDes'
+import RightImg from '@/components/PostItemCards/RightImg'
 import Icon from '@/components/Icons'
 
 import TS from '@/strings'

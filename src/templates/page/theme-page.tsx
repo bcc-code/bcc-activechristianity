@@ -3,10 +3,10 @@ import { graphql } from "gatsby"
 import { INavItem, IImage } from "@/types"
 import MetaTag from '@/components/Meta'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import FetchPost from '@/layout-parts/HOC/FetchPosts'
+import FetchPost from '@/HOC/FetchPosts'
 import Content from '@/components/Content'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
-import { LayoutH1Wide } from '@/layout-parts'
+import { LayoutH1Wide } from '@/components/Headers'
 
 const CustomizedPage: React.FC<ICustomizedPage> = ({ path, pageContext, data }) => {
     const { breadcrumb } = pageContext

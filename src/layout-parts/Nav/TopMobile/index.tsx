@@ -51,6 +51,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
         // remove all history if visit one of the 4 main pages
         const find = menu.find(item => item.to === location.pathname || `/${item.to}` === location.pathname)
 
+        setIsback(false)
         if (find) {
             setHistory([currentPage])
         } else if (isBack) {
@@ -62,13 +63,14 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                 let updateHistory = history.slice(0, history.length - 1)
                 console.log(updateHistory)
                 setHistory(updateHistory)
-                setIsback(false)
+
             }
 
         } else {
             // if user keep browsing. 
             if (history.length > 0) {
-                //
+                console.log('is continue')
+                console.log(history)
                 if (history[history.length - 1].to !== currentPage.to) {
                     setHistory([...history, currentPage])
                 }

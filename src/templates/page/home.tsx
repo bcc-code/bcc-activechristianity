@@ -3,8 +3,8 @@ import { graphql } from "gatsby";
 import loadable from '@loadable/component'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { useSelector } from "react-redux";
-import FetchPosts from '@/layout-parts/HOC/FetchPosts'
-import FetchPostList from '@/layout-parts/HOC/FetchPostList'
+import FetchPosts from '@/HOC/FetchPosts'
+import FetchPostList from '@/HOC/FetchPostList'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
@@ -12,7 +12,7 @@ const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/Fe
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
 import LazyLoad from '@/components/LazyLoad';
-import { PageSectionHeader } from '@/layout-parts'
+import { PageSectionHeader } from '@/components/Headers'
 import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import FetchPost from '@/layout-parts/HOC/FetchPosts'
+import FetchPost from '@/HOC/FetchPosts'
 import Content from '@/components/Content'
-import RightImgPostItem from '@/components/PostItem/RightImgWDes'
+import RightImgPostItem from '@/components/PostItemCards/RightImg'
 
 const CustomizedPage: React.FC<IPageCompTypes & { isFirst?: boolean }> = (item) => {
 

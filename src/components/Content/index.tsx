@@ -1,10 +1,10 @@
 import * as React from "react"
 import ReactHtmlParser from "react-html-parser"
-import FetchPost from '@/layout-parts/HOC/FetchPosts'
+import FetchPost from '@/HOC/FetchPosts'
 
 import h2p from 'html2plaintext'
 import SelectionPopper from '@/components/TextSelectPopper'
-import RightImgPost from '@/components/PostItem/RightImgWDes'
+import RightImgPost from '@/components/PostItemCards/RightImg'
 
 import { IGlossary } from '@/types'
 import ToolTipGlossary from '@/components/ToolTip'

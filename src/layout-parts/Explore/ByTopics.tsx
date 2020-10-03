@@ -3,8 +3,8 @@ import { navigate } from "gatsby"
 import { generate as generateId } from 'shortid'
 import { IResourceOverview } from './ExploreByType'
 import { connectRefinementList } from 'react-instantsearch-dom'
-import { TitleWithIcon, typeIcons } from '@/layout-parts'
-
+import { TitleWithIcon } from '@/components/Headers'
+import { typeIcons } from '@/layout-parts/PostSections'
 interface IByTaxonomyProps {
     resource: IResourceOverview
     isShowingResult: boolean

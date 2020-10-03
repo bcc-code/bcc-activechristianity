@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-import { PostItemPlayButtonSmall } from '@/layout-parts/Buttons/PlayButton'
+import { PostItemPlayButtonSmall } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import ac_string from '@/strings/ac_strings.json'

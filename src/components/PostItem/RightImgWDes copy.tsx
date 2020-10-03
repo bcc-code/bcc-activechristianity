@@ -3,10 +3,10 @@ import Link from '@/components/CustomLink'
 
 import { IPostItem } from '@/types'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
-import TopicWithIcons from '@/layout-parts/Buttons/TopicWithIcon'
+import { TopicWithIcon } from '@/components/PostElements/TopicToggleFollow'
 import { PostTitle, PostExcerpt, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
-import { PostItemMediaImg } from '@/layout-parts/Buttons/PlayButton'
-import { BookmarksAndViews } from '@/layout-parts'
+import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
+import { BookmarksAndViews } from '@/components/PostElements'
 
 import 'lazysizes';
 
@@ -78,7 +78,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                             <div className="flex flex-wrap">
                                 {topics.map(t => (
                                     <div className="">
-                                        <TopicWithIcons  {...t} />
+                                        <TopicWithIcon  {...t} />
                                     </div>
                                 ))}
                             </div>

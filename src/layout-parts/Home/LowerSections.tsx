@@ -1,8 +1,8 @@
 import * as React from "react"
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import FetchPosts from '@/layout-parts/HOC/FetchPosts'
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+import FetchPosts from '@/HOC/FetchPosts'
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 
 import { IPostItem, ITopicPostItems, INavItem, ITopic, ITopicPostSlugs } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'

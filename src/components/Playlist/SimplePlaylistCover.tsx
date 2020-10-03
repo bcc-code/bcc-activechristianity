@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { PostTitle, PostExcerpt } from '@/components/PostItem/PostItemParts'
 import { IPostItem } from '@/types'
 import SquareImg from '@/components/Images/Image1to1Rounded'
-import { PlaylistPlayButton } from '@/layout-parts/Buttons/PlayButton'
+import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'
 
 const PlaylistPostItem: React.FC<IPostItem> = ({ title, excerpt, image, slug, media }) => {
     return (

@@ -2,58 +2,29 @@ import React from "react"
 import MetaTag from '@/components/Meta'
 import LazyLoad from '@/components/LazyLoad';
 import { UnderlineLinkViewAll } from '@/components/Button'
+import FetchPosts from '@/HOC/FetchPosts'
+import FetchPostList from '@/HOC/FetchPostList'
 import loadable from '@loadable/component'
 import ac_strings from '@/strings/ac_strings.json'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
-import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
-const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
-const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 
-import { TitleWithIcon, typeIcons } from '@/layout-parts'
-import { INavItem, IPostsByFormat, IPostItem, IPostsByFormatCollection, INavItemCount, ISubtopicLinks } from '@/types'
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import FetchTopicPostItems from '@/layout-parts/HOC/FetchTopicWithPostItems'
+const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
+
+import { INavItem, IPostItem, INavItemCount, ISubtopicLinks } from '@/types'
+
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
-import RightImgPostItem from '@/components/PostItem/RightImgWDes'
-import { LayoutH1Wide, PageSectionHeader } from '@/layout-parts'
+import RightImg from '@/components/PostItemCards/RightImg'
+import { PageSectionHeader } from '@/components/Headers'
 
 const Read: React.FC<IProps> = (props) => {
-    const [headerPost, setHeaderPost] = React.useState<IPostItem | null>(null)
-    const [latest, setLatest] = React.useState<IPostItem[]>([])
-    const [popular, setPopular] = React.useState<IPostItem[]>([])
-    const [mobilePostRows, setMobilePostRows] = React.useState<IOnePostByTypeRow[]>([])
-    const [desktopRow1, setDesktopRow1] = React.useState<IOnePostByType[]>([])
-    const [desktopRow2, setDesktopRow2] = React.useState<IOnePostByType[]>([])
-    const [typeLinks, setTypeLinks] = React.useState<INavItemCount[]>([])
-    const [isLoading, setIsLoading] = React.useState(false)
+    console.log(props)
+
     const { pageContext, path } = props
 
-    const { title, menu, info, items } = pageContext
+    const { title, menu, info, items, mostPopular } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
-
-    React.useEffect(() => {
-
-
-        setIsLoading(true)
-        fetchPostslistFromArchivePage(latestSlug).then(res => {
-
-            if (res) {
-                setLatestPosts(res)
-                setIsLoading(false)
-            }
-        })
-    }, [pageContext])
-
-    const setLatestPosts = (posts: IPostItem[]) => {
-        setHeaderPost(posts[0])
-        setLatest(posts)
-        setPopular(posts.slice(5, 10))
-    }
-
-
-
 
     return (
         <div>
@@ -65,24 +36,50 @@ const Read: React.FC<IProps> = (props) => {
                 path={path}
             />
 
-            <Placeholder loading={isLoading || !headerPost}>
 
-                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
-                    <div className="w-full pb-4 sm:hidden pt-8">
-                        <PageSectionHeader title={ac_strings.featured} />
-                        <FeaturedBanner featured={popular} />
-                    </div>
+            <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+
+                <div className="w-full pb-4 sm:hidden pt-8">
+                    <PageSectionHeader title={ac_strings.featured} />
+                    <FetchPosts
+                        slugs={mostPopular.slice(5).map(p => p.slug)}
+                        layout="row"
+                        render={({ posts }) => {
+                            return <HSCardList posts={posts} />
+                        }}
+                    />
+
                 </div>
-                <div className="sm:bg-transparent py-6 overflow-hidden sm:hidden">
-                    <PageSectionHeader title={ac_strings.popular} />
-                    <TopImgHorizontalScroll posts={popular} />
-                </div>
-                <LazyLoad>
-                    <FetchTopicPostItems
-                        topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
-                        layout="list"
-                        render={({ topicPostItems }) => (
+            </div>
+            <div className="sm:bg-transparent py-6 overflow-hidden sm:hidden">
+                <PageSectionHeader title={ac_strings.popular} />
+                <FetchPosts
+                    slugs={mostPopular.slice(0, 5).map(p => p.slug)}
+                    layout="row"
+                    render={({ posts }) => {
+                        return <HSCardList posts={posts} />
+                    }}
+                />
+            </div>
+            <div className="sm:bg-transparent py-6 overflow-hidden">
+                <PageSectionHeader title={ac_strings.latest} />
+
+                <FetchPostList
+                    slug={latestSlug}
+                    layout="row" render={({ posts }) => {
+                        return (<HSCardList posts={posts} />)
+                    }}
+                />
+
+            </div>
+            <LazyLoad>
+                <FetchTopicPostItems
+                    topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                    layout="list"
+                    render={({ topicPostItems }) => {
+                        console.log(topicPostItems)
+                        return (
                             <div>
                                 <div className="sm:hidden">
                                     <ScrollNavTabs tabs={topicPostItems.map(item => ({
@@ -92,7 +89,7 @@ const Read: React.FC<IProps> = (props) => {
                                             <div>
                                                 {item.posts.slice(0, 6).map(p => {
                                                     return (
-                                                        <RightImgPostItem {...p} />
+                                                        <RightImg {...p} />
                                                     )
                                                 })}
                                                 <div className="w-full flex justify-center py-6">
@@ -104,11 +101,20 @@ const Read: React.FC<IProps> = (props) => {
                                 </div>
 
                             </div>
-                        )}
+                        )
+                    }}
 
-                    />
-                </LazyLoad>
-            </Placeholder>
+                />
+            </LazyLoad>
+            <RecommendDesktopLayout
+                latestSlug={latestSlug}
+                popularPosts={mostPopular.map(item => item.slug)}
+                topics={items}
+                name={title}
+
+
+            />
+
         </div>
     )
 }
@@ -124,6 +130,10 @@ interface IProps {
         items: ISubtopicLinks[]
         menu: INavItemCount[]
         ebook: INavItemCount
+        mostPopular: {
+            slug: string
+            views: number
+        }[]
 
     }
     path: string

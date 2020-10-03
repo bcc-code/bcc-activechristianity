@@ -1,7 +1,7 @@
 import React from "react"
 import { IPostItem } from "@/types"
 import TopImgPost from '@/components/PostItem/TopImg'
-import MoreLatestButton from '@/layout-parts/Buttons/MoreLatest'
+import { MoreLatestLink } from '@/layout-parts/PostSections'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import PostRow from '@/layout-parts/List/PostRow4Col'
 interface ILatestDesktopRow {
@@ -16,7 +16,7 @@ const LatestDesktopRow: React.FC<ILatestDesktopRow> = ({ posts, latestSlug, vide
             <div className="standard-max-w-px">
                 <LatestSectionHeader latestSlug={latestSlug} />
                 <PostRow posts={posts} />
-                <MoreLatestButton latestSlug={latestSlug} />
+                <MoreLatestLink latestSlug={latestSlug} />
             </div>
         </div>
     )

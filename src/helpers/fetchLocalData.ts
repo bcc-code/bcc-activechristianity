@@ -1,5 +1,5 @@
-import { IPostItem, INavItem, IEbook, IPlaylist, ITopicNavItem } from '@/types'
-import { trimSlug, normalizePostRes } from './index'
+import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem } from '@/types'
+import { trimSlug, normalizePostRes, normalizeTracks } from './index'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 
@@ -54,6 +54,19 @@ export const fetchPlaylistFromSlug = (slug: string) => {
             return undefined
         })
 }
+
+export const fetchTracksFromSlug = (slug: string) => {
+
+    return fetchPlaylistFromSlug(slug).then(res => {
+        let tracks: IMedia[] = []
+        if (res && res.tracks) {
+            tracks = normalizeTracks(res.tracks)
+        }
+        return tracks
+
+    })
+}
+
 
 export const fetchEbookFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)

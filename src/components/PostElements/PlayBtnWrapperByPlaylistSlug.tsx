@@ -3,7 +3,7 @@ import { setCurrentMedia, setAutoPlay, addTracks, floatPlayer } from '@/state/ac
 
 import { IMedia } from '@/types'
 import { normalizeTracks } from '@/helpers/'
-import { fetchPlaylistFromSlug } from '@/helpers/fetchLocalData'
+import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
 import { useDispatch } from 'react-redux'
 
 interface IPlayButtonList {
@@ -20,17 +20,13 @@ const PlayButton: React.FC<IPlayButtonList> = ({ slug, children, className }) =>
     }
 
     const handleClick = () => {
+        fetchTracksFromSlug(slug).then(tracks => {
 
-        let tracks: IMedia[] = []
-        fetchPlaylistFromSlug(slug).then(res => {
-
-            if (res && res.tracks) {
-                tracks = normalizeTracks(res.tracks)
+            if (tracks.length > 0) {
                 setCurrent(tracks[0])
                 dispatch(addTracks(tracks.slice(1)))
             }
         })
-
     }
 
     return (

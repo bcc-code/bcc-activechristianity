@@ -1,7 +1,7 @@
 import React from 'react'
 import MetaTag from '@/components/Meta'
 import Content from '@/components/Content'
-import { PostH1 } from '@/layout-parts'
+import { PostH1 } from '@/components/Headers'
 
 
 import { INavItem } from '@/types'
@@ -21,7 +21,7 @@ const Glossary: React.FC<IGlossaryProps> = ({ pageContext, path }) => {
                 />
                 <PostH1 title={title} />
                 <div className="border-b w-1/6 my-8 border-d4gray"></div>
-                <Content content={content} />
+                <Content content={content} title={title} slug={path} />
             </div>
         )
     } else {

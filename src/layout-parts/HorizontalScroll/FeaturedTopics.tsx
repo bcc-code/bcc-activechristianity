@@ -4,7 +4,7 @@ import XScrollCustomSize from './BaseCustomSize'
 import './horizontal-scroll.css';
 import { ITopic } from '@/types'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
-import SlateDarkFollowButton from '@/layout-parts/Buttons/ToggleFollow'
+import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFollow'
 import { getImage } from '@/helpers/imageHelpers'
 import TS from '@/strings'
 const placeHolderImage = {

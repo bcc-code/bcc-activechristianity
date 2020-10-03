@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 
 import { IMenusQuery, INavItem } from '@/types'
 
-import { typeIcons } from '@/layout-parts'
+import { typeIcons } from '@/layout-parts/PostSections'
 import ac_strings from '@/strings/ac_strings.json'
 
 export interface IMenuWithIcon extends INavItem {

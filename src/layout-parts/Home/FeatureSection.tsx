@@ -1,7 +1,6 @@
 import React from 'react'
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItem/FeaturedCardNew'
 import Icons from '@/components/Icons'
-import MobileFeatureCard from '@/components/PostItem/WTopicFollowCard'
 import ac_strings from '@/strings/ac_strings.json'
 
 const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featuredPosts }) => {

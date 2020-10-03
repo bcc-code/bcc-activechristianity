@@ -6,7 +6,7 @@ import { IPaginate, INavItem, IPostItem } from "@/types"
 import { normalizePostRes } from '@/helpers'
 import VideoItem from '@/components/PostItem/TopImg'
 import Pagination from '@/components/Pagination'
-import { LayoutH1Wide } from '@/layout-parts'
+import { LayoutH1Wide } from '@/components/Headers'
 import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 
 interface ITaxonomyPageProps {

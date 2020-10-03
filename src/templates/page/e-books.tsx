@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from "gatsby"
 
 import FeaturedCard from '@/components/PostItem/FeaturedCard'
-import { LayoutH1Wide } from '@/layout-parts'
+import { LayoutH1Wide } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 
 import ac_strings from '@/strings/ac_strings.json'

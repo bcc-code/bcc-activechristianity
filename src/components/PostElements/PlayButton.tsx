@@ -2,8 +2,9 @@ import React from 'react'
 import Link from '@/components/CustomLink'
 import { IMedia } from '@/types'
 import Icon from '@/components/Icons'
-import PlayButtonTrack from './PlayButtonTrack'
-import PlayButtonList from './PlayButtonList'
+import MUIcon from '@/components/Icons/Icon'
+import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
+import PlayButtonList from './PlayBtnWrapperByPlaylistSlug'
 import ac_strings from '@/strings/ac_strings.json'
 export interface IPlayButtonProps {
     track: IMedia
@@ -33,7 +34,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                     id="play-button"
                     className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
                 >
-                    {track.video ? <Icon name="play" size="4xl" /> : <Icon name="speaker" size="4xl" />}
+                    {track.video ? <MUIcon name="OndemandVideo" size="12" /> : <MUIcon name="Headset" size="12" />}
                 </div>
             )}
             {children}

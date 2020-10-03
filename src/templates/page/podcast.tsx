@@ -11,10 +11,9 @@ import Modal from '@/components/Modal/ModalWProps'
 
 import PostItem from '@/components/PostItem/RightImgSimple'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
-import { PlaylistPlayOutlineButton } from '@/layout-parts/Buttons/PlayButton'
+import { PlaylistPlayOutlineButton } from '@/components/PostElements/PlayButton'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-import TwoToThreeTabs from '@/components/Tabs/TwoToThreeTabs'
-import { UnderlineTitleLink } from '@/layout-parts'
+
 
 // helpers
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'

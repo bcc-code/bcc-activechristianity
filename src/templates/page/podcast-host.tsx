@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
-import { LayoutH1Wide } from '@/layout-parts'
+import { LayoutH1Wide } from '@/components/Headers'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 
 const Host: React.FC<IHost> = ({ path, pageContext, data }) => {

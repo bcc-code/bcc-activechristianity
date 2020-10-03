@@ -6,7 +6,7 @@ import ac_strings from '@/strings/ac_strings.json'
 import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
 import UserInitials from '@/layout-parts/User/UserInitial'
-import { LayoutH1 } from '@/layout-parts'
+import { LayoutH1 } from '@/components/Headers'
 import { INavItem } from '@/types'
 
 const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {

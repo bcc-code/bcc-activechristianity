@@ -9,9 +9,9 @@ import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import TopImgPost from '@/components/PostItem/TopImg'
 
-import { UnderlineTitleLink, typeIcons, LayoutH1Wide, TitleWithIcon } from '@/layout-parts'
+import { UnderlineTitleLink, LayoutH1Wide, TitleWithIcon } from '@/components/Headers'
 
-
+import { typeIcons } from '@/layout-parts/PostSections'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 
 

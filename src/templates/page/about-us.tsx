@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { graphql } from "gatsby"
 import { INavItem, IPage } from '@/types'
-import { LayoutH1 } from '@/layout-parts'
 import MetaTag from '@/components/Meta'
 import CustomizedLayoutProps from '@/components/CustomizedPageComponent'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'

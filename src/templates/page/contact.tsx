@@ -2,7 +2,8 @@ import React from 'react'
 import MetaTag from '@/components/Meta'
 
 import TS from '@/strings'
-import { MobileMainWrapper, LayoutH1 } from '@/layout-parts'
+import { LayoutH1 } from '@/components/Headers'
+import { MobileMainWrapper } from '@/layout-parts/PostSections'
 import { FacebookIcon, InstagramIcon } from '@/components/Icons/SocialMedia'
 import ContactForm from '@/layout-parts/Form/Contact'
 

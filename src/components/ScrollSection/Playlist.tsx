@@ -6,7 +6,7 @@ import { getImage } from '@/helpers/imageHelpers'
 import { normalizeTracks } from "@/helpers"
 import { IRootState } from '@/state/types'
 import { IPlaylist, IMedia } from '@/types'
-import { PostH1, ShareSection } from '@/layout-parts'
+import { PostH1 } from '@/components/Headers'
 import { } from '@/components/PostItem/PostItemParts'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
