@@ -11,8 +11,9 @@ import FetchPosts from '@/HOC/FetchPosts'
 import FetchPostList from '@/HOC/FetchPostList'
 import { LayoutH1Wide } from '@/components/Headers'
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
-
-import { ISubtopicLinks } from "@/types"
+import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
+import { ISubtopicLinks, IPlaylist } from "@/types"
+import { playlistToPost } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 import '@/styles/react-tabs.css'
@@ -23,6 +24,7 @@ interface IRecommandLayout {
     latestSlug: string
     popularPosts: string[]
     topics: ISubtopicLinks[]
+    playlists?: IPlaylist[]
 
 }
 
@@ -30,7 +32,8 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     name,
     popularPosts,
     topics,
-    latestSlug
+    latestSlug,
+    playlists
 }) => {
 
     return (
@@ -59,7 +62,22 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     }}
                 />
             </LazyLoad>
+            {playlists && (
+                <LazyLoad>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16 px-4">
 
+                        {playlists.map((p, i) => {
+                            const post = playlistToPost(p)
+                            return (
+                                <div className={`div${i + 1}`} key={p.slug}>
+                                    < FeaturedCard {...post} type="playlist" />
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                </LazyLoad>
+            )}
             <LazyLoad >
                 <FetchTopicPostItems
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}

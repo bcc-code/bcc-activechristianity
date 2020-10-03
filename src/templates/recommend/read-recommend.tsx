@@ -108,8 +108,6 @@ const Read: React.FC<IProps> = (props) => {
                 popularPosts={mostPopular.map(item => item.slug)}
                 topics={items}
                 name={title}
-
-
             />
 
         </div>

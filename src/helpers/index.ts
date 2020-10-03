@@ -211,20 +211,20 @@ export const ebookResToPost = (ebook: IEbook) => {
 
 export const playlistToPost = (playlist: IPlaylist): IPostItem => {
     const { title, slug, image, excerpt } = playlist
-    return (
-        {
-            id: '',
-            title,
-            slug: `${ac_strings.slug_playlist}/${slug}`,
-            image: getImage(title, "640x320", image),
-            excerpt,
-            date: new Date(),
-            media: {
-                path: '',
-            }
+    const post: IPostItem = {
+        id: '',
+        title,
+        slug: `${ac_strings.slug_playlist}/${slug}`,
+        image: getImage(title, "640x320", image),
+        excerpt,
+        date: new Date(),
+        media: {
+            path: '',
+        },
 
-        }
-    )
+
+    }
+    return post
 }
 
 const secondesToMinutes = (seconds: number) => `${Math.round(seconds / 60)} ${ac_strings.mins}`
