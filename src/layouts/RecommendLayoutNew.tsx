@@ -4,7 +4,7 @@ import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const LatestPopularTab = loadable(() => import('@/layout-parts/Tabs/LatestPopularTabs'))
 const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/PostsByTypes'))
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'

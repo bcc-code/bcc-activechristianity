@@ -10,7 +10,7 @@ const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/Fe
 const FeaturedBannerPosts = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const FeaturedBannerSmall = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideoSmall'))
 import FetchPosts from '@/HOC/FetchPosts'
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import { UnderlineLinkViewAll } from '@/components/Button'

@@ -9,7 +9,7 @@ const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/Fe
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
-import RightImgPostItem from '@/components/PostItem/RightImgWDes'
+import RightImgPostItem from '@/components/PostItemCards/RightImg'
 import { LayoutH1Wide, PageSectionHeader } from '@/components/Headers'
 
 import { UnderlineLinkViewAll } from '@/components/Button'

@@ -57,9 +57,9 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
 
 
     return (
-        <div className={`${border !== false ? 'border-b border-b-1 border-gray-300 last:border-b-1 sm:border-none pb-4' : ''}`}>
+        <div className={`${border !== false ? 'border-b border-gray-300 last:border-b-1 pb-4' : ''}`}>
             <div className="flex items-start sm:items-stretch w-full cursor-pointer mt-5">
-                <div className={`sm:pr-4 flex flex-col w-8/12 sm:w-6/12 md:w-8/12 items-start ${border !== false ? 'sm:border-b sm:border-b-1 sm:border-gray-300 last:sm:border-b-1 mr-4' : ''}`}>
+                <div className={`sm:pr-4 flex flex-col w-8/12 sm:w-6/12 md:w-8/12 items-start `}>
                     {format && format[0] && (
                         <div className="pb-2">
                             <span className="text-xxs text-gray-600">{format[0].name}</span>

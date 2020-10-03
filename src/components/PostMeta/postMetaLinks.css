@@ -1,3 +1,8 @@
 .post-meta-commar:not(:last-child):after {
-    content: ", ";
+    content: ",  ";
+}
+
+.post-meta-commar:not(:first-child) {
+    content: ",  ";
+    margin-left: 5px;
 }

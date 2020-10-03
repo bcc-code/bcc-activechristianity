@@ -2,10 +2,10 @@ import React from 'react'
 import { navigate } from "gatsby"
 import { IPaginate, IPostItem } from "@/types"
 
-import RightImgWDes from '@/components/PostItem/RightImgWDes'
+import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
-
+import FetchPosts from '@/HOC/FetchPosts'
 export interface IPostList {
     audio?: boolean
     paginate?: IPaginate
@@ -40,12 +40,24 @@ const PostList: React.FC<IPostList> = (props) => {
 
     return (
         <div className="max-w-sm" >
-            {postList.map((p, k) => {
-                return (
-                    <RightImgWDes key={k} {...p} />
+            <FetchPosts
 
-                )
-            })}
+                slugs={posts}
+                layout="list"
+                render={({ posts: postList }) => {
+                    return (
+                        <div>
+                            {postList.map((p, k) => {
+                                return (
+                                    <RightImgWDes key={k} {...p} />
+
+                                )
+                            })}
+                        </div>
+                    )
+                }}
+            />
+
 
             {paginate && <div className="flex justify-item py-4">
                 <Pagination

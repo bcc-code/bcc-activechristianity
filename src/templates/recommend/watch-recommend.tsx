@@ -5,7 +5,7 @@ import { UnderlineLinkViewAll } from '@/components/Button'
 import MetaTag from '@/components/Meta'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideo'))
 const FeaturedBannerSmall = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBannerVideoSmall'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'

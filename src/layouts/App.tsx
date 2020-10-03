@@ -156,7 +156,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
                             <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
                                 {breadcrumb.items.length > 0 && (
-                                    <div className="relative z-50 w-full bg-white pt-2 px-2 hidden sm:block">
+                                    <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
                                         <Breadcrumb {...breadcrumb} />
                                     </div>
                                 )}

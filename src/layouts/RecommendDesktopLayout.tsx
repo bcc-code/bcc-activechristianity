@@ -4,7 +4,7 @@ import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
+const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
 import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 import FetchPosts from '@/HOC/FetchPosts'

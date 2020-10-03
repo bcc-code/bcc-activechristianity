@@ -7,7 +7,7 @@ const PostRow: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
             {posts.slice(0, 4).map((post, i) => {
                 return (
                     <div className={`div${i + 1}`} key={post.slug}>
-                        < TopImgPost {...post} />
+                        < TopImgPost showType {...post} />
                     </div>
                 )
             })}
