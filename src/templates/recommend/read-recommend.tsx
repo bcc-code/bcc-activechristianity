@@ -36,76 +36,73 @@ const Read: React.FC<IProps> = (props) => {
                 path={path}
             />
 
+            <div className="sm:hidden">
 
 
-            <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
-                <div className="w-full pb-4 sm:hidden pt-8">
-                    <PageSectionHeader title={ac_strings.featured} />
+                    <div className="w-full pb-4 pt-8">
+                        <PageSectionHeader title={ac_strings.featured} />
+                        <FetchPosts
+                            slugs={mostPopular.slice(5).map(p => p.slug)}
+                            layout="row"
+                            render={({ posts }) => {
+                                return <HSCardList posts={posts} />
+                            }}
+                        />
+
+                    </div>
+                </div>
+                <div className="sm:bg-transparent py-6 overflow-hidden">
+                    <PageSectionHeader title={ac_strings.popular} />
                     <FetchPosts
-                        slugs={mostPopular.slice(5).map(p => p.slug)}
+                        slugs={mostPopular.slice(0, 5).map(p => p.slug)}
                         layout="row"
                         render={({ posts }) => {
                             return <HSCardList posts={posts} />
                         }}
                     />
+                </div>
+                <div className="py-6 overflow-hidden">
+                    <PageSectionHeader title={ac_strings.latest} />
+
+                    <FetchPostList
+                        slug={latestSlug}
+                        layout="row" render={({ posts }) => {
+                            return (<HSCardList posts={posts} />)
+                        }}
+                    />
 
                 </div>
-            </div>
-            <div className="sm:bg-transparent py-6 overflow-hidden sm:hidden">
-                <PageSectionHeader title={ac_strings.popular} />
-                <FetchPosts
-                    slugs={mostPopular.slice(0, 5).map(p => p.slug)}
-                    layout="row"
-                    render={({ posts }) => {
-                        return <HSCardList posts={posts} />
-                    }}
-                />
-            </div>
-            <div className="sm:bg-transparent py-6 overflow-hidden">
-                <PageSectionHeader title={ac_strings.latest} />
-
-                <FetchPostList
-                    slug={latestSlug}
-                    layout="row" render={({ posts }) => {
-                        return (<HSCardList posts={posts} />)
-                    }}
-                />
-
-            </div>
-            <LazyLoad>
-                <FetchTopicPostItems
-                    topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
-                    layout="list"
-                    render={({ topicPostItems }) => {
-                        console.log(topicPostItems)
-                        return (
-                            <div>
-                                <div className="sm:hidden">
-                                    <ScrollNavTabs tabs={topicPostItems.map(item => ({
-                                        name: item.name,
-                                        to: item.slug,
-                                        content: (
-                                            <div>
-                                                {item.posts.slice(0, 6).map(p => {
-                                                    return (
-                                                        <RightImg {...p} />
-                                                    )
-                                                })}
-                                                <div className="w-full flex justify-center py-6">
-                                                    <UnderlineLinkViewAll to={`${item.slug}`} />
-                                                </div>
+                <LazyLoad>
+                    <FetchTopicPostItems
+                        topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                        layout="list"
+                        render={({ topicPostItems }) => {
+                            console.log(topicPostItems)
+                            return (
+                                <ScrollNavTabs tabs={topicPostItems.map(item => ({
+                                    name: item.name,
+                                    to: item.slug,
+                                    content: (
+                                        <div>
+                                            {item.posts.slice(0, 6).map(p => {
+                                                return (
+                                                    <RightImg {...p} />
+                                                )
+                                            })}
+                                            <div className="w-full flex justify-center py-6">
+                                                <UnderlineLinkViewAll to={`${item.slug}`} />
                                             </div>
-                                        )
-                                    }))} />
-                                </div>
+                                        </div>
+                                    )
+                                }))} />
+                            )
+                        }}
 
-                            </div>
-                        )
-                    }}
-
-                />
-            </LazyLoad>
+                    />
+                </LazyLoad>
+            </div>
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
                 popularPosts={mostPopular.map(item => item.slug)}

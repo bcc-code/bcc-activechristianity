@@ -1,6 +1,5 @@
 import React from "react"
 import { IPostItem } from "@/types"
-import TopImgPost from '@/components/PostItem/TopImg'
 import { MoreLatestLink } from '@/layout-parts/PostSections'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import PostRow from '@/layout-parts/List/PostRow4Col'

@@ -19,7 +19,7 @@ interface IByTaxonomies {
 const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title, arrow, col, icon }) => {
     return (
         <div className="bg-d4athens sm:bg-white py-4">
-            <div className="standard-max-w-px">
+            <div className="standard-max-w">
                 <div className="font-bold relative flex justify-between mt-8 sm:mt-16 mb-2 sm:mb-8 pb-2 text-d4dark text-base">
                     <span className="block">{title}</span>
                 </div>

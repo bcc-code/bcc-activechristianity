@@ -3,7 +3,7 @@ import * as React from 'react';
 import { IPostItem } from '@/types'
 import PostBase, { IPostBase } from '@/components/PostElements/Base'
 import { PostLabel } from '@/components/PostItem/PostItemParts'
-import Image2To1 from '@/components/Images/Image2To1'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import './leftverticle.css'
 
@@ -18,9 +18,9 @@ const TopImgPost: React.FC<IPostItem> = (props) => {
 
     return (
         <div
-            className={`h-full overflow-hidden left-vert w-full`}>
+            className={`h-full overflow-hidden left-vert w-full  rounded-xxl sm:rounded-xl border`}>
             <PostItemMediaImg
-                className="relative flex justify-end left-vert-img"
+                className="relative flex justify-end left-vert-img "
                 track={media}
                 slug={props.slug}
             >
@@ -30,9 +30,9 @@ const TopImgPost: React.FC<IPostItem> = (props) => {
                     </div>
                 )}
 
-                <Image2To1
-                    image={image}
-                    imageClassName={`relative block w-full sm:pl-0 flex justify-end  rounded-l-xl`}
+                <LazysizesFeaturedImage
+                    {...image}
+                    className=" h-full pointer-events-none w-auto object-cover g-image rounded-l-xl"
                     alt={title}
                 />
             </PostItemMediaImg>

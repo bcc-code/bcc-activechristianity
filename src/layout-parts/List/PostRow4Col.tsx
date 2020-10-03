@@ -1,5 +1,5 @@
 import React from 'react'
-import TopImgPost from '@/components/PostItem/TopImg'
+import TopImgPost from '@/components/PostItemCards/TopImg'
 import { IPostItem, } from '@/types'
 const PostRow: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
     return (

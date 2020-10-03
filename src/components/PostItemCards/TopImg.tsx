@@ -36,7 +36,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 slug={props.slug}
             >
                 {showType && format && format[0] && (
-                    <div className="absolute p-3  top-0 left-0 flex">
+                    <div className="absolute p-3  top-0 left-0 flex z-10">
                         <PostLabel text={format[0].name}></PostLabel>
                     </div>
                 )}
@@ -59,7 +59,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 postExcerptProps={noExcerpt ? undefined : {
                     fontKey: 'text-base',
                     clamp: 3,
-                    className: "flex items-stretch mb-4"
+                    className: "flex items-stretch mb-4 sm:text-sm sm:text-gray-600"
                 }}
                 audioDuration />
         </div>

@@ -9,21 +9,18 @@ interface IFetchPost {
 }
 const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])
-    const [loading, setLoading] = React.useState(false)
+
     React.useEffect(() => {
 
         Promise.all(topics
-            .map(t => {
-                return fetchPostslistFromArchivePage(t.slug).then(posts => {
-                    if (posts) {
-                        return ({
-                            ...t,
-                            posts
-                        })
-                    }
-                })
-
-            }))
+            .map(t => fetchPostslistFromArchivePage(t.slug).then(posts => {
+                if (posts) {
+                    return ({
+                        ...t,
+                        posts
+                    })
+                }
+            })))
             .then(res => {
                 const toAdd: ITopicPostItems[] = []
                 res.forEach(item => {

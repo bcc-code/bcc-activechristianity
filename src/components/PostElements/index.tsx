@@ -73,6 +73,7 @@ export const ReadOrListenIcon: React.FC<{ read?: string, listen?: string, track?
                                         <Icon
                                             name="Equalizer"
                                             size="4"
+                                            color="slate-light"
                                         />
                                         <span className="text-xs text-white pl-2 whitespace-no-wrap">
                                             {ac_strings.playing}
@@ -118,14 +119,14 @@ export const ReadOrListenIcon: React.FC<{ read?: string, listen?: string, track?
 interface ILikesViewsProps {
     id: string
     likes?: number
-    views?: number
+    views?: string
 }
 
 export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
     const { id, views } = props
     return (
-        <div className="font-roboto flex">
-            <div className="mr-2 flex items-center">
+        <div className="font-roboto flex flex-1">
+            <div className="mr-2 flex flex-1 justify-between items-center">
                 {typeof views === "string" && (
                     <div className="mr-4 flex items-center">
                         <Icon

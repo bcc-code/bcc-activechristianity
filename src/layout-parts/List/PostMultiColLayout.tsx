@@ -2,8 +2,8 @@ import React from "react"
 import { IPostItem, INavItem } from "@/types"
 import { UnderlineTitleLink } from '@/components/Headers'
 import FeaturedCard from '@/components/PostItem/FeaturedCard'
-import TopImgPost from '@/components/PostItem/TopImg'
-
+import LeftImg from '@/components/PostItemCards/LeftImg'
+import TopImg from '@/components/PostItemCards/TopImg'
 export interface IOnePostByType {
     type: INavItem,
     post: IPostItem,
@@ -29,11 +29,11 @@ const OnePostByType: React.FC<IOnePostByType> = ({ type, post, postThumnailType,
                 return <FeaturedCard {...props} />
             }
             case "leftImage": {
-                return <TopImgPost isLeftImg {...post} />
+                return <LeftImg {...post} />
             }
 
             default: {
-                return <TopImgPost {...post} />
+                return <TopImg showType {...post} />
             }
         }
     }

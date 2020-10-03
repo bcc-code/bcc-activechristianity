@@ -112,7 +112,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
                 popularPosts={mostPopular.map(item => item.slug)}
-                topics={formats.map(f => ({ ...f, slug: `${TS.slug_topic}/${f.to}` }))}
+                topics={formats.map(f => ({ ...f, to: `${TS.slug_topic}/${f.to}` }))}
                 name={title}
 
 

@@ -5,7 +5,7 @@ import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Latest'))
-const PostsByTypes = loadable(() => import('@/layout-parts/RecommendLayout/PostsByTypes'))
+const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
 import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 import FetchPosts from '@/HOC/FetchPosts'
 import FetchPostList from '@/HOC/FetchPostList'
@@ -32,7 +32,6 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     topics,
     latestSlug
 }) => {
-
 
     return (
         <div className="hidden sm:block">
@@ -71,9 +70,9 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                             (
 
                                 <div className="standard-max-w-px pb-6">
-                                    <PostsByTypes types={postsByTypesRow1} />
+                                    <PostMultiColLayout types={postsByTypesRow1} />
                                     <ByTaxonomies types={topics} title={ac_strings.exploreType} />
-                                    <PostsByTypes types={postsByTypesRow2} />
+                                    <PostMultiColLayout types={postsByTypesRow2} />
                                 </div>
 
 
