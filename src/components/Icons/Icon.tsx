@@ -1,7 +1,7 @@
 import * as Icons from '@material-ui/icons';
 import * as React from 'react';
 
-export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light"
+export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light" | "white"
 interface IIconProps {
     name: string
     size?: string
@@ -40,7 +40,8 @@ const colorMap = {
     "primary": "#FFAE0C",
     "secondary": "#4A75D1",
     "slate-dark": "#384156",
-    "slate-light": "#9CA6BE"
+    "slate-light": "#9CA6BE",
+    "white": "#FFF"
 }
 const sizeMap = {
     '0': 0,

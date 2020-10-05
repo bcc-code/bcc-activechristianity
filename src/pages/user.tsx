@@ -4,11 +4,12 @@ import { graphql } from "gatsby"
 import { Router } from "@reach/router"
 import MetaTag from '@/components/Meta'
 import Profile from "@/layout-parts/Form/Profile"
-import Layout from "@/layouts/AccountLayout"
+import Layout from "@/layouts/UserLayout"
 import PrivateRoute from "@/components/PrivateRoute"
 import Bookmarked from "@/layout-parts/User/Bookmarked"
 import History from "@/layout-parts/User/History"
 import Followed from "@/layout-parts/User/Followed"
+import MyContent from "@/layout-parts/User/MyContent"
 import Downloaded from "@/layout-parts/User/Downloaded"
 import ChangePassword from "@/layout-parts/Form/ChangePassword"
 import DeleteProfile from "@/layout-parts/Form/Delete"
@@ -60,6 +61,7 @@ const User: React.FC<IUserProps> = ({ data }) => {
                                 <PrivateRoute path={`/${page.slug}`} component={Component} />
                             )
                         })}
+                        <PrivateRoute path={`/my-content`} component={MyContent} />
                     </Router>
                 </Layout>
             ) : (

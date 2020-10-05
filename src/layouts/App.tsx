@@ -10,7 +10,7 @@ import Link from '@/components/CustomLink';
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
-import SideNav from '@/layout-parts/Nav/SideNav'
+import SideNav from '@/layout-parts/Nav/SideNav/index.tsx'
 import SignInSignUpModal from '@/layout-parts/SignInSignUp'
 
 import { useDispatch, useSelector } from "react-redux"
@@ -76,7 +76,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 }
             })
             .catch((err: any) => {
-                console.log(err)
+                dispatch(setLogout())
                 console.log('handle login error')
             })
     }
@@ -148,6 +148,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                             breadcrumb={breadcrumb}
                             menu={mobileMenu}
                             currentPage={{ name: pageContext.title, to: location.pathname }}
+                            explorePage={explorePage}
                         />
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
 

@@ -18,7 +18,6 @@ import RightImg from '@/components/PostItemCards/RightImg'
 import { PageSectionHeader } from '@/components/Headers'
 
 const Read: React.FC<IProps> = (props) => {
-    console.log(props)
 
     const { pageContext, path } = props
 
@@ -44,7 +43,7 @@ const Read: React.FC<IProps> = (props) => {
                     <div className="w-full pb-4 pt-8">
                         <PageSectionHeader title={ac_strings.featured} />
                         <FetchPosts
-                            slugs={mostPopular.slice(5).map(p => p.slug)}
+                            slugs={mostPopular.slice(5)}
                             layout="row"
                             render={({ posts }) => {
                                 return <HSCardList posts={posts} />
@@ -56,7 +55,7 @@ const Read: React.FC<IProps> = (props) => {
                 <div className="sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} />
                     <FetchPosts
-                        slugs={mostPopular.slice(0, 5).map(p => p.slug)}
+                        slugs={mostPopular.slice(0, 5)}
                         layout="row"
                         render={({ posts }) => {
                             return <HSCardList posts={posts} />
@@ -79,7 +78,6 @@ const Read: React.FC<IProps> = (props) => {
                         topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
                         layout="list"
                         render={({ topicPostItems }) => {
-                            console.log(topicPostItems)
                             return (
                                 <ScrollNavTabs tabs={topicPostItems.map(item => ({
                                     name: item.name,
@@ -105,7 +103,7 @@ const Read: React.FC<IProps> = (props) => {
             </div>
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
-                popularPosts={mostPopular.map(item => item.slug)}
+                popularPosts={mostPopular}
                 topics={items}
                 name={title}
             />
@@ -125,10 +123,7 @@ interface IProps {
         items: ISubtopicLinks[]
         menu: INavItemCount[]
         ebook: INavItemCount
-        mostPopular: {
-            slug: string
-            views: number
-        }[]
+        mostPopular: string[]
 
     }
     path: string

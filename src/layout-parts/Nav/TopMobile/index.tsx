@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
 import LogoSmall from '@/images/AC_Logo_sm.png'
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
 import ReactPlaceholder from 'react-placeholder'
 import { UserInitial } from '@/layout-parts/User/UserInitial'
@@ -17,6 +17,7 @@ interface IHistoryPage { name?: string, to: string }
 interface ITopNavMobile extends IDrawerNav {
     breadcrumb: IBreadcrumb
     currentPage: IHistoryPage
+    explorePage?: INavItem
 }
 
 /*
@@ -27,7 +28,7 @@ interface ITopNavMobile extends IDrawerNav {
         }
     }, [pageContext])
 */
-const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, breadcrumb, currentPage, menu }) => {
+const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, breadcrumb, currentPage, menu, explorePage }) => {
 
     /*     const [showMobileSteps, setShowMobileSteps] = React.useState(false) */
     const [hasDelayedOnce, setHasDelayedOnce] = React.useState(false)
@@ -154,7 +155,10 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                         <div className=" min-w-20 font-roboto">
                             {showMobileSteps && mobileLastStep ? (
                                 <button className="flex items-center" onClick={handleBackClick}>
-                                    <Icon name="chev-left" size="sm" className="pl-2" />
+                                    <span className="pl-2">
+                                        <Icon name="KeyboardArrowLeft" size="6" />
+                                    </span>
+
                                     <span className="text-sm pl-2">
                                         {mobileLastStep.name}
                                     </span>
@@ -170,29 +174,16 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                             <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />
                         </Link>
                         <div className="flex items-center">
-                            <ReactPlaceholder
-                                className="m-2 w-8 h-8"
-
-                                type="round"
-                                ready={authInfo.loggedIn !== "loading"}
-                                showLoadingAnimation={true}
-                            >
-                                {authInfo.loggedIn === 'success' ? (
-                                    <Link
-                                        className=""
-                                        to={ac_strings.slug_user}
-                                    >
-                                        <UserInitial className="w-8 h-8" name={authInfo.user ? authInfo.user.name : ""} />
-                                    </Link>
-                                ) : <div></div>
-                                }
-
-                            </ReactPlaceholder>
+                            {explorePage && (
+                                <Link to={explorePage.to}>
+                                    <Icon name="Search" size="6" />
+                                </Link>
+                            )}
                             <button
                                 className="p-2 px-4 uppdercase text-small"
                                 onClick={() => { setSideNavOpen(true) }}
                             >
-                                <Icon name="menu" size="lg" />
+                                <Icon name="Menu" size="6" />
                             </button>
                         </div>
                     </div>

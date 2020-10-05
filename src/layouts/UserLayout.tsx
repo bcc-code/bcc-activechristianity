@@ -74,17 +74,24 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
     }
 
     return (
-        <LeftSidebarLayout
-            title={title}
-            sidebar={SidebarNav}
+        <div>
+            <div className="hidden sm:block">
+                <LeftSidebarLayout
+                    title={title}
+                    sidebar={SidebarNav}
 
-            content={(
-                <div className="sm:pt-18 px-4">
-                    <LayoutH1 title={currentPageTitle || ''} />
-                    {children}
-                </div>
-            )}
-        />
+                    content={(
+                        <div className="sm:pt-18 px-4">
+                            <LayoutH1 title={currentPageTitle || ''} />
+                            {children}
+                        </div>
+                    )}
+                />
+            </div>
+            <div className="sm:hidden">
+                {children}
+            </div>
+        </div>
 
     )
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import './dropdown.css'
 
 export interface IOption {
@@ -54,7 +54,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
             >
                 <span className="whitespace-no-wrap">{selected ? selected.label : label}</span>
                 <span className="flex items-center mx-2" >
-                    <Icon name="chev-down" size="sm" />
+                    <Icon name="KeyboardArrowDown" size="6" color="slate-light" />
                 </span>
             </button>
             {showDropdown && (

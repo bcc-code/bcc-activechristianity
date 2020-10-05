@@ -28,7 +28,10 @@ export default {
     },
     profile: () => {
         const query = request.profileQuery
-        return sendQuery(query).then(res => res.me)
+
+        return sendQuery(query).then(res => {
+            return res.me
+        })
     },
     logout: () => {
         const query = request.logoutMutation

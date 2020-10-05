@@ -45,15 +45,15 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     }
 
     return authInfo.loggedIn === 'success' ? (
-        <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
+        <div className={`${col ? 'flex flex-col justify-center' : 'grid grid-cols-2'} ${className}`}>
             <Link
-                className="p-2 uppdercase text-small"
+                className="py-2"
                 onClick={onClick}
                 to={`/${ac_strings.slug_user}`}
             >
-                {TS.account}
+                {ac_strings.title_user}
             </Link>
-            <button className="py-2" onClick={handleLogout}>{TS.logout}</button>
+            <span className="py-2 text-center" onClick={handleLogout}>{TS.logout}</span>
 
         </div>
     ) : (
@@ -63,8 +63,8 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
                 </div>
             ) : (
                     <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
-                        <button className="whitespace-no-wrap p-2" onClick={handleSignIn}>{TS.login}</button>
-                        <button className="p-2" onClick={handleSignUp}>{TS.register}</button>
+                        <span className="whitespace-no-wrap p-2 text-center" onClick={handleSignIn}>{TS.login}</span>
+                        <span className="p-2 text-center" onClick={handleSignUp}>{TS.register}</span>
                     </div>
 
                 )

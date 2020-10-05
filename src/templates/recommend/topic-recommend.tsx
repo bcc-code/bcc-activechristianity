@@ -51,7 +51,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 <div className="w-full pb-4 pt-8">
                     <PageSectionHeader title={ac_strings.featured} />
                     <FetchPosts
-                        slugs={mostPopular.slice(5).map(p => p.slug)}
+                        slugs={mostPopular.slice(5)}
                         layout="row"
                         render={({ posts }) => {
                             return <FeaturedBanner featured={posts} />
@@ -61,7 +61,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 <div className="bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} />
                     <FetchPosts
-                        slugs={mostPopular.slice(0, 5).map(p => p.slug)}
+                        slugs={mostPopular.slice(0, 5)}
                         layout="row"
                         render={({ posts }) => {
                             return (<TopImgHorizontalScroll posts={posts} />)
@@ -111,7 +111,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             </div>
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
-                popularPosts={mostPopular.map(item => item.slug)}
+                popularPosts={mostPopular}
                 topics={formats.map(f => ({ ...f, to: `${TS.slug_topic}/${f.to}` }))}
                 name={title}
 
@@ -131,10 +131,7 @@ interface ITaxonomyPageProps {
         breadcrumb: INavItem[]
         types: ISubtopicLinks[]
         formats: ISubtopicLinks[]
-        mostPopular: {
-            slug: string
-            views: number
-        }[]
+        mostPopular: string[]
     }
     path: string
 }

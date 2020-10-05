@@ -7,8 +7,7 @@ import { IDrawerNav } from '@/layouts/App'
 import LogoSmall from '@/images/AC_Logo_sm.png'
 import TopFirst from './TopFirst'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
-import Icons from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import { INavItem } from '@/types'
 
 const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideNavOpen, setSideNavOpen, menu, explorePage }) => {
@@ -35,12 +34,12 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
                 <div className="flex flex-row items-center">
                     {explorePage && (
                         <Link to={explorePage.to} className="px-2">
-                            <Icons name="search" size="xl" />
+                            <Icon name="Search" size="6" />
                         </Link>
                     )}
                     <button className="pl-2 pr-4 -mt-1" onClick={() => { setSideNavOpen(true) }}>
 
-                        <Icons name="menu" size="xl" />
+                        <Icon name="Menu" size="6" />
                     </button>
                 </div>
             </div>

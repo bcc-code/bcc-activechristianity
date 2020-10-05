@@ -35,7 +35,7 @@ const Watch: React.FC<IProps> = (props) => {
             <div className="hidden sm:block px-4">
                 <LazyLoad >
                     <FetchPosts
-                        slugs={mostPopular.map(p => p.slug)}
+                        slugs={mostPopular}
                         layout="list"
                         render={({ posts }) => {
                             return <HeaderSection headerPost={posts[5]} listPosts={posts.slice(0, 5)} />
@@ -43,6 +43,7 @@ const Watch: React.FC<IProps> = (props) => {
                     >
 
                     </FetchPosts>
+
                 </LazyLoad>
 
             </div>
@@ -52,7 +53,7 @@ const Watch: React.FC<IProps> = (props) => {
                     <div className="w-full py-6">
                         <PageSectionHeader title={ac_strings.featured} />
                         <FetchPosts
-                            slugs={mostPopular.slice(5).map(p => p.slug)}
+                            slugs={mostPopular.slice(5)}
                             layout="row"
                             render={({ posts }) => (
                                 <XScroll
@@ -67,7 +68,7 @@ const Watch: React.FC<IProps> = (props) => {
                 <div className="w-full py-6">
                     <PageSectionHeader title={ac_strings.popular} />
                     <FetchPosts
-                        slugs={mostPopular.slice(0, 5).map(p => p.slug)}
+                        slugs={mostPopular.slice(0, 5)}
                         layout="row"
                         render={({ posts }) => (
                             <HSCardListVideo posts={posts} />
@@ -123,10 +124,7 @@ interface IProps {
         info: INavItemCount
         items: ISubtopicLinks[]
         menu: INavItemCount[]
-        mostPopular: {
-            slug: string
-            views: number
-        }[]
+        mostPopular: string[]
     }
     path: string
 }

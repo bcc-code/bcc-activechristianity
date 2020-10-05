@@ -106,6 +106,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             body: JSON.stringify({ query })
         })
             .then(response => response.json())
+            .catch(error=>{
+                console.log(error)
+            })
     }
       const firstQueryRes = await sendQuery(settingsQuery)
 
@@ -143,7 +146,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                       }
                 }`
                 
-                const popular_slug=await sendQuery(popularPostsQuery)
+                const popular_slug=await sendQuery(popularPostsQuery).catch(error=>{
+                    console.log(error)
+                })
                   metadata["popular_posts"]=popular_slug.data.posts.data.map(p=>p.slug)
             }
   
@@ -254,7 +259,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             } else {
                 throw new Error('Replacer not working!')
             }
-
+            console.log(`creating ${entities.length} nodes`)
             for(let k=0;k<entities.length;k++){
                 const post = entities[k]
                 const transformedPost = Object.assign({},post)
@@ -264,22 +269,17 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 transformedPost.glossary = glossaryContent.postGlossaries
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
-                const recommendByPostQuery = getRecommendPosts(post.id)
-                
-/*                 const recommendByPostRes = await sendQuery(recommendByPostQuery)
-                .catch(error=>{
-                    console.log(error)
-                    return null
-                })
+/*                 const recommendByPostQuery = getRecommendPosts(post.id)
+                console.log(`getting recommendedPost for ${post.slug}`)
+                const recommendByPostRes = await sendQuery(recommendByPostQuery)
 
                 if(recommendByPostRes && recommendByPostRes.errors){
                     console.log(recommendByPostQuery)
                     console.log(recommendByPostRes)
                     
-                } else if(recommendByPostRes){
+                } else if(recommendByPostRes && recommendByPostRes.data && recommendByPostRes.data.recommendedByPost){
                     transformedPost.recommendPosts = recommendByPostRes.data.recommendedByPost.map(post=>post.slug)
-                }
- */
+                } */
                 const nodeContent = JSON.stringify(transformedPost)
                 const nodeMeta = {
                     id: createNodeId(`ac-post-${post.id}`),

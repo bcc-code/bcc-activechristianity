@@ -30,7 +30,7 @@ const Listen: React.FC<IProps> = (props) => {
             fetch(`/page-data/${podcast.to}/page-data.json`)
                 .then(res => res.json())
                 .then(res => {
-                    const posts = res.result.data.ac.topics[0].posts.slice(0, 6).map(item => item.slug)
+                    const posts = res.result.data.ac.topics[0].posts.slice(0, 6)
                     setPodcastEps(posts)
                 }),
 
@@ -58,7 +58,7 @@ const Listen: React.FC<IProps> = (props) => {
                     <div className="w-full pb-4 sm:hidden pt-8">
                         <PageSectionHeader title={ac_strings.featured} />
                         <FetchPosts
-                            slugs={mostPopular.slice(5).map(p => p.slug)}
+                            slugs={mostPopular.slice(5)}
                             layout="row"
                             render={({ posts }) => <HSCardList posts={posts} />}
                         />
@@ -98,7 +98,7 @@ const Listen: React.FC<IProps> = (props) => {
             </div>
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
-                popularPosts={mostPopular.map(item => item.slug)}
+                popularPosts={mostPopular}
                 playlists={playlists}
                 topics={[playlist, podcast, ...items]}
                 name={title}
@@ -119,10 +119,7 @@ interface IProps {
         info: INavItemCount
         items: ISubtopicLinks[]
         menu: INavItemCount[]
-        mostPopular: {
-            slug: string
-            views: number
-        }[]
+        mostPopular: string[]
 
     }
     path: string

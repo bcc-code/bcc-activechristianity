@@ -10,7 +10,7 @@ const formatTemplate= 'src/templates/recommend/format-recommend.tsx'
 
 const ac_strings = require('../../src/strings/ac_strings.json')
 const TS = require('../../src/strings')
-const {getSubTopics,getSubTopicPosts,createSubTopicPages, formatScope,typeScope,typesAll} = require('./hjelper')
+const {getSubTopicsAndFeaturedPosts,getSubTopicPosts,createSubTopicPages, formatScope,typeScope,typesAll} = require('./hjelper')
 
 
 const query = `{
@@ -140,7 +140,7 @@ module.exports = function generateTopics(actions, graphql) {
                     name:ac_strings.type,
                     items:[]
                 }
-                console.log(" formats")
+
                 for(let j=0;j<formats.length;j++){
                     console.log(`generating formats ${j}/${formats.length}`)
                     const format=formats[j]
@@ -149,12 +149,12 @@ module.exports = function generateTopics(actions, graphql) {
                     
                     if (find){
                         resource_grouped["format"].items.push(({key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts}))
-                        const querySubTopics = getSubTopics(format.id)
-                        const mostPopular=format.posts.sort((a,b)=>b.views-a.views).slice(0,10)
-
+                        const querySubTopics = getSubTopicsAndFeaturedPosts(format.id)
+                        const mostPopular=format.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
+                        
                         const subTRes = await graphql(querySubTopics)
-
                         const subTopics = subTRes.data.ac.topic.subTopics
+                        const featuredPosts = subTRes.data.ac.topic.posts.map(p=>p.slug)
                         const formatType={
                             info:{
                                 key:find.keyname,
@@ -201,6 +201,7 @@ module.exports = function generateTopics(actions, graphql) {
                               title:format.name,
                               formatType,
                               mostPopular,
+                              featuredPosts,
                               breadcrumb:[resourceNavItem, {name:format.name ,to:format.slug}]
                             },
                           })
@@ -219,11 +220,12 @@ module.exports = function generateTopics(actions, graphql) {
       
                     if (findType){
                         
-                        const querySubTopics = getSubTopics(type.id)
+                        const querySubTopics = getSubTopicsAndFeaturedPosts(type.id)
                         
                         const subTRes = await graphql(querySubTopics)
                         
                         const subTopics = subTRes.data.ac.topic.subTopics
+                        const featuredPosts = subTRes.data.ac.topic.posts.map(p=>p.slug)
                         const typeFormatEach={
                             info:{key:findType.keyname,name:type.name,to:type.slug,count:type.noOfPosts},
                             items:[]}
@@ -265,12 +267,8 @@ module.exports = function generateTopics(actions, graphql) {
 
                         let typeMenu=[...typeFormatEach.items]
 
-                        typesPopular[findType.keyname]=type.posts.sort((a,b)=>b.views-a.views).slice(0,10)
-                        resource_grouped[findType.keyname]={
-                            name:type.name,
-                            slug:type.slug,
-                            breadcrumb:typeBreadcrumb
-                        }
+                        typesPopular[findType.keyname]=type.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
+                        
 
                         if(`${type.id}`===typesAll.read.keyId){
                             
@@ -304,8 +302,10 @@ module.exports = function generateTopics(actions, graphql) {
                             slug:type.slug,
                             breadcrumb:typeBreadcrumb,
                             menu:typeMenu,
+                            featuredPosts,
                             ...typeFormatEach
                         }
+                        
 
                     }
                 }
@@ -328,7 +328,7 @@ module.exports = function generateTopics(actions, graphql) {
                 Object.keys(sortedTypes).forEach(typekey=>{
                     const eachType=resource_grouped[typekey]
                     const mostPopular=typesPopular[typekey]
-
+                    console.log(eachType)
                     createPage({
                         path: `${eachType.slug}`,
                         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),
@@ -357,7 +357,6 @@ module.exports = function generateTopics(actions, graphql) {
             }
 
             if(explorePage){
-                console.log(scripturePage)
                 createPage({
                     path: explorePage.slug,
                     component: path.resolve(exploreTemplate),

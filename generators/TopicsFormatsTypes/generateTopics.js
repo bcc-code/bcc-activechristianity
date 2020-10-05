@@ -5,7 +5,7 @@ const listTemplate = 'src/templates/archive/post-list.tsx'
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
 const TS = require('../../src/strings')
-const {getSubTopics,getSubTopicPosts,createSubTopicPages, formatScope,typeScope,typesAll,formatsAll} = require('./hjelper')
+const {getSubTopicsAndFeaturedPosts,getSubTopicPosts,createSubTopicPages, formatScope,typeScope,typesAll,formatsAll} = require('./hjelper')
 /* SETUP */
  
 
@@ -120,14 +120,15 @@ module.exports = function generateTopics(actions, graphql) {
               
                     if(topic.noOfPosts>20){
                         
-                        const querySubTopics = getSubTopics(topic.id)
+                        const querySubTopics = getSubTopicsAndFeaturedPosts(topic.id)
+                        
                         const topicFormat = []
                         const topicType = []
 
                         const subTRes = await graphql(querySubTopics)
 
                         const subTopics = subTRes.data.ac.topic.subTopics
-
+                        const featuredPosts = subTRes.data.ac.topic.posts.map(p=>p.slug)
                         for (let i =0;i<subTopics.length;i++){
                             
                             const stTopic=subTopics [i]
@@ -196,7 +197,7 @@ module.exports = function generateTopics(actions, graphql) {
                         }
                         // create recommend
                         const pagePath = `${TS.slug_topic}/${topic.slug}`
-                        const mostPopular=topic.posts.sort((a,b)=>b.views-a.views).slice(0,10)
+                        const mostPopular=topic.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
 
                         createPage({
                             path:pagePath,
@@ -207,6 +208,7 @@ module.exports = function generateTopics(actions, graphql) {
                               slug:topic.slug,
                               types:topicType,
                               formats:topicFormat,
+                              featuredPosts,
                               mostPopular,
                               breadcrumb:[
                                 navTopItem, 

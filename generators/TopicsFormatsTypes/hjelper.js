@@ -59,7 +59,7 @@ module.exports.formatScope = Object.keys(formatsAll).map(key=>formatsAll[key])
 
 module.exports.typeScope = Object.keys(typesAll).map(key=>typesAll[key])
 
-module.exports.getSubTopics = (id)=>`{
+module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
   ac {
       topic(id: ${id}) {
           id
@@ -70,7 +70,9 @@ module.exports.getSubTopics = (id)=>`{
             group_id
             slug
           }
-        }
+          posts(isFeatured: true) { slug}
+      }
+      
   }
 }`
 
