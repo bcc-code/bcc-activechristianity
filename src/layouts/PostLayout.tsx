@@ -368,7 +368,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 {body}
             </DesktopPostMain>
-            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white ">
+            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4">
                 <p className=""><em>{TS.scripture_copyright}</em></p>
             </div>
             {postFooter}
