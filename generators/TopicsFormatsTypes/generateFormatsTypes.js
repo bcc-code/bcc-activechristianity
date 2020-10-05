@@ -92,10 +92,6 @@ module.exports = function generateTopics(actions, graphql) {
             const podcastCount = result.data.ac.podcasts.noOfPosts
             const explorePage = pageInfo.find(page=>`${page.id}`===process.env.EXPLORE_PAGE_ID)
             const scripturePage = pageInfo.find(page=>`${page.id}`===process.env.SCRIPTURE_PAGE_ID)
-            const resourceNavItem = {
-                name:resourcePage.title,
-                to:resourcePage.slug
-            }
             let all = [...formats,...types]
 
             all.forEach((node) => {
@@ -200,7 +196,7 @@ module.exports = function generateTopics(actions, graphql) {
                               formatType,
                               mostPopular,
                               featuredPosts,
-                              breadcrumb:[resourceNavItem, {name:format.name ,to:format.slug}]
+                              breadcrumb:[{name:format.name ,to:format.slug}]
                             },
                           })
 
@@ -250,7 +246,7 @@ module.exports = function generateTopics(actions, graphql) {
                                         
                                         createSubTopicPages({
                                             type:findType.keyname,
-                                            breadcrumb:[resourceNavItem],
+                                            breadcrumb:[],
                                             createPage,allPosts,
                                             topic:type,
                                             subTopic
@@ -261,7 +257,7 @@ module.exports = function generateTopics(actions, graphql) {
                             
                         }
 
-                        const typeBreadcrumb = [resourceNavItem, {name:type.name ,to:type.slug}]
+                        const typeBreadcrumb = [ {name:type.name ,to:type.slug}]
 
                         let typeMenu=[...typeFormatEach.items]
 
