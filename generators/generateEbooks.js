@@ -29,11 +29,6 @@ const query = `
               alt
             }
           }
-
-          resource:page(id:${process.env.RESOURCE_PAGE_ID}){
-            title
-            slug
-          }
     
           ebook:page(id:${process.env.EBOOK_PAGE_ID}){
             title
@@ -56,9 +51,8 @@ module.exports = function generateEbooks(actions, graphql) {
       }
       console.log("Generating ebooks")
       const eBooks = result.data.ac.ebooks
-      const resourcePage = result.data.ac.resource
       const ebookPage = result.data.ac.ebook
-      const navTopItem={name:resourcePage.title,to:resourcePage.slug}
+
       const navParentItem={name:ebookPage.title,to: ebookPage.slug}
       _.each(eBooks, (ebook) => {
         const basePath = `/${ebookPage.slug}/${ebook.slug}`  
@@ -70,7 +64,7 @@ module.exports = function generateEbooks(actions, graphql) {
             title:ebook.title,
             slug: ebook.slug,
             ebook,
-            breadcrumb:[navTopItem,navParentItem]
+            breadcrumb:[navParentItem]
           },
         })
       })

@@ -27,11 +27,6 @@ const query = `{
 
         }
 
-        page(id:${process.env.RESOURCE_PAGE_ID}){
-          title
-          slug
-        }
-
         topicMain:page(id:${process.env.TOPICS_PAGE_ID}){
           title
           slug
@@ -57,9 +52,7 @@ module.exports = function generateTopics(actions, graphql) {
           } else {
             console.log("generating topics")
             const topicInfo = result.data.ac.topics
-            const resourcePage = result.data.ac.page
             const topicsMain= result.data.ac.topicMain
-            const navTopItem={name:resourcePage.title,to:resourcePage.slug}
             const navParentItem={name:topicsMain.title,to:topicsMain.slug}
             const filteredTopics = []
             
@@ -100,7 +93,6 @@ module.exports = function generateTopics(actions, graphql) {
                           id:node.id,
                           title:node.name,
                           breadcrumb:[
-                            navTopItem,
                             navParentItem, 
                             {
                             name:node.name,
@@ -153,7 +145,6 @@ module.exports = function generateTopics(actions, graphql) {
                                       topic,subTopic:stTopic, 
                                       isTopic:true,
                                       breadcrumb:[
-                                        navTopItem,
                                         navParentItem
                                       ]
                                       })
@@ -186,7 +177,6 @@ module.exports = function generateTopics(actions, graphql) {
                                       subTopic:stTopic,
                                       isTopic:true,
                                       breadcrumb:[
-                                        navTopItem,
                                         navParentItem
                                       ]
                                     })
@@ -211,7 +201,6 @@ module.exports = function generateTopics(actions, graphql) {
                               featuredPosts,
                               mostPopular,
                               breadcrumb:[
-                                navTopItem, 
                                 navParentItem,{
                                 name:topic.name,
                                 to:pagePath

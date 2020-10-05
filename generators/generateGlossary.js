@@ -12,10 +12,6 @@ const getGlossaryQuery = `
             id
           }
 
-          resource:page(id:${process.env.RESOURCE_PAGE_ID}){
-            title
-            slug
-          }
           glossariesPage:page(id:${process.env.GLOSSARY_PAGE_ID}){
             title
             slug
@@ -40,9 +36,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
 
     if (result.data.ac && result.data.ac.glossary){
         const allGlossaries= result.data.ac.glossary
-        const resourcePage = result.data.ac.resource
         const glossariesPage = result.data.ac.glossariesPage
-        const navTopItem={name:resourcePage.title,to:resourcePage.slug}
         const navParentItem={name:glossariesPage.title,to:glossariesPage.to}
         allGlossaries.forEach(glossary=>{
             const baseUrl=`${glossariesPage.slug}/${glossary.slug}`
@@ -54,7 +48,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                   title:glossary.word,
                   slug:glossary.slug,
                   id:glossary.id,
-                  breadcrumb:[navTopItem,navParentItem]
+                  breadcrumb:[navParentItem]
                 }
               })
         })

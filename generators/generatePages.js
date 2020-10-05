@@ -14,11 +14,6 @@ const query = `{
       flexibleContent
     }
 
-    resource:page(id:${process.env.RESOURCE_PAGE_ID}){
-      title
-      slug
-    }
-
     topicMain:page(id:${process.env.TOPICS_PAGE_ID}){
       title
       slug
@@ -73,11 +68,9 @@ module.exports = function generatePages(actions, graphql) {
       return Promise.reject(result.errors)
     } else {
       const pageInfo = result.data.ac.allPages
-      const resourcePage = result.data.ac.resource
       const topicsMain= result.data.ac.topicMain
       const podcast = result.data.ac.podcast
       const aboutMain = result.data.ac.about
-      const navTopItem={name:resourcePage.title,to:resourcePage.slug}
       const navTopicsItem={name:topicsMain.title,to:topicsMain.slug}
      
 
@@ -93,7 +86,6 @@ module.exports = function generatePages(actions, graphql) {
           let context = {
             title:page.title,
               breadcrumb:[
-                navTopItem,
                 {
                   name:page.title,
                   to:page.slug
@@ -126,7 +118,6 @@ module.exports = function generatePages(actions, graphql) {
           id:topicsMain.id,
           themes:themePages,
           breadcrumb:[
-            navTopItem,
             navTopicsItem
           ]
         }, 
@@ -142,7 +133,6 @@ module.exports = function generatePages(actions, graphql) {
             title:page.title,
             id:page.id,
             breadcrumb:[
-              navTopItem,
               navTopicsItem,
               {
                 name:page.title,
@@ -196,7 +186,6 @@ module.exports = function generatePages(actions, graphql) {
           title:podcast.title,
           id:podcast.id,
           breadcrumb:[
-            navTopItem,
             {
               name:podcast.title,
               to:podcast.slug

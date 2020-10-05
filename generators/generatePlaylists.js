@@ -27,10 +27,6 @@ const query = `
         }
       }
 
-      resource:page(id:${process.env.RESOURCE_PAGE_ID}){
-        title
-        slug
-      }
 
       playlistMain:page(id:${process.env.PLAYLIST_PAGE_ID}){
         title
@@ -51,9 +47,7 @@ module.exports = function generatePlaylists(actions, graphql) {
       }
   
       const playlists = result.data.ac.playlists
-      const resourcePage = result.data.ac.resource
       const playlistMain= result.data.ac.playlistMain
-      const navTopItem={name:resourcePage.title,to:resourcePage.slug}
       console.log("Generating playlist")
       _.each(playlists, (playlist) => {
         const basePath = `/${ac_strings.slug_playlist}/${playlist.slug}`
@@ -65,7 +59,7 @@ module.exports = function generatePlaylists(actions, graphql) {
             title:playlist.title,
             slug: playlist.slug,
             playlist,
-            breadcrumb:[navTopItem,{name:playlistMain.title,to:playlistMain.slug}]
+            breadcrumb:[{name:playlistMain.title,to:playlistMain.slug}]
           },
         })
       })
