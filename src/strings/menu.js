@@ -240,10 +240,6 @@ module.exports.resourceMenu = {
     "listen": all.listen.children,
     "links": [
         {
-            name: 'All Resource',
-            to: `/resource`
-        },
-        {
             name: 'About Us',
             to: `${TS.slug_about}`
         },

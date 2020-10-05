@@ -3,7 +3,6 @@ const _ = require('lodash')
 const path = require('path')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate ='src/templates/archive/video-list.tsx'
-const resourceTemplate = 'src/templates/page/resources.tsx'
 
 const exploreTemplate='src/templates/page/explore.tsx'
 const formatTemplate= 'src/templates/recommend/format-recommend.tsx'
@@ -92,7 +91,6 @@ module.exports = function generateTopics(actions, graphql) {
             const playlistsAll = result.data.ac.playlists
             const podcastCount = result.data.ac.podcasts.noOfPosts
             const explorePage = pageInfo.find(page=>`${page.id}`===process.env.EXPLORE_PAGE_ID)
-            const resourcePage = pageInfo.find(page=>`${page.id}`===process.env.RESOURCE_PAGE_ID)
             const scripturePage = pageInfo.find(page=>`${page.id}`===process.env.SCRIPTURE_PAGE_ID)
             const resourceNavItem = {
                 name:resourcePage.title,
@@ -343,18 +341,6 @@ module.exports = function generateTopics(actions, graphql) {
                     })
                 })
 
-                if (resourcePage){
-
-                createPage({
-                    path: resourcePage.slug,
-                    component: path.resolve(resourceTemplate),
-                    context: {
-                      title:resourcePage.title,
-                      slug: resourcePage.slug,
-                      resource:resource_grouped
-                    },
-                  })
-            }
 
             if(explorePage){
                 createPage({
