@@ -28,8 +28,6 @@ const core = [
     "EBOOK_PAGE_ID",
     "SERIES_PAGE_ID",
     "PLAYLIST_PAGE_ID",
-
-    "RESOURCE_PAGE_ID",
     "EXPLORE_PAGE_ID",
     "GLOSSARY_PAGE_ID",
     "ABOUT_PAGE_ID",

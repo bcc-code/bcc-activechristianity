@@ -98,7 +98,7 @@ const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrl
 
 export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ authors }) => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-4">
             <PageSectionHeaderUpperCaseGray title={authors.as} />
 
             <span>{authors.authors.map(a => (
@@ -157,7 +157,7 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
     const { id, shareSlug, text, views, likes, authors } = props
     return (
         <div className="relative bg-white border-d4gray flex justify-between">
-            <div className="flex">
+            <div className="flex flex-col">
                 {authors?.map(item => {
                     return (
                         <AuthorFollowSection authors={item} />
@@ -174,6 +174,7 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
                     shareUrl={shareSlug}
                     text={text ? text : ""}
                     label={ac_strings.share}
+                    color="slate-dark"
                 />
             </div>
         </div>
