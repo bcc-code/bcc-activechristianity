@@ -5,11 +5,14 @@ const listTemplate = 'src/templates/archive/post-list.tsx'
 const perPage= 12
 
 const formatsAll = {
+  "animation":{
+    keyId: process.env.ANIMATION_FILTER_ID,
+    keyname: "animation",
+  },
   "message":{
       keyId: process.env.MESSAGE_FILTER_ID,
       keyname: "message",
   },
-
   "song": {
       keyId: process.env.SONG_FILTER_ID,
       keyname: "song",
@@ -30,10 +33,10 @@ const formatsAll = {
       keyId: process.env.COMMENTARY_FILTER_ID,
       keyname: "commentary",
   },
-/*   "podcast":{
-      keyId: process.env.PODCAST_FILTER_ID,
-      keyname: "podcast",
-  } */
+  "interview":{
+    keyId: process.env.INTERVIEW_FILTER_ID,
+    keyname: "interview",
+},
 }
 module.exports.formatsAll=formatsAll
 

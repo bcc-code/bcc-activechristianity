@@ -4,19 +4,20 @@ import MetaTag from '@/components/Meta'
 
 import FetchPostList from '@/HOC/FetchPostList'
 import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
+import FetchTopicFeatured from '@/HOC/FetchTopicFeatured.tsx'
 import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
-const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
-const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenDesktopLayout'))
-import LazyLoad from '@/components/LazyLoad';
-import { INavItem, IPlaylist, INavItemCount, ISubtopicLinks } from '@/types'
-import FetchPosts from '@/HOC/FetchPosts'
-import { PageSectionHeader } from '@/components/Headers'
-import podcastProperties from '@/strings/podcastProperties'
 import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
-import { getRandomArray } from "@/helpers"
+const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+import { PageSectionHeader } from '@/components/Headers'
+import LazyLoad from '@/components/LazyLoad';
+const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenDesktopLayout'))
 import RightImgWDes from '@/components/PostItemCards/RightImg'
-import { GetFeaturedPostsForTopic } from '@/layout-parts/PostSections'
 import { UnderlineLinkViewAll } from '@/components/Button'
+
+import { INavItem, INavItemCount, ISubtopicLinks } from '@/types'
+import podcastProperties from '@/strings/podcastProperties'
+import { getRandomArray } from "@/helpers"
+
 // helper
 
 import ac_strings from '@/strings/ac_strings.json'
@@ -37,13 +38,17 @@ const Listen: React.FC<IProps> = (props) => {
             <div className="sm:hidden">
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
-                    <div className="w-full pb-4 sm:hidden pt-8">
+                    <div className="w-full py-6 sm:hidden">
 
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <GetFeaturedPostsForTopic
+                        <FetchTopicFeatured
                             latestSlug={latestSlug}
                             featuredPosts={featuredPosts}
-                            popularPosts={mostPopular}
+                            popularPosts={mostPopular.slice(0, 5)}
+                            render={({ posts }) => (
+                                <HSCardList posts={posts} />
+                            )}
+
                         />
                     </div>
                 </div>

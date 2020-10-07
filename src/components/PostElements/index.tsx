@@ -120,34 +120,33 @@ interface ILikesViewsProps {
     id: string
     likes?: number
     views?: string
+    className?: string
 }
 
 export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
-    const { id, views } = props
+    const { id, views, className } = props
     return (
-        <div className="font-roboto flex flex-1">
-            <div className="mr-2 flex flex-1 justify-between items-center">
-                {typeof views === "string" && (
-                    <div className="mr-4 flex items-center">
-                        <Icon
-                            name="Visibility"
-                            color="slate-dark"
-                            size="5"
-                        />
-                        <span className="text-xs text-d4slate-dark pl-2 mt-1">
-                            {views}
-                        </span>
-                    </div>
-                )}
+        <div className={`font-roboto  ${className ? className : 'flex flex-1 mr-2 justify-between items-center'}`}>
+            {typeof views === "string" && (
+                <div className="mr-4 flex items-center">
+                    <Icon
+                        name="Visibility"
+                        color="slate-dark"
+                        size="5"
+                    />
+                    <span className="text-xs text-d4slate-dark pl-2 mt-1">
+                        {views}
+                    </span>
+                </div>
+            )}
 
-                <Bookmark
-                    id={id}
-                    color="slate-dark"
-                    size="5"
-                />
-            </div>
-
-
+            <Bookmark
+                id={id}
+                color="slate-dark"
+                size="5"
+            />
         </div>
     )
 }
+
+

@@ -39,11 +39,12 @@ const TopImgPost: React.FC<IPostItem & IProps> = (props) => {
                     className: "mb-2 text-d4slate-dark"
                 }} rawText={title} />
                 {small !== true && (
-                    <div className="pb-4 flex">
+                    <div className="pb-4">
                         <BookmarksAndViews
                             id={id}
                             likes={likes}
                             views={views}
+                            className="flex justify-start"
                         />
                     </div>
                 )}

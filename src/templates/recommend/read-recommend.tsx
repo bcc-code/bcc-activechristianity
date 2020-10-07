@@ -1,30 +1,36 @@
 import React from "react"
-import MetaTag from '@/components/Meta'
-import LazyLoad from '@/components/LazyLoad';
+import loadable from '@loadable/component'
+
+import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import { UnderlineLinkViewAll } from '@/components/Button'
 import FetchPosts from '@/HOC/FetchPosts'
 import FetchPostList from '@/HOC/FetchPostList'
-import loadable from '@loadable/component'
+import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
+import FetchTopicFeatured from '@/HOC/FetchTopicFeatured.tsx'
+
+import LazyLoad from '@/components/LazyLoad';
+import MetaTag from '@/components/Meta'
+import { PageSectionHeader } from '@/components/Headers'
+import RightImg from '@/components/PostItemCards/RightImg'
+import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
+
+const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
+
+import { INavItem, INavItemCount, ISubtopicLinks } from '@/types'
+import { IRootState } from '@/state/types'
+
 import ac_strings from '@/strings/ac_strings.json'
 import { useSelector } from "react-redux";
 import { getRandomArray } from "@/helpers"
-const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
-const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
-import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
-import { INavItem, IPostItem, INavItemCount, ISubtopicLinks } from '@/types'
-import { IRootState } from '@/state/types'
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
-import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
-import RightImg from '@/components/PostItemCards/RightImg'
-import { PageSectionHeader } from '@/components/Headers'
-import { GetFeaturedPostsForTopic } from '@/layout-parts/PostSections'
+
 const Read: React.FC<IProps> = (props) => {
     const { loggedIn } = useSelector((state: IRootState) => state.auth)
     const { pageContext, path } = props
-    const { title, menu, info, items, mostPopular, featuredPosts } = pageContext
+    const { title, info, items, mostPopular, featuredPosts } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
-
+    console.log(items)
     return (
         <div>
             <MetaTag
@@ -40,12 +46,16 @@ const Read: React.FC<IProps> = (props) => {
 
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
-                    <div className="w-full pb-4 pt-8">
+                    <div className="w-full py-6">
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <GetFeaturedPostsForTopic
+                        <FetchTopicFeatured
                             latestSlug={latestSlug}
                             featuredPosts={featuredPosts}
                             popularPosts={mostPopular.slice(0, 5)}
+                            render={({ posts }) => (
+                                <HSCardList posts={posts} />
+                            )}
+
                         />
 
 

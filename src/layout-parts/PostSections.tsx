@@ -317,35 +317,6 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
     </div>
 )
 
-export const GetFeaturedPostsForTopic: React.FC<{ latestSlug: string, popularPosts: string[], featuredPosts: string[], topicId?: string }> = ({ latestSlug, popularPosts, featuredPosts, topicId }) => {
-    const [randomPosts, setRandomPosts] = React.useState<string[]>([])
-    React.useEffect(() => {
-
-        fetch(`/page-data/${latestSlug}/page-data.json`)
-            .then(res => res.json())
-            .then(res => {
-                if (res.result && res.result && res.result.pageContext.posts) {
-                    const latestPost: string[] = res.result.pageContext.posts
-                    const featuredList1 = getRandomArray([...popularPosts, ...latestPost], 6)
-                    const featuredList = getRandomArray([...featuredPosts, ...featuredList1].slice(0, 6), featuredList1.length)
-                    setRandomPosts(featuredList)
-
-                }
-                return undefined
-            })
-
-    }, [])
-    return (
-        <FetchPosts
-            slugs={randomPosts}
-            layout="row"
-            render={({ posts }) => {
-
-                return <HSCardList posts={posts} />
-            }}
-        />
-    )
-}
 export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[] }> = ({ postId, readMorePosts }) => {
 
     const [randomPosts, setRandomPosts] = React.useState<string[]>([])

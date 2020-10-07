@@ -221,7 +221,12 @@ module.exports = function generateTopics(actions, graphql) {
                         const subTopics = subTRes.data.ac.topic.subTopics
                         const featuredPosts = subTRes.data.ac.topic.posts.map(p=>p.slug)
                         const typeFormatEach={
-                            info:{key:findType.keyname,name:type.name,to:type.slug,count:type.noOfPosts},
+                            info:{
+                                key:findType.keyname,
+                                name:type.name,
+                                to:type.slug,
+                                count:type.noOfPosts
+                            },
                             items:[]}
 
 
@@ -259,10 +264,7 @@ module.exports = function generateTopics(actions, graphql) {
 
                         const typeBreadcrumb = [ {name:type.name ,to:type.slug}]
 
-                        let typeMenu=[...typeFormatEach.items]
-
                         typesPopular[findType.keyname]=type.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
-                        
 
                         if(`${type.id}`===typesAll.read.keyId){
                             
@@ -271,7 +273,7 @@ module.exports = function generateTopics(actions, graphql) {
                                 const ebookItem={key:"ebook",name:ebookPage.title,to:ebookPage.slug,count:ebooksAll.length}
                                 typeFormatEach["ebook"]=ebookItem
                                 resource_grouped["format"].items.push(ebookItem)
-                                typeMenu.push(ebookItem)
+                                
                             }
 
                         }
@@ -285,17 +287,23 @@ module.exports = function generateTopics(actions, graphql) {
                                 typeFormatEach["playlist"]=playlistItem
                                 typeFormatEach["podcast"]=podcastItem
                                 resource_grouped["format"].items.push(playlistItem,podcastItem)
-                                typeMenu.push(playlistItem,podcastItem)
                             }
                             
                         }
-                        typeMenu = typeMenu.sort((a,b)=>b.count-a.count)
- 
+                    
+                        typeFormatEach["items"]=typeFormatEach["items"].sort((a, b) => {
+                            if (b.key === "animation") {
+                                return 1
+                            } if (a.key === "animation") {
+                                return -1
+                            } else {
+                                return b.count - a.count
+                            }
+                        })
                         resource_grouped[findType.keyname]={
                             name:type.name,
                             slug:type.slug,
                             breadcrumb:typeBreadcrumb,
-                            menu:typeMenu,
                             featuredPosts,
                             ...typeFormatEach
                         }

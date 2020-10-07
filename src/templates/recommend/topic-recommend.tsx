@@ -30,7 +30,6 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         mostPopular
     } = pageContext
 
-
     const latestSlug = `${path}/1`
 
     return (
@@ -49,7 +48,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                     />
                 </div>
                 <div className="w-full pb-4 pt-8">
-                    <PageSectionHeader title={ac_strings.featured} />
+                    <PageSectionHeader title={ac_strings.featured} className="pb-4" />
                     <FetchPosts
                         slugs={mostPopular.slice(5)}
                         layout="row"
@@ -59,7 +58,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                     />
                 </div>
                 <div className="bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden">
-                    <PageSectionHeader title={ac_strings.popular} />
+                    <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                     <FetchPosts
                         slugs={mostPopular.slice(0, 5)}
                         layout="row"
@@ -67,12 +66,9 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                             return (<TopImgHorizontalScroll posts={posts} />)
                         }}
                     />
-
                 </div>
-
-
                 <div className="sm:bg-transparent py-6 overflow-hidden">
-                    <PageSectionHeader title={ac_strings.latest} />
+                    <PageSectionHeader title={ac_strings.latest} className="pb-4" />
 
                     <FetchPostList
                         slug={latestSlug}
@@ -114,8 +110,6 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 popularPosts={mostPopular}
                 topics={formats.map(f => ({ ...f, to: `${TS.slug_topic}/${f.to}` }))}
                 name={title}
-
-
             />
 
         </div>
