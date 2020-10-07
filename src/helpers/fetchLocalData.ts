@@ -26,7 +26,6 @@ export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
 
 export const fetchPostslistFromArchivePage = (slug: string) => {
     let processSlug = trimSlug(slug)
-    console.log(slug)
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {

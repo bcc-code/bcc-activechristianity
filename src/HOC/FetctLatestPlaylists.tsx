@@ -8,13 +8,12 @@ interface IFetchPost {
 const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
     const [playlists, setPlaylists] = React.useState<IPlaylist[]>([])
     React.useEffect(() => {
-        console.log(slug)
+
         fetch(`/page-data/${slug}/page-data.json`)
             .then(res => res.json())
             .then(res => {
 
                 const allPlaylist = res.result.data.ac.playlists
-                console.log(allPlaylist)
                 setPlaylists(allPlaylist)
             })
     }, [slug])

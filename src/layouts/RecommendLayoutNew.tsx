@@ -2,7 +2,7 @@ import React from "react"
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
-const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
+const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const LatestPopularTab = loadable(() => import('@/layout-parts/Tabs/LatestPopularTabs'))
@@ -13,7 +13,7 @@ import { HorizontalScrollSection } from '@/layout-parts/HorizontalScroll'
 import { LayoutH1Wide } from '@/components/Headers'
 
 import TopImgPost from '@/components/PostItem/TopImg'
-import { ITypeCount } from '@/layout-parts/RecommendLayout/ByTaxonomies'
+import { ITypeCount } from '@/layout-parts/RecommendLayout/ByCategoriesDesktop'
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
 import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { IQuoteBlock } from '@/components/QuoteBlock'

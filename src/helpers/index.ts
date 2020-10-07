@@ -227,6 +227,21 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
     return post
 }
 
+export const getRandomArray = (pickFromArray: any[], length: number) => {
+    if (pickFromArray.length > 0) {
+        let randName = [];
+        let processArray = [...pickFromArray]
+        do {
+            randName[randName.length] = processArray.splice(
+                Math.floor(Math.random() * processArray.length)
+                , 1)[0];
+        } while (randName.length < length);
+        return randName
+    } else {
+        return []
+    }
+
+}
 const secondesToMinutes = (seconds: number) => `${Math.round(seconds / 60)} ${ac_strings.mins}`
 
 export const normalizePostRes = (post: IPostRes) => {

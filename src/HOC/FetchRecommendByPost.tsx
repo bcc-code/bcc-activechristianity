@@ -1,34 +1,31 @@
 import * as React from "react"
 import { IPostItem, } from '@/types'
-import { useSelector } from "react-redux";
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
-
+import acApi from '@/util/api'
 interface IFetchPost {
-    slugs: string[],
-    layout: "row" | "list",
-    render: (data: { posts: IPostItem[] }) => JSX.Element
+    postId: number | string,
+    render: (data: { postSlugs: string[] }) => JSX.Element
 }
-const FetchPosts: React.FC<IFetchPost> = ({ slugs, render }) => {
-    const [posts, setPosts] = React.useState<IPostItem[]>([])
+const FetchPosts: React.FC<IFetchPost> = ({ render, postId }) => {
+    const [posts, setPosts] = React.useState<string[]>([])
     React.useEffect(() => {
-        fetchLocalPostsFromSlugs(slugs)
+        acApi.recommendedByPost(postId)
             .then(res => {
-                if (res) {
-                    setPosts(res)
-                }
+                const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
+                setPosts(allSlugs)
             })
             .catch(error => {
                 console.log(error)
             })
-    }, [slugs])
+    }, [postId])
 
     return (
 
         <Placeholder
             loading={posts.length === 0}
         >
-            {render({ posts })}
+            {render({ postSlugs: posts })}
         </Placeholder>
     )
 

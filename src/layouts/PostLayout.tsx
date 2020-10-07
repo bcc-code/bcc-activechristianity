@@ -20,12 +20,12 @@ import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
 import FetchPost from '@/HOC/FetchPosts'
 import FetchPostFromList from '@/HOC/FetchPostList'
-import ShareButton from '@/components/PostElements/ToggleBookmark'
-import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts } from '@/layout-parts/PostSections'
+import FetchRecommendByPost from '@/HOC/FetchRecommendByPost'
+import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts, RecommendedPostsSection } from '@/layout-parts/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import TwoToOneImg from "@/components/Images/Image2To1"
-
+import { getRandomArray } from "@/helpers"
 import TS from '@/strings'
 
 import acApi from '@/util/api'
@@ -138,7 +138,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         content,
         langs,
         glossary,
-        recommendPosts,
         readMorePosts,
         views,
         likes
@@ -150,26 +149,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
 
-    let readMore: string[] = []
-    if (readMorePosts.length > 0) {
-        const procssedReadMore = readMorePosts.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
-        readMore = procssedReadMore
-    }
 
-    let randomRecommendPosts: string[] = []
-    if (recommendPosts) {
-        let randName = [];
-        let recommendPostsSlugs = [...recommendPosts]
-        do {
-            randName[randName.length] = recommendPostsSlugs.splice(
-                Math.floor(Math.random() * recommendPostsSlugs.length)
-                , 1)[0];
-        } while (randName.length < 3);
-        // prepare to remove dupicates in readmores 
-        randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
-    }
-
-    readMore = [...new Set([...randomRecommendPosts, ...readMore])]
 
 
     const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
@@ -252,21 +232,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 )
             })}
 
-            {readMore.length > 0 ? (
-                <LazyLoad>
-                    <FetchPost
-                        slugs={readMore}
-                        layout="list"
-                        render={({ posts }) => {
-                            return (
-                                <Row2ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
-                            )
-                        }}
-                    />
 
+            <LazyLoad>
+                <RecommendedPostsSection
+                    postId={id}
+                    readMorePosts={readMorePosts}
+                />
+            </LazyLoad>
 
-                </LazyLoad>
-            ) : null}
 
 
             {featuredInPlaylist && (

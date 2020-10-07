@@ -14,7 +14,7 @@ import VideoRow4Col from '@/layout-parts/List/Combo/VideoRow4Col-HorizontalScrol
 import { PageSectionHeader, LayoutH1Wide } from '@/components/Headers'
 import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 import { INavItem, IPostItem, INavItemCount, ISubtopicLinks } from '@/types'
-
+import { getRandomArray } from "@/helpers"
 import ac_strings from '@/strings/ac_strings.json'
 
 
@@ -23,7 +23,7 @@ const Watch: React.FC<IProps> = (props) => {
 
 
     const { pageContext, path } = props
-    const { title, items, menu, mostPopular } = pageContext
+    const { title, items, menu, mostPopular, featuredPosts } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
@@ -40,9 +40,8 @@ const Watch: React.FC<IProps> = (props) => {
                         render={({ posts }) => {
                             return <HeaderSection headerPost={posts[5]} listPosts={posts.slice(0, 5)} />
                         }}
-                    >
+                    />
 
-                    </FetchPosts>
 
                 </LazyLoad>
 
@@ -51,7 +50,7 @@ const Watch: React.FC<IProps> = (props) => {
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
                     <div className="w-full py-6">
-                        <PageSectionHeader title={ac_strings.featured} />
+                        <PageSectionHeader title={ac_strings.featured} className="pb-4" />
                         <FetchPosts
                             slugs={mostPopular.slice(5)}
                             layout="row"
@@ -66,7 +65,7 @@ const Watch: React.FC<IProps> = (props) => {
 
                 </div>
                 <div className="w-full py-6">
-                    <PageSectionHeader title={ac_strings.popular} />
+                    <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                     <FetchPosts
                         slugs={mostPopular.slice(0, 5)}
                         layout="row"
@@ -125,6 +124,7 @@ interface IProps {
         items: ISubtopicLinks[]
         menu: INavItemCount[]
         mostPopular: string[]
+        featuredPosts: string[]
     }
     path: string
 }

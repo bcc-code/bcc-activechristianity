@@ -18,8 +18,8 @@ const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
                     setPostItems(res)
                 }
             })
-            .catch(res => {
-                console.log(res)
+            .catch(error => {
+                console.log(error)
             })
     }, [])
 

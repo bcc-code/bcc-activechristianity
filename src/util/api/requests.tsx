@@ -90,6 +90,24 @@ query {
   }
 
 `
+
+export const recommendedByPostQuery = (postId: number | string) => `
+  query { 
+    
+    recommendedByPost(postId:${postId}){
+      slug
+    }
+  }  
+
+`
+export const topicReommendedPostsQuery = (topicId: number) => `
+query {
+  rankingTopicPosts(topicId:${topicId}){
+    slug
+  }
+}  
+`
+
 export const likedPostsQuery = `
   query {
     liked {

@@ -12,7 +12,12 @@ import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 import FetchPostFromList from '@/HOC/FetchPostList'
-
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
+import FetchPosts from '@/HOC/FetchPosts'
+const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+import FetchPost from '@/HOC/FetchPosts'
+import { getRandomArray } from "@/helpers"
+import acApi from '@/util/api'
 interface IPostMain {
     id: string
     title: string
@@ -311,3 +316,77 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
         </Link>
     </div>
 )
+
+export const GetFeaturedPostsForTopic: React.FC<{ latestSlug: string, popularPosts: string[], featuredPosts: string[], topicId?: string }> = ({ latestSlug, popularPosts, featuredPosts, topicId }) => {
+    const [randomPosts, setRandomPosts] = React.useState<string[]>([])
+    React.useEffect(() => {
+
+        fetch(`/page-data/${latestSlug}/page-data.json`)
+            .then(res => res.json())
+            .then(res => {
+                if (res.result && res.result && res.result.pageContext.posts) {
+                    const latestPost: string[] = res.result.pageContext.posts
+                    const featuredList1 = getRandomArray([...popularPosts, ...latestPost], 6)
+                    const featuredList = getRandomArray([...featuredPosts, ...featuredList1].slice(0, 6), featuredList1.length)
+                    setRandomPosts(featuredList)
+
+                }
+                return undefined
+            })
+
+    }, [])
+    return (
+        <FetchPosts
+            slugs={randomPosts}
+            layout="row"
+            render={({ posts }) => {
+
+                return <HSCardList posts={posts} />
+            }}
+        />
+    )
+}
+export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[] }> = ({ postId, readMorePosts }) => {
+
+    const [randomPosts, setRandomPosts] = React.useState<string[]>([])
+
+    React.useEffect(() => {
+        acApi.recommendedByPost(postId)
+            .then(res => {
+                const recommendedPosts: string[] = res.recommendedByPost.map((p: any) => p.slug)
+                /* setPosts(allSlugs) */
+                let readMore: string[] = []
+                if (readMorePosts.length > 0) {
+                    const procssedReadMore = readMorePosts.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
+                    readMore = procssedReadMore
+                }
+
+                let randomRecommendPosts: string[] = []
+                if (recommendedPosts) {
+                    let randName = [];
+                    let recommendPostsSlugs = [...recommendedPosts]
+                    if (recommendPostsSlugs.length > 0) {
+                        randName = getRandomArray(recommendPostsSlugs, 3)
+                        // prepare to remove dupicates in readmores 
+                        randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
+                    }
+                }
+
+                readMore = [...new Set([...randomRecommendPosts, ...readMore])]
+                setRandomPosts(readMore)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [postId, readMorePosts])
+    return (
+        <FetchPost
+
+            slugs={randomPosts}
+            layout="row"
+            render={({ posts }) => {
+                return <Row2ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
+            }}
+        />
+    )
+}

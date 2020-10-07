@@ -12,7 +12,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
         fetch(`/page-data/${slug}/page-data.json`)
             .then(res => res.json())
             .then(res => {
-                const postSlugs = res.result.data.ac.topics[0].posts.slice(0, 6).map(p => p.slug)
+                const postSlugs = res.result.data.ac.topics[0].posts.slice(0, 12).map(p => p.slug)
                 return fetchLocalPostsFromSlugs(postSlugs).then(res => {
                     if (res) {
                         setPodcastEps(res)

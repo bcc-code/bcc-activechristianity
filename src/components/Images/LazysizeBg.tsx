@@ -15,14 +15,6 @@ class LazysizesImg extends React.Component<IImage, IState> {
         this.state = ({ isFullWidth: false })
     }
 
-    componentDidMount() {
-        console.log(this.refElem)
-        if (this.refElem.current) {
-            console.log(this.refElem.current.clientWidth)
-            console.log(this.refElem.current.clientHeight)
-        }
-    }
-
     render() {
         return (
             <div ref={this.refElem} className="absolute inset-0">

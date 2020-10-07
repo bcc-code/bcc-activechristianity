@@ -172,7 +172,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     }
 
     const title = ac_strings.explore
-    console.log()
+
     return (
 
         <InstantSearch

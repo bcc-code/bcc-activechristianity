@@ -6,14 +6,17 @@ import FetchPostList from '@/HOC/FetchPostList'
 import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
 import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
 const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
-const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
+const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenDesktopLayout'))
 import LazyLoad from '@/components/LazyLoad';
 import { INavItem, IPlaylist, INavItemCount, ISubtopicLinks } from '@/types'
 import FetchPosts from '@/HOC/FetchPosts'
 import { PageSectionHeader } from '@/components/Headers'
 import podcastProperties from '@/strings/podcastProperties'
 import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
+import { getRandomArray } from "@/helpers"
 import RightImgWDes from '@/components/PostItemCards/RightImg'
+import { GetFeaturedPostsForTopic } from '@/layout-parts/PostSections'
+import { UnderlineLinkViewAll } from '@/components/Button'
 // helper
 
 import ac_strings from '@/strings/ac_strings.json'
@@ -21,14 +24,12 @@ import ac_strings from '@/strings/ac_strings.json'
 
 const Listen: React.FC<IProps> = (props) => {
 
-    const [podcastEps, setPodcastEps] = React.useState<string[]>([])
-    const [playlists, setPlaylist] = React.useState<IPlaylist[]>([])
     const { pageContext, path, } = props
-    console.log(pageContext)
     const { title, breadcrumb, items, playlist, podcast, mostPopular, featuredPosts } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
     const featured = [...featuredPosts, ...mostPopular.slice(5)]
+
     return (
         <div >
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
@@ -37,37 +38,35 @@ const Listen: React.FC<IProps> = (props) => {
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
                     <div className="w-full pb-4 sm:hidden pt-8">
-                        <PageSectionHeader title={ac_strings.featured} />
-                        <FetchPosts
-                            slugs={featured}
-                            layout="row"
-                            render={({ posts }) => <HSCardList posts={posts} />}
+
+                        <PageSectionHeader title={ac_strings.featured} className="pb-4" />
+                        <GetFeaturedPostsForTopic
+                            latestSlug={latestSlug}
+                            featuredPosts={featuredPosts}
+                            popularPosts={mostPopular}
                         />
                     </div>
                 </div>
-                {/*                 <div className="sm:bg-transparent py-6 overflow-hidden">
-                    <PageSectionHeader title={ac_strings.popular} />
-                    <FetchPosts
-                        slugs={mostPopular.slice(0, 5).map(p => p.slug)}
-                        layout="row"
-                        render={({ posts }) => {
-                            return <HSCardList posts={posts} />
-                        }}
-                    />
-                </div> */}
-                <LazyLoad>
-                    <div className="py-6">
+                <div className="py-6">
+                    <div className="w-full flex justify-between items-center  pb-4 pr-4">
                         <PageSectionHeader title={ac_strings.playlist} />
-                        <FetctLatestPlaylists
-                            slug={playlist.to}
-                            render={({ playlists }) => <HSPlaylist playlists={playlists.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />}
-                        />
+                        <UnderlineLinkViewAll to={`${playlist.to}`} />
                     </div>
 
-                </LazyLoad>
+                    <FetctLatestPlaylists
+                        slug={playlist.to}
+                        render={({ playlists }) => {
+                            const randomPlaylist = getRandomArray(playlists, playlists.length > 6 ? 6 : playlists.length)
+                            return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
+                        }}
+                    />
+                </div>
                 <LazyLoad>
                     <div className="py-6">
-                        <PageSectionHeader title={podcastProperties.title} />
+                        <div className="w-full flex justify-between items-center pb-4 pr-4">
+                            <PageSectionHeader title={podcastProperties.title} />
+                            <UnderlineLinkViewAll to={`${podcast.to}`} />
+                        </div>
                         <FetchLatestPodcast
                             slug={podcast.to}
                             render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
@@ -79,8 +78,8 @@ const Listen: React.FC<IProps> = (props) => {
 
 
                 <LazyLoad>
-                    <div className="py-6">
-
+                    <div className="py-6 px-4">
+                        <PageSectionHeader title={ac_strings.latest} />
                         <FetchPostList
                             slug={latestSlug}
                             layout="row" render={({ posts }) => {
@@ -91,14 +90,20 @@ const Listen: React.FC<IProps> = (props) => {
                                 )
                             }}
                         />
+                        <div className="w-full flex justify-center items-center py-4">
+
+                            <UnderlineLinkViewAll to={`${latestSlug}`} />
+                        </div>
+
                     </div>
 
                 </LazyLoad>
             </div>
             <RecommendDesktopLayout
+                playlist={playlist}
+                podcast={podcast}
                 latestSlug={latestSlug}
                 popularPosts={mostPopular}
-                playlists={playlists}
                 topics={[playlist, podcast, ...items]}
                 name={title}
             />

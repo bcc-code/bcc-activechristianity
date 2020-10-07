@@ -12,7 +12,7 @@ import TopImgPost from '@/components/PostItem/TopImg'
 import { UnderlineTitleLink, LayoutH1Wide, TitleWithIcon } from '@/components/Headers'
 
 import { typeIcons } from '@/layout-parts/PostSections'
-const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByTaxonomies'))
+const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
 
 
 import { INavItem, IPostsByFormat, IPostItem, ITopicRes, INavItemCount, ISubtopicLinks } from '@/types'

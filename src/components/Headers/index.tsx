@@ -15,8 +15,8 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
     <h1 className=" font-semibold text-d4slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
 )
 
-export const PageSectionHeader: React.FC<{ title: string }> = ({ title }) => (
-    <div className="font-semibold pb-4 px-4 text-xl">{title}</div>
+export const PageSectionHeader: React.FC<{ title: string, className?: string }> = ({ title, className }) => (
+    <div className={`font-semibold px-4 text-xl ${className ? className : ''}`}>{title}</div>
 )
 
 export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (

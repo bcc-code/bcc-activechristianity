@@ -70,7 +70,6 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
         }
 
         if (sub && sub.trim() !== "") {
-            console.log(sub)
             modified.exceprt = sub
         }
 
@@ -80,7 +79,6 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
         if (type === "ebook") {
             fetchEbookFromSlug(slug).then(res => {
                 if (res) {
-                    console.log(res)
                     const toAdd = { ...res, ...modified }
                     setLoadedEbook(toAdd)
                 }

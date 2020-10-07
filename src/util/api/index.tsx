@@ -92,5 +92,18 @@ export default {
         return sendQuery(query).then(res => {
             return res
         })
-    }
+    },
+    topicReommendedPosts: (id: number) => {
+        const query = request.topicReommendedPostsQuery(id)
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
+
+    recommendedByPost: (id: number | string) => {
+        const query = request.recommendedByPostQuery(id)
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
 }
