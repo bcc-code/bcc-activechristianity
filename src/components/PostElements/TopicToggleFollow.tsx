@@ -29,6 +29,26 @@ interface IToggleFollowProps {
     text?: string
 }
 
+export const ToggleBookmarkIconOnly: React.FC<IToggleFollowProps> = ({ id }) => {
+
+    return (
+        <FetchAndSetFollowed
+            id={id}
+            className="p-2"
+            render={({ followed }) => {
+                const config = toggleFollowStatusMap[followed]
+                return (
+                    <button>
+                        {config.icon}
+                    </button>
+                )
+            }}
+        />
+
+    )
+}
+
+
 export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => {
 
     return (

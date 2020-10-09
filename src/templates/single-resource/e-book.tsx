@@ -89,17 +89,6 @@ const Ebook: React.FC<IProps> = ({ pageContext: { breadcrumb, ebook }, path }) =
 
     const contributors = <PostMetaWLabel authors={normalizeAuthors(authors)} />
 
-    /*   const relatedEbooks = (
-        <div className="grid-1-2col py-6">
-          {related.map(book => {
-            const item = WPItemtoPostItem(book)
-            return (
-              <FeatureCard {...item} slug={`${TS.slug_ac_ebook}/${item.slug}`} likes={99} type="ebook" />
-            )
-          })}
-        </div>
-      )
-     */
     const pageSlug = `${ac_strings.slug_ebook}/${slug}`
     return (
         <article className="overflow-scroll">

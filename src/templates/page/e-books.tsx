@@ -23,7 +23,7 @@ const EbookOverview: React.FC<IProps> = (props) => {
             <div>
                 <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={pageContext.breadcrumb} path={path} />
                 <LayoutH1Wide title={title} />
-                <div className="grid-2-4col grid-h70 standard-max-w-px">
+                <div className="grid grid-cols-2 md:grid-cols-4 grid-h70 standard-max-w-px">
                     {
                         ebooks.map((ebook) => {
                             const { slug } = ebook;

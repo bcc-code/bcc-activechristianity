@@ -3,10 +3,7 @@
 @tailwind utilities;
 
 
-@import './custom/layout-grid.css';
-@import './custom/layout-grid-topic.css';
 @import './custom/layout-out-general.css';
-@import './custom/layout-grid-home.css';
 
 
 html {

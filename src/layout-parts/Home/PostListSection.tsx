@@ -1,10 +1,9 @@
 import * as React from "react"
-import RightImgWDes from '@/components/PostItem/RightImgWDes'
+import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Link from '@/components/CustomLink'
 import { IPostItem, ITopicPostSlugs } from '@/types'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
-import { OutlineSmallRounded } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 import FetchPosts from '@/HOC/FetchPosts'

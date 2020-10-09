@@ -189,21 +189,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 />
             </div>
-            {/*             <div className="border-b pb-6">
-                <ShareSection
-                    id={id}
-                    text={excerpt || title}
-                    shareSlug={slug}
-                    views={views}
-                    likes={likes}
 
-                />
-            </div>
-            {authors && <AuthorsFollowAndPosts
-                authors={authors}
-                postId={id}
-            />
-            } */}
             {authors?.map(item => {
                 return (
 

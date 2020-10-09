@@ -11,7 +11,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])
 
     React.useEffect(() => {
-
+        console.log(topics)
         Promise.all(topics
             .map(t => fetchPostslistFromArchivePage(t.slug).then(posts => {
                 if (posts) {

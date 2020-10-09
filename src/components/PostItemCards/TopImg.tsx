@@ -5,9 +5,10 @@ import PostBase, { IPostBase } from '@/components/PostElements/Base'
 import { PostLabel } from '@/components/PostItem/PostItemParts'
 import Image2To1 from '@/components/Images/Image2To1'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
-
+import LazysizesImage from '@/components/Images/LazysizesImage'
 
 interface ITopImgPost {
+    fixedImageHeight?: boolean
     noBorder?: boolean
     showType?: boolean
     noExcerpt?: boolean
@@ -24,7 +25,8 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
         media,
         showType,
         format,
-        noBg
+        noBg,
+        fixedImageHeight
     } = props
 
     return (
@@ -41,11 +43,20 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                     </div>
                 )}
 
-                <Image2To1
-                    image={image}
-                    imageClassName={`w-full h-full pointer-events-none w-auto object-cover g-image ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
-                    alt={title}
-                />
+                {fixedImageHeight ? (
+                    <LazysizesImage
+                        {...image}
+                        className={`w-full pointer-events-none object-cover g-image ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
+                        alt={title}
+                        style={{ minWidth: '84px', height: "180px" }}
+                    />
+                ) : (
+                        <Image2To1
+                            image={image}
+                            imageClassName={` h-full pointer-events-none w-auto object-cover g-image ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
+                            alt={title}
+                        />
+                    )}
             </PostItemMediaImg>
             <PostBase
                 post={props}

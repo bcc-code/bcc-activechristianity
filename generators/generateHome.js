@@ -32,6 +32,17 @@ const query =`{
         featuredTopics:topics(featured:true) {
         	${topicQuery}
       }
+        allPages {
+            id
+            title
+            slug
+            label
+            parent {
+                title
+                label
+            
+            }
+        }
     }
 }`
 
@@ -65,7 +76,9 @@ module.exports = function generatePages(actions, graphql) {
           return Promise.reject(result.errors)
         } else {
             const {allAcNodeSetting,ac}=result.data
-
+            const pageInfo = ac.allPages
+            const playlistPage = pageInfo.find(page=>page.id===process.env.PLAYLIST_PAGE_ID);
+            const podcastPage = pageInfo.find(page=>page.id===process.env.PODCAST_PAGE_ID);
             const featuredPosts = allAcNodeSetting.nodes[0].featured_posts
            
             const formatIDs= ac.format.map(node=>node.id)
@@ -93,6 +106,7 @@ module.exports = function generatePages(actions, graphql) {
 
             await graphql(getPopularQuery)
             .then(async(popularRes)=>{
+                console.log(popularRes.data.ac)
                 const {ac_popularPosts,ac_popularTopics}=popularRes.data.ac
                 if (ac_popularPosts){
                     popularPosts["dynamic"]= ac_popularPosts.map(node=>node.slug)
@@ -134,6 +148,8 @@ module.exports = function generatePages(actions, graphql) {
                     featuredPosts,
                     popularPosts,
                     popularTopics,
+                    playlistPage,
+                    podcastPage,
                     formats:filteredFormats
                   },
               })

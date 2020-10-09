@@ -115,7 +115,10 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
+
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)
+                        console.log(postsByTypesRow1)
+                        console.log(postsByTypesRow2)
                         return (
                             (
 

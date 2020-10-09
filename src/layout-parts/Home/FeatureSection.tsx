@@ -1,9 +1,20 @@
 import React from 'react'
-import FeaturedCard, { IFeaturedCard } from '@/components/PostItem/FeaturedCardNew'
+import FetchPosts from '@/HOC/FetchPosts'
+import FeaturedCard, { IFeaturedCard } from '@/components/PostItemCards/FeaturedCard'
+import TopImg from '@/components/PostItemCards/TopImg'
 import Icons from '@/components/Icons'
 import ac_strings from '@/strings/ac_strings.json'
-
-const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featuredPosts }) => {
+import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
+import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
+import { playlistToPost, getRandomArray } from '@/helpers'
+import { ITopicPostSlugs } from '@/types'
+const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPostSlugs[] }> = ({ featuredPosts, topicPosts }) => {
+    console.log(topicPosts)
+    let postSlugs: string[] = []
+    topicPosts.map(t => {
+        postSlugs.push(...t.posts)
+    })
+    const randomFeaturedFromTopics = getRandomArray(postSlugs, 2)
     return (
         <div>
             <h3 className="relative mt-8 sm:mt-16 mx-4 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
@@ -12,39 +23,40 @@ const FeatureSection: React.FC<{ featuredPosts: IFeaturedCard[] }> = ({ featured
                     <span className="block mx-2">{ac_strings.featured}</span>
                 </div>
             </h3>
-            <div className="scroll-4col-h mx-4 my-4 hidden sm:grid">
-                {featuredPosts.map((item, i) => {
+            <div className=" mx-4 my-4 grid gap-4 md:gap-6 grid-cols-4">
+                <FetchLatestPodcast
+                    slug={"podcast"}
+                    render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="playlist" />}
 
-                    return (
-                        <div className={`div${i + 1}`} key={item.slug}>
-                            <FeaturedCard className="bg-white" {...item} />
-                        </div>
-                    )
-                })}
-            </div>
-            {/*             <div className="scroll-4col-h flex mb-4 sm:hidden">
-                {featuredPosts.map((item, i) => {
-                    const topic = item.topics && Array.isArray(item.topics) ? item.topics[0] : undefined
-                    if (item.type) {
-                        return (
-                            <div className={`div${i + 1}`} key={item.slug}>
-                                <FeaturedCard className="bg-white" {...item} />
-                            </div>
+                />
+                <FetctLatestPlaylists
 
-                        )
-                    } else {
-                        return (
-                            <div className={`div${i + 1}`} key={i}>
-                                <MobileFeatureCard post={item} topic={topic} />
-                            </div>
-                        )
+                    slug={"playlist"}
+                    render={({ playlists }) => {
+                        const random = getRandomArray(playlists, 1)
+                        const post = random.length ? random[0] : undefined
+                        return <FeaturedCard {...post} type="playlist" />
+                    }}
+                />
+                <FetchPosts
+                    slugs={[randomFeaturedFromTopics[0]]}
+                    layout="list"
+                    render={({ posts }) => {
+                        return <TopImg {...posts[0]} />
                     }
+                    }
+                />
+                <FetchPosts
+                    slugs={[randomFeaturedFromTopics[1]]}
+                    layout="list"
+                    render={({ posts }) => {
+                        return <TopImg {...posts[0]} />
+                    }
+                    }
+                />
 
-                })}
-                <div className="min-w-4">
+            </div>
 
-                </div>
-            </div> */}
         </div>
     )
 }

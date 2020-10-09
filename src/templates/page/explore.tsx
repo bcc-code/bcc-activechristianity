@@ -10,6 +10,7 @@ import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import MetaTag from '@/components/Meta'
 import { LayoutH1, PageSectionHeader } from '@/components/Headers'
 import { OutlineScriptureChapter, UnderlineLink } from '@/components/Button'
+import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import { SubSection } from '@/layout-parts/Explore/ExploreByType'
 import { fetchTopicFromSlug } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
@@ -24,7 +25,7 @@ const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/B
 import Link from '@/components/CustomLink';
 import TS from '@/strings'
 const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'))
-
+import { getRandomArray } from '@/helpers'
 import localStorageHelper from '@/helpers/localStorage'
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
@@ -56,19 +57,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
 
     }, [])
 
-    React.useEffect(() => {
-        const receivedTopics: INavItem[] = []
 
-        Promise.all(topicSlugs.map(({ slug }) => fetchTopicFromSlug(slug))).then(res => {
-            res.forEach(c => {
-                if (c) {
-                    receivedTopics.push(c)
-                }
-            })
-            setPopularTopics(receivedTopics)
-        })
-
-    }, [])
     React.useEffect(() => {
         localStorageHelper.storeQuery(query)
     }, [query])
@@ -203,22 +192,30 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     <div className="bg-white max-w-tablet mx-auto">
                         <div className="pt-6">
                             <div className="w-full flex justify-between">
-                                <PageSectionHeader title={ac_strings.topics} />
+                                <PageSectionHeader title={ac_strings.topics} className="pb-4" />
                                 <div className="pr-4"><UnderlineLink to={TS.slug_topic}>{ac_strings.see_all}</UnderlineLink></div>
                             </div>
-
-                            <XScrollCustomSize
-                                childeClassName=""
-                                items={popularTopics.map(({ name, to }) => {
+                            <QPopularAndFeaturedPosts
+                                render={({ topicPostItems }) => {
+                                    const topics = getRandomArray(topicPostItems, 6)
                                     return (
-                                        <div className="flex flex-col items-center">
-                                            <div className="min-h-24 h-24 w-18" >
-                                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
-                                            </div>
-                                        </div>
+                                        <XScrollCustomSize
+                                            childeClassName=""
+                                            items={topics.map(({ name, slug: to }) => {
+                                                return (
+                                                    <div className="flex flex-col items-center">
+                                                        <div className="min-h-24 h-24 w-18" >
+                                                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        />
                                     )
-                                })}
+                                }}
+
                             />
+
                             <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
                                 {popularTopics.map(({ name, to }) => (
                                     <div className="min-h-36 h-36" >
@@ -228,7 +225,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             </div>
                         </div>
                         <div className="pt-6">
-                            <PageSectionHeader title={ac_strings.resource} />
+                            <PageSectionHeader title={ac_strings.resource} className="pb-4" />
                             <XScrollCustomSize
                                 childeClassName=""
                                 items={resource.format.items.slice(0, 5).map(({ name, to }) => (
@@ -261,7 +258,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                         </div>
                         <div className="pt-6 pb-8">
                             <div className="w-full flex justify-between">
-                                <PageSectionHeader title={ac_strings.byScripture} />
+                                <PageSectionHeader title={ac_strings.byScripture} className="pb-4" />
                                 <div className="pr-4"><UnderlineLink to={scripturePage.to}>{ac_strings.see_all}</UnderlineLink></div>
 
                             </div>
@@ -352,6 +349,9 @@ query PpularTopics{
     popularTopics {
     slug
   }
+  featuredTopics:topics(featured:true) {
+    slug
+      }
   }
 }
 `

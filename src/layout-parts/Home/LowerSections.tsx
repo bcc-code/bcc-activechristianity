@@ -3,8 +3,8 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import FetchPosts from '@/HOC/FetchPosts'
 import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
-
-import { IPostItem, ITopicPostItems, INavItem, ITopic, ITopicPostSlugs } from '@/types'
+import FollowUs from '@/layout-parts/Home/FollowUs'
+import { ITopic, ITopicPostSlugs } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
@@ -20,32 +20,29 @@ interface IHomeLowerSection {
     topicsForYou: ITopic[]
     popularPosts: string[]
 }
-const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou, topicsForYou, popularPosts }) => {
+const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts }) => {
     return (
-        <div className="grid-home-posts-layout sm:px-4">
-            {lists.slice(0, 4).map((slot, i) => {
+        <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
+            <div className="col-start-1 col-end-3 lg:col-end-4">
+                {lists.slice(0, 4).map((slot, i) => {
 
-                return (
-                    slot && (
-                        <div key={i} className={`div${1 + i} mt-4 mx-4 sm:mr-10 sm:ml-0`}>
-                            <LazyLoad>
-                                <PostListSection {...slot} />
+                    return (
+                        slot && (
+                            <div key={i} className={`div${1 + i} mt-4 mx-4 sm:mr-10 sm:ml-0`}>
+                                <LazyLoad>
+                                    <PostListSection {...slot} />
 
-                            </LazyLoad>
+                                </LazyLoad>
 
-                        </div>
+                            </div>
+                        )
                     )
-                )
-            })}
+                })}
 
+            </div>
 
-            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden hidden sm:block">
+            <div className="col-start-3 lg:col-start-4 col-end-5 bg-gray-200 sm:bg-transparent py-6 overflow-hidden hidden sm:block">
                 <LazyLoad>
-                    {/*  <h6 className="text-d4slate-dark text-lg font-bold sm:hidden mx-4 mb-6">{ac_strings.popular}</h6> */}
-                    {/*                    <PostlistHorizontalSimple
-
-            posts={popularPosts}
-        /> */}
                     <FetchPosts
                         slugs={popularPosts}
                         layout="list"
@@ -61,18 +58,11 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, newPostsForYou,
 
 
                 </LazyLoad>
+                <FollowUs />
 
 
             </div>
-            {/*                       {newPostsForYou && newPostsForYou.length > 0 && <div className="div7 overflow-hidden">
-            <LazyLoad>
-
-                <div className="hidden sm:flex mt-8">
-                    <PopularPostVertical title={ac_strings.newForYou} posts={newPostsForYou.map(item => item.posts[0])} small />
-                </div>
-            </LazyLoad>
-        </div>} */}
-            {/*             < TopicsForYouSection topics={topicsForYou} /> */}
+            < TopicsForYouSection />
 
 
 

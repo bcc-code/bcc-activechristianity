@@ -23,7 +23,7 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path,
 
             />
             <LayoutH1Wide title={title} />
-            <div className="grid-2-4col grid-h70 standard-max-w-px py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4  grid-h70 standard-max-w-px py-8">
                 {allPlaylists.map((item) => {
                     const post = playlistToPost(item)
                     return (

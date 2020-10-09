@@ -113,7 +113,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .unfinishedPosts()
                 .then((res: IUnfinished) => {
-                    console.log(res)
                     if (Array.isArray(res.unfinishedPosts)) {
                         store.dispatch(setUserUnfinished(res.unfinishedPosts))
                     }

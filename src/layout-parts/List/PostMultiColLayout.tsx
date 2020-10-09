@@ -4,6 +4,7 @@ import { UnderlineTitleLink } from '@/components/Headers'
 import FeaturedCard from '@/components/PostItem/FeaturedCard'
 import LeftImg from '@/components/PostItemCards/LeftImg'
 import TopImg from '@/components/PostItemCards/TopImg'
+import './post-multi-col-layout.css'
 export interface IOnePostByType {
     type: INavItem,
     post: IPostItem,
@@ -14,6 +15,7 @@ export interface IOnePostByType {
 interface IPostByTypeList {
     types: IOnePostByType[]
 }
+
 
 const OnePostByType: React.FC<IOnePostByType> = ({ type, post, postThumnailType, position, postThumbnailProps }) => {
 
@@ -33,7 +35,7 @@ const OnePostByType: React.FC<IOnePostByType> = ({ type, post, postThumnailType,
             }
 
             default: {
-                return <TopImg showType {...post} />
+                return <TopImg showType {...post} fixedImageHeight />
             }
         }
     }
@@ -49,9 +51,9 @@ const OnePostByType: React.FC<IOnePostByType> = ({ type, post, postThumnailType,
     )
 }
 
-const PostsByTypes: React.FC<IPostByTypeList> = ({ types }) => {
+const PostMultiColLayout: React.FC<IPostByTypeList> = ({ types }) => {
     return (
-        <div className="hidden sm:grid grid-4col grid-h80 mt-12">
+        <div className="desktop-multi-col-layout hidden sm:grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 grid-h80 mt-12">
             {types.map((item, i) => {
 
                 return (
@@ -62,4 +64,4 @@ const PostsByTypes: React.FC<IPostByTypeList> = ({ types }) => {
     )
 }
 
-export default PostsByTypes
+export default PostMultiColLayout

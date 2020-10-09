@@ -37,8 +37,8 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
                 style={bgGradientStyle}
             >
             </div>
-            <div className="z-10 grid-home-header-5-3 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
-                <Link to={`/${slug}`} className="div1 relative sm:pr-12">
+            <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
+                <Link to={`/${slug}`} className="col-start-1 col-end-5 relative sm:pr-12">
 
 
                     {media && media.video && media.video.src ? (
@@ -58,7 +58,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
                     }
 
                 </Link>
-                <div className="div2 ml-5 flex flex-col justify-center pt-0">
+                <div className="col-start-6 col-end-9  ml-5 flex flex-col justify-center pt-0">
                     <Link
                         to={`/${slug}`}
 

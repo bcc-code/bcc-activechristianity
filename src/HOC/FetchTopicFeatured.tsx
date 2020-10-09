@@ -1,6 +1,6 @@
 import * as React from "react"
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { getRandomArray } from "@/helpers"
+import { getRandomArray, trimSlug } from "@/helpers"
 import { IPostItem, } from '@/types'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 interface IFetchPost {
@@ -14,8 +14,8 @@ interface IFetchPost {
 const GetFeaturedPostsForTopic: React.FC<IFetchPost> = ({ latestSlug, popularPosts, featuredPosts, topicId, render }) => {
     const [randomPosts, setRandomPosts] = React.useState<IPostItem[]>([])
     React.useEffect(() => {
-
-        fetch(`/page-data/${latestSlug}/page-data.json`)
+        let processSlug = trimSlug(latestSlug)
+        fetch(`/page-data/${processSlug}/page-data.json`)
             .then(res => res.json())
             .then(res => {
                 if (res.result && res.result && res.result.pageContext.posts) {

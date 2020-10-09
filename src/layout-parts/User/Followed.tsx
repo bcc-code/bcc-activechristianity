@@ -26,7 +26,7 @@ const UserHistory = () => {
     }, [userLibrary.followedTopics])
 
     return (
-        <div className="grid-1-2col mx-4 mt-4 sm:mt-12 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mx-4 sm:mt-12">
             {followedTopic.map(({ name, to }) => {
                 return (
                     <OutlineRightIcon name={name} to={to} key={to} />

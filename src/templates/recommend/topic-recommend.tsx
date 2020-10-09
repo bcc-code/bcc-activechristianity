@@ -1,5 +1,6 @@
 import React from 'react'
 import loadable from '@loadable/component'
+import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
 import LazyLoad from '@/components/LazyLoad';
 import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
@@ -23,6 +24,7 @@ import TS from '@/strings'
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const { pageContext, path } = props
+
     const {
         title,
         formats,
@@ -67,7 +69,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                         }}
                     />
                 </div>
-                <div className="sm:bg-transparent py-6 overflow-hidden">
+                {/*                 <div className="sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.latest} className="pb-4" />
 
                     <FetchPostList
@@ -77,7 +79,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                         }}
                     />
 
-                </div>
+                </div> */}
 
                 <LazyLoad>
                     <FetchTopicPostItems
@@ -102,6 +104,10 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                             }))} />
                         )}
 
+                    />
+                    <ByCatergories
+                        title={ac_strings.byCategories}
+                        types={formats.map(f => ({ name: f.name, to: `${TS.slug_topic}/${f.to}`, id: '' }))}
                     />
                 </LazyLoad>
             </div>
