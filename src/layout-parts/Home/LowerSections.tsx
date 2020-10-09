@@ -2,16 +2,13 @@ import * as React from "react"
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import FetchPosts from '@/HOC/FetchPosts'
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { ITopic, ITopicPostSlugs } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
-import TS from '@/strings'
-const NewForYou = loadable(() => import('@/layout-parts/Home/NewForYou'))
-/* const NewForYouDesktop = loadable(() => import('@/layout-parts/Home/NewForYou/Vertical')) */
+
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
 const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsForYou'))
-import { PostlistHorizontalSimple } from '@/layout-parts/HorizontalScroll'
+
 const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
 
 interface IHomeLowerSection {

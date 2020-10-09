@@ -54,7 +54,7 @@
     "gatsby-source-filesystem": "^2.3.8",
     "gatsby-source-graphql": "^2.6.2",
     "gatsby-transformer-sharp": "^2.5.3",
-    "googleapis": "^46.0.0",
+    "googleapis": "^61.0.0",
     "html2plaintext": "^2.1.2",
     "js-cookie": "^2.2.1",
     "lazysizes": "^5.2.2",
@@ -110,7 +110,7 @@
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.10",
     "prettier": "^1.19.1",
     "react-docgen-typescript-loader": "^3.7.2",
-    "tailwindcss": "^1.4.6",
+    "tailwindcss": "^1.8.12",
     "typescript": "^3.9.3"
   },
   "keywords": [

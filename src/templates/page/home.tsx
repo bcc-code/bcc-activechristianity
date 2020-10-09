@@ -9,7 +9,8 @@ const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/Fe
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
 const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
-const FeatureSection = loadable(() => import('@/layout-parts/Home/FeatureSection'))
+const FeatureSectionDesktop = loadable(() => import('@/layout-parts/Home/FeatureSectionDesktop'))
+const FeatureSectionMobile = loadable(() => import('@/layout-parts/Home/FeatureSectionMobile'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
@@ -51,7 +52,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     slug: ac_strings.slug_latest
   }
   const tabs = [latestPostAsTopic, ...formats.map(f => ({ ...f, slug: `${f.slug}/${ac_strings.slug_latest}` }))]
-
   return (
 
     <div className="standard-max-w">
@@ -107,35 +107,28 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
 
           <LazyLoad>
-            <QPopularAndFeaturedTopics
-              excludeFollowed
-              render={({ topicPostItems }) => {
-                const randomTopics = getRandomArray(topicPostItems, 6)
-                const randomPostsSlugs: string[] = []
-                randomTopics.map(p => {
-                  randomPostsSlugs.push(p.)
-                })
-                return (
-                  <>
-                    <div className="py-6">
-                      <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
-                      <FetchPosts
-                        slugs={randomPostsSlugs}
-                        layout="row"
-                        render={
-                          ({ posts }) => <TopImgHorizontalScroll posts={posts} />
-                        }
-                      />
-                    </div>
-                    <div className="py-6">
 
-                      <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
-                      <FeaturedTopics featured={randomTopics} />
-                    </div>
-                  </>
-                )
-              }}
-            />
+
+            <div className="py-6">
+              <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
+              <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
+            </div>
+            <div className="py-6">
+
+              <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
+              <QPopularAndFeaturedTopics
+                excludeFollowed
+                render={({ topicPostItems }) => {
+                  const randomTopics = getRandomArray(topicPostItems, 6)
+
+                  return (
+                    <FeaturedTopics featured={randomTopics} />
+                  )
+                }}
+              />
+
+            </div>
+
           </LazyLoad>
           {loggedIn !== "success" ? (
             <>
@@ -193,7 +186,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             }}
 
           />
-          <FeatureSection featuredPosts={featuredPostSlugs} topicPosts={popularTopicsAll.static} />
+          <FeatureSectionDesktop featuredPosts={featuredPostSlugs} topicPosts={popularTopicsAll.static} />
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}

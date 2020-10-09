@@ -8,8 +8,8 @@ import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
 import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
 import { playlistToPost, getRandomArray } from '@/helpers'
 import { ITopicPostSlugs } from '@/types'
-const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPostSlugs[] }> = ({ featuredPosts, topicPosts }) => {
-    console.log(topicPosts)
+const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPostSlugs[] }> = ({ topicPosts }) => {
+
     let postSlugs: string[] = []
     topicPosts.map(t => {
         postSlugs.push(...t.posts)
