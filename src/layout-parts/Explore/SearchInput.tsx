@@ -5,8 +5,7 @@ import * as React from 'react';
 import SearchInput from '@/components/Search'
 import SearchHistory from '@/layout-parts/Explore/SearchHistory'
 import localStorageHelper from '@/helpers/localStorage'
-import Icon from '@/components/Icons'
-import { SubSection } from '@/layout-parts/Explore/ExploreByType'
+
 import ac_strings from '@/strings/ac_strings.json'
 
 interface ICustomerSearchBox {

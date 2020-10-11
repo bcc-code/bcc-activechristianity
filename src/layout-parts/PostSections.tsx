@@ -4,17 +4,13 @@ import Link from '@/components/CustomLink'
 import { INavItem, IPostAuthors } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
-import Icon from '@/components/Icons'
-import IconMUI from '@/components/Icons/Icon'
+import Icon from '@/components/Icons/Icon'
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
 import FetchPostFromList from '@/HOC/FetchPostList'
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import FetchPosts from '@/HOC/FetchPosts'
-const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
 import FetchPost from '@/HOC/FetchPosts'
 import { getRandomArray } from "@/helpers"
 import acApi from '@/util/api'
@@ -49,9 +45,17 @@ interface IDesktopPostMain extends IPostMain {
 }
 
 export const typeIcons: { [key: string]: JSX.Element } = {
-    'listen': <Icon name="listen" size="lg" />,
-    'read': <Icon name="file" size="lg" />,
-    'watch': <Icon name="watch" size="lg" />
+    'listen': <Icon
+        name="Headset"
+
+    />,
+    'read': <Icon
+        name="Description"
+
+    />,
+    'watch': <Icon
+        name="OndemandVideo"
+    />
 
 }
 
@@ -236,7 +240,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id,
 
             </button>
             <button className="px-2 py-1" onClick={scrollToTop}>
-                <IconMUI
+                <Icon
                     name="Publish"
                     color="secondary"
                     size="6"
@@ -312,7 +316,7 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
             to={`/${latestSlug}`}
         >
             <span>{ac_strings.moreLatest}</span>
-            <Icon name="chev-right" size="sm" />
+            <Icon name="KeyboardArrowRight" size="4" color="slate-dark" />
         </Link>
     </div>
 )

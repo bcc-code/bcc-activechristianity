@@ -1,28 +1,92 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { LayoutH1, PageSectionHeader } from '@/components/Headers'
 import { IPostItem, ITopicNavItem } from '@/types'
 import { IRootState } from '@/state/types'
-
-import PostItem from '@/components/PostItem/RightImgWDes'
+import FetchPosts from '@/HOC/FetchPosts'
+import FetchTopics from '@/HOC/FetchFullTopicWithPostSlugs'
+import PostItem from '@/components/PostItemCards/RightImg'
+import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
+import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
+import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
+import TS from '@/strings'
 const UserHistory = () => {
-    const [followedTopic, setFollowedTopics] = React.useState<ITopicNavItem[]>([])
+
     const [likedPosts, setLikePosts] = React.useState<IPostItem[]>([])
-    const userLibrary = useSelector((state: IRootState) => state.userLibrary);
+    const { followedTopics, bookmarkedPosts, unfinishedPosts, historyPosts } = useSelector((state: IRootState) => state.userLibrary);
 
-    React.useEffect(() => {
-
-        fetchLocalPostsFromSlugs(userLibrary.bookmarkedPosts.map(p => p.slug)).then(res => {
-            setLikePosts(likedPosts)
-        })
-    }, [userLibrary.bookmarkedPosts])
 
     return (
-        <div className="flex flex-col">
-            My content!!!
-            {likedPosts.map((item, i) => (
-                <PostItem {...item} key={i} />
-            ))}
+        <div className="flex flex-col ">
+
+
+            <FetchTopics
+                topics={followedTopics.map(p => p.slug)}
+                layout="row"
+                render={({ topicPostItems }) => {
+                    return (
+                        <div className="py-6">
+                            <PageSectionHeader title={"Following Topics"} className="pb-4" />
+                            <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
+                                {topicPostItems.map(({ name, slug: to }) => {
+                                    return (
+                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                    )
+                                })}
+                            </div>
+                            <XScrollCustomSize
+                                childeClassName=""
+                                items={topicPostItems.map(({ name, slug: to }) => {
+                                    return (
+                                        <div className="flex flex-col items-center">
+                                            <div className="min-h-24 h-24 w-18" >
+                                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            />
+                        </div>
+                    )
+                }}
+            />
+            <FetchPosts
+                slugs={bookmarkedPosts.slice(0, 6).map(p => p.slug)}
+                layout="list"
+                render={({ posts }) => {
+                    const video: IPostItem[] = []
+                    const other: IPostItem[] = []
+                    posts.map(p => {
+                        if (p.media.video) {
+                            video.push(p)
+                        } else {
+                            other.push(p)
+                        }
+                    })
+                    return (
+                        <div>
+                            <div className="py-6">
+                                <PageSectionHeader title={"Saved Videos"} className="pb-4" />
+                                <HSCardListVideo posts={video} />
+                            </div>
+                            <div className="py-6">
+
+                                <PageSectionHeader title={"Bookmarked"} className="" />
+                                <div className="px-4">
+                                    {other.map((item, i) => (
+                                        <PostItem {...item} key={i} />
+                                    ))}
+                                </div>       </div>
+
+
+                        </div>
+                    )
+                }}
+
+            />
+
+
+
         </div>
     )
 }

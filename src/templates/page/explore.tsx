@@ -8,11 +8,10 @@ import CustomSearchBox from '@/layout-parts/Explore/SearchInput'
 import CustomePagination from '@/layout-parts/Explore/Pagination'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import MetaTag from '@/components/Meta'
-import { LayoutH1, PageSectionHeader } from '@/components/Headers'
+import { LayoutH1, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { OutlineScriptureChapter, UnderlineLink } from '@/components/Button'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
-import { SubSection } from '@/layout-parts/Explore/ExploreByType'
-import { fetchTopicFromSlug } from '@/helpers/fetchLocalData'
+import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
 import ac_strings from '@/strings/ac_strings.json'
 
 import "react-placeholder/lib/reactPlaceholder.css";
@@ -191,25 +190,16 @@ const ExplorePage: React.FC<IResource> = (props) => {
                 {showExploreHome && (
                     <div className="bg-white max-w-tablet mx-auto">
                         <div className="pt-6">
-                            <div className="w-full flex justify-between">
-                                <PageSectionHeader title={ac_strings.topics} className="pb-4" />
-                                <div className="pr-4"><UnderlineLink to={TS.slug_topic}>{ac_strings.see_all}</UnderlineLink></div>
-                            </div>
+                            <SectionTitleDesktopAndMobile
+                                name={ac_strings.topics}
+                                to={TS.slug_topic}
+                            />
                             <QPopularAndFeaturedPosts
-                                render={({ topicPostItems }) => {
-                                    const topics = getRandomArray(topicPostItems, 6)
+                                render={({ topics }) => {
+                                    const randomTopics = getRandomArray(topics, 6)
                                     return (
-                                        <XScrollCustomSize
-                                            childeClassName=""
-                                            items={topics.map(({ name, slug: to }) => {
-                                                return (
-                                                    <div className="flex flex-col items-center">
-                                                        <div className="min-h-24 h-24 w-18" >
-                                                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })}
+                                        <TopicRowAndHorizontalScroll
+                                            topics={randomTopics}
                                         />
                                     )
                                 }}
@@ -225,7 +215,10 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             </div>
                         </div>
                         <div className="pt-6">
-                            <PageSectionHeader title={ac_strings.resource} className="pb-4" />
+                            <SectionTitleDesktopAndMobile
+                                name={ac_strings.resource}
+
+                            />
                             <XScrollCustomSize
                                 childeClassName=""
                                 items={resource.format.items.slice(0, 5).map(({ name, to }) => (
@@ -257,10 +250,21 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             </div>
                         </div>
                         <div className="pt-6 pb-8">
-                            <div className="w-full flex justify-between">
-                                <PageSectionHeader title={ac_strings.byScripture} className="pb-4" />
-                                <div className="pr-4"><UnderlineLink to={scripturePage.to}>{ac_strings.see_all}</UnderlineLink></div>
+                            <SectionTitleDesktopAndMobile
+                                name={ac_strings.byScripture}
+                                to={scripturePage.to}
 
+                            />
+                            <div className="hidden sm:grid grid-cols-4 lg:grid-cols-6 gap-2 px-4">
+                                {mostUsedScriptures.map(s => {
+                                    return (
+                                        <Link to={s.to}>
+                                            < OutlineScriptureChapter>
+                                                {s.name}
+                                            </ OutlineScriptureChapter>
+                                        </Link>
+                                    )
+                                })}
                             </div>
                             <XScrollCustomSize
                                 childeClassName=""

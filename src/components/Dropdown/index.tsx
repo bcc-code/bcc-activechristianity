@@ -16,9 +16,9 @@ export interface IDropdownProps {
     options: IOption[],
     selected: IOption | undefined
     onChange?: (selected: IOption) => void
-    padding?: string
+    className?: string
 }
-const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label, padding }) => {
+const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label, className }) => {
     const [showDropdown, setShowDropdown] = React.useState(false)
 
     const inputEl = React.useRef<HTMLInputElement>(null);
@@ -46,7 +46,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
     }
 
     return (
-        <div className={`w-full relative flex items-center ${padding ? padding : 'p-2 sm:px-4 sm:py-3'}`} ref={inputEl}>
+        <div className={`relative flex items-center ${className ? className : ''}`} ref={inputEl}>
             <button
                 className=" w-full flex items-center justify-between"
                 onClick={handleClick}
@@ -54,7 +54,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
             >
                 <span className="whitespace-no-wrap">{selected ? selected.label : label}</span>
                 <span className="flex items-center mx-2" >
-                    <Icon name="KeyboardArrowDown" size="6" color="slate-light" />
+                    <Icon name="KeyboardArrowDown" size="6" color="slate-dark" />
                 </span>
             </button>
             {showDropdown && (

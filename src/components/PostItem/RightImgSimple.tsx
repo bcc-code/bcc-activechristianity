@@ -5,7 +5,7 @@ import { IPostItem } from '@/types'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
 import PlayButtonTrack from '@/components/PostElements/PlayBtnWrapperByTrackSlug'
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import 'lazysizes';
 const RightImgNoDes: React.FC<IPostItem & { border?: boolean }> = (props) => {
     const { title, image, types, bookmarked, excerpt, border, slug, id, reading_time, authors, media, date } = props
@@ -18,7 +18,7 @@ const RightImgNoDes: React.FC<IPostItem & { border?: boolean }> = (props) => {
                     {media && (media.audio || media.video) && (
                         <div className="pt-2 text-gray-600">
                             <PlayButtonTrack track={media}>
-                                <Icon name="speaker" size="2xl" />
+                                <Icon name="VolumeUp" size="16" />
                             </PlayButtonTrack>
                         </div>
                     )}

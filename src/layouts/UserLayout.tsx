@@ -1,14 +1,13 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
-import LeftSidebarLayout, { ISiderbar } from './LeftSidebarLayout'
+import StickyBox from "react-sticky-box";
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
 import UserInitials from '@/layout-parts/User/UserInitial'
-import { LayoutH1 } from '@/components/Headers'
 import { INavItem } from '@/types'
-
+import { SideNavItem } from '@/components/Button'
 const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
 
     const dispatch = useDispatch()
@@ -33,63 +32,60 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
 
     const title = ac_strings.title_user
 
-    const menuItemClassName = `flex tracking-wide text-base sm:text-lg sm:mb-2 leading-loose `
-    const SidebarNav: React.FC<ISiderbar> = ({ closeMobileNav }) => {
-        const handleClick = (title: string) => {
-            setCurrentPageTitle(title)
-            closeMobileNav()
-        }
-
-        return (
-            <div >
-                <div className="hidden sm:block py-8">
-                    <UserInitials />
-                </div>
-                <div className="flex flex-col pb-8">
-                    {userLinks.map((item, i) => (
-                        <Link
-                            key={i}
-                            activeClassName="font-bold"
-                            to={item.to}
-                            className={menuItemClassName}
-                            onClick={() => handleClick(item.name)}
-
-                        >
-                            <div>{item.name}</div>
-                        </Link>
-                    )
-                    )}
-                    <button
-                        className={menuItemClassName}
-                        onClick={handleLogout}
-                        onKeyDown={handleLogout}
-                    >
-                        {TS.logout}
-                    </button>
-                </div>
-
-            </div>
-
-        )
-    }
 
     return (
-        <div>
-            <div className="hidden sm:block">
-                <LeftSidebarLayout
-                    title={title}
-                    sidebar={SidebarNav}
+        <div className="flex relative mt-12 items-start ">
 
-                    content={(
-                        <div className="sm:pt-18 px-4">
-                            <LayoutH1 title={currentPageTitle || ''} />
-                            {children}
-                        </div>
-                    )}
-                />
+
+
+
+            <div className="hidden sm:flex flex-col items-center bg-d4slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
+                <StickyBox offsetTop={150} >
+
+                    <UserInitials />
+                    <div className="flex justify-center">
+                        {/*                  <button
+                            className="border border-d4slate-light text-d4slate-light text-sm rounded-full px-2 py-1 ">
+                            {ac_strings.edit_profile}
+                        </button> */}
+                    </div>
+                    <div className="flex flex-col py-8">
+                        {/* <SideNavItem >
+                            {ac_strings.account_setting}
+                        </SideNavItem > */}
+                        {[
+                            {
+                                name: "My Content",
+                                to: '/user/my-content'
+                            },
+                            {
+                                name: "History",
+                                to: 'user/history'
+                            }
+                        ].map((item, i) => {
+                            return (
+                                <SideNavItem key={i} to={item.to} onClick={close}>
+                                    {item.name}
+                                </SideNavItem >
+                            )
+                        })}
+
+
+                        <button
+                            onClick={handleLogout}
+                            onKeyDown={handleLogout}
+                        >
+                            {TS.logout}
+                        </button>
+                    </div>
+
+                </StickyBox>
             </div>
-            <div className="sm:hidden">
-                {children}
+
+            <div className="relative w-full flex flex-col ">
+                <div className="z-10 w-tablet">
+                    {children}
+                </div>
             </div>
         </div>
 

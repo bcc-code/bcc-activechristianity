@@ -1,18 +1,27 @@
 import * as React from 'react';
-import Link from '@/components/CustomLink'
 import { IDrawerNav } from '@/layouts/App'
-import Icon from '@/components/Icons/Icon'
 import { useDispatch, useSelector } from 'react-redux'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
-import Submenu from './Submenu'
+import { SideNavItem } from '@/components/Button'
 import { openSignInModal } from '@/state/action'
-import { IRootState, IUserState } from '@/state/types'
+import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
+import SideNavWrapper from './SideNavWrapper'
+
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, menu }) => {
-    const [openSubmenu, setOpenSubmenu] = React.useState(false)
+import { INavItem } from '@/types';
+import loadable from '@loadable/component'
+const UserMenu = loadable(() => import('./UserMenu'))
+const ResourceMenu = loadable(() => import('./ResourceMenu'))
+interface ISideMobile extends IDrawerNav {
+    resoureMenu: INavItem[]
+}
+const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu, resoureMenu }) => {
+    const [openUserMenu, setOpenUserMenu] = React.useState(false)
+    const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
+
     const close = () => setSideNavOpen(false)
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const dispatch = useDispatch()
@@ -30,43 +39,81 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, menu 
         dispatch(initiateLogout())
     }
 
-    const closeSubmenu = () => {
-        setOpenSubmenu(false)
+    const closeUserMenu = () => {
+        setOpenUserMenu(false)
         setSideNavOpen(false)
     }
-    return (
-        <div
-            className={`drawer-side drawer-side-${isSideNavOpen ? 'open' : 'close'} bg-d4gray-light w-full h-full px-4 py-8 sm:py-16 flex flex-col justify-between xs:w-mobile xs:left-auto xs:shadow overflow-y-scroll fixed top-0 right-0 bottom-0`}
-        >
-            <Submenu
-                isSideNavOpen={openSubmenu}
-                close={closeSubmenu}
-                user={authInfo}
-            />
-            <div className="absolute right-0 top-0 p-4 py-6" onClick={close}>
-                <Icon name="Close" size="6" />
-            </div>
-            <div className="w-full flex justify-center sm:hidden">
-                <LanguageDropdown className="border px-4 py-2 rounded mb-4" />
-            </div>
 
-            <div className="mx-auto flex flex-col font-roboto items-center font-semibold">
+    const closeResourceMenu = () => {
+        setOpenResourceMenu(false)
+        setSideNavOpen(false)
+    }
+
+    return (
+        <SideNavWrapper
+            close={close}
+            isSideNavOpen={isSideNavOpen}
+            className="flex flex-col justify-between p-4"
+        >
+            {openUserMenu && <UserMenu
+                isSideNavOpen={openUserMenu}
+                close={closeUserMenu}
+                back={() => setOpenUserMenu(false)}
+
+            />
+            }
+
+            {openResourceMenu && <ResourceMenu
+                menu={resoureMenu}
+                isSideNavOpen={openResourceMenu}
+                close={closeResourceMenu}
+                back={() => setOpenResourceMenu(false)}
+            />}
+
+            <div className="w-full flex justify-center sm:hidden">
+                <LanguageDropdown className="border border-d4slate-dark font-roboto font-semibold text-d4slate-dark rounded-full pl-4" />
+
+            </div>
+            <div className="mx-auto flex flex-col font-roboto items-center font-semibold w-full">
+
+                <SideNavItem
+                    next
+                    onClick={() => { setOpenResourceMenu(true) }}
+
+                >
+                    {ac_strings.resource}
+                </SideNavItem>
                 {menu.map((item, i) => {
                     return (
-                        <Link key={i} to={item.to} className=" px-4 py-2" onClick={close}>
+                        <SideNavItem
+                            key={i}
+                            to={item.to}
+                            onClick={close}
+                        >
                             {item.name}
-                        </Link>
+                        </SideNavItem>
                     )
                 })}
+
                 {authInfo.loggedIn === 'success' ? (
-                    <div className={`flex flex-col justify-center`}>
-                        <Link
-                            className="py-2 hidden sm:block"
+                    <div className={`w-full flex flex-col justify-center`}>
+
+                        <SideNavItem
                             to={`/${ac_strings.slug_user}`}
+                            hideOnMobile
+                            onClick={close}
+
                         >
-                            {ac_strings.title_user}
-                        </Link>
-                        <span onClick={() => { setOpenSubmenu(true) }}>{ac_strings.title_user} <Icon name="KeyboardArrowRight" size="6" /></span>
+                            {ac_strings.my_profile}
+                        </SideNavItem>
+                        <SideNavItem
+                            next
+                            onClick={() => { setOpenUserMenu(true) }}
+                            hideOnDeskop
+
+                        >
+                            {ac_strings.my_profile}
+                        </SideNavItem>
                         <span className="py-2 text-center" onClick={handleLogout}>{TS.logout}</span>
 
                     </div>
@@ -77,8 +124,8 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, menu 
                             </div>
                         ) : (
                                 <div className={`flex flex-col`}>
-                                    <span className="whitespace-no-wrap p-2 text-center" onClick={handleSignIn}>{TS.login}</span>
-                                    <span className="p-2 text-center" onClick={handleSignUp}>{TS.register}</span>
+                                    <SideNavItem onClick={handleSignIn}>{TS.login}</SideNavItem>
+                                    <SideNavItem onClick={handleSignUp}>{TS.register}</SideNavItem>
                                 </div>
 
                             )
@@ -86,10 +133,11 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, menu 
 
             </div>
 
-            <div className="pt-4 text-d4slate-light">
+            <div className="pt-4 text-d4slate-dark">
                 <SocialPlatformas />
             </div>
-        </div >
+
+        </SideNavWrapper>
     )
 }
 

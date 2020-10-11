@@ -38,7 +38,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
             >
             </div>
             <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
-                <Link to={`/${slug}`} className="col-start-1 col-end-5 relative sm:pr-12">
+                <Link to={`/${slug}`} className="col-start-1 col-end-6 relative">
 
 
                     {media && media.video && media.video.src ? (

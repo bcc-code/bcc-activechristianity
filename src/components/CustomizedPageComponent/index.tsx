@@ -2,7 +2,7 @@ import * as React from 'react'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import FetchPost from '@/HOC/FetchPosts'
 import Content from '@/components/Content'
-import Header from '@/components/PostItem/DesktopHeaderPost'
+import Header from '@/layout-parts/Home/DesktopHeaderPost'
 
 const CustomizedPage: React.FC<IPageCompTypes & { isFirst?: boolean }> = (item) => {
 

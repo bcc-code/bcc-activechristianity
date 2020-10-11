@@ -4,7 +4,7 @@ import { useSwipeable } from "react-swipeable"
 
 
 import RightImg from '@/components/PostItemCards/RightImg'
-import Icon from '@/components/Icons'
+
 
 import TS from '@/strings'
 import { IPostItem } from '@/types'

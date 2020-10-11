@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connectRefinementList } from 'react-instantsearch-dom'
 import { generate as generateId } from 'shortid'
-import TypeCard from '@/components/Cards/TypeCard'
+
 import { ISearchFilter } from '@/types'
 import { typesImageColors } from '@/layout-parts/Explore/ExploreByType'
 import ac_strings from '@/strings/ac_strings.json'

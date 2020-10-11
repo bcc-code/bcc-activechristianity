@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { useDispatch } from 'react-redux'
 import { setAutoPlay, setCurrentMedia, addTracks, floatPlayer } from '@/state/action'
 
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 
 import TS from '@/strings'
 
@@ -52,7 +52,7 @@ const PostAudio: React.FC<IPlaylist> = ({
                                     onKeyDown={() => handleTrackClick(media, i)}
                                 >
                                     <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
-                                        <Icon name="speaker" size="lg" />
+                                        <Icon name="VolumeUpRounded" size="12" />
                                     </div>
                                 </button>
 

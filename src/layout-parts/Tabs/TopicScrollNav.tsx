@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
-import RightImg from '@/components/PostItem/RightImgWDes'
+import RightImg from '@/components/PostItemCards/RightImg'
 import { ITopicPostItems } from '@/types'
 
 

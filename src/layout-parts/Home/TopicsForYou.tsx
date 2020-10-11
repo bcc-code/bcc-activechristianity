@@ -13,8 +13,8 @@ const TopicsForYou = () => {
         <div className="col-start-1 col-end-5 overflow-hidden flex flex-col bg-d4slate-dark p-10 text-white rounded-lg">
             <QPopularAndFeaturedTopics
                 excludeFollowed
-                render={({ topicPostItems }) => {
-                    const randomTopics = getRandomArray(topicPostItems, 6)
+                render={({ topics }) => {
+                    const randomTopics = getRandomArray(topics, 6)
                     return (
 
                         <div className="sm:w-9/12 ">

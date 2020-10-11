@@ -10,7 +10,6 @@ interface IIconProps {
 
 
 const IconWrapper: React.FC<IIconProps> = ({ name, size, color }) => {
-
     const Icon = Icons[name]
     const style: any = {}
     if (size) {

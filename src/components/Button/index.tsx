@@ -1,9 +1,8 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import Icons from '@/components/Icons'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
-
+import Icon from '@/components/Icons/Icon'
 
 
 interface IButton {
@@ -17,7 +16,13 @@ interface IButton {
 }
 
 export const Button: React.FC<IButton> = ({ className, disabledClassName, enabledClassName, onClick, href, to, disabled, children }) => {
-    if (onClick) {
+    if (to) {
+        return (
+            <Link to={to} className={`block ${className}`} onClick={onClick}>
+                {children}
+            </Link>
+        )
+    } else if (onClick) {
         return (
             <button
                 className={`${className} ${disabled && disabledClassName ? disabledClassName : enabledClassName}`}
@@ -27,12 +32,6 @@ export const Button: React.FC<IButton> = ({ className, disabledClassName, enable
             >
                 {children}
             </button>
-        )
-    } else if (to) {
-        return (
-            <Link to={to} className={`block ${className}`}>
-                {children}
-            </Link>
         )
     } else if (href) {
         return (
@@ -139,7 +138,7 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
             <div className="text-xs sm:text:sm">
                 {count ? count : ''}
                 {arrow && (
-                    <Icons name="right-arrow" size="base" />
+                    <Icon name="KeyboardArrowRight" size="6" />
                 )}
             </div>
         </Button>
@@ -153,3 +152,19 @@ export const SolidDarkBgToggleActive: React.FC<{ active?: boolean } & IButton> =
         {children}
     </Button>
 )
+
+export const SideNavItem: React.FC<{ hideOnMobile?: boolean, hideOnDeskop?: boolean, next?: boolean } & IButton> = ({ onClick, children, to, hideOnMobile, hideOnDeskop, next }) => {
+    return (
+        <Button
+            className={`w-full py-4 font-roboto font-semibold flex justify-center relative ${hideOnDeskop ? ' sm:hidden' : ''} ${hideOnMobile ? ' hidden sm:flex' : ''}`}
+            onClick={onClick}
+            to={to}
+        >
+            <span className="py-1">{children}</span>
+            {next && <div className="absolute right-0 pr-4">
+                <Icon name="KeyboardArrowRight" size="6" />
+            </div>}
+        </Button>
+    )
+}
+

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Icons from '@/components/Icons'
+import Icons from '@/components/Icons/Icon'
 
 interface ISnackbar {
     text: string
@@ -12,7 +12,7 @@ const Snackbar: React.FC<ISnackbar> = ({ text, onClick }) => {
                 {text}
             </div>
             {onClick && <button onClick={onClick}>
-                <Icons name="search" size="sm" />
+                <Icons name="Search" size="6" />
             </button>}
         </div>
     )

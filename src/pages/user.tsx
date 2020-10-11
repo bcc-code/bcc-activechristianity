@@ -51,7 +51,7 @@ const User: React.FC<IUserProps> = ({ data }) => {
                     userLinks={userLinks}
                 >
                     <Router basepath={`/${ac_string.slug_user}`}>
-                        <PrivateRoute path="/" title={TS.account} component={Profile} />
+                        <PrivateRoute path="/" title={TS.account} component={MyContent} />
 
                         {userPages.map(page => {
 

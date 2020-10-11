@@ -2,7 +2,6 @@ import React from 'react'
 import FetchPosts from '@/HOC/FetchPosts'
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItemCards/FeaturedCard'
 import TopImg from '@/components/PostItemCards/TopImg'
-import Icons from '@/components/Icons'
 import ac_strings from '@/strings/ac_strings.json'
 import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
 import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
@@ -19,7 +18,6 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
         <div>
             <h3 className="relative mt-8 sm:mt-16 mx-4 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
                 <div className="flex items-center ">
-                    <Icons name="star" size="sm" />
                     <span className="block mx-2">{ac_strings.featured}</span>
                 </div>
             </h3>

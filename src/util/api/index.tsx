@@ -14,7 +14,10 @@ const sendQuery = (query: string) => {
         body: JSON.stringify({ query })
     })
         .then(response => response.json())
-        .then(res => res.data)
+        .then(res => {
+            console.log(res)
+            return res.data
+        })
 }
 
 export default {

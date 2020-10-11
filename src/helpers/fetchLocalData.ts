@@ -29,7 +29,6 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
-            console.log(res.result)
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: string[] = res.result.pageContext.posts
 

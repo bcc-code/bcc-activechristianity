@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import Link from '@/components/CustomLink'
+import { UnderlineLinkViewAll } from '@/components/Button'
 
 export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
     <span className="flex items-center">
@@ -54,5 +55,20 @@ export const UnderlineTitleLink: React.FC<IUnderlineTitleLink> = ({ name, to }) 
             </div>
         )
     }
+}
 
+export const SectionTitleDesktopAndMobile: React.FC<IUnderlineTitleLink> = ({ name, to }) => {
+    return (
+        <div>
+            <div className="hidden sm:block px-4">
+                <UnderlineTitleLink name={name} to={to} />
+            </div>
+            <div className="block sm:hidden">
+                <div className="w-full flex justify-between pt-6 pr-4">
+                    <PageSectionHeader title={name} className="pb-4" />
+                    {to && <UnderlineLinkViewAll to={`${to}`} />}
+                </div>
+            </div>
+        </div>
+    )
 }

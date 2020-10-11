@@ -3,30 +3,51 @@ import { useSelector } from 'react-redux'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { IRootState } from '@/state/types'
 import { IPostItem, IApiItem } from '@/types'
-import PostItem from '@/components/PostItem/RightImgWDes'
+
+import FetchPosts from '@/HOC/FetchPosts'
+import { LayoutH1, PageSectionHeader } from '@/components/Headers'
+import PostItem from '@/components/PostItemCards/RightImg'
+import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 
 const UserHistory = () => {
     const [historyPosts, setHistoryPosts] = React.useState<IPostItem[]>([])
     const { history } = useSelector((state: IRootState) => ({ history: state.userLibrary.historyPosts }));
 
-    React.useEffect(() => {
 
-        if (history.length > 0) {
-            fetchLocalPostsFromSlugs(history.map(item => item.slug))
-                .then(res => {
-                    console.log(res)
-                    if (res) {
-                        return setHistoryPosts(res)
-                    }
-                })
-        }
-
-    }, [history])
     return (
-        <div className="flex flex-col">
-            {historyPosts.map((item, i) => (
-                <PostItem {...item} key={i} />
-            ))}
+        <div>
+            <FetchPosts
+                slugs={history.slice(0, 6).map(p => p.slug)}
+                layout="list"
+                render={({ posts }) => {
+                    const video: IPostItem[] = []
+                    const other: IPostItem[] = []
+                    posts.map(p => {
+                        if (p.media.video) {
+                            video.push(p)
+                        } else {
+                            other.push(p)
+                        }
+                    })
+                    return (
+                        <div>
+                            <div>
+                                <PageSectionHeader title={"Saved Videos"} className="pb-4" />
+                                <HSCardListVideo posts={video} />
+                            </div>
+                            <PageSectionHeader title={"Bookmarked"} className="pb-4" />
+                            <div className="px-4">
+                                {other.map((item, i) => (
+                                    <PostItem {...item} key={i} />
+                                ))}
+                            </div>
+
+                        </div>
+                    )
+                }}
+
+            />
+
         </div>
     )
 }

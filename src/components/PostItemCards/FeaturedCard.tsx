@@ -7,7 +7,7 @@ import { IPostItem } from '@/types'
 import { PostTitle } from '@/components/PostItem/PostItemParts'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 export interface IFeaturedCard extends IPostItem {
     showOnMobile?: boolean
     likes?: number
@@ -53,7 +53,7 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                     {(type === "podcast" || type === "playlist") && (
                         <div className="relative w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32">
                             <div id="play-button" className="absolute p-2 text-white z-10 inset-0 flex justify-center items-center">
-                                <Icon name="speaker" size="3xl" />
+                                <Icon name="VolumeUp" size="16" />
                             </div>
                             <SquareImg {...image} alt={title} />
                         </div>

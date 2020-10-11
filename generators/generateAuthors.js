@@ -62,8 +62,8 @@ module.exports = function generateTaxonomies(actions, graphql) {
       const eachPageQuery=getEachPagePosts(i)
           return graphql(eachPageQuery)
                   .then(res =>{
-           
-                    if (res.data.ac && res.data.ac.authors.data && res.data.ac.authors.data[0]){
+                    
+                    if (res.data.ac && res.data.ac.authors && res.data.ac.authors.data && res.data.ac.authors.data[0]){
                       const allAuthors = res.data.ac.authors.data
                       _.each(allAuthors, (author)=>{
                         const {name,id,slug,posts} =author
@@ -99,6 +99,9 @@ module.exports = function generateTaxonomies(actions, graphql) {
                           })
                         }
                       })
+                    } else {
+                      console.log('unexpected response')
+                      console.log(res)
                     }
             })
         }))

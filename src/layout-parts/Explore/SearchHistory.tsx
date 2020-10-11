@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Icons from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import ac_strings from '@/strings/ac_strings.json'
 
 interface ISearchHistory {
@@ -23,14 +23,14 @@ const SearchHistory: React.FC<ISearchHistory> = ({ searches, removeSearchHistory
                         {searches.map((search, i) => (
                             <div className="flex justify-between items-baseline" key={i}>
                                 <button
-                                    className="text-d4secondary pb-6"
+                                    className=" pb-6"
                                     onClick={() => useSearchHistory(search)}
                                 >
                                     {search}
                                 </button>
                                 <button onClick={() => removeSearchHistory(search)}>
 
-                                    <Icons className="mr-2" size="xs" name="cancel" />
+                                    <Icon name="Close" size="4" color="secondary" />
                                 </button>
                             </div>
                         ))}

@@ -4,7 +4,7 @@ import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { IPostItem } from '@/types'
 import { IRootState } from '@/state/types'
 
-import PostItem from '@/components/PostItem/RightImgWDes'
+import PostItem from '@/components/PostItemCards/RightImg'
 const UserHistory = () => {
     const [likedPosts, setLikePosts] = React.useState<IPostItem[]>([])
     const userLibrary = useSelector((state: IRootState) => state.userLibrary);

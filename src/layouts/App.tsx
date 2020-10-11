@@ -29,6 +29,7 @@ import { IUser, IMenusQuery, INavItem } from '@/types'
 import "@/styles/tailwind-output.css"
 import './Layout.css'
 import "react-placeholder/lib/reactPlaceholder.css";
+import auth from '@/state/reducer/authReducer'
 
 export interface IDrawerNav {
     isSideNavOpen: boolean
@@ -43,14 +44,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const dispatch = useDispatch();
 
-    const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, isPlay } = useSelector((state: IRootState) => ({
+    const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
         isSignInModalOpen: state.isSignInModalOpen,
         currentMedia: state.currentMedia,
         isFloating: state.isPlayerFloating,
         isModalOpen: state.isModalOpen,
         mpHeight: state.mpHeight,
         breadcrumb: state.breadcrumb,
-        isPlay: state.isPlaying
+        isPlay: state.isPlaying,
+        auth: state.auth
 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
@@ -102,12 +104,13 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         <StaticQuery query={query}
             render={(ghdata: IAppQueryProps) => {
                 const { menus, allPages } = ghdata.ac
-
+                let sideResourceMenu: INavItem[] = []
                 let sideMenu: INavItem[] = []
                 let desktopMenu: INavItem[] = []
                 let mobileMenu: IMenuWithIcon[] = []
                 let explorePage: INavItem | undefined = undefined
-                mobileMenu.push({ name: ac_strings.home, to: "/", icon: iconMapNav["home"] })
+
+
                 Object.keys(iconMapNav).forEach(label => {
 
                     const page = allPages.find(page => {
@@ -119,10 +122,22 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         if (page.label === "explore") {
                             explorePage = { name: page.title, to: page.slug }
                         }
+                        sideResourceMenu.push({ name: page.title, to: page.slug })
                         mobileMenu.push(({ name: page.title, to: page.slug, icon: iconMapNav[page.label] }))
                     }
 
                 })
+
+                if (auth.loggedIn !== "success") {
+                    mobileMenu.unshift({ name: ac_strings.home, to: "/", icon: iconMapNav["home"] })
+                } else {
+                    mobileMenu.push({ name: "My Content", to: "/user/my-content", icon: iconMapNav["my-content"] })
+                }
+
+                const findGlossary = allPages.find(p => p.label === "build-glossaries")
+                if (findGlossary) {
+                    sideResourceMenu.push({ name: findGlossary.title, to: findGlossary.slug })
+                }
                 menus.forEach(m => {
                     if (`${m.id}` === process.env.DESKTOP_NAV_ID) {
                         desktopMenu = m.menuItems
@@ -142,7 +157,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         </Helmet>
                         <SignInSignUpModal />
 
-                        <SideNav {...NavProps} menu={sideMenu} />
+                        <SideNav {...NavProps} menu={sideMenu} resoureMenu={sideResourceMenu} />
                         <TopMobile
                             {...NavProps}
                             breadcrumb={breadcrumb}

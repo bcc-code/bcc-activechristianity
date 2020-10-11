@@ -4,7 +4,7 @@ import { IRootState } from '@/state/types'
 import { setMpHeight, setCurrentMedia } from '@/state/action'
 import MainController from './AudioPlayerController'
 import { useSelector, useDispatch } from "react-redux";
-import Icon from '@/components/Icons'
+import Icon from '@/components/Icons/Icon'
 import "./style/madia-player.css"
 
 type IAllProps = {
@@ -91,7 +91,7 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
             <div className={`w-full flex`}>
                 {showLeftArrow && (
                     <div className="cursor-pointer w-6 flex items-center" onClick={() => { setExpanded(true) }} onKeyDown={() => { setExpanded(true) }} role="button">
-                        <Icon name="chev-left" size="lg" />
+                        <Icon name="KeyboardArrowLeft" size="6" color="slate-dark" />
                     </div>
 
                 )}
@@ -122,7 +122,7 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
                     <div className="w-6 flex items-center">
                         {showRightArrow && (
                             <div className="w-full mx-2 cursor-pointer" onClick={() => { setExpanded(false) }}>
-                                <Icon name="chev-right" size="lg" />
+                                <Icon name="KeyboardArrowRight" size="6" color="slate-dark" />
                             </div>
                         )}
                     </div>

@@ -13,7 +13,7 @@ const FeatureSectionDesktop = loadable(() => import('@/layout-parts/Home/Feature
 const FeatureSectionMobile = loadable(() => import('@/layout-parts/Home/FeatureSectionMobile'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
-import HomeTopFeaturePost from '@/components/PostItem/DesktopHeaderPost'
+import HomeTopFeaturePost from '@/layout-parts/Home/DesktopHeaderPost'
 import LazyLoad from '@/components/LazyLoad';
 import { PageSectionHeader } from '@/components/Headers'
 import LowerSections from '@/layout-parts/Home/LowerSections'
@@ -118,8 +118,8 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
               <QPopularAndFeaturedTopics
                 excludeFollowed
-                render={({ topicPostItems }) => {
-                  const randomTopics = getRandomArray(topicPostItems, 6)
+                render={({ topics }) => {
+                  const randomTopics = getRandomArray(topics, 6)
 
                   return (
                     <FeaturedTopics featured={randomTopics} />

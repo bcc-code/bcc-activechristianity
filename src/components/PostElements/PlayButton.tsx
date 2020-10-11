@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
 import { IMedia } from '@/types'
-import Icon from '@/components/Icons'
 import MUIcon from '@/components/Icons/Icon'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
 import PlayButtonList from './PlayBtnWrapperByPlaylistSlug'
@@ -47,7 +46,7 @@ export const PostItemPlayButton: React.FC<IPlayButtonProps> = ({ track }) => {
 
         return (
             <PlayButtonTrack track={track}>
-                {track.video ? <Icon name="play" size="3xl" /> : <Icon name="speaker" size="3xl" />}
+                {track.video ? <MUIcon name="PlayArrowRounded" size="12" /> : <MUIcon name="VolumeUpRounded" size="12" />}
             </PlayButtonTrack>
         )
     } else {
@@ -60,7 +59,7 @@ export const PostItemPlayButtonSmall: React.FC<IPlayButtonProps> = ({ track }) =
 
         return (
             <PlayButtonTrack track={track}>
-                {track.video ? <Icon name="play" size="base" /> : <Icon name="speaker" size="sm" />}
+                {track.video ? <MUIcon name="PlayArrowRounded" size="6" /> : <MUIcon name="VolumeUpRounded" size="6" />}
             </PlayButtonTrack>
         )
     } else {
@@ -71,7 +70,7 @@ export const PostItemPlayButtonSmall: React.FC<IPlayButtonProps> = ({ track }) =
 export const PlaylistPlayButton: React.FC<{ slug: string }> = ({ slug }) => {
     return (
         <PlayButtonList slug={slug}>
-            <Icon name="speaker" size="base" />
+            <MUIcon name="VolumeUpRounded" size="6" />
         </PlayButtonList>
     )
 }

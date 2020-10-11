@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from "gatsby";
 import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
 
-import { IMenusQuery, INavItem } from '@/types'
+import { INavItem } from '@/types'
 
 import { typeIcons } from '@/layout-parts/PostSections'
 import ac_strings from '@/strings/ac_strings.json'
@@ -21,13 +21,6 @@ interface IProps {
     menu: IMenuWithIcon[]
 }
 
-export const iconMap: { [key: string]: JSX.Element } = {
-    'home': <Icon size="lg" name="home" />,
-    'explore': <Icon size="lg" name="search" />,
-    'listen-recommend': typeIcons.listen,
-    'read-recommend': typeIcons.read,
-    'watch-recommend': typeIcons.watch
-}
 
 export const iconMapNav: {
     [key: string]: {
@@ -116,6 +109,24 @@ export const iconMapNav: {
         default: (
             <Icon
                 name="OndemandVideo"
+                color="slate-light"
+            />
+
+
+        )
+    },
+    'my-content': {
+        selected: (
+            <Icon
+                name="Bookmarks"
+                color="slate-light"
+            />
+
+
+        ),
+        default: (
+            <Icon
+                name="Bookmarks"
                 color="slate-light"
             />
 

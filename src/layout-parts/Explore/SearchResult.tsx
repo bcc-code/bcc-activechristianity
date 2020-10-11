@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connectHits } from 'react-instantsearch-dom'
 import { IPostRes, IAuthor, IAuthorRes, ITopicRes } from '@/types'
 import FeaturedCard from '@/components/PostItem/FeaturedCard'
-import PostItem from '@/components/PostItem/RightImgWDes'
+import PostItem from '@/components/PostItemCards/RightImg'
 import { normalizePostRes, ebookResToPost, playlistToPost } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.json'
 

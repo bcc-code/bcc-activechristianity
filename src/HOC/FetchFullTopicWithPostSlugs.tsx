@@ -1,6 +1,7 @@
 import * as React from "react"
 import { ITopic } from '@/types'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
+import TS from '@/strings'
 interface IFetchPost {
     topics: string[]
     layout: "row" | "list",
@@ -11,7 +12,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
 
     React.useEffect(() => {
         Promise.all(topics
-            .map(slug => fetch(`/page-data/${slug}/page-data.json`)
+            .map(slug => fetch(`/page-data/${TS.slug_topic}/${slug}/page-data.json`)
                 .then(res => res.json())
                 .then(topicRes => {
                     const data = topicRes.result.pageContext
@@ -26,7 +27,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
 
             ))
             .then(res => {
-                const toAdd: ITopicPostSlugs[] = []
+                const toAdd: ITopic[] = []
                 res.forEach(item => {
                     if (item) {
                         toAdd.push(item)

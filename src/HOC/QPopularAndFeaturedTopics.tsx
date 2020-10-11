@@ -4,10 +4,10 @@ import { IRootState } from '@/state/types'
 import { StaticQuery, graphql } from "gatsby";
 import FetchTopicWithPostItems from '@/HOC/FetchFullTopicWithPostSlugs'
 import { ITopic, ITopicPostSlugs } from '@/types'
-import TS from '@/strings'
+
 interface QProps {
     excludeFollowed?: boolean
-    render: (data: { topicPostItems: ITopicPostSlugs[] }) => JSX.Element
+    render: (data: { topics: ITopic[] }) => JSX.Element
 }
 
 const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }) => {
@@ -16,8 +16,8 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
     return (
         <StaticQuery query={query}
             render={(props: IQuery) => {
-                const featuredSlugs = props.ac.featuredTopics.map(f => `${TS.slug_topic}/${f.slug}`)
-                const popularSlugs = props.ac.popularTopics.map(f => `${TS.slug_topic}/${f.slug}`)
+                const featuredSlugs = props.ac.featuredTopics.map(f => f.slug)
+                const popularSlugs = props.ac.popularTopics.map(f => f.slug)
                 const topics = [...new Set([...featuredSlugs, ...popularSlugs])]
                 return (
                     <FetchTopicWithPostItems
@@ -33,7 +33,7 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
                             }
                             return (
                                 <div>
-                                    {render({ topicPostItems: topics })}
+                                    {render({ topics })}
                                 </div>
                             )
                         }}

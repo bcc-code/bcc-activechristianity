@@ -98,5 +98,8 @@
     "resource": "Resource",
     "see_all": "See all",
     "views": "views",
-    "back": "Back"
+    "back": "Back",
+    "my_profile":"My Profile",
+    "edit_profile":"Edit Profile",
+    "account_setting":"Account Settings"
 }
