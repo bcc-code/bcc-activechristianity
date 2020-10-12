@@ -11,14 +11,18 @@ interface IFetchPost {
 }
 const FetchPosts: React.FC<IFetchPost> = ({ slugs, render }) => {
     const [posts, setPosts] = React.useState<IPostItem[]>([])
+    const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
+        setLoading(true)
         fetchLocalPostsFromSlugs(slugs)
             .then(res => {
+                setLoading(false)
                 if (res) {
                     setPosts(res)
                 }
             })
             .catch(error => {
+                setLoading(false)
                 console.log(error)
             })
     }, [slugs])
@@ -26,7 +30,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ slugs, render }) => {
     return (
 
         <Placeholder
-            loading={posts.length === 0}
+            loading={loading}
         >
             {render({ posts })}
         </Placeholder>

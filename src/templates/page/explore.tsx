@@ -1,38 +1,30 @@
 import * as React from 'react';
-import { graphql } from "gatsby"
+
 import loadable from '@loadable/component'
 import algoliasearch from 'algoliasearch/lite'
-import { InstantSearch, connectStats } from 'react-instantsearch-dom'
-import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
+import { InstantSearch } from 'react-instantsearch-dom'
+
 import CustomSearchBox from '@/layout-parts/Explore/SearchInput'
 import CustomePagination from '@/layout-parts/Explore/Pagination'
-import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
-import MetaTag from '@/components/Meta'
-import { LayoutH1, SectionTitleDesktopAndMobile } from '@/components/Headers'
-import { OutlineScriptureChapter, UnderlineLink } from '@/components/Button'
-import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
-import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
-import ac_strings from '@/strings/ac_strings.json'
 
-import "react-placeholder/lib/reactPlaceholder.css";
+import MetaTag from '@/components/Meta'
+import { LayoutH1 } from '@/components/Headers'
+import ac_strings from '@/strings/ac_strings.json'
+import ExploreHomeLayout from '@/layouts/ExploreHome'
 import { Stats } from 'react-instantsearch-dom';
 import { INavItem } from "@/types"
 import { IResourceOverview } from '@/layout-parts/Explore/ExploreByType'
 
 const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTopics'))
 
-import Link from '@/components/CustomLink';
-import TS from '@/strings'
 const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'))
-import { getRandomArray } from '@/helpers'
+
 import localStorageHelper from '@/helpers/localStorage'
 
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
 const ExplorePage: React.FC<IResource> = (props) => {
     const [query, setQuery] = React.useState('');
-    const [popularTopics, setPopularTopics] = React.useState<INavItem[]>([])
-    const [mostUsedScriptures, setPopularScriptures] = React.useState<INavItem[]>([])
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
 
     const [typeFilter, setTypeFilter] = React.useState<string[] | null>(null);
@@ -42,20 +34,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [searchState, setSearchState] = React.useState<any>({})
 
     const { resource, scripturePage } = props.pageContext
-    const topicSlugs = props.data.ac.popularTopics
-
-    React.useEffect(() => {
-
-        fetch(`/page-data/${scripturePage.to}/page-data.json`)
-            .then(res => res.json())
-            .then(res => {
-                const mostUsedScriptures: INavItem[] = res.result.pageContext.mostPopular
-                setPopularScriptures(mostUsedScriptures)
-            })
-            .catch(error => console.log(error))
-
-    }, [])
-
 
     React.useEffect(() => {
         localStorageHelper.storeQuery(query)
@@ -188,98 +166,10 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     <CustomSearchBox {...customSearchBoxProps} />
                 </div>
                 {showExploreHome && (
-                    <div className="bg-white max-w-tablet mx-auto">
-                        <div className="pt-6">
-                            <SectionTitleDesktopAndMobile
-                                name={ac_strings.topics}
-                                to={TS.slug_topic}
-                            />
-                            <QPopularAndFeaturedPosts
-                                render={({ topics }) => {
-                                    const randomTopics = getRandomArray(topics, 6)
-                                    return (
-                                        <TopicRowAndHorizontalScroll
-                                            topics={randomTopics}
-                                        />
-                                    )
-                                }}
-
-                            />
-
-                            <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
-                                {popularTopics.map(({ name, to }) => (
-                                    <div className="min-h-36 h-36" >
-                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="pt-6">
-                            <SectionTitleDesktopAndMobile
-                                name={ac_strings.resource}
-
-                            />
-                            <XScrollCustomSize
-                                childeClassName=""
-                                items={resource.format.items.slice(0, 5).map(({ name, to }) => (
-                                    <div className="flex flex-col items-center">
-                                        <div className="min-h-24 h-24 w-24" >
-                                            <ImgBgTopicCard name={name} to={`${to}`} />
-
-                                        </div>
-                                    </div>
-                                ))}
-                            />
-                            <XScrollCustomSize
-                                childeClassName=""
-                                items={resource.format.items.slice(5).map(({ name, to }) => (
-                                    <div className="flex flex-col items-center">
-                                        <div className="min-h-24 h-24 w-36" >
-                                            <ImgBgTopicCard name={name} to={`${to}`} />
-
-                                        </div>
-                                    </div>
-                                ))}
-                            />
-                            <div className="hidden sm:grid grid-cols-4 gap-4 px-4">
-                                {resource.format.items.map(({ name, to }) => (
-                                    <div className="min-h-24 h-24" >
-                                        <ImgBgTopicCard name={name} to={`${to}`} />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="pt-6 pb-8">
-                            <SectionTitleDesktopAndMobile
-                                name={ac_strings.byScripture}
-                                to={scripturePage.to}
-
-                            />
-                            <div className="hidden sm:grid grid-cols-4 lg:grid-cols-6 gap-2 px-4">
-                                {mostUsedScriptures.map(s => {
-                                    return (
-                                        <Link to={s.to}>
-                                            < OutlineScriptureChapter>
-                                                {s.name}
-                                            </ OutlineScriptureChapter>
-                                        </Link>
-                                    )
-                                })}
-                            </div>
-                            <XScrollCustomSize
-                                childeClassName=""
-                                items={mostUsedScriptures.map(s => {
-                                    return (
-                                        <Link to={s.to}>
-                                            < OutlineScriptureChapter>
-                                                {s.name}
-                                            </ OutlineScriptureChapter>
-                                        </Link>
-                                    )
-                                })}
-                            />
-                        </div>
-                    </div>
+                    <ExploreHomeLayout
+                        scriptureSlug={scripturePage.to}
+                        formats={resource.format.items}
+                    />
                 )}
 
                 {hasSearchProps && (
@@ -298,8 +188,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
                         />
                     </div>
                 )}
-
-
 
                 {!showExploreHome && (
                     <div className="bg-white max-w-tablet m-auto py-4 min-h-screen">
@@ -336,27 +224,6 @@ interface IResource {
         scripturePage: INavItem
         resource: IResourceOverview
     }
-
-    data: {
-        ac: {
-            popularTopics: {
-                slug: string
-            }[]
-        }
-    }
 }
 
-
-export const pageQuery = graphql`
-query PpularTopics{
-  ac {
-    popularTopics {
-    slug
-  }
-  featuredTopics:topics(featured:true) {
-    slug
-      }
-  }
-}
-`
 

@@ -1,11 +1,10 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { IRootState } from '@/state/types'
 import { IPostItem, IApiItem } from '@/types'
 
 import FetchPosts from '@/HOC/FetchPosts'
-import { LayoutH1, PageSectionHeader } from '@/components/Headers'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 
@@ -31,15 +30,17 @@ const UserHistory = () => {
                     })
                     return (
                         <div>
-                            <div>
-                                <PageSectionHeader title={"Saved Videos"} className="pb-4" />
+                            <div className="py-6">
+                                <SectionTitleDesktopAndMobile name={"Recently watched videos"} />
                                 <HSCardListVideo posts={video} />
                             </div>
-                            <PageSectionHeader title={"Bookmarked"} className="pb-4" />
-                            <div className="px-4">
-                                {other.map((item, i) => (
-                                    <PostItem {...item} key={i} />
-                                ))}
+                            <div className="py-6">
+                                <SectionTitleDesktopAndMobile name={"Recently viewed posts"} />
+                                <div className="px-4">
+                                    {other.map((item, i) => (
+                                        <PostItem {...item} key={i} />
+                                    ))}
+                                </div>
                             </div>
 
                         </div>

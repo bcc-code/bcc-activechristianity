@@ -4,7 +4,7 @@ import TS from '@/strings'
 
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import UserNav from '@/layout-parts/Nav/User'
-import NewWindowIcons from '@/components/Icons/NewWindow'
+import Icon from '@/components/Icons/Icon'
 const TopDesktop: React.FC = () => {
 
     return (
@@ -19,7 +19,9 @@ const TopDesktop: React.FC = () => {
                     <div className="flex justify-between items-center border-gray-200 border-b py-2 sm:py-0 px-2 text-gray-500 text-sm ">
                         <a href={tagline.path} target="_window" className="flex items-center text-sm">
                             <span>{tagline.text}</span>
-                            <span className="px-2"><NewWindowIcons className="w-4 h-4" /></span>
+                            <span className="px-2">
+                                <Icon name="Launch" size="4" color="slate-dark" />
+                            </span>
                         </a>
 
                         <div className="hidden sm:flex items-center text-sm">

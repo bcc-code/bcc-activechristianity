@@ -9,9 +9,11 @@ interface IFetchPost {
 }
 const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
     const [topicPostItems, setTopicPostItems] = React.useState<ITopic[]>([])
-
+    const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
+        setLoading(true)
         Promise.all(topics
+
             .map(slug => fetch(`/page-data/${TS.slug_topic}/${slug}/page-data.json`)
                 .then(res => res.json())
                 .then(topicRes => {
@@ -20,6 +22,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
                         id: data.id,
                         name: data.title,
                         slug,
+                        image: data.image
                     }
 
                     return topic
@@ -27,6 +30,7 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
 
             ))
             .then(res => {
+                setLoading(false)
                 const toAdd: ITopic[] = []
                 res.forEach(item => {
                     if (item) {
@@ -36,13 +40,14 @@ const FetchPosts: React.FC<IFetchPost> = ({ topics, render }) => {
                 setTopicPostItems(toAdd)
             })
             .catch(error => {
+                setLoading(false)
                 console.log(error)
             })
     }, [topics])
 
     return (
         <Placeholder
-            loading={topicPostItems.length === 0}
+            loading={loading}
         >
             {render({ topicPostItems })}
         </Placeholder>

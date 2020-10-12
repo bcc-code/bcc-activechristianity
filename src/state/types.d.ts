@@ -35,7 +35,7 @@ export interface IUserState {
   errorMessage?: string
 }
 
-export type ISignInModalContentType = 'signUpOptions' | 'signInOptions' | 'signInForm' | 'signUpForm' | null
+export type ISignInModalContentType = 'signUpOptions' | 'signInOptions' | 'signInForm' | 'signUpForm' | "forgotPassword" | null
 
 export interface ADD_T_URLS_Payload {
   translated: ITranslations[]

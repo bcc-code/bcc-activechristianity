@@ -80,7 +80,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 }
             }
         }
-        const debounceScroll = debounce(handleScroll, 500)
+        const debounceScroll = debounce(handleScroll, 1000)
         window.addEventListener('scroll', debounceScroll);
         return () => window.removeEventListener('scroll', debounceScroll);
     }, [post.slug])
@@ -144,7 +144,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     } = post
 
     const postId = id
-
     const imageUrl = image;
 
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)

@@ -29,6 +29,10 @@ export default {
         const query = request.registerMutation(username, email, password, remember)
         return sendQuery(query).then(res => res.signUp.user) //signUp
     },
+    forgotPassword: (email: string) => {
+        const query = request.forgotPasswordMutation(email)
+        return sendQuery(query)
+    },
     profile: () => {
         const query = request.profileQuery
 

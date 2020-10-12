@@ -35,6 +35,9 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
     }
     const text = formText[type]
     const handleClick = () => dispatch(openSignInModal(type === "signInOptions" ? "signInForm" : "signUpForm"))
+    const handleFacebookClick = () => {
+        window.location.href = 'https://ac2.day4.live/social/facebook/redirect'
+    }
     return (
         <div className="flex flex-col items-center text-center">
             <div className="flex flex-col justify-center bg-d4primary py-12 px-4 rounded-lg text-white shadow w-full">
@@ -43,7 +46,12 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             </div>
             <div className="flex flex-col justify-center py-4 w-full px-2">
                 <span className="block uppercase text-xs pb-4">{text.action}</span>
-                <button className="rounded-lg text-white mt-4 px-2 py-4" style={{ background: "#3b5998" }}>
+                <button
+                    className="rounded-lg text-white mt-4 px-2 py-4"
+                    style={{ background: "#3b5998" }}
+                    onClick={handleFacebookClick}
+                    onKeyDown={handleFacebookClick}
+                >
                     {text.facebook}
                 </button>
                 <Seperator />

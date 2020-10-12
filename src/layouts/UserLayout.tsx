@@ -70,20 +70,15 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
                             )
                         })}
 
+                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{TS.logout}</SideNavItem>
 
-                        <button
-                            onClick={handleLogout}
-                            onKeyDown={handleLogout}
-                        >
-                            {TS.logout}
-                        </button>
                     </div>
 
                 </StickyBox>
             </div>
 
             <div className="relative w-full flex flex-col ">
-                <div className="z-10 w-tablet">
+                <div className="z-10 sm:w-tablet">
                     {children}
                 </div>
             </div>

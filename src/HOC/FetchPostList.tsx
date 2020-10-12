@@ -9,23 +9,26 @@ interface IFetchPost {
 }
 const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
     const [postItems, setPostItems] = React.useState<IPostItem[]>([])
-    const [loading, setLoading] = React.useState(false)
+    const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
 
         fetchPostslistFromArchivePage(slug)
             .then(res => {
+                setLoading(false)
                 if (res) {
+
                     setPostItems(res)
                 }
             })
             .catch(error => {
+                setLoading(false)
                 console.log(error)
             })
     }, [])
 
     return (
         <Placeholder
-            loading={postItems.length === 0}
+            loading={loading}
         >
             {render({ posts: postItems })}
         </Placeholder>

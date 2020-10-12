@@ -153,10 +153,10 @@ export const SolidDarkBgToggleActive: React.FC<{ active?: boolean } & IButton> =
     </Button>
 )
 
-export const SideNavItem: React.FC<{ hideOnMobile?: boolean, hideOnDeskop?: boolean, next?: boolean } & IButton> = ({ onClick, children, to, hideOnMobile, hideOnDeskop, next }) => {
+export const SideNavItem: React.FC<{ hideOnMobile?: boolean, hideOnDeskop?: boolean, next?: boolean } & IButton> = ({ onClick, children, to, hideOnMobile, hideOnDeskop, next, className }) => {
     return (
         <Button
-            className={`w-full py-4 font-roboto font-semibold flex justify-center relative ${hideOnDeskop ? ' sm:hidden' : ''} ${hideOnMobile ? ' hidden sm:flex' : ''}`}
+            className={`w-full py-4 font-roboto font-semibold flex justify-center relative ${hideOnDeskop ? ' sm:hidden' : ''} ${hideOnMobile ? ' hidden sm:flex' : ''} ${className ? ` ${className}` : ''}`}
             onClick={onClick}
             to={to}
         >

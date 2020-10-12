@@ -79,6 +79,9 @@ const SignInForm: React.FC = () => {
     const handleSigninOpionts = () => {
         dispatch(openSignInModal("signInOptions"))
     }
+    const handleForgotPassword = () => {
+        dispatch(openSignInModal("forgotPassword"))
+    }
 
     return (
         <div
@@ -87,6 +90,7 @@ const SignInForm: React.FC = () => {
             {authInfo.errorMessage && (
                 <Snackbar
                     text={authInfo.errorMessage}
+                    error
                 />
             )}
             <InputText
@@ -120,13 +124,19 @@ const SignInForm: React.FC = () => {
                 loading={authInfo.loggedIn === "loading"}
                 onClick={handleSubmit}
             />
-            <div className="text-sm">
+            <div className="text-sm flex flex-col">
                 <button
                     className="text-blue-500 font-semibold"
                     onClick={handleSigninOpionts}
                     onKeyDown={handleSigninOpionts}
                 >
                     {ac_strings.allSigninOptions}
+                </button>
+                <button className="text-d4slate-light py-2"
+                    onClick={handleForgotPassword}
+                    onKeyDown={handleForgotPassword}
+                >
+                    {TS.forgot_password}
                 </button>
             </div>
         </div>

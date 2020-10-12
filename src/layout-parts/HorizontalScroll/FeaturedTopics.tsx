@@ -40,13 +40,10 @@ const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
                     </div>
                 ))}
             />
-            <div className="hidden sm:flex flex-wrap mx-4">
-                {processTopics.map(({ name, image, slug, id, followed }) => (
-                    <div className="flex flex-col items-center  mr-4">
-                        <div className="min-h-24 h-24 w-36" >
-                            <ImgBgTopicCard name={name} image={image} to={`${TS.slug_topic}/${slug}`} />
-
-                        </div>
+            <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
+                {processTopics.map(({ name, image, slug, id }) => (
+                    <div className="flex flex-col items-center">
+                        <ImgBgTopicCard name={name} image={image} to={`${TS.slug_topic}/${slug}`} />
                         <SlateDarkFollowButton
                             id={id}
 

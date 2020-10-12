@@ -27,10 +27,8 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
     const { title, items, playlist, podcast, mostPopular, featuredPosts } = pageContext
-    console.log(playlist)
-    console.log(podcast)
+
     const latestSlug = `${path}/${ac_strings.slug_latest}`
-    const featured = [...featuredPosts, ...mostPopular.slice(5)]
 
     return (
         <div >

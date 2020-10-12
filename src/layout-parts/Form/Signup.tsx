@@ -129,6 +129,7 @@ const SignUpForm = () => {
             {authInfo.errorMessage && (
                 <Snackbar
                     text={authInfo.errorMessage}
+                    type="error"
                 />
             )}
 

@@ -66,7 +66,7 @@ const SideMobile: React.FC<{
                 },
                 {
                     name: "History",
-                    to: ''
+                    to: '/user/history'
                 }
             ].map((item, i) => {
                 return (

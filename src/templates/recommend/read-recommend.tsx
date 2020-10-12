@@ -30,7 +30,6 @@ const Read: React.FC<IProps> = (props) => {
     const { title, info, items, mostPopular, featuredPosts } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
-    console.log(items)
     return (
         <div>
             <MetaTag

@@ -114,7 +114,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
                         >
                             {ac_strings.my_profile}
                         </SideNavItem>
-                        <span className="py-2 text-center" onClick={handleLogout}>{TS.logout}</span>
+                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{TS.logout}</SideNavItem>
 
                     </div>
                 ) : (

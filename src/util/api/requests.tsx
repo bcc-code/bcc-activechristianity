@@ -39,6 +39,17 @@ export const registerMutation = (username: string, email: string, password: stri
 
 `
 
+export const forgotPasswordMutation = (email: string) => `
+  mutation {
+    forgotPassword(input:{email:"${email}"}) {
+      success
+      message
+    } 
+  }
+
+`
+
+
 export const logoutMutation = `
   mutation {
     signOut {

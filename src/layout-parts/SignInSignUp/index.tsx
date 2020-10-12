@@ -5,6 +5,7 @@ import Modal from '@/components/Modal/ModalNotControlled'
 import Main from './Main'
 import SignUpForm from '@/layout-parts/Form/Signup'
 import SignInForm from '@/layout-parts/Form/Signin'
+import ForgotPassword from '@/layout-parts/Form/ForgotPassword'
 import { IRootState } from '@/state/types'
 
 const SigninSignUpModal: React.FC = () => {
@@ -29,6 +30,8 @@ const SigninSignUpModal: React.FC = () => {
                 return <SignUpForm />
             case 'signInForm':
                 return <SignInForm />
+            case 'forgotPassword':
+                return <ForgotPassword />
             default:
                 return <Main type='signUpOptions' />
         }

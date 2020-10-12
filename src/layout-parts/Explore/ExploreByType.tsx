@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { INavItemCount } from "@/types"
+import { INavItemCount, INavItemWKey } from "@/types"
 
 
 //"Podcast","Ebook","Edification","Audio Playlists","Messages","Video","Testimonies","Questions"
@@ -42,12 +42,7 @@ export const typesImageColors: {
     }
 }
 
-interface INavItemWKey {
-    key: string
-    count: number
-    name: string
-    to: string
-}
+
 
 export interface IResourceOverview {
     format: {

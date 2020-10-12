@@ -442,3 +442,9 @@ export interface ITopicPostItems extends ITopic {
 export interface ITab extends INavItem {
     content: JSX.Element
 }
+
+export interface INavItemWKey extends INavItem {
+    key: string
+    count: number
+    image?: IImage
+}

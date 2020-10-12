@@ -128,7 +128,7 @@ const ContactForm = () => {
 
     return (
         <div className="pb-8 sm:py-4" >
-            {errorMessage !== undefined && <Snackbar text={errorMessage} />}
+            {errorMessage !== undefined && <Snackbar text={errorMessage} error />}
             <div className="w-full flex">
 
                 <div className="w-1/2 pr-2">

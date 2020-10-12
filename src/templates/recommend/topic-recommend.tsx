@@ -69,17 +69,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                         }}
                     />
                 </div>
-                {/*                 <div className="sm:bg-transparent py-6 overflow-hidden">
-                    <PageSectionHeader title={ac_strings.latest} className="pb-4" />
 
-                    <FetchPostList
-                        slug={latestSlug}
-                        layout="row" render={({ posts }) => {
-                            return (<TopImgHorizontalScroll posts={posts} />)
-                        }}
-                    />
-
-                </div> */}
 
                 <LazyLoad>
                     <FetchTopicPostItems

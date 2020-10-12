@@ -1,13 +1,9 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-import { StaticQuery, graphql } from "gatsby";
 import Icon from '@/components/Icons/Icon'
-import { navigate } from "gatsby"
 
 import { INavItem } from '@/types'
 
-import { typeIcons } from '@/layout-parts/PostSections'
-import ac_strings from '@/strings/ac_strings.json'
 
 export interface IMenuWithIcon extends INavItem {
     icon: {

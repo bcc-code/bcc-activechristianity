@@ -13,6 +13,7 @@ interface IPlaylistList {
 }
 const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clickable }) => {
     const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
+
     const dispatch = useDispatch()
 
     const setCurrent = (toAdd: IMedia) => {

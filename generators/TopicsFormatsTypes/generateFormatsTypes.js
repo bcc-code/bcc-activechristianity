@@ -18,6 +18,11 @@ const query = `{
             id
             name
             slug
+            image {
+                src
+                srcset
+                dataUri
+              }
             noOfPosts
             group {
                 id
@@ -142,7 +147,7 @@ module.exports = function generateTopics(actions, graphql) {
                     const find = formatScope.find(f=>f.keyId===`${format.id}`)
                     
                     if (find){
-                        resource_grouped["format"].items.push(({key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts}))
+                        resource_grouped["format"].items.push(({key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts,image:format.image}))
                         const querySubTopics = getSubTopicsAndFeaturedPosts(format.id)
                         const mostPopular=format.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
                         

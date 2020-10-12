@@ -20,6 +20,11 @@ const query = `{
               id
               name
           }
+          image {
+            src
+            srcset
+            dataUri
+          }
           posts {
             slug
             views
@@ -92,6 +97,7 @@ module.exports = function generateTopics(actions, graphql) {
                           paginate,
                           id:node.id,
                           title:node.name,
+                          image:node.image,
                           breadcrumb:[
                             navParentItem, 
                             {

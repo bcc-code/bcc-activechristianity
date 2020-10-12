@@ -2,10 +2,11 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { UnderlineLinkViewAll } from '@/components/Button'
-
+import ac_strings from '@/strings/ac_strings.json'
 export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
-    <span className="flex items-center">
-        <span className="pr-4">{icon}</span> {title}
+    <span className="flex">
+        <span className="pr-2">{icon}</span>
+        <span> {title}</span>
     </span>
 )
 export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Element }> = ({ title, icon }) => (
@@ -40,12 +41,13 @@ interface IUnderlineTitleLink {
 }
 
 export const UnderlineTitleLink: React.FC<IUnderlineTitleLink> = ({ name, to }) => {
-    const mainClass = "border-b w-full pb-1 relative text-xl h-12 mb-10"
+    const mainClass = "border-b w-full pb-1 relative h-12 mb-10"
     const text = <span className="block text-sm sm:text-base border-b border-d4primary pb-1 absolute uppercase font-roboto " style={{ bottom: "-1px" }}>{name}</span>
     if (to) {
         return (
-            <Link className={`${mainClass} flex justify-between`} to={to} >
-                {text}
+            <Link className={`${mainClass} flex justify-between items-end`} to={to} >
+                <span className=" text-xl ">{text}</span>
+                <span className="text-sm text-d4slate-light">{ac_strings.see_all}</span>
             </Link>
         )
     } else {
