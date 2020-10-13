@@ -7,7 +7,6 @@ const query = `
     {
     ac {
       playlists {
-        id
         title
         slug
         excerpt
