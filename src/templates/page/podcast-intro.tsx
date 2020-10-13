@@ -10,6 +10,7 @@ import { PageSectionHeader } from '@/components/Headers'
 import { ReadOrListenIcon } from '@/components/PostElements'
 import Tabs from '@/components/Tabs/ImageTab'
 import { normalizePostRes, dateToString } from '@/helpers'
+import MetaTag from '@/components/Meta'
 
 export const PodcastPageHeadSection: React.FC = ({ children }) => {
     return (
@@ -28,8 +29,8 @@ export const PodcastPageHeadSection: React.FC = ({ children }) => {
 }
 
 const Host: React.FC<IPodcastIntro> = (props) => {
-    const { data } = props
-    const { hosts: hostSlugs } = props.pageContext
+    const { data, path } = props
+    const { hosts: hostSlugs, breadcrumb } = props.pageContext
     const introPost = normalizePostRes(data.acNodePost)
     const [hosts, setHosts] = React.useState<IAuthor[]>([])
     React.useEffect(() => {
@@ -79,6 +80,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
 
     return (
         <div className="max-w-sm mx-auto">
+            <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={[...breadcrumb, { name: introPost.title, to: path }]} path={path} />
             <PodcastPageHeadSection >
                 <div className="p-4" >
                     <h1 className="font-semibold text-2xl relative z-10 mb-6">{introPost.title}</h1>

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
-
+import ShareButton from '@/components/PostElements/SharePopover'
 import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts/PostSections'
 /* import MockRelatedContentMedia from '@/layout-parts/RelatedContent' */
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
@@ -50,11 +50,6 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
                 shareSlug={shareSlug}
 
             >
-                {isCurrentMedia.audio && (
-                    <div className="px-4 pr-8 relative">
-                        <PlaylistBackground slug={slug} imageUrl={imageUrl} />
-                    </div>
-                )}
 
                 <div className="mt-6">
                     <ContentPlaylist tracks={allTracks} slug={slug} />
@@ -68,18 +63,24 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
                 shareSlug={shareSlug}
                 headerLeft={
                     (
-                        <div className="px-4 pr-8 relative">
+                        <div className="pr-8 relative">
                             <PlaylistBackground slug={slug} imageUrl={imageUrl} />
                         </div>
                     )
                 }
                 headerMeta={(
-                    <div className="flex justify-end">
-                        <ShareSection shareSlug={slug} id={id} text={excerpt} />
+                    <div className="flex justify-end text-d4slate-dark">
+                        <ShareButton
+                            shareUrl={shareSlug}
+                            color="slate-dark"
+                            label={ac_strings.share}
+                            text={title}
+                            size="5"
+                        />
                     </div>
                 )}
             >
-                <div className="mx-4">
+                <div className="mt-6">
                     <ContentPlaylist tracks={allTracks} slug={slug} />
                 </div>
                 {/* <MockRelatedContentMedia type="playlist" /> */}

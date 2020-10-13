@@ -62,33 +62,34 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
             {playlist && (
                 <LazyLoad>
-                    <div className="px-4"><UnderlineTitleLink    {...playlist} /></div>
-                    <FetctLatestPlaylists
-                        slug={playlist.to}
-                        render={({ playlists }) => {
-                            return (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16 px-4">
+                    <div className="standard-max-w-px">
+                        <UnderlineTitleLink    {...playlist} />
+                        <FetctLatestPlaylists
+                            slug={playlist.to}
+                            render={({ playlists }) => {
+                                return (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16">
 
-                                    {getRandomArray(playlists, 4).map((p, i) => {
-                                        const post = playlistToPost(p)
-                                        return (
-                                            <div className={`div${i + 1}`} key={shortId()}>
-                                                < FeaturedCard {...post} type="playlist" />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )
-                        }}
+                                        {getRandomArray(playlists, 4).map((p, i) => {
+                                            const post = playlistToPost(p)
+                                            return (
+                                                <div className={`div${i + 1}`} key={shortId()}>
+                                                    < FeaturedCard {...post} type="playlist" />
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )
+                            }}
 
-                    />
+                        />
 
-
+                    </div>
                 </LazyLoad>
             )}
             {podcast && (
                 <LazyLoad>
-                    <div className="px-4">
+                    <div className="standard-max-w-px">
                         <UnderlineTitleLink    {...podcast} />
                         <FetchLatestPodcast
                             slug={podcast.to}

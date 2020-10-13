@@ -38,12 +38,10 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
             />
 
 
-            <div className="">
-                <ScrollSectionLayout
-                    title={title}
-                    sections={allPages}
-                />
-            </div>
+            <ScrollSectionLayout
+                title={title}
+                sections={allPages}
+            />
 
         </div>
     )

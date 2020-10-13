@@ -64,7 +64,7 @@ const PostAudio: React.FC<IPlaylist> = ({
                                 </button>
                                 <div className="w-full sm:w-auto flex text-gray-600 text-sm mt-4 mb-2">
                                     <button
-                                        className="flex justify-center mr-4"
+                                        className="flex justify-center items-center mr-4"
                                         onClick={() => handleTrackClick(media, i)}
                                         onKeyDown={() => handleTrackClick(media, i)}
                                     >

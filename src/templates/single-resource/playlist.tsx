@@ -1,13 +1,26 @@
 import * as React from 'react'
-import { IPlaylist } from '@/types'
+import { IPlaylist, INavItem } from '@/types'
 import PlaylistLayout from '@/layouts/PlaylistLayout'
+import MetaTag from '@/components/Meta'
 const Playlist: React.FC<IPlaylistsProps> = (props) => {
-    const { playlist } = props.pageContext
-    return (
-        <PlaylistLayout
-            {...playlist}
 
-        />
+    const { playlist, title, breadcrumb } = props.pageContext
+    const path = props.path
+    return (
+        <div>
+            <MetaTag
+                path={props.path}
+                title={title}
+                type="article"
+                translatedUrls={[]}
+                breadcrumb={[...breadcrumb, { name: title, to: path }]}
+            />
+            <PlaylistLayout
+                {...playlist}
+
+            />
+        </div>
+
     )
 }
 
@@ -18,6 +31,8 @@ interface IPlaylistsProps {
 
     pageContext: {
         title: string
+        slug: string
         playlist: IPlaylist
+        breadcrumb: INavItem[]
     }
 }
