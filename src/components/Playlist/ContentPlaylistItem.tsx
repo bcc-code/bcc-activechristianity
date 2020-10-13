@@ -1,35 +1,44 @@
 import React from 'react'
-
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAutoPlay, setCurrentMedia, addTracks, floatPlayer } from '@/state/action'
+import { ReadIcon, ListenIcon, ReadingTimingIcon } from '@/components/PostElements'
 
-import Icon from '@/components/Icons/Icon'
-
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
 import { IMedia } from '@/types'
-
+import { IRootState } from '@/state/types'
 
 interface IPlaylist {
+    slug: string
     tracks: IMedia[]
     hideRead?: boolean
 }
 
-
 const PostAudio: React.FC<IPlaylist> = ({
     tracks: allTracks,
-    hideRead
+    hideRead,
+    slug
 }) => {
     const dispatch = useDispatch()
-
+    const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
     const handleTrackClick = (t: IMedia, index: number) => {
+        const audioToAdd = { ...t }
+        if (audioToAdd.audio) {
+            audioToAdd.audio.playlistSlug = slug
+        }
+
 
         dispatch(setAutoPlay(true))
-        dispatch(setCurrentMedia(t))
+        dispatch(setCurrentMedia(audioToAdd))
         dispatch(floatPlayer())
         let tracksToAdd: IMedia[] = []
         if (allTracks.length > 1) {
-            tracksToAdd = [...allTracks]
+            tracksToAdd = [...allTracks.map(at => {
+                console.log(at)
+                const atToAdd = { ...at }
+                if (atToAdd.audio) {
+                    atToAdd.audio.playlistSlug = slug
+                }
+                return atToAdd
+            })]
         }
 
         if (index > -1) {
@@ -46,40 +55,32 @@ const PostAudio: React.FC<IPlaylist> = ({
                 if (audio) {
                     return (
                         (
-                            <li className="w-full \px-1 py-2 cursor-pointer flex flex-col sm:flex-row items-center text-sm justify-between md:text-base border-b last:border-b-0 hover:bg-gray-100" >
-                                <div className="w-full sm:w-auto flex-1 mt-2"
+                            <li className="w-full px-1 py-2 cursor-pointer flex flex-col sm:flex-row text-sm md:text-base border-b last:border-b-0 hover:bg-gray-100" >
+                                <button
+                                    className="flex items-start font-semibold  flex-1 mt-4 mb-2"
                                     onClick={() => handleTrackClick(media, i)}
                                     onKeyDown={() => handleTrackClick(media, i)}
                                 >
-                                    <div className="font-semibold text">{audio.title}</div>
-                                    <div className="text-gray-600 text-sm">{TS.by} {audio.contributor}</div>
-                                </div>
+                                    <span className="text-left">{audio.title}</span>
+                                </button>
                                 <div className="w-full sm:w-auto flex text-gray-600 text-sm mt-4 mb-2">
                                     <button
                                         className="flex justify-center mr-4"
                                         onClick={() => handleTrackClick(media, i)}
                                         onKeyDown={() => handleTrackClick(media, i)}
                                     >
-                                        <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
-                                            <Icon
-                                                name="Bookmarks"
-                                                color="slate-light"
-                                            />
-                                        </div>
-                                        <span className="uppercase ">{ac_strings.listen}</span>
+                                        <ListenIcon playing={currentMedia.path === media.path} />
                                     </button>
                                     {audio.article && hideRead !== true && (
                                         <a className="flex justify-center mr-4" href={`/${audio.article.url}`} target="_blank">
-                                            <div className="w-8 min-w-8 mr-2 sm:mx-4 flex justify-center">
-                                                <Icon
-                                                    name="Description"
-                                                    color="slate-light"
-                                                />
-                                            </div>
-
-                                            <span className="uppercase ">{ac_strings.read}</span>
+                                            <ReadIcon />
                                         </a>
+
+
                                     )}
+                                    <ReadingTimingIcon
+                                        read={media.audio?.duration}
+                                    />
                                 </div>
 
                             </li>

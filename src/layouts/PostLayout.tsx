@@ -23,7 +23,7 @@ import FetchPostFromList from '@/HOC/FetchPostList'
 import FetchRecommendByPost from '@/HOC/FetchRecommendByPost'
 import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts, RecommendedPostsSection } from '@/layout-parts/PostSections'
 
-import { ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
+import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 import { getRandomArray } from "@/helpers"
 import TS from '@/strings'
@@ -329,7 +329,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4">
                 <p className=""><em>{TS.scripture_copyright}</em></p>
             </div>
-            {postFooter}
+            {/*    {postFooter} */}
         </article >
     )
 }

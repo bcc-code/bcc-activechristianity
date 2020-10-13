@@ -22,7 +22,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             />
             <LayoutH1 title={title} icon={icon} />
             {description && (
-                <div className="w-ful py-4" dangerouslySetInnerHTML={{ __html: description }} />
+                <div className="w-full py-4" dangerouslySetInnerHTML={{ __html: description }} />
             )}
             <PostList
                 /*            audio={type === "listen"} */

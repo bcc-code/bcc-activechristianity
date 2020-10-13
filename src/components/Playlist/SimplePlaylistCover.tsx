@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import { PostTitle, PostExcerpt } from '@/components/PostItem/PostItemParts'
+import PostTitle from '@/components/PostElements/TextSizeWClamp'
 import { IPostItem } from '@/types'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'

@@ -118,7 +118,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
             {
                 path: track.post.slug,
                 audio: {
-                    duration: track.duration,
+                    duration: secondesToMinutes(track.duration),
                     src: `${process.env.API_HOST}${track.url}`,
                     title: track.title,
                     type: "audio",
@@ -164,7 +164,6 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
             topics: INavItem[]
         }
     } = {}
-
     topics.forEach((t) => {
         const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${TS.slug_topic}/${t.slug}` }
         if (t.group.name !== 'Type' && t.group.name !== 'Format') {
@@ -182,6 +181,7 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
         }
 
     })
+
     return sortedTags
 }
 
@@ -246,10 +246,10 @@ const secondesToMinutes = (seconds: number) => `${Math.round(seconds / 60)} ${ac
 
 export const normalizePostRes = (post: IPostRes) => {
 
-    const { id, authors, title, excerpt, image, slug, readtime, track, topics, created_at, meta, glossary, views, likes } = post
+    const { id, authors, title, excerpt, image, slug, readtime, track, topics, published, meta, glossary, views, likes } = post
 
     const { filteredTopics, types, format } = transformTopicsRes(topics)
-
+    console.log(published)
     const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem: IPostItem = {
         id,
@@ -265,7 +265,7 @@ export const normalizePostRes = (post: IPostRes) => {
             read: readingTimeMinutes
         },
         reading_time: { text: readingTimeMinutes, minutes: 0 },
-        date: new Date(created_at),
+        date: new Date(published),
         media: {
             path: slug,
         },
@@ -317,3 +317,5 @@ export function chunkArray(myArray: INavItem[], chunk_size: number) {
 
     return tempArray;
 }
+
+export const dateToString = (date: Date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`

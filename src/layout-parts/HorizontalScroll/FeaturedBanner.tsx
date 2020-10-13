@@ -1,5 +1,5 @@
 import React from 'react'
-import TopImgPost from '@/components/PostItem/TopImg'
+import TopImgPost from '@/components/PostItemCards/TopImg'
 import XScroll from './BaseLarge'
 import './horizontal-scroll.css';
 import { IImage } from '@/types'
@@ -24,8 +24,7 @@ const FeatureSection: React.FC<{ featured: IFeaturedBanner[] }> = ({ featured })
                 media={{ path: slug }}
                 date={new Date}
                 noBorder
-                roundedImage
-                hideReadingTime
+
                 noBg
                 showType
             />

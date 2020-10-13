@@ -24,9 +24,17 @@ const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clicka
 
     const handleClick = () => {
         fetchTracksFromSlug(slug).then(tracks => {
+            console.log(tracks)
             if (tracks.length > 0) {
-                setCurrent(tracks[0])
-                dispatch(addTracks(tracks.slice(1)))
+                const tracksToAdd = tracks.map(at => {
+                    const atToAdd = { ...at }
+                    if (atToAdd.audio) {
+                        atToAdd.audio.playlistSlug = slug
+                    }
+                    return atToAdd
+                })
+                setCurrent(tracksToAdd[0])
+                dispatch(addTracks(tracksToAdd))
             }
         })
     }
@@ -34,6 +42,9 @@ const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clicka
         onClick: handleClick,
         onKeyDown: handleClick
     } : {}
+    /*     console.log(`playing`)
+        console.log(currentMedia.audio?.playlistSlug)
+        console.log(slug) */
     return (
         <button
             className={`${className ? className : ''}`}

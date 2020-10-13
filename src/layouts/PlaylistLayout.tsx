@@ -6,7 +6,7 @@ import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
 import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts/PostSections'
 /* import MockRelatedContentMedia from '@/layout-parts/RelatedContent' */
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
-import { PlaylistBackground } from '@/components/PostItem/PostItemParts'
+import { PlaylistBackground } from '@/components/PostElements'
 
 import { normalizeTracks } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
@@ -18,8 +18,6 @@ import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 
 export const PostLayout: React.FC<IPlaylist> = (post) => {
-
-    const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
 
     const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
     const id = ''
@@ -39,7 +37,7 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
         <article className="overflow-scroll">
             <MobileHeaderBackground imgUrl={imageUrl.src}>
                 <div className="flex flex-col items-center w-full" style={{ transform: 'translateY(0px)' }}>
-                    <div className="w-5/12">
+                    <div className="w-7/12">
                         <PlaylistBackground slug={slug} imageUrl={imageUrl} />
                     </div>
                 </div>
@@ -59,7 +57,7 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
                 )}
 
                 <div className="mt-6">
-                    <ContentPlaylist tracks={allTracks} />
+                    <ContentPlaylist tracks={allTracks} slug={slug} />
                 </div>
                 {/* <MockRelatedContentMedia type="playlist" /> */}
             </MobilePostMain>
@@ -77,18 +75,18 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
                 }
                 headerMeta={(
                     <div className="flex justify-end">
-                        <ShareSection shareSlug={slug} id={id} text={excerpt} simple />
+                        <ShareSection shareSlug={slug} id={id} text={excerpt} />
                     </div>
                 )}
             >
                 <div className="mx-4">
-                    <ContentPlaylist tracks={allTracks} />
+                    <ContentPlaylist tracks={allTracks} slug={slug} />
                 </div>
                 {/* <MockRelatedContentMedia type="playlist" /> */}
             </DesktopPostMain>
-            <div className="relative">
+            {/*             <div className="relative">
                 <ExclusiveContent />
-            </div>
+            </div> */}
         </article >
     )
 }

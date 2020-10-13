@@ -72,8 +72,11 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
 
 
     const navigatePlaylist = (direction: number) => {
+        console.log(playlist)
+        console.log(currentMedia)
         if (playlist.length > 0) {
-            const index = playlist.findIndex(track => track.audio?.src === currentMedia.audio?.src)
+            const index = playlist.findIndex(track => track.path === currentMedia.path)
+            console.log(index)
             if (index > -1) {
                 const newIndex = mod(
                     index + direction,
@@ -82,6 +85,8 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
 
                 dispatch(setCurrentMedia(playlist[newIndex]))
 
+            } else {
+                dispatch(setCurrentMedia(playlist[0]))
             }
         }
     }

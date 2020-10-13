@@ -1,7 +1,9 @@
 const core = [
     "TITLE",
+    "API_HOST",
     "API_URL",
     "SITE_URL",
+  
     "LANG",
     "LANG_CODE",
     "LOCALE",
@@ -23,7 +25,8 @@ const core = [
     "COMMENTARY_FILTER_ID",
     "MESSAGE_FILTER_ID",
     "SONG_FILTER_ID",
-
+    "INTERVIEW_FILTER_ID",
+    "ANIMATION_FILTER_ID",
     "TOPICS_PAGE_ID",
     "EBOOK_PAGE_ID",
     "SERIES_PAGE_ID",
@@ -41,6 +44,7 @@ const english=[
     "PODCAST_PLAYLIST_SLUG",
     "PODCAST_PAGE_ID",
     "PODCAST_FILTER_ID",
+    "POCAST_INTRO_POST_ID"
     
 ]
 

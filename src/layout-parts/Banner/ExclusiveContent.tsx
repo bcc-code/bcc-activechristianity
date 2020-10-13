@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { PostTitle } from '@/components/PostItem/PostItemParts'
+import PostTitle from '@/components/PostElements/TextSizeWClamp'
 const Banner = () => {
     return (
         <div className="relative bg-white w-full bg-d4athens p-8 mx-auto pt-8 flex items-center" style={{ height: "360px" }}>

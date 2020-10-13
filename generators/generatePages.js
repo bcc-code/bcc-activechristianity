@@ -161,7 +161,7 @@ module.exports = function generatePages(actions, graphql) {
       const allHostsSlug= []
       for (let i =0;i<podcastHosts.length;i++){
         const hostPage = podcastHosts[i]
-        const hostPath = `${hostPage.slug}`
+        const hostPath = `${ac_strings.slug_host}/${hostPage.slug}`
         // const getHostImage = getPostImage(hostPage.slug)
         // get image and slug
         // const result = await graphql(getHostImage)
@@ -180,11 +180,28 @@ module.exports = function generatePages(actions, graphql) {
       }
 
       createPage({
+        path: ac_strings.slug_podcast_intro,
+        component: path.resolve(`src/templates/page/podcast-intro.tsx`),
+        context:{
+          title:podcast.title,
+          postId:process.env.POCAST_INTRO_POST_ID,
+          breadcrumb:[
+            {
+              name:podcast.title,
+              to:podcast.slug
+            }
+          ],
+          hosts:allHostsSlug
+
+        },
+      })
+
+      createPage({
         path: podcast.slug,
         component: path.resolve(`src/templates/page/podcast.tsx`),
         context:{
           title:podcast.title,
-          id:podcast.id,
+          id:process.env.PODCAST_FILTER_ID,
           breadcrumb:[
             {
               name:podcast.title,

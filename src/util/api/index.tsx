@@ -59,7 +59,13 @@ export default {
         })
     },
     following: () => {
-        const query = request.followedTopicsQuery
+        const query = request.followingQuery
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
+    followPlaylist: (id: number, toggle: boolean) => {
+        const query = request.followPlaylistMutation(id, !toggle)
         return sendQuery(query).then(res => {
             return res
         })

@@ -4,11 +4,11 @@ import Content from '@/components/Content'
 import { PostH1 } from '@/components/Headers'
 
 
-import { INavItem } from '@/types'
+import { INavItem, IGlossary } from '@/types'
 
 const Glossary: React.FC<IGlossaryProps> = ({ pageContext, path }) => {
 
-    const { title, content, slug, breadcrumb } = pageContext
+    const { title, glossary, breadcrumb } = pageContext
     if (title) {
         return (
             <div className="relativeh-full pt-4 max-w-tablet m-auto px-4">
@@ -17,11 +17,11 @@ const Glossary: React.FC<IGlossaryProps> = ({ pageContext, path }) => {
                     title={title}
                     type="article"
                     translatedUrls={[]}
-                    breadcrumb={breadcrumb}
+                    breadcrumb={[...breadcrumb, { name: title, to: path }]}
                 />
                 <PostH1 title={title} />
                 <div className="border-b w-1/6 my-8 border-d4gray"></div>
-                <Content content={content} title={title} slug={path} />
+                <Content content={glossary.content} title={title} slug={path} />
             </div>
         )
     } else {
@@ -35,7 +35,7 @@ interface IGlossaryProps {
     pageContext: {
         title: string
         slug: string
-        content: string
+        glossary: IGlossary
         breadcrumb: INavItem[]
     }
 }

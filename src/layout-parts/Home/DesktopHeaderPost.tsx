@@ -5,9 +5,9 @@ import VideoHeader from '@/components/Images/Video16to9'
 import { IPostItem } from '@/types'
 import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
-import { PostTitle, ReadingTimingAuthor, PostLabel } from '@/components/PostItem/PostItemParts'
+import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 
-
+import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
 const rbgToString = (colors: number[], alpha?: number) => {
     if (alpha) {
         return "rgba(" + colors.join(", ") + ", " + alpha + ")";
@@ -16,7 +16,7 @@ const rbgToString = (colors: number[], alpha?: number) => {
     }
 }
 
-const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, excerpt, authors, reading_time, id, slug, media }) => {
+const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
     const bgGradientStyle = { 'backgroundImage': '' }
     if (image) {
@@ -27,8 +27,6 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
             bgGradientStyle.backgroundImage = `linear-gradient(0, #fff 30%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%), linear-gradient(90deg, ${rbgToString(darkMuted, .5)}, ${rbgToString(vibrant, .5)} 50%, ${rbgToString(muted, .5)} 100%)`
         }
     }
-
-
 
     return (
         <div>
@@ -66,7 +64,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
                         {format && format[0] && (
                             <PostLabel text={format[0].name} />
                         )}
-                        <PostTitle
+                        <TextSizeWClamp
                             rawText={title}
                             bold="font-semibold"
                             fontKey="header-post"
@@ -86,7 +84,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, bookmarked, image, title, exc
                             <Bookmark id={id} size={"6"} />
                         </span>
                         {reading_time && <p className="ml-1 text-sm text-d4gray-dark lg:hidden">{reading_time.text}</p>}
-                        <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden lg:block" readingTime={reading_time?.text} authors={authors} />
+                        <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden lg:block" duration={duration?.listen} authors={authors} />
                     </div>
                 </div>
             </div>

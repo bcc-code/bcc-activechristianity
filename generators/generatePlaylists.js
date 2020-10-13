@@ -13,6 +13,7 @@ const query = `
         tracks {
           url
           title
+          duration
           post {
             title
             slug

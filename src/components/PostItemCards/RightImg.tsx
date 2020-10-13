@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 
-import TextSizeTitle, { ITextSizeWClampProps } from '@/components/PostElements/TextSizeWClamp'
-import { ReadOrListenIcon, ReadingTimingIcon, BookmarksAndViews } from '@/components/PostElements'
+import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
+import { ReadOrListenIcon, BookmarksAndViews } from '@/components/PostElements'
 import { IPostItem } from '@/types'
 
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
@@ -65,9 +65,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                             <span className="text-xxs text-gray-600">{format[0].name}</span>
                         </div>
                     )}
-                    {media && media.audio && media.audio.playlistSlug === "podcast" && date && (
-                        <span className="text-gray-500 text-xxs">{date.getDate()} {date.toLocaleString('default', { month: 'short' })} {date.getFullYear()}</span>
-                    )}
+
                     <Link to={`/${slug}`} >
                         <TextSizeTitle {...{
                             rawText: title,

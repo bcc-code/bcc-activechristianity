@@ -1,7 +1,7 @@
 import React from "react"
 import { IPostItem, INavItem } from "@/types"
 import { UnderlineTitleLink } from '@/components/Headers'
-import FeaturedCard from '@/components/PostItem/FeaturedCard'
+import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import LeftImg from '@/components/PostItemCards/LeftImg'
 import TopImg from '@/components/PostItemCards/TopImg'
 import './post-multi-col-layout.css'

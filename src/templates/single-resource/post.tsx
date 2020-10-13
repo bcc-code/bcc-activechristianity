@@ -107,6 +107,7 @@ export const pageQuery = graphql`
                 published
                 likes
                 views
+                published
 
     }
 

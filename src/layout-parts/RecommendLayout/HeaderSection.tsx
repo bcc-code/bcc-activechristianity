@@ -2,8 +2,8 @@ import React from "react"
 import Link from '@/components/CustomLink'
 import { IPostItem } from "@/types"
 import PopularPosts from '@/layout-parts/PopularPosts'
-import VideoLefttImg from '@/components/PostItem/VideoLefttImg'
-import { PostTitle } from '@/components/PostItem/PostItemParts'
+import VideoLefttImg from '@/components/PostItemCards/VideoLefttImg'
+import PostTitle from '@/components/PostElements/TextSizeWClamp'
 import { PostItemPlayButton } from '@/components/PostElements/PlayButton'
 import ac_strings from '@/strings/ac_strings.json'
 interface ISectionHeader {

@@ -39,7 +39,7 @@ export const platforms: IPodcastPlatform[] = [
 ]
 
 export const SubscribePodcast: React.FC<ISubscribePodcast> = ({ showText }) => (
-    <div className="flex flex-col mt-2 mb-4 text-gray-600 ">
+    <div className="flex flex-col mt-2 mb-4 ">
         {showText === true && <span className="w-full text-sm sm:text-center pb-4">Subscribe on</span>}
         <div className="w-full flex flex-wrap">
             {/*  */}

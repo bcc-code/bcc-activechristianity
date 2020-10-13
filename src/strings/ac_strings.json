@@ -75,6 +75,7 @@
     "slug_playlist": "playlist",
     "slug_podcast": "podcast",
     "title_user": "My Profile",
+    "slug_podcast_intro":"living-the-gospel-intro",
     "slug_cookie_policy": "cookie-policy",
     "slug_privacy_policy": "privacy-policy",
     "slug_account": "account",
@@ -101,5 +102,6 @@
     "back": "Back",
     "my_profile":"My Profile",
     "edit_profile":"Edit Profile",
-    "account_setting":"Account Settings"
+    "account_setting":"Account Settings",
+    "learn_more":"Learn more"
 }

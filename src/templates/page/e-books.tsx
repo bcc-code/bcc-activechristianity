@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from "gatsby"
 
-import FeaturedCard from '@/components/PostItem/FeaturedCard'
+import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import { LayoutH1Wide } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 

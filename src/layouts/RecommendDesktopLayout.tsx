@@ -136,7 +136,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
                 />
             </LazyLoad>
-            <ExclusiveContent />
+            {/*             <ExclusiveContent /> */}
 
         </div>
     )

@@ -68,13 +68,20 @@ export const likePostMutation = (id: string, toggle: boolean) => `
 `
 export const followTopicMutation = (id: number, toggle: boolean) => `
   mutation {
-    followTag(tagId: ${id}, toggle: ${toggle}) {
+    follow (type:TOPIC,id:${id},toggle:${toggle}){
       success
-      postViews
-      userPostViews
     }
   }
 `
+
+export const followPlaylistMutation = (id: number, toggle: boolean) => `
+  mutation {
+    follow (type:PLAYLIST,id:${id},toggle:${toggle}){
+      success
+    }
+  }
+`
+
 
 export const readingPostMutation = (id: string) => `
   mutation {
@@ -127,14 +134,22 @@ export const likedPostsQuery = `
     }
   }
 `
-export const followedTopicsQuery = `
+export const followingQuery = `
   query {
     following {
-      tags {
+      topics {
         id
         slug
       }
-    } 
+      playlists {
+        id
+        slug
+      }
+      authors {
+        id
+        slug
+      }
+    }
 }
 `
 export const latestHistoryQuery = `

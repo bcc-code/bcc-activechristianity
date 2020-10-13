@@ -1,5 +1,5 @@
 import * as React from "react"
-import TopImgPost from '@/components/PostItem/TopImg'
+import TopImgPost from '@/components/PostItemCards/TopImg'
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 
 import { ITopicPostItems } from '@/types'

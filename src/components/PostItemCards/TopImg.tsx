@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { IPostItem } from '@/types'
 import PostBase, { IPostBase } from '@/components/PostElements/Base'
-import { PostLabel } from '@/components/PostItem/PostItemParts'
+import { PostLabel } from '@/components/PostElements'
 import Image2To1 from '@/components/Images/Image2To1'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import LazysizesImage from '@/components/Images/LazysizesImage'

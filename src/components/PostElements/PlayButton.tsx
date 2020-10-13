@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { IMedia } from '@/types'
 import MUIcon from '@/components/Icons/Icon'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
-import PlayButtonList from './PlayBtnWrapperByPlaylistSlug'
+import PlayPlaylistFromSlug from '@/HOC/FetchPlayingPlaylist'
 import ac_strings from '@/strings/ac_strings.json'
 export interface IPlayButtonProps {
     track: IMedia
@@ -69,18 +69,16 @@ export const PostItemPlayButtonSmall: React.FC<IPlayButtonProps> = ({ track }) =
 
 export const PlaylistPlayButton: React.FC<{ slug: string }> = ({ slug }) => {
     return (
-        <PlayButtonList slug={slug}>
-            <MUIcon name="VolumeUpRounded" size="6" />
-        </PlayButtonList>
+        <PlayPlaylistFromSlug
+            slug={slug}
+            clickable
+            render={({ playing }) => {
+                return playing ? <MUIcon name="Equalizer" size="12" /> : <MUIcon name="VolumeUpRounded" size="12" />
+            }}
+
+        />
+
+
     )
 }
 
-export const PlaylistPlayOutlineButton: React.FC<{ slug: string }> = ({ slug }) => {
-    return (
-        <PlayButtonList slug={slug}>
-            <button className="rounded-full bg-d4slate-dark text-sm text-white font-semibold py-2 px-4">
-                {ac_strings.play}
-            </button>
-        </PlayButtonList>
-    )
-}

@@ -12,7 +12,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
     switch (action.type) {
         // only catch a specific action
         case 'NEW_USER_FOLLLOW_TOPIC':
-            console.log(action)
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {

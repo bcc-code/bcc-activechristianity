@@ -37,7 +37,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
     if (result.data.ac && result.data.ac.glossary){
         const allGlossaries= result.data.ac.glossary
         const glossariesPage = result.data.ac.glossariesPage
-        const navParentItem={name:glossariesPage.title,to:glossariesPage.to}
+        const navParentItem={name:glossariesPage.title,to:glossariesPage.slug}
         allGlossaries.forEach(glossary=>{
             const baseUrl=`${glossariesPage.slug}/${glossary.slug}`
             createPage({

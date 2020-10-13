@@ -15,8 +15,9 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
     const path = props.path
     const sortedTopics = sortTopicsByGroups(props.data.ac.allTopics)
 
-    const { Topic, Format, Type, ...rest } = sortedTopics
+    const { Format, Type, ...rest } = sortedTopics
     const topicGroups = Object.keys(rest).map(k => ({ name: rest[k].info.name, items: rest[k].topics.map(item => ({ ...item })) }))
+
     return (
         <ResourceLayout
             title={title}
@@ -29,9 +30,9 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
                 breadcrumb={[]}
             />
             <div className="standard-max-w-px mb-8">
-                <div className="flex text-xs sm:text-base font-semibold">
+                {/*                 <div className="flex text-xs sm:text-base font-semibold">
                     <h2 className="pb-4">{ac_strings.featured}</h2>
-                </div>
+                </div> */}
                 {/*                 {themes.length > 0 && <div className="grid grid-cols-2 gap-2 sm:flex flex-wrap">
                     {themes.map(item => (
                         <Link

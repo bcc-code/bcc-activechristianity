@@ -133,7 +133,7 @@ const Ebook: React.FC<IProps> = ({ pageContext: { breadcrumb, ebook }, path }) =
                 </div>
                 {/* {relatedEbooks} */}
             </DesktopPostMain>
-            <ExclusiveContent />
+            {/*             <ExclusiveContent /> */}
         </article >
     )
 }

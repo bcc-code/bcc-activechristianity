@@ -3,7 +3,7 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { IPostItem } from '@/types'
 import TextSizeTitle, { ITextSizeWClamp } from '@/components/PostElements/TextSizeWClamp'
-import { PostLabel } from '@/components/PostItem/PostItemParts'
+
 import Image16to9 from '@/components/Images/Image16to9'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import { AuthorLink, ReadingTimingIcon, BookmarksAndViews, ReadOrListenIcon } from '@/components/PostElements'

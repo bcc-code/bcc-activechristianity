@@ -2,7 +2,8 @@ import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { PostItemPlayButtonSmall } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
-import { PostTitle, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
+import { ReadingTimingAuthor } from '@/components/PostElements'
+import PostTitle from '@/components/PostElements/TextSizeWClamp'
 import ac_string from '@/strings/ac_strings.json'
 
 interface IProps {
@@ -51,7 +52,7 @@ const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
                                         <span>
                                             <ReadingTimingAuthor
                                                 authors={[]}
-                                                readingTime={post.media.audio.duration}
+                                                duration={post.duration?.listen}
                                             />
 
                                         </span>
@@ -59,7 +60,7 @@ const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
                                     <div className="text-d4slate-light text-xs py-2">
                                         {post.views} {ac_string.views}</div>
                                     {playIcon && (
-                                        <ReadingTimingAuthor readingTime={post.reading_time?.text} authors={post.authors} />
+                                        <ReadingTimingAuthor duration={post.duration?.listen} authors={post.authors} />
                                     )}
                                 </Link>
                             </div>

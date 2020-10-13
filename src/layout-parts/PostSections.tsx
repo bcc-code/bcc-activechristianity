@@ -65,7 +65,10 @@ const bgStyle = {
     transform: 'scale(1.2)',
 
     height: "300px",
-    top: "-20px"
+    top: "-20px",
+    bottom: "-10px",
+    right: "-10px",
+    left: "-10px"
 
 }
 

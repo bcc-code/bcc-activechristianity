@@ -2,7 +2,7 @@ import React from "react"
 import Image16to9 from '@/components/Images/Image16to9'
 import Link from '@/components/CustomLink'
 import { IPostItem } from '@/types'
-import { PostTitle, PostExcerpt, ReadingTimingAuthor } from '@/components/PostItem/PostItemParts'
+import PostExcerpt from '@/components/PostElements/TextSizeWClamp'
 
 
 interface IVideoPost extends IPostItem {

@@ -57,12 +57,10 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
             setHistory([currentPage])
         } else if (isBack) {
             // if user clicked the back button, update the history accordingly
-            console.log('isBack')
-            console.log(history)
             if (history.length > 0) {
-                console.log(history)
+
                 let updateHistory = history.slice(0, history.length - 1)
-                console.log(updateHistory)
+
                 setHistory(updateHistory)
 
             }
@@ -71,7 +69,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
             // if user keep browsing. 
             if (history.length > 0) {
                 console.log('is continue')
-                console.log(history)
+
                 if (history[history.length - 1].to !== currentPage.to) {
                     setHistory([...history, currentPage])
                 }

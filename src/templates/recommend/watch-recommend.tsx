@@ -35,13 +35,13 @@ const Watch: React.FC<IProps> = (props) => {
             <div className="hidden sm:block">
                 <LayoutH1Wide title={title} />
                 <LazyLoad >
-                    <FetchPosts
+                    {<FetchPosts
                         slugs={mostPopular}
                         layout="list"
                         render={({ posts }) => {
-                            return <HeaderSection headerPost={posts[5]} listPosts={posts.slice(0, 5)} />
+                            return posts[5] ? <HeaderSection headerPost={posts[5]} listPosts={posts.slice(0, 5)} /> : <div></div>
                         }}
-                    />
+                    />}
                 </LazyLoad>
             </div>
 

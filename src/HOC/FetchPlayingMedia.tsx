@@ -7,12 +7,13 @@ import { IRootState } from '@/state/types'
 
 export interface IPlayButtonProps {
     track: IMedia
+    playlistTracks?: IMedia[]
     className?: string
     style?: any
     clickable?: boolean
     render: (data: { playing: boolean }) => JSX.Element
 }
-const PlayButton: React.FC<IPlayButtonProps> = ({ track, className, style, render, clickable }) => {
+const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, className, style, render, clickable }) => {
     const dispatch = useDispatch()
     const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
     const setCurrent = (toAdd: IMedia) => {
@@ -26,20 +27,25 @@ const PlayButton: React.FC<IPlayButtonProps> = ({ track, className, style, rende
     }
 
     const handlePlaylist = () => {
-
-        if (track.audio && track.audio.playlistSlug) {
+        if (playlistTracks) {
+            handleTracks(playlistTracks)
+        } else if (track.audio && track.audio.playlistSlug) {
             const playlistSlug = track.audio.playlistSlug
 
             return fetchTracksFromSlug(playlistSlug).then(tracks => {
-                let toUpdate = [...tracks]
-                if (tracks.length > 0) {
-                    const index = tracks.findIndex(item => item.audio?.src === track.audio?.src)
-                    if (index > -1) {
-                        toUpdate = [...tracks.slice(index), ...tracks.slice(0, index)]
-                    }
-                    dispatch(addTracks(toUpdate))
-                }
+                handleTracks(tracks)
             })
+        }
+    }
+
+    const handleTracks = (tracks: IMedia[]) => {
+        let toUpdate = [...tracks]
+        if (tracks.length > 0) {
+            const index = tracks.findIndex(item => item.audio?.src === track.audio?.src)
+            if (index > -1) {
+                toUpdate = [...tracks.slice(index), ...tracks.slice(0, index)]
+            }
+            dispatch(addTracks(toUpdate))
         }
     }
 

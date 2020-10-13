@@ -1,12 +1,14 @@
 
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-import { IPostAuthors, IMedia } from '@/types'
+import { IPostAuthors, IMedia, IImage } from '@/types'
 import Icon from '@/components/Icons/Icon'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import FetchAndSetCurrentMedia from '@/HOC/FetchPlayingMedia'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
+import SquareImg from '@/components/Images/Image1to1Rounded'
+import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'
 
 export const ReadMore: React.FC<{ slug: string, id: string }> = ({ slug, id }) => {
     return (
@@ -50,10 +52,56 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
                 color="slate-dark"
                 size="5"
             />
-            <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap mt-1">
+            <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
                 {read}
             </span>
         </span>
+    )
+}
+
+export const ReadIcon: React.FC<{ text?: string }> = ({ text }) => (
+    <div className={"mr-4 flex items-center"}>
+        <Icon
+            name="Description"
+            color="slate-dark"
+            size="4"
+        />
+        <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
+            {text ? text : ac_strings.read}
+        </span>
+    </div>
+)
+export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text, playing }) => {
+    return (
+        <div className="">
+            {playing ? (
+                <div className="mr-4 flex items-center bg-d4slate-dark  rounded-full p-1">
+                    <Icon
+                        name="Equalizer"
+                        size="4"
+                        color="slate-light"
+                    />
+                    <span className="text-xs text-white pl-2 whitespace-no-wrap">
+                        {ac_strings.playing}
+                    </span>
+                </div>
+            ) : (
+
+                    <div className="mr-4 flex items-center rounded-full bg-d4slate-lighter p-1">
+                        <Icon
+                            name="PlayCircleOutline"
+                            color="slate-dark"
+                            size="4"
+                        />
+                        <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
+                            {text ? text : ac_strings.listen}
+                        </span>
+                    </div>
+
+
+                )}
+
+        </div>
     )
 }
 
@@ -67,49 +115,16 @@ export const ReadOrListenIcon: React.FC<{ read?: string, listen?: string, track?
                     clickable
                     render={({ playing }) => {
                         return (
-                            <div className="">
-                                {playing ? (
-                                    <div className="mr-4 flex items-center bg-d4slate-dark  rounded-full p-1">
-                                        <Icon
-                                            name="Equalizer"
-                                            size="4"
-                                            color="slate-light"
-                                        />
-                                        <span className="text-xs text-white pl-2 whitespace-no-wrap">
-                                            {ac_strings.playing}
-                                        </span>
-                                    </div>
-                                ) : (
-
-                                        <div className="mr-4 flex items-center rounded-full bg-d4slate-lighter p-1">
-                                            <Icon
-                                                name="PlayCircleOutline"
-                                                color="slate-dark"
-                                                size="4"
-                                            />
-                                            <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
-                                                {listen}
-                                            </span>
-                                        </div>
-
-
-                                    )}
-
-                            </div>
+                            <ListenIcon
+                                playing={playing}
+                                text={listen}
+                            />
                         )
 
                     }} />
+
             ) : (
-                    <div className={"mr-4 flex items-center"}>
-                        <Icon
-                            name="Description"
-                            color="slate-dark"
-                            size="4"
-                        />
-                        <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap mt-1">
-                            {read}
-                        </span>
-                    </div>
+                    <ReadIcon text={read} />
                 )}
         </span>
     )
@@ -149,4 +164,14 @@ export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
     )
 }
 
+export const PlaylistBackground: React.FC<{ slug: string, imageUrl: IImage }> = ({ slug, imageUrl }) => {
+    return (
+        <div className="w-full relative">
+            <div id="play-button" className="absolute p-2 text-white z-10 inset-0 flex justify-center items-center">
+                <PlaylistPlayButton slug={slug} />
+            </div>
+            <SquareImg {...imageUrl} alt='background' />
+        </div>
+    )
+}
 

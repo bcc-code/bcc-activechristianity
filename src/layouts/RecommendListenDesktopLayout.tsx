@@ -56,9 +56,8 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                         const randomHeaderPost = getRandomArray(posts.slice(5), 1)
                         return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
                     }}
-                >
+                />
 
-                </FetchPosts>
             </div>
 
             {playlist && (
@@ -137,7 +136,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
                 />
             </LazyLoad>
-            <ExclusiveContent />
+            {/*             <ExclusiveContent /> */}
 
         </div>
     )
