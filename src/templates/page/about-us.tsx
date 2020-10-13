@@ -7,16 +7,8 @@ import CustomizedLayoutProps from '@/components/CustomizedPageComponent'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import AboutUsLayout from '@/layouts/AboutUsLayout'
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
-import {
-    ScrollingProvider,
-    useScrollSections,
-    useScrollSection,
-    Section,
-} from 'react-scroll-section';
+import { ScrollingProvider } from 'react-scroll-section';
 
-import { divide } from 'lodash'
-import { Header } from './contact'
-const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
 const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 
 
@@ -28,7 +20,7 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
         return ({
             slug: item.slug,
             title: item.title,
-            childPage: customLayout[0]
+            childPage: customLayout
         })
 
     })

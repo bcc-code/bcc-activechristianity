@@ -27,6 +27,26 @@ export interface IPageTextComp {
     }
 }
 
+export interface IPageEmbedComp {
+    type: "embed"
+    data: {
+        url: string
+    }
+}
+
+export interface IPostItems {
+    type: "post_items"
+    data: {
+        author: string
+        id: number
+        image: { src: string }
+        slug: string
+        sub: string
+        title: string
+        type: "post"
+    }[]
+}
+
 export interface IPageFeaturedItems {
     type: "featured_items"
     data: IPageFeaturedPost[]
@@ -44,7 +64,7 @@ export interface IPagePost {
     }
 }
 
-export type IPageCompTypes = IPagePost | IPageFeaturedItems | IPageTextComp
+export type IPageCompTypes = IPagePost | IPageFeaturedItems | IPageTextComp | IPostItems | IPageEmbedComp
 
 const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
     type,

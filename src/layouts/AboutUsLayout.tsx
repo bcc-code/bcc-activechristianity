@@ -33,12 +33,11 @@ const App: React.FC<IProps> = ({ sections, title }) => {
     }
 
     const links = sections.map(item => ({ name: item.title, id: item.slug, ...useScrollSection(item.slug) }))
-    console.log(links)
     return (
 
         <div className="flex">
             <div className="hidden sm:flex flex-col items-center bg-d4slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
-                <StickyBox offsetTop={150} >
+                <StickyBox offsetTop={300} >
                     {links.map(({ id, onClick, selected, name }) => (
                         < SideNavItem key={id} onClick={onClick} selected={selected}>
                             {name}
@@ -47,7 +46,7 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                 </StickyBox>
 
             </div>
-            <div className="max-w-sm relative">
+            <div className="relative flex-1">
 
                 <Section id={"about-us"} className={`pb-16 relative`} >
                     <div
@@ -57,11 +56,11 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                             background: `url(${imageUrl}) center center no-repeat`,
                             backgroundSize: "cover",
                             zIndex: 200,
-                            /*    minHeight: "250px", */
+                            minHeight: "250px"
                             /*  backgroundPositionY: "30%", */
                         }}
                     >
-                        <h1 className="sm:text-lg lg:text-4xl xl:text-5xl font-bold mb-4" >{title}</h1>
+                        <h1 className="sm:text-lg lg:text-4xl xl:text-5xl font-bold mb-4 sm:hidden" >{title}</h1>
                     </div>
 
                 </Section>
@@ -74,18 +73,23 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                         ))}
                     </div>
                 </div>
-                {sections.map((item, k) =>
-                    (
+                {sections.map((item, k) => {
+                    return (
                         <Section id={item.slug}>
-                            <div className={`px-4 ${k % 2 == 0 ? 'bg-d4slate-lighter' : ''}`}>
-                                <h2 className="text-2xl py-6 font-roboto">{item.title}</h2>
-                                <CustomizedPageComponent
-                                    {...item.childPage}
-                                />
+                            <div className={`px-4 sm:px-6 ${k % 2 == 1 ? 'bg-d4gray-light' : ''}`}>
+                                <div className="max-w-sm ">
+                                    <h2 className="text-2xl py-6 font-roboto sm:text-3xl font-semibold">{item.title}</h2>
+                                    <CustomizedPageComponent
+                                        items={item.childPage}
+                                    />
+                                </div>
+
                             </div>
                         </Section>
                         /*    k % 2 == 0  <ScrollSectionChild key={k} {...item} background={k % 2 == 0} /> */
                     )
+                }
+
                 )}
                 <div className="hiddem sm:flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
 

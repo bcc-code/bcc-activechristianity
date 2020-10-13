@@ -11,7 +11,7 @@ export interface ISectionProps {
 export interface IScrollSectionChildProps {
     slug: string
     title: string
-    childPage: IPageCompTypes
+    childPage: IPageCompTypes[]
     background?: boolean
 }
 
