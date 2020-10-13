@@ -1,6 +1,7 @@
 import * as React from 'react';
-import FetchAndSetFollowed from '@/HOC/FetchAndSetFollowed'
-import Icon from "@/components/Icons/Icon"
+import FetchAndSetFollowedTopics from '@/HOC/FetchAndSetFollowed'
+import FetchAndSetFollowedPlaylists from '@/HOC/FetchAndSetFollowedPlaylist'
+import Icon, { IButtonColour } from "@/components/Icons/Icon"
 import Link from '@/components/CustomLink'
 import { ITopicNavItem } from '@/types'
 import { OutlineSmallRounded } from '@/components/Button'
@@ -27,12 +28,14 @@ export const toggleFollowStatusMap = {
 interface IToggleFollowProps {
     id: string
     text?: string
+    color?: IButtonColour
+    size?: string
 }
 
 export const ToggleBookmarkIconOnly: React.FC<IToggleFollowProps> = ({ id }) => {
 
     return (
-        <FetchAndSetFollowed
+        <FetchAndSetFollowedTopics
             id={id}
             className="p-2"
             render={({ followed }) => {
@@ -52,7 +55,7 @@ export const ToggleBookmarkIconOnly: React.FC<IToggleFollowProps> = ({ id }) => 
 export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => {
 
     return (
-        <FetchAndSetFollowed
+        <FetchAndSetFollowedTopics
             id={id}
             className=""
             render={({ followed }) => {
@@ -73,10 +76,76 @@ export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => 
     )
 }
 
+export const ToggleFollowPlaylistOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => {
+
+    return (
+        <FetchAndSetFollowedPlaylists
+            id={id}
+            className=""
+            render={({ followed }) => {
+                const config = toggleFollowStatusMap[followed]
+                return (
+                    <OutlineSmallRounded>
+                        <div className="flex">
+                            <span className="">{config.text}</span>
+                            <span className="pl-2 flex items-center">
+                                {config.icon}
+                            </span>
+                        </div>
+                    </OutlineSmallRounded>
+                )
+            }}
+        />
+
+    )
+}
+
+export const ToggleFollowPlaylistBookmark: React.FC<IToggleFollowProps> = ({ id, color, size }) => {
+    const buttonColor = color ? color : "secondary"
+    const buttonSize = size ? size : "6"
+    return (
+        <FetchAndSetFollowedPlaylists
+            id={id}
+            className=""
+            render={({ followed }) => {
+                return (
+                    <div>
+                        {followed === "loading" && (
+                            <Icon
+                                name="Cached"
+                                color={buttonColor}
+                                size={buttonSize}
+                            />
+                        )}
+                        {followed === "false" && (
+                            <Icon
+                                name="BookmarkBorder"
+                                color={buttonColor}
+                                size={buttonSize}
+                            />
+                        )}
+                        {
+                            followed === "true" && (
+                                <Icon
+                                    name="Bookmark"
+                                    color={buttonColor}
+                                    size={buttonSize}
+                                />
+                            )
+                        }
+
+                    </div>
+                )
+            }}
+        />
+
+    )
+}
+
 export const SlateDarkFollowButton: React.FC<IToggleFollowProps> = ({ id, text }) => {
 
     return (
-        <FetchAndSetFollowed
+        <FetchAndSetFollowedTopics
             id={id}
             className="w-full"
             render={({ followed }) => {
@@ -104,7 +173,7 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
 
         <div className={`flex py-1 px-3 pr-0 mb-2 mr-2 text-center text-xs rounded-full font-semibold items-center bg-gray-300`}>
             <Link to={to} className="">{name}</Link>
-            <FetchAndSetFollowed
+            <FetchAndSetFollowedTopics
                 id={id}
                 className=""
                 render={({ followed }) => {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ToggleBookmark from '@/components/PostElements/ToggleBookmark'
-
+import { ToggleFollowPlaylistBookmark } from '@/components/PostElements/TopicToggleFollow'
 import Link from '@/components/CustomLink'
 import Ebook from '@/components/Ebook/EbookItem'
 import { IPostItem } from '@/types'
@@ -16,7 +16,6 @@ export interface IFeaturedCard extends IPostItem {
 }
 
 const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes, image, className, slug, media, showOnMobile }) => {
-
     let bgStyle: any = {
         backgroundImage: image ? `url(${image.src})` : '',
         backgrond: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%)`
@@ -75,20 +74,26 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                         />
                     </div>
                     <div className={`${showOnMobile ? 'block' : 'hidden sm:block'} z-30 w-full border-b border-gray-500 my-2 md:my-4`} />
-                    <div className={`${showOnMobile ? 'block' : 'hidden sm:flex'} justify-between items-center text-sm z-30`}>
-                        {authors && authors[0] && (
-                            <div className="">
-                                <span>{authors[0].authors.map(item => item.name).join(" ,")}</span>
-                            </div>
-                        )}
-                        {type != "ebook" && type !== "playlist" && (
-                            <div className="flex">
-                                <ToggleBookmark id={id} color="slate-light" size="4" />
-                                <span className="ml-2">{likes}</span>
-                            </div>
-                        )}
-                    </div>
+
                 </Link>
+                <div className={`${showOnMobile ? 'block' : 'hidden sm:flex'} justify-between items-center text-sm z-30`}>
+                    {authors && authors[0] && (
+                        <div className="">
+                            <span>{authors[0].authors.map(item => item.name).join(" ,")}</span>
+                        </div>
+                    )}
+                    {type !== "ebook" && type !== "playlist" && (
+                        <div className="flex">
+                            <ToggleBookmark id={id} color="white" size="6" />
+                            <span className="ml-2">{likes}</span>
+                        </div>
+                    )}
+                    {/*                     {
+                        type === "playlist" && (
+                            <ToggleFollowPlaylistBookmark id={id} color="white" size="6" />
+                        )
+                    } */}
+                </div>
             </div >
 
         </div >

@@ -5,7 +5,7 @@ const MainpageLoadingPeplacer: React.FC<{ loading: boolean }> = ({ loading, chil
     const customerPlaceholder = (
         <div className="standard-max-w sm:px-4 grid sm:grid-cols-2 md:grid-cols-4 gap-4 pb-16 w-full">
 
-            {["", "", "", "", "", "", "", "", ""].map((item, k) => {
+            {["", "", "", "", "", "", "", ""].map((item, k) => {
                 return (
                     <TopImgPlaceholder key={k} />
                 )
@@ -19,5 +19,6 @@ const MainpageLoadingPeplacer: React.FC<{ loading: boolean }> = ({ loading, chil
 
     )
 }
+
 
 export default MainpageLoadingPeplacer

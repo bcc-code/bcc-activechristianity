@@ -12,9 +12,11 @@ const FetchPosts: React.FC<IFetchPost> = ({ slug, render }) => {
         fetch(`/page-data/${slug}/page-data.json`)
             .then(res => res.json())
             .then(res => {
+                if (res.result && res.result.data.ac && res.result.data.ac.playlists) {
+                    const allPlaylist = res.result.data.ac.playlists
+                    setPlaylists(allPlaylist)
+                }
 
-                const allPlaylist = res.result.data.ac.playlists
-                setPlaylists(allPlaylist)
             })
     }, [slug])
 

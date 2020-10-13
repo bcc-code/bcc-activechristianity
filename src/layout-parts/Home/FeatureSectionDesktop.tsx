@@ -24,7 +24,7 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
             <div className=" mx-4 my-4 grid gap-4 md:gap-6 grid-cols-4">
                 <FetchLatestPodcast
                     slug={"podcast"}
-                    render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="playlist" />}
+                    render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast" />}
 
                 />
                 <FetctLatestPlaylists
@@ -38,7 +38,7 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
                 />
                 <FetchPosts
                     slugs={[randomFeaturedFromTopics[0]]}
-                    layout="list"
+                    layout="one"
                     render={({ posts }) => {
                         return <TopImg {...posts[0]} />
                     }
@@ -46,7 +46,7 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
                 />
                 <FetchPosts
                     slugs={[randomFeaturedFromTopics[1]]}
-                    layout="list"
+                    layout="one"
                     render={({ posts }) => {
                         return <TopImg {...posts[0]} />
                     }

@@ -386,7 +386,7 @@ export interface IUnfinished {
 export interface IFollowing {
     following: {
         topics: IResourceRef[]
-        tags: IResourceRef[]
+        playlists: IResourceRef[]
         authors: IResourceRef[]
     }
 }

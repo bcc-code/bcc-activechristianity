@@ -24,6 +24,8 @@ export interface IRootState {
 
 export interface IUserLibrary {
   followedTopics: IApiItem[]
+  followedPlaylists: IApiItem[]
+  followedAuthors: IApiItem[]
   unfinishedPosts: IApiItem[]
   bookmarkedPosts: IApiItem[]
   historyPosts: IApiItem[]

@@ -10,9 +10,7 @@ const UserHistory = () => {
     const userLibrary = useSelector((state: IRootState) => state.userLibrary);
 
     React.useEffect(() => {
-        fetchLocalPostsFromSlugs(userLibrary.bookmarkedPosts.map(p => p.slug)).then(res => {
-            console.log(res)
-        })
+        fetchLocalPostsFromSlugs(userLibrary.bookmarkedPosts.map(p => p.slug))
     }, [userLibrary.bookmarkedPosts])
 
     return (

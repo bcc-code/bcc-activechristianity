@@ -64,8 +64,8 @@ const PostList: React.FC<IPostList> = (props) => {
                     currentPage={paginate.currentPage}
                     totalPages={paginate.totalPages}
                     onChange={(activePage: number) => {
-                        const firstPagePath = paginate.baseUrl + `${paginate.hasRecommendPage === true ? '/1' : ''}`
-                        const fullPath = activePage > 1 ? `${paginate.baseUrl}/${activePage}` : firstPagePath
+                        const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
+                        const fullPath = activePage > 1 ? `/${paginate.baseUrl}/${activePage}` : firstPagePath
                         scrollToTop()
                         navigate(fullPath)
                     }}

@@ -15,7 +15,6 @@ const sendQuery = (query: string) => {
     })
         .then(response => response.json())
         .then(res => {
-            console.log(res)
             return res.data
         })
 }

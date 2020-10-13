@@ -249,7 +249,6 @@ export const normalizePostRes = (post: IPostRes) => {
     const { id, authors, title, excerpt, image, slug, readtime, track, topics, published, meta, glossary, views, likes } = post
 
     const { filteredTopics, types, format } = transformTopicsRes(topics)
-    console.log(published)
     const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem: IPostItem = {
         id,

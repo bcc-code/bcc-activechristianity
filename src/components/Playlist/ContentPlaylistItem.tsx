@@ -32,7 +32,6 @@ const PostAudio: React.FC<IPlaylist> = ({
         let tracksToAdd: IMedia[] = []
         if (allTracks.length > 1) {
             tracksToAdd = [...allTracks.map(at => {
-                console.log(at)
                 const atToAdd = { ...at }
                 if (atToAdd.audio) {
                     atToAdd.audio.playlistSlug = slug

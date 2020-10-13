@@ -14,7 +14,7 @@ import FetchPosts from '@/HOC/FetchPosts'
 import TopImg from '@/components/PostItemCards/TopImg'
 import RightImg from '@/components/PostItemCards/RightImg'
 // helpers
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { PodcastPageHeadSection } from './podcast-intro'
 import livingTheGospel from '@/strings/podcastProperties'
 
 import { INavItem, IPostItem, IAuthor, ITab } from '@/types'
@@ -50,44 +50,36 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
 
     return (
-        <div>
+        <div className="max-w-sm mx-auto">
             <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
-            <div className="text-white sm:hidden" style={{ background: "#263948" }} >
+            <PodcastPageHeadSection>
                 <h1 className="p-4 font-semibold text-3xl relative z-10">{livingTheGospel.title}</h1>
                 <div className="flex">
                     <div className="p-4">
 
                         <Link
-                            className="block bg-white rounded-full text-d4slate-dark px-4 py-2 font-semibold mb-4"
+                            className="inline-block bg-white rounded-full text-d4slate-dark px-4 py-2 font-semibold mb-4"
                             to={ac_strings.slug_podcast_intro}
                         >
                             {ac_strings.learn_more}
                         </Link>
                         <SubscribePodcast />
                     </div>
-                    <div style={{ width: "180px", marginTop: "-40px" }}>
-                        <div className="relative w-full pb-square sm:pb-wide" >
-                            <img
-                                src={livingTheGospel.artworkSrc}
-                                className="absolute w-full h-full inset-0 rounded-lg object-cover g-image"
-                            />
-                        </div>
-                    </div>
                 </div>
 
-            </div>
+            </PodcastPageHeadSection>
             <FetchPosts
 
-                slugs={postSlugList.slice(0, 13)}
+                slugs={postSlugList.slice(0, 12)}
                 layout="list"
                 render={({ posts }) => {
                     const first = posts[0]
                     const latest = posts.slice(1)
                     return (
                         <div className="">
-                            <div className="sm:hidden">
+                            <div className="">
                                 {first && (
-                                    <div className="px-4 py-6">
+                                    <div className="px-4 py-6 sm:hidden">
                                         <TopImg
                                             {...first}
                                         />
@@ -98,6 +90,11 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
                                 />
                                 <div className="px-4">
+                                    {first && (
+                                        <div className="hidden sm:block">
+                                            <RightImg  {...first} />
+                                        </div>
+                                    )}
                                     {latest.map(p => {
                                         return (
                                             <RightImg  {...p} key={p.slug} />
@@ -108,62 +105,9 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
                                     <UnderlineLinkViewAll
 
-                                        to={`${path}/${ac_strings}`}
+                                        to={`${path}/${ac_strings.slug_latest}/2`}
                                     />
                                 </div>
-                            </div>
-                            <div className="hidden sm:block">
-                                <div className="standard-max-w-px">
-                                    <div className="relative p-4 text-white rounded-xl overflow-hidden w-full" style={{ background: "#263948" }} >
-                                        <h1 className="font-semibold text-3xl relative z-10 mb-4">{livingTheGospel.title}</h1>
-
-                                        <SubscribePodcast />
-                                        <div className="flex justify-start">
-                                            <Link
-                                                className="rounded-full  border border-white px-4 my-6 font-semibold mb-4 py-2"
-                                                to={ac_strings.slug_podcast_intro}
-                                            >
-                                                {ac_strings.learn_more}
-                                            </Link>
-                                        </div>
-                                        <div className="absolute w-64 h-64 bottom-0 right-0">
-                                            <div className="w-full pb-square sm:pb-wide" >
-                                                <img
-                                                    src={livingTheGospel.artworkSrc}
-                                                    className="absolute w-full h-full inset-0 rounded-lg object-cover g-image"
-                                                />
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-
-                                </div>
-                                <SectionTitleDesktopAndMobile
-                                    name={TS.latest}
-
-                                />
-                                <div className="standard-max-w-px" >
-
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 grid-h pb-16">
-                                        {posts.map((post, i) => {
-                                            return (
-                                                <div className={`div${i + 1}`} key={post.slug}>
-                                                    < TopImg showType {...post} />
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                    <div className="flex justify-center py-4">
-
-                                        <UnderlineLinkViewAll
-
-                                            to={`${path}/${ac_strings}`}
-                                        />
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     )

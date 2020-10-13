@@ -23,6 +23,8 @@ export const preloadedState = {
         bookmarkedPosts: [],
         unfinishedPosts: [],
         followedTopics: [],
+        followedPlaylists: [],
+        followedAuthors: [],
         historyPosts: []
     },
     mpHeight:0,

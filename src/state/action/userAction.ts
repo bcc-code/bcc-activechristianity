@@ -17,10 +17,21 @@ export const setUserHistory = (payload: IApiItem[]) => ({
     payload
 })
 
-export const setUserFollowing = (payload: IApiItem[]) => ({
-    type: 'SET_USER_FOLLOW',
+export const setUserFollowingTopics = (payload: IApiItem[]) => ({
+    type: 'SET_USER_FOLLOW_TOPICS',
     payload
 })
+
+export const setUserFollowingPlaylists = (payload: IApiItem[]) => ({
+    type: 'SET_USER_FOLLOW_PLAYLISTS',
+    payload
+})
+
+export const setUserFollowingAuthors = (payload: IApiItem[]) => ({
+    type: 'SET_USER_FOLLOW_AUTHORS',
+    payload
+})
+
 
 export const setUserUnfinished = (payload: IApiItem[]) => ({
     type: 'SET_USER_UNFINISHED',
@@ -32,21 +43,6 @@ export const getUserLibrary = () => ({
 
 })
 
-export const getUserLiked = () => ({
-    type: 'FETCH_USER_LIKED'
-})
-
-export const getUserHistory = () => ({
-    type: 'FETCH_USER_HISTORY'
-})
-
-export const getUserFollowing = () => ({
-    type: 'FETCH_USER_FOLLOWING'
-})
-
-export const getUserUnfinished = () => ({
-    type: 'FETCH_USER_UNFINISHED'
-})
 
 export const setNewLike = (payload: { id: string, bookmarked: boolean }) => ({
     type: 'NEW_USER_LIKED',
@@ -54,7 +50,18 @@ export const setNewLike = (payload: { id: string, bookmarked: boolean }) => ({
 })
 
 export const setNewFollowTopic = (payload: { id: string, followed: boolean }) => ({
-    type: 'NEW_USER_FOLLLOW_TOPIC',
+    type: 'NEW_USER_FOLLOW_TOPIC',
+    payload
+})
+
+export const setNewFollowPlaylists = (payload: { id: string, followed: boolean }) => ({
+    type: 'NEW_USER_FOLLOW_PLAYLISTS',
+    payload
+})
+
+
+export const setNewFollowAuthors = (payload: { id: string, followed: boolean }) => ({
+    type: 'NEW_USER_FOLLOW_AUTHORS',
     payload
 })
 

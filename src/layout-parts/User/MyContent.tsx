@@ -18,8 +18,6 @@ import { getRandomArray } from '@/helpers'
 const UserHistory = () => {
 
     const { followedTopics, bookmarkedPosts, } = useSelector((state: IRootState) => state.userLibrary);
-
-    console.log(bookmarkedPosts)
     return (
         <div className="flex flex-col ">
 

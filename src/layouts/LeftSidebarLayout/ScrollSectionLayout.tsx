@@ -33,7 +33,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ sections, title }) => {
                     )}
                 </SectionLink>
                 {sections.map((item, i) => {
-                    console.log(item.slug)
+
                     return (
                         <SectionLink section={item.slug} key={i}>
                             {({ onClick, isSelected }) => {

@@ -4,14 +4,21 @@ import {
 } from 'redux'
 
 import { IRootState, IUserLibrary } from '../types'
-import { setUserLiked, setUserHistory, setUserFollowing, setUserUnfinished, setUserLibrary } from '@/state/action/userAction'
+import {
+    setUserLiked,
+    setUserHistory,
+    setUserFollowingTopics,
+    setUserUnfinished,
+    setUserLibrary,
+    setUserFollowingPlaylists
+} from '@/state/action/userAction'
 import { IHistory, ILiked, IUnfinished, IFollowing } from '@/types'
 import acApi from '@/util/api'
 
 const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) => {
     switch (action.type) {
         // only catch a specific action
-        case 'NEW_USER_FOLLLOW_TOPIC':
+        case 'NEW_USER_FOLLOW_TOPIC':
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
@@ -20,11 +27,33 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         .following()
                         .then((res: IFollowing) => {
                             console.log(res)
-                            if (res.following && Array.isArray(res.following.tags)) {
-                                store.dispatch(setUserFollowing(res.following.tags))
+                            if (res.following && Array.isArray(res.following.topics)) {
+                                store.dispatch(setUserFollowingTopics(res.following.topics))
+                            } else {
+                                store.dispatch(setUserFollowingTopics([]))
+                            }
+
+                        })
+                        .catch((error: any) => {
+                            console.log(error)
+                        })
+
+                }).catch((error: any) => {
+                    console.log(error)
+                })
+            break;
+        case 'NEW_USER_FOLLOW_PLAYLISTS':
+            acApi
+                .followPlaylist(action.payload.id, action.payload.followed)
+                .then((resNewFollow: any) => {
+                    return acApi
+                        .following()
+                        .then((res: IFollowing) => {
+                            if (res.following && Array.isArray(res.following.playlists)) {
+                                store.dispatch(setUserFollowingPlaylists(res.following.playlists))
                             } else {
                                 console.log('reset topics')
-                                store.dispatch(setUserFollowing([]))
+                                store.dispatch(setUserFollowingPlaylists([]))
                             }
 
                         })
@@ -80,9 +109,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 .following()
                 .then((res: IFollowing) => {
                     console.log(res)
-                    if (Array.isArray(res.following.tags)) {
-                        if (res.following.tags) {
-                            store.dispatch(setUserFollowing(res.following.tags))
+                    if (Array.isArray(res.following.topics)) {
+                        if (res.following.topics) {
+                            store.dispatch(setUserFollowingTopics(res.following.topics))
                         }
                     }
 
@@ -142,9 +171,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     .following()
                     .then((res: IFollowing) => {
                         console.log(res)
-                        if (Array.isArray(res.following.tags)) {
-                            if (res.following.tags) {
-                                return res.following.tags
+                        if (Array.isArray(res.following.topics)) {
+                            if (res.following) {
+                                return res.following
                             } else {
                                 throw new Error('Error res.topics')
                             }
@@ -191,14 +220,18 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         bookmarkedPosts: [],
                         followedTopics: [],
                         historyPosts: [],
-                        unfinishedPosts: []
+                        unfinishedPosts: [],
+                        followedAuthors: [],
+                        followedPlaylists: []
                     }
                     if (res[0] && res[0].length > 0) {
                         userLibrary.bookmarkedPosts = res[0]
                     }
 
-                    if (res[1] && res[1].length > 0) {
-                        userLibrary.followedTopics = res[1]
+                    if (res[1]) {
+                        userLibrary.followedTopics = res[1].topics
+                        userLibrary.followedPlaylists = res[1].playlists
+                        userLibrary.followedAuthors = res[1].authors
                     }
 
                     if (res[2] && res[2].length > 0) {
