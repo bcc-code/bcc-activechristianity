@@ -5,9 +5,14 @@ import { INavItem, IPage } from '@/types'
 import MetaTag from '@/components/Meta'
 import CustomizedLayoutProps from '@/components/CustomizedPageComponent'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import ScrollSectionLayout from '@/layouts/LeftSidebarLayout/ScrollSectionLayout'
+import AboutUsLayout from '@/layouts/AboutUsLayout'
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
-
+import {
+    ScrollingProvider,
+    useScrollSections,
+    useScrollSection,
+    Section,
+} from 'react-scroll-section';
 
 import { divide } from 'lodash'
 import { Header } from './contact'
@@ -37,11 +42,12 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
                 breadcrumb={[]}
             />
 
-
-            <ScrollSectionLayout
-                title={title}
-                sections={allPages}
-            />
+            <ScrollingProvider>
+                <AboutUsLayout
+                    title={title}
+                    sections={allPages}
+                />
+            </ScrollingProvider>
 
         </div>
     )

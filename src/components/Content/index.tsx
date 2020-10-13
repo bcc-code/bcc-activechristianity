@@ -148,7 +148,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
 
     return (
         <SelectionPopper
-            className="main-content leading-normal font-serif"
+            className="main-content leading-normal font-serif text-justify"
             slug={slug}
             title={title}
         >

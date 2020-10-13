@@ -66,7 +66,6 @@ const ScrollSectionLayout: React.FC<IProps> = ({ sections, title }) => {
                         background: `url(${imageUrl}) center center no-repeat`,
                         backgroundSize: "cover",
                         zIndex: 200,
-                        minHeight: "250px",
                         /*  backgroundPositionY: "30%", */
                     }}
                 >

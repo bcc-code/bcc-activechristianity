@@ -60,16 +60,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIc
                     </button>
                 </div>
             </div>
-            <StickyBox offsetTop={300} >
-                <div className="hidden sm:flex flex-col sm:ml-8" style={{ width: "400px" }}>
-                    {sidebar({ closeMobileNav })}
-                </div>
-            </StickyBox>
-            <div className="relative w-full flex flex-col scroll-layout-main pt-64 sm:p-0">
-                <div className="z-10 w-full">
-                    {content}
-                </div>
-            </div>
+
         </div>
     )
 }

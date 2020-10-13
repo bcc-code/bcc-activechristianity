@@ -145,12 +145,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const postId = id
     const imageUrl = image;
-
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
-
-
-
-
     const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
 
     const body = (
