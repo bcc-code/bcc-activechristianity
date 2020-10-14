@@ -59,11 +59,13 @@ module.exports = function generateTaxonomies(actions, graphql) {
         for (let i = 0; i < allChapters.length; i++) {
           console.log(`Generating scripture ${i}/${allChapters.length}`)
           const book=allChapters[i]
+          console.log(book)
           for (let j=0;j<book.chapters.length;j++){
             const chapter=book.chapters[j]
             const chapterQuery = perChapterQuery(book.id,chapter)
             const chapterRes = await graphql(chapterQuery).catch(err=>console.log(err))
             const pagePath=`${page.slug}/${book.id}/${chapter}`
+            console.log(pagePath)
             const posts=chapterRes.data.ac.biblePosts.map(i=>i.slug)
             chaptersCounts.push({
               name:`${book.name} ${chapter}`,

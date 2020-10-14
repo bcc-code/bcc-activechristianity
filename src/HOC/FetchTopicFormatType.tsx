@@ -14,6 +14,7 @@ export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render
     const [topics, setTopics] = React.useState<ITopic[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
+
         setLoading(true)
         Promise.all(topicSlugs
 
@@ -29,6 +30,10 @@ export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render
                     }
 
                     return topic
+                })
+                .catch(error => {
+                    console.log(slug)
+                    console.log(error.message)
                 })
 
             ))

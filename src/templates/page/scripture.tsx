@@ -40,12 +40,12 @@ interface IActiveBook extends IBibleBook {
 
 const BibleNav: React.FC<IBibleNavProps> = (props) => {
     const { pageContext: { breadcrumb, title, bible }, path } = props
-
+    console.log(bible)
     const [activeBook, setActiveBook] = React.useState<undefined | IActiveBook>(undefined)
     const [activeBookOrder, setActiveBookOrder] = React.useState<undefined | number>(undefined)
 
     const handleSelectActiveBook = (e: any, book: IBibleBook) => {
-
+        console.log(book)
         if (activeBook && activeBook.availableChapters && book.no === activeBook.no) {
             setActiveBook(undefined)
             setActiveBookOrder(undefined)
@@ -70,17 +70,27 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
     const result = (
         <div className="w-full rounded-lg  flex flex-wrap justify-start">
             {activeBook && activeBook.availableChapters && activeBook.availableChapters.map((chpt) => {
+
                 return (
+                    chpt.a ?
+                        (
+                            <Link
+                                to={`${path}/${chpt.bookId}/${chpt.v}`}
+                                className={`w-8 text-center py-1 text-d4secondary font-semibold`}
+                                key={chpt.v}
 
-                    <Link
-                        to={`${path}/${chpt.bookId}/${chpt.v}`}
-                        className={`w-8 text-center py-1 text-d4secondary font-semibold`}
-                        key={chpt.v}
+                            >
+                                {chpt.v}
+                            </Link>
+                        )
+                        :
+                        <button
+                            className="w-8 text-center py-1 text-d4gray font-light"
+                            key={chpt.v}
 
-                    >
-                        {chpt.v}
-                    </Link>
-
+                        >
+                            {chpt.v}
+                        </button>
                 )
             }
             )}
@@ -113,13 +123,14 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                                 return (
                                     <div
                                         key={book.no}
-                                        className="w-1/2 sm:1/4 md:1/6 py-2 inline-block pr-2"
+                                        className="w-1/2 sm:1/4 md:1/6 py-2 inline-block pr-2 cursor-pointer"
                                         style={{ order: book.no }}
+                                        onClick={(e) => { handleSelectActiveBook(e, book) }}
 
                                     >
                                         <OutlineScriptureChapter
                                             active={activeBook && activeBook.name === book.name}
-                                            onClick={(e) => { handleSelectActiveBook(e, book) }}
+
 
                                         >
                                             {book.name}
@@ -155,12 +166,13 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                                 return (
                                     <div
                                         key={book.no}
-                                        className="w-1/2 sm:1/4 md:1/6 py-2 inline-block pr-2"
+                                        className="w-1/2 sm:1/4 md:1/6 py-2 inline-block pr-2 cursor-pointer"
                                         style={{ order: book.no }}
+                                        onClick={(e) => { handleSelectActiveBook(e, book) }}
                                     >
                                         <OutlineScriptureChapter
                                             active={activeBook && activeBook.name === book.name}
-                                            onClick={(e) => { handleSelectActiveBook(e, book) }}
+
 
                                         >
                                             {book.name}

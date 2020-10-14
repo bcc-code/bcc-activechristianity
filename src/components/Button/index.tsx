@@ -63,7 +63,7 @@ export const OutlineSmallRounded: React.FC<IButton> = ({ children }) => (
 
 export const OutlineScriptureChapter: React.FC<{ active?: boolean } & IButton> = ({ children, active }) => (
     <Button
-        className={` whitespace-no-wrap text-sm border border-d4gray hover:border-d4slate-dark rounded-lg py-1 px-2 font-semibold ${active === true ? 'bg-d4slate-dark text-white' : 'text-d4slate-dark bg-white'}`}
+        className={` whitespace-no-wrap text-sm border border-d4gray hover:border-d4slate-dark rounded-lg py-2 px-2 font-semibold ${active === true ? 'bg-d4slate-dark text-white' : 'text-d4slate-dark bg-white'}`}
     >
         {children}
     </Button>
