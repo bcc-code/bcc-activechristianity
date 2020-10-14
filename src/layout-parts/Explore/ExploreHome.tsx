@@ -4,7 +4,7 @@ import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard, { IBgImgTopicCard, asImageWDataUri } from '@/components/Cards/BgImgTopicCard'
 
 import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
-import { OutlineScriptureChapter } from '@/components/Button'
+import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
 import ac_strings from '@/strings/ac_strings.json'
@@ -22,7 +22,7 @@ import PodcastImg from '@/images/format-Podcast-05.jpg'
 const ExploreLayout: React.FC<{
     formats: INavItemWKey[]
     scriptureSlug: string
-}> = ({ formats }) => {
+}> = ({ formats, scriptureSlug }) => {
 
     const categoryKeys: IFormatKey[] = ["testimony", "commentary", "edification", "question"]
     const mediaLongKeys: IFormatKey[] = ["animation", "interview", "song", "message"]
@@ -52,7 +52,6 @@ const ExploreLayout: React.FC<{
     const categories: IBgImgTopicCard[] = getMenu(categoryKeys)
     const mediaLong: IBgImgTopicCard[] = getMenu(mediaLongKeys)
     const mediaSquare: IBgImgTopicCard[] = getMenu(mediaSquareKeys)
-    console.log('rendering home')
     return (
         <div className="bg-white max-w-tablet mx-auto">
             <div className="pt-6">
@@ -117,6 +116,9 @@ const ExploreLayout: React.FC<{
                 </div>
             </div>
 
+            <ExplorePopularScripture
+                scriptureSlug={scriptureSlug}
+            />
         </div>
     )
 }

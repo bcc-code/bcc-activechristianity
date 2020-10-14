@@ -7,7 +7,7 @@ import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Header
 import { OutlineScriptureChapter } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.json'
 import { INavItem, } from "@/types"
-const ExploreLayout: React.FC<{
+const ExplorePopularScripture: React.FC<{
 
     scriptureSlug: string
 }> = ({ scriptureSlug }) => {
@@ -58,4 +58,6 @@ const ExploreLayout: React.FC<{
             />
         </div>
     )
-})
+}
+
+export default ExplorePopularScripture

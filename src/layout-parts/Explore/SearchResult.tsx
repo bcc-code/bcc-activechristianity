@@ -71,7 +71,7 @@ const ExploreSearchResult: React.FC<IExploreSearchResult> = (props) => {
                                     if (post) {
                                         const fetched = playlistToPost(post)
                                         return (
-                                            <div className="max-w-64 flex flex-col">
+                                            <div className="flex flex-col">
                                                 <div className="pb-2">
                                                     <span className="text-xxs text-gray-600">{ac_strings.playlist}</span>
                                                 </div>
