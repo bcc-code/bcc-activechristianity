@@ -17,10 +17,7 @@ const CustomizedPage: React.FC<ICustomizedPage> = ({ path, pageContext, data }) 
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <LayoutH1Wide title={title} />
             <div className="standard-max-w-px">
-                {componentConfig.map((item, i) => {
-
-                    return <CustomizedPageComponent {...item} key={i} isFirst={i === 0} />
-                })}
+                <CustomizedPageComponent items={componentConfig} />
             </div>
 
         </div>
