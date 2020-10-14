@@ -20,6 +20,7 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
 
         const found = followedPlaylists.findIndex(p => p.id === id)
         const followed = found > -1
+
         setFollowed(followed ? "true" : "false")
     }, [id, followedPlaylists])
 

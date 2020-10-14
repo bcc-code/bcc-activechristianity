@@ -3,8 +3,8 @@ import { graphql } from "gatsby";
 import loadable from '@loadable/component'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { useSelector } from "react-redux";
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchPostList from '@/HOC/FetchPostList'
+import { FetchPostsFromArchivePage, FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
+
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
@@ -67,7 +67,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         <div className="sm:hidden">
           <div className="w-full pb-4 pt-8">
             <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-            <FetchPosts
+            <FetchPostsFromSlugs
               slugs={featuredPostSlugs}
               layout="row"
               render={
@@ -80,7 +80,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             {loggedIn !== "success" ? (
               <>
                 <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                <FetchPosts
+                <FetchPostsFromSlugs
                   slugs={popularPostsAll.static}
                   layout="row"
                   render={
@@ -92,7 +92,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 <>
                   <PageSectionHeader title={ac_strings.latest} className="pb-4" />
 
-                  <FetchPostList
+                  <FetchPostsFromArchivePage
                     slug={latestPostAsTopic.slug}
                     layout="row"
                     render={
@@ -119,7 +119,11 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               <QPopularAndFeaturedTopics
                 excludeFollowed
                 render={({ topics }) => {
-                  const randomTopics = getRandomArray(topics, 6)
+                  const filtredTopics = topics.filter(item => {
+                    const find = followedTopics.find(t => `${t.id}` === `${item.id}`)
+                    return find === undefined
+                  })
+                  const randomTopics = getRandomArray(filtredTopics, 6)
 
                   return (
                     <FeaturedTopics featured={randomTopics} />
@@ -134,7 +138,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             <>
               <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
                 <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-                <FetchPostList
+                <FetchPostsFromArchivePage
                   slug={latestPostAsTopic.slug}
                   layout="row"
                   render={
@@ -154,7 +158,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           ) : (
               <>
                 <PageSectionHeader title={ac_strings.continue} className="pb-4" />
-                <FetchPosts
+                <FetchPostsFromSlugs
                   slugs={unfinishedPosts.length > 0 ? unfinishedPosts.map(item => item.slug) : historyPosts.map(item => item.slug)}
                   layout="list"
                   render={
@@ -169,15 +173,14 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
         <div className="hidden sm:block">
 
-          <FetchPosts
-            slugs={[getRandomArray(featuredPostSlugs, 1)[0]]}
-            layout="row"
+          <FetchOnePost
+            slug={getRandomArray(featuredPostSlugs, 1)[0]}
             render={
-              ({ posts }) => <HomeTopFeaturePost {...posts[0]} />
+              ({ post }) => post ? <HomeTopFeaturePost {...post} /> : <div></div>
             }
           />
 
-          <FetchPostList
+          <FetchPostsFromArchivePage
             slug={latestPostAsTopic.slug}
             layout="list"
             render={({ posts }) => {
@@ -197,7 +200,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <LazyLoad >
             <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
               <div className="col-start-1 col-end-3 lg:col-end-4">
-                <FetchPostList
+                <FetchPostsFromArchivePage
                   slug={latestPostAsTopic.slug}
                   layout="list"
                   render={({ posts }) => {

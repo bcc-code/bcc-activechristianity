@@ -4,7 +4,7 @@ import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/com
 import { IRootState } from '@/state/types'
 import { IPostItem, IApiItem } from '@/types'
 
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 
@@ -15,7 +15,7 @@ const UserHistory = () => {
 
     return (
         <div>
-            <FetchPosts
+            <FetchPostsFromSlugs
                 slugs={history.slice(0, 6).map(p => p.slug)}
                 layout="list"
                 render={({ posts }) => {

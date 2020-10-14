@@ -5,7 +5,8 @@ import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import PostItem from '@/components/PostItemCards/RightImg'
 import { normalizePostRes, ebookResToPost, playlistToPost } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.json'
-
+import { FetchOnePost, FetchOnePlaylist } from '@/HOC/FetchPosts'
+import RightImgWDes from '@/components/PostItemCards/RightImg';
 interface IHitPost extends IPostRes {
     type: "post"
 }
@@ -47,25 +48,49 @@ const ExploreSearchResult: React.FC<IExploreSearchResult> = (props) => {
 
                         const post = normalizePostRes(hit)
                         return (
-                            <PostItem {...post} />
-                        )
-                    } else if (hit.type === "ebook") {
-                        return (
-                            <FeaturedCard
-                                {...ebookResToPost(hit)}
+                            <FetchOnePost
                                 slug={hit.slug}
 
-                                type="ebook"
+                                render={({ post }) => {
+                                    if (post) {
+                                        return (
+                                            <RightImgWDes {...post} />
+                                        )
+                                    } else {
+                                        return <div> </div>
+                                    }
+                                }}
                             />
                         )
                     } else if (hit.type = "playlist") {
                         return (
-                            <FeaturedCard
-                                {...playlistToPost(hit)}
-                                slug={hit.slug}
+                            <FetchOnePlaylist
 
-                                type="playlist"
+                                slug={hit.slug}
+                                render={({ post }) => {
+                                    if (post) {
+                                        const fetched = playlistToPost(post)
+                                        return (
+                                            <div className="max-w-64 flex flex-col">
+                                                <div className="pb-2">
+                                                    <span className="text-xxs text-gray-600">{ac_strings.playlist}</span>
+                                                </div>
+
+                                                <FeaturedCard
+                                                    {...fetched}
+
+                                                    type="playlist"
+                                                />
+                                            </div>
+                                        )
+                                    } else {
+                                        return <div> </div>
+
+                                    }
+
+                                }}
                             />
+                            /*                             */
                         )
                     }
 

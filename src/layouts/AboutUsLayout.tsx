@@ -4,12 +4,9 @@ import { PageSectionHeader } from '@/components/Headers'
 import { SideNavItem } from '@/components/Button'
 import Icon from '@/components/Icons/Icon'
 const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
-import ScrollSectionChild, { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
-import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import CustomizedPageComponent from '@/components/ScrollSection/CustomizedPageComponent'
+import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
+import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import {
-    ScrollingProvider,
-    useScrollSections,
     useScrollSection,
     Section,
 } from 'react-scroll-section';

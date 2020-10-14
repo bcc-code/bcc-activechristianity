@@ -210,9 +210,9 @@ export const ebookResToPost = (ebook: IEbook) => {
 }
 
 export const playlistToPost = (playlist: IPlaylist): IPostItem => {
-    const { title, slug, image, excerpt } = playlist
+    const { title, slug, image, excerpt, id } = playlist
     const post: IPostItem = {
-        id: '',
+        id,
         title,
         slug: `${ac_strings.slug_playlist}/${slug}`,
         image: getImage(title, "640x320", image),

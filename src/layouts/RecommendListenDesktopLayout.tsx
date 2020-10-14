@@ -7,12 +7,12 @@ const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveC
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
+import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import PostRow from '@/layout-parts/List/PostRow4Col'
-import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
-import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchPostList from '@/HOC/FetchPostList'
+
+import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
+import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+
 import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import { ISubtopicLinks, IPlaylist, INavItem } from "@/types"
@@ -49,7 +49,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
 
             <div className="standard-max-w-px">
-                <FetchPosts
+                <FetchPostsFromSlugs
                     slugs={popularPosts}
                     layout="list"
                     render={({ posts }) => {
@@ -64,8 +64,8 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink    {...playlist} />
-                        <FetctLatestPlaylists
-                            slug={playlist.to}
+                        <FetchLatestPlaylists
+                            layout="row"
                             render={({ playlists }) => {
                                 return (
                                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16">
@@ -92,7 +92,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink    {...podcast} />
                         <FetchLatestPodcast
-                            slug={podcast.to}
+                            layout="row"
                             render={({ podcastEps }) => {
                                 return (
                                     <PostRow
@@ -108,7 +108,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
                 </LazyLoad>
             )}
-            <FetchPostList
+            <FetchPostsFromArchivePage
                 slug={latestSlug}
                 layout="row" render={({ posts }) => {
                     return (<LatestDesktopRow posts={posts} latestSlug={latestSlug} />)

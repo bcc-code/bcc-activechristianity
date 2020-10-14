@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { IPostItem, ITopicNavItem } from '@/types'
 import { IRootState } from '@/state/types'
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchTopics from '@/HOC/FetchFullTopicWithPostSlugs'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import { FetchTopics } from '@/HOC/FetchTopicFormatType'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
@@ -26,12 +26,12 @@ const UserHistory = () => {
                     <FetchTopics
                         topics={followedTopics.map(p => p.slug)}
                         layout="row"
-                        render={({ topicPostItems }) => {
+                        render={({ topics }) => {
                             return (
                                 <>
                                     <SectionTitleDesktopAndMobile name={"Following Topics"} />
                                     <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
-                                        {topicPostItems.map(({ name, slug: to }) => {
+                                        {topics.map(({ name, slug: to }) => {
                                             return (
                                                 <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
                                             )
@@ -39,7 +39,7 @@ const UserHistory = () => {
                                     </div>
                                     <XScrollCustomSize
                                         childeClassName=""
-                                        items={topicPostItems.map(({ name, slug: to, id }) => {
+                                        items={topics.map(({ name, slug: to, id }) => {
                                             return (
                                                 <div className="flex flex-col items-center">
                                                     <div className="min-h-24 h-24 w-18" >
@@ -73,7 +73,7 @@ const UserHistory = () => {
                         </div>
                     )}
             </div>
-            {bookmarkedPosts.length > 0 ? <FetchPosts
+            {bookmarkedPosts.length > 0 ? <FetchPostsFromSlugs
                 slugs={bookmarkedPosts.slice(0, 6).map(p => p.slug)}
                 layout="list"
                 render={({ posts }) => {

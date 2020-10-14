@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { IMedia } from '@/types'
 import MUIcon from '@/components/Icons/Icon'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
-import PlayPlaylistFromSlug from '@/HOC/FetchPlayingPlaylist'
+import PlayPlaylistFromSlug from '@/HOC/SetAndUpdatePlayingPlaylist'
 import ac_strings from '@/strings/ac_strings.json'
 export interface IPlayButtonProps {
     track: IMedia

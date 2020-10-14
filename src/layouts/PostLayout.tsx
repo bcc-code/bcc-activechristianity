@@ -18,14 +18,13 @@ const PlaylistItem = loadable(() => import('@/components/PostItem/LeftImgPlaylis
 import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
-import FetchPost from '@/HOC/FetchPosts'
-import FetchPostFromList from '@/HOC/FetchPostList'
-import FetchRecommendByPost from '@/HOC/FetchRecommendByPost'
+import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+
 import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts, RecommendedPostsSection } from '@/layout-parts/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
-import { getRandomArray } from "@/helpers"
+
 import TS from '@/strings'
 
 import acApi from '@/util/api'
@@ -38,6 +37,7 @@ import { IRootState } from '@/state/types'
 // mock data
 
 import ac_strings from '@/strings/ac_strings.json'
+import { duration } from '@material-ui/core';
 
 interface IPostProps extends IPostItem {
     content: string
@@ -140,7 +140,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         glossary,
         readMorePosts,
         views,
-        likes
+        likes,
+        duration
     } = post
 
     const postId = id
@@ -190,7 +191,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <div>
                         {item.authors.map(a => (
                             <div className="py-6">
-                                <FetchPostFromList
+                                <FetchPostsFromArchivePage
                                     slug={`${TS.slug_ac_author}/${a.to}`}
                                     layout="list"
                                     render={({ posts }) => {
@@ -200,7 +201,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                                 title={`${ac_strings.more_from} ${a.name}`}
                                                 posts={filteredPosts}
                                             />
-                                        ) : null
+                                        ) : <div></div>
                                     }}
 
                                 />
@@ -281,7 +282,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             >
                 <div className="pb-6 bg-white border-d4gray border-b text-sm">
                     <ReadingTimingAuthor
-                        readingTime={reading_time?.text}
+                        duration={duration?.read}
                         authors={authors}
 
                     />
@@ -304,7 +305,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 translatedUrls={tranlsatedUrl}
                 headerMeta={(
                     <ReadingTimingAuthor
-                        readingTime={reading_time?.text}
+                        duration={duration?.read}
                         authors={authors}
 
                     />

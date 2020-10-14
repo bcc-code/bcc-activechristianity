@@ -1,15 +1,17 @@
 import * as React from "react"
-import { IPostItem, } from '@/types'
-import { useSelector } from "react-redux";
-import { RowPlaceholder, ListPlaceholder, OneTopImgPost } from '@/layout-parts/Loader/PlaceHolders'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { IPostItem, IPlaylist } from '@/types'
+import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
+import { fetchLocalPostsFromSlugs, fetchOneLocalPostsFromSlug, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
+import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
+import ac_strings from '@/strings/ac_strings.json'
+
 
 interface IFetchPost {
     slugs: string[],
     layout: "row" | "list" | "one",
     render: (data: { posts: IPostItem[] }) => JSX.Element
 }
-const FetchPosts: React.FC<IFetchPost> = ({ slugs, render, layout }) => {
+export const FetchPostsFromSlugs: React.FC<IFetchPost> = ({ slugs, render, layout }) => {
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
@@ -26,22 +28,130 @@ const FetchPosts: React.FC<IFetchPost> = ({ slugs, render, layout }) => {
                 console.log(error)
             })
     }, [slugs])
-    const getPlaceholder = {
-        row: RowPlaceholder,
-        list: ListPlaceholder,
-        one: OneTopImgPost
-    }
 
-    const CustomPlacehoder = getPlaceholder[layout]
+    const CustomPlaceholder = getPlaceholder[layout]
     return (
 
-        <CustomPlacehoder
+        <CustomPlaceholder
             loading={loading}
         >
             {render({ posts })}
-        </CustomPlacehoder>
+        </CustomPlaceholder>
+    )
+
+}
+interface IFetchPostsFromArchivePage {
+    slug: string
+    layout: "row" | "list" | "one",
+    render: (data: { posts: IPostItem[] }) => JSX.Element
+}
+
+export const FetchPostsFromArchivePage: React.FC<IFetchPostsFromArchivePage> = ({ slug, render }) => {
+    const [postItems, setPostItems] = React.useState<IPostItem[]>([])
+    const [loading, setLoading] = React.useState(true)
+    React.useEffect(() => {
+
+        fetchPostslistFromArchivePage(slug)
+            .then(res => {
+                setLoading(false)
+                if (res) {
+
+                    setPostItems(res)
+                }
+            })
+            .catch(error => {
+                setLoading(false)
+                console.log(error)
+            })
+    }, [])
+
+    return (
+        <Placeholder
+            loading={loading}
+        >
+            {render({ posts: postItems })}
+        </Placeholder>
     )
 
 }
 
-export default FetchPosts
+
+interface IFetchOnePost {
+    slug: string,
+    render: (data: { post: IPostItem | null }) => JSX.Element
+}
+export const FetchOnePost: React.FC<IFetchOnePost> = ({ slug, render }) => {
+    const [post, setPost] = React.useState<IPostItem | null>(null)
+    const [loading, setLoading] = React.useState(true)
+    React.useEffect(() => {
+        setLoading(true)
+        fetchOneLocalPostsFromSlug(slug)
+            .then(res => {
+                setLoading(false)
+                if (res) {
+                    setPost(res)
+                }
+            })
+            .catch(error => {
+                setLoading(false)
+                console.log(error)
+            })
+    }, [slug])
+
+
+    const CustomPlaceholder = getPlaceholder["one"]
+    return (
+
+        <CustomPlaceholder
+            loading={loading}
+        >
+            {render({ post })}
+        </CustomPlaceholder>
+    )
+
+}
+
+interface IFetchOnePlaylist {
+    slug: string
+    render: (data: { post: IPlaylist | null }) => JSX.Element
+}
+
+export const FetchOnePlaylist: React.FC<IFetchOnePlaylist> = ({ slug, render }) => {
+    const [post, setPost] = React.useState<IPlaylist | null>(null)
+    const [loading, setLoading] = React.useState(true)
+    React.useEffect(() => {
+        setLoading(true)
+        fetch(`/page-data/${ac_strings.slug_playlist}/${slug}/page-data.json`)
+            .then(res => res.json())
+            .then(res => {
+                if (res.result && res.result.pageContext && res.result.pageContext['playlist']) {
+                    const updatePost = res.result.pageContext && res.result.pageContext['playlist']
+                    return updatePost
+                }
+                return undefined
+            })
+            .then(res => {
+                console.log(res)
+                setLoading(false)
+                if (res) {
+                    setPost(res)
+                }
+            })
+            .catch(error => {
+                setLoading(false)
+                console.log(error)
+            })
+    }, [slug])
+
+
+    const CustomPlaceholder = getPlaceholder["one"]
+    return (
+
+        <CustomPlaceholder
+            loading={loading}
+        >
+            {render({ post })}
+        </CustomPlaceholder>
+    )
+
+}

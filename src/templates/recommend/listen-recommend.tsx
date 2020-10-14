@@ -2,10 +2,10 @@ import React from "react"
 import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 
-import FetchPostList from '@/HOC/FetchPostList'
-import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
-import FetchTopicFeatured from '@/HOC/FetchTopicFeatured.tsx'
-import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
+import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+
+import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
+import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
 const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
 import { PageSectionHeader } from '@/components/Headers'
@@ -57,8 +57,8 @@ const Listen: React.FC<IProps> = (props) => {
                         <UnderlineLinkViewAll to={`${playlist.to}`} />
                     </div>
 
-                    <FetctLatestPlaylists
-                        slug={playlist.to}
+                    <FetchLatestPlaylists
+                        layout="row"
                         render={({ playlists }) => {
                             const randomPlaylist = getRandomArray(playlists, playlists.length > 6 ? 6 : playlists.length)
                             return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
@@ -72,7 +72,7 @@ const Listen: React.FC<IProps> = (props) => {
                             <UnderlineLinkViewAll to={`${podcast.to}`} />
                         </div>
                         <FetchLatestPodcast
-                            slug={podcast.to}
+                            layout="row"
                             render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
 
                         />
@@ -84,7 +84,7 @@ const Listen: React.FC<IProps> = (props) => {
                 <LazyLoad>
                     <div className="py-6 px-4">
                         <PageSectionHeader title={ac_strings.latest} />
-                        <FetchPostList
+                        <FetchPostsFromArchivePage
                             slug={latestSlug}
                             layout="row" render={({ posts }) => {
                                 return (

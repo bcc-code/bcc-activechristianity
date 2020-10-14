@@ -220,7 +220,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
 }
 
-export default App
+export default React.memo(App)
 
 interface IAppQueryProps {
     ac: {

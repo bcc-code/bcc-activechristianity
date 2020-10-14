@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactPlaceholder from 'react-placeholder'
 import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders';
 
+
 export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     const customerPlaceholder = (
         <div className="standard-max-w sm:px-4 grid sm:grid-cols-2 md:grid-cols-4 gap-4 pb-16 w-full">
@@ -82,3 +83,10 @@ export const ScriptureBookBlock = () => {
         <RectShape color="WhiteSmoke" className="text-gray-300 w-full min-h-8" />
     )
 }
+
+export const getPlaceholder = {
+    row: RowPlaceholder,
+    list: ListPlaceholder,
+    one: OneTopImgPost
+}
+

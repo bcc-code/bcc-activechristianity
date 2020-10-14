@@ -38,11 +38,10 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
     let ImgTag: any = Link
     let props: any = { to: slug }
 
-    //|| type === "playlist"
     return (
         <div
 
-            className={`${className ? className : ''} relative justify-end select-none block rounded-xxl sm:rounded-xl border border-gray-300 hover:shadow-md p-2 md:p-4 max-w-lg h-full w-full text-white overflow-hidden`}
+            className={`${className ? className : ''} relative justify-end select-none block rounded-xxl sm:rounded-xl border border-gray-300 hover:shadow-md p-2 md:p-4 max-w-64  h-full w-full text-white overflow-hidden`}
 
         >
             <div className="absolute inset-0 rounded-xxl sm:rounded-xl overflow-hidden bg-center bg-cover" style={bgStyle}></div>
@@ -85,14 +84,14 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                     {type !== "ebook" && type !== "playlist" && (
                         <div className="flex">
                             <ToggleBookmark id={id} color="white" size="6" />
-                            <span className="ml-2">{likes}</span>
+
                         </div>
                     )}
-                    {/*                     {
+                    {
                         type === "playlist" && (
                             <ToggleFollowPlaylistBookmark id={id} color="white" size="6" />
                         )
-                    } */}
+                    }
                 </div>
             </div >
 

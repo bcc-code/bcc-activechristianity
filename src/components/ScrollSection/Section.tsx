@@ -2,7 +2,7 @@ import React from 'react'
 import { Section } from 'react-scroll-section'
 import Video16to9 from '@/components/Images/Video16to9'
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import CustomizedPageComponent from './CustomizedPageComponent'
+import CustomizedPageComponent from '../CustomizedPageComponent'
 
 export interface ISectionProps {
     title: string

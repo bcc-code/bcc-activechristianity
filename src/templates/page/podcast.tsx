@@ -10,7 +10,7 @@ import MetaTag from '@/components/Meta'
 
 import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import TopImg from '@/components/PostItemCards/TopImg'
 import RightImg from '@/components/PostItemCards/RightImg'
 // helpers
@@ -68,7 +68,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                 </div>
 
             </PodcastPageHeadSection>
-            <FetchPosts
+            <FetchPostsFromSlugs
 
                 slugs={postSlugList.slice(0, 12)}
                 layout="list"

@@ -7,11 +7,11 @@ const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveC
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
 import PostRow from '@/layout-parts/List/PostRow4Col'
-import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
-import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchPostList from '@/HOC/FetchPostList'
+import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
+import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
+
+import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+
 import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
@@ -49,18 +49,18 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
 
             <div className="standard-max-w-px">
-                <FetchPosts
+                <FetchPostsFromSlugs
                     slugs={popularPosts}
                     layout="list"
                     render={({ posts }) => {
                         const randomHeaderPost = getRandomArray(posts.slice(5), 1)
                         return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
                     }}
-                >
+                />
 
-                </FetchPosts>
+
             </div>
-            <FetchPostList
+            <FetchPostsFromArchivePage
                 slug={latestSlug}
                 layout="row" render={({ posts }) => {
                     return (<LatestDesktopRow posts={posts} latestSlug={latestSlug} />)
@@ -69,8 +69,8 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             {listen && listen.playlist && (
                 <LazyLoad>
                     <div className="px-4"><UnderlineTitleLink    {...listen.playlist} /></div>
-                    <FetctLatestPlaylists
-                        slug={listen.playlist.to}
+                    <FetchLatestPlaylists
+                        layout="row"
                         render={({ playlists }) => {
                             return (
                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16 px-4">
@@ -96,7 +96,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                 <LazyLoad>
                     <div className="px-4"><UnderlineTitleLink    {...listen.podcast} /></div>
                     <FetchLatestPodcast
-                        slug={listen.podcast.to}
+                        layout="row"
                         render={({ podcastEps }) => {
                             return (
                                 <PostRow

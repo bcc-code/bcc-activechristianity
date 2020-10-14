@@ -23,7 +23,7 @@ const Search: React.FC<ISearch> = ({ onChange, clearInput, value, setInputFocus,
     // px-2 text-lg w-full rounded-lg h-8 sm:h-12
     return (
         <div
-            className={`flex flex-auto border w-full bg-white rounded-lg sm:rounded-full items-center px-2 sm:px-4 sm:mb-4 overflow-hidden`}
+            className={`flex flex-auto border w-full bg-white rounded-lg sm:rounded-full items-center px-2 sm:px-4 overflow-hidden`}
             onClick={handleFocus}
             onKeyDown={handleFocus}
             role="application"

@@ -10,8 +10,7 @@ import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-import FetchPostFromList from '@/HOC/FetchPostList'
-import FetchPost from '@/HOC/FetchPosts'
+import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from "@/helpers"
 import acApi from '@/util/api'
 interface IPostMain {
@@ -140,7 +139,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
                     <div>
                         {item.authors.map(a => (
                             <div className="py-6">
-                                <FetchPostFromList
+                                <FetchPostsFromArchivePage
                                     slug={`${TS.slug_ac_author}/${a.to}`}
                                     layout="list"
                                     render={({ posts }) => {
@@ -150,7 +149,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
                                                 title={`${ac_strings.more_from} ${a.name}`}
                                                 posts={posts}
                                             />
-                                        ) : null
+                                        ) : <div></div>
                                     }}
 
                                 />
@@ -358,7 +357,7 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
             })
     }, [postId, readMorePosts])
     return (
-        <FetchPost
+        <FetchPostsFromSlugs
 
             slugs={randomPosts}
             layout="row"

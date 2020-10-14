@@ -1,5 +1,5 @@
 import React from 'react'
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray } from '@/helpers'
@@ -14,7 +14,7 @@ const FeatureSection: React.FC<{ topicPosts: ITopicPostSlugs[] }> = ({ topicPost
     return (
 
 
-        <FetchPosts
+        <FetchPostsFromSlugs
             slugs={randomFeaturedFromTopics}
             layout="list"
             render={({ posts }) => {

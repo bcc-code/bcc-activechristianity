@@ -14,7 +14,7 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path,
     const translatedUrls: ITranslations[] = []
     const allPlaylists = data.ac.playlists
     return (
-        <div>
+        <div className="max-w-lg mx-auto pt-6">
             <MetaTag
                 title={title}
                 translatedUrls={translatedUrls}
@@ -24,7 +24,7 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path,
 
             />
             <LayoutH1Wide title={title} />
-            <div className="grid grid-cols-2 md:grid-cols-4  grid-h70  gap-2 sm:gap-4 md:gap-6 standard-max-w-px py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4  grid-h70  gap-2 sm:gap-4 md:gap-6 py-8 px-4">
                 {allPlaylists.map((item) => {
                     const post = playlistToPost(item)
                     return (
@@ -65,6 +65,7 @@ export const pageQuery = graphql`
     query AllPlaylists {
         ac {
             playlists {
+                id
                 title
                 slug
                 image {

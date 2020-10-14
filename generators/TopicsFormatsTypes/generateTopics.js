@@ -168,7 +168,8 @@ module.exports = function generateTopics(actions, graphql) {
                                 const getFormatPosts = getSubTopicPosts(topic.id,stTopic.id)
                                 await graphql(getFormatPosts)
                                 .then((subTopicPostRes)=>{
-                                    const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
+                                    if(subTopicPostRes.data && subTopicPostRes.data.ac){
+                                      const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
                                     topicFormat.push({ 
                                       key:find.keyname,
                                       id: stTopic.id, 
@@ -187,6 +188,10 @@ module.exports = function generateTopics(actions, graphql) {
                                       ]
                                     })
                                 
+                                    } else {
+                                      console.log('error with this response')
+                                      console.log(subTopicPostRes)
+                                    }
                                 })
                               }
                           }

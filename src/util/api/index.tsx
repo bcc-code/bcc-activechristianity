@@ -64,8 +64,11 @@ export default {
         })
     },
     followPlaylist: (id: number, toggle: boolean) => {
+        console.log(id)
         const query = request.followPlaylistMutation(id, !toggle)
+        console.log(query)
         return sendQuery(query).then(res => {
+            console.log(res)
             return res
         })
     },

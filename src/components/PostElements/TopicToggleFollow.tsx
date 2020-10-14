@@ -1,6 +1,6 @@
 import * as React from 'react';
-import FetchAndSetFollowedTopics from '@/HOC/FetchAndSetFollowed'
-import FetchAndSetFollowedPlaylists from '@/HOC/FetchAndSetFollowedPlaylist'
+import FetchAndSetFollowedTopics from '@/HOC/SetAndUpdateFollowedTopic'
+import FetchAndSetFollowedPlaylists from '@/HOC/SetAndUpdateFollowedPlaylist'
 import Icon, { IButtonColour } from "@/components/Icons/Icon"
 import Link from '@/components/CustomLink'
 import { ITopicNavItem } from '@/types'

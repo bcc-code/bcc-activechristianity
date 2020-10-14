@@ -3,10 +3,9 @@ import loadable from '@loadable/component'
 
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import { UnderlineLinkViewAll } from '@/components/Button'
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchPostList from '@/HOC/FetchPostList'
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
-import FetchTopicFeatured from '@/HOC/FetchTopicFeatured.tsx'
+import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
+import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 
 import LazyLoad from '@/components/LazyLoad';
 import MetaTag from '@/components/Meta'
@@ -95,7 +94,7 @@ const Read: React.FC<IProps> = (props) => {
                         <>
                             <div className="bg-d4slate-lighter py-6 overflow-hidden">
                                 <PageSectionHeader title={ac_strings.popular} />
-                                <FetchPosts
+                                <FetchPostsFromSlugs
                                     slugs={mostPopular.slice(0, 5)}
                                     layout="row"
                                     render={({ posts }) => {
@@ -106,7 +105,7 @@ const Read: React.FC<IProps> = (props) => {
                             </div>
 
 
-                            <FetchPostList
+                            <FetchPostsFromArchivePage
                                 slug={latestSlug}
                                 layout="row" render={({ posts }) => {
                                     return (
@@ -137,7 +136,7 @@ const Read: React.FC<IProps> = (props) => {
                                         <PageSectionHeader title={ac_strings.latest} />
                                         <UnderlineLinkViewAll to={`${latestSlug}`} />
                                     </div>
-                                    <FetchPostList
+                                    <FetchPostsFromArchivePage
                                         slug={latestSlug}
                                         layout="row" render={({ posts }) => {
                                             return (<HSCardList posts={posts} />)
@@ -145,7 +144,7 @@ const Read: React.FC<IProps> = (props) => {
                                     />
 
                                 </div>
-                                <FetchPosts
+                                <FetchPostsFromSlugs
                                     slugs={mostPopular.slice(0, 5)}
                                     layout="row"
                                     render={({ posts }) => {

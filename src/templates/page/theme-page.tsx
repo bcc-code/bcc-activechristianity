@@ -3,8 +3,7 @@ import { graphql } from "gatsby"
 import { INavItem, IImage } from "@/types"
 import MetaTag from '@/components/Meta'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-import FetchPost from '@/HOC/FetchPosts'
-import Content from '@/components/Content'
+
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import { LayoutH1Wide } from '@/components/Headers'
 

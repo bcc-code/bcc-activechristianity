@@ -6,7 +6,7 @@ import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 const PostListSection: React.FC<ITopicPostSlugs> = ({ posts: slugs, ...topic }) => (
     <div className="md:h-full md:flex md:flex-col">
         {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
@@ -22,7 +22,7 @@ const PostListSection: React.FC<ITopicPostSlugs> = ({ posts: slugs, ...topic }) 
             <ToggleFollowOutlineBtn id={topic.id} />
         </div>
         <div className="flex-1">
-            <FetchPosts
+            <FetchPostsFromSlugs
                 slugs={slugs.slice(0, 1)}
                 layout="row"
                 render={({ posts }) => {

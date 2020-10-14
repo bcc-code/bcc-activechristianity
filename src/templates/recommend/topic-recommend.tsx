@@ -3,9 +3,9 @@ import loadable from '@loadable/component'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
 import LazyLoad from '@/components/LazyLoad';
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchPostList from '@/HOC/FetchPostList'
+import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
@@ -51,7 +51,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 </div>
                 <div className="w-full pb-4 pt-8">
                     <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                    <FetchPosts
+                    <FetchPostsFromSlugs
                         slugs={mostPopular.slice(5)}
                         layout="row"
                         render={({ posts }) => {
@@ -61,7 +61,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 </div>
                 <div className="bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                    <FetchPosts
+                    <FetchPostsFromSlugs
                         slugs={mostPopular.slice(0, 5)}
                         layout="row"
                         render={({ posts }) => {

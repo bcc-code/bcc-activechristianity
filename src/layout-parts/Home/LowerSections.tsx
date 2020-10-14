@@ -1,7 +1,7 @@
 import * as React from "react"
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { ITopic, ITopicPostSlugs } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
@@ -40,7 +40,7 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts })
 
             <div className="col-start-3 lg:col-start-4 col-end-5 bg-gray-200 sm:bg-transparent py-6 overflow-hidden hidden sm:block">
                 <LazyLoad>
-                    <FetchPosts
+                    <FetchPostsFromSlugs
                         slugs={popularPosts}
                         layout="list"
                         render={({ posts }) => {

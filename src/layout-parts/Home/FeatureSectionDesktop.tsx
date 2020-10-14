@@ -1,12 +1,13 @@
 import React from 'react'
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchOnePost } from '@/HOC/FetchPosts'
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItemCards/FeaturedCard'
+
 import TopImg from '@/components/PostItemCards/TopImg'
 import ac_strings from '@/strings/ac_strings.json'
-import FetchLatestPodcast from '@/HOC/FetchLatestPodcast'
-import FetctLatestPlaylists from '@/HOC/FetctLatestPlaylists'
+import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
 import { playlistToPost, getRandomArray } from '@/helpers'
 import { ITopicPostSlugs } from '@/types'
+import shortid from 'shortid'
 const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPostSlugs[] }> = ({ topicPosts }) => {
 
     let postSlugs: string[] = []
@@ -23,32 +24,35 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
             </h3>
             <div className=" mx-4 my-4 grid gap-4 md:gap-6 grid-cols-4">
                 <FetchLatestPodcast
-                    slug={"podcast"}
-                    render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast" />}
+                    key={shortid()}
+                    layout="one"
+                    render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast"
+                    />}
 
                 />
-                <FetctLatestPlaylists
-
-                    slug={"playlist"}
+                <FetchLatestPlaylists
+                    layout="one"
+                    key={shortid()}
                     render={({ playlists }) => {
                         const random = getRandomArray(playlists, 1)
                         const post = random.length ? random[0] : undefined
+                        console.log(post)
                         return <FeaturedCard {...post} type="playlist" />
                     }}
                 />
-                <FetchPosts
-                    slugs={[randomFeaturedFromTopics[0]]}
-                    layout="one"
-                    render={({ posts }) => {
-                        return <TopImg {...posts[0]} />
+                <FetchOnePost
+                    key={shortid()}
+                    slug={randomFeaturedFromTopics[0]}
+                    render={({ post }) => {
+                        return post ? <TopImg {...post} /> : <div></div>
                     }
                     }
                 />
-                <FetchPosts
-                    slugs={[randomFeaturedFromTopics[1]]}
-                    layout="one"
-                    render={({ posts }) => {
-                        return <TopImg {...posts[0]} />
+                <FetchOnePost
+
+                    slug={randomFeaturedFromTopics[1]}
+                    render={({ post }) => {
+                        return post ? <TopImg {...post} /> : <div></div>
                     }
                     }
                 />

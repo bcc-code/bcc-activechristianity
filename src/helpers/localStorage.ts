@@ -17,12 +17,13 @@ const ACLocalStorage = {
             const searchHistory = ACLocalStorage.getStoredHistory()
 
             if (query !== "" && query.length > 2) {
-                const findQuery = searchHistory.findIndex((elt: string) => elt === query)
+                const findQuery = searchHistory.findIndex((elt: string) => query.startsWith(elt))
                 if (findQuery !== -1) {
-                    searchHistory.unshift(searchHistory.splice(findQuery, 1)[0])
-                } else {
-                    searchHistory.unshift(query)
+                    searchHistory.splice(findQuery, 1)
                 }
+
+                searchHistory.unshift(query)
+
 
                 localStorage.setItem(localStorageKey, JSON.stringify(searchHistory));
             }

@@ -2,17 +2,16 @@ import * as React from 'react';
 import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 import TopImgPost from '@/components/PostItemCards/TopImg'
-import PostItem from '@/components/PostItemCards/RightImg'
-import FetchPostList from '@/HOC/FetchPostList'
+
+
 import RightImg from '@/components/PostItemCards/RightImg'
-import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import Post4Col from '@/layout-parts/List/PostRow4Col'
 import { SectionTitleDesktopAndMobile, PageSectionHeader, LayoutH1Wide, } from '@/components/Headers'
 import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 import { INavItem, ITopicRes, INavItemCount, ISubtopicLinks } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
 import TS from '@/strings'
@@ -39,7 +38,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
             <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <LayoutH1Wide title={info.name} />
             {formatType.info.count < 21 ? (
-                <FetchPostList
+                <FetchPostsFromArchivePage
                     slug={latestSlug}
                     layout="row" render={({ posts }) => {
                         return (
@@ -57,7 +56,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
             ) : (
                     <div className="sm:px-4 standard-max-w">
-                        <FetchPosts
+                        <FetchPostsFromSlugs
                             slugs={mostPopular}
                             layout="list"
                             render={({ posts }) => {
@@ -68,7 +67,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
                         <div className="w-full pb-4 pt-8 sm:hidden">
                             <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                            <FetchPosts
+                            <FetchPostsFromSlugs
                                 slugs={mostPopular.slice(5)}
                                 layout="row"
                                 render={({ posts }) => {
@@ -76,7 +75,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                                 }}
                             />
                         </div>
-                        <FetchPosts
+                        <FetchPostsFromSlugs
                             slugs={mostPopular}
                             layout="row"
                             render={({ posts }) => {
@@ -84,7 +83,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                             }}
                         />
                         {watch[0] && (
-                            <FetchPostList
+                            <FetchPostsFromArchivePage
                                 slug={`${watch[0].to}/${info.to}`}
                                 layout="row"
                                 render={({ posts }) => {
@@ -100,7 +99,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                         )}
                         <SectionTitleDesktopAndMobile name={TS.latest} />
                         {listen[0] && (
-                            < FetchPostList
+                            <FetchPostsFromArchivePage
 
                                 slug={`${listen[0].to}/${info.to}`}
                                 layout="row"
@@ -121,7 +120,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                             />
                         )}
                         {read[0] && (
-                            < FetchPostList
+                            < FetchPostsFromArchivePage
 
                                 slug={`${read[0].to}/${info.to}`}
                                 layout="row"
@@ -144,7 +143,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
                         <div className="bg-d4slate-lighter sm:hidden py-6 overflow-hidden">
                             <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                            <FetchPosts
+                            <FetchPostsFromSlugs
                                 slugs={mostPopular.slice(0, 5)}
                                 layout="row"
                                 render={({ posts }) => {

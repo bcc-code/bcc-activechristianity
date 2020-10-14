@@ -72,6 +72,7 @@ const query = `{
         }
           
         playlists {
+            id
             slug
         }
     }

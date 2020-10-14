@@ -5,7 +5,7 @@ import { IPaginate, IPostItem } from "@/types"
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
-import FetchPosts from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 export interface IPostList {
     audio?: boolean
     paginate?: IPaginate
@@ -40,7 +40,7 @@ const PostList: React.FC<IPostList> = (props) => {
 
     return (
         <div className="max-w-sm" >
-            <FetchPosts
+            <FetchPostsFromSlugs
 
                 slugs={posts}
                 layout="list"

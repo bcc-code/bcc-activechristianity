@@ -62,6 +62,7 @@ export const likePostMutation = (id: string, toggle: boolean) => `
   mutation {
     likePost(postId:${id}, toggle:${toggle}){
       success
+      message
       count
     }
   }
@@ -70,6 +71,7 @@ export const followTopicMutation = (id: number, toggle: boolean) => `
   mutation {
     follow (type:TOPIC,id:${id},toggle:${toggle}){
       success
+      message
     }
   }
 `
@@ -78,6 +80,7 @@ export const followPlaylistMutation = (id: number, toggle: boolean) => `
   mutation {
     follow (type:PLAYLIST,id:${id},toggle:${toggle}){
       success
+      message
     }
   }
 `

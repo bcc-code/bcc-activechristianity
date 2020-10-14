@@ -1,9 +1,9 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import FetchPostList from '@/HOC/FetchPostList'
-import FetchPosts from '@/HOC/FetchPosts'
-import FetchTopicFeatured from '@/HOC/FetchTopicFeatured.tsx'
+
+import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 
 import MetaTag from '@/components/Meta'
 import XScroll from '@/layout-parts/HorizontalScroll/BaseLarge'
@@ -12,7 +12,7 @@ import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import VideoTopImg from '@/components/PostItemCards/VideoTopImg'
 import VideoRow4Col from '@/layout-parts/List/Combo/VideoRow4Col-HorizontalScroll'
 import { PageSectionHeader, LayoutH1Wide, SectionTitleDesktopAndMobile } from '@/components/Headers'
-import FetchTopicPostItems from '@/HOC/FetchTopicWithPostItems'
+import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import { INavItem, INavItemCount, ISubtopicLinks } from '@/types'
 import { IRootState } from '@/state/types'
 
@@ -35,7 +35,7 @@ const Watch: React.FC<IProps> = (props) => {
             <div className="hidden sm:block">
                 <LayoutH1Wide title={title} />
                 <LazyLoad >
-                    {<FetchPosts
+                    {<FetchPostsFromSlugs
                         slugs={mostPopular}
                         layout="list"
                         render={({ posts }) => {
@@ -73,7 +73,7 @@ const Watch: React.FC<IProps> = (props) => {
                     <SectionTitleDesktopAndMobile
                         name={ac_strings.popular}
                     />
-                    <FetchPosts
+                    <FetchPostsFromSlugs
                         slugs={mostPopular.slice(0, 5)}
                         layout="row"
                         render={({ posts }) => (
@@ -82,7 +82,7 @@ const Watch: React.FC<IProps> = (props) => {
                     />
                 </div>
             ) : (
-                    <FetchPostList
+                    <FetchPostsFromArchivePage
                         slug={latestSlug}
                         layout="row" render={({ posts }) => (
                             <VideoRow4Col

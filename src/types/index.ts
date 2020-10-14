@@ -339,6 +339,7 @@ export interface IEbook {
 }
 
 export interface IPlaylist {
+    id: string
     title: string
     slug: string
     excerpt: string

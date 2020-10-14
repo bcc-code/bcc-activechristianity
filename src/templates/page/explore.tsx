@@ -10,12 +10,12 @@ import CustomePagination from '@/layout-parts/Explore/Pagination'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import ac_strings from '@/strings/ac_strings.json'
-import ExploreHomeLayout from '@/layouts/ExploreHome'
+import ExploreHomeLayout from '@/layout-parts/Explore/ExploreHome'
 import { Stats } from 'react-instantsearch-dom';
-import { INavItem } from "@/types"
-import { IResourceOverview } from '@/layout-parts/Explore/ExploreByType'
+import { INavItem, INavItemCount, INavItemWKey } from "@/types"
 
-const RefinementListByTaxonomy = loadable(() => import('@/layout-parts/Explore/ByTopics'))
+
+const RefinementListByTopics = loadable(() => import('@/layout-parts/Explore/ByTopics'))
 
 const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'))
 
@@ -26,13 +26,11 @@ const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.e
 const ExplorePage: React.FC<IResource> = (props) => {
     const [query, setQuery] = React.useState('');
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
-
-    const [typeFilter, setTypeFilter] = React.useState<string[] | null>(null);
     const [taxonomyFilter, setTaxonomyFilter] = React.useState<string[] | null>(null);
     const [pageNr, setPageNr] = React.useState(1)
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
-
+    console.log('render explore')
     const { resource, scripturePage } = props.pageContext
 
     React.useEffect(() => {
@@ -49,12 +47,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
         if (state.page) {
             setPageNr(state.page)
         }
-        /* if (state.query !== undefined) {
-            setQuery(state.query)
-        } */
-        if (state.refinementList && state.refinementList["categories.name"]) {
-            setTypeFilter(state.refinementList["categories.name"])
-        }
 
         if (state.refinementList && state.refinementList["topics.name"]) {
             setTaxonomyFilter(state.refinementList["topics.name"])
@@ -62,29 +54,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
         setSearchState(state)
     }
 
-    const removeTypeFilter = (filter?: string) => {
-        if (typeFilter !== null) {
-            const refinementState = {
-                ...searchState.refinementList,
-            }
-            const index = typeFilter.findIndex(item => item === filter)
-            const newFiltlerList = [...typeFilter.slice(0, index), ...typeFilter.slice(index + 1)]
-
-            if (filter === undefined || index < 0 || newFiltlerList.length === 0) {
-                setTypeFilter(null)
-                delete refinementState["categories.name"]
-
-            } else {
-                refinementState["categories.name"] = newFiltlerList
-                setTypeFilter(newFiltlerList)
-            }
-
-            setSearchState({
-                ...searchState,
-                refinementList: refinementState
-            })
-        }
-    }
 
     const removeTaxonomyFilter = (filter?: string) => {
         if (taxonomyFilter !== null) {
@@ -112,12 +81,9 @@ const ExplorePage: React.FC<IResource> = (props) => {
         }
     }
 
-
-    const hasTypeFilter = typeFilter && typeFilter.length !== 0
-
     const hasTaxonomyFilter = taxonomyFilter && taxonomyFilter.length !== 0
 
-    const hasSearchProps = query !== "" || hasTypeFilter || hasTaxonomyFilter
+    const hasSearchProps = query !== "" || hasTaxonomyFilter
 
     const showExploreHome = !isInputFocus && !hasSearchProps
     const showSearchHistory = isInputFocus && !hasSearchProps
@@ -129,7 +95,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
         isInputFocus,
         setInputFocus,
         taxonomyFilter,
-        removeTypeFilter,
         removeTaxonomyFilter,
         searchHistory,
         setSearchHistory,
@@ -155,7 +120,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
         >
             <MetaTag title={title} type="page" breadcrumb={[]} />
             <div
-                className={`bg-d4gray-light pb-8`}
+                className={`bg-d4gray-light pb-8 relative`}
             >
                 <div className={`max-w-tablet m-auto`}>
                     {isInputFocus === false && (
@@ -165,6 +130,24 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     )}
                     <CustomSearchBox {...customSearchBoxProps} />
                 </div>
+                {hasSearchProps ? (
+                    <div className="max-w-tablet m-auto">
+                        {/*                         <RefinementListByType
+                            attribute={"categories.name"}
+                            setTypeFilter={setTypeFilter}
+                        /> */}
+                        <RefinementListByTopics
+                            attribute={"topics.name"}
+                            isShowingResult={isInputFocus === true}
+                            setTaxonomyFilter={setTaxonomyFilter}
+                            showMore
+                            showMoreLimit={30}
+                            resource={resource}
+                        />
+                    </div>
+                ) : (
+                        <div className="min-h-8 min-w-8"></div>
+                    )}
                 {showExploreHome && (
                     <ExploreHomeLayout
                         scriptureSlug={scripturePage.to}
@@ -172,22 +155,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     />
                 )}
 
-                {hasSearchProps && (
-                    <div className="max-w-tablet m-auto">
-                        {/*                         <RefinementListByType
-                            attribute={"categories.name"}
-                            setTypeFilter={setTypeFilter}
-                        /> */}
-                        <RefinementListByTaxonomy
-                            attribute={"topics.name"}
-                            isShowingResult={typeFilter !== null || isInputFocus === true}
-                            setTaxonomyFilter={setTaxonomyFilter}
-                            showMore
-                            showMoreLimit={30}
-                            resource={resource}
-                        />
-                    </div>
-                )}
+
 
                 {!showExploreHome && (
                     <div className="bg-white max-w-tablet m-auto py-4 min-h-screen">
@@ -227,3 +195,39 @@ interface IResource {
 }
 
 
+export interface IResourceOverview {
+    format: {
+        name: string
+        info: INavItemWKey
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
+    }
+    general: {
+        name: string
+        info: INavItemWKey
+
+        items: INavItemCount[]
+    }
+    read: {
+        name: string
+        slug: string
+        info: INavItemWKey
+        ebook?: INavItemCount
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
+    }
+    listen?: {
+        name: string
+        slug: string
+        info: INavItemWKey
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
+    }
+    watch?: {
+        name: string
+        slug: string
+        info: INavItemWKey
+        menu: INavItemWKey[]
+        items: INavItemWKey[]
+    }
+}

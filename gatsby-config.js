@@ -61,47 +61,8 @@ const queries = [
   {
     query: `{
       ac {
-        ebooks {
-          objectID: id
-              title
-              slug
-              image {
-                src
-                srcset
-                dataUri
-  
-              }
-              authors {
-                      name
-                      slug
-                      id
-                      pivot {
-                          as
-                      }
-              }
-            
-            topics {
-                    name
-                    slug
-                    id
-                    group {
-                        name
-                        slug
-                    }
-                }
-    
-          
-        }
-      }
-    }`,
-    transformer: ({ data }) => data.ac && data.ac.ebooks.map((node) => {
-      return { ...node, type: 'ebook' }
-    })
-  },
-  {
-    query: `{
-      ac {
-        playlists {    
+        playlists {  
+          id  
           objectID: slug
           title
           slug

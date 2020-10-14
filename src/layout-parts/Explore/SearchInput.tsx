@@ -10,29 +10,23 @@ import ac_strings from '@/strings/ac_strings.json'
 
 interface ICustomerSearchBox {
     setQuery: (query: string) => void
-    removeTypeFilter: (filter?: string) => void
     removeTaxonomyFilter: (filter?: string) => void
     isInputFocus: boolean
     setInputFocus: (status: boolean) => void
     refine: (item: any) => void
-    currentRefinement: any
-    isSearchStalled: boolean
     searchHistory: string[]
     setSearchHistory: (string: []) => void
-    showExploreHome: boolean
     showSearchHistory: boolean
 }
 
 const SearchBox: React.FC<ICustomerSearchBox> = ({
     setQuery,
-    removeTypeFilter,
     removeTaxonomyFilter,
     refine,
     setInputFocus,
     isInputFocus,
     searchHistory,
     setSearchHistory,
-
     showSearchHistory,
 
 }) => {
@@ -72,7 +66,6 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
         refine('')
         setQuery('')
         setLocalQuery('')
-        removeTypeFilter()
         removeTaxonomyFilter()
     }
 
@@ -89,8 +82,8 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
     }
     return (
         <div>
-            <div className={`flex w-full px-4 sm:px-0 py-4 sm:pb-8 sm:pt-0 ${isInputFocus ? 'pt-4 sm:pt-8' : ''}`}>
-                <div className="w-full">
+            <div className={`flex w-full px-4 sm:px-0 pt-8 sm:pt-0 ${isInputFocus ? 'sm:pt-8' : ''}`}>
+                <div className="w-full text-mini sm:text-xs">
                     <SearchInput
                         placedholderText={ac_strings.searchPlaceHolder}
                         setInputFocus={setInputFocus}
@@ -103,7 +96,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
                 </div>
                 {isInputFocus && (
                     <button
-                        className="pl-2 block text-sm"
+                        className="pl-2 block text-xs sm:text-sm"
                         onClick={cancelSearch}
                         onKeyDown={cancelSearch}
                     >
@@ -114,7 +107,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
 
             {showSearchHistory && localQuery === "" &&
                 (
-                    <div className="max-w-tablet m-auto">
+                    <div className="max-w-tablet m-auto  mt-8">
                         <SearchHistory
                             searches={searchHistory}
                             removeSearchHistory={removeSearchHistory}
