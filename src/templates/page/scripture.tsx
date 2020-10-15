@@ -9,12 +9,6 @@ import PlaceHolder from '@/layout-parts/Loader/ScripturePlaceholder'
 import { OutlineScriptureChapter } from '@/components/Button'
 // Type
 import { INavItem, IBibleBook, IBible, } from '@/types'
-
-
-// Helper
-/* import { other as otherApi } from '@/util/sdk' */
-import acApi from '@/util/api'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.json'
 
 interface IBibleNavProps {

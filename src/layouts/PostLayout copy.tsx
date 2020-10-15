@@ -3,11 +3,11 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentMedia, fixPlayer, floatPlayer, setMpHeight } from '@/state/action'
-/* const AudioPlayer */
-const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/BannerOnlyAudioPlayer'))
-const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayerLocal'))
+const VideoMediaPlay = loadable(() => import('@/components/MediaPlayer/VideoPlayerLocal'))
 const Content = loadable(() => import('@/components/Content'))
+
 const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
+
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
@@ -97,11 +97,30 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             }
         } else if (media.audio) {
             setHasMedia("audio")
-            dispatch(setMpHeight(80))
         } else {
             setHasMedia("none")
         }
 
+        dispatch(setCurrentMedia(media))
+        dispatch(fixPlayer())
+
+        if (id) {
+            acApi.visitsPost(id)
+                .then((res: any) => {
+                    console.log(res)
+                })
+                .catch((err: any) => {
+                    console.log(err)
+                })
+        }
+        return () => {
+            if (media.audio && isPlaying) {
+                dispatch(floatPlayer())
+            } else {
+                dispatch(setCurrentMedia({ path: undefined }))
+                dispatch(setMpHeight(0))
+            }
+        }
 
     }, [post, isPlaying])
 
@@ -122,8 +141,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         readMorePosts,
         views,
         likes,
-        duration,
-        media
+        duration
     } = post
 
     const postId = id
@@ -135,12 +153,21 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
         <div>
 
-            <Content
-                content={content}
-                glossary={glossary}
-                slug={slug}
-                title={title}
-            />
+            {isPodcast && isPodcast > -1 ? (
+                <ContentPodcast
+                    episodeNotes={"<p>Peter the disciple might be the apostle that we know the most about from the accounts written in the Bible. And what we find when we read these stories about him is that he is a very relatable man. In this episode Kathy and Julia have an animated discussion about Peter – Julia’s self-proclaimed “favorite apostle” – and how what we read about him as a man and a disciple, can fill us with hope for our own lives.</p>\n<p>Read the article “The Apostle Peter: A completely new man” here: <a href=\"https://bit.ly/2X1ogq9\">https://bit.ly/2X1ogq9</a></p>\n"}
+                    transcript={content}
+                    hosts={authors || []}
+                />
+            ) : (
+                    <Content
+                        content={content}
+                        glossary={glossary}
+                        slug={slug}
+                        title={title}
+                    />
+                )
+            }
             <div className="flex flex-wrap border-d4gray py-6">
                 {topics && topics?.map(item => (
                     <ToggleFollowWithName {...item} />
@@ -221,28 +248,17 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 likes={likes}
             />
 
-
-            {/*             {hasMedia === "audio" && videoSrc !== '' && (
+            {hasMedia === "video" && videoSrc !== '' && (
                 <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
                     <VideoMediaPlay src={videoSrc} showControl={showControl} />
                 </div>
 
-            )} */}
+            )}
 
             <div className="sm:hidden fixed mt-64 inset-x top-0 w-full">
                 {hasMedia === "video" || hasMedia === "audio" ? (
                     <div className='fixed bg-mp-background w-full' style={{ top: "50px", height: `${mpHeight + 50}px` }}>
-                        {hasMedia === "video" && videoSrc !== '' && (
-                            <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                                <VideoMediaPlayer src={videoSrc} showControl={showControl} />
-                            </div>
 
-                        )}
-                        {hasMedia === "audio" && (
-                            <div className="fixed sm:relative w-full" style={{ zIndex: 3000 }}>
-                                <AudioMediaPlayer media={media} duration={duration?.listen} />
-                            </div>
-                        )}
                     </div>
                 ) : (
                         <div
@@ -258,7 +274,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 id={postId}
                 title={title}
                 excerpt={excerpt}
-                height={mpHeight === 0 ? (hasMedia == "audio" ? 80 : mpHeight) : mpHeight}
+                height={mpHeight === 0 ? 250 : mpHeight}
                 shareSlug={slug}
                 translatedUrls={tranlsatedUrl}
             >
@@ -269,7 +285,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     />
                 </div>
-                {(hasMedia === "video" || hasMedia === "audio") && (
+                {isCurrentMedia.audio && (
                     <div className="relative sm:pt-10 mb-12 ">
                         <TwoToOneImg image={image} />
                         {isPodcast && isPodcast > -1 && (
@@ -307,7 +323,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4">
                 <p className=""><em>{TS.scripture_copyright}</em></p>
             </div>
-
+            {/*    {postFooter} */}
         </article >
     )
 }

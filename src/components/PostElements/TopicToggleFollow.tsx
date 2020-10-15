@@ -171,14 +171,14 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
     return (
 
 
-        <div className={`flex py-1 px-3 pr-0 mb-2 mr-2 text-center text-xs rounded-full font-semibold items-center bg-gray-300`}>
+        <div className={`flex py-2 px-4 pr-0 mb-2 mr-2 text-center text-sm rounded-full font-semibold items-center bg-gray-300`}>
             <Link to={to} className="">{name}</Link>
             <FetchAndSetFollowedTopics
                 id={id}
                 className=""
                 render={({ followed }) => {
                     const config = toggleFollowStatusMap[followed]
-                    return (<span className="px-2">
+                    return (<span className="py-2 px-4">
                         {config.icon}
                     </span>)
                 }}

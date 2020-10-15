@@ -12,7 +12,7 @@ import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import SideNav from '@/layout-parts/Nav/SideNav/index.tsx'
 import SignInSignUpModal from '@/layout-parts/SignInSignUp'
-
+import shortid from 'shortid'
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
@@ -167,28 +167,23 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         />
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
 
-                        <div>
+                        <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
+                            {breadcrumb.items.length > 0 && (
+                                <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
+                                    <Breadcrumb {...breadcrumb} />
+                                </div>
+                            )}
+                            {currentMedia.audio ? (
+                                <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
+                                    <MediaPlayer />
+                                </div>
+                            ) : null}
 
-
-                            <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
-                                {breadcrumb.items.length > 0 && (
-                                    <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
-                                        <Breadcrumb {...breadcrumb} />
-                                    </div>
-                                )}
-                                {currentMedia.audio ? (
-                                    <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                                        <MediaPlayer />
-                                    </div>
-                                ) : null}
-
-                                {children}
-                                <Footer />
-                            </div>
-
-                            <BottomMobile  {...NavProps} menu={mobileMenu} />
-
+                            {children}
+                            <Footer key={shortid()} />
                         </div>
+
+                        <BottomMobile key={shortid()} {...NavProps} menu={mobileMenu} />
                         <CookieConsent
                             location="bottom"
                             buttonText={TS.consent_general_accept}

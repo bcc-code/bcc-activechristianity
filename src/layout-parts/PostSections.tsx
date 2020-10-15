@@ -13,6 +13,7 @@ import TS from '@/strings'
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from "@/helpers"
 import acApi from '@/util/api'
+import shortid from 'shortid'
 interface IPostMain {
     id: string
     title: string
@@ -112,8 +113,8 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
         <div className="flex flex-col mb-4">
             <PageSectionHeaderUpperCaseGray title={authors.as} />
 
-            <span>{authors.authors.map(a => (
-                <Link className="text-sm" to={`${TS.slug_ac_author}/${a.to}`}>
+            <span className="">{authors.authors.map(a => (
+                <Link className="block text-sm pt-4" to={`${TS.slug_ac_author}/${a.to}`}>
                     <div className="font-roboto ">{a.name}</div>
                     <div className="text-gray-500">{a.excerpt}</div>
                 </Link>
@@ -125,7 +126,7 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
 export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: string }> = ({ authors, postId }) => {
     return (
         <div>
-            <div className="border-d4gray border-b py-6">
+            <div className="border-d4gray border-b pt-6">
                 {authors?.map(item => {
                     return (
                         <AuthorFollowSection authors={item} />
@@ -138,22 +139,20 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
 
                     <div>
                         {item.authors.map(a => (
-                            <div className="py-6">
-                                <FetchPostsFromArchivePage
-                                    slug={`${TS.slug_ac_author}/${a.to}`}
-                                    layout="list"
-                                    render={({ posts }) => {
-                                        const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
-                                        return fourPosts.length > 0 ? (
-                                            <Row2ColAndXScroll
-                                                title={`${ac_strings.more_from} ${a.name}`}
-                                                posts={posts}
-                                            />
-                                        ) : <div></div>
-                                    }}
+                            <FetchPostsFromArchivePage
+                                slug={`${TS.slug_ac_author}/${a.to}`}
+                                layout="list"
+                                render={({ posts }) => {
+                                    const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
+                                    return fourPosts.length > 0 ? (
+                                        <Row2ColAndXScroll
+                                            title={`${ac_strings.more_from} ${a.name}`}
+                                            posts={posts}
+                                        />
+                                    ) : <div></div>
+                                }}
 
-                                />
-                            </div>
+                            />
 
                         ))}
                     </div>
@@ -225,12 +224,12 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id,
 
     return (
         <div className="flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
-            <button className="px-2 py-1">
+            <button className="px-2 py-1" key={shortid()}>
                 <ToogleBookmark
                     id={id}
                 />
             </button>
-            <button className="px-2 py-1">
+            <button className="px-2 py-1" key={shortid()}>
                 <ShareButton
                     shareUrl={shareSlug}
                     text={text ? text : ""}
@@ -241,7 +240,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id,
 
 
             </button>
-            <button className="px-2 py-1" onClick={scrollToTop}>
+            <button key={shortid()} className="px-2 py-1" onClick={scrollToTop}>
                 <Icon
                     name="Publish"
                     color="secondary"
