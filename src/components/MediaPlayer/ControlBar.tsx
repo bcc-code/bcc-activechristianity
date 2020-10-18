@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Media, Player, controls, utils } from 'react-media-player'
-import { PlayPause, VolumeBar } from './ControlElements'
+import { PlayPause, VolumeBar, PlayPauseVideo } from './ControlElements'
 const { CurrentTime, Progress, SeekBar, Duration } = controls
 
 interface IConrolBar {
@@ -13,8 +13,8 @@ const ControlBar: React.FC<IConrolBar> = ({ audioTitle, video }) => {
             {/*                             */}
             {/* show play button with current time when floating & audio */}
             <div className="text-d4cadet-blue flex items-center text-xs ml-4 sm:ml-0">
-                <PlayPause className="border border-d4cadet-blue rounded-lg" />
-                <CurrentTime className="ml-4" />
+                {video == true ? <PlayPauseVideo className="border border-d4cadet-blue rounded-lg" /> : <PlayPause className="border border-d4cadet-blue rounded-lg" />}
+                {/*  <CurrentTime className="ml-4" /> */}
             </div>
 
             {/* show controls when floating & audio & expanded (not minimized) */}
@@ -53,3 +53,4 @@ const ControlBar: React.FC<IConrolBar> = ({ audioTitle, video }) => {
 }
 
 export default ControlBar
+

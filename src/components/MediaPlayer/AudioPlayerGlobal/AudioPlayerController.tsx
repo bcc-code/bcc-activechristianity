@@ -201,8 +201,8 @@ const MediaControl: React.FC<IProps> = (props) => {
                                     autoPlay={true}
                                     onEnded={onNextTrack}
 
-                                /* onPlay={() => { setIsPlaying(true) }}
-                                onPause={() => { setIsPlaying(false) }} */
+                                    onPlay={() => { setIsPlaying(true) }}
+                                    onPause={() => { setIsPlaying(false) }}
                                 />
 
                             </div>
