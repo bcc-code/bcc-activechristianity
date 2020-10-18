@@ -55,7 +55,7 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration, stopScrollingTitl
                             </div>
 
                             <span className="text-sm pt-6 text-left">{duration}
-                            </span>
+                            </ span>
 
 
                         </div>

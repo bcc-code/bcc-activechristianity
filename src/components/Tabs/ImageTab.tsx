@@ -35,7 +35,7 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
 
             <span className="px-4 flex items-center pb-6 relative overflow-scroll py-">
                 {tabs.map((item, i) => {
-                    console.log(item)
+
                     return (
                         <button
                             className={`pt-6`}

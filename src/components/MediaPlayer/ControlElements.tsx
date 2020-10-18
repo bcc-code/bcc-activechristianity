@@ -2,8 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setIsPlaying } from '@/state/action'
 import { withMediaProps } from 'react-media-player'
-import { IMediaProps } from './MediaController'
+
 import { ITrack } from '@/types'
+
+
+export interface IMediaProps {
+    isFullscreen: boolean
+    isPlaying: boolean
+    play: () => void
+    playPause: () => void
+    fullscreen: () => void
+    currentTime: number
+    duration: number
+
+    isMuted: boolean
+    volume: number
+    muteUnmute: () => void
+    setVolume: (v: number) => void
+}
+
 interface IPlayPauseProps {
     media: IMediaProps
     className: string

@@ -7,7 +7,7 @@ import CookieConsent from "react-cookie-consent";
 import Footer from '@/layout-parts/Footer'
 import Helmet from 'react-helmet'
 import Link from '@/components/CustomLink';
-const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
+const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import SideNav from '@/layout-parts/Nav/SideNav/index.tsx'

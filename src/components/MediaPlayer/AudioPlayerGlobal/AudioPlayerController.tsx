@@ -198,11 +198,11 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 <Player
                                     src={track.audio?.src}
                                     loop={repeatTrack}
-                                    /* autoPlay={autoPlay} */
+                                    autoPlay={true}
                                     onEnded={onNextTrack}
-                                    fullScreen={false}
-                                    onPlay={() => { setIsPlaying(true) }}
-                                    onPause={() => { setIsPlaying(false) }}
+
+                                /* onPlay={() => { setIsPlaying(true) }}
+                                onPause={() => { setIsPlaying(false) }} */
                                 />
 
                             </div>
