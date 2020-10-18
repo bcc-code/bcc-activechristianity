@@ -114,7 +114,7 @@ var Youtube = function (_Component) {
           videoId: this._videoId,
           events: this._events(),
           playerVars: _extends({
-            controls: 0,
+            controls: 1,
             showinfo: 0,
             modestbranding: 1,
             playsinline:1

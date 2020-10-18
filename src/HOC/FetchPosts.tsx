@@ -131,7 +131,7 @@ export const FetchOnePlaylist: React.FC<IFetchOnePlaylist> = ({ slug, render }) 
                 return undefined
             })
             .then(res => {
-                console.log(res)
+
                 setLoading(false)
                 if (res) {
                     setPost(res)

@@ -17,7 +17,7 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
                 const featuredSlugs = props.ac.featuredTopics.map(f => f.slug)
                 const popularSlugs = props.ac.popularTopics.map(f => f.slug)
                 const topicsSlugs = [...new Set([...featuredSlugs, ...popularSlugs])]
-                console.log(topicsSlugs)
+
                 return (
                     <FetchTopics
                         topics={topicsSlugs}

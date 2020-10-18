@@ -24,7 +24,7 @@ const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clicka
 
     const handleClick = () => {
         fetchTracksFromSlug(slug).then(tracks => {
-            console.log(tracks)
+
             if (tracks.length > 0) {
                 const tracksToAdd = tracks.map(at => {
                     const atToAdd = { ...at }
@@ -42,9 +42,7 @@ const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clicka
         onClick: handleClick,
         onKeyDown: handleClick
     } : {}
-    /*     console.log(`playing`)
-        console.log(currentMedia.audio?.playlistSlug)
-        console.log(slug) */
+
     return (
         <button
             className={`${className ? className : ''}`}

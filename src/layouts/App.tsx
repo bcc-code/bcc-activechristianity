@@ -16,6 +16,7 @@ import shortid from 'shortid'
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
+import { setIsModalOpen } from '@/state/action'
 
 // string
 import TS from '@/strings';
@@ -83,10 +84,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             })
     }
 
+    const handleSideNavOpen = (status: boolean) => {
+        setSideNavOpen(status)
+        setIsModalOpen(status)
+    }
+
     const NavProps = React.useMemo(() => (
         {
             isSideNavOpen,
-            setSideNavOpen,
+            setSideNavOpen: handleSideNavOpen,
             isModalOpen,
             isSignInModalOpen
         }
@@ -94,6 +100,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
         isSideNavOpen,
         setSideNavOpen,
+        handleSideNavOpen,
         isModalOpen,
         isSignInModalOpen
 
@@ -114,7 +121,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 Object.keys(iconMapNav).forEach(label => {
 
                     const page = allPages.find(page => {
-                        /* console.log(page) */
+
                         return page.label === label
                     })
                     if (page) {

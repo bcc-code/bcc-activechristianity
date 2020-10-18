@@ -86,7 +86,12 @@ export const pageQuery = graphql`
                         title
                         slug
                         }
+                    playlists {
+                    slug
+                    title
                     }
+                    }
+                    
                 authors {
                     name
                     slug

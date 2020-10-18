@@ -111,15 +111,20 @@ export const normalizeAuthors = (authors: IAuthorRes[]) => {
 }
 
 export const normalizeTracks = (tracks: ITrackRes[]) => {
+
     const toReturn = tracks.map(track => {
+
         const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
         const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+
+        const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
+
         const toAdd: IMedia = (
             {
                 path: track.post.slug,
                 audio: {
                     duration: secondesToMinutes(track.duration),
-                    src: `${process.env.API_HOST}${track.url}`,
+                    src,
                     title: track.title,
                     type: "audio",
                     article: {
@@ -127,6 +132,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
                         url: track.post.slug,
 
                     },
+                    playlists: track.playlists,
                     contributor: trackPostAuthor
                 },
 
@@ -138,6 +144,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
     return toReturn
 }
+
 export const transformTopicsRes = (topics: ITopicRes[]) => {
     const types: ITopicNavItem[] = []
     const filteredTopics: ITopicNavItem[] = []
@@ -282,13 +289,14 @@ export const normalizePostRes = (post: IPostRes) => {
             postItem.duration = { listen: secondesToMinutes(track.duration) }
         }
         media["audio"] = {
-            src: `${process.env.API_HOST}${track.url}`,
+            src: track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`,
             title: track.title,
             type: "audio",
             article: {
                 title: track.post.title,
                 url: track.post.slug
-            }
+            },
+            playlists: track.playlists
         }
     }
 

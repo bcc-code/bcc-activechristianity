@@ -19,9 +19,8 @@ import ac_strings from '@/strings/ac_strings.json'
 
 export const PostLayout: React.FC<IPlaylist> = (post) => {
 
-    const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
-    const id = ''
     const {
+        id,
         image,
         title,
         slug,

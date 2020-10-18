@@ -104,7 +104,7 @@ module.exports.createSubTopicPages=({
     const totalCount = allPosts.length
 
     if (!totalCount) {
-      console.log(topic.slug)
+
       console.log('No posts for this topic')
     }
     const totalPages = Math.ceil(totalCount / perPage)

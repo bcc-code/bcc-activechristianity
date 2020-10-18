@@ -68,7 +68,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
         } else {
             // if user keep browsing. 
             if (history.length > 0) {
-                console.log('is continue')
+
 
                 if (history[history.length - 1].to !== currentPage.to) {
                     setHistory([...history, currentPage])

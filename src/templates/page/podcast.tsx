@@ -31,23 +31,6 @@ const Listen: React.FC<IListenPageProps> = (props) => {
     const { posts } = data.ac.topics[0]
     const postSlugList = posts.map(p => p.slug)
     const { breadcrumb } = pageContext
-    /*     React.useEffect(() => {
-            getHosts().then(res => console.log(res))
-    
-            getPopular()
-        }, []) */
-
-    /*     const getPopular = () => {
-            const toAdd = postSlugList.slice(10, 20)
-    
-            fetchLocalPostsFromSlugs(toAdd)
-                .then(res => {
-                    setPopularPost(res)
-                })
-        }
- 
-     */
-
 
     return (
         <div className="max-w-sm mx-auto">
@@ -131,7 +114,6 @@ export const pageQuery = graphql`
         }
     }
 `
-console.log(pageQuery)
 
 interface IListenPageProps {
     data: {

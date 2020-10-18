@@ -5,7 +5,6 @@ import { ITopicPostItems } from '@/types'
 import { getRandomArray } from '@/helpers'
 const PostsByTypesLayout = (collection: ITopicPostItems[]) => {
 
-    console.log(collection)
     const postsByTypesRow1: IOnePostByType[] = []
     const postsByTypesRow2: IOnePostByType[] = []
 

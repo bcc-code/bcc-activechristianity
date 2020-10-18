@@ -3,8 +3,8 @@ import * as React from 'react'
 import { graphql } from "gatsby"
 import { INavItem, IPage } from '@/types'
 import MetaTag from '@/components/Meta'
-import CustomizedLayoutProps from '@/components/CustomizedPageComponent'
-import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
+
+import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import AboutUsLayout from '@/layouts/AboutUsLayout'
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import { ScrollingProvider } from 'react-scroll-section';

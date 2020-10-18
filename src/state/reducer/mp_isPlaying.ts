@@ -8,10 +8,9 @@ interface TIsPlayingStateAction {
 
 const defaultState = false
 
-const autoPlay: Reducer<boolean, TIsPlayingStateAction> = (state = defaultState, action: TIsPlayingStateAction) => {
+const isPlaying: Reducer<boolean, TIsPlayingStateAction> = (state = defaultState, action: TIsPlayingStateAction) => {
     switch (action.type) {
         case 'SET_IS_PLAYING': {
-
             const { payload } = action
             return payload
         }
@@ -21,4 +20,4 @@ const autoPlay: Reducer<boolean, TIsPlayingStateAction> = (state = defaultState,
     }
 }
 
-export default autoPlay
+export default isPlaying

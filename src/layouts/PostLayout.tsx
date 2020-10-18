@@ -272,9 +272,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 {(hasMedia === "video" || hasMedia === "audio") && (
                     <div className="relative sm:pt-10 mb-12 ">
                         <TwoToOneImg image={image} />
-                        {isPodcast && isPodcast > -1 && (
+                        {isPodcast && isPodcast > -1 ? (
                             <SubscribePodcast />
-                        )}
+                        ) : null}
                     </div>
                 )}
                 {body}
@@ -293,18 +293,18 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     />
                 )}
             >
-                {!isCurrentMedia.video && <div className="relative sm:pt-10 mb-12 ">
-                    <TwoToOneImg image={image} rounded />
-                    {isPodcast && isPodcast > -1 && (
-                        <div>
+                {!isCurrentMedia.video && (
+                    <div className="relative sm:pt-10 mb-12 ">
+                        <TwoToOneImg image={image} rounded />
+                        {isPodcast && isPodcast > -1 ? (
                             <SubscribePodcast />
-                        </div>
-                    )}
-                </div>}
+                        ) : null}
+                    </div>
+                )}
 
                 {body}
             </DesktopPostMain>
-            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4">
+            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 z-50">
                 <p className=""><em>{TS.scripture_copyright}</em></p>
             </div>
 

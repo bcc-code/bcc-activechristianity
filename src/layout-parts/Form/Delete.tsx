@@ -55,7 +55,7 @@ const ChangePassword = () => {
             const { existingPassword } = fields
 
             const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
-            console.log('update password')
+
         }
     }
 

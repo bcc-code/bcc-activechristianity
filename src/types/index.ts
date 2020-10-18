@@ -37,7 +37,7 @@ export interface ITrack {
     contributor?: string
     artworkSrc?: string
     duration?: string
-    playlist?: string
+    playlists?: IPlaylist[]
     playlistSlug?: string
     article?: IArticle
     type: ITrackType
@@ -255,11 +255,13 @@ export interface IAuthorRes {
 }
 
 export interface ITrackRes {
-    id: string
     post: IPostRes
     title: string
     duration: number
     url: string
+    id: string
+    image: IImage
+    playlists: IPlaylist[]
 }
 
 

@@ -43,12 +43,12 @@ const Host: React.FC<IPodcastIntro> = (props) => {
         const getAuthors = hostSlugs.map(slug => {
             const trimmedSlug = slug.replace(`${ac_strings.slug_host}/`, '')
             const authorSlug = `${TS.slug_ac_author}/${trimmedSlug}`
-            console.log(authorSlug)
+
             return fetch(`/page-data/${authorSlug}/page-data.json`)
                 .then(res => res.json())
                 .then((res: any) => {
                     const { author } = res.result.pageContext
-                    console.log(`${ac_strings.slug_host}/${trimmedSlug}`)
+
                     return fetch(`/page-data/${ac_strings.slug_host}/${trimmedSlug}/page-data.json`)
                         .then(res => res.json())
                         .then(hostRes => {

@@ -67,10 +67,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       generatePlaylists(actions, graphql),
       generateGlossary(actions, graphql),
       generatePages(actions, graphql),
-      generateTopics(actions, graphql),
+/*       generateTopics(actions, graphql), */
       generateFormatsTypesResource(actions, graphql),
       generateHome(actions, graphql),
-      generateScriptures(actions, graphql),
+/*       generateScriptures(actions, graphql), */
     ]
 
     return Promise.all(generators)

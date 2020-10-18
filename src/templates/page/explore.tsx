@@ -30,7 +30,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [pageNr, setPageNr] = React.useState(1)
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
-    console.log('render explore')
+
     const { resource, scripturePage } = props.pageContext
 
     React.useEffect(() => {
