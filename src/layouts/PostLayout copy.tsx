@@ -2,7 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentMedia, fixPlayer, floatPlayer, setMpHeight } from '@/state/action'
+import { setCurrentMedia, fixPlayer, togglePlayMedia, setMpHeight } from '@/state/action'
 const VideoMediaPlay = loadable(() => import('@/components/MediaPlayer/VideoPlayerLocal'))
 const Content = loadable(() => import('@/components/Content'))
 
@@ -52,7 +52,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const [hasMedia, setHasMedia] = React.useState<"audio" | "video" | "none" | "waiting">("waiting")
     const [videoSrc, setVideoSrc] = React.useState('')
     const [showControl, setShowControl] = React.useState(true)
-    const { isPlaying, mpHeight, isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isFloating: state.isPlayerFloating, isPlaying: state.isPlaying, mpHeight: state.mpHeight }))
+    const { isPlaying, mpHeight, isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isPlaying: state.isPlaying, mpHeight: state.mpHeight }))
 
     React.useEffect(() => {
 
@@ -115,7 +115,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         }
         return () => {
             if (media.audio && isPlaying) {
-                dispatch(floatPlayer())
+                dispatch(togglePlayMedia())
             } else {
                 dispatch(setCurrentMedia({ path: undefined }))
                 dispatch(setMpHeight(0))

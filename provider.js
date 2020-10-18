@@ -15,7 +15,7 @@ export const preloadedState = {
     playlist:[],
     currentMedia:{},
     isAutoPlay:false,
-    isPlayerFloating:false,
+    mpPlayPause:false,
     isPlaying:false,
     isSignInModalOpen:null,
     isModalOpen:false,

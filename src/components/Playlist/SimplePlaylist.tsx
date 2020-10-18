@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
 import { useDispatch } from 'react-redux'
-import { setAutoPlay, setCurrentMedia, addTracks, floatPlayer } from '@/state/action'
+import { setAutoPlay, setCurrentMedia, addTracks, togglePlayMedia } from '@/state/action'
 
 import Icon from '@/components/Icons/Icon'
 
@@ -25,7 +25,7 @@ const PostAudio: React.FC<IPlaylist> = ({
 
         dispatch(setAutoPlay(true))
         dispatch(setCurrentMedia(t))
-        dispatch(floatPlayer())
+        dispatch(togglePlayMedia())
         let tracksToAdd: IMedia[] = []
         if (allTracks.length > 1) {
             tracksToAdd = [...allTracks]

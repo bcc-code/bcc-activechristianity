@@ -11,6 +11,38 @@ interface IPlayPauseProps {
 
 const fillColor = "#9ca6be"
 
+const PlayPauseButtonVideo: React.FC<IPlayPauseProps> = ({ media, className }) => {
+
+
+    const { isPlaying, playPause } = media
+    /*      */
+    return (
+        <svg
+            role="button"
+            width="36px"
+            height="36px"
+            viewBox="0 0 36 36"
+            className={`${className} fill-current`}
+            onClick={playPause}
+        >
+            {/* <circle fill={fillColor} cx="18" cy="18" r="18" /> */}
+            {isPlaying ?
+                <g key="pause" style={{ transformOrigin: '0% 50%' }}>
+                    <rect x="12" y="11" width="4" height="14" />
+                    <rect x="20" y="11" width="4" height="14" />
+                </g> :
+                <polygon
+                    key="play"
+                    points="14,11 26,18 14,25"
+                    style={{ transformOrigin: '100% 50%' }}
+                />
+            }
+
+        </svg>
+    )
+}
+
+export const PlayPauseVideo = withMediaProps(PlayPauseButtonVideo)
 
 const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
     const dispatch = useDispatch()

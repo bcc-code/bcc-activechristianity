@@ -13,10 +13,6 @@ const SigninSignUpModal: React.FC = () => {
 
     const { isSignInModalOpen } = useSelector((state: IRootState) => ({
         isSignInModalOpen: state.isSignInModalOpen,
-        currentMedia: state.currentMedia,
-        isFloating: state.isPlayerFloating,
-        isModalOpen: state.isModalOpen
-
     }));
 
     const getContent = () => {

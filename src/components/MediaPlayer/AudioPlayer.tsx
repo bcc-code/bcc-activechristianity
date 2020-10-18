@@ -1,7 +1,7 @@
 // https://github.com/souporserious/react-media-player
 import React from 'react'
 import { IRootState } from '@/state/types'
-import { setMpHeight, setCurrentMedia } from '@/state/action'
+import { setCurrentMedia } from '@/state/action'
 import MainController from './AudioPlayerController'
 import { useSelector, useDispatch } from "react-redux";
 import Icon from '@/components/Icons/Icon'
@@ -16,7 +16,7 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
     const inputEl = React.useRef(null);
     const dispatch = useDispatch();
 
-    const { playlist, isAutoPlay, currentMedia, isFloating } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia, playlist: state.playlist, isAutoPlay: state.isAutoPlay, isFloating: state.isPlayerFloating }));
+    const { playlist, isAutoPlay, currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia, playlist: state.playlist, isAutoPlay: state.isAutoPlay }));
     const { video, audio, path } = currentMedia
 
     const getInitialPlayingType = () => {
@@ -32,40 +32,12 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
     }
     const [playingType, setPlayingType] = React.useState<"audio" | "video">(getInitialPlayingType())
 
-    const [isOnPost, setIsOnPost] = React.useState<boolean>()
-
-    const [expanded, setExpanded] = React.useState(false)
-    const [showLeftArrow, setShowLeftArrow] = React.useState(false)
-    const [showRightArrow, setShowRightArrow] = React.useState(false)
 
     React.useEffect(() => {
         setPlayingType(getInitialPlayingType())
 
     }, [currentMedia.video, currentMedia.audio, currentMedia.path])
 
-    React.useEffect(() => {
-        setIsOnPost(getIsOnPost())
-
-    }, [typeof window !== "undefined" && window.location.pathname, currentMedia.path])
-
-    React.useEffect(() => {
-        if (playingType === "audio") {
-            setShowLeftArrow(isFloating && !expanded)
-            setShowRightArrow(expanded)
-        }
-
-
-    }, [playingType, isFloating, expanded])
-
-
-    React.useEffect(() => {
-        if (inputEl !== null && inputEl.current !== null) {
-            dispatch(setMpHeight(inputEl.current.offsetHeight))
-
-        } else {
-            dispatch(setMpHeight(0))
-        }
-    }, [currentMedia.path, inputEl.current && inputEl.current.offsetHeight])
 
     const audioTitle = audio ? audio.title : undefined
     const [isRepeat, setIsRepeat] = React.useState(false)
@@ -90,46 +62,28 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ defaultMedia }) => {
     }
 
     return (
-        <div className={isFloating ? `fixed pb-20 sm:pb-0 ${playingType === "audio" ? 'bottom-0' : "sm:bottom-0"} right-0` : ``} ref={inputEl}>
-            <div className={`w-full flex`}>
-                {showLeftArrow && (
-                    <div className="cursor-pointer w-6 flex items-center" onClick={() => { setExpanded(true) }} onKeyDown={() => { setExpanded(true) }} role="button">
-                        <Icon name="KeyboardArrowLeft" size="6" color="slate-dark" />
-                    </div>
+        <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom`} ref={inputEl} style={{ zIndex: 3000 }}>
+            <div className={`w-full flex bg-mp-background`}>
+                <div className="mx-auto max-w-tablet w-full">
+                    <MainController
+                        isVideo={playingType === "video"}
+                        src={currentMedia[playingType]?.src}
+                        audioTitle={audioTitle}
+                        autoPlay={isAutoPlay}
 
-                )}
-                <div className={`flex-1 bg-mp-background ${isFloating && playingType === "audio" ? 'rounded-xl my-6' : ''}`}>
-                    <div className="mx-auto max-w-tablet">
-                        <MainController
-                            isVideo={playingType === "video"}
-                            floating={isFloating}
-                            src={currentMedia[playingType]?.src}
-                            audioTitle={audioTitle}
-                            autoPlay={isAutoPlay}
-                            isOnPost={isOnPost}
-                            expanded={expanded}
-                            repeatTrack={isRepeat}
-                            onPrevTrack={() => {
-                                navigatePlaylist(-1)
-                            }}
-                            onNextTrack={() => {
-                                navigatePlaylist(1)
-                            }}
-                            onRepeatTrack={() => {
-                                setIsRepeat(!isRepeat)
-                            }}
-                        />
-                    </div>
+                        expanded={true}
+                        repeatTrack={isRepeat}
+                        onPrevTrack={() => {
+                            navigatePlaylist(-1)
+                        }}
+                        onNextTrack={() => {
+                            navigatePlaylist(1)
+                        }}
+                        onRepeatTrack={() => {
+                            setIsRepeat(!isRepeat)
+                        }}
+                    />
                 </div>
-                {isFloating && playingType !== "video" && (
-                    <div className="w-6 flex items-center">
-                        {showRightArrow && (
-                            <div className="w-full mx-2 cursor-pointer" onClick={() => { setExpanded(false) }}>
-                                <Icon name="KeyboardArrowRight" size="6" color="slate-dark" />
-                            </div>
-                        )}
-                    </div>
-                )}
             </div>
         </div>
     )

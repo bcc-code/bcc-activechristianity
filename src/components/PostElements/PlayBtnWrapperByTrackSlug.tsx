@@ -1,5 +1,5 @@
 import React from 'react'
-import { setCurrentMedia, setAutoPlay, addTracks, floatPlayer } from '@/state/action'
+import { setCurrentMedia, setAutoPlay, addTracks, togglePlayMedia } from '@/state/action'
 
 import { IMedia, ITrack } from '@/types'
 import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
@@ -14,7 +14,7 @@ const PlayButton: React.FC<IPlayButtonProps> = ({ track, children, className, st
     const dispatch = useDispatch()
 
     const setCurrent = (toAdd: IMedia) => {
-        dispatch(floatPlayer())
+        dispatch(togglePlayMedia())
         dispatch(setCurrentMedia(toAdd))
         dispatch(setAutoPlay(true))
     }

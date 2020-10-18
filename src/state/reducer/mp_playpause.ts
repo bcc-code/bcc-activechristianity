@@ -4,7 +4,7 @@ interface TSignInModalStateAction {
     type: 'FLOAT_PLAYER' | 'FIX_PLAYER'
 }
 
-const isPlayerFloating: Reducer<boolean, TSignInModalStateAction> = (state = false, action: TSignInModalStateAction) => {
+const mpPlayPause: Reducer<boolean, TSignInModalStateAction> = (state = false, action: TSignInModalStateAction) => {
     switch (action.type) {
         case 'FIX_PLAYER': {
             return false
@@ -18,4 +18,4 @@ const isPlayerFloating: Reducer<boolean, TSignInModalStateAction> = (state = fal
     }
 }
 
-export default isPlayerFloating;
+export default mpPlayPause;
