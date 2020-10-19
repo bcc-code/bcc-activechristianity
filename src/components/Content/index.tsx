@@ -108,7 +108,6 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                             )
                         }
 
-
                     }
 
                     if (node.type === 'tag' &&

@@ -22,7 +22,6 @@ import { useSelector } from "react-redux";
 
 
 const Watch: React.FC<IProps> = (props) => {
-    const { loggedIn } = useSelector((state: IRootState) => state.auth)
 
     const { pageContext, path } = props
     const { title, items, mostPopular, featuredPosts } = pageContext

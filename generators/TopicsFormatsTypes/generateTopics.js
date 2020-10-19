@@ -64,7 +64,7 @@ module.exports = function generateTopics(actions, graphql) {
             topicInfo.forEach((node) => {
      
                 
-                if (node.group.id !== process.env.FORMAT_GROUP_ID && node.group.id !==process.env.TYPE_GROUP_ID) {
+                if (node.group && node.group.id !== process.env.FORMAT_GROUP_ID && node.group.id !==process.env.TYPE_GROUP_ID) {
                     filteredTopics.push(node)
 
                     const component = path.resolve(listTemplate)

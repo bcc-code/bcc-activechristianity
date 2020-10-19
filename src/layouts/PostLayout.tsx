@@ -183,7 +183,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 />
             </div>
-
+            <LazyLoad>
+                <RecommendedPostsSection
+                    postId={id}
+                    readMorePosts={readMorePosts}
+                />
+            </LazyLoad>
             {authors?.map(item => {
                 return (
 
@@ -211,12 +216,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             })}
 
 
-            <LazyLoad>
-                <RecommendedPostsSection
-                    postId={id}
-                    readMorePosts={readMorePosts}
-                />
-            </LazyLoad>
+
 
 
 
