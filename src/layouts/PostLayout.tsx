@@ -17,7 +17,7 @@ const PlaylistItem = loadable(() => import('@/components/PostItem/LeftImgPlaylis
 import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
-import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 
 import { MobilePostMain, DesktopPostMain, AuthorBookmarkShareSection, ShareBookmarkTopShortCuts, RecommendedPostsSection } from '@/layout-parts/PostSections'
 

@@ -8,7 +8,7 @@ interface IProps {
     size?: string
 }
 
-const Bookmark: React.FC<IProps> = ({ id, color, size }) => {
+export const Bookmark: React.FC<IProps> = ({ id, color, size }) => {
     const buttonColor = color ? color : "secondary"
     const buttonSize = size ? size : "6"
     return (

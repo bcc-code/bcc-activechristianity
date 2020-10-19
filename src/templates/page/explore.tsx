@@ -24,6 +24,7 @@ import localStorageHelper from '@/helpers/localStorage'
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
 const ExplorePage: React.FC<IResource> = (props) => {
+    console.log(props)
     const [query, setQuery] = React.useState('');
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
     const [taxonomyFilter, setTaxonomyFilter] = React.useState<string[] | null>(null);

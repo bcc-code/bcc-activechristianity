@@ -76,7 +76,7 @@ module.exports = function generateTopics(actions, graphql) {
                     
                     // create achive of each topic, type, format
                     const totalPages = Math.ceil(totalCount / perPage)
-                    const firstPageNr=allPosts.length>20?'/1':''
+                    const firstPageNr=allPosts.length>10?'/1':''
                     for (let i = 0; i < totalCount; i += perPage, currentPage++) {
                       
                       let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : firstPageNr}`
@@ -85,7 +85,7 @@ module.exports = function generateTopics(actions, graphql) {
                         currentPage,
                         totalPages,
                         baseUrl,
-                        hasRecommendPage:allPosts.length>20
+                        hasRecommendPage:allPosts.length>10
                       }
               
 
@@ -116,7 +116,7 @@ module.exports = function generateTopics(actions, graphql) {
                 for (let i=0;i<filteredTopics.length;i++){
                     const topic=filteredTopics[i]
               
-                    if(topic.noOfPosts>20){
+                    if(topic.noOfPosts>10){
                         
                         const querySubTopics = getSubTopicsAndFeaturedPosts(topic.id)
                         

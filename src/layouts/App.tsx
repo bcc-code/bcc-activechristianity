@@ -56,8 +56,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
-
-
     React.useEffect(() => {
         checkUser()
     }, [])
@@ -84,17 +82,19 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const handleSideNavOpen = (status: boolean) => {
         setSideNavOpen(status)
-        setIsModalOpen(status)
+        dispatch(setIsModalOpen(status))
     }
 
-    const NavProps = React.useMemo(() => (
-        {
-            isSideNavOpen,
-            setSideNavOpen: handleSideNavOpen,
-            isModalOpen,
-            isSignInModalOpen
-        }
-    ), [
+    const NavProps = React.useMemo(() => {
+        return (
+            {
+                isSideNavOpen,
+                setSideNavOpen: handleSideNavOpen,
+                isModalOpen,
+                isSignInModalOpen
+            }
+        )
+    }, [
 
         isSideNavOpen,
         setSideNavOpen,

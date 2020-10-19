@@ -41,7 +41,7 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
     return (
         <div
 
-            className={`${className ? className : ''} relative justify-end select-none block rounded-xxl sm:rounded-xl border border-gray-300 hover:shadow-md p-2 md:p-4 max-w-64  h-full w-full text-white overflow-hidden`}
+            className={`${className ? className : ''} relative justify-end select-none block rounded-xxl sm:rounded-xl border border-gray-300 hover:shadow-md p-2 md:p-4 h-full w-full text-white overflow-hidden`}
 
         >
             <div className="absolute inset-0 rounded-xxl sm:rounded-xl overflow-hidden bg-center bg-cover" style={bgStyle}></div>

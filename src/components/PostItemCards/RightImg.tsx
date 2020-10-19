@@ -61,9 +61,9 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
             <div className="flex items-start sm:items-stretch w-full cursor-pointer mt-5">
                 <div className={`pr-4 flex flex-col w-8/12 sm:w-6/12 md:w-8/12 items-start `}>
                     {format && format[0] && (
-                        <div className="pb-2">
+                        <Link className="pb-2" to={`${format[0].to}`}>
                             <span className="text-xxs text-gray-600">{format[0].name}</span>
-                        </div>
+                        </Link>
                     )}
 
                     <Link to={`/${slug}`} >
