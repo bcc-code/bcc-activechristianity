@@ -59,7 +59,7 @@ const PostAudio: React.FC<IPlaylist> = ({
                                 <Link className="w-full sm:w-auto flex-1" to={media.path ? media.path : ''}>
                                     <div className="font-semibold text">{audio.title}</div>
                                     <div className="flex justify-between text-gray-600 text-sm">
-                                        <div className=" ">{audio.playlist}</div>
+                                        <div className=" ">{audio.playlists?.map(p => p.title)}</div>
                                         <div>
                                             {audio.duration}
                                         </div>

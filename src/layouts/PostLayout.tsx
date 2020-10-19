@@ -70,32 +70,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     } = post
 
     const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
-    const [featuredInPlaylist, setFeaturedInPlaylist] = React.useState<IPostRes | null>(null)
-    const [mpHeight, setMpHeight] = React.useState(0)
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
-
-    const [showControl, setShowControl] = React.useState(true)
     const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
-
-    const mediaPlaylistEl = React.useRef(null);
-
-
-    React.useEffect(() => {
-        if (mediaPlaylistEl !== null && mediaPlaylistEl.current !== null) {
-            let height = mediaPlaylistEl.current.offsetHeight
-            if (height < 80) {
-                height = 120
-            }
-            /*   const updateHeight = mediaPlaylistEl.current.offsetHeight > 80 ? mediaPlaylistEl.current.offsetHeigh : 80
-              setMpHeight(updateHeight) */
-            setMpHeight(height)
-
-        } else {
-
-            setMpHeight(mediaPlaylistEl.current.offsetHeight)
-        }
-    }, [mediaPlaylistEl.current && mediaPlaylistEl.current.offsetHeight, currentMediaType])
 
     React.useEffect(() => {
 
@@ -113,15 +90,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 }
             }
 
-            const scrollY = 120
 
-            if (window.scrollY > scrollY) {
-                setShowControl(false)
-            } else {
-                if (window.scrollY < scrollY) {
-                    setShowControl(false)
-                }
-            }
         }
         const debounceScroll = debounce(handleScroll, 1000)
         window.addEventListener('scroll', debounceScroll);
@@ -216,18 +185,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             })}
 
 
-
-
-
-
-            {featuredInPlaylist && (
-                {/* <LazyLoad>
-                    <PlaylistItem tagline={"Featured in playlist"} {...featuredInPlaylist} />
-                </LazyLoad> */}
-            )}
-
         </div>
     )
+
 
     const postFooter = (
         <LazyLoad>
@@ -238,6 +198,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     )
 
+    const defaultHeight = {
+        "audio": 88,
+        "video": window ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
+        "none": 250
+    }
+
+    console.log(currentMediaType)
+    const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
     return (
         <article className="overflow-scroll w-full relative">
             <ShareBookmarkTopShortCuts
@@ -249,9 +217,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 likes={likes}
             />
 
-            <div className="fixed sm:relative w-full z-50" ref={mediaPlaylistEl}>
+            <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
-                    <VideoMediaPlayer src={media.video.src} showControl={showControl} />
+                    <VideoMediaPlayer src={media.video.src} />
 
                 )}
                 {currentMediaType === "audio" && media.audio && (
@@ -274,8 +242,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
 
             <div className="sm:hidden fixed mt-64 inset-x top-0 w-full">
-                {currentMediaType === "video" || currentMediaType === "audio" ? (
-                    <div className='fixed bg-mp-background w-full' style={{ top: "50px", height: `${mpHeight + 50}px` }}>
+                {mediaTypes.length > 0 ? (
+                    <div className='fixed bg-mp-background w-full' style={{ top: "50px", height: `${currentHeigt + 50}px` }}>
 
                     </div>
                 ) : (
@@ -292,7 +260,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 id={postId}
                 title={title}
                 excerpt={excerpt}
-                height={currentMediaType === "video" || currentMediaType === "audio" ? mpHeight : 250}
+                height={currentHeigt}
                 shareSlug={slug}
                 translatedUrls={tranlsatedUrl}
             >
@@ -303,7 +271,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     />
                 </div>
-                {(currentMediaType === "video" || currentMediaType === "audio") && (
+                {(currentMediaType !== "video") && (
                     <div className="relative sm:pt-10 mb-12 ">
                         <TwoToOneImg image={image} />
                         {isPodcast && isPodcast > -1 ? (
@@ -327,7 +295,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     />
                 )}
             >
-                {!isCurrentMedia.video && (
+                {currentMediaType !== "video" && (
                     <div className="relative sm:pt-10 mb-12 ">
                         <TwoToOneImg image={image} rounded />
                         {isPodcast && isPodcast > -1 && (

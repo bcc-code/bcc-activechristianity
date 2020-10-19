@@ -6,11 +6,9 @@ interface TSignInModalStateAction {
 
 const mpPlayPause: Reducer<boolean, TSignInModalStateAction> = (state = false, action: TSignInModalStateAction) => {
     switch (action.type) {
-        case 'FIX_PLAYER': {
-            return false
-        }
+
         case 'FLOAT_PLAYER': {
-            return true
+            return !state
         }
 
         default:

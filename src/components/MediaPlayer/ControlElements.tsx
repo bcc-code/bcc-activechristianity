@@ -22,6 +22,7 @@ const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
 
         dispatch(setIsPlaying(isPlaying))
     }, [isPlaying])
+
     useEffect(() => {
 
         if (mpPlayPause !== isPlaying) {

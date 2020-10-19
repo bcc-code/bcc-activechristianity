@@ -73,11 +73,7 @@ const MediaControl: React.FC<IWithMediaProps> = (props) => {
                             />
                         </div>
 
-                        <ControlBar
-
-
-                            video={true}
-                        />
+                        <ControlBar video={true} />
                     </div>
                 )
             }

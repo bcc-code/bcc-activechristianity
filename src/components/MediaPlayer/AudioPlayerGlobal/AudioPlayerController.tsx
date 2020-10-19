@@ -9,6 +9,7 @@ import ac_strings from '@/strings/ac_strings.json'
 import { IMedia } from '@/types'
 import { PlayPause, VolumeBar, NextTrack, PrevTrack } from '../ControlElements'
 import shortid from 'shortid'
+import ControlBar from '../ControlBar'
 const { CurrentTime, Progress, SeekBar, Duration } = controls
 
 const { keyboardControls } = utils
@@ -198,7 +199,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 <Player
                                     src={track.audio?.src}
                                     loop={repeatTrack}
-                                    autoPlay={true}
+                                    autoPlay={autoPlay}
                                     onEnded={onNextTrack}
 
                                     onPlay={() => { setIsPlaying(true) }}
@@ -286,35 +287,8 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 )}
 
                             </div>
-                            <div className={`w-full hidden sm:flex py-8 mx-auto max-w-tablet`}>
-
-                                <div className={`flex items-center flex-1 text-mp-text text-mini`}>
-                                    <div className="flex items-center">
-                                        <CurrentTime className="mx-3 my-0 " />
-                                    </div>
-                                    <div className="flex-1 flex flex-col relative">
-                                        {audioTitle && (
-                                            <div className="w-full absolute overflow-hidden h-8 text-sm" style={{ top: "-2rem" }}>
-                                                <div className="mp--title-scrolling">
-                                                    {audioTitle}
-                                                </div>
-                                            </div>
-                                        )}
-                                        <div className="flex items-center relative flex-1 w-full">
-                                            <Progress className="mp--progress absolute my-0 mx-3 rounded" />
-                                            <SeekBar className="mp--seekbar mx-3 my-0" />
-                                        </div>
-                                    </div>
-
-                                    <div className="media-control-group media-control-time-wrapper">
-                                        <Duration className="mx-3 my-0 media-control--duration" />
-                                    </div>
-                                </div>
-                                <div className={`flex items-center`}>
-                                    <div className="media-control-group">
-                                        <VolumeBar className="mx-3 my-0 media-control--mute-unmute" />
-                                    </div>
-                                </div>
+                            <div className={`w-full hidden sm:flex `}>
+                                <ControlBar />
                             </div>
 
                         </div>

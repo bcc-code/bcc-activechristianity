@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import LazyLoad from '@/components/LazyLoad';
-import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
-import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
+
 import ShareButton from '@/components/PostElements/SharePopover'
 import { ToggleFollowPlaylistBookmark } from '@/components/PostElements/TopicToggleFollow'
 import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts/PostSections'
