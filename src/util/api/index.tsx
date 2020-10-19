@@ -22,11 +22,11 @@ const sendQuery = (query: string) => {
 export default {
     login: (username: string, password: string, remember: boolean) => {
         const query = request.loginMutation(username, password, remember)
-        return sendQuery(query).then(res => res.signIn.user)
+        return sendQuery(query)
     },
     register: (username: string, email: string, password: string, remember: boolean) => {
         const query = request.registerMutation(username, email, password, remember)
-        return sendQuery(query).then(res => res.signUp.user) //signUp
+        return sendQuery(query)
     },
     forgotPassword: (email: string) => {
         const query = request.forgotPasswordMutation(email)

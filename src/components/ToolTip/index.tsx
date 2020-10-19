@@ -41,7 +41,7 @@ const ShareIconPopper: React.FC<IProps> = ({ popperContent, children, placement 
 
     return (
         <>
-            <button onClick={handleShowPopper} onKeyDown={handleShowPopper} type="button" ref={setReferenceElement} style={{ height: 0 }}>
+            <button onClick={handleShowPopper} onKeyDown={handleShowPopper} type="button" ref={setReferenceElement}>
                 {children}
             </button>
 
