@@ -37,121 +37,124 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
         <div>
             <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <LayoutH1Wide title={info.name} />
-            {formatType.info.count < 21 ? (
-                <FetchPostsFromArchivePage
-                    slug={latestSlug}
-                    layout="row" render={({ posts }) => {
-                        return (
-                            <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
-                                { posts.map(p => {
-                                    return (
-                                        <TopImgPost {...p} key={p.slug} />
-                                    )
-                                })}
-                            </div>
-                        )
-                    }}
-                />
+            {formatType.info.count > 1 ? (
 
+                <div className="sm:px-4 standard-max-w">
+                    <FetchPostsFromSlugs
+                        slugs={mostPopular}
+                        layout="list"
+                        render={({ posts }) => {
+                            const randomHeaderPost = getRandomArray(posts.slice(5), 1)
+                            return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
+                        }}
+                    />
 
-            ) : (
-                    <div className="sm:px-4 standard-max-w">
+                    <div className="w-full pb-4 pt-8 sm:hidden">
+                        <PageSectionHeader title={ac_strings.featured} className="pb-4" />
                         <FetchPostsFromSlugs
-                            slugs={mostPopular}
-                            layout="list"
+                            slugs={mostPopular.slice(5)}
+                            layout="row"
                             render={({ posts }) => {
-                                const randomHeaderPost = getRandomArray(posts.slice(5), 1)
-                                return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
+                                return <FeaturedBanner featured={posts} />
                             }}
                         />
+                    </div>
+                    <FetchPostsFromSlugs
+                        slugs={mostPopular}
+                        layout="row"
+                        render={({ posts }) => {
+                            return (<TopImgHorizontalScroll posts={posts} />)
+                        }}
+                    />
+                    {watch[0] && (
+                        <FetchPostsFromArchivePage
+                            slug={`${watch[0].to}/${info.to}`}
+                            layout="row"
+                            render={({ posts }) => {
+                                return (
+                                    <div className="py-6">
+                                        <SectionTitleDesktopAndMobile name={watch[0].name} />
+                                        <HSCardListVideo posts={posts} />
+                                    </div>
+                                )
+                            }}
 
-                        <div className="w-full pb-4 pt-8 sm:hidden">
-                            <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                            <FetchPostsFromSlugs
-                                slugs={mostPopular.slice(5)}
-                                layout="row"
-                                render={({ posts }) => {
-                                    return <FeaturedBanner featured={posts} />
-                                }}
-                            />
-                        </div>
+                        />
+                    )}
+                    <SectionTitleDesktopAndMobile name={TS.latest} />
+                    {listen[0] && (
+                        <FetchPostsFromArchivePage
+
+                            slug={`${listen[0].to}/${info.to}`}
+                            layout="row"
+                            render={({ posts }) => {
+                                return (
+                                    <div>
+                                        <div className="sm:hidden px-4">
+                                            {posts.slice(0, 4).map(item => (
+                                                <RightImg {...item} />
+                                            ))}
+                                        </div>
+                                        <div className="hidden sm:block">
+                                            <Post4Col posts={posts.slice(0, 4)} />
+                                        </div>
+                                    </div>
+                                )
+                            }}
+                        />
+                    )}
+                    {read[0] && (
+                        < FetchPostsFromArchivePage
+
+                            slug={`${read[0].to}/${info.to}`}
+                            layout="row"
+                            render={({ posts }) => {
+                                return (
+                                    <div>
+                                        <div className="sm:hidden px-4">
+                                            {posts.slice(0, 4).map(item => (
+                                                <RightImg {...item} />
+                                            ))}
+                                        </div>
+                                        <div className="hidden sm:block">
+                                            <Post4Col posts={posts.slice(0, 4)} />
+                                        </div>
+                                    </div>
+                                )
+                            }}
+                        />
+                    )}
+
+                    <div className="bg-d4slate-lighter sm:hidden py-6 overflow-hidden">
+                        <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                         <FetchPostsFromSlugs
-                            slugs={mostPopular}
+                            slugs={mostPopular.slice(0, 5)}
                             layout="row"
                             render={({ posts }) => {
                                 return (<TopImgHorizontalScroll posts={posts} />)
                             }}
                         />
-                        {watch[0] && (
-                            <FetchPostsFromArchivePage
-                                slug={`${watch[0].to}/${info.to}`}
-                                layout="row"
-                                render={({ posts }) => {
-                                    return (
-                                        <div className="py-6">
-                                            <SectionTitleDesktopAndMobile name={watch[0].name} />
-                                            <HSCardListVideo posts={posts} />
-                                        </div>
-                                    )
-                                }}
-
-                            />
-                        )}
-                        <SectionTitleDesktopAndMobile name={TS.latest} />
-                        {listen[0] && (
-                            <FetchPostsFromArchivePage
-
-                                slug={`${listen[0].to}/${info.to}`}
-                                layout="row"
-                                render={({ posts }) => {
-                                    return (
-                                        <div>
-                                            <div className="sm:hidden px-4">
-                                                {posts.slice(0, 4).map(item => (
-                                                    <RightImg {...item} />
-                                                ))}
-                                            </div>
-                                            <div className="hidden sm:block">
-                                                <Post4Col posts={posts.slice(0, 4)} />
-                                            </div>
-                                        </div>
-                                    )
-                                }}
-                            />
-                        )}
-                        {read[0] && (
-                            < FetchPostsFromArchivePage
-
-                                slug={`${read[0].to}/${info.to}`}
-                                layout="row"
-                                render={({ posts }) => {
-                                    return (
-                                        <div>
-                                            <div className="sm:hidden px-4">
-                                                {posts.slice(0, 4).map(item => (
-                                                    <RightImg {...item} />
-                                                ))}
-                                            </div>
-                                            <div className="hidden sm:block">
-                                                <Post4Col posts={posts.slice(0, 4)} />
-                                            </div>
-                                        </div>
-                                    )
-                                }}
-                            />
-                        )}
-
-                        <div className="bg-d4slate-lighter sm:hidden py-6 overflow-hidden">
-                            <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                            <FetchPostsFromSlugs
-                                slugs={mostPopular.slice(0, 5)}
-                                layout="row"
-                                render={({ posts }) => {
-                                    return (<TopImgHorizontalScroll posts={posts} />)
-                                }}
-                            />
-                        </div>
                     </div>
+                </div>
+
+
+
+
+            ) : (
+                    <FetchPostsFromArchivePage
+                        slug={latestSlug}
+                        layout="row" render={({ posts }) => {
+                            return (
+                                <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
+                                    { posts.map(p => {
+                                        return (
+                                            <TopImgPost {...p} key={p.slug} />
+                                        )
+                                    })}
+                                </div>
+                            )
+                        }}
+                    />
                 )}
         </div>
     )

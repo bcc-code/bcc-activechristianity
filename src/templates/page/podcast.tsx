@@ -88,7 +88,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
                                     <UnderlineLinkViewAll
 
-                                        to={`${path}/${ac_strings.slug_latest}/2`}
+                                        to={`${path}/${ac_strings.slug_latest}`}
                                     />
                                 </div>
                             </div>

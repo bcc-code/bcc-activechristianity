@@ -17,7 +17,6 @@ const queries = [
           title
           slug
           excerpt
-		  		content
           authors {
               name
               slug

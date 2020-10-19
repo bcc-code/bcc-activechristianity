@@ -67,8 +67,29 @@ const Watch: React.FC<IProps> = (props) => {
                 </div>
 
             </div>
-
-            {loggedIn !== "success" ? (
+            <FetchPostsFromArchivePage
+                slug={latestSlug}
+                layout="row" render={({ posts }) => (
+                    <VideoRow4Col
+                        name={ac_strings.latest}
+                        posts={posts}
+                        slug={latestSlug}
+                    />
+                )}
+            />
+            <div className="w-full pt-4">
+                <SectionTitleDesktopAndMobile
+                    name={ac_strings.popular}
+                />
+                <FetchPostsFromSlugs
+                    slugs={mostPopular.slice(0, 5)}
+                    layout="row"
+                    render={({ posts }) => (
+                        <HSCardListVideo posts={posts} />
+                    )}
+                />
+            </div>
+            {/*             {loggedIn !== "success" ? (
                 <div className="w-full pt-4">
                     <SectionTitleDesktopAndMobile
                         name={ac_strings.popular}
@@ -93,7 +114,7 @@ const Watch: React.FC<IProps> = (props) => {
                         )}
                     />
 
-                )}
+                )} */}
 
 
             <FetchTopicPostItems
