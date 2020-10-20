@@ -172,7 +172,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         />
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
 
-                        <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'} `}>
+                        <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
                             {breadcrumb.items.length > 0 && (
                                 <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
                                     <Breadcrumb {...breadcrumb} />
