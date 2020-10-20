@@ -7,6 +7,7 @@ import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Header
 import { OutlineScriptureChapter } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.json'
 import { INavItem, } from "@/types"
+import { trimSlug } from '@/helpers'
 const ExplorePopularScripture: React.FC<{
 
     scriptureSlug: string
@@ -16,7 +17,7 @@ const ExplorePopularScripture: React.FC<{
 
     React.useEffect(() => {
 
-        fetch(`/page-data/${scriptureSlug}/page-data.json`)
+        fetch(`/page-data/${trimSlug(scriptureSlug)}/page-data.json`)
             .then(res => res.json())
             .then(res => {
                 const mostUsedScriptures: INavItem[] = res.result.pageContext.mostPopular

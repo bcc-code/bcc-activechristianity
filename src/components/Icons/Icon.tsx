@@ -1,16 +1,127 @@
-import * as Icons from '@material-ui/icons';
+
+import Home from '@material-ui/icons/Home'
+import Close from '@material-ui/icons/Close'
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
+import Visibility from '@material-ui/icons/Visibility'
+import GetApp from '@material-ui/icons/GetApp'
+import VolumeUpRounded from '@material-ui/icons/VolumeUpRounded'
+import AccessTime from '@material-ui/icons/AccessTime'
+import Description from '@material-ui/icons/Description'
+import Equalizer from '@material-ui/icons/Equalizer'
+import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline'
+import OndemandVideo from '@material-ui/icons/OndemandVideo'
+import Headset from '@material-ui/icons/Headset'
+import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded'
+import ShareOutlined from '@material-ui/icons/ShareOutlined'
+import Cached from '@material-ui/icons/Cached'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
+import Bookmark from '@material-ui/icons/Bookmark'
+import Check from '@material-ui/icons/Check'
+import Add from '@material-ui/icons/Add'
+import Search from '@material-ui/icons/Search'
+import ArrowForward from '@material-ui/icons/ArrowForward'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import FilterList from '@material-ui/icons/FilterList'
+import Menu from '@material-ui/icons/Menu'
+import Launch from '@material-ui/icons/Launch'
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
+import Explore from '@material-ui/icons/Explore'
+import Bookmarks from '@material-ui/icons/Bookmarks'
+import Publish from '@material-ui/icons/Publish'
+import LocalOffer from '@material-ui/icons/LocalOffer'
+import VolumeUp from '@material-ui/icons/VolumeUp'
+import MoreVert from '@material-ui/icons/MoreVert'
+type IMUIIConName = "Home" |
+    "Explore" |
+    "Close" |
+    "KeyboardArrowRight" |
+    "KeyboardArrowDown" |
+    "Visibility" |
+    "GetApp" |
+    "Description" |
+    "VolumeUpRounded" |
+    "AccessTime" |
+    "Description" |
+    "Equalizer" |
+    "PlayCircleOutline" |
+    "OndemandVideo" |
+    "Headset" |
+    "PlayArrowRounded" |
+    "PlayArrowRounded" |
+    "ShareOutlined" |
+    "Cached" |
+    "BookmarkBorder" |
+    "Bookmark" |
+    "Check" |
+    "Add" |
+    "Search" |
+    "ArrowForward" |
+    "ExpandMore" |
+    "FilterList" |
+    "Menu" |
+    "Launch" |
+    "KeyboardArrowLeft" |
+    "Bookmarks" |
+    "Publish" |
+    "LocalOffer" |
+    "VolumeUp" |
+    "MoreVert"
+
+    ;
+
+const Icons = {
+    Home,
+    Close,
+    KeyboardArrowRight,
+    KeyboardArrowDown,
+    Visibility,
+    GetApp,
+    Description,
+    VolumeUpRounded,
+    AccessTime,
+    Equalizer,
+    PlayCircleOutline,
+    OndemandVideo,
+    Headset,
+    PlayArrowRounded,
+    ShareOutlined,
+    Cached,
+    BookmarkBorder,
+    Bookmark,
+    Check,
+    Add,
+    Search,
+    ArrowForward,
+    ExpandMore,
+    FilterList,
+    Menu,
+    Launch,
+    KeyboardArrowLeft,
+    Explore,
+    Bookmarks,
+    Publish,
+    LocalOffer,
+    VolumeUp,
+    MoreVert
+}
 import * as React from 'react';
 
 export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light" | "white"
-interface IIconProps {
-    name: string
+interface IIconProps extends IIconStyle {
+    name: IMUIIConName
+
+}
+
+
+
+interface IIconStyle {
     size?: string
     color?: IButtonColour
 }
 
-
-const IconWrapper: React.FC<IIconProps> = ({ name, size, color }) => {
-    const Icon = Icons[name]
+const getIconStyle = (props: IIconStyle) => {
+    const { size, color } = props
     const style: any = {}
     if (size) {
         style.fontSize = `${sizeMap[size]}rem`
@@ -19,6 +130,12 @@ const IconWrapper: React.FC<IIconProps> = ({ name, size, color }) => {
     if (color) {
         style.color = `${colorMap[color]}`
     }
+    return style
+}
+const IconWrapper: React.FC<IIconProps> = ({ name, ...rest }) => {
+    const Icon = Icons[name]
+    const style: any = getIconStyle(rest)
+
     if (Icon) {
         return (
             <Icon

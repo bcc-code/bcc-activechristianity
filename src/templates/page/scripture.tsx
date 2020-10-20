@@ -34,12 +34,11 @@ interface IActiveBook extends IBibleBook {
 
 const BibleNav: React.FC<IBibleNavProps> = (props) => {
     const { pageContext: { breadcrumb, title, bible }, path } = props
-    console.log(bible)
+
     const [activeBook, setActiveBook] = React.useState<undefined | IActiveBook>(undefined)
     const [activeBookOrder, setActiveBookOrder] = React.useState<undefined | number>(undefined)
 
     const handleSelectActiveBook = (e: any, book: IBibleBook) => {
-        console.log(book)
         if (activeBook && activeBook.availableChapters && book.no === activeBook.no) {
             setActiveBook(undefined)
             setActiveBookOrder(undefined)

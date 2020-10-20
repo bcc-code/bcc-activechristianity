@@ -1,17 +1,17 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { Media, Player, controls, utils } from 'react-media-player'
-
+import { setIsPlaying, setCurrentMedia } from '@/state/action'
+import { useSelector, useDispatch } from "react-redux";
+import { Media, controls, utils } from 'react-media-player'
+import Player from '../lib/Player'
 import { withMediaProps } from 'react-media-player'
-import { setCurrentMedia, setMpHeight } from '@/state/action'
-import ControlBar from './ControlBar'
-import CloseButton from '@/components/Button/CloseButtonRound'
-import isPlayerFloating from '@/state/reducer/mp_floating'
+import ControlBar from '../ControlBar'
 
 const { keyboardControls } = utils
 
-interface IProps {
+export interface IWithMediaProps {
+    showControl: boolean
     expanded: boolean
+    isVideo: boolean
     isOnPost: boolean
     floating: boolean
     src: string | null
@@ -26,6 +26,7 @@ interface IProps {
 }
 
 export interface IMediaProps {
+
     isFullscreen: boolean
     isPlaying: boolean
     play: () => void
@@ -39,21 +40,16 @@ export interface IMediaProps {
     muteUnmute: () => void
     setVolume: (v: number) => void
 }
-const MediaControl: React.FC<IProps> = (props) => {
-    const { src, audioTitle, repeatTrack, autoPlay, floating, expanded } = props
-
-    const minimized = !expanded && floating
+const MediaControl: React.FC<IWithMediaProps> = (props) => {
+    const { src, repeatTrack, autoPlay, isVideo } = props
     const dispatch = useDispatch()
-
-    const handleCloseClickButton = () => {
-        dispatch(setCurrentMedia({ path: undefined }))
-        dispatch(setMpHeight(0))
+    const handlePlay = () => {
+        dispatch(setCurrentMedia({ path: '' }))
     }
-
-
     return (
         <Media>
             {(mediaProps: IMediaProps) => {
+
                 return (
                     <div
                         role="application"
@@ -61,16 +57,10 @@ const MediaControl: React.FC<IProps> = (props) => {
                         onKeyDown={keyboardControls.bind(null, mediaProps)}
                         tabIndex={0}
                     >
-                        {floating && (
-                            <div
-                                className="absolute right-0"
-                                style={{ top: "-2rem" }}
-                            >
-                                <CloseButton onClick={handleCloseClickButton} />
-                            </div>
-                        )}
+
+                        {/* extra margin top if it is showing video at the top (not floating) */}
                         <div
-                            className={`flex justify-center bg-mp-background`}
+                            className={`flex justify-center bg-mp-background mp--video`}
                             onClick={() => mediaProps.playPause()}
                         >
                             <Player
@@ -79,14 +69,11 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 autoPlay={autoPlay}
                                 onEnded={props.onNextTrack}
                                 fullScreen={false}
+                                onPlay={handlePlay}
                             />
-
                         </div>
-                        <ControlBar
-                            floating={floating}
-                            minimized={minimized}
-                            audioTitle={audioTitle}
-                        />
+
+                        <ControlBar video={true} />
                     </div>
                 )
             }

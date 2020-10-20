@@ -15,6 +15,7 @@ import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFoll
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics.tsx'
 import TS from '@/strings'
 import { getRandomArray } from '@/helpers'
+import ac_strings from '@/strings/ac_strings.json'
 const UserHistory = () => {
 
     const { followedTopics, bookmarkedPosts, } = useSelector((state: IRootState) => state.userLibrary);
@@ -30,6 +31,7 @@ const UserHistory = () => {
                             return (
                                 <>
                                     <SectionTitleDesktopAndMobile name={"Following Topics"} />
+                                    <span className="text-d4slate-light">{ac_strings.youMightBeInterestedIn}</span>
                                     <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
                                         {topics.map(({ name, slug: to }) => {
                                             return (

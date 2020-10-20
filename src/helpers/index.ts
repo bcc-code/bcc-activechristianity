@@ -111,15 +111,20 @@ export const normalizeAuthors = (authors: IAuthorRes[]) => {
 }
 
 export const normalizeTracks = (tracks: ITrackRes[]) => {
+
     const toReturn = tracks.map(track => {
+
         const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
         const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+
+        const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
+
         const toAdd: IMedia = (
             {
                 path: track.post.slug,
                 audio: {
                     duration: secondesToMinutes(track.duration),
-                    src: `${process.env.API_HOST}${track.url}`,
+                    src,
                     title: track.title,
                     type: "audio",
                     article: {
@@ -127,6 +132,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
                         url: track.post.slug,
 
                     },
+                    playlists: track.playlists,
                     contributor: trackPostAuthor
                 },
 
@@ -138,16 +144,17 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
     return toReturn
 }
+
 export const transformTopicsRes = (topics: ITopicRes[]) => {
     const types: ITopicNavItem[] = []
     const filteredTopics: ITopicNavItem[] = []
     const format: ITopicNavItem[] = []
     topics.forEach((t) => {
         const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
-        if (t.group.name === 'Type') {
+        if (t.group && t.group.name === 'Type') {
             types.push(toAdd)
 
-        } else if (t.group.name === 'Format') {
+        } else if (t.group && t.group.name === 'Format') {
             format.push(toAdd)
         } else {
             toAdd.to = `${TS.slug_topic}/${t.slug}`
@@ -166,18 +173,26 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     } = {}
     topics.forEach((t) => {
         const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${TS.slug_topic}/${t.slug}` }
-        if (t.group.name !== 'Type' && t.group.name !== 'Format') {
-        }
-        if (sortedTags[t.group.name]) {
+        if (t.group) {
+            if (t.group.name !== 'Type' && t.group.name !== 'Format') {
+            }
+            if (sortedTags[t.group.name]) {
 
-            sortedTags[t.group.name].topics.push(toAdd)
+                sortedTags[t.group.name].topics.push(toAdd)
+            } else {
+                sortedTags[t.group.name] =
+                {
+                    info: { name: t.group.name, to: t.group.slug },
+                    topics: [toAdd]
+                }
+
+            }
         } else {
-            sortedTags[t.group.name] =
+            sortedTags['Unknown'] =
             {
-                info: { name: t.group.name, to: t.group.slug },
+                info: { name: '', to: '' },
                 topics: [toAdd]
             }
-
         }
 
     })
@@ -282,13 +297,14 @@ export const normalizePostRes = (post: IPostRes) => {
             postItem.duration = { listen: secondesToMinutes(track.duration) }
         }
         media["audio"] = {
-            src: `${process.env.API_HOST}${track.url}`,
+            src: track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`,
             title: track.title,
             type: "audio",
             article: {
                 title: track.post.title,
                 url: track.post.slug
-            }
+            },
+            playlists: track.playlists
         }
     }
 

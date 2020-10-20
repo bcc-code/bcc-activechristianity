@@ -36,7 +36,6 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
                     render={({ playlists }) => {
                         const random = getRandomArray(playlists, 1)
                         const post = random.length ? random[0] : undefined
-                        console.log(post)
                         return <FeaturedCard {...post} type="playlist" />
                     }}
                 />

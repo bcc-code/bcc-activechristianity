@@ -3,16 +3,14 @@ import * as React from 'react'
 import { graphql } from "gatsby"
 import { INavItem, IPage } from '@/types'
 import MetaTag from '@/components/Meta'
-import CustomizedLayoutProps from '@/components/CustomizedPageComponent'
-import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
+
+import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import AboutUsLayout from '@/layouts/AboutUsLayout'
-import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
+
 import { ScrollingProvider } from 'react-scroll-section';
 
 const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 
-
-    const aboutUs: IScrollSectionChildProps[] = []
     const { title, childPages } = pageContext
     const allPages = childPages.map(item => {
         const customLayout: IPageCompTypes[] = JSON.parse(item.flexibleContent)

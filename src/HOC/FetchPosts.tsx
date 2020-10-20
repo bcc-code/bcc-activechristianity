@@ -16,17 +16,27 @@ export const FetchPostsFromSlugs: React.FC<IFetchPost> = ({ slugs, render, layou
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
         setLoading(true)
+        let isSubscribed = true
         fetchLocalPostsFromSlugs(slugs)
             .then(res => {
-                setLoading(false)
-                if (res) {
-                    setPosts(res)
+                if (isSubscribed) {
+                    setLoading(false)
+                    if (res) {
+                        setPosts(res)
+                    }
                 }
+
             })
             .catch(error => {
-                setLoading(false)
-                console.log(error)
+                if (isSubscribed) {
+                    setLoading(false)
+                    console.log(error)
+                }
+
             })
+        return () => {
+            isSubscribed = false
+        }
     }, [slugs])
 
     const CustomPlaceholder = getPlaceholder[layout]
@@ -50,19 +60,29 @@ export const FetchPostsFromArchivePage: React.FC<IFetchPostsFromArchivePage> = (
     const [postItems, setPostItems] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
-
+        let isSubscribed = true
         fetchPostslistFromArchivePage(slug)
             .then(res => {
-                setLoading(false)
-                if (res) {
+                if (isSubscribed) {
+                    setLoading(false)
+                    if (res) {
 
-                    setPostItems(res)
+                        setPostItems(res)
+                    }
                 }
+
             })
             .catch(error => {
-                setLoading(false)
-                console.log(error)
+                if (isSubscribed) {
+                    setLoading(false)
+                    console.log(error)
+                }
+
             })
+
+        return () => {
+            isSubscribed = false
+        }
     }, [])
 
     return (
@@ -84,17 +104,24 @@ export const FetchOnePost: React.FC<IFetchOnePost> = ({ slug, render }) => {
     const [post, setPost] = React.useState<IPostItem | null>(null)
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
+        let isSubscribed = true
         setLoading(true)
         fetchOneLocalPostsFromSlug(slug)
             .then(res => {
-                setLoading(false)
-                if (res) {
-                    setPost(res)
+                if (isSubscribed) {
+                    setLoading(false)
+                    if (res) {
+                        setPost(res)
+                    }
                 }
+
             })
             .catch(error => {
-                setLoading(false)
-                console.log(error)
+                if (isSubscribed) {
+                    setLoading(false)
+                    console.log(error)
+                }
+
             })
     }, [slug])
 
@@ -131,7 +158,7 @@ export const FetchOnePlaylist: React.FC<IFetchOnePlaylist> = ({ slug, render }) 
                 return undefined
             })
             .then(res => {
-                console.log(res)
+
                 setLoading(false)
                 if (res) {
                     setPost(res)

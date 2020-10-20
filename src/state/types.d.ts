@@ -15,7 +15,7 @@ export interface IRootState {
   isPlaying: boolean,
   isSignInModalOpen: ISignInModalContentType
   isModalOpen: boolean
-  isPlayerFloating: boolean
+  mpPlayPause: boolean
   userLibrary: IUserLibrary
   currentMedia: IMedia
   mpHeight: number

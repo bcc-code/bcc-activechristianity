@@ -17,21 +17,6 @@ const queries = [
           title
           slug
           excerpt
-          image {
-              src
-              srcset
-              dataUri
-
-          }
-          readtime
-          track {
-              url
-              title
-              post {
-                  title
-                  slug
-                  }
-              }
           authors {
               name
               slug

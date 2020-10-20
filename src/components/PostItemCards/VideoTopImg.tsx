@@ -24,20 +24,23 @@ const TopImgPost: React.FC<IPostItem & IProps> = (props) => {
     } = props
 
     return (
-        <Link to={`${slug}`} className={`flex flex-col max-w-lg text-gray-800 h-full overflow-hidden `}>
-            <Image16to9
-                image={image}
-                alt={title}
-                imageClassName="rounded-xl"
-            />
-
+        <div className={`flex flex-col max-w-lg text-gray-800 h-full overflow-hidden `}>
+            <Link to={`${slug}`} >
+                <Image16to9
+                    image={image}
+                    alt={title}
+                    imageClassName="rounded-xl"
+                />
+            </Link>
             <div className="flex-1 flex justify-between flex-col">
-                <TextSizeTitle {...{
-                    fontKey: small ? 'text-sm' : 'text-lg',
-                    clamp: 3,
-                    bold: "font-semibold",
-                    className: "mb-2 text-d4slate-dark"
-                }} rawText={title} />
+                <Link to={`${slug}`} >
+                    <TextSizeTitle {...{
+                        fontKey: small ? 'text-sm' : 'text-lg',
+                        clamp: 3,
+                        bold: "font-semibold",
+                        className: "mb-2 text-d4slate-dark"
+                    }} rawText={title} />
+                </Link>
                 {small !== true && (
                     <div className="pb-4">
                         <BookmarksAndViews
@@ -49,7 +52,7 @@ const TopImgPost: React.FC<IPostItem & IProps> = (props) => {
                     </div>
                 )}
             </div>
-        </Link>
+        </div>
 
     )
 }

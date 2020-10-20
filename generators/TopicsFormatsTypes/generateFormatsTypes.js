@@ -3,10 +3,10 @@ const _ = require('lodash')
 const path = require('path')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate ='src/templates/archive/video-list.tsx'
-
+const fs = require('fs')
+const stringify = require(`json-stringify-safe`)
 const exploreTemplate='src/templates/page/explore.tsx'
 const formatTemplate= 'src/templates/recommend/format-recommend.tsx'
-
 const ac_strings = require('../../src/strings/ac_strings.json')
 const TS = require('../../src/strings')
 const {getSubTopicsAndFeaturedPosts,getSubTopicPosts,createSubTopicPages, formatScope,typeScope,typesAll} = require('./hjelper')
@@ -133,7 +133,8 @@ module.exports = function generateTopics(actions, graphql) {
                 }
             })
 
-
+            const formatIds = {}
+            const typeIds={}
             if(formats && formatScope){
               
                 resource_grouped["format"]={
@@ -148,6 +149,7 @@ module.exports = function generateTopics(actions, graphql) {
                     const find = formatScope.find(f=>f.keyId===`${format.id}`)
                     
                     if (find){
+                        formatIds[`${format.id}`]=format
                         resource_grouped["format"].items.push(({key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts,image:format.image}))
                         const querySubTopics = getSubTopicsAndFeaturedPosts(format.id)
                         const mostPopular=format.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
@@ -219,7 +221,7 @@ module.exports = function generateTopics(actions, graphql) {
                     const findType=typeScope.find(t=>t.keyId===`${type.id}`)
       
                     if (findType){
-                        
+                        typeIds[`${type.id}`]=type
                         const querySubTopics = getSubTopicsAndFeaturedPosts(type.id)
                         
                         const subTRes = await graphql(querySubTopics)
@@ -319,7 +321,11 @@ module.exports = function generateTopics(actions, graphql) {
                 }
 
             }
-
+            const data = {
+                formatIds,
+                typeIds
+            }
+            saveFile('./src/strings', 'topic-filters', 'json',  data)
             resource_grouped["general"]={
                 name:ac_strings.general,
                 items:[]
@@ -369,3 +375,15 @@ module.exports = function generateTopics(actions, graphql) {
     })
 
 }
+//saveFile('./src/strings', 'languages', 'json',  data)
+
+function saveFile(folder, name, extension, data) {
+    const filename = path.resolve(`${folder}/${name}.${extension}`)
+    try {
+      fs.writeFileSync(filename, stringify(data, null, 2))
+    } catch(err) {
+      console.error(`AC Translations could not save the file. Please make sure the folder structure is already in place.`, err)
+    }
+  
+    console.log(`File ${filename} – saved`)
+  }

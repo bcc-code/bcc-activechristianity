@@ -38,7 +38,7 @@ export const fixPlayer: fixPlayer = () => ({
   type: 'FIX_PLAYER'
 })
 
-export const floatPlayer: fixPlayer = () => ({
+export const togglePlayMedia: fixPlayer = () => ({
   type: 'FLOAT_PLAYER'
 })
 

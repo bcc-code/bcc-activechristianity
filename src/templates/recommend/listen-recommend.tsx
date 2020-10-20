@@ -3,7 +3,7 @@ import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 
 import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
-
+import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
@@ -100,7 +100,10 @@ const Listen: React.FC<IProps> = (props) => {
                         </div>
 
                     </div>
-
+                    <ByCatergories
+                        title={ac_strings.byCategories}
+                        types={items}
+                    />
                 </LazyLoad>
             </div>
             <RecommendDesktopLayout

@@ -49,7 +49,7 @@ export const FetchLatestPodcast: React.FC<IFetchLatestPodcast> = ({ layout, rend
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
         setLoading(true)
-        fetch(`/page-data/${ac_strings.podcast}/page-data.json`)
+        fetch(`/page-data/${ac_strings.slug_podcast}/page-data.json`)
             .then(res => res.json())
             .then(res => {
 

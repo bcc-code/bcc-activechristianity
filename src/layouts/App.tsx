@@ -7,7 +7,7 @@ import CookieConsent from "react-cookie-consent";
 import Footer from '@/layout-parts/Footer'
 import Helmet from 'react-helmet'
 import Link from '@/components/CustomLink';
-const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayer'))
+const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import SideNav from '@/layout-parts/Nav/SideNav/index.tsx'
@@ -16,6 +16,7 @@ import shortid from 'shortid'
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
+import { setIsModalOpen } from '@/state/action'
 
 // string
 import TS from '@/strings';
@@ -47,17 +48,13 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
     const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
         isSignInModalOpen: state.isSignInModalOpen,
         currentMedia: state.currentMedia,
-        isFloating: state.isPlayerFloating,
         isModalOpen: state.isModalOpen,
-        mpHeight: state.mpHeight,
         breadcrumb: state.breadcrumb,
         isPlay: state.isPlaying,
         auth: state.auth
 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
-
-
 
     React.useEffect(() => {
         checkUser()
@@ -83,17 +80,25 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             })
     }
 
-    const NavProps = React.useMemo(() => (
-        {
-            isSideNavOpen,
-            setSideNavOpen,
-            isModalOpen,
-            isSignInModalOpen
-        }
-    ), [
+    const handleSideNavOpen = (status: boolean) => {
+        setSideNavOpen(status)
+        dispatch(setIsModalOpen(status))
+    }
+
+    const NavProps = React.useMemo(() => {
+        return (
+            {
+                isSideNavOpen,
+                setSideNavOpen: handleSideNavOpen,
+                isModalOpen,
+                isSignInModalOpen
+            }
+        )
+    }, [
 
         isSideNavOpen,
         setSideNavOpen,
+        handleSideNavOpen,
         isModalOpen,
         isSignInModalOpen
 
@@ -114,7 +119,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 Object.keys(iconMapNav).forEach(label => {
 
                     const page = allPages.find(page => {
-                        /* console.log(page) */
+
                         return page.label === label
                     })
                     if (page) {

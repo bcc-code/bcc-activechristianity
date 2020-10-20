@@ -1,5 +1,5 @@
 import React from 'react'
-import { setCurrentMedia, setAutoPlay, addTracks, floatPlayer } from '@/state/action'
+import { setCurrentMedia, setAutoPlay, addTracks, togglePlayMedia } from '@/state/action'
 import { IMedia } from '@/types'
 import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,26 +15,46 @@ export interface IPlayButtonProps {
 }
 const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, className, style, render, clickable }) => {
     const dispatch = useDispatch()
-    const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
+    const { currentMedia, isPlaying } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia, isPlaying: state.isPlaying }))
     const setCurrent = (toAdd: IMedia) => {
-        dispatch(floatPlayer())
         dispatch(setCurrentMedia(toAdd))
         dispatch(setAutoPlay(true))
+
     }
     const handleClick = () => {
-        setCurrent(track)
-        handlePlaylist()
+        if (currentMedia.audio) {
+            if (currentMedia.path === track.path) {
+                dispatch(togglePlayMedia())
+            } else {
+                setCurrent(track)
+                handlePlaylist()
+            }
+        } else {
+            setCurrent(track)
+            handlePlaylist()
+        }
+
     }
 
     const handlePlaylist = () => {
         if (playlistTracks) {
             handleTracks(playlistTracks)
-        } else if (track.audio && track.audio.playlistSlug) {
-            const playlistSlug = track.audio.playlistSlug
+        } else if (track.audio && track.audio.playlists) {
 
-            return fetchTracksFromSlug(playlistSlug).then(tracks => {
+            return Promise.all(track.audio.playlists.map(p => {
+                return fetchTracksFromSlug(p.slug).then(tracks => {
+                    return tracks
+                })
+            })).then(res => {
+                let tracks: IMedia[] = []
+                res.forEach(list => {
+                    tracks = [...tracks, ...list]
+                })
                 handleTracks(tracks)
             })
+            /*             return fetchTracksFromSlug(playlistSlug).then(tracks => {
+                            handleTracks(tracks)
+                        }) */
         }
     }
 
@@ -43,7 +63,7 @@ const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, classNa
         if (tracks.length > 0) {
             const index = tracks.findIndex(item => item.audio?.src === track.audio?.src)
             if (index > -1) {
-                toUpdate = [...tracks.slice(index), ...tracks.slice(0, index)]
+                toUpdate = [...tracks.slice(index + 1), ...tracks.slice(0, index)]
             }
             dispatch(addTracks(toUpdate))
         }
@@ -60,7 +80,7 @@ const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, classNa
             {...props}
             style={style}
         >
-            {render({ playing: currentMedia.path === track.path })}
+            {render({ playing: currentMedia.path === track.path && isPlaying == true })}
         </button>
     )
 

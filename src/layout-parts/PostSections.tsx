@@ -211,7 +211,7 @@ export const ShareSection: React.FC<IShareLikesViewsProps> = (props) => {
     )
 }
 
-export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id, shareSlug, text, views, likes }) => {
+export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPlayingAudio: boolean }> = ({ id, shareSlug, text, isPlayingAudio }) => {
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
             window.scroll({
@@ -223,7 +223,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id,
     }
 
     return (
-        <div className="flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
+        <div className={`flex flex-col fixed bottom-0 right-0 mx-3 py-2 ${isPlayingAudio ? 'mb-32 ' : 'mb-20 '}bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
             <button className="px-2 py-1" key={shortid()}>
                 <ToogleBookmark
                     id={id}
@@ -250,7 +250,6 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps> = ({ id,
         </div>
     )
 }
-
 export const MobileMainWrapper: React.FC<{ height: number }> = ({ height, children }) => {
     return (
         <div className="sm:hidden">

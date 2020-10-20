@@ -6,6 +6,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import { trimSlug } from '@/helpers'
 export interface IPostList {
     audio?: boolean
     paginate?: IPaginate
@@ -15,18 +16,6 @@ export interface IPostList {
 const PostList: React.FC<IPostList> = (props) => {
 
     const { paginate, posts } = props
-
-
-    const [postList, setPostList] = React.useState<IPostItem[]>([])
-    React.useEffect(() => {
-        fetchLocalPostsFromSlugs(posts)
-            .then(res => {
-                if (res) {
-                    setPostList(res)
-                }
-
-            })
-    }, posts)
 
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
@@ -65,7 +54,8 @@ const PostList: React.FC<IPostList> = (props) => {
                     totalPages={paginate.totalPages}
                     onChange={(activePage: number) => {
                         const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
-                        const fullPath = activePage > 1 ? `/${paginate.baseUrl}/${activePage}` : firstPagePath
+                        const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
+                        console.log(fullPath)
                         scrollToTop()
                         navigate(fullPath)
                     }}

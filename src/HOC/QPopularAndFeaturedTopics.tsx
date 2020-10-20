@@ -4,7 +4,7 @@ import { IRootState } from '@/state/types'
 import { StaticQuery, graphql } from "gatsby";
 import { FetchTopics } from '@/HOC/FetchTopicFormatType'
 import { ITopic, ITopicPostSlugs } from '@/types'
-
+import topicFilters from '@/strings/topic-filters.json'
 interface QProps {
     excludeFollowed?: boolean
     render: (data: { topics: ITopic[] }) => JSX.Element
@@ -14,10 +14,23 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
     return (
         <StaticQuery query={query}
             render={(props: IQuery) => {
-                const featuredSlugs = props.ac.featuredTopics.map(f => f.slug)
-                const popularSlugs = props.ac.popularTopics.map(f => f.slug)
-                const topicsSlugs = [...new Set([...featuredSlugs, ...popularSlugs])]
-                console.log(topicsSlugs)
+                const filtered: string[] = []
+
+
+                props.ac.featuredTopics.forEach(t => {
+                    if (!topicFilters.formatIds[t.id] && !topicFilters.typeIds[t.id]) {
+                        filtered.push(t.slug)
+                    }
+                })
+
+
+                props.ac.popularTopics.forEach(t => {
+                    if (!topicFilters.formatIds[t.id] && !topicFilters.typeIds[t.id]) {
+                        filtered.push(t.slug)
+                    }
+                })
+                const topicsSlugs = [...new Set([...filtered])]
+
                 return (
                     <FetchTopics
                         topics={topicsSlugs}
@@ -48,9 +61,11 @@ interface IQuery {
     ac: {
         featuredTopics: {
             slug: string
+            id: string
         }[]
         popularTopics: {
             slug: string
+            id: string
         }[]
     }
 }
@@ -59,10 +74,13 @@ const query = graphql`
   ac {
     popularTopics {
     slug
+    id
   }
   featuredTopics:topics(featured:true) {
     slug
+    id
       }
+      
   }
 }
 `

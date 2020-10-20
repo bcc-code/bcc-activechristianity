@@ -48,7 +48,7 @@ const TextSelectPopper: React.FC<{ className?: string, slug: string, title: stri
 
     const handleSelectedText = (e: any) => {
         const selectionObj = (window.getSelection && window.getSelection());
-        console.log(selectionObj)
+
         if (selectionObj && selectionObj.anchorOffset !== selectionObj.focusOffset) {
 
             const selectionInfo = getSelectionTextAndPosition(selectionObj)

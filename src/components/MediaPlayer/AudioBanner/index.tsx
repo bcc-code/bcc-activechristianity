@@ -2,16 +2,15 @@
 import React from 'react'
 import { IMedia } from '@/types'
 import PlayMedia from '@/HOC/SetAndUpdatePlayingMedia'
-import "./style/madia-player.css"
+import "../style/madia-player.css"
 
 type IAllProps = {
     media: IMedia
     duration?: string
+    stopScrollingTitle: boolean
 }
 const mod = (num: number, max: number) => ((num % max) + max) % max
-const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration }) => {
-
-
+const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration, stopScrollingTitle }) => {
 
     return (
 
@@ -22,7 +21,7 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration }) => {
             track={media}
             render={({ playing }) => {
                 return (
-                    <div className={` w-full flex mx-auto max-w-tablet py-3 sm:py-4`}>
+                    <div className={`w-full flex mx-auto max-w-tablet py-6`}>
 
                         <div className="text-d4cadet-blue flex items-center text-xs mx-4 sm:ml-0">
 
@@ -50,12 +49,13 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration }) => {
 
                         </div>
 
-                        <div className="flex-1 flex flex-col relative overflow-hidden  justify-center text-mp-text max-w-sm" style={{ top: "-8px" }}>
-                            <div className="mp--title-scrolling">
-                                <span className="font-semibold ">{media.audio?.title}</span>
+                        <div className="flex-1 flex flex-col relative overflow-hidden  justify-center text-mp-text max-w-sm">
+                            <div className={`mp--title-scrolling flex justify-start whitespace-no-wrap ${stopScrollingTitle ? '' : 'mp--title-scrolling-animation '}`}>
+                                <span className="font-semibold text-left">{media.audio?.title}</span>
                             </div>
 
-                            <span className="text-sm pt-10 text-left">{duration}</span>
+                            <span className="text-sm pt-6 text-left">{duration}
+                            </ span>
 
 
                         </div>

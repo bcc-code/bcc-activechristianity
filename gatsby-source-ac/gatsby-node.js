@@ -54,6 +54,10 @@ const getPostsQuery = (pageNr)=>`
                         title
                         slug
                     }
+                    playlists {
+                        slug
+                        title
+                      }
                 }
                 authors {
                     name
@@ -179,7 +183,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
           
         const {count,total}=firstQueryRes.data.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-        console.log(`Source ac_post`)
         bar1.start(pageCount, 0);
         for (let i = 1; i <=pageCount; i++){
             console.log(i)

@@ -50,8 +50,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
     })
   }
 
-
-
   exports.onPreBootstrap = async () => {
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()

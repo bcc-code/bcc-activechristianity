@@ -1,10 +1,10 @@
 import * as React from "react"
 import ReactHtmlParser from "react-html-parser"
-
+import Link from '@/components/CustomLink'
 import h2p from 'html2plaintext'
 import SelectionPopper from '@/components/TextSelectPopper'
 import RightImgPost from '@/components/PostItemCards/RightImg'
-
+import { FetchOnePost } from '@/HOC/FetchPosts'
 import { IGlossary } from '@/types'
 import ToolTipGlossary from '@/components/ToolTip'
 import TS from '@/strings'
@@ -39,6 +39,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                     const node = obj as HTMLNode
 
                     if (node.name === "script") {
+                        console.log(node)
                         return null
                     }
 
@@ -79,7 +80,36 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
 
                         )
 
+
+
                     }
+
+                    if (process.env.SITE_URL && node.type === 'tag' &&
+                        node.name === 'a' &&
+                        node.attribs &&
+                        node.attribs.href
+                    ) {
+
+                        const text = node.children[0].data
+                        const apiUrl = String(process.env.SITE_URL).replace(/(https?:|\/)/gm, '')
+                        if (node.attribs.href.indexOf(apiUrl) > -1) {
+
+                            const internalLink = node.attribs.href
+                                .replace(`${apiUrl}/media`, '')
+                                .replace(`${apiUrl}`, '')
+                                .replace(`https://`, '')
+                                .replace(`http://`, '')
+                            return (
+                                <Link to={internalLink}>{text}</Link>
+                            )
+                        } else {
+                            return (
+                                <a href={node.attribs.href}>{text}!</a>
+                            )
+                        }
+
+                    }
+
                     if (node.type === 'tag' &&
                         node.name === 'audio' &&
                         node.attribs &&
@@ -117,17 +147,20 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                         if (!alink) return
                         return (
                             <div className="">
-                                <FetchPost
-                                    slugs={[alink]}
-                                    layout="list"
-                                    render={({ posts }) => {
-                                        return (
-                                            <div>
-                                                {posts.map(post => (
+                                <FetchOnePost
+                                    slug={alink}
+
+                                    render={({ post }) => {
+                                        if (post) {
+                                            return (
+                                                <div>
                                                     <RightImgPost {...post} />
-                                                ))}
-                                            </div>
-                                        )
+                                                </div>
+                                            )
+                                        } else {
+                                            return <div></div>
+                                        }
+
                                     }}
                                 />
                             </div>

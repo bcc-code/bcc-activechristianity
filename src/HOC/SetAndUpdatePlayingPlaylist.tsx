@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentMedia, setAutoPlay, addTracks, floatPlayer } from '@/state/action'
+import { setCurrentMedia, setAutoPlay, addTracks } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { IMedia } from '@/types'
 import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
@@ -17,14 +17,13 @@ const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clicka
     const dispatch = useDispatch()
 
     const setCurrent = (toAdd: IMedia) => {
-        dispatch(floatPlayer())
         dispatch(setCurrentMedia(toAdd))
         dispatch(setAutoPlay(true))
     }
 
     const handleClick = () => {
         fetchTracksFromSlug(slug).then(tracks => {
-            console.log(tracks)
+
             if (tracks.length > 0) {
                 const tracksToAdd = tracks.map(at => {
                     const atToAdd = { ...at }
@@ -42,9 +41,7 @@ const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clicka
         onClick: handleClick,
         onKeyDown: handleClick
     } : {}
-    /*     console.log(`playing`)
-        console.log(currentMedia.audio?.playlistSlug)
-        console.log(slug) */
+
     return (
         <button
             className={`${className ? className : ''}`}

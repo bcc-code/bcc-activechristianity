@@ -1,17 +1,32 @@
+.mp--bottom {
+    padding-bottom: 65px;
+
+}
+
+@media (min-width: 640px) {
+    .mp--bottom {
+        padding-bottom: 0px
+    }
+}
+
+
 .mp--container {
     transition: all 1s cubic-bezier(.19, 1, .22, 1);
 }
 
+.mp--title-scrolling-animation {
+    animation: scrolling-title 15s linear infinite;
+}
 
 .mp--title-scrolling {
     position: absolute;
     width: 100%;
     height: 100%;
     margin: 0;
-    line-height: 50px;
+    line-height: 20px;
     /* Starting position */
     transform: translateX(0%);
-    animation: scrolling-title 15s linear infinite;
+
 
 }
 

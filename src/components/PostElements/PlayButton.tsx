@@ -18,16 +18,10 @@ export interface IPostItemMediaImg {
 }
 
 export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, className, children, style }) => {
-    let ImgTag: any = Link
-    let props: any = { to: slug }
-    if (track && track.audio) {
-        ImgTag = PlayButtonTrack
-        props = { track }
-    }
 
 
     return (
-        <ImgTag className={className} style={style} {...props}>
+        <Link className={className} style={style} to={slug}>
             {track && (track.video || track.audio) && (
                 <div
                     id="play-button"
@@ -37,7 +31,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                 </div>
             )}
             {children}
-        </ImgTag>
+        </Link>
     )
 }
 

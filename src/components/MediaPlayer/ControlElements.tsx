@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { setIsPlaying } from '@/state/action'
+import { useDispatch, useSelector } from 'react-redux'
+import { setIsPlaying, setCurrentMedia } from '@/state/action'
+import { IRootState } from '@/state/types'
 import { withMediaProps } from 'react-media-player'
 import { IMediaProps } from './MediaController'
-import { ITrack } from '@/types'
+
 interface IPlayPauseProps {
     media: IMediaProps
     className: string
@@ -14,13 +15,21 @@ const fillColor = "#9ca6be"
 
 const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
     const dispatch = useDispatch()
+    const { mpPlayPause } = useSelector((state: IRootState) => ({ mpPlayPause: state.mpPlayPause }));
     const { isPlaying, playPause } = media
 
     useEffect(() => {
-        dispatch(setIsPlaying(isPlaying))
 
+        dispatch(setIsPlaying(isPlaying))
     }, [isPlaying])
 
+    useEffect(() => {
+
+        if (mpPlayPause !== isPlaying) {
+            playPause()
+        }
+
+    }, [mpPlayPause])
     return (
         <svg
             role="button"
@@ -47,7 +56,38 @@ const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
     )
 }
 
+const PlayPauseButtonVideo: React.FC<IPlayPauseProps> = ({ media, className }) => {
 
+
+    const { isPlaying, playPause } = media
+    /*      */
+    return (
+        <svg
+            role="button"
+            width="36px"
+            height="36px"
+            viewBox="0 0 36 36"
+            className={`${className} fill-current`}
+            onClick={playPause}
+        >
+            {/* <circle fill={fillColor} cx="18" cy="18" r="18" /> */}
+            {isPlaying ?
+                <g key="pause" style={{ transformOrigin: '0% 50%' }}>
+                    <rect x="12" y="11" width="4" height="14" />
+                    <rect x="20" y="11" width="4" height="14" />
+                </g> :
+                <polygon
+                    key="play"
+                    points="14,11 26,18 14,25"
+                    style={{ transformOrigin: '100% 50%' }}
+                />
+            }
+
+        </svg>
+    )
+}
+
+export const PlayPauseVideo = withMediaProps(PlayPauseButtonVideo)
 export const PlayPause = withMediaProps(PlayPauseButton)
 
 export const AudioButton = () => (
@@ -63,6 +103,7 @@ const VolumeBarGroup: React.FC<IPlayPauseProps> = ({ media: { volume, muteUnmute
     const updateVolume = (e: any) => {
         setVolume(e.target.value / 100)
     }
+
     return (
         <div className="volume-bar flex">
             <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,13 +170,13 @@ interface INextTrackProps {
     className: string
 }
 export const PrevTrack: React.FC<INextTrackProps> = (props) => (
-    <svg width="10px" height="12px" viewBox="0 0 10 12" {...props}>
+    <svg width="36px" height="36px" viewBox="0 0 10 12" {...props}>
         <polygon fill={fillColor} points="10,0 2,4.8 2,0 0,0 0,12 2,12 2,7.2 10,12" />
     </svg>
 )
 
 export const NextTrack: React.FC<INextTrackProps> = (props) => (
-    <svg width="10px" height="12px" viewBox="0 0 10 12" {...props}>
+    <svg width="36px" height="36px" viewBox="0 0 10 12" {...props}>
         <polygon fill={fillColor} points="8,0 8,4.8 0,0 0,12 8,7.2 8,12 10,12 10,0" />
     </svg>
 )

@@ -26,7 +26,7 @@ const TopicsForYou = () => {
                                         <Link
                                             key={i}
                                             className="p-2"
-                                            to={`/${to}`}>
+                                            to={`${TS.slug_topic}/${to}`}>
                                             {name}
                                         </Link>
                                         <ToggleBookmarkIconOnly
