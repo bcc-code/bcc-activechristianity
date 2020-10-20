@@ -2,11 +2,18 @@ import * as React from 'react'
 import { INavItem, IPage } from '@/types'
 import MetaTag from '@/components/Meta'
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
-
+import CustomizedPageComponent from '@/components/CustomizedPageComponent'
+import { PostH1 } from '@/components/Headers'
 const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 
-    const { title } = pageContext
+    const { title, slug, flexibleContent } = pageContext
+    const customLayout: IPageCompTypes[] = JSON.parse(flexibleContent)
 
+    const comProps = {
+        slug: slug,
+        title,
+        pageContent: customLayout
+    }
     //CustomizedLayoutProps
     return (
         <div>
@@ -18,7 +25,14 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
             />
 
             <div>
-                {title}
+
+                <div className="max-w-tablet mx-auto px-4 pt-16">
+                    <PostH1 title={title} />
+                    <CustomizedPageComponent
+
+                        items={customLayout}
+                    />
+                </div>
             </div>
 
         </div>
@@ -27,10 +41,8 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 export default Page
 
 interface IAboutProps {
-    pageContext: {
-        title: string
+    pageContext: IPage & {
         breadcrumb: INavItem[]
-        page: IPage
     }
     path: string
 }

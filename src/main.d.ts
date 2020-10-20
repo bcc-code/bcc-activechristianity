@@ -17,10 +17,6 @@ declare module "*.json" {
     export default value;
 }
 
-declare module "html2plaintext" {
-    export default (value: string): string => { };
-}
-
 declare module '@microlink/react'
 declare module 'react-html-parser'
 declare module 'react-media-player'

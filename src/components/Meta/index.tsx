@@ -3,8 +3,7 @@ import Helmet from 'react-helmet'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateTranslationUrl, updateBreadcrumb } from '@/state/action'
 
-import h2p from 'html2plaintext'
-
+import { htmlTags2PlainText } from '@/helpers'
 import { Location } from '@reach/router'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
@@ -41,7 +40,7 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
 
     const { description: possiblyHTML, date, tags, categories, imageUrl, authors }: { [k: string]: any } = meta || {}
 
-    const description = shorten(h2p(possiblyHTML), 160)
+    const description = shorten(htmlTags2PlainText(possiblyHTML), 160)
 
     const mediaTypes: { [k: string]: string } = {
         music: 'music.song',
@@ -75,10 +74,11 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
                     <Helmet>
                         <title>{type === 'page' ? `${title} – ${TS.site_title}` : title}</title>
                         <meta name="description" content={description} />
+                        <meta name="robots" content="noindex" ></meta>
                         {tags && tags.length ? tags.map((t: INavItem) => <meta property="article:tag" key={t.to} content={t.name} />) : null}
                         {categories && categories.length ? <meta property="article:section" content={categories[0].name} /> : null}
                         {date ? <meta property="article:published_time" content={date} /> : null}
-
+                        <link rel="canonical" href={`${process.env.API_URL}/${path}`} />
                         <meta name="og:title" content={title} />
                         <meta property="og:site_name" content={TS.site_title} />
                         <meta name="og:description" content={description} />

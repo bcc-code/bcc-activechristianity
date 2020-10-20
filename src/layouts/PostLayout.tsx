@@ -66,7 +66,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         views,
         likes,
         duration,
-        media
+        media,
+
     } = post
 
     const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
@@ -136,6 +137,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 slug={slug}
                 title={title}
             />
+            <div>
+                {}
+            </div>
             <div className="flex flex-wrap border-d4gray py-6">
                 {topics && topics?.map(item => (
                     <ToggleFollowWithName {...item} />
@@ -204,7 +208,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         "none": 250
     }
 
-    console.log(currentMediaType)
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
     return (
         <article className="overflow-scroll w-full relative">

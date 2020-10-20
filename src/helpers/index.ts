@@ -1,6 +1,5 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
-import h2p from 'html2plaintext'
-var he = require('he');
+import he from 'he'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
@@ -201,9 +200,14 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     return sortedTags
 }
 
-export const replaceHTMLTags = (html: string) => {
-    let text = html.replace(/<\/?[^>]+>/ig, " ");
-    return he.decode(text);
+export const htmlTags2PlainText = (html: string) => {
+    if (html) {
+        let text = html.replace(/<\/?[^>]+>/ig, " ");
+        return he.decode(text);
+    } else {
+        return ''
+    }
+
 }
 
 export const ebookResToPost = (ebook: IEbook) => {
@@ -213,7 +217,7 @@ export const ebookResToPost = (ebook: IEbook) => {
     const post: IPostItem = {
         id,
         title,
-        excerpt: h2p(excerpt),
+        excerpt: htmlTags2PlainText(excerpt),
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,
@@ -249,13 +253,16 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
 
 export const getRandomArray = (pickFromArray: any[], length: number) => {
     if (pickFromArray.length > 0) {
+        const returnArrayLength = length > pickFromArray.length ? pickFromArray.length : length
+        console.log(returnArrayLength)
         let randName = [];
         let processArray = [...pickFromArray]
         do {
             randName[randName.length] = processArray.splice(
                 Math.floor(Math.random() * processArray.length)
                 , 1)[0];
-        } while (randName.length < length);
+        } while (randName.length < returnArrayLength);
+        console.log(randName)
         return randName
     } else {
         return []
@@ -273,7 +280,7 @@ export const normalizePostRes = (post: IPostRes) => {
     const postItem: IPostItem = {
         id,
         title,
-        excerpt: h2p(excerpt),
+        excerpt: htmlTags2PlainText(excerpt),
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,
