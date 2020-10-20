@@ -3,8 +3,7 @@ import Helmet from 'react-helmet'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateTranslationUrl, updateBreadcrumb } from '@/state/action'
 
-import h2p from 'html2plaintext'
-
+import { htmlTags2PlainText } from '@/helpers'
 import { Location } from '@reach/router'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
@@ -41,7 +40,7 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
 
     const { description: possiblyHTML, date, tags, categories, imageUrl, authors }: { [k: string]: any } = meta || {}
 
-    const description = shorten(h2p(possiblyHTML), 160)
+    const description = shorten(htmlTags2PlainText(possiblyHTML), 160)
 
     const mediaTypes: { [k: string]: string } = {
         music: 'music.song',

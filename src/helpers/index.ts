@@ -1,6 +1,5 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
-import h2p from 'html2plaintext'
-var he = require('he');
+import he from 'he'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
@@ -201,9 +200,14 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     return sortedTags
 }
 
-export const replaceHTMLTags = (html: string) => {
-    let text = html.replace(/<\/?[^>]+>/ig, " ");
-    return he.decode(text);
+export const htmlTags2PlainText = (html: string) => {
+    if (html) {
+        let text = html.replace(/<\/?[^>]+>/ig, " ");
+        return he.decode(text);
+    } else {
+        return ''
+    }
+
 }
 
 export const ebookResToPost = (ebook: IEbook) => {
@@ -213,7 +217,7 @@ export const ebookResToPost = (ebook: IEbook) => {
     const post: IPostItem = {
         id,
         title,
-        excerpt: h2p(excerpt),
+        excerpt: htmlTags2PlainText(excerpt),
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,
@@ -273,7 +277,7 @@ export const normalizePostRes = (post: IPostRes) => {
     const postItem: IPostItem = {
         id,
         title,
-        excerpt: h2p(excerpt),
+        excerpt: htmlTags2PlainText(excerpt),
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,

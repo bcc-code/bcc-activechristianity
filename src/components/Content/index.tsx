@@ -1,13 +1,13 @@
 import * as React from "react"
 import ReactHtmlParser from "react-html-parser"
 import Link from '@/components/CustomLink'
-import h2p from 'html2plaintext'
 import SelectionPopper from '@/components/TextSelectPopper'
 import RightImgPost from '@/components/PostItemCards/RightImg'
 import { FetchOnePost } from '@/HOC/FetchPosts'
 import { IGlossary } from '@/types'
 import ToolTipGlossary from '@/components/ToolTip'
 import TS from '@/strings'
+import { htmlTags2PlainText } from '@/helpers'
 import "./content.css"
 
 interface HTMLNode {
@@ -54,7 +54,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                             const g = glossary.find(item => item.word.toLowerCase() === word)
 
                             if (g) {
-                                let shorten = h2p(g.content)
+                                let shorten = htmlTags2PlainText(g.content)
 
                                 if (g.content.length > 235) {
                                     let parts = shorten.substr(0, 220).split(' ')
@@ -180,7 +180,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
 
     return (
         <SelectionPopper
-            className="main-content leading-normal font-serif"
+            className="main-content leading-normal"
             slug={slug}
             title={title}
         >

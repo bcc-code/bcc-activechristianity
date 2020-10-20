@@ -48,7 +48,7 @@
       "key": "song",
       "name": "Song",
       "to": "song",
-      "count": 67,
+      "count": 64,
       "image": {
         "src": "https://ac2.day4.live/storage/sizes/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol-w600.jpeg",
         "srcset": "https://ac2.day4.live/storage/sizes/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol-w600.jpeg 600w, https://ac2.day4.live/storage/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol.jpeg 1000w",
@@ -106,7 +106,7 @@
       "key": "watch",
       "name": "Watch",
       "to": "watch",
-      "count": 112
+      "count": 109
     }
   }
 }
