@@ -3,6 +3,7 @@ import { INavItem, IPage } from '@/types'
 import MetaTag from '@/components/Meta'
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
+import { PostH1 } from '@/components/Headers'
 const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 
     const { title, slug, flexibleContent } = pageContext
@@ -11,7 +12,7 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
     const comProps = {
         slug: slug,
         title,
-        childPage: customLayout
+        pageContent: customLayout
     }
     //CustomizedLayoutProps
     return (
@@ -24,7 +25,14 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
             />
 
             <div>
-                {title}
+
+                <div className="max-w-tablet mx-auto px-4 pt-16">
+                    <PostH1 title={title} />
+                    <CustomizedPageComponent
+
+                        items={customLayout}
+                    />
+                </div>
             </div>
 
         </div>
