@@ -55,6 +55,7 @@
     "gatsby-source-graphql": "^2.6.2",
     "gatsby-transformer-sharp": "^2.5.3",
     "googleapis": "^61.0.0",
+    "he": "^1.2.0",
     "html2plaintext": "^2.1.2",
     "js-cookie": "^2.2.1",
     "lazysizes": "^5.2.2",

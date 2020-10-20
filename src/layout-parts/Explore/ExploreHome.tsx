@@ -26,12 +26,11 @@ const ExploreLayout: React.FC<{
 
     const categoryKeys: IFormatKey[] = ["testimony", "commentary", "edification", "question"]
     const mediaLongKeys: IFormatKey[] = ["animation", "interview", "song", "message"]
-    const mediaSquareKeys: IFormatKey[] = ['podcast', 'playlist', 'ebook']
+    const mediaSquareKeys: IFormatKey[] = ['podcast', 'playlist']
 
     const mediaSquareImages = {
         'podcast': asImageWDataUri(PodcastImg),
-        'playlist': asImageWDataUri(PlaylistImg),
-        'ebook': asImageWDataUri(EbookImg)
+        'playlist': asImageWDataUri(PlaylistImg)
     }
 
     const getMenu = (keys: IFormatKey[]) => {

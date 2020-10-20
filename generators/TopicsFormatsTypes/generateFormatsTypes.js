@@ -149,8 +149,9 @@ module.exports = function generateTopics(actions, graphql) {
                     const find = formatScope.find(f=>f.keyId===`${format.id}`)
                     
                     if (find){
-                        formatIds[`${format.id}`]=format
-                        resource_grouped["format"].items.push(({key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts,image:format.image}))
+                        const formatToAdd = {key: find.keyname,name:format.name,to:format.slug,count:format.noOfPosts,image:format.image}
+                        formatIds[`${format.id}`]=formatToAdd
+                        resource_grouped["format"].items.push(formatToAdd)
                         const querySubTopics = getSubTopicsAndFeaturedPosts(format.id)
                         const mostPopular=format.posts.sort((a,b)=>b.views-a.views).slice(0,10).map(p=>p.slug)
                         
@@ -221,22 +222,26 @@ module.exports = function generateTopics(actions, graphql) {
                     const findType=typeScope.find(t=>t.keyId===`${type.id}`)
       
                     if (findType){
-                        typeIds[`${type.id}`]=type
+                        
+                        const typeToAdd = {
+                            key:findType.keyname,
+                            name:type.name,
+                            to:type.slug,
+                            count:type.noOfPosts
+                        }
+
+                        typeIds[`${type.id}`]=typeToAdd 
+                        const typeFormatEach={
+                            info:typeToAdd,
+                            items:[]}
+
+
                         const querySubTopics = getSubTopicsAndFeaturedPosts(type.id)
                         
                         const subTRes = await graphql(querySubTopics)
                         
                         const subTopics = subTRes.data.ac.topic.subTopics
                         const featuredPosts = subTRes.data.ac.topic.posts.map(p=>p.slug)
-                        const typeFormatEach={
-                            info:{
-                                key:findType.keyname,
-                                name:type.name,
-                                to:type.slug,
-                                count:type.noOfPosts
-                            },
-                            items:[]}
-
 
                         for(let j=0;j<subTopics.length;j++){
                             const subTopic=subTopics[j]

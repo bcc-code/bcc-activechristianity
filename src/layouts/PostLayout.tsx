@@ -200,7 +200,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const defaultHeight = {
         "audio": 88,
-        "video": window ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
+        "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
         "none": 250
     }
 

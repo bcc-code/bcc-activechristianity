@@ -31,19 +31,6 @@ const query = `{
   }
 }`
 
-const getPostImage = (slug)=>`
-  {
-    ac {
-        author(slug:${slug}){
-          image {
-          src
-          srcset
-          dataUri
-        }
-      }
-    }
-  }
-`
 const pagesContext = {
 
   "podcast":{
@@ -84,7 +71,7 @@ module.exports = function generatePages(actions, graphql) {
         } else if (page && page.label.indexOf("build-") >-1){
           const templateName=page.label.replace("build-","")
           let context = {
-            title:page.title,
+            ...page,
               breadcrumb:[
                 {
                   name:page.title,
