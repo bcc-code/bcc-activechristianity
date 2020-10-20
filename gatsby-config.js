@@ -74,6 +74,14 @@ checkEnvVar()
 
 
 const plugins = [
+  {
+    resolve: `gatsby-plugin-google-tagmanager`,
+    options: {
+      id: process.env.GTM_TAG||"GTM-WCW8RR4", 
+      includeInDevelopment: false,
+      gtmLocale: process.env.LOCALE,
+    },
+  },
   'gatsby-plugin-typescript',
   'gatsby-plugin-react-helmet',
   {
