@@ -189,9 +189,9 @@ input:focus {
 }
 
 .standard-max-w {
-    @apply max-w-desktop m-auto;
+    @apply max-w-laptop m-auto;
 }
 
 .standard-max-w-px {
-    @apply max-w-desktop m-auto px-4;
+    @apply max-w-laptop m-auto px-4;
 }

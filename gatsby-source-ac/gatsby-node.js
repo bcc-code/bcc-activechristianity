@@ -19,14 +19,6 @@ const settingsQuery = `
 const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.legacy);
  
 
-const getRecommendPosts = (postId)=>`
-
-    {
-        recommendedByPost(postId:${postId}){
-            slug
-          }
-    }
-`
 const getPostsQuery = (pageNr)=>`
     {
         posts(page:${pageNr}) {

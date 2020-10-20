@@ -253,13 +253,16 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
 
 export const getRandomArray = (pickFromArray: any[], length: number) => {
     if (pickFromArray.length > 0) {
+        const returnArrayLength = length > pickFromArray.length ? pickFromArray.length : length
+        console.log(returnArrayLength)
         let randName = [];
         let processArray = [...pickFromArray]
         do {
             randName[randName.length] = processArray.splice(
                 Math.floor(Math.random() * processArray.length)
                 , 1)[0];
-        } while (randName.length < length);
+        } while (randName.length < returnArrayLength);
+        console.log(randName)
         return randName
     } else {
         return []
