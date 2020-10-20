@@ -43,8 +43,13 @@ const getPostsQuery = (pageNr)=>`
             
                 }
                 readtime
+                seo {
+                    title
+                    desc
+                  }
                 meta {
-                    url
+                credits
+                url
                 }
                 track {
                     url

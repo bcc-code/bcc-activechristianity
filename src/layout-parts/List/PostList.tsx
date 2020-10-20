@@ -48,19 +48,20 @@ const PostList: React.FC<IPostList> = (props) => {
             />
 
 
-            {paginate && <div className="flex justify-item py-4">
-                <Pagination
-                    currentPage={paginate.currentPage}
-                    totalPages={paginate.totalPages}
-                    onChange={(activePage: number) => {
-                        const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
-                        const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
-                        console.log(fullPath)
-                        scrollToTop()
-                        navigate(fullPath)
-                    }}
-                />
-            </div>}
+            {paginate && (
+                <div className="flex justify-item py-4">
+                    <Pagination
+                        currentPage={paginate.currentPage}
+                        totalPages={paginate.totalPages}
+                        onChange={(activePage: number) => {
+                            const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
+                            const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
+                            scrollToTop()
+                            navigate(fullPath)
+                        }}
+                    />
+                </div>
+            )}
 
         </div>
     )

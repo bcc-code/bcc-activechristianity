@@ -32,6 +32,7 @@ import Publish from '@material-ui/icons/Publish'
 import LocalOffer from '@material-ui/icons/LocalOffer'
 import VolumeUp from '@material-ui/icons/VolumeUp'
 import MoreVert from '@material-ui/icons/MoreVert'
+import Folder from '@material-ui/icons/Folder'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -67,6 +68,7 @@ type IMUIIConName = "Home" |
     "LocalOffer" |
     "VolumeUp" |
     "MoreVert"
+"Folder"
 
     ;
 
@@ -103,7 +105,8 @@ const Icons = {
     Publish,
     LocalOffer,
     VolumeUp,
-    MoreVert
+    MoreVert,
+    Folder
 }
 import * as React from 'react';
 
