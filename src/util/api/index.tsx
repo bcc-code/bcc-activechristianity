@@ -24,8 +24,8 @@ export default {
         const query = request.loginMutation(username, password, remember)
         return sendQuery(query)
     },
-    register: (username: string, email: string, password: string, remember: boolean) => {
-        const query = request.registerMutation(username, email, password, remember)
+    register: (email: string, password: string, remember: boolean) => {
+        const query = request.registerMutation(email, password, remember)
         return sendQuery(query)
     },
     forgotPassword: (email: string) => {

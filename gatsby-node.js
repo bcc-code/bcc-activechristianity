@@ -11,7 +11,7 @@ const generateTopics = require('./generators/TopicsFormatsTypes/generateTopics.j
 const generatePages = require('./generators/generatePages.js')
 
 const generateAuthors = require('./generators/generateAuthors.js')
-const generateEbooks = require('./generators/generateEbooks.js')
+/* const generateEbooks = require('./generators/generateEbooks.js') */
 const generatePlaylists = require('./generators/generatePlaylists.js')
 /* const generateSeries = require('./generators/generateSeries.js') */
 const generateScriptures=require('./generators/generateScriptures.js')
@@ -44,7 +44,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.DESKTOP_NAV_ID':JSON.stringify(process.env.DESKTOP_NAV_ID),
           'process.env.SIDE_NAV_ID':JSON.stringify(process.env.SIDE_NAV_ID),
           'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
-          'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID)
+          'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
+          'process.env.NEW_URL':JSON.stringify(process.env.NEW_URL),
         })
       ]
     })
@@ -61,7 +62,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
      const generators = [
       generatePosts(actions, graphql),
       generateAuthors(actions, graphql),
-      generateEbooks(actions, graphql),
+/*       generateEbooks(actions, graphql), */
       generatePlaylists(actions, graphql),
       generateGlossary(actions, graphql),
       generatePages(actions, graphql),

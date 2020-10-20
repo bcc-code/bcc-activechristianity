@@ -85,7 +85,6 @@ const SignUpForm = () => {
             const { username, email, password, keepSignedIn } = fields
 
             const data = {
-                name: username,
                 email,
                 password,
                 remember: keepSignedIn
@@ -129,18 +128,11 @@ const SignUpForm = () => {
             {authInfo.errorMessage && (
                 <Snackbar
                     text={authInfo.errorMessage}
-                    type="error"
+                    error
                 />
             )}
 
-            <InputText
-                label={TS.username}
-                value={fields["username"]}
-                onChange={(e) => {
-                    handleChange(e, 'username')
-                }}
-                error={errors.username}
-            />
+
             <InputText
                 label={TS.email}
                 value={fields["email"]}

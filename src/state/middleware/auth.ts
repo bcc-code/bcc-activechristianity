@@ -39,10 +39,10 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
             next(action)
 
-            const { name: register_fullname, email: register_email, password: register_password, remember: register_remember } = action.payload
+            const { email: register_email, password: register_password, remember: register_remember } = action.payload
             /* const reguster_data = { register_fullname, register_email, register_password, register_remember } */
             acApi
-                .register(register_fullname, register_email, register_password, register_remember)
+                .register(register_email, register_password, register_remember)
                 .then((res: any) => {
                     store.dispatch(setUser(res))
                     store.dispatch(closeSignInModal())

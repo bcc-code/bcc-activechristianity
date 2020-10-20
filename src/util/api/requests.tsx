@@ -20,10 +20,9 @@ export const loginMutation = (username: string, password: string, remember: bool
   `
 }
 
-export const registerMutation = (username: string, email: string, password: string, remember: boolean) => `
+export const registerMutation = (email: string, password: string, remember: boolean) => `
     mutation {
       signUp(input:{
-      name:"${username}",
       email:"${email},
       password:"${password},
       remember:${remember}

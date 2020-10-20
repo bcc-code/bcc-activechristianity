@@ -1,5 +1,6 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
 import h2p from 'html2plaintext'
+var he = require('he');
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.json'
 import languages from '@/strings/languages.json'
@@ -200,6 +201,10 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     return sortedTags
 }
 
+export const replaceHTMLTags = (html: string) => {
+    let text = html.replace(/<\/?[^>]+>/ig, " ");
+    return he.decode(text);
+}
 
 export const ebookResToPost = (ebook: IEbook) => {
     const { id, authors, title, excerpt, image, slug, topics } = ebook
