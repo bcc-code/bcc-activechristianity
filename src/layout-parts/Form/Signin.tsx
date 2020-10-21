@@ -61,8 +61,8 @@ const SignInForm: React.FC = () => {
         }
     }
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
 
         if (validate()) {
             const { email, password, keepSignedIn } = fields
@@ -85,60 +85,73 @@ const SignInForm: React.FC = () => {
 
     return (
         <div
-            className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full px-4 py-6"
+            className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full px-4 py-6"
         >
+            <div className={`rounded  w-full bg-blue-500 text-white py-4 px-2 my-4 flex flex-col`}>
+                <h2 className="text-2xl pb-4">{ac_strings.message_to_existing_user_first_time_title}</h2>
+                <p className="text-sm leading-normal">{ac_strings.message_to_existing_user_first_time_main}</p>
+                <div className="flex justify-center">
+                    <button className="p-2 border border-white my-4">
+                        {ac_strings.message_to_existing_user_first_time_cta}
+                    </button>
+                </div>
+                <button className="text-white text-sm">{ac_strings.message_to_existing_user_ignore}</button>
+            </div>
             {authInfo.errorMessage && (
                 <Snackbar
                     text={authInfo.errorMessage}
                     error
                 />
             )}
-            <InputText
-                label={TS.email}
-                type='text'
-                value={fields.email}
-                onChange={(e) => {
-                    handleChange(e, 'email')
-                }}
-                error={errors.email ? 'Required' : undefined}
-            />
-            <InputText
-                label={TS.password}
-                type='password'
-                value={fields.password}
-                onChange={(e) => {
-                    handleChange(e, 'password')
-                }}
-                error={errors.password ? 'Required' : undefined}
-            />
-            <InputCheckbox
-                label={TS.remember_me}
-                onChange={(e) => {
-                    handleChange(e, 'keepSignedIn')
-                }}
-                value={fields.keepSignedIn}
-            />
+            <h2 className="text-2xl pb-4">{ac_strings.signin_options_email}</h2>
+            <form action="" onSubmit={handleSubmit}>
+                <InputText
+                    label={TS.email}
+                    type='text'
+                    value={fields.email}
+                    onChange={(e) => {
+                        handleChange(e, 'email')
+                    }}
+                    error={errors.email ? 'Required' : undefined}
+                />
+                <InputText
+                    label={TS.password}
+                    type='password'
+                    value={fields.password}
+                    onChange={(e) => {
+                        handleChange(e, 'password')
+                    }}
+                    error={errors.password ? 'Required' : undefined}
+                />
+                <InputCheckbox
+                    label={TS.remember_me}
+                    onChange={(e) => {
+                        handleChange(e, 'keepSignedIn')
+                    }}
+                    value={fields.keepSignedIn}
+                />
 
-            <FormSubmitButton
+                <FormSubmitButton
 
-                loading={authInfo.loggedIn === "loading"}
-                onClick={handleSubmit}
-            />
-            <div className="text-sm flex flex-col">
-                <button
-                    className="text-blue-500 font-semibold"
-                    onClick={handleSigninOpionts}
-                    onKeyDown={handleSigninOpionts}
-                >
-                    {ac_strings.allSigninOptions}
-                </button>
-                <button className="text-d4slate-light py-2"
-                    onClick={handleForgotPassword}
-                    onKeyDown={handleForgotPassword}
-                >
-                    {TS.forgot_password}
-                </button>
-            </div>
+                    loading={authInfo.loggedIn === "loading"}
+                    onClick={handleSubmit}
+                />
+                <div className="text-sm flex flex-col">
+                    <button
+                        className="text-blue-500 font-semibold"
+                        onClick={handleSigninOpionts}
+                        onKeyDown={handleSigninOpionts}
+                    >
+                        {ac_strings.allSigninOptions}
+                    </button>
+                    <button className="text-d4slate-light py-2"
+                        onClick={handleForgotPassword}
+                        onKeyDown={handleForgotPassword}
+                    >
+                        {TS.forgot_password}
+                    </button>
+                </div>
+            </form>
         </div>
 
     )

@@ -63,8 +63,8 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
                 </div>
             ) : (
                     <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
-                        <span className="whitespace-no-wrap p-2 text-center" onClick={handleSignIn}>{TS.login}</span>
-                        <span className="p-2 text-center" onClick={handleSignUp}>{TS.register}</span>
+                        <span className="whitespace-no-wrap p-2 text-center cursor-pointer hover:text-d4slate-dark" onClick={handleSignIn}>{TS.login}</span>
+                        <span className="p-2 text-center cursor-pointer bg-d4slate-dark rounded mb-1 text-white" onClick={handleSignUp}>{TS.register}</span>
                     </div>
 
                 )

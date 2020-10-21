@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.json'
-
+import TS from '@/strings'
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_options_title,
@@ -22,7 +22,7 @@ const formText = {
         "email": ac_strings.signin_options_email,
         "optionText": ac_strings.signin_options_option_text,
         "optionButton": ac_strings.signin_options_option_button,
-        "disclaimer": ac_strings.signin_options_disclaimer,
+        "disclaimer": TS.consent_register,
         "action": ac_strings.signin_options_action
     }
 }
@@ -63,7 +63,10 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
                     {text.email}
                 </button>
             </div>
-            <div className="text-sm">
+            <div className="text-sm text-gray-500 leading-normal">
+                {text.disclaimer}
+            </div>
+            <div className="text-sm py-4 ">
                 <span>{text.optionText}</span>
                 <button
                     className="text-blue-500 font-semibold"
@@ -73,9 +76,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
                     {text.optionButton}
                 </button>
             </div>
-            <div className="text-xs text-gray-400 py-4">
-                {text.disclaimer}
-            </div>
+
         </div>
     )
 }

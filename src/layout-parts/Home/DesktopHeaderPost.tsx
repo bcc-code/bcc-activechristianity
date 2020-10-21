@@ -19,20 +19,12 @@ const rbgToString = (colors: number[], alpha?: number) => {
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
     const bgGradientStyle = { 'backgroundImage': '' }
-    if (image) {
-        const darkMuted = image.colors && image.colors[0]
-        const vibrant = image.colors && image.colors[1]
-        const muted = image.colors && image.colors[2]
-        if (darkMuted && vibrant && muted) {
-            bgGradientStyle.backgroundImage = `linear-gradient(0, #fff 30%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%), linear-gradient(90deg, ${rbgToString(darkMuted, .5)}, ${rbgToString(vibrant, .5)} 50%, ${rbgToString(muted, .5)} 100%)`
-        }
-    }
+
 
     return (
         <div>
             <div
                 className="absolute inset-x-0 top-0 h-64 z-minus"
-                style={bgGradientStyle}
             >
             </div>
             <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">

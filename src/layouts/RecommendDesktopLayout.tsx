@@ -68,7 +68,8 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             />
             {listen && listen.playlist && (
                 <LazyLoad>
-                    <div className="px-4"><UnderlineTitleLink    {...listen.playlist} /></div>
+                    <div className="px-4">
+                        <UnderlineTitleLink    {...listen.playlist} /></div>
                     <FetchLatestPlaylists
                         layout="row"
                         render={({ playlists }) => {

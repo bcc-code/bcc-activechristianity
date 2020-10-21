@@ -10,6 +10,8 @@ import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
 import acApi from '@/util/api'
+
+
 const initialFieldsState = {
     email: '',
 }
@@ -75,6 +77,7 @@ const ForgotPasswordForm: React.FC = () => {
         <div
             className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full px-4 py-6"
         >
+            <h2>{ac_strings.message_to_existing_user_first_time_cta}</h2>
             {resError && (
                 <Snackbar
                     text={resError}

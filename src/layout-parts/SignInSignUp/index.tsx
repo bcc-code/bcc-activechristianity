@@ -5,9 +5,10 @@ import Modal from '@/components/Modal/ModalNotControlled'
 import Main from './Main'
 import SignUpForm from '@/layout-parts/Form/Signup'
 import SignInForm from '@/layout-parts/Form/Signin'
+/* import ForgotPassword from '@/layout-parts/Form/ForgotPassword' */
 import ForgotPassword from '@/layout-parts/Form/ForgotPassword'
 import { IRootState } from '@/state/types'
-
+import TS from '@/strings'
 const SigninSignUpModal: React.FC = () => {
     const dispatch = useDispatch();
 
@@ -42,7 +43,15 @@ const SigninSignUpModal: React.FC = () => {
     return (
         <Modal
             isOpen={isSignInModalOpen !== null}
-            content={showingContent}
+            content={(
+                <div>
+                    {showingContent}
+                    <div className="flex justify-center">
+                        <button className="p-4">{TS.consent_privacy_policy}</button>
+                        <div className="p-4">Terms of use</div>
+                    </div>
+                </div>
+            )}
             closeModal={handleClose}
         />
     )

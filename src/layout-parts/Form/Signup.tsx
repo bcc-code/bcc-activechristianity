@@ -5,7 +5,6 @@ import { initiateRegister } from '@/state/action/authAction'
 import { openSignInModal } from '@/state/action'
 import { InputText, InputCheckbox } from '@/components/Input'
 import TS from '@/strings'
-
 import ac_strings from '@/strings/ac_strings.json'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
@@ -79,7 +78,8 @@ const SignUpForm = () => {
         return pass
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
         if (validate()) {
 
             const { username, email, password, keepSignedIn } = fields
@@ -132,65 +132,64 @@ const SignUpForm = () => {
                 />
             )}
 
+            <form action="" onSubmit={handleSubmit}>
 
-            <InputText
-                label={TS.email}
-                value={fields["email"]}
-                onChange={(e) => {
-                    handleChange(e, 'email')
-                }}
-                error={errors.email}
-            />
-            <InputText
-                label={TS.password}
-                type="password"
-                value={fields.password}
-                onChange={(e) => {
-                    handleChange(e, 'password')
-                }}
-                error={errors.password}
-            />
+                <InputText
+                    label={TS.email}
+                    value={fields["email"]}
+                    onChange={(e) => {
+                        handleChange(e, 'email')
+                    }}
+                    error={errors.email}
+                />
+                <InputText
+                    label={TS.password}
+                    type="password"
+                    value={fields.password}
+                    onChange={(e) => {
+                        handleChange(e, 'password')
+                    }}
+                    error={errors.password}
+                />
 
-            <InputText
-                label={TS.confirm_password}
-                type="password"
-                value={fields.confirm}
-                onChange={(e) => {
-                    handleChange(e, 'confirm')
-                }}
-                error={errors.confirm}
-            />
+                <InputText
+                    label={TS.confirm_password}
+                    type="password"
+                    value={fields.confirm}
+                    onChange={(e) => {
+                        handleChange(e, 'confirm')
+                    }}
+                    error={errors.confirm}
+                />
 
-            <InputCheckbox
-                label={TS.remember_me}
-                onChange={(e) => {
-                    handleChange(e, 'keepSignedIn')
-                }}
-                value={fields.keepSignedIn}
-                error={errors.keepSignedIn}
-            />
+                <InputCheckbox
+                    label={TS.remember_me}
+                    onChange={(e) => {
+                        handleChange(e, 'keepSignedIn')
+                    }}
+                    value={fields.keepSignedIn}
+                    error={errors.keepSignedIn}
+                />
 
-            <InputCheckbox
-                label={TS.consent_contact}
-                onChange={(e) => {
-                    handleChange(e, 'consent')
-                }}
-                value={fields.consent}
-                error={errors.consent}
-            />
+                <InputCheckbox
+                    label={TS.consent_contact}
+                    onChange={(e) => {
+                        handleChange(e, 'consent')
+                    }}
+                    value={fields.consent}
+                    error={errors.consent}
+                />
 
-            <div className="flex flex-col justify-center w-full text-sm sm:text-base">
-                <div className="flex justify-center py-4">
-                    <a className='underline text-d4secondary' href={`/${ac_strings.slug_privacy_policy}` || "/"} target="_blank">{TS.consent_read_policy}</a>
+                <div className="flex flex-col justify-center w-full text-sm sm:text-base">
+                    <div className="flex justify-center">
+                        <FormSubmitButton
+                            disabled={!fields.consent || authInfo.loggedIn === "loading"}
+                            loading={authInfo.loggedIn === "loading"}
+                            onClick={handleSubmit}
+                        />
+                    </div>
                 </div>
-                <div className="flex justify-center">
-                    <FormSubmitButton
-                        disabled={!fields.consent || authInfo.loggedIn === "loading"}
-                        loading={authInfo.loggedIn === "loading"}
-                        onClick={handleSubmit}
-                    />
-                </div>
-            </div>
+            </form>
             <div className="text-sm">
                 <span
                     className="text-blue-500 font-semibold"

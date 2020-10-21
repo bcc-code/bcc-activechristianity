@@ -24,7 +24,7 @@ const SideMobile: React.FC<{
                 back={() => setOpenChangePassword(false)}
             /> */}
             <div className="mx-auto flex-1 flex flex-col font-roboto items-center justify-center font-semibold">
-                <UserInitial />
+                {/*  <UserInitial /> */}
                 <div>
                     <div><label htmlFor="">{TS.username}</label><input type="text" name="" id="" /></div>
                     <div><label htmlFor="">{TS.email}</label><input type="text" name="" id="" /></div>

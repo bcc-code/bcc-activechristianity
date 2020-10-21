@@ -7,7 +7,7 @@ import LogoSmall from '@/images/AC_Logo_sm.png'
 import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
 import ReactPlaceholder from 'react-placeholder'
-import { UserInitial } from '@/layout-parts/User/UserInitial'
+
 import ac_strings from '@/strings/ac_strings.json'
 import { IDrawerNav } from '@/layouts/App'
 import { INavItem, IBreadcrumb } from '@/types'
