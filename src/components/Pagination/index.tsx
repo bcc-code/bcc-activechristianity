@@ -10,6 +10,14 @@ const StaticPagination: React.FC<IProps> = (props) => {
     const hasPrevPage = currentPage - 1 > 0;
     const hasNextPage = currentPage + 1 <= totalPages;
 
+    const getPaginationStart = () => {
+        let start = 0
+        if (currentPage > 4) {
+            start = totalPages - currentPage > 2 ? currentPage - 3 : currentPage - 5
+        }
+        return start
+    }
+    const paginationStart = getPaginationStart()
     if (totalPages > 1) {
         const pageArray = [...Array(totalPages).keys()]
         return (
@@ -23,23 +31,25 @@ const StaticPagination: React.FC<IProps> = (props) => {
                             &laquo;
                         </button>
                     )}
+
                     {
-                        pageArray.slice(0, 5).map((item, i) => {
+                        pageArray.slice(paginationStart, paginationStart + 5).map((item, i) => {
+                            const index = paginationStart + i
                             return (
                                 <button
-                                    onClick={() => onChange(i + 1)}
-                                    className={`${i === currentPage - 1 ? 'bg-gray-100 font-bold' : ''} w-16 h-16 `}
+                                    onClick={() => onChange(index + 1)}
+                                    className={`${index === currentPage - 1 ? 'bg-gray-100 font-bold' : ''} w-16 h-16 `}
 
                                 >
-                                    {i + 1}
+                                    {index + 1}
                                 </button>
                             )
                         })
                     }
-                    {pageArray.length > 5 && (
+                    {pageArray.length > 5 && totalPages - currentPage > 2 && (
                         <button disabled className="w-16 h-16">...</button>
                     )}
-                    {pageArray.length > 5 && (
+                    {pageArray.length > 5 && totalPages - currentPage > 2 && (
                         <button
                             onClick={() => onChange(pageArray.length)}
                             className={`${pageArray.length === currentPage ? 'bg-gray-100 font-bold' : ''} w-16 h-16 `}

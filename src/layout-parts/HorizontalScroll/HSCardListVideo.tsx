@@ -9,7 +9,7 @@ const HSCardList: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
             <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4">
                 {posts.slice(0, 4).map((post, i) => {
                     return (
-                        <div className={`div${i + 1}`} key={post.slug}>
+                        <div key={post.slug}>
                             < VideoTopImg {...post} />
                         </div>
                     )
