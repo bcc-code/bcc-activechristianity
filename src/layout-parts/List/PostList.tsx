@@ -1,9 +1,10 @@
 import React from 'react'
 import { navigate } from "gatsby"
 import { IPaginate, IPostItem } from "@/types"
-
+import Icons from '@/components/Icons/Icon'
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
+import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { trimSlug } from '@/helpers'
@@ -16,7 +17,7 @@ export interface IPostList {
 const PostList: React.FC<IPostList> = (props) => {
 
     const { paginate, posts } = props
-
+    const [pageInput, setPageInput] = React.useState(paginate ? paginate.currentPage : 1)
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
             window.scroll({
@@ -27,8 +28,39 @@ const PostList: React.FC<IPostList> = (props) => {
         }
     }
 
+    const handleChange = (activePage: number) => {
+        if (paginate) {
+            const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
+            const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
+            scrollToTop()
+            navigate(fullPath)
+        }
+    }
+
+    const handleInputChange = (e: any) => {
+        e.preventDefault();
+        console.log(e.target)
+        setPageInput(e.target.value)
+    }
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        handleChange(pageInput)
+    }
+
     return (
         <div className="max-w-sm" >
+            {paginate && (
+                <div className="hidden sm:flex justify-end">
+                    <div>
+                        <InputLeftRight
+                            currentPage={paginate.currentPage}
+                            totalPages={paginate.totalPages}
+                            onChange={handleChange}
+                        />
+                    </div>
+                </div>
+            )}
             <FetchPostsFromSlugs
 
                 slugs={posts}
@@ -53,12 +85,7 @@ const PostList: React.FC<IPostList> = (props) => {
                     <Pagination
                         currentPage={paginate.currentPage}
                         totalPages={paginate.totalPages}
-                        onChange={(activePage: number) => {
-                            const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
-                            const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
-                            scrollToTop()
-                            navigate(fullPath)
-                        }}
+                        onChange={handleChange}
                     />
                 </div>
             )}

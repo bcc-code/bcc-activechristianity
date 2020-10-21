@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Icons from '@/components/Icons/Icon'
+import PaginationShort from './InputLeftRight'
 interface IProps {
     currentPage: number;
     totalPages: number;
@@ -21,24 +22,35 @@ const StaticPagination: React.FC<IProps> = (props) => {
     if (totalPages > 1) {
         const pageArray = [...Array(totalPages).keys()]
         return (
-            <div className="w-full sm:flex justify-center">
+            <div className="w-full sm:flex justify-center text-gray-500 font-roboto">
                 <div className="hidden sm:block">
                     {currentPage !== 1 && (
-                        <button
-                            className="p-4"
-                            onClick={() => onChange(1)}
+                        <button className="bg-d4slate-lighter rounded  p-2 mr-2"
+                            onClick={() => onChange(currentPage - 1)}
+                            onKeyDown={() => onChange(currentPage - 1)}
                         >
-                            &laquo;
+                            <Icons name="KeyboardArrowLeft" />
                         </button>
                     )}
+                    {paginationStart > 5 && (
+                        <button
+                            onClick={() => onChange(1)}
+                            className={`${pageArray.length === currentPage ? 'bg-gray-100 font-bold' : ''} w-16 h-16 `}
 
+                        >
+                            {1}
+                        </button>
+                    )}
+                    {paginationStart > 5 && (
+                        <button disabled className="h-16">...</button>
+                    )}
                     {
                         pageArray.slice(paginationStart, paginationStart + 5).map((item, i) => {
                             const index = paginationStart + i
                             return (
                                 <button
                                     onClick={() => onChange(index + 1)}
-                                    className={`${index === currentPage - 1 ? 'bg-gray-100 font-bold' : ''} w-16 h-16 `}
+                                    className={`${index === currentPage - 1 ? 'bg-d4slate-dark font-bold text-white rounded' : ''} w-12 h-12 `}
 
                                 >
                                     {index + 1}
@@ -47,7 +59,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
                         })
                     }
                     {pageArray.length > 5 && totalPages - currentPage > 2 && (
-                        <button disabled className="w-16 h-16">...</button>
+                        <button disabled className="h-16">...</button>
                     )}
                     {pageArray.length > 5 && totalPages - currentPage > 2 && (
                         <button
@@ -59,19 +71,16 @@ const StaticPagination: React.FC<IProps> = (props) => {
                         </button>
                     )}
                     {currentPage !== totalPages && (
-                        <button
-                            className="p-4"
-                            onClick={() => onChange(totalPages - 1)}
+                        <button className="bg-d4slate-lighter rounded  p-2"
+                            onChange={() => onChange(currentPage + 1)}
+                            onKeyDown={() => onChange(currentPage + 1)}
                         >
-                            &raquo;
+                            <Icons name="KeyboardArrowRight" />
                         </button>
                     )}
                 </div>
-                <div className='sm:hidden flex justify-center items-center'>
-                    <span className='w-8 h-8 flex justify-center items-center'>{hasPrevPage ? <button onClick={() => onChange(currentPage - 1)}>&laquo;</button> : null}</span>
-                    <span className='flex justify-center items-center'> {currentPage} of {totalPages} </span>
-                    <span className='w-8 h-8 flex justify-center items-center'>{hasNextPage ? <button onClick={() => onChange(currentPage + 1)}>&raquo;</button> : null}
-                    </span>
+                <div className='sm:hidden flex justify-center items-center '>
+                    <PaginationShort {...props} />
                 </div>
             </div>
         )

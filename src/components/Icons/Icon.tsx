@@ -33,6 +33,9 @@ import LocalOffer from '@material-ui/icons/LocalOffer'
 import VolumeUp from '@material-ui/icons/VolumeUp'
 import MoreVert from '@material-ui/icons/MoreVert'
 import Folder from '@material-ui/icons/Folder'
+import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt'
+import FirstPage from '@material-ui/icons/FirstPage'
+import LastPage from '@material-ui/icons/LastPage'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -67,8 +70,11 @@ type IMUIIConName = "Home" |
     "Publish" |
     "LocalOffer" |
     "VolumeUp" |
-    "MoreVert"
-"Folder"
+    "MoreVert" |
+    "Folder" |
+    "ArrowRightAlt" |
+    "FirstPage" |
+    "LastPage"
 
     ;
 
@@ -106,7 +112,10 @@ const Icons = {
     LocalOffer,
     VolumeUp,
     MoreVert,
-    Folder
+    Folder,
+    ArrowRightAlt,
+    FirstPage,
+    LastPage
 }
 import * as React from 'react';
 
