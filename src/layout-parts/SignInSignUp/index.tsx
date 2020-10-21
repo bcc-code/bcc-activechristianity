@@ -9,6 +9,8 @@ import SignInForm from '@/layout-parts/Form/Signin'
 import ForgotPassword from '@/layout-parts/Form/ForgotPassword'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings.json'
+import Link from '@/components/CustomLink'
 const SigninSignUpModal: React.FC = () => {
     const dispatch = useDispatch();
 
@@ -46,9 +48,17 @@ const SigninSignUpModal: React.FC = () => {
             content={(
                 <div>
                     {showingContent}
-                    <div className="flex justify-center">
-                        <button className="p-4">{TS.consent_privacy_policy}</button>
-                        <div className="p-4">Terms of use</div>
+                    <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
+                        <div className="pb-4">
+                            <span className="h-full font-semibold">Read {TS.consent_privacy_policy}: </span><a href={ac_strings.slug_privacy_policy}>click here</a>
+                        </div>
+                        <div className="pb-4">
+                            <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span>
+                            <span className="leading-normal font-normal font-sans pt-6" >
+                                {TS.copyright}
+                            </span>
+                        </div>
+
                     </div>
                 </div>
             )}

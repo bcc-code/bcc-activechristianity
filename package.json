@@ -11,6 +11,7 @@
     "@popperjs/core": "^2.5.2",
     "@types/algoliasearch": "^3.34.10",
     "@types/he": "^1.1.1",
+    "@types/js-cookie": "^2.2.6",
     "@types/loadable__component": "^5.10.0",
     "@types/react-helmet": "^5.0.16",
     "@types/react-instantsearch-dom": "^5.2.6",

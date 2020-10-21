@@ -88,14 +88,19 @@ const SignInForm: React.FC = () => {
             className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full px-4 py-6"
         >
             <div className={`rounded  w-full bg-blue-500 text-white py-4 px-2 my-4 flex flex-col`}>
-                <h2 className="text-2xl pb-4">{ac_strings.message_to_existing_user_first_time_title}</h2>
+                <h2 className="text-lg sm:text-2xl pb-4">{ac_strings.message_to_existing_user_first_time_title}</h2>
                 <p className="text-sm leading-normal">{ac_strings.message_to_existing_user_first_time_main}</p>
-                <div className="flex justify-center">
-                    <button className="p-2 border border-white my-4">
+                <div className="flex justify-center text-xs">
+                    <button
+                        className="p-2 border border-white my-4"
+                        onClick={handleForgotPassword}
+                        onKeyDown={handleForgotPassword}
+
+                    >
                         {ac_strings.message_to_existing_user_first_time_cta}
                     </button>
                 </div>
-                <button className="text-white text-sm">{ac_strings.message_to_existing_user_ignore}</button>
+                <button className="text-white text-xs">{ac_strings.message_to_existing_user_ignore}</button>
             </div>
             {authInfo.errorMessage && (
                 <Snackbar
@@ -104,7 +109,7 @@ const SignInForm: React.FC = () => {
                 />
             )}
             <h2 className="text-2xl pb-4">{ac_strings.signin_options_email}</h2>
-            <form action="" onSubmit={handleSubmit}>
+            <form action="" className="w-full" onSubmit={handleSubmit}>
                 <InputText
                     label={TS.email}
                     type='text'

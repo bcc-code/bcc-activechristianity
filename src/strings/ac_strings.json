@@ -111,6 +111,7 @@
     "message_to_existing_user_first_time_cta":"Reset password",
     "message_to_existing_user_ignore":"Don’t show this message again",
     "message_to_existing_user_reset_password":"Welcome to the latest version of ActiveChristianity, where you as a member can follow topics, bookmark resources, download wallpapers and much more!",
-    "message_to_existing_user_reset_password_2":"Before you continue, we ask that you take some time to review our Terms of Use and Privacy Policy"
+    "message_to_existing_user_reset_password_2":"Before you continue, we ask that you take some time to review our Terms of Use and Privacy Policy",
+    "terms_of_use":"Terms of use"
 
 }

@@ -132,8 +132,8 @@ const SignUpForm = () => {
                 />
             )}
 
-            <form action="" onSubmit={handleSubmit}>
-
+            <form action="" className="w-full" onSubmit={handleSubmit}>
+                <h2 className="text-2xl pb-4">{ac_strings.signup_options_email}</h2>
                 <InputText
                     label={TS.email}
                     value={fields["email"]}

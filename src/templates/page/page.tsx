@@ -9,11 +9,6 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
     const { title, slug, flexibleContent } = pageContext
     const customLayout: IPageCompTypes[] = JSON.parse(flexibleContent)
 
-    const comProps = {
-        slug: slug,
-        title,
-        pageContent: customLayout
-    }
     //CustomizedLayoutProps
     return (
         <div>

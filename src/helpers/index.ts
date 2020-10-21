@@ -111,14 +111,13 @@ export const normalizeAuthors = (authors: IAuthorRes[]) => {
 }
 
 export const normalizeTracks = (tracks: ITrackRes[]) => {
-
+    console.log(tracks)
     const toReturn = tracks.map(track => {
 
         const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
         const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
-
+        console.log(track)
         const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
-
         const toAdd: IMedia = (
             {
                 path: track.post.slug,
