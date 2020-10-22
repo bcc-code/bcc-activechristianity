@@ -22,7 +22,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, close, back, title, 
                     </button>
                 )}
                 {title && <div className="flex justify-center w-full font-roboto font-semibold">{title}</div>}
-                {close && <div className="absolute right-0 top-0 p-3" onClick={close} onKeyDown={close}>
+                {close && <div className=" cursor-pointer absolute right-0 top-0 p-3" onClick={close} onKeyDown={close}>
                     <Icon name="Close" size="6" color="slate-light" />
                 </div>}
             </div>

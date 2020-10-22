@@ -1,7 +1,7 @@
 
 import { Middleware } from 'redux'
 
-import { setUser, setLogInError, setRegisterError, setLogout, } from '@/state/action/authAction'
+import { setUser, setLogInError, setRegisterError, setLogout } from '@/state/action/authAction'
 import { closeSignInModal, openSignInModal } from '@/state/action'
 import { getUserLibrary } from '@/state/action/userAction'
 import { IRootState } from '@/state/types'
@@ -77,14 +77,14 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             const { email: register_email, password: register_password, consent: register_consent, receiveEmail: register_receive_email } = action.payload
             /* const reguster_data = { register_fullname, register_email, register_password, register_remember } */
             acApi
-                .register(register_email, register_password, true)
+                .register(register_email, register_password, false)
                 .then((UserRes: any) => {
                     if (UserRes && UserRes.signUp && UserRes.signUp.user) {
                         store.dispatch(setUser(UserRes.signUp.user))
                         if (UserRes.signUp.user.meta && UserRes.signUp.user.meta.consented) {
                             store.dispatch(closeSignInModal())
                         } else {
-                            store.dispatch(openSignInModal("giveConsent"))
+                            store.dispatch(openSignInModal("signInForm"))
                         }
 
                     } else {

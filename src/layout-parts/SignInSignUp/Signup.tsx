@@ -170,13 +170,13 @@ const SignUpForm = () => {
                     }}
                     error={errors.confirm}
                 />
-                <InputCheckbox
+                {/*                 <InputCheckbox
                     label={TS.remember_me}
                     onChange={(e) => {
                         handleChange(e, 'keepSignedIn')
                     }}
                     value={fields.keepSignedIn}
-                />
+                /> */}
                 {/*                 <InputCheckbox
                     label={ac_strings.consent_signup_email_checkbox_first}
                     onChange={(e) => {
