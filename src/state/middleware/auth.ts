@@ -30,7 +30,6 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
             return Promise.all(request).then(res => {
                 return acApi.profile().then(userRes => {
-                    console.log(userRes)
                     if (userRes && userRes.meta && userRes.meta.consented) {
                         store.dispatch(setUser(userRes))
                         store.dispatch(getUserLibrary())
@@ -80,7 +79,6 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             acApi
                 .register(register_email, register_password, true)
                 .then((UserRes: any) => {
-                    console.log(UserRes)
                     if (UserRes && UserRes.signUp && UserRes.signUp.user) {
                         store.dispatch(setUser(UserRes.signUp.user))
                         if (UserRes.signUp.user.meta && UserRes.signUp.user.meta.consented) {
