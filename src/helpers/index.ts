@@ -118,7 +118,6 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
         const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
 
         const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
-
         const toAdd: IMedia = (
             {
                 path: track.post.slug,
@@ -254,7 +253,7 @@ export const playlistToPost = (playlist: IPlaylist): IPostItem => {
 export const getRandomArray = (pickFromArray: any[], length: number) => {
     if (pickFromArray.length > 0) {
         const returnArrayLength = length > pickFromArray.length ? pickFromArray.length : length
-        console.log(returnArrayLength)
+
         let randName = [];
         let processArray = [...pickFromArray]
         do {
@@ -262,7 +261,7 @@ export const getRandomArray = (pickFromArray: any[], length: number) => {
                 Math.floor(Math.random() * processArray.length)
                 , 1)[0];
         } while (randName.length < returnArrayLength);
-        console.log(randName)
+
         return randName
     } else {
         return []

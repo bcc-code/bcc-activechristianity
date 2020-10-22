@@ -44,6 +44,7 @@ interface IPostProps extends IPostItem {
     langs: ITranslations[]
     recommendPosts: string[]
     readMorePosts: string[]
+    credits?: string
 }
 type IMediaType = "audio" | "video"
 export const PostLayout: React.FC<IPostProps> = (post) => {
@@ -67,7 +68,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         likes,
         duration,
         media,
-
+        credits
     } = post
 
     const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
@@ -137,9 +138,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 slug={slug}
                 title={title}
             />
-            <div>
-                {}
-            </div>
+            {credits && (
+                <Content
+                    content={credits}
+                    slug={slug}
+                    title={title}
+                />
+            )}
             <div className="flex flex-wrap border-d4gray py-6">
                 {topics && topics?.map(item => (
                     <ToggleFollowWithName {...item} />
@@ -156,12 +161,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 />
             </div>
-            <LazyLoad>
+
+            <div className="pt-6">
                 <RecommendedPostsSection
                     postId={id}
                     readMorePosts={readMorePosts}
                 />
-            </LazyLoad>
+            </div>
             {authors?.map(item => {
                 return (
 

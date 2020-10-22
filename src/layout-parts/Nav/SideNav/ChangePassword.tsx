@@ -3,7 +3,6 @@ import ac_strings from '@/strings/ac_strings.json'
 import SideNavWrapper from './SideNavWrapper'
 import Icon from '@/components/Icons/Icon'
 import TS from '@/strings'
-import UserInitial from '@/layout-parts/User/UserInitial'
 import { INavItem } from '@/types'
 const SideMobile: React.FC<{
     isSideNavOpen: boolean

@@ -39,7 +39,6 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                     const node = obj as HTMLNode
 
                     if (node.name === "script") {
-                        console.log(node)
                         return null
                     }
 

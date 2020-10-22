@@ -47,7 +47,7 @@ const SideMobile: React.FC<{
                 isSideNavOpen={openEditAcc}
             />}
             <div className="w-full justify-center items-center flex flex-col px-4 py-8">
-                <UserInitial />
+                {/* <UserInitial /> */}
                 {/*               <button onClick={() => setOpenEditProfile(true)}
                     className="border border-d4slate-light text-d4slate-light text-sm rounded-full px-2 py-1 ">
                     {ac_strings.edit_profile}

@@ -100,6 +100,7 @@ export interface IPostItem {
     glossary?: IGlossary[]
     likes?: number
     views?: string
+
 }
 
 export interface IPaginate {
@@ -279,7 +280,9 @@ export interface IPostRes {
     content: string
     readtime: number
     meta: {
+        no_dict: boolean
         url: string
+        credits: string
     }
     track: ITrackRes
     authors: IAuthorRes[]
@@ -292,14 +295,21 @@ export interface IPostRes {
     readMorePosts: string[]
     likes: number
     views: number
+    seo: {
+        desc: string
+        title: string
+    }
+
 }
 
 export interface IUser {
     id: string
-    name: string
     email: string
-    created_at: string
-    updated_at: string
+    consent: boolean
+    meta: {
+        consented?: boolean
+        notify?: boolean
+    }
 }
 
 export interface IPaginatorInfo {

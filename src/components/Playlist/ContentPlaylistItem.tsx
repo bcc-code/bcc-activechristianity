@@ -25,7 +25,6 @@ const PostAudio: React.FC<IPlaylist> = ({
             audioToAdd.audio.playlistSlug = slug
         }
 
-
         dispatch(setAutoPlay(true))
         dispatch(setCurrentMedia(audioToAdd))
         dispatch(togglePlayMedia())

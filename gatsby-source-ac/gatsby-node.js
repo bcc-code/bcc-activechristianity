@@ -41,6 +41,7 @@ const getPostsQuery = (pageNr)=>`
                   }
                 meta {
                 credits
+                no_dict
                 url
                 }
                 track {
@@ -180,10 +181,10 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
           
         const {count,total}=firstQueryRes.data.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-        bar1.start(pageCount, 0);
+   
         for (let i = 1; i <=pageCount; i++){
             console.log(i)
-            bar1.update(i);
+            
             const response = await sendQuery(getPostsQuery(i))
 
                 if (Array.isArray(response) && response[0]){
@@ -197,7 +198,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     entities=entities.concat(posts)
                 }
         }
-        bar1.stop();
+        
 
             const words = {}
             const glossaryQuery = `{

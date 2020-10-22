@@ -10,6 +10,8 @@ import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
 import acApi from '@/util/api'
+
+
 const initialFieldsState = {
     email: '',
 }
@@ -60,9 +62,9 @@ const ForgotPasswordForm: React.FC = () => {
             acApi.forgotPassword(email).then(res => {
                 setLoading(false)
                 if (res.forgotPassword) {
-                    setInfo(res.forgotPassword.message)
+                    setInfo(ac_strings.message_after_reset_password)
                 } else {
-                    setResError('Not about to send email')
+                    setResError('Something went wrong')
                 }
             }).catch(error => {
                 setResError(error.message)
@@ -73,33 +75,39 @@ const ForgotPasswordForm: React.FC = () => {
 
     return (
         <div
-            className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full px-4 py-6"
+            className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full "
         >
-            {resError && (
-                <Snackbar
-                    text={resError}
-                    error
+            <div className="flex flex-col justify-center bg-d4primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+                <h5 className="font-semibold pb-2">{ac_strings.message_to_existing_user_first_time_cta}</h5>
+            </div>
+            <div className="px-4 py-6">
+                {resError && (
+                    <Snackbar
+                        text={resError}
+                        error
+                    />
+                )}
+                {info && (
+                    <Snackbar
+                        text={info}
+                    />
+                )}
+                <InputText
+                    label={TS.email}
+                    type='text'
+                    value={fields.email}
+                    onChange={(e) => {
+                        handleChange(e, 'email')
+                    }}
+                    error={errors.email ? 'Required' : undefined}
                 />
-            )}
-            {info && (
-                <Snackbar
-                    text={info}
-                />
-            )}
-            <InputText
-                label={TS.email}
-                type='text'
-                value={fields.email}
-                onChange={(e) => {
-                    handleChange(e, 'email')
-                }}
-                error={errors.email ? 'Required' : undefined}
-            />
 
-            <FormSubmitButton
-                loading={loading}
-                onClick={handleSubmit}
-            />
+                <FormSubmitButton
+                    loading={loading}
+                    onClick={handleSubmit}
+                />
+            </div>
+
         </div>
 
     )

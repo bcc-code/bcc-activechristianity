@@ -53,7 +53,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
             >
                 {ac_strings.title_user}
             </Link>
-            <span className="py-2 text-center" onClick={handleLogout}>{TS.logout}</span>
+            <span className="py-2 text-center hover:text-d4slate-light hover:font-bold " onClick={handleLogout}>{TS.logout}</span>
 
         </div>
     ) : (
@@ -63,8 +63,8 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
                 </div>
             ) : (
                     <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
-                        <span className="whitespace-no-wrap p-2 text-center" onClick={handleSignIn}>{TS.login}</span>
-                        <span className="p-2 text-center" onClick={handleSignUp}>{TS.register}</span>
+                        <span className="whitespace-no-wrap p-2 text-center cursor-pointer hover:text-d4slate-light hover:font-bold " onClick={handleSignIn}>{TS.login}</span>
+                        <span className="p-2 text-center cursor-pointer bg-d4slate-dark rounded mb-1 text-white hover:text-d4slate-light hover:font-bold " onClick={handleSignUp}>{TS.register}</span>
                     </div>
 
                 )

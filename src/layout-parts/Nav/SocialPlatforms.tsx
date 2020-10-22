@@ -1,6 +1,13 @@
 import React from 'react'
-import { Link, StaticQuery, graphql } from "gatsby";
-import { FacebookIcon, InstagramIcon, YoutubeIcon } from '@/components/Icons/SocialMedia'
+import { Link } from "gatsby";
+
+import FetchSocialMediaPlatforms from '@/HOC/FetchSocialMediaPlatforms'
+
+interface ISMPlatform {
+    name: string
+    url: string
+    icon: JSX.Element
+}
 
 const ColLink: React.FC<{ icon: JSX.Element, name: string, url: string }> = ({ icon, name, url }) => {
 
@@ -20,30 +27,12 @@ const SocialPlatforms: React.FC<{ col?: boolean }> = ({ col }) => {
 
 
     return (
-        <StaticQuery
-            query={query}
-            render={(data: IFooterData) => {
-                const { social_facebook, social_instagram, social_youtube } = data.acNodeSetting
-                const colLinks = [
-                    {
-                        url: social_facebook,
-                        icon: <FacebookIcon />,
-                        name: 'Facebook'
-                    },
-                    {
-                        url: social_instagram,
-                        icon: <InstagramIcon />,
-                        name: 'Instagram'
-                    },
-                    {
-                        url: social_youtube,
-                        icon: <YoutubeIcon />,
-                        name: 'Youtube'
-                    }
-                ]
+        <FetchSocialMediaPlatforms
+
+            render={({ platforms }) => {
                 return !col ? (
                     <div className="flex justify-around w-full items-center">
-                        {colLinks.map((item, i) => {
+                        {platforms.map((item, i) => {
                             return (
                                 <Link to={item.url} key={i}>
                                     {item.icon}
@@ -53,7 +42,7 @@ const SocialPlatforms: React.FC<{ col?: boolean }> = ({ col }) => {
                     </div>
                 ) : (
                         <div className="flex flex-col mt-8">
-                            {colLinks.map((item, i) => {
+                            {platforms.map((item, i) => {
                                 return (
                                     <ColLink
                                         {...item}
@@ -65,29 +54,13 @@ const SocialPlatforms: React.FC<{ col?: boolean }> = ({ col }) => {
                         </div>
 
                     )
-            }} />
+            }}
+
+        />
+
+
 
     )
 }
 
 export default SocialPlatforms
-
-const query = graphql`
-    query GetSocialSimple{
-        acNodeSetting {
-            social_facebook
-            social_instagram
-            social_youtube
-            
-        }
-    }
-`
-
-interface IFooterData {
-    acNodeSetting: {
-        social_facebook: string
-        social_instagram: string
-        social_youtube: string
-    }
-
-}

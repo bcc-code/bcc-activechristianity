@@ -22,15 +22,37 @@ const sendQuery = (query: string) => {
 export default {
     login: (username: string, password: string, remember: boolean) => {
         const query = request.loginMutation(username, password, remember)
+
         return sendQuery(query)
     },
     register: (email: string, password: string, remember: boolean) => {
         const query = request.registerMutation(email, password, remember)
+
         return sendQuery(query)
     },
     forgotPassword: (email: string) => {
         const query = request.forgotPasswordMutation(email)
         return sendQuery(query)
+    },
+    giveConsent: () => {
+        const query = request.giveConsent
+
+        return sendQuery(query).then(res => {
+
+            return res
+        })
+    },
+    toggleNotify: (agree: boolean) => {
+        const query = request.toggleNotify(agree)
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
+    toggleNotifyAndGiveConsent: (agree: boolean) => {
+        const query = request.toggleNotifyAndGiveConsent(agree)
+        return sendQuery(query).then(res => {
+            return res
+        })
     },
     profile: () => {
         const query = request.profileQuery

@@ -21,12 +21,12 @@ const Modal: React.FC<IModal> = ({ content: Component, contentLabel, trigger }) 
 
     const toggleModal = () => {
         setIsOpen(!isOpen)
-        dispatch(setIsModalOpen(!isOpen))
+        /* dispatch(setIsModalOpen(!isOpen)) */
     }
 
     const closeModal = () => {
         setIsOpen(false)
-        dispatch(setIsModalOpen(false))
+        /*  dispatch(setIsModalOpen(false)) */
     }
     const customStyles = {
         overlay: {

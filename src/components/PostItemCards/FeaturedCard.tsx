@@ -16,15 +16,13 @@ export interface IFeaturedCard extends IPostItem {
     type?: "podcast" | "playlist" | "ebook"
 }
 
-const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes, image, className, slug, media, showOnMobile }) => {
+const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes, image, className, slug, showOnMobile }) => {
     let bgStyle: any = {
         backgroundImage: image ? `url(${image.src})` : '',
         backgrond: `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%)`
     }
     let postSlug = slug
-    if (type === "playlist") {
-        postSlug = `${ac_strings.slug_playlist}/${slug}`
-    }
+
     if (type === "podcast" || type === "playlist" || type === "ebook") {
         bgStyle = {
             ...bgStyle,
@@ -34,8 +32,6 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
             right: '-10px',
             top: '-10px',
             bottom: '-10px'
-
-            /*             backgroundSize: '120% 120%' */
         }
     }
 
@@ -49,7 +45,7 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
             <div className=" absolute left-0 top-0 bottom-0 right-0 rounded-lg" style={{ background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%)' }}></div>
             <div className="flex flex-col rounded-lg h-full relative">
 
-                <Link to={slug} className="w-full flex items-center justify-center flex-1 p-2 md:p-4 z-50" >
+                <Link to={postSlug} className="w-full flex items-center justify-center flex-1 p-2 md:p-4 z-50" >
                     {(type === "podcast" || type === "playlist") && (
                         <div className="relative w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32">
                             <div id="play-button" className="absolute p-2 text-white z-10 inset-0 flex justify-center items-center">
@@ -64,15 +60,16 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                         )
                     }
                 </Link>
-                <Link to={slug} className="flex flex-col">
+                <Link to={postSlug} className="flex flex-col">
                     <div className="flex flex-col justify-center sm:justify-end z-30 h-12 sm:h-15 md:h-18">
                         {type == "playlist" && <span className="text-xs text-white text-center py-2" >{ac_strings.playlist} </span>}
                         <PostTitle
                             rawText={title}
                             bold={"font-semibold"}
-                            fontKey={showOnMobile ? "feature-card-full" : "feature-card"}
-                            clamp={2}
-                            className="text-center"
+                            fontKey={'text-lg'}
+                            clamp={3}
+                            className="text-center leading-tight"
+
                         />
                     </div>
                     <div className={`${showOnMobile ? 'block' : 'hidden sm:block'} z-30 w-full border-b border-gray-500 my-2 md:my-4`} />

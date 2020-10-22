@@ -22,7 +22,10 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
     const [openUserMenu, setOpenUserMenu] = React.useState(false)
     const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
 
-    const close = () => setSideNavOpen(false)
+    const close = () => {
+        console.log('clicked close')
+        setSideNavOpen(false)
+    }
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const dispatch = useDispatch()
 

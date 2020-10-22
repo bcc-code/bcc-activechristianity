@@ -42,7 +42,7 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
             <div className="hidden sm:flex flex-col items-center bg-d4slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
                 <StickyBox offsetTop={150} >
 
-                    <UserInitials />
+                    {/* <UserInitials /> */}
                     <div className="flex justify-center">
                         {/*                  <button
                             className="border border-d4slate-light text-d4slate-light text-sm rounded-full px-2 py-1 ">

@@ -31,7 +31,7 @@ const Watch: React.FC<IProps> = (props) => {
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
-            <div className="hidden sm:block">
+            <div className="hidden sm:block standard-max-w-px">
                 <LayoutH1Wide title={title} />
                 <LazyLoad >
                     {<FetchPostsFromSlugs
@@ -66,28 +66,49 @@ const Watch: React.FC<IProps> = (props) => {
                 </div>
 
             </div>
-            <FetchPostsFromArchivePage
-                slug={latestSlug}
-                layout="row" render={({ posts }) => (
-                    <VideoRow4Col
-                        name={ac_strings.latest}
-                        posts={posts}
-                        slug={latestSlug}
-                    />
-                )}
-            />
-            <div className="w-full pt-4">
-                <SectionTitleDesktopAndMobile
-                    name={ac_strings.popular}
-                />
-                <FetchPostsFromSlugs
-                    slugs={mostPopular.slice(0, 5)}
-                    layout="row"
-                    render={({ posts }) => (
-                        <HSCardListVideo posts={posts} />
+            <div className="standard-max-w-px">
+                <FetchPostsFromArchivePage
+                    slug={latestSlug}
+                    layout="row" render={({ posts }) => (
+                        <VideoRow4Col
+                            name={ac_strings.latest}
+                            posts={posts}
+                            slug={latestSlug}
+                        />
                     )}
                 />
+                <div className="w-full pt-4">
+                    <SectionTitleDesktopAndMobile
+                        name={ac_strings.popular}
+                    />
+                    <FetchPostsFromSlugs
+                        slugs={mostPopular.slice(0, 5)}
+                        layout="row"
+                        render={({ posts }) => (
+                            <HSCardListVideo posts={posts} />
+                        )}
+                    />
+                </div>
+                <FetchTopicPostItems
+                    topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                    layout="list"
+                    render={({ topicPostItems }) => (
+                        <div>
+
+                            {topicPostItems.map(item => (
+                                <VideoRow4Col
+                                    name={item.name}
+                                    slug={item.slug}
+                                    posts={getRandomArray(item.posts, item.posts.length)}
+                                />
+
+                            ))}
+                        </div>
+                    )}
+
+                />
             </div>
+
             {/*             {loggedIn !== "success" ? (
                 <div className="w-full pt-4">
                     <SectionTitleDesktopAndMobile
@@ -116,24 +137,7 @@ const Watch: React.FC<IProps> = (props) => {
                 )} */}
 
 
-            <FetchTopicPostItems
-                topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
-                layout="list"
-                render={({ topicPostItems }) => (
-                    <div>
 
-                        {topicPostItems.map(item => (
-                            <VideoRow4Col
-                                name={item.name}
-                                slug={item.slug}
-                                posts={getRandomArray(item.posts, item.posts.length)}
-                            />
-
-                        ))}
-                    </div>
-                )}
-
-            />
 
         </div>
     )

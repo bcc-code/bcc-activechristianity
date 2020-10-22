@@ -5,20 +5,12 @@ import ac_strings from '@/strings/ac_strings.json'
 
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 import { LayoutH1 } from '@/components/Headers'
-import { FacebookIcon, InstagramIcon } from '@/components/Icons/SocialMedia'
 
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 
 const siteUrl = process.env.SITE_URL
 const contactFormTo = process.env.CONTACT_FROM_TO
-
-interface IState {
-    fields: IContactFrom
-    loading: boolean
-    success: boolean
-    errorMessage?: string
-}
 
 interface IContactFrom {
     name: string
@@ -66,7 +58,8 @@ const ContactForm = () => {
         setErrors(result)
         return pass;
     }
-    const handleSubmit = () => {
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
         if (fields.honey !== '') return;
 
         if (validate()) {
@@ -129,7 +122,7 @@ const ContactForm = () => {
     return (
         <div className="pb-8 sm:py-4" >
             {errorMessage !== undefined && <Snackbar text={errorMessage} error />}
-            <div className="w-full flex">
+            <form className="w-full flex" onSubmit={handleSubmit}>
 
                 <div className="w-1/2 pr-2">
                     <InputText
@@ -150,7 +143,7 @@ const ContactForm = () => {
                         onChange={(e) => handleChange(e, 'location')}
                     />
                 </div>
-            </div>
+            </form>
             <input type="hidden" name="form-name" value="contact" />
             <InputText
                 label={TS.email}
@@ -202,38 +195,3 @@ const ContactForm = () => {
 export default ContactForm;
 
 
-const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({ className, style, imageUrl }) => {
-    const socialPlatforms = [
-        {
-            icon: <FacebookIcon />,
-            name: 'Facebook',
-            href: ''
-        },
-        {
-            icon: <InstagramIcon />,
-            name: 'Instagram',
-            href: ''
-        }
-    ]
-    return (
-
-        <div
-            className={className}
-            style={{ top: "50px", background: `url(${imageUrl}) center center no-repeat`, backgroundSize: "cover", ...style }}
-        >
-            <LayoutH1 title={TS.contact} />
-            <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
-                {socialPlatforms.map(item => {
-                    return (
-                        <a href={item.href} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">
-                            <div className="pr-2">{item.icon} </div><div>{item.name}</div>
-                        </a>
-                    )
-                })}
-
-            </div>
-
-        </div>
-
-    )
-}

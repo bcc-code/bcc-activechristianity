@@ -19,20 +19,12 @@ const rbgToString = (colors: number[], alpha?: number) => {
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
     const bgGradientStyle = { 'backgroundImage': '' }
-    if (image) {
-        const darkMuted = image.colors && image.colors[0]
-        const vibrant = image.colors && image.colors[1]
-        const muted = image.colors && image.colors[2]
-        if (darkMuted && vibrant && muted) {
-            bgGradientStyle.backgroundImage = `linear-gradient(0, #fff 30%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%), linear-gradient(90deg, ${rbgToString(darkMuted, .5)}, ${rbgToString(vibrant, .5)} 50%, ${rbgToString(muted, .5)} 100%)`
-        }
-    }
+
 
     return (
         <div>
             <div
                 className="absolute inset-x-0 top-0 h-64 z-minus"
-                style={bgGradientStyle}
             >
             </div>
             <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
@@ -56,7 +48,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                     }
 
                 </Link>
-                <div className="col-start-6 col-end-9  ml-5 flex flex-col justify-center pt-0">
+                <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
                     <Link
                         to={`/${slug}`}
 
@@ -73,7 +65,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
 
                         />
                     </Link>
-                    <span className="font-medium hidden sm:block lg:text-xl mt-4">{excerpt}</span>
+                    <span className="leading-normal hidden sm:block  mt-4">{excerpt}</span>
                     {authors && (
                         <span className="text-d4gray-dark lg:hidden sm:py-3 py-1 text-sm">
                             <PostMeta authors={authors} />

@@ -46,9 +46,9 @@
     },
     "108204": {
       "key": "song",
-      "name": "Song",
-      "to": "song",
-      "count": 64,
+      "name": "Songs",
+      "to": "songs",
+      "count": 63,
       "image": {
         "src": "https://ac2.day4.live/storage/sizes/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol-w600.jpeg",
         "srcset": "https://ac2.day4.live/storage/sizes/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol-w600.jpeg 600w, https://ac2.day4.live/storage/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol.jpeg 1000w",
@@ -59,7 +59,7 @@
       "key": "edification",
       "name": "Edification",
       "to": "edification",
-      "count": 452,
+      "count": 453,
       "image": {
         "src": "https://ac2.day4.live/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg",
         "srcset": "https://ac2.day4.live/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg 600w, https://ac2.day4.live/storage/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpeg 1000w",
@@ -70,7 +70,7 @@
       "key": "interview",
       "name": "Interviews",
       "to": "interviews",
-      "count": 8,
+      "count": 11,
       "image": {
         "src": "https://ac2.day4.live/storage/sizes/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV-w600.jpeg",
         "srcset": "https://ac2.day4.live/storage/sizes/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV-w600.jpeg 600w, https://ac2.day4.live/storage/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV.jpeg 1000w",
@@ -94,13 +94,13 @@
       "key": "read",
       "name": "Read",
       "to": "read",
-      "count": 948
+      "count": 949
     },
     "108197": {
       "key": "listen",
       "name": "Listen",
       "to": "listen",
-      "count": 265
+      "count": 266
     },
     "108198": {
       "key": "watch",

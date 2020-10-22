@@ -1,10 +1,10 @@
 import React from 'react'
 import MetaTag from '@/components/Meta'
-
+import FetchSocialMediaPlatform from '@/HOC/FetchSocialMediaPlatforms'
 import TS from '@/strings'
 import { LayoutH1 } from '@/components/Headers'
 import { MobileMainWrapper } from '@/layout-parts/PostSections'
-import { FacebookIcon, InstagramIcon } from '@/components/Icons/SocialMedia'
+
 import ContactForm from '@/layout-parts/Form/Contact'
 
 const ContactPage = () => {
@@ -40,40 +40,34 @@ const ContactPage = () => {
 }
 
 export default ContactPage
+const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({ className, style, imageUrl }) => {
 
-
-export const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({ className, style, imageUrl }) => {
-    const socialPlatforms = [
-        {
-            icon: <FacebookIcon />,
-            name: 'Facebook',
-            href: ''
-        },
-        {
-            icon: <InstagramIcon />,
-            name: 'Instagram',
-            href: ''
-        }
-    ]
     return (
 
         <div
             className={className}
             style={{ top: "50px", background: `url(${imageUrl}) center center no-repeat`, backgroundSize: "cover", ...style }}
         >
-            <div className="hidden sm:block">
-                <LayoutH1 title={TS.contact} />
-            </div>
-            <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
-                {socialPlatforms.map(item => {
-                    return (
-                        <a href={item.href} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">
-                            <div className="pr-2">{item.icon} </div><div>{item.name}</div>
-                        </a>
-                    )
-                })}
+            <LayoutH1 title={TS.contact} />
 
-            </div>
+            <FetchSocialMediaPlatform
+
+                render={({ platforms }) => {
+                    return (
+                        <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
+                            {platforms.map(item => {
+                                return (
+                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">
+                                        <div className="pr-2">{item.icon} </div><div>{item.name}</div>
+                                    </a>
+                                )
+                            })}
+                        </div>
+                    )
+                }}
+
+            />
+
 
         </div>
 

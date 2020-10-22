@@ -11,6 +11,7 @@ import { SectionTitleDesktopAndMobile, PageSectionHeader, LayoutH1Wide, } from '
 import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+import Row4ColAndHorizontalScroll from '@/layout-parts/List/Combo/Row4Col-HorizontalScrol'
 import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 import { INavItem, ITopicRes, INavItemCount, ISubtopicLinks } from '@/types'
 import ac_strings from '@/strings/ac_strings.json'
@@ -37,7 +38,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
         <div>
             <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <LayoutH1Wide title={info.name} />
-            {formatType.info.count > 1 ? (
+            {formatType.info.count > 10 ? (
 
                 <div className="sm:px-4 standard-max-w">
                     <FetchPostsFromSlugs
@@ -63,67 +64,61 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                         slugs={mostPopular}
                         layout="row"
                         render={({ posts }) => {
-                            return (<TopImgHorizontalScroll posts={posts} />)
+                            return (
+                                <Row4ColAndHorizontalScroll
+                                    title={ac_strings.popular}
+                                    posts={posts}
+
+                                />
+                            )
                         }}
                     />
-                    {watch[0] && (
+                    {/*                     {watch[0] && (
                         <FetchPostsFromArchivePage
                             slug={`${watch[0].to}/${info.to}`}
                             layout="row"
                             render={({ posts }) => {
                                 return (
                                     <div className="py-6">
-                                        <SectionTitleDesktopAndMobile name={watch[0].name} />
+                                        <SectionTitleDesktopAndMobile name={watch[0].name} to={`${watch[0].to}/${info.to}`} />
                                         <HSCardListVideo posts={posts} />
                                     </div>
                                 )
                             }}
 
                         />
-                    )}
-                    <SectionTitleDesktopAndMobile name={TS.latest} />
-                    {listen[0] && (
+                    )} */}
+                    <div className="pb-6">
                         <FetchPostsFromArchivePage
 
-                            slug={`${listen[0].to}/${info.to}`}
+                            slug={latestSlug}
                             layout="row"
                             render={({ posts }) => {
                                 return (
                                     <div>
+                                        <SectionTitleDesktopAndMobile name={ac_strings.latest} to={latestSlug} />
                                         <div className="sm:hidden px-4">
-                                            {posts.slice(0, 4).map(item => (
+                                            {posts.map(item => (
                                                 <RightImg {...item} />
                                             ))}
                                         </div>
                                         <div className="hidden sm:block">
-                                            <Post4Col posts={posts.slice(0, 4)} />
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pb-16">
+                                                {posts.map((post, i) => {
+                                                    return (
+                                                        <div className={`div${i + 1}`} key={post.slug}>
+                                                            < TopImgPost showType {...post} />
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
                                         </div>
                                     </div>
                                 )
                             }}
                         />
-                    )}
-                    {read[0] && (
-                        < FetchPostsFromArchivePage
+                    </div>
 
-                            slug={`${read[0].to}/${info.to}`}
-                            layout="row"
-                            render={({ posts }) => {
-                                return (
-                                    <div>
-                                        <div className="sm:hidden px-4">
-                                            {posts.slice(0, 4).map(item => (
-                                                <RightImg {...item} />
-                                            ))}
-                                        </div>
-                                        <div className="hidden sm:block">
-                                            <Post4Col posts={posts.slice(0, 4)} />
-                                        </div>
-                                    </div>
-                                )
-                            }}
-                        />
-                    )}
 
                     <div className="bg-d4slate-lighter sm:hidden py-6 overflow-hidden">
                         <PageSectionHeader title={ac_strings.popular} className="pb-4" />

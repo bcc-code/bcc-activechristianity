@@ -76,7 +76,7 @@ const UserHistory = () => {
                     )}
             </div>
             {bookmarkedPosts.length > 0 ? <FetchPostsFromSlugs
-                slugs={bookmarkedPosts.slice(0, 6).map(p => p.slug)}
+                slugs={bookmarkedPosts.map(p => p.slug)}
                 layout="list"
                 render={({ posts }) => {
                     const video: IPostItem[] = []

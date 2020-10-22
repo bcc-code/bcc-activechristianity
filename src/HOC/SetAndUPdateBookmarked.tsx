@@ -26,13 +26,14 @@ const Bookmark: React.FC<IFetchPost> = ({ id, render }) => {
                 dispatch(setNewLike({ id, bookmarked: bookmarked === "true" }))
             }
         } else {
-            dispatch(openSignInModal("signInOptions"))
+            dispatch(openSignInModal("signUpOptions"))
         }
     }
     return (
         <div
             onClick={handleClick}
             onKeyDown={handleClick}
+            className="hover:shadow-md"
         >
             {render({ bookmarked })}
         </div>

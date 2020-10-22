@@ -3,10 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeSignInModal } from '@/state/action'
 import Modal from '@/components/Modal/ModalNotControlled'
 import Main from './Main'
-import SignUpForm from '@/layout-parts/Form/Signup'
-import SignInForm from '@/layout-parts/Form/Signin'
-import ForgotPassword from '@/layout-parts/Form/ForgotPassword'
+import SignUpForm from './Signup'
+import SignInForm from './Signin'
+/* import ForgotPassword from '@/layout-parts/Form/ForgotPassword' */
+import ForgotPassword from './ForgotPassword'
+import GiveConsent from './GiveConsent'
 import { IRootState } from '@/state/types'
+import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings.json'
 
 const SigninSignUpModal: React.FC = () => {
     const dispatch = useDispatch();
@@ -28,6 +32,8 @@ const SigninSignUpModal: React.FC = () => {
                 return <SignInForm />
             case 'forgotPassword':
                 return <ForgotPassword />
+            case 'giveConsent':
+                return <GiveConsent />;
             default:
                 return <Main type='signUpOptions' />
         }
@@ -42,7 +48,11 @@ const SigninSignUpModal: React.FC = () => {
     return (
         <Modal
             isOpen={isSignInModalOpen !== null}
-            content={showingContent}
+            content={(
+                <div>
+                    {showingContent}
+                </div>
+            )}
             closeModal={handleClose}
         />
     )

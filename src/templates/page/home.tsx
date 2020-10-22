@@ -41,7 +41,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     featuredPosts: featuredPostSlugs,
     popularTopics: popularTopicsAll,
     popularPosts: popularPostsAll,
-    formats
   } = pageContext
 
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
@@ -51,7 +50,11 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-  const tabs = [latestPostAsTopic, ...formats.map(f => ({ ...f, slug: `${f.slug}/${ac_strings.slug_latest}` }))]
+  const getfeaturedList: string[] = []
+
+  const randomFeatured = getRandomArray(featuredPostSlugs, featuredPostSlugs.length)
+  const featuredAndPopuloar = [...new Set([...randomFeatured.slice(2), ...popularPostsAll.dynamic.slice(5)])]
+  const randomRest = getRandomArray(featuredAndPopuloar, featuredAndPopuloar.length)
   return (
 
     <div className="standard-max-w">
@@ -68,7 +71,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <div className="w-full pb-4 pt-8">
             <PageSectionHeader title={ac_strings.featured} className="pb-4" />
             <FetchPostsFromSlugs
-              slugs={featuredPostSlugs}
+              slugs={[randomFeatured[0], randomFeatured[1], ...randomRest]}
               layout="row"
               render={
                 ({ posts }) => <FeaturedBanner featured={posts} />
@@ -101,14 +104,8 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                   />
                 </>
               )}
-
           </div>
-
-
-
           <LazyLoad>
-
-
             <div className="py-6">
               <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
               <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
@@ -174,7 +171,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         <div className="hidden sm:block">
 
           <FetchOnePost
-            slug={getRandomArray(featuredPostSlugs, 1)[0]}
+            slug={randomFeatured[0]}
             render={
               ({ post }) => post ? <HomeTopFeaturePost {...post} /> : <div></div>
             }
@@ -189,7 +186,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             }}
 
           />
-          <FeatureSectionDesktop featuredPosts={featuredPostSlugs} topicPosts={popularTopicsAll.static} />
+          <FeatureSectionDesktop featuredPosts={[randomFeatured[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}

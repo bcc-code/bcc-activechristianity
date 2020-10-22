@@ -22,7 +22,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
-                    console.log(resNewFollow)
                     return acApi
                         .following()
                         .then((res: IFollowing) => {
@@ -69,11 +68,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .likePost(action.payload.id, !action.payload.bookmarked)
                 .then((resNewLike: any) => {
-
                     if (resNewLike.likePost && resNewLike.likePost.success === true) {
                         return acApi.liked()
                             .then((res: ILiked) => {
-                                console.log(res)
                                 if (Array.isArray(res.liked)) {
                                     store.dispatch(setUserLiked(res.liked))
                                 }
@@ -81,6 +78,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                             })
 
                     } else {
+
                         throw Error('feil to set new like')
                     }
 
@@ -186,9 +184,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 acApi
                     .history()
                     .then((res: IHistory) => {
-                        console.log(res)
                         if (Array.isArray(res.history)) {
-                            console.log(res.history)
                             return res.history
                         } else {
                             throw new Error('Error res.history')
@@ -202,7 +198,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 acApi
                     .unfinishedPosts()
                     .then((res: IUnfinished) => {
-                        console.log(res)
                         if (Array.isArray(res.unfinishedPosts)) {
                             return res.unfinishedPosts
                         } else {
@@ -244,9 +239,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     store.dispatch(setUserLibrary(userLibrary))
                     /*
                       followedTopics: IApiItem[]
-      unfinishedPosts: IApiItem[]
-      bookmarkedPosts: IApiItem[]
-      historyPosts: IApiItem[]*/
+            unfinishedPosts: IApiItem[]
+            bookmarkedPosts: IApiItem[]
+            historyPosts: IApiItem[]*/
                     //)
                 })
 

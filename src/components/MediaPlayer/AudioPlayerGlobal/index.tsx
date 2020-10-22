@@ -18,7 +18,7 @@ const ACMediaPlayer: React.FC = () => {
 
     const [isRepeat, setIsRepeat] = React.useState(false)
     const [fullScreenInfo, setFullScreenInfo] = React.useState(false)
-
+    console.log(currentMedia.audio)
     return currentMedia.audio ? (
         (
             <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom ${fullScreenInfo ? 'top-0' : ''}`} ref={inputEl}>
