@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.json'
+import Link from '@/components/CustomLink'
 import TS from '@/strings'
 const formText = {
     "signUpOptions": {
@@ -12,7 +13,7 @@ const formText = {
         "email": ac_strings.signup_options_email,
         "optionText": ac_strings.signup_options_option_text,
         "optionButton": ac_strings.signup_options_option_button,
-        "disclaimer": ac_strings.signup_options_disclaimer,
+        "disclaimer": TS.consent_register,
         "action": ac_strings.signup_options_action
     },
     "signInOptions": {
@@ -77,6 +78,19 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
                 </button>
             </div>
 
+            <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
+
+                <Link className="pb-4" to={ac_strings.slug_privacy_policy}>
+                    <span className="h-full font-semibold">Read {TS.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
+                </Link>
+                <div className="pb-4">
+                    {/* <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span> */}
+                    <span className="leading-normal font-normal font-sans pt-6" >
+                        {TS.copyright}
+                    </span>
+                </div>
+
+            </div>
         </div>
     )
 }

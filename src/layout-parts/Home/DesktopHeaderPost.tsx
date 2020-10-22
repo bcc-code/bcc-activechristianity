@@ -48,7 +48,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                     }
 
                 </Link>
-                <div className="col-start-6 col-end-9  ml-5 flex flex-col justify-center pt-0">
+                <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
                     <Link
                         to={`/${slug}`}
 
@@ -65,7 +65,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
 
                         />
                     </Link>
-                    <span className="font-medium hidden sm:block lg:text-xl mt-4">{excerpt}</span>
+                    <span className="leading-normal hidden sm:block  mt-4">{excerpt}</span>
                     {authors && (
                         <span className="text-d4gray-dark lg:hidden sm:py-3 py-1 text-sm">
                             <PostMeta authors={authors} />

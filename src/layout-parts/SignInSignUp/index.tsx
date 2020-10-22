@@ -51,22 +51,6 @@ const SigninSignUpModal: React.FC = () => {
             content={(
                 <div>
                     {showingContent}
-                    <div className="pb-4 text-gray-500">
-                        {TS.consent_register}
-                    </div>
-                    <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
-
-                        <div className="pb-4">
-                            <span className="h-full font-semibold">Read {TS.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
-                        </div>
-                        <div className="pb-4">
-                            {/* <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span> */}
-                            <span className="leading-normal font-normal font-sans pt-6" >
-                                {TS.copyright}
-                            </span>
-                        </div>
-
-                    </div>
                 </div>
             )}
             closeModal={handleClose}

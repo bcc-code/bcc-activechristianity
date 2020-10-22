@@ -11,6 +11,10 @@ interface ItextSizeConfig {
     }
 }
 const textSizeConfig: ItextSizeConfig = {
+    "header-post": {
+        s: 'text-xl md:text-3xl lg:text-4xl',
+        h2lines: 'max-h-15 md:max-h-28 lg:max-h-36',
+    },
     'text-sm': {
         s: 'text-sm',
         h2lines: 'max-h-10',
