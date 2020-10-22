@@ -16,30 +16,25 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
         // only catch a specific action
         case 'INITIATE_CONSENT_NOTIFY':
             const { receivedEmail, consent } = action.payload
-            const request = []
-            if (consent) {
-                request.push(
-                    acApi.giveConsent()
-                )
-            }
-            if (receivedEmail) {
-                request.push(
-                    acApi.toggleNotify(true)
-                )
-            }
-
-            return Promise.all(request).then(res => {
-                return acApi.profile().then(userRes => {
-                    if (userRes && userRes.meta && userRes.meta.consented) {
-                        store.dispatch(setUser(userRes))
-                        store.dispatch(getUserLibrary())
-                        store.dispatch(closeSignInModal())
+            return acApi.toggleNotifyAndGiveConsent(receivedEmail)
+                .then(res => {
+                    if (res.consent.success) {
+                        return acApi.profile().then(userRes => {
+                            if (userRes && userRes.meta && userRes.meta.consented) {
+                                store.dispatch(setUser(userRes))
+                                store.dispatch(getUserLibrary())
+                                store.dispatch(closeSignInModal())
+                            } else {
+                                store.dispatch(openSignInModal("signInForm"))
+                            }
+                            /* return store.dispatch(setUser(userRes)) */
+                        })
                     } else {
-                        store.dispatch(openSignInModal("signInForm"))
+                        store.dispatch(setLogout())
+                        store.dispatch(setLogInError('Something'))
                     }
-                    /* return store.dispatch(setUser(userRes)) */
+
                 })
-            })
             break
         case 'INITIATE_LOG_IN':
             // continue propagating the action through redux
@@ -49,10 +44,10 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             // fetch data from an API that may take a while to respond
             acApi.login(login_email, login_password, remember)
                 .then((res: any) => {
-                    if (res) {
-                        console.log(res)
-                        if (res.meta && res.meta.consented) {
-                            store.dispatch(setUser(res))
+                    const data = res.signIn
+                    if (data.success && data.user) {
+                        if (data.user.meta && data.user.consented) {
+                            store.dispatch(setUser(data.user))
                             store.dispatch(closeSignInModal())
                         } else {
                             store.dispatch(openSignInModal("giveConsent"))

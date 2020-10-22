@@ -48,7 +48,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             <div className="flex flex-col justify-center py-4 w-full px-2">
                 <span className="block uppercase text-xs pb-4">{text.action}</span>
                 <button
-                    className="rounded-lg text-white mt-4 px-2 py-4"
+                    className="rounded-lg text-white mt-4 px-2 py-4 hover:font-bold hover:shadow"
                     style={{ background: "#3b5998" }}
                     onClick={handleFacebookClick}
                     onKeyDown={handleFacebookClick}
@@ -57,7 +57,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
                 </button>
                 <Seperator />
                 <button
-                    className="bg-blue-500 rounded-lg text-white mb-4 px-2 py-4"
+                    className="bg-blue-500 rounded-lg text-white mb-4 px-2 py-4 hover:font-bold hover:shadow"
                     onClick={handleClick}
                     onKeyDown={handleClick}
                 >
@@ -70,7 +70,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             <div className="text-sm py-4 ">
                 <span>{text.optionText}</span>
                 <button
-                    className="text-blue-500 font-semibold"
+                    className="text-blue-500 font-semibold hover:font-bold"
                     onClick={toggleOptions}
                     onKeyDown={toggleOptions}
                 >
@@ -81,7 +81,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
 
                 <a className="pb-4" href={ac_strings.slug_privacy_policy} target="_blank">
-                    <span className="h-full font-semibold">Read {TS.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
+                    <span className="h-full font-semibold hover:font-bold">Read {TS.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
                 </a>
                 <div className="pb-4">
                     {/* <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span> */}

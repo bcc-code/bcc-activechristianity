@@ -66,9 +66,10 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                         <PostTitle
                             rawText={title}
                             bold={"font-semibold"}
-                            fontKey={showOnMobile ? "feature-card-full" : "feature-card"}
-                            clamp={2}
-                            className="text-center"
+                            fontKey={'text-lg'}
+                            clamp={3}
+                            className="text-center leading-tight"
+
                         />
                     </div>
                     <div className={`${showOnMobile ? 'block' : 'hidden sm:block'} z-30 w-full border-b border-gray-500 my-2 md:my-4`} />

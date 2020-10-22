@@ -171,7 +171,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         <div className="hidden sm:block">
 
           <FetchOnePost
-            slug={getRandomArray(featuredPostSlugs, 1)[0]}
+            slug={randomFeatured[0]}
             render={
               ({ post }) => post ? <HomeTopFeaturePost {...post} /> : <div></div>
             }
@@ -186,7 +186,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             }}
 
           />
-          <FeatureSectionDesktop featuredPosts={featuredPostSlugs} topicPosts={popularTopicsAll.static} />
+          <FeatureSectionDesktop featuredPosts={[randomFeatured[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}

@@ -49,6 +49,11 @@ body {
     color: #3a4154;
 }
 
+a,
+button {
+    cursor: pointer;
+}
+
 @screen sm {
 
     html,

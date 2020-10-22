@@ -7,6 +7,7 @@ import CookieConsent from "react-cookie-consent";
 import Footer from '@/layout-parts/Footer'
 import Helmet from 'react-helmet'
 import Link from '@/components/CustomLink';
+import Icon from '@/components/Icons/Icon'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
@@ -73,8 +74,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                     } else {
                         dispatch(openSignInModal("giveConsent"))
                     }
-
-
                 } else {
                     dispatch(setLogout())
                 }
@@ -100,13 +99,11 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             }
         )
     }, [
-
         isSideNavOpen,
         setSideNavOpen,
         handleSideNavOpen,
         isModalOpen,
         isSignInModalOpen
-
     ])
 
 
@@ -135,7 +132,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         sideResourceMenu.push({ name: page.title, to: page.slug })
                         mobileMenu.push(({ name: page.title, to: page.slug, icon: iconMapNav[page.label] }))
                     }
-
                 })
 
                 if (auth.loggedIn !== "success") {
@@ -151,7 +147,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 menus.forEach(m => {
                     if (`${m.id}` === process.env.DESKTOP_NAV_ID) {
                         desktopMenu = m.menuItems
-
                     }
 
                     if (`${m.id}` === process.env.SIDE_NAV_ID) {
@@ -178,6 +173,16 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
 
                         <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+                            <div className={"flex items-center bg-d4slate-lighter  py-2 standard-max-w-px text-xs leading-snug hover:font-bold text-d4secondary"}>
+                                <a href={process.env.SITE_URL}>
+                                    Revert back to original version here. Note that your old login details will apply. <span><Icon
+                                        name="KeyboardArrowRight"
+                                        size="4"
+
+                                    /></span>
+                                </a>
+
+                            </div>
                             {breadcrumb.items.length > 0 && (
                                 <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
                                     <Breadcrumb {...breadcrumb} />

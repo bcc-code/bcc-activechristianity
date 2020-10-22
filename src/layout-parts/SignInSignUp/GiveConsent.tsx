@@ -98,12 +98,11 @@ const SignUpForm = () => {
                 />
 
 
-
                 <div className="flex flex-col justify-center w-full text-sm sm:text-base">
                     <div className="flex justify-center">
                         <FormSubmitButton
-                            disabled={!fields.consent || authInfo.loggedIn === "loading"}
-                            loading={authInfo.loggedIn === "loading"}
+                            disabled={!fields.consent}
+                            loading={false}
                             onClick={handleSubmit}
                         />
                     </div>

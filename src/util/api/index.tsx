@@ -48,6 +48,12 @@ export default {
             return res
         })
     },
+    toggleNotifyAndGiveConsent: (agree: boolean) => {
+        const query = request.toggleNotifyAndGiveConsent(agree)
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
     profile: () => {
         const query = request.profileQuery
 

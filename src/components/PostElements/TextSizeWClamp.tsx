@@ -29,7 +29,7 @@ const textSizeConfig: ItextSizeConfig = {
     'text-lg': {
         s: 'text-lg leading-tight',
         h2lines: 'h-14 max-h-14',
-        h3lines: 'max-h-22 max-max-h-22'
+        h3lines: 'max-h-22 max-max-h-24'
     },
     'text-base-lg': {
         s: 'text-base sm:text-lg',

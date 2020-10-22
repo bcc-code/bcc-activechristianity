@@ -51,6 +51,21 @@ export const forgotPasswordMutation = (email: string) => `
       message
     } 
   }
+`
+
+export const toggleNotifyAndGiveConsent = (agree: boolean) => `
+mutation ToggleNotify {
+  notifications(allow: ${agree}) {
+    success
+    message
+  }
+
+  consent(agreed: true) {
+    success
+    message
+  }
+}
+
 
 `
 export const toggleNotify = (agree: boolean) => `
@@ -59,6 +74,7 @@ export const toggleNotify = (agree: boolean) => `
       success
       message
     }
+
   }
 
 `
@@ -85,7 +101,6 @@ export const likePostMutation = (id: string, toggle: boolean) => `
     likePost(postId:${id}, toggle:${toggle}){
       success
       message
-      count
     }
   }
 `
