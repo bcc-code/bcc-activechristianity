@@ -17,8 +17,7 @@ const initialFieldState = {
     email: '',
     password: '',
     confirm: '',
-    consentReceiveEmail: false,
-    consent: false
+    keepSignedIn: false
 }
 
 const initialErrorState = {
@@ -26,11 +25,10 @@ const initialErrorState = {
     email: '',
     password: '',
     confirm: '',
-    consentReceiveEmail: '',
-    consent: '',
+    keepSignedIn: ''
 }
 
-type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'consent' | 'consentReceiveEmail'
+type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'keepSignedIn'
 const SignUpForm = () => {
     const dispatch = useDispatch()
     const [fields, setFields] = React.useState(initialFieldState)
@@ -104,12 +102,11 @@ const SignUpForm = () => {
         }
         const result = { ...fields }
         validate()
-        if (field === 'consentReceiveEmail') {
-            result.consentReceiveEmail = !fields.consentReceiveEmail;
-            setFields(result)
-        } else if (field === 'consent') {
-            result.consent = !fields.consent;
-            setFields(result)
+        if (field === 'keepSignedIn') {
+            setFields({
+                ...fields,
+                keepSignedIn: !fields.keepSignedIn
+            })
         } else {
             result[field] = e.target.value
             setFields(result)
@@ -173,6 +170,13 @@ const SignUpForm = () => {
                     }}
                     error={errors.confirm}
                 />
+                <InputCheckbox
+                    label={TS.remember_me}
+                    onChange={(e) => {
+                        handleChange(e, 'keepSignedIn')
+                    }}
+                    value={fields.keepSignedIn}
+                />
                 {/*                 <InputCheckbox
                     label={ac_strings.consent_signup_email_checkbox_first}
                     onChange={(e) => {
@@ -200,9 +204,9 @@ const SignUpForm = () => {
                     </div>
                 </div>
             </form>
-            <div className="text-sm">
+            <div className="text-sm mb-6">
                 <span
-                    className="text-blue-500 font-semibold"
+                    className="text-blue-500 font-semibold "
                     onClick={handleSignUpOpionts}
                     onKeyDown={handleSignUpOpionts}
                 >

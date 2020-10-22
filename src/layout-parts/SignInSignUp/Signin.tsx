@@ -164,11 +164,13 @@ const SignInForm: React.FC = () => {
                                 value={fields.keepSignedIn}
                             />
 
-                            <FormSubmitButton
-                                disabled={false}
-                                loading={authInfo.loggedIn === "loading"}
-                                onClick={handleSubmit}
-                            />
+                            <div className="flex justify-center">
+                                <FormSubmitButton
+                                    disabled={false}
+                                    loading={authInfo.loggedIn === "loading"}
+                                    onClick={handleSubmit}
+                                />
+                            </div>
                             <div className="text-sm flex flex-col py-4">
                                 <button
                                     className="text-blue-500 font-semibold mb-4"
