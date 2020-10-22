@@ -9,6 +9,8 @@ import ac_strings from '@/strings/ac_strings.json'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
+import Cookies from 'js-cookie'
+
 
 const initialFieldsState = {
     email: '',
@@ -22,10 +24,13 @@ const initialErrorState = {
 
 type IFormFieldType = 'email' | 'password'
 const SignInForm: React.FC = () => {
+    const cookieName = 'ac.signin.reset_password_reminder'
+    const userReminderOption = Cookies.get(cookieName);
+    console.log(userReminderOption)
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const [fields, setFields] = React.useState(initialFieldsState)
     const [errors, setErrors] = React.useState(initialErrorState)
-
+    const [showReminder, setShowReminder] = React.useState(userReminderOption !== "true")
     const dispatch = useDispatch()
     const validate = () => {
         const fieldNames: IFormFieldType[] = ['email', 'password'];
@@ -43,6 +48,11 @@ const SignInForm: React.FC = () => {
         }
         setErrors(result)
         return pass;
+    }
+    const setNotShowReminder = () => {
+        console.log('setting')
+        setShowReminder(false)
+        Cookies.set(cookieName, 'true')
     }
 
     const handleChange = (e: any, fieldName: string) => {
@@ -85,78 +95,101 @@ const SignInForm: React.FC = () => {
 
     return (
         <div
-            className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full px-4 py-6"
+            className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full "
         >
-            <div className={`rounded  w-full bg-blue-500 text-white py-4 px-2 my-4 flex flex-col`}>
-                <h2 className="text-lg sm:text-2xl pb-4">{ac_strings.message_to_existing_user_first_time_title}</h2>
-                <p className="text-sm leading-normal">{ac_strings.message_to_existing_user_first_time_main}</p>
-                <div className="flex justify-center text-xs">
-                    <button
-                        className="p-2 border border-white my-4"
-                        onClick={handleForgotPassword}
-                        onKeyDown={handleForgotPassword}
-
-                    >
-                        {ac_strings.message_to_existing_user_first_time_cta}
-                    </button>
-                </div>
-                <button className="text-white text-xs">{ac_strings.message_to_existing_user_ignore}</button>
+            <div className="flex flex-col justify-center bg-d4primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+                <h5 className="font-semibold pb-2">{ac_strings.signin_options_email}</h5>
             </div>
-            {authInfo.errorMessage && (
-                <Snackbar
-                    text={authInfo.errorMessage}
-                    error
-                />
-            )}
-            <h2 className="text-2xl pb-4">{ac_strings.signin_options_email}</h2>
-            <form action="" className="w-full" onSubmit={handleSubmit}>
-                <InputText
-                    label={TS.email}
-                    type='text'
-                    value={fields.email}
-                    onChange={(e) => {
-                        handleChange(e, 'email')
-                    }}
-                    error={errors.email ? 'Required' : undefined}
-                />
-                <InputText
-                    label={TS.password}
-                    type='password'
-                    value={fields.password}
-                    onChange={(e) => {
-                        handleChange(e, 'password')
-                    }}
-                    error={errors.password ? 'Required' : undefined}
-                />
-                <InputCheckbox
-                    label={TS.remember_me}
-                    onChange={(e) => {
-                        handleChange(e, 'keepSignedIn')
-                    }}
-                    value={fields.keepSignedIn}
-                />
+            {showReminder ? (
+                <div className="w-full px-4 py-2">
+                    <div className={`rounded  w-full bg-blue-500 text-white py-4 px-2 my-4 flex flex-col`}>
+                        <h2 className="pb-4 leading-normal">{ac_strings.message_to_existing_user_first_time_title}</h2>
+                        <p className="text-sm leading-normal">{ac_strings.message_to_existing_user_first_time_main}</p>
+                        <div className="flex justify-center text-xs">
+                            <button
+                                className="p-2 border border-white rounded font-semibold my-4"
+                                onClick={handleForgotPassword}
+                                onKeyDown={handleForgotPassword}
 
-                <FormSubmitButton
-
-                    loading={authInfo.loggedIn === "loading"}
-                    onClick={handleSubmit}
-                />
-                <div className="text-sm flex flex-col">
-                    <button
-                        className="text-blue-500 font-semibold"
-                        onClick={handleSigninOpionts}
-                        onKeyDown={handleSigninOpionts}
-                    >
-                        {ac_strings.allSigninOptions}
-                    </button>
-                    <button className="text-d4slate-light py-2"
-                        onClick={handleForgotPassword}
-                        onKeyDown={handleForgotPassword}
-                    >
-                        {TS.forgot_password}
-                    </button>
+                            >
+                                {ac_strings.message_to_existing_user_first_time_cta}
+                            </button>
+                        </div>
+                        <div className="flex justify-center text-xs " onClick={setNotShowReminder}>
+                            Continue to sign in
+{/*                             <button
+                                className="text-xs bg-white text-blue-500 rounded p-2"
+                                onClick={() => {
+                                    setShowReminder(false)
+                                }}
+                            >
+                                {ac_strings.signin_options_email}
+                            </button> */}
+                        </div>
+                    </div>
                 </div>
-            </form>
+
+            ) : (
+                    <div className="w-full px-4">
+                        {authInfo.errorMessage && (
+                            <Snackbar
+                                text={authInfo.errorMessage}
+                                error
+                            />
+                        )}
+
+                        <form action="" className="w-full" onSubmit={handleSubmit}>
+                            <InputText
+                                label={TS.email}
+                                type='text'
+                                value={fields.email}
+                                onChange={(e) => {
+                                    handleChange(e, 'email')
+                                }}
+                                error={errors.email ? 'Required' : undefined}
+                            />
+                            <InputText
+                                label={TS.password}
+                                type='password'
+                                value={fields.password}
+                                onChange={(e) => {
+                                    handleChange(e, 'password')
+                                }}
+                                error={errors.password ? 'Required' : undefined}
+                            />
+                            <InputCheckbox
+                                label={TS.remember_me}
+                                onChange={(e) => {
+                                    handleChange(e, 'keepSignedIn')
+                                }}
+                                value={fields.keepSignedIn}
+                            />
+
+                            <FormSubmitButton
+                                disabled={false}
+                                loading={authInfo.loggedIn === "loading"}
+                                onClick={handleSubmit}
+                            />
+                            <div className="text-sm flex flex-col py-4">
+                                <button
+                                    className="text-blue-500 font-semibold mb-4"
+                                    onClick={handleSigninOpionts}
+                                    onKeyDown={handleSigninOpionts}
+                                >
+                                    {ac_strings.allSigninOptions}
+                                </button>
+                                <button className="text-d4slate-light"
+
+                                    onClick={handleForgotPassword}
+                                    onKeyDown={handleForgotPassword}
+                                >
+                                    {ac_strings.message_to_existing_user_first_time_cta}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
+
         </div>
 
     )

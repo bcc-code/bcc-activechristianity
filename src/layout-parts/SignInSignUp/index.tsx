@@ -50,7 +50,7 @@ const SigninSignUpModal: React.FC = () => {
                     {showingContent}
                     <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
                         <div className="pb-4">
-                            <span className="h-full font-semibold">Read {TS.consent_privacy_policy}: </span><a href={ac_strings.slug_privacy_policy}>click here</a>
+                            <span className="h-full font-semibold">Read {TS.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
                         </div>
                         <div className="pb-4">
                             <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span>

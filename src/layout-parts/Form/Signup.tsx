@@ -17,7 +17,7 @@ const initialFieldState = {
     email: '',
     password: '',
     confirm: '',
-    keepSignedIn: false,
+    consentReceiveEmail: false,
     consent: false
 }
 
@@ -26,11 +26,11 @@ const initialErrorState = {
     email: '',
     password: '',
     confirm: '',
-    keepSignedIn: '',
+    consentReceiveEmail: '',
     consent: '',
 }
 
-type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'consent' | 'keepSignedIn'
+type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'consent' | 'consentReceiveEmail'
 const SignUpForm = () => {
     const dispatch = useDispatch()
     const [fields, setFields] = React.useState(initialFieldState)
@@ -38,9 +38,9 @@ const SignUpForm = () => {
     const [strength, setStrength] = React.useState<'white' | 'green' | 'orange' | 'red'>('white')
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
 
-    React.useEffect(() => {
-        validate()
-    }, [fields]);
+    /*     React.useEffect(() => {
+            validate()
+        }, [fields]); */
     const validate = () => {
         const errorsFound = {
             ...initialErrorState
@@ -58,7 +58,7 @@ const SignUpForm = () => {
         }
 
         if (fields.password.length < 6) {
-            errorsFound['confirm'] = 'Password is to short'
+            errorsFound['confirm'] = 'Password is too short'
             pass = false
         }
 
@@ -66,7 +66,7 @@ const SignUpForm = () => {
 
         if (!strongRegex.test(fields.password) && !mediumRegex.test(fields.password)) {
             setStrength('red')
-            errorsFound['password'] = 'Password needs atleast a-z, A-Z, 1-9, !#$&'
+            errorsFound['password'] = 'Password must be at least 6 characters long and contain at least one letter AND one digit or special character.'
             pass = false
         }
 
@@ -82,12 +82,12 @@ const SignUpForm = () => {
         e.preventDefault()
         if (validate()) {
 
-            const { username, email, password, keepSignedIn } = fields
+            const { email, password, consentReceiveEmail } = fields
 
             const data = {
                 email,
                 password,
-                remember: keepSignedIn
+                remember: consentReceiveEmail
             }
             dispatch(initiateRegister(data))
         }
@@ -96,8 +96,8 @@ const SignUpForm = () => {
     const handleChange = (e: any, field: IFieldName) => {
         const result = { ...fields }
 
-        if (field === 'keepSignedIn') {
-            result.keepSignedIn = !fields.keepSignedIn;
+        if (field === 'consentReceiveEmail') {
+            result.consentReceiveEmail = !fields.consentReceiveEmail;
             setFields(result)
         } else if (field === 'consent') {
             result.consent = !fields.consent;
@@ -116,6 +116,7 @@ const SignUpForm = () => {
                 }
             }
         }
+        validate()
     }
     const handleSignUpOpionts = () => {
         dispatch(openSignInModal("signUpOptions"))
@@ -123,17 +124,20 @@ const SignUpForm = () => {
 
     return (
         <div
-            className="flex-1 flex flex-col items-center justify-center w-full h-full px-4 py-6"
+            className="flex-1 flex flex-col items-center justify-center w-full h-full "
         >
-            {authInfo.errorMessage && (
-                <Snackbar
-                    text={authInfo.errorMessage}
-                    error
-                />
-            )}
+            <div className="flex flex-col justify-center bg-d4primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+                <h5 className="font-semibold pb-2">{ac_strings.signup_options_email}</h5>
+            </div>
 
-            <form action="" className="w-full" onSubmit={handleSubmit}>
-                <h2 className="text-2xl pb-4">{ac_strings.signup_options_email}</h2>
+
+            <form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>
+                {authInfo.errorMessage && (
+                    <Snackbar
+                        text={authInfo.errorMessage}
+                        error
+                    />
+                )}
                 <InputText
                     label={TS.email}
                     value={fields["email"]}
@@ -161,24 +165,24 @@ const SignUpForm = () => {
                     }}
                     error={errors.confirm}
                 />
-
                 <InputCheckbox
-                    label={TS.remember_me}
-                    onChange={(e) => {
-                        handleChange(e, 'keepSignedIn')
-                    }}
-                    value={fields.keepSignedIn}
-                    error={errors.keepSignedIn}
-                />
-
-                <InputCheckbox
-                    label={TS.consent_contact}
+                    label={ac_strings.consent_signup_email_checkbox_first}
                     onChange={(e) => {
                         handleChange(e, 'consent')
                     }}
                     value={fields.consent}
                     error={errors.consent}
                 />
+                <InputCheckbox
+                    label={ac_strings.consent_signup_email_receive}
+                    onChange={(e) => {
+                        handleChange(e, 'consentReceiveEmail')
+                    }}
+                    value={fields.consentReceiveEmail}
+                    error={errors.consentReceiveEmail}
+                />
+
+
 
                 <div className="flex flex-col justify-center w-full text-sm sm:text-base">
                     <div className="flex justify-center">

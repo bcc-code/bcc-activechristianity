@@ -36,6 +36,8 @@ import Folder from '@material-ui/icons/Folder'
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt'
 import FirstPage from '@material-ui/icons/FirstPage'
 import LastPage from '@material-ui/icons/LastPage'
+import CheckBox from '@material-ui/icons/CheckBox'
+import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -74,9 +76,10 @@ type IMUIIConName = "Home" |
     "Folder" |
     "ArrowRightAlt" |
     "FirstPage" |
-    "LastPage"
+    "LastPage" |
+    "CheckBox" |
+    "CheckBoxOutlineBlank"
 
-    ;
 
 const Icons = {
     Home,
@@ -115,17 +118,16 @@ const Icons = {
     Folder,
     ArrowRightAlt,
     FirstPage,
-    LastPage
+    LastPage,
+    CheckBox,
+    CheckBoxOutlineBlank
 }
 import * as React from 'react';
 
 export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light" | "white"
 interface IIconProps extends IIconStyle {
     name: IMUIIConName
-
 }
-
-
 
 interface IIconStyle {
     size?: string

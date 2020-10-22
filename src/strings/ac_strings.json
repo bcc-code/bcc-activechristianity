@@ -105,11 +105,11 @@
     "learn_more":"Learn more",
     "filters":"Filters",
     "consent_signup_email_checkbox_first":"I confirm that I have read and agree to ActiveChristianity’s Terms of Use and Privacy Policy. ",
-    "consent_signup_email_checkbox_second":"I would like to receive e-mail updates from ActiveChristianity.",
+    "consent_signup_email_receive":"I would like to receive e-mail updates from ActiveChristianity.",
     "message_to_existing_user_first_time_title":"Logging in to the latest version of our website for the first time? ",
     "message_to_existing_user_first_time_main":"You will be able to log in using the same email address after resetting your password.",
     "message_to_existing_user_first_time_cta":"Reset password",
-    "message_to_existing_user_ignore":"Don’t show this message again",
+    "message_after_reset_password":"We sent you an email. Check your inbox and click the link to reset your password",
     "message_to_existing_user_reset_password":"Welcome to the latest version of ActiveChristianity, where you as a member can follow topics, bookmark resources, download wallpapers and much more!",
     "message_to_existing_user_reset_password_2":"Before you continue, we ask that you take some time to review our Terms of Use and Privacy Policy",
     "terms_of_use":"Terms of use"

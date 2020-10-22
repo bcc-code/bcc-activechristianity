@@ -14,7 +14,7 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
     topicPosts.map(t => {
         postSlugs.push(...t.posts)
     })
-    const randomFeaturedFromTopics = getRandomArray(postSlugs, 2)
+    const randomFeaturedFromTopics = getRandomArray(postSlugs, 4)
     return (
         <div>
             <h3 className="relative mt-8 sm:mt-16 mx-4 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
@@ -36,7 +36,9 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
                     render={({ playlists }) => {
                         const random = getRandomArray(playlists, 1)
                         const post = random.length ? random[0] : undefined
-                        return <FeaturedCard {...post} type="playlist" />
+                        return post ? (
+                            <FeaturedCard {...playlistToPost(post)} type="playlist" />
+                        ) : (<div></div>)
                     }}
                 />
                 <FetchOnePost
