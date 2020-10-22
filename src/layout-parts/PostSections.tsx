@@ -114,7 +114,7 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
             <PageSectionHeaderUpperCaseGray title={authors.as} />
 
             <span className="">{authors.authors.map(a => (
-                <Link className="block text-sm pt-4" to={`${TS.slug_ac_author}/${a.to}`}>
+                <Link className="block text-sm pt-1" to={`${TS.slug_ac_author}/${a.to}`}>
                     <div className="font-roboto ">{a.name}</div>
                     <div className="text-gray-500">{a.excerpt}</div>
                 </Link>

@@ -59,7 +59,7 @@
       "key": "edification",
       "name": "Edification",
       "to": "edification",
-      "count": 452,
+      "count": 453,
       "image": {
         "src": "https://ac2.day4.live/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg",
         "srcset": "https://ac2.day4.live/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg 600w, https://ac2.day4.live/storage/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpeg 1000w",
@@ -94,7 +94,7 @@
       "key": "read",
       "name": "Read",
       "to": "read",
-      "count": 948
+      "count": 949
     },
     "108197": {
       "key": "listen",

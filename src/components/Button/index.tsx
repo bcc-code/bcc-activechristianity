@@ -82,12 +82,13 @@ export const UnderlineLinkViewAll: React.FC<{ to: string }> = ({ to, children })
 }
 
 export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClick, loading }) => {
+    const isDisabled = disabled || loading
     return (
         <SolidDarkBgToggleActive
-            disabled={disabled || loading}
-            active={!disabled && !loading}
+            disabled={isDisabled}
             onClick={onClick}
             className="w-auto px-4 py-2"
+            active={!isDisabled}
         >
 
             {loading ? ac_strings.loading : TS.send}
@@ -145,9 +146,10 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
     )
 }
 
-export const SolidDarkBgToggleActive: React.FC<{ active?: boolean, className?: string } & IButton> = ({ children, active, className }) => (
+export const SolidDarkBgToggleActive: React.FC<{ active?: boolean, className?: string } & IButton> = ({ children, active, className, onClick }) => (
     <Button
         className={`flex justify-center py-1 px-2 my-2 text-center text-sm rounded-full font-semibold ${className ? className : ''} ${active === true ? 'bg-d4slate-dark text-white' : 'bg-d4slate-lighter text-d4slate-dark'}`}
+        onClick={onClick}
     >
         {children}
     </Button>

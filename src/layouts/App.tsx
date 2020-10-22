@@ -16,7 +16,7 @@ import shortid from 'shortid'
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
-import { setIsModalOpen } from '@/state/action'
+import { setIsModalOpen, openSignInModal } from '@/state/action'
 
 // string
 import TS from '@/strings';
@@ -65,10 +65,17 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         acApi
             .profile()
             .then((res: IUser) => {
+                console.log(res)
                 if (res && res.id) {
+                    console.log(res)
 
-                    dispatch(setUser(res))
-                    dispatch(getUserLibrary())
+                    if (res.meta && res.meta.consented) {
+                        dispatch(setUser(res))
+                        dispatch(getUserLibrary())
+                    } else {
+                        dispatch(openSignInModal("giveConsent"))
+                    }
+
 
                 } else {
                     dispatch(setLogout())

@@ -41,7 +41,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     featuredPosts: featuredPostSlugs,
     popularTopics: popularTopicsAll,
     popularPosts: popularPostsAll,
-    formats
   } = pageContext
 
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
@@ -51,7 +50,19 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-  const tabs = [latestPostAsTopic, ...formats.map(f => ({ ...f, slug: `${f.slug}/${ac_strings.slug_latest}` }))]
+  const getfeaturedList: string[] = []
+  const randomFeatured = getRandomArray(featuredPostSlugs, featuredPostSlugs.length)
+  const getRestFeaturedList: string[] = randomFeatured.slice(2)
+  if (randomFeatured[0]) {
+    getfeaturedList.push(randomFeatured[0])
+  }
+  if (randomFeatured[1]) {
+    getfeaturedList.push(randomFeatured[1])
+  }
+  getRestFeaturedList.push(...popularPostsAll.dynamic.slice(5))
+
+  randomFeatured.push(...getRandomArray(getRestFeaturedList, getRestFeaturedList.length))
+
   return (
 
     <div className="standard-max-w">
@@ -68,7 +79,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <div className="w-full pb-4 pt-8">
             <PageSectionHeader title={ac_strings.featured} className="pb-4" />
             <FetchPostsFromSlugs
-              slugs={featuredPostSlugs}
+              slugs={randomFeatured}
               layout="row"
               render={
                 ({ posts }) => <FeaturedBanner featured={posts} />

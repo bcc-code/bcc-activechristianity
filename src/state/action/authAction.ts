@@ -11,7 +11,6 @@ interface ILogin {
 interface IRegister {
     email: string
     password: string
-    remember: boolean
 }
 export type loggedIn = (payload: ILogin) => Action
 export type logIn = (payload: ILogin) => Action
@@ -57,4 +56,13 @@ export const setLogout = () => ({
 export const setLogoutError = (payload: string) => ({
     type: 'SET_LOGOUT_ERROR',
     payload
+})
+
+export const initiateConsentNotify = (payload: { receivedEmail: boolean, consent: boolean }) => ({
+    type: 'INITIATE_CONSENT_NOTIFY',
+    payload: payload
+})
+export const initiateConsent = (agree: boolean) => ({
+    type: 'INITIATE_CONSENT',
+    payload: agree
 })

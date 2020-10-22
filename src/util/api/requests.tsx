@@ -1,7 +1,5 @@
 
 export const loginMutation = (username: string, password: string, remember: boolean) => {
-  console.log(username)
-  console.log(password)
   return `
   mutation {
       signIn(input:{
@@ -13,6 +11,10 @@ export const loginMutation = (username: string, password: string, remember: bool
         user {
           name
           email
+          meta {
+            consented
+            notify
+          }
   
         }
       }
@@ -21,21 +23,25 @@ export const loginMutation = (username: string, password: string, remember: bool
 }
 
 export const registerMutation = (email: string, password: string, remember: boolean) => `
-    mutation {
+  mutation {
       signUp(input:{
-      email:"${email},
-      password:"${password},
+      name:"${email}",
+      email:"${email}",
+      password:"${password}",
       remember:${remember}
     }) {
       success
       user {
         name
         email
+        meta {
+          consented
+          notify
+        }
 
       }
     }
- }
-
+  }
 `
 
 export const forgotPasswordMutation = (email: string) => `
@@ -47,7 +53,24 @@ export const forgotPasswordMutation = (email: string) => `
   }
 
 `
+export const toggleNotify = (agree: boolean) => `
+  mutation ToggleNotify {
+    notifications(allow: ${agree}) {
+      success
+      message
+    }
+  }
 
+`
+
+export const giveConsent = `
+  mutation {
+    consent(agreed: true) {
+      success
+      message
+    }
+  }
+`
 
 export const logoutMutation = `
   mutation {
@@ -178,6 +201,10 @@ export const profileQuery = `
       name
       email
       id
+      meta {
+        consented
+        notify
+      }
     }
   }
 `

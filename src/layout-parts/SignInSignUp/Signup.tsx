@@ -35,18 +35,23 @@ const SignUpForm = () => {
     const dispatch = useDispatch()
     const [fields, setFields] = React.useState(initialFieldState)
     const [errors, setErrors] = React.useState(initialErrorState)
+    const [touched, setTouched] = React.useState(false)
     const [strength, setStrength] = React.useState<'white' | 'green' | 'orange' | 'red'>('white')
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
 
-    /*     React.useEffect(() => {
+    React.useEffect(() => {
+        if (touched) {
             validate()
-        }, [fields]); */
+        }
+
+    }, [fields]);
+
     const validate = () => {
         const errorsFound = {
             ...initialErrorState
         }
         let pass = true;
-        const fieldNames: IFieldName[] = ['username', 'email', 'password', 'confirm']
+        const fieldNames: IFieldName[] = ['email', 'password', 'confirm']
         for (let field of fieldNames) {
             let value = fields[field]
             if (typeof value === 'string' && value.trim() === '') {
@@ -80,22 +85,25 @@ const SignUpForm = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        if (validate()) {
+        const passValidation = validate()
+        if (passValidation) {
 
-            const { email, password, consentReceiveEmail } = fields
+            const { email, password } = fields
 
             const data = {
                 email,
                 password,
-                remember: consentReceiveEmail
             }
             dispatch(initiateRegister(data))
         }
     }
 
     const handleChange = (e: any, field: IFieldName) => {
+        if (!touched) {
+            setTouched(true)
+        }
         const result = { ...fields }
-
+        validate()
         if (field === 'consentReceiveEmail') {
             result.consentReceiveEmail = !fields.consentReceiveEmail;
             setFields(result)
@@ -116,7 +124,7 @@ const SignUpForm = () => {
                 }
             }
         }
-        validate()
+
     }
     const handleSignUpOpionts = () => {
         dispatch(openSignInModal("signUpOptions"))
@@ -165,7 +173,7 @@ const SignUpForm = () => {
                     }}
                     error={errors.confirm}
                 />
-                <InputCheckbox
+                {/*                 <InputCheckbox
                     label={ac_strings.consent_signup_email_checkbox_first}
                     onChange={(e) => {
                         handleChange(e, 'consent')
@@ -181,13 +189,11 @@ const SignUpForm = () => {
                     value={fields.consentReceiveEmail}
                     error={errors.consentReceiveEmail}
                 />
-
-
-
+ */}
                 <div className="flex flex-col justify-center w-full text-sm sm:text-base">
                     <div className="flex justify-center">
                         <FormSubmitButton
-                            disabled={!fields.consent || authInfo.loggedIn === "loading"}
+                            /*    disabled={fields.consent !== true} */
                             loading={authInfo.loggedIn === "loading"}
                             onClick={handleSubmit}
                         />
