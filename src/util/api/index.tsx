@@ -22,12 +22,12 @@ const sendQuery = (query: string) => {
 export default {
     login: (username: string, password: string, remember: boolean) => {
         const query = request.loginMutation(username, password, remember)
-        console.log(query)
+
         return sendQuery(query)
     },
     register: (email: string, password: string, remember: boolean) => {
         const query = request.registerMutation(email, password, remember)
-        console.log(query)
+
         return sendQuery(query)
     },
     forgotPassword: (email: string) => {
@@ -36,16 +36,15 @@ export default {
     },
     giveConsent: () => {
         const query = request.giveConsent
-        console.log(query)
+
         return sendQuery(query).then(res => {
-            console.log(res)
+
             return res
         })
     },
     toggleNotify: (agree: boolean) => {
         const query = request.toggleNotify(agree)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },

@@ -25,7 +25,7 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
                 </Link>
                 <div className="flex justify-center ">
                     {menu.map((item, i) => (
-                        <Link className="block p-2" key={i} to={`${item.to}`}>
+                        <Link className="block p-2 hover:underline hover:text-d4slate-light hover:font-bold " key={i} to={`${item.to}`}>
                             {item.name}
                         </Link>
                     ))}

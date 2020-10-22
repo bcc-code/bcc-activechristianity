@@ -51,18 +51,10 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     slug: ac_strings.slug_latest
   }
   const getfeaturedList: string[] = []
+
   const randomFeatured = getRandomArray(featuredPostSlugs, featuredPostSlugs.length)
-  const getRestFeaturedList: string[] = randomFeatured.slice(2)
-  if (randomFeatured[0]) {
-    getfeaturedList.push(randomFeatured[0])
-  }
-  if (randomFeatured[1]) {
-    getfeaturedList.push(randomFeatured[1])
-  }
-  getRestFeaturedList.push(...popularPostsAll.dynamic.slice(5))
-
-  randomFeatured.push(...getRandomArray(getRestFeaturedList, getRestFeaturedList.length))
-
+  const featuredAndPopuloar = [...new Set([...randomFeatured.slice(2), ...popularPostsAll.dynamic.slice(5)])]
+  const randomRest = getRandomArray(featuredAndPopuloar, featuredAndPopuloar.length)
   return (
 
     <div className="standard-max-w">
@@ -79,7 +71,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <div className="w-full pb-4 pt-8">
             <PageSectionHeader title={ac_strings.featured} className="pb-4" />
             <FetchPostsFromSlugs
-              slugs={randomFeatured}
+              slugs={[randomFeatured[0], randomFeatured[1], ...randomRest]}
               layout="row"
               render={
                 ({ posts }) => <FeaturedBanner featured={posts} />
@@ -112,14 +104,8 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                   />
                 </>
               )}
-
           </div>
-
-
-
           <LazyLoad>
-
-
             <div className="py-6">
               <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
               <FeatureSectionMobile topicPosts={popularTopicsAll.static} />

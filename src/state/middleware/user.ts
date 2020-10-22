@@ -22,7 +22,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
-                    console.log(resNewFollow)
                     return acApi
                         .following()
                         .then((res: IFollowing) => {
@@ -186,9 +185,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 acApi
                     .history()
                     .then((res: IHistory) => {
-                        console.log(res)
                         if (Array.isArray(res.history)) {
-                            console.log(res.history)
                             return res.history
                         } else {
                             throw new Error('Error res.history')
@@ -202,7 +199,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 acApi
                     .unfinishedPosts()
                     .then((res: IUnfinished) => {
-                        console.log(res)
                         if (Array.isArray(res.unfinishedPosts)) {
                             return res.unfinishedPosts
                         } else {

@@ -50,7 +50,6 @@ const SignInForm: React.FC = () => {
         return pass;
     }
     const setNotShowReminder = () => {
-        console.log('setting')
         setShowReminder(false)
         Cookies.set(cookieName, 'true')
     }
