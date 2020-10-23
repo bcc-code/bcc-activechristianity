@@ -4,7 +4,7 @@ import Link from '@/components/CustomLink'
 
 import { IDrawerNav } from '@/layouts/App'
 
-import LogoSmall from '@/images/AC_Logo_sm.png'
+import LogoFull from '@/images/ACLogoFull'
 import TopFirst from './TopFirst'
 import TS from '@/strings'
 import Icon from '@/components/Icons/Icon'
@@ -15,13 +15,8 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
         <div className={`fixed top-0 z-50 bg-white hidden sm:block w-full py-1 border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
             <TopFirst />
             <div className="flex justify-between py-2">
-                <Link className='flex items-center' to="/">
-                    <div className='pr-4'>
-                        <img className='w-8 h-auto' src={LogoSmall} alt={TS.site_title} />
-                    </div>
-                    <div >
-                        <img style={{ maxWidth: '200px' }} src="https://media.activechristianity.org/2020/04/activechristianity_en_logo_200px.png" alt="" />
-                    </div>
+                <Link className='flex items-center px-4' to="/">
+                    <LogoFull full height="24px" />
                 </Link>
                 <div className="flex justify-center ">
                     {menu.map((item, i) => (

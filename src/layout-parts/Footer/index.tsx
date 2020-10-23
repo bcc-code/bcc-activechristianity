@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 
 import TS from '@/strings'
 import Link from "@/components/CustomLink"
-import LogoSmall from '@/images/AC_Logo_sm.png'
+import LogoFull from '@/images/ACLogoFull'
 import SocialPlatforms from '@/layout-parts/Nav/SocialPlatforms'
 import UserNav from '@/layout-parts/Nav/User'
 import ac_strings from '@/strings/ac_strings.json'
@@ -19,7 +19,10 @@ const Footer: React.FC = () => {
         <div className="w-full border-t relative bg-white">
             <div className="flex flex-col sm:flex-row standard-max-w">
                 <div className="flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10 sm:w-1/3">
-                    <div className="w-12 m-4 "><img className="w-full" src={LogoSmall} /></div>
+                    <div className="m-4 "
+                    >
+                        <LogoFull height="48px" width="48x" />
+                    </div>
                     <div>
                         <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{TS.about_activechristianity_body}</div>
                         <Link to={TS.slug_about} className="block text-gray-600 text-sm text-center sm:text-left py-6">{ac_strings.learnMoreAC}</Link>

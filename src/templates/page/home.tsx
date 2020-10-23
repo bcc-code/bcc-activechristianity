@@ -186,7 +186,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             }}
 
           />
-          <FeatureSectionDesktop featuredPosts={[randomFeatured[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
+          <FeatureSectionDesktop featuredPosts={[randomRest[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}
