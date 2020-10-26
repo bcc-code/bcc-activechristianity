@@ -31,7 +31,6 @@ import { IUser, IMenusQuery, INavItem } from '@/types'
 import "@/styles/tailwind-output.css"
 import './Layout.css'
 import "react-placeholder/lib/reactPlaceholder.css";
-import auth from '@/state/reducer/authReducer'
 
 export interface IDrawerNav {
     isSideNavOpen: boolean
@@ -173,14 +172,16 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
 
                         <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
-                            <div className={"flex items-center bg-d4slate-lighter  py-2 standard-max-w-px text-xs leading-snug hover:font-bold text-d4secondary"}>
-                                <a href={process.env.SITE_URL}>
-                                    Revert back to original version here. Note that your old login details will apply. <span><Icon
-                                        name="KeyboardArrowRight"
-                                        size="4"
+                            <div className={"flex items-center bg-d4slate-lighter  py-2 text-xs leading-snug hover:font-bold text-d4secondary"}>
+                                <div className={`standard-max-w-px w-full`}>
+                                    <a href={process.env.SITE_URL}>
+                                        Revert back to original version here. Note that your old login details will apply. <span><Icon
+                                            name="KeyboardArrowRight"
+                                            size="4"
 
-                                    /></span>
-                                </a>
+                                        /></span>
+                                    </a>
+                                </div>
 
                             </div>
                             {breadcrumb.items.length > 0 && (

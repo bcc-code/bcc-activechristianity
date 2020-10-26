@@ -42,20 +42,29 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             next(action)
             const { email: login_email, password: login_password, remember } = action.payload
             // fetch data from an API that may take a while to respond
+
             acApi.login(login_email, login_password, remember)
                 .then((res: any) => {
-                    const data = res.signIn
-                    if (data.success && data.user) {
-                        if (data.user.meta && data.user.consented) {
-                            store.dispatch(setUser(data.user))
-                            store.dispatch(closeSignInModal())
-                        } else {
-                            store.dispatch(openSignInModal("giveConsent"))
-                        }
+                    if (res) {
+                        const data = res.signIn
+                        if (data.success && data.user) {
+                            console.log(data)
+                            if (data.user.meta && data.user.meta.consented) {
+                                store.dispatch(setUser(data.user))
+                                store.dispatch(closeSignInModal())
+                                store.dispatch(setLogInError(''))
+                            } else {
+                                store.dispatch(setLogInError(''))
+                                store.dispatch(openSignInModal("giveConsent"))
+                            }
 
+                        } else {
+                            throw new Error("Incorrect email or password, please try again.")
+                        }
                     } else {
-                        throw new Error("Unknown error (possible wrong username or password)")
+                        throw new Error("Incorrect email or password, please try again.")
                     }
+
 
                 })
                 .catch((err: any) => {
@@ -70,6 +79,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             next(action)
 
             const { email: register_email, password: register_password, consent: register_consent, receiveEmail: register_receive_email } = action.payload
+
             /* const reguster_data = { register_fullname, register_email, register_password, register_remember } */
             acApi
                 .register(register_email, register_password, false)

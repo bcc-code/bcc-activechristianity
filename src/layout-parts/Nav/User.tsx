@@ -53,7 +53,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
             >
                 {ac_strings.title_user}
             </Link>
-            <span className="py-2 text-center hover:text-d4slate-light hover:font-bold " onClick={handleLogout}>{TS.logout}</span>
+            <button className="py-2 text-center hover:text-d4slate-light hover:font-bold " onClick={handleLogout}>{TS.logout}</button>
 
         </div>
     ) : (
