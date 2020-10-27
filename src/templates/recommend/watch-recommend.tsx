@@ -1,5 +1,4 @@
 import * as React from 'react'
-import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 
 import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'

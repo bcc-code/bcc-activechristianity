@@ -10,17 +10,17 @@ import ac_strings from '@/strings/ac_strings.json'
 export const toggleFollowStatusMap = {
     "loading": {
         color: 'bg-slate-lighter text-d4slate-dark',
-        icon: <Icon name="Cached" size="3" />,
+        icon: <Icon name="Cached" size="4" />,
         text: ac_strings.loading
     },
     "true": {
         color: 'bg-slate-lighter text-d4slate-dark',
-        icon: <Icon name="Check" size="3" />,
+        icon: <Icon name="Check" size="4" />,
         text: ac_strings.following
     },
     "false": {
         color: 'bg-d4slate-dark text-white',
-        icon: <Icon name="Add" size="3" />,
+        icon: <Icon name="Add" size="4" />,
         text: ac_strings.follow
     },
 }
@@ -152,7 +152,7 @@ export const SlateDarkFollowButton: React.FC<IToggleFollowProps> = ({ id, text }
                 const config = toggleFollowStatusMap[followed]
 
                 return (
-                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-xs rounded-full font-semibold ${config.color}`}>
+                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-sm rounded-full font-semibold ${config.color}`}>
                         <span>{text ? text : config.text}</span>
                         <span className="pl-2 flex items-center">
                             {config.icon}

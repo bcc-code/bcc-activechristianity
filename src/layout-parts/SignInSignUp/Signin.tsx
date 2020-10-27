@@ -26,7 +26,7 @@ type IFormFieldType = 'email' | 'password'
 const SignInForm: React.FC = () => {
     const cookieName = 'ac.signin.reset_password_reminder'
     const userReminderOption = Cookies.get(cookieName);
-    console.log(userReminderOption)
+
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const [fields, setFields] = React.useState(initialFieldsState)
     const [errors, setErrors] = React.useState(initialErrorState)

@@ -52,7 +52,7 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
                 color="slate-dark"
                 size="5"
             />
-            <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
+            <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
                 {read}
             </span>
         </span>
@@ -60,13 +60,13 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
 }
 
 export const ReadIcon: React.FC<{ text?: string }> = ({ text }) => (
-    <div className={"mr-4 flex items-center"}>
+    <div className={"mx-2 flex items-center"}>
         <Icon
             name="Description"
             color="slate-dark"
-            size="4"
+            size="5"
         />
-        <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
+        <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
             {text ? text : ac_strings.read}
         </span>
     </div>
@@ -75,25 +75,25 @@ export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text
     return (
         <div className="">
             {playing ? (
-                <div className="mr-4 flex items-center bg-d4slate-dark  rounded-full p-1">
+                <div className="flex items-center bg-d4slate-dark  rounded-full py-1 px-2">
                     <Icon
                         name="Equalizer"
-                        size="4"
+                        size="5"
                         color="slate-light"
                     />
-                    <span className="text-xs text-white pl-2 whitespace-no-wrap">
+                    <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
                         {ac_strings.playing}
                     </span>
                 </div>
             ) : (
 
-                    <div className="mr-4 flex items-center rounded-full bg-d4slate-lighter p-1">
+                    <div className="flex items-center rounded-full bg-d4slate-lighter py-1 px-2">
                         <Icon
                             name="PlayCircleOutline"
                             color="slate-dark"
-                            size="4"
+                            size="5"
                         />
-                        <span className="text-xs text-d4slate-dark pl-2 whitespace-no-wrap">
+                        <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
                             {text ? text : ac_strings.listen}
                         </span>
                     </div>
@@ -138,6 +138,20 @@ interface ILikesViewsProps {
     className?: string
 }
 
+export const Views: React.FC<{ views: string }> = ({ views }) => {
+    return (
+        <div className="mx-2 flex items-center">
+            <Icon
+                name="Visibility"
+                color="slate-dark"
+                size="5"
+            />
+            <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
+                {views}
+            </span>
+        </div>
+    )
+}
 export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
     const { id, views, className } = props
     return (
@@ -149,7 +163,7 @@ export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
                         color="slate-dark"
                         size="5"
                     />
-                    <span className="text-xs text-d4slate-dark pl-2 mt-1">
+                    <span className="text-xs sm:text-sm text-d4slate-dark pl-2">
                         {views}
                     </span>
                 </div>

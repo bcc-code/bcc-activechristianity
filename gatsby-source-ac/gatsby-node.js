@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const cliProgress = require('cli-progress');
+
 const settingsQuery = `
 {
     settings {
@@ -15,8 +15,6 @@ const settingsQuery = `
       }
 }
 `
-
-const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.legacy);
  
 
 const getPostsQuery = (pageNr)=>`

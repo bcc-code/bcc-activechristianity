@@ -97,7 +97,7 @@ export const iconMapNav: {
     'watch-recommend': {
         selected: (
             <Icon
-                name="OndemandVideo"
+                name="PlayCircleOutline"
                 color="slate-light"
             />
 
@@ -105,7 +105,7 @@ export const iconMapNav: {
         ),
         default: (
             <Icon
-                name="OndemandVideo"
+                name="PlayCircleOutline"
                 color="slate-light"
             />
 

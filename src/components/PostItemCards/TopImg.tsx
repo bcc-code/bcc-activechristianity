@@ -72,7 +72,9 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                     clamp: 3,
                     className: "flex items-stretch mb-4 sm:text-sm sm:text-gray-600"
                 }}
-                audioDuration />
+                audioDuration
+                noBorder={noBorder}
+            />
         </div>
 
     )

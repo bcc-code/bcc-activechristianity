@@ -57,7 +57,7 @@ const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({
                         <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
                             {platforms.map(item => {
                                 return (
-                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">
+                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mx-2 flex items-center">
                                         <div className="pr-2">{item.icon} </div><div>{item.name}</div>
                                     </a>
                                 )

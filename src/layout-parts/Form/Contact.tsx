@@ -36,6 +36,7 @@ const initialFields = {
 const ContactForm = () => {
     const [fields, setFields] = React.useState<IContactFrom>(initialFields)
     const [errors, setErrors] = React.useState(initialFields)
+    const [success, setSuccess] = React.useState(true)
     const [fieldsError, setFieldsError] = React.useState<{
         [x: string]: any
     }>({})
@@ -85,6 +86,8 @@ const ContactForm = () => {
             }).then((result: any) => {
                 if (result.data.errorMessage) {
                     throw new Error(result.errorMessage)
+                } else {
+                    setSuccess(true)
                 }
 
                 setFields(initialFields)
@@ -122,6 +125,7 @@ const ContactForm = () => {
     return (
         <div className="pb-8 sm:py-4" >
             {errorMessage !== undefined && <Snackbar text={errorMessage} error />}
+            {success !== undefined && <Snackbar text={TS.contact_sent} />}
             <form className="w-full flex" onSubmit={handleSubmit}>
 
                 <div className="w-1/2 pr-2">

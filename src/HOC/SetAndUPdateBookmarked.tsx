@@ -33,7 +33,7 @@ const Bookmark: React.FC<IFetchPost> = ({ id, render }) => {
         <div
             onClick={handleClick}
             onKeyDown={handleClick}
-            className="hover:shadow-md"
+            className="hover:shadow-md flex items-center"
         >
             {render({ bookmarked })}
         </div>

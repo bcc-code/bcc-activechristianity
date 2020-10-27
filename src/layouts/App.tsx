@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
+import Cookies from 'js-cookie'
 
 // string
 import TS from '@/strings';
@@ -41,6 +42,10 @@ export interface IDrawerNav {
 
 
 const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: { pathname: string } }> = (props) => {
+
+    const cookieName = 'ac.revert_to_original'
+    const showInfoBanner = Cookies.get(cookieName);
+
     const { children, pageContext, location } = props
 
     const dispatch = useDispatch();
@@ -55,11 +60,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
-
+    const [isInfoBarOpen, setIsInfoBarOpen] = React.useState(showInfoBanner !== "true")
     React.useEffect(() => {
         checkUser()
     }, [])
 
+    const setNotIsInfoBarOpen = () => {
+        setIsInfoBarOpen(false)
+        Cookies.set(cookieName, 'true')
+    }
 
     const checkUser = () => {
         acApi
@@ -160,7 +169,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                             <meta name="viewport" content="width=device-width, initial-scale=1" />
                         </Helmet>
                         <SignInSignUpModal />
-
                         <SideNav {...NavProps} menu={sideMenu} resoureMenu={sideResourceMenu} />
                         <TopMobile
                             {...NavProps}
@@ -170,20 +178,29 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                             explorePage={explorePage}
                         />
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
+                        <div className={`flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+                            {isInfoBarOpen && (
+                                <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug hover:font-bold text-d4slate-dark"} style={{ zIndex: 100 }}>
+                                    <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
+                                        Revert back to original version here. Note that your old login details will apply.
+                                    <button onClick={setNotIsInfoBarOpen}>
+                                            <Icon
+                                                name="KeyboardArrowRight"
+                                                size="4"
 
-                        <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
-                            <div className={"flex items-center bg-d4slate-lighter  py-2 text-xs leading-snug hover:font-bold text-d4secondary"}>
-                                <div className={`standard-max-w-px w-full`}>
-                                    <a href={process.env.SITE_URL}>
-                                        Revert back to original version here. Note that your old login details will apply. <span><Icon
-                                            name="KeyboardArrowRight"
+                                            />
+                                        </button>
+                                    </a>
+                                    <div onClick={() => setIsInfoBarOpen(false)} className="p-2">
+                                        <Icon
+                                            name="Close"
                                             size="4"
 
-                                        /></span>
-                                    </a>
-                                </div>
+                                        />
+                                    </div>
 
-                            </div>
+                                </div>
+                            )}
                             {breadcrumb.items.length > 0 && (
                                 <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
                                     <Breadcrumb {...breadcrumb} />

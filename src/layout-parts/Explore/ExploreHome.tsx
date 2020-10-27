@@ -77,7 +77,14 @@ const ExploreLayout: React.FC<{
                 />
                 <div className="grid  grid-cols-2 sm:grid-cols-4 gap-4 px-4 mb-4 ">
                     {categories.map((card) => (
-                        <ImgBgTopicCard {...card} overlay="light" key={shortid()} />
+                        <div className="min-h-12 h-12">
+                            <ImgBgTopicCard
+                                {...card}
+                                overlay="light"
+                                key={shortid()}
+
+                            />
+                        </div>
                     ))}
                 </div>
 

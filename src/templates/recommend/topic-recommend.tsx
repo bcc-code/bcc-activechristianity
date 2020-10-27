@@ -44,11 +44,14 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             />
 
             <div className="sm:hidden">
-                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
+                {/*                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
                     <LayoutH1Wide
                         title={title}
                     />
-                </div>
+                </div> */}
+                <LayoutH1Wide
+                    title={title}
+                />
                 <div className="w-full pb-4 pt-8">
                     <PageSectionHeader title={ac_strings.featured} className="pb-4" />
                     <FetchPostsFromSlugs

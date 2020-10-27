@@ -61,6 +61,10 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                     return (
                         <div className="">
                             <div className="">
+                                <SectionTitleDesktopAndMobile
+                                    name={TS.latest}
+
+                                />
                                 {first && (
                                     <div className="px-4 py-6 sm:hidden">
                                         <TopImg
@@ -68,10 +72,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                                         />
                                     </div>
                                 )}
-                                <SectionTitleDesktopAndMobile
-                                    name={TS.latest}
 
-                                />
                                 <div className="px-4">
                                     {first && (
                                         <div className="hidden sm:block">

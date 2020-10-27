@@ -7,7 +7,7 @@ import './horizontal-scroll.css';
 import { ITopic } from '@/types'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFollow'
-
+import shortid from 'shortid'
 import TS from '@/strings'
 
 const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
@@ -28,9 +28,15 @@ const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
             <XScrollCustomSize
                 childeClassName=""
                 items={featured.map(({ name, image, slug, id }) => (
-                    <div className="flex flex-col items-center">
-                        <div className="min-h-36 h-36 w-24" >
-                            <ImgBgTopicCard name={name} image={image} to={`${TS.slug_topic}/${slug}`} />
+                    <div className="flex flex-col items-center" key={shortid()}>
+                        <div style={{ width: "100px", height: "138px" }}>
+                            <ImgBgTopicCard
+                                name={name}
+                                image={image}
+                                to={`${TS.slug_topic}/${slug}`}
+                                rounded="rounded-xxl"
+
+                            />
 
                         </div>
                         <SlateDarkFollowButton

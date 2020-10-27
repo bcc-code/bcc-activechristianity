@@ -93,7 +93,7 @@ const Read: React.FC<IProps> = (props) => {
                     {loggedIn !== "success" ? (
                         <>
                             <div className="bg-d4slate-lighter py-6 overflow-hidden">
-                                <PageSectionHeader title={ac_strings.popular} />
+                                <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                                 <FetchPostsFromSlugs
                                     slugs={mostPopular.slice(0, 5)}
                                     layout="row"
@@ -168,7 +168,7 @@ const Read: React.FC<IProps> = (props) => {
                         )}
 
                     <ByCatergories
-                        title={ac_strings.byCategories}
+                        title={`${ac_strings.read} ${ac_strings.byCategories}`}
                         types={items}
                     />
                 </LazyLoad>

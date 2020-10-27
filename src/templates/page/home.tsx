@@ -8,7 +8,8 @@ import { FetchPostsFromArchivePage, FetchPostsFromSlugs, FetchOnePost } from '@/
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
-const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
+import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
+const LatestSection = loadable(() => import('@/layout-parts/List/PostRow4Col'))
 const FeatureSectionDesktop = loadable(() => import('@/layout-parts/Home/FeatureSectionDesktop'))
 const FeatureSectionMobile = loadable(() => import('@/layout-parts/Home/FeatureSectionMobile'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
@@ -66,10 +67,9 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         breadcrumb={[]}
       />
       <Placeholder loading={loggedIn == "loading"}>
-
         <div className="sm:hidden">
           <div className="w-full pb-4 pt-8">
-            <PageSectionHeader title={ac_strings.featured} className="pb-4" />
+            {/* <PageSectionHeader title={ac_strings.featured} className="pb-4" /> */}
             <FetchPostsFromSlugs
               slugs={[randomFeatured[0], randomFeatured[1], ...randomRest]}
               layout="row"
@@ -144,10 +144,11 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 />
               </div>
               <div className="w-full p-4">
-                <div className='w-full'>
+                <div className='w-full h-16'>
                   <BgImgTopicCard
                     name={ac_strings.browse_resource}
                     to={ac_strings.slug_explore}
+
                   />
                 </div>
               </div>
@@ -167,7 +168,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             )}
 
         </div>
-
         <div className="hidden sm:block">
 
           <FetchOnePost
@@ -176,54 +176,58 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               ({ post }) => post ? <HomeTopFeaturePost {...post} /> : <div></div>
             }
           />
+          <div className="px-4">
+            <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
+            <FetchPostsFromArchivePage
+              slug={latestPostAsTopic.slug}
+              layout="list"
+              render={({ posts }) => {
+                return <LatestSection posts={posts.slice(0, 4)} />
 
-          <FetchPostsFromArchivePage
-            slug={latestPostAsTopic.slug}
-            layout="list"
-            render={({ posts }) => {
-              return <LatestSection latestPosts={posts.slice(0, 6)} latestSlug={latestPostAsTopic.slug} />
+              }}
 
-            }}
+            />
+            <FeatureSectionDesktop featuredPosts={[randomRest[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
+            <LowerSections
+              lists={popularTopicsAll.static}
+              newPostsForYou={[]}
+              topicsForYou={popularTopicsAll.static}
+              popularPosts={popularPostsAll.static}
+            />
+            <LazyLoad >
+              <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
+                <div className="col-start-1 col-end-3 lg:col-end-4">
+                  <FetchPostsFromArchivePage
+                    slug={latestPostAsTopic.slug}
+                    layout="list"
+                    render={({ posts }) => {
+                      return (
+                        <div className="">
+                          {posts.slice(6, 12).map((item, i) => {
+                            return (
+                              <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
+                                <RightImgWDes key={i} {...item} />
+                              </div>
+                            )
+                          })}
+                        </div>
+                      )
 
-          />
-          <FeatureSectionDesktop featuredPosts={[randomRest[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
-          <LowerSections
-            lists={popularTopicsAll.static}
-            newPostsForYou={[]}
-            topicsForYou={popularTopicsAll.static}
-            popularPosts={popularPostsAll.static}
-          />
+                    }}
 
-          <LazyLoad >
-            <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
-              <div className="col-start-1 col-end-3 lg:col-end-4">
-                <FetchPostsFromArchivePage
-                  slug={latestPostAsTopic.slug}
-                  layout="list"
-                  render={({ posts }) => {
-                    return (
-                      <div className="">
-                        {posts.slice(6, 12).map((item, i) => {
-                          return (
-                            <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
-                              <RightImgWDes key={i} {...item} />
-                            </div>
-                          )
-                        })}
-                      </div>
-                    )
-
-                  }}
-
-                />
-                <ShowMore
-                  slug={latestPostAsTopic.slug}
-                  startNr={2}
-                />
+                  />
+                  <ShowMore
+                    slug={latestPostAsTopic.slug}
+                    startNr={2}
+                  />
+                </div>
               </div>
-            </div>
-          </LazyLoad>
+            </LazyLoad>
+          </div>
         </div>
+
+
+
       </Placeholder>
     </div>
 

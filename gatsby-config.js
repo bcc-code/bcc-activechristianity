@@ -74,14 +74,6 @@ checkEnvVar()
 
 
 const plugins = [
-  {
-    resolve: `gatsby-plugin-google-tagmanager`,
-    options: {
-      id: process.env.GTM_TAG||"GTM-WCW8RR4", 
-      includeInDevelopment: false,
-      gtmLocale: process.env.LOCALE,
-    },
-  },
   'gatsby-plugin-typescript',
   'gatsby-plugin-react-helmet',
   {
@@ -106,8 +98,6 @@ const plugins = [
       baseUrl: process.env.API_URL,
     },
   },
-  'gatsby-transformer-sharp',
-  'gatsby-plugin-sharp',
   'gatsby-plugin-sass',
   {
     resolve: 'gatsby-plugin-root-import',
@@ -146,22 +136,9 @@ const plugins = [
   },
   "gatsby-plugin-webpack-bundle-analyser-v2",
   'gatsby-plugin-loadable-components-ssr',
-  {
-    resolve: `gatsby-plugin-algolia-search`,
-    options: {
-      appId: process.env.ALGOLIA_APP_ID,
-      apiKey: process.env.ALGOLIA_ADMIN_KEY,
-      indexName: 'dev_posts', // for all queries
-      queries,
-      enablePartialUpdates: true
-    },
-  }
+
 ];
 
-/* if (process.env.ALGOLIA_ADMIN_KEY && process.env.ENABLE_ALGOLIA === 'yes') {
-  console.log('pushing algolia')
-  plugins.push()
-} */
 
 if (activeEnv === 'production') {
   
@@ -182,7 +159,25 @@ if (activeEnv === 'production') {
           generateRedirectObjectsForPermanentRedirects: true,
       },
     }
-  )
+  ),
+  {
+    resolve: `gatsby-plugin-algolia-search`,
+    options: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_ADMIN_KEY,
+      indexName: 'dev_posts', // for all queries
+      queries,
+      enablePartialUpdates: true
+    },
+  },
+  {
+    resolve: `gatsby-plugin-google-tagmanager`,
+    options: {
+      id: process.env.GTM_TAG||"GTM-WCW8RR4", 
+      includeInDevelopment: false,
+      gtmLocale: process.env.LOCALE,
+    },
+  }
 }
 
 module.exports = {

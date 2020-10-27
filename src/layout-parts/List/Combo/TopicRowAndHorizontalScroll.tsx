@@ -13,7 +13,12 @@ const TopicRowAndHorizontalScroll: React.FC<{ topics: ITopic[] }> = ({ topics })
                 {topics.map(({ name, slug: to, image }) => {
                     return (
                         <div className="min-h-24 h-24" key={shortid()}  >
-                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} image={image} />
+                            <ImgBgTopicCard
+                                name={name}
+                                to={`${TS.slug_topic}/${to}`}
+                                image={image}
+                                rounded="rounded-xxl"
+                            />
                         </div>
                     )
                 })}
@@ -23,8 +28,13 @@ const TopicRowAndHorizontalScroll: React.FC<{ topics: ITopic[] }> = ({ topics })
                 items={topics.map(({ name, slug: to, image }) => {
                     return (
                         <div className="flex flex-col items-center" key={shortid()} >
-                            <div className="min-h-36 h-36 w-24" >
-                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} image={image} />
+                            <div style={{ width: "100px", height: "138px" }}>
+                                <ImgBgTopicCard
+                                    name={name}
+                                    to={`${TS.slug_topic}/${to}`}
+                                    image={image}
+                                    rounded="rounded-xxl"
+                                />
                             </div>
                         </div>
                     )

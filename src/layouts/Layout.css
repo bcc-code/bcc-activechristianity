@@ -73,7 +73,15 @@
 @media (min-width: 640px) {
 
     .layout-children {
-        margin-top: 86px;
+        margin-top: 90px;
+
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .layout-children {
+        margin-top: 96px;
     }
 }
 

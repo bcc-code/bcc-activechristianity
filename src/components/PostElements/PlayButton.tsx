@@ -27,7 +27,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                     id="play-button"
                     className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
                 >
-                    {track.video ? <MUIcon name="OndemandVideo" size="12" /> : <MUIcon name="Headset" size="12" />}
+                    {track.video ? <MUIcon name="PlayCircleOutline" size="12" /> : <MUIcon name="Headset" size="12" />}
                 </div>
             )}
             {children}

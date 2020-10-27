@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
-import LogoFull from '@/images/ACLogoFull'
+import LogoSmall from '@/images/AC_Logo.png'
 import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
 import ReactPlaceholder from 'react-placeholder'
@@ -48,17 +48,8 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
         }
     }, [hasDelayedOnce])
 
-
     React.useEffect(() => {
-        delayShowSteps()
-        return () => {
-            if (timerId.current) {
-                clearTimeout(timerId.current);
-            }
-        }
-    }, [breadcrumb])
-
-    const useHistory = () => {
+        // remove all history if visit one of the 4 main pages
         const find = menu.find(item => item.to === location.pathname || `/${item.to}` === location.pathname)
 
         setIsback(false)
@@ -88,22 +79,11 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 
 
         }
-    }
-    const handleBackClick = () => {
 
-        if (typeof window !== "undefined") {
-            if (history.length > 1) {
-                setIsback(true)
-                navigate(-1)
-            } else if (mobileLastStep) {
-                setHistory([])
-                navigate(`/${mobileLastStep.to}`)
-            }
-        }
 
-    }
+    }, [currentPage.to])
+    React.useEffect(() => {
 
-    const activateLastStepFunction = () => {
         if (history.length > 1) {
 
             const lastStep = history[history.length - 2]
@@ -122,7 +102,28 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
         }
 
         delayShowSteps()
+
+
+        return () => {
+            if (timerId.current) {
+                clearTimeout(timerId.current);
+            }
+        }
+    }, [breadcrumb])
+    const handleBackClick = () => {
+
+        if (typeof window !== "undefined") {
+            if (history.length > 1) {
+                setIsback(true)
+                navigate(-1)
+            } else if (mobileLastStep) {
+                setHistory([])
+                navigate(`/${mobileLastStep.to}`)
+            }
+        }
+
     }
+
     const getLastStep = () => {
         let lastStep = breadcrumb && breadcrumb.items.length > 0 && breadcrumb.items[breadcrumb.items.length - 1]
 
@@ -143,14 +144,13 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 
     }
 
-
     return (
 
         <div className={`fixed w-full top-0 z-50 sm:hidden  drawer-main drawer-main-${isSideNavOpen ? 'mobile-open' : 'close'}`}>
             <div className={`cube-wrapper`}>
                 <div className={`cube ${showMobileSteps ? 'cube-row' : ''}`}>
                     <div className="cube-top flex justify-between items-center w-full">
-                        {/*                         <div className=" min-w-20 font-roboto">
+                        <div className=" min-w-20 font-roboto">
                             {showMobileSteps && mobileLastStep ? (
                                 <button className="flex items-center" onClick={handleBackClick}>
                                     <span className="pl-2">
@@ -167,9 +167,9 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                                     </div>
                                 )
                             }
-                        </div> */}
-                        <Link className='px-4' to="/">
-                            <LogoFull height="24" full />
+                        </div>
+                        <Link className='pr-4' to="/">
+                            <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />
                         </Link>
                         <div className="flex items-center">
                             {explorePage && (
@@ -187,7 +187,18 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                     </div>
                     <div className="cube-front flex justify-center items-center py-2 w-full">
                         <Link className='flex items-center' to="/">
-                            <LogoFull height="24" full />
+                            <div className='pr-4'>
+                                <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />
+                            </div>
+                            <div >
+                                <img
+                                    style={{ maxWidth: '150px' }}
+                                    src={languageLogoSrc}
+                                    alt={TS.site_title}
+                                />
+                            </div>
+
+
                         </Link>
                     </div>
                 </div>
@@ -198,3 +209,4 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 }
 
 export default React.memo(TopNavMobile)
+

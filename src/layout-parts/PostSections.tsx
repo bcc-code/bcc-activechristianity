@@ -54,7 +54,7 @@ export const typeIcons: { [key: string]: JSX.Element } = {
 
     />,
     'watch': <Icon
-        name="OndemandVideo"
+        name="PlayCircleOutline"
     />
 
 }

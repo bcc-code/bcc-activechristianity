@@ -10,7 +10,6 @@ import AccessTime from '@material-ui/icons/AccessTime'
 import Description from '@material-ui/icons/Description'
 import Equalizer from '@material-ui/icons/Equalizer'
 import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline'
-import OndemandVideo from '@material-ui/icons/OndemandVideo'
 import Headset from '@material-ui/icons/Headset'
 import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded'
 import ShareOutlined from '@material-ui/icons/ShareOutlined'
@@ -38,6 +37,7 @@ import FirstPage from '@material-ui/icons/FirstPage'
 import LastPage from '@material-ui/icons/LastPage'
 import CheckBox from '@material-ui/icons/CheckBox'
 import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank'
+
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -51,7 +51,7 @@ type IMUIIConName = "Home" |
     "Description" |
     "Equalizer" |
     "PlayCircleOutline" |
-    "OndemandVideo" |
+    "PlayCircleOutline" |
     "Headset" |
     "PlayArrowRounded" |
     "PlayArrowRounded" |
@@ -93,7 +93,7 @@ const Icons = {
     AccessTime,
     Equalizer,
     PlayCircleOutline,
-    OndemandVideo,
+    PlayCircleOutline,
     Headset,
     PlayArrowRounded,
     ShareOutlined,

@@ -38,7 +38,7 @@ export default function HTML(props) {
               }
             }
           ` }}></script>
-          <script async={true} src="https://api.reftagger.com/v2/RefTagger.js"></script>
+          <script src="https://api.reftagger.com/v2/RefTagger.js"></script>
 {/* 
           <link type="text/css" rel="stylesheet" href="/src/styles/tailwind-output.css"></link> */}
           

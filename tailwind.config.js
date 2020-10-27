@@ -152,7 +152,8 @@ module.exports = {
         'mp-background': 'var(--mp-background)',
         'mp-play-progress': 'var(--mp-play-progress)',
         'mp-duration': 'var(--mp-duration)',
-        'mp-text': 'var(--mp-text)'
+        'mp-text': 'var(--mp-text)',
+        'info-bar':'var(--info-bar)'
       },
       opacity:{
         '0': '0',

@@ -209,6 +209,7 @@ module.exports = function generateTopics(actions, graphql) {
                               slug:topic.slug,
                               types:topicType,
                               formats:topicFormat,
+                              image:topic.image,
                               featuredPosts,
                               mostPopular,
                               breadcrumb:[

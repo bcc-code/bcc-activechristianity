@@ -3,8 +3,7 @@ import React from 'react';
 import { INavItem, IPostAuthors } from '@/types'
 import PostMetaLinks from './PostMetaLinks'
 import TS from '@/strings'
-import { sprintf } from 'sprintf-js'
-import { normalizeAuthors } from '@/helpers'
+
 interface IPostMetaProps {
     categories?: INavItem[]
     authors: IPostAuthors[]
