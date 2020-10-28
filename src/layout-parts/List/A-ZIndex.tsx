@@ -1,11 +1,11 @@
 import React from 'react'
-import { INavItem } from '@/types'
+import { ITopicNavItem } from '@/types'
 import Link from '@/components/CustomLink'
 import { chunkArray } from '@/helpers'
-
+import { ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow.tsx'
 interface ILinkGroup {
     name: string
-    items: INavItem[]
+    items: ITopicNavItem[]
 }
 interface IProps {
     groups: ILinkGroup[]
@@ -29,9 +29,15 @@ const TaxonomyIndex: React.FC<IProps> = ({ groups }) => {
 
 
 
-            items.map(t => {
+            items.sort((a, b) => a.name.localeCompare(b.name)).map(t => {
 
-                desktopFlexItemArray.push(<Link className="block p-2 pr-8 text-xs" to={`/${t.to}`}>{t.name}</Link>)
+                desktopFlexItemArray.push(
+                    <div className="flex justify-between items-center">
+                        <Link className="block p-2 pr-8 text-xs" to={`/${t.to}`}>{t.name}</Link>
+                        <ToggleBookmarkIconOnly id={t.id} />
+
+                    </div>
+                )
 
                 return null
 

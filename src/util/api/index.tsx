@@ -15,7 +15,12 @@ const sendQuery = (query: string) => {
     })
         .then(response => response.json())
         .then(res => {
-            return res.data
+            if (res.errors && Array.isArray(res.errors)) {
+                throw new Error(res.errors[0].message)
+            } else {
+                return res.data
+            }
+
         })
 }
 

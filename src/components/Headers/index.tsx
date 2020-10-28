@@ -62,7 +62,7 @@ export const UnderlineTitleLink: React.FC<IUnderlineTitleLink> = ({ name, to }) 
 export const SectionTitleDesktopAndMobile: React.FC<IUnderlineTitleLink> = ({ name, to }) => {
     return (
         <div>
-            <div className="hidden sm:block px-4">
+            <div className="hidden sm:block standard-max-w-px">
                 <UnderlineTitleLink name={name} to={to} />
             </div>
             <div className="block sm:hidden">

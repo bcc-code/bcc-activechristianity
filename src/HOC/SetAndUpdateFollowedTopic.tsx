@@ -17,7 +17,6 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     const dispatch = useDispatch()
 
     React.useEffect(() => {
-
         const found = followedTopics.findIndex(p => p.id === id)
         const followed = found > -1
         setFollowed(followed ? "true" : "false")

@@ -65,7 +65,7 @@ const Watch: React.FC<IProps> = (props) => {
                 </div>
 
             </div>
-            <div className="standard-max-w-px">
+            <div className="">
                 <FetchPostsFromArchivePage
                     slug={latestSlug}
                     layout="row" render={({ posts }) => (

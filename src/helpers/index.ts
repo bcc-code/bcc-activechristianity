@@ -167,7 +167,7 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     const sortedTags: {
         [key: string]: {
             info: INavItem
-            topics: INavItem[]
+            topics: ITopicNavItem[]
         }
     } = {}
     topics.forEach((t) => {
