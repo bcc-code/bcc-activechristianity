@@ -37,12 +37,6 @@ const PostList: React.FC<IPostList> = (props) => {
         }
     }
 
-    const handleInputChange = (e: any) => {
-        e.preventDefault();
-        console.log(e.target)
-        setPageInput(e.target.value)
-    }
-
     const handleSubmit = (e: any) => {
         e.preventDefault();
         handleChange(pageInput)

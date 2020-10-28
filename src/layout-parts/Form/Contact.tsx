@@ -36,10 +36,7 @@ const initialFields = {
 const ContactForm = () => {
     const [fields, setFields] = React.useState<IContactFrom>(initialFields)
     const [errors, setErrors] = React.useState(initialFields)
-    const [success, setSuccess] = React.useState(true)
-    const [fieldsError, setFieldsError] = React.useState<{
-        [x: string]: any
-    }>({})
+    const [success, setSuccess] = React.useState(false)
 
     const [errorMessage, setErrorMessage] = React.useState<undefined | string>(undefined)
     const validate = () => {

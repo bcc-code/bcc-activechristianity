@@ -11,7 +11,7 @@ const FeatureSection: React.FC<IXScrollItem> = ({ items }) => {
             {items.map((c, i) => {
 
                 return (
-                    <div className="scroll-snap-x-child w-10/12 min-w-10/12 ml-4">
+                    <div className="scroll-snap-x-child ml-4" style={{ width: "88%", minWidth: "88%" }}>
                         {c}
                     </div>
                 )

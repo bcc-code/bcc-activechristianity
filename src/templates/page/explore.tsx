@@ -34,15 +34,15 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const { resource, scripturePage } = props.pageContext
 
     React.useEffect(() => {
-        localStorageHelper.storeQuery(query)
-    }, [query])
-
-    React.useEffect(() => {
         const search = localStorageHelper.getStoredHistory()
         setSearchHistory(search)
 
     }, [query])
 
+    const handleQueryChange = (searchQuery: string) => {
+        localStorageHelper.storeQuery(searchQuery)
+        setQuery(searchQuery)
+    }
     const onSearchStateChange = (state: any) => {
         if (state.page) {
             setPageNr(state.page)
@@ -91,7 +91,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
 
     const customSearchBoxProps = {
         query,
-        setQuery,
+        setQuery: handleQueryChange,
         isInputFocus,
         setInputFocus,
         taxonomyFilter,

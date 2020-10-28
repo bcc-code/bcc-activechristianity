@@ -19,15 +19,24 @@ export interface IPostItemMediaImg {
 
 export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, className, children, style }) => {
 
-
     return (
         <Link className={className} style={style} to={slug}>
             {track && (track.video || track.audio) && (
                 <div
                     id="play-button"
                     className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
+
+
                 >
-                    {track.video ? <MUIcon name="PlayCircleOutline" size="12" /> : <MUIcon name="Headset" size="12" />}
+                    <div className="z-20">
+                        {track.video ? <MUIcon name="PlayCircleOutline" size="12" color="white" /> : <MUIcon name="Headset" size="12" color="white" />}
+                    </div>
+                    <div
+                        style={{ background: "#020203", opacity: "0.3" }}
+                        className="absolute inset-0"
+                    >
+
+                    </div>
                 </div>
             )}
             {children}

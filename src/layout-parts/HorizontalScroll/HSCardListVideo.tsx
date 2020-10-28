@@ -19,7 +19,7 @@ const HSCardList: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
                 <VideoTopImg
                     key={item.slug}
                     {...item}
-                    small
+
                 />
             ))}
             />

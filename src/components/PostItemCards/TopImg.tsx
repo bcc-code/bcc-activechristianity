@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { IPostItem } from '@/types'
-import PostBase, { IPostBase } from '@/components/PostElements/Base'
+import PostBase from '@/components/PostElements/Base'
 import { PostLabel } from '@/components/PostElements'
 import Image2To1 from '@/components/Images/Image2To1'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
@@ -28,12 +28,11 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
         noBg,
         fixedImageHeight
     } = props
-
     return (
         <div
-            className={`flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-xl border' : ''} `}>
+            className={`flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-xl border ' : ''} `}>
             <PostItemMediaImg
-                className={`relative w-full sm:pl-0 flex justify-end`}
+                className={`relative w-full sm:pl-0 flex justify-end overflow-hidden ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
                 track={media}
                 slug={props.slug}
             >
@@ -60,7 +59,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
             </PostItemMediaImg>
             <PostBase
                 post={props}
-                wrapperClass={noBorder === true ? ' pt-4 pr-4' : 'px-4 pt-4'}
+                wrapperClass={noBorder === true ? ' pt-4' : 'px-4 pt-4'}
                 postTitleProps={{
                     fontKey: 'text-lg',
                     clamp: 3,

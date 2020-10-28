@@ -12,12 +12,13 @@ export interface IPostBase {
     audioDuration?: boolean
     post: IPostItem
     noBorder?: boolean
+    hideTime?: boolean
 
 }
 
 const PostBase: React.FC<IPostBase> = (props) => {
 
-    const { wrapperClass, postExcerptProps, postTitleProps, post, audioDuration, noBorder } = props
+    const { wrapperClass, postExcerptProps, postTitleProps, post, audioDuration, hideTime } = props
     const { slug, duration, id, authors, media, title, likes, views, excerpt } = post
 
     let postReadingTime = duration?.read
@@ -37,21 +38,18 @@ const PostBase: React.FC<IPostBase> = (props) => {
             </div>
 
 
-            <div className={`pb-4 flex ${noBorder === true ? '' : 'justify-around'} `}>
-                <ReadOrListenIcon
-                    track={media}
-                    {...duration}
-                />
-                {views && <Views views={views} />}
-                <Bookmark id={id} color="slate-dark" size="5" />
-                {/*  <ReadingTimingIcon
-                    duration={duration?.listen || duration?.read}
-                /> */}
-                {/*               <BookmarksAndViews
-                    id={id}
-                    likes={likes}
-                    views={views}
-                /> */}
+            <div className={`pb-4 flex justify-between`}>
+                {hideTime !== true && (
+                    <ReadOrListenIcon
+                        track={media}
+                        {...duration}
+                    />
+                )}
+                <div className="flex">
+                    {views && <Views views={views} />}
+                    <Bookmark id={id} color="slate-dark" size="5" />
+                </div>
+
             </div>
         </div>
     )

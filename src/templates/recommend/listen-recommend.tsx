@@ -35,6 +35,17 @@ const Listen: React.FC<IProps> = (props) => {
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
+                <div className="py-6">
+                    <div className="w-full flex justify-between items-center pb-4 pr-4">
+                        <PageSectionHeader title={podcastProperties.title} />
+                        <UnderlineLinkViewAll to={`${podcast.to}`} />
+                    </div>
+                    <FetchLatestPodcast
+                        layout="row"
+                        render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
+
+                    />
+                </div>
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
                     <div className="w-full py-6 sm:hidden">
@@ -65,20 +76,7 @@ const Listen: React.FC<IProps> = (props) => {
                         }}
                     />
                 </div>
-                <LazyLoad>
-                    <div className="py-6">
-                        <div className="w-full flex justify-between items-center pb-4 pr-4">
-                            <PageSectionHeader title={podcastProperties.title} />
-                            <UnderlineLinkViewAll to={`${podcast.to}`} />
-                        </div>
-                        <FetchLatestPodcast
-                            layout="row"
-                            render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
 
-                        />
-                    </div>
-
-                </LazyLoad>
 
 
                 <LazyLoad>

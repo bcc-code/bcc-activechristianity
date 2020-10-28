@@ -177,6 +177,24 @@ if (activeEnv === 'production') {
       includeInDevelopment: false,
       gtmLocale: process.env.LOCALE,
     },
+  },
+  {
+    resolve: 'gatsby-plugin-sitemap'
+  },
+  {
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      host: process.env.SITE_URL,
+      sitemap: `${process.env.SITE_URL}/sitemap.xml`,
+      env: {
+        development: {
+          policy: [{ userAgent: '*', disallow: ['/'] }]
+        },
+        production: {
+          policy: [{ userAgent: '*', disallow: ['/'] }]
+        }
+      }
+    }
   }
 }
 

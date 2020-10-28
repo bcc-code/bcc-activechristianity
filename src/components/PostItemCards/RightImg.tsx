@@ -86,14 +86,14 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                 </div>
                 <div className="w-4/12 sm:w-6/12 md:w-4/12 flex justify-center">
                     <PostItemMediaImg
-                        className="relative w-full max-h-24 pb-square sm:pb-half mt-4"
+                        className="relative w-full max-h-24 pb-square sm:pb-half mt-4 rounded-xxl sm:rounded-xl overflow-hidden "
                         track={media}
                         slug={slug}
 
                     >
                         <LazysizesFeaturedImage
                             {...image}
-                            className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                            className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl overflow-hidden object-cover g-image"
                             alt={title}
                         />
 

@@ -14,7 +14,6 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
     return (
         <StaticQuery query={query}
             render={(props: IQuery) => {
-                console.log(props)
                 const filtered: string[] = []
 
 
