@@ -14,7 +14,7 @@ const CustomForm: React.FC<{ status: 'error' | 'success' | 'sending' | null, mes
     }
     return (
         <div className="w-full">
-            {status === "sending" && <div style={{ color: "blue" }}>sending...</div>}
+            {status === "sending" && <div style={{ color: "blue" }}>Sending...</div>}
             {status === "error" && (
                 <div
                     style={{ color: "red" }}
@@ -24,8 +24,11 @@ const CustomForm: React.FC<{ status: 'error' | 'success' | 'sending' | null, mes
             {status === "success" && (
                 <div
                     style={{ color: "green" }}
-                    dangerouslySetInnerHTML={{ __html: message }}
-                />
+
+                >
+                    Thank you for subscribing!
+                    You will receive an email shortly.
+                </div>
             )}
             <InputText
                 label={'Email'}

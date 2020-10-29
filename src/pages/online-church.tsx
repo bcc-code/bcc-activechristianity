@@ -10,6 +10,7 @@ import shortid from 'shortid'
 import Link from '@/components/CustomLink'
 import { timeToString } from '@/helpers'
 import AddToCalendar from 'react-add-to-calendar'
+import AddToCalendarLocal from '@/layout-parts/LandingPage/AddToCalendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
 import ModalWProps from '@/components/Modal/ModalWProps'
@@ -41,15 +42,15 @@ const OnlineChurch = () => {
     }
     const mailChimpUrl = "https://activechristianity.us2.list-manage.com/subscribe/post?u=ac35386bb66cd1f6e45717bcd&amp;id=f36218379d"
     const onlineChurchUrl = "https://brunstadchristianchurch.online.church"
-    const date1 = '1 Nov 2020 17:00:00 GMT'
-    const date2 = '1 Nov 2020 20:00:00 GMT'
-    const date3 = '2 Nov 2020 02:00:00 GMT'
+    const date1 = '1 Nov 2020 17:00:00 UTC'
+    const date2 = '1 Nov 2020 20:00:00 UTC'
+    const date3 = '2 Nov 2020 02:00:00 UTC'
     const event = {
         title: 'Sample Event',
         description: 'This is the sample event provided as an example only',
         location: 'Portland, OR',
         startTime: date1,
-        endTime: '1 Nov 2020 18:00:00 GMT'
+        endTime: '1 Nov 2020 18:00:00 UTC'
     }
     const IconProps = {
         size: 40,
@@ -203,7 +204,7 @@ const OnlineChurch = () => {
                 <div className="standard-max-w-px mx-auto ">
                     <div className="bg-white text-blue-600 rounded-3xl flex flex-col py-6 px-8">
 
-                        <h1 className="text-3xl text-bold mb-4"></h1>
+                        <h1 className="text-3xl font-bold mb-4">Details</h1>
                         <span className="py-4">
 
                         </span>
@@ -248,9 +249,6 @@ const OnlineChurch = () => {
                                     popUpTitle: strings.emailOptionTitle,
                                     popUpContent: (
                                         <div>
-                                            <p className="py-4">
-                                                {strings.emailOptionConsent}
-                                            </p>
                                             <MailchimpSubscribe
                                                 url={mailChimpUrl}
                                                 render={({ subscribe, status, message }) => (
@@ -273,15 +271,15 @@ const OnlineChurch = () => {
                                             {[
                                                 {
                                                     date: date1,
-                                                    endDate: '1 Nov 2020 18:00:00 GMT'
+                                                    endDate: '1 Nov 2020 18:00:00 UTC'
                                                 },
                                                 {
                                                     date: date2,
-                                                    event: '1 Nov 2020 21:00:00 GMT'
+                                                    event: '1 Nov 2020 21:00:00 UTC'
                                                 },
                                                 {
                                                     date: date3,
-                                                    event: '2 Nov 2020 03:00:00 GMT',
+                                                    event: '2 Nov 2020 03:00:00 UTC',
                                                 }
                                             ].map(e => {
                                                 return (
@@ -289,12 +287,16 @@ const OnlineChurch = () => {
                                                         <span className="whitespace-pre-wrap">
                                                             {timeToString(new Date(e.date))}
                                                         </span>
-                                                        <AddToCalendar event={{
-                                                            title: strings.eventTitle,
-                                                            description: strings.eventDescription,
-                                                            startTime: e.date,
-                                                            endTime: '1 Nov 2020 18:00:00 GMT'
-                                                        }} />
+
+                                                        <AddToCalendarLocal
+                                                            event={{
+                                                                title: strings.eventTitle,
+                                                                description: strings.eventDescription,
+                                                                startTime: e.date,
+                                                                endTime: '1 Nov 2020 18:00:00 UTC'
+                                                            }}
+
+                                                        />
                                                     </div>
                                                 )
                                             })}
