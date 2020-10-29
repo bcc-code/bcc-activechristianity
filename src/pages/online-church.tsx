@@ -63,8 +63,8 @@ const OnlineChurch = () => {
         seconds: 'Seconds',
         cta: 'See details',
         theme: 'Theme:',
-        inviteTitle: 'BCC Church Service Live – Take up your cross: The secret to perfect unity',
-        inviteDescription: 'Join us this Sunday and connect with our community on our online church service!',
+        inviteTitle: 'Online Church Service this Sunday. ',
+        inviteDescription: 'BCC Church Service Live – Take up your cross: The secret to perfect unity. Join us this Sunday and connect with our community on our online church service!',
         emailOptionTitle: 'Notify me by email ',
         emailOptionConsent: 'By continuing, you consent to receiving email updates from ActiveChristianity.',
         eventTitle: 'Brunstad Christian Church Online Service',
@@ -253,157 +253,156 @@ const OnlineChurch = () => {
 
                         </div>
 
-
-
-
-
                     </div>
                     <div>
                         <div className="grid sm:grid-cols-3 gap-4 py-4">
-                            {[
-                                {
-                                    iconName: "AddAlert",
-                                    title: strings.emailOptionTitle,
-                                    popUpTitle: strings.emailOptionTitle,
-                                    popUpContent: (
-                                        <div>
-                                            <MailchimpSubscribe
-                                                url={mailChimpUrl}
-                                                render={({ subscribe, status, message }) => (
-                                                    <CustomForm
-                                                        status={status}
-                                                        message={message}
-                                                        onValidated={formData => subscribe(formData)}
-                                                    />
-                                                )}
-                                            />
-                                        </div>
-                                    )
-                                },
-                                {
-                                    iconName: "Event",
-                                    title: 'Add to Calendar',
-                                    popUpTitle: "Add to Calendar",
-                                    popUpContent: (
-                                        <div>
-                                            {[
-                                                {
-                                                    date: date1,
-                                                    endDate: '1 Nov 2020 18:00:00 UTC'
-                                                },
-                                                {
-                                                    date: date2,
-                                                    event: '1 Nov 2020 21:00:00 UTC'
-                                                },
-                                                {
-                                                    date: date3,
-                                                    event: '2 Nov 2020 03:00:00 UTC',
-                                                }
-                                            ].map(e => {
-                                                return (
-                                                    <div className="pb-4">
-                                                        <span className="whitespace-pre-wrap">
-                                                            {timeToString(new Date(e.date))}
-                                                        </span>
+                            {[{
+                                iconName: "GroupAdd",
+                                bgColor: "bg-d4slate-light",
+                                title: 'Invite a friend',
+                                popUpTitle: 'Invite a friend',
+                                popUpContent: (
+                                    <div className="mx-auto w-full">
+                                        <div className="flex flex-col">
+                                            <div className="py-1">
+                                                <FacebookMessengerShareButton
+                                                    url={onlineChurchUrl}
+                                                    title={strings.inviteTitle}
 
-                                                        <AddToCalendarLocal
-                                                            event={{
-                                                                title: strings.eventTitle,
-                                                                description: strings.eventDescription,
-                                                                startTime: e.date,
-                                                                endTime: '1 Nov 2020 18:00:00 UTC'
-                                                            }}
-
-                                                        />
+                                                    appId={"1879474385645145"}
+                                                >
+                                                    <div className="flex items-center">
+                                                        <FacebookMessengerIcon {...IconProps} />
+                                                        <span className="px-2">Facebook Messenger</span>
                                                     </div>
-                                                )
-                                            })}
 
-                                        </div>
-                                    )
-                                },
-                                {
-                                    iconName: "GroupAdd",
-                                    title: 'Invite a friend',
-                                    popUpTitle: 'Invite a friend',
-                                    popUpContent: (
-                                        <div className="mx-auto w-full">
-                                            <div className="flex flex-col">
-                                                <div className="py-1">
-                                                    <FacebookMessengerShareButton
-                                                        url={onlineChurchUrl}
-                                                        title={strings.inviteTitle}
+                                                </FacebookMessengerShareButton>
 
-                                                        appId={"1879474385645145"}
-                                                    >
-                                                        <div className="flex items-center">
-                                                            <FacebookMessengerIcon {...IconProps} />
-                                                            <span className="px-2">Facebook Messenger</span>
-                                                        </div>
+                                            </div>
+                                            <div className="py-1">
+                                                <FacebookShareButton
+                                                    url={onlineChurchUrl}
+                                                    quote={`${strings.inviteTitle} | ${strings.inviteDescription}`}
+                                                >
+                                                    <div className="flex items-center">
+                                                        <FacebookIcon {...IconProps} />
+                                                        <span className="px-2">Facebook</span>
+                                                    </div>
 
-                                                    </FacebookMessengerShareButton>
+                                                </FacebookShareButton>
 
-                                                </div>
-                                                <div className="py-1">
-                                                    <FacebookShareButton
-                                                        url={onlineChurchUrl}
-                                                        quote={`${strings.inviteTitle} | ${strings.inviteDescription}`}
-                                                    >
-                                                        <div className="flex items-center">
-                                                            <FacebookIcon {...IconProps} />
-                                                            <span className="px-2">Facebook</span>
-                                                        </div>
-
-                                                    </FacebookShareButton>
-
-                                                </div>
-                                                <div className="py-1">
-                                                    <WhatsappShareButton
-                                                        url={onlineChurchUrl}
-                                                        title={`${strings.inviteTitle} | ${strings.inviteDescription}`}
-                                                    >
-                                                        <div className="flex items-center">
-                                                            <WhatsappIcon {...IconProps} />
-                                                            <span className="px-2">Whatsapp</span>
-                                                        </div>
+                                            </div>
+                                            <div className="py-1">
+                                                <WhatsappShareButton
+                                                    url={onlineChurchUrl}
+                                                    title={`${strings.inviteTitle} | ${strings.inviteDescription}`}
+                                                >
+                                                    <div className="flex items-center">
+                                                        <WhatsappIcon {...IconProps} />
+                                                        <span className="px-2">Whatsapp</span>
+                                                    </div>
 
 
-                                                    </WhatsappShareButton>
-                                                </div>
-                                                <div className="py-1">
-                                                    <TelegramShareButton
-                                                        url={onlineChurchUrl}
-                                                        title={`${strings.inviteTitle} | ${strings.inviteDescription}`}
-                                                    >
-                                                        <div className="flex items-center">
-                                                            <TelegramIcon {...IconProps} />
-                                                            <span className="px-2">Telegram</span>
-                                                        </div>
+                                                </WhatsappShareButton>
+                                            </div>
+                                            <div className="py-1">
+                                                <TelegramShareButton
+                                                    url={onlineChurchUrl}
+                                                    title={`${strings.inviteTitle} | ${strings.inviteDescription}`}
+                                                >
+                                                    <div className="flex items-center">
+                                                        <TelegramIcon {...IconProps} />
+                                                        <span className="px-2">Telegram</span>
+                                                    </div>
 
-                                                    </TelegramShareButton>
-                                                </div>
-                                                <div className="py-1">
-                                                    <EmailShareButton
-                                                        url={onlineChurchUrl}
-                                                        subject={strings.inviteTitle}
-                                                        body={strings.inviteDescription}
-                                                    >
-                                                        <div className="flex items-center">
-                                                            <EmailIcon {...IconProps} />
-                                                            <span className="px-2">Send Email</span>
-                                                        </div>
-                                                    </EmailShareButton>
-                                                </div>
+                                                </TelegramShareButton>
+                                            </div>
+                                            <div className="py-1">
+                                                <EmailShareButton
+                                                    url={onlineChurchUrl}
+                                                    subject={strings.inviteTitle}
+                                                    body={strings.inviteDescription}
+                                                >
+                                                    <div className="flex items-center">
+                                                        <EmailIcon {...IconProps} />
+                                                        <span className="px-2">Send Email</span>
+                                                    </div>
+                                                </EmailShareButton>
                                             </div>
                                         </div>
-                                    )
-                                }
+                                    </div>
+                                )
+                            },
+                            {
+                                iconName: "AddAlert",
+                                bgColor: "bg-d4primary",
+                                title: strings.emailOptionTitle,
+                                popUpTitle: strings.emailOptionTitle,
+                                popUpContent: (
+                                    <div>
+                                        <MailchimpSubscribe
+                                            url={mailChimpUrl}
+                                            render={({ subscribe, status, message }) => (
+                                                <CustomForm
+                                                    status={status}
+                                                    message={message}
+                                                    onValidated={formData => subscribe(formData)}
+                                                />
+                                            )}
+                                        />
+                                    </div>
+                                )
+                            },
+                            {
+                                iconName: "Event",
+                                bgColor: "bg-d4slate-dark",
+                                title: 'Add to Calendar',
+                                popUpTitle: "Add to Calendar",
+                                popUpContent: (
+                                    <div>
+                                        {[
+                                            {
+                                                date: date1,
+                                                endDate: '1 Nov 2020 18:00:00 UTC'
+                                            },
+                                            {
+                                                date: date2,
+                                                event: '1 Nov 2020 21:00:00 UTC'
+                                            },
+                                            {
+                                                date: date3,
+                                                event: '2 Nov 2020 03:00:00 UTC',
+                                            }
+                                        ].map(e => {
+                                            return (
+                                                <div className="pb-4">
+                                                    <span className="whitespace-pre-wrap">
+                                                        {timeToString(new Date(e.date))}
+                                                    </span>
+
+                                                    <AddToCalendarLocal
+                                                        event={{
+                                                            title: strings.eventTitle,
+                                                            description: strings.eventDescription,
+                                                            startTime: e.date,
+                                                            endTime: '1 Nov 2020 18:00:00 UTC'
+                                                        }}
+
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+
+                                    </div>
+                                )
+                            },
+
                             ].map(item => {
                                 return (
                                     <ModalWProps
                                         trigger={(
-                                            <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center justify-center w-full" >
-                                                <Icon name={item.iconName} size="12" />
+                                            <button classNamw={`${item.bgColor} p-4 text-white rounded-xl flex  items-center justify-center w-full`} >
+                                                <Icon name={item.iconName} size="8" />
                                                 <span className="px-4 mt-4"> {item.title}</span>
                                             </button>
                                         )}

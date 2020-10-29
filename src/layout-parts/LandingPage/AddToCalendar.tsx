@@ -34,12 +34,14 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                 // (even with "download" attribute in use) so this solution
                 // ensures the event will download cross-browser
                 ****************************************************************/
-                var link = document.createElement("a");
-                link.href = window.URL.createObjectURL(blob);
-                link.setAttribute("download", filename);
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                if (typeof document !== undefined) {
+                    var link = document.createElement("a");
+                    link.href = window.URL.createObjectURL(blob);
+                    link.setAttribute("download", filename);
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
             }
         } else {
             window.open(url, "_blank");
@@ -51,11 +53,13 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                 listItem => {
                     var currentItem = Object.keys(listItem)[0];
                     var currentLabel = listItem[currentItem]
+                    const href = helpers.buildUrl(event, currentItem, isCrappyIE)
+                    console.log()
                     return (
                         <li>
                             <a
                                 target="_blank"
-                                href={helpers.buildUrl(event, currentItem, isCrappyIE)}
+                                href={href}
                                 onClick={handleDropdownLinkClick}
                             >
                                 {currentLabel}
