@@ -1,6 +1,6 @@
 import React from 'react'
 import onlineServer16to9 from '@/images/landingPage/online-service-2.jpg'
-import onlineServerMobile from '@/images/landingPage/online-service-small-2.jpg'
+import onlineServerMobile from '@/images/landingPage/online-church-small.jpg'
 import Icon from '@/components/Icons/Icon'
 import Countdown from 'react-countdown';
 import EmbedVideo from '@/components/Images/Video16to9'
@@ -61,7 +61,7 @@ const OnlineChurch = () => {
         hours: 'Hours',
         minutes: 'Minutes',
         seconds: 'Seconds',
-        cta: 'More details',
+        cta: 'See details',
         theme: 'Theme:',
         inviteTitle: 'BCC Church Service Live – Take up your cross: The secret to perfect unity',
         inviteDescription: 'Join us this Sunday and connect with our community on our online church service!',
@@ -76,20 +76,18 @@ const OnlineChurch = () => {
     return (
         <div>
             <div className="relative font-roboto font-semibold">
-                <div className="absolute inset-0 z-10" style={{ paddingTop: '3rem' }}>
+                <div className="absolute inset-0 z-10 pt-4">
                     <div className="standard-max-w-px mx-auto text-white h-full flex flex-col" >
                         <div className="flex flex-col">
-                            <h1 className="uppercase bold text-sm sm:text-base ">Join us <span className="bg-red-600 text-white px-2">Live</span> This Sunday </h1>
+                            <span className="pb-2">Join us <span className="bg-red-600 text-white px-2 rounded">Live</span> This Sunday </span>
 
-                            <h1 className=" text-d4primary text-2xl leading-snug md:text-3xl lg:text-4xl bold sm:leading-normal uppercase shadow" style={{ maxWidth: "450px" }}>
+                            <h1 className="text-xl leading-snug md:text-3xl lg:text-4xl bold sm:leading-normal shadow">
                                 Take up your cross:<br /> The secret to perfect unity
                         </h1>
-                            <div className="pb-4 flex my-2">
-                                <div className="text-sm sm:text-base bg-d4slate-dark p-2 leading-snug"> {strings.timeGeneral}<br />{strings.dateGeneral}</div>
-                            </div>
+
                         </div>
                         <div className="flex flex-col pb-12">
-                            <div className="mt-12 sm:mt-0">
+                            <div className="mt-4 sm:mt-0">
                                 <Countdown
                                     date={Date.parse(date1)}
                                     renderer={({ days, hours, minutes, seconds, completed }) => {
@@ -107,9 +105,9 @@ const OnlineChurch = () => {
                                             return (
                                                 <div className="flex text-white">
                                                     {countingBlocks.map(b => (
-                                                        <span className="flex flex-col items-center border border-white rounded mr-2 p-2">
-                                                            <span className="text-sxl sm:text-4xl">{b.time}</span>
-                                                            <span className="text-sm sm:text-base">{b.string}</span>
+                                                        <span className="flex flex-col items-center border border-white rounded-lg mr-2 p-2">
+                                                            <span className="text-xs sm:text-4xl">{b.time}</span>
+                                                            <span className="text-xs sm:text-base">{b.string}</span>
                                                         </span>
                                                     ))}
 
@@ -120,23 +118,23 @@ const OnlineChurch = () => {
                                 />
                             </div>
                             <div>
-                                <button className="flex items-center bg-d4primary px-4 rounded-full mt-12">
-                                    <div className="block sm:hidden pr-2">
+                                <button className="flex items-center bg-d4primary text-black py-2 my-4 px-4 rounded-full">
+
+                                    <span className="text-sm sm:text-2xl font-bold" onClick={handleShowDetailsClick}>{strings.cta}</span>
+                                    <div className="block sm:hidden">
                                         <Icon
                                             name="KeyboardArrowRight"
-                                            color="white"
-                                            size="8"
+
+                                            size="6"
                                         />
                                     </div>
-                                    <div className="hidden sm:block pr-2">
+                                    <div className="hidden sm:block">
                                         <Icon
                                             name="KeyboardArrowRight"
-                                            color="white"
+
                                             size="12"
                                         />
                                     </div>
-                                    <span className="text-lg sm:text-2xl pr-4 font-bold" onClick={handleShowDetailsClick}>{strings.cta}</span>
-
                                 </button>
                             </div>
                         </div>
@@ -147,26 +145,39 @@ const OnlineChurch = () => {
                 <img className="hidden sm:block inset-0 w-full" src={onlineServer16to9} alt="" />
                 <img className="block sm:hidden inset-0 w-full" src={onlineServerMobile} alt="" />
             </div>
-            <div className="bg-d4slate-dark text-white py-12 ">
+            <div className="bg-d4slate-dark text-white py-4 ">
                 <div className="standard-max-w-px mx-auto ">
-                    <h1 className="text uppercase">Before the service starts</h1>
-                    <h1 className="text-2xl text-d4primary font-bold">More on Message of the cross</h1>
+                    <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1>
+                    <h1 className="font-bold text-lg">More on Message of the cross</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 py-4">
-                        <div className="py-2 mb-12">
-                            <div className="w-full">
-                                <EmbedVideo
-                                    className={`rounded-xxl sm:rounded-xl overflow-hidden`}
-                                    src="https://www.youtube.com/embed/3zIwaKgJrbU"
+                        <div className="py-2 mb-6">
+                            <FetchOnePost
+                                slug={"bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily"}
+                                render={({ post }) => {
+                                    return post ? (
+                                        <>
+                                            <div className="w-full">
+                                                <EmbedVideo
+                                                    className={`rounded-xxl sm:rounded-xl overflow-hidden`}
+                                                    src="https://www.youtube.com/embed/3zIwaKgJrbU"
 
-                                />
-                            </div>
-                            <Link className="flex flex-col" to="/bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily">
-                                <h2 className="text-2xl bold py-4 font-semibold text-d4slate-lighter">Bible words explained: Take up your cross</h2>
-                            </Link>
+                                                />
+                                            </div>
+                                            <Link className="flex flex-col" to="/bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily">
+                                                <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post.title}</h2>
+                                                <p className="leading-normal">{post?.excerpt}</p>
+                                            </Link>
+                                        </>
+                                    ) : <div></div>
+                                }}
+
+                            />
+
                         </div>
+
                         {["the-message-of-the-cross-practical-christianity",
                             "the-message-of-the-cross-essential-but-unpopular-christianity"].map(slug => (
-                                <div className="py-2 mb-12">
+                                <div className="py-2 mb-6">
                                     <FetchOnePost
                                         slug={slug}
                                         render={({ post }) => {
@@ -176,7 +187,7 @@ const OnlineChurch = () => {
                                                         className="rounded-xxl overflow-hidden"
                                                         image={post?.image}
                                                     />
-                                                    <h2 className="text-2xl bold py-4 font-semibold text-d4slate-lighter">{post?.title}</h2>
+                                                    <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post?.title}</h2>
                                                     <p className="leading-normal">{post?.excerpt}</p>
                                                 </Link>
                                             ) : <div></div>
@@ -193,47 +204,61 @@ const OnlineChurch = () => {
                 </div>
 
             </div>
-            <div className="bg-d4primary py-12" ref={refElem}>
+            <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
                 <div className="standard-max-w-px mx-auto ">
-                    <div className="bg-white text-blue-600 rounded-3xl flex flex-col py-6 px-8">
+                    <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4">
 
-                        <h1 className="text-3xl font-bold mb-4">Details</h1>
-                        <span className="py-4">
+                        <h5 className="mb-4 ">
+                            <Icon name="Event" /><span className="font-bold">Event:</span>
+                            <br />
+                            <span className="">Brunstad Christian Church Online Service</span>
+                        </h5>
+                        <h5 className="mb-4 ">
+                            <Icon name="Event" /><span className="font-bold">Theme:</span>
+                            <br />
+                            <span className="leading-normal">Take up your cross: The secret to perfect unit</span>
+                            <br />
+                            <span className="leading-normal">Join us on our online service Live this Sunday November 1, where we will hear more about how we as disciples are to react to all that’s going on in the world today. Set a reminder so you don’t miss this!</span>
+                        </h5>
+                        <div className="mb-4">
+                            <Icon name="AccessTime" /><span className="font-bold">Date and Time:</span>
+                            {[
+                                {
+                                    date: date1,
+                                },
+                                {
+                                    date: date2,
+                                },
+                                {
+                                    date: date3,
+                                }
+                            ].map(d => (
+                                <span key={shortid()} className="flex">
 
-                        </span>
-                        {[
-                            {
-                                iconProps: {},
-                                date: date1,
-                            },
-                            {
-                                iconProps: { color: 'white' },
-                                date: date2,
-                            },
-                            {
-                                iconProps: { color: 'white' },
-                                date: date3,
-                            }
-                        ].map(d => (
-                            <span key={shortid()} className="flex">
-                                <div className="block pr-4">
-                                    <Icon name="AccessTime" {...d.iconProps} />
-                                </div>
-                                <span className="whitespace-pre-wrap">
-                                    {timeToString(new Date(d.date))}
+                                    <span className="whitespace-pre-wrap">
+                                        {timeToString(new Date(d.date))}
+                                    </span>
                                 </span>
+                            ))}
+                        </div>
+
+
+                        <div className="pr-4">
+                            <Icon name="LocationOn" />
+                            <span className="font-bold">Watch live here:</span>
+                            <span key={shortid()} className="flex">
+
+                                <a href={onlineChurchUrl} className="text-blue-700 break-words w-11/12" target="_blank" >{onlineChurchUrl}</a>
                             </span>
-                        ))}
 
-                        <span key={shortid()} className="flex py-4">
-                            <div className="pr-4">
-                                <Icon name="LocationOn" />
-                            </div>
-                            <a href={onlineChurchUrl} className="text-blue-700 break-words w-11/12" target="_blank" >{onlineChurchUrl}</a>
-                        </span>
+                        </div>
 
 
 
+
+
+                    </div>
+                    <div>
                         <div className="grid sm:grid-cols-3 gap-4 py-4">
                             {[
                                 {
@@ -395,10 +420,9 @@ const OnlineChurch = () => {
 
                                 )
                             })}
-
                         </div>
-                    </div>
 
+                    </div>
 
 
                 </div>
