@@ -37,7 +37,10 @@ import FirstPage from '@material-ui/icons/FirstPage'
 import LastPage from '@material-ui/icons/LastPage'
 import CheckBox from '@material-ui/icons/CheckBox'
 import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank'
-
+import Event from '@material-ui/icons/Event'
+import LocationOn from '@material-ui/icons/LocationOn'
+import AddAlert from '@material-ui/icons/AddAlert'
+import GroupAdd from '@material-ui/icons/GroupAdd'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -78,7 +81,12 @@ type IMUIIConName = "Home" |
     "FirstPage" |
     "LastPage" |
     "CheckBox" |
-    "CheckBoxOutlineBlank"
+    "CheckBoxOutlineBlank" |
+    "Event" |
+    "LocationOn" |
+    "AddAlert" |
+    "GroupAdd"
+    ;
 
 
 const Icons = {
@@ -93,7 +101,7 @@ const Icons = {
     AccessTime,
     Equalizer,
     PlayCircleOutline,
-    PlayCircleOutline,
+    Event,
     Headset,
     PlayArrowRounded,
     ShareOutlined,
@@ -120,7 +128,11 @@ const Icons = {
     FirstPage,
     LastPage,
     CheckBox,
-    CheckBoxOutlineBlank
+    CheckBoxOutlineBlank,
+    LocationOn,
+    AddAlert,
+    GroupAdd
+
 }
 import * as React from 'react';
 

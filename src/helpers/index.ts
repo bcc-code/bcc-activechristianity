@@ -344,4 +344,20 @@ export function chunkArray(myArray: INavItem[], chunk_size: number) {
     return tempArray;
 }
 
+function formatAMPM(date: Date) {
+    const timeZoneOffset = date.getTimezoneOffset() / 60
+    console.log
+    var hours = date.getHours() + 1 + timeZoneOffset;
+    var minutes = date.getMinutes();
+    let minutesString = ''
+    var ampm = hours >= 12 ? 'pm' : 'am';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    var strTime = hours + ':' + minutesString + ' ' + ampm;
+    return strTime;
+}
+
 export const dateToString = (date: Date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`
+export const timeToString = (date: Date) => `${formatAMPM(date)} (${Intl.DateTimeFormat().resolvedOptions().timeZone}), ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`

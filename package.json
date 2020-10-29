@@ -61,6 +61,7 @@
     "raf": "^3.4.1",
     "react": "^16.13.1",
     "react-cookie-consent": "^3.0.0",
+    "react-countdown": "^2.3.1",
     "react-dom": "^16.13.1",
     "react-flickity-component": "^3.5.0",
     "react-helmet": "^5.2.1",
