@@ -62,7 +62,6 @@
     "prop-types": "^15.7.2",
     "raf": "^3.4.1",
     "react": "^16.13.1",
-    "react-add-to-calendar": "^0.1.5",
     "react-cookie-consent": "^3.0.0",
     "react-countdown": "^2.3.1",
     "react-dom": "^16.13.1",

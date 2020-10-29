@@ -9,7 +9,6 @@ import { FetchOnePost } from '@/HOC/FetchPosts'
 import shortid from 'shortid'
 import Link from '@/components/CustomLink'
 import { timeToString } from '@/helpers'
-import AddToCalendar from 'react-add-to-calendar'
 import AddToCalendarLocal from '@/layout-parts/LandingPage/AddToCalendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
@@ -45,13 +44,7 @@ const OnlineChurch = () => {
     const date1 = '1 Nov 2020 17:00:00 UTC'
     const date2 = '1 Nov 2020 20:00:00 UTC'
     const date3 = '2 Nov 2020 02:00:00 UTC'
-    const event = {
-        title: 'Sample Event',
-        description: 'This is the sample event provided as an example only',
-        location: 'Portland, OR',
-        startTime: date1,
-        endTime: '1 Nov 2020 18:00:00 UTC'
-    }
+
     const IconProps = {
         size: 40,
     }
@@ -309,56 +302,71 @@ const OnlineChurch = () => {
                                     title: 'Invite a friend',
                                     popUpTitle: 'Invite a friend',
                                     popUpContent: (
-                                        <div>
-                                            <div className="flex flex-col items-center">
+                                        <div className="mx-auto w-full">
+                                            <div className="flex flex-col">
                                                 <div className="py-1">
-                                                    <FacebookMessengerShareButton url={onlineChurchUrl} appId={"1879474385645145"}>
-                                                        <FacebookMessengerIcon {...IconProps} />
-                                                        <span>Facebook Messenger</span>
+                                                    <FacebookMessengerShareButton
+                                                        url={onlineChurchUrl}
+                                                        title={strings.inviteTitle}
+
+                                                        appId={"1879474385645145"}
+                                                    >
+                                                        <div className="flex items-center">
+                                                            <FacebookMessengerIcon {...IconProps} />
+                                                            <span className="px-2">Facebook Messenger</span>
+                                                        </div>
+
                                                     </FacebookMessengerShareButton>
 
                                                 </div>
                                                 <div className="py-1">
                                                     <FacebookShareButton
                                                         url={onlineChurchUrl}
-                                                        quote={text}
+                                                        quote={`${strings.inviteTitle} | ${strings.inviteDescription}`}
                                                     >
-                                                        <FacebookIcon {...IconProps} />
-                                                        <span>  Share on Facebook</span>
+                                                        <div className="flex items-center">
+                                                            <FacebookIcon {...IconProps} />
+                                                            <span className="px-2">Facebook</span>
+                                                        </div>
+
                                                     </FacebookShareButton>
 
                                                 </div>
                                                 <div className="py-1">
-                                                    <WhatsappShareButton url={onlineChurchUrl}>
-                                                        <WhatsappIcon {...IconProps} />
-                                                        <span>
-                                                            Whatsapp
-                                                    </span>
+                                                    <WhatsappShareButton
+                                                        url={onlineChurchUrl}
+                                                        title={`${strings.inviteTitle} | ${strings.inviteDescription}`}
+                                                    >
+                                                        <div className="flex items-center">
+                                                            <WhatsappIcon {...IconProps} />
+                                                            <span className="px-2">Whatsapp</span>
+                                                        </div>
+
+
                                                     </WhatsappShareButton>
                                                 </div>
                                                 <div className="py-1">
                                                     <TelegramShareButton
                                                         url={onlineChurchUrl}
-                                                        title={text}
+                                                        title={`${strings.inviteTitle} | ${strings.inviteDescription}`}
                                                     >
                                                         <div className="flex items-center">
                                                             <TelegramIcon {...IconProps} />
-                                                            <span>
-                                                                Telegram
-                                                    </span>
+                                                            <span className="px-2">Telegram</span>
                                                         </div>
+
                                                     </TelegramShareButton>
                                                 </div>
                                                 <div className="py-1">
                                                     <EmailShareButton
                                                         url={onlineChurchUrl}
-                                                        subject={text}
-                                                        body={text}
+                                                        subject={strings.inviteTitle}
+                                                        body={strings.inviteDescription}
                                                     >
-                                                        <EmailIcon {...IconProps} />
-                                                        <span>
-                                                            Send Email
-                                                    </span>
+                                                        <div className="flex items-center">
+                                                            <EmailIcon {...IconProps} />
+                                                            <span className="px-2">Send Email</span>
+                                                        </div>
                                                     </EmailShareButton>
                                                 </div>
                                             </div>

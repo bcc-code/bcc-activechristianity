@@ -346,10 +346,8 @@ export function chunkArray(myArray: INavItem[], chunk_size: number) {
 
 function formatAMPM(date: Date) {
 
-    const timeZoneOffset = date.getTimezoneOffset() / 60
-    console.log(date.getHours())
-    console.log(timeZoneOffset)
-    var hours = date.getHours() - 1 - timeZoneOffset;
+    var hours = date.getHours()
+
     var minutes = date.getMinutes();
     let minutesString = ''
     var ampm = hours >= 12 ? 'pm' : 'am';
