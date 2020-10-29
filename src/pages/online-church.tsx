@@ -11,6 +11,7 @@ import Link from '@/components/CustomLink'
 import { timeToString } from '@/helpers'
 import AddToCalendar from 'react-add-to-calendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
+import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
 import ModalWProps from '@/components/Modal/ModalWProps'
 import {
     EmailShareButton,
@@ -27,7 +28,7 @@ import {
     WhatsappIcon
 
 } from "react-share";
-import { divide } from 'lodash';
+
 const Completionist = () => <span>You are good to go!</span>;
 
 const OnlineChurch = () => {
@@ -55,6 +56,29 @@ const OnlineChurch = () => {
     }
 
     const text = 'Online Church This Sunday'
+
+    const strings = {
+        tagline: 'Join us live this sunday',
+        title1: 'Take up your cross:',
+        title2: 'The secret to perfect unity',
+        timeGeneral: '9AM (PST) / 11AM (CST) / 12PM (EST) ',
+        dateGeneral: 'NOVEMBER 1',
+        days: 'Days',
+        hours: 'Hours',
+        minutes: 'Minutes',
+        seconds: 'Seconds',
+        cta: 'More details',
+        theme: 'Theme:',
+        inviteTitle: 'BCC Church Service Live – Take up your cross: The secret to perfect unity',
+        inviteDescription: 'Join us this Sunday and connect with our community on our online church service!',
+        emailOptionTitle: 'Notify me by email ',
+        emailOptionConsent: 'By continuing, you consent to receiving email updates from ActiveChristianity.',
+        eventTitle: 'Brunstad Christian Church Online Service',
+        eventDescription: 'Sermon theme: “Take up your cross: The secret to perfect unity. Join us on our online service this Sunday, where we will hear more about how we as disciples of Christ are to react to all that\'s going on in the world today. Click on the URL to watch!',
+        eventUrl: onlineChurchUrl
+    }
+
+
     return (
         <div>
             <div className="relative font-roboto font-semibold">
@@ -67,7 +91,7 @@ const OnlineChurch = () => {
                                 Take up your cross:<br /> The secret to perfect unity
                         </h1>
                             <div className="pb-4 flex my-2">
-                                <div className="text-sm sm:text-base bg-d4slate-dark p-2 leading-snug"> 9AM (PST) / 11AM (CST) / 12PM (EST) <br />NOVEMBER 1</div>
+                                <div className="text-sm sm:text-base bg-d4slate-dark p-2 leading-snug"> {strings.timeGeneral}<br />{strings.dateGeneral}</div>
                             </div>
                         </div>
                         <div className="flex flex-col pb-12">
@@ -80,24 +104,21 @@ const OnlineChurch = () => {
                                             return <Completionist />;
                                         } else {
                                             // Render a countdown
+                                            const countingBlocks = [
+                                                { time: days, string: strings.days },
+                                                { time: hours, string: strings.hours },
+                                                { time: minutes, string: strings.minutes },
+                                                { time: seconds, string: strings.seconds }
+                                            ]
                                             return (
                                                 <div className="flex text-white">
-                                                    <span className="flex flex-col items-center border border-white rounded mr-2 p-2">
-                                                        <span className="text-sxl sm:text-4xl">{days}</span>
-                                                        <span className="text-sm sm:text-base">Days</span>
-                                                    </span>
-                                                    <span className="flex flex-col items-center border border-white rounded mr-2 p-2">
-                                                        <span className="text-ssxl sm:text-4xl">{hours}</span>
-                                                        <span className="text-sm sm:text-base">Hours</span>
-                                                    </span>
-                                                    <span className="flex flex-col items-center border border-white rounded mr-2 p-2">
-                                                        <span className="text-sxl sm:text-4xl">{minutes}</span>
-                                                        <span className="text-sm sm:text-base">Minutes</span>
-                                                    </span>
-                                                    <span className="flex flex-col items-center border border-white rounded mr-2 p-2">
-                                                        <span className="text-sxl sm:text-4xl">{seconds}</span>
-                                                        <span className="text-sm sm:text-base">Second</span>
-                                                    </span>
+                                                    {countingBlocks.map(b => (
+                                                        <span className="flex flex-col items-center border border-white rounded mr-2 p-2">
+                                                            <span className="text-sxl sm:text-4xl">{b.time}</span>
+                                                            <span className="text-sm sm:text-base">{b.string}</span>
+                                                        </span>
+                                                    ))}
+
                                                 </div>
                                             )
                                         }
@@ -120,7 +141,7 @@ const OnlineChurch = () => {
                                             size="12"
                                         />
                                     </div>
-                                    <span className="text-lg sm:text-2xl pr-4 font-bold" onClick={handleShowDetailsClick}>More details</span>
+                                    <span className="text-lg sm:text-2xl pr-4 font-bold" onClick={handleShowDetailsClick}>{strings.cta}</span>
 
                                 </button>
                             </div>
@@ -149,44 +170,30 @@ const OnlineChurch = () => {
                                 <h2 className="text-2xl bold py-4 font-semibold text-d4slate-lighter">Bible words explained: Take up your cross</h2>
                             </Link>
                         </div>
-                        <div className="py-2 mb-12">
-                            <FetchOnePost
-                                slug="the-message-of-the-cross-practical-christianity"
-                                render={({ post }) => {
-                                    return (
-                                        <Link className="flex flex-col" to={post?.slug}>
-                                            <Image2To1
-                                                className="rounded-xxl overflow-hidden"
-                                                image={post?.image}
-                                            />
-                                            <h2 className="text-2xl bold py-4 font-semibold text-d4slate-lighter">{post?.title}</h2>
-                                            <p className="leading-normal">{post?.excerpt}</p>
-                                        </Link>
-                                    )
-                                }}
+                        {["the-message-of-the-cross-practical-christianity",
+                            "the-message-of-the-cross-essential-but-unpopular-christianity"].map(slug => (
+                                <div className="py-2 mb-12">
+                                    <FetchOnePost
+                                        slug={slug}
+                                        render={({ post }) => {
+                                            return post ? (
+                                                <Link className="flex flex-col" to={post?.slug}>
+                                                    <Image2To1
+                                                        className="rounded-xxl overflow-hidden"
+                                                        image={post?.image}
+                                                    />
+                                                    <h2 className="text-2xl bold py-4 font-semibold text-d4slate-lighter">{post?.title}</h2>
+                                                    <p className="leading-normal">{post?.excerpt}</p>
+                                                </Link>
+                                            ) : <div></div>
+                                        }}
 
-                            />
+                                    />
 
-                        </div>
-                        <div className="py-2 mb-12">
-                            <FetchOnePost
-                                slug="the-message-of-the-cross-essential-but-unpopular-christianity"
-                                render={({ post }) => {
-                                    return (
-                                        <Link className="flex flex-col" to={post?.slug}>
-                                            <Image2To1
-                                                className="rounded-xxl overflow-hidden"
-                                                image={post?.image}
-                                            />
-                                            <h2 className="text-2xl bold py-4 font-semibold text-d4slate-lighter">{post?.title}</h2>
-                                            <p className="leading-normal">{post?.excerpt}</p>
-                                        </Link >
-                                    )
-                                }}
+                                </div>
+                            ))
+                        }
 
-                            />
-
-                        </div>
 
                     </div>
                 </div>
@@ -194,38 +201,36 @@ const OnlineChurch = () => {
             </div>
             <div className="bg-d4primary py-12" ref={refElem}>
                 <div className="standard-max-w-px mx-auto ">
-                    <div className="bg-white text-blue-600 rounded-3xl flex flex-col  py-6  px-8">
+                    <div className="bg-white text-blue-600 rounded-3xl flex flex-col py-6 px-8">
 
-                        <h1 className="text-3xl text-bold mb-4">Details</h1>
+                        <h1 className="text-3xl text-bold mb-4"></h1>
                         <span className="py-4">
-                            Theme: Take up your cross: The secret to perfect unity
-                            Set a reminder so you don't miss this!
-                        </span>
-                        <span key={shortid()} className="flex">
-                            <div className="block pr-4">
-                                <Icon name="AccessTime" />
-                            </div>
-                            <span className="whitespace-pre-wrap">
-                                {timeToString(new Date(date1))}
-                            </span>
-                        </span>
 
-                        <span key={shortid()} className="flex">
-                            <div className="pr-4">
-                                <Icon name="AccessTime" color="white" />
-                            </div>
-                            <span className="">
-                                {timeToString(new Date(date2))}
-                            </span>
                         </span>
-                        <span key={shortid()} className="flex">
-                            <div className="pr-4">
-                                <Icon name="AccessTime" color="white" />
-                            </div>
-                            <span className="">
-                                {timeToString(new Date(date3))}
+                        {[
+                            {
+                                iconProps: {},
+                                date: date1,
+                            },
+                            {
+                                iconProps: { color: 'white' },
+                                date: date2,
+                            },
+                            {
+                                iconProps: { color: 'white' },
+                                date: date3,
+                            }
+                        ].map(d => (
+                            <span key={shortid()} className="flex">
+                                <div className="block pr-4">
+                                    <Icon name="AccessTime" {...d.iconProps} />
+                                </div>
+                                <span className="whitespace-pre-wrap">
+                                    {timeToString(new Date(d.date))}
+                                </span>
                             </span>
-                        </span>
+                        ))}
+
                         <span key={shortid()} className="flex py-4">
                             <div className="pr-4">
                                 <Icon name="LocationOn" />
@@ -236,74 +241,73 @@ const OnlineChurch = () => {
 
 
                         <div className="grid sm:grid-cols-3 gap-4 py-4">
-                            <ModalWProps
-                                trigger={(
-                                    <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
-                                        <Icon name="AddAlert" size="12" />
-                                        <span className="px-4 mt-4">  Receive Notification</span>
-                                    </button>
-                                )}
-                                content={(props: any) => {
-                                    return (
-                                        <div className="py-12">
-                                            <MailchimpSubscribe url={mailChimpUrl} />
-                                        </div>
-                                    )
-                                }}
-                                contentLabel="Get reminder"
-                            />
-
-                            <ModalWProps
-                                trigger={(
-                                    <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
-                                        <Icon name="Event" size="12" />
-                                        <span className="px-4 mt-4"> Add to Calendar</span>
-                                    </button>
-                                )}
-                                content={(props: any) => {
-                                    return (
-                                        <div style={{ minHeight: "80%" }}>
-                                            <span key={shortid()} >
-
-                                                <span className="whitespace-pre-wrap">
-                                                    {timeToString(new Date(date1))}
-                                                </span>
-                                                <AddToCalendar event={event} />
-                                            </span>
-                                            <span key={shortid()} >
-
-                                                <span className="">
-                                                    {timeToString(new Date(date2))}
-                                                </span>
-                                                <AddToCalendar event={event} />
-                                            </span>
-                                            <span key={shortid()}>
-                                                <div className="pr-4">
-                                                    <Icon name="AccessTime" color="white" />
-                                                </div>
-                                                <span className="">
-                                                    {timeToString(new Date(date3))}
-                                                </span>
-                                                <AddToCalendar event={event} />
-                                            </span>
-
-                                        </div>
-                                    )
-                                }}
-                                contentLabel="Online service times"
-                            />
-
-                            <ModalWProps
-                                trigger={(
-                                    <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
-                                        <Icon name="GroupAdd" size="12" />
-                                        <span className="px-4 mt-4">Invite</span>
-                                    </button>
-                                )}
-                                content={(props: any) => {
-                                    return (
+                            {[
+                                {
+                                    iconName: "AddAlert",
+                                    title: strings.emailOptionTitle,
+                                    popUpTitle: strings.emailOptionTitle,
+                                    popUpContent: (
                                         <div>
-                                            <h2>Invite a friend</h2>
+                                            <p className="py-4">
+                                                {strings.emailOptionConsent}
+                                            </p>
+                                            <MailchimpSubscribe
+                                                url={mailChimpUrl}
+                                                render={({ subscribe, status, message }) => (
+                                                    <CustomForm
+                                                        status={status}
+                                                        message={message}
+                                                        onValidated={formData => subscribe(formData)}
+                                                    />
+                                                )}
+                                            />
+                                        </div>
+                                    )
+                                },
+                                {
+                                    iconName: "Event",
+                                    title: 'Add to Calendar',
+                                    popUpTitle: "Add to Calendar",
+                                    popUpContent: (
+                                        <div>
+                                            {[
+                                                {
+                                                    date: date1,
+                                                    endDate: '1 Nov 2020 18:00:00 GMT'
+                                                },
+                                                {
+                                                    date: date2,
+                                                    event: '1 Nov 2020 21:00:00 GMT'
+                                                },
+                                                {
+                                                    date: date3,
+                                                    event: '2 Nov 2020 03:00:00 GMT',
+                                                }
+                                            ].map(e => {
+                                                return (
+                                                    <div className="pb-4">
+                                                        <span className="whitespace-pre-wrap">
+                                                            {timeToString(new Date(e.date))}
+                                                        </span>
+                                                        <AddToCalendar event={{
+                                                            title: strings.eventTitle,
+                                                            description: strings.eventDescription,
+                                                            startTime: e.date,
+                                                            endTime: '1 Nov 2020 18:00:00 GMT'
+                                                        }} />
+                                                    </div>
+                                                )
+                                            })}
+
+                                        </div>
+                                    )
+                                },
+                                {
+                                    iconName: "GroupAdd",
+                                    title: 'Invite a friend',
+                                    popUpTitle: 'Invite a friend',
+                                    popUpContent: (
+                                        <div>
                                             <div className="flex flex-col items-center">
                                                 <div className="py-1">
                                                     <FacebookMessengerShareButton url={onlineChurchUrl} appId={"1879474385645145"}>
@@ -327,7 +331,7 @@ const OnlineChurch = () => {
                                                         <WhatsappIcon {...IconProps} />
                                                         <span>
                                                             Whatsapp
-                                                        </span>
+                                                    </span>
                                                     </WhatsappShareButton>
                                                 </div>
                                                 <div className="py-1">
@@ -339,7 +343,7 @@ const OnlineChurch = () => {
                                                             <TelegramIcon {...IconProps} />
                                                             <span>
                                                                 Telegram
-                                                        </span>
+                                                    </span>
                                                         </div>
                                                     </TelegramShareButton>
                                                 </div>
@@ -352,16 +356,35 @@ const OnlineChurch = () => {
                                                         <EmailIcon {...IconProps} />
                                                         <span>
                                                             Send Email
-                                                        </span>
+                                                    </span>
                                                     </EmailShareButton>
                                                 </div>
                                             </div>
                                         </div>
                                     )
-                                }}
-                                contentLabel="Invite a friend"
-                            />
+                                }
+                            ].map(item => {
+                                return (
+                                    <ModalWProps
+                                        trigger={(
+                                            <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center justify-center w-full" >
+                                                <Icon name={item.iconName} size="12" />
+                                                <span className="px-4 mt-4"> {item.title}</span>
+                                            </button>
+                                        )}
+                                        content={(props: any) => {
+                                            return (
+                                                <div className="py-12 px-4 bg-d4slate-lighter">
+                                                    <h2 className="font-bold pb-4">{item.popUpTitle}</h2>
+                                                    {item.popUpContent}
+                                                </div>
+                                            )
+                                        }}
+                                        contentLabel="Get reminder"
+                                    />
 
+                                )
+                            })}
 
                         </div>
                     </div>
