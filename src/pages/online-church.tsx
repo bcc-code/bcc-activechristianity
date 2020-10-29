@@ -11,6 +11,23 @@ import Link from '@/components/CustomLink'
 import { timeToString } from '@/helpers'
 import AddToCalendar from 'react-add-to-calendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
+import ModalWProps from '@/components/Modal/ModalWProps'
+import {
+    EmailShareButton,
+    FacebookShareButton,
+    TelegramShareButton,
+    TwitterShareButton,
+    WhatsappShareButton,
+    FacebookMessengerShareButton,
+    FacebookMessengerIcon,
+    EmailIcon,
+    FacebookIcon,
+    TelegramIcon,
+    TwitterIcon,
+    WhatsappIcon
+
+} from "react-share";
+import { divide } from 'lodash';
 const Completionist = () => <span>You are good to go!</span>;
 
 const OnlineChurch = () => {
@@ -21,7 +38,8 @@ const OnlineChurch = () => {
             refElem.current.scrollIntoView()
         }
     }
-    const url = "https://activechristianity.us2.list-manage.com/subscribe/post?u=ac35386bb66cd1f6e45717bcd&amp;id=f36218379d"
+    const mailChimpUrl = "https://activechristianity.us2.list-manage.com/subscribe/post?u=ac35386bb66cd1f6e45717bcd&amp;id=f36218379d"
+    const onlineChurchUrl = "https://brunstadchristianchurch.online.church"
     const date1 = '1 Nov 2020 17:00:00 GMT'
     const date2 = '1 Nov 2020 20:00:00 GMT'
     const date3 = '2 Nov 2020 02:00:00 GMT'
@@ -32,7 +50,11 @@ const OnlineChurch = () => {
         startTime: date1,
         endTime: '1 Nov 2020 18:00:00 GMT'
     }
+    const IconProps = {
+        size: 40,
+    }
 
+    const text = 'Online Church This Sunday'
     return (
         <div>
             <div className="relative font-roboto font-semibold">
@@ -208,32 +230,148 @@ const OnlineChurch = () => {
                             <div className="pr-4">
                                 <Icon name="LocationOn" />
                             </div>
-                            <a href="https://brunstadchristianchurch.online.church" className="text-blue-700 break-words w-11/12" target="_blank" >https://brunstadchristianchurch.online.church/</a>
+                            <a href={onlineChurchUrl} className="text-blue-700 break-words w-11/12" target="_blank" >{onlineChurchUrl}</a>
                         </span>
 
 
 
                         <div className="grid sm:grid-cols-3 gap-4 py-4">
-                            <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
-                                <Icon name="AddAlert" size="12" />
-                                <span className="px-4 mt-4">  Receive Notification</span>
-                            </button>
+                            <ModalWProps
+                                trigger={(
+                                    <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
+                                        <Icon name="AddAlert" size="12" />
+                                        <span className="px-4 mt-4">  Receive Notification</span>
+                                    </button>
+                                )}
+                                content={(props: any) => {
+                                    return (
+                                        <div className="py-12">
+                                            <MailchimpSubscribe url={mailChimpUrl} />
+                                        </div>
+                                    )
+                                }}
+                                contentLabel="Get reminder"
+                            />
 
-                            <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
-                                <Icon name="Event" size="12" />
-                                <span className="px-4 mt-4"> Add to Calendar</span>
-                            </button>
-                            <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
-                                <Icon name="GroupAdd" size="12" />
-                                <span className="px-4 mt-4">Invite</span>
-                            </button>
+                            <ModalWProps
+                                trigger={(
+                                    <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
+                                        <Icon name="Event" size="12" />
+                                        <span className="px-4 mt-4"> Add to Calendar</span>
+                                    </button>
+                                )}
+                                content={(props: any) => {
+                                    return (
+                                        <div style={{ minHeight: "80%" }}>
+                                            <span key={shortid()} >
+
+                                                <span className="whitespace-pre-wrap">
+                                                    {timeToString(new Date(date1))}
+                                                </span>
+                                                <AddToCalendar event={event} />
+                                            </span>
+                                            <span key={shortid()} >
+
+                                                <span className="">
+                                                    {timeToString(new Date(date2))}
+                                                </span>
+                                                <AddToCalendar event={event} />
+                                            </span>
+                                            <span key={shortid()}>
+                                                <div className="pr-4">
+                                                    <Icon name="AccessTime" color="white" />
+                                                </div>
+                                                <span className="">
+                                                    {timeToString(new Date(date3))}
+                                                </span>
+                                                <AddToCalendar event={event} />
+                                            </span>
+
+                                        </div>
+                                    )
+                                }}
+                                contentLabel="Online service times"
+                            />
+
+                            <ModalWProps
+                                trigger={(
+                                    <button className="bg-blue-900 p-4 text-white rounded-xl flex flex-col sm:flex-row items-center" >
+                                        <Icon name="GroupAdd" size="12" />
+                                        <span className="px-4 mt-4">Invite</span>
+                                    </button>
+                                )}
+                                content={(props: any) => {
+                                    return (
+                                        <div>
+                                            <h2>Invite a friend</h2>
+                                            <div className="flex flex-col items-center">
+                                                <div className="py-1">
+                                                    <FacebookMessengerShareButton url={onlineChurchUrl} appId={"1879474385645145"}>
+                                                        <FacebookMessengerIcon {...IconProps} />
+                                                        <span>Facebook Messenger</span>
+                                                    </FacebookMessengerShareButton>
+
+                                                </div>
+                                                <div className="py-1">
+                                                    <FacebookShareButton
+                                                        url={onlineChurchUrl}
+                                                        quote={text}
+                                                    >
+                                                        <FacebookIcon {...IconProps} />
+                                                        <span>  Share on Facebook</span>
+                                                    </FacebookShareButton>
+
+                                                </div>
+                                                <div className="py-1">
+                                                    <WhatsappShareButton url={onlineChurchUrl}>
+                                                        <WhatsappIcon {...IconProps} />
+                                                        <span>
+                                                            Whatsapp
+                                                        </span>
+                                                    </WhatsappShareButton>
+                                                </div>
+                                                <div className="py-1">
+                                                    <TelegramShareButton
+                                                        url={onlineChurchUrl}
+                                                        title={text}
+                                                    >
+                                                        <div className="flex items-center">
+                                                            <TelegramIcon {...IconProps} />
+                                                            <span>
+                                                                Telegram
+                                                        </span>
+                                                        </div>
+                                                    </TelegramShareButton>
+                                                </div>
+                                                <div className="py-1">
+                                                    <EmailShareButton
+                                                        url={onlineChurchUrl}
+                                                        subject={text}
+                                                        body={text}
+                                                    >
+                                                        <EmailIcon {...IconProps} />
+                                                        <span>
+                                                            Send Email
+                                                        </span>
+                                                    </EmailShareButton>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                }}
+                                contentLabel="Invite a friend"
+                            />
+
+
                         </div>
                     </div>
-                    <AddToCalendar event={event} />
-                    <MailchimpSubscribe url={url} />
+
+
+
                 </div>
             </div>
-        </div >
+        </div>
+
     )
 }
 
