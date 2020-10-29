@@ -27,7 +27,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 title={seo && seo.title ? seo.title : title}
                 type="article"
                 meta={{
-                    description: seo && seo.desc ? excerpt : seo.desc,
+                    description: seo && seo.desc ? seo.desc : excerpt,
                     date,
                     topics,
                     types,
