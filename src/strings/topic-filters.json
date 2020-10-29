@@ -37,7 +37,7 @@
       "key": "commentary",
       "name": "Commentary",
       "to": "commentary",
-      "count": 98,
+      "count": 99,
       "image": {
         "src": "https://ac2.day4.live/storage/sizes/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh-w600.jpeg",
         "srcset": "https://ac2.day4.live/storage/sizes/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh-w600.jpeg 600w, https://ac2.day4.live/storage/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh.jpeg 1000w",
@@ -94,7 +94,7 @@
       "key": "read",
       "name": "Read",
       "to": "read",
-      "count": 950
+      "count": 951
     },
     "108197": {
       "key": "listen",

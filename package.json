@@ -45,7 +45,7 @@
     "gatsby-plugin-root-import": "^2.0.5",
     "gatsby-plugin-s3": "^0.3.8",
     "gatsby-plugin-sass": "^2.3.2",
-    "gatsby-plugin-sitemap": "^2.4.3",
+    "gatsby-plugin-sitemap": "^2.4.17",
     "gatsby-plugin-typescript": "^2.4.3",
     "gatsby-source-ac": "file:gatsby-source-ac",
     "gatsby-source-graphql": "^2.7.6",

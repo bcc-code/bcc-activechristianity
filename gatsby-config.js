@@ -8,36 +8,37 @@ require("dotenv").config({
 
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
 
+const postQuery = `{
+  ac {
+    allPosts {
+      objectID: id
+      title
+      slug
+      excerpt
+      authors {
+          name
+          slug
+          id
+          pivot {
+              as
+          }
+      }
+      topics {
+          name
+          slug
+          id
+          group {
+              name
+              slug
+          }
+      }
+      published
+    }
+  }
+}`
 const queries = [
   {
-    query: `{
-      ac {
-        allPosts {
-          objectID: id
-          title
-          slug
-          excerpt
-          authors {
-              name
-              slug
-              id
-              pivot {
-                  as
-              }
-          }
-          topics {
-              name
-              slug
-              id
-              group {
-                  name
-                  slug
-              }
-          }
-          published
-        }
-      }
-    }`,
+    query: postQuery ,
     transformer: ({ data }) => data.ac && data.ac.allPosts.map((node) => {
       return { ...node, type: 'post' }
     }), // (optional)
@@ -179,13 +180,17 @@ if (activeEnv === 'production') {
     },
   },
   {
-    resolve: 'gatsby-plugin-sitemap'
+    resolve: 'gatsby-plugin-sitemap',
+    options:{
+      query:postQuery
+    }
   },
   {
     resolve: 'gatsby-plugin-robots-txt',
     options: {
       host: process.env.SITE_URL,
       sitemap: `${process.env.SITE_URL}/sitemap.xml`,
+      output:'/robots.txt',
       env: {
         development: {
           policy: [{ userAgent: '*', disallow: ['/'] }]
