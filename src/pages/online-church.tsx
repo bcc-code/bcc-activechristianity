@@ -1,6 +1,6 @@
 import React from 'react'
 import onlineServer16to9 from '@/images/landingPage/online-service-2.jpg'
-import onlineServerMobile from '@/images/landingPage/online-service-small.jpg'
+import onlineServerMobile from '@/images/landingPage/online-service-small-2.jpg'
 import Icon from '@/components/Icons/Icon'
 import Countdown from 'react-countdown';
 import EmbedVideo from '@/components/Images/Video16to9'
@@ -33,13 +33,13 @@ const OnlineChurch = () => {
                             <h1 className="text-base sm:text-3xl bold pb-4">Coming Up</h1>
 
 
-                            <h1 className="uppercase bold text-sm sm:text-base ">Join us <span className="bg-red-600 text-white px-2">Live</span> This Sunday (NOVEMBER 1)</h1>
+                            <h1 className="uppercase bold text-sm sm:text-base ">Join us <span className="bg-red-600 text-white px-2">Live</span> This Sunday </h1>
 
-                            <h1 className=" text-d4primary text-xl leading-snug md:text-3xl lg:text-4xl bold sm:leading-normal uppercase shadow" style={{ maxWidth: "450px" }}>
+                            <h1 className=" text-d4primary text-2xl leading-snug md:text-3xl lg:text-4xl bold sm:leading-normal uppercase shadow" style={{ maxWidth: "450px" }}>
                                 Take up your cross:<br /> The secret to perfect unity
                         </h1>
                             <div className="pb-4 flex my-2">
-                                <div className="text-sm sm:text-base py-4 bg-d4slate-dark px-2"> 9AM (PST) / 11AM (CST) / 12PM (EST)</div>
+                                <div className="text-sm sm:text-base bg-d4slate-dark p-2 leading-snug"> 9AM (PST) / 11AM (CST) / 12PM (EST) <br />NOVEMBER 1</div>
                             </div>
                         </div>
                         <div className="flex flex-col pb-12">
