@@ -9,6 +9,8 @@ import { FetchOnePost } from '@/HOC/FetchPosts'
 import shortid from 'shortid'
 import Link from '@/components/CustomLink'
 import { timeToString } from '@/helpers'
+import AddToCalendar from 'react-add-to-calendar'
+import MailchimpSubscribe from "react-mailchimp-subscribe"
 const Completionist = () => <span>You are good to go!</span>;
 
 const OnlineChurch = () => {
@@ -19,20 +21,24 @@ const OnlineChurch = () => {
             refElem.current.scrollIntoView()
         }
     }
-
+    const url = "https://activechristianity.us2.list-manage.com/subscribe/post?u=ac35386bb66cd1f6e45717bcd&amp;id=f36218379d"
     const date1 = '1 Nov 2020 17:00:00 GMT'
     const date2 = '1 Nov 2020 20:00:00 GMT'
     const date3 = '2 Nov 2020 02:00:00 GMT'
+    const event = {
+        title: 'Sample Event',
+        description: 'This is the sample event provided as an example only',
+        location: 'Portland, OR',
+        startTime: date1,
+        endTime: '1 Nov 2020 18:00:00 GMT'
+    }
 
     return (
         <div>
             <div className="relative font-roboto font-semibold">
                 <div className="absolute inset-0 z-10" style={{ paddingTop: '3rem' }}>
-                    <div className="standard-max-w-px mx-auto text-white h-full flex flex-col justify-between" >
+                    <div className="standard-max-w-px mx-auto text-white h-full flex flex-col" >
                         <div className="flex flex-col">
-                            <h1 className="text-base sm:text-3xl bold pb-4">Coming Up</h1>
-
-
                             <h1 className="uppercase bold text-sm sm:text-base ">Join us <span className="bg-red-600 text-white px-2">Live</span> This Sunday </h1>
 
                             <h1 className=" text-d4primary text-2xl leading-snug md:text-3xl lg:text-4xl bold sm:leading-normal uppercase shadow" style={{ maxWidth: "450px" }}>
@@ -223,6 +229,8 @@ const OnlineChurch = () => {
                             </button>
                         </div>
                     </div>
+                    <AddToCalendar event={event} />
+                    <MailchimpSubscribe url={url} />
                 </div>
             </div>
         </div >
