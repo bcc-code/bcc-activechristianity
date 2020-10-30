@@ -41,6 +41,8 @@ import Event from '@material-ui/icons/Event'
 import LocationOn from '@material-ui/icons/LocationOn'
 import AddAlert from '@material-ui/icons/AddAlert'
 import GroupAdd from '@material-ui/icons/GroupAdd'
+import Chat from '@material-ui/icons/Chat'
+import WatchLater from '@material-ui/icons/WatchLater'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -85,7 +87,9 @@ type IMUIIConName = "Home" |
     "Event" |
     "LocationOn" |
     "AddAlert" |
-    "GroupAdd"
+    "GroupAdd" |
+    "Chat" |
+    "WatchLater"
     ;
 
 
@@ -131,7 +135,9 @@ const Icons = {
     CheckBoxOutlineBlank,
     LocationOn,
     AddAlert,
-    GroupAdd
+    GroupAdd,
+    Chat,
+    WatchLater
 
 }
 import * as React from 'react';

@@ -42,11 +42,13 @@ export interface IDrawerNav {
 
 
 const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: { pathname: string } }> = (props) => {
+    const { children, pageContext, location } = props
 
+    const isLandingPage = location && location.pathname && location.pathname.indexOf('online-church') > -1
     const cookieName = 'ac.revert_to_original'
     const showInfoBanner = Cookies.get(cookieName);
 
-    const { children, pageContext, location } = props
+
 
     const dispatch = useDispatch();
 
@@ -178,45 +180,54 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                             explorePage={explorePage}
                         />
                         <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
-                        <div className={`flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
-                            {isInfoBarOpen && (
-                                <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug hover:font-bold text-d4slate-dark"} style={{ zIndex: 100 }}>
-                                    <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
-                                        Revert back to original version here. Note that your old login details will apply.
+                        {isLandingPage ? (
+                            <div className={`flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+                                {children}
+                                <Footer key={shortid()} />
+                            </div>
+                        ) : (
+                                <div className={`flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+
+                                    {isInfoBarOpen && (
+                                        <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug hover:font-bold text-d4slate-dark"} style={{ zIndex: 100 }}>
+                                            <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
+                                                Revert back to original version here. Note that your old login details will apply.
                                     <button onClick={setNotIsInfoBarOpen}>
-                                            <Icon
-                                                name="KeyboardArrowRight"
-                                                size="4"
+                                                    <Icon
+                                                        name="KeyboardArrowRight"
+                                                        size="4"
 
-                                            />
-                                        </button>
-                                    </a>
-                                    <div onClick={() => setIsInfoBarOpen(false)} className="p-2">
-                                        <Icon
-                                            name="Close"
-                                            size="4"
+                                                    />
+                                                </button>
+                                            </a>
+                                            <div onClick={() => setIsInfoBarOpen(false)} className="p-2">
+                                                <Icon
+                                                    name="Close"
+                                                    size="4"
 
-                                        />
-                                    </div>
+                                                />
+                                            </div>
 
+                                        </div>
+                                    )}
+                                    {breadcrumb.items.length > 0 && (
+                                        <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
+                                            <Breadcrumb {...breadcrumb} />
+                                        </div>
+                                    )}
+                                    {currentMedia.audio ? (
+                                        <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
+                                            <MediaPlayer />
+                                        </div>
+                                    ) : null}
+
+                                    {children}
+                                    <Footer key={shortid()} />
                                 </div>
                             )}
-                            {breadcrumb.items.length > 0 && (
-                                <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
-                                    <Breadcrumb {...breadcrumb} />
-                                </div>
-                            )}
-                            {currentMedia.audio ? (
-                                <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                                    <MediaPlayer />
-                                </div>
-                            ) : null}
 
-                            {children}
-                            <Footer key={shortid()} />
-                        </div>
 
-                        <BottomMobile key={shortid()} {...NavProps} menu={mobileMenu} />
+                        {!isLandingPage && <BottomMobile key={shortid()} {...NavProps} menu={mobileMenu} />}
                         <CookieConsent
                             location="bottom"
                             buttonText={TS.consent_general_accept}
