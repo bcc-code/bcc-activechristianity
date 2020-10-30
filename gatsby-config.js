@@ -179,10 +179,7 @@ if (activeEnv === 'production') {
       },
     },
     {
-      resolve: 'gatsby-plugin-sitemap',
-      options:{
-        query:postQuery
-      }
+      resolve: 'gatsby-plugin-sitemap'
     },
     {
       resolve: 'gatsby-plugin-robots-txt',
