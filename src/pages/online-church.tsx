@@ -1,6 +1,6 @@
 import React from 'react'
 import MetaTag from '@/components/Meta'
-import onlineServer16to9 from '@/images/landingPage/online-service-2.jpg'
+import onlineServer16to9 from '@/images/landingPage/online-church.jpg'
 import onlineServerMobile from '@/images/landingPage/online-church-small.jpg'
 import Icon from '@/components/Icons/Icon'
 import Countdown from 'react-countdown';
@@ -146,7 +146,7 @@ const OnlineChurch = () => {
                 <img className="block sm:hidden inset-0 w-full" src={onlineServerMobile} alt="" />
             </div>
             <div className="bg-d4slate-dark text-white py-4 ">
-                <div className="standard-max-w-px mx-auto ">
+                <div className="standard-max-w-px mx-auto">
                     <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1>
                     <h1 className="font-bold text-lg">More on Message of the cross</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 py-4">
@@ -205,8 +205,8 @@ const OnlineChurch = () => {
 
             </div>
             <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
-                <div className="standard-max-w-px mx-auto ">
-                    <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4">
+                <div className="standard-max-w-px mx-auto sm:flex">
+                    <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4 sm:w-7/12">
 
                         <h5 className="mb-4 ">
                             <div>
@@ -218,7 +218,7 @@ const OnlineChurch = () => {
                             <div>
                                 <Icon name="Chat" /><span className="font-bold ml-2">Theme:</span>
                             </div>
-                            <h5 className="leading-normal font-medium mb-4">Take up your cross: The secret to perfect unit</h5>
+                            <h5 className="leading-normal font-medium mb-4">Take up your cross: The secret to perfect unity</h5>
                             <p className="leading-normal font-medium">Join us on our online service Live this Sunday November 1, where we will hear more about how we as disciples are to react to all that’s going on in the world today. Set a reminder so you don’t miss this!</p>
                         </div>
                         <div className="mb-4">
@@ -252,8 +252,8 @@ const OnlineChurch = () => {
                         </div>
 
                     </div>
-                    <div>
-                        <div className="grid sm:grid-cols-3 gap-4 py-4">
+                    <div className="sm:w-5/12 sm:px-6 sm:flex sm:items-center">
+                        <div className="grid sm:grid-cols-1 gap-4 py-4 w-full">
                             {[{
                                 iconName: "GroupAdd",
                                 bgColor: "bg-d4slate-light",
