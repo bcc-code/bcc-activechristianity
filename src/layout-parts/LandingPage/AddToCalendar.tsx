@@ -54,7 +54,7 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                     var currentItem = Object.keys(listItem)[0];
                     var currentLabel = listItem[currentItem]
                     const href = helpers.buildUrl(event, currentItem, isCrappyIE)
-                    console.log()
+                    console.log(href)
                     return (
                         <li>
                             <a
@@ -62,6 +62,7 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                                 href={href}
                                 onClick={handleDropdownLinkClick}
                             >
+                                {href}
                                 {currentLabel}
                             </a>
                         </li>

@@ -10,6 +10,7 @@ import shortid from 'shortid'
 import Link from '@/components/CustomLink'
 import { timeToString } from '@/helpers'
 import AddToCalendarLocal from '@/layout-parts/LandingPage/AddToCalendar'
+import AddtoCalendarTest2 from '@/layout-parts/LandingPage/ReactAddToCalendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
 import ModalWProps from '@/components/Modal/ModalWProps'
@@ -365,14 +366,14 @@ const OnlineChurch = () => {
                                                 date: date1,
                                                 endDate: '1 Nov 2020 18:00:00 UTC'
                                             },
-                                            {
+                                            /* {
                                                 date: date2,
-                                                event: '1 Nov 2020 21:00:00 UTC'
+                                                endDate: '1 Nov 2020 21:00:00 UTC'
                                             },
                                             {
                                                 date: date3,
-                                                event: '2 Nov 2020 03:00:00 UTC',
-                                            }
+                                                endDate: '2 Nov 2020 03:00:00 UTC',
+                                            } */
                                         ].map(e => {
                                             return (
                                                 <div className="pb-4">
@@ -385,9 +386,17 @@ const OnlineChurch = () => {
                                                             title: strings.eventTitle,
                                                             description: strings.eventDescription,
                                                             startTime: e.date,
-                                                            endTime: '1 Nov 2020 18:00:00 UTC'
+                                                            endTime: e.endDate
                                                         }}
 
+                                                    />
+                                                    <AddtoCalendarTest2
+                                                        event={{
+                                                            title: strings.eventTitle,
+                                                            description: strings.eventDescription,
+                                                            startTime: e.date,
+                                                            endTime: e.endDate
+                                                        }}
                                                     />
                                                 </div>
                                             )

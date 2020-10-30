@@ -135,7 +135,7 @@ var ReactAddToCalendar = function (_React$Component) {
               target: "_blank"
             },
             icon,
-            currentLabel
+            helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE) + ' ' + currentLabel
           )
         );
       });
