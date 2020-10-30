@@ -8,8 +8,8 @@ interface IEvent {
     title: string
     description: string
     location?: string
-    startTime: string
-    endTime: string
+    startTime: Date
+    endTime: Date
 }
 const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
 
@@ -54,7 +54,6 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                     var currentItem = Object.keys(listItem)[0];
                     var currentLabel = listItem[currentItem]
                     const href = helpers.buildUrl(event, currentItem, isCrappyIE, "https://brunstadchristianchurch.online.church")
-                    console.log(href)
                     return (
                         <li>
                             <a
@@ -62,8 +61,10 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                                 href={href}
                                 onClick={handleDropdownLinkClick}
                             >
-                                {href}
+
                                 {currentLabel}
+
+                                {href}
                             </a>
                         </li>
                     )

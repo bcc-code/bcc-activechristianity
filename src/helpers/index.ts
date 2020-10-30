@@ -361,3 +361,14 @@ function formatAMPM(date: Date) {
 
 export const dateToString = (date: Date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`
 export const timeToString = (date: Date) => `${formatAMPM(date)} (${Intl.DateTimeFormat().resolvedOptions().timeZone}), ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`
+export const dateToICSFormate = (date: Date, durationHours?: number) => {
+    var pre =
+        date.getFullYear().toString() +
+        ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString()) +
+        ((date.getDate() + 1) < 10 ? "0" + date.getDate().toString() : date.getDate().toString());
+    const addDuration = durationHours ? durationHours : 0
+    var post = `${(date.getHours() + addDuration) > 10 ? date.getHours() : `0` + date.getHours()}${date.getMinutes() > 0 ? date.getMinutes() : '00'}00`;
+    console.log(date.getMinutes().toString())
+    console.log(post)
+    return pre + "T" + post
+}

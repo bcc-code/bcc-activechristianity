@@ -8,9 +8,8 @@ import Image2To1 from '@/components/Images/Image2To1'
 import { FetchOnePost } from '@/HOC/FetchPosts'
 import shortid from 'shortid'
 import Link from '@/components/CustomLink'
-import { timeToString } from '@/helpers'
+import { timeToString, dateToICSFormate } from '@/helpers'
 import AddToCalendarLocal from '@/layout-parts/LandingPage/AddToCalendar'
-import AddtoCalendarTest2 from '@/layout-parts/LandingPage/ReactAddToCalendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
 import ModalWProps from '@/components/Modal/ModalWProps'
@@ -42,9 +41,9 @@ const OnlineChurch = () => {
     }
     const mailChimpUrl = "https://activechristianity.us2.list-manage.com/subscribe/post?u=ac35386bb66cd1f6e45717bcd&amp;id=f36218379d"
     const onlineChurchUrl = "https://brunstadchristianchurch.online.church"
-    const date1 = '1 Nov 2020 17:00:00 UTC'
-    const date2 = '1 Nov 2020 20:00:00 UTC'
-    const date3 = '2 Nov 2020 02:00:00 UTC'
+    const date1 = new Date('1 Nov 2020 17:00:00 UTC')
+    const date2 = new Date('1 Nov 2020 20:00:00 UTC')
+    const date3 = new Date('2 Nov 2020 02:00:00 UTC')
 
     const IconProps = {
         size: 40,
@@ -90,7 +89,7 @@ const OnlineChurch = () => {
                         <div className="flex flex-col pb-12">
                             <div className="mt-4 sm:mt-0">
                                 <Countdown
-                                    date={Date.parse(date1)}
+                                    date={date1.getTime()}
                                     renderer={({ days, hours, minutes, seconds, completed }) => {
                                         if (completed) {
                                             // Render a completed state
@@ -237,7 +236,7 @@ const OnlineChurch = () => {
                                 <span key={shortid()} className="flex">
 
                                     <span className="whitespace-pre-wrap">
-                                        {timeToString(new Date(d.date))}
+                                        {timeToString(d.date)}
                                     </span>
                                 </span>
                             ))}
@@ -344,18 +343,16 @@ const OnlineChurch = () => {
                                 title: strings.emailOptionTitle,
                                 popUpTitle: strings.emailOptionTitle,
                                 popUpContent: (
-                                    <div>
-                                        <MailchimpSubscribe
-                                            url={mailChimpUrl}
-                                            render={({ subscribe, status, message }) => (
-                                                <CustomForm
-                                                    status={status}
-                                                    message={message}
-                                                    onValidated={formData => subscribe(formData)}
-                                                />
-                                            )}
-                                        />
-                                    </div>
+                                    <MailchimpSubscribe
+                                        url={mailChimpUrl}
+                                        render={({ subscribe, status, message }) => (
+                                            <CustomForm
+                                                status={status}
+                                                message={message}
+                                                onValidated={formData => subscribe(formData)}
+                                            />
+                                        )}
+                                    />
                                 )
                             },
                             {
@@ -370,21 +367,24 @@ const OnlineChurch = () => {
                                         {[
                                             {
                                                 date: date1,
-                                                endDate: '1 Nov 2020 18:00:00 UTC'
+                                                duration: 1
                                             },
-                                            /* {
+                                            {
                                                 date: date2,
-                                                endDate: '1 Nov 2020 21:00:00 UTC'
+                                                duration: 1
                                             },
                                             {
                                                 date: date3,
-                                                endDate: '2 Nov 2020 03:00:00 UTC',
-                                            } */
+                                                duration: 1
+                                            }
                                         ].map(e => {
+
+                                            const endDate = new Date(e.date)
+                                            endDate.setHours(endDate.getHours() + e.duration);
                                             return (
                                                 <div className="pb-4">
                                                     <span className="whitespace-pre-wrap">
-                                                        {timeToString(new Date(e.date))}
+                                                        {timeToString(e.date)}
                                                     </span>
 
                                                     <AddToCalendarLocal
@@ -392,17 +392,10 @@ const OnlineChurch = () => {
                                                             title: strings.eventTitle,
                                                             description: strings.eventDescription,
                                                             startTime: e.date,
-                                                            endTime: e.endDate
+                                                            endTime: endDate,
+                                                            location: 'Online Church'
                                                         }}
 
-                                                    />
-                                                    <AddtoCalendarTest2
-                                                        event={{
-                                                            title: strings.eventTitle,
-                                                            description: strings.eventDescription,
-                                                            startTime: e.date,
-                                                            endTime: e.endDate
-                                                        }}
                                                     />
                                                 </div>
                                             )
@@ -425,7 +418,7 @@ const OnlineChurch = () => {
                                         content={(props: any) => {
                                             return (
                                                 <div className={`py-12 px-4 ${item.contentBgColor} ${item.textColor}`}>
-                                                    <h2 className={`font-bold pb-4 `}>{item.popUpTitle}</h2>
+                                                    <h2 className={`font-bold pb-4 text-xl`}>{item.popUpTitle}</h2>
                                                     {item.popUpContent}
                                                 </div>
                                             )
