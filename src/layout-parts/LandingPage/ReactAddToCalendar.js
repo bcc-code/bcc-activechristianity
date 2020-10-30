@@ -131,11 +131,11 @@ var ReactAddToCalendar = function (_React$Component) {
             {
               className: currentItem + "-link",
               onClick: self.handleDropdownLinkClick,
-              href: helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE),
+              href: helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE,"https://brunstadchristianchurch.online.church"),
               target: "_blank"
             },
             icon,
-            helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE) + ' ' + currentLabel
+            helpers.buildUrl(self.props.event, currentItem, self.state.isCrappyIE,"https://brunstadchristianchurch.online.church") + ' ' + currentLabel
           )
         );
       });

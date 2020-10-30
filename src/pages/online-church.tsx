@@ -260,6 +260,8 @@ const OnlineChurch = () => {
                             {[{
                                 iconName: "GroupAdd",
                                 bgColor: "bg-d4slate-light",
+                                contentBgColor: "bg-d4slate-lighter",
+                                textColor: "text-d4slate-dark",
                                 title: 'Invite a friend',
                                 popUpTitle: 'Invite a friend',
                                 popUpContent: (
@@ -337,6 +339,8 @@ const OnlineChurch = () => {
                             {
                                 iconName: "AddAlert",
                                 bgColor: "bg-d4primary",
+                                contentBgColor: "bg-d4primary",
+                                textColor: "text-white",
                                 title: strings.emailOptionTitle,
                                 popUpTitle: strings.emailOptionTitle,
                                 popUpContent: (
@@ -357,6 +361,8 @@ const OnlineChurch = () => {
                             {
                                 iconName: "Event",
                                 bgColor: "bg-d4slate-dark",
+                                contentBgColor: "bg-d4slate-dark",
+                                textColor: "text-white",
                                 title: 'Add to Calendar',
                                 popUpTitle: "Add to Calendar",
                                 popUpContent: (
@@ -409,16 +415,17 @@ const OnlineChurch = () => {
                             ].map(item => {
                                 return (
                                     <ModalWProps
+                                        key={shortid()}
                                         trigger={(
-                                            <button classNamw={`${item.bgColor} p-4 text-white rounded-xl flex  items-center justify-center w-full`} >
+                                            <button className={`${item.bgColor} p-4 text-white rounded-xl flex  items-center justify-center w-full`} >
                                                 <Icon name={item.iconName} size="8" />
-                                                <span className="px-4 mt-4"> {item.title}</span>
+                                                <span className="px-4 font-bold"> {item.title}</span>
                                             </button>
                                         )}
                                         content={(props: any) => {
                                             return (
-                                                <div className="py-12 px-4 bg-d4slate-lighter">
-                                                    <h2 className="font-bold pb-4">{item.popUpTitle}</h2>
+                                                <div className={`py-12 px-4 ${item.contentBgColor} ${item.textColor}`}>
+                                                    <h2 className={`font-bold pb-4 `}>{item.popUpTitle}</h2>
                                                     {item.popUpContent}
                                                 </div>
                                             )

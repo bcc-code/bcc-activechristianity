@@ -48,7 +48,7 @@ var helpers = function () {
     }
   }, {
     key: "buildUrl",
-    value: function buildUrl(event, type, isCrappyIE) {
+    value: function buildUrl(event, type, isCrappyIE,eventUrl) {
       var calendarUrl = "";
 
       // allow mobile browsers to open the gmail data URI within native calendar app
@@ -89,7 +89,7 @@ var helpers = function () {
           break;
 
         default:
-          calendarUrl = ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", "URL:" + document.URL, "DTSTART:" + this.formatTime(event.startTime), "DTEND:" + this.formatTime(event.endTime), "SUMMARY:" + event.title, "DESCRIPTION:" + event.description, "LOCATION:" + event.location, "END:VEVENT", "END:VCALENDAR"].join("\n");
+          calendarUrl = ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", "URL:" + eventUrl, "DTSTART:" + this.formatTime(event.startTime), "DTEND:" + this.formatTime(event.endTime), "SUMMARY:" + event.title, "DESCRIPTION:" + event.description, "LOCATION:" + event.location, "END:VEVENT", "END:VCALENDAR"].join("\n");
 
           if (!isCrappyIE && this.isMobile()) {
             calendarUrl = encodeURI("data:text/calendar;charset=utf8," + calendarUrl);

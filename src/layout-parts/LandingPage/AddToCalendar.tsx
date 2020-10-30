@@ -53,7 +53,7 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
                 listItem => {
                     var currentItem = Object.keys(listItem)[0];
                     var currentLabel = listItem[currentItem]
-                    const href = helpers.buildUrl(event, currentItem, isCrappyIE)
+                    const href = helpers.buildUrl(event, currentItem, isCrappyIE, "https://brunstadchristianchurch.online.church")
                     console.log(href)
                     return (
                         <li>
