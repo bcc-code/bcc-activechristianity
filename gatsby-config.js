@@ -159,48 +159,49 @@ if (activeEnv === 'production') {
           generateRoutingRules: false,
           generateRedirectObjectsForPermanentRedirects: true,
       },
-    }
-  ),
-  {
-    resolve: `gatsby-plugin-algolia-search`,
-    options: {
-      appId: process.env.ALGOLIA_APP_ID,
-      apiKey: process.env.ALGOLIA_ADMIN_KEY,
-      indexName: 'dev_posts', // for all queries
-      queries,
-      enablePartialUpdates: true
     },
-  },
-  {
-    resolve: `gatsby-plugin-google-tagmanager`,
-    options: {
-      id: process.env.GTM_TAG||"GTM-WCW8RR4", 
-      includeInDevelopment: false,
-      gtmLocale: process.env.LOCALE,
+    {
+      resolve: `gatsby-plugin-algolia-search`,
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        indexName: 'dev_posts', // for all queries
+        queries,
+        enablePartialUpdates: true
+      },
     },
-  },
-  {
-    resolve: 'gatsby-plugin-sitemap',
-    options:{
-      query:postQuery
-    }
-  },
-  {
-    resolve: 'gatsby-plugin-robots-txt',
-    options: {
-      host: process.env.SITE_URL,
-      sitemap: `${process.env.SITE_URL}/sitemap.xml`,
-      output:'/robots.txt',
-      env: {
-        development: {
-          policy: [{ userAgent: '*', disallow: ['/'] }]
-        },
-        production: {
-          policy: [{ userAgent: '*', disallow: ['/'] }]
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: process.env.GTM_TAG||"GTM-WCW8RR4", 
+        includeInDevelopment: false,
+        gtmLocale: process.env.LOCALE,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options:{
+        query:postQuery
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: process.env.SITE_URL,
+        sitemap: `${process.env.SITE_URL}/sitemap.xml`,
+        output:'/robots.txt',
+        env: {
+          development: {
+            policy: [{ userAgent: '*', disallow: ['/'] }]
+          },
+          production: {
+            policy: [{ userAgent: '*', disallow: ['/'] }]
+          }
         }
       }
     }
-  }
+  )
+
 }
 
 module.exports = {
