@@ -118,9 +118,9 @@ const OnlineChurch = () => {
                                 />
                             </div>
                             <div>
-                                <button className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
+                                <button onClick={handleShowDetailsClick} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
 
-                                    <span className="text-sm sm:text-2xl font-bold" onClick={handleShowDetailsClick}>{strings.cta}</span>
+                                    <span className="text-sm sm:text-2xl font-bold">{strings.cta}</span>
                                     <div className="block sm:hidden">
                                         <Icon
                                             name="KeyboardArrowRight"
@@ -205,9 +205,9 @@ const OnlineChurch = () => {
 
             </div>
             <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
-                <div className="standard-max-w-px mx-auto sm:flex">
-                    <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4 sm:w-7/12">
-
+                <div className="standard-max-w-px mx-auto ">
+                    <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4">
+                        <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Details</h2>
                         <h5 className="mb-4 ">
                             <div>
                                 <Icon name="Event" /><span className="ml-2 font-bold">Event:</span>
@@ -239,9 +239,7 @@ const OnlineChurch = () => {
                                 </span>
                             ))}
                         </div>
-
-
-                        <div className="pr-4">
+                        <div className="pr-4" key={shortid()} >
                             <Icon name="LocationOn" />
                             <span className="font-bold ml-2">Watch live here:</span>
                             <span key={shortid()} className="flex">
@@ -250,11 +248,104 @@ const OnlineChurch = () => {
                             </span>
 
                         </div>
+                        <div className="py-4" key={shortid()} >
+                            <Icon name="EmojiPeople" />
+                            <span className="font-bold ml-2">I am interested!</span>
+                            <div>
+                                <MailchimpSubscribe
+                                    url={mailChimpUrl}
+                                    render={({ subscribe, status, message }) => (
+                                        <CustomForm
+                                            status={status}
+                                            message={message}
+                                            onValidated={formData => subscribe(formData)}
+                                        />
+                                    )}
+                                />
+                            </div>
+                            {/*                            <span key={shortid()} className="flex">
 
+                                <a href={onlineChurchUrl} className="break-words w-11/12 py-2" target="_blank" >{onlineChurchUrl}</a>
+                            </span> */}
+
+                        </div>
+
+
+                        {/*                         
+ */}
                     </div>
-                    <div className="sm:w-5/12 sm:px-6 sm:flex sm:items-center">
-                        <div className="grid sm:grid-cols-1 gap-4 py-4 w-full">
-                            {[{
+                    <div className="grid sm:grid-cols-2 gap-4 py-4 w-full">
+                        {[
+                            /*                             {
+                                                            iconName: "AddAlert",
+                                                            bgColor: "bg-d4primary",
+                                                            contentBgColor: "bg-d4primary",
+                                                            textColor: "text-white",
+                                                            title: strings.emailOptionTitle,
+                                                            popUpTitle: strings.emailOptionTitle,
+                                                            popUpContent: (
+                                                                <MailchimpSubscribe
+                                                                    url={mailChimpUrl}
+                                                                    render={({ subscribe, status, message }) => (
+                                                                        <CustomForm
+                                                                            status={status}
+                                                                            message={message}
+                                                                            onValidated={formData => subscribe(formData)}
+                                                                        />
+                                                                    )}
+                                                                />
+                                                            )
+                                                        }, */
+                            {
+                                iconName: "Event",
+                                bgColor: "bg-d4slate-dark",
+                                contentBgColor: "bg-d4slate-dark",
+                                textColor: "text-white",
+                                title: 'Add to calendar',
+                                popUpTitle: "Add to Calendar",
+                                popUpContent: (
+                                    <div>
+                                        {[
+                                            {
+                                                date: date1,
+                                                duration: 1
+                                            },
+                                            {
+                                                date: date2,
+                                                duration: 1
+                                            },
+                                            {
+                                                date: date3,
+                                                duration: 1
+                                            }
+                                        ].map(e => {
+
+                                            const endDate = new Date(e.date)
+                                            endDate.setHours(endDate.getHours() + e.duration);
+                                            return (
+                                                <div className="pb-8">
+                                                    <h5 className="whitespace-pre-wrap font-semibold mb-4">
+                                                        - {timeToString(e.date)}
+                                                    </h5>
+
+                                                    <AddToCalendarLocal
+                                                        event={{
+                                                            title: strings.eventTitle,
+                                                            description: strings.eventDescription,
+                                                            startTime: e.date,
+                                                            endTime: endDate,
+                                                            location: 'Online Church'
+                                                        }}
+
+                                                    />
+                                                </div>
+                                            )
+                                        })}
+
+                                    </div>
+                                )
+                            },
+                            {
                                 iconName: "GroupAdd",
                                 bgColor: "bg-d4slate-light",
                                 contentBgColor: "bg-d4slate-lighter",
@@ -370,102 +461,30 @@ const OnlineChurch = () => {
                                         </div>
                                     </div>
                                 )
-                            },
-                            {
-                                iconName: "AddAlert",
-                                bgColor: "bg-d4primary",
-                                contentBgColor: "bg-d4primary",
-                                textColor: "text-white",
-                                title: strings.emailOptionTitle,
-                                popUpTitle: strings.emailOptionTitle,
-                                popUpContent: (
-                                    <MailchimpSubscribe
-                                        url={mailChimpUrl}
-                                        render={({ subscribe, status, message }) => (
-                                            <CustomForm
-                                                status={status}
-                                                message={message}
-                                                onValidated={formData => subscribe(formData)}
-                                            />
-                                        )}
-                                    />
-                                )
-                            },
-                            {
-                                iconName: "Event",
-                                bgColor: "bg-d4slate-dark",
-                                contentBgColor: "bg-d4slate-dark",
-                                textColor: "text-white",
-                                title: 'Add to Calendar',
-                                popUpTitle: "Add to Calendar",
-                                popUpContent: (
-                                    <div>
-                                        {[
-                                            {
-                                                date: date1,
-                                                duration: 1
-                                            },
-                                            {
-                                                date: date2,
-                                                duration: 1
-                                            },
-                                            {
-                                                date: date3,
-                                                duration: 1
-                                            }
-                                        ].map(e => {
+                            }
+                        ].map(item => {
+                            return (
+                                <ModalWProps
+                                    key={shortid()}
+                                    trigger={(
+                                        <button className={`${item.bgColor} p-4 text-white rounded-xl flex  items-center justify-center w-full`} >
+                                            <Icon name={item.iconName} size="8" />
+                                            <span className="px-4 font-bold"> {item.title}</span>
+                                        </button>
+                                    )}
+                                    content={(props: any) => {
+                                        return (
+                                            <div className={`py-8 px-4 ${item.contentBgColor} ${item.textColor}`}>
+                                                <h2 className={`font-bold pb-4 text-xl`}>{item.popUpTitle}</h2>
+                                                {item.popUpContent}
+                                            </div>
+                                        )
+                                    }}
+                                    contentLabel="Get reminder"
+                                />
 
-                                            const endDate = new Date(e.date)
-                                            endDate.setHours(endDate.getHours() + e.duration);
-                                            return (
-                                                <div className="pb-8">
-                                                    <h5 className="whitespace-pre-wrap font-semibold mb-4">
-                                                        - {timeToString(e.date)}
-                                                    </h5>
-
-                                                    <AddToCalendarLocal
-                                                        event={{
-                                                            title: strings.eventTitle,
-                                                            description: strings.eventDescription,
-                                                            startTime: e.date,
-                                                            endTime: endDate,
-                                                            location: 'Online Church'
-                                                        }}
-
-                                                    />
-                                                </div>
-                                            )
-                                        })}
-
-                                    </div>
-                                )
-                            },
-
-                            ].map(item => {
-                                return (
-                                    <ModalWProps
-                                        key={shortid()}
-                                        trigger={(
-                                            <button className={`${item.bgColor} p-4 text-white rounded-xl flex  items-center justify-center w-full`} >
-                                                <Icon name={item.iconName} size="8" />
-                                                <span className="px-4 font-bold"> {item.title}</span>
-                                            </button>
-                                        )}
-                                        content={(props: any) => {
-                                            return (
-                                                <div className={`py-8 px-4 ${item.contentBgColor} ${item.textColor}`}>
-                                                    <h2 className={`font-bold pb-4 text-xl`}>{item.popUpTitle}</h2>
-                                                    {item.popUpContent}
-                                                </div>
-                                            )
-                                        }}
-                                        contentLabel="Get reminder"
-                                    />
-
-                                )
-                            })}
-                        </div>
-
+                            )
+                        })}
                     </div>
 
 

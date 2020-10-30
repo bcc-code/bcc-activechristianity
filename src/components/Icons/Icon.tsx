@@ -43,6 +43,7 @@ import AddAlert from '@material-ui/icons/AddAlert'
 import GroupAdd from '@material-ui/icons/GroupAdd'
 import Chat from '@material-ui/icons/Chat'
 import WatchLater from '@material-ui/icons/WatchLater'
+import EmojiPeople from '@material-ui/icons/EmojiPeople'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -89,7 +90,8 @@ type IMUIIConName = "Home" |
     "AddAlert" |
     "GroupAdd" |
     "Chat" |
-    "WatchLater"
+    "WatchLater" |
+    "EmojiPeople"
     ;
 
 
@@ -137,7 +139,8 @@ const Icons = {
     AddAlert,
     GroupAdd,
     Chat,
-    WatchLater
+    WatchLater,
+    EmojiPeople
 
 }
 import * as React from 'react';

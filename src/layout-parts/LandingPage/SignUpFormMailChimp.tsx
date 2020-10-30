@@ -14,9 +14,7 @@ const CustomForm: React.FC<{ status: 'error' | 'success' | 'sending' | null, mes
     }
     return (
         <div className="w-full">
-            <div className="leading-normal text-sm">
-                By continuing, you consent to receiving email updates from ActiveChristianity.
-            </div>
+
             {status === "sending" && <div>Sending...</div>}
             {status === "error" && (
                 <div
@@ -39,12 +37,15 @@ const CustomForm: React.FC<{ status: 'error' | 'success' | 'sending' | null, mes
                 type="email"
                 onChange={handleEmailChange}
             />
-
+            <div className="leading-normal text-sm text-gray-500 pb-4">
+                By continuing, you consent to receiving email updates from ActiveChristianity.
+            </div>
             <div>
-                <button className="bg-white text-d4primary font-bold rounded px-4 py-2" onClick={submit}>
-                    Submit
+                <button className="bg-d4primary text-white font-bold rounded p-4 sm:p-6 sm:text-lg" onClick={submit}>
+                    Send me more details
                 </button>
             </div>
+
         </div>
     );
 };
