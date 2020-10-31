@@ -13,7 +13,6 @@ const PostList: React.FC<IProps> = (props) => {
     const [pageInput, setPageInput] = React.useState(currentPage)
     const handleInputChange = (e: any) => {
         e.preventDefault();
-        console.log(e.target)
         setPageInput(e.target.value)
     }
 

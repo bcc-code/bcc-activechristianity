@@ -3,12 +3,20 @@ import { InputText } from '@/components/Input'
 
 const CustomForm: React.FC<{ status: 'error' | 'success' | 'sending' | null, message: string | Error | null, onValidated: (data: { EMAIL: string }) => void }> = ({ status, message, onValidated }) => {
     const [email, setEmail] = React.useState('')
-    const submit = () =>
-        email &&
-        email.indexOf("@") > -1 &&
-        onValidated({
-            EMAIL: email
-        });
+    const submit = () => {
+
+        const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({
+            event: 'ac.gtm_track_landingpage',
+            label: 'Submit email'
+        })
+
+        return email &&
+            email.indexOf("@") > -1 &&
+            onValidated({
+                EMAIL: email
+            });
+    }
     const handleEmailChange = (e: any) => {
         setEmail(e.target.value)
     }

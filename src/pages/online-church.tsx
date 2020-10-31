@@ -33,6 +33,12 @@ const OnlineChurch = () => {
         if (refElem.current) {
             refElem.current.scrollIntoView()
         }
+        const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({
+            event: 'ac.gtm_track_landingpage',
+            label: 'Click Details'
+        })
+
     }
     const mailChimpUrl = "https://activechristianity.us2.list-manage.com/subscribe/post?u=ac35386bb66cd1f6e45717bcd&amp;id=f36218379d"
     const onlineChurchUrl = "https://brunstadchristianchurch.online.church"
@@ -117,7 +123,7 @@ const OnlineChurch = () => {
                                     }}
                                 />
                             </div>
-                            <div>
+                            {/*                             <div>
                                 <button onClick={handleShowDetailsClick} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
 
                                     <span className="text-sm sm:text-2xl font-bold">{strings.cta}</span>
@@ -136,7 +142,7 @@ const OnlineChurch = () => {
                                         />
                                     </div>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>
@@ -145,69 +151,10 @@ const OnlineChurch = () => {
                 <img className="hidden sm:block inset-0 w-full" src={onlineServer16to9} alt="" />
                 <img className="block sm:hidden inset-0 w-full" src={onlineServerMobile} alt="" />
             </div>
-            <div className="bg-d4slate-dark text-white py-4 ">
-                <div className="standard-max-w-px mx-auto">
-                    <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1>
-                    <h1 className="font-bold text-lg">More on Message of the cross</h1>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 py-4">
-                        <div className="py-2 mb-6">
-                            <FetchOnePost
-                                slug={"bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily"}
-                                render={({ post }) => {
-                                    return post ? (
-                                        <>
-                                            <div className="w-full">
-                                                <EmbedVideo
-                                                    className={`rounded-xxl sm:rounded-xl overflow-hidden`}
-                                                    src="https://www.youtube.com/embed/3zIwaKgJrbU"
-
-                                                />
-                                            </div>
-                                            <Link className="flex flex-col" to="/bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily">
-                                                <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post.title}</h2>
-                                                <p className="leading-normal">{post?.excerpt}</p>
-                                            </Link>
-                                        </>
-                                    ) : <div></div>
-                                }}
-
-                            />
-
-                        </div>
-
-                        {["the-message-of-the-cross-practical-christianity",
-                            "the-message-of-the-cross-essential-but-unpopular-christianity"].map(slug => (
-                                <div className="py-2 mb-6">
-                                    <FetchOnePost
-                                        slug={slug}
-                                        render={({ post }) => {
-                                            return post ? (
-                                                <Link className="flex flex-col" to={post?.slug}>
-                                                    <Image2To1
-                                                        className="rounded-xxl overflow-hidden"
-                                                        image={post?.image}
-                                                    />
-                                                    <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post?.title}</h2>
-                                                    <p className="leading-normal">{post?.excerpt}</p>
-                                                </Link>
-                                            ) : <div></div>
-                                        }}
-
-                                    />
-
-                                </div>
-                            ))
-                        }
-
-
-                    </div>
-                </div>
-
-            </div>
             <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
                 <div className="standard-max-w-px mx-auto ">
                     <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4">
-                        <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Details</h2>
+                        {/*                         <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Details</h2> */}
                         <h5 className="mb-4 ">
                             <div>
                                 <Icon name="Event" /><span className="ml-2 font-bold">Event:</span>
@@ -490,6 +437,66 @@ const OnlineChurch = () => {
 
                 </div>
             </div>
+            <div className="bg-d4slate-dark text-white py-4 ">
+                <div className="standard-max-w-px mx-auto">
+                    <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1>
+                    <h1 className="font-bold text-lg">More on Message of the cross</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 py-4">
+                        <div className="py-2 mb-6">
+                            <FetchOnePost
+                                slug={"bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily"}
+                                render={({ post }) => {
+                                    return post ? (
+                                        <>
+                                            <div className="w-full">
+                                                <EmbedVideo
+                                                    className={`rounded-xxl sm:rounded-xl overflow-hidden`}
+                                                    src="https://www.youtube.com/embed/3zIwaKgJrbU"
+
+                                                />
+                                            </div>
+                                            <Link className="flex flex-col" to="/bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily">
+                                                <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post.title}</h2>
+                                                <p className="leading-normal">{post?.excerpt}</p>
+                                            </Link>
+                                        </>
+                                    ) : <div></div>
+                                }}
+
+                            />
+
+                        </div>
+
+                        {["the-message-of-the-cross-practical-christianity",
+                            "the-message-of-the-cross-essential-but-unpopular-christianity"].map(slug => (
+                                <div className="py-2 mb-6">
+                                    <FetchOnePost
+                                        slug={slug}
+                                        render={({ post }) => {
+                                            return post ? (
+                                                <Link className="flex flex-col" to={post?.slug}>
+                                                    <Image2To1
+                                                        className="rounded-xxl overflow-hidden"
+                                                        image={post?.image}
+                                                    />
+                                                    <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post?.title}</h2>
+                                                    <p className="leading-normal">{post?.excerpt}</p>
+                                                </Link>
+                                            ) : <div></div>
+                                        }}
+
+                                    />
+
+                                </div>
+                            ))
+                        }
+
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
     )

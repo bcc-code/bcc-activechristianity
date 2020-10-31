@@ -56,6 +56,12 @@ const AddToCalender: React.FC<{ event: IEvent }> = ({ event }) => {
     function handleDropdownLinkClick(e: any) {
         e.preventDefault();
         var url = e.currentTarget.getAttribute("href");
+        const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({
+            event: 'ac.gtm_track_landingpage',
+            label: 'Submit add to calender',
+            data: url
+        })
 
         if (!helpers.isMobile() && (url.startsWith("data") || url.startsWith("BEGIN"))) {
             var filename = "download.ics";
