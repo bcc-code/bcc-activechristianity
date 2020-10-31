@@ -174,9 +174,9 @@ const OnlineChurch = () => {
                             </div>
 
                             {[
-                                'November 1 – 6:00 PM (CEST)',
-                                'November 1 – 9:00 PM (CEST)',
-                                'November 2 – 3:00 AM (CEST)'
+                                'November 1 – 6:00 PM (CET)',
+                                'November 1 – 9:00 PM (CET)',
+                                'November 2 – 3:00 AM (CET)'
                             ].map(d => (
                                 <span key={shortid()} className="flex">
 
