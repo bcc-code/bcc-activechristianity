@@ -14,6 +14,7 @@ import AddToCalendarLocal from '@/layout-parts/LandingPage/AddToCalendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
 import ModalWProps from '@/components/Modal/ModalWProps'
+
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -45,7 +46,8 @@ const OnlineChurch = () => {
     const date1 = new Date('1 Nov 2020 17:00:00 UTC')
     const date2 = new Date('1 Nov 2020 20:00:00 UTC')
     const date3 = new Date('2 Nov 2020 02:00:00 UTC')
-
+    const countDownDate = new Date(date1)
+    countDownDate.setHours(date1.getHours() - 1);
     const IconProps = {
         size: 40,
     }
@@ -95,16 +97,37 @@ const OnlineChurch = () => {
                         <div className="flex flex-col pb-12 sm:pt-16">
                             <div className="mt-4 sm:mt-0">
                                 <Countdown
-                                    date={date1.getTime()}
+                                    date={countDownDate.getTime()}
                                     renderer={({ days, hours, minutes, seconds, completed }) => {
                                         if (completed) {
                                             // Render a completed state
-                                            return <Completionist />;
+                                            return (
+                                                <div className="flex">
+                                                    <a href={onlineChurchUrl} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
+
+                                                        <span className="text-sm sm:text-2xl font-bold">Watch Now</span>
+                                                        <div className="block sm:hidden">
+                                                            <Icon
+                                                                name="KeyboardArrowRight"
+
+                                                                size="6"
+                                                            />
+                                                        </div>
+                                                        <div className="hidden sm:block">
+                                                            <Icon
+                                                                name="KeyboardArrowRight"
+
+                                                                size="12"
+                                                            />
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            );
                                         } else {
                                             // Render a countdown
                                             const countingBlocks = [
                                                 { time: days, string: strings.days },
-                                                { time: hours, string: strings.hours },
+                                                { time: hours + 1, string: strings.hours },
                                                 { time: minutes, string: strings.minutes },
                                                 { time: seconds, string: strings.seconds }
                                             ]
@@ -123,7 +146,8 @@ const OnlineChurch = () => {
                                     }}
                                 />
                             </div>
-                            {/*                             <div>
+
+                            {/*  <div>
                                 <button onClick={handleShowDetailsClick} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
 
                                     <span className="text-sm sm:text-2xl font-bold">{strings.cta}</span>
