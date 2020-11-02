@@ -14,7 +14,7 @@ import AddToCalendarLocal from '@/layout-parts/LandingPage/AddToCalendar'
 import MailchimpSubscribe from "react-mailchimp-subscribe"
 import CustomForm from '@/layout-parts/LandingPage/SignUpFormMailChimp'
 import ModalWProps from '@/components/Modal/ModalWProps'
-
+import Video from '@/components/Images/Video16to9'
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -83,18 +83,29 @@ const OnlineChurch = () => {
                 path={'/online-church'}
                 breadcrumb={[]}
             />
-            <div className="relative font-roboto font-semibold">
+
+            <div className="bg-mp-background">
+                <div className="standard-max-w-px py-4 sm:py-16">
+                    {/*                     <h5 className="pb-2 sm:text-2xl"> <span className="bg-red-600 text-white px-2 rounded uppercase">Live</span> </h5> */}
+                    <Video
+                        className="w-full"
+                        src={'https://www.youtube.com/embed/X4w6bGI3Gpk'}
+
+                    />
+                </div>
+            </div>
+            {/*             <div className="relative font-roboto font-semibold">
                 <div className="absolute inset-0 z-10 pt-4 sm:pt-16">
                     <div className="standard-max-w-px mx-auto text-white h-full flex flex-col" >
                         <div className="flex flex-col">
                             <span className="pb-2 sm:text-2xl">Join us <span className="bg-red-600 text-white px-2 rounded">Live</span> This Sunday </span>
-
                             <h1 className="text-xl leading-snug md:text-3xl lg:text-4xl bold sm:leading-normal shadow">
                                 Take up your cross:<br /> The secret to perfect unity
                         </h1>
 
                         </div>
                         <div className="flex flex-col pb-12 sm:pt-16">
+
                             <div className="mt-4 sm:mt-0">
                                 <Countdown
                                     date={countDownDate.getTime()}
@@ -147,7 +158,7 @@ const OnlineChurch = () => {
                                 />
                             </div>
 
-                            {/*  <div>
+                            <div>
                                 <button onClick={handleShowDetailsClick} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
 
                                     <span className="text-sm sm:text-2xl font-bold">{strings.cta}</span>
@@ -166,7 +177,7 @@ const OnlineChurch = () => {
                                         />
                                     </div>
                                 </button>
-                            </div> */}
+                            </div>
                         </div>
 
                     </div>
@@ -174,11 +185,11 @@ const OnlineChurch = () => {
                 <div className="absolute inset-0" style={{ background: "#252730", opacity: "0.5" }}></div>
                 <img className="hidden sm:block inset-0 w-full" src={onlineServer16to9} alt="" />
                 <img className="block sm:hidden inset-0 w-full" src={onlineServerMobile} alt="" />
-            </div>
-            <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
+            </div> */}
+            {/* <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
                 <div className="standard-max-w-px mx-auto ">
                     <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4">
-                        {/*                         <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Details</h2> */}
+                        <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Details</h2>
                         <h5 className="mb-4 ">
                             <div>
                                 <Icon name="Event" /><span className="ml-2 font-bold">Event:</span>
@@ -234,39 +245,10 @@ const OnlineChurch = () => {
                                     )}
                                 />
                             </div>
-                            {/*                            <span key={shortid()} className="flex">
-
-                                <a href={onlineChurchUrl} className="break-words w-11/12 py-2" target="_blank" >{onlineChurchUrl}</a>
-                            </span> */}
-
                         </div>
-
-
-                        {/*                         
- */}
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4 py-4 w-full">
                         {[
-                            /*                             {
-                                                            iconName: "AddAlert",
-                                                            bgColor: "bg-d4primary",
-                                                            contentBgColor: "bg-d4primary",
-                                                            textColor: "text-white",
-                                                            title: strings.emailOptionTitle,
-                                                            popUpTitle: strings.emailOptionTitle,
-                                                            popUpContent: (
-                                                                <MailchimpSubscribe
-                                                                    url={mailChimpUrl}
-                                                                    render={({ subscribe, status, message }) => (
-                                                                        <CustomForm
-                                                                            status={status}
-                                                                            message={message}
-                                                                            onValidated={formData => subscribe(formData)}
-                                                                        />
-                                                                    )}
-                                                                />
-                                                            )
-                                                        }, */
                             {
                                 iconName: "Event",
                                 bgColor: "bg-d4slate-dark",
@@ -460,10 +442,10 @@ const OnlineChurch = () => {
 
 
                 </div>
-            </div>
+            </div> */}
             <div className="bg-d4slate-dark text-white py-4 ">
                 <div className="standard-max-w-px mx-auto">
-                    <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1>
+                    {/* <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1> */}
                     <h1 className="font-bold text-lg">More on Message of the cross</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 py-4">
                         <div className="py-2 mb-6">
