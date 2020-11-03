@@ -114,29 +114,41 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
     const toReturn = tracks.map(track => {
 
-        const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
-        const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+
 
         const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
+
         const toAdd: IMedia = (
             {
-                path: track.post.slug,
+                path: '',
                 audio: {
                     duration: secondesToMinutes(track.duration),
                     src,
                     title: track.title,
                     type: "audio",
-                    article: {
-                        title: track.post.title,
-                        url: track.post.slug,
 
-                    },
                     playlists: track.playlists,
-                    contributor: trackPostAuthor
+
                 },
 
             }
         )
+
+        if (track.post) {
+            toAdd.path = track.post.slug
+            if (toAdd.audio) {
+
+                const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
+                const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+                toAdd.audio.article = {
+                    title: track.post.title,
+                    url: track.post.slug,
+                }
+                toAdd.audio.contributor = trackPostAuthor
+            }
+
+
+        }
 
         return toAdd
     })

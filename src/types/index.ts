@@ -256,7 +256,7 @@ export interface IAuthorRes {
 }
 
 export interface ITrackRes {
-    post: IPostRes
+    post?: IPostRes
     title: string
     duration: number
     url: string
