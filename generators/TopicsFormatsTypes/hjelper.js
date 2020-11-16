@@ -1,7 +1,8 @@
-const ac_strings = require('../../src/strings/ac_strings.json')
+const {postQuery, sendQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const TS = require('../../src/strings')
 const listTemplate = 'src/templates/archive/post-list.tsx'
+const baseUrl = process.env.API_URL
 const perPage= 12
 
 const formatsAll = {
@@ -73,11 +74,65 @@ module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
             group_id
             slug
           }
-          posts(isFeatured: true) { slug}
+          posts(isFeatured: true) {
+            ${postQuery}
+          }
       }
       
   }
 }`
+
+module.exports.getSubTopics = (id)=>`{
+  ac {
+      topic(id: ${id}) {
+          id
+          name
+          subTopics {
+            id
+            name
+            group_id
+            slug
+          }
+      }
+      
+  }
+}`
+module.exports.getTopicPagination=(id)=>`
+  topic(id:${id}) {
+    name
+    somePosts(first:12){
+          paginatorInfo {
+            total
+            count
+            currentPage
+          }
+        }
+    }
+  }
+`
+const getPostsPerPageQuery = (id,page)=>`{
+  ac {
+    topic(id:${id}) {	
+  
+      allPosts:somePosts(first:12,page:${page}){
+        data{
+          slug
+        }
+      }
+    }
+  }
+}`
+module.exports.getPostsPerPageQuery=getPostsPerPageQuery
+
+module.exports.getPopularPosts=(id)=>`
+  popularPosts:topic(id:${id}) {
+    somePosts(orderBy:{column:VIEWS, order:DESC}){
+      data {
+        ${postQuery}
+      }
+    }
+  }
+`
 
 module.exports.getSubTopicPosts=(id1,id2) =>`{
   ac {
@@ -85,11 +140,58 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
           id
           name
           posts (hasTopics: { value: ${id2}, column: ID }){
-            slug
+            ${postQuery}
           }
         }
   }
 }`
+
+
+module.exports.createArchivePages =async function ({
+  graphql,
+  createPage, 
+  paginatorInfo,
+  node,
+  baseUrl,
+  breadcrumb,
+  topicType
+}){
+  const {total,count}=paginatorInfo 
+  const hasRecommendPage=total>10
+  const totalPages = Math.ceil(total/count);
+      for (let i = 1; i <=totalPages; i++){
+        let currentPage = i
+        let pagePath = `${baseUrl}/${currentPage}`
+        if(i===1){
+            pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
+        }
+        
+        const component = path.resolve(listTemplate)
+        const paginate = {
+          currentPage,
+          totalPages:totalPages,
+          baseUrl,
+          hasRecommendPage
+        }
+        const query=getPostsPerPageQuery(node.id,i)
+        const perPagePosts = await graphql(query).then(res=>res.data.ac.topic.allPosts.data.map(p=>p.slug))
+            console.log(pagePath)
+            createPage({
+              path:pagePath,
+              component,
+              context: {
+                posts: perPagePosts,
+                paginate,
+                id:node.id,
+                title:node.name,
+                image:node.image,
+                breadcrumb
+              },
+            })
+
+
+      }
+}
 
 module.exports.createSubTopicPages=({
   type,
@@ -110,7 +212,7 @@ module.exports.createSubTopicPages=({
     const totalPages = Math.ceil(totalCount / perPage)
     const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
 
-    const component = (topic.id=== process.env.VIDEO_POSTS_FILTER_ID|| subTopic.id===process.env.VIDEO_POSTS_FILTER_ID)?path.resolve(videoListTemplate):path.resolve(listTemplate)
+    const component = path.resolve(listTemplate)
     const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
 
     pageBreadcrumb.push(
@@ -128,6 +230,8 @@ module.exports.createSubTopicPages=({
   
     for (let i = 0; i < totalCount; i += perPage, currentPage++) {
       let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
+      console.log(pagePath)
+
       createPage({
         path:pagePath,
         component,
@@ -139,8 +243,9 @@ module.exports.createSubTopicPages=({
             totalPages,
             baseUrl
           },
-          title:`${subTopic.name}`,
-          breadcrumb:pageBreadcrumb
+          title:subTopic.name,
+          breadcrumb:pageBreadcrumb,
+          isTopic
 /*            ...node */
         },
       })

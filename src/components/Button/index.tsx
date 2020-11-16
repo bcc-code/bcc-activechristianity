@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import Icon from '@/components/Icons/Icon'
 
 

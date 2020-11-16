@@ -65,7 +65,12 @@ const TaxonomyIndex: React.FC<IProps> = ({ groups }) => {
                                 return (
                                     <div key={i} className="w-10/12 flex flex-col ml-4 text-sm min-w-5/12 sm:w-5/12">
                                         {subGroups.map((t, j) => (
-                                            <Link className="py-2" key={j} to={t.to}>{t.name}</Link>
+                                            <div className="flex justify-between items-center" key={j}>
+                                                <Link className="block p-2 pr-8 text-xs" to={`/${t.to}`}>{t.name}</Link>
+                                                <ToggleBookmarkIconOnly id={t.id} />
+
+                                            </div>
+
 
                                         ))}
                                     </div>)

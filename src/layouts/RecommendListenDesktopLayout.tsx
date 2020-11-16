@@ -11,14 +11,13 @@ import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import PostRow from '@/layout-parts/List/PostRow4Col'
 
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
-import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 
 import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
-import { ISubtopicLinks, IPlaylist, INavItem } from "@/types"
+import { ISubtopicLinks, IPlaylist, INavItem, IPostItem } from "@/types"
 import { playlistToPost, getRandomArray } from '@/helpers'
 import shortId from 'shortid'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 import '@/styles/react-tabs.css'
 
@@ -29,8 +28,10 @@ interface IRecommandLayout {
     latestSlug: string
     podcast: INavItem
     playlist: INavItem
-    popularPosts: string[]
     topics: ISubtopicLinks[]
+    featured: IPostItem[]
+    latestPosts: IPostItem[]
+    popularPosts: IPostItem[]
 
 }
 
@@ -40,7 +41,9 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     topics,
     latestSlug,
     playlist,
-    podcast
+    podcast,
+    latestPosts,
+    featured
 }) => {
 
     return (
@@ -49,14 +52,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
 
             <div className="standard-max-w-px">
-                <FetchPostsFromSlugs
-                    slugs={popularPosts}
-                    layout="list"
-                    render={({ posts }) => {
-                        const randomHeaderPost = getRandomArray(posts.slice(5), 1)
-                        return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
-                    }}
-                />
+                {featured[0] ? <HeaderSection headerPost={featured[0]} listPosts={popularPosts.slice(0, 5)} /> : <div></div>}
 
             </div>
 
@@ -90,7 +86,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             {podcast && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
-                        <UnderlineTitleLink    {...podcast} />
+                        <UnderlineTitleLink {...podcast} />
                         <FetchLatestPodcast
                             layout="row"
                             render={({ podcastEps }) => {
@@ -103,17 +99,9 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
                         />
                     </div>
-
-
-
                 </LazyLoad>
             )}
-            <FetchPostsFromArchivePage
-                slug={latestSlug}
-                layout="row" render={({ posts }) => {
-                    return (<LatestDesktopRow posts={posts} latestSlug={latestSlug} />)
-                }}
-            />
+            <LatestDesktopRow posts={latestPosts.slice(0, 4)} latestSlug={latestSlug} />
             <LazyLoad >
                 <FetchTopicPostItems
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}

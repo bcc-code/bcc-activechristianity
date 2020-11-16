@@ -7,69 +7,61 @@ const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveC
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
 import PostRow from '@/layout-parts/List/PostRow4Col'
+import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-
-import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-
-import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
+import { UnderlineTitleLink, LayoutH1 } from '@/components/Headers'
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
-import { ISubtopicLinks, IPlaylist, INavItem } from "@/types"
+import { ISubtopicLinks, IPlaylist, INavItem, IPostItem } from "@/types"
 import { playlistToPost, getRandomArray } from '@/helpers'
 import shortId from 'shortid'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import '@/styles/react-tabs.css'
 
 
 interface IRecommandLayout {
+    topicId?: string
     listen?: {
         podcast: INavItem
         playlist: INavItem
     }
     name: string
     latestSlug: string
-    popularPosts: string[]
+    featured: IPostItem[]
+    latestPosts: IPostItem[]
+    popularPosts: IPostItem[]
     topics: ISubtopicLinks[]
 
 }
 
 const RecommendLayout: React.FC<IRecommandLayout> = ({
+    topicId,
     name,
     popularPosts,
     topics,
     latestSlug,
-    listen
+    listen,
+    latestPosts,
+    featured
 }) => {
-
+    console.log(topicId)
     return (
         <div className="hidden sm:block">
-            <LayoutH1Wide title={name} />
-
-
-            <div className="standard-max-w-px">
-                <FetchPostsFromSlugs
-                    slugs={popularPosts}
-                    layout="list"
-                    render={({ posts }) => {
-                        const randomHeaderPost = getRandomArray(posts.slice(5), 1)
-                        return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
-                    }}
-                />
-
-
+            <div className="flex justify-between items-between px-4">
+                <LayoutH1 title={name} />
+                {topicId && <ToggleFollowOutlineBtn id={topicId} />}
             </div>
-            <FetchPostsFromArchivePage
-                slug={latestSlug}
-                layout="row" render={({ posts }) => {
-                    return (<LatestDesktopRow posts={posts} latestSlug={latestSlug} />)
-                }}
-            />
+            <div className="standard-max-w-px">
+                {featured[0] ? <HeaderSection headerPost={featured[0]} listPosts={popularPosts.slice(0, 5)} /> : <div></div>}
+            </div>
+            <LatestDesktopRow posts={latestPosts.slice(0, 4)} latestSlug={latestSlug} />
             {listen && listen.playlist && (
                 <LazyLoad>
                     <div className="px-4">
-                        <UnderlineTitleLink    {...listen.playlist} /></div>
+                        <UnderlineTitleLink  {...listen.playlist} />
+                    </div>
                     <FetchLatestPlaylists
                         layout="row"
                         render={({ playlists }) => {
@@ -116,8 +108,9 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
-
+                        console.log(topicPostItems)
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)
+
                         return (
                             (
 

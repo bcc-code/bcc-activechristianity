@@ -5,7 +5,7 @@ import { graphql } from "gatsby"
 import ImageRound from '@/components/Images/ImageRound'
 import livingTheGospel from '@/strings/podcastProperties'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { PageSectionHeader } from '@/components/Headers'
 import { ReadOrListenIcon } from '@/components/PostElements'
 import Tabs from '@/components/Tabs/ImageTab'

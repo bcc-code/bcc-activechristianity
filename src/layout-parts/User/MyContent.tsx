@@ -11,14 +11,15 @@ import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
-import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFollow'
+import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFollow'
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics.tsx'
 import TS from '@/strings'
 import { getRandomArray } from '@/helpers'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
+import shortid from 'shortid'
 const UserHistory = () => {
 
-    const { followedTopics, bookmarkedPosts, } = useSelector((state: IRootState) => state.userLibrary);
+    const { followedTopics, bookmarkedPosts, followedPlaylists } = useSelector((state: IRootState) => state.userLibrary);
     return (
         <div className="flex flex-col ">
 
@@ -31,11 +32,11 @@ const UserHistory = () => {
                             return (
                                 <>
                                     <SectionTitleDesktopAndMobile name={"Following Topics"} />
-                                    <span className="text-d4slate-light">{ac_strings.youMightBeInterestedIn}</span>
+
                                     <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
                                         {topics.map(({ name, slug: to }) => {
                                             return (
-                                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} key={shortid()} />
                                             )
                                         })}
                                     </div>
@@ -44,9 +45,11 @@ const UserHistory = () => {
                                         items={topics.map(({ name, slug: to, id }) => {
                                             return (
                                                 <div className="flex flex-col items-center">
-                                                    <div className="min-h-24 h-24 w-18" >
-                                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
-                                                        <SlateDarkFollowButton
+                                                    <div className="w-18" >
+                                                        <div className="h-24 min-h-24">
+                                                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                                        </div>
+                                                        <SlateDarkUnfollowButton
                                                             id={id}
                                                         />
                                                     </div>
@@ -60,7 +63,7 @@ const UserHistory = () => {
                     />
                 ) : (
                         <div>
-                            <SectionTitleDesktopAndMobile name={"No follow topics found"} />
+                            <SectionTitleDesktopAndMobile name={"No follow topics found. You might be interested in..."} />
                             <QPopularAndFeaturedPosts
                                 render={({ topics }) => {
                                     const randomTopics = getRandomArray(topics, 6)
@@ -75,6 +78,9 @@ const UserHistory = () => {
                         </div>
                     )}
             </div>
+            {followedPlaylists.length > 0 && (
+                <div>{followedPlaylists.map(p => p.name)}</div>
+            )}
             {bookmarkedPosts.length > 0 ? <FetchPostsFromSlugs
                 slugs={bookmarkedPosts.map(p => p.slug)}
                 layout="list"

@@ -22,7 +22,7 @@ import Cookies from 'js-cookie'
 
 // string
 import TS from '@/strings';
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import acApi from '@/util/api'
 // type 
 import { IRootState } from '@/state/types'
@@ -46,8 +46,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const isLandingPage = location && location.pathname && location.pathname.indexOf('online-church') > -1
     const cookieName = 'ac.revert_to_original'
+    const acSessionCookie = 'ac2_session'
     const showInfoBanner = Cookies.get(cookieName);
-
+    const getLoggedInCookie = Cookies.get(acSessionCookie)
 
 
     const dispatch = useDispatch();
@@ -65,6 +66,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
     const [isInfoBarOpen, setIsInfoBarOpen] = React.useState(showInfoBanner !== "true")
     React.useEffect(() => {
         checkUser()
+
     }, [])
 
     const setNotIsInfoBarOpen = () => {

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import Link from '@/components/CustomLink'
 import TS from '@/strings'
 const formText = {

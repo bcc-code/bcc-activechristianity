@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby";
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics'
 import { ITopic } from '@/types'
 import { ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
 import { getRandomArray } from '@/helpers'
 import TS from '@/strings'

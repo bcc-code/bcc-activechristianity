@@ -9,7 +9,7 @@ import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { INavItem } from '@/types';
 import loadable from '@loadable/component'

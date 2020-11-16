@@ -9,7 +9,7 @@ import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 import { PostLabel } from '@/components/PostElements'
 import { PostH1 } from '@/components/Headers'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 import TS from '@/strings'
 

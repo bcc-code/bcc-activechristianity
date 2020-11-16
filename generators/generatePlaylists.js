@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const ac_strings = require('../src/strings/ac_strings.json')
+const ac_strings = require('../src/strings/ac_strings.js')
 const template = 'src/templates/single-resource/playlist.tsx'
 
 const query = `

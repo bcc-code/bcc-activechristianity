@@ -6,7 +6,7 @@ import SearchInput from '@/components/Search'
 import SearchHistory from '@/layout-parts/Explore/SearchHistory'
 import localStorageHelper from '@/helpers/localStorage'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 interface ICustomerSearchBox {
     setQuery: (query: string) => void

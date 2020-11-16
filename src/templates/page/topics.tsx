@@ -5,7 +5,7 @@ import MetaTag from '@/components/Meta'
 import ResourceLayout from "@/layouts/ResourceLayout"
 import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
 import { INavItem, IPage } from "@/types"
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { ITopicRes } from '@/types'
 import { sortTopicsByGroups } from '@/helpers'

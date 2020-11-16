@@ -10,7 +10,7 @@ import ModalWProps from '@/components/Modal/ModalWProps'
 
 import { IRootState } from '@/state/types'
 import { INavItem } from '@/types'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 
 interface IEbookDOwnload {

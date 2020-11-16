@@ -21,7 +21,6 @@ interface HTMLNode {
     parent: HTMLNode
 }
 
-
 const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string, slug: string }> = ({ content, glossary, title, slug }) => {
     /*     React.useEffect(() => {
     

@@ -5,7 +5,7 @@ import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import Link from '@/components/CustomLink';
 import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
 import { OutlineScriptureChapter } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { INavItem, } from "@/types"
 import { trimSlug } from '@/helpers'
 const ExplorePopularScripture: React.FC<{

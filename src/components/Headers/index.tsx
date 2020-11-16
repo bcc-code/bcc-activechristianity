@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { UnderlineLinkViewAll } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
     <span className="flex">
         <span className="pr-2">{icon}</span>

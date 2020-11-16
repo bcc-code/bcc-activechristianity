@@ -3,9 +3,8 @@ import loadable from '@loadable/component'
 
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import { UnderlineLinkViewAll } from '@/components/Button'
-import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 
 import LazyLoad from '@/components/LazyLoad';
 import MetaTag from '@/components/Meta'
@@ -16,19 +15,21 @@ import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 
-import { INavItem, INavItemCount, ISubtopicLinks } from '@/types'
+import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
 import { IRootState } from '@/state/types'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { useSelector } from "react-redux";
-import { getRandomArray } from "@/helpers"
+import { getRandomArray, processRecommendationContext } from "@/helpers"
 
 const Read: React.FC<IProps> = (props) => {
     const { loggedIn } = useSelector((state: IRootState) => state.auth)
     const { pageContext, path } = props
-    const { title, info, items, mostPopular, featuredPosts } = pageContext
+    const { title, info, items, popularPosts, featuredPosts, latestPosts } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
+
+    const { featured, popular, latest, featuredMixed } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
     return (
         <div>
             <MetaTag
@@ -46,22 +47,9 @@ const Read: React.FC<IProps> = (props) => {
 
                     <div className="w-full py-6">
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <FetchTopicFeatured
-                            latestSlug={latestSlug}
-                            featuredPosts={featuredPosts}
-                            popularPosts={mostPopular.slice(0, 5)}
-                            render={({ posts }) => (
-                                <HSCardList posts={posts} />
-                            )}
-
-                        />
-
-
+                        <HSCardList posts={featuredMixed} />
                     </div>
                 </div>
-
-
-
                 <LazyLoad>
                     <FetchTopicPostItems
                         topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
@@ -94,39 +82,21 @@ const Read: React.FC<IProps> = (props) => {
                         <>
                             <div className="bg-d4slate-lighter py-6 overflow-hidden">
                                 <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                                <FetchPostsFromSlugs
-                                    slugs={mostPopular.slice(0, 5)}
-                                    layout="row"
-                                    render={({ posts }) => {
-                                        return (<HSCardList posts={posts} />)
-                                    }}
-                                />
-
+                                <HSCardList posts={popular} />
                             </div>
-
-
-                            <FetchPostsFromArchivePage
-                                slug={latestSlug}
-                                layout="row" render={({ posts }) => {
-                                    return (
-                                        <div className="py-6">
-                                            <PageSectionHeader title={ac_strings.latest} />
-                                            <div className="px-4 ">
-                                                {posts.slice(0, 3).map(p => {
-                                                    return (
-                                                        <RightImg {...p} />
-                                                    )
-                                                })}
-                                            </div>
-                                            <div className="w-full flex justify-center py-6">
-                                                <UnderlineLinkViewAll to={`${latestSlug}`} />
-                                            </div>
-                                        </div>
-                                    )
-
-                                }}
-                            />
-
+                            <div className="py-6">
+                                <PageSectionHeader title={ac_strings.latest} />
+                                <div className="px-4 ">
+                                    {latest.slice(0, 3).map(p => {
+                                        return (
+                                            <RightImg {...p} />
+                                        )
+                                    })}
+                                </div>
+                                <div className="w-full flex justify-center py-6">
+                                    <UnderlineLinkViewAll to={`${latestSlug}`} />
+                                </div>
+                            </div>
                         </>
                     ) : (
                             <>
@@ -136,33 +106,20 @@ const Read: React.FC<IProps> = (props) => {
                                         <PageSectionHeader title={ac_strings.latest} />
                                         <UnderlineLinkViewAll to={`${latestSlug}`} />
                                     </div>
-                                    <FetchPostsFromArchivePage
-                                        slug={latestSlug}
-                                        layout="row" render={({ posts }) => {
-                                            return (<HSCardList posts={posts} />)
-                                        }}
-                                    />
+                                    <HSCardList posts={latest} />
 
                                 </div>
-                                <FetchPostsFromSlugs
-                                    slugs={mostPopular.slice(0, 5)}
-                                    layout="row"
-                                    render={({ posts }) => {
-                                        return (
-                                            <div className=' py-6'>
-                                                <PageSectionHeader title={ac_strings.popular} />
-                                                <div className="px-4">
+                                <div className=' py-6'>
+                                    <PageSectionHeader title={ac_strings.popular} />
+                                    <div className="px-4">
 
-                                                    {posts.slice(0, 3).map(p => {
-                                                        return (
-                                                            <RightImg {...p} />
-                                                        )
-                                                    })}
-                                                </div>
-                                            </div>
-                                        )
-                                    }}
-                                />
+                                        {popular.slice(0, 3).map(p => {
+                                            return (
+                                                <RightImg {...p} />
+                                            )
+                                        })}
+                                    </div>
+                                </div>
 
                             </>
                         )}
@@ -175,7 +132,9 @@ const Read: React.FC<IProps> = (props) => {
             </div>
             <RecommendDesktopLayout
                 latestSlug={latestSlug}
-                popularPosts={mostPopular}
+                latestPosts={latest}
+                popularPosts={popular}
+                featured={featuredMixed}
                 topics={items}
                 name={title}
             />
@@ -186,18 +145,12 @@ const Read: React.FC<IProps> = (props) => {
 
 export default Read
 
-
+interface IPageContext extends IRecommendationPage {
+    info: INavItemCount
+    items: ISubtopicLinks[]
+    menu: INavItemCount[]
+}
 interface IProps {
-    pageContext: {
-        title: string
-        breadcrumb: INavItem[]
-        info: INavItemCount
-        items: ISubtopicLinks[]
-        menu: INavItemCount[]
-        ebook: INavItemCount
-        mostPopular: string[]
-        featuredPosts: string[]
-
-    }
+    pageContext: IPageContext
     path: string
 }

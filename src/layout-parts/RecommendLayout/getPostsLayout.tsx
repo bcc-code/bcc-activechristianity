@@ -75,41 +75,64 @@ const PostsByTypesLayout = (collection: ITopicPostItems[]) => {
                 post: c0.posts[0],
                 position: '1-wide',
                 postThumnailType: 'leftImage'
-            },
-            {
-                type: { name: c1.name, to: c1.slug },
-                post: c1.posts[0],
-                position: '3',
-                postThumnailType: 'topImage'
-            },
-            {
-                type: {
-                    name: "",
-                    to: ""
-                },
-                post: c1.posts[1],
-                position: '4',
-                postThumnailType: 'topImage'
             }
+
         )
 
-        postsByTypesRow2.push(
+        if (c1.posts.length > 1) {
+            postsByTypesRow1.push(
+                {
+                    type: { name: c1.name, to: c1.slug },
+                    post: c1.posts[0],
+                    position: '3',
+                    postThumnailType: 'topImage'
+                },
+                {
+                    type: {
+                        name: "",
+                        to: ""
+                    },
+                    post: c1.posts[1],
+                    position: '4',
+                    postThumnailType: 'topImage'
+                }
+            )
+        } else {
+            postsByTypesRow1.push({
+                type: { name: c1.name, to: c1.slug },
+                post: c1.posts[0],
+                position: '2-wide',
+                postThumnailType: 'leftImage'
+            })
+        }
 
-            {
+        if (c2.posts.length > 1) {
+            postsByTypesRow2.push(
+                {
+                    type: { name: c2.name, to: c2.slug },
+                    post: c2.posts[0],
+                    position: '1',
+                    postThumnailType: 'topImage'
+                },
+                {
+                    type: {
+                        name: "",
+                        to: ""
+                    },
+                    post: c2.posts[1],
+                    position: '2',
+                    postThumnailType: 'topImage'
+                }
+            )
+        } else {
+            postsByTypesRow2.push({
                 type: { name: c2.name, to: c2.slug },
                 post: c2.posts[0],
-                position: '1',
-                postThumnailType: 'topImage'
-            },
-            {
-                type: {
-                    name: "",
-                    to: ""
-                },
-                post: c2.posts[1],
-                position: '2',
-                postThumnailType: 'topImage'
-            },
+                position: '1-wide',
+                postThumnailType: 'leftImage'
+            })
+        }
+        postsByTypesRow2.push(
             {
                 type: { name: c3.name, to: c3.slug },
                 post: c3.posts[0],
@@ -151,23 +174,38 @@ const PostsByTypesLayout = (collection: ITopicPostItems[]) => {
                 post: c3.posts[0],
                 position: '1-wide',
                 postThumnailType: 'leftImage'
-            },
-            {
-                type: { name: c4.name, to: c4.slug },
-                post: c4.posts[0],
-                position: '3',
-                postThumnailType: 'topImage'
-            },
-            {
-                type: {
-                    name: "",
-                    to: ""
-                },
-                post: c4.posts[1],
-                position: '4',
-                postThumnailType: 'topImage'
             }
+
         )
+
+        if (c4.posts.length > 1) {
+            postsByTypesRow2.push(
+                {
+                    type: { name: c4.name, to: c4.slug },
+                    post: c4.posts[0],
+                    position: '3',
+                    postThumnailType: 'topImage'
+                },
+                {
+                    type: {
+                        name: "",
+                        to: ""
+                    },
+                    post: c4.posts[1],
+                    position: '4',
+                    postThumnailType: 'topImage'
+                }
+            )
+        } else {
+            postsByTypesRow2.push(
+                {
+                    type: { name: c4.name, to: c4.slug },
+                    post: c4.posts[0],
+                    position: '2-wide',
+                    postThumnailType: 'leftImage'
+                }
+            )
+        }
     }
 
     if (nrOfFormats > 5) {

@@ -12,7 +12,7 @@ const PlaylistPostItem: React.FC<IPostItem> = ({ title, excerpt, image, slug, me
                 <div id="play-button" className="absolute p-2 text-white z-10 inset-0 flex justify-center items-center">
                     <PlaylistPlayButton slug={slug} />
                 </div>
-                <SquareImg {...image} alt={title} />
+                <SquareImg rounded {...image} alt={title} />
 
             </div>
             <Link className="flex-1 px-4 pt-4" to={slug}>

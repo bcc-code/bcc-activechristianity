@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const helpers = require('./helpers')
 
 const settingsQuery = `
 {
@@ -15,106 +15,45 @@ const settingsQuery = `
       }
 }
 `
- 
 
 const getPostsQuery = (pageNr)=>`
     {
         posts(page:${pageNr}) {
             data {
-                id
-                title
-                slug
-                excerpt
-                image {
-                    src
-                    srcset
-                    dataUri
-                      colors
-            
-                }
-                readtime
-                seo {
-                    title
-                    desc
-                  }
-                meta {
-                credits
-                no_dict
-                url
-                }
-                track {
-                    url
-                    title
-                    duration
-                    post {
-                        title
-                        slug
-                    }
-                    playlists {
-                        slug
-                        title
-                      }
-                }
-                authors {
-                    name
-                    slug
-                    pivot {
-                        as
-                    }
-                    id 
-                }
-                topics {
-                    name
-                    slug
-                    id
-                    group {
-                        name
-                        slug
-                        id
-                    }
-                }
-                published 
-                readMorePosts:posts {
-                    slug
-                }
+                ${postQuery}
+                content
                 langs {
                     lang
                     slug
                 }
-                content
-                likes
-                views
+                readMorePosts:posts {
+                    slug
+                }
+                seo {
+                    title
+                    desc
+                }
+                meta {
+                    credits
+                    no_dict
+                    url
+                }
             }
         }
     }
 `
 
-
+const {sendQuery,getMultiPosts, postQuery} = helpers
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
     const {fieldName,typeName,baseUrl} = options
-    const sendQuery = (query) => {
-        return fetch(baseUrl, {
-            method: 'POST',
-            'credentials': 'include',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-                /*              */
-            },
-            body: JSON.stringify({ query })
-        })
-            .then(response => response.json())
-            .catch(error=>{
-                console.log(error)
-            })
-    }
-      const firstQueryRes = await sendQuery(settingsQuery)
 
-      if (firstQueryRes.data) {
-        if (firstQueryRes.data.settings && Array.isArray(firstQueryRes.data.settings)){
-            const {settings} = firstQueryRes.data
+      const firstQueryRes = await sendQuery(settingsQuery,baseUrl)
+
+      if (firstQueryRes) {
+        if (firstQueryRes.settings && Array.isArray(firstQueryRes.settings)){
+            const {settings} = firstQueryRes
             const metadata = {}
             settings.forEach(s => {
               metadata[s.key] = s.value
@@ -122,40 +61,19 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             if (metadata["featured_posts"]){
 
                 const featuredArraySlug = JSON.parse(metadata["featured_posts"])
-                const featuredPostsQuery = `{
-                    posts(ids: [${featuredArraySlug.join(",")}]) {
-                        data {
-                         slug
-                        }
-                      }
-                }`
-                const featured_slug=await sendQuery(featuredPostsQuery)
-                  metadata["featured_posts"]=featured_slug.data.posts.data.map(p=>p.slug)
+                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl)
                   /* metadata["featured_posts"]=featured_slug. */
- 
             }
 
             if (metadata["popular_posts"]){
                 const popularArraySlug = JSON.parse(metadata["popular_posts"])
-
-                const popularPostsQuery = `{
-                    posts(ids: [${popularArraySlug.join(",")}]) {
-                        data {
-                         slug
-                        }
-                      }
-                }`
-                
-                const popular_slug=await sendQuery(popularPostsQuery).catch(error=>{
-                    console.log(error)
-                })
-                  metadata["popular_posts"]=popular_slug.data.posts.data.map(p=>p.slug)
+                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl)
             }
-  
+
               // Data can come from anywhere, but for now create it manually
   
             const nodeContent = JSON.stringify(metadata)
-  
+            
             const nodeMeta = {
               id: createNodeId(`ac-settings`),
               parent: null,
@@ -175,22 +93,22 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
       let entities = [];
   
-      if (firstQueryRes.data.posts){
+      if (firstQueryRes.posts){
           
-        const {count,total}=firstQueryRes.data.posts.paginatorInfo
+        const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
    
         for (let i = 1; i <=pageCount; i++){
             console.log(i)
             
-            const response = await sendQuery(getPostsQuery(i))
+            const response = await sendQuery(getPostsQuery(i),baseUrl)
 
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
                     throw new Error('Failed to fetch')
                 }
 
-                const posts=response.data.posts.data
+                const posts=response.posts.data
                 
                 if (Array.isArray(posts)){
                     entities=entities.concat(posts)
@@ -207,9 +125,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     id
                   }
             }`
-            const glossaryRes = await sendQuery(glossaryQuery)           
+            const glossaryRes = await sendQuery(glossaryQuery,baseUrl)           
             
-            const glossary = glossaryRes.data.glossary
+            const glossary = glossaryRes.glossary
             glossary.forEach(g=>{
                 words[g.word.toLowerCase()]=g
             })
@@ -268,17 +186,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 transformedPost.glossary = glossaryContent.postGlossaries
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
-/*                 const recommendByPostQuery = getRecommendPosts(post.id)
-                console.log(`getting recommendedPost for ${post.slug}`)
-                const recommendByPostRes = await sendQuery(recommendByPostQuery)
 
-                if(recommendByPostRes && recommendByPostRes.errors){
-                    console.log(recommendByPostQuery)
-                    console.log(recommendByPostRes)
-                    
-                } else if(recommendByPostRes && recommendByPostRes.data && recommendByPostRes.data.recommendedByPost){
-                    transformedPost.recommendPosts = recommendByPostRes.data.recommendedByPost.map(post=>post.slug)
-                } */
                 const nodeContent = JSON.stringify(transformedPost)
                 const nodeMeta = {
                     id: createNodeId(`ac-post-${post.id}`),

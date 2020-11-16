@@ -18,6 +18,12 @@
     "url": "https://activechristianity.org/"
   },
   {
+    "lang": "African english",
+    "locale": "en_ke",
+    "title": "AfricaChristianity",
+    "url": "https://activechristianity.africa"
+  },
+  {
     "lang": "Español",
     "locale": "es",
     "title": "Christianismo Activo",
@@ -34,6 +40,12 @@
     "locale": "fr",
     "title": "Christianisme Actif",
     "url": "https://christianismeactif.fr/"
+  },
+  {
+    "lang": "Africain français",
+    "locale": "fr_cm",
+    "title": "Christianisme Actif",
+    "url": "https://christianismeactif.africa"
   },
   {
     "lang": "Magyar",

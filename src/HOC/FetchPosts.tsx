@@ -3,7 +3,7 @@ import { IPostItem, IPlaylist } from '@/types'
 import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
 import { fetchLocalPostsFromSlugs, fetchOneLocalPostsFromSlug, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 
 interface IFetchPost {

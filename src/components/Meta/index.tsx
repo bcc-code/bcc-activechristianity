@@ -7,7 +7,7 @@ import { htmlTags2PlainText } from '@/helpers'
 import { Location } from '@reach/router'
 import { IRootState } from '@/state/types'
 import TS from '@/strings'
-import ac_strings from "@/strings/ac_strings.json"
+import ac_strings from "@/strings/ac_strings.js"
 import { INavItem, ITranslations } from '@/types'
 
 function shorten(str: string, length: number) {

@@ -3,33 +3,23 @@ import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray } from '@/helpers'
-import { ITopicPostSlugs } from '@/types'
-const FeatureSection: React.FC<{ topicPosts: ITopicPostSlugs[] }> = ({ topicPosts }) => {
+import { ITopicPostItems, IPostItem } from '@/types'
+const FeatureSection: React.FC<{ topicPosts: ITopicPostItems[] }> = ({ topicPosts }) => {
 
-    let postSlugs: string[] = []
+    let postSlugs: IPostItem[] = []
     topicPosts.map(t => {
         postSlugs.push(...t.posts)
     })
-    const randomFeaturedFromTopics = getRandomArray(postSlugs, 3)
+    const posts = getRandomArray(postSlugs, 3)
     return (
 
-
-        <FetchPostsFromSlugs
-            slugs={randomFeaturedFromTopics}
-            layout="list"
-            render={({ posts }) => {
+        <div className="px-4">
+            {posts.map(item => {
                 return (
-                    <div className="px-4">
-                        {posts.map(item => {
-                            return (
-                                <RightImg {...item} />
-                            )
-                        })}
-                    </div>
+                    <RightImg {...item} />
                 )
-            }
-            }
-        />
+            })}
+        </div>
 
 
     )

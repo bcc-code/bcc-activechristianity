@@ -5,7 +5,7 @@ import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import { LayoutH1Wide } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 import { ebookResToPost } from '@/helpers'
 import { INavItem, IEbook } from '@/types'

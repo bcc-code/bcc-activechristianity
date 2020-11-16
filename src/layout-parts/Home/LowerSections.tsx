@@ -3,8 +3,8 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import FollowUs from '@/layout-parts/Home/FollowUs'
-import { ITopic, ITopicPostSlugs } from '@/types'
-import ac_strings from '@/strings/ac_strings.json'
+import { ITopic, IPostItem, ITopicPostItems } from '@/types'
+import ac_strings from '@/strings/ac_strings.js'
 
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
 const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsForYou'))
@@ -12,10 +12,10 @@ const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsFor
 const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
 
 interface IHomeLowerSection {
-    lists: ITopicPostSlugs[]
+    lists: ITopicPostItems[]
     newPostsForYou: ITopic[]
     topicsForYou: ITopic[]
-    popularPosts: string[]
+    popularPosts: IPostItem[]
 }
 const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts }) => {
     return (
@@ -39,22 +39,9 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts })
             </div>
 
             <div className="col-start-3 lg:col-start-4 col-end-5 bg-gray-200 sm:bg-transparent py-6 overflow-hidden hidden sm:block">
-                <LazyLoad>
-                    <FetchPostsFromSlugs
-                        slugs={popularPosts}
-                        layout="list"
-                        render={({ posts }) => {
-                            return (
-                                <div className="hidden sm:flex">
-                                    <PopularPostVertical title={ac_strings.popularOnAC} posts={posts} small />
-                                </div>
-                            )
-                        }}
-
-                    />
-
-
-                </LazyLoad>
+                <div className="hidden sm:flex">
+                    <PopularPostVertical title={ac_strings.popularOnAC} posts={popularPosts} small />
+                </div>
                 <FollowUs />
 
 

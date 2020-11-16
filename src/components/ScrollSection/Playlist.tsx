@@ -9,7 +9,7 @@ import { IPlaylist, IMedia } from '@/types'
 import { PostH1 } from '@/components/Headers'
 
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 export const PostLayout: React.FC<IPlaylist> = (post) => {
 
     const {

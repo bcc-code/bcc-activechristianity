@@ -5,7 +5,7 @@ import { initiateRegister } from '@/state/action/authAction'
 import { openSignInModal } from '@/state/action'
 import { InputText, InputCheckbox } from '@/components/Input'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'

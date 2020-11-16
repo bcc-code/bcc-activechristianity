@@ -8,7 +8,7 @@ import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
 import ReactPlaceholder from 'react-placeholder'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { IDrawerNav } from '@/layouts/App'
 import { INavItem, IBreadcrumb } from '@/types'
 import './topmobile.css'

@@ -16,7 +16,7 @@ export const toggleFollowStatusMap = {
     "true": {
         color: 'bg-slate-lighter text-d4slate-dark',
         icon: <Icon name="Check" size="4" />,
-        text: ac_strings.following
+        text: ac_strings.unfollow
     },
     "false": {
         color: 'bg-d4slate-dark text-white',
@@ -189,6 +189,27 @@ export const SlateDarkFollowButton: React.FC<IToggleFollowProps> = ({ id, text }
                                 <Icon name="Add" size="4" key={shortid()} />
                             )}
                         </span>
+                    </div>
+
+                )
+            }}
+        />
+
+    )
+}
+
+export const SlateDarkUnfollowButton: React.FC<IToggleFollowProps> = ({ id, text }) => {
+
+    return (
+        <FetchAndSetFollowedTopics
+            id={id}
+            className="w-full"
+            render={({ followed }) => {
+                const config = toggleFollowStatusMap[followed]
+
+                return (
+                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-sm rounded-full font-semibold ${config.color}`}>
+                        <span>{text ? text : config.text}</span>
                     </div>
 
                 )

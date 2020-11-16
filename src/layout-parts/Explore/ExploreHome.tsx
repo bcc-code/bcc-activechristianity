@@ -7,22 +7,22 @@ import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Header
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import categoriesMap, { IFormatKey } from '@/components/Icons/Formats'
-import { INavItem, INavItemWKey, ITopic } from "@/types"
 
 import TS from '@/strings'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
 
-import EbookImg from '@/images/format-Ebooks-01.jpg'
+import typesFormats from '@/strings/topic-filters.json'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
 import PodcastImg from '@/images/format-Podcast-05.jpg'
+import { ITopic } from '@/types';
 
 const ExploreLayout: React.FC<{
-    formats: INavItemWKey[]
+    topics: ITopic[]
     scriptureSlug: string
-}> = ({ formats, scriptureSlug }) => {
+}> = ({ scriptureSlug, topics }) => {
 
     const categoryKeys: IFormatKey[] = ["testimony", "commentary", "edification", "question"]
     const mediaLongKeys: IFormatKey[] = ["animation", "interview", "song", "message"]
@@ -32,10 +32,12 @@ const ExploreLayout: React.FC<{
         'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
     }
-
+    const { formatIds, typeIds } = typesFormats
+    const formats = Object.keys(formatIds).map(id => formatIds[id])
     const getMenu = (keys: IFormatKey[]) => {
         const toReturn: IBgImgTopicCard[] = []
         keys.map(k => {
+
             const findFormat = formats.find(f => f.key === k)
             if (findFormat) {
                 const icon = categoriesMap[k]
@@ -51,6 +53,8 @@ const ExploreLayout: React.FC<{
     const categories: IBgImgTopicCard[] = getMenu(categoryKeys)
     const mediaLong: IBgImgTopicCard[] = getMenu(mediaLongKeys)
     const mediaSquare: IBgImgTopicCard[] = getMenu(mediaSquareKeys)
+    const filteredTopics = topics.filter(t => formatIds[t.id] === undefined && typeIds[t.id] === undefined)
+    const randomTopics = getRandomArray(filteredTopics, 6)
     return (
         <div className="bg-white max-w-tablet mx-auto">
             <div className="pt-6">
@@ -58,16 +62,8 @@ const ExploreLayout: React.FC<{
                     name={ac_strings.topics}
                     to={TS.slug_topic}
                 />
-                <QPopularAndFeaturedPosts
-                    render={({ topics }) => {
-                        const randomTopics = getRandomArray(topics, 6)
-                        return (
-                            <TopicRowAndHorizontalScroll
-                                topics={randomTopics}
-                            />
-                        )
-                    }}
-
+                <TopicRowAndHorizontalScroll
+                    topics={randomTopics}
                 />
             </div>
             <div className="pt-6">

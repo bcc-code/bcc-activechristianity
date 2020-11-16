@@ -1,7 +1,7 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
 import he from 'he'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
 
@@ -342,7 +342,7 @@ export const normalizePostRes = (post: IPostRes) => {
 }
 
 
-export function chunkArray(myArray: INavItem[], chunk_size: number) {
+export function chunkArray(myArray: INavItem[] | ITopicNavItem[], chunk_size: number) {
     var index = 0;
     var arrayLength = myArray.length;
     var tempArray = [];
@@ -373,3 +373,27 @@ function formatAMPM(date: Date) {
 
 export const dateToString = (date: Date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`
 export const timeToString = (date: Date) => `${formatAMPM(date)} (${Intl.DateTimeFormat().resolvedOptions().timeZone}), ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`
+
+export const processRecommendationContext = (data: {
+    featuredPosts: IPostRes[],
+    popularPosts: IPostRes[],
+    latestPosts: IPostRes[]
+}) => {
+    const { featuredPosts, popularPosts, latestPosts } = data
+
+    const featured = featuredPosts.map(p => normalizePostRes(p))
+    const popular = popularPosts.map(p => normalizePostRes(p))
+    const latest = latestPosts.map(p => normalizePostRes(p))
+
+    let toCheck = [...new Set([...popular, ...latest])]
+    const fixedPopularLatest = getRandomArray(toCheck, 6)
+    toCheck = [...new Set([...featured, ...fixedPopularLatest])]
+    const featuredMixed = getRandomArray(toCheck.slice(0, 6), 6)
+    return ({
+        featured,
+        popular,
+        latest,
+        featuredMixed
+    })
+
+}

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import Icon from '@/components/Icons/Icon'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 const LatestSectionHeader: React.FC<{ latestSlug: string }> = ({ latestSlug }) => {
     return (

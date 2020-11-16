@@ -9,7 +9,7 @@ import PlaceHolder from '@/layout-parts/Loader/ScripturePlaceholder'
 import { OutlineScriptureChapter } from '@/components/Button'
 // Type
 import { INavItem, IBibleBook, IBible, } from '@/types'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 interface IBibleNavProps {
     path: string

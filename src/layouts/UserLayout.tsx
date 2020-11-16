@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '@/components/CustomLink'
 import StickyBox from "react-sticky-box";
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
 import UserInitials from '@/layout-parts/User/UserInitial'

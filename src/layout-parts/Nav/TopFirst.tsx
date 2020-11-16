@@ -10,10 +10,10 @@ const TopDesktop: React.FC = () => {
     return (
         <StaticQuery query={query}
             render={(data: IGetSiteUrl) => {
-                const { acNodeSetting: { url } } = data
+                const { acNodeSetting: { top_link } } = data
                 const tagline: ITagline = {
                     text: TS.tagline,
-                    path: url
+                    path: top_link
                 };
                 return (
                     <div className="flex justify-between items-center border-gray-200 border-b py-2 sm:py-0 px-2 text-gray-500 text-sm ">
@@ -50,13 +50,13 @@ export const query = graphql`
 
     query GetSiteUrl {
         acNodeSetting{
-            url
+            top_link
         }
     }
 `
 
 export interface IGetSiteUrl {
     acNodeSetting: {
-        url: string
+        top_link: string
     }
 }

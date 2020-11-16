@@ -73,13 +73,13 @@ const query = graphql`
   query QFeaturedAndPopularTopics {
   ac {
     popularTopics {
-    slug
-    id
-  }
-  featuredTopics:topics(featured:true) {
-    slug
-    id
-      }
+        slug
+        id
+    }   
+    featuredTopics:topics(featured:true) {
+        slug
+        id
+    }
       
   }
 }

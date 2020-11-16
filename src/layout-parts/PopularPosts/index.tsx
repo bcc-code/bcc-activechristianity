@@ -4,7 +4,7 @@ import { PostItemPlayButtonSmall } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import PostTitle from '@/components/PostElements/TextSizeWClamp'
-import ac_string from '@/strings/ac_strings.json'
+import ac_string from '@/strings/ac_strings.js'
 
 interface IProps {
     title: string

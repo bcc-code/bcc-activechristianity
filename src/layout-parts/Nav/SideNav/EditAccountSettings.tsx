@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import SideNavWrapper from './SideNavWrapper'
 
 import TS from '@/strings'

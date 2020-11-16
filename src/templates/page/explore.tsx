@@ -9,10 +9,10 @@ import CustomePagination from '@/layout-parts/Explore/Pagination'
 
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import ExploreHomeLayout from '@/layout-parts/Explore/ExploreHome'
 import { Stats } from 'react-instantsearch-dom';
-import { INavItem, INavItemCount, INavItemWKey } from "@/types"
+import { INavItem, INavItemCount, INavItemWKey, ITopic, } from "@/types"
 
 
 const RefinementListByTopics = loadable(() => import('@/layout-parts/Explore/ByTopics'))
@@ -31,7 +31,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    const { resource, scripturePage } = props.pageContext
+    const { popularTopics, featuredTopics, scripturePage } = props.pageContext
 
     React.useEffect(() => {
         const search = localStorageHelper.getStoredHistory()
@@ -142,7 +142,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             setTaxonomyFilter={setTaxonomyFilter}
                             showMore
                             showMoreLimit={30}
-                            resource={resource}
                         />
                     </div>
                 ) : (
@@ -150,8 +149,8 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     )}
                 {showExploreHome && (
                     <ExploreHomeLayout
+                        topics={[...new Set([...popularTopics, ...featuredTopics])]}
                         scriptureSlug={scripturePage.to}
-                        formats={resource.format.items}
                     />
                 )}
 
@@ -190,44 +189,8 @@ interface IResource {
     pageContext: {
         title: string
         scripturePage: INavItem
-        resource: IResourceOverview
+        featuredTopics: ITopic[]
+        popularTopics: ITopic[]
     }
 }
 
-
-export interface IResourceOverview {
-    format: {
-        name: string
-        info: INavItemWKey
-        menu: INavItemWKey[]
-        items: INavItemWKey[]
-    }
-    general: {
-        name: string
-        info: INavItemWKey
-
-        items: INavItemCount[]
-    }
-    read: {
-        name: string
-        slug: string
-        info: INavItemWKey
-        ebook?: INavItemCount
-        menu: INavItemWKey[]
-        items: INavItemWKey[]
-    }
-    listen?: {
-        name: string
-        slug: string
-        info: INavItemWKey
-        menu: INavItemWKey[]
-        items: INavItemWKey[]
-    }
-    watch?: {
-        name: string
-        slug: string
-        info: INavItemWKey
-        menu: INavItemWKey[]
-        items: INavItemWKey[]
-    }
-}

@@ -7,7 +7,7 @@ import Link from "@/components/CustomLink"
 import LogoFull from '@/images/ACLogoFull'
 import SocialPlatforms from '@/layout-parts/Nav/SocialPlatforms'
 import UserNav from '@/layout-parts/Nav/User'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 
 import { IRootState } from '@/state/types'

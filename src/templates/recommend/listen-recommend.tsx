@@ -2,7 +2,7 @@ import React from "react"
 import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 
-import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
@@ -14,22 +14,23 @@ const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenD
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
-import { INavItem, INavItemCount, ISubtopicLinks } from '@/types'
+import { INavItem, INavItemCount, ISubtopicLinks, IPostRes, IRecommendationPage } from '@/types'
 import podcastProperties from '@/strings/podcastProperties'
-import { getRandomArray } from "@/helpers"
-
+import { getRandomArray, processRecommendationContext } from "@/helpers"
 // helper
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 // types'
 
 const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
-    const { title, items, playlist, podcast, mostPopular, featuredPosts } = pageContext
-
+    const { title, items, playlist, podcast, popularPosts, featuredPosts, latestPosts } = pageContext
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
+    const { featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+
+    const allCategories = [playlist, podcast, ...items]
     return (
         <div >
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
@@ -51,15 +52,7 @@ const Listen: React.FC<IProps> = (props) => {
                     <div className="w-full py-6 sm:hidden">
 
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <FetchTopicFeatured
-                            latestSlug={latestSlug}
-                            featuredPosts={featuredPosts}
-                            popularPosts={mostPopular.slice(0, 5)}
-                            render={({ posts }) => (
-                                <HSCardList posts={posts} />
-                            )}
-
-                        />
+                        <HSCardList posts={featuredMixed} />
                     </div>
                 </div>
                 <div className="py-6">
@@ -82,16 +75,9 @@ const Listen: React.FC<IProps> = (props) => {
                 <LazyLoad>
                     <div className="py-6 px-4">
                         <PageSectionHeader title={ac_strings.latest} />
-                        <FetchPostsFromArchivePage
-                            slug={latestSlug}
-                            layout="row" render={({ posts }) => {
-                                return (
-                                    <div className="px-4">
-                                        {posts.map((p, k) => <RightImgWDes key={k} {...p} />)}
-                                    </div>
-                                )
-                            }}
-                        />
+                        <div className="px-4">
+                            {latest.map((p, k) => <RightImgWDes key={k} {...p} />)}
+                        </div>
                         <div className="w-full flex justify-center items-center py-4">
 
                             <UnderlineLinkViewAll to={`${latestSlug}`} />
@@ -100,7 +86,7 @@ const Listen: React.FC<IProps> = (props) => {
                     </div>
                     <ByCatergories
                         title={ac_strings.byCategories}
-                        types={items}
+                        types={allCategories}
                     />
                 </LazyLoad>
             </div>
@@ -108,9 +94,11 @@ const Listen: React.FC<IProps> = (props) => {
                 playlist={playlist}
                 podcast={podcast}
                 latestSlug={latestSlug}
-                popularPosts={mostPopular}
-                topics={[playlist, podcast, ...items]}
+                popularPosts={popular}
+                topics={allCategories}
                 name={title}
+                latestPosts={latest}
+                featured={featuredMixed}
             />
 
         </div>
@@ -119,18 +107,14 @@ const Listen: React.FC<IProps> = (props) => {
 
 export default Listen
 
+interface IPageContext extends IRecommendationPage {
+    playlist: INavItemCount
+    podcast: INavItemCount
+    info: INavItemCount
+    items: ISubtopicLinks[]
+    menu: INavItemCount[]
+}
 interface IProps {
-    pageContext: {
-        title: string
-        breadcrumb: INavItem[]
-        playlist: INavItemCount
-        podcast: INavItemCount
-        info: INavItemCount
-        items: ISubtopicLinks[]
-        menu: INavItemCount[]
-        mostPopular: string[]
-        featuredPosts: string[]
-
-    }
+    pageContext: IPageContext
     path: string
 }

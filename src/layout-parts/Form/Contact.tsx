@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 import { LayoutH1 } from '@/components/Headers'

@@ -461,3 +461,22 @@ export interface INavItemWKey extends INavItem {
     count: number
     image?: IImage
 }
+
+export interface ICta {
+    path: string;
+    text: string;
+}
+export interface IBannerBasic {
+    title: string;
+    body: string;
+    cta: ICta;
+};
+
+export interface IRecommendationPage {
+    title: string
+    breadcrumb: INavItem[]
+    popularPosts: IPostRes[]
+    featuredPosts: IPostRes[]
+    latestPosts: IPostRes[]
+
+}

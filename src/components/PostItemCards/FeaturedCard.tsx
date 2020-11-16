@@ -7,7 +7,7 @@ import Ebook from '@/components/Ebook/EbookItem'
 import { IPostItem } from '@/types'
 import PostTitle from '@/components/PostElements/TextSizeWClamp'
 import SquareImg from '@/components/Images/Image1to1Rounded'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import Icon from '@/components/Icons/Icon'
 export interface IFeaturedCard extends IPostItem {
     showOnMobile?: boolean
@@ -51,7 +51,7 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                             <div id="play-button" className="absolute p-2 text-white z-10 inset-0 flex justify-center items-center">
                                 <Icon name="VolumeUpRounded" size="12" />
                             </div>
-                            <SquareImg {...image} alt={title} />
+                            <SquareImg rounded {...image} alt={title} />
                         </div>
                     )}
                     {

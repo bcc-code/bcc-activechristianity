@@ -1,7 +1,7 @@
 import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem } from '@/types'
 import { trimSlug, normalizePostRes, normalizeTracks } from './index'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 
 

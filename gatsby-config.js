@@ -36,6 +36,7 @@ const postQuery = `{
     }
   }
 }`
+
 const queries = [
   {
     query: postQuery ,
@@ -79,6 +80,10 @@ const plugins = [
   'gatsby-plugin-react-helmet',
   {
     resolve: "gatsby-source-graphql",
+    headers: {
+      // Learn about environment variables: https://gatsby.dev/env-vars
+      "x-lang": process.env.LANG_CODE
+    },
     options: {
       // This type will contain remote schema Query type
       typeName: "AcGraphql",

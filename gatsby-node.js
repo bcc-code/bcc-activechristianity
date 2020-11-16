@@ -7,23 +7,15 @@
 // You can delete this file if you're not using it
 const _ = require('lodash')
 const generatePosts = require('./generators/generatePosts.js')
-const generateTopics = require('./generators/TopicsFormatsTypes/generateTopics.js')
 const generatePages = require('./generators/generatePages.js')
-
 const generateAuthors = require('./generators/generateAuthors.js')
-/* const generateEbooks = require('./generators/generateEbooks.js') */
 const generatePlaylists = require('./generators/generatePlaylists.js')
-/* const generateSeries = require('./generators/generateSeries.js') */
 const generateScriptures=require('./generators/generateScriptures.js')
 const generateGlossary = require('./generators/generateGlossary.js')
-const generateFormatsTypesResource = require('./generators/TopicsFormatsTypes/generateFormatsTypes.js')
+const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
 const generateHome = require('./generators/generateHome.js')
-const ac_strings = require('./src/strings/ac_strings.json')
+const generateExplore = require('./generators/generateExplore')
 const buildTranslations = require('./generators/json/build-translations')
-
-const fetch = require('node-fetch');
-
-const path = require('path')
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
     actions.setWebpackConfig({
@@ -61,15 +53,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
 
      const generators = [
       generatePosts(actions, graphql),
+      generateTopics(actions, graphql),
       generateAuthors(actions, graphql),
-/*       generateEbooks(actions, graphql), */
       generatePlaylists(actions, graphql),
       generateGlossary(actions, graphql),
-      generatePages(actions, graphql),
-      generateTopics(actions, graphql),
-      generateFormatsTypesResource(actions, graphql),
+      generatePages(actions, graphql), 
+      generateExplore(actions, graphql),
       generateHome(actions, graphql),
-      generateScriptures(actions, graphql),
+      generateScriptures(actions, graphql)
     ]
 
     return Promise.all(generators)

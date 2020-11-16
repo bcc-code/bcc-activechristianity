@@ -4,7 +4,7 @@ import Link from '@/components/CustomLink'
 import { IRootState } from '@/state/types'
 
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { initials } from '@/helpers'
 
 export const UserInitial: React.FC<{ name: string, className?: string }> = ({ name, className }) => (

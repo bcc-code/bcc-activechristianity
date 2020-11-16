@@ -17,7 +17,7 @@ import { IRootState } from '@/state/types'
 import { IPlaylist, IMedia } from '@/types'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 
 export const PostLayout: React.FC<IPlaylist> = (post) => {

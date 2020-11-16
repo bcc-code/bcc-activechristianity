@@ -3,18 +3,13 @@ import { FetchOnePost } from '@/HOC/FetchPosts'
 import FeaturedCard, { IFeaturedCard } from '@/components/PostItemCards/FeaturedCard'
 
 import TopImg from '@/components/PostItemCards/TopImg'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
 import { playlistToPost, getRandomArray } from '@/helpers'
-import { ITopicPostSlugs } from '@/types'
+import { ITopicPostSlugs, IPostItem, ITopicPostItems } from '@/types'
 import shortid from 'shortid'
-const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPostSlugs[] }> = ({ topicPosts }) => {
+const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPosts }) => {
 
-    let postSlugs: string[] = []
-    topicPosts.map(t => {
-        postSlugs.push(...t.posts)
-    })
-    const randomFeaturedFromTopics = getRandomArray(postSlugs, 4)
     return (
         <div>
             <h3 className="relative mt-8 mx-4 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
@@ -41,22 +36,8 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
                         ) : (<div></div>)
                     }}
                 />
-                <FetchOnePost
-                    key={shortid()}
-                    slug={randomFeaturedFromTopics[0]}
-                    render={({ post }) => {
-                        return post ? <TopImg {...post} /> : <div></div>
-                    }
-                    }
-                />
-                <FetchOnePost
-
-                    slug={randomFeaturedFromTopics[1]}
-                    render={({ post }) => {
-                        return post ? <TopImg {...post} /> : <div></div>
-                    }
-                    }
-                />
+                <TopImg {...featuredPosts[0]} />
+                <TopImg {...featuredPosts[1]} />
 
             </div>
 

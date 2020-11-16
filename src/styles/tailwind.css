@@ -14,10 +14,11 @@ html {
     --slate-light: #9CA6BE;
     --slate: #606F94;
     --slate-dark: #384156;
+    --slate-darker: #1E2633;
 
     --gray-light: #f4f4f4;
     --gray: #d4d4d4;
-    --gray-dark: #757575;
+    --gray-dark: #828282;
 
     --white: #ffffff;
     --black: #212236;
@@ -46,7 +47,7 @@ body {
     -moz-osx-font-smoothing: grayscale !important;
     scroll-behavior: smooth;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color: #3a4154;
+    color: #1E2633;
 }
 
 a,

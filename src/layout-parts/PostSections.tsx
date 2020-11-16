@@ -8,7 +8,7 @@ import Icon from '@/components/Icons/Icon'
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from "@/helpers"
@@ -89,7 +89,7 @@ export const MobileHeaderBackground: React.FC<{ imgUrl: string }> = ({ imgUrl, c
     )
 }
 
-const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrls }) => {
+export const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrls }) => {
     if (translatedUrls && translatedUrls.length > 1) {
 
         return (

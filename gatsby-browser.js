@@ -33,7 +33,7 @@ const addScript = url => {
 
 export const onClientEntry = () => {
   window.onload = () => {
-    if(typeof window!==undefined) {
+    if(typeof window !== 'undefined') {
       window.refTagger = {
         settings: {
           bibleVersion: process.env.BIBLE_VERSION,

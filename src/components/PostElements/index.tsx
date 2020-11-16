@@ -6,7 +6,7 @@ import Icon from '@/components/Icons/Icon'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import FetchAndSetCurrentMedia from '@/HOC/SetAndUpdatePlayingMedia'
 import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'
 
@@ -37,7 +37,7 @@ export const ReadingTimingAuthor: React.FC<IProps> = ({ duration, authors, class
     return (
         <span className={className ? className : 'text-sm text-gray-600'}>
             <span>{duration ? duration : ''}</span>
-            {duration && authors && <span> · </span>}
+            {duration && authors && authors?.length > 0 && <span> · </span>}
             <AuthorLink authorGroups={authors} />
         </span>
     )
@@ -184,7 +184,7 @@ export const PlaylistBackground: React.FC<{ slug: string, imageUrl: IImage }> = 
             <div id="play-button" className="absolute p-2 text-white z-10 inset-0 flex justify-center items-center">
                 <PlaylistPlayButton slug={slug} />
             </div>
-            <SquareImg {...imageUrl} alt='background' />
+            <SquareImg rounded {...imageUrl} alt='background' />
         </div>
     )
 }

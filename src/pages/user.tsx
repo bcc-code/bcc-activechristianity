@@ -14,7 +14,7 @@ import Downloaded from "@/layout-parts/User/Downloaded"
 import ChangePassword from "@/layout-parts/Form/ChangePassword"
 import DeleteProfile from "@/layout-parts/Form/Delete"
 import TS from '@/strings'
-import ac_string from '@/strings/ac_strings.json'
+import ac_string from '@/strings/ac_strings.js'
 import { IPage } from '@/types'
 const componentMap = {
     Bookmarked,
