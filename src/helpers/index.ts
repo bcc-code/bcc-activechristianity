@@ -138,7 +138,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
             toAdd.path = track.post.slug
             if (toAdd.audio) {
 
-                const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
+                const normalized = track.post && track.post.authors ? normalizeAuthors(track.post.authors) : undefined
                 const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
                 toAdd.audio.article = {
                     title: track.post.title,

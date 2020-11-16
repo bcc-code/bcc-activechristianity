@@ -75,9 +75,7 @@ const Listen: React.FC<IProps> = (props) => {
                 <LazyLoad>
                     <div className="py-6 px-4">
                         <PageSectionHeader title={ac_strings.latest} />
-                        <div className="px-4">
-                            {latest.map((p, k) => <RightImgWDes key={k} {...p} />)}
-                        </div>
+                        {latest.map((p, k) => <RightImgWDes key={k} {...p} />)}
                         <div className="w-full flex justify-center items-center py-4">
 
                             <UnderlineLinkViewAll to={`${latestSlug}`} />

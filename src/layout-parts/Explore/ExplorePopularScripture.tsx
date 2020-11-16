@@ -34,7 +34,7 @@ const ExplorePopularScripture: React.FC<{
                 to={scriptureSlug}
 
             />
-            <div className="hidden sm:grid grid-cols-4 lg:grid-cols-6 gap-2 px-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 px-4">
                 {mostUsedScriptures.map(s => {
                     return (
                         <Link to={s.to}>
@@ -45,7 +45,7 @@ const ExplorePopularScripture: React.FC<{
                     )
                 })}
             </div>
-            <XScrollCustomSize
+            {/*             <XScrollCustomSize
                 childeClassName=""
                 items={mostUsedScriptures.map(s => {
                     return (
@@ -56,7 +56,7 @@ const ExplorePopularScripture: React.FC<{
                         </Link>
                     )
                 })}
-            />
+            /> */}
         </div>
     )
 }

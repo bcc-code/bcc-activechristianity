@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard, { IBgImgTopicCard, asImageWDataUri } from '@/components/Cards/BgImgTopicCard'
-
+import Link from '@/components/CustomLink'
 import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
 import ac_strings from '@/strings/ac_strings.js'
 import categoriesMap, { IFormatKey } from '@/components/Icons/Formats'
-
+import SquareImages from '@/components/Images/Image1to1Rounded'
 import TS from '@/strings'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
@@ -18,7 +18,7 @@ import typesFormats from '@/strings/topic-filters.json'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
 import PodcastImg from '@/images/format-Podcast-05.jpg'
 import { ITopic } from '@/types';
-
+import { getImage } from '@/helpers/imageHelpers'
 const ExploreLayout: React.FC<{
     topics: ITopic[]
     scriptureSlug: string
@@ -71,50 +71,42 @@ const ExploreLayout: React.FC<{
                     name={TS.categories}
 
                 />
-                <div className="grid  grid-cols-2 sm:grid-cols-4 gap-4 px-4 mb-4 ">
-                    {categories.map((card) => (
-                        <div className="min-h-12 h-12">
-                            <ImgBgTopicCard
-                                {...card}
-                                overlay="light"
-                                key={shortid()}
-
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
+                    {ac_strings.slug_podcast && (
+                        <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                            <SquareImages
+                                className="rounded-t-lg"
+                                src={PodcastImg}
                             />
-                        </div>
+                            <div className="font-roboto font-semi text-center py-2 px-2">
+                                {ac_strings.podcast}
+                            </div>
+                        </Link>
+                    )}
+                    {ac_strings.slug_podcast && (
+                        <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                            <SquareImages
+                                className="rounded-t-lg"
+                                src={PlaylistImg}
+                            />
+                            <div className="font-roboto font-semi text-center py-2 px-2">
+                                {ac_strings.playlist}
+                            </div>
+                        </Link>
+                    )}
+                    {formats.map((card) => (
+                        <Link key={shortid()} to={card.slug} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                            <SquareImages
+                                className="rounded-t-lg"
+                                {...card.image}
+                            />
+                            <div className="font-roboto font-semi text-center py-2 px-2">
+                                {card.name}
+                            </div>
+                        </Link>
+
                     ))}
-                </div>
 
-            </div>
-            <div className="pt-6">
-                <SectionTitleDesktopAndMobile
-                    name={TS.media}
-
-                />
-                <XScrollCustomSize
-                    childeClassName=""
-                    items={mediaLong.map((card) => (
-                        <div className="min-h-24 h-24 w-36" key={shortid()} >
-                            <ImgBgTopicCard {...card} overlay="medium" />
-
-                        </div>
-                    ))}
-                />
-                <XScrollCustomSize
-                    childeClassName=""
-                    items={mediaSquare.map((card) => (
-                        <div className="min-h-24 h-24 w-24" key={shortid()}>
-                            <ImgBgTopicCard {...card} overlay="medium" />
-
-                        </div>
-                    ))}
-                />
-
-                <div className="hidden sm:grid grid-cols-4 gap-4 px-4">
-                    {[...mediaLong, ...mediaSquare].map((card) => (
-                        <div className="min-h-24 h-24" >
-                            <ImgBgTopicCard {...card} overlay="medium" />
-                        </div>
-                    ))}
                 </div>
             </div>
 

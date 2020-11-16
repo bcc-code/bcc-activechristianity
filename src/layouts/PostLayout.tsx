@@ -151,8 +151,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
 
-    console.log(defaultHeight)
-    console.log(currentHeigt)
     return (
         <article className="overflow-scroll w-full relative">
             <ShareBookmarkTopShortCuts
