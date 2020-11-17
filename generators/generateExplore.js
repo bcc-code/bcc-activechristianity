@@ -56,17 +56,27 @@ module.exports = function generateTopics(actions, graphql) {
                 }`)
 
                 const {popularTopics} = popularTopicsRes.data.ac
-                createPage({
-                    path: explorePage.slug,
-                    component: path.resolve(exploreTemplate),
-                    context: {
-                      title:explorePage.title,
-                      slug: explorePage.slug,
-                      popularTopics,
-                      featuredTopics,
-                      scripturePage:({name: scripturePage.title,to: scripturePage.slug})
-                    },
-                  })
+                
+  
+                if(explorePage && `${explorePage.id}`===process.env.EXPLORE_PAGE_ID){
+                    const context = {
+                        title:explorePage.title,
+                        slug: explorePage.slug,
+                        popularTopics,
+                        featuredTopics 
+                    }
+                    if(scripturePage && `${scripturePage.id}`===process.env.SCRIPTURE_PAGE_ID){
+                        context.scripturePage=({name: scripturePage.title,to: scripturePage.slug})
+                    }
+                    createPage({
+                        path: explorePage.slug,
+                        component: path.resolve(exploreTemplate),
+                        context,
+                        })
+                } else {
+                    console.log('not able to find explore page')
+                }
+               
           }
     })
 

@@ -49,7 +49,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     console.log(topicId)
     return (
         <div className="hidden sm:block">
-            <div className="flex justify-between items-between px-4">
+            <div className="standard-max-w-px flex justify-between items-between">
                 <LayoutH1 title={name} />
                 {topicId && <ToggleFollowOutlineBtn id={topicId} />}
             </div>

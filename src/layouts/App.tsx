@@ -26,7 +26,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import acApi from '@/util/api'
 // type 
 import { IRootState } from '@/state/types'
-import { IUser, IMenusQuery, INavItem } from '@/types'
+import { IUser, INavItem } from '@/types'
 
 
 import "@/styles/tailwind-output.css"
@@ -149,7 +149,11 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 if (auth.loggedIn !== "success") {
                     mobileMenu.unshift({ name: ac_strings.home, to: "/", icon: iconMapNav["home"] })
                 } else {
-                    mobileMenu.push({ name: "My Content", to: "/user/my-content", icon: iconMapNav["my-content"] })
+                    mobileMenu.push({
+                        name: ac_strings.my_content,
+                        to: ac_strings.slug_user_content,
+                        icon: iconMapNav["my-content"]
+                    })
                 }
 
                 const findGlossary = allPages.find(p => p.label === "build-glossaries")

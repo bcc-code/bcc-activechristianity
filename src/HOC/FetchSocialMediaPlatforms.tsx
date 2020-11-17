@@ -17,7 +17,7 @@ export const FetchSocialPlatformUrls: React.FC<QProps> = ({ render, podcast }) =
         <StaticQuery
             query={query}
             render={(data: IFooterData) => {
-                const { social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_twitter, social_spotify } = data.acNodeSetting
+                const { social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify } = data.acNodeSetting
                 const platforms = podcast !== true ? [
                     {
                         url: social_facebook,
@@ -69,7 +69,6 @@ const query = graphql`
         acNodeSetting {
             social_rss
             social_itunes
-            social_twitter
             social_youtube
             social_spotify
             social_facebook
@@ -82,7 +81,6 @@ interface IFooterData {
     acNodeSetting: {
         social_rss: string
         social_itunes: string
-        social_twitter: string
         social_youtube: string
         social_spotify: string
         social_facebook: string

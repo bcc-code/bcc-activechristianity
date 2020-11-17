@@ -44,6 +44,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   }
 
   exports.onPreBootstrap = async () => {
+    console.log('loading pre bootscrap')
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()
 
@@ -52,16 +53,25 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   exports.createPages = ({ page,actions, graphql }) => {
 
      const generators = [
-      generatePosts(actions, graphql),
-      generateTopics(actions, graphql),
-      generateAuthors(actions, graphql),
-      generatePlaylists(actions, graphql),
-      generateGlossary(actions, graphql),
+/*       generatePosts(actions, graphql), */
+/*       generateTopics(actions, graphql), 
+generateExplore(actions, graphql),
+generateHome(actions, graphql)
+*/
+      generatePages(actions, graphql)
+/*      generateAuthors(actions, graphql),
+
       generatePages(actions, graphql), 
       generateExplore(actions, graphql),
-      generateHome(actions, graphql),
-      generateScriptures(actions, graphql)
+      generateHome(actions, graphql)*/
     ]
+
+    if (process.env.LANG_CODE==="en"){
+      generators.push( generateGlossary(actions, graphql))
+      generators.push(generatePlaylists(actions, graphql))
+      generators.push(generateScriptures(actions, graphql))
+    }
+  
 
     return Promise.all(generators)
 

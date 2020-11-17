@@ -55,12 +55,12 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
                         </SideNavItem > */}
                         {[
                             {
-                                name: "My Content",
-                                to: '/user/my-content'
+                                name: ac_strings.my_content,
+                                to: ac_strings.slug_user_content
                             },
                             {
-                                name: "History",
-                                to: 'user/history'
+                                name: ac_strings.history,
+                                to: ac_strings.slug_user_history
                             }
                         ].map((item, i) => {
                             return (

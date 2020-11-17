@@ -1,8 +1,12 @@
 const path = require('path')
-const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
+const {postQuery,getMultiPosts,postQueryNoTrack}= require('gatsby-source-ac/helpers')
 const {typeScope,formatScope} = require('./TopicsFormatsTypes/hjelper')
 const baseUrl = process.env.API_URL
 //${postQuery}
+const headers = {
+    "x-lang": process.env.LANG_CODE
+}
+const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoTrack
 const topicQuery=`
     id
     name
@@ -16,7 +20,7 @@ const topicQuery=`
       }
     somePosts(first:12){
         data {
-            ${postQuery}
+            ${languagePostQuery}
         }
       }
 `
@@ -24,10 +28,10 @@ const query =`{
     allAcNodeSetting {
         nodes {
             popular_posts {
-                ${postQuery}
+                ${languagePostQuery}
             }
             featured_posts {
-                ${postQuery}
+                ${languagePostQuery}
             }
         }
     }
@@ -36,7 +40,7 @@ const query =`{
 
         latestPosts:posts(page:1,first:12){
             data {
-                ${postQuery}
+                ${languagePostQuery}
             }
           }
         featuredTopics:topics(featured:true) {
@@ -105,7 +109,7 @@ module.exports = function generatePages(actions, graphql) {
                 console.log(popularRes.data.ac)
                 const {popularPosts,popularTopics}=popularRes.data.ac
                 if (popularPosts){
-                    popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl)
+                    popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl,headers)
                 }
                 
                 
@@ -124,8 +128,8 @@ module.exports = function generatePages(actions, graphql) {
                                 .then(async res=>{
                                    
                                     const topic = res.data.ac.topic
-                                    const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl)
-                                    
+                                    const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl,headers)
+                                    console.log(allPosts)
                                 })
                             }
                         }

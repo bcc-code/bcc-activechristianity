@@ -1,7 +1,8 @@
-const {postQuery, sendQuery} = require('gatsby-source-ac/helpers')
+const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const TS = require('../../src/strings')
 const listTemplate = 'src/templates/archive/post-list.tsx'
+const videoTemplate = 'src/templates/archive/video-list.tsx'
 const baseUrl = process.env.API_URL
 const perPage= 12
 
@@ -166,7 +167,7 @@ module.exports.createArchivePages =async function ({
             pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
         }
         
-        const component = path.resolve(listTemplate)
+        const component = (`${node.id}`===process.env.WATCH_POSTS_FILTER_ID || `${node.id}`===process.env.ANIMATION_FILTER_ID)?path.resolve(videoTemplate): path.resolve(listTemplate)
         const paginate = {
           currentPage,
           totalPages:totalPages,
@@ -176,6 +177,7 @@ module.exports.createArchivePages =async function ({
         const query=getPostsPerPageQuery(node.id,i)
         const perPagePosts = await graphql(query).then(res=>res.data.ac.topic.allPosts.data.map(p=>p.slug))
             console.log(pagePath)
+            
             createPage({
               path:pagePath,
               component,
@@ -212,14 +214,12 @@ module.exports.createSubTopicPages=({
     const totalPages = Math.ceil(totalCount / perPage)
     const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
 
-    const component = path.resolve(listTemplate)
+    const component = (`${topic.id}`===process.env.WATCH_POSTS_FILTER_ID || 
+    `${subTopic.id}`===process.env.WATCH_POSTS_FILTER_ID)?path.resolve(videoTemplate):path.resolve(listTemplate)
     const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
 
     pageBreadcrumb.push(
-      {
-      name:topic.name,
-      to:topic.slug
-    },
+
     {
       name:subTopic.name,
       to:subTopic.slug

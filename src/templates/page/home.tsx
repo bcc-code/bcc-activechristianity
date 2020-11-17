@@ -16,7 +16,7 @@ import { PageSectionHeader } from '@/components/Headers'
 import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
-
+import shortid from 'shortid'
 const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'))
 import { getRandomArray, normalizePostRes } from '@/helpers'
 // Type
@@ -103,13 +103,13 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
       <div className="hidden sm:block">
 
-        <HomeTopFeaturePost {...featured[0]} />
+        <HomeTopFeaturePost {...featured[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
-          <FeatureSectionDesktop
+          {/*           <FeatureSectionDesktop
             featuredPosts={[randomRest[1], randomRest[0]]}
-          />
+          /> */}
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}
@@ -118,15 +118,13 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           />
           <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
             <div className="col-start-1 col-end-3 lg:col-end-4">
-              <div className="">
-                {latest.slice(6, 12).map((item, i) => {
-                  return (
-                    <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
-                      <RightImgWDes key={i} {...item} />
-                    </div>
-                  )
-                })}
-              </div>
+              {latest.slice(6, 12).map((item, i) => {
+                return (
+                  <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
+                    <RightImgWDes key={i} {...item} />
+                  </div>
+                )
+              })}
               <ShowMore
                 slug={latestPostAsTopic.slug}
                 startNr={2}

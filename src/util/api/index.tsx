@@ -1,28 +1,7 @@
 
 import * as request from './requests';
-
+const { sendQuery } = require('gatsby-source-ac/helpers')
 const baseUrl = process.env.API_URL || "API_URL"
-const sendQuery = (query: string) => {
-    return fetch(baseUrl, {
-        method: 'POST',
-        'credentials': 'include',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            /*              */
-        },
-        body: JSON.stringify({ query })
-    })
-        .then(response => response.json())
-        .then(res => {
-            if (res.errors && Array.isArray(res.errors)) {
-                throw new Error(res.errors[0].message)
-            } else {
-                return res.data
-            }
-
-        })
-}
 
 export default {
     login: (username: string, password: string, remember: boolean) => {

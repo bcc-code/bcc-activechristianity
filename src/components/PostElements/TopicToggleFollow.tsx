@@ -5,7 +5,7 @@ import Icon, { IButtonColour } from "@/components/Icons/Icon"
 import Link from '@/components/CustomLink'
 import { ITopicNavItem } from '@/types'
 import { OutlineSmallRounded } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import shortid from 'shortid'
 export const toggleFollowStatusMap = {
     "loading": {

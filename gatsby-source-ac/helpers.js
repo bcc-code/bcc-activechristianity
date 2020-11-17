@@ -63,8 +63,53 @@ const postQuery = `
     likes
     views
 `
-module.exports.postQuery = postQuery
 
+const postQueryNoPlaylist = `
+    id
+    title
+    slug
+    excerpt
+    image {
+        src
+        srcset
+        dataUri
+        colors
+
+    }
+    readtime
+    track {
+        url
+        title
+        duration
+        post {
+            title
+            slug
+        }
+    }
+    authors {
+        name
+        slug
+        pivot {
+            as
+        }
+        id 
+    }
+    topics {
+        name
+        slug
+        id
+        group {
+            name
+            slug
+            id
+        }
+    }
+    published 
+    likes
+    views
+`
+module.exports.postQuery = postQuery
+module.exports.postQueryNoPlaylist=postQueryNoPlaylist
 const multiPostsQuery = (slugsArray)=>`
 {
     posts(ids: [${slugsArray.join(",")}]) {
@@ -94,17 +139,19 @@ function errorMessage(gqlError){
     }
     return msg
   }
-const sendQuery = (query, baseUrl) => {
-    return fetch(baseUrl, {
+const sendQuery = (query, baseUrl,headers) => {
+    const options = {
         method: 'POST',
         'credentials': 'include',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            /*              */
+            ...headers
         },
         body: JSON.stringify({ query })
-    })
+    }
+
+    return fetch(baseUrl, options)
         .then(response => response.json())
         .then((gqlResponse) => {
             if (gqlResponse.errors) {
@@ -125,7 +172,11 @@ module.exports.sendQuery = sendQuery
 
 module.exports.topicQuery=topicQuery
 
-module.exports.getMultiPosts = (idArray,baseUrl)=>{
+module.exports.getMultiPosts = (idArray,baseUrl,headers)=>{
     const query = multiPostsQuery(idArray)
-    return sendQuery(query,baseUrl).then(res=>res.posts.data) 
+    return sendQuery(query,baseUrl,headers).then(res=>{
+        console.log(query)
+        console.log(res)
+        return res.posts.data
+    })
 }

@@ -16,7 +16,7 @@ const settingsQuery = `
 }
 `
 
-const getPostsQuery = (pageNr)=>`
+const getPostsQuery = (pageNr,noPlaylistQuery)=>`
     {
         posts(page:${pageNr}) {
             data {
@@ -47,13 +47,14 @@ const {sendQuery,getMultiPosts, postQuery} = helpers
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
-    const {fieldName,typeName,baseUrl} = options
-
-      const firstQueryRes = await sendQuery(settingsQuery,baseUrl)
-
+    const {fieldName,baseUrl,headers,noPlaylistQuery} = options
+       
+      const firstQueryRes = await sendQuery(settingsQuery,baseUrl,headers)
+        
       if (firstQueryRes) {
         if (firstQueryRes.settings && Array.isArray(firstQueryRes.settings)){
             const {settings} = firstQueryRes
+            console.log(settings)
             const metadata = {}
             settings.forEach(s => {
               metadata[s.key] = s.value
@@ -61,13 +62,13 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             if (metadata["featured_posts"]){
 
                 const featuredArraySlug = JSON.parse(metadata["featured_posts"])
-                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl)
+                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl,headers)
                   /* metadata["featured_posts"]=featured_slug. */
             }
 
             if (metadata["popular_posts"]){
                 const popularArraySlug = JSON.parse(metadata["popular_posts"])
-                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl)
+                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl,headers)
             }
 
               // Data can come from anywhere, but for now create it manually
@@ -94,14 +95,14 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
       let entities = [];
   
       if (firstQueryRes.posts){
-          
+          console.log(firstQueryRes.posts)
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
    
-        for (let i = 1; i <=pageCount; i++){
+        for (let i = 1; i <=3; i++){
             console.log(i)
             
-            const response = await sendQuery(getPostsQuery(i),baseUrl)
+            const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
 
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
@@ -125,13 +126,17 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     id
                   }
             }`
-            const glossaryRes = await sendQuery(glossaryQuery,baseUrl)           
+            const glossaryRes = await sendQuery(glossaryQuery,baseUrl,headers)           
             
             const glossary = glossaryRes.glossary
-            glossary.forEach(g=>{
-                words[g.word.toLowerCase()]=g
-            })
 
+            if(glossary.length>0){
+                glossary.forEach(g=>{
+                    words[g.word.toLowerCase()]=g
+                })
+    
+            }
+            
             const replacer = (word) => {
 
                 const origialWord=word
@@ -166,24 +171,32 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 
                 return {text:toReplace,postGlossaries}
               }
-              let test = `Some random text containing ${glossary[0].word} and ${glossary[1].word} and ${glossary[2].word} should get replaced`
 
-              const replacedTest = scanForAllGlossary(test)
+              if(glossary.length>3){
+                  console.log(glossary)
+                let test = `Some random text containing ${glossary[0].word} and ${glossary[1].word} and ${glossary[2].word} should get replaced`
 
-              if (replacedTest.text!==test){
-                
-                console.log('Replacer is working')
-            } else {
-                throw new Error('Replacer not working!')
-            }
+                const replacedTest = scanForAllGlossary(test)
+  
+                if (replacedTest.text!==test){
+                  
+                  console.log('Replacer is working')
+              } else {
+                  throw new Error('Replacer not working!')
+              }
+              }
+              
             console.log(`creating ${entities.length} nodes`)
             for(let k=0;k<entities.length;k++){
                 const post = entities[k]
                 const transformedPost = Object.assign({},post)
-                const glossaryContent = scanForAllGlossary(transformedPost.content)
+                if(glossary.length>0){
+                    const glossaryContent = scanForAllGlossary(transformedPost.content)
+                    transformedPost.content = glossaryContent.text
+                    transformedPost.glossary = glossaryContent.postGlossaries
+                }
                 transformedPost.acId = post.id
-                transformedPost.content = glossaryContent.text
-                transformedPost.glossary = glossaryContent.postGlossaries
+                
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
 

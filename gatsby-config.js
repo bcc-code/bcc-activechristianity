@@ -80,10 +80,7 @@ const plugins = [
   'gatsby-plugin-react-helmet',
   {
     resolve: "gatsby-source-graphql",
-    headers: {
-      // Learn about environment variables: https://gatsby.dev/env-vars
-      "x-lang": process.env.LANG_CODE
-    },
+
     options: {
       // This type will contain remote schema Query type
       typeName: "AcGraphql",
@@ -91,6 +88,10 @@ const plugins = [
       fieldName: "ac",
       // URL to query from
       url: process.env.API_URL,
+      headers: {
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        "x-lang": process.env.LANG_CODE
+      },
     },
   },
   {
@@ -102,6 +103,9 @@ const plugins = [
       fieldName: "ac_node",
       // URL to query from
       baseUrl: process.env.API_URL,
+      headers: {
+        "x-lang": process.env.LANG_CODE
+      }
     },
   },
   'gatsby-plugin-sass',

@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
 const ac_strings=require('../src/strings/ac_strings.js')
-
+const TS = require('../src/strings')
 /* SETUP */
 
 const query = `{
@@ -12,11 +12,6 @@ const query = `{
       slug
       label
       flexibleContent
-    }
-
-    topicMain:page(id:${process.env.TOPICS_PAGE_ID}){
-      title
-      slug
     }
 
     podcast:page(id:${process.env.PODCAST_PAGE_ID}){
@@ -55,10 +50,9 @@ module.exports = function generatePages(actions, graphql) {
       return Promise.reject(result.errors)
     } else {
       const pageInfo = result.data.ac.allPages
-      const topicsMain= result.data.ac.topicMain
       const podcast = result.data.ac.podcast
       const aboutMain = result.data.ac.about
-      const navTopicsItem={name:topicsMain.title,to:topicsMain.slug}
+      const navTopicsItem={name:ac_strings.topic,to:TS.slug_topic}
      
 
       _.each(pageInfo,(page)=>{
@@ -69,7 +63,13 @@ module.exports = function generatePages(actions, graphql) {
         } else if (page && page.label.indexOf("about-us-") >-1){
           aboutUsChildren.push(page)
         } else if (page && page.label.indexOf("build-") >-1){
-          const templateName=page.label.replace("build-","")
+          let templateName
+          if (page.label.indexOf("build-page") >-1){
+            templateName="page"
+           } else {
+            templateName=page.label.replace("build-","")
+           }          
+
           let context = {
             ...page,
               breadcrumb:[
@@ -95,14 +95,13 @@ module.exports = function generatePages(actions, graphql) {
           })
         } 
       })
-
+      //{name:ac_strings.topic,to:TS.slug_topic}
       // topic
       createPage({
-        path: `${topicsMain.slug}`,
+        path: `${ac_strings.topic}`,
         component: path.resolve(`./src/templates/page/topics.tsx`),
         context:{
-          title:topicsMain.title,
-          id:topicsMain.id,
+          title:TS.slug_topic,
           themes:themePages,
           breadcrumb:[
             navTopicsItem
@@ -200,15 +199,6 @@ module.exports = function generatePages(actions, graphql) {
         },
       })
 
-/*       console.log(ac_strings.slug_user)
-      createPage({
-        path: ac_strings.slug_user,
-        component: path.resolve(`src/templates/page/user.tsx`),
-        context:{
-          title:ac_strings.title_user,
-          userPages:userPages.map(page=>({component:page.label.replace("user-",""),path:page.slug, title:page.title}))
-        },
-      }) */
     }
   })
 

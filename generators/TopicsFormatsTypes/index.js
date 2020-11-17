@@ -29,10 +29,7 @@ const query = `{
       }
       
     }
-    topicMain:page(id:${process.env.TOPICS_PAGE_ID}){
-      title
-      slug
-    }       
+      
   }
 
 }`
@@ -81,7 +78,7 @@ module.exports = function generateTopics(actions, graphql) {
             const topicInfo = result.data.ac.topics
             const formatIds = {}
             const typeIds={}
-
+            console.log(topicInfo)
             for(let t=0;t<topicInfo .length;t++){
               const node = topicInfo[t]
                 console.log(node.name)
@@ -102,9 +99,8 @@ module.exports = function generateTopics(actions, graphql) {
                 to:baseUrl
               }]
               if(topicType==='topic'){
-                
-                const topicsMain= result.data.ac.topicMain
-                const navParentItem={name:topicsMain.title,to:topicsMain.slug}
+           
+                const navParentItem={name:ac_strings.topic,to:TS.slug_topic}
                 breadcrumb=[
                     navParentItem, 
                     {
@@ -133,7 +129,7 @@ module.exports = function generateTopics(actions, graphql) {
                 image:node.image
               }
 
-              if (["type","format","topic"].includes(topicType)){//["type","format","topic"]
+              if (["type"].includes(topicType)){//["type","format","topic"]
                 const contextPostsQuery = getContextPostsQuery(node.id)
                 const contextPostsRes = await graphql(contextPostsQuery)
                   .then(res=>{
@@ -154,6 +150,7 @@ module.exports = function generateTopics(actions, graphql) {
                     latestPosts,
                     featuredPosts
                 }
+                console.log(contextPosts)
 
                 if (topicType==='format'){
                   const find = formatScope.find(f=>f.keyId===`${node.id}`)

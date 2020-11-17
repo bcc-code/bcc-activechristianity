@@ -77,14 +77,14 @@ module.exports = async function generateTypes(data) {
         const {playlistPage,podcastPage,podcasts,playlists} = result.data.ac
         const podcastCount = podcasts.noOfPosts
 
-        if(playlistPage){
+        if(playlistPage && `${playlistPage.id}`===process.env.PLAYLIST_PAGE_ID){
             const playlistItem = {key:"playlist",name:playlistPage .title,to:playlistPage.slug,count:playlists.length}
            
             typeFormatEach["playlist"]=playlistItem
                 
         }
 
-        if(podcastPage){
+        if(podcastPage && `${podcastPage.id}`===process.env.PODCAST_PAGE_ID){
             const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
         typeFormatEach["podcast"]=podcastItem
         }

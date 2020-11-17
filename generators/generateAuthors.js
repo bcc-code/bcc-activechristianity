@@ -79,7 +79,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
 
                         for (let i = 0; i < totalCount; i += perPage, currentPage++) {
                           let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-  
+                          console.log(pagePath)
                           createPage({
                             path:pagePath,
                             component:path.resolve(template),
