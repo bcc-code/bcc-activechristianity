@@ -16,7 +16,7 @@ import { PageSectionHeader } from '@/components/Headers'
 import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
-
+import shortid from 'shortid'
 const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'))
 import { getRandomArray, normalizePostRes } from '@/helpers'
 // Type
@@ -103,7 +103,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
       <div className="hidden sm:block">
 
-        <HomeTopFeaturePost {...featured[0]} />
+        <HomeTopFeaturePost {...featured[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
