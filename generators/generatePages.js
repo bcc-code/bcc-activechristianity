@@ -69,7 +69,14 @@ module.exports = function generatePages(actions, graphql) {
         } else if (page && page.label.indexOf("about-us-") >-1){
           aboutUsChildren.push(page)
         } else if (page && page.label.indexOf("build-") >-1){
-          const templateName=page.label.replace("build-","")
+          let templateName
+          if (page && page.label.indexOf("build-page")>-1 ){
+            templateName="page"
+          } else {
+            templateName=page.label.replace("build-","")
+            
+          }
+
           let context = {
             ...page,
               breadcrumb:[
@@ -79,7 +86,6 @@ module.exports = function generatePages(actions, graphql) {
                 }
               ]
           }
-
           if (pagesContext[page.label]){
             const pageContext = pagesContext[page.label]
             if (pageContext.context){
