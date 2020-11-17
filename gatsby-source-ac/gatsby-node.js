@@ -1,4 +1,5 @@
 const helpers = require('./helpers')
+const {sendQuery,getMultiPosts, postQuery,postQueryNoPlaylist} = helpers
 
 const settingsQuery = `
 {
@@ -20,7 +21,7 @@ const getPostsQuery = (pageNr,noPlaylistQuery)=>`
     {
         posts(page:${pageNr}) {
             data {
-                ${postQuery}
+                ${noPlaylistQuery===true? postQueryNoPlaylist:postQuery}
                 content
                 langs {
                     lang
@@ -42,8 +43,6 @@ const getPostsQuery = (pageNr,noPlaylistQuery)=>`
         }
     }
 `
-
-const {sendQuery,getMultiPosts, postQuery} = helpers
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
@@ -102,7 +101,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         for (let i = 1; i <=3; i++){
             console.log(i)
             
-            const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
+            const response = await sendQuery(getPostsQuery(i,true),baseUrl,headers)
 
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
