@@ -73,7 +73,7 @@ const ExploreLayout: React.FC<{
                         </Link>
                     )}
                     {formats.map((card) => (
-                        <Link key={shortid()} to={card.slug} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                        <Link key={shortid()} to={card.to} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
                                 {...card.image}

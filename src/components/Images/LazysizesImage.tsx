@@ -3,7 +3,7 @@ import * as React from 'react';
 import { IImage } from '@/types'
 import shortid from 'shortid'
 import 'lazysizes';
-
+import shortid from 'shortid'
 interface ILazysizes extends IImage {
     className: string
     style?: any

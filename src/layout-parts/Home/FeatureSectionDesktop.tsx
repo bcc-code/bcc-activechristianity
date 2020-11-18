@@ -39,10 +39,10 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                         ) : (<div></div>)
                     }}
                 /> : (
-                        featuredPosts[3] && <TopImg {...featuredPosts[3]} />
+                        featuredPosts[3] && <TopImg {...featuredPosts[3]} key={shortid()} />
                     )}
-                {featuredPosts[0] && <TopImg {...featuredPosts[0]} />}
-                {featuredPosts[1] && <TopImg {...featuredPosts[1]} />}
+                {featuredPosts[0] && <TopImg {...featuredPosts[0]} key={shortid()} />}
+                {featuredPosts[1] && <TopImg {...featuredPosts[1]} key={shortid()} />}
 
             </div>
 

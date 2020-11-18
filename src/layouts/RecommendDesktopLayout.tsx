@@ -46,7 +46,6 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     latestPosts,
     featured
 }) => {
-    console.log(topics)
     return (
         <div className="hidden sm:block">
             <div className="standard-max-w-px flex justify-between items-between">
@@ -71,7 +70,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                             <div className="standard-max-w-px pb-6">
 
                                 <PostMultiColLayout types={postsByTypesRow1} />
-                                {<ByTaxonomies types={topics} title={ac_strings.byCategories} />}
+                                <ByTaxonomies types={topics} title={ac_strings.byCategories} />
                                 <PostMultiColLayout types={postsByTypesRow2} />
                             </div>
                         ) : <div></div>

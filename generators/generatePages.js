@@ -62,11 +62,20 @@ module.exports = function generatePages(actions, graphql) {
           aboutUsChildren.push(page)
         } else if (page && page.label.indexOf("build-") >-1){
           let templateName
+<<<<<<< HEAD
           if (page.label.indexOf("build-page") >-1){
             templateName="page"
            } else {
             templateName=page.label.replace("build-","")
            }          
+=======
+          if (page && page.label.indexOf("build-page")>-1 ){
+            templateName="page"
+          } else {
+            templateName=page.label.replace("build-","")
+            
+          }
+>>>>>>> new-language
 
           let context = {
             ...page,
@@ -77,7 +86,6 @@ module.exports = function generatePages(actions, graphql) {
                 }
               ]
           }
-
           if (pagesContext[page.label]){
             const pageContext = pagesContext[page.label]
             if (pageContext.context){
