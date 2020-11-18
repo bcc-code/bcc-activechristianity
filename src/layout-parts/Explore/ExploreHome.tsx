@@ -83,8 +83,8 @@ const ExploreLayout: React.FC<{
                             </div>
                         </Link>
                     )}
-                    {ac_strings.slug_podcast && (
-                        <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                    {ac_strings.slug_playlist && (
+                        <Link key={shortid()} to={ac_strings.slug_playlist} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
                                 src={PlaylistImg}
@@ -95,7 +95,7 @@ const ExploreLayout: React.FC<{
                         </Link>
                     )}
                     {formats.map((card) => (
-                        <Link key={shortid()} to={card.slug} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                        <Link key={shortid()} to={card.to} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
                                 {...card.image}
