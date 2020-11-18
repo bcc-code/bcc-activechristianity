@@ -163,6 +163,7 @@ if (activeEnv === 'production') {
           },
           generateRoutingRules: false,
           generateRedirectObjectsForPermanentRedirects: true,
+          enableS3StaticWebsiteHosting: false,
       },
     },
     {
