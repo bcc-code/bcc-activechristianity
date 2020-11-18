@@ -36,8 +36,8 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                         ) : (<div></div>)
                     }}
                 />
-                <TopImg {...featuredPosts[0]} />
-                <TopImg {...featuredPosts[1]} />
+                <TopImg {...featuredPosts[0]} key={shortid()} />
+                <TopImg {...featuredPosts[1]} key={shortid()} />
 
             </div>
 

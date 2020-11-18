@@ -46,7 +46,6 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     latestPosts,
     featured
 }) => {
-    console.log(topicId)
     return (
         <div className="hidden sm:block">
             <div className="flex justify-between items-between px-4">
