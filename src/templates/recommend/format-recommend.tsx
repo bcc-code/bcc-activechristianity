@@ -10,7 +10,7 @@ const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalS
 import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
-import { processRecommendationContext } from '@/helpers'
+import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
     const { formatType, breadcrumb, popularPosts, latestPosts, featuredPosts } = pageContext
@@ -18,7 +18,8 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
     const { info, items } = formatType
 
     const latestSlug = `${info.to}/${ac_strings.slug_latest}`
-    const { featured, featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const featuredMixed = getRandomFeatured({ latest, popular, featured })
 
 
     return (

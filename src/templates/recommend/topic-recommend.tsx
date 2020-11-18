@@ -17,7 +17,7 @@ import { LayoutH1Wide, PageSectionHeader } from '@/components/Headers'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { INavItem, ISubtopicLinks, IRecommendationPage } from '@/types'
-import { processRecommendationContext } from '@/helpers'
+import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
@@ -38,7 +38,8 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const latestSlug = `${path}/1`
 
-    const { featured, featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const featuredMixed = getRandomFeatured({ latest, popular, featured })
 
     return (
         <div>

@@ -16,7 +16,7 @@ import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { INavItem, INavItemCount, ISubtopicLinks, IPostRes, IRecommendationPage } from '@/types'
 import podcastProperties from '@/strings/podcastProperties'
-import { getRandomArray, processRecommendationContext } from "@/helpers"
+import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 // helper
 
 import ac_strings from '@/strings/ac_strings.js'
@@ -28,8 +28,8 @@ const Listen: React.FC<IProps> = (props) => {
     const { title, items, playlist, podcast, popularPosts, featuredPosts, latestPosts } = pageContext
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
-    const { featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const featuredMixed = getRandomFeatured({ latest, popular, featured })
     const allCategories = [playlist, podcast, ...items]
     return (
         <div >

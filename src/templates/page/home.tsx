@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
+
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 const LatestSection = loadable(() => import('@/layout-parts/List/PostRow4Col'))
 const FeatureSectionDesktop = loadable(() => import('@/layout-parts/Home/FeatureSectionDesktop'))
@@ -18,9 +18,9 @@ import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
 const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'))
-import { getRandomArray, normalizePostRes } from '@/helpers'
+import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 // Type
-import { IPostRes, ITopicPostItems } from '@/types'
+import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 
 // Helpers
 
@@ -40,6 +40,14 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   } = pageContext
 
+  const popularPosts = popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
+  const { featured, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+  const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+  React.useEffect(() => {
+
+    const mixed = getRandomFeatured({ latest, popular, featured })
+    setMixedFeaturedPosts(mixed)
+  }, [])
 
   const latestPostAsTopic = {
     id: '',
@@ -47,14 +55,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     slug: ac_strings.slug_latest
   }
 
-  const featuredPostsAll = featuredPosts.map(p => normalizePostRes(p))
-  const randomFeatured = getRandomArray(featuredPostsAll, featuredPostsAll.length)
-  const popularDynamic = popularPostsAll.dynamic.map(p => normalizePostRes(p))//.map(p => normalizePostRes(p)
-  const featuredAndPopuloar = [...new Set([...randomFeatured.slice(2), ...popularDynamic.slice(5)])]
-  const randomRest = getRandomArray(featuredAndPopuloar, featuredAndPopuloar.length)
-  const featured = [randomFeatured[0], randomFeatured[1], ...randomRest]
-  const latest = latestPosts.map(p => normalizePostRes(p))
-  const popular = popularPostsAll.static.map(p => normalizePostRes(p))
   return (
 
     <div className="standard-max-w">
@@ -103,12 +103,12 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
       <div className="hidden sm:block">
 
-        <HomeTopFeaturePost {...featured[0]} key={shortid()} />
+        <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
           <FeatureSectionDesktop
-            featuredPosts={[randomRest[1], randomRest[0]]}
+            featuredPosts={[mixedFeaturedPosts[2], mixedFeaturedPosts[3]]}
           />
           <LowerSections
             lists={popularTopicsAll.static}

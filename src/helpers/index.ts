@@ -385,15 +385,24 @@ export const processRecommendationContext = (data: {
     const popular = popularPosts.map(p => normalizePostRes(p))
     const latest = latestPosts.map(p => normalizePostRes(p))
 
+
+    return ({
+        featured,
+        popular,
+        latest
+    })
+
+}
+
+export const getRandomFeatured = (data: {
+    featured: IPostItem[],
+    latest: IPostItem[],
+    popular: IPostItem[]
+}) => {
+    const { latest, featured, popular } = data
     let toCheck = [...new Set([...popular, ...latest])]
     const fixedPopularLatest = getRandomArray(toCheck, 6)
     toCheck = [...new Set([...featured, ...fixedPopularLatest])]
     const featuredMixed = getRandomArray(toCheck.slice(0, 6), 6)
-    return ({
-        featured,
-        popular,
-        latest,
-        featuredMixed
-    })
-
+    return featuredMixed
 }
