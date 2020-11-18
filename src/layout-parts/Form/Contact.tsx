@@ -122,7 +122,7 @@ const ContactForm = () => {
     return (
         <div className="pb-8 sm:py-4" >
             {errorMessage !== undefined && <Snackbar text={errorMessage} error />}
-            {success !== undefined && <Snackbar text={TS.contact_sent} />}
+            {success === true && <Snackbar text={TS.contact_sent} />}
             <form className="w-full flex" onSubmit={handleSubmit}>
 
                 <div className="w-1/2 pr-2">

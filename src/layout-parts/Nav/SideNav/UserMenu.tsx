@@ -63,8 +63,8 @@ const SideMobile: React.FC<{
                         </SideNavItem >
                     )
                 })}
-
-        </SideNavWrapper >
+            </div>
+        </SideNavWrapper>
     )
 }
 

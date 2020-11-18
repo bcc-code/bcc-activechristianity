@@ -8,6 +8,7 @@ import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
 import { playlistToPost, getRandomArray } from '@/helpers'
 import { ITopicPostSlugs, IPostItem, ITopicPostItems } from '@/types'
 import shortid from 'shortid'
+
 const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPosts }) => {
 
     return (
@@ -18,14 +19,16 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                 </div>
             </h3>
             <div className=" mx-4 my-4 grid gap-4 sm:gap-6 md:gap-6 grid-cols-4">
-                <FetchLatestPodcast
+                {ac_strings.slug_podcast ? <FetchLatestPodcast
                     key={shortid()}
                     layout="one"
                     render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast"
                     />}
 
-                />
-                <FetchLatestPlaylists
+                /> : (
+                        featuredPosts[2] && <TopImg {...featuredPosts[2]} />
+                    )}
+                {ac_strings.slug_playlist ? <FetchLatestPlaylists
                     layout="one"
                     key={shortid()}
                     render={({ playlists }) => {
@@ -35,9 +38,11 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                             <FeaturedCard {...playlistToPost(post)} type="playlist" />
                         ) : (<div></div>)
                     }}
-                />
-                <TopImg {...featuredPosts[0]} />
-                <TopImg {...featuredPosts[1]} />
+                /> : (
+                        featuredPosts[3] && <TopImg {...featuredPosts[3]} />
+                    )}
+                {featuredPosts[0] && <TopImg {...featuredPosts[0]} />}
+                {featuredPosts[1] && <TopImg {...featuredPosts[1]} />}
 
             </div>
 

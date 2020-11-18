@@ -7,11 +7,7 @@ const ac_strings=require('../src/strings/ac_strings.js')
 const allBooksQuery =  `
 {
     ac {
-      page(id:${process.env.SCRIPTURE_PAGE_ID}){
-        title
-        slug
-        label
-      }
+
         bible {
             old {
                 chapters
@@ -51,7 +47,12 @@ module.exports = function generateTaxonomies(actions, graphql) {
         result.errors.forEach(e => console.error(e.toString()))
         return Promise.reject(result.errors)
       }
-      const {bible,page} = result.data.ac
+      const {bible} = result.data.ac
+      const page = {
+        title:ac_strings.scripture,
+        slug:ac_strings.slug_scripture,
+        lable:"scripture"
+      }
       const chaptersCounts = []
       console.log("Generating scriptures")
       if (bible.new && bible.old){

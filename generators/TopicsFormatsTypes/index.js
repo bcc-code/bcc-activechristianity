@@ -1,8 +1,8 @@
 const _ = require('lodash')
 const path = require('path')
 const saveFile = require('../saveFile')
-const {topicQuery, postQuery,} = require('gatsby-source-ac/helpers')
-
+const {topicQuery, postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/helpers')
+const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
 const TS = require('../../src/strings')
 const ac_strings = require('../../src/strings/ac_strings.js')
 const {formatScope,typeScope,createArchivePages} = require('./hjelper')
@@ -44,16 +44,16 @@ const getContextPostsQuery =(id)=> `{
         slug
         }
     featuredPostsRes:posts(isFeatured: true) {
-        ${postQuery}
+        ${languagePostQuery}
         }
     popularPostsRes:somePosts(orderBy:{column:VIEWS, order:DESC},first:12){
         data {
-            ${postQuery}
+            ${languagePostQuery}
           } 
       }
     latestPostsRes:somePosts(first:12){
         data {
-            ${postQuery}
+            ${languagePostQuery}
         }
 
 
@@ -78,7 +78,7 @@ module.exports = function generateTopics(actions, graphql) {
             const topicInfo = result.data.ac.topics
             const formatIds = {}
             const typeIds={}
-            console.log(topicInfo)
+ 
             for(let t=0;t<topicInfo .length;t++){
               const node = topicInfo[t]
                 console.log(node.name)
@@ -109,7 +109,7 @@ module.exports = function generateTopics(actions, graphql) {
                   }]
               }
                 // create achive of each topic, type, format
-                await createArchivePages({
+/*                 await createArchivePages({
                   graphql,
                   createPage,
                   paginatorInfo:node.pagination.paginatorInfo,
@@ -117,7 +117,7 @@ module.exports = function generateTopics(actions, graphql) {
                   baseUrl,
                   breadcrumb,
                   topicType
-                })
+                }) */
 
 
             
@@ -129,8 +129,9 @@ module.exports = function generateTopics(actions, graphql) {
                 image:node.image
               }
 
-              if (["type"].includes(topicType)){//["type","format","topic"]
+              if (["type","format","topic"].includes(topicType)){//["type","format","topic"]
                 const contextPostsQuery = getContextPostsQuery(node.id)
+                
                 const contextPostsRes = await graphql(contextPostsQuery)
                   .then(res=>{
                       if(res.errors){
@@ -150,7 +151,6 @@ module.exports = function generateTopics(actions, graphql) {
                     latestPosts,
                     featuredPosts
                 }
-                console.log(contextPosts)
 
                 if (topicType==='format'){
                   const find = formatScope.find(f=>f.keyId===`${node.id}`)

@@ -35,14 +35,15 @@ module.exports = function generatePosts(actions, graphql) {
 
     // Iterate over the array of posts
     _.each(posts, (post) => {
-      createPage({
-        path: `${post.slug}`,
-        component: path.resolve(template),
-        context: {
-          id: post.id,
-        },
-      })
-
+      if(posts.slug!=="dummy-content"){
+        createPage({
+          path: `${post.slug}`,
+          component: path.resolve(template),
+          context: {
+            id: post.id,
+          },
+        })
+      }
     })
 
     const component = path.resolve(listTemplate)

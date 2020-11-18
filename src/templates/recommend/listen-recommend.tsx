@@ -25,18 +25,27 @@ import ac_strings from '@/strings/ac_strings.js'
 const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
-    const { title, items, playlist, podcast, popularPosts, featuredPosts, latestPosts } = pageContext
+    const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
+    const allCategories: INavItem[] = []
+    if (playlist.to) {
+        allCategories.push(playlist)
+    }
+
+    if (podcast.to) {
+        allCategories.push(podcast)
+    }
+
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     const { featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
-    const allCategories = [playlist, podcast, ...items]
+    allCategories.push(...items)
     return (
         <div >
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
-                <div className="py-6">
+                {ac_strings.slug_podcast && <div className="py-6">
                     <div className="w-full flex justify-between items-center pb-4 pr-4">
                         <PageSectionHeader title={podcastProperties.title} />
                         <UnderlineLinkViewAll to={`${podcast.to}`} />
@@ -46,7 +55,7 @@ const Listen: React.FC<IProps> = (props) => {
                         render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
 
                     />
-                </div>
+                </div>}
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
                     <div className="w-full py-6 sm:hidden">
@@ -55,7 +64,7 @@ const Listen: React.FC<IProps> = (props) => {
                         <HSCardList posts={featuredMixed} />
                     </div>
                 </div>
-                <div className="py-6">
+                {ac_strings.slug_podcast && <div className="py-6">
                     <div className="w-full flex justify-between items-center  pb-4 pr-4">
                         <PageSectionHeader title={ac_strings.playlist} />
                         <UnderlineLinkViewAll to={`${playlist.to}`} />
@@ -68,7 +77,7 @@ const Listen: React.FC<IProps> = (props) => {
                             return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
                         }}
                     />
-                </div>
+                </div>}
 
 
 

@@ -150,7 +150,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                 {showExploreHome && (
                     <ExploreHomeLayout
                         topics={[...new Set([...popularTopics, ...featuredTopics])]}
-                        scriptureSlug={scripturePage.to}
+                        scriptureSlug={scripturePage ? scripturePage.to : undefined}
                     />
                 )}
 

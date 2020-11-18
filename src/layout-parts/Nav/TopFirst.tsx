@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link, StaticQuery, graphql } from "gatsby"
+import { StaticQuery, graphql } from "gatsby"
+import Link from '@/components/CustomLink'
 import TS from '@/strings'
 
 import LanguageDropdown from '@/layout-parts/Nav/Languages'

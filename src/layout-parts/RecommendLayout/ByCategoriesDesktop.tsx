@@ -26,9 +26,10 @@ const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title, arrow, col, icon 
 
                 <div className={`hidden sm:grid grid-cols-${col ? col : '2'} gap-4 mt:4 sm:mt-12 mb-4`}>
                     {types.map(({ to, name, count }, key) => {
-                        return (
+                        return count && count > 0 ? (
                             <OutlineRightIcon key={key} name={name} to={to} count={arrow ? undefined : count} arrow={arrow} />
-                        )
+                        ) : null
+
                     })}
                 </div>
                 <div className="flex flex-col sm:hidden">

@@ -40,7 +40,7 @@ const SideMobile: React.FC<{
                 <SideNavItem>{TS.delete_account}</SideNavItem>
             </div>
 
-        </SideNavWrapper >
+        </SideNavWrapper>
     )
 }
 

@@ -18,7 +18,7 @@ const rbgToString = (colors: number[], alpha?: number) => {
 
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
-    const bgGradientStyle = { 'backgroundImage': '' }
+
 
 
     return (
@@ -40,6 +40,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                     ) : (
                             <div className="m-0 relative w-full pb-square sm:pb-half">
                                 <LazysizesFeaturedImage
+
                                     {...image}
                                     className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
                                 />

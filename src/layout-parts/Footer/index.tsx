@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
                 <div className="flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10 sm:w-1/3">
                     <div className="m-4 "
                     >
-                        <LogoFull height="48px" width="48x" />
+                        <LogoFull height="48px" width="48x" lang={process.env.LOCALE} />
                     </div>
                     <div>
                         <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{TS.about_activechristianity_body}</div>

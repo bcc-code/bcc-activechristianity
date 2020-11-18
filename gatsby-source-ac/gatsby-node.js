@@ -17,11 +17,11 @@ const settingsQuery = `
 }
 `
 
-const getPostsQuery = (pageNr,noPlaylistQuery)=>`
+const getPostsQuery = (pageNr,noPlaylists)=>`
     {
         posts(page:${pageNr}) {
             data {
-                ${noPlaylistQuery===true? postQueryNoPlaylist:postQuery}
+                ${noPlaylists?postQueryNoPlaylist:postQuery}
                 content
                 langs {
                     lang
@@ -46,8 +46,25 @@ const getPostsQuery = (pageNr,noPlaylistQuery)=>`
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
-    const {fieldName,baseUrl,headers,noPlaylistQuery} = options
+    const {fieldName,baseUrl,headers,noPlaylists} = options
        
+        const createPostNode = (post)=>{
+            const nodeContent = JSON.stringify(post)
+                const nodeMeta = {
+                    id: createNodeId(`ac-post-${post.id}`),
+                    parent: null,
+                    children: [],
+                    internal: {
+                        type: `${fieldName}_post`,
+                        mediaType: `text/html`,
+                        content: nodeContent,
+                        contentDigest: createContentDigest(post)
+                    }
+                }
+    
+                const node = Object.assign({},post, nodeMeta)
+                createNode(node)
+        }
       const firstQueryRes = await sendQuery(settingsQuery,baseUrl,headers)
         
       if (firstQueryRes) {
@@ -61,13 +78,13 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             if (metadata["featured_posts"]){
 
                 const featuredArraySlug = JSON.parse(metadata["featured_posts"])
-                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl,headers)
+                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl,headers,noPlaylists)
                   /* metadata["featured_posts"]=featured_slug. */
             }
 
             if (metadata["popular_posts"]){
                 const popularArraySlug = JSON.parse(metadata["popular_posts"])
-                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl,headers)
+                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl,headers,noPlaylists)
             }
 
               // Data can come from anywhere, but for now create it manually
@@ -98,10 +115,10 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
    
-        for (let i = 1; i <=3; i++){
+        for (let i = 1; i <=pageCount; i++){
             console.log(i)
             
-            const response = await sendQuery(getPostsQuery(i,true),baseUrl,headers)
+            const response = await sendQuery(getPostsQuery(i,noPlaylists),baseUrl,headers)
 
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
@@ -187,6 +204,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
               
             console.log(`creating ${entities.length} nodes`)
             for(let k=0;k<entities.length;k++){
+                
                 const post = entities[k]
                 const transformedPost = Object.assign({},post)
                 if(glossary.length>0){
@@ -198,22 +216,46 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
-
-                const nodeContent = JSON.stringify(transformedPost)
-                const nodeMeta = {
-                    id: createNodeId(`ac-post-${post.id}`),
-                    parent: null,
-                    children: [],
-                    internal: {
-                        type: `${fieldName}_post`,
-                        mediaType: `text/html`,
-                        content: nodeContent,
-                        contentDigest: createContentDigest(transformedPost)
+                if(noPlaylists && k===0){
+                    const dummyContentPost = {...transformedPost}
+                    dummyContentPost.acId = "dummy-content"
+                    dummyContentPost.id = "dummy-content"
+                    dummyContentPost.topics=[]
+                    dummyContentPost.title="dummy-content"
+                    dummyContentPost.slug="dummy-content"
+                    dummyContentPost.track = {
+                        url:"dummy-content",
+                        title:"dummy-content",
+                        duration:0,
+                        post: {
+                            title:transformedPost.title,
+                            slug:transformedPost.slug
+                        },
+                        playlists :{
+                            slug:"dummy-content",
+                            title:"dummy-content"
+                        }
                     }
+                    dummyContentPost.seo={
+                        title:"dummy-content",
+                        desc:"dummy-content",
+                    }
+                    dummyContentPost.meta= {
+                        credits:"dummy-content",
+                        no_dict:false,
+                        url:"dummy-content"
+                    }
+
+                    dummyContentPost.glossary = [{
+                        word:"dummy-content",
+                        content:"dummy-content",
+                        slug:"dummy-content",
+                        id:"dummy-content"
+                      }]
+
+                      createPostNode(dummyContentPost)
                 }
-    
-                const node = Object.assign({}, transformedPost, nodeMeta)
-                createNode(node)
+                createPostNode(transformedPost)
             }
 
             

@@ -1,24 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
 const {getSubTopicPosts,createSubTopicPages, formatScope,typesAll} = require('./hjelper')
-
+const ac_strings=require('../../src/strings/ac_strings.js')
 const query = `{
     ac {
-        playlistPage:page(id:${process.env.PLAYLIST_PAGE_ID}){
-            id
-            title
-            slug
-            label
-            
-        }
-
-        podcastPage:page(id:${process.env.PODCAST_PAGE_ID}){
-            id
-            title
-            slug
-            label
-        }
-
 
         podcasts:topic (id:${process.env.PODCAST_FILTER_ID}){
             noOfPosts
@@ -33,6 +18,7 @@ const query = `{
 
 module.exports = async function generateTypes(data) {
     const {actions, graphql,contextPosts,subTopics,node:type,nodeInfo,breadcrumb}=data
+
     const { createPage } = actions
     
     const typeFormatEach={
@@ -74,19 +60,27 @@ module.exports = async function generateTypes(data) {
     if(`${type.id}`===typesAll.listen.keyId){
         const result = await graphql(query)
 
-        const {playlistPage,podcastPage,podcasts,playlists} = result.data.ac
+        const {podcasts,playlists} = result.data.ac
+        const playlistPage = {
+            title:ac_strings.playlist,
+            slug:ac_strings.slug_playlist
+        }
+        const podcastPage = {
+            title:ac_strings.podcast,
+            slug:ac_strings.slug_podcast
+        }
         const podcastCount = podcasts.noOfPosts
 
-        if(playlistPage && `${playlistPage.id}`===process.env.PLAYLIST_PAGE_ID){
+        if(playlistPage.title){
             const playlistItem = {key:"playlist",name:playlistPage .title,to:playlistPage.slug,count:playlists.length}
            
             typeFormatEach["playlist"]=playlistItem
                 
         }
 
-        if(podcastPage && `${podcastPage.id}`===process.env.PODCAST_PAGE_ID){
+        if(podcastPage.title){
             const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
-        typeFormatEach["podcast"]=podcastItem
+            typeFormatEach["podcast"]=podcastItem
         }
        
     }

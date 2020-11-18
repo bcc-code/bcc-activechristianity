@@ -67,10 +67,7 @@ export const pageQuery = graphql`
                 id:acId
                 title
                 slug
-                meta {
-                    credits
-                    url
-                }
+
                 excerpt
                 image {
                     src
@@ -118,7 +115,11 @@ export const pageQuery = graphql`
                 seo {
                     desc
                     title
-                    }
+                 }
+                 meta {
+                    credits
+                    url
+                }
 
     }
 

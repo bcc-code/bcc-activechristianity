@@ -30,11 +30,6 @@ const query = `
       }
 
 
-      playlistMain:page(id:${process.env.PLAYLIST_PAGE_ID}){
-        title
-        slug
-      }
-
     }
   }
 `
@@ -49,7 +44,10 @@ module.exports = function generatePlaylists(actions, graphql) {
       }
   
       const playlists = result.data.ac.playlists
-      const playlistMain= result.data.ac.playlistMain
+      const playlistMain= {
+        title:ac_strings.playlist,
+        slug:ac_strings.slug_playlist
+    }
       console.log("Generating playlist")
       _.each(playlists, (playlist) => {
         const basePath = `/${ac_strings.slug_playlist}/${playlist.slug}`

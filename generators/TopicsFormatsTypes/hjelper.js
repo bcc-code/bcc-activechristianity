@@ -1,11 +1,11 @@
-const {postQuery} = require('gatsby-source-ac/helpers')
+const {postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const TS = require('../../src/strings')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
 const baseUrl = process.env.API_URL
 const perPage= 12
-
+const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
 const formatsAll = {
   "animation":{
     keyId: process.env.ANIMATION_FILTER_ID,
@@ -76,7 +76,7 @@ module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
             slug
           }
           posts(isFeatured: true) {
-            ${postQuery}
+            ${languagePostQuery}
           }
       }
       
@@ -129,7 +129,7 @@ module.exports.getPopularPosts=(id)=>`
   popularPosts:topic(id:${id}) {
     somePosts(orderBy:{column:VIEWS, order:DESC}){
       data {
-        ${postQuery}
+        ${languagePostQuery}
       }
     }
   }
@@ -141,7 +141,7 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
           id
           name
           posts (hasTopics: { value: ${id2}, column: ID }){
-            ${postQuery}
+            ${languagePostQuery}
           }
         }
   }
@@ -209,45 +209,47 @@ module.exports.createSubTopicPages=({
 
     if (!totalCount) {
 
-      console.log('No posts for this topic')
-    }
-    const totalPages = Math.ceil(totalCount / perPage)
-    const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
-
-    const component = (`${topic.id}`===process.env.WATCH_POSTS_FILTER_ID || 
-    `${subTopic.id}`===process.env.WATCH_POSTS_FILTER_ID)?path.resolve(videoTemplate):path.resolve(listTemplate)
-    const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
-
-    pageBreadcrumb.push(
-
-    {
-      name:subTopic.name,
-      to:subTopic.slug
-    }
-    )
-    
-    let currentPage = 1
+      console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
+    } else {
+      const totalPages = Math.ceil(totalCount / perPage)
+      const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
   
-    for (let i = 0; i < totalCount; i += perPage, currentPage++) {
-      let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-      console.log(pagePath)
-
-      createPage({
-        path:pagePath,
-        component,
-        context: {
-          type,
-          posts: allPosts.slice(i,i+perPage),
-          paginate: {
-            currentPage,
-            totalPages,
-            baseUrl
+      const component = (`${topic.id}`===process.env.WATCH_POSTS_FILTER_ID || 
+      `${subTopic.id}`===process.env.WATCH_POSTS_FILTER_ID)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
+  
+      pageBreadcrumb.push(
+  
+      {
+        name:subTopic.name,
+        to:subTopic.slug
+      }
+      )
+      
+      let currentPage = 1
+    
+      for (let i = 0; i < totalCount; i += perPage, currentPage++) {
+        let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
+        console.log(pagePath)
+  
+        createPage({
+          path:pagePath,
+          component,
+          context: {
+            type,
+            posts: allPosts.slice(i,i+perPage),
+            paginate: {
+              currentPage,
+              totalPages,
+              baseUrl
+            },
+            title:subTopic.name,
+            breadcrumb:pageBreadcrumb,
+            isTopic
+  /*            ...node */
           },
-          title:subTopic.name,
-          breadcrumb:pageBreadcrumb,
-          isTopic
-/*            ...node */
-        },
-      })
+        })
+      }
     }
+
 }

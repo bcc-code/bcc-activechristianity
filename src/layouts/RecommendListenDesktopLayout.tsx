@@ -9,7 +9,7 @@ const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiC
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import PostRow from '@/layout-parts/List/PostRow4Col'
-
+import TopImgPost from '@/components/PostItemCards/TopImg'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 
 import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
@@ -56,7 +56,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
             </div>
 
-            {playlist && (
+            {ac_strings.slug_playlist && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink    {...playlist} />
@@ -83,7 +83,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     </div>
                 </LazyLoad>
             )}
-            {podcast && (
+            {ac_strings.slug_podcast && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink {...podcast} />
@@ -108,19 +108,24 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     layout="list"
                     render={({ topicPostItems }) => {
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)
-                        return (
-                            (
+                        return topics.length > 1 ? (
 
-                                <div className="standard-max-w-px pb-6">
-                                    <ByTaxonomies types={topics} title={ac_strings.byCategories} />
-                                    <PostMultiColLayout types={postsByTypesRow1} />
-                                    <PostMultiColLayout types={postsByTypesRow2} />
+
+                            <div className="standard-max-w-px pb-6">
+
+                                <PostMultiColLayout types={postsByTypesRow1} />
+                                {<ByTaxonomies types={topics} title={ac_strings.byCategories} />}
+                                <PostMultiColLayout types={postsByTypesRow2} />
+                            </div>
+                        ) : (
+                                <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
+                                    { topicPostItems[0].posts.map(p => {
+                                        return (
+                                            <TopImgPost {...p} key={p.slug} />
+                                        )
+                                    })}
                                 </div>
-
-
-
                             )
-                        )
                     }}
 
                 />

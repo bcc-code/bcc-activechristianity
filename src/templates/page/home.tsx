@@ -17,8 +17,9 @@ import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
+import { processRecommendationContext } from '@/helpers'
 const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'))
-import { getRandomArray, normalizePostRes } from '@/helpers'
+
 // Type
 import { IPostRes, ITopicPostItems } from '@/types'
 
@@ -47,14 +48,9 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     slug: ac_strings.slug_latest
   }
 
-  const featuredPostsAll = featuredPosts.map(p => normalizePostRes(p))
-  const randomFeatured = getRandomArray(featuredPostsAll, featuredPostsAll.length)
-  const popularDynamic = popularPostsAll.dynamic.map(p => normalizePostRes(p))//.map(p => normalizePostRes(p)
-  const featuredAndPopuloar = [...new Set([...randomFeatured.slice(2), ...popularDynamic.slice(5)])]
-  const randomRest = getRandomArray(featuredAndPopuloar, featuredAndPopuloar.length)
-  const featured = [randomFeatured[0], randomFeatured[1], ...randomRest]
-  const latest = latestPosts.map(p => normalizePostRes(p))
-  const popular = popularPostsAll.static.map(p => normalizePostRes(p))
+
+
+  const { featured, featuredMixed, latest, popular } = processRecommendationContext({ popularPosts: popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static, featuredPosts, latestPosts })
   return (
 
     <div className="standard-max-w">
@@ -103,13 +99,13 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
       <div className="hidden sm:block">
 
-        <HomeTopFeaturePost {...featured[0]} key={shortid()} />
+        <HomeTopFeaturePost {...featuredMixed[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
-          {/*           <FeatureSectionDesktop
-            featuredPosts={[randomRest[1], randomRest[0]]}
-          /> */}
+          <FeatureSectionDesktop
+            featuredPosts={featuredMixed.slice(2)}
+          />
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}

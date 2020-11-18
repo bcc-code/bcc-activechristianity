@@ -33,8 +33,8 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
           'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
-          'process.env.DESKTOP_NAV_ID':JSON.stringify(process.env.DESKTOP_NAV_ID),
-          'process.env.SIDE_NAV_ID':JSON.stringify(process.env.SIDE_NAV_ID),
+          'process.env.DESKTOP_NAV_slug':JSON.stringify(process.env.DESKTOP_NAV_slug),
+          'process.env.SIDE__NAV_slug':JSON.stringify(process.env.SIDE__NAV_slug),
           'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
           'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
           'process.env.NEW_URL':JSON.stringify(process.env.NEW_URL),
@@ -53,17 +53,12 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   exports.createPages = ({ page,actions, graphql }) => {
 
      const generators = [
-/*       generatePosts(actions, graphql), */
-/*       generateTopics(actions, graphql), 
-generateExplore(actions, graphql),
-generateHome(actions, graphql)
-*/
-      generatePages(actions, graphql)
-/*      generateAuthors(actions, graphql),
-
-      generatePages(actions, graphql), 
+      generateAuthors(actions, graphql),
+      generatePages(actions, graphql),
       generateExplore(actions, graphql),
-      generateHome(actions, graphql)*/
+      generateHome(actions, graphql),
+      generateTopics(actions, graphql),
+      generatePosts(actions, graphql)
     ]
 
     if (process.env.LANG_CODE==="en"){

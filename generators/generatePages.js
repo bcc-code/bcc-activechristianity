@@ -14,11 +14,6 @@ const query = `{
       flexibleContent
     }
 
-    podcast:page(id:${process.env.PODCAST_PAGE_ID}){
-      title
-      slug
-    }
-
     about:page(id:${process.env.ABOUT_PAGE_ID}){
       title
       slug
@@ -50,7 +45,10 @@ module.exports = function generatePages(actions, graphql) {
       return Promise.reject(result.errors)
     } else {
       const pageInfo = result.data.ac.allPages
-      const podcast = result.data.ac.podcast
+      const podcast = {
+        title:ac_strings.podcast,
+        slug:ac_strings.slug_podcast
+      }
       const aboutMain = result.data.ac.about
       const navTopicsItem={name:ac_strings.topic,to:TS.slug_topic}
      

@@ -110,11 +110,11 @@ const postQueryNoPlaylist = `
 `
 module.exports.postQuery = postQuery
 module.exports.postQueryNoPlaylist=postQueryNoPlaylist
-const multiPostsQuery = (slugsArray)=>`
+const multiPostsQuery = (slugsArray,noPlaylists)=>`
 {
     posts(ids: [${slugsArray.join(",")}]) {
         data {
-            ${postQuery}
+            ${noPlaylists? postQueryNoPlaylist:postQuery}
         }
       }
 }
@@ -172,11 +172,10 @@ module.exports.sendQuery = sendQuery
 
 module.exports.topicQuery=topicQuery
 
-module.exports.getMultiPosts = (idArray,baseUrl,headers)=>{
-    const query = multiPostsQuery(idArray)
+module.exports.getMultiPosts = (idArray,baseUrl,headers,noPlaylists=false)=>{
+    console.log(noPlaylists)
+    const query = multiPostsQuery(idArray,noPlaylists)
     return sendQuery(query,baseUrl,headers).then(res=>{
-        console.log(query)
-        console.log(res)
         return res.posts.data
     })
 }

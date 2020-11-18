@@ -19,7 +19,7 @@ import shortId from 'shortid'
 import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import '@/styles/react-tabs.css'
-
+import TopImgPost from '@/components/PostItemCards/TopImg'
 
 interface IRecommandLayout {
     topicId?: string
@@ -46,7 +46,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     latestPosts,
     featured
 }) => {
-    console.log(topicId)
+    console.log(topics)
     return (
         <div className="hidden sm:block">
             <div className="standard-max-w-px flex justify-between items-between">
@@ -56,74 +56,25 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             <div className="standard-max-w-px">
                 {featured[0] ? <HeaderSection headerPost={featured[0]} listPosts={popularPosts.slice(0, 5)} /> : <div></div>}
             </div>
-            <LatestDesktopRow posts={latestPosts.slice(0, 4)} latestSlug={latestSlug} />
-            {listen && listen.playlist && (
-                <LazyLoad>
-                    <div className="px-4">
-                        <UnderlineTitleLink  {...listen.playlist} />
-                    </div>
-                    <FetchLatestPlaylists
-                        layout="row"
-                        render={({ playlists }) => {
-                            return (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16 px-4">
+            <LatestDesktopRow posts={topics.length > 1 ? latestPosts.slice(0, 4) : latestPosts} latestSlug={latestSlug} />
 
-                                    {getRandomArray(playlists, 4).map((p, i) => {
-                                        const post = playlistToPost(p)
-                                        return (
-                                            <div className={`div${i + 1}`} key={shortId()}>
-                                                < FeaturedCard {...post} type="playlist" />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )
-                        }}
-
-                    />
-
-
-                </LazyLoad>
-            )}
-            {listen && listen.podcast && (
-                <LazyLoad>
-                    <div className="px-4"><UnderlineTitleLink    {...listen.podcast} /></div>
-                    <FetchLatestPodcast
-                        layout="row"
-                        render={({ podcastEps }) => {
-                            return (
-                                <PostRow
-                                    posts={podcastEps.slice(0, 4)}
-                                />
-                            )
-                        }}
-
-                    />
-
-
-                </LazyLoad>
-            )}
             <LazyLoad >
                 <FetchTopicPostItems
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
-                        console.log(topicPostItems)
+
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)
-
-                        return (
-                            (
-
-                                <div className="standard-max-w-px pb-6">
-                                    <PostMultiColLayout types={postsByTypesRow1} />
-                                    <ByTaxonomies types={topics} title={ac_strings.byCategories} />
-                                    <PostMultiColLayout types={postsByTypesRow2} />
-                                </div>
+                        return topics.length > 1 ? (
 
 
+                            <div className="standard-max-w-px pb-6">
 
-                            )
-                        )
+                                <PostMultiColLayout types={postsByTypesRow1} />
+                                {<ByTaxonomies types={topics} title={ac_strings.byCategories} />}
+                                <PostMultiColLayout types={postsByTypesRow2} />
+                            </div>
+                        ) : <div></div>
                     }}
 
                 />

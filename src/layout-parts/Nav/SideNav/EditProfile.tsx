@@ -35,7 +35,7 @@ const SideMobile: React.FC<{
                 </div>
             </div>
 
-        </SideNavWrapper >
+        </SideNavWrapper>
     )
 }
 

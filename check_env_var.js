@@ -33,8 +33,8 @@ const core = [
     "ABOUT_PAGE_ID",
     "SCRIPTURE_PAGE_ID",
     "USER_PAGE_ID",
-    "DESKTOP_NAV_ID",
-    "SIDE_NAV_ID"
+    "DESKTOP_NAV_slug",
+    "SIDE__NAV_slug"
 ]
 const english=[
     "BIBLE_VERSION",

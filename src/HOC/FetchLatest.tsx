@@ -15,7 +15,8 @@ export const FetchLatestPlaylists: React.FC<IFetchLatestPlaylist> = ({ render, l
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
         setLoading(true)
-        fetch(`/page-data/${ac_strings.slug_playlist}/page-data.json`)
+        const url = `/page-data/${ac_strings.slug_playlist}/page-data.json`
+        fetch(url)
             .then(res => res.json())
             .then(res => {
                 setLoading(false)
@@ -24,6 +25,10 @@ export const FetchLatestPlaylists: React.FC<IFetchLatestPlaylist> = ({ render, l
                     setPlaylists(allPlaylist)
                 }
 
+            })
+            .catch(error => {
+                console.log(url)
+                console.log(error.message)
             })
     }, [])
 
@@ -47,9 +52,10 @@ interface IFetchLatestPodcast {
 export const FetchLatestPodcast: React.FC<IFetchLatestPodcast> = ({ layout, render }) => {
     const [podcastEps, setPodcastEps] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(true)
+    const url = `/page-data/${ac_strings.slug_podcast}/page-data.json`
     React.useEffect(() => {
         setLoading(true)
-        fetch(`/page-data/${ac_strings.slug_podcast}/page-data.json`)
+        fetch(url)
             .then(res => res.json())
             .then(res => {
 
@@ -61,6 +67,10 @@ export const FetchLatestPodcast: React.FC<IFetchLatestPodcast> = ({ layout, rend
                     setLoading(false)
                 })
 
+            })
+            .catch(error => {
+                console.log(url)
+                console.log(error.message)
             })
     }, [])
     const CustomPlaceholder = getPlaceholder[layout]

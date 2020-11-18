@@ -103,6 +103,7 @@ const plugins = [
       fieldName: "ac_node",
       // URL to query from
       baseUrl: process.env.API_URL,
+      noPlaylists:process.env.LANG_CODE!=="en",
       headers: {
         "x-lang": process.env.LANG_CODE
       }
@@ -189,8 +190,11 @@ if (activeEnv === 'production') {
     },
     {
       resolve: 'gatsby-plugin-sitemap'
-    },
-    {
+    }
+  )
+
+  if(rocess.env.LANG_CODE==="en"){
+    plugins.push({
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: process.env.SITE_URL,
@@ -205,8 +209,8 @@ if (activeEnv === 'production') {
           }
         }
       }
-    }
-  )
+    })
+  }
 
 }
 
