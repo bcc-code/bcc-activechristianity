@@ -53,12 +53,12 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   exports.createPages = ({ page,actions, graphql }) => {
 
      const generators = [
-/*       generateAuthors(actions, graphql), */
+      generateAuthors(actions, graphql), 
       generatePages(actions, graphql),
-/*       generateExplore(actions, graphql),
+      generateExplore(actions, graphql),
       generateHome(actions, graphql), 
       generatePosts(actions, graphql),
-      generateTopics(actions, graphql), */
+      generateTopics(actions, graphql), 
       generateRedirect(actions, graphql)
     ]
 

@@ -61,6 +61,20 @@ module.exports = function generateTopics(actions, graphql) {
                     popularTopics,
                     featuredTopics 
                 }
+                const navTopicsItem={name:ac_strings.topic,to:ac_strings.slug_topic}
+                createPage({
+                    path: `${ac_strings.slug_topic}`,
+                    component: path.resolve(`./src/templates/page/topics.tsx`),
+                    context:{
+                      title:ac_strings.topic,
+                      breadcrumb:[
+                        navTopicsItem
+                      ],
+                      popularTopics,
+                      featuredTopics 
+                    }, 
+                  })
+
                 if(process.env.LOCALE==="en"){
                     context.scripturePage=({name: scripturePage.title,to: scripturePage.slug})
                 }

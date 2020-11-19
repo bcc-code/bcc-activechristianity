@@ -50,7 +50,7 @@ module.exports = function generatePages(actions, graphql) {
         slug:ac_strings.slug_podcast
       }
       const aboutMain = result.data.ac.about
-      const navTopicsItem={name:ac_strings.topic,to:TS.slug_topic}
+
       const buildPages = [
         {
           slug:ac_strings.glossaries,
@@ -101,20 +101,6 @@ module.exports = function generatePages(actions, graphql) {
           })
         } 
       })
-      //{name:ac_strings.topic,to:TS.slug_topic}
-      // topic
-      createPage({
-        path: `${ac_strings.slug_topic}`,
-        component: path.resolve(`./src/templates/page/topics.tsx`),
-        context:{
-          title:TS.slug_topic,
-          themes:themePages,
-          breadcrumb:[
-            navTopicsItem
-          ]
-        }, 
-      })
-
 
       // about us
       createPage({
