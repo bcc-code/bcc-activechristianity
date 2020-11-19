@@ -21,8 +21,7 @@ import { ITopic } from '@/types';
 const ExploreLayout: React.FC<{
     topics: ITopic[]
     scriptureSlug?: string
-}> = ({ scriptureSlug, topics }) => {
-    console.log(scriptureSlug)
+}> = ({ topics }) => {
     const mediaSquareImages = {
         'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
@@ -88,9 +87,11 @@ const ExploreLayout: React.FC<{
                 </div>
             </div>
 
-            {scriptureSlug && <ExplorePopularScripture
-                scriptureSlug={scriptureSlug}
-            />}
+            {ac_strings.slug_scripture && (
+                <ExplorePopularScripture
+                    scriptureSlug={ac_strings.slug_scripture}
+                />
+            )}
         </div>
     )
 }

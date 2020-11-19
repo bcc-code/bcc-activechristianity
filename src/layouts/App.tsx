@@ -82,7 +82,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             .profile()
             .then((res: IUser) => {
                 if (res && res.id) {
-                    console.log(res)
                     if (res.meta && res.meta.consented) {
                         dispatch(setUser(res))
                         dispatch(getUserLibrary())

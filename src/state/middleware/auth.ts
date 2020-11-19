@@ -47,7 +47,6 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                 .then((res: any) => {
                     if (res) {
                         const data = res.signIn
-                        console.log(data)
                         if (data.success && data.user) {
 
                             if (data.user.meta && data.user.meta.consented) {

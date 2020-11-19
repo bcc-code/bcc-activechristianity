@@ -185,7 +185,16 @@ module.exports.createArchivePages =async function ({
           hasRecommendPage
         }
         const query=getPostsPerPageQuery(node.id,i)
-        const perPagePosts = await graphql(query).then(res=>res.data.ac.topic.allPosts.data.map(p=>p.slug))
+        const perPagePosts = await graphql(query).then(res=>{
+          if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
+            return res.data.ac.topic.allPosts.data.map(p=>p.slug)
+          } else {
+            console.log(query)
+            console.log(res)
+            throw new Error('not able to get pages')
+          }
+
+        })
             console.log(pagePath)
             
             createPage({

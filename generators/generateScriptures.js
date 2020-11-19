@@ -51,7 +51,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
       const page = {
         title:ac_strings.scripture,
         slug:ac_strings.slug_scripture,
-        lable:"scripture"
+        label:"scripture"
       }
       const chaptersCounts = []
       console.log("Generating scriptures")

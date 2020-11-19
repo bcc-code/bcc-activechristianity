@@ -3,7 +3,6 @@ const core = [
     "API_HOST",
     "API_URL",
     "SITE_URL",
-  
     "LANG",
     "LANG_CODE",
     "LOCALE",
@@ -12,18 +11,16 @@ const core = [
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",
     "ENABLE_ALGOLIA",
-
+    "GTM_TAG",
     "ABOUT_PAGE_ID",
-
-    "USER_PAGE_ID",
-
+    "USER_PAGE_ID"
 ]
+
 const english=[
     "BIBLE_VERSION",
     "PODCAST_PLAYLIST_SLUG",
     "PODCAST_FILTER_ID",
-    "POCAST_INTRO_POST_ID"
-    
+    "POCAST_INTRO_POST_ID" 
 ]
 
 module.exports = function (){

@@ -30,7 +30,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     popularPosts: popularPostsAll,
     latestPosts
   } = pageContext
-  console.log(pageContext)
+
   const { loggedIn } = useSelector((state: IRootState) => state.auth)
 
   const latestPostAsTopic = {

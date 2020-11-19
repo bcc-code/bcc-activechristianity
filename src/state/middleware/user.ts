@@ -22,11 +22,11 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
-                    console.log(resNewFollow)
+
                     return acApi
                         .following()
                         .then((res: IFollowing) => {
-                            console.log(res)
+
                             if (res.following && Array.isArray(res.following.topics)) {
                                 const filtered = res.following.topics.filter(p => typeof p.slug === "string")
                                 store.dispatch(setUserLiked(filtered))
@@ -98,7 +98,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .liked()
                 .then((res: ILiked) => {
-                    console.log(res)
+
                     if (Array.isArray(res.liked)) {
                         const filtered = res.liked.filter(p => typeof p.slug === "string")
                         store.dispatch(setUserLiked(filtered))
@@ -131,9 +131,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .history()
                 .then((res: IHistory) => {
-                    console.log(res)
                     if (Array.isArray(res.history)) {
-                        console.log(res.history)
                         const filtered = res.history.filter(p => typeof p.slug === "string")
                         store.dispatch(setUserHistory(filtered))
                     }

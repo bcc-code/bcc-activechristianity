@@ -40,6 +40,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             <PostList
                 /*            audio={type === "listen"} */
                 {...pageContext}
+                isTopic={isTopic == true}
             />
         </div>
     )

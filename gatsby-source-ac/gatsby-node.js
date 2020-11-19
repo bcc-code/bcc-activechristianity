@@ -188,7 +188,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
               }
 
               if(glossary.length>3){
-                  console.log(glossary)
+      
                 let test = `Some random text containing ${glossary[0].word} and ${glossary[1].word} and ${glossary[2].word} should get replaced`
 
                 const replacedTest = scanForAllGlossary(test)

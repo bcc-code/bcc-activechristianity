@@ -91,6 +91,7 @@
     "slug_user_followed":"folger",
     "slug_user_change_password":"endre-passord",
     "slug_user_delete_profile":"slett-profil",
+    "slug_topic": "tema",
     "my_content":"Mitt innhold",
     "history":"Historikk",
     "bookmarked":"Merket",

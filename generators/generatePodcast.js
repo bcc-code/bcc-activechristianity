@@ -36,9 +36,7 @@ module.exports = function generatePages(actions, graphql) {
         title:ac_strings.podcast,
         slug:ac_strings.slug_podcast
       }
-  
-      const navTopicsItem={name:ac_strings.topic,to:TS.slug_topic}
-     
+
 
       _.each(pageInfo,(page)=>{
         if (page && page.label==="podcast-host"){

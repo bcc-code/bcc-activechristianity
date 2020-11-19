@@ -20,8 +20,7 @@ import shortid from 'shortid'
 const UserHistory = () => {
 
     const { followedTopics, bookmarkedPosts, followedPlaylists } = useSelector((state: IRootState) => state.userLibrary);
-    console.log(followedTopics)
-    console.log(bookmarkedPosts)
+
     return (
         <div className="flex flex-col ">
 
