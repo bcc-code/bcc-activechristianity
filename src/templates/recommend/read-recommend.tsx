@@ -20,7 +20,7 @@ import { IRootState } from '@/state/types'
 
 import ac_strings from '@/strings/ac_strings.js'
 import { useSelector } from "react-redux";
-import { getRandomArray, processRecommendationContext } from "@/helpers"
+import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 
 const Read: React.FC<IProps> = (props) => {
     const { loggedIn } = useSelector((state: IRootState) => state.auth)
@@ -29,7 +29,8 @@ const Read: React.FC<IProps> = (props) => {
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
-    const { featured, popular, latest, featuredMixed } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const featuredMixed = getRandomFeatured({ latest, popular, featured })
     return (
         <div>
             <MetaTag

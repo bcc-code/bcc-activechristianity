@@ -169,7 +169,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                             }
                         </div> */}
                         <Link className='px-4' to="/">
-                            <LogoFull height="24" full lang={process.env.LOCALE} />
+                            <LogoFull height="24" full />
                         </Link>
                         <div className="flex items-center">
                             {explorePage && (

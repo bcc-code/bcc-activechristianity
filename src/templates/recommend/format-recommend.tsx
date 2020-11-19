@@ -8,9 +8,9 @@ import { SectionTitleDesktopAndMobile, PageSectionHeader, LayoutH1Wide, } from '
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
-import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
+import { INavItemCount, ISubtopicLinks, IRecommendationPage, IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
-import { processRecommendationContext } from '@/helpers'
+import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
     const { formatType, breadcrumb, popularPosts, latestPosts, featuredPosts } = pageContext
@@ -18,8 +18,13 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
     const { info, items } = formatType
 
     const latestSlug = `${info.to}/${ac_strings.slug_latest}`
-    const { featured, featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+    React.useEffect(() => {
 
+        const mixed = getRandomFeatured({ latest, popular, featured })
+        setMixedFeaturedPosts(mixed)
+    }, [])
 
     return (
         <div>
@@ -28,11 +33,11 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
             {formatType.info.count > 10 ? (
 
                 <div className="sm:px-4 standard-max-w">
-                    {featuredMixed[0] ? <HeaderSection headerPost={featuredMixed[0]} listPosts={popular.slice(0, 5)} /> : <div></div>}
+                    {mixedFeaturedPosts[0] ? <HeaderSection headerPost={mixedFeaturedPosts[0]} listPosts={popular.slice(0, 5)} /> : <div></div>}
 
                     <div className="w-full pb-4 pt-8 sm:hidden">
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <FeaturedBanner featured={featuredMixed} />
+                        <FeaturedBanner featured={mixedFeaturedPosts} />
                     </div>
 
 

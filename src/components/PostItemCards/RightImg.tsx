@@ -70,23 +70,22 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     <Link to={`/${slug}`} >
                         <TextSizeTitle {...{
                             rawText: title,
-                            fontKey: 'text-lg',
+                            fontKey: 'text-lg-2xl',
                             clamp: 3,
-                            bold: "font-semibold",
                             className: "mb-2 text-d4slate-dark"
                         }} />
                         <TextSizeTitle {...{
                             rawText: excerpt,
-                            fontKey: "text-base",
+                            fontKey: "text-sm",
                             clamp: 2,
-                            className: "mb-4 leading-tight "
+                            className: "mb-4 leading-tight text-gray-600"
 
                         }} />
                     </Link>
                 </div>
-                <div className="w-4/12 sm:w-6/12 md:w-4/12 flex justify-center">
+                <div className="w-24 sm:w-64 md:w-64 flex justify-center">
                     <PostItemMediaImg
-                        className="relative w-full max-h-24 pb-square sm:pb-half mt-4 rounded-xxl sm:rounded-xl overflow-hidden "
+                        className="relative w-full max-h-24 pb-square sm:pb-half rounded-xxl sm:rounded-xl overflow-hidden "
                         track={media}
                         slug={slug}
 
@@ -109,7 +108,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     {...duration}
                 />
                 <div className="flex">
-                    {views && <Views views={views} />}
+                    {views ? <Views views={views} /> : null}
                     <Bookmark id={id} color="slate-dark" size="5" />
                 </div>
             </div>

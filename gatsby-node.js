@@ -15,6 +15,7 @@ const generateGlossary = require('./generators/generateGlossary.js')
 const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
 const generateHome = require('./generators/generateHome.js')
 const generateExplore = require('./generators/generateExplore')
+const generatePodcast = require('./generators/generatePodcast')
 const buildTranslations = require('./generators/json/build-translations')
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
@@ -33,8 +34,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
           'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
-          'process.env.DESKTOP_NAV_slug':JSON.stringify(process.env.DESKTOP_NAV_slug),
-          'process.env.SIDE__NAV_slug':JSON.stringify(process.env.SIDE__NAV_slug),
           'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
           'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
           'process.env.NEW_URL':JSON.stringify(process.env.NEW_URL),
@@ -56,15 +55,16 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       generateAuthors(actions, graphql),
       generatePages(actions, graphql),
       generateExplore(actions, graphql),
-      generateHome(actions, graphql),
-      generateTopics(actions, graphql),
-      generatePosts(actions, graphql)
+      generateHome(actions, graphql), 
+      generatePosts(actions, graphql),
+      generateTopics(actions, graphql)
     ]
 
     if (process.env.LANG_CODE==="en"){
       generators.push( generateGlossary(actions, graphql))
       generators.push(generatePlaylists(actions, graphql))
       generators.push(generateScriptures(actions, graphql))
+      generators.push(generatePodcast(actions, graphql))
     }
   
 

@@ -1,10 +1,10 @@
 import * as React from "react"
 import loadable from '@loadable/component'
 import { useSelector } from "react-redux";
-
+import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
+import Loader from '@/layout-parts/Loader/MainpagePlaceholder'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 const LatestSection = loadable(() => import('@/layout-parts/List/PostRow4Col'))
 const FeatureSectionDesktop = loadable(() => import('@/layout-parts/Home/FeatureSectionDesktop'))
@@ -17,11 +17,10 @@ import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
-import { processRecommendationContext } from '@/helpers'
+import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'))
-
 // Type
-import { IPostRes, ITopicPostItems } from '@/types'
+import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 
 // Helpers
 
@@ -41,6 +40,14 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   } = pageContext
 
+  const popularPosts = popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
+  const { featured, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+  const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+  React.useEffect(() => {
+
+    const mixed = getRandomFeatured({ latest, popular, featured })
+    setMixedFeaturedPosts(mixed)
+  }, [])
 
   const latestPostAsTopic = {
     id: '',
@@ -48,9 +55,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     slug: ac_strings.slug_latest
   }
 
-
-
-  const { featured, featuredMixed, latest, popular } = processRecommendationContext({ popularPosts: popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static, featuredPosts, latestPosts })
   return (
 
     <div className="standard-max-w">
@@ -98,13 +102,15 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
       </div>
       <div className="hidden sm:block">
+        <DesktopFeaturedPostLoader loading={typeof mixedFeaturedPosts[0] === "undefined"}>
+          <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
+        </DesktopFeaturedPostLoader>
 
-        <HomeTopFeaturePost {...featuredMixed[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
           <FeatureSectionDesktop
-            featuredPosts={featuredMixed.slice(2)}
+            featuredPosts={mixedFeaturedPosts.slice(2)}
           />
           <LowerSections
             lists={popularTopicsAll.static}
@@ -129,7 +135,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
 
   )
 }

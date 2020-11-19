@@ -117,15 +117,16 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                                 {<ByTaxonomies types={topics} title={ac_strings.byCategories} />}
                                 <PostMultiColLayout types={postsByTypesRow2} />
                             </div>
-                        ) : (
-                                <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
-                                    { topicPostItems[0].posts.map(p => {
-                                        return (
-                                            <TopImgPost {...p} key={p.slug} />
-                                        )
-                                    })}
-                                </div>
-                            )
+                        ) : topicPostItems[0] ? (
+                            <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
+                                {topicPostItems[0].posts.map(p => {
+                                    return (
+                                        <TopImgPost {...p} key={p.slug} />
+                                    )
+                                })}
+                            </div>
+                        ) : <div></div>
+
                     }}
 
                 />

@@ -18,7 +18,7 @@ const TopDesktop: React.FC = () => {
                 };
                 return (
                     <div className="flex justify-between items-center border-gray-200 border-b py-2 sm:py-0 px-2 text-gray-500 text-sm ">
-                        <a href={tagline.path} target="_window" className="flex items-center text-sm">
+                        <a href={tagline.path} target="_window" className="flex items-center text-sm -mt-1 pl-1">
                             <span>{tagline.text}</span>
                             <span className="px-2">
                                 <Icon name="Launch" size="4" color="slate-dark" />
@@ -28,7 +28,7 @@ const TopDesktop: React.FC = () => {
                         <div className="hidden sm:flex items-center text-sm">
                             <UserNav className="pr-4" />
 
-                            <Link className="py-2 pr-4" to={TS.slug_contact}>{TS.contact}</Link>
+                            <Link className="py-2 pr-4 hover:text-d4slate" to={TS.slug_contact}>{TS.contact}</Link>
                             <LanguageDropdown className="border-l pl-2 p-0" />
                         </div>
                     </div>

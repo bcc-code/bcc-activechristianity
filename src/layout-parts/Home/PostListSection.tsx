@@ -16,7 +16,7 @@ const PostListSection: React.FC<ITopicPostItems> = ({ posts, ...topic }) => (
         <div className="w-full flex justify-between items-center text-sm mb-6">
             <Link to={`${TS.slug_topic}/${topic.slug}`}>
                 <PageSectionHeaderUpperCaseGray title={ac_strings.popularTopic} />
-                <h4 className="font-roboto">{topic.name}</h4>
+                <h4 className="font-roboto text-base">{topic.name}</h4>
             </Link>
             <ToggleFollowOutlineBtn id={topic.id} />
         </div>

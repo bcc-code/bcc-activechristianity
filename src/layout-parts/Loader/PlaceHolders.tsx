@@ -50,6 +50,30 @@ export const OneTopImgPost: React.FC<{ loading: boolean }> = ({ loading, childre
     )
 }
 
+export const DesktopFeaturedPostLoader: React.FC<{ loading: boolean }> = ({ loading, children }) => {
+    return (
+        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={DesktopFeaturedPlaceholder}>
+            {children}
+        </ReactPlaceholder>
+
+    )
+}
+export const DesktopFeaturedPlaceholder = () => {
+    return (
+        <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
+            <div className="col-start-1 col-end-6 ">
+                <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-64 md:min-h-64" />
+            </div>
+
+            <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
+
+                <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
+            </div>
+        </div>
+
+    )
+}
+
 export const TopImgPlaceholder = () => {
     return (
         <div className="flex flex-col">

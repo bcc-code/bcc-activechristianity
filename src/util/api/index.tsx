@@ -1,8 +1,24 @@
 
 import * as request from './requests';
-const { sendQuery } = require('gatsby-source-ac/helpers')
-const baseUrl = process.env.API_URL || "API_URL"
 
+
+const baseUrl = process.env.API_URL || "API_URL"
+const sendQuery = (query: string) => {
+    return fetch(baseUrl, {
+        method: 'POST',
+        'credentials': 'include',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            "x-lang": process.env.LANG_CODE
+        },
+        body: JSON.stringify({ query })
+    })
+        .then(response => response.json())
+        .then(res => {
+            return res.data
+        })
+}
 export default {
     login: (username: string, password: string, remember: boolean) => {
         const query = request.loginMutation(username, password, remember)

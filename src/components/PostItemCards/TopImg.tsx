@@ -30,9 +30,9 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
     } = props
     return (
         <div
-            className={`flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-xl border ' : ''} `}>
+            className={`hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}>
             <PostItemMediaImg
-                className={`relative w-full sm:pl-0 flex justify-end overflow-hidden ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
+                className={`relative w-full sm:pl-0 flex justify-end overflow-hidden ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
                 track={media}
                 slug={props.slug}
             >
@@ -45,14 +45,14 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 {fixedImageHeight ? (
                     <LazysizesImage
                         {...image}
-                        className={`w-full pointer-events-none object-cover g-image ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
+                        className={`w-full pointer-events-none object-cover g-image ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
                         alt={title}
                         style={{ minWidth: '84px', height: "180px" }}
                     />
                 ) : (
                         <Image2To1
                             image={image}
-                            imageClassName={` h-full pointer-events-none w-auto object-cover g-image ${noBorder === true ? 'rounded-xl' : 'rounded-xl rounded-b-none'}`}
+                            imageClassName={` h-full pointer-events-none w-auto object-cover g-image ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
                             alt={title}
                         />
                     )}
@@ -61,15 +61,14 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 post={props}
                 wrapperClass={noBorder === true ? ' pt-4' : 'px-4 pt-4'}
                 postTitleProps={{
-                    fontKey: 'text-lg',
+                    fontKey: 'text-lg-2xl',
                     clamp: 3,
-                    bold: "font-semibold",
                     className: "mb-2 text-d4slate-dark"
                 }}
                 postExcerptProps={noExcerpt ? undefined : {
-                    fontKey: 'text-base',
+                    fontKey: 'text-sm',
                     clamp: 3,
-                    className: "flex items-stretch mb-4 sm:text-sm sm:text-gray-600"
+                    className: "flex items-stretch mb-4 text-gray-600"
                 }}
                 audioDuration
                 noBorder={noBorder}

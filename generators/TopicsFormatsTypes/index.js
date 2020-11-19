@@ -5,7 +5,7 @@ const {topicQuery, postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/he
 const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
 const TS = require('../../src/strings')
 const ac_strings = require('../../src/strings/ac_strings.js')
-const {formatScope,typeScope,createArchivePages} = require('./hjelper')
+const {createArchivePages,formatScope,typeScope,groupAll} = require('./hjelper')
 const generateFormat = require('./gFormat.js')
 const generateType = require('./gType.js')
 const generateTopic = require('./gTopic.js')
@@ -78,22 +78,21 @@ module.exports = function generateTopics(actions, graphql) {
             const topicInfo = result.data.ac.topics
             const formatIds = {}
             const typeIds={}
- 
+            
             for(let t=0;t<topicInfo .length;t++){
               const node = topicInfo[t]
-                console.log(node.name)
+                
               let topicType = 'topic'
               let baseUrl = `${TS.slug_topic}/${node.slug}`
-              
-              if (node.group.id == process.env.FORMAT_GROUP_ID ) {
+              if (`${node.group.id}` === `${groupAll.format}` ) {
                 topicType='format'
                 baseUrl = `${node.slug}/${ac_strings.slug_latest}`
-              } else if (node.group.id ===process.env.TYPE_GROUP_ID) {
+              } else if (`${node.group.id}` ===`${groupAll.type}`) {
                 topicType='type'
                 baseUrl = `${node.slug}/${ac_strings.slug_latest}`
                 
               } 
-              
+                              
               let breadcrumb= [{
                 name:node.name,
                 to:baseUrl
@@ -109,7 +108,7 @@ module.exports = function generateTopics(actions, graphql) {
                   }]
               }
                 // create achive of each topic, type, format
-/*                 await createArchivePages({
+                await createArchivePages({
                   graphql,
                   createPage,
                   paginatorInfo:node.pagination.paginatorInfo,
@@ -117,9 +116,7 @@ module.exports = function generateTopics(actions, graphql) {
                   baseUrl,
                   breadcrumb,
                   topicType
-                }) */
-
-
+                }) 
             
               const nodeInfo = {
                 key: '',
@@ -143,6 +140,7 @@ module.exports = function generateTopics(actions, graphql) {
                   })
                   .then(res=>res.data.ac.topic)
                 const {subTopics,featuredPostsRes,popularPostsRes,latestPostsRes} =contextPostsRes
+
                 const popularPosts = popularPostsRes.data
                 const latestPosts=latestPostsRes.data
                 const featuredPosts=featuredPostsRes
@@ -153,7 +151,7 @@ module.exports = function generateTopics(actions, graphql) {
                 }
 
                 if (topicType==='format'){
-                  const find = formatScope.find(f=>f.keyId===`${node.id}`)
+                  const find = formatScope.find(f=>`${f.keyId}`===`${node.id}`)
                   if(find){
                     nodeInfo.key=find.keyname
                     formatIds[`${node.id}`]=nodeInfo
@@ -171,7 +169,7 @@ module.exports = function generateTopics(actions, graphql) {
                 }
 
               if (topicType==='type'){
-                const findType=typeScope.find(t=>t.keyId===`${node.id}`)
+                const findType=typeScope.find(t=>`${t.keyId}`===`${node.id}`)
                 if (findType){
                     nodeInfo.key=findType.keyname
                     typeIds[`${node.id}`]=nodeInfo
@@ -207,6 +205,7 @@ module.exports = function generateTopics(actions, graphql) {
             formatIds,
             typeIds
           }
+
           saveFile('./src/strings', 'topic-filters', 'json',  data)
         }
     })

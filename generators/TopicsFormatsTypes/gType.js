@@ -28,7 +28,7 @@ module.exports = async function generateTypes(data) {
     for(let j=0;j<subTopics.length;j++){
         const subTopic=subTopics[j]
         
-        const find = formatScope.find(f=>f.keyId===`${subTopic.id}`)
+        const find = formatScope.find(f=>`${f.keyId}`===`${subTopic.id}`)
        
         if (find){
             
@@ -37,6 +37,12 @@ module.exports = async function generateTypes(data) {
             await graphql( geFormatPostsQuery)
                 .then(subTopicPostRes=>{
                     const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
+                    console.log({
+                        key:find.keyname,
+                        name:subTopic.name,
+                        to:`${type.slug}/${subTopic.slug}`,
+                        count:allPosts.length
+                    })
                     typeFormatEach.items.push({
                         key:find.keyname,
                         name:subTopic.name,
@@ -57,7 +63,7 @@ module.exports = async function generateTypes(data) {
         
     } 
 
-    if(`${type.id}`===typesAll.listen.keyId){
+    if(`${type.id}`===`${typesAll.listen.keyId}`){
         const result = await graphql(query)
 
         const {podcasts,playlists} = result.data.ac
@@ -100,10 +106,11 @@ module.exports = async function generateTypes(data) {
         typekey,
         title:type.name,
         breadcrumb,
+        items:subTopics,
         ...typeFormatEach,
         ...contextPosts
     }
-    console.log(type.slug)
+    console.log(context)
     createPage({
         path: `${type.slug}`,
         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),

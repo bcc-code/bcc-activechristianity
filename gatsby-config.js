@@ -44,32 +44,35 @@ const queries = [
       return { ...node, type: 'post' }
     }), // (optional)
     //index: ''// (optional) override default
-  },
-  {
-    query: `{
-      ac {
-        playlists {  
-          id  
-          objectID: slug
-          title
-          slug
-          excerpt
-          image {
-            src
-            srcset
-            dataUri
-
-        }
-        }
-      }
-    }`,
-    transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
-      return { ...node, type: 'playlist' }
-    }), // (optional)
-    //index: ''// (optional) override default
   }
-];
-
+  ];
+if(process.env.LOCALE==="en"){
+  queries.push(
+    {
+      query: `{
+        ac {
+          playlists {  
+            id  
+            objectID: slug
+            title
+            slug
+            excerpt
+            image {
+              src
+              srcset
+              dataUri
+  
+          }
+          }
+        }
+      }`,
+      transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
+        return { ...node, type: 'playlist' }
+      }), // (optional)
+      //index: ''// (optional) override default
+    }
+  )
+}
 
 const checkEnvVar = require('./check_env_var')
 checkEnvVar()
@@ -147,6 +150,16 @@ const plugins = [
   },
   "gatsby-plugin-webpack-bundle-analyser-v2",
   'gatsby-plugin-loadable-components-ssr',
+  {
+    resolve: `gatsby-plugin-algolia-search`,
+    options: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_ADMIN_KEY,
+      indexName: 'posts', // for all queries
+      queries,
+      enablePartialUpdates: true
+    }
+  },
 
 ];
 
@@ -170,16 +183,15 @@ if (activeEnv === 'production') {
           generateRedirectObjectsForPermanentRedirects: true,
       },
     },
-    {
+/*     {
       resolve: `gatsby-plugin-algolia-search`,
       options: {
         appId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_ADMIN_KEY,
-        indexName: 'dev_posts', // for all queries
+        indexName: 'posts', // for all queries
         queries,
         enablePartialUpdates: true
-      },
-    },
+      }, }*/
     {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
@@ -193,7 +205,7 @@ if (activeEnv === 'production') {
     }
   )
 
-  if(rocess.env.LANG_CODE==="en"){
+  if(process.env.LANG_CODE==="en"){
     plugins.push({
       resolve: 'gatsby-plugin-robots-txt',
       options: {

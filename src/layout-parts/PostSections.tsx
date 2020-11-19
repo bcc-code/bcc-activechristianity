@@ -1,7 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { INavItem, IPostAuthors } from '@/types'
+import { INavItem, IPostAuthors, ITopicNavItem, IPostItem } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import Icon from '@/components/Icons/Icon'
@@ -12,6 +12,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from "@/helpers"
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import acApi from '@/util/api'
 import shortid from 'shortid'
 interface IPostMain {
@@ -321,14 +322,15 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
     </div>
 )
 
-export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[] }> = ({ postId, readMorePosts }) => {
-
+export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[], topics?: ITopicNavItem[] }> = ({ postId, readMorePosts, topics }) => {
+    console.log(topics)
+    console.log(readMorePosts)
     const [randomPosts, setRandomPosts] = React.useState<string[]>([])
 
     React.useEffect(() => {
         acApi.recommendedByPost(postId)
             .then(res => {
-                const recommendedPosts: string[] = res.recommendedByPost.map((p: any) => p.slug)
+
                 /* setPosts(allSlugs) */
                 let readMore: string[] = []
                 if (readMorePosts.length > 0) {
@@ -337,7 +339,8 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                 }
 
                 let randomRecommendPosts: string[] = []
-                if (recommendedPosts) {
+                if (res.recommendedByPost) {
+                    let recommendedPosts = res.recommendedByPost.map((p: any) => p.slug)
                     let randName = [];
                     let recommendPostsSlugs = [...recommendedPosts]
                     if (recommendPostsSlugs.length > 0) {
@@ -346,9 +349,51 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                         randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
                     }
                 }
+                let allPosts = [...randomRecommendPosts, ...readMore]
+                readMore = [...new Set(allPosts)]
+                console.log(readMore)
+                /*  setRandomPosts(readMore) */
+                if (readMore.length > 4) {
+                    setRandomPosts(readMore)
+                } else {
+                    if (topics && topics.length > 0) {
+                        return Promise.all(topics.map(f => {
+                            console.log(`${f.to}`)
+                            return fetch(`/page-data/${f.to}/page-data.json`)
+                                .then(res => res.json())
+                                .then(res => {
+                                    if (res.result.pageContext) {
+                                        return res.result.pageContext.latestPosts
+                                    } else {
+                                        return []
+                                    }
 
-                readMore = [...new Set([...randomRecommendPosts, ...readMore])]
-                setRandomPosts(readMore)
+                                })
+                        })).then(res => {
+                            console.log(res)
+                            if (Array.isArray(res)) {
+
+                                res.forEach(item => {
+                                    console.log(item)
+                                    const topicPost = getRandomArray(item, 2)
+                                    readMore.push(...topicPost)
+
+                                })
+                                console.log(readMore)
+                                setRandomPosts(readMore)
+                            } else {
+                                setRandomPosts(readMore)
+                            }
+                            return
+                        })
+                        //return Promise.all(format.map(f => {
+                        //console.log(f)//fetchPostslistFromArchivePage
+                    } else {
+                        setRandomPosts(readMore)
+                    }
+
+
+                }
             })
             .catch(error => {
                 console.log(error)
@@ -360,6 +405,7 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
             slugs={randomPosts}
             layout="row"
             render={({ posts }) => {
+                console.log(posts)
                 return <Row2ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
             }}
         />

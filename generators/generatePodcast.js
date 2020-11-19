@@ -14,21 +14,8 @@ const query = `{
       flexibleContent
     }
 
-    about:page(id:${process.env.ABOUT_PAGE_ID}){
-      title
-      slug
-    }
   }
 }`
-
-const pagesContext = {
-
-  "podcast":{
-    context: {
-      id:process.env.PODCAST_FILTER_ID
-    }
-  }
-}
 
 /* BUILDER */
 
@@ -54,15 +41,9 @@ module.exports = function generatePages(actions, graphql) {
      
 
       _.each(pageInfo,(page)=>{
-        if (page && page.label.indexOf("about-us-") >-1){
-          aboutUsChildren.push(page)
-        } else if (page && page.label.indexOf("build-") >-1){
-          let templateName
-          if (page.label.indexOf("build-page") >-1){
-            templateName="page"
-           } else {
-            templateName=page.label.replace("build-","")
-           }          
+        if (page && page.label==="podcast-host"){
+            podcastHosts.push(page)      
+        }  
 
           let context = {
             ...page,
@@ -73,25 +54,18 @@ module.exports = function generatePages(actions, graphql) {
                 }
               ]
           }
-          if (pagesContext[page.label]){
-            const pageContext = pagesContext[page.label]
-            if (pageContext.context){
-              context = {...context,...pageContext.context}
-            }
-            
-          }
-          console.log(page.slug)
+
           createPage({
             path: `${page.slug}`,
-            component: path.resolve(`./src/templates/page/${templateName}.tsx`),
+            component: path.resolve(`./src/templates/page/podcast.tsx`),
             context,
           })
-        } 
-      })
+        })
+ 
       //{name:ac_strings.topic,to:TS.slug_topic}
       // topic
       createPage({
-        path: `${ac_strings.slug_topic}`,
+        path: `${ac_strings.topic}`,
         component: path.resolve(`./src/templates/page/topics.tsx`),
         context:{
           title:TS.slug_topic,
@@ -114,10 +88,62 @@ module.exports = function generatePages(actions, graphql) {
           breadcrumb:[]
         },
       })
+      
+      // podcast and hosts
+      const allHostsSlug= []
+      for (let i =0;i<podcastHosts.length;i++){
+        const hostPage = podcastHosts[i]
+        const hostPath = `${ac_strings.slug_host}/${hostPage.slug}`
+        // const getHostImage = getPostImage(hostPage.slug)
+        // get image and slug
+        // const result = await graphql(getHostImage)
+        allHostsSlug.push(hostPath)
+  
+        createPage({
+          path: hostPath,
+          component: path.resolve(`src/templates/page/podcast-host.tsx`),
+          context:{
+            title:hostPage.title,
+            id:hostPage.id,
+            breadcrumb:[]
 
+          },
+        })
+      }
 
+      createPage({
+        path: ac_strings.slug_podcast_intro,
+        component: path.resolve(`src/templates/page/podcast-intro.tsx`),
+        context:{
+          title:podcast.title,
+          postId:process.env.POCAST_INTRO_POST_ID,
+          breadcrumb:[
+            {
+              name:podcast.title,
+              to:podcast.slug
+            }
+          ],
+          hosts:allHostsSlug
 
+        },
+      })
 
+      createPage({
+        path: podcast.slug,
+        component: path.resolve(`src/templates/page/podcast.tsx`),
+        context:{
+          title:podcast.title,
+          id:process.env.PODCAST_FILTER_ID,
+          breadcrumb:[
+            {
+              name:podcast.title,
+              to:podcast.slug
+            }
+          ],
+          hosts:allHostsSlug
+
+        },
+      })
 
     }
   })

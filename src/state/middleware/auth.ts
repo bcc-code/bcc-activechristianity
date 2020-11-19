@@ -47,7 +47,9 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                 .then((res: any) => {
                     if (res) {
                         const data = res.signIn
+                        console.log(data)
                         if (data.success && data.user) {
+
                             if (data.user.meta && data.user.meta.consented) {
                                 store.dispatch(setUser(data.user))
                                 store.dispatch(closeSignInModal())
@@ -58,6 +60,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                             }
 
                         } else {
+
                             throw new Error("Incorrect email or password, please try again.")
                         }
                     } else {

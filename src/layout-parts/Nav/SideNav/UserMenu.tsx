@@ -50,11 +50,11 @@ const SideMobile: React.FC<{
                 {[
                     {
                         name: ac_strings.my_content,
-                        to: ac_strings.slug_user_content
+                        to: `${ac_strings.user}/${ac_strings.slug_user_content}`
                     },
                     {
                         name: ac_strings.history,
-                        to: ac_strings.slug_user_history
+                        to: `${ac_strings.user}/${ac_strings.slug_user_history}`
                     }
                 ].map((item, i) => {
                     return (

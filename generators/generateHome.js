@@ -119,9 +119,9 @@ module.exports = function generatePages(actions, graphql) {
                    
                     for (let k =0;k<popularTopicsUnfilteredIDs.length;k++){
                         const item=popularTopicsUnfilteredIDs[k]
-                        const hasType = typeScope.find(t=>t===item)
+                        const hasType = typeScope.find(t=>`${t.id}`===`${item}`)
                         if(!hasType){
-                            const hasFormat=formatScope.find(f=>f===item)
+                            const hasFormat=formatScope.find(f=>`${f.id}`===`${item}`)
                             if (!hasFormat){
                                 const getTopicQuery = getTopic(item)
                                 await graphql(getTopicQuery)

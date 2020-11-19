@@ -16,7 +16,7 @@ import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { INavItem, INavItemCount, ISubtopicLinks, IPostRes, IRecommendationPage } from '@/types'
 import podcastProperties from '@/strings/podcastProperties'
-import { getRandomArray, processRecommendationContext } from "@/helpers"
+import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 // helper
 
 import ac_strings from '@/strings/ac_strings.js'
@@ -26,20 +26,21 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
     const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
-    const allCategories: INavItem[] = []
-    if (playlist.to) {
+    console.log(items)
+    const allCategories: INavItem[] = [...items]
+    if (playlist && playlist.to) {
         allCategories.push(playlist)
     }
 
-    if (podcast.to) {
+    if (podcast && podcast.to) {
         allCategories.push(podcast)
     }
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
-    const { featuredMixed, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+    const featuredMixed = getRandomFeatured({ latest, popular, featured })
 
-    allCategories.push(...items)
     return (
         <div >
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
@@ -64,20 +65,22 @@ const Listen: React.FC<IProps> = (props) => {
                         <HSCardList posts={featuredMixed} />
                     </div>
                 </div>
-                {ac_strings.slug_podcast && <div className="py-6">
-                    <div className="w-full flex justify-between items-center  pb-4 pr-4">
-                        <PageSectionHeader title={ac_strings.playlist} />
-                        <UnderlineLinkViewAll to={`${playlist.to}`} />
-                    </div>
+                {ac_strings.slug_playlist && (
+                    <div className="py-6">
+                        <div className="w-full flex justify-between items-center  pb-4 pr-4">
+                            <PageSectionHeader title={ac_strings.playlist} />
+                            <UnderlineLinkViewAll to={`${playlist.to}`} />
+                        </div>
 
-                    <FetchLatestPlaylists
-                        layout="row"
-                        render={({ playlists }) => {
-                            const randomPlaylist = getRandomArray(playlists, playlists.length > 6 ? 6 : playlists.length)
-                            return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
-                        }}
-                    />
-                </div>}
+                        <FetchLatestPlaylists
+                            layout="row"
+                            render={({ playlists }) => {
+                                const randomPlaylist = getRandomArray(playlists, playlists.length > 6 ? 6 : playlists.length)
+                                return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
+                            }}
+                        />
+                    </div>
+                )}
 
 
 

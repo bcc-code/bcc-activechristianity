@@ -22,34 +22,30 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
 
 
     return (
-        <div>
-            <div
-                className="absolute inset-x-0 top-0 h-64 z-minus"
-            >
-            </div>
-            <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
-                <Link to={`/${slug}`} className="col-start-1 col-end-6 relative">
+        <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16">
+            <Link to={`/${slug}`} className="col-start-1 col-end-6 relative">
 
 
-                    {media && media.video && media.video.src ? (
-                        <VideoHeader
-                            src={media.video.src}
-                            className={`rounded-xxl sm:rounded-xl overflow-hidden`}
-                        />
+                {media && media.video && media.video.src ? (
+                    <VideoHeader
+                        src={media.video.src}
+                        className={`rounded-xxl sm:rounded-xl overflow-hidden`}
+                    />
 
-                    ) : (
-                            <div className="m-0 relative w-full pb-square sm:pb-half">
-                                <LazysizesFeaturedImage
+                ) : (
+                        <div className="m-0 relative w-full pb-square sm:pb-half">
+                            <LazysizesFeaturedImage
 
-                                    {...image}
-                                    className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
-                                />
-                            </div>
-                        )
-                    }
+                                {...image}
+                                className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                            />
+                        </div>
+                    )
+                }
 
-                </Link>
-                <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
+            </Link>
+            <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
+                <div className="flex flex-col justify-center pt-0">
                     <Link
                         to={`/${slug}`}
 
@@ -80,6 +76,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                         <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden lg:block" duration={duration?.listen} authors={authors} />
                     </div>
                 </div>
+
             </div>
         </div>
 

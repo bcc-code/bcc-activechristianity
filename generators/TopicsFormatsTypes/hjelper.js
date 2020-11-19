@@ -6,37 +6,40 @@ const videoTemplate = 'src/templates/archive/video-list.tsx'
 const baseUrl = process.env.API_URL
 const perPage= 12
 const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
+
+
+
 const formatsAll = {
   "animation":{
-    keyId: process.env.ANIMATION_FILTER_ID,
+    keyId: 108212,
     keyname: "animation",
   },
   "message":{
-      keyId: process.env.MESSAGE_FILTER_ID,
+      keyId: 36170,
       keyname: "message",
   },
   "song": {
-      keyId: process.env.SONG_FILTER_ID,
+      keyId: 108204,
       keyname: "song",
   },
   "edification":{
-      keyId: process.env.EDIFICATION_FILTER_ID,
+      keyId: 108206,
       keyname: "edification",
   },
   "testimony":{
-      keyId: process.env.TESTIMONY_FILTER_ID,
+      keyId: 345,
       keyname: "testimony",
   },
   "question":{
-      keyId: process.env.QUESTION_FILTER_ID,
+      keyId: 1503,
       keyname: "question",
   },
   "commentary":{
-      keyId: process.env.COMMENTARY_FILTER_ID,
+      keyId: 108201,
       keyname: "commentary",
   },
   "interview":{
-    keyId: process.env.INTERVIEW_FILTER_ID,
+    keyId: 108211,
     keyname: "interview",
 },
 }
@@ -44,22 +47,29 @@ module.exports.formatsAll=formatsAll
 
 const typesAll={
   "read":{
-      keyId:process.env.READ_POSTS_FILTER_ID,
+      keyId:108196,
       keyname:"read"
   },
   "watch":{
-      keyId:process.env.WATCH_POSTS_FILTER_ID,
+      keyId:108198,
       keyname:"watch"
   },
   "listen":{
-      keyId:process.env.LISTEN_POSTS_FILTER_ID,
+      keyId:108197,
       keyname:"listen"
   }
 }
 
+
 module.exports.typesAll = typesAll
 
 
+const groupAll={
+  format:4,  
+  type:5
+}
+
+module.exports.groupAll=groupAll
 module.exports.formatScope = Object.keys(formatsAll).map(key=>formatsAll[key])
 
 module.exports.typeScope = Object.keys(typesAll).map(key=>typesAll[key])
@@ -167,7 +177,7 @@ module.exports.createArchivePages =async function ({
             pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
         }
         
-        const component = (`${node.id}`===process.env.WATCH_POSTS_FILTER_ID || `${node.id}`===process.env.ANIMATION_FILTER_ID)?path.resolve(videoTemplate): path.resolve(listTemplate)
+        const component = (`${node.id}`===typesAll.watch || `${node.id}`===formatsAll.animation)?path.resolve(videoTemplate): path.resolve(listTemplate)
         const paginate = {
           currentPage,
           totalPages:totalPages,
@@ -214,8 +224,8 @@ module.exports.createSubTopicPages=({
       const totalPages = Math.ceil(totalCount / perPage)
       const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
   
-      const component = (`${topic.id}`===process.env.WATCH_POSTS_FILTER_ID || 
-      `${subTopic.id}`===process.env.WATCH_POSTS_FILTER_ID)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      const component = (`${topic.id}`===typesAll.watch || 
+      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
       const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
   
       pageBreadcrumb.push(

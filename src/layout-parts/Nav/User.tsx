@@ -47,13 +47,13 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     return authInfo.loggedIn === 'success' ? (
         <div className={`${col ? 'flex flex-col justify-center' : 'grid grid-cols-2'} ${className}`}>
             <Link
-                className="py-2"
+                className="py-2 hover:text-d4slate"
                 onClick={onClick}
                 to={`/${ac_strings.slug_user}`}
             >
                 {ac_strings.title_user}
             </Link>
-            <button className="py-2 text-center hover:text-d4slate-light hover:font-bold " onClick={handleLogout}>{TS.logout}</button>
+            <button className="py-2 text-center hover:text-d4slate" onClick={handleLogout}>{TS.logout}</button>
 
         </div>
     ) : (
@@ -63,8 +63,8 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
                 </div>
             ) : (
                     <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
-                        <span className="whitespace-no-wrap p-2 text-center cursor-pointer hover:text-d4slate-light hover:font-bold " onClick={handleSignIn}>{TS.login}</span>
-                        <span className="p-2 text-center cursor-pointer bg-d4slate-dark rounded mb-1 text-white hover:text-d4slate-light hover:font-bold " onClick={handleSignUp}>{TS.register}</span>
+                        <span className="whitespace-no-wrap px-2 py-1 text-center cursor-pointer hover:text-d4slate" onClick={handleSignIn}>{TS.login}</span>
+                        <span className="px-2 py-1 text-center cursor-pointer bg-d4slate-dark rounded mb-1 text-white hover:text-d4slate-lighter" onClick={handleSignUp}>{TS.register}</span>
                     </div>
 
                 )

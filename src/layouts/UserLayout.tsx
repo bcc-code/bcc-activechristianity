@@ -56,15 +56,15 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
                         {[
                             {
                                 name: ac_strings.my_content,
-                                to: ac_strings.slug_user_content
+                                to: `${ac_strings.slug_user}/${ac_strings.slug_user_content}`
                             },
                             {
                                 name: ac_strings.history,
-                                to: ac_strings.slug_user_history
+                                to: `${ac_strings.slug_user}/${ac_strings.slug_user_history}`
                             }
                         ].map((item, i) => {
                             return (
-                                <SideNavItem key={i} to={item.to} onClick={close}>
+                                <SideNavItem key={i} to={item.to}>
                                     {item.name}
                                 </SideNavItem >
                             )

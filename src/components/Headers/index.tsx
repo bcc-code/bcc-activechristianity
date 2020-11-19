@@ -18,11 +18,11 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
 )
 
 export const PageSectionHeader: React.FC<{ title: string, className?: string }> = ({ title, className }) => (
-    <div className={`font-semibold px-4 text-xl ${className ? className : ''}`}>{title}</div>
+    <div className={`px-4 text-2xl ${className ? className : ''}`}>{title}</div>
 )
 
 export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (
-    <span className="uppercase font-roboto text-d4slate-light font-semibold text-xs">
+    <span className="block uppercase font-roboto text-gray-500 text-sm tracking-wider pb-2">
         {title}
     </span>
 )

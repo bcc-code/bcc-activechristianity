@@ -129,7 +129,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             icon: iconMapNav["my-content"]
         })
     }
-    console.log(mobileMenu)
+
     return (
 
         <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
@@ -148,15 +148,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             />
             <TopDesktop {...NavProps} menu={desktopMenu} explorePage={menusItems.explore} />
             {isLandingPage ? (
-                <div className={`flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+                <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
                     {children}
                     <Footer key={shortid()} />
                 </div>
             ) : (
-                    <div className={`flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+                    <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
 
                         {isInfoBarOpen && process.env.LOCALE === "en" && (
-                            <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug hover:font-bold text-d4slate-dark"} style={{ zIndex: 100 }}>
+                            <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug text-d4slate-dark"} style={{ zIndex: 100 }}>
                                 <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
                                     Revert back to original version here. Note that your old login details will apply.
                     <button onClick={setNotIsInfoBarOpen}>

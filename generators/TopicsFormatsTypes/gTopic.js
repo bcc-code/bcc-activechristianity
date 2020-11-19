@@ -2,7 +2,7 @@ const _ = require('lodash')
 const path = require('path')
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
-const {getSubTopicPosts,createSubTopicPages, getPostsPerPageQuery,formatScope,typeScope} = require('./hjelper')
+const {getSubTopicPosts,createSubTopicPages, groupAll,formatScope} = require('./hjelper')
 const TS = require('../../src/strings')
 module.exports = async function generateTopic(data) {
     const {actions, graphql,contextPosts,subTopics,node:topic,breadcrumb}=data
@@ -13,7 +13,7 @@ module.exports = async function generateTopic(data) {
                         
         const stTopic=subTopics [i]
 
-        if (`${stTopic.group_id}` === process.env.FORMAT_GROUP_ID) {
+        if (`${stTopic.group_id}` === groupAll.format) {
           const find = formatScope.find(f=>f.keyId===`${stTopic.id}`)
           if (find){
             

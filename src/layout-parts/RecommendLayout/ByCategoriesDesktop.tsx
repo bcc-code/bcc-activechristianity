@@ -21,7 +21,7 @@ const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title, arrow, col, icon 
         <div className="bg-d4athens sm:bg-white py-4">
             <div className="standard-max-w">
                 <div className="font-bold relative flex justify-between mt-8 sm:mt-16 mb-2 sm:mb-8 pb-2 text-d4dark text-base">
-                    <span className="block">{title}</span>
+                    <span className="block text-lg">{title}</span>
                 </div>
 
                 <div className={`hidden sm:grid grid-cols-${col ? col : '2'} gap-4 mt:4 sm:mt-12 mb-4`}>

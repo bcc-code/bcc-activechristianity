@@ -269,6 +269,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         <div className="pt-6">
                             <RecommendedPostsSection
                                 postId={id}
+                                topics={topics}
                                 readMorePosts={readMorePosts}
                             />
                         </div>

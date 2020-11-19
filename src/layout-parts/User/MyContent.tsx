@@ -20,6 +20,8 @@ import shortid from 'shortid'
 const UserHistory = () => {
 
     const { followedTopics, bookmarkedPosts, followedPlaylists } = useSelector((state: IRootState) => state.userLibrary);
+    console.log(followedTopics)
+    console.log(bookmarkedPosts)
     return (
         <div className="flex flex-col ">
 
@@ -78,9 +80,9 @@ const UserHistory = () => {
                         </div>
                     )}
             </div>
-            {followedPlaylists.length > 0 && (
+            {/*             {followedPlaylists.length > 0 && (
                 <div>{followedPlaylists.map(p => p.name)}</div>
-            )}
+            )} */}
             {bookmarkedPosts.length > 0 ? <FetchPostsFromSlugs
                 slugs={bookmarkedPosts.map(p => p.slug)}
                 layout="list"
