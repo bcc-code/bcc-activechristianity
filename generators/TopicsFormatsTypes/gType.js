@@ -37,12 +37,7 @@ module.exports = async function generateTypes(data) {
             await graphql( geFormatPostsQuery)
                 .then(subTopicPostRes=>{
                     const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
-                    console.log({
-                        key:find.keyname,
-                        name:subTopic.name,
-                        to:`${type.slug}/${subTopic.slug}`,
-                        count:allPosts.length
-                    })
+
                     typeFormatEach.items.push({
                         key:find.keyname,
                         name:subTopic.name,
@@ -110,7 +105,7 @@ module.exports = async function generateTypes(data) {
         ...typeFormatEach,
         ...contextPosts
     }
-    console.log(context)
+
     createPage({
         path: `${type.slug}`,
         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),

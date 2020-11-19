@@ -70,7 +70,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
       if (firstQueryRes) {
         if (firstQueryRes.settings && Array.isArray(firstQueryRes.settings)){
             const {settings} = firstQueryRes
-            console.log(settings)
             const metadata = {}
             settings.forEach(s => {
               metadata[s.key] = s.value
@@ -111,7 +110,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
       let entities = [];
   
       if (firstQueryRes.posts){
-          console.log(firstQueryRes.posts)
+
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
    

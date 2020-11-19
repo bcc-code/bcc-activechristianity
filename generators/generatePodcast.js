@@ -36,7 +36,7 @@ module.exports = function generatePages(actions, graphql) {
         title:ac_strings.podcast,
         slug:ac_strings.slug_podcast
       }
-      const aboutMain = result.data.ac.about
+  
       const navTopicsItem={name:ac_strings.topic,to:TS.slug_topic}
      
 
@@ -44,50 +44,9 @@ module.exports = function generatePages(actions, graphql) {
         if (page && page.label==="podcast-host"){
             podcastHosts.push(page)      
         }  
-
-          let context = {
-            ...page,
-              breadcrumb:[
-                {
-                  name:page.title,
-                  to:page.slug
-                }
-              ]
-          }
-
-          createPage({
-            path: `${page.slug}`,
-            component: path.resolve(`./src/templates/page/podcast.tsx`),
-            context,
-          })
         })
  
-      //{name:ac_strings.topic,to:TS.slug_topic}
-      // topic
-      createPage({
-        path: `${ac_strings.topic}`,
-        component: path.resolve(`./src/templates/page/topics.tsx`),
-        context:{
-          title:TS.slug_topic,
-          themes:themePages,
-          breadcrumb:[
-            navTopicsItem
-          ]
-        }, 
-      })
 
-
-      // about us
-      createPage({
-        path: `${aboutMain.slug}`,
-        component: path.resolve(`src/templates/page/about-us.tsx`),
-        context:{
-          title:aboutMain.title,
-          id:aboutMain.id,
-          childPages:aboutUsChildren,
-          breadcrumb:[]
-        },
-      })
       
       // podcast and hosts
       const allHostsSlug= []
