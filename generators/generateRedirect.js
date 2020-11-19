@@ -16,17 +16,15 @@ module.exports = function generateRedirects(actions, graphql) {
         }
     
         const {redirects}= result.data.ac
-
+        console.log(redirects)
         console.log("Generating redirects")
-        _.each(redirects, ({to,from}) => {
-         
-  
-          ccreateRedirect({
+        redirects.forEach(({to,from}) => {
+    
+          createRedirect({
             fromPath:from,
             toPath:to,
             isPermanent: true
-          })
-        })
-    
+          })})
+
       })
 }

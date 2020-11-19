@@ -323,8 +323,6 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
 )
 
 export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[], topics?: ITopicNavItem[] }> = ({ postId, readMorePosts, topics }) => {
-    console.log(topics)
-    console.log(readMorePosts)
     const [randomPosts, setRandomPosts] = React.useState<string[]>([])
 
     React.useEffect(() => {
@@ -351,7 +349,6 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                 }
                 let allPosts = [...randomRecommendPosts, ...readMore]
                 readMore = [...new Set(allPosts)]
-                console.log(readMore)
                 setRandomPosts(readMore)
             })
             .catch(error => {

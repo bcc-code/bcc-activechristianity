@@ -16,6 +16,7 @@ const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
 const generateHome = require('./generators/generateHome.js')
 const generateExplore = require('./generators/generateExplore')
 const generatePodcast = require('./generators/generatePodcast')
+const generateRedirect = require('./generators/generateRedirect')
 const buildTranslations = require('./generators/json/build-translations')
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
@@ -52,12 +53,13 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   exports.createPages = ({ page,actions, graphql }) => {
 
      const generators = [
-      generateAuthors(actions, graphql),
+/*       generateAuthors(actions, graphql), */
       generatePages(actions, graphql),
-      generateExplore(actions, graphql),
+/*       generateExplore(actions, graphql),
       generateHome(actions, graphql), 
       generatePosts(actions, graphql),
-      generateTopics(actions, graphql)
+      generateTopics(actions, graphql), */
+      generateRedirect(actions, graphql)
     ]
 
     if (process.env.LANG_CODE==="en"){
@@ -66,8 +68,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       generators.push(generateScriptures(actions, graphql))
       generators.push(generatePodcast(actions, graphql))
     }
-  
-
     return Promise.all(generators)
 
 

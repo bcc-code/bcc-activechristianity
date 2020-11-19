@@ -51,7 +51,20 @@ module.exports = function generatePages(actions, graphql) {
       }
       const aboutMain = result.data.ac.about
       const navTopicsItem={name:ac_strings.topic,to:TS.slug_topic}
-     
+      const buildPages = [
+        {
+          slug:ac_strings.glossaries,
+          templateName:"glossaries"
+        },
+        {
+          slug:ac_strings.playlist,
+          templateName:"playlists"
+        },
+        {
+          slug:ac_strings.contact,
+          templateName:"contact"
+        }
+      ]
 
       _.each(pageInfo,(page)=>{
         if (page && page.label.indexOf("about-us-") >-1){

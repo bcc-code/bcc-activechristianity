@@ -32,7 +32,7 @@ export const menusItems = {
         to: `${ac_strings.user}/${ac_strings.slug_user_history}`
     },
     "about": {
-        name: ac_strings.history,
+        name: ac_strings.about,
         to: ac_strings.slug_about
     },
     "contact": {

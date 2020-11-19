@@ -32,7 +32,7 @@ const UserHistory = () => {
                         render={({ topics }) => {
                             return (
                                 <>
-                                    <SectionTitleDesktopAndMobile name={"Following Topics"} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.following} />
 
                                     <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
                                         {topics.map(({ name, slug: to }) => {
@@ -64,7 +64,7 @@ const UserHistory = () => {
                     />
                 ) : (
                         <div>
-                            <SectionTitleDesktopAndMobile name={"No follow topics found. You might be interested in..."} />
+                            <SectionTitleDesktopAndMobile name={ac_strings.no_followed_topics} />
                             <QPopularAndFeaturedPosts
                                 render={({ topics }) => {
                                     const randomTopics = getRandomArray(topics, 6)
@@ -99,14 +99,14 @@ const UserHistory = () => {
                         <div>
                             {video.length > 0 && (
                                 <div className="py-6">
-                                    <SectionTitleDesktopAndMobile name={"Saved Videos"} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.save_video} />
                                     <HSCardListVideo posts={video} />
                                 </div>
                             )}
                             {other.length > 0 && (
                                 <div className="py-6">
 
-                                    <SectionTitleDesktopAndMobile name={"Bookmarked"} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.bookmarked} />
                                     <div className="px-4">
                                         {other.map((item, i) => (
                                             <PostItem {...item} key={i} />
@@ -122,7 +122,7 @@ const UserHistory = () => {
 
             /> : (
                     <div className="py-6">
-                        <PageSectionHeader title="No bookmark posts found" />
+                        <PageSectionHeader title={ac_strings.no_bookmark} />
                     </div>
                 )}
 

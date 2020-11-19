@@ -130,7 +130,11 @@
     "message_to_existing_user_first_time_cta":"Tilbakestill passord",
     "message_after_reset_password":"Vi har sendt deg en e-post. Sjekk innboksen din og klikk på lenken for å tilbakestille passordet ditt ",
     "message_to_existing_user_after_reset_password_content":" Før du fortsetter, ber vi at du tar deg litt tid til å lese gjennom våre vilkår for bruk og personvernerklæring",
-    "terms_of_use":"Vilkår for bruk"
+    "terms_of_use":"Vilkår for bruk",
+    "no_followed_topics":"Det ser ikke ut til at du følger noen temaer. Kanskje er du interessert i",
+    "following_topics":"Følger",
+    "save_video":"lagrede videoer",
+    "no_bookmark":"Ingen merket innlegg funnet"
 
 
 }
