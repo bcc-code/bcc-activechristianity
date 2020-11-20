@@ -20,14 +20,12 @@ import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 
 import {
-    MobilePostMain,
-    DesktopPostMain,
     AuthorBookmarkShareSection,
     ShareBookmarkTopShortCuts,
-    RecommendedPostsSection,
     Translations
 } from '@/layout-parts/PostSections'
 
+import { RecommendedPostsSection, Interest } from '@/layout-parts/PostLayout/InsterestedPosts'
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 
@@ -194,7 +192,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
             </div>
             <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50 flex justify-center" >
-                <div className="max-w-tablet">
+                <div className="max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
@@ -293,8 +291,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
                 </div>
-                <div>
-                    aaasdfasdf
+                <div className="hidden sm:block">
+                    {/*                <Interest
+                        postId={postId}
+                        readMorePosts={readMorePosts}
+                        authors={authors}
+                        topics={topics}
+                    /> */}
                 </div>
 
             </div>

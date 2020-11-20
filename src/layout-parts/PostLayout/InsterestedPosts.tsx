@@ -1,9 +1,8 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
-import Link from '@/components/CustomLink'
-import { INavItem, IPostAuthors, ITopicNavItem, IPostItem } from '@/types'
+import { IPostAuthors, ITopicNavItem, IPostItem, ITopic } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
-import { BookmarksAndViews } from '@/components/PostElements'
+import Flickity from 'react-flickity-component'
 import Icon from '@/components/Icons/Icon'
 const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
@@ -12,50 +11,85 @@ import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
+import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray } from "@/helpers"
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import acApi from '@/util/api'
 import shortid from 'shortid'
-
+import { fetchLocalPostsFromSlugs, fetchOneLocalPostsFromSlug, fetchPostslistFromArchivePage, } from '@/helpers/fetchLocalData'
 interface IInterestedPosts {
     postId: string
     readMorePosts: string[]
-    authors:
+    authors?: IPostAuthors[]
+    topics?: ITopic[]
 }
-export const Interest: React.FC<IInterestedPosts> = ({ postId }) => {
+export const Interest: React.FC<IInterestedPosts> = ({ postId, readMorePosts: readMore }) => {
     const [recommendedPosts, setRecommendedPosts] = React.useState<IPostItem[]>([])
     const [readMorePosts, setReadMorePosts] = React.useState<IPostItem[]>([])
-    const [setTopicPosts, setAuthorPosts] = React.useState<IPostItem[]>([])
+    const [authorPosts, setAuthorPosts] = React.useState<IPostItem[]>([])
+    const [topicPosts, setTopicPosts] = React.useState<IPostItem[]>([])
     const [animationPost, setAnimationPost] = React.useState<IPostItem[]>([])
     const [podcastPost, setPodcastPost] = React.useState<IPostItem[]>([])
 
     React.useEffect(() => {
+        let isSubscribed = true
         acApi.recommendedByPost(postId)
             .then(res => {
-
-                /* setPosts(allSlugs) */
-                let readMore: string[] = []
-                if (readMorePosts.length > 0) {
-                    const procssedReadMore = readMorePosts.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
-                    readMore = procssedReadMore
-                }
-
-                let randomRecommendPosts: string[] = []
+                console.log(res)
                 if (res.recommendedByPost) {
-                    const postStrinsg = res.recommendedByPost.map((p: any) => p.slug)
+                    console.log(res)
+                    let recommendedPosts = res.recommendedByPost.map((p: any) => p.slug)
+                    return fetchLocalPostsFromSlugs(recommendedPosts.slice(0, 1)).then(posts => {
+                        if (posts) {
+                            if (isSubscribed) {
+                                setRecommendedPosts(posts)
+                            }
+
+                        }
+                    })
+
                 }
-                let allPosts = [...randomRecommendPosts, ...readMore]
-
-
             })
             .catch(error => {
                 console.log(error)
             })
-    }, [postId, readMorePosts])
+        return () => {
+            isSubscribed = false
+        }
+    }, [postId])
+    /*     React.useEffect(() => {
+            let isSubscribed = true
+            let readMoreSlugs: string[] = []
+            if (readMore.length > 0) {
+                const procssedReadMore = readMore.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
+                readMoreSlugs = procssedReadMore
+            }
+    
+            fetchLocalPostsFromSlugs(readMoreSlugs.slice(0, 1)).then(posts => {
+                if (posts) {
+                    if (isSubscribed) {
+                        setReadMorePosts(posts)
+                    }
+    
+                }
+            })
+    
+            return () => {
+                isSubscribed = false
+            }
+        }, [postId, readMorePosts]) */
 
+    const width = typeof window !== 'undefined' ? (window.innerWidth - 768) / 2 : 200
+
+    console.log(recommendedPosts)
     return (
-        <div>
-
+        <div className="fixed right-0 top-0 px-6 bg-white" style={{ width: `${width}px` }}>
+            interested
+            {recommendedPosts.map(post => {
+                return (
+                    <TopImgPost key={shortid()} {...post} />
+                )
+            })}
         </div>
     )
 }
