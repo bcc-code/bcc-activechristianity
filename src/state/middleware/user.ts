@@ -22,7 +22,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
-                    console.log(resNewFollow)
+
                     return acApi
                         .following()
                         .then((res: IFollowing) => {

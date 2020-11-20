@@ -160,12 +160,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 views={views}
                 likes={likes}
             />
-            <ViewNext
-                isPlayingAudio={!!isCurrentMedia.audio}
-                postId={id}
-                topics={topics}
-                formats={format}
-            />
+            {!isCurrentMedia.audio && (
+                <ViewNext
+                    postId={id}
+                    topics={topics}
+                    formats={format}
+                />
+            )}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
