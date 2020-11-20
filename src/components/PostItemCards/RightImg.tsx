@@ -102,7 +102,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
 
 
             </div>
-            <div className="py-4 flex w-full justify-between">
+            <div className="pt-4 flex w-full justify-between">
                 <ReadOrListenIcon
                     track={media}
                     {...duration}

@@ -17,7 +17,7 @@ const FeatureSection: React.FC<{ featuredPosts: string[], topicPosts: ITopicPost
     const randomFeaturedFromTopics = getRandomArray(postSlugs, 4)
     return (
         <div>
-            <h3 className="relative mt-8 mx-4 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
+            <h3 className="relative mt-8 mx-4 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
                 <div className="flex items-center ">
                     <span className="block text-lg">{ac_strings.featured}</span>
                 </div>
