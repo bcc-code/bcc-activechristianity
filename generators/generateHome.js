@@ -126,10 +126,13 @@ module.exports = function generatePages(actions, graphql) {
                                 const getTopicQuery = getTopic(item)
                                 await graphql(getTopicQuery)
                                 .then(async res=>{
-                                   
-                                    const topic = res.data.ac.topic
-                                    const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl,headers)
-                                    console.log(allPosts)
+                                    if(res.data && res.data.ac &&res.data.ac.topic){
+                                        const topic = res.data.ac.topic
+                                        const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl,headers)
+                                        popularTopicsAll["dynamic"].push({...topic,posts:allPosts})
+                                    }
+                                    
+                                    
                                 })
                             }
                         }

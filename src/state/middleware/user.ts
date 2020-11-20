@@ -22,14 +22,16 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
-
+                    console.log(resNewFollow)
                     return acApi
                         .following()
                         .then((res: IFollowing) => {
 
                             if (res.following && Array.isArray(res.following.topics)) {
+
                                 const filtered = res.following.topics.filter(p => typeof p.slug === "string")
-                                store.dispatch(setUserLiked(filtered))
+                                console.log(filtered)
+                                store.dispatch(setUserFollowingTopics(filtered))
 
                             } else {
                                 store.dispatch(setUserFollowingTopics([]))
