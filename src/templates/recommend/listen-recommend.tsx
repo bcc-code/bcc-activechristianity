@@ -1,10 +1,7 @@
 import React from "react"
 import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
-
-
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
-import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
 const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
@@ -14,7 +11,7 @@ const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenD
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
-import { INavItem, INavItemCount, ISubtopicLinks, IPostRes, IRecommendationPage } from '@/types'
+import { INavItem, INavItemCount, ISubtopicLinks, IPostItem, IRecommendationPage } from '@/types'
 import podcastProperties from '@/strings/podcastProperties'
 import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 // helper
@@ -26,7 +23,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
     const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
-    console.log(items)
+
     const allCategories: INavItem[] = [...items]
     if (playlist && playlist.to) {
         allCategories.push(playlist)
@@ -39,7 +36,13 @@ const Listen: React.FC<IProps> = (props) => {
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const featuredMixed = getRandomFeatured({ latest, popular, featured })
+
+    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+    React.useEffect(() => {
+
+        const mixed = getRandomFeatured({ latest, popular, featured })
+        setMixedFeaturedPosts(mixed)
+    }, [])
 
     return (
         <div >
@@ -62,7 +65,7 @@ const Listen: React.FC<IProps> = (props) => {
                     <div className="w-full py-6 sm:hidden">
 
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <HSCardList posts={featuredMixed} />
+                        <HSCardList posts={mixedFeaturedPosts} />
                     </div>
                 </div>
                 {ac_strings.slug_playlist && (
@@ -108,7 +111,7 @@ const Listen: React.FC<IProps> = (props) => {
                 topics={allCategories}
                 name={title}
                 latestPosts={latest}
-                featured={featuredMixed}
+                featured={mixedFeaturedPosts}
             />
 
         </div>

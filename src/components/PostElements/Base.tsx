@@ -45,7 +45,7 @@ const PostBase: React.FC<IPostBase> = (props) => {
                         {...duration}
                     />
                 )}
-                <div className="flex">
+                <div className="flex pr-4">
                     {views && <Views views={views} />}
                     <Bookmark id={id} color="slate-dark" size="5" />
                 </div>

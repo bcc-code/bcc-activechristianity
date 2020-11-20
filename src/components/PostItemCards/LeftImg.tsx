@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { IPostItem } from '@/types'
 import PostBase, { IPostBase } from '@/components/PostElements/Base'
-import PostLabel from '@/components/PostElements/TextSizeWClamp'
+import { PostLabel } from '@/components/PostElements'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import './leftverticle.css'
@@ -39,16 +39,16 @@ const TopImgPost: React.FC<IPostItem> = (props) => {
             <PostBase
                 post={props}
                 wrapperClass={' pt-4 pr-4 left-vert-content'}
+
                 postTitleProps={{
-                    fontKey: 'text-lg',
+                    fontKey: 'text-lg-2xl',
                     clamp: 3,
-                    bold: "font-semibold",
-                    className: "mb-2"
+                    className: "mb-2 text-d4slate-dark"
                 }}
                 postExcerptProps={{
-                    fontKey: 'text-base',
+                    fontKey: 'text-sm',
                     clamp: 3,
-                    className: "flex items-stretch mb-4"
+                    className: "flex items-stretch mb-4 text-gray-600"
                 }}
                 audioDuration />
         </div>

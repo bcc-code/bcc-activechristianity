@@ -9,7 +9,7 @@ import VideoTopImg from '@/components/PostItemCards/VideoTopImg'
 import VideoRow4Col from '@/layout-parts/List/Combo/VideoRow4Col-HorizontalScroll'
 import { LayoutH1Wide, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
+import { INavItemCount, ISubtopicLinks, IRecommendationPage, IPostItem } from '@/types'
 
 import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 import ac_strings from '@/strings/ac_strings.js'
@@ -23,15 +23,22 @@ const Watch: React.FC<IProps> = (props) => {
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const featuredMixed = getRandomFeatured({ latest, popular, featured })
+    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+    React.useEffect(() => {
+
+        const mixed = getRandomFeatured({ latest, popular, featured })
+        setMixedFeaturedPosts(mixed)
+    }, [])
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
-            <div className="hidden sm:block standard-max-w-px">
+            <div className="hidden sm:block standard-max-w">
                 <LayoutH1Wide title={title} />
-                <LazyLoad >
-                    {featuredMixed[0] && <HeaderSection headerPost={featuredMixed[0]} listPosts={popular.slice(0, 5)} />}
-                </LazyLoad>
+                <div className="px-4">
+                    <LazyLoad >
+                        {mixedFeaturedPosts[0] && <HeaderSection headerPost={mixedFeaturedPosts[0]} listPosts={popular.slice(0, 5)} />}
+                    </LazyLoad>
+                </div>
             </div>
             <div className="sm:hidden" style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
                 <div className="w-full py-6">
@@ -40,7 +47,7 @@ const Watch: React.FC<IProps> = (props) => {
                         name={ac_strings.featured}
                     />
                     <XScroll
-                        items={featuredMixed.map((p) => (<VideoTopImg  {...p} />
+                        items={mixedFeaturedPosts.map((p) => (<VideoTopImg  {...p} />
                         ))}
                     />
                 </div>

@@ -133,16 +133,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
     const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
 
-
-    const postFooter = (
-        <LazyLoad>
-            <div className="relative bg-white">
-                <ExclusiveContent />
-            </div>
-        </LazyLoad>
-
-    )
-
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
@@ -203,8 +193,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             <div className='w-full sm:hidden relative' style={{ top: "50px", height: `${currentHeigt}px` }}>
 
             </div>
-            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50" >
-                <div className="max-w-tablet m-auto">
+            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50 flex justify-center" >
+                <div className="max-w-tablet">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
@@ -303,7 +293,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
                 </div>
-
+                <div>
+                    aaasdfasdf
+                </div>
 
             </div>
 

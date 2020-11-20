@@ -30,7 +30,12 @@ const Read: React.FC<IProps> = (props) => {
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const featuredMixed = getRandomFeatured({ latest, popular, featured })
+    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+    React.useEffect(() => {
+
+        const mixed = getRandomFeatured({ latest, popular, featured })
+        setMixedFeaturedPosts(mixed)
+    }, [])
     return (
         <div>
             <MetaTag
@@ -48,7 +53,7 @@ const Read: React.FC<IProps> = (props) => {
 
                     <div className="w-full py-6">
                         <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <HSCardList posts={featuredMixed} />
+                        <HSCardList posts={mixedFeaturedPosts} />
                     </div>
                 </div>
                 <LazyLoad>
@@ -135,7 +140,7 @@ const Read: React.FC<IProps> = (props) => {
                 latestSlug={latestSlug}
                 latestPosts={latest}
                 popularPosts={popular}
-                featured={featuredMixed}
+                featured={mixedFeaturedPosts}
                 topics={items}
                 name={title}
             />
