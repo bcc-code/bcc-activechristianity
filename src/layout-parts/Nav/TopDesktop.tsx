@@ -33,10 +33,13 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
                                 <Icon name="Search" size="6" />
                             </Link>
                         )}
-                        <button className="pl-2 pr-4" onClick={() => { setSideNavOpen(true) }}>
+                        <button className="pl-2 pr-4" onClick={() => { setSideNavOpen(!isSideNavOpen) }}>
                             <Icon name="Menu" size="6" />
                         </button>
                     </div>
+                </div>
+                <div className="flex">
+
                 </div>
             </div>
         </div>

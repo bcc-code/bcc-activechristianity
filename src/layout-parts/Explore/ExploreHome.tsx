@@ -6,6 +6,8 @@ import { SectionTitleDesktopAndMobile } from '@/components/Headers'
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 
 import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
+import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended'
+import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
 import ac_strings from '@/strings/ac_strings.js'
 
 import SquareImages from '@/components/Images/Image1to1Rounded'
@@ -20,18 +22,19 @@ import { ITopic } from '@/types';
 
 const ExploreLayout: React.FC<{
     topics: ITopic[]
-    scriptureSlug?: string
-}> = ({ topics }) => {
+    formatIds?: number[]
+}> = (props) => {
+    const { topics, formatIds: recommendFormatIds } = props
     const mediaSquareImages = {
         'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
     }
     const { formatIds, typeIds } = typesFormats
     const formats = Object.keys(formatIds).map(id => formatIds[id])
-
-
-    const filteredTopics = topics.filter(t => formatIds[t.id] === undefined && typeIds[t.id] === undefined)
+    let filteredTopics = topics.filter(item => !formatIds[item.id] && !typeIds[item.id])
+    filteredTopics = [...new Set(filteredTopics)]
     const randomTopics = getRandomArray(filteredTopics, 6)
+
     return (
         <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
@@ -92,6 +95,15 @@ const ExploreLayout: React.FC<{
                     scriptureSlug={ac_strings.slug_scripture}
                 />
             )}
+
+            <div className="pt-6">
+                <SectionTitleDesktopAndMobile
+                    name={ac_strings.recommend_for_you}
+
+                />
+                {recommendFormatIds && recommendFormatIds.length > 3 && <ExploreFormatRecommended ids={recommendFormatIds} />}
+                <FetchRecommendMix />
+            </div>
         </div>
     )
 }

@@ -24,6 +24,7 @@ import localStorageHelper from '@/helpers/localStorage'
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`)
 
 const ExplorePage: React.FC<IResource> = (props) => {
+
     const [query, setQuery] = React.useState('');
     const [searchHistory, setSearchHistory] = React.useState<string[]>([])
     const [taxonomyFilter, setTaxonomyFilter] = React.useState<string[] | null>(null);
@@ -31,7 +32,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    const { popularTopics, featuredTopics, scripturePage } = props.pageContext
+    const { popularTopics, featuredTopics, scripturePage, recommendFormats } = props.pageContext
 
     React.useEffect(() => {
         const search = localStorageHelper.getStoredHistory()
@@ -149,6 +150,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     )}
                 {showExploreHome && (
                     <ExploreHomeLayout
+                        formatIds={recommendFormats}
                         topics={[...new Set([...popularTopics, ...featuredTopics])]}
                         scriptureSlug={scripturePage ? scripturePage.to : undefined}
                     />
@@ -191,6 +193,7 @@ interface IResource {
         scripturePage: INavItem
         featuredTopics: ITopic[]
         popularTopics: ITopic[]
+        recommendFormats: number[]
     }
 }
 

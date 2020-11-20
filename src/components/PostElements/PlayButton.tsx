@@ -31,12 +31,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                     <div className="z-20">
                         {track.video ? <MUIcon name="PlayCircleOutline" size="12" color="white" /> : <MUIcon name="Headset" size="12" color="white" />}
                     </div>
-                    <div
-                        style={{ background: "#020203", opacity: "0.3" }}
-                        className="absolute inset-0"
-                    >
 
-                    </div>
                 </div>
             )}
             {children}

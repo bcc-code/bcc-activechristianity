@@ -2,7 +2,7 @@ import React from 'react'
 import Link from '@/components/CustomLink'
 /* import ResourceNav from '@/layout-parts/Nav/ResourceNav' */
 import MetaTag from '@/components/Meta'
-import { typeIcons } from '@/layout-parts/PostSections'
+import { typeIcons } from '@/layout-parts/PostLayout/PostSections'
 import { INavItem, INavItemCount } from "@/types"
 import { UnderlineTitleLink, LayoutH1Wide, TitleWithIcon } from '@/components/Headers'
 

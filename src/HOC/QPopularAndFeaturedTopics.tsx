@@ -36,13 +36,6 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
                         topics={topicsSlugs}
                         layout="list"
                         render={({ topics }) => {
-
-                            /*                             if (excludeFollowed) {
-                                                            topics = topics.filter(item => {
-                                                                const find = followedTopics.find(t => `${t.id}` === `${item.id}`)
-                                                                return find === undefined
-                                                            })
-                                                        } */
                             return (
                                 <div>
                                     {render({ topics })}
@@ -80,7 +73,7 @@ const query = graphql`
         slug
         id
     }
-      
+    
   }
 }
 `

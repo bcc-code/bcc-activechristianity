@@ -5,7 +5,7 @@ import EbookDownload from '@/components/Ebook/EbookDownload'
 import Content from '@/components/Content'
 import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
 import MetaTag from '@/components/Meta'
-import { MobileHeaderBackground, MobilePostMain, DesktopPostMain } from '@/layout-parts/PostSections'
+import { MobileHeaderBackground, MobilePostMain, DesktopPostMain } from '@/layout-parts/PostLayout/PostSections'
 
 import PostMetaWLabel from '@/components/PostMeta/PostMeta'
 

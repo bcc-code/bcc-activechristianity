@@ -1,5 +1,6 @@
 const path = require('path')
 const {topicQuery} = require('gatsby-source-ac/helpers')
+const {formatsAll} = require('./TopicsFormatsTypes/hjelper')
 const exploreTemplate='src/templates/page/explore.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
 const TS = require('../src/strings')
@@ -40,10 +41,7 @@ module.exports = function generateTopics(actions, graphql) {
                     slug: ac_strings.slug_explore,
                 }
 
-                const scripturePage = {
-                    title:ac_strings.scripture,
-                    slug: ac_strings.slug_scripture
-                }
+
                 const popularTopicsRes = await graphql(`{
                     ac {
                         popularTopics: topics(ids:[${popularTopicsSlugs.map(t=>t.id).join(",")}]) {
@@ -55,33 +53,30 @@ module.exports = function generateTopics(actions, graphql) {
                 const {popularTopics} = popularTopicsRes.data.ac
                 
   
-                const context = {
-                    title: explorePage.title,
-                    slug:  explorePage.slug,
-                    popularTopics,
-                    featuredTopics 
-                }
-                const navTopicsItem={name:ac_strings.topic,to:ac_strings.slug_topic}
+               
+
                 createPage({
                     path: `${ac_strings.slug_topic}`,
                     component: path.resolve(`./src/templates/page/topics.tsx`),
                     context:{
                       title:ac_strings.topic,
-                      breadcrumb:[
-                        navTopicsItem
-                      ],
                       popularTopics,
                       featuredTopics 
                     }, 
                   })
-
-                if(process.env.LOCALE==="en"){
-                    context.scripturePage=({name: scripturePage.title,to: scripturePage.slug})
+                  const {animation,song,testimony,interview}=formatsAll
+                  const contextExplore = {
+                    title: explorePage.title,
+                    slug:  explorePage.slug,
+                    popularTopics,
+                    featuredTopics,
+                    recommendFormats:[animation,song,testimony,interview].map(f=>f.keyId)
                 }
                 createPage({
                     path: explorePage.slug,
                     component: path.resolve(exploreTemplate),
-                    context,
+                    context:contextExplore,
+                    
                     })
                
           }

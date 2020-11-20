@@ -72,30 +72,34 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])
     const [loading, setLoading] = React.useState(true)
     const CustomPlaceholder = getPlaceholder[layout]
-    console.log(topics)
+
     React.useEffect(() => {
         setLoading(true)
+
         Promise.all(topics
-            .map(t => fetchPostslistFromArchivePage(t.slug)
-                .then(posts => {
-                    console.log(posts)
-                    if (posts) {
+            .map(t => {
 
-                        return ({
-                            ...t,
-                            posts
-                        })
-                    }
-                }).catch(error => {
-                    console.log(error)
-                    return null
+                return fetchPostslistFromArchivePage(t.slug)
+                    .then(posts => {
 
-                })))
+                        if (posts) {
+
+                            return ({
+                                ...t,
+                                posts
+                            })
+                        }
+                    }).catch(error => {
+                        console.log(error)
+                        return null
+
+                    })
+            }))
 
             .then(res => {
 
                 const toAdd: ITopicPostItems[] = []
-                console.log(res)
+
                 res.forEach(item => {
                     if (item) {
                         toAdd.push(item)
@@ -109,7 +113,7 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
                 setLoading(false)
                 console.log(error)
             })
-    }, [])
+    }, [topics])
 
     return (
         <CustomPlaceholder

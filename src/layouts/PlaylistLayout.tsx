@@ -4,7 +4,7 @@ import LazyLoad from '@/components/LazyLoad';
 
 import ShareButton from '@/components/PostElements/SharePopover'
 import { ToggleFollowPlaylistBookmark } from '@/components/PostElements/TopicToggleFollow'
-import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts/PostSections'
+import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection } from '@/layout-parts/PostLayout/PostSections'
 /* import MockRelatedContentMedia from '@/layout-parts/RelatedContent' */
 import { FetchLatestPlaylists } from '@/HOC/FetchLatest'
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'

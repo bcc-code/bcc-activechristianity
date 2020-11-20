@@ -69,7 +69,6 @@ export const FetchLatestPodcast: React.FC<IFetchLatestPodcast> = ({ layout, rend
 
             })
             .catch(error => {
-                console.log(url)
                 console.log(error.message)
             })
     }, [])

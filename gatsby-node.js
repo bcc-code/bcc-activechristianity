@@ -37,7 +37,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
           'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
           'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
-          'process.env.NEW_URL':JSON.stringify(process.env.NEW_URL),
         })
       ]
     })

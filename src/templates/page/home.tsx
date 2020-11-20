@@ -69,7 +69,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       <div className="sm:hidden">
         <div className="w-full pb-4 pt-8">
 
-          <FeaturedBanner featured={featured} />
+          <FeaturedBanner featured={mixedFeaturedPosts} />
         </div>
         <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
           <PageSectionHeader title={ac_strings.latest} className="pb-4" />

@@ -31,7 +31,6 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
         .then(res => {
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: string[] = res.result.pageContext.posts
-
                 return fetchLocalPostsFromSlugs(posts)
 
             }

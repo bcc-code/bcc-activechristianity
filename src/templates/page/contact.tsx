@@ -3,7 +3,7 @@ import MetaTag from '@/components/Meta'
 import FetchSocialMediaPlatform from '@/HOC/FetchSocialMediaPlatforms'
 import TS from '@/strings'
 import { LayoutH1 } from '@/components/Headers'
-import { MobileMainWrapper } from '@/layout-parts/PostSections'
+import { MobileMainWrapper } from '@/layout-parts/PostLayout/PostSections'
 
 import ContactForm from '@/layout-parts/Form/Contact'
 

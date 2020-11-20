@@ -57,8 +57,11 @@ export const onClientEntry = () => {
 }
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
-  if (typeof window !== 'undefined') {
-    window.refTagger && window.refTagger.tag && window.refTagger.tag();
+  if (typeof window !== 'undefined' ) {
+    if( process.env.LANG_CODE==="en"){
+      window.refTagger && window.refTagger.tag && window.refTagger.tag();
+    }
+
     /* window.cue && window.cue.initialize(); */
     // Since the History Change trigger fires as soon as the event is dispatched, the content might not be there yet when the tracking tags fire.
     // By delaying the trigger, the tags won’t fire until the page has had time to load the content

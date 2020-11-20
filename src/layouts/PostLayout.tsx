@@ -9,10 +9,9 @@ const Content = loadable(() => import('@/components/Content'))
 const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
-const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
-/* const EbookFooterBanner = loadable(() => import('@/layout-parts/Banner/EbookFooterBanner'))
-const MockRelatedContentMedia = loadable(() => import('@/layout-parts/RelatedContent'))
-*/
+const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
+import ViewNext from '@/layout-parts/PostLayout/ViewNext'
+
 import { PostH1 } from '@/components/Headers'
 import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
@@ -26,7 +25,7 @@ import {
     ShareBookmarkTopShortCuts,
     RecommendedPostsSection,
     Translations
-} from '@/layout-parts/PostSections'
+} from '@/layout-parts/PostLayout/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
@@ -150,7 +149,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
-
+    console.log('rendering')
     return (
         <article className="overflow-scroll w-full relative">
             <ShareBookmarkTopShortCuts
@@ -160,6 +159,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 shareSlug={slug}
                 views={views}
                 likes={likes}
+            />
+            <ViewNext
+                isPlayingAudio={!!isCurrentMedia.audio}
+                postId={id}
+                topics={topics}
+                formats={format}
             />
 
             <div className="fixed sm:relative w-full z-50">
@@ -284,7 +289,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                             render={({ posts }) => {
                                                 const filteredPosts = posts.filter(p => `${p.id}` !== `${postId}`).slice(0, 6)
                                                 return filteredPosts.length > 0 ? (
-                                                    <Row2ColAndXScroll
+                                                    <Row3ColAndXScroll
                                                         title={`${ac_strings.more_from} ${a.name}`}
                                                         posts={filteredPosts}
                                                     />

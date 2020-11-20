@@ -26,7 +26,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
     const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
-    console.log(items)
+
     const allCategories: INavItem[] = [...items]
     if (playlist && playlist.to) {
         allCategories.push(playlist)

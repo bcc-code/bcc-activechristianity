@@ -1,17 +1,18 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { INavItem, IPostAuthors } from '@/types'
+import { INavItem, IPostAuthors, ITopicNavItem, IPostItem } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import Icon from '@/components/Icons/Icon'
-const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
+const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from "@/helpers"
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import acApi from '@/util/api'
 import shortid from 'shortid'
 interface IPostMain {
@@ -89,7 +90,7 @@ export const MobileHeaderBackground: React.FC<{ imgUrl: string }> = ({ imgUrl, c
     )
 }
 
-const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrls }) => {
+export const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrls }) => {
     if (translatedUrls && translatedUrls.length > 1) {
 
         return (
@@ -145,7 +146,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
                                 render={({ posts }) => {
                                     const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
                                     return fourPosts.length > 0 ? (
-                                        <Row2ColAndXScroll
+                                        <Row3ColAndXScroll
                                             title={`${ac_strings.more_from} ${a.name}`}
                                             posts={posts}
                                         />
@@ -321,14 +322,13 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
     </div>
 )
 
-export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[] }> = ({ postId, readMorePosts }) => {
-
+export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[], topics?: ITopicNavItem[] }> = ({ postId, readMorePosts, topics }) => {
     const [randomPosts, setRandomPosts] = React.useState<string[]>([])
 
     React.useEffect(() => {
         acApi.recommendedByPost(postId)
             .then(res => {
-                const recommendedPosts: string[] = res.recommendedByPost.map((p: any) => p.slug)
+
                 /* setPosts(allSlugs) */
                 let readMore: string[] = []
                 if (readMorePosts.length > 0) {
@@ -337,7 +337,8 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                 }
 
                 let randomRecommendPosts: string[] = []
-                if (recommendedPosts) {
+                if (res.recommendedByPost) {
+                    let recommendedPosts = res.recommendedByPost.map((p: any) => p.slug)
                     let randName = [];
                     let recommendPostsSlugs = [...recommendedPosts]
                     if (recommendPostsSlugs.length > 0) {
@@ -346,8 +347,8 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                         randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
                     }
                 }
-
-                readMore = [...new Set([...randomRecommendPosts, ...readMore])]
+                let allPosts = [...randomRecommendPosts, ...readMore]
+                readMore = [...new Set(allPosts)]
                 setRandomPosts(readMore)
             })
             .catch(error => {
@@ -360,7 +361,7 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
             slugs={randomPosts}
             layout="row"
             render={({ posts }) => {
-                return <Row2ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
+                return <Row3ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
             }}
         />
     )
