@@ -149,7 +149,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
-    console.log('rendering')
     return (
         <article className="overflow-scroll w-full relative">
             <ShareBookmarkTopShortCuts
@@ -160,13 +159,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 views={views}
                 likes={likes}
             />
-            {!isCurrentMedia.audio && (
+            {/*             {!isCurrentMedia.audio && (
                 <ViewNext
                     postId={id}
                     topics={topics}
                     formats={format}
                 />
-            )}
+            )} */}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (

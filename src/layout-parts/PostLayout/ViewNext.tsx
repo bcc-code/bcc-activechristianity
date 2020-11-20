@@ -14,10 +14,9 @@ interface IFetchPost {
     authors?: IAuthor[],
     formats?: ITopicNavItem[]
     postId: string
-    isPlayingAudio: boolean
 }
 
-const ReadNext: React.FC<IFetchPost> = ({ topics, authors, formats, isPlayingAudio, postId }) => {
+const ReadNext: React.FC<IFetchPost> = ({ topics, authors, formats, postId }) => {
     return (
 
         <div className={`flex flex-col fixed h-20 left-0 bottom-0 right-0 bg-d4slate-lighter sm:hidden`} style={{ zIndex: 60, marginBottom: `65px` }}>
