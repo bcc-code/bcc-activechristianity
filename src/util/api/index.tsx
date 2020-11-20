@@ -143,4 +143,11 @@ export default {
             return res
         })
     },
+    recommended: () => {
+        const query = request.recommendedPostsAndPopularTopic()
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
+
 }

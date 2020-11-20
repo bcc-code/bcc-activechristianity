@@ -35,11 +35,11 @@ const UserHistory = () => {
                                     <SectionTitleDesktopAndMobile name={ac_strings.following} />
 
                                     <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
-                                        {topics.map(({ name, slug: to, id }) => {
+                                        {topics.map(({ name, slug: to, id, image }) => {
                                             return (
                                                 <div className="flex flex-col items-center" key={shortid()} >
                                                     <div className="h-24 min-h-24">
-                                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} image={image} />
                                                     </div>
                                                     <SlateDarkUnfollowButton
                                                         id={id}

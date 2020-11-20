@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-
 import Icon from '@/components/Icons/Icon'
-
 import { INavItem } from '@/types'
 
 
@@ -100,15 +98,12 @@ export const iconMapNav: {
                 name="PlayCircleOutline"
                 color="slate-light"
             />
-
-
         ),
         default: (
             <Icon
                 name="PlayCircleOutline"
                 color="slate-light"
             />
-
 
         )
     },

@@ -33,7 +33,7 @@ const ExploreLayout: React.FC<{
     const filteredTopics = topics.filter(t => formatIds[t.id] === undefined && typeIds[t.id] === undefined)
     const randomTopics = getRandomArray(filteredTopics, 6)
     return (
-        <div className="bg-white max-w-tablet mx-auto">
+        <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
                 <SectionTitleDesktopAndMobile
                     name={ac_strings.topics}

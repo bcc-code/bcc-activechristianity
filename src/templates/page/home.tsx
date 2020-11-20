@@ -94,7 +94,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               <BgImgTopicCard
                 name={ac_strings.browse_resource}
                 to={ac_strings.slug_explore}
-
               />
             </div>
           </div>
