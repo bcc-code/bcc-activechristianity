@@ -60,13 +60,13 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
 }
 
 export const ReadIcon: React.FC<{ text?: string }> = ({ text }) => (
-    <div className={"mx-2 flex items-center"}>
+    <div className={"flex items-center"}>
         <Icon
             name="Description"
             color="slate-dark"
             size="5"
         />
-        <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
+        <span className="text-xs sm:text-sm text-d4slate-dark px-2 whitespace-no-wrap">
             {text ? text : ac_strings.read}
         </span>
     </div>

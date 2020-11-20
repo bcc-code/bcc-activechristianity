@@ -177,7 +177,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                             </div>
                         )}
                         {breadcrumb.items.length > 0 && (
-                            <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
+                            <div className="relative z-50 w-full bg-white px-4 hidden sm:block standard-max-w i">
                                 <Breadcrumb {...breadcrumb} />
                             </div>
                         )}
