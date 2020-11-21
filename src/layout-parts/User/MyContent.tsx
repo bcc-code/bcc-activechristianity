@@ -38,7 +38,7 @@ const UserHistory = () => {
                                         {topics.map(({ name, slug: to, id, image }) => {
                                             return (
                                                 <div className="flex flex-col items-center" key={shortid()} >
-                                                    <div className="h-24 min-h-24">
+                                                    <div style={{ width: "100px", height: "138px" }}>
                                                         <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} image={image} />
                                                     </div>
                                                     <SlateDarkUnfollowButton
@@ -50,17 +50,23 @@ const UserHistory = () => {
                                     </div>
                                     <XScrollCustomSize
                                         childeClassName=""
-                                        items={topics.map(({ name, slug: to, id }) => {
+                                        items={topics.map(({ name, slug, id, image }) => {
                                             return (
-                                                <div className="flex flex-col items-center">
-                                                    <div className="w-18" >
-                                                        <div className="h-24 min-h-24">
-                                                            <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} key={shortid()} />
-                                                        </div>
-                                                        <SlateDarkUnfollowButton
-                                                            id={id}
+                                                <div className="flex flex-col items-center" key={shortid()}>
+                                                    <div style={{ width: "100px", height: "138px" }}>
+                                                        <ImgBgTopicCard
+                                                            name={name}
+                                                            image={image}
+                                                            to={`${TS.slug_topic}/${slug}`}
+                                                            rounded="rounded-xxl"
+
                                                         />
+
                                                     </div>
+                                                    <SlateDarkUnfollowButton
+                                                        id={id}
+                                                    />
+
                                                 </div>
                                             )
                                         })}

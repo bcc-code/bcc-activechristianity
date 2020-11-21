@@ -30,7 +30,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
     } = props
     return (
         <div
-            className={`hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}>
+            className={`sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}>
             <PostItemMediaImg
                 className={`relative w-full sm:pl-0 flex justify-end overflow-hidden ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
                 track={media}

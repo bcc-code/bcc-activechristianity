@@ -208,7 +208,7 @@ export const SlateDarkUnfollowButton: React.FC<IToggleFollowProps> = ({ id, text
                 const config = toggleFollowStatusMap[followed]
 
                 return (
-                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-sm rounded-full font-semibold ${config.color}`}>
+                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-xs rounded-full font-semibold ${config.color}`}>
                         <span>{text ? text : config.text}</span>
                     </div>
 
