@@ -7,6 +7,7 @@ import TextSizeTitle, { ITextSizeWClamp } from '@/components/PostElements/TextSi
 import ac_strings from '@/strings/ac_strings.js'
 import Flickity from "react-flickity-component";
 import SquareImage from '@/components/Images/Image1to1Rounded'
+import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import shortid from 'shortid'
 interface IFetchPost {
@@ -40,9 +41,6 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, authors, formats, isPlayingAud
                                         const showPost = selectFromList[pickPost]
                                         return (
                                             <div className="w-full" key={shortid()}>
-
-
-
                                                 <div className="text-sm flex" >
                                                     <Link to={showPost.slug} className="h-20 w-20">
                                                         <SquareImage
@@ -65,6 +63,26 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, authors, formats, isPlayingAud
                                             </div>
                                         )
                                     })}
+                                    {topicPostItems?.map((t) => (
+                                        <div className="w-full ">
+                                            <Link to={t.slug} className="h-20 w-20">
+                                                {t.image && <SquareImage
+                                                    {...t.image}
+                                                />}
+                                            </Link>
+                                            <div className="p-2">
+                                                <h5 className="block uppercase font-roboto text-gray-500 text-xs tracking-wider pb-2">Related Topic</h5>
+                                                <div className="justify-between flex items-center">
+                                                    <Link to={t.slug} className="font-roboto text-lg">
+                                                        {t.name}
+                                                    </Link>
+                                                    <ToggleFollowOutlineBtn id={t.id} />
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    ))}
                                 </Flickity>
                             </div>
 
@@ -73,6 +91,7 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, authors, formats, isPlayingAud
                 />
 
             )}
+
         </div>
 
 
