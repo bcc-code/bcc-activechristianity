@@ -25,7 +25,7 @@ export const menusItems = {
     },
     "my_content": {
         name: ac_strings.my_content,
-        to: `${ac_strings.user}/${ac_strings.slug_user_content}`
+        to: `${ac_strings.slug_user}/${ac_strings.slug_user_content}`
     },
     "slug_user_history": {
         name: ac_strings.slug_user,
