@@ -2,6 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { useSelector, useDispatch } from 'react-redux'
+import StickyBox from "react-sticky-box";
 /* const AudioPlayer */
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
@@ -75,17 +76,20 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         credits
     } = post
 
-    const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
+
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
     const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
+    const [contentPosition, setContentPosition] = React.useState({ height: 0, top: 0 })
+    const contentEl = React.useRef<HTMLDivElement>(null);
+    const lastScroll = React.useRef(null);
 
     React.useEffect(() => {
+        lastScroll.current = Date.now() + 5000
+        const handleScroll = (e: any) => {
+            if (lastScroll.current < Date.now()) {
+                lastScroll.current = Date.now() + 5000
 
-        const handleScroll = () => {
-
-            if (lastScroll < Date.now()) {
-                setLastScroll(Date.now() + 5000)
                 const { id } = post
                 if (id) {
                     acApi
@@ -102,6 +106,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         window.addEventListener('scroll', debounceScroll);
         return () => window.removeEventListener('scroll', debounceScroll);
     }, [post.slug])
+
 
     React.useEffect(() => {
 
@@ -149,24 +154,25 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
-    console.log('rendering')
+
     return (
-        <article className="overflow-scroll w-full relative">
-            <ShareBookmarkTopShortCuts
+        <article className="overflow-scroll sm:overflow-visible w-full relative">
+
+            <ViewNext
                 isPlayingAudio={!!isCurrentMedia.audio}
-                id={id}
-                text={excerpt || title}
-                shareSlug={slug}
-                views={views}
-                likes={likes}
+                /* 
+                                text={excerpt || title}
+                                shareSlug={slug}
+                                views={views}
+                                likes={likes} */
+                position={{
+                    height: contentEl.current && contentEl.current.clientHeight,
+                    top: contentEl.current && contentEl.current.offsetTop
+                }}
+                postId={id}
+                topics={topics}
+                formats={format}
             />
-            {!isCurrentMedia.audio && (
-                <ViewNext
-                    postId={id}
-                    topics={topics}
-                    formats={format}
-                />
-            )}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
@@ -241,13 +247,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     )}
 
                     <div>
+                        <div ref={contentEl}>
+                            <Content
+                                content={content}
+                                glossary={glossary}
+                                slug={slug}
+                                title={title}
+                            />
+                        </div>
 
-                        <Content
-                            content={content}
-                            glossary={glossary}
-                            slug={slug}
-                            title={title}
-                        />
                         {credits && (
                             <Content
                                 content={credits}

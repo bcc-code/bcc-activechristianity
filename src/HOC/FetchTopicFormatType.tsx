@@ -2,7 +2,7 @@ import * as React from "react"
 import { ITopic, ITopicPostItems } from '@/types'
 import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
+import { fetchPostslistFromArchivePage, fetchPostsFromTopics } from '@/helpers/fetchLocalData'
 import TS from '@/strings'
 
 interface IFetchTopics {
@@ -10,7 +10,7 @@ interface IFetchTopics {
     layout: "row" | "list",
     render: (data: { topics: ITopic[] }) => JSX.Element
 }
-export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render, layout }) => {
+export const FetchTopicsB: React.FC<IFetchTopics> = ({ topics: topicSlugs, render, layout }) => {
     const [topics, setTopics] = React.useState<ITopic[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
@@ -63,11 +63,13 @@ export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render
 
 }
 
+export const FetchTopics = React.memo(FetchTopicsB)
 interface IFetchTopicsWithPosts {
     topics: ITopic[]
     layout: "row" | "list"
     render: (data: { topicPostItems: ITopicPostItems[] }) => JSX.Element
 }
+
 export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, render, layout }) => {
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])
     const [loading, setLoading] = React.useState(true)
@@ -76,38 +78,14 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
     React.useEffect(() => {
         setLoading(true)
 
-        Promise.all(topics
-            .map(t => {
-
-                return fetchPostslistFromArchivePage(t.slug)
-                    .then(posts => {
-
-                        if (posts) {
-
-                            return ({
-                                ...t,
-                                posts
-                            })
-                        }
-                    }).catch(error => {
-                        console.log(error)
-                        return null
-
-                    })
-            }))
-
+        fetchPostsFromTopics(topics)
             .then(res => {
-
-                const toAdd: ITopicPostItems[] = []
-
-                res.forEach(item => {
-                    if (item) {
-                        toAdd.push(item)
-                    }
-
-                })
-                setLoading(false)
-                setTopicPostItems(toAdd)
+                if (res) {
+                    setLoading(false)
+                    setTopicPostItems(res)
+                } else {
+                    throw Error('No posts found')
+                }
             })
             .catch(error => {
                 setLoading(false)
@@ -124,3 +102,4 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
     )
 
 }
+

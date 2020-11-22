@@ -28,7 +28,7 @@ interface IMobilePostMain extends IPostMain {
     height: number
 }
 
-interface IShareLikesViewsProps extends ILikesViewsProps {
+export interface IShareLikesViewsProps extends ILikesViewsProps {
     shareSlug: string
     text: string
 }
@@ -224,7 +224,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPla
     }
 
     return (
-        <div className={`flex flex-col fixed bottom-0 right-0 mx-3 py-2 ${isPlayingAudio ? 'mb-32 ' : 'mb-40 '}bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
+        <div className={`flex flex-col mx-3 py-2 absolute right-0 bottom-0 ${isPlayingAudio ? 'mb-40' : 'mb-24'} bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
             <button className="px-2 py-1" key={shortid()}>
                 <ToogleBookmark
                     id={id}
