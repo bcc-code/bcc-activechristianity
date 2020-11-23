@@ -73,7 +73,7 @@ module.exports = async function generateTypes(data) {
         const podcastCount = podcasts.noOfPosts
 
         if(playlistPage.title){
-            const playlistItem = {key:"playlist",name:playlistPage .title,to:playlistPage.slug,count:playlists.length}
+            const playlistItem = {key:"playlist",name:playlistPage.title,to:playlistPage.slug,count:playlists.length}
            
             typeFormatEach["playlist"]=playlistItem
                 
@@ -106,6 +106,10 @@ module.exports = async function generateTypes(data) {
         ...contextPosts
     }
 
+    if (typekey==="listen"){
+        context.playlist=playlistPage
+        context.podcast=podcastPage
+    }
     createPage({
         path: `${type.slug}`,
         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),

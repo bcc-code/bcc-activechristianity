@@ -44,7 +44,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     latestPosts,
     featured
 }) => {
-
+    console.log(topics)
     return (
         <div className="hidden sm:block">
             <LayoutH1Wide title={name} />
@@ -72,7 +72,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                                                 <PodcastTopImg
                                                     key={shortId()}
                                                     {...p}
-                                                    slug={`${ac_strings.slug_strings}/${p.slug}`}
+                                                    slug={`${playlist.to}/${p.slug}`}
                                                 />
                                             )
                                         })}
