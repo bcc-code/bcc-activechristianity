@@ -116,7 +116,7 @@ module.exports = function generatePages(actions, graphql) {
         }
         createPage({
           
-          path: `${page.slug}`,
+          path: `${ac_strings.slug_theme}/${page.slug}`,
           component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
           context,
         })

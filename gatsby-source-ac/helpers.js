@@ -14,11 +14,7 @@ const topicQuery = `
         srcset
         dataUri
     }
-    meta {
-        credits
-        no_dict
-        url
-    }
+
 `
 const postQuery = `
     id
@@ -67,13 +63,49 @@ const postQuery = `
     published 
     likes
     views
-    meta {
-        credits
-        no_dict
+
+`
+const postQueryBasic = `
+    id
+    title
+    slug
+    excerpt
+    image {
+        src
+        srcset
+        dataUri
+        colors
+
+    }
+    readtime
+    track {
         url
+        title
+        duration
+        post {
+            title
+            slug
+        }
+    }
+    authors {
+        name
+        slug
+        pivot {
+            as
+        }
+        id 
+    }
+    topics {
+        name
+        slug
+        id
+        group {
+            name
+            slug
+            id
+        }
     }
 `
-
 const postQueryNoPlaylist = `
     id
     title
@@ -117,6 +149,7 @@ const postQueryNoPlaylist = `
     published 
     likes
     views
+
 `
 module.exports.postQuery = postQuery
 module.exports.postQueryNoPlaylist=postQueryNoPlaylist

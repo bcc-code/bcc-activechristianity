@@ -52,21 +52,21 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
   exports.createPages = ({ page,actions, graphql }) => {
 
      const generators = [
-/*       generateAuthors(actions, graphql),  */
+      generateAuthors(actions, graphql), 
       generatePages(actions, graphql),
- /*      generateExplore(actions, graphql),
+      generateExplore(actions, graphql),
       generateHome(actions, graphql), 
       generatePosts(actions, graphql),
       generateTopics(actions, graphql), 
-      generateRedirect(actions, graphql) */
+      generateRedirect(actions, graphql)
     ]
 
-/*     if (process.env.LANG_CODE==="en"){
+    if (process.env.LANG_CODE==="en"){
       generators.push( generateGlossary(actions, graphql))
       generators.push(generatePlaylists(actions, graphql))
       generators.push(generateScriptures(actions, graphql))
       generators.push(generatePodcast(actions, graphql))
-    } */
+    } 
     return Promise.all(generators)
 
 
