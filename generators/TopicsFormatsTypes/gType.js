@@ -106,10 +106,6 @@ module.exports = async function generateTypes(data) {
         ...contextPosts
     }
 
-    if (typekey==="listen"){
-        context.playlist=playlistPage
-        context.podcast=podcastPage
-    }
     createPage({
         path: `${type.slug}`,
         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),
