@@ -1,13 +1,11 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { PlaylistBackground, PostLabel } from '@/components/PostElements'
-import SimplePlaylist from '@/components/Playlist/SimplePlaylist'
+import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
 import { getImage } from '@/helpers/imageHelpers'
 import { normalizeTracks } from "@/helpers"
-import { IRootState } from '@/state/types'
 import { IPlaylist, IMedia } from '@/types'
 import { PostH1 } from '@/components/Headers'
-
+import { OutlineButton } from '@/components/Button'
 import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 export const PostLayout: React.FC<IPlaylist> = (post) => {
@@ -19,18 +17,24 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
         tracks,
         excerpt,
     } = post
+    const trackPerPage = 5
+    const [pageNr, setPageNr] = React.useState(1)
+    const [items, setItems] = React.useState(normalizeTracks(tracks.slice(0, trackPerPage)))
 
-
-
+    const total = Math.ceil(tracks.length / trackPerPage)
     const imageUrl = getImage(title, '400x400', image)
-    const shareSlug = `${TS.slug_ac_media}/${slug}`
-
-    const allTracks: IMedia[] = normalizeTracks(tracks)
-
+    /* const allTracks: IMedia[] = normalizeTracks(tracks) */
+    const showMoreTracks = () => {
+        if (pageNr < total) {
+            const toAdd = normalizeTracks(tracks.slice(trackPerPage * pageNr, trackPerPage * (pageNr + 1)))
+            setItems([...items, ...toAdd])
+            setPageNr(pageNr + 1)
+        }
+    }
     return (
-        <div className="flex flex-col sm:flex-row py-8">
-            <div className=" w-full lg:w-4/12">
-                <div className="sm:px-4 relative pb-8 flex">
+        <div className="flex flex-col md:flex-row py-8">
+            <div className=" w-full md:w-4/12 hidden md:block">
+                <div className="sm:px-4 relative py-8 flex justify-center">
                     <div className="w-48">
                         <PlaylistBackground slug={slug} imageUrl={imageUrl} />
                     </div>
@@ -41,7 +45,12 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
                 <PostH1 title={title} />
                 <p className="text-d4slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
                 <div className="border-b w-1/6 my-8 border-d4gray"></div>
-                <SimplePlaylist tracks={allTracks} />
+                <ContentPlaylist slug={slug} tracks={items} />
+                {pageNr < total && (
+                    <div className="flex justify-center py-4">
+                        <OutlineButton name={'More from playlist'} onClick={showMoreTracks} />
+                    </div>
+                )}
             </div>
 
         </div>

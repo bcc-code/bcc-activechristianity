@@ -97,7 +97,7 @@ const plugins = [
       },
     },
   },
-/*   {
+  {
     resolve: "gatsby-source-ac",
     options: {
       // This type will contain remote schema Query type
@@ -111,7 +111,7 @@ const plugins = [
         "x-lang": process.env.LANG_CODE
       }
     },
-  }, */
+  },
   'gatsby-plugin-sass',
   {
     resolve: 'gatsby-plugin-root-import',

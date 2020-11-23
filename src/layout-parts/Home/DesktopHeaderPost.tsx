@@ -7,20 +7,28 @@ import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
-
+import { fetchOneLocalPostsFromSlug } from '@/helpers/fetchLocalData'
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
 
-
-
+    const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
+    React.useEffect(() => {
+        fetchOneLocalPostsFromSlug(slug).then(res => {
+            if (res && res.media && res.media.video) {
+                setVideoUrl(res.media.video.src)
+            }
+        })
+    }, [slug])
+    console.log(videoUrl)
     return (
-        <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16">
-            <Link to={`/${slug}`} className="col-start-1 col-end-6 relative">
+        <div className="w-full z-10 grid grid-cols-1 md:grid-cols-8 md:gap-6 lg:gap-12 relative sm:pt-16">
+            <Link to={`/${slug}`} className="md:col-start-1 md:col-end-6 relative pb-6">
 
 
-                {media && media.video && media.video.src ? (
+                {videoUrl !== null ? (
+
                     <VideoHeader
-                        src={media.video.src}
+                        src={videoUrl}
                         className={`rounded-xxl sm:rounded-xl overflow-hidden`}
                     />
 
@@ -36,7 +44,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                 }
 
             </Link>
-            <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
+            <div className="md:col-start-6 md:col-end-9 md:ml-5 flex flex-col justify-center pt-0">
                 <div className="flex flex-col justify-center pt-0">
                     <Link
                         to={`/${slug}`}

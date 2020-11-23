@@ -86,21 +86,17 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     React.useEffect(() => {
         lastScroll.current = Date.now() + 5000
+        if (id) {
+            acApi
+                .visitsPost(id)
+                .catch((err: any) => {
+                    console.log(err)
+                })
+        }
         const handleScroll = (e: any) => {
             if (lastScroll.current < Date.now()) {
                 lastScroll.current = Date.now() + 5000
-
-                const { id } = post
-                if (id) {
-                    acApi
-                        .readingPost(id)
-                        .catch((err: any) => {
-                            console.log(err)
-                        })
-                }
             }
-
-
         }
         const debounceScroll = debounce(handleScroll, 1000)
         window.addEventListener('scroll', debounceScroll);
@@ -159,6 +155,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
             <ViewNext
                 isPlayingAudio={!!isCurrentMedia.audio}
+                slug={slug}
                 /* 
                                 text={excerpt || title}
                                 shareSlug={slug}

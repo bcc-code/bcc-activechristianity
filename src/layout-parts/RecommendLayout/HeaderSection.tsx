@@ -6,7 +6,7 @@ import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import VideoHeader from '@/components/Images/Video16to9'
 import VideoLefttImg from '@/components/PostItemCards/VideoLefttImg'
 import PostBase from '@/components/PostElements/Base'
-
+import { fetchOneLocalPostsFromSlug } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.js'
 
 interface ISectionHeader {
@@ -17,6 +17,14 @@ interface ISectionHeader {
 }
 const SectionHeader: React.FC<ISectionHeader> = ({ headerPost, listPosts, listTitle, video }) => {
     const { image, media } = headerPost
+    const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
+    React.useEffect(() => {
+        fetchOneLocalPostsFromSlug(headerPost.slug).then(res => {
+            if (res && res.media && res.media.video) {
+                setVideoUrl(res.media.video.src)
+            }
+        })
+    }, [headerPost.slug])
     return (
 
         <div className="relative hidden sm:flex mb-8">
@@ -25,9 +33,9 @@ const SectionHeader: React.FC<ISectionHeader> = ({ headerPost, listPosts, listTi
                     to={`${headerPost.slug}`}
                     className="relative z-30 flex flex-col justify-between text-sm"
                 >
-                    {media && media.video && media.video.src ? (
+                    {videoUrl ? (
                         <VideoHeader
-                            src={media.video.src}
+                            src={videoUrl}
                             className={`rounded-xxl sm:rounded-xl overflow-hidden`}
                         />
 
