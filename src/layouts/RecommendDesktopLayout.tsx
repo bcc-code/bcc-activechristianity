@@ -55,7 +55,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             <div className="standard-max-w-px">
                 {featured[0] ? <HeaderSection headerPost={featured[0]} listPosts={popularPosts.slice(0, 5)} /> : <div></div>}
             </div>
-            <LatestDesktopRow posts={topics.length > 1 ? latestPosts.slice(0, 4) : latestPosts} latestSlug={latestSlug} />
+            <LatestDesktopRow posts={latestPosts.slice(0, 4)} latestSlug={latestSlug} />
 
             <LazyLoad >
                 <FetchTopicPostItems

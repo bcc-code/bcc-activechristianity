@@ -14,6 +14,11 @@ const topicQuery = `
         srcset
         dataUri
     }
+    meta {
+        credits
+        no_dict
+        url
+    }
 `
 const postQuery = `
     id
@@ -62,6 +67,11 @@ const postQuery = `
     published 
     likes
     views
+    meta {
+        credits
+        no_dict
+        url
+    }
 `
 
 const postQueryNoPlaylist = `

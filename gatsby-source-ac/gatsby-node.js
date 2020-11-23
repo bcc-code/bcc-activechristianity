@@ -34,11 +34,7 @@ const getPostsQuery = (pageNr,noPlaylists)=>`
                     title
                     desc
                 }
-                meta {
-                    credits
-                    no_dict
-                    url
-                }
+
             }
         }
     }

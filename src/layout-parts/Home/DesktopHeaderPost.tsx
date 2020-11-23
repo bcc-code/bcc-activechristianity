@@ -6,15 +6,7 @@ import { IPostItem } from '@/types'
 import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
-
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
-const rbgToString = (colors: number[], alpha?: number) => {
-    if (alpha) {
-        return "rgba(" + colors.join(", ") + ", " + alpha + ")";
-    } else {
-        return "rgb(" + colors.join(", ") + ")";
-    }
-}
 
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
@@ -55,7 +47,6 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                         )}
                         <TextSizeWClamp
                             rawText={title}
-                            bold="font-semibold"
                             fontKey="header-post"
                             clamp={3}
                             className="sm:py-3 py-1"
