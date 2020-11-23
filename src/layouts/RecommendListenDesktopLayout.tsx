@@ -72,7 +72,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                                                 <PodcastTopImg
                                                     key={shortId()}
                                                     {...p}
-                                                    slug={`${ac_strings.slug_strings}/${p.slug}`}
+                                                    slug={`${ac_strings.slug_playlist}/${p.slug}`}
                                                 />
                                             )
                                         })}

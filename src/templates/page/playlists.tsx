@@ -33,7 +33,7 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path,
                         <PodcastTopImg
                             key={shortId()}
                             {...p}
-                            slug={`${ac_strings.slug_strings}/${p.slug}`}
+                            slug={`${ac_strings.slug_playlist}/${p.slug}`}
                         />
                     )
                 })}
