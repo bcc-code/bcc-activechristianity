@@ -203,7 +203,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
             </div>
             <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50 flex justify-center" >
-                <div className="max-w-tablet relative">
+                <div className="max-w-full sm:max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
