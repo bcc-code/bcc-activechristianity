@@ -79,7 +79,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
 
     React.useEffect(() => {
-
+        if (id) {
+            acApi
+                .visitsPost(id)
+                .catch((err: any) => {
+                    console.log(err)
+                })
+        }
         const handleScroll = () => {
 
             if (lastScroll < Date.now()) {
