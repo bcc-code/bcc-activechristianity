@@ -14,8 +14,14 @@ export const asImageWDataUri = (uri: string) => ({
     "srcset": uri
 })
 
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+
 const getRandomImage = () => {
-    return asImageWDataUri(getRandomArray([RandomImage1, RandomImage2, RandomImage3, RandomImage4], 1)[0])
+    const randomNr = getRandomInt(4)
+    return asImageWDataUri([RandomImage1, RandomImage3, RandomImage2, RandomImage4][randomNr])
 }
 export interface IBgImgTopicCard {
     name: string | JSX.Element

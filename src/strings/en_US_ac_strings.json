@@ -135,6 +135,7 @@
     "message_to_existing_user_first_time_cta":"Reset password",
     "message_after_reset_password":"We sent you an email. Check your inbox and click the link to reset your password",
     "message_to_existing_user_after_reset_password_content":"Before you continue, we ask that you take some time to review our Terms of Use and Privacy Policy",
-    "terms_of_use":"Terms of use"
+    "terms_of_use":"Terms of use",
+    "about_us":"About Us"
 
 }

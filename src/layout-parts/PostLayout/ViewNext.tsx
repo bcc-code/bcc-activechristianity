@@ -22,6 +22,7 @@ interface IFetchPost {
     authors?: IAuthor[],
     formats?: ITopicNavItem[]
     postId: string
+<<<<<<< HEAD
     show?: boolean
     position: {
         height: number | null
@@ -123,6 +124,11 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
         height: position.height - 100,
         ...lgStyle
     }
+=======
+}
+
+const ReadNext: React.FC<IFetchPost> = ({ topics, authors, formats, postId }) => {
+>>>>>>> dev/changedPages
     return (
 
         <div className={`fixed xl:relative transition-all duration-1000 flex flex-col bg-d4slate-lighter veiw-next-wrapper ${showViewMore ? 'veiw-next-show' : 'veiw-next-hidden'}`}>

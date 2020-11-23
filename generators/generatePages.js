@@ -12,32 +12,22 @@ const query = `{
       slug
       label
       flexibleContent
+      parent {
+        id
+        title
+        slug
+      }
     }
 
-    about:page(id:${process.env.ABOUT_PAGE_ID}){
-      title
-      slug
-    }
   }
 }`
 
-const pagesContext = {
-
-  "podcast":{
-    context: {
-      id:process.env.PODCAST_FILTER_ID
-    }
-  }
-}
 
 /* BUILDER */
 
 module.exports = function generatePages(actions, graphql) {
   const { createPage } = actions
-  const themePages=[]
 
-  const podcastHosts=[]
-  const aboutUsChildren=[]
   return graphql(query).then(result=>{
     console.log("Generating pages")
     if (result.errors){
@@ -45,71 +35,120 @@ module.exports = function generatePages(actions, graphql) {
       return Promise.reject(result.errors)
     } else {
       const pageInfo = result.data.ac.allPages
-      const podcast = {
-        title:ac_strings.podcast,
-        slug:ac_strings.slug_podcast
-      }
-      const aboutMain = result.data.ac.about
 
+      const aboutMain = {
+        page:ac_strings.about_us,
+        slug:ac_strings.slug_about
+      }
+
+      const parentIds = {
+        about:{
+          "id": "13",
+          templateName:'about-us',
+          children:[]
+        },
+        themes:{
+          "id": "75",
+          templateName:'theme-page',
+          children:[]
+        },
+        pages:{
+          "id": "76",
+          templateName:`page`,
+          children:[]
+        }
+      }
       const buildPages = [
         {
-          slug:ac_strings.glossaries,
+          title:ac_strings.glossary,
+          slug:ac_strings.slug_glossary,
           templateName:"glossaries"
         },
         {
-          slug:ac_strings.playlist,
+          title:ac_strings.playlist,
+          slug:ac_strings.slug_playlist,
           templateName:"playlists"
         },
         {
-          slug:ac_strings.contact,
+          title:ac_strings.contact,
+          slug:ac_strings.slug_contact,
           templateName:"contact"
         }
       ]
 
-      _.each(pageInfo,(page)=>{
-        if (page && page.label.indexOf("about-us-") >-1){
-          aboutUsChildren.push(page)
-        } else if (page && page.label.indexOf("build-") >-1){
-          let templateName
-          if (page.label.indexOf("build-page") >-1){
-            templateName="page"
-           } else {
-            templateName=page.label.replace("build-","")
-           }          
+      _.each(buildPages,page=>{
+        console.log(page)
+        createPage({
+          path: `${page.slug}`,
+          component: path.resolve(`./src/templates/page/${page.templateName}.tsx`),
+          context:{
+            title:page.title,
+            slug:page.slug
+          },
+        })
+      })
 
-          let context = {
-            ...page,
-              breadcrumb:[
-                {
-                  name:page.title,
-                  to:page.slug
-                }
-              ]
+      _.each(pageInfo,(page)=>{
+        
+          if(page.parent){
+            if (`${page.parent.id}`==`${parentIds.about.id}`){
+              parentIds.about.children.push(page)
+            } else if (`${page.parent.id}`==`${parentIds.themes.id}`){
+              parentIds.themes.children.push(page)
+            } else if (`${page.parent.id}`==`${parentIds.pages.id}`){
+              parentIds.pages.children.push(page)
+            } 
           }
-          if (pagesContext[page.label]){
-            const pageContext = pagesContext[page.label]
-            if (pageContext.context){
-              context = {...context,...pageContext.context}
-            }
-            
-          }
-          console.log(page.slug)
-          createPage({
-            path: `${page.slug}`,
-            component: path.resolve(`./src/templates/page/${templateName}.tsx`),
-            context,
-          })
-        } 
+      })
+
+     
+      // themes pages
+      _.each(parentIds.themes.children,page=>{
+        console.log(page)
+        let context = {
+          ...page,
+            breadcrumb:[
+              {
+                name:page.title,
+                to:page.slug
+              }
+            ]
+        }
+        createPage({
+          
+          path: `${ac_strings.slug_theme}/${page.slug}`,
+          component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
+          context,
+        })
+      })
+ // pages
+      _.each(parentIds.pages.children,page=>{
+        console.log(page)
+        let context = {
+          ...page,
+            breadcrumb:[
+              {
+                name:page.title,
+                to:page.slug
+              }
+            ]
+        }
+        createPage({
+          path: `${page.slug}`,
+          component: path.resolve(`./src/templates/page/${parentIds.pages.templateName}.tsx`),
+          context,
+        })
       })
 
       // about us
+      console.log('building about')
+      console.log(aboutMain)
       createPage({
         path: `${aboutMain.slug}`,
         component: path.resolve(`src/templates/page/about-us.tsx`),
         context:{
           title:aboutMain.title,
-          id:aboutMain.id,
-          childPages:aboutUsChildren,
+          childPages:parentIds.about.children,
           breadcrumb:[]
         },
       })
