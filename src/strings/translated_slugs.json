@@ -1,5 +1,5 @@
 {
-  "om-oss": [
+  "about-us": [
     {
       "lang": "en",
       "url": "about-us"
@@ -61,7 +61,7 @@
       "url": "om-os"
     }
   ],
-  "bidragsyter": [
+  "contributor": [
     {
       "lang": "en",
       "url": "contributor"
@@ -185,7 +185,7 @@
       "url": "banner"
     }
   ],
-  "media/e-bok": [
+  "media/e-book": [
     {
       "lang": "en",
       "url": "media/e-book"
@@ -247,7 +247,7 @@
       "url": "media/e-bog"
     }
   ],
-  "kjernen": [
+  "essential": [
     {
       "lang": "en",
       "url": "essential"
@@ -309,7 +309,7 @@
       "url": "kernelærdomme"
     }
   ],
-  "kampanje": [
+  "campaign": [
     {
       "lang": "en",
       "url": "campaign"
@@ -371,7 +371,7 @@
       "url": "Kampagne"
     }
   ],
-  "media/kategori": [
+  "media/category": [
     {
       "lang": "en",
       "url": "media/category"
@@ -495,7 +495,7 @@
       "url": "media"
     }
   ],
-  "vedlegg": [
+  "attachment\n": [
     {
       "lang": "en",
       "url": "attachment\n"
@@ -557,7 +557,7 @@
       "url": "Vedhæftning"
     }
   ],
-  "forfatter": [
+  "author": [
     {
       "lang": "en",
       "url": "author"
@@ -619,7 +619,7 @@
       "url": "bidragsyder"
     }
   ],
-  "blogg": [
+  "blog": [
     {
       "lang": "en",
       "url": "blog"
@@ -681,7 +681,7 @@
       "url": "blog"
     }
   ],
-  "kategori": [
+  "category": [
     {
       "lang": "en",
       "url": "category"
@@ -743,7 +743,7 @@
       "url": "kategori"
     }
   ],
-  "kontakt": [
+  "contact": [
     {
       "lang": "en",
       "url": "contact"
@@ -805,7 +805,7 @@
       "url": "kontakt-os"
     }
   ],
-  "ordliste": [
+  "glossary": [
     {
       "lang": "en",
       "url": "glossary"
@@ -929,7 +929,7 @@
       "url": "tag"
     }
   ],
-  "søk": [
+  "search": [
     {
       "lang": "en",
       "url": "search"
@@ -991,7 +991,7 @@
       "url": "søg"
     }
   ],
-  "tema": [
+  "topic": [
     {
       "lang": "en",
       "url": "topic"

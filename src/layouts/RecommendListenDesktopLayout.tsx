@@ -3,19 +3,18 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
-const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import PostRow from '@/layout-parts/List/PostRow4Col'
 import TopImgPost from '@/components/PostItemCards/TopImg'
+import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 
 import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
-import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
-import { ISubtopicLinks, IPlaylist, INavItem, IPostItem } from "@/types"
-import { playlistToPost, getRandomArray } from '@/helpers'
+import { ISubtopicLinks, INavItem, IPostItem } from "@/types"
+import { getRandomArray } from '@/helpers'
 import shortId from 'shortid'
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -64,20 +63,22 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                             layout="row"
                             render={({ playlists }) => {
                                 return (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 grid-h pb-16">
 
-                                        {getRandomArray(playlists, 4).map((p, i) => {
-                                            const post = playlistToPost(p)
+                                        {getRandomArray(playlists, 5).map((p, i) => {
+
                                             return (
-                                                <div className={`div${i + 1}`} key={shortId()}>
-                                                    < FeaturedCard {...post} type="playlist" />
-                                                </div>
+
+                                                <PodcastTopImg
+                                                    key={shortId()}
+                                                    {...p}
+                                                    slug={`${ac_strings.slug_strings}/${p.slug}`}
+                                                />
                                             )
                                         })}
                                     </div>
                                 )
                             }}
-
                         />
 
                     </div>

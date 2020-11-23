@@ -16,7 +16,7 @@ import { LayoutH1Wide, PageSectionHeader } from '@/components/Headers'
 
 import { UnderlineLinkViewAll } from '@/components/Button'
 
-import { INavItem, ISubtopicLinks, IRecommendationPage } from '@/types'
+import { IPostItem, ISubtopicLinks, IRecommendationPage } from '@/types'
 import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
@@ -39,8 +39,12 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const latestSlug = `${path}/1`
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const featuredMixed = getRandomFeatured({ latest, popular, featured })
+    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+    React.useEffect(() => {
 
+        const mixed = getRandomFeatured({ latest, popular, featured })
+        setMixedFeaturedPosts(mixed)
+    }, [])
     return (
         <div>
             <MetaTag
@@ -59,7 +63,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 </div>
                 <div className="w-full pb-4 pt-8">
                     <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                    <FeaturedBanner featured={featuredMixed} />
+                    <FeaturedBanner featured={mixedFeaturedPosts} />
                 </div>
                 <div className="bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} className="pb-4" />
@@ -99,7 +103,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 latestSlug={latestSlug}
                 popularPosts={popular}
                 latestPosts={latest}
-                featured={featuredMixed}
+                featured={mixedFeaturedPosts}
                 topics={formats.map(f => ({ ...f, to: `${TS.slug_topic}/${f.to}` }))}
                 name={title}
             />

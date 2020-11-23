@@ -62,6 +62,11 @@ const postQuery = `
     published 
     likes
     views
+    meta {
+        credits
+        no_dict
+        url
+    }
 `
 
 const postQueryNoPlaylist = `
@@ -107,6 +112,11 @@ const postQueryNoPlaylist = `
     published 
     likes
     views
+    meta {
+        credits
+        no_dict
+        url
+    }
 `
 module.exports.postQuery = postQuery
 module.exports.postQueryNoPlaylist=postQueryNoPlaylist

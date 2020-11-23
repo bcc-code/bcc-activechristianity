@@ -11,8 +11,9 @@ import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.js'
 import TS from '@/strings'
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
 import { getRandomArray } from "@/helpers"
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
+import TopImgPost from '@/components/PostItemCards/TopImg'
 import acApi from '@/util/api'
 import shortid from 'shortid'
 interface IPostMain {
