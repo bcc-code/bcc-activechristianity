@@ -92,6 +92,7 @@
     "slug_user_change_password":"endre-passord",
     "slug_user_delete_profile":"slett-profil",
     "slug_topic": "tema",
+    "slug_glossary": "ordliste",
     "my_content":"Mitt innhold",
     "history":"Historikk",
     "bookmarked":"Merket",
@@ -134,7 +135,7 @@
     "no_followed_topics":"Det ser ikke ut til at du følger noen temaer. Kanskje er du interessert i",
     "following_topics":"Følger",
     "save_video":"lagrede videoer",
-    "no_bookmark":"Ingen merket innlegg funnet"
-
+    "no_bookmark":"Ingen merket innlegg funnet",
+    "about_us":"Om Oss"
 
 }
