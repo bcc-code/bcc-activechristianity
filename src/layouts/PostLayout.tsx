@@ -19,7 +19,8 @@ import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 import {
     AuthorBookmarkShareSection,
     RecommendedPostsSection,
-    Translations
+    Translations,
+    ShareBookmarkTopShortCuts
 } from '@/layout-parts/PostLayout/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
@@ -144,23 +145,26 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative">
-
-            <ViewNext
+            <ShareBookmarkTopShortCuts
+                id={id}
+                text={excerpt || title}
+                shareSlug={slug}
+                views={views}
+                likes={likes}
+                isPlayingAudio={!!isCurrentMedia.audio}
+            />
+            {/*             <ViewNext
                 isPlayingAudio={!!isCurrentMedia.audio}
                 slug={slug}
-                /* 
-                                text={excerpt || title}
-                                shareSlug={slug}
-                                views={views}
-                                likes={likes} */
-                position={{
-                    height: contentEl.current && contentEl.current.clientHeight,
+
+                position = {{
+                height: contentEl.current && contentEl.current.clientHeight,
                     top: contentEl.current && contentEl.current.offsetTop
                 }}
                 postId={id}
                 topics={topics}
                 formats={format}
-            />
+            /> */}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (

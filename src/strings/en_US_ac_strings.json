@@ -1,5 +1,4 @@
-{
-    "latest": "Latest",
+{ "latest": "Latest",
     "popular": "Popular",
     "preview": "preview",
     "exploreType": "Explore by type",
@@ -37,7 +36,6 @@
     "learnMoreAC": "Learn more about ActiveChristianity",
     "exclusiveContent": "Exclusive content",
     "subscribe": "Subscribe",
-    
     "allSigninOptions": "All Sign In Options",
     "allSignupOptions": "All Sign Up Options",
     "or": "Or",
@@ -148,7 +146,7 @@
     "consent_privacy_policy": "Privacy Policy",
     "consent_general_accept": "I Accept",
     "consent_read_policy": "Read policy",
-  "consent_cookie_policy": "Cookie Policy",
+    "consent_cookie_policy": "Cookie Policy",
     "please_login": "Please login",
     "passwords_mismatch": "Passwords do not match\n",
     "email": "Email",
@@ -184,5 +182,4 @@
     "please_login_download": " Please $$login$$ or $$register$$ to download e-books.",
     "download": "Download",
     "send": "Send"
-
 }
