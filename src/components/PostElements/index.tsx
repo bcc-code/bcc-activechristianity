@@ -5,7 +5,6 @@ import { IPostAuthors, IMedia, IImage } from '@/types'
 import Icon from '@/components/Icons/Icon'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import FetchAndSetCurrentMedia from '@/HOC/SetAndUpdatePlayingMedia'
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'
@@ -13,7 +12,7 @@ import { PlaylistPlayButton } from '@/components/PostElements/PlayButton'
 export const ReadMore: React.FC<{ slug: string, id: string }> = ({ slug, id }) => {
     return (
         <div className="flex justify-between">
-            <Link className="block text-indigo-500 text-sm" to={slug}>{TS.read_more}</Link>
+            <Link className="block text-indigo-500 text-sm" to={slug}>{ac_strings.read_more}</Link>
             <Bookmark id={id} color="slate-light" size="5" />
         </div>
     )
@@ -30,7 +29,7 @@ export const PostLabel: React.FC<{ text: string | JSX.Element }> = ({ text }) =>
 )
 
 export const AuthorLink: React.FC<{ authorGroups?: IPostAuthors[] }> = ({ authorGroups }) => {
-    return <span>{authorGroups && authorGroups[0] ? authorGroups[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={`${TS.slug_ac_author}/${item.to}`}>{item.name}</Link>) : ''}</span>
+    return <span>{authorGroups && authorGroups[0] ? authorGroups[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={`${ac_strings.slug_ac_author}/${item.to}`}>{item.name}</Link>) : ''}</span>
 }
 export const ReadingTimingAuthor: React.FC<IProps> = ({ duration, authors, className }) => {
 

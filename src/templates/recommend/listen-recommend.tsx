@@ -22,9 +22,14 @@ import ac_strings from '@/strings/ac_strings.js'
 const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
+
+    console.log(pageContext)
     const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
 
     const allCategories: INavItem[] = [...items]
+
+
+
     if (playlist && playlist.to) {
         allCategories.push(playlist)
     }
@@ -38,28 +43,31 @@ const Listen: React.FC<IProps> = (props) => {
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
     const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+
+    console.log(allCategories)
     React.useEffect(() => {
 
         const mixed = getRandomFeatured({ latest, popular, featured })
         setMixedFeaturedPosts(mixed)
     }, [])
-
     return (
         <div >
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
-                {ac_strings.slug_podcast && <div className="py-6">
-                    <div className="w-full flex justify-between items-center pb-4 pr-4">
-                        <PageSectionHeader title={podcastProperties.title} />
-                        <UnderlineLinkViewAll to={`${podcast.to}`} />
-                    </div>
-                    <FetchLatestPodcast
-                        layout="row"
-                        render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
+                {ac_strings.slug_podcast && (
+                    <div className="py-6">
+                        <div className="w-full flex justify-between items-center pb-4 pr-4">
+                            <PageSectionHeader title={podcastProperties.title} />
+                            <UnderlineLinkViewAll to={`${podcast.to}`} />
+                        </div>
+                        <FetchLatestPodcast
+                            layout="row"
+                            render={({ podcastEps }) => <HSCardList posts={podcastEps} />}
 
-                    />
-                </div>}
+                        />
+                    </div>
+                )}
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
                     <div className="w-full py-6 sm:hidden">

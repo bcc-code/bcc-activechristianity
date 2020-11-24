@@ -9,7 +9,7 @@ import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
 //types
 import { INavItem, IGlossary } from "@/types"
 
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings'
 
 function compare(a: INavItem, b: INavItem) {
 
@@ -47,7 +47,7 @@ const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { bre
             title={title}
         >
             <MetaTag
-                title={TS.glossary}
+                title={ac_strings.glossary}
                 translatedUrls={[]}
                 type="page"
                 breadcrumb={breadcrumb}

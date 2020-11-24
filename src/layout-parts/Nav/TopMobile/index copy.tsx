@@ -2,13 +2,12 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
-import TS from '@/strings'
+
+import ac_strings from '@/strings/ac_strings'
 import LogoSmall from '@/images/AC_Logo.png'
 import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
-import ReactPlaceholder from 'react-placeholder'
 
-import ac_strings from '@/strings/ac_strings.js'
 import { IDrawerNav } from '@/layouts/App'
 import { INavItem, IBreadcrumb } from '@/types'
 import './topmobile.css'
@@ -169,7 +168,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                             }
                         </div>
                         <Link className='pr-4' to="/">
-                            <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />
+                            <img className='w-6 h-auto' src={LogoSmall} alt={ac_strings.site_title} />
                         </Link>
                         <div className="flex items-center">
                             {explorePage && (
@@ -188,13 +187,13 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                     <div className="cube-front flex justify-center items-center py-2 w-full">
                         <Link className='flex items-center' to="/">
                             <div className='pr-4'>
-                                <img className='w-6 h-auto' src={LogoSmall} alt={TS.site_title} />
+                                <img className='w-6 h-auto' src={LogoSmall} alt={ac_strings.site_title} />
                             </div>
                             <div >
                                 <img
                                     style={{ maxWidth: '150px' }}
                                     src={languageLogoSrc}
-                                    alt={TS.site_title}
+                                    alt={ac_strings.site_title}
                                 />
                             </div>
 

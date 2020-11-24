@@ -3,7 +3,7 @@ const path = require('path')
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
 const {getSubTopicPosts,createSubTopicPages, groupAll,formatScope} = require('./hjelper')
-const TS = require('../../src/strings')
+const ac_strings = require('../../src/strings/ac_strings')
 module.exports = async function generateTopic(data) {
     const {actions, graphql,contextPosts,subTopics,node:topic,breadcrumb}=data
     const { createPage } = actions
@@ -47,7 +47,7 @@ module.exports = async function generateTopic(data) {
       }
     }
     // create recommend
-    const pagePath = `${TS.slug_topic}/${topic.slug}`
+    const pagePath = `${ac_strings.slug_topic}/${topic.slug}`
     console.log(topic.slug)
     createPage({
         path:pagePath,

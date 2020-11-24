@@ -14,7 +14,6 @@ const topicQuery = `
         srcset
         dataUri
     }
-
 `
 const postQuery = `
     id
@@ -149,7 +148,6 @@ const postQueryNoPlaylist = `
     published 
     likes
     views
-
 `
 module.exports.postQuery = postQuery
 module.exports.postQueryNoPlaylist=postQueryNoPlaylist

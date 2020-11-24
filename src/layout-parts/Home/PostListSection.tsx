@@ -5,7 +5,7 @@ import { ITopicPostItems } from '@/types'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import ac_strings from '@/strings/ac_strings.js'
-import TS from '@/strings'
+
 const PostListSection: React.FC<ITopicPostItems> = ({ posts, ...topic }) => (
     <div className="md:h-full md:flex md:flex-col">
         {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
@@ -14,7 +14,7 @@ const PostListSection: React.FC<ITopicPostItems> = ({ posts, ...topic }) => (
 
         </div> */}
         <div className="w-full flex justify-between items-center text-sm mb-6">
-            <Link to={`${TS.slug_topic}/${topic.slug}`}>
+            <Link to={`${ac_strings.slug_topic}/${topic.slug}`}>
                 <PageSectionHeaderUpperCaseGray title={ac_strings.popularTopic} />
                 <h4 className="font-roboto text-base">{topic.name}</h4>
             </Link>

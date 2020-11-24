@@ -1,6 +1,5 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
 import he from 'he'
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
@@ -81,10 +80,10 @@ export const normalizeAvailableLanguages = (langs: ITranslations[], showAllLangu
 
 const authorMap: { [key: string]: string } = {
     "wr": ac_strings.author,
-    "vo": TS.vocals,
-    "ly": TS.lyrics,
-    "sp": TS.speaker,
-    "co": TS.with,
+    "vo": ac_strings.vocals,
+    "ly": ac_strings.lyrics,
+    "sp": ac_strings.speaker,
+    "co": ac_strings.with,
     "ho": ac_strings.hosts
 
 }
@@ -92,7 +91,7 @@ export const normalizeAuthors = (authors: IAuthorRes[]) => {
     const sortedAuthors: { [key: string]: IAuthor[] } = {}
     authors.forEach((a) => {
 
-        const key = a.pivot && typeof a.pivot.as === "string" ? authorMap[a.pivot.as] ? authorMap[a.pivot.as] : TS.by : TS.by
+        const key = a.pivot && typeof a.pivot.as === "string" ? authorMap[a.pivot.as] ? authorMap[a.pivot.as] : ac_strings.by : ac_strings.by
         const toAdd = { name: a.name, to: a.slug, as: key }
 
         if (sortedAuthors[key]) {
@@ -168,7 +167,7 @@ export const transformTopicsRes = (topics: ITopicRes[]) => {
         } else if (t.group && t.group.name === 'Format') {
             format.push(toAdd)
         } else {
-            toAdd.to = `${TS.slug_topic}/${t.slug}`
+            toAdd.to = `${ac_strings.slug_topic}/${t.slug}`
             filteredTopics.push(toAdd)
         }
     })
@@ -183,7 +182,7 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
         }
     } = {}
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${TS.slug_topic}/${t.slug}` }
+        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
         if (t.group) {
             if (t.group.name !== 'Type' && t.group.name !== 'Format') {
             }

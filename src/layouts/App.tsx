@@ -21,8 +21,8 @@ import { setIsModalOpen, openSignInModal } from '@/state/action'
 import Cookies from 'js-cookie'
 
 // string
-import TS from '@/strings';
 import ac_strings from '@/strings/ac_strings.js'
+
 import acApi from '@/util/api'
 // type 
 import { IRootState } from '@/state/types'
@@ -196,7 +196,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             {!isLandingPage && <BottomMobile key={shortid()} {...NavProps} menu={mobileMenu} />}
             <CookieConsent
                 location="bottom"
-                buttonText={TS.consent_general_accept}
+                buttonText={ac_strings.consent_general_accept}
                 cookieName="myAwesomeCookieName2"
                 style={{ background: "#2B373B" }}
                 buttonStyle={{
@@ -208,10 +208,10 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 }}
                 expires={150}
             >
-                {TS.consent_general_main}
+                {ac_strings.consent_general_main}
                 {" "}
                 <Link style={{ fontSize: "11px" }} to={ac_strings.slug_cookie_policy}>
-                    {TS.consent_general_link}
+                    {ac_strings.consent_general_link}
                 </Link>
             </CookieConsent>
         </div>
@@ -221,21 +221,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
 export default React.memo(App)
 
-interface IAppQueryProps {
-    ac: {
-        menus: {
-            id: string
-            slug: string
-            menuItems: INavItem[]
-        }[]
-
-        allPages: {
-            title: string
-            slug: string
-            label: string
-        }[]
-    }
-}
 const query = graphql`
     query LayoutQuery {
         ac {

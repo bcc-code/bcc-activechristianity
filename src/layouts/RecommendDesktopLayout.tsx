@@ -3,23 +3,18 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
-const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
-import PostRow from '@/layout-parts/List/PostRow4Col'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
-import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import { UnderlineTitleLink, LayoutH1 } from '@/components/Headers'
+import { LayoutH1 } from '@/components/Headers'
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
-import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
-import { ISubtopicLinks, IPlaylist, INavItem, IPostItem } from "@/types"
-import { playlistToPost, getRandomArray } from '@/helpers'
-import shortId from 'shortid'
+
+import { ISubtopicLinks, INavItem, IPostItem } from "@/types"
+
 import ac_strings from '@/strings/ac_strings.js'
-import TS from '@/strings'
+
 import '@/styles/react-tabs.css'
-import TopImgPost from '@/components/PostItemCards/TopImg'
 
 interface IRecommandLayout {
     topicId?: string

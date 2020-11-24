@@ -3,15 +3,20 @@ import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/F
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import Content from '@/components/Content'
 import RightImgPostItem from '@/components/PostItemCards/RightImg'
-import { computeStyles } from '@popperjs/core'
+import PostRow2Col from '@/layout-parts/List/PostRow2Col'
+import PostRow3Col from '@/layout-parts/List/PostRow3Col'
+import PostRow4Col from '@/layout-parts/List/PostRow4Col'
+import DesktopHeaderPost from '@/layout-parts/Home/DesktopHeaderPost'
+
 import Video16to9 from '@/components/Images/Video16to9'
-const CustomizedPage: React.FC<{ items: IPageCompTypes[] }> = ({ items }) => {
+const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: string }> = ({ items, slug, title }) => {
 
     const comps: React.ReactNode[] = []
     items.map(c => {
+        console.log(c.type)
         if (c.type === "text") {
 
-            comps.push(<Content content={c.data.content} />)
+            comps.push(<Content content={c.data.content} slug={slug} title={title} />)
 
         } else if (c.type === "article_banner") {
             const post = c.data
@@ -36,7 +41,7 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[] }> = ({ items }) => {
             const childItems = c.data
 
             comps.push(
-                <div className="max-w-tablet">
+                <div className="">
                     {childItems.map((child, k) => {
                         return (
                             <RenderFeaturedPost {...child} />
@@ -59,15 +64,41 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[] }> = ({ items }) => {
                     slugs={c.data.map(p => p.slug)}
                     layout="list"
                     render={({ posts }) => {
-                        return (
-                            <div>
-                                {posts.map(p => {
-                                    return (
-                                        <RightImgPostItem {...p} />
-                                    )
-                                })}
-                            </div>
-                        )
+                        if (posts.length === 1) {
+                            return <DesktopHeaderPost {...posts[0]} />
+                        } else if (posts.length === 2) {
+                            return <PostRow2Col posts={posts} />
+                        } else if (posts.length === 3) {
+                            return <PostRow3Col posts={posts} />
+                        } else if (posts.length === 4) {
+                            return (
+                                <div className="">
+                                    <div className="hidden sm:block">
+                                        <PostRow4Col posts={posts} />
+                                    </div>
+                                    <div className="sm:hidden">
+
+                                        {posts.map(p => {
+                                            return (
+                                                <RightImgPostItem {...p} />
+                                            )
+                                        })}
+
+                                    </div>
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <div>
+                                    {posts.map(p => {
+                                        return (
+                                            <RightImgPostItem {...p} />
+                                        )
+                                    })}
+                                </div>
+                            )
+                        }
+
                     }}
 
                 />
@@ -78,7 +109,13 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[] }> = ({ items }) => {
 
     return (
         <div>
-            {comps.map(c => c)}
+            {comps.map((section, k) => {
+                return (
+                    <div className={`standard-max-w-px py-6 ${k % 2 == 1 ? 'bg-d4slate-lighter' : ''}`}>
+                        {section}
+                    </div>
+                )
+            })}
         </div>
     )
 }

@@ -3,7 +3,6 @@ const path = require('path')
 const saveFile = require('../saveFile')
 const {topicQuery, postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/helpers')
 const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
-const TS = require('../../src/strings')
 const ac_strings = require('../../src/strings/ac_strings.js')
 const {createArchivePages,formatScope,typeScope,groupAll} = require('./hjelper')
 const generateFormat = require('./gFormat.js')
@@ -83,7 +82,7 @@ module.exports = function generateTopics(actions, graphql) {
               const node = topicInfo[t]
                 
               let topicType = 'topic'
-              let baseUrl = `${TS.slug_topic}/${node.slug}`
+              let baseUrl = `${ac_strings.slug_topic}/${node.slug}`
               if (`${node.group.id}` === `${groupAll.format}` ) {
                 topicType='format'
                 baseUrl = `${node.slug}/${ac_strings.slug_latest}`
@@ -99,7 +98,7 @@ module.exports = function generateTopics(actions, graphql) {
               }]
               if(topicType==='topic'){
            
-                const navParentItem={name:ac_strings.topic,to:TS.slug_topic}
+                const navParentItem={name:ac_strings.topic,to:ac_strings.slug_topic}
                 breadcrumb=[
                     navParentItem, 
                     {

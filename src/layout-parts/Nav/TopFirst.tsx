@@ -1,7 +1,7 @@
 import React from 'react'
 import { StaticQuery, graphql } from "gatsby"
 import Link from '@/components/CustomLink'
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings'
 
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import UserNav from '@/layout-parts/Nav/User'
@@ -13,7 +13,7 @@ const TopDesktop: React.FC = () => {
             render={(data: IGetSiteUrl) => {
                 const { acNodeSetting: { top_link } } = data
                 const tagline: ITagline = {
-                    text: TS.tagline,
+                    text: ac_strings.tagline,
                     path: top_link
                 };
                 return (
@@ -28,7 +28,7 @@ const TopDesktop: React.FC = () => {
                         <div className="hidden sm:flex items-center text-sm">
                             <UserNav className="pr-4" />
 
-                            <Link className="py-2 pr-4 hover:text-d4slate" to={TS.slug_contact}>{TS.contact}</Link>
+                            <Link className="py-2 pr-4 hover:text-d4slate" to={ac_strings.slug_contact}>{ac_strings.contact}</Link>
                             <LanguageDropdown className="border-l pl-2 p-0" />
                         </div>
                     </div>

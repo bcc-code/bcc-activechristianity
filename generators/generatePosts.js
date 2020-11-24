@@ -1,7 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
 const listTemplate = 'src/templates/archive/post-list.tsx'
-const TS = require('../src/strings')
 const ac_strings=require('../src/strings/ac_strings.js')
 /* SETUP */
 const template = 'src/templates/single-resource/post.tsx'
@@ -67,7 +66,7 @@ module.exports = function generatePosts(actions, graphql) {
             totalPages,
             baseUrl
           },
-          title:TS.latest
+          title:ac_strings.latest
         },
       })
     }

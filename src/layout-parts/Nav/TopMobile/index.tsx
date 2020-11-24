@@ -2,11 +2,9 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
-import TS from '@/strings'
 import LogoFull from '@/images/ACLogoFull'
 import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
-import ReactPlaceholder from 'react-placeholder'
 
 import ac_strings from '@/strings/ac_strings.js'
 import { IDrawerNav } from '@/layouts/App'

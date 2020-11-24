@@ -6,7 +6,7 @@ import RightImgPost from '@/components/PostItemCards/RightImg'
 import { FetchOnePost } from '@/HOC/FetchPosts'
 import { IGlossary } from '@/types'
 import ToolTipGlossary from '@/components/ToolTip'
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings'
 import { htmlTags2PlainText } from '@/helpers'
 import "./content.css"
 
@@ -63,7 +63,7 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                                     <ToolTipGlossary popperContent={
                                         <span className="text-sm leading-normal font-normal font-sans max-w-64 py-6" >
                                             {shorten}...
-                                            <a target="_blank" href={`${TS.slug_glossary}/${g.slug}`}> {TS.read_more} </a>
+                                            <a target="_blank" href={`${ac_strings.slug_glossary}/${g.slug}`}> {ac_strings.read_more} </a>
                                         </span>
                                     }>
                                         <span className="rtBibleRef"> {word}</span>

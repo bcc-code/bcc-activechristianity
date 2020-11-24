@@ -1,7 +1,7 @@
 import React from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 /* const AudioPlayer */
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
@@ -13,22 +13,17 @@ const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3C
 import ViewNext from '@/layout-parts/PostLayout/ViewNext'
 
 import { PostH1 } from '@/components/Headers'
-import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-
 import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 
 import {
     AuthorBookmarkShareSection,
-    ShareBookmarkTopShortCuts,
+    RecommendedPostsSection,
     Translations
 } from '@/layout-parts/PostLayout/PostSections'
 
-import { RecommendedPostsSection } from '@/layout-parts/PostLayout/PostSections'
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
-
-import TS from '@/strings'
 
 import acApi from '@/util/api'
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
@@ -73,12 +68,16 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         credits
     } = post
 
-    const [lastScroll, setLastScroll] = React.useState(Date.now() + 5000)
+
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
     const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
+    const [contentPosition, setContentPosition] = React.useState({ height: 0, top: 0 })
+    const contentEl = React.useRef<HTMLDivElement>(null);
+    const lastScroll = React.useRef(null);
 
     React.useEffect(() => {
+        lastScroll.current = Date.now() + 5000
         if (id) {
             acApi
                 .visitsPost(id)
@@ -86,26 +85,16 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     console.log(err)
                 })
         }
-        const handleScroll = () => {
-
-            if (lastScroll < Date.now()) {
-                setLastScroll(Date.now() + 5000)
-                const { id } = post
-                if (id) {
-                    acApi
-                        .readingPost(id)
-                        .catch((err: any) => {
-                            console.log(err)
-                        })
-                }
+        const handleScroll = (e: any) => {
+            if (lastScroll.current < Date.now()) {
+                lastScroll.current = Date.now() + 5000
             }
-
-
         }
         const debounceScroll = debounce(handleScroll, 1000)
         window.addEventListener('scroll', debounceScroll);
         return () => window.removeEventListener('scroll', debounceScroll);
     }, [post.slug])
+
 
     React.useEffect(() => {
 
@@ -136,6 +125,16 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
     const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
 
+
+    const postFooter = (
+        <LazyLoad>
+            <div className="relative bg-white">
+                <ExclusiveContent />
+            </div>
+        </LazyLoad>
+
+    )
+
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
@@ -144,22 +143,24 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
     return (
-        <article className="overflow-scroll w-full relative">
-            <ShareBookmarkTopShortCuts
+        <article className="overflow-scroll sm:overflow-visible w-full relative">
+
+            <ViewNext
                 isPlayingAudio={!!isCurrentMedia.audio}
-                id={id}
-                text={excerpt || title}
-                shareSlug={slug}
-                views={views}
-                likes={likes}
+                slug={slug}
+                /* 
+                                text={excerpt || title}
+                                shareSlug={slug}
+                                views={views}
+                                likes={likes} */
+                position={{
+                    height: contentEl.current && contentEl.current.clientHeight,
+                    top: contentEl.current && contentEl.current.offsetTop
+                }}
+                postId={id}
+                topics={topics}
+                formats={format}
             />
-            {/*             {!isCurrentMedia.audio && (
-                <ViewNext
-                    postId={id}
-                    topics={topics}
-                    formats={format}
-                />
-            )} */}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
@@ -234,13 +235,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     )}
 
                     <div>
+                        <div ref={contentEl}>
+                            <Content
+                                content={content}
+                                glossary={glossary}
+                                slug={slug}
+                                title={title}
+                            />
+                        </div>
 
-                        <Content
-                            content={content}
-                            glossary={glossary}
-                            slug={slug}
-                            title={title}
-                        />
                         {credits && (
                             <Content
                                 content={credits}
@@ -278,7 +281,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 <div className="pt-6">
                                     {item.authors.map(a => (
                                         <FetchPostsFromArchivePage
-                                            slug={`${TS.slug_ac_author}/${a.to}`}
+                                            slug={`${ac_strings.slug_ac_author}/${a.to}`}
                                             layout="list"
                                             render={({ posts }) => {
                                                 const filteredPosts = posts.filter(p => `${p.id}` !== `${postId}`).slice(0, 6)
@@ -302,19 +305,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
                 </div>
-                <div className="hidden sm:block">
-                    {/*                <Interest
-                        postId={postId}
-                        readMorePosts={readMorePosts}
-                        authors={authors}
-                        topics={topics}
-                    /> */}
-                </div>
+
 
             </div>
 
             <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 z-50">
-                <p className=""><em>{TS.scripture_copyright}</em></p>
+                <p className=""><em>{ac_strings.scripture_copyright}</em></p>
             </div>
 
         </article >

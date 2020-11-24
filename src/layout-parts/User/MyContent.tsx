@@ -13,7 +13,6 @@ import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
 import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFollow'
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics.tsx'
-import TS from '@/strings'
 import { getRandomArray } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.js'
 import shortid from 'shortid'
@@ -39,7 +38,7 @@ const UserHistory = () => {
                                             return (
                                                 <div className="flex flex-col items-center" key={shortid()} >
                                                     <div style={{ width: "100px", height: "138px" }}>
-                                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} image={image} />
+                                                        <ImgBgTopicCard name={name} to={`${ac_strings.slug_topic}/${to}`} image={image} />
                                                     </div>
                                                     <SlateDarkUnfollowButton
                                                         id={id}
@@ -57,7 +56,7 @@ const UserHistory = () => {
                                                         <ImgBgTopicCard
                                                             name={name}
                                                             image={image}
-                                                            to={`${TS.slug_topic}/${slug}`}
+                                                            to={`${ac_strings.slug_topic}/${slug}`}
                                                             rounded="rounded-xxl"
 
                                                         />

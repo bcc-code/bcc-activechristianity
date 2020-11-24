@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 
 import ImageRound from '@/components/Images/ImageRound'
 import livingTheGospel from '@/strings/podcastProperties'
-import TS from '@/strings'
+
 import ac_strings from '@/strings/ac_strings.js'
 import { PageSectionHeader } from '@/components/Headers'
 import { ReadOrListenIcon } from '@/components/PostElements'
@@ -42,7 +42,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
     const getHosts = () => {
         const getAuthors = hostSlugs.map(slug => {
             const trimmedSlug = slug.replace(`${ac_strings.slug_host}/`, '')
-            const authorSlug = `${TS.slug_ac_author}/${trimmedSlug}`
+            const authorSlug = `${ac_strings.slug_ac_author}/${trimmedSlug}`
 
             return fetch(`/page-data/${authorSlug}/page-data.json`)
                 .then(res => res.json())

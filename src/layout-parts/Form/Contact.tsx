@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
@@ -62,7 +61,7 @@ const ContactForm = () => {
 
         if (validate()) {
 
-            const data: IContactFrom = { from: TS.site_title, ...fields }
+            const data: IContactFrom = { from: ac_strings.site_title, ...fields }
             if (siteUrl) {
                 data.from = siteUrl.replace("https://", '')
             }
@@ -122,12 +121,12 @@ const ContactForm = () => {
     return (
         <div className="pb-8 sm:py-4" >
             {errorMessage !== undefined && <Snackbar text={errorMessage} error />}
-            {success === true && <Snackbar text={TS.contact_sent} />}
+            {success === true && <Snackbar text={ac_strings.contact_sent} />}
             <form className="w-full flex" onSubmit={handleSubmit}>
 
                 <div className="w-1/2 pr-2">
                     <InputText
-                        label={TS.full_name}
+                        label={ac_strings.full_name}
                         type='text'
                         name="name"
                         required
@@ -137,7 +136,7 @@ const ContactForm = () => {
                 </div>
                 <div className="w-1/2">
                     <InputText
-                        label={TS.location}
+                        label={ac_strings.location}
                         type='text'
                         name="location"
                         value={fields.location}
@@ -147,7 +146,7 @@ const ContactForm = () => {
             </form>
             <input type="hidden" name="form-name" value="contact" />
             <InputText
-                label={TS.email}
+                label={ac_strings.email}
                 type='email'
                 name="email"
                 required
@@ -155,14 +154,14 @@ const ContactForm = () => {
                 onChange={(e) => handleChange(e, 'email')}
             />
             <InputText
-                label={TS.subject}
+                label={ac_strings.subject}
                 type='text'
                 name="subject"
                 value={fields.subject}
                 onChange={(e) => handleChange(e, 'subject')}
             />
             <InputTextArea
-                label={TS.message}
+                label={ac_strings.message}
                 required
                 name="message"
                 value={fields.message}
@@ -172,14 +171,14 @@ const ContactForm = () => {
             <InputCheckbox
                 className="text-gray-600"
                 value={fields.consent === true}
-                label={TS.consent_contact}
+                label={ac_strings.consent_contact}
                 onChange={(e) => {
                     handleChange(e, 'consent')
                 }}
             />
             <div className="flex flex-col justify-center w-full text-sm sm:text-base">
                 <div className="flex justify-center py-4">
-                    <a className='underline text-d4secondary' href={`${ac_strings.slug_privacy_policy}` || "/"} target="_blank">{TS.consent_read_policy}</a>
+                    <a className='underline text-d4secondary' href={`${ac_strings.slug_privacy_policy}` || "/"} target="_blank">{ac_strings.consent_read_policy}</a>
                 </div>
                 <div className="flex justify-center">
                     <FormSubmitButton

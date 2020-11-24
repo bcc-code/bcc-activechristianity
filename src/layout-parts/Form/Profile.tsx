@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useDispatch } from "react-redux"
 
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings.js'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import { OutlineButton } from '@/components/Button'
@@ -83,7 +83,7 @@ const Profile: React.FC<{ title: string }> = ({ title }) => {
             <div className="w-full">Id: {user?.id}</div>
             {/* {errors.email ? <div>{TS.required_username_or_email}</div> : null} */}
             <InputText
-                label={TS.full_name}
+                label={ac_strings.full_name}
                 type='text'
                 value={fields.name}
                 onChange={(e) => {
@@ -91,7 +91,7 @@ const Profile: React.FC<{ title: string }> = ({ title }) => {
                 }}
             />
             <InputText
-                label={TS.email}
+                label={ac_strings.email}
                 type='text'
                 value={fields.email}
                 onChange={(e) => {
