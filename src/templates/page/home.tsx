@@ -23,9 +23,6 @@ const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'
 import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 
 // Helpers
-
-import TS from '@/strings'
-
 import ac_strings from '@/strings/ac_strings.js'
 
 
@@ -60,7 +57,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     <div className="standard-max-w">
       <MetaTag
         path={path}
-        title={`${TS.site_title} - ${TS.tagline}`}
+        title={`${ac_strings.site_title} - ${ac_strings.tagline}`}
         type="website"
         translatedUrls={[]}
         breadcrumb={[]}

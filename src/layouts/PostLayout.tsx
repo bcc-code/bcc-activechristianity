@@ -1,8 +1,7 @@
 import React from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import { useSelector, useDispatch } from 'react-redux'
-import StickyBox from "react-sticky-box";
+import { useSelector } from 'react-redux'
 /* const AudioPlayer */
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
@@ -14,24 +13,17 @@ const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3C
 import ViewNext from '@/layout-parts/PostLayout/ViewNext'
 
 import { PostH1 } from '@/components/Headers'
-import Icon from "@/components/Icons/Icon"
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-
 import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 
 import {
-    MobilePostMain,
-    DesktopPostMain,
     AuthorBookmarkShareSection,
-    ShareBookmarkTopShortCuts,
     RecommendedPostsSection,
     Translations
 } from '@/layout-parts/PostLayout/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
-
-import TS from '@/strings'
 
 import acApi from '@/util/api'
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
@@ -289,7 +281,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 <div className="pt-6">
                                     {item.authors.map(a => (
                                         <FetchPostsFromArchivePage
-                                            slug={`${TS.slug_ac_author}/${a.to}`}
+                                            slug={`${ac_strings.slug_ac_author}/${a.to}`}
                                             layout="list"
                                             render={({ posts }) => {
                                                 const filteredPosts = posts.filter(p => `${p.id}` !== `${postId}`).slice(0, 6)
@@ -318,7 +310,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
 
             <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 z-50">
-                <p className=""><em>{TS.scripture_copyright}</em></p>
+                <p className=""><em>{ac_strings.scripture_copyright}</em></p>
             </div>
 
         </article >

@@ -9,7 +9,7 @@ const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3C
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.js'
-import TS from '@/strings'
+
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
 import { getRandomArray } from "@/helpers"
@@ -116,7 +116,7 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
             <PageSectionHeaderUpperCaseGray title={authors.as} />
 
             <span className="">{authors.authors.map(a => (
-                <Link className="block text-sm pt-1" to={`${TS.slug_ac_author}/${a.to}`}>
+                <Link className="block text-sm pt-1" to={`${ac_strings.slug_ac_author}/${a.to}`}>
                     <div className="font-roboto ">{a.name}</div>
                     <div className="text-gray-500">{a.excerpt}</div>
                 </Link>
@@ -142,7 +142,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
                     <div>
                         {item.authors.map(a => (
                             <FetchPostsFromArchivePage
-                                slug={`${TS.slug_ac_author}/${a.to}`}
+                                slug={`${ac_strings.slug_ac_author}/${a.to}`}
                                 layout="list"
                                 render={({ posts }) => {
                                     const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)

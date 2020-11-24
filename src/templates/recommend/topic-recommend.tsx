@@ -20,7 +20,6 @@ import { IPostItem, ISubtopicLinks, IRecommendationPage } from '@/types'
 import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
-import TS from '@/strings'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
@@ -45,6 +44,8 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         const mixed = getRandomFeatured({ latest, popular, featured })
         setMixedFeaturedPosts(mixed)
     }, [])
+
+    const topicSlug = ac_strings.slug_topic
     return (
         <div>
             <MetaTag
@@ -71,7 +72,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 </div>
 
                 <FetchTopicPostItems
-                    topics={formats.map(f => ({ name: f.name, slug: `${TS.slug_topic}/${f.to}`, id: '' }))}
+                    topics={formats.map(f => ({ name: f.name, slug: `${topicSlug}/${f.to}`, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => (
                         <ScrollNavTabs tabs={topicPostItems.map(item => ({
@@ -95,7 +96,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 />
                 <ByCatergories
                     title={ac_strings.byCategories}
-                    types={formats.map(f => ({ name: f.name, to: `${TS.slug_topic}/${f.to}`, id: '' }))}
+                    types={formats.map(f => ({ name: f.name, to: `${topicSlug}/${f.to}`, id: '' }))}
                 />
             </div>
             <RecommendDesktopLayout
@@ -104,7 +105,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 popularPosts={popular}
                 latestPosts={latest}
                 featured={mixedFeaturedPosts}
-                topics={formats.map(f => ({ ...f, to: `${TS.slug_topic}/${f.to}` }))}
+                topics={formats.map(f => ({ ...f, to: `${topicSlug}/${f.to}` }))}
                 name={title}
             />
 

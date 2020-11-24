@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
-import Link from '@/components/CustomLink'
-import TS from '@/strings'
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_options_title,
@@ -13,7 +11,7 @@ const formText = {
         "email": ac_strings.signup_options_email,
         "optionText": ac_strings.signup_options_option_text,
         "optionButton": ac_strings.signup_options_option_button,
-        "disclaimer": TS.consent_register,
+        "disclaimer": ac_strings.consent_register,
         "action": ac_strings.signup_options_action
     },
     "signInOptions": {
@@ -23,7 +21,7 @@ const formText = {
         "email": ac_strings.signin_options_email,
         "optionText": ac_strings.signin_options_option_text,
         "optionButton": ac_strings.signin_options_option_button,
-        "disclaimer": TS.consent_register,
+        "disclaimer": ac_strings.consent_register,
         "action": ac_strings.signin_options_action
     }
 }
@@ -81,12 +79,12 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
 
                 <a className="pb-4" href={ac_strings.slug_privacy_policy} target="_blank">
-                    <span className="h-full font-semibold">Read {TS.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
+                    <span className="h-full font-semibold">Read {ac_strings.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
                 </a>
                 <div className="pb-4">
                     {/* <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span> */}
                     <span className="leading-normal font-normal font-sans pt-6" >
-                        {TS.copyright}
+                        {ac_strings.copyright}
                     </span>
                 </div>
 

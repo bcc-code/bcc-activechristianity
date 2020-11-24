@@ -13,10 +13,9 @@ import { getRandomArray } from "@/helpers"
 import { normalizeTracks } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg'
-import { IRootState } from '@/state/types'
 import { IPlaylist, IMedia } from '@/types'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
-import TS from '@/strings'
+
 import ac_strings from '@/strings/ac_strings.js'
 
 

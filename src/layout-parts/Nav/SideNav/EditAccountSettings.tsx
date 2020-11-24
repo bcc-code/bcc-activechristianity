@@ -2,7 +2,6 @@ import * as React from 'react';
 import ac_strings from '@/strings/ac_strings.js'
 import SideNavWrapper from './SideNavWrapper'
 
-import TS from '@/strings'
 import { SideNavItem } from '@/components/Button'
 import loadable from '@loadable/component'
 const ChangePassword = loadable(() => import('./ChangePassword'))
@@ -35,9 +34,9 @@ const SideMobile: React.FC<{
                     onClick={() => setOpenChangePassword(true)}
                     next
                 >
-                    {TS.change_password}
+                    {ac_strings.change_password}
                 </SideNavItem>
-                <SideNavItem>{TS.delete_account}</SideNavItem>
+                <SideNavItem>{ac_strings.delete_account}</SideNavItem>
             </div>
 
         </SideNavWrapper>

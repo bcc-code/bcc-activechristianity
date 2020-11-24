@@ -5,9 +5,6 @@ import { useSwipeable } from "react-swipeable"
 
 import RightImg from '@/components/PostItemCards/RightImg'
 
-
-import TS from '@/strings'
-import { IPostItem } from '@/types'
 import { IPostListSection } from '@/layout-parts/Home/PostListSection'
 import './scrollNavTabs.css'
 

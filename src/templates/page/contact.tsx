@@ -1,7 +1,7 @@
 import React from 'react'
 import MetaTag from '@/components/Meta'
 import FetchSocialMediaPlatform from '@/HOC/FetchSocialMediaPlatforms'
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings'
 import { LayoutH1 } from '@/components/Headers'
 import { MobileMainWrapper } from '@/layout-parts/PostLayout/PostSections'
 
@@ -12,7 +12,7 @@ const ContactPage = () => {
     const height = 150
     return (
         <div className="">
-            <MetaTag title={TS.contact} type="page" breadcrumb={[]} />
+            <MetaTag title={ac_strings.contact} type="page" breadcrumb={[]} />
             <Header
                 className={`fixed transition-transform background-image w-full flex flex-col justify-center px-4 pb-12 sm:hidden`}
                 imageUrl={imageUrl}
@@ -48,7 +48,7 @@ const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({
             className={className}
             style={{ top: "50px", background: `url(${imageUrl}) center center no-repeat`, backgroundSize: "cover", ...style }}
         >
-            <LayoutH1 title={TS.contact} />
+            <LayoutH1 title={ac_strings.contact} />
 
             <FetchSocialMediaPlatform
 

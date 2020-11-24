@@ -6,7 +6,6 @@ import { IDrawerNav } from '@/layouts/App'
 
 import LogoFull from '@/images/ACLogoFull'
 import TopFirst from './TopFirst'
-import TS from '@/strings'
 import Icon from '@/components/Icons/Icon'
 import { INavItem } from '@/types'
 

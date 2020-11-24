@@ -1,11 +1,9 @@
 import React from 'react'
-import Link from '@/components/CustomLink'
 import StickyBox from "react-sticky-box";
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
-import UserInitials from '@/layout-parts/User/UserInitial'
+
 import { INavItem } from '@/types'
 import { SideNavItem } from '@/components/Button'
 const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
@@ -70,7 +68,7 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
                             )
                         })}
 
-                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{TS.logout}</SideNavItem>
+                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{ac_strings.logout}</SideNavItem>
 
                     </div>
 

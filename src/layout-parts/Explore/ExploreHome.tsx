@@ -11,7 +11,6 @@ import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
 import ac_strings from '@/strings/ac_strings.js'
 
 import SquareImages from '@/components/Images/Image1to1Rounded'
-import TS from '@/strings'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
 
@@ -40,7 +39,7 @@ const ExploreLayout: React.FC<{
             <div className="pt-6">
                 <SectionTitleDesktopAndMobile
                     name={ac_strings.topics}
-                    to={TS.slug_topic}
+                    to={ac_strings.slug_topic}
                 />
                 <TopicRowAndHorizontalScroll
                     topics={randomTopics}
@@ -48,7 +47,7 @@ const ExploreLayout: React.FC<{
             </div>
             <div className="pt-6">
                 <SectionTitleDesktopAndMobile
-                    name={TS.categories}
+                    name={ac_strings.categories}
 
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">

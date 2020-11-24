@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import Link from '@/components/CustomLink'
 import { IRootState } from '@/state/types'
 
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 import { initials } from '@/helpers'
 
@@ -23,7 +22,7 @@ const User: React.FC = () => {
             <h6 className="m-2 font-roboto font-semibold">{auth.user.name}</h6>
         </div>
     ) : (
-            <Link to={ac_strings.slug_login}>{TS.please_login}</Link>
+            <Link to={ac_strings.slug_login}>{ac_strings.please_login}</Link>
         )
 }
 

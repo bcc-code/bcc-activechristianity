@@ -6,7 +6,7 @@ import { ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFol
 import ac_strings from '@/strings/ac_strings.js'
 import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
 import { getRandomArray } from '@/helpers'
-import TS from '@/strings'
+
 const TopicsForYou = () => {
 
     return (
@@ -26,7 +26,7 @@ const TopicsForYou = () => {
                                         <Link
                                             key={i}
                                             className="p-2"
-                                            to={`${TS.slug_topic}/${to}`}>
+                                            to={`${ac_strings.slug_topic}/${to}`}>
                                             {name}
                                         </Link>
                                         <ToggleBookmarkIconOnly

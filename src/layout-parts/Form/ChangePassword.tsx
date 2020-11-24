@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux"
 
 import { OutlineButton } from '@/components/Button'
 import { InputText } from '@/components/Input'
-import TS from '@/strings'
-
+import ac_strings from '@/strings/ac_strings.js'
 const initialFieldsState = {
     existingPassword: '',
     newPassword: '',
@@ -66,7 +65,7 @@ const ChangePassword = () => {
                 error={!!errorMessage || !!error.length} */
         >
             <InputText
-                label={TS.password}
+                label={ac_strings.password}
                 type='password'
                 value={fields.existingPassword}
                 onChange={(e) => {
@@ -74,7 +73,7 @@ const ChangePassword = () => {
                 }}
             />
             <InputText
-                label={TS.confirm_password}
+                label={ac_strings.confirm_password}
                 type='password'
                 value={fields.confirmPassword}
                 onChange={(e) => {
@@ -82,7 +81,7 @@ const ChangePassword = () => {
                 }}
             />
             <InputText
-                label={TS.change_password}
+                label={ac_strings.change_password}
                 type='password'
                 value={fields.newPassword}
                 onChange={(e) => {

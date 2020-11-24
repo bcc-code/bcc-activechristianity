@@ -1,7 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
 const ac_strings=require('../src/strings/ac_strings.js')
-const TS = require('../src/strings')
 /* SETUP */
 
 const query = `{

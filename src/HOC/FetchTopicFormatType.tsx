@@ -2,9 +2,8 @@ import * as React from "react"
 import { ITopic, ITopicPostItems } from '@/types'
 import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { fetchPostslistFromArchivePage, fetchPostsFromTopics } from '@/helpers/fetchLocalData'
-import TS from '@/strings'
-
+import { fetchPostsFromTopics } from '@/helpers/fetchLocalData'
+import ac_strings from '@/strings/ac_strings.js'
 interface IFetchTopics {
     topics: string[]
     layout: "row" | "list",
@@ -18,7 +17,7 @@ export const FetchTopicsB: React.FC<IFetchTopics> = ({ topics: topicSlugs, rende
         setLoading(true)
         Promise.all(topicSlugs
 
-            .map(slug => fetch(`/page-data/${TS.slug_topic}/${slug}/page-data.json`)
+            .map(slug => fetch(`/page-data/${ac_strings.slug_topic}/${slug}/page-data.json`)
                 .then(res => res.json())
                 .then(topicRes => {
                     const data = topicRes.result.pageContext

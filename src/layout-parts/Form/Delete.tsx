@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux"
 
 import { OutlineButton } from '@/components/Button'
 import { InputText } from '@/components/Input'
-import TS from '@/strings'
-
+import ac_strings from '@/strings/ac_strings'
 const initialFieldsState = {
     existingPassword: '',
 
@@ -66,7 +65,7 @@ const ChangePassword = () => {
                 error={!!errorMessage || !!error.length} */
         >
             <InputText
-                label={TS.password}
+                label={ac_strings.password}
                 type='password'
                 value={fields.existingPassword}
                 onChange={(e) => {

@@ -1,8 +1,5 @@
 import React from 'react'
 import { useSelector } from "react-redux";
-import { graphql } from "gatsby";
-
-import TS from '@/strings'
 import Link from "@/components/CustomLink"
 import LogoFull from '@/images/ACLogoFull'
 import SocialPlatforms from '@/layout-parts/Nav/SocialPlatforms'
@@ -24,12 +21,12 @@ const Footer: React.FC = () => {
                         <LogoFull height="36px" width="36px" iconOnly />
                     </div>
                     <div>
-                        <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{TS.about_activechristianity_body}</div>
-                        <Link to={TS.slug_about} className="pt-4 flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learnMoreAC}</Link>
+                        <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{ac_strings.about_activechristianity_body}</div>
+                        <Link to={ac_strings.slug_about} className="pt-4 flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learnMoreAC}</Link>
                     </div>
                 </div>
                 <div className="sm:col-start-3 px-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
-                    <h6 className="font-roboto uppercase pb-4 text-center">{TS.follow_us}</h6>
+                    <h6 className="font-roboto uppercase pb-4 text-center">{ac_strings.follow_us}</h6>
                     <SocialPlatforms />
                 </div>
                 <div className="sm:col-start-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
@@ -52,14 +49,14 @@ const Footer: React.FC = () => {
             <div className="w-full sm:border-t">
                 <div className="standard-max-w  w-full flex flex-col sm:flex-row px-4 py-8 text-sm sm:justify-between">
                     <div className="text-d4cadet-blue order-2 sm:order-1 sm:max-w-1/2">
-                        {TS.copyright}
+                        {ac_strings.copyright}
                     </div>
                     <div className="flex text-d4slate  w-full sm:w-auto justify-between items-center pb-10 sm:pb-0 order-1 sm:order-2">
                         <div>
-                            <Link to={ac_strings.slug_privacy_policy} className="underline pr-4">{TS.consent_privacy_policy}</Link>
-                            <Link to={ac_strings.slug_cookie_policy} className="underline pr-4">{TS.consent_cookie_policy}</Link>
+                            <Link to={ac_strings.slug_privacy_policy} className="underline pr-4">{ac_strings.consent_privacy_policy}</Link>
+                            <Link to={ac_strings.slug_cookie_policy} className="underline pr-4">{ac_strings.consent_cookie_policy}</Link>
                         </div>
-                        <Link to={TS.slug_contact} className="border border-d4slate px-2 py-1 rounded-md">{TS.contact}</Link>
+                        <Link to={ac_strings.slug_contact} className="border border-d4slate px-2 py-1 rounded-md">{ac_strings.contact}</Link>
                     </div>
                 </div>
             </div>

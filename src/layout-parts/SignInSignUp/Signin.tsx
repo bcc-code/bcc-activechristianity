@@ -4,7 +4,6 @@ import { openSignInModal } from '@/state/action'
 
 import { initiateLogIn } from '@/state/action/authAction'
 import { InputText, InputCheckbox } from '@/components/Input'
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
@@ -139,7 +138,7 @@ const SignInForm: React.FC = () => {
 
                         <form action="" className="w-full" onSubmit={handleSubmit}>
                             <InputText
-                                label={TS.email}
+                                label={ac_strings.email}
                                 type='text'
                                 value={fields.email}
                                 onChange={(e) => {
@@ -148,7 +147,7 @@ const SignInForm: React.FC = () => {
                                 error={errors.email ? 'Required' : undefined}
                             />
                             <InputText
-                                label={TS.password}
+                                label={ac_strings.password}
                                 type='password'
                                 value={fields.password}
                                 onChange={(e) => {
@@ -157,7 +156,7 @@ const SignInForm: React.FC = () => {
                                 error={errors.password ? 'Required' : undefined}
                             />
                             <InputCheckbox
-                                label={TS.remember_me}
+                                label={ac_strings.remember_me}
                                 onChange={(e) => {
                                     handleChange(e, 'keepSignedIn')
                                 }}

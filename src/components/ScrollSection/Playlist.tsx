@@ -6,7 +6,6 @@ import { normalizeTracks } from "@/helpers"
 import { IPlaylist, IMedia } from '@/types'
 import { PostH1 } from '@/components/Headers'
 import { OutlineButton } from '@/components/Button'
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 export const PostLayout: React.FC<IPlaylist> = (post) => {
 

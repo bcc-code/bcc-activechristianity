@@ -13,7 +13,6 @@ import MyContent from "@/layout-parts/User/MyContent"
 import Downloaded from "@/layout-parts/User/Downloaded"
 import ChangePassword from "@/layout-parts/Form/ChangePassword"
 import DeleteProfile from "@/layout-parts/Form/Delete"
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 import { IPage } from '@/types'
 const componentMap = {
@@ -59,13 +58,13 @@ const User: React.FC<IUserProps> = ({ data }) => {
 
     return (
         <div>
-            <MetaTag title={TS.account} type="page" breadcrumb={[]} />
+            <MetaTag title={ac_strings.account} type="page" breadcrumb={[]} />
             <Layout
                 pathname={ac_strings.slug_user}
                 userLinks={userLinks}
             >
                 <Router basepath={`/${ac_strings.slug_user}`}>
-                    <PrivateRoute path="/" title={TS.account} component={MyContent} />
+                    <PrivateRoute path="/" title={ac_strings.account} component={MyContent} />
 
                     {Object.keys(componentMap).map(key => {
                         const page = componentMap[key]

@@ -1,9 +1,8 @@
 const {postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/helpers')
 const path = require('path')
-const TS = require('../../src/strings')
+const ac_strings = require('../../src/strings/ac_strings')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
-const baseUrl = process.env.API_URL
 const perPage= 12
 const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
 
@@ -231,7 +230,7 @@ module.exports.createSubTopicPages=({
       console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
     } else {
       const totalPages = Math.ceil(totalCount / perPage)
-      const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
+      const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
   
       const component = (`${topic.id}`===typesAll.watch || 
       `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)

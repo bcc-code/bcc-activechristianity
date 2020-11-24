@@ -11,7 +11,6 @@ import ModalWProps from '@/components/Modal/ModalWProps'
 import { IRootState } from '@/state/types'
 import { INavItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
-import TS from '@/strings'
 
 interface IEbookDOwnload {
     languageOptions: INavItem[]
@@ -86,7 +85,7 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
         <button className="flex items-center justify-center py-2 mr-2">
             <Icon name="GetApp" size="12" />
             <div className="px-2">
-                {TS.download}
+                {ac_strings.download}
             </div>
         </button>
 
@@ -100,8 +99,8 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
                     <div className="p-4 w-11/12 flex flex-col items-center justify-center">
                         {authInfo.loggedIn !== "success" ? (
                             <div className="w-full">
-                                <div className="text-center">{replaceTextWithLink(TS.please_login_download, props.closeModal, ac_strings.slug_login, ac_strings.slug_register,)}</div>
-                                <p className="text-center mt-4">{TS.also_available_in} </p>
+                                <div className="text-center">{replaceTextWithLink(ac_strings.please_login_download, props.closeModal, ac_strings.slug_login, ac_strings.slug_register,)}</div>
+                                <p className="text-center mt-4">{ac_strings.also_available_in} </p>
                                 {languageOptions.map(item => {
                                     return (
                                         <button className="block text-gray-600 text-center py-2">{item.name}</button>

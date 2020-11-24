@@ -2,8 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 
 // Components
-import PostTitle from '@/components/PostElements/TextSizeWClamp'
-import { PostItemPlayButton } from '@/components/PostElements/PlayButton'
+
 import { UnderlineLinkViewAll } from '@/components/Button'
 import Link from '@/components/CustomLink'
 import MetaTag from '@/components/Meta'
@@ -17,10 +16,8 @@ import RightImg from '@/components/PostItemCards/RightImg'
 import { PodcastPageHeadSection } from './podcast-intro'
 import livingTheGospel from '@/strings/podcastProperties'
 
-import { INavItem, IPostItem, IAuthor, ITab } from '@/types'
+import { INavItem } from '@/types'
 
-
-import TS from '@/strings'
 import ac_strings from '@/strings/ac_strings.js'
 // mock data
 import '@/styles/react-tabs.css'
@@ -62,7 +59,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                         <div className="">
                             <div className="">
                                 <SectionTitleDesktopAndMobile
-                                    name={TS.latest}
+                                    name={ac_strings.latest}
 
                                 />
                                 {first && (

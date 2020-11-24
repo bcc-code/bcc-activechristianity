@@ -1,12 +1,10 @@
 import React from 'react'
 import { graphql } from "gatsby"
-import Link from '@/components/CustomLink'
 import MetaTag from '@/components/Meta'
 import ResourceLayout from "@/layouts/ResourceLayout"
 import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
-import { INavItem, IPage } from "@/types"
-import ac_strings from '@/strings/ac_strings.js'
-import TS from '@/strings'
+import { IPage } from "@/types"
+
 import { ITopicRes } from '@/types'
 import { sortTopicsByGroups } from '@/helpers'
 const AllTopic: React.FC<IAllTopic> = (props) => {
