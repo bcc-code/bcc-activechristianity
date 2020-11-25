@@ -31,7 +31,7 @@ const ExploreLayout: React.FC<{
     const { formatIds, typeIds } = typesFormats
     const formats = Object.keys(formatIds).map(id => formatIds[id])
     let filteredTopics = topics.filter(item => !formatIds[item.id] && !typeIds[item.id])
-    filteredTopics = [...new Set(filteredTopics)]
+    filteredTopics = [...new Set([...filteredTopics])]
     const randomTopics = getRandomArray(filteredTopics, 6)
 
     return (
