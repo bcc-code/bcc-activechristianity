@@ -2,7 +2,6 @@ import React from 'react'
 
 import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
 import FetchRecommendFormat from '@/HOC/Recommendations/FetchRecommendFormat'
-import Flickity from "react-flickity-component";
 import PostRow3Col from '@/layout-parts/List/PostRow3Col'
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import shortid from 'shortid'
@@ -26,25 +25,9 @@ const RecommendedSectionOne: React.FC<IFetchPost> = ({ ids }) => {
                                 <TopImgHorizontalScrollRow posts={posts.slice(0, 6)} />
                             </div>
                             <div className="hidden sm:block">
-                                <Flickity
-                                    options={{
-                                        autoPlay: true,
-                                        groupCells: 3,
-                                        wrapAround: true,
-                                        prevNextButtons: false,
-                                        pageDots: false,
-                                    }}
-                                >
-                                    {posts.map((post, i) => {
-                                        return (
-                                            <div className="w-1/3 min-w-1/3 px-1 h-full" key={i}>
-                                                < TopImgPost showType {...post} key={post.slug} noExcerpt />
-                                            </div>
-                                        )
-                                    })}
-                                </Flickity>
-                            </div>
-                            <div>
+                                <PostRow3Col
+                                    posts={posts.slice(0, 3)}
+                                />
 
                             </div>
                         </div>

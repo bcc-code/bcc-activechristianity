@@ -28,7 +28,7 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
             setIsFetchingMore(true)
             Promise.all(randomTopics.map(t => {
 
-                const url = `/${ac_strings.slug_topic}/${t}/1`
+                const url = `${ac_strings.slug_topic}/${t}/1`
                 return fetch(`/page-data/${url}/page-data.json`)
                     .then(res => res.json())
                     .then(res => {
