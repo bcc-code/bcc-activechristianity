@@ -2,9 +2,9 @@
   "formatIds": {
     "345": {
       "key": "testimony",
-      "name": "Testimonies",
-      "to": "testimonies",
-      "count": 226,
+      "name": "Vitnesbyrd",
+      "to": "vitnesbyrd",
+      "count": 155,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4.jpeg 1000w",
@@ -13,9 +13,9 @@
     },
     "1503": {
       "key": "question",
-      "name": "Questions",
-      "to": "question-and-answers",
-      "count": 181,
+      "name": "Spørsmål og svar",
+      "to": "sporsmal-og-svar",
+      "count": 148,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl.jpeg 1000w",
@@ -24,9 +24,9 @@
     },
     "36170": {
       "key": "message",
-      "name": "Messages",
-      "to": "messages",
-      "count": 13,
+      "name": "Taler",
+      "to": "taler",
+      "count": 6,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/qMO39Rz5Za5UmZ91PFhrGoDgMvvJd1zf2OiYuTxA-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/qMO39Rz5Za5UmZ91PFhrGoDgMvvJd1zf2OiYuTxA-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/qMO39Rz5Za5UmZ91PFhrGoDgMvvJd1zf2OiYuTxA.jpeg 1000w",
@@ -35,9 +35,9 @@
     },
     "108201": {
       "key": "commentary",
-      "name": "Commentary",
-      "to": "commentary",
-      "count": 99,
+      "name": "Kommentar",
+      "to": "kommentar",
+      "count": 58,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh.jpeg 1000w",
@@ -46,9 +46,9 @@
     },
     "108204": {
       "key": "song",
-      "name": "Songs",
-      "to": "songs",
-      "count": 64,
+      "name": "Sanger",
+      "to": "sanger",
+      "count": 21,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/5DxJAHObZj9R3p2ozLTqbCAtR6jxK3XtLk52G0ol.jpeg 1000w",
@@ -57,9 +57,9 @@
     },
     "108206": {
       "key": "edification",
-      "name": "Edification",
-      "to": "edification",
-      "count": 456,
+      "name": "Oppbyggelse",
+      "to": "oppbyggelse-nb",
+      "count": 379,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpeg 1000w",
@@ -68,9 +68,9 @@
     },
     "108211": {
       "key": "interview",
-      "name": "Interviews",
-      "to": "interviews",
-      "count": 11,
+      "name": "Intervjuer",
+      "to": "intervjuer",
+      "count": 6,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV.jpeg 1000w",
@@ -79,9 +79,9 @@
     },
     "108212": {
       "key": "animation",
-      "name": "Animation",
-      "to": "animation",
-      "count": 10,
+      "name": "Animasjon",
+      "to": "animasjon",
+      "count": 4,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/FVch0OIGw6zdplJ3TPJV2yxx92xzAps8KPD0DpPg-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/FVch0OIGw6zdplJ3TPJV2yxx92xzAps8KPD0DpPg-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/FVch0OIGw6zdplJ3TPJV2yxx92xzAps8KPD0DpPg.jpeg 1000w",
@@ -92,23 +92,23 @@
   "typeIds": {
     "108196": {
       "key": "read",
-      "name": "Read",
-      "to": "read",
-      "count": 955,
+      "name": "Les",
+      "to": "les",
+      "count": 750,
       "image": null
     },
     "108197": {
       "key": "listen",
-      "name": "Listen",
-      "to": "listen",
-      "count": 336,
+      "name": "Lytt",
+      "to": "lytt",
+      "count": 192,
       "image": null
     },
     "108198": {
       "key": "watch",
-      "name": "Watch",
-      "to": "watch",
-      "count": 112,
+      "name": "Se på",
+      "to": "se-paa",
+      "count": 41,
       "image": null
     }
   }

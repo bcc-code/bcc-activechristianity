@@ -106,7 +106,6 @@ const plugins = [
       fieldName: "ac_node",
       // URL to query from
       baseUrl: process.env.API_URL,
-      noPlaylists:process.env.LANG_CODE!=="en",
       headers: {
         "x-lang": process.env.LANG_CODE
       }

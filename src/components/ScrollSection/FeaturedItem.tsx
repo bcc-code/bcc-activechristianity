@@ -84,7 +84,7 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
     }, [slug])
 
     const setPost = () => {
-        console.log(type)
+
         let modified: IModifiedFields = {}
         if (title && title.trim() !== "") {
             modified["title"] = title
@@ -122,7 +122,7 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
             })
         }
     }
-    console.log(loadedPlaylist)
+
     if (loadedEbook) {
         return <Ebook {...loadedEbook} />
     } else if (loadedPost) {

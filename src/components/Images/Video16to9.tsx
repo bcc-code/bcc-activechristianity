@@ -19,10 +19,10 @@ function getId(url: string) {
 
 const VideoHeader: React.FC<IVideoHeader> = (props) => {
 
-    const { src, className } = props
+    const { className } = props
     const videoId = getId(props.src)
     const url = 'https://www.youtube.com/embed/' + videoId
-    console.log(url)
+
     return (
         <div className={`embed-responsive embed-responsive-16by9 ${className}`}>
             <iframe

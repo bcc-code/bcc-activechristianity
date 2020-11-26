@@ -1,5 +1,5 @@
 const helpers = require('./helpers')
-const {sendQuery,getMultiPosts, postQuery,postQueryNoPlaylist} = helpers
+const {sendQuery,getMultiPosts, postQuery} = helpers
 
 const settingsQuery = `
 {
@@ -17,11 +17,11 @@ const settingsQuery = `
 }
 `
 
-const getPostsQuery = (pageNr,noPlaylists)=>`
+const getPostsQuery = (pageNr)=>`
     {
         posts(page:${pageNr}) {
             data {
-                ${noPlaylists?postQueryNoPlaylist:postQuery}
+                ${postQuery}
                 content
                 langs {
                     lang
@@ -47,7 +47,7 @@ const getPostsQuery = (pageNr,noPlaylists)=>`
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
-    const {fieldName,baseUrl,headers,noPlaylists} = options
+    const {fieldName,baseUrl,headers} = options
        
         const createPostNode = (post)=>{
             const nodeContent = JSON.stringify(post)
@@ -78,13 +78,21 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
             if (metadata["featured_posts"]){
 
                 const featuredArraySlug = JSON.parse(metadata["featured_posts"])
-                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl,headers,noPlaylists)
+                  metadata["featured_posts"]=await getMultiPosts(featuredArraySlug, baseUrl,headers)
+                  if(metadata["featured_posts"][0]){
+                    const dummypost = createDummyPost(metadata["featured_posts"][0])
+                    metadata["featured_posts"].push(dummypost)
+                  }
                   /* metadata["featured_posts"]=featured_slug. */
             }
 
             if (metadata["popular_posts"]){
                 const popularArraySlug = JSON.parse(metadata["popular_posts"])
-                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl,headers,noPlaylists)
+                  metadata["popular_posts"]=await getMultiPosts(popularArraySlug, baseUrl,headers)
+                  if(metadata["popular_posts"][0]){
+                    const dummypost = createDummyPost(metadata["popular_posts"][0])
+                    metadata["popular_posts"].push(dummypost)
+                  }
             }
 
               // Data can come from anywhere, but for now create it manually
@@ -118,7 +126,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         for (let i = 1; i <=pageCount ; i++){
             console.log(i)
             
-            const response = await sendQuery(getPostsQuery(i,noPlaylists),baseUrl,headers)
+            const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
 
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
@@ -216,42 +224,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
-                if(noPlaylists && k===0){
-                    const dummyContentPost = {...transformedPost}
-                    dummyContentPost.acId = "dummy-content"
-                    dummyContentPost.id = "dummy-content"
-                    dummyContentPost.topics=[]
-                    dummyContentPost.title="dummy-content"
-                    dummyContentPost.slug="dummy-content"
-                    dummyContentPost.track = {
-                        url:"dummy-content",
-                        title:"dummy-content",
-                        duration:0,
-                        post: {
-                            title:transformedPost.title,
-                            slug:transformedPost.slug
-                        },
-                        playlists :{
-                            slug:"dummy-content",
-                            title:"dummy-content"
-                        }
-                    }
-                    dummyContentPost.seo={
-                        title:"dummy-content",
-                        desc:"dummy-content",
-                    }
-                    dummyContentPost.meta= {
-                        credits:"dummy-content",
-                        no_dict:false,
-                        url:"dummy-content"
-                    }
-
-                    dummyContentPost.glossary = [{
-                        word:"dummy-content",
-                        content:"dummy-content",
-                        slug:"dummy-content",
-                        id:"dummy-content"
-                      }]
+                if( k===0){
+                    const dummyContentPost = createDummyPost(transformedPost)
 
                       createPostNode(dummyContentPost)
                 }
@@ -270,5 +244,43 @@ exports.onPostBuild = async ({ cache }) => {
     console.log(cachedValue) // logs `value`
 }
 
+const createDummyPost = (transformedPost)=>{
+    const dummyContentPost = {...transformedPost}
+    dummyContentPost.acId = "dummy-content"
+    dummyContentPost.id = "dummy-content"
+    dummyContentPost.topics=[]
+    dummyContentPost.title="dummy-content"
+    dummyContentPost.slug="dummy-content"
+    dummyContentPost.track = {
+        url:"dummy-content",
+        title:"dummy-content",
+        duration:0,
+        post: {
+            title:transformedPost.title,
+            slug:transformedPost.slug
+        },
+        playlists :{
+            slug:"dummy-content",
+            title:"dummy-content"
+        }
+    }
+    dummyContentPost.seo={
+        title:"dummy-content",
+        desc:"dummy-content",
+    }
+    dummyContentPost.meta= {
+        credits:"dummy-content",
+        no_dict:false,
+        url:"dummy-content"
+    }
 
+    dummyContentPost.glossary = [{
+        word:"dummy-content",
+        content:"dummy-content",
+        slug:"dummy-content",
+        id:"dummy-content"
+        }]
+
+        return dummyContentPost
+}
 

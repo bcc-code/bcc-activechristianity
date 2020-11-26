@@ -1,8 +1,8 @@
 const _ = require('lodash')
 const path = require('path')
 const saveFile = require('../saveFile')
-const {topicQuery, postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/helpers')
-const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
+const {topicQuery, postQuery} = require('gatsby-source-ac/helpers')
+const languagePostQuery = postQuery
 const ac_strings = require('../../src/strings/ac_strings.js')
 const {createArchivePages,formatScope,typeScope,groupAll} = require('./hjelper')
 const generateFormat = require('./gFormat.js')

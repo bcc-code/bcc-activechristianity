@@ -32,7 +32,7 @@ interface IFetchPost {
 }
 
 const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isPlayingAudio, slug }) => {
-    console.log(position)
+
     const [showViewMore, setViewMore] = React.useState(false)
 
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])

@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const TS = require('../src/strings/index.js')
+const ac_strings = require('../src/strings/ac_strings')
 const template = 'src/templates/archive/post-list.tsx'
 
 const getPageCountQuery = `
@@ -75,7 +75,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                         const allPosts=posts.map(p=>p.slug)
                         let currentPage = 1
   
-                        const baseUrl = `/${TS.slug_ac_author}/${author.slug}`
+                        const baseUrl = `/${ac_strings.slug_ac_author}/${author.slug}`
 
                         for (let i = 0; i < totalCount; i += perPage, currentPage++) {
                           let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`

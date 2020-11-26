@@ -6,18 +6,7 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-const generatePosts = require('./generators/generatePosts.js')
-const generatePages = require('./generators/generatePages.js')
-const generateAuthors = require('./generators/generateAuthors.js')
-const generatePlaylists = require('./generators/generatePlaylists.js')
-const generateScriptures=require('./generators/generateScriptures.js')
-const generateGlossary = require('./generators/generateGlossary.js')
-const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
-const generateHome = require('./generators/generateHome.js')
-const generateExplore = require('./generators/generateExplore')
-const generatePodcast = require('./generators/generatePodcast')
-const generateRedirect = require('./generators/generateRedirect')
-const generateSeries = require('./generators/generateSeries')
+
 const buildTranslations = require('./generators/json/build-translations')
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
@@ -43,15 +32,27 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
     })
   }
 
-  exports.onPreBootstrap = async () => {
-    console.log('loading pre bootscrap')
+  exports.onPreInit = async () => {
+    console.log('loading pre PreInit')
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()
 
   }
 
   exports.createPages = ({ page,actions, graphql }) => {
-
+    const generatePosts = require('./generators/generatePosts.js')
+    const generatePages = require('./generators/generatePages.js')
+    const generateAuthors = require('./generators/generateAuthors.js')
+    const generatePlaylists = require('./generators/generatePlaylists.js')
+    const generateScriptures=require('./generators/generateScriptures.js')
+    const generateGlossary = require('./generators/generateGlossary.js')
+    const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
+    const generateHome = require('./generators/generateHome.js')
+    const generateExplore = require('./generators/generateExplore')
+    const generatePodcast = require('./generators/generatePodcast')
+    const generateRedirect = require('./generators/generateRedirect')
+    const generateSeries = require('./generators/generateSeries')
+    
      const generators = [
       generateAuthors(actions, graphql), 
       generatePages(actions, graphql),

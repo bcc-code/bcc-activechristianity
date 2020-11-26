@@ -1,6 +1,5 @@
 const _ = require('lodash')
 const path = require('path')
-const TS = require('../src/strings/index.js')
 const template = 'src/templates/single-resource/glossary.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
 const getGlossaryQuery = `

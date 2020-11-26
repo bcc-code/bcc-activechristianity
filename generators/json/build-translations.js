@@ -4,8 +4,6 @@ const fs = require('fs')
 const path = require('path')
 const stringify = require(`json-stringify-safe`)
 
-
-
 const translationStrings =  async function() {
   console.log('Loading AC Translations')
   try {
@@ -15,7 +13,7 @@ const translationStrings =  async function() {
     });
 
     return await sheets.spreadsheets.values.get({
-      spreadsheetId: '19ukkR_BS7FVkVwTN63SCYwtZfK-OHqQDQWKJ_FhOJm4',
+      spreadsheetId: '1waay0ca8OdtmJFyMtKzOsje_gocnWwfI2ZUFh5Bg90U',
       range: 'A:Z',
     }, (err, res) => {
       let langs = 0
@@ -77,21 +75,14 @@ const translationStrings =  async function() {
                 lang:langSlugKey,
                 url:cols[i]}
             }).slice(1)
-            
-/*             cols.forEach((c,i)=>{
-              const locale_key = headers[i]
-              if(locale_key!=="Key"){
-                const langSlugKey=locale_slug_map[locale_key]
-                slugTranslatedUrl[cols[localeIndex]][langSlugKey]=cols[i]
-              }
-            }) */
+
           }
           
         })
 /*         console.log(slugTranslatedUrl) */
 
         if (localeIndex > -1) {
-          saveFile('./src/strings', envLocale, 'json', langsObj[envLocale])
+          saveFile('./src/strings', `${envLocale}_ac_strings`, 'json', langsObj[envLocale])
           saveFile('./src/strings',`translated_slugs`,'json',slugTranslatedUrl)
         } else for (let locale in langsObj) {
           saveFile('./src/strings', locale, 'json', langsObj[locale])

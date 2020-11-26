@@ -64,98 +64,15 @@ const postQuery = `
     views
 
 `
-const postQueryBasic = `
-    id
-    title
-    slug
-    excerpt
-    image {
-        src
-        srcset
-        dataUri
-        colors
 
-    }
-    readtime
-    track {
-        url
-        title
-        duration
-        post {
-            title
-            slug
-        }
-    }
-    authors {
-        name
-        slug
-        pivot {
-            as
-        }
-        id 
-    }
-    topics {
-        name
-        slug
-        id
-        group {
-            name
-            slug
-            id
-        }
-    }
-`
-const postQueryNoPlaylist = `
-    id
-    title
-    slug
-    excerpt
-    image {
-        src
-        srcset
-        dataUri
-        colors
 
-    }
-    readtime
-    track {
-        url
-        title
-        duration
-        post {
-            title
-            slug
-        }
-    }
-    authors {
-        name
-        slug
-        pivot {
-            as
-        }
-        id 
-    }
-    topics {
-        name
-        slug
-        id
-        group {
-            name
-            slug
-            id
-        }
-    }
-    published 
-    likes
-    views
-`
 module.exports.postQuery = postQuery
-module.exports.postQueryNoPlaylist=postQueryNoPlaylist
-const multiPostsQuery = (slugsArray,noPlaylists)=>`
+
+const multiPostsQuery = (slugsArray)=>`
 {
     posts(ids: [${slugsArray.join(",")}]) {
         data {
-            ${noPlaylists? postQueryNoPlaylist:postQuery}
+            ${postQuery}
         }
       }
 }
@@ -213,9 +130,8 @@ module.exports.sendQuery = sendQuery
 
 module.exports.topicQuery=topicQuery
 
-module.exports.getMultiPosts = (idArray,baseUrl,headers,noPlaylists=false)=>{
-    console.log(noPlaylists)
-    const query = multiPostsQuery(idArray,noPlaylists)
+module.exports.getMultiPosts = (idArray,baseUrl,headers)=>{
+    const query = multiPostsQuery(idArray)
     return sendQuery(query,baseUrl,headers).then(res=>{
         return res.posts.data
     })

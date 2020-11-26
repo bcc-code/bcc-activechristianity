@@ -1,12 +1,12 @@
 const path = require('path')
-const {postQuery,getMultiPosts,postQueryNoPlaylist}= require('gatsby-source-ac/helpers')
+const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
 const {typeScope,formatScope} = require('./TopicsFormatsTypes/hjelper')
 const baseUrl = process.env.API_URL
 //${postQuery}
 const headers = {
     "x-lang": process.env.LANG_CODE
 }
-const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
+const languagePostQuery = postQuery
 const topicQuery=`
     id
     name

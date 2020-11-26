@@ -23,12 +23,9 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
 
-    console.log(pageContext)
     const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
 
     const allCategories: INavItem[] = [...items]
-
-
 
     if (playlist && playlist.to) {
         allCategories.push(playlist)
@@ -44,7 +41,6 @@ const Listen: React.FC<IProps> = (props) => {
 
     const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
 
-    console.log(allCategories)
     React.useEffect(() => {
 
         const mixed = getRandomFeatured({ latest, popular, featured })

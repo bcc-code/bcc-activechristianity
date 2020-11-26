@@ -1,10 +1,10 @@
-const {postQuery,postQueryNoPlaylist} = require('gatsby-source-ac/helpers')
+const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
 const perPage= 12
-const languagePostQuery = process.env.LANG_CODE==="en"?postQuery:postQueryNoPlaylist
+const languagePostQuery = postQuery
 
 
 

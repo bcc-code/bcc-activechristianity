@@ -12,7 +12,7 @@ const CustomizedPage: React.FC<ICustomizedPage> = ({ path, pageContext, data }) 
     const { breadcrumb } = pageContext
     const { flexibleContent, title, slug } = data.ac.page
     const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-    console.log(componentConfig)
+
     return (
         <div>
             <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
