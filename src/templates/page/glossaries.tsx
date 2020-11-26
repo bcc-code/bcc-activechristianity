@@ -29,7 +29,7 @@ const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { bre
         const alphabet = g.word[0];
         const item = {
             name: g.word,
-            to: `/${TS.slug_glossary}/${g.slug}`
+            to: `/${ac_strings.slug_glossary}/${g.slug}`
         }
         alphabetGroupsObject[alphabet] ? alphabetGroupsObject[alphabet].push(item) : alphabetGroupsObject[alphabet.toUpperCase()] = [item]
         return item
