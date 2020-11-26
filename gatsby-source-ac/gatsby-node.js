@@ -259,10 +259,10 @@ const createDummyPost = (transformedPost)=>{
             title:transformedPost.title,
             slug:transformedPost.slug
         },
-        playlists :{
+        playlists :[{
             slug:"dummy-content",
             title:"dummy-content"
-        }
+        }]
     }
     dummyContentPost.seo={
         title:"dummy-content",

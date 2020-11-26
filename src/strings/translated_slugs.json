@@ -1,5 +1,5 @@
 {
-  "om-oss": [
+  "about-us": [
     {
       "lang": "en",
       "url": "about-us"
@@ -61,7 +61,7 @@
       "url": "om-os"
     }
   ],
-  "bidragsyter": [
+  "contributor": [
     {
       "lang": "en",
       "url": "contributor"
@@ -123,7 +123,7 @@
       "url": "bidragsyder"
     }
   ],
-  "konto": [
+  "account": [
     {
       "lang": "en",
       "url": "account"
@@ -153,7 +153,7 @@
       "url": "account"
     }
   ],
-  "kontakt": [
+  "contact": [
     {
       "lang": "en",
       "url": "contact"
@@ -213,7 +213,7 @@
       "url": "gestione-cookie"
     }
   ],
-  "e-bok": [
+  "e-book": [
     {
       "lang": "en",
       "url": "e-book"
@@ -243,7 +243,7 @@
       "url": "e-book"
     }
   ],
-  "utforsk": [
+  "explore": [
     {
       "lang": "en",
       "url": "explore"
@@ -273,7 +273,7 @@
       "url": "esplora"
     }
   ],
-  "ordliste": [
+  "glossary": [
     {
       "lang": "en",
       "url": "glossary"
@@ -303,7 +303,7 @@
       "url": "glossario"
     }
   ],
-  "vert": [
+  "host": [
     {
       "lang": "en",
       "url": "host"
@@ -333,7 +333,7 @@
       "url": "host"
     }
   ],
-  "nyeste": [
+  "latest": [
     {
       "lang": "en",
       "url": "latest"
@@ -363,7 +363,7 @@
       "url": "ultimo"
     }
   ],
-  "lytt": [
+  "listen": [
     {
       "lang": "en",
       "url": "listen"
@@ -393,7 +393,7 @@
       "url": "ascolta"
     }
   ],
-  "logg-pa": [
+  "login": [
     {
       "lang": "en",
       "url": "login"
@@ -423,10 +423,72 @@
       "url": "login"
     }
   ],
-  "DO NOT TRANSLATE": [
+  "playlist": [
     {
       "lang": "en",
-      "url": "scripture"
+      "url": "playlist"
+    },
+    {
+      "lang": "nb",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "es",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "fr",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "fi",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "hu",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "it",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "pl",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "pt-pt",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "ro",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "ru",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "sv",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "de",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "nl",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "da",
+      "url": "DO NOT TRANSLATE"
+    }
+  ],
+  "podcast": [
+    {
+      "lang": "en",
+      "url": "podcast"
     },
     {
       "lang": "nb",
@@ -515,7 +577,7 @@
       "url": "vivere-il-vangelo-intro"
     }
   ],
-  "personvernerklæring": [
+  "privacy-policy": [
     {
       "lang": "en",
       "url": "privacy-policy"
@@ -545,7 +607,7 @@
       "url": "gestione-privacy"
     }
   ],
-  "les": [
+  "read": [
     {
       "lang": "en",
       "url": "read"
@@ -605,7 +667,99 @@
       "url": "registra"
     }
   ],
-  "tema": [
+  "scripture": [
+    {
+      "lang": "en",
+      "url": "scripture"
+    },
+    {
+      "lang": "nb",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "es",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "fr",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "fi",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "hu",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "it",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "pl",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "pt-pt",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "ro",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "ru",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "sv",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "de",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "nl",
+      "url": "DO NOT TRANSLATE"
+    },
+    {
+      "lang": "da",
+      "url": "DO NOT TRANSLATE"
+    }
+  ],
+  "theme": [
+    {
+      "lang": "en",
+      "url": "theme"
+    },
+    {
+      "lang": "nb",
+      "url": "tema"
+    },
+    {
+      "lang": "es",
+      "url": ""
+    },
+    {
+      "lang": "fr",
+      "url": ""
+    },
+    {
+      "lang": "fi",
+      "url": ""
+    },
+    {
+      "lang": "hu",
+      "url": ""
+    },
+    {
+      "lang": "it",
+      "url": "tema"
+    }
+  ],
+  "topic": [
     {
       "lang": "en",
       "url": "topic"
@@ -697,7 +851,7 @@
       "url": "utente"
     }
   ],
-  "merket": [
+  "bookmarked": [
     {
       "lang": "en",
       "url": "bookmarked"
@@ -727,7 +881,7 @@
       "url": "segnalibro"
     }
   ],
-  "endre-passord": [
+  "password": [
     {
       "lang": "en",
       "url": "password"
@@ -757,7 +911,7 @@
       "url": "password"
     }
   ],
-  "mitt-innhold": [
+  "my-content": [
     {
       "lang": "en",
       "url": "my-content"
@@ -787,7 +941,7 @@
       "url": "il-mio-contenuto"
     }
   ],
-  "slett-profil": [
+  "delete-profile": [
     {
       "lang": "en",
       "url": "delete-profile"
@@ -817,7 +971,7 @@
       "url": "elimina-profilo"
     }
   ],
-  "folger": [
+  "followed": [
     {
       "lang": "en",
       "url": "followed"
@@ -847,7 +1001,7 @@
       "url": "seguito"
     }
   ],
-  "historikk": [
+  "history": [
     {
       "lang": "en",
       "url": "history"
@@ -877,7 +1031,7 @@
       "url": "storia"
     }
   ],
-  "se-paa": [
+  "watch": [
     {
       "lang": "en",
       "url": "watch"

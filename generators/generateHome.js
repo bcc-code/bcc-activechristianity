@@ -83,10 +83,10 @@ module.exports = function generatePages(actions, graphql) {
             
             const {allAcNodeSetting,ac}=result.data
            
-            const featuredPosts = allAcNodeSetting.nodes[0].featured_posts
+            const featuredPosts = allAcNodeSetting.nodes[0].featured_posts.filter(item=>item.slug!=="dummy-content")
             
             const popularPostsAll={
-                "static":allAcNodeSetting.nodes[0].popular_posts
+                "static":allAcNodeSetting.nodes[0].popular_posts.filter(item=>item.slug!=="dummy-content")
             }
     
             const staticTopics = []
