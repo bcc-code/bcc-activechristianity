@@ -108,7 +108,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     {...duration}
                 />
                 <div className="flex">
-                    {views ? <Views views={views} /> : null}
+                    {/*  {views ? <Views views={views} /> : null} */}
                     <Bookmark id={id} color="slate-dark" size="5" />
                 </div>
             </div>

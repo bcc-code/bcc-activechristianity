@@ -154,8 +154,8 @@ export const Views: React.FC<{ views: string }> = ({ views }) => {
 export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
     const { id, views, className } = props
     return (
-        <div className={`font-roboto  ${className ? className : 'flex flex-1 mr-2 justify-between items-center'}`}>
-            {typeof views === "string" && (
+        <div className={`font-roboto  ${className ? className : 'flex flex-1 mr-2 justify-end items-center'}`}>
+            {/*             {typeof views === "string" && (
                 <div className="mr-4 flex items-center">
                     <Icon
                         name="Visibility"
@@ -167,7 +167,7 @@ export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
                     </span>
                 </div>
             )}
-
+ */}
             <Bookmark
                 id={id}
                 color="slate-dark"

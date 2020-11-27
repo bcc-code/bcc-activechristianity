@@ -10,7 +10,6 @@ import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
-import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
 import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFollow'
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics.tsx'
 import { getRandomArray } from '@/helpers'
@@ -111,14 +110,14 @@ const UserHistory = () => {
                         <div>
                             {video.length > 0 && (
                                 <div className="py-6">
-                                    <SectionTitleDesktopAndMobile name={ac_strings.save_video} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.bookmarked_video} />
                                     <HSCardListVideo posts={video} />
                                 </div>
                             )}
                             {other.length > 0 && (
                                 <div className="py-6">
 
-                                    <SectionTitleDesktopAndMobile name={ac_strings.bookmarked} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.bookmarked_posts} />
                                     <div className="px-4">
                                         {other.map((item, i) => (
                                             <PostItem {...item} key={i} />
