@@ -205,7 +205,7 @@ if (activeEnv === 'production') {
     }
   )
 
-  if(process.env.LANG_CODE==="en"){
+  if(process.env.LANG_CODE==="en" || process.env.NO_FOLLOW==="true"){
     plugins.push({
       resolve: 'gatsby-plugin-robots-txt',
       options: {

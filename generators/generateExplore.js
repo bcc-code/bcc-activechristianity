@@ -16,7 +16,6 @@ const query = `{
         ${topicQuery}
     }
   }
-
 }`
 
 
@@ -50,19 +49,9 @@ module.exports = function generateTopics(actions, graphql) {
                 }`)
 
                 const {popularTopics} = popularTopicsRes.data.ac
-                
-  
-               
 
-                createPage({
-                    path: `${ac_strings.slug_topic}`,
-                    component: path.resolve(`./src/templates/page/topics.tsx`),
-                    context:{
-                      title:ac_strings.topic,
-                      popularTopics,
-                      featuredTopics 
-                    }, 
-                  })
+                
+
                   const {animation,song,testimony,interview}=formatsAll
                   const contextExplore = {
                     title: explorePage.title,
@@ -75,7 +64,6 @@ module.exports = function generateTopics(actions, graphql) {
                     path: explorePage.slug,
                     component: path.resolve(exploreTemplate),
                     context:contextExplore,
-                    
                     })
                
           }

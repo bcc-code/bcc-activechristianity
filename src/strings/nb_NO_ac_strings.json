@@ -186,5 +186,7 @@
   "with": "med %1$s",
   "youMightBeInterestedIn": "Kanskje er du interessert i",
   "recently_watched": "Nylig sett videoer",
-  "recently_viewed": "Nylig sett innlegg"
+  "recently_viewed": "Nylig sett innlegg",
+  "bookmarked_video": "Merket videoer",
+  "bookmarked_posts": "Merket  innlegg"
 }

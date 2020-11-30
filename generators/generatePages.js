@@ -17,7 +17,6 @@ const query = `{
         slug
       }
     }
-
   }
 }`
 
@@ -114,12 +113,21 @@ module.exports = function generatePages(actions, graphql) {
             ]
         }
         createPage({
-          
           path: `${ac_strings.slug_theme}/${page.slug}`,
           component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
           context,
         })
       })
+
+      createPage({
+        path: `${ac_strings.slug_topic}`,
+        component: path.resolve(`./src/templates/page/topics.tsx`),
+        context:{
+          title:ac_strings.topic,
+          themes: parentIds.themes.children.map(page=>({title:page.title,slug:page.slug}))
+        }, 
+      })
+
  // pages
       _.each(parentIds.pages.children,page=>{
         console.log(page)

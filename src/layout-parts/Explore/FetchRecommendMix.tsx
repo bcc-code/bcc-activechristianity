@@ -12,10 +12,9 @@ interface IFetchPost {
     topics?: ITopic[]
 }
 
-const RecommendedForYou: React.FC<IFetchPost> = () => {
+const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
     const [posts, setPosts] = React.useState<string[]>([])
-    const [showingPosts, setShowingPosts] = React.useState<string[]>([])
-    const [pageNumber, setPageNumber] = React.useState<number>(0)
+    const [pageNumber, setPageNumber] = React.useState<number>(1)
     const postsPerPage = 12
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
@@ -40,6 +39,8 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
                         }
                         return undefined
                     }).catch(error => {
+                        console.log(t)
+                        console.log(url)
                         console.log(error)
                     })
             })).then(async (postArrays) => {
@@ -52,7 +53,6 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
                 }))
                 const randomPostSlugs = getRandomArray(allPostSlugs, allPostSlugs.length)
                 setIsFetchingMore(false)
-                handlePageChange()
                 setPosts(randomPostSlugs)
             })
         })
@@ -66,10 +66,7 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
         }
 
         if (pageNumber < lastPage) {
-            const start = (pageNumber) * postsPerPage
-            const end = (pageNumber + 1) * postsPerPage
-            const postToAdd = posts.slice(start, end)
-            setShowingPosts([...showingPosts, ...postToAdd])
+
             setPageNumber(pageNumber + 1)
             setTimeout(() => {
                 window.scrollTo({
@@ -79,11 +76,11 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
         }
     }
 
-
+    const end = pageNumber * postsPerPage
     return (
 
         <div className="px-4">
-            {showingPosts.map(p => {
+            {posts.slice(0, end).map(p => {
 
                 return p ? (
                     <FetchOnePost
@@ -109,4 +106,4 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
     )
 }
 
-export default React.memo(RecommendedForYou)
+export default RecommendedForYou

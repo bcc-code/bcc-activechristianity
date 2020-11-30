@@ -33,7 +33,7 @@ const ExploreLayout: React.FC<{
     let filteredTopics = topics.filter(item => !formatIds[item.id] && !typeIds[item.id])
     filteredTopics = [...new Set([...filteredTopics])]
     const randomTopics = getRandomArray(filteredTopics, 6)
-
+    console.log('exploring home')
     return (
         <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
