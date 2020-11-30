@@ -33,13 +33,13 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     }
 
     return (
-        <button
+        <div
             className={className ? className : ''}
             onClick={handleClick}
             onKeyDown={handleClick}
         >
             {render({ followed })}
-        </button>
+        </div>
     )
 }
 

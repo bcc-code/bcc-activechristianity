@@ -55,7 +55,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
             </div>
 
-            {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowercase !== "false" && (
+            {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink    {...playlist} />
@@ -84,7 +84,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     </div>
                 </LazyLoad>
             )}
-            {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowercase !== "false" && (
+            {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink {...podcast} />

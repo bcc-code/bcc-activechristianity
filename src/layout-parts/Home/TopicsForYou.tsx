@@ -22,9 +22,8 @@ const TopicsForYou = () => {
                             <div className="flex flex-wrap">
 
                                 {randomTopics.map(({ name, slug: to, id }, i) => (
-                                    <div className="flex bg-white text-d4slate-dark mt-4 mr-4 text-lg font-bold">
+                                    <div className="flex bg-white text-d4slate-dark mt-4 mr-4 text-lg font-bold" key={i}>
                                         <Link
-                                            key={i}
                                             className="p-2"
                                             to={`${ac_strings.slug_topic}/${to}`}>
                                             {name}

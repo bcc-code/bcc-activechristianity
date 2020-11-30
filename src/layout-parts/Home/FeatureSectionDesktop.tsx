@@ -10,7 +10,6 @@ import { ITopicPostSlugs, IPostItem, ITopicPostItems } from '@/types'
 import shortid from 'shortid'
 
 const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPosts }) => {
-
     return (
         <div>
             <h3 className="relative mt-8 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
@@ -19,26 +18,30 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                 </div>
             </h3>
             <div className="my-4 grid gap-4 sm:gap-6 md:gap-6 grid-cols-4">
-                {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowercase !== "false" ? <FetchLatestPodcast
-                    key={shortid()}
-                    layout="one"
-                    render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast"
-                    />}
+                {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" ? (
+                    <FetchLatestPodcast
+                        key={shortid()}
+                        layout="one"
+                        render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast"
+                        />}
 
-                /> : (
+                    />
+                ) : (
                         featuredPosts[2] && <TopImg {...featuredPosts[2]} />
                     )}
-                {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowercase !== "false" ? <FetchLatestPlaylists
-                    layout="one"
-                    key={shortid()}
-                    render={({ playlists }) => {
-                        const random = getRandomArray(playlists, 1)
-                        const post = random.length ? random[0] : undefined
-                        return post ? (
-                            <FeaturedCard {...playlistToPost(post)} type="playlist" />
-                        ) : (<div></div>)
-                    }}
-                /> : (
+                {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" ? (
+                    <FetchLatestPlaylists
+                        layout="one"
+                        key={shortid()}
+                        render={({ playlists }) => {
+                            const random = getRandomArray(playlists, 1)
+                            const post = random.length ? random[0] : undefined
+                            return post ? (
+                                <FeaturedCard {...playlistToPost(post)} type="playlist" />
+                            ) : (<div></div>)
+                        }}
+                    />
+                ) : (
                         featuredPosts[3] && <TopImg {...featuredPosts[3]} key={shortid()} />
                     )}
                 {featuredPosts[0] && <TopImg {...featuredPosts[0]} key={shortid()} />}

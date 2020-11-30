@@ -51,7 +51,7 @@ const ExploreLayout: React.FC<{
 
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
-                    {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowercase !== "false" && (
+                    {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" && (
                         <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
@@ -62,7 +62,7 @@ const ExploreLayout: React.FC<{
                             </div>
                         </Link>
                     )}
-                    {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowercase !== "false" && (
+                    {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" && (
                         <Link key={shortid()} to={ac_strings.slug_playlist} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
