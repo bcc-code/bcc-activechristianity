@@ -3,7 +3,7 @@ import he from 'he'
 import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
-
+import endpoints from '@/endpoints'
 export function trimSlug(slug: string) {
     const regex = /^[/]*/gm
     let updatedTo = slug.replace(regex, '');
@@ -115,7 +115,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
 
 
-        const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
+        const src = track.url.startsWith('http') ? track.url : `${endpoints.api_host}${track.url}`
 
         const toAdd: IMedia = (
             {
@@ -319,7 +319,7 @@ export const normalizePostRes = (post: IPostRes) => {
             postItem.duration = { listen: secondesToMinutes(track.duration) }
         }
         media["audio"] = {
-            src: track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`,
+            src: track.url.startsWith('http') ? track.url : `${endpoints.api_host}${track.url}`,
             title: track.title,
             type: "audio",
             article: {

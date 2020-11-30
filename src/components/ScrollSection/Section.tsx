@@ -3,6 +3,7 @@ import { Section } from 'react-scroll-section'
 import Video16to9 from '@/components/Images/Video16to9'
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import CustomizedPageComponent from '../CustomizedPageComponent'
+import endpoints from '@/endpoints'
 
 export interface ISectionProps {
     title: string
@@ -22,7 +23,7 @@ const ScrollSectionChild: React.FC<IScrollSectionChildProps> = ({ slug, backgrou
             <div className="w-tablet px-4">
                 <h2 className="font-bold text-xl pb-4">{title}</h2>
                 {slug === "about-us-top" && <Video16to9
-                    src="https://www.youtube.com/embed/sAbW36EzKIc"
+                    src={endpoints.about_us_video}
                     className={`rounded-xxl sm:rounded-xl overflow-hidden mt-8`}
                 />}
                 <CustomizedPageComponent {...childPage} />

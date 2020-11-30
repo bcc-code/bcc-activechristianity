@@ -13,8 +13,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
         plugins.define({
-          'process.env.API_URL': JSON.stringify(process.env.API_URL),
-          'process.env.API_HOST': JSON.stringify(process.env.API_HOST),
           'process.env.SITE_URL': JSON.stringify(process.env.SITE_URL),
           'process.env.URL': JSON.stringify(process.env.URL),
           'process.env.LANG': JSON.stringify(process.env.LANG),

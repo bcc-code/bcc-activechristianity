@@ -1,7 +1,5 @@
 const core = [
     "TITLE",
-    "API_HOST",
-    "API_URL",
     "SITE_URL",
     "URL",
     "LANG",

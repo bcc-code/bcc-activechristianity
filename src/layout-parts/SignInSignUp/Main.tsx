@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
+import endpoints from '@/endpoints'
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_options_title,
@@ -35,7 +36,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
     const text = formText[type]
     const handleClick = () => dispatch(openSignInModal(type === "signInOptions" ? "signInForm" : "signUpForm"))
     const handleFacebookClick = () => {
-        window.location.href = 'https://ac2.day4.live/social/facebook/redirect'
+        window.location.href = endpoints.facebook_login_redirect
     }
     return (
         <div className="flex flex-col items-center text-center">

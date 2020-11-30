@@ -3,17 +3,18 @@ const axios = require(`axios`)
 const fs = require('fs')
 const path = require('path')
 const stringify = require(`json-stringify-safe`)
+const endpoints = require('../../src/endpoints')
 
 const translationStrings =  async function() {
   console.log('Loading AC Translations')
   try {
     const sheets = google.sheets({
       version: 'v4',
-      auth: 'AIzaSyASDGn4oZErww-RsW6kBPnQz7tCB6x3Fpk'
+      auth: endpoints.translation_google_sheet_auth
     });
 
     return await sheets.spreadsheets.values.get({
-      spreadsheetId: '1waay0ca8OdtmJFyMtKzOsje_gocnWwfI2ZUFh5Bg90U',
+      spreadsheetId: endpoints.translation_google_sheet_id,
       range: 'A:Z',
     }, (err, res) => {
       let langs = 0
@@ -102,7 +103,7 @@ module.exports.translationStrings = translationStrings
 const languageSites = async function() {
 
   const options = {
-      url: `${process.env.API_URL}`,
+      url: `${endpoints.api_url}`,
         method: 'post',
         headers: {
           'Content-Type': 'application/json'

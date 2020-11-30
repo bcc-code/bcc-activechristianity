@@ -1,9 +1,9 @@
 import React from 'react';
 import StickyBox from "react-sticky-box";
-import { PageSectionHeader } from '@/components/Headers'
 import { SideNavItem } from '@/components/Button'
+import endpoints from '@/endpoints'
 import Icon from '@/components/Icons/Icon'
-const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
+const imageUrl = endpoints.contact_hero
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import {

@@ -66,10 +66,6 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
         <Location>
             {({ navigate, location }) => (
                 <div>
-                    {wpId && auth.is_editor ? (
-                        <a href={`${process.env.API_URL}/wp-admin/post.php?post=${wpId}&action=edit`} target="_blank" rel="noopener noreferrer">Edit Post</a>
-                    ) : null}
-
                     <Helmet>
                         <title>{type === 'page' ? `${title} – ${ac_strings.site_title}` : title}</title>
                         <meta name="description" content={description} />

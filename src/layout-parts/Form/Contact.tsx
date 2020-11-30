@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import ac_strings from '@/strings/ac_strings.js'
-
+import endpoints from '@/endpoints'
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 import { LayoutH1 } from '@/components/Headers'
 
@@ -73,7 +73,7 @@ const ContactForm = () => {
             /*     const dataLayer = (window as any).dataLayer = (window as any).dataLayer || []; */
 
             axios({
-                url: "https://q4jq50xsab.execute-api.us-east-1.amazonaws.com/prod",
+                url: endpoints.contact_form_api,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
