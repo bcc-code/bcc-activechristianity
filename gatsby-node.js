@@ -14,7 +14,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
       plugins: [
         plugins.define({
           'process.env.SITE_URL': JSON.stringify(process.env.SITE_URL),
-          'process.env.URL': JSON.stringify(process.env.URL),
           'process.env.LANG': JSON.stringify(process.env.LANG),
           'process.env.LANG_CODE': JSON.stringify(process.env.LANG_CODE),
           'process.env.LOCALE': JSON.stringify(process.env.LOCALE),
@@ -23,7 +22,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
           'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
-          'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
           'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
         })
       ]
@@ -34,7 +32,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
     console.log('loading pre PreInit')
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()
-
   }
 
   exports.createPages = ({ page,actions, graphql }) => {

@@ -78,7 +78,7 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
                         <meta name="og:description" content={description} />
                         <meta property="og:type" content={mediaTypes[type] ? mediaTypes[type] : type} />
                         {authors ? (
-                            authors.map((a: INavItem, k: number) => <meta key={k} property="book:author" content={`${process.env.URL}/${ac_strings.slug_ac_author}/${a.to}`} />)
+                            authors.map((a: INavItem, k: number) => <meta key={k} property="book:author" content={`${process.env.SITE_URL}/${ac_strings.slug_ac_author}/${a.to}`} />)
                         ) : null}
                         {imageUrl ? [
                             (<meta key={1} property="og:image" content={imageUrl.src} />),

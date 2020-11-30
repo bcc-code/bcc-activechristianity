@@ -19,7 +19,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                 </div>
             </h3>
             <div className="my-4 grid gap-4 sm:gap-6 md:gap-6 grid-cols-4">
-                {ac_strings.slug_podcast ? <FetchLatestPodcast
+                {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowercase !== "false" ? <FetchLatestPodcast
                     key={shortid()}
                     layout="one"
                     render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast"
@@ -28,7 +28,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                 /> : (
                         featuredPosts[2] && <TopImg {...featuredPosts[2]} />
                     )}
-                {ac_strings.slug_playlist ? <FetchLatestPlaylists
+                {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowercase !== "false" ? <FetchLatestPlaylists
                     layout="one"
                     key={shortid()}
                     render={({ playlists }) => {
