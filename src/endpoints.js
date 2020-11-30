@@ -8,7 +8,7 @@ module.exports = {
     "about_us_video":"https://www.youtube.com/embed/sAbW36EzKIc",
     "reftagger":"https://api.reftagger.com/v2/RefTagger.js",
     "api_host":"https://ac2.day4.live",
-    "api_url":"ttps://ac2.day4.live/graphql",
+    "api_url":"https://ac2.day4.live/graphql",
     "translation_google_sheet_auth":"AIzaSyASDGn4oZErww-RsW6kBPnQz7tCB6x3Fpk",
     "translation_google_sheet_id":"1waay0ca8OdtmJFyMtKzOsje_gocnWwfI2ZUFh5Bg90U"
 }

@@ -151,6 +151,26 @@
     {
       "lang": "it",
       "url": "account"
+    },
+    {
+      "lang": "pl",
+      "url": "konto"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "konto"
     }
   ],
   "kontakt": [
@@ -181,6 +201,26 @@
     {
       "lang": "it",
       "url": "contatto"
+    },
+    {
+      "lang": "pl",
+      "url": "kontakt"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "kontakt"
     }
   ],
   "cookie-policy": [
@@ -211,6 +251,26 @@
     {
       "lang": "it",
       "url": "gestione-cookie"
+    },
+    {
+      "lang": "pl",
+      "url": "polityka-ciasteczek"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "cookie-policy"
     }
   ],
   "e-bok": [
@@ -241,6 +301,26 @@
     {
       "lang": "it",
       "url": "e-book"
+    },
+    {
+      "lang": "pl",
+      "url": "e-książka"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "e-bok"
     }
   ],
   "utforsk": [
@@ -271,6 +351,26 @@
     {
       "lang": "it",
       "url": "esplora"
+    },
+    {
+      "lang": "pl",
+      "url": "odkryj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "utforska"
     }
   ],
   "ordliste": [
@@ -301,6 +401,26 @@
     {
       "lang": "it",
       "url": "glossario"
+    },
+    {
+      "lang": "pl",
+      "url": "wyjaśnienia"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "ordlista"
     }
   ],
   "vert": [
@@ -331,6 +451,26 @@
     {
       "lang": "it",
       "url": "host"
+    },
+    {
+      "lang": "pl",
+      "url": "gospodarz"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "värd"
     }
   ],
   "nyeste": [
@@ -361,6 +501,26 @@
     {
       "lang": "it",
       "url": "ultimo"
+    },
+    {
+      "lang": "pl",
+      "url": "najnowsze"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "senaste"
     }
   ],
   "lytt": [
@@ -391,6 +551,26 @@
     {
       "lang": "it",
       "url": "ascolta"
+    },
+    {
+      "lang": "pl",
+      "url": "posłuchaj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "lyssna"
     }
   ],
   "logg-pa": [
@@ -421,68 +601,88 @@
     {
       "lang": "it",
       "url": "login"
+    },
+    {
+      "lang": "pl",
+      "url": "zaloguj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "inloggning"
     }
   ],
-  "DO NOT TRANSLATE": [
+  "FALSE": [
     {
       "lang": "en",
       "url": "scripture"
     },
     {
       "lang": "nb",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "es",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "fr",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "fi",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "hu",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "it",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "pl",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "pt-pt",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "ro",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "ru",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "sv",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "de",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "nl",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "da",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     }
   ],
   "living-the-gospel-intro": [
@@ -513,6 +713,26 @@
     {
       "lang": "it",
       "url": "vivere-il-vangelo-intro"
+    },
+    {
+      "lang": "pl",
+      "url": "życie-ewangelią-wstęp"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "living-the-gospel-intro"
     }
   ],
   "personvernerklæring": [
@@ -542,7 +762,27 @@
     },
     {
       "lang": "it",
-      "url": "gestione-privacy"
+      "url": "gestione-riservatezza"
+    },
+    {
+      "lang": "pl",
+      "url": "polityka prywatności"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "Sekretesspolicy"
     }
   ],
   "les": [
@@ -573,6 +813,26 @@
     {
       "lang": "it",
       "url": "leggi"
+    },
+    {
+      "lang": "pl",
+      "url": "przeczytaj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "läsa"
     }
   ],
   "register": [
@@ -603,6 +863,26 @@
     {
       "lang": "it",
       "url": "registra"
+    },
+    {
+      "lang": "pl",
+      "url": "zarejestruj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "registrera dig"
     }
   ],
   "tema": [
@@ -695,6 +975,26 @@
     {
       "lang": "it",
       "url": "utente"
+    },
+    {
+      "lang": "pl",
+      "url": "użytkownik"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "användare"
     }
   ],
   "merket": [
@@ -724,7 +1024,27 @@
     },
     {
       "lang": "it",
-      "url": "segnalibro"
+      "url": "preferiti"
+    },
+    {
+      "lang": "pl",
+      "url": "dodano do zakładek"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "bokmärkt"
     }
   ],
   "endre-passord": [
@@ -755,6 +1075,26 @@
     {
       "lang": "it",
       "url": "password"
+    },
+    {
+      "lang": "pl",
+      "url": "hasło"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "lösenord"
     }
   ],
   "mitt-innhold": [
@@ -785,6 +1125,26 @@
     {
       "lang": "it",
       "url": "il-mio-contenuto"
+    },
+    {
+      "lang": "pl",
+      "url": "moja-zawartość"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "mitt-innehåll"
     }
   ],
   "slett-profil": [
@@ -815,6 +1175,26 @@
     {
       "lang": "it",
       "url": "elimina-profilo"
+    },
+    {
+      "lang": "pl",
+      "url": "usuń profil"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "radera-profil"
     }
   ],
   "folger": [
@@ -845,6 +1225,26 @@
     {
       "lang": "it",
       "url": "seguito"
+    },
+    {
+      "lang": "pl",
+      "url": "śledzę"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "följer"
     }
   ],
   "historikk": [
@@ -875,6 +1275,26 @@
     {
       "lang": "it",
       "url": "storia"
+    },
+    {
+      "lang": "pl",
+      "url": "historia"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "historik"
     }
   ],
   "se-paa": [
@@ -905,6 +1325,26 @@
     {
       "lang": "it",
       "url": "guarda"
+    },
+    {
+      "lang": "pl",
+      "url": "obejrzyj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": ""
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "se"
     }
   ]
 }
