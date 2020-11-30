@@ -8,7 +8,7 @@ const HSCardList: React.FC<{ playlists: IPlaylist[] }> = ({ playlists }) => {
         <XScroll
             childeClassName="w-3/12 min-w-3/12"
             items={playlists.map((p) => (
-                <PodcastTopImg  {...p} key={shortId.generate()} />
+                <PodcastTopImg   {...p} key={shortId.generate()} />
             ))}
         />
 

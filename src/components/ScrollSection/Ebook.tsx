@@ -9,10 +9,7 @@ import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 import { PostLabel } from '@/components/PostElements'
 import { PostH1 } from '@/components/Headers'
-import ac_strings from '@/strings/ac_strings.json'
-
-import TS from '@/strings'
-
+import ac_strings from '@/strings/ac_strings.js'
 
 const Ebook: React.FC<IEbook> = (ebook) => {
 
@@ -65,7 +62,7 @@ const Ebook: React.FC<IEbook> = (ebook) => {
                     {desktopCover}
                 </div>
                 <div className="flex-1">
-                    <PostLabel text={TS["e-book"]} />
+                    <PostLabel text={ac_strings["e-book"]} />
                     <PostH1 title={title} />
                     <div className="border-b w-1/6 my-8 border-d4gray"></div>
 

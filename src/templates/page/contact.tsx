@@ -1,9 +1,9 @@
 import React from 'react'
 import MetaTag from '@/components/Meta'
 import FetchSocialMediaPlatform from '@/HOC/FetchSocialMediaPlatforms'
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings'
 import { LayoutH1 } from '@/components/Headers'
-import { MobileMainWrapper } from '@/layout-parts/PostSections'
+import { MobileMainWrapper } from '@/layout-parts/PostLayout/PostSections'
 
 import ContactForm from '@/layout-parts/Form/Contact'
 
@@ -12,7 +12,7 @@ const ContactPage = () => {
     const height = 150
     return (
         <div className="">
-            <MetaTag title={TS.contact} type="page" breadcrumb={[]} />
+            <MetaTag title={ac_strings.contact} type="page" breadcrumb={[]} />
             <Header
                 className={`fixed transition-transform background-image w-full flex flex-col justify-center px-4 pb-12 sm:hidden`}
                 imageUrl={imageUrl}
@@ -48,7 +48,7 @@ const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({
             className={className}
             style={{ top: "50px", background: `url(${imageUrl}) center center no-repeat`, backgroundSize: "cover", ...style }}
         >
-            <LayoutH1 title={TS.contact} />
+            <LayoutH1 title={ac_strings.contact} />
 
             <FetchSocialMediaPlatform
 
@@ -57,7 +57,7 @@ const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({
                         <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
                             {platforms.map(item => {
                                 return (
-                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">
+                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mx-2 flex items-center">
                                         <div className="pr-2">{item.icon} </div><div>{item.name}</div>
                                     </a>
                                 )

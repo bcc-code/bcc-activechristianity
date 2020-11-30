@@ -4,7 +4,7 @@ import Link from '@/components/CustomLink'
 import { INavItem } from "@/types"
 import Icon from '@/components/Icons/Icon'
 import { PageSectionHeader } from '@/components/Headers'
-import ac_strings from '@/strings/ac_strings.json'
+
 
 export interface ITypeCount extends INavItem {
     count?: number
@@ -18,10 +18,10 @@ interface IByTaxonomies {
     icon?: JSX.Element
 }
 
-const ByTaxonomies: React.FC<IByTaxonomies> = ({ types }) => {
+const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title }) => {
     return (
         <div className="bg-d4athens py-4">
-            <PageSectionHeader title={ac_strings.byCategories} />
+            <PageSectionHeader title={title} className="pb-4" />
             <div className="standard-max-w">
                 <div className="flex flex-col sm:hidden">
                     {types.map(({ to, name, count }, key) => {

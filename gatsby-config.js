@@ -8,84 +8,82 @@ require("dotenv").config({
 
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
 
+const postQuery = `{
+  ac {
+    allPosts {
+      objectID: id
+      title
+      slug
+      excerpt
+      authors {
+          name
+          slug
+          id
+          pivot {
+              as
+          }
+      }
+      topics {
+          name
+          slug
+          id
+          group {
+              name
+              slug
+          }
+      }
+      published
+    }
+  }
+}`
+
 const queries = [
   {
-    query: `{
-      ac {
-        allPosts {
-          objectID: id
-          title
-          slug
-          excerpt
-          authors {
-              name
-              slug
-              id
-              pivot {
-                  as
-              }
-          }
-          topics {
-              name
-              slug
-              id
-              group {
-                  name
-                  slug
-              }
-          }
-          published
-        }
-      }
-    }`,
+    query: postQuery ,
     transformer: ({ data }) => data.ac && data.ac.allPosts.map((node) => {
       return { ...node, type: 'post' }
     }), // (optional)
     //index: ''// (optional) override default
-  },
-  {
-    query: `{
-      ac {
-        playlists {  
-          id  
-          objectID: slug
-          title
-          slug
-          excerpt
-          image {
-            src
-            srcset
-            dataUri
-
-        }
-        }
-      }
-    }`,
-    transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
-      return { ...node, type: 'playlist' }
-    }), // (optional)
-    //index: ''// (optional) override default
   }
-];
-
+  ];
+if(process.env.LOCALE==="en"){
+  queries.push(
+    {
+      query: `{
+        ac {
+          playlists {  
+            id  
+            objectID: slug
+            title
+            slug
+            excerpt
+            image {
+              src
+              srcset
+              dataUri
+  
+          }
+          }
+        }
+      }`,
+      transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
+        return { ...node, type: 'playlist' }
+      }), // (optional)
+      //index: ''// (optional) override default
+    }
+  )
+}
 
 const checkEnvVar = require('./check_env_var')
 checkEnvVar()
 
 
 const plugins = [
-  {
-    resolve: `gatsby-plugin-google-tagmanager`,
-    options: {
-      id: process.env.GTM_TAG||"GTM-WCW8RR4", 
-      includeInDevelopment: false,
-      gtmLocale: process.env.LOCALE,
-    },
-  },
   'gatsby-plugin-typescript',
   'gatsby-plugin-react-helmet',
   {
     resolve: "gatsby-source-graphql",
+
     options: {
       // This type will contain remote schema Query type
       typeName: "AcGraphql",
@@ -93,6 +91,10 @@ const plugins = [
       fieldName: "ac",
       // URL to query from
       url: process.env.API_URL,
+      headers: {
+        // Learn about environment variables: https://gatsby.dev/env-vars
+        "x-lang": process.env.LANG_CODE
+      },
     },
   },
   {
@@ -104,10 +106,11 @@ const plugins = [
       fieldName: "ac_node",
       // URL to query from
       baseUrl: process.env.API_URL,
+      headers: {
+        "x-lang": process.env.LANG_CODE
+      }
     },
   },
-  'gatsby-transformer-sharp',
-  'gatsby-plugin-sharp',
   'gatsby-plugin-sass',
   {
     resolve: 'gatsby-plugin-root-import',
@@ -151,17 +154,14 @@ const plugins = [
     options: {
       appId: process.env.ALGOLIA_APP_ID,
       apiKey: process.env.ALGOLIA_ADMIN_KEY,
-      indexName: 'dev_posts', // for all queries
+      indexName: 'posts', // for all queries
       queries,
       enablePartialUpdates: true
-    },
-  }
+    }
+  },
+
 ];
 
-/* if (process.env.ALGOLIA_ADMIN_KEY && process.env.ENABLE_ALGOLIA === 'yes') {
-  console.log('pushing algolia')
-  plugins.push()
-} */
 
 if (activeEnv === 'production') {
   
@@ -180,9 +180,50 @@ if (activeEnv === 'production') {
           },
           generateRoutingRules: false,
           generateRedirectObjectsForPermanentRedirects: true,
+          enableS3StaticWebsiteHosting: false,
       },
+    },
+/*     {
+      resolve: `gatsby-plugin-algolia-search`,
+      options: {
+        appId: process.env.ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        indexName: 'posts', // for all queries
+        queries,
+        enablePartialUpdates: true
+      }, }*/
+    {
+      resolve: `gatsby-plugin-google-tagmanager`,
+      options: {
+        id: process.env.GTM_TAG||"GTM-WCW8RR4", 
+        includeInDevelopment: false,
+        gtmLocale: process.env.LOCALE,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sitemap'
     }
   )
+
+  if(process.env.LANG_CODE==="en"){
+    plugins.push({
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: process.env.SITE_URL,
+        sitemap: `${process.env.SITE_URL}/sitemap.xml`,
+        output:'/robots.txt',
+        env: {
+          development: {
+            policy: [{ userAgent: '*', disallow: ['/'] }]
+          },
+          production: {
+            policy: [{ userAgent: '*', disallow: ['/'] }]
+          }
+        }
+      }
+    })
+  }
+
 }
 
 module.exports = {

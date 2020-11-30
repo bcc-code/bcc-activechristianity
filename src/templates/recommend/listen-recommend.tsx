@@ -1,10 +1,7 @@
 import React from "react"
 import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
-
-import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
-import FetchTopicFeatured from '@/HOC/FetchFeaturedPostsForTopic.tsx'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
 const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
@@ -14,58 +11,47 @@ const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenD
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
-import { INavItem, INavItemCount, ISubtopicLinks } from '@/types'
+import { INavItem, INavItemCount, ISubtopicLinks, IPostItem, IRecommendationPage } from '@/types'
 import podcastProperties from '@/strings/podcastProperties'
-import { getRandomArray } from "@/helpers"
-
+import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 // helper
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 // types'
 
 const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
-    const { title, items, playlist, podcast, mostPopular, featuredPosts } = pageContext
+
+    const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
+
+    const allCategories: INavItem[] = [...items]
+
+    if (playlist && playlist.to) {
+        allCategories.push(playlist)
+    }
+
+    if (podcast && podcast.to) {
+        allCategories.push(podcast)
+    }
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
+    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+
+    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+
+    React.useEffect(() => {
+
+        const mixed = getRandomFeatured({ latest, popular, featured })
+        setMixedFeaturedPosts(mixed)
+    }, [])
     return (
         <div >
             <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
-                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
-
-                    <div className="w-full py-6 sm:hidden">
-
-                        <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-                        <FetchTopicFeatured
-                            latestSlug={latestSlug}
-                            featuredPosts={featuredPosts}
-                            popularPosts={mostPopular.slice(0, 5)}
-                            render={({ posts }) => (
-                                <HSCardList posts={posts} />
-                            )}
-
-                        />
-                    </div>
-                </div>
-                <div className="py-6">
-                    <div className="w-full flex justify-between items-center  pb-4 pr-4">
-                        <PageSectionHeader title={ac_strings.playlist} />
-                        <UnderlineLinkViewAll to={`${playlist.to}`} />
-                    </div>
-
-                    <FetchLatestPlaylists
-                        layout="row"
-                        render={({ playlists }) => {
-                            const randomPlaylist = getRandomArray(playlists, playlists.length > 6 ? 6 : playlists.length)
-                            return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
-                        }}
-                    />
-                </div>
-                <LazyLoad>
+                {ac_strings.slug_podcast && (
                     <div className="py-6">
                         <div className="w-full flex justify-between items-center pb-4 pr-4">
                             <PageSectionHeader title={podcastProperties.title} />
@@ -77,23 +63,38 @@ const Listen: React.FC<IProps> = (props) => {
 
                         />
                     </div>
+                )}
+                <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
-                </LazyLoad>
+                    <div className="w-full py-6 sm:hidden">
+
+                        <PageSectionHeader title={ac_strings.featured} className="pb-4" />
+                        <HSCardList posts={mixedFeaturedPosts} />
+                    </div>
+                </div>
+                {ac_strings.slug_playlist && (
+                    <div className="py-6">
+                        <div className="w-full flex justify-between items-center  pb-4 pr-4">
+                            <PageSectionHeader title={ac_strings.playlist} />
+                            <UnderlineLinkViewAll to={`${playlist.to}`} />
+                        </div>
+
+                        <FetchLatestPlaylists
+                            layout="row"
+                            render={({ playlists }) => {
+                                const randomPlaylist = getRandomArray(playlists, playlists.length > 6 ? 6 : playlists.length)
+                                return (<HSPlaylist playlists={randomPlaylist.map(p => ({ ...p, slug: `${playlist.to}/${p.slug}` }))} />)
+                            }}
+                        />
+                    </div>
+                )}
+
 
 
                 <LazyLoad>
                     <div className="py-6 px-4">
                         <PageSectionHeader title={ac_strings.latest} />
-                        <FetchPostsFromArchivePage
-                            slug={latestSlug}
-                            layout="row" render={({ posts }) => {
-                                return (
-                                    <div className="px-4">
-                                        {posts.map((p, k) => <RightImgWDes key={k} {...p} />)}
-                                    </div>
-                                )
-                            }}
-                        />
+                        {latest.map((p, k) => <RightImgWDes key={k} {...p} />)}
                         <div className="w-full flex justify-center items-center py-4">
 
                             <UnderlineLinkViewAll to={`${latestSlug}`} />
@@ -102,7 +103,7 @@ const Listen: React.FC<IProps> = (props) => {
                     </div>
                     <ByCatergories
                         title={ac_strings.byCategories}
-                        types={items}
+                        types={allCategories}
                     />
                 </LazyLoad>
             </div>
@@ -110,9 +111,11 @@ const Listen: React.FC<IProps> = (props) => {
                 playlist={playlist}
                 podcast={podcast}
                 latestSlug={latestSlug}
-                popularPosts={mostPopular}
-                topics={[playlist, podcast, ...items]}
+                popularPosts={popular}
+                topics={allCategories}
                 name={title}
+                latestPosts={latest}
+                featured={mixedFeaturedPosts}
             />
 
         </div>
@@ -121,18 +124,14 @@ const Listen: React.FC<IProps> = (props) => {
 
 export default Listen
 
+interface IPageContext extends IRecommendationPage {
+    playlist: INavItemCount
+    podcast: INavItemCount
+    info: INavItemCount
+    items: ISubtopicLinks[]
+    menu: INavItemCount[]
+}
 interface IProps {
-    pageContext: {
-        title: string
-        breadcrumb: INavItem[]
-        playlist: INavItemCount
-        podcast: INavItemCount
-        info: INavItemCount
-        items: ISubtopicLinks[]
-        menu: INavItemCount[]
-        mostPopular: string[]
-        featuredPosts: string[]
-
-    }
+    pageContext: IPageContext
     path: string
 }

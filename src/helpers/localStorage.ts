@@ -17,15 +17,19 @@ const ACLocalStorage = {
             const searchHistory = ACLocalStorage.getStoredHistory()
 
             if (query !== "" && query.length > 2) {
-                const findQuery = searchHistory.findIndex((elt: string) => query.startsWith(elt))
-                if (findQuery !== -1) {
-                    searchHistory.splice(findQuery, 1)
+                // example query: test5
+                const fileredList: string[] = [query]
+                for (let i = 0; i < searchHistory.length; i++) {
+                    const historyQuery = searchHistory[i]
+                    // example query: tes, test5
+
+                    const result = query.startsWith(historyQuery)
+                    if (!result) {
+                        fileredList.push(historyQuery)
+                    }
                 }
 
-                searchHistory.unshift(query)
-
-
-                localStorage.setItem(localStorageKey, JSON.stringify(searchHistory));
+                localStorage.setItem(localStorageKey, JSON.stringify(fileredList));
             }
         }
 

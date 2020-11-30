@@ -9,8 +9,7 @@ import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
 
-import ac_strings from '@/strings/ac_strings.json'
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings.js'
 import { INavItem } from '@/types';
 import loadable from '@loadable/component'
 const UserMenu = loadable(() => import('./UserMenu'))
@@ -117,7 +116,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
                         >
                             {ac_strings.my_profile}
                         </SideNavItem>
-                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{TS.logout}</SideNavItem>
+                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{ac_strings.logout}</SideNavItem>
 
                     </div>
                 ) : (
@@ -127,8 +126,8 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
                             </div>
                         ) : (
                                 <div className={`flex flex-col`}>
-                                    <SideNavItem onClick={handleSignIn}>{TS.login}</SideNavItem>
-                                    <SideNavItem onClick={handleSignUp}>{TS.register}</SideNavItem>
+                                    <SideNavItem onClick={handleSignIn}>{ac_strings.login}</SideNavItem>
+                                    <SideNavItem onClick={handleSignUp}>{ac_strings.register}</SideNavItem>
                                 </div>
 
                             )

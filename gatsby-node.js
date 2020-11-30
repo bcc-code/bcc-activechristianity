@@ -6,24 +6,8 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-const generatePosts = require('./generators/generatePosts.js')
-const generateTopics = require('./generators/TopicsFormatsTypes/generateTopics.js')
-const generatePages = require('./generators/generatePages.js')
 
-const generateAuthors = require('./generators/generateAuthors.js')
-/* const generateEbooks = require('./generators/generateEbooks.js') */
-const generatePlaylists = require('./generators/generatePlaylists.js')
-/* const generateSeries = require('./generators/generateSeries.js') */
-const generateScriptures=require('./generators/generateScriptures.js')
-const generateGlossary = require('./generators/generateGlossary.js')
-const generateFormatsTypesResource = require('./generators/TopicsFormatsTypes/generateFormatsTypes.js')
-const generateHome = require('./generators/generateHome.js')
-const ac_strings = require('./src/strings/ac_strings.json')
 const buildTranslations = require('./generators/json/build-translations')
-
-const fetch = require('node-fetch');
-
-const path = require('path')
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
     actions.setWebpackConfig({
@@ -41,37 +25,51 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
           'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
-          'process.env.DESKTOP_NAV_ID':JSON.stringify(process.env.DESKTOP_NAV_ID),
-          'process.env.SIDE_NAV_ID':JSON.stringify(process.env.SIDE_NAV_ID),
           'process.env.USER_PAGE_ID':JSON.stringify(process.env.USER_PAGE_ID),
           'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
-          'process.env.NEW_URL':JSON.stringify(process.env.NEW_URL),
         })
       ]
     })
   }
 
-  exports.onPreBootstrap = async () => {
+  exports.onPreInit = async () => {
+    console.log('loading pre PreInit')
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()
 
   }
 
   exports.createPages = ({ page,actions, graphql }) => {
-
+    const generatePosts = require('./generators/generatePosts.js')
+    const generatePages = require('./generators/generatePages.js')
+    const generateAuthors = require('./generators/generateAuthors.js')
+    const generatePlaylists = require('./generators/generatePlaylists.js')
+    const generateScriptures=require('./generators/generateScriptures.js')
+    const generateGlossary = require('./generators/generateGlossary.js')
+    const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
+    const generateHome = require('./generators/generateHome.js')
+    const generateExplore = require('./generators/generateExplore')
+    const generatePodcast = require('./generators/generatePodcast')
+    const generateRedirect = require('./generators/generateRedirect')
+    const generateSeries = require('./generators/generateSeries')
+    
      const generators = [
-      generatePosts(actions, graphql),
-      generateAuthors(actions, graphql),
-/*       generateEbooks(actions, graphql), */
-      generatePlaylists(actions, graphql),
-      generateGlossary(actions, graphql),
+      generateAuthors(actions, graphql), 
       generatePages(actions, graphql),
-      generateTopics(actions, graphql),
-      generateFormatsTypesResource(actions, graphql),
-      generateHome(actions, graphql),
-      generateScriptures(actions, graphql),
+      generateExplore(actions, graphql),
+      generateHome(actions, graphql), 
+      generatePosts(actions, graphql),
+      generateTopics(actions, graphql), 
+      generateRedirect(actions, graphql)
     ]
 
+    if (process.env.LANG_CODE==="en"){
+      generators.push(generateSeries(actions, graphql))
+      generators.push( generateGlossary(actions, graphql))
+      generators.push(generatePlaylists(actions, graphql))
+      generators.push(generateScriptures(actions, graphql))
+      generators.push(generatePodcast(actions, graphql))
+    }
     return Promise.all(generators)
 
 

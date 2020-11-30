@@ -1,40 +1,44 @@
-const ac_strings = require('../../src/strings/ac_strings.json')
+const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
-const TS = require('../../src/strings')
+const ac_strings = require('../../src/strings/ac_strings')
 const listTemplate = 'src/templates/archive/post-list.tsx'
+const videoTemplate = 'src/templates/archive/video-list.tsx'
 const perPage= 12
+const languagePostQuery = postQuery
+
+
 
 const formatsAll = {
   "animation":{
-    keyId: process.env.ANIMATION_FILTER_ID,
+    keyId: 108212,
     keyname: "animation",
   },
   "message":{
-      keyId: process.env.MESSAGE_FILTER_ID,
+      keyId: 36170,
       keyname: "message",
   },
   "song": {
-      keyId: process.env.SONG_FILTER_ID,
+      keyId: 108204,
       keyname: "song",
   },
   "edification":{
-      keyId: process.env.EDIFICATION_FILTER_ID,
+      keyId: 108206,
       keyname: "edification",
   },
   "testimony":{
-      keyId: process.env.TESTIMONY_FILTER_ID,
+      keyId: 345,
       keyname: "testimony",
   },
   "question":{
-      keyId: process.env.QUESTION_FILTER_ID,
+      keyId: 1503,
       keyname: "question",
   },
   "commentary":{
-      keyId: process.env.COMMENTARY_FILTER_ID,
+      keyId: 108201,
       keyname: "commentary",
   },
   "interview":{
-    keyId: process.env.INTERVIEW_FILTER_ID,
+    keyId: 108211,
     keyname: "interview",
 },
 }
@@ -42,22 +46,29 @@ module.exports.formatsAll=formatsAll
 
 const typesAll={
   "read":{
-      keyId:process.env.READ_POSTS_FILTER_ID,
+      keyId:108196,
       keyname:"read"
   },
   "watch":{
-      keyId:process.env.WATCH_POSTS_FILTER_ID,
+      keyId:108198,
       keyname:"watch"
   },
   "listen":{
-      keyId:process.env.LISTEN_POSTS_FILTER_ID,
+      keyId:108197,
       keyname:"listen"
   }
 }
 
+
 module.exports.typesAll = typesAll
 
 
+const groupAll={
+  format:4,  
+  type:5
+}
+
+module.exports.groupAll=groupAll
 module.exports.formatScope = Object.keys(formatsAll).map(key=>formatsAll[key])
 
 module.exports.typeScope = Object.keys(typesAll).map(key=>typesAll[key])
@@ -73,11 +84,65 @@ module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
             group_id
             slug
           }
-          posts(isFeatured: true) { slug}
+          posts(isFeatured: true) {
+            ${languagePostQuery}
+          }
       }
       
   }
 }`
+
+module.exports.getSubTopics = (id)=>`{
+  ac {
+      topic(id: ${id}) {
+          id
+          name
+          subTopics {
+            id
+            name
+            group_id
+            slug
+          }
+      }
+      
+  }
+}`
+module.exports.getTopicPagination=(id)=>`
+  topic(id:${id}) {
+    name
+    somePosts(first:12){
+          paginatorInfo {
+            total
+            count
+            currentPage
+          }
+        }
+    }
+  }
+`
+const getPostsPerPageQuery = (id,page)=>`{
+  ac {
+    topic(id:${id}) {	
+  
+      allPosts:somePosts(first:12,page:${page}){
+        data{
+          slug
+        }
+      }
+    }
+  }
+}`
+module.exports.getPostsPerPageQuery=getPostsPerPageQuery
+
+module.exports.getPopularPosts=(id)=>`
+  popularPosts:topic(id:${id}) {
+    somePosts(orderBy:{column:VIEWS, order:DESC}){
+      data {
+        ${languagePostQuery}
+      }
+    }
+  }
+`
 
 module.exports.getSubTopicPosts=(id1,id2) =>`{
   ac {
@@ -85,11 +150,68 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
           id
           name
           posts (hasTopics: { value: ${id2}, column: ID }){
-            slug
+            ${languagePostQuery}
           }
         }
   }
 }`
+
+
+module.exports.createArchivePages =async function ({
+  graphql,
+  createPage, 
+  paginatorInfo,
+  node,
+  baseUrl,
+  breadcrumb,
+  topicType
+}){
+  const {total,count}=paginatorInfo 
+  const hasRecommendPage=total>10
+  const totalPages = Math.ceil(total/count);
+      for (let i = 1; i <=totalPages; i++){
+        let currentPage = i
+        let pagePath = `${baseUrl}/${currentPage}`
+        if(i===1){
+            pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
+        }
+        
+        const component = (`${node.id}`===typesAll.watch || `${node.id}`===formatsAll.animation)?path.resolve(videoTemplate): path.resolve(listTemplate)
+        const paginate = {
+          currentPage,
+          totalPages:totalPages,
+          baseUrl,
+          hasRecommendPage
+        }
+        const query=getPostsPerPageQuery(node.id,i)
+        const perPagePosts = await graphql(query).then(res=>{
+          if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
+            return res.data.ac.topic.allPosts.data.map(p=>p.slug)
+          } else {
+            console.log(query)
+            console.log(res)
+            throw new Error('not able to get pages')
+          }
+
+        })
+            console.log(pagePath)
+            
+            createPage({
+              path:pagePath,
+              component,
+              context: {
+                posts: perPagePosts,
+                paginate,
+                id:node.id,
+                title:node.name,
+                image:node.image,
+                breadcrumb
+              },
+            })
+
+
+      }
+}
 
 module.exports.createSubTopicPages=({
   type,
@@ -105,44 +227,47 @@ module.exports.createSubTopicPages=({
 
     if (!totalCount) {
 
-      console.log('No posts for this topic')
-    }
-    const totalPages = Math.ceil(totalCount / perPage)
-    const baseUrl = `${isTopic===true?`${TS.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
-
-    const component = (topic.id=== process.env.VIDEO_POSTS_FILTER_ID|| subTopic.id===process.env.VIDEO_POSTS_FILTER_ID)?path.resolve(videoListTemplate):path.resolve(listTemplate)
-    const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
-
-    pageBreadcrumb.push(
-      {
-      name:topic.name,
-      to:topic.slug
-    },
-    {
-      name:subTopic.name,
-      to:subTopic.slug
-    }
-    )
-    
-    let currentPage = 1
+      console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
+    } else {
+      const totalPages = Math.ceil(totalCount / perPage)
+      const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
   
-    for (let i = 0; i < totalCount; i += perPage, currentPage++) {
-      let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-      createPage({
-        path:pagePath,
-        component,
-        context: {
-          type,
-          posts: allPosts.slice(i,i+perPage),
-          paginate: {
-            currentPage,
-            totalPages,
-            baseUrl
+      const component = (`${topic.id}`===typesAll.watch || 
+      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
+  
+      pageBreadcrumb.push(
+  
+      {
+        name:subTopic.name,
+        to:subTopic.slug
+      }
+      )
+      
+      let currentPage = 1
+    
+      for (let i = 0; i < totalCount; i += perPage, currentPage++) {
+        let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
+        console.log(pagePath)
+  
+        createPage({
+          path:pagePath,
+          component,
+          context: {
+            type,
+            posts: allPosts.slice(i,i+perPage),
+            paginate: {
+              currentPage,
+              totalPages,
+              baseUrl
+            },
+            title:subTopic.name,
+            breadcrumb:pageBreadcrumb,
+            isTopic
+  /*            ...node */
           },
-          title:`${subTopic.name}`,
-          breadcrumb:pageBreadcrumb
-/*            ...node */
-        },
-      })
+        })
+      }
     }
+
 }

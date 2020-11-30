@@ -4,8 +4,8 @@ import { graphql } from "gatsby"
 
 import ImageRound from '@/components/Images/ImageRound'
 import livingTheGospel from '@/strings/podcastProperties'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+
+import ac_strings from '@/strings/ac_strings.js'
 import { PageSectionHeader } from '@/components/Headers'
 import { ReadOrListenIcon } from '@/components/PostElements'
 import Tabs from '@/components/Tabs/ImageTab'
@@ -42,7 +42,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
     const getHosts = () => {
         const getAuthors = hostSlugs.map(slug => {
             const trimmedSlug = slug.replace(`${ac_strings.slug_host}/`, '')
-            const authorSlug = `${TS.slug_ac_author}/${trimmedSlug}`
+            const authorSlug = `${ac_strings.slug_ac_author}/${trimmedSlug}`
 
             return fetch(`/page-data/${authorSlug}/page-data.json`)
                 .then(res => res.json())
@@ -87,7 +87,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                     <p className="text-xs leading-normal sm:w-7/12">{livingTheGospel.description}</p>
                 </div>
                 <div className="pt-6 pb-12 flex items-center px-4">
-                    <div className="bg-d4gray-light rounded-full inline-block pl-2 py-1">
+                    <div className="bg-d4gray-light rounded-full inline-block">
                         <ReadOrListenIcon
                             listen={introPost.duration?.listen}
                             track={introPost.media}
@@ -110,7 +110,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                                 name: h.name
                             },
                             content: (
-                                <div className="font-semibold bg-white text-xs leading-normal">
+                                <div className=" bg-white text-xs leading-normal">
                                     {h.excerpt && <p dangerouslySetInnerHTML={{ __html: h.excerpt }}></p>}
                                 </div>
                             )

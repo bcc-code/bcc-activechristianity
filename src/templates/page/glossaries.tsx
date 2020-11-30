@@ -9,7 +9,7 @@ import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
 //types
 import { INavItem, IGlossary } from "@/types"
 
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings'
 
 function compare(a: INavItem, b: INavItem) {
 
@@ -29,7 +29,7 @@ const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { bre
         const alphabet = g.word[0];
         const item = {
             name: g.word,
-            to: `/${TS.slug_glossary}/${g.slug}`
+            to: `/${ac_strings.slug_glossary}/${g.slug}`
         }
         alphabetGroupsObject[alphabet] ? alphabetGroupsObject[alphabet].push(item) : alphabetGroupsObject[alphabet.toUpperCase()] = [item]
         return item
@@ -47,7 +47,7 @@ const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { bre
             title={title}
         >
             <MetaTag
-                title={TS.glossary}
+                title={ac_strings.glossary}
                 translatedUrls={[]}
                 type="page"
                 breadcrumb={breadcrumb}

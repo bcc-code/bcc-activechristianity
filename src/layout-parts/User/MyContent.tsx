@@ -10,15 +10,15 @@ import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
-import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
-import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFollow'
+import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFollow'
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics.tsx'
-import TS from '@/strings'
 import { getRandomArray } from '@/helpers'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
+import shortid from 'shortid'
 const UserHistory = () => {
 
-    const { followedTopics, bookmarkedPosts, } = useSelector((state: IRootState) => state.userLibrary);
+    const { followedTopics, bookmarkedPosts, followedPlaylists } = useSelector((state: IRootState) => state.userLibrary);
+
     return (
         <div className="flex flex-col ">
 
@@ -30,26 +30,41 @@ const UserHistory = () => {
                         render={({ topics }) => {
                             return (
                                 <>
-                                    <SectionTitleDesktopAndMobile name={"Following Topics"} />
-                                    <span className="text-d4slate-light">{ac_strings.youMightBeInterestedIn}</span>
+                                    <SectionTitleDesktopAndMobile name={ac_strings.following} />
+
                                     <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
-                                        {topics.map(({ name, slug: to }) => {
+                                        {topics.map(({ name, slug: to, id, image }) => {
                                             return (
-                                                <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
+                                                <div className="flex flex-col items-center" key={shortid()} >
+                                                    <div style={{ width: "100px", height: "138px" }}>
+                                                        <ImgBgTopicCard name={name} to={`${ac_strings.slug_topic}/${to}`} image={image} />
+                                                    </div>
+                                                    <SlateDarkUnfollowButton
+                                                        id={id}
+                                                    />
+                                                </div>
                                             )
                                         })}
                                     </div>
                                     <XScrollCustomSize
                                         childeClassName=""
-                                        items={topics.map(({ name, slug: to, id }) => {
+                                        items={topics.map(({ name, slug, id, image }) => {
                                             return (
-                                                <div className="flex flex-col items-center">
-                                                    <div className="min-h-24 h-24 w-18" >
-                                                        <ImgBgTopicCard name={name} to={`${TS.slug_topic}/${to}`} />
-                                                        <SlateDarkFollowButton
-                                                            id={id}
+                                                <div className="flex flex-col items-center" key={shortid()}>
+                                                    <div style={{ width: "100px", height: "138px" }}>
+                                                        <ImgBgTopicCard
+                                                            name={name}
+                                                            image={image}
+                                                            to={`${ac_strings.slug_topic}/${slug}`}
+                                                            rounded="rounded-xxl"
+
                                                         />
+
                                                     </div>
+                                                    <SlateDarkUnfollowButton
+                                                        id={id}
+                                                    />
+
                                                 </div>
                                             )
                                         })}
@@ -60,7 +75,7 @@ const UserHistory = () => {
                     />
                 ) : (
                         <div>
-                            <SectionTitleDesktopAndMobile name={"No follow topics found"} />
+                            <SectionTitleDesktopAndMobile name={ac_strings.no_followed_topics} />
                             <QPopularAndFeaturedPosts
                                 render={({ topics }) => {
                                     const randomTopics = getRandomArray(topics, 6)
@@ -75,6 +90,9 @@ const UserHistory = () => {
                         </div>
                     )}
             </div>
+            {/*             {followedPlaylists.length > 0 && (
+                <div>{followedPlaylists.map(p => p.name)}</div>
+            )} */}
             {bookmarkedPosts.length > 0 ? <FetchPostsFromSlugs
                 slugs={bookmarkedPosts.map(p => p.slug)}
                 layout="list"
@@ -92,14 +110,14 @@ const UserHistory = () => {
                         <div>
                             {video.length > 0 && (
                                 <div className="py-6">
-                                    <SectionTitleDesktopAndMobile name={"Saved Videos"} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.bookmarked_video} />
                                     <HSCardListVideo posts={video} />
                                 </div>
                             )}
                             {other.length > 0 && (
                                 <div className="py-6">
 
-                                    <SectionTitleDesktopAndMobile name={"Bookmarked"} />
+                                    <SectionTitleDesktopAndMobile name={ac_strings.bookmarked_posts} />
                                     <div className="px-4">
                                         {other.map((item, i) => (
                                             <PostItem {...item} key={i} />
@@ -115,7 +133,7 @@ const UserHistory = () => {
 
             /> : (
                     <div className="py-6">
-                        <PageSectionHeader title="No bookmark posts found" />
+                        <PageSectionHeader title={ac_strings.no_bookmark} />
                     </div>
                 )}
 

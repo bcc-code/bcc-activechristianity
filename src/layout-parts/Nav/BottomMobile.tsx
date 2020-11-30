@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-
 import Icon from '@/components/Icons/Icon'
-
 import { INavItem } from '@/types'
 
 
@@ -97,18 +95,15 @@ export const iconMapNav: {
     'watch-recommend': {
         selected: (
             <Icon
-                name="OndemandVideo"
+                name="PlayCircleOutline"
                 color="slate-light"
             />
-
-
         ),
         default: (
             <Icon
-                name="OndemandVideo"
+                name="PlayCircleOutline"
                 color="slate-light"
             />
-
 
         )
     },

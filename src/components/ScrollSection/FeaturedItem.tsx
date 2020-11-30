@@ -84,6 +84,7 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
     }, [slug])
 
     const setPost = () => {
+
         let modified: IModifiedFields = {}
         if (title && title.trim() !== "") {
             modified["title"] = title

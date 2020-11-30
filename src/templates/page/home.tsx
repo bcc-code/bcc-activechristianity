@@ -1,231 +1,137 @@
 import * as React from "react"
-import { graphql } from "gatsby";
 import loadable from '@loadable/component'
-import FollowUs from '@/layout-parts/Home/FollowUs'
 import { useSelector } from "react-redux";
-import { FetchPostsFromArchivePage, FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
-
+import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
-const LatestSection = loadable(() => import('@/layout-parts/Home/Latest'))
+import Loader from '@/layout-parts/Loader/MainpagePlaceholder'
+import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
+const LatestSection = loadable(() => import('@/layout-parts/List/PostRow4Col'))
 const FeatureSectionDesktop = loadable(() => import('@/layout-parts/Home/FeatureSectionDesktop'))
 const FeatureSectionMobile = loadable(() => import('@/layout-parts/Home/FeatureSectionMobile'))
 const FeaturedTopics = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedTopics'))
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/layout-parts/Home/DesktopHeaderPost'
-import LazyLoad from '@/components/LazyLoad';
 import { PageSectionHeader } from '@/components/Headers'
 import LowerSections from '@/layout-parts/Home/LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
+import shortid from 'shortid'
+import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 const RightImgWDes = loadable(() => import('@/components/PostItemCards/RightImg'))
-import { getRandomArray } from '@/helpers'
 // Type
-import { IRootState } from '@/state/types'
-import { ITopicPostSlugs } from '@/types'
-
+import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 
 // Helpers
-
-import TS from '@/strings'
-
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 
 const IndexPage: React.FC<IHomeProps> = (props) => {
   const { pageContext, path } = props
-  const { bookmarkedPosts, historyPosts, unfinishedPosts, followedTopics } = useSelector((state: IRootState) => state.userLibrary)
+
   const {
-    featuredPosts: featuredPostSlugs,
+    featuredPosts: featuredPosts,
     popularTopics: popularTopicsAll,
     popularPosts: popularPostsAll,
+    latestPosts: latestPosts
+
   } = pageContext
 
-  const { loggedIn } = useSelector((state: IRootState) => state.auth)
+  const popularPosts = popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
+  const { featured, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+  const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+  React.useEffect(() => {
+
+    const mixed = getRandomFeatured({ latest, popular, featured })
+    setMixedFeaturedPosts(mixed)
+  }, [])
 
   const latestPostAsTopic = {
     id: '',
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-  const getfeaturedList: string[] = []
 
-  const randomFeatured = getRandomArray(featuredPostSlugs, featuredPostSlugs.length)
-  const featuredAndPopuloar = [...new Set([...randomFeatured.slice(2), ...popularPostsAll.dynamic.slice(5)])]
-  const randomRest = getRandomArray(featuredAndPopuloar, featuredAndPopuloar.length)
   return (
 
     <div className="standard-max-w">
       <MetaTag
         path={path}
-        title={`${TS.site_title} - ${TS.tagline}`}
+        title={`${ac_strings.site_title} - ${ac_strings.tagline}`}
         type="website"
         translatedUrls={[]}
         breadcrumb={[]}
       />
-      <Placeholder loading={loggedIn == "loading"}>
 
-        <div className="sm:hidden">
-          <div className="w-full pb-4 pt-8">
-            <PageSectionHeader title={ac_strings.featured} className="pb-4" />
-            <FetchPostsFromSlugs
-              slugs={[randomFeatured[0], randomFeatured[1], ...randomRest]}
-              layout="row"
-              render={
-                ({ posts }) => <FeaturedBanner featured={posts} />
-              }
-            />
-          </div>
+      <div className="sm:hidden">
+        <div className="w-full pb-4 pt-8">
 
-          <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-            {loggedIn !== "success" ? (
-              <>
-                <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                <FetchPostsFromSlugs
-                  slugs={popularPostsAll.static}
-                  layout="row"
-                  render={
-                    ({ posts }) => <TopImgHorizontalScroll posts={posts} />
-                  }
-                />
-              </>
-            ) : (
-                <>
-                  <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-
-                  <FetchPostsFromArchivePage
-                    slug={latestPostAsTopic.slug}
-                    layout="row"
-                    render={
-                      ({ posts }) => <TopImgHorizontalScroll posts={posts} />
-                    }
-                  />
-                </>
-              )}
-          </div>
-          <LazyLoad>
-            <div className="py-6">
-              <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
-              <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
-            </div>
-            <div className="py-6">
-
-              <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
-              <QPopularAndFeaturedTopics
-                excludeFollowed
-                render={({ topics }) => {
-                  const filtredTopics = topics.filter(item => {
-                    const find = followedTopics.find(t => `${t.id}` === `${item.id}`)
-                    return find === undefined
-                  })
-                  const randomTopics = getRandomArray(filtredTopics, 6)
-
-                  return (
-                    <FeaturedTopics featured={randomTopics} />
-                  )
-                }}
-              />
-
-            </div>
-
-          </LazyLoad>
-          {loggedIn !== "success" ? (
-            <>
-              <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-                <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-                <FetchPostsFromArchivePage
-                  slug={latestPostAsTopic.slug}
-                  layout="row"
-                  render={
-                    ({ posts }) => <TopImgHorizontalScroll posts={posts} />
-                  }
-                />
-              </div>
-              <div className="w-full p-4">
-                <div className='w-full'>
-                  <BgImgTopicCard
-                    name={ac_strings.browse_resource}
-                    to={ac_strings.slug_explore}
-                  />
-                </div>
-              </div>
-            </>
-          ) : (
-              <>
-                <PageSectionHeader title={ac_strings.continue} className="pb-4" />
-                <FetchPostsFromSlugs
-                  slugs={unfinishedPosts.length > 0 ? unfinishedPosts.map(item => item.slug) : historyPosts.map(item => item.slug)}
-                  layout="list"
-                  render={
-                    ({ posts }) => <TopImgHorizontalScroll posts={posts} />
-                  }
-                />
-
-              </>
-            )}
-
+          <FeaturedBanner featured={mixedFeaturedPosts} />
+        </div>
+        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+          <PageSectionHeader title={ac_strings.latest} className="pb-4" />
+          <TopImgHorizontalScroll posts={latest} />
         </div>
 
-        <div className="hidden sm:block">
+        <div className="py-6">
+          <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
+          <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
+        </div>
+        <div className="py-6">
 
-          <FetchOnePost
-            slug={randomFeatured[0]}
-            render={
-              ({ post }) => post ? <HomeTopFeaturePost {...post} /> : <div></div>
-            }
+          <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
+          <FeaturedTopics featured={popularTopicsAll.static} />
+
+          <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+            <PageSectionHeader title={ac_strings.popular} className="pb-4" />
+            <TopImgHorizontalScroll posts={popular} />
+          </div>
+          <div className="w-full p-4">
+            <div className='w-full h-16'>
+              <BgImgTopicCard
+                name={ac_strings.browse_resource}
+                to={ac_strings.slug_explore}
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div className="hidden sm:block">
+        <DesktopFeaturedPostLoader loading={typeof mixedFeaturedPosts[0] === "undefined"}>
+          <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
+        </DesktopFeaturedPostLoader>
+
+        <div className="px-4">
+          <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
+          <LatestSection posts={latest.slice(0, 4)} />
+          <FeatureSectionDesktop
+            featuredPosts={mixedFeaturedPosts.slice(2)}
           />
-
-          <FetchPostsFromArchivePage
-            slug={latestPostAsTopic.slug}
-            layout="list"
-            render={({ posts }) => {
-              return <LatestSection latestPosts={posts.slice(0, 6)} latestSlug={latestPostAsTopic.slug} />
-
-            }}
-
-          />
-          <FeatureSectionDesktop featuredPosts={[randomRest[1], randomRest[0]]} topicPosts={popularTopicsAll.static} />
           <LowerSections
             lists={popularTopicsAll.static}
             newPostsForYou={[]}
             topicsForYou={popularTopicsAll.static}
-            popularPosts={popularPostsAll.static}
+            popularPosts={popular}
           />
-
-          <LazyLoad >
-            <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
-              <div className="col-start-1 col-end-3 lg:col-end-4">
-                <FetchPostsFromArchivePage
-                  slug={latestPostAsTopic.slug}
-                  layout="list"
-                  render={({ posts }) => {
-                    return (
-                      <div className="">
-                        {posts.slice(6, 12).map((item, i) => {
-                          return (
-                            <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
-                              <RightImgWDes key={i} {...item} />
-                            </div>
-                          )
-                        })}
-                      </div>
-                    )
-
-                  }}
-
-                />
-                <ShowMore
-                  slug={latestPostAsTopic.slug}
-                  startNr={2}
-                />
-              </div>
+          <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
+            <div className="col-start-1 col-end-3 lg:col-end-4">
+              {latest.slice(6, 12).map((item, i) => {
+                return (
+                  <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
+                    <RightImgWDes key={i} {...item} />
+                  </div>
+                )
+              })}
+              <ShowMore
+                slug={latestPostAsTopic.slug}
+                startNr={2}
+              />
             </div>
-          </LazyLoad>
+          </div>
         </div>
-      </Placeholder>
-    </div>
+      </div>
+    </div >
 
   )
 }
@@ -236,19 +142,16 @@ export default IndexPage
 interface IHomeProps {
   path: string
   pageContext: {
-
-    featuredPosts: string[]
+    featuredPosts: IPostRes[]
+    latestPosts: IPostRes[]
     popularPosts: {
-      static: string[]
-      dynamic: string[]
+      static: IPostRes[]
+      dynamic: IPostRes[]
     }
     popularTopics: {
-      static: ITopicPostSlugs[]
-      dynamic: ITopicPostSlugs[]
+      static: ITopicPostItems[]
+      dynamic: ITopicPostItems[]
     }
-    formats: ITopicPostSlugs[]
   }
 
 }
-
-

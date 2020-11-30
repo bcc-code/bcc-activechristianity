@@ -1,7 +1,7 @@
 import * as React from 'react'
 import CloseButtonRound from '@/components/Button/CloseButtonRound'
 import ReactModal from 'react-modal'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 interface IModal {
     isOpen: boolean

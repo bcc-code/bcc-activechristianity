@@ -1,17 +1,19 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { INavItem, IPostAuthors } from '@/types'
+import { INavItem, IPostAuthors, ITopicNavItem, IPostItem } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import Icon from '@/components/Icons/Icon'
-const Row2ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row2Col-HorizontalScroll'))
+const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
-import ac_strings from '@/strings/ac_strings.json'
-import TS from '@/strings'
+import ac_strings from '@/strings/ac_strings.js'
+
 import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
 import { getRandomArray } from "@/helpers"
+import TopImgPost from '@/components/PostItemCards/TopImg'
 import acApi from '@/util/api'
 import shortid from 'shortid'
 interface IPostMain {
@@ -27,7 +29,7 @@ interface IMobilePostMain extends IPostMain {
     height: number
 }
 
-interface IShareLikesViewsProps extends ILikesViewsProps {
+export interface IShareLikesViewsProps extends ILikesViewsProps {
     shareSlug: string
     text: string
 }
@@ -54,7 +56,7 @@ export const typeIcons: { [key: string]: JSX.Element } = {
 
     />,
     'watch': <Icon
-        name="OndemandVideo"
+        name="PlayCircleOutline"
     />
 
 }
@@ -89,7 +91,7 @@ export const MobileHeaderBackground: React.FC<{ imgUrl: string }> = ({ imgUrl, c
     )
 }
 
-const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrls }) => {
+export const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ translatedUrls }) => {
     if (translatedUrls && translatedUrls.length > 1) {
 
         return (
@@ -114,7 +116,7 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
             <PageSectionHeaderUpperCaseGray title={authors.as} />
 
             <span className="">{authors.authors.map(a => (
-                <Link className="block text-sm pt-1" to={`${TS.slug_ac_author}/${a.to}`}>
+                <Link className="block text-sm pt-1" to={`${ac_strings.slug_ac_author}/${a.to}`}>
                     <div className="font-roboto ">{a.name}</div>
                     <div className="text-gray-500">{a.excerpt}</div>
                 </Link>
@@ -140,12 +142,12 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
                     <div>
                         {item.authors.map(a => (
                             <FetchPostsFromArchivePage
-                                slug={`${TS.slug_ac_author}/${a.to}`}
+                                slug={`${ac_strings.slug_ac_author}/${a.to}`}
                                 layout="list"
                                 render={({ posts }) => {
                                     const fourPosts = posts.filter(p => p.id !== postId).slice(0, 4)
                                     return fourPosts.length > 0 ? (
-                                        <Row2ColAndXScroll
+                                        <Row3ColAndXScroll
                                             title={`${ac_strings.more_from} ${a.name}`}
                                             posts={posts}
                                         />
@@ -223,7 +225,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPla
     }
 
     return (
-        <div className={`flex flex-col fixed bottom-0 right-0 mx-3 py-2 ${isPlayingAudio ? 'mb-32 ' : 'mb-20 '}bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
+        <div className={`flex flex-col mx-3 py-2 absolute right-0 bottom-0 ${isPlayingAudio ? 'mb-40' : 'mb-24'} bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
             <button className="px-2 py-1" key={shortid()}>
                 <ToogleBookmark
                     id={id}
@@ -321,14 +323,13 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
     </div>
 )
 
-export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[] }> = ({ postId, readMorePosts }) => {
-
+export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[], topics?: ITopicNavItem[] }> = ({ postId, readMorePosts, topics }) => {
     const [randomPosts, setRandomPosts] = React.useState<string[]>([])
 
     React.useEffect(() => {
         acApi.recommendedByPost(postId)
             .then(res => {
-                const recommendedPosts: string[] = res.recommendedByPost.map((p: any) => p.slug)
+
                 /* setPosts(allSlugs) */
                 let readMore: string[] = []
                 if (readMorePosts.length > 0) {
@@ -337,7 +338,8 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                 }
 
                 let randomRecommendPosts: string[] = []
-                if (recommendedPosts) {
+                if (res.recommendedByPost) {
+                    let recommendedPosts = res.recommendedByPost.map((p: any) => p.slug)
                     let randName = [];
                     let recommendPostsSlugs = [...recommendedPosts]
                     if (recommendPostsSlugs.length > 0) {
@@ -346,8 +348,8 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                         randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
                     }
                 }
-
-                readMore = [...new Set([...randomRecommendPosts, ...readMore])]
+                let allPosts = [...randomRecommendPosts, ...readMore]
+                readMore = [...new Set(allPosts)]
                 setRandomPosts(readMore)
             })
             .catch(error => {
@@ -360,7 +362,7 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
             slugs={randomPosts}
             layout="row"
             render={({ posts }) => {
-                return <Row2ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
+                return <Row3ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
             }}
         />
     )

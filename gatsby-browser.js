@@ -24,9 +24,44 @@ export const wrapRootElement = wrapWithProvider
 
 export const wrapPageElement = ({ element, props }) => <Layout {...props}>{element}</Layout>
 
+const addScript = url => {
+  const script = document.createElement("script")
+  script.src = url
+  script.async = true
+  document.body.appendChild(script)
+}
+
+export const onClientEntry = () => {
+  window.onload = () => {
+    if(typeof window !== 'undefined') {
+      window.refTagger = {
+        settings: {
+          bibleVersion: process.env.BIBLE_VERSION,
+          addLogosLink: false,
+          appendIconToLibLinks: false,
+          caseInsensitive: true,
+          convertHyperlinks: false,
+          libronixBibleVersion: process.env.BIBLE_VERSION,
+          libronixLinkIcon: "light",
+          linksOpenNewWindow: false,
+          tagChapters: true,
+          useTooltip: true
+        }
+      }
+    }
+
+    addScript("https://api.reftagger.com/v2/RefTagger.js")
+
+  }
+
+}
+
 export const onRouteUpdate = ({ location, prevLocation }) => {
-  if (typeof window !== 'undefined') {
-    window.refTagger && window.refTagger.tag && window.refTagger.tag();
+  if (typeof window !== 'undefined' ) {
+    if( process.env.LANG_CODE==="en"){
+      window.refTagger && window.refTagger.tag && window.refTagger.tag();
+    }
+
     /* window.cue && window.cue.initialize(); */
     // Since the History Change trigger fires as soon as the event is dispatched, the content might not be there yet when the tracking tags fire.
     // By delaying the trigger, the tags won’t fire until the page has had time to load the content

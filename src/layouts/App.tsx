@@ -1,7 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import { StaticQuery, graphql } from "gatsby"
-import BottomMobile, { iconMapNav, IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
+import BottomMobile, { IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
 import Breadcrumb from '@/components/Breadcrumb'
 import CookieConsent from "react-cookie-consent";
 import Footer from '@/layout-parts/Footer'
@@ -18,20 +18,21 @@ import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
+import Cookies from 'js-cookie'
 
 // string
-import TS from '@/strings';
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
+
 import acApi from '@/util/api'
 // type 
 import { IRootState } from '@/state/types'
-import { IUser, IMenusQuery, INavItem } from '@/types'
+import { IUser, INavItem } from '@/types'
 
 
 import "@/styles/tailwind-output.css"
 import './Layout.css'
 import "react-placeholder/lib/reactPlaceholder.css";
-
+import { desktopMenu, mobileMenuBase, sideMenu, sideResourceMenu, menusItems, iconMapNav } from '@/layout-parts/Nav/Menus'
 export interface IDrawerNav {
     isSideNavOpen: boolean
     setSideNavOpen: (status: boolean) => void
@@ -42,6 +43,13 @@ export interface IDrawerNav {
 
 const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: { pathname: string } }> = (props) => {
     const { children, pageContext, location } = props
+
+    const isLandingPage = location && location.pathname && location.pathname.indexOf('online-church') > -1
+    const cookieName = 'ac.revert_to_original'
+    const acSessionCookie = 'ac2_session'
+    const showInfoBanner = Cookies.get(cookieName);
+    const getLoggedInCookie = Cookies.get(acSessionCookie)
+
 
     const dispatch = useDispatch();
 
@@ -55,18 +63,25 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
+    const [isInfoBarOpen, setIsInfoBarOpen] = React.useState(showInfoBanner !== "true")
+
+
 
     React.useEffect(() => {
         checkUser()
+
     }, [])
 
+    const setNotIsInfoBarOpen = () => {
+        setIsInfoBarOpen(false)
+        Cookies.set(cookieName, 'true')
+    }
 
     const checkUser = () => {
         acApi
             .profile()
             .then((res: IUser) => {
                 if (res && res.id) {
-                    console.log(res)
                     if (res.meta && res.meta.consented) {
                         dispatch(setUser(res))
                         dispatch(getUserLibrary())
@@ -104,150 +119,108 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isModalOpen,
         isSignInModalOpen
     ])
-
+    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
+    if (auth.loggedIn !== "success") {
+        mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
+    } else {
+        mobileMenu.push({
+            ...menusItems.my_content,
+            icon: iconMapNav["my-content"]
+        })
+    }
 
     return (
-        <StaticQuery query={query}
-            render={(ghdata: IAppQueryProps) => {
-                const { menus, allPages } = ghdata.ac
-                let sideResourceMenu: INavItem[] = []
-                let sideMenu: INavItem[] = []
-                let desktopMenu: INavItem[] = []
-                let mobileMenu: IMenuWithIcon[] = []
-                let explorePage: INavItem | undefined = undefined
 
+        <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
+            <Helmet>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Helmet>
+            <SignInSignUpModal />
+            <SideNav {...NavProps} menu={sideMenu} resoureMenu={sideResourceMenu} />
+            <TopMobile
+                {...NavProps}
+                breadcrumb={breadcrumb}
+                menu={mobileMenu}
+                currentPage={{ name: pageContext.title, to: location.pathname }}
+                explorePage={menusItems.explore}
+            />
+            <TopDesktop {...NavProps} menu={desktopMenu} explorePage={menusItems.explore} />
+            {isLandingPage ? (
+                <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
+                    {children}
+                    <Footer key={shortid()} />
+                </div>
+            ) : (
+                    <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
 
-                Object.keys(iconMapNav).forEach(label => {
-
-                    const page = allPages.find(page => {
-
-                        return page.label === label
-                    })
-                    if (page) {
-
-                        if (page.label === "explore") {
-                            explorePage = { name: page.title, to: page.slug }
-                        }
-                        sideResourceMenu.push({ name: page.title, to: page.slug })
-                        mobileMenu.push(({ name: page.title, to: page.slug, icon: iconMapNav[page.label] }))
-                    }
-                })
-
-                if (auth.loggedIn !== "success") {
-                    mobileMenu.unshift({ name: ac_strings.home, to: "/", icon: iconMapNav["home"] })
-                } else {
-                    mobileMenu.push({ name: "My Content", to: "/user/my-content", icon: iconMapNav["my-content"] })
-                }
-
-                const findGlossary = allPages.find(p => p.label === "build-glossaries")
-                if (findGlossary) {
-                    sideResourceMenu.push({ name: findGlossary.title, to: findGlossary.slug })
-                }
-                menus.forEach(m => {
-                    if (`${m.id}` === process.env.DESKTOP_NAV_ID) {
-                        desktopMenu = m.menuItems
-                    }
-
-                    if (`${m.id}` === process.env.SIDE_NAV_ID) {
-                        sideMenu = m.menuItems
-
-                    }
-                })
-                return (
-                    <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
-                        <Helmet>
-                            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-                            <meta name="viewport" content="width=device-width, initial-scale=1" />
-                        </Helmet>
-                        <SignInSignUpModal />
-
-                        <SideNav {...NavProps} menu={sideMenu} resoureMenu={sideResourceMenu} />
-                        <TopMobile
-                            {...NavProps}
-                            breadcrumb={breadcrumb}
-                            menu={mobileMenu}
-                            currentPage={{ name: pageContext.title, to: location.pathname }}
-                            explorePage={explorePage}
-                        />
-                        <TopDesktop {...NavProps} menu={desktopMenu} explorePage={explorePage} />
-
-                        <div className={` flex-grow relative z-0 pb-24 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
-                            <div className={"flex items-center bg-d4slate-lighter  py-2 text-xs leading-snug hover:font-bold text-d4secondary"}>
-                                <div className={`standard-max-w-px w-full`}>
-                                    <a href={process.env.SITE_URL}>
-                                        Revert back to original version here. Note that your old login details will apply. <span><Icon
+                        {isInfoBarOpen && process.env.LOCALE === "en" && (
+                            <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug text-d4slate-dark"} style={{ zIndex: 100 }}>
+                                <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
+                                    Revert back to original version here. Note that your old login details will apply.
+                    <button onClick={setNotIsInfoBarOpen}>
+                                        <Icon
                                             name="KeyboardArrowRight"
                                             size="4"
 
-                                        /></span>
-                                    </a>
+                                        />
+                                    </button>
+                                </a>
+                                <div onClick={() => setIsInfoBarOpen(false)} className="p-2">
+                                    <Icon
+                                        name="Close"
+                                        size="4"
+
+                                    />
                                 </div>
 
                             </div>
-                            {breadcrumb.items.length > 0 && (
-                                <div className="relative z-50 w-full bg-white pt-2 px-4 hidden sm:block">
-                                    <Breadcrumb {...breadcrumb} />
-                                </div>
-                            )}
-                            {currentMedia.audio ? (
-                                <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                                    <MediaPlayer />
-                                </div>
-                            ) : null}
+                        )}
+                        {breadcrumb.items.length > 0 && (
+                            <div className="relative z-50 w-full bg-white px-4 hidden sm:block standard-max-w i">
+                                <Breadcrumb {...breadcrumb} />
+                            </div>
+                        )}
+                        {currentMedia.audio ? (
+                            <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
+                                <MediaPlayer />
+                            </div>
+                        ) : null}
 
-                            {children}
-                            <Footer key={shortid()} />
-                        </div>
-
-                        <BottomMobile key={shortid()} {...NavProps} menu={mobileMenu} />
-                        <CookieConsent
-                            location="bottom"
-                            buttonText={TS.consent_general_accept}
-                            cookieName="myAwesomeCookieName2"
-                            style={{ background: "#2B373B" }}
-                            buttonStyle={{
-                                color: "#2B373B",
-                                fontSize: "12px",
-                                background: "#F1AD2C",
-                                borderRadius: "25px",
-                                padding: "0.5rem 1rem"
-                            }}
-                            expires={150}
-                        >
-                            {TS.consent_general_main}
-                            {" "}
-                            <Link style={{ fontSize: "11px" }} to={ac_strings.slug_cookie_policy}>
-                                {TS.consent_general_link}
-                            </Link>
-                        </CookieConsent>
+                        {children}
+                        <Footer key={shortid()} />
                     </div>
-                )
-            }}
+                )}
 
 
-
-        />
+            {!isLandingPage && <BottomMobile key={shortid()} {...NavProps} menu={mobileMenu} />}
+            <CookieConsent
+                location="bottom"
+                buttonText={ac_strings.consent_general_accept}
+                cookieName="myAwesomeCookieName2"
+                style={{ background: "#2B373B" }}
+                buttonStyle={{
+                    color: "#2B373B",
+                    fontSize: "12px",
+                    background: "#F1AD2C",
+                    borderRadius: "25px",
+                    padding: "0.5rem 1rem"
+                }}
+                expires={150}
+            >
+                {ac_strings.consent_general_main}
+                {" "}
+                <Link style={{ fontSize: "11px" }} to={ac_strings.slug_cookie_policy}>
+                    {ac_strings.consent_general_link}
+                </Link>
+            </CookieConsent>
+        </div>
     )
 
 }
 
 export default React.memo(App)
 
-interface IAppQueryProps {
-    ac: {
-        menus: {
-            id: string
-            slug: string
-            menuItems: INavItem[]
-        }[]
-
-        allPages: {
-            title: string
-            slug: string
-            label: string
-        }[]
-    }
-}
 const query = graphql`
     query LayoutQuery {
         ac {

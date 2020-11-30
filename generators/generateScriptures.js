@@ -1,17 +1,12 @@
 const _ = require('lodash')
 const path = require('path')
 const listTemplate = 'src/templates/archive/post-list.tsx'
-const TS = require('../src/strings')
-const ac_strings=require('../src/strings/ac_strings.json')
+const ac_strings=require('../src/strings/ac_strings.js')
 
 const allBooksQuery =  `
 {
     ac {
-      page(id:${process.env.SCRIPTURE_PAGE_ID}){
-        title
-        slug
-        label
-      }
+
         bible {
             old {
                 chapters
@@ -51,7 +46,12 @@ module.exports = function generateTaxonomies(actions, graphql) {
         result.errors.forEach(e => console.error(e.toString()))
         return Promise.reject(result.errors)
       }
-      const {bible,page} = result.data.ac
+      const {bible} = result.data.ac
+      const page = {
+        title:ac_strings.scripture,
+        slug:ac_strings.slug_scripture,
+        label:"scripture"
+      }
       const chaptersCounts = []
       console.log("Generating scriptures")
       if (bible.new && bible.old){
@@ -66,22 +66,27 @@ module.exports = function generateTaxonomies(actions, graphql) {
             const chapterRes = await graphql(chapterQuery).catch(err=>console.log(err))
             const pagePath=`${page.slug}/${book.id}/${chapter}`
             console.log(pagePath)
-            const posts=chapterRes.data.ac.biblePosts.map(i=>i.slug)
-            chaptersCounts.push({
-              name:`${book.name} ${chapter}`,
-              to:pagePath,
-              count:posts.length
-            })
-            createPage({
-              path:pagePath,
-              component:path.resolve(listTemplate),
-              context: {
-                posts,
-                title:`${book.name} ${chapter}`,
-                slug:pagePath,
-                breadcrumb:[{name:page.title,to:page.slug}]
-              }
-            })
+            if(chapterRes.data.ac.biblePosts){
+              const posts=chapterRes.data.ac.biblePosts.map(i=>i.slug)
+              chaptersCounts.push({
+                name:`${book.name} ${chapter}`,
+                to:pagePath,
+                count:posts.length
+              })
+              createPage({
+                path:pagePath,
+                component:path.resolve(listTemplate),
+                context: {
+                  posts,
+                  title:`${book.name} ${chapter}`,
+                  slug:pagePath,
+                  breadcrumb:[{name:page.title,to:page.slug}]
+                }
+              })
+            } else {
+              console.log(chapterRes.data.ac)
+            }
+
           }
         }
 

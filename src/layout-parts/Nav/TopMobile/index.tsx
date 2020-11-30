@@ -2,13 +2,11 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
-import TS from '@/strings'
 import LogoFull from '@/images/ACLogoFull'
 import Icon from '@/components/Icons/Icon'
 import { navigate } from "gatsby"
-import ReactPlaceholder from 'react-placeholder'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { IDrawerNav } from '@/layouts/App'
 import { INavItem, IBreadcrumb } from '@/types'
 import './topmobile.css'
@@ -187,7 +185,7 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                     </div>
                     <div className="cube-front flex justify-center items-center py-2 w-full">
                         <Link className='flex items-center' to="/">
-                            <LogoFull height="24" full />
+                            <LogoFull height="24" full lang={process.env.LOCALE} />
                         </Link>
                     </div>
                 </div>
@@ -198,4 +196,3 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
 }
 
 export default React.memo(TopNavMobile)
-

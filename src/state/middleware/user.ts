@@ -22,12 +22,17 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .followTopic(action.payload.id, action.payload.followed)
                 .then((resNewFollow: any) => {
+
                     return acApi
                         .following()
                         .then((res: IFollowing) => {
-                            console.log(res)
+
                             if (res.following && Array.isArray(res.following.topics)) {
-                                store.dispatch(setUserFollowingTopics(res.following.topics))
+
+                                const filtered = res.following.topics.filter(p => typeof p.slug === "string")
+                                console.log(filtered)
+                                store.dispatch(setUserFollowingTopics(filtered))
+
                             } else {
                                 store.dispatch(setUserFollowingTopics([]))
                             }
@@ -49,9 +54,11 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         .following()
                         .then((res: IFollowing) => {
                             if (res.following && Array.isArray(res.following.playlists)) {
-                                store.dispatch(setUserFollowingPlaylists(res.following.playlists))
+
+                                const filtered = res.following.playlists.filter(p => typeof p.slug === "string")
+                                store.dispatch(setUserFollowingPlaylists(filtered))
                             } else {
-                                console.log('reset topics')
+                                console.log('reset playlist')
                                 store.dispatch(setUserFollowingPlaylists([]))
                             }
 
@@ -72,7 +79,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         return acApi.liked()
                             .then((res: ILiked) => {
                                 if (Array.isArray(res.liked)) {
-                                    store.dispatch(setUserLiked(res.liked))
+                                    const filtered = res.liked.filter(p => typeof p.slug === "string")
+                                    store.dispatch(setUserLiked(filtered))
                                 }
 
                             })
@@ -92,9 +100,10 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .liked()
                 .then((res: ILiked) => {
-                    console.log(res)
+
                     if (Array.isArray(res.liked)) {
-                        store.dispatch(setUserLiked(res.liked))
+                        const filtered = res.liked.filter(p => typeof p.slug === "string")
+                        store.dispatch(setUserLiked(filtered))
                     }
 
                 })
@@ -109,7 +118,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     console.log(res)
                     if (Array.isArray(res.following.topics)) {
                         if (res.following.topics) {
-                            store.dispatch(setUserFollowingTopics(res.following.topics))
+                            const filtered = res.following.topics.filter(p => typeof p.slug === "string")
+                            store.dispatch(setUserFollowingTopics(filtered))
                         }
                     }
 
@@ -123,10 +133,9 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .history()
                 .then((res: IHistory) => {
-                    console.log(res)
                     if (Array.isArray(res.history)) {
-                        console.log(res.history)
-                        store.dispatch(setUserHistory(res.history))
+                        const filtered = res.history.filter(p => typeof p.slug === "string")
+                        store.dispatch(setUserHistory(filtered))
                     }
 
                 })
@@ -141,7 +150,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 .unfinishedPosts()
                 .then((res: IUnfinished) => {
                     if (Array.isArray(res.unfinishedPosts)) {
-                        store.dispatch(setUserUnfinished(res.unfinishedPosts))
+                        const filtered = res.unfinishedPosts.filter(p => typeof p.slug === "string")
+                        store.dispatch(setUserUnfinished(filtered))
                     }
                 })
                 .catch((err: any) => {
@@ -220,21 +230,21 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                         followedPlaylists: []
                     }
                     if (res[0] && res[0].length > 0) {
-                        userLibrary.bookmarkedPosts = res[0]
+                        userLibrary.bookmarkedPosts = res[0].filter(p => typeof p.slug === "string")
                     }
 
                     if (res[1]) {
-                        userLibrary.followedTopics = res[1].topics
-                        userLibrary.followedPlaylists = res[1].playlists
-                        userLibrary.followedAuthors = res[1].authors
+                        userLibrary.followedTopics = res[1].topics.filter(p => typeof p.slug === "string")
+                        userLibrary.followedPlaylists = res[1].playlists.filter(p => typeof p.slug === "string")
+                        userLibrary.followedAuthors = res[1].authors.filter(p => typeof p.slug === "string")
                     }
 
                     if (res[2] && res[2].length > 0) {
-                        userLibrary.historyPosts = res[2]
+                        userLibrary.historyPosts = res[2].filter(p => typeof p.slug === "string")
                     }
 
                     if (res[3] && res[3].length > 0) {
-                        userLibrary.unfinishedPosts = res[3]
+                        userLibrary.unfinishedPosts = res[3].filter(p => typeof p.slug === "string")
                     }
                     store.dispatch(setUserLibrary(userLibrary))
                     /*

@@ -56,12 +56,13 @@ const widthStandard = {
   'xs':'380px',
   'sm': '640px',
   'md': '768px',
-  'lg': '1024px',
+  'lg-inner': '1000px',
+  'lg': '1140px',
   'xl': '1280px',
   'hd': '1440px',
   'mobile': '380px',
   'tablet': '768px',
-  'laptop': '1024px',
+  'laptop': '1140px',
   'desktop':'1440px',
 /*   'desktop': '1280px' */
 }
@@ -86,7 +87,7 @@ module.exports = {
       'xs':'380px',
       'sm': '640px',// => @media (min-width: 640px) { ... }
       'md': '768px',// => @media (min-width: 768px) { ... }
-      'lg': '1024px',// => @media (min-width: 1024px) { ... }
+      'lg': '1140px',// => @media (min-width: 1140px) { ... }
       'xl': '1280px',// => @media (min-width: 1280px) { ... }
       'hd': '1440px',
       'msm': {'max': '639px'},// => @media (max-width: 639px) { ... }
@@ -112,13 +113,18 @@ module.exports = {
         'mini-plus':'0.675rem',
         'xxs':'.7rem',
         '2-5xl':'1.7rem',
-        '3-5xl':'2rem'
+        '3-5xl':'2rem',
+        '4-7xl':'2.626rem',
+        '6xl':'3.5rem',
       },
       padding:{
         'quarter':'25%',
         'half':'50%',
         'square':'100%',
-        '16/9':'56.25%'
+        '16/9':'56.25%',
+        '14':'3.5rem',
+        '15':'3.75rem',
+        '18':'4.5rem',
       },
       borderRadius: {
         'xl': '0.75rem',
@@ -130,7 +136,7 @@ module.exports = {
       height: {
         ...heightStandard,
         'mobile': '674px',
-        'tablet': '1024px',
+        'tablet': '1140px',
         'laptop': '768px',
       },
       colors: {
@@ -140,6 +146,7 @@ module.exports = {
         'd4slate-light': 'var(--slate-light)',
         'd4slate': 'var(--slate)',
         'd4slate-dark': 'var(--slate-dark)',
+        'd4slate-darker': 'var(--slate-darker)',
         'd4gray-light': 'var(--gray-light)',
         'd4gray': 'var(--gray)',
         'd4gray-dark': 'var(--gray-dark)',
@@ -152,7 +159,8 @@ module.exports = {
         'mp-background': 'var(--mp-background)',
         'mp-play-progress': 'var(--mp-play-progress)',
         'mp-duration': 'var(--mp-duration)',
-        'mp-text': 'var(--mp-text)'
+        'mp-text': 'var(--mp-text)',
+        'info-bar':'var(--info-bar)'
       },
       opacity:{
         '0': '0',

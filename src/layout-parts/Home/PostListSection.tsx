@@ -1,13 +1,12 @@
 import * as React from "react"
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Link from '@/components/CustomLink'
-import { IPostItem, ITopicPostSlugs } from '@/types'
+import { ITopicPostItems } from '@/types'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
-import ac_strings from '@/strings/ac_strings.json'
-import TS from '@/strings'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-const PostListSection: React.FC<ITopicPostSlugs> = ({ posts: slugs, ...topic }) => (
+import ac_strings from '@/strings/ac_strings.js'
+
+const PostListSection: React.FC<ITopicPostItems> = ({ posts, ...topic }) => (
     <div className="md:h-full md:flex md:flex-col">
         {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
             {subHeader && <PageSectionHeaderUpperCaseGray title={subHeader} />}
@@ -15,29 +14,20 @@ const PostListSection: React.FC<ITopicPostSlugs> = ({ posts: slugs, ...topic }) 
 
         </div> */}
         <div className="w-full flex justify-between items-center text-sm mb-6">
-            <Link to={`${TS.slug_topic}/${topic.slug}`}>
+            <Link to={`${ac_strings.slug_topic}/${topic.slug}`}>
                 <PageSectionHeaderUpperCaseGray title={ac_strings.popularTopic} />
-                <h4 className="font-roboto">{topic.name}</h4>
+                <h4 className="font-roboto text-base">{topic.name}</h4>
             </Link>
             <ToggleFollowOutlineBtn id={topic.id} />
         </div>
         <div className="flex-1">
-            <FetchPostsFromSlugs
-                slugs={slugs.slice(0, 1)}
-                layout="row"
-                render={({ posts }) => {
+            <div>
+                {posts.slice(0, 2).map((item, k) => {
                     return (
-                        <div>
-                            {posts.map((item, k) => {
-                                return (
-                                    <RightImgWDes border={true} {...item} key={k} />
-                                )
-                            })}
-                        </div>
+                        <RightImgWDes border={true} {...item} key={k} />
                     )
-                }}
-
-            />
+                })}
+            </div>
 
 
         </div>

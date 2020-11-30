@@ -42,7 +42,7 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
                             onClick={() => { handleTabClick(i) }}
                             key={i}
                         >
-                            <div className={`w-16 h-16 rounded-full  mx-1 ${activeTab === i ? 'border-d4slate-dark border-2' : ''}`}>
+                            <div className={`w-20 h-20 rounded-full  mx-1 ${activeTab === i ? 'border-d4slate-dark border-2' : ''}`}>
                                 <ImageRound {...item.header.image} />
                             </div>
                             <span className={`text-roboto text-xs ${activeTab === i ? 'font-semibold' : ''}`}>{item.header.name}</span>
@@ -51,7 +51,7 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
                 })}
                 <span
                     className="absolute bottom-0 mb-5 block rounded ac-tab-marker"
-                    style={{ left: `${activeTab * 72}px`, width: "20px", height: "2px", marginLeft: "42px", backgroundColor: "#ED8C61" }}
+                    style={{ left: `${activeTab * 92}px`, width: "20px", height: "2px", marginLeft: "42px", backgroundColor: "#ED8C61" }}
                 />
                 {/*                 <span
                     className="absolute bottom-0 mb-5 block rounded ac-tab-marker"

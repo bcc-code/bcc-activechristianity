@@ -7,8 +7,8 @@ import './horizontal-scroll.css';
 import { ITopic } from '@/types'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFollow'
-
-import TS from '@/strings'
+import shortid from 'shortid'
+import ac_strings from '@/strings/ac_strings.js'
 
 const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
     const { followedTopics } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics }))
@@ -28,9 +28,15 @@ const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
             <XScrollCustomSize
                 childeClassName=""
                 items={featured.map(({ name, image, slug, id }) => (
-                    <div className="flex flex-col items-center">
-                        <div className="min-h-36 h-36 w-24" >
-                            <ImgBgTopicCard name={name} image={image} to={`${TS.slug_topic}/${slug}`} />
+                    <div className="flex flex-col items-center" key={shortid()}>
+                        <div style={{ width: "100px", height: "138px" }}>
+                            <ImgBgTopicCard
+                                name={name}
+                                image={image}
+                                to={`${ac_strings.slug_topic}/${slug}`}
+                                rounded="rounded-xxl"
+
+                            />
 
                         </div>
                         <SlateDarkFollowButton
@@ -43,7 +49,7 @@ const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
             <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
                 {processTopics.map(({ name, image, slug, id }) => (
                     <div className="flex flex-col items-center">
-                        <ImgBgTopicCard name={name} image={image} to={`${TS.slug_topic}/${slug}`} />
+                        <ImgBgTopicCard name={name} image={image} to={`${ac_strings.slug_topic}/${slug}`} />
                         <SlateDarkFollowButton
                             id={id}
 

@@ -156,7 +156,23 @@ export const recommendedByPostQuery = (postId: number | string) => `
       slug
     }
   }  
+`
 
+export const recommendedPostsAndPopularTopic = () => `
+  query { 
+    
+    recommended(count:10){
+      slug
+    }
+    popularTopics{
+      slug
+      id
+    }
+    featuredTopics:topics(featured:true) {
+      slug
+      id
+  }
+  }  
 `
 export const topicReommendedPostsQuery = (topicId: number) => `
 query {

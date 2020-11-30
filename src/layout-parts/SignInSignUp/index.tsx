@@ -9,8 +9,6 @@ import SignInForm from './Signin'
 import ForgotPassword from './ForgotPassword'
 import GiveConsent from './GiveConsent'
 import { IRootState } from '@/state/types'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
 
 const SigninSignUpModal: React.FC = () => {
     const dispatch = useDispatch();

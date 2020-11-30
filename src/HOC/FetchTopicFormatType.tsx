@@ -2,15 +2,14 @@ import * as React from "react"
 import { ITopic, ITopicPostItems } from '@/types'
 import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import TS from '@/strings'
-
+import { fetchPostsFromTopics } from '@/helpers/fetchLocalData'
+import ac_strings from '@/strings/ac_strings.js'
 interface IFetchTopics {
     topics: string[]
     layout: "row" | "list",
     render: (data: { topics: ITopic[] }) => JSX.Element
 }
-export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render, layout }) => {
+export const FetchTopicsB: React.FC<IFetchTopics> = ({ topics: topicSlugs, render, layout }) => {
     const [topics, setTopics] = React.useState<ITopic[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
@@ -18,7 +17,7 @@ export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render
         setLoading(true)
         Promise.all(topicSlugs
 
-            .map(slug => fetch(`/page-data/${TS.slug_topic}/${slug}/page-data.json`)
+            .map(slug => fetch(`/page-data/${ac_strings.slug_topic}/${slug}/page-data.json`)
                 .then(res => res.json())
                 .then(topicRes => {
                     const data = topicRes.result.pageContext
@@ -63,42 +62,35 @@ export const FetchTopics: React.FC<IFetchTopics> = ({ topics: topicSlugs, render
 
 }
 
+export const FetchTopics = React.memo(FetchTopicsB)
 interface IFetchTopicsWithPosts {
     topics: ITopic[]
     layout: "row" | "list"
     render: (data: { topicPostItems: ITopicPostItems[] }) => JSX.Element
 }
+
 export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, render, layout }) => {
     const [topicPostItems, setTopicPostItems] = React.useState<ITopicPostItems[]>([])
     const [loading, setLoading] = React.useState(true)
     const CustomPlaceholder = getPlaceholder[layout]
+
     React.useEffect(() => {
         setLoading(true)
-        Promise.all(topics
-            .map(t => fetchPostslistFromArchivePage(t.slug).then(posts => {
-                if (posts) {
 
-                    return ({
-                        ...t,
-                        posts
-                    })
-                }
-            })))
+        fetchPostsFromTopics(topics)
             .then(res => {
-                const toAdd: ITopicPostItems[] = []
-                res.forEach(item => {
+                if (res) {
                     setLoading(false)
-                    if (item) {
-                        toAdd.push(item)
-                    }
-                })
-                setTopicPostItems(toAdd)
+                    setTopicPostItems(res)
+                } else {
+                    throw Error('No posts found')
+                }
             })
             .catch(error => {
                 setLoading(false)
                 console.log(error)
             })
-    }, [])
+    }, [topics])
 
     return (
         <CustomPlaceholder
@@ -109,3 +101,4 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
     )
 
 }
+

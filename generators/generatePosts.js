@@ -1,8 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
 const listTemplate = 'src/templates/archive/post-list.tsx'
-const TS = require('../src/strings')
-const ac_strings=require('../src/strings/ac_strings.json')
+const ac_strings=require('../src/strings/ac_strings.js')
 /* SETUP */
 const template = 'src/templates/single-resource/post.tsx'
 
@@ -35,14 +34,15 @@ module.exports = function generatePosts(actions, graphql) {
 
     // Iterate over the array of posts
     _.each(posts, (post) => {
-      createPage({
-        path: `${post.slug}`,
-        component: path.resolve(template),
-        context: {
-          id: post.id,
-        },
-      })
-
+      if(post.slug!=="dummy-content"){
+        createPage({
+          path: `${post.slug}`,
+          component: path.resolve(template),
+          context: {
+            id: post.id,
+          },
+        })
+      }
     })
 
     const component = path.resolve(listTemplate)
@@ -66,7 +66,7 @@ module.exports = function generatePosts(actions, graphql) {
             totalPages,
             baseUrl
           },
-          title:TS.latest
+          title:ac_strings.latest
         },
       })
     }

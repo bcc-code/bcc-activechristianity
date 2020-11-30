@@ -9,7 +9,7 @@ const FetchPostImage: React.FC<{ slug: string }> = ({ slug }) => {
             render={({ post }) => {
                 return post ? (
                     <SquareImage
-
+                        rounded
                         {...post?.image}
                     />
                 ) : (

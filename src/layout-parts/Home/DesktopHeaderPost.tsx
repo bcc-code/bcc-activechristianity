@@ -6,49 +6,45 @@ import { IPostItem } from '@/types'
 import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
-
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
-const rbgToString = (colors: number[], alpha?: number) => {
-    if (alpha) {
-        return "rgba(" + colors.join(", ") + ", " + alpha + ")";
-    } else {
-        return "rgb(" + colors.join(", ") + ")";
-    }
-}
-
+import { fetchOneLocalPostsFromSlug } from '@/helpers/fetchLocalData'
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
-    const bgGradientStyle = { 'backgroundImage': '' }
 
-
+    const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
+    React.useEffect(() => {
+        fetchOneLocalPostsFromSlug(slug).then(res => {
+            if (res && res.media && res.media.video) {
+                setVideoUrl(res.media.video.src)
+            }
+        })
+    }, [slug])
     return (
-        <div>
-            <div
-                className="absolute inset-x-0 top-0 h-64 z-minus"
-            >
-            </div>
-            <div className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24">
-                <Link to={`/${slug}`} className="col-start-1 col-end-6 relative">
+        <div className="w-full z-10 grid grid-cols-1 md:grid-cols-8 md:gap-6 lg:gap-12 relative sm:pt-16 px-4">
+            <Link to={`/${slug}`} className="md:col-start-1 md:col-end-6 relative pb-6">
 
 
-                    {media && media.video && media.video.src ? (
-                        <VideoHeader
-                            src={media.video.src}
-                            className={`rounded-xxl sm:rounded-xl overflow-hidden`}
-                        />
+                {videoUrl !== null ? (
 
-                    ) : (
-                            <div className="m-0 relative w-full pb-square sm:pb-half">
-                                <LazysizesFeaturedImage
-                                    {...image}
-                                    className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
-                                />
-                            </div>
-                        )
-                    }
+                    <VideoHeader
+                        src={videoUrl}
+                        className={`rounded-xxl sm:rounded-xl overflow-hidden`}
+                    />
 
-                </Link>
-                <div className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0">
+                ) : (
+                        <div className="m-0 relative w-full pb-square sm:pb-half">
+                            <LazysizesFeaturedImage
+
+                                {...image}
+                                className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                            />
+                        </div>
+                    )
+                }
+
+            </Link>
+            <div className="md:col-start-6 md:col-end-9 md:ml-5 flex flex-col justify-center pt-0">
+                <div className="flex flex-col justify-center pt-0">
                     <Link
                         to={`/${slug}`}
 
@@ -58,7 +54,6 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                         )}
                         <TextSizeWClamp
                             rawText={title}
-                            bold="font-semibold"
                             fontKey="header-post"
                             clamp={3}
                             className="sm:py-3 py-1"
@@ -79,6 +74,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                         <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden lg:block" duration={duration?.listen} authors={authors} />
                     </div>
                 </div>
+
             </div>
         </div>
 

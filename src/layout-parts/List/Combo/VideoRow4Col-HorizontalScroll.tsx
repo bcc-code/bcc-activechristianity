@@ -9,6 +9,7 @@ const Row2ColAndHorizontalScroll: React.FC<{ name: string, slug?: string, posts:
                 name={name}
                 to={to}
             />
+
             <HSCardListVideo posts={posts} />
         </div>
     )

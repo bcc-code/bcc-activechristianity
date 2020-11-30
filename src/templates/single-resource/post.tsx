@@ -11,7 +11,7 @@ const Post: React.FC<IPostProp> = (props) => {
     const post = normalizePostRes(postRes)
 
     const { title, excerpt, date, topics, types, image, format } = post
-    const { id, langs, content, meta, recommendPosts, readMorePosts } = postRes
+    const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = postRes
     const breadcrumb: INavItem[] = []
     if (types) {
         breadcrumb.push(types[0])
@@ -24,10 +24,10 @@ const Post: React.FC<IPostProp> = (props) => {
     return (
         <div>
             <MetaTag
-                title={title}
+                title={seo && seo.title ? seo.title : title}
                 type="article"
                 meta={{
-                    description: excerpt,
+                    description: seo && seo.desc ? seo.desc : excerpt,
                     date,
                     topics,
                     types,
@@ -67,10 +67,7 @@ export const pageQuery = graphql`
                 id:acId
                 title
                 slug
-                meta {
-                    credits
-                    url
-                }
+
                 excerpt
                 image {
                     src
@@ -118,7 +115,11 @@ export const pageQuery = graphql`
                 seo {
                     desc
                     title
-                    }
+                 }
+                 meta {
+                    credits
+                    url
+                }
 
     }
 

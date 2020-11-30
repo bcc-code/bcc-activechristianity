@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import { IImage } from '@/types'
+
 import 'lazysizes';
 
 interface ILazysizes extends IImage {
@@ -8,7 +9,6 @@ interface ILazysizes extends IImage {
     style?: any
 }
 const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
-
     const { src, srcset, dataUri, alt, className, style } = props
     return (
         <img

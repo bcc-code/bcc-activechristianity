@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
-const TS = require('../src/strings/index.js')
 const template = 'src/templates/single-resource/glossary.tsx'
+const ac_strings=require('../src/strings/ac_strings.js')
 const getGlossaryQuery = `
   {
     ac {
@@ -11,11 +11,7 @@ const getGlossaryQuery = `
             slug
             id
           }
-
-          glossariesPage:page(id:${process.env.GLOSSARY_PAGE_ID}){
-            title
-            slug
-          }  
+ 
     }
   }
 `
@@ -36,7 +32,10 @@ module.exports = function generateTaxonomies(actions, graphql) {
 
     if (result.data.ac && result.data.ac.glossary){
         const allGlossaries= result.data.ac.glossary
-        const glossariesPage = result.data.ac.glossariesPage
+        const glossariesPage = {
+          title:ac_strings.glossary,
+          slug:ac_strings.slug_glossary
+        }
         const navParentItem={name:glossariesPage.title,to:glossariesPage.slug}
         allGlossaries.forEach(glossary=>{
             const baseUrl=`${glossariesPage.slug}/${glossary.slug}`

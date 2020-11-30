@@ -2,7 +2,7 @@
 import * as React from "react"
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { OutlineButton } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { ITopic, IPostItem } from '@/types'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 
@@ -11,8 +11,11 @@ const ShowMorePosts: React.FC<{ startNr: number, slug: string }> = ({ startNr, s
     const [latestPageNr, setLatestPageNr] = React.useState(startNr)
     const [isFetchingMore, setIsFetchingMore] = React.useState(false)
 
-
     const showMorePosts = () => {
+        let scrollTop = 0
+        if (typeof window !== 'undefined') {
+            scrollTop = window.pageYOffset
+        }
 
         if (latestPageNr > 0) {
             setIsFetchingMore(true)
@@ -25,6 +28,12 @@ const ShowMorePosts: React.FC<{ startNr: number, slug: string }> = ({ startNr, s
                         setInfinitePosts([...infinitePosts, ...res])
                         setIsFetchingMore(false)
                     }
+
+                    setTimeout(() => {
+                        window.scrollTo({
+                            top: scrollTop
+                        })
+                    }, 200)
                 })
         }
 

@@ -5,22 +5,22 @@ import Icon, { IButtonColour } from "@/components/Icons/Icon"
 import Link from '@/components/CustomLink'
 import { ITopicNavItem } from '@/types'
 import { OutlineSmallRounded } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
-
+import ac_strings from '@/strings/ac_strings.js'
+import shortid from 'shortid'
 export const toggleFollowStatusMap = {
     "loading": {
         color: 'bg-slate-lighter text-d4slate-dark',
-        icon: <Icon name="Cached" size="3" />,
+        icon: <Icon name="Cached" size="4" />,
         text: ac_strings.loading
     },
     "true": {
         color: 'bg-slate-lighter text-d4slate-dark',
-        icon: <Icon name="Check" size="3" />,
-        text: ac_strings.following
+        icon: <Icon name="Check" size="4" />,
+        text: ac_strings.unfollow
     },
     "false": {
         color: 'bg-d4slate-dark text-white',
-        icon: <Icon name="Add" size="3" />,
+        icon: <Icon name="Add" size="4" />,
         text: ac_strings.follow
     },
 }
@@ -42,7 +42,15 @@ export const ToggleBookmarkIconOnly: React.FC<IToggleFollowProps> = ({ id }) => 
                 const config = toggleFollowStatusMap[followed]
                 return (
                     <button>
-                        {config.icon}
+                        {followed === "loading" && (
+                            <Icon name="Cached" size="4" key={shortid()} />
+                        )}
+                        {followed === "true" && (
+                            <Icon name="Check" size="4" key={shortid()} />
+                        )}
+                        {followed === "false" && (
+                            <Icon name="Add" size="4" key={shortid()} />
+                        )}
                     </button>
                 )
             }}
@@ -64,8 +72,16 @@ export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => 
                     <OutlineSmallRounded>
                         <div className="flex">
                             <span className="">{config.text}</span>
-                            <span className="pl-2 flex items-center">
-                                {config.icon}
+                            <span className="pl-2 flex items-center -mr-1">
+                                {followed === "loading" && (
+                                    <Icon name="Cached" size="4" key={shortid()} />
+                                )}
+                                {followed === "true" && (
+                                    <Icon name="Check" size="4" key={shortid()} />
+                                )}
+                                {followed === "false" && (
+                                    <Icon name="Add" size="4" key={shortid()} />
+                                )}
                             </span>
                         </div>
                     </OutlineSmallRounded>
@@ -89,7 +105,15 @@ export const ToggleFollowPlaylistOutlineBtn: React.FC<IToggleFollowProps> = ({ i
                         <div className="flex">
                             <span className="">{config.text}</span>
                             <span className="pl-2 flex items-center">
-                                {config.icon}
+                                {followed === "loading" && (
+                                    <Icon name="Cached" size="4" key={shortid()} />
+                                )}
+                                {followed === "true" && (
+                                    <Icon name="Check" size="4" key={shortid()} />
+                                )}
+                                {followed === "false" && (
+                                    <Icon name="Add" size="4" key={shortid()} />
+                                )}
                             </span>
                         </div>
                     </OutlineSmallRounded>
@@ -152,11 +176,40 @@ export const SlateDarkFollowButton: React.FC<IToggleFollowProps> = ({ id, text }
                 const config = toggleFollowStatusMap[followed]
 
                 return (
-                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-xs rounded-full font-semibold ${config.color}`}>
+                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-sm rounded-full font-semibold ${config.color}`}>
                         <span>{text ? text : config.text}</span>
                         <span className="pl-2 flex items-center">
-                            {config.icon}
+                            {followed === "loading" && (
+                                <Icon name="Cached" size="4" key={shortid()} />
+                            )}
+                            {followed === "true" && (
+                                <Icon name="Check" size="4" key={shortid()} />
+                            )}
+                            {followed === "false" && (
+                                <Icon name="Add" size="4" key={shortid()} />
+                            )}
                         </span>
+                    </div>
+
+                )
+            }}
+        />
+
+    )
+}
+
+export const SlateDarkUnfollowButton: React.FC<IToggleFollowProps> = ({ id, text }) => {
+
+    return (
+        <FetchAndSetFollowedTopics
+            id={id}
+            className="w-full"
+            render={({ followed }) => {
+                const config = toggleFollowStatusMap[followed]
+
+                return (
+                    <div className={`flex justify-center py-1 px-2 my-2 w-full text-center text-xs rounded-full font-semibold ${config.color}`}>
+                        <span>{text ? text : config.text}</span>
                     </div>
 
                 )
@@ -178,9 +231,20 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
                 className=""
                 render={({ followed }) => {
                     const config = toggleFollowStatusMap[followed]
-                    return (<span className="py-2 px-4">
-                        {config.icon}
-                    </span>)
+                    return (
+                        <span className="py-2 px-4">
+                            {followed === "loading" && (
+                                <Icon name="Cached" size="4" key={shortid()} />
+                            )}
+                            {followed === "true" && (
+                                <Icon name="Check" size="4" key={shortid()} />
+                            )}
+                            {followed === "false" && (
+                                <Icon name="Add" size="4" key={shortid()} />
+                            )}
+                        </span>
+
+                    )
                 }}
             />
         </div>

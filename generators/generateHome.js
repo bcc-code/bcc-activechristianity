@@ -1,32 +1,48 @@
 const path = require('path')
-
+const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
+const {typeScope,formatScope} = require('./TopicsFormatsTypes/hjelper')
+const baseUrl = process.env.API_URL
+//${postQuery}
+const headers = {
+    "x-lang": process.env.LANG_CODE
+}
+const languagePostQuery = postQuery
 const topicQuery=`
     id
     name
     slug
     noOfPosts
     excerpt
-    posts {
-        slug
-    }
+    image {
+        src
+        srcset
+        dataUri
+      }
+    somePosts(first:12){
+        data {
+            ${languagePostQuery}
+        }
+      }
 `
 const query =`{
     allAcNodeSetting {
         nodes {
-            popular_posts
-            featured_posts
+            popular_posts {
+                ${languagePostQuery}
+            }
+            featured_posts {
+                ${languagePostQuery}
+            }
         }
     }
 
     ac {
 
-        type:topics(group_id:${process.env.TYPE_GROUP_ID}){
-            id
-        }
-        format:topics(group_id:${process.env.FORMAT_GROUP_ID}){
-            ${topicQuery}
-        }
-
+        latestPosts:posts(page:1,first:12){
+            data {
+                ${languagePostQuery}
+            }
+          }
         featuredTopics:topics(featured:true) {
         	${topicQuery}
       }
@@ -51,6 +67,7 @@ const getPopularQuery = `{
 
         popularTopics(count:20) {
             id
+            slug
         }
     }
 }`
@@ -63,25 +80,28 @@ module.exports = function generatePages(actions, graphql) {
           result.errors.forEach(e => console.error(e.toString()))
           return Promise.reject(result.errors)
         } else {
+            
             const {allAcNodeSetting,ac}=result.data
-
-            const featuredPosts = allAcNodeSetting.nodes[0].featured_posts
            
-            const formatIDs= ac.format.map(node=>node.id)
-            const typeIDs = ac.type.map(node=>node.id)
-
+            const featuredPosts = allAcNodeSetting.nodes[0].featured_posts.filter(item=>item.slug!=="dummy-content")
             
             const popularPostsAll={
-
-                "static":allAcNodeSetting.nodes[0].popular_posts
+                "static":allAcNodeSetting.nodes[0].popular_posts.filter(item=>item.slug!=="dummy-content")
             }
     
+            const staticTopics = []
+            for (let i=0;i<ac.featuredTopics.length;i++){
+                const item=ac.featuredTopics[i]
+                
+                staticTopics.push(
+                    {
+                        ...item,
+                        posts:item.somePosts.data
+                    }
+                )
+            }
             const popularTopicsAll = {
-       
-                "static":ac.featuredTopics.map(item=>({
-                    ...item,
-                    posts:item.posts.slice(0,2).map(item=>item.slug)
-                }))
+                "static":staticTopics
             }
 
             await graphql(getPopularQuery)
@@ -89,29 +109,30 @@ module.exports = function generatePages(actions, graphql) {
                 console.log(popularRes.data.ac)
                 const {popularPosts,popularTopics}=popularRes.data.ac
                 if (popularPosts){
-                    popularPostsAll["dynamic"]= popularPosts.map(node=>node.slug)
+                    popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl,headers)
                 }
                 
                 
                 if(popularTopics){
                     const popularTopicsUnfilteredIDs=popularTopics.map(node=>node.id)
                     popularTopicsAll["dynamic"]=[]
+                   
                     for (let k =0;k<popularTopicsUnfilteredIDs.length;k++){
                         const item=popularTopicsUnfilteredIDs[k]
-                        const hasType = typeIDs.find(t=>t===item)
+                        const hasType = typeScope.find(t=>`${t.id}`===`${item}`)
                         if(!hasType){
-                            const hasFormat=formatIDs.find(f=>f===item)
+                            const hasFormat=formatScope.find(f=>`${f.id}`===`${item}`)
                             if (!hasFormat){
                                 const getTopicQuery = getTopic(item)
                                 await graphql(getTopicQuery)
-                                .then(res=>{
-                                   
-                                    const topic = res.data.ac.topic
-                                    const allPosts = topic.posts.slice(0,2).map(item=>item.slug)
-                                    popularTopicsAll["dynamic"].push({
-                                        ...topic,
-                                        posts:allPosts
-                                    })
+                                .then(async res=>{
+                                    if(res.data && res.data.ac &&res.data.ac.topic){
+                                        const topic = res.data.ac.topic
+                                        const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl,headers)
+                                        popularTopicsAll["dynamic"].push({...topic,posts:allPosts})
+                                    }
+                                    
+                                    
                                 })
                             }
                         }
@@ -125,6 +146,7 @@ module.exports = function generatePages(actions, graphql) {
             })
 
             const context = {
+                latestPosts:ac.latestPosts.data,
                 featuredPosts,
                 popularPosts:popularPostsAll,
                 popularTopics:popularTopicsAll,

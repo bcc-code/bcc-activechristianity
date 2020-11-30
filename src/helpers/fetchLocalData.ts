@@ -1,7 +1,6 @@
-import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem } from '@/types'
+import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem, ITopic, ITopicPostItems } from '@/types'
 import { trimSlug, normalizePostRes, normalizeTracks } from './index'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 
 
@@ -31,7 +30,6 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
         .then(res => {
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: string[] = res.result.pageContext.posts
-
                 return fetchLocalPostsFromSlugs(posts)
 
             }
@@ -111,7 +109,7 @@ export const fetchLatestPlaylists = () => {
 
 export const fetchTopicFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
-    return fetch(`/page-data/${TS.slug_topic}/${processSlug}/page-data.json`)
+    return fetch(`/page-data/${ac_strings.slug_topic}/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
@@ -146,3 +144,39 @@ export const fetchOneLocalPostsFromSlug = (slug: string) => {
         })
 }
 
+export const fetchPostsFromTopics = (topics: ITopic[]) => {
+    console.log('fetch topics')
+
+    return Promise.all(topics
+        .map(t => {
+            return fetchPostslistFromArchivePage(t.slug)
+                .then(posts => {
+
+                    if (posts) {
+
+                        return ({
+                            ...t,
+                            posts
+                        })
+                    }
+                }).catch(error => {
+                    console.log(error)
+                    return null
+
+                })
+        }))
+
+        .then(res => {
+
+            const toAdd: ITopicPostItems[] = []
+
+            res.forEach(item => {
+                if (item) {
+                    toAdd.push(item)
+                }
+
+            })
+            return toAdd
+        })
+
+}

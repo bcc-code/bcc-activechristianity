@@ -3,7 +3,7 @@ import * as React from 'react'
 import { IPostAuthors, ITab } from '@/types'
 import Content from '@/components/Content'
 import Tabs from '@/components/Tabs/TwoToThreeTabs'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 interface IContentPodcast {
     episodeNotes?: string
     transcript: string

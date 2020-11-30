@@ -15,9 +15,7 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
     const [followed, setFollowed] = React.useState<IFollowStatus>("loading")
     const dispatch = useDispatch()
-
     React.useEffect(() => {
-
         const found = followedTopics.findIndex(p => p.id === id)
         const followed = found > -1
         setFollowed(followed ? "true" : "false")
@@ -35,13 +33,13 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     }
 
     return (
-        <div
+        <button
             className={className ? className : ''}
             onClick={handleClick}
             onKeyDown={handleClick}
         >
             {render({ followed })}
-        </div>
+        </button>
     )
 }
 

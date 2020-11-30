@@ -1,5 +1,5 @@
 import * as React from "react"
-import { MoreLatestLink } from '@/layout-parts/PostSections'
+import { MoreLatestLink } from '@/layout-parts/PostLayout/PostSections'
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import { IPostItem } from '@/types'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'

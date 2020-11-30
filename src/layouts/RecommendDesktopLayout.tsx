@@ -3,114 +3,55 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
-const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
 const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
-import PostRow from '@/layout-parts/List/PostRow4Col'
-import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
+import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-
-import { FetchPostsFromArchivePage, FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-
-import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
+import { LayoutH1 } from '@/components/Headers'
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
-import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
-import { ISubtopicLinks, IPlaylist, INavItem } from "@/types"
-import { playlistToPost, getRandomArray } from '@/helpers'
-import shortId from 'shortid'
-import ac_strings from '@/strings/ac_strings.json'
-import TS from '@/strings'
+
+import { ISubtopicLinks, INavItem, IPostItem } from "@/types"
+
+import ac_strings from '@/strings/ac_strings.js'
+
 import '@/styles/react-tabs.css'
 
-
 interface IRecommandLayout {
+    topicId?: string
     listen?: {
         podcast: INavItem
         playlist: INavItem
     }
     name: string
     latestSlug: string
-    popularPosts: string[]
+    featured: IPostItem[]
+    latestPosts: IPostItem[]
+    popularPosts: IPostItem[]
     topics: ISubtopicLinks[]
 
 }
 
 const RecommendLayout: React.FC<IRecommandLayout> = ({
+    topicId,
     name,
     popularPosts,
     topics,
     latestSlug,
-    listen
+    listen,
+    latestPosts,
+    featured
 }) => {
-
     return (
         <div className="hidden sm:block">
-            <LayoutH1Wide title={name} />
-
-
-            <div className="standard-max-w-px">
-                <FetchPostsFromSlugs
-                    slugs={popularPosts}
-                    layout="list"
-                    render={({ posts }) => {
-                        const randomHeaderPost = getRandomArray(posts.slice(5), 1)
-                        return randomHeaderPost[0] ? <HeaderSection headerPost={randomHeaderPost[0]} listPosts={posts.slice(0, 5)} /> : <div></div>
-                    }}
-                />
-
-
+            <div className="standard-max-w-px flex justify-between items-between">
+                <LayoutH1 title={name} />
+                {topicId && <ToggleFollowOutlineBtn id={topicId} />}
             </div>
-            <FetchPostsFromArchivePage
-                slug={latestSlug}
-                layout="row" render={({ posts }) => {
-                    return (<LatestDesktopRow posts={posts} latestSlug={latestSlug} />)
-                }}
-            />
-            {listen && listen.playlist && (
-                <LazyLoad>
-                    <div className="px-4">
-                        <UnderlineTitleLink    {...listen.playlist} /></div>
-                    <FetchLatestPlaylists
-                        layout="row"
-                        render={({ playlists }) => {
-                            return (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 grid-h pt-8 pb-16 px-4">
+            <div className="standard-max-w-px">
+                {featured[0] ? <HeaderSection headerPost={featured[0]} listPosts={popularPosts.slice(0, 5)} /> : <div></div>}
+            </div>
+            <LatestDesktopRow posts={latestPosts.slice(0, 4)} latestSlug={latestSlug} />
 
-                                    {getRandomArray(playlists, 4).map((p, i) => {
-                                        const post = playlistToPost(p)
-                                        return (
-                                            <div className={`div${i + 1}`} key={shortId()}>
-                                                < FeaturedCard {...post} type="playlist" />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )
-                        }}
-
-                    />
-
-
-                </LazyLoad>
-            )}
-            {listen && listen.podcast && (
-                <LazyLoad>
-                    <div className="px-4"><UnderlineTitleLink    {...listen.podcast} /></div>
-                    <FetchLatestPodcast
-                        layout="row"
-                        render={({ podcastEps }) => {
-                            return (
-                                <PostRow
-                                    posts={podcastEps.slice(0, 4)}
-                                />
-                            )
-                        }}
-
-                    />
-
-
-                </LazyLoad>
-            )}
             <LazyLoad >
                 <FetchTopicPostItems
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
@@ -118,19 +59,16 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     render={({ topicPostItems }) => {
 
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)
-                        return (
-                            (
-
-                                <div className="standard-max-w-px pb-6">
-                                    <PostMultiColLayout types={postsByTypesRow1} />
-                                    <ByTaxonomies types={topics} title={ac_strings.byCategories} />
-                                    <PostMultiColLayout types={postsByTypesRow2} />
-                                </div>
+                        return topics.length > 1 ? (
 
 
+                            <div className="standard-max-w-px pb-6">
 
-                            )
-                        )
+                                <PostMultiColLayout types={postsByTypesRow1} />
+                                <ByTaxonomies types={topics} title={ac_strings.byCategories} />
+                                <PostMultiColLayout types={postsByTypesRow2} />
+                            </div>
+                        ) : <div></div>
                     }}
 
                 />

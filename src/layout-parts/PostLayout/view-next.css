@@ -1,0 +1,60 @@
+.veiw-next-wrapper {
+    height: 5rem;
+    min-height: 5rem;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 60;
+
+}
+
+.veiw-next-show {
+    margin-bottom: 65px;
+}
+
+.veiw-next-hidden {
+    margin-bottom: -20px;
+}
+
+@media (min-width: 640px) {
+    .veiw-next-wrapper {
+        height: 5rem;
+        bottom: 0;
+        right: 0;
+        z-index: 60;
+        left: auto;
+        width: 300px;
+        border-radius: 0.5rem;
+
+        overflow: hidden;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        margin-right: 1rem;
+
+    }
+
+    .veiw-next-show {
+        margin-bottom: 1rem;
+    }
+
+    .veiw-next-hidden {
+        margin-bottom: -80px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .veiw-next-wrapper {
+        height: auto;
+        min-height: 0;
+        overflow: visible
+    }
+
+    .veiw-next-show {
+        margin-right: 0rem;
+        margin-bottom: 0rem;
+    }
+
+    .veiw-next-hidden {
+        margin-bottom: 0;
+
+    }
+}

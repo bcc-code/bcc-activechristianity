@@ -1,7 +1,6 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
 import he from 'he'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
 
@@ -81,10 +80,10 @@ export const normalizeAvailableLanguages = (langs: ITranslations[], showAllLangu
 
 const authorMap: { [key: string]: string } = {
     "wr": ac_strings.author,
-    "vo": TS.vocals,
-    "ly": TS.lyrics,
-    "sp": TS.speaker,
-    "co": TS.with,
+    "vo": ac_strings.vocals,
+    "ly": ac_strings.lyrics,
+    "sp": ac_strings.speaker,
+    "co": ac_strings.with,
     "ho": ac_strings.hosts
 
 }
@@ -92,7 +91,7 @@ export const normalizeAuthors = (authors: IAuthorRes[]) => {
     const sortedAuthors: { [key: string]: IAuthor[] } = {}
     authors.forEach((a) => {
 
-        const key = a.pivot && typeof a.pivot.as === "string" ? authorMap[a.pivot.as] ? authorMap[a.pivot.as] : TS.by : TS.by
+        const key = a.pivot && typeof a.pivot.as === "string" ? authorMap[a.pivot.as] ? authorMap[a.pivot.as] : ac_strings.by : ac_strings.by
         const toAdd = { name: a.name, to: a.slug, as: key }
 
         if (sortedAuthors[key]) {
@@ -114,29 +113,41 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
     const toReturn = tracks.map(track => {
 
-        const normalized = track.post.authors ? normalizeAuthors(track.post.authors) : undefined
-        const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+
 
         const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
+
         const toAdd: IMedia = (
             {
-                path: track.post.slug,
+                path: '',
                 audio: {
                     duration: secondesToMinutes(track.duration),
                     src,
                     title: track.title,
                     type: "audio",
-                    article: {
-                        title: track.post.title,
-                        url: track.post.slug,
 
-                    },
                     playlists: track.playlists,
-                    contributor: trackPostAuthor
+
                 },
 
             }
         )
+
+        if (track.post) {
+            toAdd.path = track.post.slug
+            if (toAdd.audio) {
+
+                const normalized = track.post && track.post.authors ? normalizeAuthors(track.post.authors) : undefined
+                const trackPostAuthor = normalized && normalized[0] ? normalized[0].authors.join(" ") : undefined
+                toAdd.audio.article = {
+                    title: track.post.title,
+                    url: track.post.slug,
+                }
+                toAdd.audio.contributor = trackPostAuthor
+            }
+
+
+        }
 
         return toAdd
     })
@@ -156,7 +167,7 @@ export const transformTopicsRes = (topics: ITopicRes[]) => {
         } else if (t.group && t.group.name === 'Format') {
             format.push(toAdd)
         } else {
-            toAdd.to = `${TS.slug_topic}/${t.slug}`
+            toAdd.to = `${ac_strings.slug_topic}/${t.slug}`
             filteredTopics.push(toAdd)
         }
     })
@@ -167,11 +178,11 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     const sortedTags: {
         [key: string]: {
             info: INavItem
-            topics: INavItem[]
+            topics: ITopicNavItem[]
         }
     } = {}
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${TS.slug_topic}/${t.slug}` }
+        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
         if (t.group) {
             if (t.group.name !== 'Type' && t.group.name !== 'Format') {
             }
@@ -330,7 +341,7 @@ export const normalizePostRes = (post: IPostRes) => {
 }
 
 
-export function chunkArray(myArray: INavItem[], chunk_size: number) {
+export function chunkArray(myArray: INavItem[] | ITopicNavItem[], chunk_size: number) {
     var index = 0;
     var arrayLength = myArray.length;
     var tempArray = [];
@@ -344,4 +355,53 @@ export function chunkArray(myArray: INavItem[], chunk_size: number) {
     return tempArray;
 }
 
+function formatAMPM(date: Date) {
+
+    var hours = date.getHours()
+
+    var minutes = date.getMinutes();
+    let minutesString = ''
+    var ampm = hours >= 12 ? 'pm' : 'am';
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutesString = minutes < 10 ? `0${minutes}` : `${minutes}`;
+    var strTime = hours + ':' + minutesString + ' ' + ampm;
+    return strTime;
+}
+
 export const dateToString = (date: Date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`
+export const timeToString = (date: Date) => `${formatAMPM(date)} (${Intl.DateTimeFormat().resolvedOptions().timeZone}), ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`
+
+export const processRecommendationContext = (data: {
+    featuredPosts: IPostRes[],
+    popularPosts: IPostRes[],
+    latestPosts: IPostRes[]
+}) => {
+    const { featuredPosts, popularPosts, latestPosts } = data
+
+    const featured = featuredPosts.map(p => normalizePostRes(p))
+    const popular = popularPosts.map(p => normalizePostRes(p))
+    const latest = latestPosts.map(p => normalizePostRes(p))
+
+
+    return ({
+        featured,
+        popular,
+        latest
+    })
+
+}
+
+export const getRandomFeatured = (data: {
+    featured: IPostItem[],
+    latest: IPostItem[],
+    popular: IPostItem[]
+}) => {
+    const { latest, featured, popular } = data
+    let toCheck = [...new Set([...popular, ...latest.slice(6)])]
+    const fixedPopularLatest = getRandomArray(toCheck, 6)
+    toCheck = [...new Set([...featured, ...fixedPopularLatest])]
+    const featuredMixed = getRandomArray(toCheck.slice(0, 6), 6)
+    return featuredMixed
+}

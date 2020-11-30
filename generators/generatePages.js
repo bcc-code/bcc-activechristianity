@@ -1,7 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const ac_strings=require('../src/strings/ac_strings.json')
-
+const ac_strings=require('../src/strings/ac_strings.js')
 /* SETUP */
 
 const query = `{
@@ -12,42 +11,22 @@ const query = `{
       slug
       label
       flexibleContent
+      parent {
+        id
+        title
+        slug
+      }
     }
 
-    topicMain:page(id:${process.env.TOPICS_PAGE_ID}){
-      title
-      slug
-    }
-
-    podcast:page(id:${process.env.PODCAST_PAGE_ID}){
-      title
-      slug
-    }
-
-    about:page(id:${process.env.ABOUT_PAGE_ID}){
-      title
-      slug
-    }
   }
 }`
 
-const pagesContext = {
-
-  "podcast":{
-    context: {
-      id:process.env.PODCAST_FILTER_ID
-    }
-  }
-}
 
 /* BUILDER */
 
 module.exports = function generatePages(actions, graphql) {
   const { createPage } = actions
-  const themePages=[]
 
-  const podcastHosts=[]
-  const aboutUsChildren=[]
   return graphql(query).then(result=>{
     console.log("Generating pages")
     if (result.errors){
@@ -55,160 +34,128 @@ module.exports = function generatePages(actions, graphql) {
       return Promise.reject(result.errors)
     } else {
       const pageInfo = result.data.ac.allPages
-      const topicsMain= result.data.ac.topicMain
-      const podcast = result.data.ac.podcast
-      const aboutMain = result.data.ac.about
-      const navTopicsItem={name:topicsMain.title,to:topicsMain.slug}
-     
 
-      _.each(pageInfo,(page)=>{
-        if (page && page.label==="theme-page"){
-          themePages.push(page)
-        } else if (page && page.label==="podcast-host"){
-          podcastHosts.push(page)
-        } else if (page && page.label.indexOf("about-us-") >-1){
-          aboutUsChildren.push(page)
-        } else if (page && page.label.indexOf("build-") >-1){
-          const templateName=page.label.replace("build-","")
-          let context = {
-            ...page,
-              breadcrumb:[
-                {
-                  name:page.title,
-                  to:page.slug
-                }
-              ]
-          }
+      const aboutMain = {
+        page:ac_strings.about_us,
+        slug:ac_strings.slug_about
+      }
 
-          if (pagesContext[page.label]){
-            const pageContext = pagesContext[page.label]
-            if (pageContext.context){
-              context = {...context,...pageContext.context}
-            }
-            
-          }
-          console.log(page.slug)
-          createPage({
-            path: `${page.slug}`,
-            component: path.resolve(`./src/templates/page/${templateName}.tsx`),
-            context,
-          })
-        } 
-      })
+      const parentIds = {
+        about:{
+          "id": "13",
+          templateName:'about-us',
+          children:[]
+        },
+        themes:{
+          "id": "75",
+          templateName:'theme-page',
+          children:[]
+        },
+        pages:{
+          "id": "76",
+          templateName:`page`,
+          children:[]
+        }
+      }
+      const buildPages = [
+        {
+          title:ac_strings.glossary,
+          slug:ac_strings.slug_glossary,
+          templateName:"glossaries"
+        },
+        {
+          title:ac_strings.playlist,
+          slug:ac_strings.slug_playlist,
+          templateName:"playlists"
+        },
+        {
+          title:ac_strings.contact,
+          slug:ac_strings.slug_contact,
+          templateName:"contact"
+        }
+      ]
 
-      // topic
-      createPage({
-        path: `${topicsMain.slug}`,
-        component: path.resolve(`./src/templates/page/topics.tsx`),
-        context:{
-          title:topicsMain.title,
-          id:topicsMain.id,
-          themes:themePages,
-          breadcrumb:[
-            navTopicsItem
-          ]
-        }, 
-      })
-
-      _.each(themePages,page=>{
-        const themePagePath=`${ac_strings.slug_theme}/${page.slug}`
-
+      _.each(buildPages,page=>{
+        console.log(page)
         createPage({
-          path: themePagePath,
-          component: path.resolve(`./src/templates/page/theme-page.tsx`),
+          path: `${page.slug}`,
+          component: path.resolve(`./src/templates/page/${page.templateName}.tsx`),
           context:{
             title:page.title,
-            id:page.id,
-            breadcrumb:[
-              navTopicsItem,
-              {
-                name:page.title,
-                to:themePagePath
-              }
-            ]
+            slug:page.slug
           },
         })
-
       })
-      
+
+      _.each(pageInfo,(page)=>{
+        
+          if(page.parent){
+            if (`${page.parent.id}`==`${parentIds.about.id}`){
+              parentIds.about.children.push(page)
+            } else if (`${page.parent.id}`==`${parentIds.themes.id}`){
+              parentIds.themes.children.push(page)
+            } else if (`${page.parent.id}`==`${parentIds.pages.id}`){
+              parentIds.pages.children.push(page)
+            } 
+          }
+      })
+
+     
+      // themes pages
+      _.each(parentIds.themes.children,page=>{
+        console.log(page)
+        let context = {
+          ...page,
+            breadcrumb:[
+              {
+                name:page.title,
+                to:page.slug
+              }
+            ]
+        }
+        createPage({
+          
+          path: `${ac_strings.slug_theme}/${page.slug}`,
+          component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
+          context,
+        })
+      })
+ // pages
+      _.each(parentIds.pages.children,page=>{
+        console.log(page)
+        let context = {
+          ...page,
+            breadcrumb:[
+              {
+                name:page.title,
+                to:page.slug
+              }
+            ]
+        }
+        createPage({
+          path: `${page.slug}`,
+          component: path.resolve(`./src/templates/page/${parentIds.pages.templateName}.tsx`),
+          context,
+        })
+      })
 
       // about us
+      console.log('building about')
+      console.log(aboutMain)
       createPage({
         path: `${aboutMain.slug}`,
         component: path.resolve(`src/templates/page/about-us.tsx`),
         context:{
           title:aboutMain.title,
-          id:aboutMain.id,
-          childPages:aboutUsChildren,
+          childPages:parentIds.about.children,
           breadcrumb:[]
         },
       })
-      
-      // podcast and hosts
-      const allHostsSlug= []
-      for (let i =0;i<podcastHosts.length;i++){
-        const hostPage = podcastHosts[i]
-        const hostPath = `${ac_strings.slug_host}/${hostPage.slug}`
-        // const getHostImage = getPostImage(hostPage.slug)
-        // get image and slug
-        // const result = await graphql(getHostImage)
-        allHostsSlug.push(hostPath)
-  
-        createPage({
-          path: hostPath,
-          component: path.resolve(`src/templates/page/podcast-host.tsx`),
-          context:{
-            title:hostPage.title,
-            id:hostPage.id,
-            breadcrumb:[]
 
-          },
-        })
-      }
 
-      createPage({
-        path: ac_strings.slug_podcast_intro,
-        component: path.resolve(`src/templates/page/podcast-intro.tsx`),
-        context:{
-          title:podcast.title,
-          postId:process.env.POCAST_INTRO_POST_ID,
-          breadcrumb:[
-            {
-              name:podcast.title,
-              to:podcast.slug
-            }
-          ],
-          hosts:allHostsSlug
 
-        },
-      })
 
-      createPage({
-        path: podcast.slug,
-        component: path.resolve(`src/templates/page/podcast.tsx`),
-        context:{
-          title:podcast.title,
-          id:process.env.PODCAST_FILTER_ID,
-          breadcrumb:[
-            {
-              name:podcast.title,
-              to:podcast.slug
-            }
-          ],
-          hosts:allHostsSlug
 
-        },
-      })
-
-/*       console.log(ac_strings.slug_user)
-      createPage({
-        path: ac_strings.slug_user,
-        component: path.resolve(`src/templates/page/user.tsx`),
-        context:{
-          title:ac_strings.title_user,
-          userPages:userPages.map(page=>({component:page.label.replace("user-",""),path:page.slug, title:page.title}))
-        },
-      }) */
     }
   })
 

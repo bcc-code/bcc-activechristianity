@@ -1,123 +1,108 @@
 import * as React from 'react';
 
-import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
-import ImgBgTopicCard, { IBgImgTopicCard, asImageWDataUri } from '@/components/Cards/BgImgTopicCard'
-
-import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
+import { asImageWDataUri } from '@/components/Cards/BgImgTopicCard'
+import Link from '@/components/CustomLink'
+import { SectionTitleDesktopAndMobile } from '@/components/Headers'
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
-import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
-import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
-import ac_strings from '@/strings/ac_strings.json'
-import categoriesMap, { IFormatKey } from '@/components/Icons/Formats'
-import { INavItem, INavItemWKey, ITopic } from "@/types"
 
-import TS from '@/strings'
+import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
+import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended'
+import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
+import ac_strings from '@/strings/ac_strings.js'
+
+import SquareImages from '@/components/Images/Image1to1Rounded'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
 
-import EbookImg from '@/images/format-Ebooks-01.jpg'
+import typesFormats from '@/strings/topic-filters.json'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
 import PodcastImg from '@/images/format-Podcast-05.jpg'
+import { ITopic } from '@/types';
 
 const ExploreLayout: React.FC<{
-    formats: INavItemWKey[]
-    scriptureSlug: string
-}> = ({ formats, scriptureSlug }) => {
-
-    const categoryKeys: IFormatKey[] = ["testimony", "commentary", "edification", "question"]
-    const mediaLongKeys: IFormatKey[] = ["animation", "interview", "song", "message"]
-    const mediaSquareKeys: IFormatKey[] = ['podcast', 'playlist']
-
+    topics: ITopic[]
+    formatIds?: number[]
+}> = (props) => {
+    const { topics, formatIds: recommendFormatIds } = props
     const mediaSquareImages = {
         'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
     }
+    const { formatIds, typeIds } = typesFormats
+    const formats = Object.keys(formatIds).map(id => formatIds[id])
+    let filteredTopics = topics.filter(item => !formatIds[item.id] && !typeIds[item.id])
+    filteredTopics = [...new Set([...filteredTopics])]
+    const randomTopics = getRandomArray(filteredTopics, 6)
 
-    const getMenu = (keys: IFormatKey[]) => {
-        const toReturn: IBgImgTopicCard[] = []
-        keys.map(k => {
-            const findFormat = formats.find(f => f.key === k)
-            if (findFormat) {
-                const icon = categoriesMap[k]
-                toReturn.push({
-                    name: <TitleWithIcon title={findFormat.name} icon={icon ? icon : categoriesMap.fallback} />,
-                    to: findFormat.to,
-                    image: findFormat.image || mediaSquareImages[k]
-                })
-            }
-        })
-        return toReturn
-    }
-    const categories: IBgImgTopicCard[] = getMenu(categoryKeys)
-    const mediaLong: IBgImgTopicCard[] = getMenu(mediaLongKeys)
-    const mediaSquare: IBgImgTopicCard[] = getMenu(mediaSquareKeys)
     return (
-        <div className="bg-white max-w-tablet mx-auto">
+        <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
                 <SectionTitleDesktopAndMobile
                     name={ac_strings.topics}
-                    to={TS.slug_topic}
+                    to={ac_strings.slug_topic}
                 />
-                <QPopularAndFeaturedPosts
-                    render={({ topics }) => {
-                        const randomTopics = getRandomArray(topics, 6)
-                        return (
-                            <TopicRowAndHorizontalScroll
-                                topics={randomTopics}
+                <TopicRowAndHorizontalScroll
+                    topics={randomTopics}
+                />
+            </div>
+            <div className="pt-6">
+                <SectionTitleDesktopAndMobile
+                    name={ac_strings.categories}
+
+                />
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
+                    {ac_strings.slug_podcast && (
+                        <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                            <SquareImages
+                                className="rounded-t-lg"
+                                {...mediaSquareImages.podcast}
                             />
-                        )
-                    }}
+                            <div className="font-roboto font-semi text-center py-2 px-2">
+                                {ac_strings.podcast}
+                            </div>
+                        </Link>
+                    )}
+                    {ac_strings.slug_playlist && (
+                        <Link key={shortid()} to={ac_strings.slug_playlist} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                            <SquareImages
+                                className="rounded-t-lg"
+                                {...mediaSquareImages.playlist}
+                            />
+                            <div className="font-roboto font-semi text-center py-2 px-2">
+                                {ac_strings.playlist}
+                            </div>
+                        </Link>
+                    )}
+                    {formats.map((card) => (
+                        <Link key={shortid()} to={card.to} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                            <SquareImages
+                                className="rounded-t-lg"
+                                {...card.image}
+                            />
+                            <div className="font-roboto font-semi text-center py-2 px-2">
+                                {card.name}
+                            </div>
+                        </Link>
 
-                />
-            </div>
-            <div className="pt-6">
-                <SectionTitleDesktopAndMobile
-                    name={TS.categories}
-
-                />
-                <div className="grid  grid-cols-2 sm:grid-cols-4 gap-4 px-4 mb-4 ">
-                    {categories.map((card) => (
-                        <ImgBgTopicCard {...card} overlay="light" key={shortid()} />
                     ))}
-                </div>
 
-            </div>
-            <div className="pt-6">
-                <SectionTitleDesktopAndMobile
-                    name={TS.media}
-
-                />
-                <XScrollCustomSize
-                    childeClassName=""
-                    items={mediaLong.map((card) => (
-                        <div className="min-h-24 h-24 w-36" key={shortid()} >
-                            <ImgBgTopicCard {...card} overlay="medium" />
-
-                        </div>
-                    ))}
-                />
-                <XScrollCustomSize
-                    childeClassName=""
-                    items={mediaSquare.map((card) => (
-                        <div className="min-h-24 h-24 w-24" key={shortid()}>
-                            <ImgBgTopicCard {...card} overlay="medium" />
-
-                        </div>
-                    ))}
-                />
-
-                <div className="hidden sm:grid grid-cols-4 gap-4 px-4">
-                    {[...mediaLong, ...mediaSquare].map((card) => (
-                        <div className="min-h-24 h-24" >
-                            <ImgBgTopicCard {...card} overlay="medium" />
-                        </div>
-                    ))}
                 </div>
             </div>
 
-            <ExplorePopularScripture
-                scriptureSlug={scriptureSlug}
-            />
+            {ac_strings.slug_scripture && (
+                <ExplorePopularScripture
+                    scriptureSlug={ac_strings.slug_scripture}
+                />
+            )}
+
+            <div className="pt-6">
+                <SectionTitleDesktopAndMobile
+                    name={ac_strings.recommend_for_you}
+
+                />
+                {recommendFormatIds && recommendFormatIds.length > 3 && <ExploreFormatRecommended ids={recommendFormatIds} />}
+                <FetchRecommendMix />
+            </div>
         </div>
     )
 }

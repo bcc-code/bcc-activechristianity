@@ -4,7 +4,6 @@ import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
 import SeriesPostLayout from "@/layouts/SeriesPostLayout"
 
-import TS from '@/strings'
 import { INavItem, IPostRes } from '@/types'
 
 const SeriesChild: React.FC<IProps> = (props) => {

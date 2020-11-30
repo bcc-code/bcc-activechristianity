@@ -5,7 +5,7 @@ import Icon from '@/components/Icons/Icon'
 import { withMediaProps } from 'react-media-player'
 import { setCurrentMedia, setIsPlaying, setIsModalOpen, addTracks } from '@/state/action'
 import FetchImage from '@/components/Images/ImageFromPost'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { IMedia } from '@/types'
 import { PlayPause, VolumeBar, NextTrack, PrevTrack } from '../ControlElements'
 import shortid from 'shortid'
@@ -131,7 +131,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 />}
                             </div>
                             <div className="px-4">
-                                <div className="text-base font-semibold">
+                                <div className="text-base font-semibold sm:text-3xl md:5xl">
                                     {audioTitle}
                                 </div>
                                 {track.path && (
@@ -172,7 +172,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                                 color="slate-light"
                                             />
                                         </div>
-                                        <span className="text-left">
+                                        <span className="text-left sm:text-lg">
                                             {p.audio?.title}
                                         </span>
                                     </button>
@@ -234,8 +234,8 @@ const MediaControl: React.FC<IProps> = (props) => {
                                     )}
                             </div>
 
-                            <div className="w-full flex sm:hidden flex-row text-d4cadet-blue justify-center">
-                                <div className="flex items-center ">
+                            <div className="w-full flex flex-row text-d4cadet-blue justify-center">
+                                <div className="flex items-center sm:hidden">
                                     {fullScreenInfo && (
                                         <PrevTrack
                                             className="p-3"
@@ -256,7 +256,7 @@ const MediaControl: React.FC<IProps> = (props) => {
 
                                 {!fullScreenInfo && (
                                     <div className="flex flex-1">
-                                        <div className="relative py-3 sm:py-8 flex-1">
+                                        <div className="relative py-3 sm:py-8 flex-1 sm:hidden">
                                             {audioTitle && (
                                                 <div className="text-d4cadet-blue w-full absolute overflow-hidden h-8 text-sm">
                                                     <div className="mp--title-scrolling mp--title-scrolling-animation whitespace-no-wrap">
@@ -264,6 +264,9 @@ const MediaControl: React.FC<IProps> = (props) => {
                                                     </div>
                                                 </div>
                                             )}
+                                        </div>
+                                        <div className="w-full hidden sm:flex">
+                                            <ControlBar />
                                         </div>
                                         <button
                                             className="py-3 sm:py-8 px-2"
@@ -287,9 +290,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 )}
 
                             </div>
-                            <div className={`w-full hidden sm:flex `}>
-                                <ControlBar />
-                            </div>
+
 
                         </div>
                     )

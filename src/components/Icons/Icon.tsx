@@ -10,7 +10,6 @@ import AccessTime from '@material-ui/icons/AccessTime'
 import Description from '@material-ui/icons/Description'
 import Equalizer from '@material-ui/icons/Equalizer'
 import PlayCircleOutline from '@material-ui/icons/PlayCircleOutline'
-import OndemandVideo from '@material-ui/icons/OndemandVideo'
 import Headset from '@material-ui/icons/Headset'
 import PlayArrowRounded from '@material-ui/icons/PlayArrowRounded'
 import ShareOutlined from '@material-ui/icons/ShareOutlined'
@@ -38,6 +37,13 @@ import FirstPage from '@material-ui/icons/FirstPage'
 import LastPage from '@material-ui/icons/LastPage'
 import CheckBox from '@material-ui/icons/CheckBox'
 import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank'
+import Event from '@material-ui/icons/Event'
+import LocationOn from '@material-ui/icons/LocationOn'
+import AddAlert from '@material-ui/icons/AddAlert'
+import GroupAdd from '@material-ui/icons/GroupAdd'
+import Chat from '@material-ui/icons/Chat'
+import WatchLater from '@material-ui/icons/WatchLater'
+import EmojiPeople from '@material-ui/icons/EmojiPeople'
 type IMUIIConName = "Home" |
     "Explore" |
     "Close" |
@@ -51,7 +57,7 @@ type IMUIIConName = "Home" |
     "Description" |
     "Equalizer" |
     "PlayCircleOutline" |
-    "OndemandVideo" |
+    "PlayCircleOutline" |
     "Headset" |
     "PlayArrowRounded" |
     "PlayArrowRounded" |
@@ -78,7 +84,15 @@ type IMUIIConName = "Home" |
     "FirstPage" |
     "LastPage" |
     "CheckBox" |
-    "CheckBoxOutlineBlank"
+    "CheckBoxOutlineBlank" |
+    "Event" |
+    "LocationOn" |
+    "AddAlert" |
+    "GroupAdd" |
+    "Chat" |
+    "WatchLater" |
+    "EmojiPeople"
+    ;
 
 
 const Icons = {
@@ -93,7 +107,7 @@ const Icons = {
     AccessTime,
     Equalizer,
     PlayCircleOutline,
-    OndemandVideo,
+    Event,
     Headset,
     PlayArrowRounded,
     ShareOutlined,
@@ -120,7 +134,14 @@ const Icons = {
     FirstPage,
     LastPage,
     CheckBox,
-    CheckBoxOutlineBlank
+    CheckBoxOutlineBlank,
+    LocationOn,
+    AddAlert,
+    GroupAdd,
+    Chat,
+    WatchLater,
+    EmojiPeople
+
 }
 import * as React from 'react';
 

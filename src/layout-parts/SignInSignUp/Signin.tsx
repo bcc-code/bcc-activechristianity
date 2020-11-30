@@ -4,8 +4,7 @@ import { openSignInModal } from '@/state/action'
 
 import { initiateLogIn } from '@/state/action/authAction'
 import { InputText, InputCheckbox } from '@/components/Input'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
@@ -26,7 +25,7 @@ type IFormFieldType = 'email' | 'password'
 const SignInForm: React.FC = () => {
     const cookieName = 'ac.signin.reset_password_reminder'
     const userReminderOption = Cookies.get(cookieName);
-    console.log(userReminderOption)
+
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const [fields, setFields] = React.useState(initialFieldsState)
     const [errors, setErrors] = React.useState(initialErrorState)
@@ -139,7 +138,7 @@ const SignInForm: React.FC = () => {
 
                         <form action="" className="w-full" onSubmit={handleSubmit}>
                             <InputText
-                                label={TS.email}
+                                label={ac_strings.email}
                                 type='text'
                                 value={fields.email}
                                 onChange={(e) => {
@@ -148,7 +147,7 @@ const SignInForm: React.FC = () => {
                                 error={errors.email ? 'Required' : undefined}
                             />
                             <InputText
-                                label={TS.password}
+                                label={ac_strings.password}
                                 type='password'
                                 value={fields.password}
                                 onChange={(e) => {
@@ -157,7 +156,7 @@ const SignInForm: React.FC = () => {
                                 error={errors.password ? 'Required' : undefined}
                             />
                             <InputCheckbox
-                                label={TS.remember_me}
+                                label={ac_strings.remember_me}
                                 onChange={(e) => {
                                     handleChange(e, 'keepSignedIn')
                                 }}

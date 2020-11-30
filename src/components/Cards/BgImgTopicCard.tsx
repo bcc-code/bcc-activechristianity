@@ -14,16 +14,23 @@ export const asImageWDataUri = (uri: string) => ({
     "srcset": uri
 })
 
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
+
 const getRandomImage = () => {
-    return asImageWDataUri(getRandomArray([RandomImage1, RandomImage2, RandomImage3, RandomImage4], 1)[0])
+    const randomNr = getRandomInt(4)
+    return asImageWDataUri([RandomImage1, RandomImage3, RandomImage2, RandomImage4][randomNr])
 }
 export interface IBgImgTopicCard {
     name: string | JSX.Element
     to: string
     image?: IImage
     overlay?: "dark" | "light" | "medium"
+    rounded?: "rounded-xxl" | "rounded-xl" | "rounded" | "rounded-md" | "rounded-lg "
 }
-const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image, to, overlay }) => {
+const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image, to, overlay, rounded }) => {
 
     const overlayStyle = {
         dark: { background: "#020203", opacity: "0.3" },
@@ -31,15 +38,15 @@ const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image, to, overlay })
         medium: { background: '#384156', opacity: "0.3" }
     }
 
-    const useImage: IImage = image || getRandomImage()
+    const useImage: IImage = image ? image : getRandomImage()
 
     return (
         <Link
             to={to}
-            className={`w-full h-full rounded-lg p-2 overflow-hidden flex items-center justify-center relative ${image ? '' : 'bg-gray-800'}`}>
+            className={`w-full h-full ${rounded ? rounded : "rounded-lg"} p-2 overflow-hidden flex items-center justify-center relative ${image ? '' : 'bg-gray-800'}`}>
             <h6 className="text-white leading-tight text-sm font-bold content-end break-words z-10 text-center">{name}</h6>
             {useImage && <div className="z-0 absolute inset-0 overflow-hidden bg-center bg-cover w-full" style={{ backgroundImage: `url(${useImage.src})` }}></div>}
-            <div className="z-0 absolute left-0 top-0 bottom-0 right-0 rounded-lg" style={overlay ? overlayStyle[overlay] : overlayStyle.dark}></div>
+            <div className={`z-0 absolute left-0 top-0 bottom-0 right-0 ${rounded ? rounded : "rounded-lg"} `} style={overlay ? overlayStyle[overlay] : overlayStyle.dark}></div>
         </Link>
     )
 }

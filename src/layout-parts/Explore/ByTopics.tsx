@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import { generate as generateId } from 'shortid'
-import { IResourceOverview } from '@/templates/page/explore'
+
 import { connectRefinementList } from 'react-instantsearch-dom'
 import Icon from '@/components/Icons/Icon'
 import { OutlineSmallButton } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
+import typesFormats from '@/strings/topic-filters.json'
 interface IByTaxonomyProps {
-    resource: IResourceOverview
     isShowingResult: boolean
     viewAll: boolean
     setViewAll: (status: boolean) => void
@@ -45,18 +45,19 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
     } = props
     // move this to buid process
     React.useEffect(() => {
-        const allResource: IResourceOverview = resource
-        const { format, general, ...types } = allResource
+
         const sorted: ISortMap = {
             formats: {},
             types: {}
         }
-        format.items.forEach(f => {
+        const { formatIds, typeIds } = typesFormats
+        Object.keys(formatIds).forEach(id => {
+            const f = formatIds[id]
             sorted.formats[f.name] = { name: f.name, key: f.key }
         })
 
-        Object.keys(types).forEach(tKey => {
-            const type = types[tKey].info
+        Object.keys(typeIds).forEach(id => {
+            const type = typeIds[id]
 
             sorted.types[type.name] = { name: type.name, key: type.key }
 

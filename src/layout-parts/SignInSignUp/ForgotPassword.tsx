@@ -1,14 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from "react-redux"
-import { openSignInModal } from '@/state/action'
+import { useDispatch } from "react-redux"
 
-import { initiateLogIn } from '@/state/action/authAction'
-import { InputText, InputCheckbox } from '@/components/Input'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import { InputText } from '@/components/Input'
+import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { IRootState } from '@/state/types'
 import acApi from '@/util/api'
 
 
@@ -19,9 +15,8 @@ const initialErrorState = {
     email: false,
 }
 
-type IFormFieldType = 'email' | 'password'
+
 const ForgotPasswordForm: React.FC = () => {
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const [fields, setFields] = React.useState(initialFieldsState)
     const [errors, setErrors] = React.useState(initialErrorState)
     const [loading, setLoading] = React.useState(false)
@@ -93,7 +88,7 @@ const ForgotPasswordForm: React.FC = () => {
                     />
                 )}
                 <InputText
-                    label={TS.email}
+                    label={ac_strings.email}
                     type='text'
                     value={fields.email}
                     onChange={(e) => {

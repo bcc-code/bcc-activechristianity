@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import SideNavWrapper from './SideNavWrapper'
 import { SideNavItem } from '@/components/Button'
 import { INavItem } from '@/types'
@@ -30,7 +30,7 @@ const SideMobile: React.FC<{
 
             </div>
 
-        </SideNavWrapper >
+        </SideNavWrapper>
     )
 }
 

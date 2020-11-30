@@ -2,9 +2,8 @@ import React from 'react';
 
 import { INavItem, IPostAuthors } from '@/types'
 import PostMetaLinks from './PostMetaLinks'
-import TS from '@/strings'
-import { sprintf } from 'sprintf-js'
-import { normalizeAuthors } from '@/helpers'
+import ac_strings from '@/strings/ac_strings'
+
 interface IPostMetaProps {
     categories?: INavItem[]
     authors: IPostAuthors[]
@@ -17,16 +16,16 @@ const PostMeta: React.FC<IPostMetaProps> = ({ categories, authors, showCategory 
 
             {authors && authors.length > 0 && authors.map((a, i) => (
                 <div className="flex" key={i}>
-                    <span className=" text-gray-500">{a.as}</span>  <PostMetaLinks prefix={TS.slug_ac_author} links={a.authors} />
+                    <span className=" text-gray-500">{a.as}</span>  <PostMetaLinks prefix={ac_strings.slug_ac_author} links={a.authors} />
                 </div>
             ))
 
             }
-            {showCategory !== false && categories && categories.length > 0 ?
+            {/*             {showCategory !== false && categories && categories.length > 0 ?
                 <div>
                     <PostMetaLinks prefix={TS.slug_category} links={categories} />
                 </div> : null
-            }
+            } */}
         </div>
     )
 }

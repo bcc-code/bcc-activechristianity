@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { UnderlineLinkViewAll } from '@/components/Button'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.Element }> = ({ icon, title }) => (
     <span className="flex">
         <span className="pr-2">{icon}</span>
@@ -10,7 +10,7 @@ export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.El
     </span>
 )
 export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Element }> = ({ title, icon }) => (
-    <h1 className="font-semibold sm:text-2xl md:text-3xl py-6 flex items-center">{icon && <div className="pr-4">{icon} </div>}<div>{title}</div></h1>
+    <h1 className="font-semibold text-xl sm:text-2xl md:text-3xl py-6 flex items-center">{icon && <div className="pr-4">{icon} </div>}<div>{title}</div></h1>
 )
 
 export const PostH1: React.FC<{ title: string }> = ({ title }) => (
@@ -18,11 +18,11 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
 )
 
 export const PageSectionHeader: React.FC<{ title: string, className?: string }> = ({ title, className }) => (
-    <div className={`font-semibold px-4 text-xl ${className ? className : ''}`}>{title}</div>
+    <div className={`px-4 text-2xl ${className ? className : ''}`}>{title}</div>
 )
 
 export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (
-    <span className="uppercase font-roboto text-d4slate-light font-semibold text-xs">
+    <span className="block uppercase font-roboto text-gray-500 text-sm tracking-wider pb-2">
         {title}
     </span>
 )
@@ -62,7 +62,7 @@ export const UnderlineTitleLink: React.FC<IUnderlineTitleLink> = ({ name, to }) 
 export const SectionTitleDesktopAndMobile: React.FC<IUnderlineTitleLink> = ({ name, to }) => {
     return (
         <div>
-            <div className="hidden sm:block px-4">
+            <div className="hidden sm:block standard-max-w-px">
                 <UnderlineTitleLink name={name} to={to} />
             </div>
             <div className="block sm:hidden">

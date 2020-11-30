@@ -2,7 +2,8 @@ import * as React from 'react';
 import Link from '@/components/CustomLink'
 
 import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
-import { ReadOrListenIcon, BookmarksAndViews } from '@/components/PostElements'
+import Bookmark from '@/components/PostElements/ToggleBookmark'
+import { AuthorLink, Views, ReadOrListenIcon } from '@/components/PostElements'
 import { IPostItem } from '@/types'
 
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
@@ -69,30 +70,29 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     <Link to={`/${slug}`} >
                         <TextSizeTitle {...{
                             rawText: title,
-                            fontKey: "text-base",
+                            fontKey: 'text-lg-2xl',
                             clamp: 3,
-                            bold: "font-semibold",
-                            className: "mb-4 leading-normal"
+                            className: "mb-2 text-d4slate-dark"
                         }} />
                         <TextSizeTitle {...{
                             rawText: excerpt,
-                            fontKey: "text-base",
+                            fontKey: "text-sm",
                             clamp: 2,
-                            className: "mb-4 leading-tight"
+                            className: "mb-4 leading-tight text-gray-600"
 
                         }} />
                     </Link>
                 </div>
-                <div className="w-4/12 sm:w-6/12 md:w-4/12 flex justify-center">
+                <div className="w-24 sm:w-64 md:w-64 flex justify-center">
                     <PostItemMediaImg
-                        className="relative w-full max-h-24 pb-square sm:pb-half mt-4"
+                        className="relative w-full max-h-24 pb-square sm:pb-half rounded-xxl sm:rounded-xl overflow-hidden "
                         track={media}
                         slug={slug}
 
                     >
                         <LazysizesFeaturedImage
                             {...image}
-                            className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                            className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl overflow-hidden object-cover g-image"
                             alt={title}
                         />
 
@@ -102,31 +102,16 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
 
 
             </div>
-            <div className="py-4 flex w-full justify-between">
+            <div className="pt-4 flex w-full justify-between">
                 <ReadOrListenIcon
                     track={media}
                     {...duration}
                 />
-                <BookmarksAndViews
-                    id={id}
-                    likes={likes}
-                    views={views}
-                />
-            </div>
-            {/*             <div className="w-full justify-between flex">
-
-                <div className="pb-4 flex">
-                    <ReadingTimingIcon
-                        readingTime={postReadingTime}
-                    />
-                    <BookmarksAndViews
-                        id={id}
-                        likes={likes}
-                        views={views}
-                    />
+                <div className="flex">
+                    {/*  {views ? <Views views={views} /> : null} */}
+                    <Bookmark id={id} color="slate-dark" size="5" />
                 </div>
-            </div> */}
-
+            </div>
         </div>
 
     )

@@ -13,60 +13,70 @@ import MyContent from "@/layout-parts/User/MyContent"
 import Downloaded from "@/layout-parts/User/Downloaded"
 import ChangePassword from "@/layout-parts/Form/ChangePassword"
 import DeleteProfile from "@/layout-parts/Form/Delete"
-import TS from '@/strings'
-import ac_string from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { IPage } from '@/types'
 const componentMap = {
-    Bookmarked,
-    History,
-    Followed,
-    Downloaded,
-    ChangePassword,
-    DeleteProfile
+    "bookmarked": {
+        slug: ac_strings.slug_user_bookmarked,
+        title: ac_strings.bookmarked,
+        component: Bookmarked,
+    },
+    "history": {
+        slug: ac_strings.slug_user_history,
+        title: ac_strings.history,
+        component: History,
+    },
+    "followed": {
+        slug: ac_strings.slug_user_followed,
+        title: ac_strings.followed,
+        component: Followed,
+    },
+    "changePassword": {
+        slug: ac_strings.slug_user_change_password,
+        title: ac_strings.change_password,
+        component: ChangePassword,
+    },
+    "deleteProfile": {
+        slug: ac_strings.slug_user_delete_profile,
+        title: ac_strings.delete_profile,
+        component: DeleteProfile,
+    },
+    "myContent": {
+        slug: ac_strings.slug_user_content,
+        title: ac_strings.my_content,
+        component: MyContent,
+    },
 }
 const User: React.FC<IUserProps> = ({ data }) => {
-    const [userPages, setUserPages] = React.useState<IPage[]>([])
-    const [profilePage, setProfilePage] = React.useState<IPage | undefined>(undefined)
 
-    React.useEffect(() => {
-        const selected: IPage[] = []
-        data.ac.allPages.forEach(p => {
-            if (`${p.id}` === process.env.USER_PAGE_ID) {
-                setProfilePage(p)
-            } else if (p.parent && `${p.parent.id}` === process.env.USER_PAGE_ID) {
-                selected.push(p)
-            }
-        })
-        setUserPages(selected)
-    }, [data])
 
-    const userLinks = userPages.map(item => ({ name: item.title, to: `${ac_string.slug_user}/${item.slug}` }))
+
+    const userLinks = Object.keys(componentMap).map(key => {
+        const item = componentMap[key]
+        return ({ name: item.title, to: `${ac_strings.slug_user}/${item.slug}` })
+    })
 
     return (
         <div>
-            <MetaTag title={TS.account} type="page" breadcrumb={[]} />
-            {profilePage ? (
-                <Layout
-                    pathname={profilePage.slug}
-                    userLinks={userLinks}
-                >
-                    <Router basepath={`/${ac_string.slug_user}`}>
-                        <PrivateRoute path="/" title={TS.account} component={MyContent} />
+            <MetaTag title={ac_strings.account} type="page" breadcrumb={[]} />
+            <Layout
+                pathname={ac_strings.slug_user}
+                userLinks={userLinks}
+            >
+                <Router basepath={`/${ac_strings.slug_user}`}>
+                    <PrivateRoute path="/" title={ac_strings.account} component={MyContent} />
 
-                        {userPages.map(page => {
+                    {Object.keys(componentMap).map(key => {
+                        const page = componentMap[key]
 
-                            const Component = componentMap[page.label]
 
-                            return (
-                                <PrivateRoute path={`/${page.slug}`} component={Component} />
-                            )
-                        })}
-                        <PrivateRoute path={`/my-content`} component={MyContent} />
-                    </Router>
-                </Layout>
-            ) : (
-                    <div><h1>User account page </h1></div>
-                )}
+                        return (
+                            <PrivateRoute path={`/${page.slug}`} component={componentMap[key].component} />
+                        )
+                    })}
+                    <PrivateRoute path={ac_strings.my_content} component={MyContent} />
+                </Router>
+            </Layout>
 
         </div>
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react' // eslint-disable-line import/no-unresolved
-import shallowequal from 'shallowequal';
-//import raf from 'raf'
+
 import shouldUpdate from './shouldUpdate'
 const raf = require('raf');
 import { number } from 'prop-types';

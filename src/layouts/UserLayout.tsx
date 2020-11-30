@@ -1,11 +1,9 @@
 import React from 'react'
-import Link from '@/components/CustomLink'
 import StickyBox from "react-sticky-box";
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
-import UserInitials from '@/layout-parts/User/UserInitial'
+
 import { INavItem } from '@/types'
 import { SideNavItem } from '@/components/Button'
 const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
@@ -55,22 +53,22 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
                         </SideNavItem > */}
                         {[
                             {
-                                name: "My Content",
-                                to: '/user/my-content'
+                                name: ac_strings.my_content,
+                                to: `${ac_strings.slug_user}/${ac_strings.slug_user_content}`
                             },
                             {
-                                name: "History",
-                                to: 'user/history'
+                                name: ac_strings.history,
+                                to: `${ac_strings.slug_user}/${ac_strings.slug_user_history}`
                             }
                         ].map((item, i) => {
                             return (
-                                <SideNavItem key={i} to={item.to} onClick={close}>
+                                <SideNavItem key={i} to={item.to}>
                                     {item.name}
                                 </SideNavItem >
                             )
                         })}
 
-                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{TS.logout}</SideNavItem>
+                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{ac_strings.logout}</SideNavItem>
 
                     </div>
 

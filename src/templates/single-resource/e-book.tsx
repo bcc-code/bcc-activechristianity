@@ -5,7 +5,7 @@ import EbookDownload from '@/components/Ebook/EbookDownload'
 import Content from '@/components/Content'
 import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent'
 import MetaTag from '@/components/Meta'
-import { MobileHeaderBackground, MobilePostMain, DesktopPostMain } from '@/layout-parts/PostSections'
+import { MobileHeaderBackground, MobilePostMain, DesktopPostMain } from '@/layout-parts/PostLayout/PostSections'
 
 import PostMetaWLabel from '@/components/PostMeta/PostMeta'
 
@@ -14,7 +14,7 @@ import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 
 import languages from '@/strings/languages.json'
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 
 interface IProps {
     path: string

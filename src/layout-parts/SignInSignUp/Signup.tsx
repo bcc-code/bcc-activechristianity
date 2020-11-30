@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { initiateRegister } from '@/state/action/authAction'
 import { openSignInModal } from '@/state/action'
-import { InputText, InputCheckbox } from '@/components/Input'
-import TS from '@/strings'
-import ac_strings from '@/strings/ac_strings.json'
+import { InputText } from '@/components/Input'
+import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
@@ -74,7 +73,7 @@ const SignUpForm = () => {
         }
 
         if (fields.password !== fields.confirm) {
-            errorsFound['confirm'] = TS.passwords_mismatch
+            errorsFound['confirm'] = ac_strings.passwords_mismatch
             pass = false
         }
         setErrors(errorsFound)
@@ -144,7 +143,7 @@ const SignUpForm = () => {
                     />
                 )}
                 <InputText
-                    label={TS.email}
+                    label={ac_strings.email}
                     value={fields["email"]}
                     onChange={(e) => {
                         handleChange(e, 'email')
@@ -152,7 +151,7 @@ const SignUpForm = () => {
                     error={errors.email}
                 />
                 <InputText
-                    label={TS.password}
+                    label={ac_strings.password}
                     type="password"
                     value={fields.password}
                     onChange={(e) => {
@@ -162,7 +161,7 @@ const SignUpForm = () => {
                 />
 
                 <InputText
-                    label={TS.confirm_password}
+                    label={ac_strings.confirm_password}
                     type="password"
                     value={fields.confirm}
                     onChange={(e) => {
@@ -171,7 +170,7 @@ const SignUpForm = () => {
                     error={errors.confirm}
                 />
                 {/*                 <InputCheckbox
-                    label={TS.remember_me}
+                    label={ac_strings.remember_me}
                     onChange={(e) => {
                         handleChange(e, 'keepSignedIn')
                     }}

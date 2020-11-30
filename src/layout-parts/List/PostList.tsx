@@ -12,11 +12,12 @@ export interface IPostList {
     audio?: boolean
     paginate?: IPaginate
     posts: string[],
+    isTopic?: boolean
 
 }
 const PostList: React.FC<IPostList> = (props) => {
 
-    const { paginate, posts } = props
+    const { paginate, posts, isTopic } = props
     const [pageInput, setPageInput] = React.useState(paginate ? paginate.currentPage : 1)
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
@@ -28,19 +29,18 @@ const PostList: React.FC<IPostList> = (props) => {
         }
     }
 
-    const handleChange = (activePage: number) => {
+    const handleChange = (nr: number) => {
+        let activePage = nr
+        if (typeof nr === "string") {
+            activePage = parseInt(nr)
+        }
         if (paginate) {
-            const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true ? '/1' : ''}`
+
+            const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true && isTopic ? '/1' : ''}`
             const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
             scrollToTop()
             navigate(fullPath)
         }
-    }
-
-    const handleInputChange = (e: any) => {
-        e.preventDefault();
-        console.log(e.target)
-        setPageInput(e.target.value)
     }
 
     const handleSubmit = (e: any) => {

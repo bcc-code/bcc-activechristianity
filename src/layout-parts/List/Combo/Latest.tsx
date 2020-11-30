@@ -1,6 +1,6 @@
 import React from "react"
 import { IPostItem } from "@/types"
-import { MoreLatestLink } from '@/layout-parts/PostSections'
+import { MoreLatestLink } from '@/layout-parts/PostLayout/PostSections'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import PostRow from '@/layout-parts/List/PostRow4Col'
 interface ILatestDesktopRow {

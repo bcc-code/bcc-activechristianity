@@ -22,25 +22,7 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
-        <script dangerouslySetInnerHTML={{ __html: `
-            window.refTagger = {
-              settings: {
-                bibleVersion: "${process.env.BIBLE_VERSION}",
-                addLogosLink: false,
-                appendIconToLibLinks: false,
-                caseInsensitive: true,
-                convertHyperlinks: false,
-                libronixBibleVersion: "${process.env.BIBLE_VERSION}",
-                libronixLinkIcon: "light",
-                linksOpenNewWindow: false,
-                tagChapters: true,
-                useTooltip: true
-              }
-            }
-          ` }}></script>
-          <script async={true} src="https://api.reftagger.com/v2/RefTagger.js"></script>
-{/* 
-          <link type="text/css" rel="stylesheet" href="/src/styles/tailwind-output.css"></link> */}
+
           
       </body>
     </html>

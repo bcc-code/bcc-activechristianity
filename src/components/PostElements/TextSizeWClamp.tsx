@@ -47,8 +47,14 @@ const textSizeConfig: ItextSizeConfig = {
     },
     'text-2xl': {
         s: 'text-2xl',
-        h2lines: 'max-h-18 '
+        h2lines: 'max-h-18 ',
+        h3lines: 'max-h-28 '
     }, // 24px
+    'text-lg-2xl': {
+        s: 'text-lg sm:text-2xl leading-snug',
+        h2lines: 'max-h-14 sm:max-h-18 ',
+        h3lines: 'max-h-20 sm:max-h-28 '
+    },
     'text-xl-3xl-4xl': {
         s: 'text-xl lg:text-3xl xl:text-4xl leading-tight', // text-2xl lg:text-4xl xl:text-5xl leading-tight'
         h2lines: 'max-h-14 sm:max-h-24 lg:max-h-36 xl:max-h-48'

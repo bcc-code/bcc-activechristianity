@@ -4,7 +4,7 @@ import { PostItemPlayButtonSmall } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import PostTitle from '@/components/PostElements/TextSizeWClamp'
-import ac_string from '@/strings/ac_strings.json'
+import ac_string from '@/strings/ac_strings.js'
 
 interface IProps {
     title: string
@@ -14,9 +14,9 @@ interface IProps {
 }
 const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
     return (
-        <div className="p-4 rounded-lg" style={{ backgroundImage: 'linear-gradient(#edf2f7,#fff)' }}>
+        <div className="p-4 rounded-lg w-full" style={{ backgroundImage: 'linear-gradient(#edf2f7,#fff)' }}>
             <div className="flex flex-col pb-4">
-                <h6 className="text-d4slate-dark text-lg font-bold mb-4">{title}</h6>
+                <h6 className="font-roboto block text-lg pb-4">{title}</h6>
                 <ol className="w-full">
                     {posts.map((post, i) => {
 
@@ -43,8 +43,7 @@ const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
                                     ) : (
                                             <PostTitle
                                                 rawText={post.title}
-                                                bold="font-semibold"
-                                                fontKey="top-img"
+                                                fontKey="text-base-lg"
                                             />
                                         )}
 

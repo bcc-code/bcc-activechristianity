@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { InputCheckbox } from '@/components/Input'
 
-import ac_strings from '@/strings/ac_strings.json'
+import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
