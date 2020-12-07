@@ -98,7 +98,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
               // Data can come from anywhere, but for now create it manually
   
             const nodeContent = JSON.stringify(metadata)
-            
+   
             const nodeMeta = {
               id: createNodeId(`ac-settings`),
               parent: null,

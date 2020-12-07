@@ -182,28 +182,32 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
         }
     } = {}
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
-        if (t.group) {
-            if (t.group.name !== 'Type' && t.group.name !== 'Format') {
-            }
-            if (sortedTags[t.group.name]) {
 
-                sortedTags[t.group.name].topics.push(toAdd)
+        if (t.noOfPosts > 0) {
+            const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
+            if (t.group) {
+                if (t.group.name !== 'Type' && t.group.name !== 'Format') {
+                }
+                if (sortedTags[t.group.name]) {
+
+                    sortedTags[t.group.name].topics.push(toAdd)
+                } else {
+                    sortedTags[t.group.name] =
+                    {
+                        info: { name: t.group.name, to: t.group.slug },
+                        topics: [toAdd]
+                    }
+
+                }
             } else {
-                sortedTags[t.group.name] =
+                sortedTags['Unknown'] =
                 {
-                    info: { name: t.group.name, to: t.group.slug },
+                    info: { name: '', to: '' },
                     topics: [toAdd]
                 }
-
-            }
-        } else {
-            sortedTags['Unknown'] =
-            {
-                info: { name: '', to: '' },
-                topics: [toAdd]
             }
         }
+
 
     })
 

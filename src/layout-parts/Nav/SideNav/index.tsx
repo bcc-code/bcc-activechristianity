@@ -8,7 +8,7 @@ import { openSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
-
+import { slug_user } from '@/layout-parts/Nav/Menus'
 import ac_strings from '@/strings/ac_strings.js'
 import { INavItem } from '@/types';
 import loadable from '@loadable/component'
@@ -101,7 +101,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
                     <div className={`w-full flex flex-col justify-center`}>
 
                         <SideNavItem
-                            to={`/${ac_strings.slug_user}`}
+                            to={`/${slug_user}`}
                             hideOnMobile
                             onClick={close}
 

@@ -171,7 +171,7 @@ export const recommendedPostsAndPopularTopic = () => `
     featuredTopics:topics(featured:true) {
       slug
       id
-  }
+    }
   }  
 `
 export const topicReommendedPostsQuery = (topicId: number) => `

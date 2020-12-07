@@ -60,29 +60,35 @@ module.exports = async function generateTypes(data) {
 
     if(`${type.id}`===`${typesAll.listen.keyId}`){
         const result = await graphql(query)
+        .catch(error=>{
+            console.log(error)
+        })
 
-        const {podcasts,playlists} = result.data.ac
-        const playlistPage = {
-            title:ac_strings.playlist,
-            slug:ac_strings.slug_playlist
+        if(result.data && result.data.ac){
+            const {podcasts,playlists} = result.data.ac
+            const playlistPage = {
+                title:ac_strings.playlist,
+                slug:ac_strings.slug_playlist
+            }
+            const podcastPage = {
+                title:ac_strings.podcast,
+                slug:ac_strings.slug_podcast
+            }
+            const podcastCount = podcasts.noOfPosts
+    
+            if(playlistPage.title){
+                const playlistItem = {key:"playlist",name:playlistPage.title,to:playlistPage.slug,count:playlists.length}
+               
+                typeFormatEach["playlist"]=playlistItem
+                    
+            }
+    
+            if(podcastPage.title){
+                const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
+                typeFormatEach["podcast"]=podcastItem
+            }
         }
-        const podcastPage = {
-            title:ac_strings.podcast,
-            slug:ac_strings.slug_podcast
-        }
-        const podcastCount = podcasts.noOfPosts
-
-        if(playlistPage.title){
-            const playlistItem = {key:"playlist",name:playlistPage.title,to:playlistPage.slug,count:playlists.length}
-           
-            typeFormatEach["playlist"]=playlistItem
-                
-        }
-
-        if(podcastPage.title){
-            const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
-            typeFormatEach["podcast"]=podcastItem
-        }
+        
        
     }
 

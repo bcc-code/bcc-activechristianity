@@ -19,16 +19,15 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
         api.recommended().then(res => {
-
-            const popularSlugs = res.popularTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug)
-            const featuredSlugs = res.featuredTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug)
+            const popularSlugs = res.popularTopics ? res.popularTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug) : []
+            const featuredSlugs = res.featuredTopics ? res.featuredTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug) : []
             const recommendSlugs = res.recommended
             const allTopics = [...new Set([...featuredSlugs, ...popularSlugs])]
             const randomTopics = getRandomArray(allTopics, 6)
             setIsFetchingMore(true)
             Promise.all(randomTopics.map(t => {
 
-                const url = `${ac_strings.slug_topic}/${t}/1`
+                const url = `${ac_strings.slug_topic}/${t}`
                 return fetch(`/page-data/${url}/page-data.json`)
                     .then(res => res.json())
                     .then(res => {
@@ -77,6 +76,7 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
     }
 
     const end = pageNumber * postsPerPage
+
     return (
 
         <div className="px-4">
@@ -94,12 +94,10 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
                         }}
                     />
                 ) : <div></div>
-                /* return */
-                // return
             })}
-            <div className="flex justify-center py-4">
+            {(posts.length > postsPerPage) && <div className="flex justify-center py-4">
                 <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={handlePageChange} />
-            </div>
+            </div>}
         </div>
 
 

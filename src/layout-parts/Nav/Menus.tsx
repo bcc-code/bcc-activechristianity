@@ -2,6 +2,8 @@
 import * as React from 'react';
 import Icon from '@/components/Icons/Icon'
 import ac_strings from '@/strings/ac_strings.js'
+export const slug_user = 'user'
+
 export const menusItems = {
     "home": {
         name: ac_strings.home,
@@ -23,14 +25,6 @@ export const menusItems = {
         name: ac_strings.watch,
         to: ac_strings.slug_watch
     },
-    "my_content": {
-        name: ac_strings.my_content,
-        to: `${ac_strings.slug_user}/${ac_strings.slug_user_content}`
-    },
-    "slug_user_history": {
-        name: ac_strings.slug_user,
-        to: `${ac_strings.slug_user}/${ac_strings.slug_user_history}`
-    },
     "about": {
         name: ac_strings.about,
         to: ac_strings.slug_about
@@ -42,6 +36,33 @@ export const menusItems = {
     "glossary": {
         name: ac_strings.glossary,
         to: ac_strings.slug_glossary
+    }
+}
+
+export const userMenuItems = {
+    "bookmarked": {
+        name: ac_strings.bookmarked,
+        to: `${slug_user}/${ac_strings.slug_user_bookmarked}`
+    },
+    "history": {
+        name: ac_strings.history,
+        to: `${slug_user}/${ac_strings.slug_user_history}`
+    },
+    "followed": {
+        name: ac_strings.followed,
+        to: `${slug_user}/${ac_strings.slug_user_followed}`
+    },
+    "changePassword": {
+        name: ac_strings.change_password,
+        to: `${slug_user}/${ac_strings.slug_user_change_password}`
+    },
+    "deleteProfile": {
+        name: ac_strings.delete_profile,
+        to: `${slug_user}/${ac_strings.slug_user_delete_profile}`
+    },
+    "myContent": {
+        name: ac_strings.my_content,
+        to: `${slug_user}/${ac_strings.slug_user_content}`
     }
 }
 

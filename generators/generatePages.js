@@ -75,7 +75,6 @@ module.exports = function generatePages(actions, graphql) {
       ]
 
       _.each(buildPages,page=>{
-        console.log(page)
         createPage({
           path: `${page.slug}`,
           component: path.resolve(`./src/templates/page/${page.templateName}.tsx`),
@@ -102,7 +101,7 @@ module.exports = function generatePages(actions, graphql) {
      
       // themes pages
       _.each(parentIds.themes.children,page=>{
-        console.log(page)
+
         let context = {
           ...page,
             breadcrumb:[
@@ -130,7 +129,7 @@ module.exports = function generatePages(actions, graphql) {
 
  // pages
       _.each(parentIds.pages.children,page=>{
-        console.log(page)
+
         let context = {
           ...page,
             breadcrumb:[

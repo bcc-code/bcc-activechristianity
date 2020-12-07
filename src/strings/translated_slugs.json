@@ -1,5 +1,5 @@
 {
-  "chi-siamo": [
+  "rolunk": [
     {
       "lang": "en",
       "url": "about-us"
@@ -61,7 +61,7 @@
       "url": "om-os"
     }
   ],
-  "autore": [
+  "kozremukodo": [
     {
       "lang": "en",
       "url": "contributor"
@@ -123,7 +123,7 @@
       "url": "bidragsyder"
     }
   ],
-  "account": [
+  "fiok": [
     {
       "lang": "en",
       "url": "account"
@@ -173,7 +173,7 @@
       "url": "konto"
     }
   ],
-  "contatto": [
+  "kapcsolat": [
     {
       "lang": "en",
       "url": "contact"
@@ -223,7 +223,7 @@
       "url": "kontakt"
     }
   ],
-  "gestione-cookie": [
+  "cookie-iranyelvek": [
     {
       "lang": "en",
       "url": "cookie-policy"
@@ -273,7 +273,7 @@
       "url": "cookie-policy"
     }
   ],
-  "e-book": [
+  "e-konyv": [
     {
       "lang": "en",
       "url": "e-book"
@@ -323,7 +323,7 @@
       "url": "e-bok"
     }
   ],
-  "esplora": [
+  "felfedezes": [
     {
       "lang": "en",
       "url": "explore"
@@ -373,7 +373,7 @@
       "url": "utforska"
     }
   ],
-  "glossario": [
+  "szojegyzek": [
     {
       "lang": "en",
       "url": "glossary"
@@ -423,7 +423,7 @@
       "url": "ordlista"
     }
   ],
-  "host": [
+  "musorvezeto": [
     {
       "lang": "en",
       "url": "host"
@@ -473,7 +473,7 @@
       "url": "värd"
     }
   ],
-  "ultimo": [
+  "legujabb": [
     {
       "lang": "en",
       "url": "latest"
@@ -523,7 +523,7 @@
       "url": "senaste"
     }
   ],
-  "ascolta": [
+  "hallgatas": [
     {
       "lang": "en",
       "url": "listen"
@@ -573,7 +573,7 @@
       "url": "lyssna"
     }
   ],
-  "login": [
+  "bejelentkezes": [
     {
       "lang": "en",
       "url": "login"
@@ -685,7 +685,7 @@
       "url": "FALSE"
     }
   ],
-  "vivere-il-vangelo-intro": [
+  "elni-az-evangeliumot-intro": [
     {
       "lang": "en",
       "url": "living-the-gospel-intro"
@@ -735,7 +735,7 @@
       "url": "living-the-gospel-intro"
     }
   ],
-  "gestione-riservatezza": [
+  "adatvedelmi-iranyelvek": [
     {
       "lang": "en",
       "url": "privacy-policy"
@@ -785,7 +785,7 @@
       "url": "Sekretesspolicy"
     }
   ],
-  "leggi": [
+  "olvas": [
     {
       "lang": "en",
       "url": "read"
@@ -835,7 +835,7 @@
       "url": "läsa"
     }
   ],
-  "registra": [
+  "regisztracio": [
     {
       "lang": "en",
       "url": "register"
@@ -886,56 +886,6 @@
     }
   ],
   "tema": [
-    {
-      "lang": "en",
-      "url": "theme"
-    },
-    {
-      "lang": "nb",
-      "url": "tema"
-    },
-    {
-      "lang": "es",
-      "url": "Tema"
-    },
-    {
-      "lang": "fr",
-      "url": ""
-    },
-    {
-      "lang": "fi",
-      "url": ""
-    },
-    {
-      "lang": "hu",
-      "url": "tema"
-    },
-    {
-      "lang": "it",
-      "url": "tema"
-    },
-    {
-      "lang": "pl",
-      "url": "zagadnienie"
-    },
-    {
-      "lang": "pt-pt",
-      "url": ""
-    },
-    {
-      "lang": "ro",
-      "url": "teme"
-    },
-    {
-      "lang": "ru",
-      "url": ""
-    },
-    {
-      "lang": "sv",
-      "url": "tema"
-    }
-  ],
-  "argomento": [
     {
       "lang": "en",
       "url": "topic"
@@ -997,7 +947,7 @@
       "url": "temaer"
     }
   ],
-  "utente": [
+  "felhasznalo": [
     {
       "lang": "en",
       "url": "user"
@@ -1047,7 +997,7 @@
       "url": "användare"
     }
   ],
-  "preferiti": [
+  "konyvjelzo-mentve": [
     {
       "lang": "en",
       "url": "bookmarked"
@@ -1097,7 +1047,7 @@
       "url": "bokmärkt"
     }
   ],
-  "password": [
+  "jelszo": [
     {
       "lang": "en",
       "url": "password"
@@ -1147,7 +1097,7 @@
       "url": "lösenord"
     }
   ],
-  "il-mio-contenuto": [
+  "sajat-tartalom": [
     {
       "lang": "en",
       "url": "my-content"
@@ -1197,7 +1147,7 @@
       "url": "mitt-innehåll"
     }
   ],
-  "elimina-profilo": [
+  "profil-torlese": [
     {
       "lang": "en",
       "url": "delete-profile"
@@ -1247,7 +1197,7 @@
       "url": "radera-profil"
     }
   ],
-  "seguito": [
+  "kovetem": [
     {
       "lang": "en",
       "url": "followed"
@@ -1297,7 +1247,7 @@
       "url": "följer"
     }
   ],
-  "storia": [
+  "elozmenyek": [
     {
       "lang": "en",
       "url": "history"
@@ -1347,7 +1297,7 @@
       "url": "historik"
     }
   ],
-  "guarda": [
+  "megtekintes": [
     {
       "lang": "en",
       "url": "watch"

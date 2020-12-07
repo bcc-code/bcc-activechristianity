@@ -85,10 +85,10 @@ export default (props: ILogoStyle) => {
         ),
         "hu": (
             <div className="flex items-center" style={{ height, width: width ? width : '190px' }} >
-                <svg style={{ height, width }} viewBox={`0 0 36 40`} fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={{ height: "30px", width: "40px", minWidth: "30px" }} viewBox={`0 0 36 40`} fill="none" xmlns="http://www.w3.org/2000/svg">
                     {iconLogo}
                 </svg>
-                <AcLogo />
+                <img src={AcLogo} alt="" className="flex-1 h-auto" />
             </div>
         ),
         "it": (
