@@ -74,7 +74,7 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                     return (
                         <Section id={item.slug}>
                             <div className={`px-4 sm:px-6 ${k % 2 == 1 ? 'bg-d4gray-light' : ''}`}>
-                                <div className="max-w-sm ">
+                                <div className="w-full">
                                     <h2 className="text-2xl py-6 font-roboto sm:text-3xl font-semibold">{item.title}</h2>
                                     <CustomizedPageComponent
                                         items={item.childPage}

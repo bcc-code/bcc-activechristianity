@@ -1,5 +1,5 @@
 {
-  "om-oss": [
+  "chi-siamo": [
     {
       "lang": "en",
       "url": "about-us"
@@ -61,7 +61,7 @@
       "url": "om-os"
     }
   ],
-  "bidragsyter": [
+  "autore": [
     {
       "lang": "en",
       "url": "contributor"
@@ -123,7 +123,7 @@
       "url": "bidragsyder"
     }
   ],
-  "konto": [
+  "account": [
     {
       "lang": "en",
       "url": "account"
@@ -162,7 +162,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "Cont"
     },
     {
       "lang": "ru",
@@ -173,7 +173,7 @@
       "url": "konto"
     }
   ],
-  "kontakt": [
+  "contatto": [
     {
       "lang": "en",
       "url": "contact"
@@ -212,7 +212,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "Contact"
     },
     {
       "lang": "ru",
@@ -223,7 +223,7 @@
       "url": "kontakt"
     }
   ],
-  "cookie-policy": [
+  "gestione-cookie": [
     {
       "lang": "en",
       "url": "cookie-policy"
@@ -254,7 +254,7 @@
     },
     {
       "lang": "pl",
-      "url": "polityka-ciasteczek"
+      "url": "polityka-cookie"
     },
     {
       "lang": "pt-pt",
@@ -262,7 +262,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "politica-de-coockie"
     },
     {
       "lang": "ru",
@@ -273,7 +273,7 @@
       "url": "cookie-policy"
     }
   ],
-  "e-bok": [
+  "e-book": [
     {
       "lang": "en",
       "url": "e-book"
@@ -304,7 +304,7 @@
     },
     {
       "lang": "pl",
-      "url": "e-książka"
+      "url": "E-Book"
     },
     {
       "lang": "pt-pt",
@@ -312,7 +312,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "e-book"
     },
     {
       "lang": "ru",
@@ -323,7 +323,7 @@
       "url": "e-bok"
     }
   ],
-  "utforsk": [
+  "esplora": [
     {
       "lang": "en",
       "url": "explore"
@@ -362,7 +362,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "explorează"
     },
     {
       "lang": "ru",
@@ -373,7 +373,7 @@
       "url": "utforska"
     }
   ],
-  "ordliste": [
+  "glossario": [
     {
       "lang": "en",
       "url": "glossary"
@@ -404,7 +404,7 @@
     },
     {
       "lang": "pl",
-      "url": "wyjaśnienia"
+      "url": "słowniczek"
     },
     {
       "lang": "pt-pt",
@@ -412,7 +412,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "glosar"
     },
     {
       "lang": "ru",
@@ -423,7 +423,7 @@
       "url": "ordlista"
     }
   ],
-  "vert": [
+  "host": [
     {
       "lang": "en",
       "url": "host"
@@ -462,7 +462,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "host"
     },
     {
       "lang": "ru",
@@ -473,7 +473,7 @@
       "url": "värd"
     }
   ],
-  "nyeste": [
+  "ultimo": [
     {
       "lang": "en",
       "url": "latest"
@@ -512,7 +512,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "ultimele"
     },
     {
       "lang": "ru",
@@ -523,7 +523,7 @@
       "url": "senaste"
     }
   ],
-  "lytt": [
+  "ascolta": [
     {
       "lang": "en",
       "url": "listen"
@@ -546,7 +546,7 @@
     },
     {
       "lang": "hu",
-      "url": "meghallgatni"
+      "url": "hallgatas"
     },
     {
       "lang": "it",
@@ -562,7 +562,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "ascultă"
     },
     {
       "lang": "ru",
@@ -573,7 +573,7 @@
       "url": "lyssna"
     }
   ],
-  "logg-pa": [
+  "login": [
     {
       "lang": "en",
       "url": "login"
@@ -612,7 +612,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "loghează-te"
     },
     {
       "lang": "ru",
@@ -685,7 +685,7 @@
       "url": "FALSE"
     }
   ],
-  "living-the-gospel-intro": [
+  "vivere-il-vangelo-intro": [
     {
       "lang": "en",
       "url": "living-the-gospel-intro"
@@ -716,7 +716,7 @@
     },
     {
       "lang": "pl",
-      "url": "życie-ewangelią-wstęp"
+      "url": "życie-wg.ewangelii-wstęp"
     },
     {
       "lang": "pt-pt",
@@ -724,7 +724,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "living-the-gospel-intro"
     },
     {
       "lang": "ru",
@@ -735,7 +735,7 @@
       "url": "living-the-gospel-intro"
     }
   ],
-  "personvernerklæring": [
+  "gestione-riservatezza": [
     {
       "lang": "en",
       "url": "privacy-policy"
@@ -766,7 +766,7 @@
     },
     {
       "lang": "pl",
-      "url": "polityka prywatności"
+      "url": "polityka-prywatności"
     },
     {
       "lang": "pt-pt",
@@ -774,7 +774,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "politica-de-confidentialitate"
     },
     {
       "lang": "ru",
@@ -785,7 +785,7 @@
       "url": "Sekretesspolicy"
     }
   ],
-  "les": [
+  "leggi": [
     {
       "lang": "en",
       "url": "read"
@@ -824,7 +824,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "citește"
     },
     {
       "lang": "ru",
@@ -835,7 +835,7 @@
       "url": "läsa"
     }
   ],
-  "register": [
+  "registra": [
     {
       "lang": "en",
       "url": "register"
@@ -874,7 +874,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "înregistrează-te"
     },
     {
       "lang": "ru",
@@ -886,6 +886,56 @@
     }
   ],
   "tema": [
+    {
+      "lang": "en",
+      "url": "theme"
+    },
+    {
+      "lang": "nb",
+      "url": "tema"
+    },
+    {
+      "lang": "es",
+      "url": "Tema"
+    },
+    {
+      "lang": "fr",
+      "url": ""
+    },
+    {
+      "lang": "fi",
+      "url": ""
+    },
+    {
+      "lang": "hu",
+      "url": "tema"
+    },
+    {
+      "lang": "it",
+      "url": "tema"
+    },
+    {
+      "lang": "pl",
+      "url": "zagadnienie"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "teme"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "tema"
+    }
+  ],
+  "argomento": [
     {
       "lang": "en",
       "url": "topic"
@@ -947,7 +997,7 @@
       "url": "temaer"
     }
   ],
-  "user": [
+  "utente": [
     {
       "lang": "en",
       "url": "user"
@@ -986,7 +1036,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "utilizator"
     },
     {
       "lang": "ru",
@@ -997,7 +1047,7 @@
       "url": "användare"
     }
   ],
-  "merket": [
+  "preferiti": [
     {
       "lang": "en",
       "url": "bookmarked"
@@ -1036,7 +1086,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "marcat"
     },
     {
       "lang": "ru",
@@ -1047,7 +1097,7 @@
       "url": "bokmärkt"
     }
   ],
-  "endre-passord": [
+  "password": [
     {
       "lang": "en",
       "url": "password"
@@ -1086,7 +1136,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "parolă"
     },
     {
       "lang": "ru",
@@ -1097,7 +1147,7 @@
       "url": "lösenord"
     }
   ],
-  "mitt-innhold": [
+  "il-mio-contenuto": [
     {
       "lang": "en",
       "url": "my-content"
@@ -1128,7 +1178,7 @@
     },
     {
       "lang": "pl",
-      "url": "moja-zawartość"
+      "url": "moje-treści"
     },
     {
       "lang": "pt-pt",
@@ -1136,7 +1186,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "continutul-meu"
     },
     {
       "lang": "ru",
@@ -1147,7 +1197,7 @@
       "url": "mitt-innehåll"
     }
   ],
-  "slett-profil": [
+  "elimina-profilo": [
     {
       "lang": "en",
       "url": "delete-profile"
@@ -1178,7 +1228,7 @@
     },
     {
       "lang": "pl",
-      "url": "usuń profil"
+      "url": "usuń-profil"
     },
     {
       "lang": "pt-pt",
@@ -1186,7 +1236,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "sterge-profil"
     },
     {
       "lang": "ru",
@@ -1197,7 +1247,7 @@
       "url": "radera-profil"
     }
   ],
-  "folger": [
+  "seguito": [
     {
       "lang": "en",
       "url": "followed"
@@ -1228,7 +1278,7 @@
     },
     {
       "lang": "pl",
-      "url": "śledzę"
+      "url": "obserwowane"
     },
     {
       "lang": "pt-pt",
@@ -1236,7 +1286,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "urmarit"
     },
     {
       "lang": "ru",
@@ -1247,7 +1297,7 @@
       "url": "följer"
     }
   ],
-  "historikk": [
+  "storia": [
     {
       "lang": "en",
       "url": "history"
@@ -1286,7 +1336,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "istorie"
     },
     {
       "lang": "ru",
@@ -1297,7 +1347,7 @@
       "url": "historik"
     }
   ],
-  "se-paa": [
+  "guarda": [
     {
       "lang": "en",
       "url": "watch"
@@ -1320,7 +1370,7 @@
     },
     {
       "lang": "hu",
-      "url": "megnezem"
+      "url": "megtekintes"
     },
     {
       "lang": "it",
@@ -1336,7 +1386,7 @@
     },
     {
       "lang": "ro",
-      "url": ""
+      "url": "vizioneaza"
     },
     {
       "lang": "ru",
