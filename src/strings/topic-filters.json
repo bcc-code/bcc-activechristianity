@@ -2,9 +2,9 @@
   "formatIds": {
     "345": {
       "key": "testimony",
-      "name": "Testimonios",
-      "to": "testimonies-es",
-      "count": 116,
+      "name": "Świadectwo",
+      "to": "swiadectwa",
+      "count": 165,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4.jpeg 1000w",
@@ -13,20 +13,31 @@
     },
     "1503": {
       "key": "question",
-      "name": "Preguntas - respuestas",
-      "to": "questions-es",
-      "count": 143,
+      "name": "Pytania i odpowiedzi",
+      "to": "pytania-i-odpowiedzi-pl",
+      "count": 148,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl.jpeg 1000w",
         "dataUri": "data:image/svg+xml,<svg fill='none' viewBox='0 0 1000 667' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><image x='0' y='0' width='1000' height='667' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAhADIDAREAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAABQYDBwEECAL/xAAvEAABAwQBAgQEBgMAAAAAAAABAgMEAAUGERIHIRMyQVEIFjFxFBciM0KBYZGh/8QAGgEAAgMBAQAAAAAAAAAAAAAAAgQAAQMFBv/EACURAAICAQQCAgIDAAAAAAAAAAECAAMRBBITMSFBFCIVYSNRUv/aAAwDAQACEQMRAD8AjxXFXsWuK5luDfikcuY9DQnTBu4iVTvEujE+t+Z2SOG2VtvJHmCj3FRdPx9TZXUeBL5xD4k7FMsTarrcGGJwGlJ5etJnUgMVMZAyMxixzqPZMomPBMpGh3S4VDv9qw5ajkkyAHMzMyJh/J2mIzniDh32e1Jtq1ZhshbPcHZbl8bFrk1JWpBBbO0tfU1tdbxjcIB8RQV8RrIUQGXdemwaW/IfqZ5M5Sg3iJblFp5ZU44riCnuBXr/AFFTPcN1dpM+VIkjwuJ4JJ/1QnCjJMtfucCVbari1PyAsy+TfiOn69t+1c61K+zOhUjscAR4hX04nd2FNyX+AdCUpCjqlGor7xNSjNkS3o2ay4d3ZfW+pDqxpKOWue6HT1IWO8RTDhCRAfUfqgyq/QGHZS2ZWuISPc+9BfQrMcRyuvcmWmUWu5uoSv8AFpPIb3WXwq4uROeLvmyrXHXDhQH3HSez3Eq0a9G9gAws5rpY3UZsBjRboyPmi5KjodUChtw8R/2kVHM2wxjSfwk2YziJnxI3CDj9xhy8dnN/pUEOcFb/ALozQWbb6E63yFUb+iY12zOMcl2C0olSkuvtJStSye/OmVqCL9xFEv5WJQwN1Ev2Z5JeIMmxyGE21BT4b29FOqSvCV2eY5pw11ZCdRvFzbXNbTkDbcychoKS+kfy1WQBYfX3OLfY+msKZzC6eoslKQExV8QNDufpQ8JmXzH/AMwWz0Yyy0KBYcS6lPuKZOmcdGdbnQ9iK/UnpnmOSWlMZyO42WztLjQ77/qirrsQ5MjPWw8RA/IS/LsrbE2PJecGyQpJJP8AmmVawKRjuYOtbMGJ6giz9Gr8lic0/bpYDQPh7SRuitLOF/UCoLWz49xnwrFMuFvEZ+HLTGQToEEa16UvqKTe+6NaW4UJsl22fF51xsyXFQSJISAnxE99ipXSyDEC6yu1txEj+UMoHYRk6+wrbY0wzX/U6MT5TTA6mLSKR5RVypoyPMmpKgx7yuVJJqxPIqpJCkL9tP3qvcP1N+rlT//Z' /></svg>"
       }
     },
+    "36170": {
+      "key": "message",
+      "name": "Przemowy",
+      "to": "przemowy",
+      "count": 6,
+      "image": {
+        "src": "https://1872483049.rsc.cdn77.org/storage/sizes/qMO39Rz5Za5UmZ91PFhrGoDgMvvJd1zf2OiYuTxA-w600.jpeg",
+        "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/qMO39Rz5Za5UmZ91PFhrGoDgMvvJd1zf2OiYuTxA-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/qMO39Rz5Za5UmZ91PFhrGoDgMvvJd1zf2OiYuTxA.jpeg 1000w",
+        "dataUri": "data:image/svg+xml,<svg fill='none' viewBox='0 0 1000 667' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><image x='0' y='0' width='1000' height='667' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAhADIDAREAAhEBAxEB/8QAHAAAAgEFAQAAAAAAAAAAAAAABAUDAQIGBwgJ/8QALBAAAQMCAwYFBQAAAAAAAAAAAgABAwQRBQYhEhMxQVFhByIzcYEIFSM0Qv/EABoBAAMBAQEBAAAAAAAAAAAAAAMEBQYCAAH/xAAiEQACAgEEAgMBAAAAAAAAAAAAAQIRAwQSITETMgUiQVH/2gAMAwEAAhEDEQA/APLco7P2TWyge60QFxdLPsIGU8d2Z09jXCF5yG8NFNLG5xxEYi13cWvZMulwxVNhEcVwa+i88dncMrqieKBhAj6Iix1ycSy26I+K5o+7hIdLI0F3B2shbbQVSpiw9CdTJdsbQ1oqd5AF34KpijcUxHJLazp36eMayvhOT8w0uPUsRyyxfjOQbvw5LNfM488s+OWF9Gk+Glp3gyedcmmMVw4Y6+oOMNmEzd4/a62WkcckF/TGapPHN/wDlp2CNgb3dPTgkqQlHI27LPI2m6HTultiD+Rm5PE7DPDubJtBLluotiJBeaI+vZT4NWqNhqo4njaVX+HMtbE8NUYvydTMvE2IQ9UZHhhDWtAABs20dUMUtuOxLKt86RsHDJ6ccOIdLho/dS5/aVspwpRpC6CqCuoZ5iazRG7N0dP6CTjlon66KnisQzyuRkTaM/JaKTrsgxjxRBtv1QeAtCd6rYBryO7KDj1C/S3PDL8E9Qe9mIr3v1Ss3uk2hiCpUxrQylTwgQPsuu5SexIHFLewj7jOLOwyk1+OqA+ew64MkwrNslPlefCigiIJJNveu3mZ/dUdDBKe9sS1U/psE5z35q68iJShRBvkLyILtFEvpusnE0L6Av6+V2DGcH64okvVAY+zLkMMG03o/KpaXpk7U9lX4qgKLosQgx//2Q==' /></svg>"
+      }
+    },
     "108201": {
       "key": "commentary",
-      "name": "Comentarios",
-      "to": "commentary-es",
-      "count": 55,
+      "name": "Komentarze",
+      "to": "commentary-pl",
+      "count": 71,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh.jpeg 1000w",
@@ -35,47 +46,47 @@
     },
     "108206": {
       "key": "edification",
-      "name": "Edificación",
-      "to": "edification-es",
-      "count": 346,
+      "name": "Zbudowanie",
+      "to": "edification-pl",
+      "count": 360,
       "image": {
         "src": "https://1872483049.rsc.cdn77.org/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg",
         "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpeg 1000w",
         "dataUri": "data:image/svg+xml,<svg fill='none' viewBox='0 0 1000 667' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><image x='0' y='0' width='1000' height='667' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAhADIDAREAAhEBAxEB/8QAHAAAAgICAwAAAAAAAAAAAAAAAAIDBAEGBQcJ/8QAKRAAAgICAAQDCQAAAAAAAAAAAQIAAwQRBRIxMkFRcQYTISIzNDVygf/EABkBAQEBAQEBAAAAAAAAAAAAAAACAQUDBP/EABwRAQEAAgMBAQAAAAAAAAAAAAABAhESMUEDM//aAAwDAQACEQMRAD8A9TnMKxJCwOsMvSWHmIBAIGGGxATlMK5GC6hluzQwQCAQCBFfkLQoLeMm3SpLRXkpZ0IiZStuNjivaPjT8KXGWkBrbrAo35SvEybq/RnCxAWGjMlbpYW1WHwM1J9wAnQ3A1zjHFqbcj3KOCy9QJ8uf0xuXGV9eHzsx5DBDO40xAEvSNnycanNya2uXmNR+Q+UpKyNC0IOglTpLJoKvzhzrylp2sCxdd8xi3f9F/SL0Tt1mn5yz9jOLj+tdu/lG38L8fSdWOXTr3/2ahLX9w0pnid+yWj1TPUzyej/2Q==' /></svg>"
       }
     },
-    "108212": {
-      "key": "animation",
-      "name": "Animaciones",
-      "to": "animaciones",
-      "count": 1,
+    "108211": {
+      "key": "interview",
+      "name": "Rozmowy",
+      "to": "rozmowy",
+      "count": 3,
       "image": {
-        "src": "https://1872483049.rsc.cdn77.org/storage/sizes/FVch0OIGw6zdplJ3TPJV2yxx92xzAps8KPD0DpPg-w600.jpeg",
-        "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/FVch0OIGw6zdplJ3TPJV2yxx92xzAps8KPD0DpPg-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/FVch0OIGw6zdplJ3TPJV2yxx92xzAps8KPD0DpPg.jpeg 1000w",
-        "dataUri": "data:image/svg+xml,<svg fill='none' viewBox='0 0 1000 563' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><image x='0' y='0' width='1000' height='563' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAcADIDAREAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAYDBAUHCAH/xAArEAABBAIBAwIEBwAAAAAAAAABAAIDBAURBgchMRJBCBNCkhYiMjRRVGH/xAAbAQACAwEBAQAAAAAAAAAAAAAAAwECBAUGB//EACERAAICAgIDAAMAAAAAAAAAAAABAgMEERIxEyFBFDJR/9oADAMBAAIRAxEAPwDthfKj0AIAEACALFSjJcdqNpKfXTK16iispKPZ5apyVH+l40VFlUq3qQRkpdECSWBAAgAQAIAyWGz9bE2AyZ7Wvf4BPcrq4WQqJcmjPbW5ojy+frZa6+OF7S9n6mg+FXNv88uSRNUHBaKK5g80/kevOMjtW44Zw6Su0u9A+pdBYstJlG2vgn1visZkxJUp1AbpiMjA49vOlo/Aa9tlI2behvodXrNHiDbeUdGciQSY2Hx/CRPGXk4x6G6kR9KesU2chvR5kCKZshMRJ1tvsoux1HTgRHbGnkeYxeapj1yiK1vUMjX60fZUork5qKLJN+kjDcPOQ4TPO7KztustP22ZrgSB/q35mNxS0G/j7Hf8bYj+3H9y4/jl/AOEJG/MD97/ADDRPuV6k6mkynjMPVxuRiswMLZm9gd+yZyYjxxXtIYrN6ezaLpJCdnxvslS+sa/1ZLdsS15GmORzO30nSTWk17M+P7TGDgLZOTcnpY+9YmkrOdsta8gp8a4t9GqFsqLOcO0M3Wl83GM5HjqFmeOqIwfQ55KvbXFPRDtlkydlnZrE5G0T+4k+4pXFE6R/9k=' /></svg>"
+        "src": "https://1872483049.rsc.cdn77.org/storage/sizes/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV-w600.jpeg",
+        "srcset": "https://1872483049.rsc.cdn77.org/storage/sizes/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV-w600.jpeg 600w, https://1872483049.rsc.cdn77.org/storage/OweU1VZsDgMqGbQS8AewjsBgl1ripUNbPgXTMrYV.jpeg 1000w",
+        "dataUri": "data:image/svg+xml,<svg fill='none' viewBox='0 0 1000 667' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><image x='0' y='0' width='1000' height='667' xlink:href='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAhADIDAREAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAgMEBQYHCAAJ/8QALhAAAQMDAgMHAwUAAAAAAAAAAQIDBAAFEQYSByExCBQiMjNhcUFRgRMjNEOR/8QAGwEAAgMBAQEAAAAAAAAAAAAABAUCAwYBAAf/xAAiEQACAgICAgIDAAAAAAAAAAAAAQIDBCEREgUxEzIUIlH/2gAMAwEAAhEDEQA/APLgxufSiroJPRxbBoa28jQp0E4MJwK8eL97OnCCHqeQ3MurK3WFnk2n7VTPIVGxhjYk8jaLy4m9kfS2odKypWnULhXmOguBlZ5LA60LXlKyW2EX+PnVHtwYov1pXbpYiup2uNKKFD3FOpr6iYALenAopRIchT7IAyBV19aORYhVkKpM1wy0OgJQ5cY6XfTKwFfGai/WicOOy5N18NosSy2CHLhufpeEBKE9DWdulKcmmbzDqhGKlEnk/Uc+PFdfedQhIbJBB6jFRxop2Ilm9nW0jAfEGUJurJTwGN7yjj81trY9ZRifO+dsJSz4Ry+lMFWDdhpWAsZAzyqycU9kk+Brd9Q+1Z6zUmEoDFQp6W2Eg+YdK5Fb2SRsTh9f3LXpWLHksKcCUDYsVnMnh2NxN3hzddSTRDuK3E+/9+RbojRTDcThTg6j2pt4vFjOyLkJfJ5tkOYRKLvqlKvLYVndnJzWny4r8lRRkq23Btj2lvwj4pwqtAfYineABtT9KBsaWkGxX9FdttSJT2987W+uPvSG5fsExWh2xGhEKaaA2nlgdap9Fi0WRbuJwi6fCEEFxCcBs9aCni1zfYbV+Rtrj1Q1yNWC4RW3VD93mVA0VBfGuIi62x2tykMxYh31/Y8hKHcZS4OWDRMLH3UpA7iuOEJ1QnG1FPXacZrYRyKuFsUOqXJX49T/AClFntjBeiSwfTRSSz7BCDV+aqyQH+w1E4L2vL+K8dOg/wAxHzUkeHtfnV80SvRA/9k=' /></svg>"
       }
     }
   },
   "typeIds": {
     "108196": {
       "key": "read",
-      "name": "Leer",
-      "to": "leer",
-      "count": 673,
+      "name": "Czytaj",
+      "to": "przeczytaj",
+      "count": 748,
       "image": null
     },
     "108197": {
       "key": "listen",
-      "name": "Escucha",
-      "to": "escucha",
-      "count": 164,
+      "name": "Posłuchaj",
+      "to": "posłuchaj",
+      "count": 177,
       "image": null
     },
     "108198": {
       "key": "watch",
-      "name": "Ver",
-      "to": "ver",
-      "count": 1,
+      "name": "Obejrzyj",
+      "to": "obejrzyj",
+      "count": 30,
       "image": null
     }
   }
