@@ -66,27 +66,36 @@ module.exports = async function generateTypes(data) {
 
         if(result.data && result.data.ac){
             const {podcasts,playlists} = result.data.ac
-            const playlistPage = {
-                title:ac_strings.playlist,
-                slug:ac_strings.slug_playlist
+
+
+            if (playlists){
+                const playlistPage = {
+                    title:ac_strings.playlist,
+                    slug:ac_strings.slug_playlist
+                }
+                if(ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false") {
+                    const playlistItem = {key:"playlist",name:playlistPage.title,to:playlistPage.slug,count:playlists.length}
+                
+                    typeFormatEach["playlist"]=playlistItem
+                        
+                }
             }
-            const podcastPage = {
-                title:ac_strings.podcast,
-                slug:ac_strings.slug_podcast
-            }
-            const podcastCount = podcasts.noOfPosts
-    
-            if(playlistPage.title){
-                const playlistItem = {key:"playlist",name:playlistPage.title,to:playlistPage.slug,count:playlists.length}
-               
-                typeFormatEach["playlist"]=playlistItem
+            if (podcasts){
+                const podcastPage = {
+                    title:ac_strings.podcast,
+                    slug:ac_strings.slug_podcast
+                }
+                const podcastCount = podcasts.noOfPosts
+
                     
+                if(ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" ){
+                    const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
+                    typeFormatEach["podcast"]=podcastItem
+                }
             }
-    
-            if(podcastPage.title){
-                const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
-                typeFormatEach["podcast"]=podcastItem
-            }
+           
+
+
         }
         
        

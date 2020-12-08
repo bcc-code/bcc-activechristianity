@@ -103,7 +103,7 @@
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby-plugin-s3 deploy --yes && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths \"/*\"",
-    "develop": "ACTIVE_ENV=hu_development gatsby develop",
+    "develop": "ACTIVE_ENV=pl_development gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
