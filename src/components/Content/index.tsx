@@ -44,7 +44,9 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                     if (
                         node.attribs &&
                         node.attribs.class &&
-                        node.attribs.class.indexOf('ac-glossary-link') > -1) {
+                        node.attribs.class.indexOf('ac-glossary-link') > -1 &&
+                        node.children &&
+                        node.children[0]) {
 
                         const word = node.children[0].data
 
