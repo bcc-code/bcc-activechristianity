@@ -87,7 +87,9 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                     if (process.env.SITE_URL && node.type === 'tag' &&
                         node.name === 'a' &&
                         node.attribs &&
-                        node.attribs.href
+                        node.attribs.href &&
+                        node.children &&
+                        node.children[0]
                     ) {
 
                         const text = node.children[0].data
