@@ -167,22 +167,6 @@ if (activeEnv === 'production') {
   
 
   plugins.push(
-    {
-      resolve: `gatsby-plugin-s3`,
-      options: {
-          bucketName: process.env.S3_BUCKET_NAME,
-          region: process.env.S3_BUCKET_REGION,
-          protocol: targetAddress.protocol.slice(0, -1),
-          hostname: targetAddress.hostname,
-          acl: null,
-          params: {
-              // In case you want to add any custom content types: https://github.com/jariz/gatsby-plugin-s3/blob/master/recipes/custom-content-type.md
-          },
-          generateRoutingRules: false,
-          generateRedirectObjectsForPermanentRedirects: true,
-          enableS3StaticWebsiteHosting: false,
-      },
-    },
 /*     {
       resolve: `gatsby-plugin-algolia-search`,
       options: {
