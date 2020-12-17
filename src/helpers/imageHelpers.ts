@@ -1,6 +1,7 @@
 import { initials } from './index'
-import { IMedia, IImage } from '@/types'
-const BaseUrl = 'https://dummyimage.com'
+import { IImage } from '@/types'
+import endpoinsts from '@/endpoints'
+const BaseUrl = endpoinsts.dummy_image_api
 
 function hashCode(str: string): number {
   var hash = 0;

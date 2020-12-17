@@ -19,6 +19,7 @@ import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
 import Cookies from 'js-cookie'
+import { desktopMenu, mobileMenuBase, sideMenu, sideResourceMenu, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus'
 
 // string
 import ac_strings from '@/strings/ac_strings.js'
@@ -32,7 +33,7 @@ import { IUser, INavItem } from '@/types'
 import "@/styles/tailwind-output.css"
 import './Layout.css'
 import "react-placeholder/lib/reactPlaceholder.css";
-import { desktopMenu, mobileMenuBase, sideMenu, sideResourceMenu, menusItems, iconMapNav } from '@/layout-parts/Nav/Menus'
+
 export interface IDrawerNav {
     isSideNavOpen: boolean
     setSideNavOpen: (status: boolean) => void
@@ -124,7 +125,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
     } else {
         mobileMenu.push({
-            ...menusItems.my_content,
+            ...userMenuItems.myContent,
             icon: iconMapNav["my-content"]
         })
     }

@@ -4,11 +4,11 @@ import FetchSocialMediaPlatform from '@/HOC/FetchSocialMediaPlatforms'
 import ac_strings from '@/strings/ac_strings'
 import { LayoutH1 } from '@/components/Headers'
 import { MobileMainWrapper } from '@/layout-parts/PostLayout/PostSections'
-
+import endpoints from '@/endpoints'
 import ContactForm from '@/layout-parts/Form/Contact'
 
 const ContactPage = () => {
-    const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
+    const imageUrl = endpoints.contact_hero
     const height = 150
     return (
         <div className="">

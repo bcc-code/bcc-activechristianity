@@ -1,44 +1,45 @@
 import axios from 'axios'
+import endpoints from '@/endpoints'
 /* https://github.com/kennethjiang/js-file-download/blob/master/file-download.js */
 
-export const API_URL = `${process.env.API_URL}`;
+export const API_URL = `${endpoints.api_url}`;
 
 function saveFile(data: any, filename: string, mime?: string) {
   /* Only download on browser */
   if (typeof window !== 'undefined') {
-    var blob = new Blob([data], {type: mime || 'application/octet-stream'});
+    var blob = new Blob([data], { type: mime || 'application/octet-stream' });
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
-        window.navigator.msSaveBlob(blob, filename);
+      window.navigator.msSaveBlob(blob, filename);
     }
     else {
-        var blobURL = window.URL.createObjectURL(blob);
-        var tempLink = document.createElement('a');
-        tempLink.style.display = 'none';
-        tempLink.href = blobURL;
-        tempLink.setAttribute('download', filename);
+      var blobURL = window.URL.createObjectURL(blob);
+      var tempLink = document.createElement('a');
+      tempLink.style.display = 'none';
+      tempLink.href = blobURL;
+      tempLink.setAttribute('download', filename);
 
-        if (typeof tempLink.download === 'undefined') {
-          tempLink.setAttribute('target', '_blank');
-        }
+      if (typeof tempLink.download === 'undefined') {
+        tempLink.setAttribute('target', '_blank');
+      }
 
-        document.body.appendChild(tempLink);
-        tempLink.click();
-        document.body.removeChild(tempLink);
-        window.URL.revokeObjectURL(blobURL);
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      window.URL.revokeObjectURL(blobURL);
     }
   }
 }
 
-export default function(url: string, filename: string) {
+export default function (url: string, filename: string) {
   return axios({
     url,
     method: 'GET',
     responseType: 'blob',
   }).then((response) => {
     if (response.headers['content-disposition']) {
-        let disposition = response.headers['content-disposition']
-        disposition = disposition.substring(disposition.indexOf("filename=") + 10, disposition.length - 1)
-        if (disposition) filename = disposition
+      let disposition = response.headers['content-disposition']
+      disposition = disposition.substring(disposition.indexOf("filename=") + 10, disposition.length - 1)
+      if (disposition) filename = disposition
     }
     saveFile(response.data, filename, response.headers['content-type'])
     return true

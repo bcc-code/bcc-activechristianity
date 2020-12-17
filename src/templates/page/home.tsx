@@ -37,7 +37,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   } = pageContext
 
-  const popularPosts = popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
+  const popularPosts = popularPostsAll.dynamic && popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
   const { featured, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
   const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
   React.useEffect(() => {
@@ -118,7 +118,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             <div className="col-start-1 col-end-3 lg:col-end-4">
               {latest.slice(6, 12).map((item, i) => {
                 return (
-                  <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`}>
+                  <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`} key={shortid()}>
                     <RightImgWDes key={i} {...item} />
                   </div>
                 )

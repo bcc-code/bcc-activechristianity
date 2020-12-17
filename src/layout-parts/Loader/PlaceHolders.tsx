@@ -43,7 +43,7 @@ export const ListPlaceholder: React.FC<{ loading: boolean }> = ({ loading, child
 
 export const OneTopImgPost: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={TopImgPlaceholder}>
+        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={<TopImgPlaceholder />}>
             {children}
         </ReactPlaceholder>
 
@@ -52,7 +52,7 @@ export const OneTopImgPost: React.FC<{ loading: boolean }> = ({ loading, childre
 
 export const DesktopFeaturedPostLoader: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={DesktopFeaturedPlaceholder}>
+        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={<DesktopFeaturedPlaceholder />}>
             {children}
         </ReactPlaceholder>
 

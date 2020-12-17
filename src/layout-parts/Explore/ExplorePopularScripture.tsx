@@ -1,7 +1,6 @@
 
 
 import * as React from 'react';
-import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
 import Link from '@/components/CustomLink';
 import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
 import { OutlineScriptureChapter } from '@/components/Button'

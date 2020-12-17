@@ -7,7 +7,8 @@ const ac_strings = require('../../src/strings/ac_strings')
 module.exports = async function generateTopic(data) {
     const {actions, graphql,contextPosts,subTopics,node:topic,breadcrumb}=data
     const { createPage } = actions
-
+    const {total}=topic.pagination.paginatorInfo
+    const hasRecommendPage=total>10
     const topicFormat = []
     for (let i =0;i<subTopics.length;i++){
                         
@@ -49,7 +50,8 @@ module.exports = async function generateTopic(data) {
     // create recommend
     const pagePath = `${ac_strings.slug_topic}/${topic.slug}`
     console.log(topic.slug)
-    createPage({
+    if(hasRecommendPage){
+      createPage({
         path:pagePath,
         component:path.resolve(topicRecommendTemplate),
         context: {
@@ -59,7 +61,10 @@ module.exports = async function generateTopic(data) {
           formats:topicFormat,
           image:topic.image,
           breadcrumb,
-          ...contextPosts
+          ...contextPosts,
+          posts: contextPosts.latestPosts,
         },
       })
+    }
+
 }

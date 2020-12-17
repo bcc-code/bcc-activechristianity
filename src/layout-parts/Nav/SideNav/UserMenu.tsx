@@ -4,6 +4,8 @@ import SideNavWrapper from './SideNavWrapper'
 
 import { SideNavItem } from '@/components/Button'
 import loadable from '@loadable/component'
+import { userMenuItems } from '@/layout-parts/Nav/Menus'
+
 const EditProfile = loadable(() => import('./EditProfile'))
 const EditAccountSettings = loadable(() => import('./EditAccountSettings'))
 
@@ -45,14 +47,8 @@ const SideMobile: React.FC<{
             />}
             <div className="w-full justify-center items-center flex flex-col px-4 py-8">
                 {[
-                    {
-                        name: ac_strings.my_content,
-                        to: `${ac_strings.user}/${ac_strings.slug_user_content}`
-                    },
-                    {
-                        name: ac_strings.history,
-                        to: `${ac_strings.user}/${ac_strings.slug_user_history}`
-                    }
+                    userMenuItems.myContent,
+                    userMenuItems.history
                 ].map((item, i) => {
                     return (
                         <SideNavItem key={i} to={item.to} onClick={close}>

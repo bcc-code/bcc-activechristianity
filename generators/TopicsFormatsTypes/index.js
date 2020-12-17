@@ -54,8 +54,6 @@ const getContextPostsQuery =(id)=> `{
         data {
             ${languagePostQuery}
         }
-
-
     }
     }
   }
@@ -169,6 +167,7 @@ module.exports = function generateTopics(actions, graphql) {
 
               if (topicType==='type'){
                 const findType=typeScope.find(t=>`${t.keyId}`===`${node.id}`)
+                console.log(findType)
                 if (findType){
                     nodeInfo.key=findType.keyname
                     typeIds[`${node.id}`]=nodeInfo
@@ -185,6 +184,7 @@ module.exports = function generateTopics(actions, graphql) {
 
               }
               if(topicType==="topic"){
+                
                 await generateTopic({
                     actions,
                     graphql,

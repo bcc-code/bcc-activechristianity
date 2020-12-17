@@ -17,7 +17,7 @@ import Layout from "./src/layouts/App"
 import "react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"
 import "./src/styles/reset.css"
-
+import endpoints from './src/endpoints'
 import wrapWithProvider from "./provider"
 
 export const wrapRootElement = wrapWithProvider
@@ -50,7 +50,7 @@ export const onClientEntry = () => {
       }
     }
 
-    addScript("https://api.reftagger.com/v2/RefTagger.js")
+    addScript(endpoints.reftagger)
 
   }
 

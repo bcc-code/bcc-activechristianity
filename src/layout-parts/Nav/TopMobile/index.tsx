@@ -36,8 +36,6 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
     const authInfo = useSelector((state: IRootState) => state.auth);
     const timerId = React.useRef<NodeJS.Timeout | null>(null)
     const [mobileLastStep, setMobileLastStep] = React.useState<null | INavItem>(null)
-    const languageLogoSrc = "https://media.activechristianity.org/2020/04/activechristianity_en_logo_200px.png"
-
 
     React.useEffect(() => {
         if (!hasDelayedOnce) {

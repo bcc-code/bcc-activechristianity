@@ -3,9 +3,9 @@ import { ScrollingProvider, SectionLink, Si } from 'react-scroll-section';
 import Video16to9 from '@/components/Images/Video16to9'
 import ScrollSectionChild, { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import LeftSidebarLayout, { ISiderbar } from './index'
-import Content from '@/components/Content'
 import { Section } from 'react-scroll-section'
-const imageUrl = 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg'
+import endpoints from '@/endpoints'
+const imageUrl = endpoints.contact_hero
 interface IProps {
     sections: IScrollSectionChildProps[]
     title: string

@@ -1,8 +1,8 @@
 
 import * as request from './requests';
+import endpoints from '@/endpoints'
 
-
-const baseUrl = process.env.API_URL || "API_URL"
+const baseUrl = endpoints.api_url
 const sendQuery = (query: string) => {
     return fetch(baseUrl, {
         method: 'POST',

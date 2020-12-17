@@ -12,24 +12,22 @@ interface IFetchPost {
     topics?: ITopic[]
 }
 
-const RecommendedForYou: React.FC<IFetchPost> = () => {
+const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
     const [posts, setPosts] = React.useState<string[]>([])
-    const [showingPosts, setShowingPosts] = React.useState<string[]>([])
-    const [pageNumber, setPageNumber] = React.useState<number>(0)
+    const [pageNumber, setPageNumber] = React.useState<number>(1)
     const postsPerPage = 12
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
         api.recommended().then(res => {
-
-            const popularSlugs = res.popularTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug)
-            const featuredSlugs = res.featuredTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug)
+            const popularSlugs = res.popularTopics ? res.popularTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug) : []
+            const featuredSlugs = res.featuredTopics ? res.featuredTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug) : []
             const recommendSlugs = res.recommended
             const allTopics = [...new Set([...featuredSlugs, ...popularSlugs])]
             const randomTopics = getRandomArray(allTopics, 6)
             setIsFetchingMore(true)
             Promise.all(randomTopics.map(t => {
 
-                const url = `${ac_strings.slug_topic}/${t}/1`
+                const url = `${ac_strings.slug_topic}/${t}`
                 return fetch(`/page-data/${url}/page-data.json`)
                     .then(res => res.json())
                     .then(res => {
@@ -40,6 +38,8 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
                         }
                         return undefined
                     }).catch(error => {
+                        console.log(t)
+                        console.log(url)
                         console.log(error)
                     })
             })).then(async (postArrays) => {
@@ -52,7 +52,6 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
                 }))
                 const randomPostSlugs = getRandomArray(allPostSlugs, allPostSlugs.length)
                 setIsFetchingMore(false)
-                handlePageChange()
                 setPosts(randomPostSlugs)
             })
         })
@@ -66,10 +65,7 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
         }
 
         if (pageNumber < lastPage) {
-            const start = (pageNumber) * postsPerPage
-            const end = (pageNumber + 1) * postsPerPage
-            const postToAdd = posts.slice(start, end)
-            setShowingPosts([...showingPosts, ...postToAdd])
+
             setPageNumber(pageNumber + 1)
             setTimeout(() => {
                 window.scrollTo({
@@ -79,11 +75,12 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
         }
     }
 
+    const end = pageNumber * postsPerPage
 
     return (
 
         <div className="px-4">
-            {showingPosts.map(p => {
+            {posts.slice(0, end).map(p => {
 
                 return p ? (
                     <FetchOnePost
@@ -97,16 +94,14 @@ const RecommendedForYou: React.FC<IFetchPost> = () => {
                         }}
                     />
                 ) : <div></div>
-                /* return */
-                // return
             })}
-            <div className="flex justify-center py-4">
+            {(posts.length > postsPerPage) && <div className="flex justify-center py-4">
                 <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={handlePageChange} />
-            </div>
+            </div>}
         </div>
 
 
     )
 }
 
-export default React.memo(RecommendedForYou)
+export default RecommendedForYou

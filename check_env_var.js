@@ -1,9 +1,6 @@
 const core = [
     "TITLE",
-    "API_HOST",
-    "API_URL",
     "SITE_URL",
-    "URL",
     "LANG",
     "LANG_CODE",
     "LOCALE",
@@ -12,8 +9,6 @@ const core = [
     "ALGOLIA_ADMIN_KEY",
     "ENABLE_ALGOLIA",
     "GTM_TAG",
-    "ABOUT_PAGE_ID",
-    "USER_PAGE_ID"
 ]
 
 const english=[

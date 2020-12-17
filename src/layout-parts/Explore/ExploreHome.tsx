@@ -33,7 +33,7 @@ const ExploreLayout: React.FC<{
     let filteredTopics = topics.filter(item => !formatIds[item.id] && !typeIds[item.id])
     filteredTopics = [...new Set([...filteredTopics])]
     const randomTopics = getRandomArray(filteredTopics, 6)
-
+    console.log('exploring home')
     return (
         <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
@@ -51,7 +51,7 @@ const ExploreLayout: React.FC<{
 
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
-                    {ac_strings.slug_podcast && (
+                    {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" && (
                         <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
@@ -62,7 +62,7 @@ const ExploreLayout: React.FC<{
                             </div>
                         </Link>
                     )}
-                    {ac_strings.slug_playlist && (
+                    {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" && (
                         <Link key={shortid()} to={ac_strings.slug_playlist} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
@@ -89,7 +89,7 @@ const ExploreLayout: React.FC<{
                 </div>
             </div>
 
-            {ac_strings.slug_scripture && (
+            {ac_strings.slug_scripture && ac_strings.slug_scripture.toLowerCase() !== "false" && (
                 <ExplorePopularScripture
                     scriptureSlug={ac_strings.slug_scripture}
                 />

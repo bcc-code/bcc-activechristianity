@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { openSignInModal } from '@/state/action'
 
 import Carousel from '@/components/Carousel'
-import DownloadFile, { API_URL } from '@/helpers/download'
+import DownloadFile from '@/helpers/download'
 import Icon from '@/components/Icons/Icon'
 
 import ModalWProps from '@/components/Modal/ModalWProps'

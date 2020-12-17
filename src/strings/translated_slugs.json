@@ -1,5 +1,5 @@
 {
-  "about-us": [
+  "rolunk": [
     {
       "lang": "en",
       "url": "about-us"
@@ -61,7 +61,7 @@
       "url": "om-os"
     }
   ],
-  "contributor": [
+  "kozremukodo": [
     {
       "lang": "en",
       "url": "contributor"
@@ -84,7 +84,7 @@
     },
     {
       "lang": "hu",
-      "url": "iro"
+      "url": "kozremukodo"
     },
     {
       "lang": "it",
@@ -123,7 +123,7 @@
       "url": "bidragsyder"
     }
   ],
-  "account": [
+  "fiok": [
     {
       "lang": "en",
       "url": "account"
@@ -134,7 +134,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Cuenta"
     },
     {
       "lang": "fr",
@@ -146,14 +146,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "fiok"
     },
     {
       "lang": "it",
       "url": "account"
+    },
+    {
+      "lang": "pl",
+      "url": "konto"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "Cont"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "konto"
     }
   ],
-  "contact": [
+  "kapcsolat": [
     {
       "lang": "en",
       "url": "contact"
@@ -164,7 +184,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Contacto"
     },
     {
       "lang": "fr",
@@ -176,14 +196,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "kapcsolat"
     },
     {
       "lang": "it",
       "url": "contatto"
+    },
+    {
+      "lang": "pl",
+      "url": "kontakt"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "Contact"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "kontakt"
     }
   ],
-  "cookie-policy": [
+  "cookie-iranyelvek": [
     {
       "lang": "en",
       "url": "cookie-policy"
@@ -194,7 +234,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "política-de-cookie"
     },
     {
       "lang": "fr",
@@ -206,14 +246,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "cookie-iranyelvek"
     },
     {
       "lang": "it",
       "url": "gestione-cookie"
+    },
+    {
+      "lang": "pl",
+      "url": "polityka-cookie"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "politica-de-coockie"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "cookie-policy"
     }
   ],
-  "e-book": [
+  "e-konyv": [
     {
       "lang": "en",
       "url": "e-book"
@@ -224,7 +284,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "e-book"
     },
     {
       "lang": "fr",
@@ -236,14 +296,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "e-konyv"
     },
     {
       "lang": "it",
       "url": "e-book"
+    },
+    {
+      "lang": "pl",
+      "url": "E-Book"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "e-book"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "e-bok"
     }
   ],
-  "explore": [
+  "felfedezes": [
     {
       "lang": "en",
       "url": "explore"
@@ -254,7 +334,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Explorar"
     },
     {
       "lang": "fr",
@@ -266,14 +346,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "felfedezes"
     },
     {
       "lang": "it",
       "url": "esplora"
+    },
+    {
+      "lang": "pl",
+      "url": "odkryj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "explorează"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "utforska"
     }
   ],
-  "glossary": [
+  "szojegyzek": [
     {
       "lang": "en",
       "url": "glossary"
@@ -284,7 +384,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Glosario"
     },
     {
       "lang": "fr",
@@ -296,14 +396,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "szojegyzek"
     },
     {
       "lang": "it",
       "url": "glossario"
+    },
+    {
+      "lang": "pl",
+      "url": "słowniczek"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "glosar"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "ordlista"
     }
   ],
-  "host": [
+  "musorvezeto": [
     {
       "lang": "en",
       "url": "host"
@@ -314,7 +434,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Anfitrión"
     },
     {
       "lang": "fr",
@@ -326,14 +446,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "musorvezeto"
     },
     {
       "lang": "it",
       "url": "host"
+    },
+    {
+      "lang": "pl",
+      "url": "gospodarz"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "host"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "värd"
     }
   ],
-  "latest": [
+  "legujabb": [
     {
       "lang": "en",
       "url": "latest"
@@ -344,7 +484,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Novedades"
     },
     {
       "lang": "fr",
@@ -356,14 +496,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "legujabb"
     },
     {
       "lang": "it",
       "url": "ultimo"
+    },
+    {
+      "lang": "pl",
+      "url": "najnowsze"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "ultimele"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "senaste"
     }
   ],
-  "listen": [
+  "hallgatas": [
     {
       "lang": "en",
       "url": "listen"
@@ -374,7 +534,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Escucha"
     },
     {
       "lang": "fr",
@@ -386,14 +546,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "hallgatas"
     },
     {
       "lang": "it",
       "url": "ascolta"
+    },
+    {
+      "lang": "pl",
+      "url": "posłuchaj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "ascultă"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "lyssna"
     }
   ],
-  "login": [
+  "bejelentkezes": [
     {
       "lang": "en",
       "url": "login"
@@ -404,7 +584,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Iniciar sesión"
     },
     {
       "lang": "fr",
@@ -416,138 +596,96 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "bejelentkezes"
     },
     {
       "lang": "it",
       "url": "login"
-    }
-  ],
-  "playlist": [
-    {
-      "lang": "en",
-      "url": "playlist"
-    },
-    {
-      "lang": "nb",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "es",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "fr",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "fi",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "hu",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "it",
-      "url": "DO NOT TRANSLATE"
     },
     {
       "lang": "pl",
-      "url": "DO NOT TRANSLATE"
+      "url": "zaloguj"
     },
     {
       "lang": "pt-pt",
-      "url": "DO NOT TRANSLATE"
+      "url": ""
     },
     {
       "lang": "ro",
-      "url": "DO NOT TRANSLATE"
+      "url": "loghează-te"
     },
     {
       "lang": "ru",
-      "url": "DO NOT TRANSLATE"
+      "url": ""
     },
     {
       "lang": "sv",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "de",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "nl",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "da",
-      "url": "DO NOT TRANSLATE"
+      "url": "inloggning"
     }
   ],
-  "podcast": [
+  "FALSE": [
     {
       "lang": "en",
-      "url": "podcast"
+      "url": "scripture"
     },
     {
       "lang": "nb",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "es",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "fr",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "fi",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "hu",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "it",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "pl",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "pt-pt",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "ro",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "ru",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "sv",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "de",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "nl",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     },
     {
       "lang": "da",
-      "url": "DO NOT TRANSLATE"
+      "url": "FALSE"
     }
   ],
-  "living-the-gospel-intro": [
+  "elni-az-evangeliumot-intro": [
     {
       "lang": "en",
       "url": "living-the-gospel-intro"
@@ -558,7 +696,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "living-the-gospel-intro"
     },
     {
       "lang": "fr",
@@ -570,14 +708,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "elni-az-evangeliumot-intro"
     },
     {
       "lang": "it",
       "url": "vivere-il-vangelo-intro"
+    },
+    {
+      "lang": "pl",
+      "url": "życie-wg.ewangelii-wstęp"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "living-the-gospel-intro"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "living-the-gospel-intro"
     }
   ],
-  "privacy-policy": [
+  "adatvedelmi-iranyelvek": [
     {
       "lang": "en",
       "url": "privacy-policy"
@@ -588,7 +746,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "política-de-privacidad"
     },
     {
       "lang": "fr",
@@ -600,14 +758,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "adatvedelmi-iranyelvek"
     },
     {
       "lang": "it",
-      "url": "gestione-privacy"
+      "url": "gestione-riservatezza"
+    },
+    {
+      "lang": "pl",
+      "url": "polityka-prywatności"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "politica-de-confidentialitate"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "Sekretesspolicy"
     }
   ],
-  "read": [
+  "olvas": [
     {
       "lang": "en",
       "url": "read"
@@ -618,7 +796,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Leer"
     },
     {
       "lang": "fr",
@@ -630,14 +808,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "olvas"
     },
     {
       "lang": "it",
       "url": "leggi"
+    },
+    {
+      "lang": "pl",
+      "url": "przeczytaj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "citește"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "läsa"
     }
   ],
-  "register": [
+  "regisztracio": [
     {
       "lang": "en",
       "url": "register"
@@ -648,7 +846,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Registrarse"
     },
     {
       "lang": "fr",
@@ -660,106 +858,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "regisztracio"
     },
     {
       "lang": "it",
       "url": "registra"
-    }
-  ],
-  "scripture": [
-    {
-      "lang": "en",
-      "url": "scripture"
-    },
-    {
-      "lang": "nb",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "es",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "fr",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "fi",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "hu",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "it",
-      "url": "DO NOT TRANSLATE"
     },
     {
       "lang": "pl",
-      "url": "DO NOT TRANSLATE"
+      "url": "zarejestruj"
     },
     {
       "lang": "pt-pt",
-      "url": "DO NOT TRANSLATE"
+      "url": ""
     },
     {
       "lang": "ro",
-      "url": "DO NOT TRANSLATE"
+      "url": "înregistrează-te"
     },
     {
       "lang": "ru",
-      "url": "DO NOT TRANSLATE"
+      "url": ""
     },
     {
       "lang": "sv",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "de",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "nl",
-      "url": "DO NOT TRANSLATE"
-    },
-    {
-      "lang": "da",
-      "url": "DO NOT TRANSLATE"
+      "url": "registrera dig"
     }
   ],
-  "theme": [
-    {
-      "lang": "en",
-      "url": "theme"
-    },
-    {
-      "lang": "nb",
-      "url": "tema"
-    },
-    {
-      "lang": "es",
-      "url": ""
-    },
-    {
-      "lang": "fr",
-      "url": ""
-    },
-    {
-      "lang": "fi",
-      "url": ""
-    },
-    {
-      "lang": "hu",
-      "url": ""
-    },
-    {
-      "lang": "it",
-      "url": "tema"
-    }
-  ],
-  "topic": [
+  "tema": [
     {
       "lang": "en",
       "url": "topic"
@@ -770,7 +896,7 @@
     },
     {
       "lang": "es",
-      "url": "temas"
+      "url": "Tema"
     },
     {
       "lang": "fr",
@@ -821,7 +947,7 @@
       "url": "temaer"
     }
   ],
-  "user": [
+  "felhasznalo": [
     {
       "lang": "en",
       "url": "user"
@@ -832,7 +958,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Usuario"
     },
     {
       "lang": "fr",
@@ -844,14 +970,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "felhasznalo"
     },
     {
       "lang": "it",
       "url": "utente"
+    },
+    {
+      "lang": "pl",
+      "url": "użytkownik"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "utilizator"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "användare"
     }
   ],
-  "bookmarked": [
+  "konyvjelzo-mentve": [
     {
       "lang": "en",
       "url": "bookmarked"
@@ -862,7 +1008,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Guardado"
     },
     {
       "lang": "fr",
@@ -874,14 +1020,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "konyvjelzo-mentve"
     },
     {
       "lang": "it",
-      "url": "segnalibro"
+      "url": "preferiti"
+    },
+    {
+      "lang": "pl",
+      "url": "dodano do zakładek"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "marcat"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "bokmärkt"
     }
   ],
-  "password": [
+  "jelszo": [
     {
       "lang": "en",
       "url": "password"
@@ -892,7 +1058,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Contraseña"
     },
     {
       "lang": "fr",
@@ -904,14 +1070,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "jelszo"
     },
     {
       "lang": "it",
       "url": "password"
+    },
+    {
+      "lang": "pl",
+      "url": "hasło"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "parolă"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "lösenord"
     }
   ],
-  "my-content": [
+  "sajat-tartalom": [
     {
       "lang": "en",
       "url": "my-content"
@@ -922,7 +1108,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Mi contenido "
     },
     {
       "lang": "fr",
@@ -934,14 +1120,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "sajat-tartalom"
     },
     {
       "lang": "it",
       "url": "il-mio-contenuto"
+    },
+    {
+      "lang": "pl",
+      "url": "moje-treści"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "continutul-meu"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "mitt-innehåll"
     }
   ],
-  "delete-profile": [
+  "profil-torlese": [
     {
       "lang": "en",
       "url": "delete-profile"
@@ -952,7 +1158,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Borrar cuenta"
     },
     {
       "lang": "fr",
@@ -964,14 +1170,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "profil-torlese"
     },
     {
       "lang": "it",
       "url": "elimina-profilo"
+    },
+    {
+      "lang": "pl",
+      "url": "usuń-profil"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "sterge-profil"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "radera-profil"
     }
   ],
-  "followed": [
+  "kovetem": [
     {
       "lang": "en",
       "url": "followed"
@@ -982,7 +1208,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Seguido"
     },
     {
       "lang": "fr",
@@ -994,14 +1220,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "kovetem"
     },
     {
       "lang": "it",
       "url": "seguito"
+    },
+    {
+      "lang": "pl",
+      "url": "obserwowane"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "urmarit"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "följer"
     }
   ],
-  "history": [
+  "elozmenyek": [
     {
       "lang": "en",
       "url": "history"
@@ -1012,7 +1258,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Historial"
     },
     {
       "lang": "fr",
@@ -1024,14 +1270,34 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "elozmenyek"
     },
     {
       "lang": "it",
       "url": "storia"
+    },
+    {
+      "lang": "pl",
+      "url": "historia"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "istorie"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "historik"
     }
   ],
-  "watch": [
+  "megtekintes": [
     {
       "lang": "en",
       "url": "watch"
@@ -1042,7 +1308,7 @@
     },
     {
       "lang": "es",
-      "url": ""
+      "url": "Ver"
     },
     {
       "lang": "fr",
@@ -1054,11 +1320,31 @@
     },
     {
       "lang": "hu",
-      "url": ""
+      "url": "megtekintes"
     },
     {
       "lang": "it",
       "url": "guarda"
+    },
+    {
+      "lang": "pl",
+      "url": "obejrzyj"
+    },
+    {
+      "lang": "pt-pt",
+      "url": ""
+    },
+    {
+      "lang": "ro",
+      "url": "vizioneaza"
+    },
+    {
+      "lang": "ru",
+      "url": ""
+    },
+    {
+      "lang": "sv",
+      "url": "se"
     }
   ]
 }

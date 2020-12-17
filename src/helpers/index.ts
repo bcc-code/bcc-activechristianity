@@ -3,7 +3,7 @@ import he from 'he'
 import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
-
+import endpoints from '@/endpoints'
 export function trimSlug(slug: string) {
     const regex = /^[/]*/gm
     let updatedTo = slug.replace(regex, '');
@@ -115,7 +115,7 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
 
 
-        const src = track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`
+        const src = track.url.startsWith('http') ? track.url : `${endpoints.api_host}${track.url}`
 
         const toAdd: IMedia = (
             {
@@ -182,28 +182,32 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
         }
     } = {}
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
-        if (t.group) {
-            if (t.group.name !== 'Type' && t.group.name !== 'Format') {
-            }
-            if (sortedTags[t.group.name]) {
 
-                sortedTags[t.group.name].topics.push(toAdd)
+        if (t.noOfPosts > 0) {
+            const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
+            if (t.group) {
+                if (t.group.name !== 'Type' && t.group.name !== 'Format') {
+                }
+                if (sortedTags[t.group.name]) {
+
+                    sortedTags[t.group.name].topics.push(toAdd)
+                } else {
+                    sortedTags[t.group.name] =
+                    {
+                        info: { name: t.group.name, to: t.group.slug },
+                        topics: [toAdd]
+                    }
+
+                }
             } else {
-                sortedTags[t.group.name] =
+                sortedTags['Unknown'] =
                 {
-                    info: { name: t.group.name, to: t.group.slug },
+                    info: { name: '', to: '' },
                     topics: [toAdd]
                 }
-
-            }
-        } else {
-            sortedTags['Unknown'] =
-            {
-                info: { name: '', to: '' },
-                topics: [toAdd]
             }
         }
+
 
     })
 
@@ -319,7 +323,7 @@ export const normalizePostRes = (post: IPostRes) => {
             postItem.duration = { listen: secondesToMinutes(track.duration) }
         }
         media["audio"] = {
-            src: track.url.startsWith('http') ? track.url : `${process.env.API_HOST}${track.url}`,
+            src: track.url.startsWith('http') ? track.url : `${endpoints.api_host}${track.url}`,
             title: track.title,
             type: "audio",
             article: {

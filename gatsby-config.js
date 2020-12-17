@@ -1,5 +1,5 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
-
+const endpoints = require('./src/endpoints')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
@@ -90,7 +90,7 @@ const plugins = [
       // This is the field under which it's accessible
       fieldName: "ac",
       // URL to query from
-      url: process.env.API_URL,
+      url: endpoints.api_url,
       headers: {
         // Learn about environment variables: https://gatsby.dev/env-vars
         "x-lang": process.env.LANG_CODE
@@ -105,7 +105,7 @@ const plugins = [
       // This is the field under which it's accessible
       fieldName: "ac_node",
       // URL to query from
-      baseUrl: process.env.API_URL,
+      baseUrl: endpoints.api_url,
       headers: {
         "x-lang": process.env.LANG_CODE
       }
@@ -205,7 +205,7 @@ if (activeEnv === 'production') {
     }
   )
 
-  if(process.env.LANG_CODE==="en"){
+  if(process.env.LANG_CODE==="en" || process.env.NO_FOLLOW==="true"){
     plugins.push({
       resolve: 'gatsby-plugin-robots-txt',
       options: {
