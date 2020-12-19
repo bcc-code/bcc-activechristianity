@@ -10,10 +10,6 @@ export const homeUrls: INavItem[] = languages.map((item) => ({
     to: item.url
 }));
 
-interface IRemappedTUrl {
-    [key: string]: string
-}
-
 interface TURLStateAction {
     dispatch: Dispatch
     payload: ADD_T_URLS_Payload

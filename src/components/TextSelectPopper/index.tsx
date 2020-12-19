@@ -23,19 +23,19 @@ const TextSelectPopper: React.FC<{ className?: string, slug: string, title: stri
     const handleMouseUp = (e: any) => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             // true for mobile device
-            if (navigator.share) {
-                navigator.share({
-                    title,
-                    url: options.shareUrl,
-                    text: shareText
-                }).then(() => {
-                    console.log('Thanks for sharing!');
-                })
-                    .catch(console.error);
-            } else {
-                e.preventDefault();
-                handleSelectedText(e)
-            }
+            /*             if (navigator.share) {
+                            navigator.share({
+                                title,
+                                url: options.shareUrl,
+                                text: shareText
+                            }).then(() => {
+                                console.log('Thanks for sharing!');
+                            })
+                                .catch(console.error);
+                        } else {
+                            e.preventDefault();
+                            handleSelectedText(e)
+                        } */
         } else {
             // false for not mobile device
             e.preventDefault();

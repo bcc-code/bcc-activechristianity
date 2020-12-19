@@ -2,7 +2,7 @@
   {
     "lang": "Dansk",
     "locale": "da",
-    "title": "Aktiv Kristendom",
+    "title": "AktivKristendom",
     "url": "https://aktivkristendom.dk/"
   },
   {
@@ -69,7 +69,7 @@
     "lang": "Nederlands",
     "locale": "nl",
     "title": "Christen Zijn",
-    "url": "https://christenzijn.nl/"
+    "url": "https://christenzijn.nl"
   },
   {
     "lang": "Polski",
@@ -99,6 +99,6 @@
     "lang": "Svenska",
     "locale": "sv",
     "title": "AktivKristendom",
-    "url": "https://aktivkristendom.se/"
+    "url": "https://aktivkristendom.se"
   }
 ]

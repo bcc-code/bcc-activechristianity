@@ -31,7 +31,7 @@ const Watch: React.FC<IProps> = (props) => {
     }, [])
     return (
         <div>
-            <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={[]} path={path} />
+            <MetaTag title={title} type="page" breadcrumb={[]} path={path} />
             <div className="hidden sm:block standard-max-w">
                 <LayoutH1Wide title={title} />
                 <div className="px-4">

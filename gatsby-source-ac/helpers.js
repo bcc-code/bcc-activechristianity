@@ -113,6 +113,7 @@ const sendQuery = (query, baseUrl,headers) => {
         .then(response => response.json())
         .then((gqlResponse) => {
             if (gqlResponse.errors) {
+                console.log(query)
                 console.error(gqlResponse.errors.map(errorMessage).join(' & '));
                 throw new Error (gqlResponse.errors.map(errorMessage))
             }

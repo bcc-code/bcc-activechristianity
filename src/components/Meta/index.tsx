@@ -7,6 +7,7 @@ import { htmlTags2PlainText } from '@/helpers'
 import { Location } from '@reach/router'
 import { IRootState } from '@/state/types'
 import ac_strings from "@/strings/ac_strings.js"
+import translatedSlugs from '@/strings/translated_slugs.json'
 import { INavItem, ITranslations } from '@/types'
 
 function shorten(str: string, length: number) {
@@ -50,8 +51,14 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
     }
 
     useEffect(() => {
+        const slug = path?.replace('/', '')
+        console.log(translatedUrls)
+        console.log(slug)
+        console.log(translatedSlugs[slug])
         if (translatedUrls) {
             dispatch(updateTranslationUrl({ translated: translatedUrls }))
+        } else if (slug && translatedSlugs[slug]) {
+            dispatch(updateTranslationUrl({ translated: translatedSlugs[slug] }))
         } else {
             dispatch(updateTranslationUrl({ translated: [] }))
         }

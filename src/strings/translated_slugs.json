@@ -1,1350 +1,1614 @@
 {
-  "rolunk": [
+  "om-oss": [
     {
       "lang": "en",
-      "url": "about-us"
+      "slug": "about-us"
     },
     {
       "lang": "nb",
-      "url": "om-oss"
+      "slug": "om-oss"
     },
     {
       "lang": "es",
-      "url": "acerca-de-nosotros"
+      "slug": "acerca-de-nosotros"
     },
     {
       "lang": "fr",
-      "url": "a-propos-de-nous"
+      "slug": "a-propos-de-nous"
     },
     {
       "lang": "fi",
-      "url": "meistä"
+      "slug": "meistä"
     },
     {
       "lang": "hu",
-      "url": "rolunk"
+      "slug": "rolunk"
     },
     {
       "lang": "it",
-      "url": "chi-siamo"
+      "slug": "chi-siamo"
     },
     {
       "lang": "pl",
-      "url": "o-nas"
+      "slug": "o-nas"
     },
     {
       "lang": "pt-pt",
-      "url": "sobre-nos"
+      "slug": "sobre-nos"
     },
     {
       "lang": "ro",
-      "url": "despre-noi"
+      "slug": "despre-noi"
     },
     {
       "lang": "ru",
-      "url": "o-nas"
+      "slug": "o-nas"
     },
     {
       "lang": "sv",
-      "url": "om-oss"
+      "slug": "om-oss"
     },
     {
       "lang": "de",
-      "url": "über-uns"
+      "slug": "über-uns"
     },
     {
       "lang": "nl",
-      "url": "christelijke-gemeente-nederland"
+      "slug": "christelijke-gemeente-nederland"
     },
     {
       "lang": "da",
-      "url": "om-os"
+      "slug": "om-os"
     }
   ],
-  "kozremukodo": [
+  "bidragsyter": [
     {
       "lang": "en",
-      "url": "contributor"
+      "slug": "contributor"
     },
     {
       "lang": "nb",
-      "url": "bidragsyter"
+      "slug": "bidragsyter"
     },
     {
       "lang": "es",
-      "url": "colaborador"
+      "slug": "colaborador"
     },
     {
       "lang": "fr",
-      "url": "collaborateur"
+      "slug": "contributeur"
     },
     {
       "lang": "fi",
-      "url": "avustaja"
+      "slug": "avustaja"
     },
     {
       "lang": "hu",
-      "url": "kozremukodo"
+      "slug": "kozremukodo"
     },
     {
       "lang": "it",
-      "url": "autore"
+      "slug": "autore"
     },
     {
       "lang": "pl",
-      "url": "współautor"
+      "slug": "wspołautor"
     },
     {
       "lang": "pt-pt",
-      "url": "contribuinte"
+      "slug": "contribuinte"
     },
     {
       "lang": "ro",
-      "url": "autor"
+      "slug": "autor"
     },
     {
       "lang": "ru",
-      "url": "Otpravitelʹ"
+      "slug": "avtor"
     },
     {
       "lang": "sv",
-      "url": "bidragsgivare"
+      "slug": "bidragsgivare"
     },
     {
       "lang": "de",
-      "url": "mitwirkende"
+      "slug": "mitwirkende"
     },
     {
       "lang": "nl",
-      "url": "auteur"
+      "slug": "auteur"
     },
     {
       "lang": "da",
-      "url": "bidragsyder"
+      "slug": "bidragsyder"
     }
   ],
-  "fiok": [
+  "konto": [
     {
       "lang": "en",
-      "url": "account"
+      "slug": "account"
     },
     {
       "lang": "nb",
-      "url": "konto"
+      "slug": "konto"
     },
     {
       "lang": "es",
-      "url": "Cuenta"
+      "slug": "cuenta"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "compte"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "fiok"
+      "slug": "fiok"
     },
     {
       "lang": "it",
-      "url": "account"
+      "slug": "account"
     },
     {
       "lang": "pl",
-      "url": "konto"
+      "slug": "konto"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "conta"
     },
     {
       "lang": "ro",
-      "url": "Cont"
+      "slug": "cont"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "akkaunt"
     },
     {
       "lang": "sv",
-      "url": "konto"
+      "slug": "konto"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "account"
+    },
+    {
+      "lang": "da",
+      "slug": "konto"
     }
   ],
-  "kapcsolat": [
+  "kontakt": [
     {
       "lang": "en",
-      "url": "contact"
+      "slug": "contact"
     },
     {
       "lang": "nb",
-      "url": "kontakt"
+      "slug": "kontakt"
     },
     {
       "lang": "es",
-      "url": "Contacto"
+      "slug": "contacto"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "contact"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "kapcsolat"
+      "slug": "kapcsolat"
     },
     {
       "lang": "it",
-      "url": "contatto"
+      "slug": "contatto"
     },
     {
       "lang": "pl",
-      "url": "kontakt"
+      "slug": "kontakt"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "contato"
     },
     {
       "lang": "ro",
-      "url": "Contact"
+      "slug": "contact"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "kontakt"
     },
     {
       "lang": "sv",
-      "url": "kontakt"
+      "slug": "kontakt"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "contact"
+    },
+    {
+      "lang": "da",
+      "slug": "kontakt"
     }
   ],
-  "cookie-iranyelvek": [
+  "cookie-policy": [
     {
       "lang": "en",
-      "url": "cookie-policy"
+      "slug": "cookie-policy"
     },
     {
       "lang": "nb",
-      "url": "cookie-policy"
+      "slug": "cookie-policy"
     },
     {
       "lang": "es",
-      "url": "política-de-cookie"
+      "slug": "cookie-policy"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "cookie-policy"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": "cookie-policy"
     },
     {
       "lang": "hu",
-      "url": "cookie-iranyelvek"
+      "slug": "cookie-policy"
     },
     {
       "lang": "it",
-      "url": "gestione-cookie"
+      "slug": "cookie-policy"
     },
     {
       "lang": "pl",
-      "url": "polityka-cookie"
+      "slug": "cookie-policy"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "cookie-policy"
     },
     {
       "lang": "ro",
-      "url": "politica-de-coockie"
+      "slug": "cookie-policy"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "cookie-policy"
     },
     {
       "lang": "sv",
-      "url": "cookie-policy"
+      "slug": "cookie-policy"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "cookie-policy"
+    },
+    {
+      "lang": "da",
+      "slug": "cookie-policy"
     }
   ],
-  "e-konyv": [
+  "e-bok": [
     {
       "lang": "en",
-      "url": "e-book"
+      "slug": "e-book"
     },
     {
       "lang": "nb",
-      "url": "e-bok"
+      "slug": "e-bok"
     },
     {
       "lang": "es",
-      "url": "e-book"
+      "slug": "e-book"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "e-book"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "e-konyv"
+      "slug": "e-konyv"
     },
     {
       "lang": "it",
-      "url": "e-book"
+      "slug": "e-book"
     },
     {
       "lang": "pl",
-      "url": "E-Book"
+      "slug": "e-book"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "e-book"
     },
     {
       "lang": "ro",
-      "url": "e-book"
+      "slug": "e-book"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "elkniga"
     },
     {
       "lang": "sv",
-      "url": "e-bok"
+      "slug": "e-bok"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "e-book"
+    },
+    {
+      "lang": "da",
+      "slug": "e-bog"
     }
   ],
-  "felfedezes": [
+  "utforsk": [
     {
       "lang": "en",
-      "url": "explore"
+      "slug": "explore"
     },
     {
       "lang": "nb",
-      "url": "utforsk"
+      "slug": "utforsk"
     },
     {
       "lang": "es",
-      "url": "Explorar"
+      "slug": "explorar"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "explorer"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "felfedezes"
+      "slug": "felfedezes"
     },
     {
       "lang": "it",
-      "url": "esplora"
+      "slug": "esplora"
     },
     {
       "lang": "pl",
-      "url": "odkryj"
+      "slug": "odkryj"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "explorar"
     },
     {
       "lang": "ro",
-      "url": "explorează"
+      "slug": "exploreaza"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "izuchi"
     },
     {
       "lang": "sv",
-      "url": "utforska"
+      "slug": "utforska"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "verken"
+    },
+    {
+      "lang": "da",
+      "slug": "udforsk"
     }
   ],
-  "szojegyzek": [
+  "ordliste": [
     {
       "lang": "en",
-      "url": "glossary"
+      "slug": "glossary"
     },
     {
       "lang": "nb",
-      "url": "ordliste"
+      "slug": "ordliste"
     },
     {
       "lang": "es",
-      "url": "Glosario"
+      "slug": "glosario"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "glossaire"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "szojegyzek"
+      "slug": "szojegyzek"
     },
     {
       "lang": "it",
-      "url": "glossario"
+      "slug": "glossario"
     },
     {
       "lang": "pl",
-      "url": "słowniczek"
+      "slug": "słowniczek"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "dicionario"
     },
     {
       "lang": "ro",
-      "url": "glosar"
+      "slug": "glosar"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "slovar"
     },
     {
       "lang": "sv",
-      "url": "ordlista"
+      "slug": "ordlista"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "woordenlijst"
+    },
+    {
+      "lang": "da",
+      "slug": "Ordliste"
     }
   ],
-  "musorvezeto": [
+  "vert": [
     {
       "lang": "en",
-      "url": "host"
+      "slug": "host"
     },
     {
       "lang": "nb",
-      "url": "vert"
+      "slug": "vert"
     },
     {
       "lang": "es",
-      "url": "Anfitrión"
+      "slug": "anfitrion"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "animateur "
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "musorvezeto"
+      "slug": "musorvezeto"
     },
     {
       "lang": "it",
-      "url": "host"
+      "slug": "host"
     },
     {
       "lang": "pl",
-      "url": "gospodarz"
+      "slug": "gospodarz"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "hospedeiro"
     },
     {
       "lang": "ro",
-      "url": "host"
+      "slug": "host"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "khozyain"
     },
     {
       "lang": "sv",
-      "url": "värd"
+      "slug": "vard"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "host"
+    },
+    {
+      "lang": "da",
+      "slug": "vært"
     }
   ],
-  "legujabb": [
+  "nyeste": [
     {
       "lang": "en",
-      "url": "latest"
+      "slug": "latest"
     },
     {
       "lang": "nb",
-      "url": "nyeste"
+      "slug": "nyeste"
     },
     {
       "lang": "es",
-      "url": "Novedades"
+      "slug": "novedades"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "le-plus-recent"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "legujabb"
+      "slug": "legujabb"
     },
     {
       "lang": "it",
-      "url": "ultimo"
+      "slug": "ultimo"
     },
     {
       "lang": "pl",
-      "url": "najnowsze"
+      "slug": "najnowsze"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "ultimo"
     },
     {
       "lang": "ro",
-      "url": "ultimele"
+      "slug": "ultimele"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "novyye"
     },
     {
       "lang": "sv",
-      "url": "senaste"
+      "slug": "senaste"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "laatste"
+    },
+    {
+      "lang": "da",
+      "slug": "seneste"
     }
   ],
-  "hallgatas": [
+  "lytt": [
     {
       "lang": "en",
-      "url": "listen"
+      "slug": "listen"
     },
     {
       "lang": "nb",
-      "url": "lytt"
+      "slug": "lytt"
     },
     {
       "lang": "es",
-      "url": "Escucha"
+      "slug": "escucha"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "ecouter"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "hallgatas"
+      "slug": "hallgatas"
     },
     {
       "lang": "it",
-      "url": "ascolta"
+      "slug": "ascolta"
     },
     {
       "lang": "pl",
-      "url": "posłuchaj"
+      "slug": "posłuchaj"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "ouca"
     },
     {
       "lang": "ro",
-      "url": "ascultă"
+      "slug": "asculta"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "proslushat"
     },
     {
       "lang": "sv",
-      "url": "lyssna"
+      "slug": "lyssna"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "luister"
+    },
+    {
+      "lang": "da",
+      "slug": "lyt"
     }
   ],
-  "bejelentkezes": [
+  "logg-pa": [
     {
       "lang": "en",
-      "url": "login"
+      "slug": "login"
     },
     {
       "lang": "nb",
-      "url": "logg-pa"
+      "slug": "logg-pa"
     },
     {
       "lang": "es",
-      "url": "Iniciar sesión"
+      "slug": "iniciar-sesion"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "se-connecter"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "bejelentkezes"
+      "slug": "bejelentkezes"
     },
     {
       "lang": "it",
-      "url": "login"
+      "slug": "login"
     },
     {
       "lang": "pl",
-      "url": "zaloguj"
+      "slug": "zaloguj"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "login"
     },
     {
       "lang": "ro",
-      "url": "loghează-te"
+      "slug": "logheaza-te"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "voyti"
     },
     {
       "lang": "sv",
-      "url": "inloggning"
+      "slug": "inloggning"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "login"
+    },
+    {
+      "lang": "da",
+      "slug": "log ind"
     }
   ],
   "FALSE": [
     {
       "lang": "en",
-      "url": "scripture"
+      "slug": "scripture"
     },
     {
       "lang": "nb",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "es",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "fr",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "fi",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "hu",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "it",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "pl",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "pt-pt",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "ro",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "ru",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "sv",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "de",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "nl",
-      "url": "FALSE"
+      "slug": "FALSE"
     },
     {
       "lang": "da",
-      "url": "FALSE"
+      "slug": "FALSE"
     }
   ],
-  "elni-az-evangeliumot-intro": [
+  "living-the-gospel-intro": [
     {
       "lang": "en",
-      "url": "living-the-gospel-intro"
+      "slug": "living-the-gospel-intro"
     },
     {
       "lang": "nb",
-      "url": "living-the-gospel-intro"
+      "slug": "living-the-gospel-intro"
     },
     {
       "lang": "es",
-      "url": "living-the-gospel-intro"
+      "slug": "living-the-gospel-intro"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "living-the-gospel-intro"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "elni-az-evangeliumot-intro"
+      "slug": "elni-az-evangeliumot-intro"
     },
     {
       "lang": "it",
-      "url": "vivere-il-vangelo-intro"
+      "slug": "vivere-il-vangelo-intro"
     },
     {
       "lang": "pl",
-      "url": "życie-wg.ewangelii-wstęp"
+      "slug": "zycie-wg-ewangelii-wstep"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "Introducao-vivendo-o-evangelho"
     },
     {
       "lang": "ro",
-      "url": "living-the-gospel-intro"
+      "slug": "living-the-gospel-intro"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "zhizn-s-yevangeliyem-vstupleniye"
     },
     {
       "lang": "sv",
-      "url": "living-the-gospel-intro"
+      "slug": "living-the-gospel-intro"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "leef-het-evangelie-intro"
+    },
+    {
+      "lang": "da",
+      "slug": "living-the-gospel-intro"
     }
   ],
-  "adatvedelmi-iranyelvek": [
+  "privacy-policy": [
     {
       "lang": "en",
-      "url": "privacy-policy"
+      "slug": "privacy-policy"
     },
     {
       "lang": "nb",
-      "url": "personvernerklæring"
+      "slug": "privacy-policy"
     },
     {
       "lang": "es",
-      "url": "política-de-privacidad"
+      "slug": "privacy-policy"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "privacy-policy"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": "privacy-policy"
     },
     {
       "lang": "hu",
-      "url": "adatvedelmi-iranyelvek"
+      "slug": "privacy-policy"
     },
     {
       "lang": "it",
-      "url": "gestione-riservatezza"
+      "slug": "privacy-policy"
     },
     {
       "lang": "pl",
-      "url": "polityka-prywatności"
+      "slug": "privacy-policy"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "privacy-policy"
     },
     {
       "lang": "ro",
-      "url": "politica-de-confidentialitate"
+      "slug": "privacy-policy"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "privacy-policy"
     },
     {
       "lang": "sv",
-      "url": "Sekretesspolicy"
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "de",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "nl",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "da",
+      "slug": "privacy-policy"
     }
   ],
-  "olvas": [
+  "les": [
     {
       "lang": "en",
-      "url": "read"
+      "slug": "read"
     },
     {
       "lang": "nb",
-      "url": "les"
+      "slug": "les"
     },
     {
       "lang": "es",
-      "url": "Leer"
+      "slug": "leer"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "lire"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "olvas"
+      "slug": "olvas"
     },
     {
       "lang": "it",
-      "url": "leggi"
+      "slug": "leggi"
     },
     {
       "lang": "pl",
-      "url": "przeczytaj"
+      "slug": "przeczytaj"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "ler"
     },
     {
       "lang": "ro",
-      "url": "citește"
+      "slug": "citeste"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "prochitat"
     },
     {
       "lang": "sv",
-      "url": "läsa"
+      "slug": "las"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "lees"
+    },
+    {
+      "lang": "da",
+      "slug": "læs"
     }
   ],
-  "regisztracio": [
+  "register": [
     {
       "lang": "en",
-      "url": "register"
+      "slug": "register"
     },
     {
       "lang": "nb",
-      "url": "register"
+      "slug": "register"
     },
     {
       "lang": "es",
-      "url": "Registrarse"
+      "slug": "registrarse"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "sincrire "
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "regisztracio"
+      "slug": "regisztracio"
     },
     {
       "lang": "it",
-      "url": "registra"
+      "slug": "registra"
     },
     {
       "lang": "pl",
-      "url": "zarejestruj"
+      "slug": "zarejestruj"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "registrar-se"
     },
     {
       "lang": "ro",
-      "url": "înregistrează-te"
+      "slug": "inregistreaza-te"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "zaregistrirovat'sya"
     },
     {
       "lang": "sv",
-      "url": "registrera dig"
+      "slug": "registrera dig"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "Registreer"
+    },
+    {
+      "lang": "da",
+      "slug": "opret dig"
     }
   ],
   "tema": [
     {
       "lang": "en",
-      "url": "topic"
+      "slug": "topic"
     },
     {
       "lang": "nb",
-      "url": "tema"
+      "slug": "tema"
     },
     {
       "lang": "es",
-      "url": "Tema"
+      "slug": "tema"
     },
     {
       "lang": "fr",
-      "url": "thème"
+      "slug": "theme"
     },
     {
       "lang": "fi",
-      "url": "teemat"
+      "slug": "teemat"
     },
     {
       "lang": "hu",
-      "url": "tema"
+      "slug": "tema"
     },
     {
       "lang": "it",
-      "url": "argomento"
+      "slug": "argomento"
     },
     {
       "lang": "pl",
-      "url": "temat"
+      "slug": "temat"
     },
     {
       "lang": "pt-pt",
-      "url": "topicos"
+      "slug": "topicos"
     },
     {
       "lang": "ro",
-      "url": "topică"
+      "slug": "topica"
     },
     {
       "lang": "ru",
-      "url": "temy"
+      "slug": "tema"
     },
     {
       "lang": "sv",
-      "url": "tema"
+      "slug": "tema"
     },
     {
       "lang": "de",
-      "url": "thema"
+      "slug": "thema"
     },
     {
       "lang": "nl",
-      "url": "onderwerpen"
+      "slug": "onderwerpen"
     },
     {
       "lang": "da",
-      "url": "temaer"
+      "slug": "temaer"
     }
   ],
-  "felhasznalo": [
+  "user": [
     {
       "lang": "en",
-      "url": "user"
+      "slug": "user"
     },
     {
       "lang": "nb",
-      "url": "user"
+      "slug": "user"
     },
     {
       "lang": "es",
-      "url": "Usuario"
+      "slug": "usuario"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "utilisateur"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "felhasznalo"
+      "slug": "felhasznalo"
     },
     {
       "lang": "it",
-      "url": "utente"
+      "slug": "utente"
     },
     {
       "lang": "pl",
-      "url": "użytkownik"
+      "slug": "uzytkownik"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "usuario"
     },
     {
       "lang": "ro",
-      "url": "utilizator"
+      "slug": "utilizator"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "polzovatel"
     },
     {
       "lang": "sv",
-      "url": "användare"
+      "slug": "anvandare"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "gebruiker"
+    },
+    {
+      "lang": "da",
+      "slug": "bruger"
     }
   ],
-  "konyvjelzo-mentve": [
+  "merket": [
     {
       "lang": "en",
-      "url": "bookmarked"
+      "slug": "bookmarked"
     },
     {
       "lang": "nb",
-      "url": "merket"
+      "slug": "merket"
     },
     {
       "lang": "es",
-      "url": "Guardado"
+      "slug": "guardado"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "ajoute-en-favoris"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "konyvjelzo-mentve"
+      "slug": "konyvjelzo-mentve"
     },
     {
       "lang": "it",
-      "url": "preferiti"
+      "slug": "preferiti"
     },
     {
       "lang": "pl",
-      "url": "dodano do zakładek"
+      "slug": "dodano-do-zakładek"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "selecionado"
     },
     {
       "lang": "ro",
-      "url": "marcat"
+      "slug": "marcat"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "dobvleno-v-zakladki"
     },
     {
       "lang": "sv",
-      "url": "bokmärkt"
+      "slug": "bokmarkt"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "bewaard"
+    },
+    {
+      "lang": "da",
+      "slug": "bogmærket"
     }
   ],
-  "jelszo": [
+  "endre-passord": [
     {
       "lang": "en",
-      "url": "password"
+      "slug": "password"
     },
     {
       "lang": "nb",
-      "url": "endre-passord"
+      "slug": "endre-passord"
     },
     {
       "lang": "es",
-      "url": "Contraseña"
+      "slug": "contraseña"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "mot-de-passe"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "jelszo"
+      "slug": "jelszo"
     },
     {
       "lang": "it",
-      "url": "password"
+      "slug": "password"
     },
     {
       "lang": "pl",
-      "url": "hasło"
+      "slug": "hasło"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "senha"
     },
     {
       "lang": "ro",
-      "url": "parolă"
+      "slug": "parola"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "parol"
     },
     {
       "lang": "sv",
-      "url": "lösenord"
+      "slug": "losenord"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "wachtwoord"
+    },
+    {
+      "lang": "da",
+      "slug": "password"
     }
   ],
-  "sajat-tartalom": [
+  "mitt-innhold": [
     {
       "lang": "en",
-      "url": "my-content"
+      "slug": "my-content"
     },
     {
       "lang": "nb",
-      "url": "mitt-innhold"
+      "slug": "mitt-innhold"
     },
     {
       "lang": "es",
-      "url": "Mi contenido "
+      "slug": "mi-contenido "
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "mon-contenu"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "sajat-tartalom"
+      "slug": "sajat-tartalom"
     },
     {
       "lang": "it",
-      "url": "il-mio-contenuto"
+      "slug": "il-mio-contenuto"
     },
     {
       "lang": "pl",
-      "url": "moje-treści"
+      "slug": "moje-tresci"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "minha-conta"
     },
     {
       "lang": "ro",
-      "url": "continutul-meu"
+      "slug": "continutul-meu"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "moyo-soderzhaniye"
     },
     {
       "lang": "sv",
-      "url": "mitt-innehåll"
+      "slug": "mitt-innehall"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "mijn-inhoud"
+    },
+    {
+      "lang": "da",
+      "slug": "mit-indhold"
     }
   ],
-  "profil-torlese": [
+  "slett-profil": [
     {
       "lang": "en",
-      "url": "delete-profile"
+      "slug": "delete-profile"
     },
     {
       "lang": "nb",
-      "url": "slett-profil"
+      "slug": "slett-profil"
     },
     {
       "lang": "es",
-      "url": "Borrar cuenta"
+      "slug": "borrar-cuenta"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "Supprimer-mon-profil"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "profil-torlese"
+      "slug": "profil-torlese"
     },
     {
       "lang": "it",
-      "url": "elimina-profilo"
+      "slug": "elimina-profilo"
     },
     {
       "lang": "pl",
-      "url": "usuń-profil"
+      "slug": "usun-profil"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "deletar-perfil"
     },
     {
       "lang": "ro",
-      "url": "sterge-profil"
+      "slug": "sterge-profil"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "udalit-profil"
     },
     {
       "lang": "sv",
-      "url": "radera-profil"
+      "slug": "radera-profil"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "verwijder-profiel"
+    },
+    {
+      "lang": "da",
+      "slug": "slet-profil"
     }
   ],
-  "kovetem": [
+  "folger": [
     {
       "lang": "en",
-      "url": "followed"
+      "slug": "followed"
     },
     {
       "lang": "nb",
-      "url": "folger"
+      "slug": "folger"
     },
     {
       "lang": "es",
-      "url": "Seguido"
+      "slug": "seguido"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "suivis"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "kovetem"
+      "slug": "kovetem"
     },
     {
       "lang": "it",
-      "url": "seguito"
+      "slug": "seguito"
     },
     {
       "lang": "pl",
-      "url": "obserwowane"
+      "slug": "obserwowane"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "seguindo"
     },
     {
       "lang": "ro",
-      "url": "urmarit"
+      "slug": "urmarit"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "podpisan"
     },
     {
       "lang": "sv",
-      "url": "följer"
+      "slug": "foljer"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "gevolgd"
+    },
+    {
+      "lang": "da",
+      "slug": "følger"
     }
   ],
-  "elozmenyek": [
+  "historikk": [
     {
       "lang": "en",
-      "url": "history"
+      "slug": "history"
     },
     {
       "lang": "nb",
-      "url": "historikk"
+      "slug": "historikk"
     },
     {
       "lang": "es",
-      "url": "Historial"
+      "slug": "historial"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "historique"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "elozmenyek"
+      "slug": "elozmenyek"
     },
     {
       "lang": "it",
-      "url": "storia"
+      "slug": "storia"
     },
     {
       "lang": "pl",
-      "url": "historia"
+      "slug": "historia"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "historia"
     },
     {
       "lang": "ro",
-      "url": "istorie"
+      "slug": "istorie"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "istoriya"
     },
     {
       "lang": "sv",
-      "url": "historik"
+      "slug": "historik"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "geschiedenis"
+    },
+    {
+      "lang": "da",
+      "slug": "historik"
     }
   ],
-  "megtekintes": [
+  "se-paa": [
     {
       "lang": "en",
-      "url": "watch"
+      "slug": "watch"
     },
     {
       "lang": "nb",
-      "url": "se-paa"
+      "slug": "se-paa"
     },
     {
       "lang": "es",
-      "url": "Ver"
+      "slug": "ver"
     },
     {
       "lang": "fr",
-      "url": ""
+      "slug": "visionner"
     },
     {
       "lang": "fi",
-      "url": ""
+      "slug": ""
     },
     {
       "lang": "hu",
-      "url": "megtekintes"
+      "slug": "megtekintes"
     },
     {
       "lang": "it",
-      "url": "guarda"
+      "slug": "guarda"
     },
     {
       "lang": "pl",
-      "url": "obejrzyj"
+      "slug": "obejrzyj"
     },
     {
       "lang": "pt-pt",
-      "url": ""
+      "slug": "veja"
     },
     {
       "lang": "ro",
-      "url": "vizioneaza"
+      "slug": "vizioneaza"
     },
     {
       "lang": "ru",
-      "url": ""
+      "slug": "posmotri"
     },
     {
       "lang": "sv",
-      "url": "se"
+      "slug": "se"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "bekijk"
+    },
+    {
+      "lang": "da",
+      "slug": "se"
     }
   ]
 }

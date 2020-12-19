@@ -40,7 +40,6 @@ const Read: React.FC<IProps> = (props) => {
         <div>
             <MetaTag
                 title={title}
-                translatedUrls={[]}
                 type="page"
                 breadcrumb={[]}
                 path={path}

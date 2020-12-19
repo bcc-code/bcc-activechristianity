@@ -61,6 +61,7 @@ export function initials(name: string) {
 
 
 export const normalizeAvailableLanguages = (langs: ITranslations[], showAllLanguages: boolean) => {
+    console.log(langs)
     let translatedLinks: INavItem[] = []
     languages.forEach(item => {
         const find = langs.find(l => l.lang === item.locale)

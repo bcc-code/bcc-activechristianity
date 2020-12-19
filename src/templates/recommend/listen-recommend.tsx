@@ -52,7 +52,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     return (
         <div >
-            <MetaTag title={title} translatedUrls={[]} breadcrumb={[]} type="page" path={path} />
+            <MetaTag title={title} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
                 {ac_strings.slug_podcast && hasPodcast && (

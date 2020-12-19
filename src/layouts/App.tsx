@@ -120,7 +120,10 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isModalOpen,
         isSignInModalOpen
     ])
-    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
+    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => {
+        console.log(item)
+        return ({ ...menusItems[item], icon: iconMapNav[item] })
+    })
     if (auth.loggedIn !== "success") {
         mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
     } else {

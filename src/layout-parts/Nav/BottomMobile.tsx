@@ -17,116 +17,6 @@ interface IProps {
 }
 
 
-export const iconMapNav: {
-    [key: string]: {
-        selected: JSX.Element,
-        default: JSX.Element
-    }
-} = {
-    'home': {
-        selected: (
-            <Icon
-                name="Home"
-                color="slate-light"
-            />
-        ),
-        default: (
-            <Icon
-                name="Home"
-                color="slate-light"
-            />
-
-        )
-    },
-    'explore': {
-        selected: (
-            <Icon
-                name="Explore"
-                color="slate-light"
-            />
-
-
-        ),
-        default: (
-            <Icon
-                name="Explore"
-                color="slate-light"
-
-            />
-
-        )
-    },
-    'listen-recommend': {
-        selected: (
-            <Icon
-                name="Headset"
-                color="slate-light"
-            />
-
-
-
-        ),
-        default: (
-            <Icon
-                name="Headset"
-                color="slate-light"
-            />
-
-        )
-    },
-    'read-recommend': {
-        selected: (
-            <Icon
-                name="Description"
-                color="slate-light"
-            />
-
-
-        ),
-        default: (
-            <Icon
-                name="Description"
-                color="slate-light"
-            />
-
-
-        )
-    },
-    'watch-recommend': {
-        selected: (
-            <Icon
-                name="PlayCircleOutline"
-                color="slate-light"
-            />
-        ),
-        default: (
-            <Icon
-                name="PlayCircleOutline"
-                color="slate-light"
-            />
-
-        )
-    },
-    'my-content': {
-        selected: (
-            <Icon
-                name="Bookmarks"
-                color="slate-light"
-            />
-
-
-        ),
-        default: (
-            <Icon
-                name="Bookmarks"
-                color="slate-light"
-            />
-
-
-        )
-    }
-}
-
 const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu }) => {
 
     const handlePathClick = (path: string, name: string) => {
@@ -151,9 +41,8 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu })
 
                 <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
                     {menu.map((item, i) => {
-
+                        console.log(item)
                         return (
-
                             <Link
                                 key={i}
                                 to={item.to}

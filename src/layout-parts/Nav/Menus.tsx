@@ -36,7 +36,11 @@ export const menusItems = {
     "glossary": {
         name: ac_strings.glossary,
         to: ac_strings.slug_glossary
-    }
+    },
+    "topic": {
+        name: ac_strings.topic,
+        to: ac_strings.slug_topic
+    },
 }
 
 export const userMenuItems = {
@@ -65,11 +69,23 @@ export const userMenuItems = {
         to: `${slug_user}/${ac_strings.slug_user_content}`
     }
 }
+const getDesktopMenu = () => {
+    const listen = ["read", "listen", "watch", "explore"]
+    const withoutListen = ["read", "watch", "explore", "about"]
+    const menu = process.env.LANG_CODE === "en" ? listen : withoutListen
+    return menu.map(item => menusItems[item]);
+}
 
-export const desktopMenu = ["read", "listen", "watch", "explore"].map(item => menusItems[item]);
-export const mobileMenuBase = ["explore", "listen", "read", "watch",];
+const getMobileMenu = (withItems?: boolean) => {
+    const listen = ["explore", "read", "listen", "watch"]
+    const withoutListen = ["explore", "read", "watch", "topic"]
+    const menu = process.env.LANG_CODE === "en" ? listen : withoutListen
+    return withItems ? menu.map(item => menusItems[item]) : menu
+}
+export const desktopMenu = getDesktopMenu();
+export const mobileMenuBase = getMobileMenu();
 export const sideMenu = ["about", "contact"].map(item => menusItems[item]);
-export const sideResourceMenu = [...mobileMenuBase].map(item => menusItems[item]);
+export const sideResourceMenu = getMobileMenu(true)
 if (process.env.LOCALE === "en") {
     sideResourceMenu.push(menusItems.glossary)
 }
@@ -179,6 +195,24 @@ export const iconMapNav: {
         default: (
             <Icon
                 name="Bookmarks"
+                color="slate-light"
+            />
+
+
+        )
+    },
+    'topic': {
+        selected: (
+            <Icon
+                name="LocalOffer"
+                color="slate-light"
+            />
+
+
+        ),
+        default: (
+            <Icon
+                name="LocalOffer"
                 color="slate-light"
             />
 

@@ -74,13 +74,12 @@ const translationStrings =  async function() {
               const langSlugKey=locale_slug_map[locale_key]
               return {
                 lang:langSlugKey,
-                url:cols[i]}
+                slug:cols[i]}
             }).slice(1)
 
           }
           
         })
-/*         console.log(slugTranslatedUrl) */
 
         if (localeIndex > -1) {
           saveFile('./src/strings', `${envLocale}_ac_strings`, 'json', langsObj[envLocale])

@@ -24,7 +24,6 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
                 title={title}
                 type="page"
                 path={path}
-                translatedUrls={[]}
                 breadcrumb={[]}
             />
             <div className="standard-max-w-px mb-8">
@@ -41,7 +40,7 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
                     ))}
                 </div>} */}
             </div>
-            <div className="mt-8 sm:mt-16">
+            <div className="sm:mt-16">
                 <TaxonomyIndex groups={topicGroups} />
             </div>
 
