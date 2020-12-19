@@ -9,7 +9,7 @@ import ContactForm from '@/layout-parts/Form/Contact'
 
 const ContactPage = () => {
     const imageUrl = endpoints.contact_hero
-    const height = 150
+    const height = 190
     return (
         <div className="">
             <MetaTag title={ac_strings.contact} type="page" breadcrumb={[]} />
@@ -54,11 +54,11 @@ const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({
 
                 render={({ platforms }) => {
                     return (
-                        <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75">
+                        <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75 sm:py-4">
                             {platforms.map(item => {
                                 return (
-                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mx-2 flex items-center">
-                                        <div className="pr-2">{item.icon} </div><div>{item.name}</div>
+                                    <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">
+                                        <div className="sm:pr-2">{item.icon} </div><div className="hidden sm:block">{item.name}</div>
                                     </a>
                                 )
                             })}
