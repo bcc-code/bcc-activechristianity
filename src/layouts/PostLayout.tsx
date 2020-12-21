@@ -89,6 +89,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         const handleScroll = (e: any) => {
             if (lastScroll.current < Date.now()) {
                 lastScroll.current = Date.now() + 5000
+
+                if (id) {
+                    acApi
+                        .readingPost(id)
+                        .catch((err: any) => {
+                            console.log(err)
+                        })
+                }
             }
         }
         const debounceScroll = debounce(handleScroll, 1000)
