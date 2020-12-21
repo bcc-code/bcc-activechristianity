@@ -9,7 +9,7 @@ const _ = require('lodash')
 
 const buildTranslations = require('./generators/json/build-translations')
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions, plugins }) => {
+exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
         plugins.define({
