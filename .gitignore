@@ -1,6 +1,6 @@
 # Enviroments
 .env.production
-
+.env.*
 # Languages
 src/lang/*.json
 static/_redirects
