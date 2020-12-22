@@ -11,7 +11,7 @@ interface ISearchHistory {
 const SearchHistory: React.FC<ISearchHistory> = ({ searches, removeSearchHistory, useSearchHistory, clearSearchHistory }) => {
     return (
         <div className="p-4 bg-white min-h-screen">
-            <h6 className="font-semibold text-d4slate-dark pb-6">{ac_strings.recentSearches}</h6>
+            <h6 className="font-semibold text-ac-slate-dark pb-6">{ac_strings.recentSearches}</h6>
             {searches.length === 0 ? (
                 <div>
                     <p className="text-sm text-gray-800 pb-4">
@@ -37,7 +37,7 @@ const SearchHistory: React.FC<ISearchHistory> = ({ searches, removeSearchHistory
                     </div>
                 )}
             <button
-                className="text-d4black text-sm rounded-xl border border-d4gray py-2 px-4 w-content m-auto uppercase"
+                className="text-d4black text-sm rounded-xl border border-ac-gray py-2 px-4 w-content m-auto uppercase"
                 onClick={clearSearchHistory}
             >
                 {ac_strings.clearRecentSearches}

@@ -51,7 +51,7 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
                 color="slate-dark"
                 size="5"
             />
-            <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
+            <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
                 {read}
             </span>
         </span>
@@ -65,7 +65,7 @@ export const ReadIcon: React.FC<{ text?: string }> = ({ text }) => (
             color="slate-dark"
             size="5"
         />
-        <span className="text-xs sm:text-sm text-d4slate-dark px-2 whitespace-no-wrap">
+        <span className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap">
             {text ? text : ac_strings.read}
         </span>
     </div>
@@ -74,7 +74,7 @@ export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text
     return (
         <div className="">
             {playing ? (
-                <div className="flex items-center bg-d4slate-dark  rounded-full py-1 px-2">
+                <div className="flex items-center bg-ac-slate-dark  rounded-full py-1 px-2">
                     <Icon
                         name="Equalizer"
                         size="5"
@@ -86,13 +86,13 @@ export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text
                 </div>
             ) : (
 
-                    <div className="flex items-center rounded-full bg-d4slate-lighter py-1 px-2">
+                    <div className="flex items-center rounded-full bg-ac-slate-lighter py-1 px-2">
                         <Icon
                             name="PlayCircleOutline"
                             color="slate-dark"
                             size="5"
                         />
-                        <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
+                        <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
                             {text ? text : ac_strings.listen}
                         </span>
                     </div>
@@ -145,7 +145,7 @@ export const Views: React.FC<{ views: string }> = ({ views }) => {
                 color="slate-dark"
                 size="5"
             />
-            <span className="text-xs sm:text-sm text-d4slate-dark pl-2 whitespace-no-wrap">
+            <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
                 {views}
             </span>
         </div>
@@ -162,7 +162,7 @@ export const BookmarksAndViews: React.FC<ILikesViewsProps> = (props) => {
                         color="slate-dark"
                         size="5"
                     />
-                    <span className="text-xs sm:text-sm text-d4slate-dark pl-2">
+                    <span className="text-xs sm:text-sm text-ac-slate-dark pl-2">
                         {views}
                     </span>
                 </div>

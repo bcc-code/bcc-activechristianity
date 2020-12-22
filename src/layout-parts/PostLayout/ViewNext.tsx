@@ -239,7 +239,7 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
     )
     return (
 
-        <div className={`fixed xl:relative transition-all duration-1000 flex flex-col bg-d4slate-lighter veiw-next-wrapper ${showViewMore ? 'veiw-next-show' : 'veiw-next-hidden'}`}>
+        <div className={`fixed xl:relative transition-all duration-1000 flex flex-col bg-ac-slate-lighter veiw-next-wrapper ${showViewMore ? 'veiw-next-show' : 'veiw-next-hidden'}`}>
             {/*             <ShareBookmarkTopShortCuts
                 isPlayingAudio={isPlayingAudio}
                 id={id}
@@ -327,7 +327,7 @@ const SeriesIndex = (data: { title: string, posts: { title: string, slug: string
             </div>
             {posts.map((item) => {
                 return (
-                    <Link to={item.slug} className="pb-4 text-d4slate-light text-sm">
+                    <Link to={item.slug} className="pb-4 text-ac-slate-light text-sm">
                         {item.title}
                     </Link >
                 )
@@ -391,7 +391,7 @@ export const TopicWithPost = (data: { post: IPostItem, topic: ITopic }) => {
                 </Link>
                 <div className="flex-1 p-2">
                     <Link to={topic.slug} className="block uppercase font-roboto text-gray-500 text-xs tracking-wider pb-2">
-                        More from <span className="font-bold text-d4secondary">{topic.name}</span>
+                        More from <span className="font-bold text-ac-secondary">{topic.name}</span>
                     </Link>
                     <Link to={post.slug} className="text-sm">
                         <TextSizeTitle

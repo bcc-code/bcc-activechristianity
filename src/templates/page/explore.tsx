@@ -121,7 +121,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
         >
             <MetaTag title={title} type="page" breadcrumb={[]} />
             <div
-                className={`bg-d4gray-light pb-8 relative`}
+                className={`bg-ac-gray-light pb-8 relative`}
             >
                 <div className={`max-w-tablet m-auto`}>
                     {isInputFocus === false && (

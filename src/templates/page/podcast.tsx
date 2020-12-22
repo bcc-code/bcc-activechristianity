@@ -38,7 +38,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
                     <div className="p-4">
 
                         <Link
-                            className="inline-block bg-white rounded-full text-d4slate-dark px-4 py-2 font-semibold mb-4"
+                            className="inline-block bg-white rounded-full text-ac-slate-dark px-4 py-2 font-semibold mb-4"
                             to={ac_strings.slug_podcast_intro}
                         >
                             {ac_strings.learn_more}

@@ -25,7 +25,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
             <div className="w-full sm:flex justify-center text-gray-500 font-roboto">
                 <div className="hidden sm:block">
                     {currentPage !== 1 && (
-                        <button className="bg-d4slate-lighter rounded  p-2 mr-2"
+                        <button className="bg-ac-slate-lighter rounded  p-2 mr-2"
                             onClick={() => onChange(currentPage - 1)}
                             onKeyDown={() => onChange(currentPage - 1)}
                         >
@@ -50,7 +50,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
                             return (
                                 <button
                                     onClick={() => onChange(index + 1)}
-                                    className={`${index === currentPage - 1 ? 'bg-d4slate-dark font-bold text-white rounded' : ''} w-12 h-12 `}
+                                    className={`${index === currentPage - 1 ? 'bg-ac-slate-dark font-bold text-white rounded' : ''} w-12 h-12 `}
 
                                 >
                                     {index + 1}
@@ -71,7 +71,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
                         </button>
                     )}
                     {currentPage !== totalPages && (
-                        <button className="bg-d4slate-lighter rounded  p-2"
+                        <button className="bg-ac-slate-lighter rounded  p-2"
                             onChange={() => onChange(currentPage + 1)}
                             onKeyDown={() => onChange(currentPage + 1)}
                         >

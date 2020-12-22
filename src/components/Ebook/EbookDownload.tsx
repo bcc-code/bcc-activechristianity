@@ -55,7 +55,7 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
             for (let i = 0; i < links.length; i++) {
                 const k = 2 * i + 1;
                 if (textArray[k] !== undefined) {
-                    textArray[k] = <button className="text-d4secondary" key={i} onClick={handleSignsin}>{textArray[k]}</button>
+                    textArray[k] = <button className="text-ac-secondary" key={i} onClick={handleSignsin}>{textArray[k]}</button>
                 }
             };
             return textArray.map(item => item);
@@ -136,7 +136,7 @@ const EbookDownload: React.FC<IEbookDOwnload> = ({ languageOptions, previewImage
     )
 
     return (
-        <div className="w-full flex items-center justify-center text-xs sm:text-base pt-4 sm:w-auto text-d4secondary font-bold opacity-75 sm:opacity-100">
+        <div className="w-full flex items-center justify-center text-xs sm:text-base pt-4 sm:w-auto text-ac-secondary font-bold opacity-75 sm:opacity-100">
             {previewModal}
             {downloadModal}
         </div>

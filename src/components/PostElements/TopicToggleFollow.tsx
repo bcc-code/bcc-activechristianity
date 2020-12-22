@@ -9,17 +9,17 @@ import ac_strings from '@/strings/ac_strings.js'
 import shortid from 'shortid'
 export const toggleFollowStatusMap = {
     "loading": {
-        color: 'bg-slate-lighter text-d4slate-dark',
+        color: 'bg-slate-lighter text-ac-slate-dark',
         icon: <Icon name="Cached" size="4" />,
         text: ac_strings.loading
     },
     "true": {
-        color: 'bg-slate-lighter text-d4slate-dark',
+        color: 'bg-slate-lighter text-ac-slate-dark',
         icon: <Icon name="Check" size="4" />,
         text: ac_strings.unfollow
     },
     "false": {
-        color: 'bg-d4slate-dark text-white',
+        color: 'bg-ac-slate-dark text-white',
         icon: <Icon name="Add" size="4" />,
         text: ac_strings.follow
     },
@@ -258,13 +258,13 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
 export const TopicWithIcon: React.FC<ITopicNavItem> = ({ name, to }) => {
 
     return (
-        <Link to={`${to}`} className="border border-d4slate-light rounded-lg px-1 flex items-center mr-2 mb-2 py-1">
+        <Link to={`${to}`} className="border border-ac-slate-light rounded-lg px-1 flex items-center mr-2 mb-2 py-1">
             <Icon
                 size="2"
                 color="slate-light"
                 name="LocalOffer"
             />
-            <span className="px-1 text-d4slate-light" style={{ fontSize: "12px" }}>{name}</span>
+            <span className="px-1 text-ac-slate-light" style={{ fontSize: "12px" }}>{name}</span>
 
         </Link>
     )

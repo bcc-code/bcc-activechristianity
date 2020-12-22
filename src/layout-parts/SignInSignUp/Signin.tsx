@@ -95,7 +95,7 @@ const SignInForm: React.FC = () => {
         <div
             className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full "
         >
-            <div className="flex flex-col justify-center bg-d4primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+            <div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
                 <h5 className="font-semibold pb-2">{ac_strings.signin_options_email}</h5>
             </div>
             {showReminder ? (
@@ -178,7 +178,7 @@ const SignInForm: React.FC = () => {
                                 >
                                     {ac_strings.allSigninOptions}
                                 </button>
-                                <button className="text-d4slate-light"
+                                <button className="text-ac-slate-light"
 
                                     onClick={handleForgotPassword}
                                     onKeyDown={handleForgotPassword}

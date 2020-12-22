@@ -119,7 +119,7 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
                     )
                 }
                 headerMeta={(
-                    <div className="flex justify-end text-d4slate-dark">
+                    <div className="flex justify-end text-ac-slate-dark">
                         {share}
                     </div>
                 )}

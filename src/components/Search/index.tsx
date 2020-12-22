@@ -32,7 +32,7 @@ const Search: React.FC<ISearch> = ({ onChange, clearInput, value, setInputFocus,
             <Icon name="Search" size="6" />
 
             <input
-                className="pl-2 flex-grow text-base placeholder-d4slate-dark h-8 sm:h-12"
+                className="pl-2 flex-grow text-base placeholder-ac-slate-dark h-8 sm:h-12"
                 type="text"
                 placeholder={placedholderText}
                 ref={inputRef}

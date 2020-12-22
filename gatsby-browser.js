@@ -13,10 +13,13 @@
  */
 
 import React from "react"
-import Layout from "./src/layouts/App"
+
 import "react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"
 import "./src/styles/reset.css"
+import "./src/styles/tailwind-output.css"
+import Layout from "./src/layouts/App"
+
 import endpoints from './src/endpoints'
 import wrapWithProvider from "./provider"
 

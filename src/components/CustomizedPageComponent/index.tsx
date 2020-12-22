@@ -111,7 +111,7 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
         <div>
             {comps.map((section, k) => {
                 return (
-                    <div className={`standard-max-w-px py-6 ${k % 2 == 1 ? 'bg-d4slate-lighter' : ''}`}>
+                    <div className={`standard-max-w-px py-6 ${k % 2 == 1 ? 'bg-ac-slate-lighter' : ''}`}>
                         {section}
                     </div>
                 )

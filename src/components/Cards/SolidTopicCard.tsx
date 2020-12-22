@@ -9,7 +9,7 @@ export interface ISimpleSolidCard {
 const SimpleSolidCard: React.FC<ISimpleSolidCard> = ({ title, to, className }) => {
     return (
         <Link to={to} className={`w-36 h-20 flex-shrink-0 ${className ? className : ""}`}>
-            <div className="bg-d4primary w-full h-full rounded-lg p-2 pr-6 flex items-end">
+            <div className="bg-ac-primary w-full h-full rounded-lg p-2 pr-6 flex items-end">
                 <h1 className="text-white leading-tight text-lg font-bold content-end">{title}</h1>
             </div>
         </Link>

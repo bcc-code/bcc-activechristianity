@@ -64,9 +64,9 @@ const Ebook: React.FC<IEbook> = (ebook) => {
                 <div className="flex-1">
                     <PostLabel text={ac_strings["e-book"]} />
                     <PostH1 title={title} />
-                    <div className="border-b w-1/6 my-8 border-d4gray"></div>
+                    <div className="border-b w-1/6 my-8 border-ac-gray"></div>
 
-                    <p className="text-d4slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
+                    <p className="text-ac-slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
                     {ebookDownload}
                 </div>
 

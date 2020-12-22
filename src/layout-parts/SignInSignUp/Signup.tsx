@@ -130,7 +130,7 @@ const SignUpForm = () => {
         <div
             className="flex-1 flex flex-col items-center justify-center w-full h-full "
         >
-            <div className="flex flex-col justify-center bg-d4primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+            <div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
                 <h5 className="font-semibold pb-2">{ac_strings.signup_options_email}</h5>
             </div>
 

@@ -38,7 +38,7 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
 
 
 
-            <div className="hidden sm:flex flex-col items-center bg-d4slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
+            <div className="hidden sm:flex flex-col items-center bg-ac-slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
                 <StickyBox offsetTop={150} >
                     <div className="flex flex-col py-8">
                         {[
@@ -52,7 +52,7 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
                             )
                         })}
 
-                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{ac_strings.logout}</SideNavItem>
+                        <SideNavItem onClick={handleLogout} className="text-ac-slate-light">{ac_strings.logout}</SideNavItem>
 
                     </div>
 

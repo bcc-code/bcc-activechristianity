@@ -54,7 +54,7 @@ const Header: React.FC<{ className: string, style: any, imageUrl: string }> = ({
 
                 render={({ platforms }) => {
                     return (
-                        <div className="w-full flex text-xs sm:text-sm text-d4secondary opacity-75 sm:py-4">
+                        <div className="w-full flex text-xs sm:text-sm text-ac-secondary opacity-75 sm:py-4">
                             {platforms.map(item => {
                                 return (
                                     <a href={item.url} target="_blank" className="bg-white rounded-xl p-2 mr-4 flex items-center">

@@ -5,7 +5,7 @@ export const CardListPosts: React.FC<{ posts: IPostItem[], title: string }> = ({
     return (
         <div style={{ background: "#f4f4f4" }}>
             <div className="standard-max-w px-4 flex flex-col justify-center py-18">
-                <h2 className="text-center font-bold text-4-7xl pb-8">{title}</h2>
+                <h2 className="text-center font-bold text-4-7/10-xl pb-8">{title}</h2>
                 <div>
 
                 </div>

@@ -56,7 +56,7 @@ const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
 
                                         </span>
                                     )}
-                                    <div className="text-d4slate-light text-xs py-2">
+                                    <div className="text-ac-slate-light text-xs py-2">
                                         {post.views} {ac_string.views}</div>
                                     {playIcon && (
                                         <ReadingTimingAuthor duration={post.duration?.listen} authors={post.authors} />

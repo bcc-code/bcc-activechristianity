@@ -114,7 +114,7 @@ const OnlineChurch = () => {
                                             // Render a completed state
                                             return (
                                                 <div className="flex">
-                                                    <a href={onlineChurchUrl} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
+                                                    <a href={onlineChurchUrl} className="flex items-center bg-ac-primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
 
                                                         <span className="text-sm sm:text-2xl font-bold">Watch Now</span>
                                                         <div className="block sm:hidden">
@@ -159,7 +159,7 @@ const OnlineChurch = () => {
                             </div>
 
                             <div>
-                                <button onClick={handleShowDetailsClick} className="flex items-center bg-d4primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
+                                <button onClick={handleShowDetailsClick} className="flex items-center bg-ac-primary text-black py-2 my-4 sm:mt-12 px-4 rounded-full">
 
                                     <span className="text-sm sm:text-2xl font-bold">{strings.cta}</span>
                                     <div className="block sm:hidden">
@@ -188,7 +188,7 @@ const OnlineChurch = () => {
             </div> */}
             {/* <div className=" py-8" ref={refElem} style={{ background: "#e5e5e5" }}>
                 <div className="standard-max-w-px mx-auto ">
-                    <div className="bg-white text-d4slate-dark rounded-xl flex flex-col py-6 px-4">
+                    <div className="bg-white text-ac-slate-dark rounded-xl flex flex-col py-6 px-4">
                         <h2 className="font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">Details</h2>
                         <h5 className="mb-4 ">
                             <div>
@@ -251,8 +251,8 @@ const OnlineChurch = () => {
                         {[
                             {
                                 iconName: "Event",
-                                bgColor: "bg-d4slate-dark",
-                                contentBgColor: "bg-d4slate-dark",
+                                bgColor: "bg-ac-slate-dark",
+                                contentBgColor: "bg-ac-slate-dark",
                                 textColor: "text-white",
                                 title: 'Add to calendar',
                                 popUpTitle: "Add to Calendar",
@@ -300,9 +300,9 @@ const OnlineChurch = () => {
                             },
                             {
                                 iconName: "GroupAdd",
-                                bgColor: "bg-d4slate-light",
-                                contentBgColor: "bg-d4slate-lighter",
-                                textColor: "text-d4slate-dark",
+                                bgColor: "bg-ac-slate-light",
+                                contentBgColor: "bg-ac-slate-lighter",
+                                textColor: "text-ac-slate-dark",
                                 title: 'Invite a friend',
                                 popUpTitle: 'Invite a friend',
                                 popUpContent: (
@@ -443,7 +443,7 @@ const OnlineChurch = () => {
 
                 </div>
             </div> */}
-            <div className="bg-d4slate-dark text-white py-4 ">
+            <div className="bg-ac-slate-dark text-white py-4 ">
                 <div className="standard-max-w-px mx-auto">
                     {/* <h1 className="text-xs uppercase font-bold pb-2">Before the service starts</h1> */}
                     <h1 className="font-bold text-lg">More on Message of the cross</h1>
@@ -462,7 +462,7 @@ const OnlineChurch = () => {
                                                 />
                                             </div>
                                             <Link className="flex flex-col" to="/bible-words-explained-what-does-it-mean-to-take-up-my-cross-daily">
-                                                <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post.title}</h2>
+                                                <h2 className="text-lg bold py-4 font-semibold text-ac-slate-lighter leading-normal">{post.title}</h2>
                                                 <p className="leading-normal">{post?.excerpt}</p>
                                             </Link>
                                         </>
@@ -485,7 +485,7 @@ const OnlineChurch = () => {
                                                         className="rounded-xxl overflow-hidden"
                                                         image={post?.image}
                                                     />
-                                                    <h2 className="text-lg bold py-4 font-semibold text-d4slate-lighter leading-normal">{post?.title}</h2>
+                                                    <h2 className="text-lg bold py-4 font-semibold text-ac-slate-lighter leading-normal">{post?.title}</h2>
                                                     <p className="leading-normal">{post?.excerpt}</p>
                                                 </Link>
                                             ) : <div></div>

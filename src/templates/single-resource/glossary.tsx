@@ -20,7 +20,7 @@ const Glossary: React.FC<IGlossaryProps> = ({ pageContext, path }) => {
                     breadcrumb={[...breadcrumb, { name: title, to: path }]}
                 />
                 <PostH1 title={title} />
-                <div className="border-b w-1/6 my-8 border-d4gray"></div>
+                <div className="border-b w-1/6 my-8 border-ac-gray"></div>
                 <Content content={glossary.content} title={title} slug={path} />
             </div>
         )

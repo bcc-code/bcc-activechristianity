@@ -69,7 +69,7 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                         (
                             <Link
                                 to={`${path}/${chpt.bookId}/${chpt.v}`}
-                                className={`w-8 text-center py-1 text-d4secondary font-semibold`}
+                                className={`w-8 text-center py-1 text-ac-secondary font-semibold`}
                                 key={chpt.v}
 
                             >
@@ -78,7 +78,7 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                         )
                         :
                         <button
-                            className="w-8 text-center py-1 text-d4gray font-light"
+                            className="w-8 text-center py-1 text-ac-gray font-light"
                             key={chpt.v}
 
                         >

@@ -85,7 +85,7 @@ const Read: React.FC<IProps> = (props) => {
                 <LazyLoad>
                     {loggedIn !== "success" ? (
                         <>
-                            <div className="bg-d4slate-lighter py-6 overflow-hidden">
+                            <div className="bg-ac-slate-lighter py-6 overflow-hidden">
                                 <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                                 <HSCardList posts={popular} />
                             </div>
@@ -105,7 +105,7 @@ const Read: React.FC<IProps> = (props) => {
                         </>
                     ) : (
                             <>
-                                <div className="bg-d4slate-lighter py-6 overflow-hidden">
+                                <div className="bg-ac-slate-lighter py-6 overflow-hidden">
 
                                     <div className="w-full flex justify-between items-center py-6 pr-4">
                                         <PageSectionHeader title={ac_strings.latest} />

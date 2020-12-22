@@ -49,7 +49,7 @@ const CustomForm: React.FC<{ status: 'error' | 'success' | 'sending' | null, mes
                 By continuing, you consent to receiving email updates from ActiveChristianity.
             </div>
             <div>
-                <button className="bg-d4primary text-white font-bold rounded p-4 sm:p-6 sm:text-lg" onClick={submit}>
+                <button className="bg-ac-primary text-white font-bold rounded p-4 sm:p-6 sm:text-lg" onClick={submit}>
                     Send me more details
                 </button>
             </div>

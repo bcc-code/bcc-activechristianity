@@ -33,7 +33,7 @@ const TopImgPost: React.FC<IPostItem & IProps> = (props) => {
                     fontKey: 'text-lg',
                     clamp: 3,
                     bold: "font-semibold",
-                    className: "mb-2 text-d4slate-dark"
+                    className: "mb-2 text-ac-slate-dark"
                 }}
                 audioDuration
                 hideTime

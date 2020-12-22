@@ -57,25 +57,25 @@ interface IFormSubmitButton extends IButton {
 }
 
 export const OutlineSmallRounded: React.FC<IButton> = ({ children }) => (
-    <Button className="font-roboto text-d4secondary border border-d4secondary rounded px-2 py-1">{children}</Button>
+    <Button className="font-roboto text-ac-secondary border border-ac-secondary rounded px-2 py-1">{children}</Button>
 )
 
 export const OutlineScriptureChapter: React.FC<{ active?: boolean } & IButton> = ({ children, active }) => (
     <Button
-        className={` whitespace-no-wrap text-sm border border-d4gray hover:border-d4slate-dark rounded-lg py-2 px-2 font-semibold ${active === true ? 'bg-d4slate-dark text-white' : 'text-d4slate-dark bg-white'}`}
+        className={` whitespace-no-wrap text-sm border border-ac-gray hover:border-ac-slate-dark rounded-lg py-2 px-2 font-semibold ${active === true ? 'bg-ac-slate-dark text-white' : 'text-ac-slate-dark bg-white'}`}
     >
         {children}
     </Button>
 )
 
 export const UnderlineLink: React.FC<{ to: string }> = ({ to, children }) => {
-    return <Button to={to} className="text-d4slate-dark underline text-sm font-semibold">
+    return <Button to={to} className="text-ac-slate-dark underline text-sm font-semibold">
         {children}
     </Button>
 }
 
 export const UnderlineLinkViewAll: React.FC<{ to: string }> = ({ to, children }) => {
-    return <Button to={to} className="text-d4slate-dark underline text-sm">
+    return <Button to={to} className="text-ac-slate-dark underline text-sm">
         {ac_strings.see_all}
     </Button>
 }
@@ -100,8 +100,8 @@ export const OutlineButton: React.FC<IButtonName> = ({ name, disabled, onClick }
             disabled={disabled}
             onClick={onClick}
             className="border rounded-full flex justify-between items-center text-base sm:text-lg px-4 py-2"
-            disabledClassName="border-d4gray text-gray-500"
-            enabledClassName="border-d4secondary text-d4secondary"
+            disabledClassName="border-ac-gray text-gray-500"
+            enabledClassName="border-ac-secondary text-ac-secondary"
         >
             {name}
         </Button>
@@ -111,7 +111,7 @@ export const OutlineButton: React.FC<IButtonName> = ({ name, disabled, onClick }
 
 export const OutlineSmallButton: React.FC<IButton> = ({ children, onClick }) => (
     <Button
-        className="text-d4secondary text-xxs uppercase border-d4secondary border px-2 py-1 rounded-sm mb-4"
+        className="text-ac-secondary text-xxs uppercase border-ac-secondary border px-2 py-1 rounded-sm mb-4"
         onClick={onClick}
     >
         {children}
@@ -129,7 +129,7 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
     return (
         <Button
             to={to}
-            className={`${count ? 'border-d4secondary text-d4secondary' : ''} px-4 py-4  sm:px-6 border rounded-xxl sm:rounded-xl flex justify-between items-center`}
+            className={`${count ? 'border-ac-secondary text-ac-secondary' : ''} px-4 py-4  sm:px-6 border rounded-xxl sm:rounded-xl flex justify-between items-center`}
         >
             <div className="text-base sm:text-lg ">
                 {name}
@@ -146,7 +146,7 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
 
 export const SolidDarkBgToggleActive: React.FC<{ active?: boolean, className?: string } & IButton> = ({ children, active, className, onClick }) => (
     <Button
-        className={`flex justify-center py-1 px-2 my-2 text-center text-sm rounded-full font-semibold ${className ? className : ''} ${active === true ? 'bg-d4slate-dark text-white' : 'bg-d4slate-lighter text-d4slate-dark'}`}
+        className={`flex justify-center py-1 px-2 my-2 text-center text-sm rounded-full font-semibold ${className ? className : ''} ${active === true ? 'bg-ac-slate-dark text-white' : 'bg-ac-slate-lighter text-ac-slate-dark'}`}
         onClick={onClick}
     >
         {children}

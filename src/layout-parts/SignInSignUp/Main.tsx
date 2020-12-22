@@ -40,7 +40,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
     }
     return (
         <div className="flex flex-col items-center text-center">
-            <div className="flex flex-col justify-center bg-d4primary py-12 px-4 rounded-lg text-white shadow w-full">
+            <div className="flex flex-col justify-center bg-ac-primary py-12 px-4 rounded-lg text-white shadow w-full">
                 <h5 className="font-semibold pb-2">{text.title}</h5>
                 <span className="text-sm">{text.subTitle}</span>
             </div>
@@ -77,7 +77,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
                 </button>
             </div>
 
-            <div className="flex justify-center flex-col px-2 text-sm bg-d4slate-dark text-white py-4">
+            <div className="flex justify-center flex-col px-2 text-sm bg-ac-slate-dark text-white py-4">
 
                 <a className="pb-4" href={ac_strings.slug_privacy_policy} target="_blank">
                     <span className="h-full font-semibold">Read {ac_strings.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>

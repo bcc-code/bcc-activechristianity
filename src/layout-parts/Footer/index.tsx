@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
 
                 {/*                 <div className="px-4 py-10 border-b sm:border-none sm:w-1/3">
                     <h6 className="font-roboto uppercase text-sm pb-4"> </h6>
-                    <div><input type="text" placeholder="Email address" className="border rounded-xl px-4 py-2" /><button className="px-4 py-2 bg-d4secondary border-d4secondary text-white rounded-xl -m-4">{TS.subject}</button></div>
+                    <div><input type="text" placeholder="Email address" className="border rounded-xl px-4 py-2" /><button className="px-4 py-2 bg-ac-secondary border-ac-secondary text-white rounded-xl -m-4">{TS.subject}</button></div>
                 </div> */}
             </div>
 
@@ -51,12 +51,12 @@ const Footer: React.FC = () => {
                     <div className="text-d4cadet-blue order-2 sm:order-1 sm:max-w-1/2">
                         {ac_strings.copyright}
                     </div>
-                    <div className="flex text-d4slate  w-full sm:w-auto justify-between items-center pb-10 sm:pb-0 order-1 sm:order-2">
+                    <div className="flex text-ac-slate  w-full sm:w-auto justify-between items-center pb-10 sm:pb-0 order-1 sm:order-2">
                         <div>
                             <Link to={ac_strings.slug_privacy_policy} className="underline pr-4">{ac_strings.consent_privacy_policy}</Link>
                             <Link to={ac_strings.slug_cookie_policy} className="underline pr-4">{ac_strings.consent_cookie_policy}</Link>
                         </div>
-                        <Link to={ac_strings.slug_contact} className="border border-d4slate px-2 py-1 rounded-md">{ac_strings.contact}</Link>
+                        <Link to={ac_strings.slug_contact} className="border border-ac-slate px-2 py-1 rounded-md">{ac_strings.contact}</Link>
                     </div>
                 </div>
             </div>

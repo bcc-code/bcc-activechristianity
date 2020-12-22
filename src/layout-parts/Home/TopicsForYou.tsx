@@ -10,7 +10,7 @@ import { getRandomArray } from '@/helpers'
 const TopicsForYou = () => {
 
     return (
-        <div className="col-start-1 col-end-5 overflow-hidden flex flex-col bg-d4slate-dark p-10 text-white rounded-lg">
+        <div className="col-start-1 col-end-5 overflow-hidden flex flex-col bg-ac-slate-dark p-10 text-white rounded-lg">
             <QPopularAndFeaturedTopics
                 excludeFollowed
                 render={({ topics }) => {
@@ -22,7 +22,7 @@ const TopicsForYou = () => {
                             <div className="flex flex-wrap">
 
                                 {randomTopics.map(({ name, slug: to, id }, i) => (
-                                    <div className="flex bg-white text-d4slate-dark mt-4 mr-4 text-lg font-bold" key={i}>
+                                    <div className="flex bg-white text-ac-slate-dark mt-4 mr-4 text-lg font-bold" key={i}>
                                         <Link
                                             className="p-2"
                                             to={`${ac_strings.slug_topic}/${to}`}>

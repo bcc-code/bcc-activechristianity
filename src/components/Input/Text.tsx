@@ -17,7 +17,7 @@ const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name
                 {label}
                 {required ? <span className="text-red-600">*</span> : ''}
             </label>
-            <div className={`opacity-70 w-full rounded border overflow-hidden focus:${error ? 'border-red-600' : 'border-d4slate-light'}`}>
+            <div className={`opacity-70 w-full rounded border overflow-hidden focus:${error ? 'border-red-600' : 'border-ac-slate-light'}`}>
                 <input
                     className={`w-full block p-2 opacity-70 text-black`}
                     type={inputType}

@@ -47,7 +47,7 @@ const ShareIconPopper: React.FC<IProps> = ({ popperContent, children, placement 
 
             {showPopper && (
                 <div
-                    className="bg-d4slate-dark text-white rounded-lg px-2 mx-2"
+                    className="bg-ac-slate-dark text-white rounded-lg px-2 mx-2"
                     ref={setPopperElement}
                     style={styles.popper} {...attributes.popper}
 

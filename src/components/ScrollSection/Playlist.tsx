@@ -42,8 +42,8 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
             <div className="flex-1">
                 <PostLabel text={ac_strings.playlist} />
                 <PostH1 title={title} />
-                <p className="text-d4slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
-                <div className="border-b w-1/6 my-8 border-d4gray"></div>
+                <p className="text-ac-slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
+                <div className="border-b w-1/6 my-8 border-ac-gray"></div>
                 <ContentPlaylist slug={slug} tracks={items} />
                 {pageNr < total && (
                     <div className="flex justify-center py-4">

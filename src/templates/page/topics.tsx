@@ -33,7 +33,7 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
                 {/*                 {themes.length > 0 && <div className="grid grid-cols-2 gap-2 sm:flex flex-wrap">
                     {themes.map(item => (
                         <Link
-                            className=" text-d4secondary sm:text-white sm:bg-d4primary mt-1 mr-1 sm:border-none text-xs sm:text-base sm:font-bold sm:p-2"
+                            className=" text-ac-secondary sm:text-white sm:bg-ac-primary mt-1 mr-1 sm:border-none text-xs sm:text-base sm:font-bold sm:p-2"
                             to={`${ac_strings.slug_theme}/${item.slug}`}>
                             {item.title}
                         </Link>

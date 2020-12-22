@@ -72,7 +72,7 @@ const ForgotPasswordForm: React.FC = () => {
         <div
             className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full "
         >
-            <div className="flex flex-col justify-center bg-d4primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+            <div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
                 <h5 className="font-semibold pb-2">{ac_strings.message_to_existing_user_first_time_cta}</h5>
             </div>
             <div className="px-4 py-6">

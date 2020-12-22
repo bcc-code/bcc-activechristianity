@@ -178,7 +178,7 @@ const ContactForm = () => {
             />
             <div className="flex flex-col justify-center w-full text-sm sm:text-base">
                 <div className="flex justify-center py-4">
-                    <a className='underline text-d4secondary' href={`${ac_strings.slug_privacy_policy}` || "/"} target="_blank">{ac_strings.consent_read_policy}</a>
+                    <a className='underline text-ac-secondary' href={`${ac_strings.slug_privacy_policy}` || "/"} target="_blank">{ac_strings.consent_read_policy}</a>
                 </div>
                 <div className="flex justify-center">
                     <FormSubmitButton

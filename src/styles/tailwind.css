@@ -130,7 +130,7 @@ input:focus {
 }
 
 .main-content a {
-    @apply text-d4secondary underline
+    @apply text-ac-secondary underline
 }
 
 .main-content h1,
@@ -170,11 +170,11 @@ input:focus {
     }
 
     .main-content h1 {
-        @apply text-2-5xl;
+        @apply text-2-1/2-xl;
     }
 
     .main-content h2 {
-        @apply text-3-5xl;
+        @apply text-3-1/2-xl;
     }
 
     .staggered-boxes {

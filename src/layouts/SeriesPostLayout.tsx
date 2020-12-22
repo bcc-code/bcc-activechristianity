@@ -35,7 +35,7 @@ const ScrollSectionLayout: React.FC<IProps> = ({ sections, title, post }) => {
                 {sections.map((item, i) => (
                     <Link
                         key={i}
-                        activeClassName="font-bold text-d4secondary"
+                        activeClassName="font-bold text-ac-secondary"
                         to={item.to}
                         className={`flex tracking-wide text-base sm:text-lg mb-4 sm:mb-8`}
                         onClick={handleOpenMobileNav}

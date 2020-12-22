@@ -28,7 +28,7 @@ const TopDesktop: React.FC = () => {
                         <div className="hidden sm:flex items-center text-sm">
                             <UserNav className="pr-4" />
 
-                            <Link className="py-2 pr-4 hover:text-d4slate" to={ac_strings.slug_contact}>{ac_strings.contact}</Link>
+                            <Link className="py-2 pr-4 hover:text-ac-slate" to={ac_strings.slug_contact}>{ac_strings.contact}</Link>
                             <LanguageDropdown className="border-l pl-2 p-0" />
                         </div>
                     </div>

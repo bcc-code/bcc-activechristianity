@@ -63,7 +63,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 postTitleProps={{
                     fontKey: 'text-lg-2xl',
                     clamp: 3,
-                    className: "mb-2 text-d4slate-dark"
+                    className: "mb-2 text-ac-slate-dark"
                 }}
                 postExcerptProps={noExcerpt ? undefined : {
                     fontKey: 'text-sm',

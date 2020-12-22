@@ -87,7 +87,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                     <p className="text-xs leading-normal sm:w-7/12">{livingTheGospel.description}</p>
                 </div>
                 <div className="pt-6 pb-12 flex items-center px-4">
-                    <div className="bg-d4gray-light rounded-full inline-block">
+                    <div className="bg-ac-gray-light rounded-full inline-block">
                         <ReadOrListenIcon
                             listen={introPost.duration?.listen}
                             track={introPost.media}
@@ -128,7 +128,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                     <div>
                         {hosts.map((h, i) => {
                             return (
-                                <div className={`flex py-6 px-4 rounded-xl ${i % 2 == 0 ? 1 : 2 ? 'bg-d4slate-lighter' : ''}`} key={i}>
+                                <div className={`flex py-6 px-4 rounded-xl ${i % 2 == 0 ? 1 : 2 ? 'bg-ac-slate-lighter' : ''}`} key={i}>
                                     <div className="flex flex-col justify-center" style={{ order: i % 2 == 0 ? 1 : 2 }}>
                                         <div className={`w-36 h-36 rounded-full`} >
                                             <ImageRound {...h.image} />

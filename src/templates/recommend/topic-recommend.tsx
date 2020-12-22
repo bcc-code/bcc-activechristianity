@@ -66,7 +66,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                     <PageSectionHeader title={ac_strings.featured} className="pb-4" />
                     <FeaturedBanner featured={mixedFeaturedPosts} />
                 </div>
-                <div className="bg-d4slate-lighter sm:bg-transparent py-6 overflow-hidden">
+                <div className="bg-ac-slate-lighter sm:bg-transparent py-6 overflow-hidden">
                     <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                     <TopImgHorizontalScroll posts={popular.slice(5)} />
                 </div>

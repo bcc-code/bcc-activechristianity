@@ -62,7 +62,7 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                     </Link>
                     <span className="leading-normal hidden sm:block  mt-4">{excerpt}</span>
                     {authors && (
-                        <span className="text-d4gray-dark lg:hidden sm:py-3 py-1 text-sm">
+                        <span className="text-ac-gray-dark lg:hidden sm:py-3 py-1 text-sm">
                             <PostMeta authors={authors} />
                         </span>
                     )}
@@ -70,8 +70,8 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
                         <span className="pr-2">
                             <Bookmark id={id} size={"6"} />
                         </span>
-                        {reading_time && <p className="ml-1 text-sm text-d4gray-dark lg:hidden">{reading_time.text}</p>}
-                        <ReadingTimingAuthor className="w-full text-sm text-d4gray-dark hidden lg:block" duration={duration?.listen} authors={authors} />
+                        {reading_time && <p className="ml-1 text-sm text-ac-gray-dark lg:hidden">{reading_time.text}</p>}
+                        <ReadingTimingAuthor className="w-full text-sm text-ac-gray-dark hidden lg:block" duration={duration?.listen} authors={authors} />
                     </div>
                 </div>
 

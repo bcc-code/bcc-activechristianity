@@ -33,7 +33,7 @@ const App: React.FC<IProps> = ({ sections, title }) => {
     return (
 
         <div className="flex">
-            <div className="hidden sm:flex flex-col items-center bg-d4slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
+            <div className="hidden sm:flex flex-col items-center bg-ac-slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
                 <StickyBox offsetTop={300} >
                     {links.map(({ id, onClick, selected, name }) => (
                         < SideNavItem key={id} onClick={onClick} selected={selected}>
@@ -64,7 +64,7 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                 <div className="sm:hidden">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 px-4 pb-4">
                         {links.map(({ id, onClick, selected, name }) => (
-                            <div className="border rounded p-2 font-roboto font-semibold text-d4slate-light" key={id} onClick={onClick} selected={selected}>
+                            <div className="border rounded p-2 font-roboto font-semibold text-ac-slate-light" key={id} onClick={onClick} selected={selected}>
                                 {name}
                             </div>
                         ))}
@@ -73,7 +73,7 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                 {sections.map((item, k) => {
                     return (
                         <Section id={item.slug}>
-                            <div className={`px-4 sm:px-6 ${k % 2 == 1 ? 'bg-d4gray-light' : ''}`}>
+                            <div className={`px-4 sm:px-6 ${k % 2 == 1 ? 'bg-ac-gray-light' : ''}`}>
                                 <div className="w-full">
                                     <h2 className="text-2xl py-6 font-roboto sm:text-3xl font-semibold">{item.title}</h2>
                                     <CustomizedPageComponent

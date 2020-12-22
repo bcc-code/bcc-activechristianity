@@ -30,9 +30,8 @@ import { IRootState } from '@/state/types'
 import { IUser, INavItem } from '@/types'
 
 
-import "@/styles/tailwind-output.css"
 import './Layout.css'
-import "react-placeholder/lib/reactPlaceholder.css";
+
 
 export interface IDrawerNav {
     isSideNavOpen: boolean
@@ -65,8 +64,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
     }));
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
     const [isInfoBarOpen, setIsInfoBarOpen] = React.useState(showInfoBanner !== "true")
-
-
 
     React.useEffect(() => {
         checkUser()
@@ -159,7 +156,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                     <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
 
                         {isInfoBarOpen && process.env.LOCALE === "en" && (
-                            <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug text-d4slate-dark"} style={{ zIndex: 100 }}>
+                            <div className={"fixed sm:relative flex items-center bg-info-bar py-2 text-xs leading-snug text-ac-slate-dark"} style={{ zIndex: 100 }}>
                                 <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
                                     Revert back to original version here. Note that your old login details will apply.
                     <button onClick={setNotIsInfoBarOpen}>

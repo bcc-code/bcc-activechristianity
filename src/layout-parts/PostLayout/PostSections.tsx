@@ -95,7 +95,7 @@ export const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ transl
     if (translatedUrls && translatedUrls.length > 1) {
 
         return (
-            <div className="border-d4gray border-t py-8 text-gray-600">
+            <div className="border-ac-gray border-t py-8 text-gray-600">
                 <PageSectionHeaderUpperCaseGray title={ac_strings.postAvailable} />
                 <div className="flex flex-wrap text-sm pt-4">
                     {translatedUrls.map(item => (
@@ -128,7 +128,7 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
 export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: string }> = ({ authors, postId }) => {
     return (
         <div>
-            <div className="border-d4gray border-b pt-6">
+            <div className="border-ac-gray border-b pt-6">
                 {authors?.map(item => {
                     return (
                         <AuthorFollowSection authors={item} />
@@ -168,7 +168,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
 export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { authors?: IPostAuthors[] }> = (props) => {
     const { id, shareSlug, text, views, likes, authors } = props
     return (
-        <div className="relative bg-white border-d4gray flex justify-between">
+        <div className="relative bg-white border-ac-gray flex justify-between">
             <div className="flex flex-col">
                 {authors?.map(item => {
                     return (
@@ -197,7 +197,7 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
 export const ShareSection: React.FC<IShareLikesViewsProps> = (props) => {
     const { id, shareSlug, text, views, likes } = props
     return (
-        <div className="relative bg-white border-d4gray flex justify-between">
+        <div className="relative bg-white border-ac-gray flex justify-between">
             <BookmarksAndViews
                 id={id}
                 views={views}
@@ -274,7 +274,7 @@ export const MobilePostMain: React.FC<IMobilePostMain> = ({ id, height, title, e
             <MobileMainWrapper height={height} >
                 <PostH1 title={title} />
 
-                <p className="text-d4gray-dark mb-6 leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
+                <p className="text-ac-gray-dark mb-6 leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
 
                 {children}
                 <Translations translatedUrls={translatedUrls || []} />
@@ -297,8 +297,8 @@ export const DesktopPostMain: React.FC<IDesktopPostMain> = ({ id, title, excerpt
                     )}
                     <div className="flex-1">
                         <PostH1 title={title} />
-                        <p className="text-d4slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
-                        {headerMeta && <div className="border-b w-1/6 my-8 border-d4gray"></div>}
+                        <p className="text-ac-slate-dark-dark text-lg font-medium leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
+                        {headerMeta && <div className="border-b w-1/6 my-8 border-ac-gray"></div>}
                         {headerMeta}
                     </div>
 
@@ -314,7 +314,7 @@ export const DesktopPostMain: React.FC<IDesktopPostMain> = ({ id, title, excerpt
 export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug }) => (
     <div className="w-full flex justify-center py-4">
         <Link
-            className="flex items-center px-2 py-1 text-d4secondary text-sm"
+            className="flex items-center px-2 py-1 text-ac-secondary text-sm"
             to={`/${latestSlug}`}
         >
             <span>{ac_strings.moreLatest}</span>

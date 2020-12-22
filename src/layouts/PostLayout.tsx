@@ -188,7 +188,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         {mediaTypes.map((item, i) => (
                             <button
                                 key={item}
-                                className={`border-d4slate-light text-d4slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'} ${currentMediaType === item ? 'bg-d4slate-light text-d4slate-dark' : ''}`}
+                                className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
                                 onClick={() => setCurrentMediaType(item)}>
                                 {item}
                             </button>
@@ -221,8 +221,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
                     <PostH1 title={title} />
-                    <p className="text-d4gray-dark mb-6 sm:mb-0 sm:font-medium sm:text-lg leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
-                    <div className="border-b w-1/6 my-8 border-d4gray"></div>
+                    <p className="text-ac-gray-dark mb-6 sm:mb-0 sm:font-medium sm:text-lg leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
+                    <div className="border-b w-1/6 my-8 border-ac-gray"></div>
                     <div className="pb-6 bg-white text-sm">
                         <ReadingTimingAuthor
                             duration={duration?.read}
@@ -263,7 +263,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 title={title}
                             />
                         )}
-                        <div className="flex flex-wrap border-d4gray py-6">
+                        <div className="flex flex-wrap border-ac-gray py-6">
                             {topics && topics?.map(item => (
                                 <ToggleFollowWithName {...item} />
                             ))}

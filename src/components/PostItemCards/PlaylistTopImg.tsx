@@ -15,7 +15,7 @@ const PlaylistTopImg: React.FC<IPlaylist> = ({ slug, image, title, excerpt }) =>
                 rawText={title}
                 fontKey={'text-sm-base-lg'}
                 clamp={3}
-                className="mb-2 text-d4slate-dark"
+                className="mb-2 text-ac-slate-dark"
             />
             <TextSizeTitle {...{
                 rawText: excerpt,

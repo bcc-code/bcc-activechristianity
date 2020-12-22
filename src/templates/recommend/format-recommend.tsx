@@ -62,7 +62,7 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                     </div>
 
 
-                    <div className="bg-d4slate-lighter sm:hidden py-6 overflow-hidden">
+                    <div className="bg-ac-slate-lighter sm:hidden py-6 overflow-hidden">
                         <PageSectionHeader title={ac_strings.popular} className="pb-4" />
                         <TopImgHorizontalScroll posts={popular.slice(0, 5)} />
                     </div>

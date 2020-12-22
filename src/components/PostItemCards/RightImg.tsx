@@ -72,7 +72,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                             rawText: title,
                             fontKey: 'text-lg-2xl',
                             clamp: 3,
-                            className: "mb-2 text-d4slate-dark"
+                            className: "mb-2 text-ac-slate-dark"
                         }} />
                         <TextSizeTitle {...{
                             rawText: excerpt,

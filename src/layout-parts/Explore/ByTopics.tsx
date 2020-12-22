@@ -124,7 +124,7 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
 
         } else {
             const typeLabel = < RefinementLabel
-                color='bg-d4secondary'
+                color='bg-ac-secondary'
                 handleClick={handleClick}
                 isRefined={isRefined}
                 topic={topic}
@@ -143,7 +143,7 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
                 <div className="hidden sm:flex flex-wrap flex-1 items-center">{allRefinement}</div>
                 <div className="flex items-center justify-end px-4 sm:pt-0" onClick={() => { setShowFilter(!showFilter) }} >
                     <Icon name="FilterList" color="secondary" />
-                    <p className="text-sm text-d4secondary p-4">
+                    <p className="text-sm text-ac-secondary p-4">
                         <i>{topics.length} {ac_strings.filters}</i>
                         <i className="sm:hidden">, Selected ({currentRefinement.length})</i>
                     </p>
@@ -153,7 +153,7 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
                 </div>
             </div>
             {showFilter && (
-                <div className="bg-d4slate-lighter absolute max-w-tablet left-0 right-0" style={{ zIndex: 60 }}>
+                <div className="bg-ac-slate-lighter absolute max-w-tablet left-0 right-0" style={{ zIndex: 60 }}>
 
                     {[{
                         title: ac_strings.type,

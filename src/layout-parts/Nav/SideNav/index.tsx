@@ -73,7 +73,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
             />}
 
             <div className="w-full flex justify-center sm:hidden">
-                <LanguageDropdown className="border border-d4slate-dark font-roboto font-semibold text-d4slate-dark rounded-full pl-4" />
+                <LanguageDropdown className="border border-ac-slate-dark font-roboto font-semibold text-ac-slate-dark rounded-full pl-4" />
 
             </div>
             <div className="mx-auto flex flex-col font-roboto items-center font-semibold w-full">
@@ -116,7 +116,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
                         >
                             {ac_strings.my_profile}
                         </SideNavItem>
-                        <SideNavItem onClick={handleLogout} className="text-d4slate-light">{ac_strings.logout}</SideNavItem>
+                        <SideNavItem onClick={handleLogout} className="text-ac-slate-light">{ac_strings.logout}</SideNavItem>
 
                     </div>
                 ) : (
@@ -135,7 +135,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
 
             </div>
 
-            <div className="pt-4 text-d4slate-dark">
+            <div className="pt-4 text-ac-slate-dark">
                 <SocialPlatformas />
             </div>
 

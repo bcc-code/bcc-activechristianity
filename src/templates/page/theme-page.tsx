@@ -19,7 +19,7 @@ const CustomizedPage: React.FC<ICustomizedPage> = ({ path, pageContext, data }) 
             <LayoutH1Wide title={title} />
             <CustomizedPageComponent items={componentConfig} slug={path} title={title} />
             <div className="w-full flex justify-center py-6">
-                <Link to={`${ac_strings.slug_topic}/${slug}`} className="bg-d4slate-dark px-4 py-2 rounded text-white text-lg">
+                <Link to={`${ac_strings.slug_topic}/${slug}`} className="bg-ac-slate-dark px-4 py-2 rounded text-white text-lg">
                     More on this topic
                 </Link>
             </div>

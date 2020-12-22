@@ -227,7 +227,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 ) : (
                                         <div className="w-full bg-gray-300">
                                             <div
-                                                className="h-1 bg-d4slate-light"
+                                                className="h-1 bg-ac-slate-light"
                                                 style={{ width: `${(mediaProps.currentTime / mediaProps.duration) * 100}%` }}>
                                             </div>
                                         </div>
@@ -277,7 +277,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                                 color="slate-light"
                                             />
                                         </button>
-                                        <button className="bg-d4slate py-3 px-2 sm:py-8" >
+                                        <button className="bg-ac-slate py-3 px-2 sm:py-8" >
                                             <div onClick={handleCloseClickButton}>
                                                 <Icon
                                                     name="Close"

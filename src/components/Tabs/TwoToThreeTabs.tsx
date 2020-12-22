@@ -42,7 +42,7 @@ const TwoToThreeTabs: React.FC<IProps> = ({ tabs }) => {
                 })}
 
                 <span
-                    className="absolute bottom-0 mb-3 h-1 block border-b border-d4primary ac-tab-marker"
+                    className="absolute bottom-0 mb-3 h-1 block border-b border-ac-primary ac-tab-marker"
                     style={{ left: `${activeTab * (100 / tabs.length)}%`, width: `${(100 / tabs.length)}%` }}
                 />
             </span>

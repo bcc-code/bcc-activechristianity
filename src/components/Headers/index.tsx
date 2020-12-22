@@ -14,7 +14,7 @@ export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Elemen
 )
 
 export const PostH1: React.FC<{ title: string }> = ({ title }) => (
-    <h1 className=" font-semibold text-d4slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
+    <h1 className=" font-semibold text-ac-slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
 )
 
 export const PageSectionHeader: React.FC<{ title: string, className?: string }> = ({ title, className }) => (
@@ -27,7 +27,7 @@ export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ ti
     </span>
 )
 export const PostRelatedContentHeader: React.FC<{ title: string }> = ({ title }) => (
-    <div className="py-6 font-semibold text-sm sm:text-base text-d4secondary">{title}</div>
+    <div className="py-6 font-semibold text-sm sm:text-base text-ac-secondary">{title}</div>
 )
 export const LayoutH1Wide: React.FC<{ title: string | JSX.Element }> = ({ title }) => (
     <div className="standard-max-w-px sm:block">
@@ -42,12 +42,12 @@ interface IUnderlineTitleLink {
 
 export const UnderlineTitleLink: React.FC<IUnderlineTitleLink> = ({ name, to }) => {
     const mainClass = "border-b w-full pb-1 relative h-12 mb-10"
-    const text = <span className="block text-sm sm:text-base border-b border-d4primary pb-1 absolute uppercase font-roboto " style={{ bottom: "-1px" }}>{name}</span>
+    const text = <span className="block text-sm sm:text-base border-b border-ac-primary pb-1 absolute uppercase font-roboto " style={{ bottom: "-1px" }}>{name}</span>
     if (to) {
         return (
             <Link className={`${mainClass} flex justify-between items-end`} to={to} >
                 <span className=" text-xl ">{text}</span>
-                <span className="text-sm text-d4slate-light">{ac_strings.see_all}</span>
+                <span className="text-sm text-ac-slate-light">{ac_strings.see_all}</span>
             </Link>
         )
     } else {

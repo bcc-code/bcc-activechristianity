@@ -42,7 +42,7 @@ const NewForYou: React.FC<IProps> = ({ tabs }) => {
                             onClick={() => { handleTabClick(i) }}
                             key={i}
                         >
-                            <div className={`w-20 h-20 rounded-full  mx-1 ${activeTab === i ? 'border-d4slate-dark border-2' : ''}`}>
+                            <div className={`w-20 h-20 rounded-full  mx-1 ${activeTab === i ? 'border-ac-slate-dark border-2' : ''}`}>
                                 <ImageRound {...item.header.image} />
                             </div>
                             <span className={`text-roboto text-xs ${activeTab === i ? 'font-semibold' : ''}`}>{item.header.name}</span>
