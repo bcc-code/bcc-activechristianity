@@ -24,16 +24,16 @@ const ExploreLayout: React.FC<{
     formatIds?: number[]
 }> = (props) => {
     const { topics, formatIds: recommendFormatIds } = props
+
     const mediaSquareImages = {
         'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
     }
-    const { formatIds, typeIds } = typesFormats
+    const { formatIds } = typesFormats
     const formats = Object.keys(formatIds).map(id => formatIds[id])
-    let filteredTopics = topics.filter(item => !formatIds[item.id] && !typeIds[item.id])
-    filteredTopics = [...new Set([...filteredTopics])]
-    const randomTopics = getRandomArray(filteredTopics, 6)
-    console.log('exploring home')
+
+    const randomTopics = getRandomArray(topics, 6)
+
     return (
         <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
@@ -101,7 +101,7 @@ const ExploreLayout: React.FC<{
 
                 />
                 {recommendFormatIds && recommendFormatIds.length > 3 && <ExploreFormatRecommended ids={recommendFormatIds} />}
-                <FetchRecommendMix />
+                <FetchRecommendMix topics={topics} />
             </div>
         </div>
     )

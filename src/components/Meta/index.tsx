@@ -52,9 +52,6 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
 
     useEffect(() => {
         const slug = path?.replace('/', '')
-        console.log(translatedUrls)
-        console.log(slug)
-        console.log(translatedSlugs[slug])
         if (translatedUrls) {
             dispatch(updateTranslationUrl({ translated: translatedUrls }))
         } else if (slug && translatedSlugs[slug]) {

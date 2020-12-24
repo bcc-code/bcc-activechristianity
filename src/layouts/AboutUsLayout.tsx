@@ -1,7 +1,7 @@
 import React from 'react';
 import StickyBox from "react-sticky-box";
 import { SideNavItem } from '@/components/Button'
-import endpoints from '@/endpoints'
+import endpoints from '@/strings/endpoints'
 import Icon from '@/components/Icons/Icon'
 const imageUrl = endpoints.contact_hero
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'

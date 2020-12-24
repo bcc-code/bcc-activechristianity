@@ -33,7 +33,7 @@
   "contact": "Contact",
   "contact_sent": "Votre message a bien été envoyé. Nous y répondrons le plus rapidement possible.",
   "continue": "Continuer",
-  "copyright": "Toute reproduction de supports provenant sur site ChristianismeActif pour une utilisation externe est interdite sans autorisation préalable.",
+  "copyright": "Toute reproduction de supports provenant du site ChristianismeActif pour une utilisation externe est interdite sans autorisation préalable.",
   "delete_account": "Supprimer le compte",
   "delete_profile": "Supprimer",
   "download": "Télécharger",
@@ -75,7 +75,7 @@
   "message_to_existing_user_first_time_cta": "Réinitialiser le mot de passe",
   "message_to_existing_user_first_time_main": "Vous pouvez vous reconnecter en utilisant la même adresse mail après avoir réinitialisé votre mot de passe.",
   "message_to_existing_user_first_time_title": "C'est la première fois que vous vous connectez sur la nouvelle version de notre site web ?",
-  "mins": "minute",
+  "mins": "minutes",
   "more": "Plus  ",
   "more_from": "Plus de ",
   "moreLatest": "Plus d'articles récents",
@@ -188,5 +188,10 @@
   "recently_watched": "Vidéos visionnées récemment",
   "recently_viewed": "Publications vues récemment",
   "bookmarked_video": "Vidéos ajoutées en favoris ",
-  "bookmarked_posts": "Publications ajoutées en favoris"
+  "bookmarked_posts": "Publications ajoutées en favoris",
+  "error_email_password": "Email ou mot de passe incorrect, merci de réessayer.",
+  "error_password_specs": "Le mot de passe doit comporter au moins 6 caractères et contenir au moins une lettre ET un chiffre ou caractère spécial.",
+  "error_required": "Required",
+  "error_password_too_short": "Mot de passe trop court",
+  "error_something_went_wrong": "Il y a une erreur"
 }

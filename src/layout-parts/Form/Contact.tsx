@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import ac_strings from '@/strings/ac_strings.js'
-import endpoints from '@/endpoints'
+import endpoints from '@/strings/endpoints'
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 import { LayoutH1 } from '@/components/Headers'
 
@@ -93,7 +93,7 @@ const ContactForm = () => {
                                label: 'Contact',
                                message: error.message
                            }) */
-                setErrorMessage(`Something went wrong. ${error.message}`)
+                setErrorMessage(`${ac_strings.error_something_went_wrong}. ${error.message}`)
 
             });
 

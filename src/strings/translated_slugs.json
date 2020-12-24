@@ -1,5 +1,5 @@
 {
-  "a-propos-de-nous": [
+  "about-us": [
     {
       "lang": "en",
       "slug": "about-us"
@@ -61,7 +61,7 @@
       "slug": "om-os"
     }
   ],
-  "contributeur": [
+  "contributor": [
     {
       "lang": "en",
       "slug": "contributor"
@@ -92,7 +92,7 @@
     },
     {
       "lang": "pl",
-      "slug": "wspołautor"
+      "slug": "współautor"
     },
     {
       "lang": "pt-pt",
@@ -123,7 +123,7 @@
       "slug": "bidragsyder"
     }
   ],
-  "compte": [
+  "account": [
     {
       "lang": "en",
       "slug": "account"
@@ -278,7 +278,7 @@
     },
     {
       "lang": "pl",
-      "slug": "cookie-policy"
+      "slug": "Polityka Cookie"
     },
     {
       "lang": "pt-pt",
@@ -371,7 +371,7 @@
       "slug": "e-bog"
     }
   ],
-  "explorer": [
+  "explore": [
     {
       "lang": "en",
       "slug": "explore"
@@ -433,7 +433,7 @@
       "slug": "udforsk"
     }
   ],
-  "glossaire": [
+  "glossary": [
     {
       "lang": "en",
       "slug": "glossary"
@@ -495,7 +495,7 @@
       "slug": "Ordliste"
     }
   ],
-  "animateur ": [
+  "host": [
     {
       "lang": "en",
       "slug": "host"
@@ -557,7 +557,7 @@
       "slug": "vært"
     }
   ],
-  "le-plus-recent": [
+  "latest": [
     {
       "lang": "en",
       "slug": "latest"
@@ -619,7 +619,7 @@
       "slug": "seneste"
     }
   ],
-  "ecouter": [
+  "listen": [
     {
       "lang": "en",
       "slug": "listen"
@@ -681,7 +681,7 @@
       "slug": "lyt"
     }
   ],
-  "se-connecter": [
+  "login": [
     {
       "lang": "en",
       "slug": "login"
@@ -743,10 +743,72 @@
       "slug": "log ind"
     }
   ],
-  "FALSE": [
+  "playlist": [
     {
       "lang": "en",
-      "slug": "scripture"
+      "slug": "playlist"
+    },
+    {
+      "lang": "nb",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "es",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fr",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fi",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "hu",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "it",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ro",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ru",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "sv",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "de",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "nl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "da",
+      "slug": "FALSE"
+    }
+  ],
+  "podcast": [
+    {
+      "lang": "en",
+      "slug": "podcast"
     },
     {
       "lang": "nb",
@@ -898,7 +960,7 @@
     },
     {
       "lang": "pl",
-      "slug": "privacy-policy"
+      "slug": "Polityka prywatności"
     },
     {
       "lang": "pt-pt",
@@ -929,7 +991,7 @@
       "slug": "privacy-policy"
     }
   ],
-  "lire": [
+  "read": [
     {
       "lang": "en",
       "slug": "read"
@@ -952,7 +1014,7 @@
     },
     {
       "lang": "hu",
-      "slug": "olvas"
+      "slug": "cikkek"
     },
     {
       "lang": "it",
@@ -991,7 +1053,7 @@
       "slug": "læs"
     }
   ],
-  "sincrire ": [
+  "register": [
     {
       "lang": "en",
       "slug": "register"
@@ -1053,7 +1115,131 @@
       "slug": "opret dig"
     }
   ],
+  "scripture": [
+    {
+      "lang": "en",
+      "slug": "scripture"
+    },
+    {
+      "lang": "nb",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "es",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fr",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fi",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "hu",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "it",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ro",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ru",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "sv",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "de",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "nl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "da",
+      "slug": "FALSE"
+    }
+  ],
   "theme": [
+    {
+      "lang": "en",
+      "slug": "theme"
+    },
+    {
+      "lang": "nb",
+      "slug": "tema"
+    },
+    {
+      "lang": "es",
+      "slug": "tema"
+    },
+    {
+      "lang": "fr",
+      "slug": "theme"
+    },
+    {
+      "lang": "fi",
+      "slug": ""
+    },
+    {
+      "lang": "hu",
+      "slug": "tema"
+    },
+    {
+      "lang": "it",
+      "slug": "tema"
+    },
+    {
+      "lang": "pl",
+      "slug": "zagadnienie"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "tema"
+    },
+    {
+      "lang": "ro",
+      "slug": "teme"
+    },
+    {
+      "lang": "ru",
+      "slug": "tema"
+    },
+    {
+      "lang": "sv",
+      "slug": "tema"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "thema"
+    },
+    {
+      "lang": "da",
+      "slug": "tema"
+    }
+  ],
+  "topic": [
     {
       "lang": "en",
       "slug": "topic"
@@ -1076,7 +1262,7 @@
     },
     {
       "lang": "hu",
-      "slug": "tema"
+      "slug": "temak"
     },
     {
       "lang": "it",
@@ -1115,7 +1301,7 @@
       "slug": "temaer"
     }
   ],
-  "utilisateur": [
+  "user": [
     {
       "lang": "en",
       "slug": "user"
@@ -1177,7 +1363,7 @@
       "slug": "bruger"
     }
   ],
-  "ajoute-en-favoris": [
+  "bookmarked": [
     {
       "lang": "en",
       "slug": "bookmarked"
@@ -1239,7 +1425,7 @@
       "slug": "bogmærket"
     }
   ],
-  "mot-de-passe": [
+  "password": [
     {
       "lang": "en",
       "slug": "password"
@@ -1301,7 +1487,7 @@
       "slug": "password"
     }
   ],
-  "mon-contenu": [
+  "my-content": [
     {
       "lang": "en",
       "slug": "my-content"
@@ -1363,7 +1549,7 @@
       "slug": "mit-indhold"
     }
   ],
-  "Supprimer-mon-profil": [
+  "delete-profile": [
     {
       "lang": "en",
       "slug": "delete-profile"
@@ -1425,7 +1611,7 @@
       "slug": "slet-profil"
     }
   ],
-  "suivis": [
+  "followed": [
     {
       "lang": "en",
       "slug": "followed"
@@ -1487,7 +1673,7 @@
       "slug": "følger"
     }
   ],
-  "historique": [
+  "history": [
     {
       "lang": "en",
       "slug": "history"
@@ -1549,7 +1735,7 @@
       "slug": "historik"
     }
   ],
-  "visionner": [
+  "watch": [
     {
       "lang": "en",
       "slug": "watch"
@@ -1572,7 +1758,7 @@
     },
     {
       "lang": "hu",
-      "slug": "megtekintes"
+      "slug": "videok"
     },
     {
       "lang": "it",

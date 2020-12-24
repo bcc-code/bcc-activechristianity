@@ -1,8 +1,8 @@
 const path = require('path')
 const {topicQuery} = require('gatsby-source-ac/helpers')
-const {formatsAll} = require('./TopicsFormatsTypes/hjelper')
 const exploreTemplate='src/templates/page/explore.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
+const {formatsAll} = require('../src/strings/topic-ids.js')
 /* SETUP */
  
 
@@ -49,8 +49,6 @@ module.exports = function generateTopics(actions, graphql) {
                 }`)
 
                 const {popularTopics} = popularTopicsRes.data.ac
-
-                
 
                   const {animation,song,testimony,interview}=formatsAll
                   const contextExplore = {

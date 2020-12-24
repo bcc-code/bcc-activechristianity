@@ -3,7 +3,6 @@ import * as React from 'react';
 import loadable from '@loadable/component'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch } from 'react-instantsearch-dom'
-
 import CustomSearchBox from '@/layout-parts/Explore/SearchInput'
 import CustomePagination from '@/layout-parts/Explore/Pagination'
 
@@ -11,8 +10,9 @@ import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import ac_strings from '@/strings/ac_strings.js'
 import ExploreHomeLayout from '@/layout-parts/Explore/ExploreHome'
+import { filterTopics } from '@/helpers'
 import { Stats } from 'react-instantsearch-dom';
-import { INavItem, INavItemCount, INavItemWKey, ITopic, } from "@/types"
+import { INavItem, ITopicRes } from "@/types"
 
 
 const RefinementListByTopics = loadable(() => import('@/layout-parts/Explore/ByTopics'))
@@ -33,6 +33,8 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [searchState, setSearchState] = React.useState<any>({})
 
     const { popularTopics, featuredTopics, scripturePage, recommendFormats } = props.pageContext
+
+    const topics = filterTopics({ topics: [popularTopics, featuredTopics], returnSlugs: false })
 
     React.useEffect(() => {
         const search = localStorageHelper.getStoredHistory()
@@ -106,7 +108,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const title = ac_strings.explore
 
     return (
-
         <InstantSearch
             appId=''
             apiKey=''
@@ -133,10 +134,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                 </div>
                 {hasSearchProps ? (
                     <div className="max-w-tablet m-auto">
-                        {/*                         <RefinementListByType
-                            attribute={"categories.name"}
-                            setTypeFilter={setTypeFilter}
-                        /> */}
+
                         <RefinementListByTopics
                             attribute={"topics.name"}
                             isShowingResult={isInputFocus === true}
@@ -151,7 +149,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                 {showExploreHome && (
                     <ExploreHomeLayout
                         formatIds={recommendFormats}
-                        topics={[...new Set([...popularTopics, ...featuredTopics])]}
+                        topics={topics}
                         scriptureSlug={scripturePage ? scripturePage.to : undefined}
                     />
                 )}
@@ -191,8 +189,8 @@ interface IResource {
     pageContext: {
         title: string
         scripturePage: INavItem
-        featuredTopics: ITopic[]
-        popularTopics: ITopic[]
+        featuredTopics: ITopicRes[]
+        popularTopics: ITopicRes[]
         recommendFormats: number[]
     }
 }

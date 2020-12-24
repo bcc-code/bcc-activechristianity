@@ -2,9 +2,8 @@ import React from 'react'
 
 import Link from '@/components/CustomLink'
 import { IAuthor, ITopicNavItem, ITopicPostItems, ITopic, IPostItem } from '@/types'
-import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import topicFiter from '@/strings/topic-filters.json'
-import TextSizeTitle, { ITextSizeWClamp } from '@/components/PostElements/TextSizeWClamp'
+
+import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
 import ac_strings from '@/strings/ac_strings.js'
 import Flickity from "react-flickity-component";
 import SquareImage from '@/components/Images/Image1to1Rounded'

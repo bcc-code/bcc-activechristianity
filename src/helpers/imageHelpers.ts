@@ -1,6 +1,6 @@
 import { initials } from './index'
 import { IImage } from '@/types'
-import endpoinsts from '@/endpoints'
+import endpoinsts from '@/strings/endpoints'
 const BaseUrl = endpoinsts.dummy_image_api
 
 function hashCode(str: string): number {

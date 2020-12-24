@@ -30,7 +30,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                             if (res.following && Array.isArray(res.following.topics)) {
 
                                 const filtered = res.following.topics.filter(p => typeof p.slug === "string")
-                                console.log(filtered)
                                 store.dispatch(setUserFollowingTopics(filtered))
 
                             } else {

@@ -1,9 +1,13 @@
-import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem } from '@/types'
+import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem, ITopic } from '@/types'
 import he from 'he'
 import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
-import endpoints from '@/endpoints'
+import endpoints from '@/strings/endpoints'
+import topicIds from '@/strings/topic-ids'
+import { groupAll as topicGroupAll, formatsIds, typeIds } from '@/strings/topic-ids'
+
+
 export function trimSlug(slug: string) {
     const regex = /^[/]*/gm
     let updatedTo = slug.replace(regex, '');
@@ -58,10 +62,7 @@ export function initials(name: string) {
     return ((initials.shift() || '') + (initials.pop() || '')).toUpperCase()
 }
 
-
-
 export const normalizeAvailableLanguages = (langs: ITranslations[], showAllLanguages: boolean) => {
-    console.log(langs)
     let translatedLinks: INavItem[] = []
     languages.forEach(item => {
         const find = langs.find(l => l.lang === item.locale)
@@ -114,8 +115,6 @@ export const normalizeTracks = (tracks: ITrackRes[]) => {
 
     const toReturn = tracks.map(track => {
 
-
-
         const src = track.url.startsWith('http') ? track.url : `${endpoints.api_host}${track.url}`
 
         const toAdd: IMedia = (
@@ -161,15 +160,17 @@ export const transformTopicsRes = (topics: ITopicRes[]) => {
     const filteredTopics: ITopicNavItem[] = []
     const format: ITopicNavItem[] = []
     topics.forEach((t) => {
-        const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
-        if (t.group && t.group.name === 'Type') {
-            types.push(toAdd)
+        if (t.noOfPosts > 0) {
+            const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
+            if (t.group && t.group.id === topicGroupAll.type) {
+                types.push(toAdd)
 
-        } else if (t.group && t.group.name === 'Format') {
-            format.push(toAdd)
-        } else {
-            toAdd.to = `${ac_strings.slug_topic}/${t.slug}`
-            filteredTopics.push(toAdd)
+            } else if (t.group && t.group.id === topicGroupAll.format) {
+                format.push(toAdd)
+            } else {
+                toAdd.to = `${ac_strings.slug_topic}/${t.slug}`
+                filteredTopics.push(toAdd)
+            }
         }
     })
     return ({ types, filteredTopics, format })
@@ -187,7 +188,7 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
         if (t.noOfPosts > 0) {
             const toAdd = { id: t.id, name: `${t.name} (${t.noOfPosts})`, to: `${ac_strings.slug_topic}/${t.slug}` }
             if (t.group) {
-                if (t.group.name !== 'Type' && t.group.name !== 'Format') {
+                if (t.group.id !== topicGroupAll.type && t.group.id !== topicGroupAll.format) {
                 }
                 if (sortedTags[t.group.name]) {
 
@@ -213,6 +214,32 @@ export const sortTopicsByGroups = (topics: ITopicRes[]) => {
     })
 
     return sortedTags
+}
+
+type ITopicMixed = ITopic | ITopicRes
+interface IFilteredTopics {
+    topics: ITopicMixed[][]
+    returnSlugs: boolean
+}
+export const filterTopics = (props: IFilteredTopics) => {
+    const { topics, returnSlugs } = props
+    const allTopics: ITopicMixed[] = []
+    topics.forEach(t => {
+        if (t) {
+            allTopics.push(...t)
+        }
+    })
+
+    const filteredTopics = allTopics.filter(item => {
+        return !formatsIds[item.id] && !typeIds[item.id] && item.noOfPosts !== 0
+    })
+
+    if (returnSlugs === true) {
+        return [...new Set([...filteredTopics.map(item => item.slug)])]
+    } else {
+        return filteredTopics
+    }
+
 }
 
 export const htmlTags2PlainText = (html: string) => {
@@ -291,6 +318,7 @@ export const normalizePostRes = (post: IPostRes) => {
     const { id, authors, title, excerpt, image, slug, readtime, track, topics, published, meta, glossary, views, likes } = post
 
     const { filteredTopics, types, format } = transformTopicsRes(topics)
+
     const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem: IPostItem = {
         id,

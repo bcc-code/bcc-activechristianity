@@ -65,7 +65,7 @@ const postQuery = `
 
 `
 
-
+module.exports.allPostQueries=[]
 module.exports.postQuery = postQuery
 
 const multiPostsQuery = (slugsArray)=>`
@@ -79,6 +79,36 @@ const multiPostsQuery = (slugsArray)=>`
 `
 module.exports.multiPostsQuery = multiPostsQuery;
 
+
+module.exports.getPostsQuery = (pageNr)=>`
+    {
+        posts(page:${pageNr}) {
+            data {
+                ${postQuery}
+                content
+                langs {
+                    lang
+                    slug
+                }
+                readMorePosts:posts {
+                    slug
+                }
+                seo {
+                    title
+                    desc
+                }
+                meta {
+                    credits
+                    no_dict
+                    url
+                }
+
+            }
+        }
+    }
+`
+
+module.exports.totalPostQueryCounts=0
 function strArr(sa, delimiter = ', ') {
     if (!sa)
         return '';
@@ -113,7 +143,6 @@ const sendQuery = (query, baseUrl,headers) => {
         .then(response => response.json())
         .then((gqlResponse) => {
             if (gqlResponse.errors) {
-                console.log(query)
                 console.error(gqlResponse.errors.map(errorMessage).join(' & '));
                 throw new Error (gqlResponse.errors.map(errorMessage))
             }
@@ -137,3 +166,111 @@ module.exports.getMultiPosts = (idArray,baseUrl,headers)=>{
         return res.posts.data
     })
 }
+
+const queries =[]
+module.exports.getIndexPostQuery=async (baseUrl)=>{
+    const getCount = `
+    query {
+        posts {
+            paginatorInfo {
+              total
+              count
+            }
+          }
+    }
+  `
+    const countRes = await sendQuery(getCount,baseUrl,{})
+    const {total,count} = countRes.posts.paginatorInfo
+    const pageCount = Math.ceil(total/count)
+
+    console.log('getting indext query')
+  
+    
+    // const queries = [
+    //   {
+    //     query: postQuery ,
+    //     transformer: ({ data }) => data.ac && data.ac.allPosts.map((node) => {
+    //       return { ...node, type: 'post' }
+    //     }), // (optional)
+    //     //index: ''// (optional) override default
+    //   }
+    //   ];
+  
+      for (let i = 1; i <=pageCount ; i++){
+        const postQuery = `{
+          ac {
+            posts(page:${i}) {
+              data {
+                objectID: id
+                title
+                slug
+                excerpt
+                authors {
+                    name
+                    slug
+                    id
+                    pivot {
+                        as
+                    }
+                }
+                topics {
+                    name
+                    slug
+                    id
+                    group {
+                        name
+                        slug
+                    }
+                }
+                published
+      
+              }
+            }
+          }
+        }`
+  
+        queries.push(
+          {
+            query: postQuery,
+            transformer: ({ data }) => data.ac && data.ac.posts.data.map((node) => {
+              return { ...node, type: 'post' }
+            }), // (optional)
+            //index: ''// (optional) override default
+          }
+        )
+  
+      }
+    
+    if(process.env.LOCALE==="en"){
+      queries.push(
+        {
+          query: `{
+            ac {
+              playlists {  
+                id  
+                objectID: slug
+                title
+                slug
+                excerpt
+                image {
+                  src
+                  srcset
+                  dataUri
+      
+              }
+              }
+            }
+          }`,
+          transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
+            return { ...node, type: 'playlist' }
+          }), // (optional)
+          //index: ''// (optional) override default
+        }
+      )
+    }
+  
+    return queries
+  }
+
+
+module.exports.allPostQueries=queries

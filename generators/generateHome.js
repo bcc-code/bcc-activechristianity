@@ -1,7 +1,7 @@
 const path = require('path')
 const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
-const {typeScope,formatScope} = require('./TopicsFormatsTypes/hjelper')
-const endpoints = require('../src/endpoints')
+const {typeScope,formatScope} = require('../src/strings/topic-ids')
+const endpoints = require('../src/strings/endpoints')
 const baseUrl = endpoints.api_url
 //${postQuery}
 const headers = {
@@ -107,7 +107,6 @@ module.exports = function generatePages(actions, graphql) {
 
             await graphql(getPopularQuery)
             .then(async(popularRes)=>{
-                console.log(popularRes.data.ac)
                 const {popularPosts,popularTopics}=popularRes.data.ac
                 if (popularPosts){
                     popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl,headers)
@@ -127,12 +126,15 @@ module.exports = function generatePages(actions, graphql) {
                                 const getTopicQuery = getTopic(item)
                                 await graphql(getTopicQuery)
                                 .then(async res=>{
-                                    if(res.data && res.data.ac &&res.data.ac.topic){
+                                    if(res.data && res.data.ac &&res.data.ac.topic && res.data.ac.topic.posts){
                                         const topic = res.data.ac.topic
                                         const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl,headers)
                                         popularTopicsAll["dynamic"].push({...topic,posts:allPosts})
+                                    } else {
+                                        console.log(res)
+                                        console.log(item)
+                                        throw new Error('not able to find posts for this topic')
                                     }
-                                    
                                     
                                 })
                             }

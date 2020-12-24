@@ -6,7 +6,6 @@ import ac_strings from '@/strings/ac_strings.js'
 import { ITopic } from '@/types'
 import shortid from 'shortid'
 const TopicRowAndHorizontalScroll: React.FC<{ topics: ITopic[] }> = ({ topics }) => {
-
     return (
         <>
             <div className="hidden sm:grid grid-cols-6 gap-4 px-4">

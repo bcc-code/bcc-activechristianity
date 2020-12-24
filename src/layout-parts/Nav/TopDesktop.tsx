@@ -15,7 +15,7 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
             <TopFirst />
             <div className="flex py-2 standard-max-w items-center">
                 <Link className='flex flex-1 justify-start items-center px-4 mt-1' to="/">
-                    <LogoFull height="24px" lang={process.env.LOCALE} />
+                    <LogoFull height="24px" />
                 </Link>
                 <div className="flex">
                     <div className="flex justify-end pr-12">

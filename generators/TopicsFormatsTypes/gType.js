@@ -1,13 +1,14 @@
 const _ = require('lodash')
 const path = require('path')
-const {getSubTopicPosts,createSubTopicPages, formatScope,typesAll} = require('./hjelper')
+const {getSubTopicPosts,createSubTopicPages} = require('./hjelper')
 const ac_strings=require('../../src/strings/ac_strings.js')
+const {formatScope,typesAll, formatsAll}=require('../../src/strings/topic-ids.js')
 const query = `{
     ac {
 
-        podcasts:topic (id:${process.env.PODCAST_FILTER_ID}){
+        ${formatsAll.podcast?`podcasts:topic (id:${formatsAll.podcast.keyId}){
             noOfPosts
-        }
+        }`:''}
           
         playlists {
             id
@@ -17,6 +18,7 @@ const query = `{
 }`
 
 module.exports = async function generateTypes(data) {
+    console.log('generating type recommendations')
     const {actions, graphql,contextPosts,subTopics,node:type,nodeInfo,breadcrumb}=data
 
     const { createPage } = actions
@@ -36,6 +38,10 @@ module.exports = async function generateTypes(data) {
 
             await graphql( geFormatPostsQuery)
                 .then(subTopicPostRes=>{
+                    if(subTopicPostRes.errors){
+                        console.log(subTopicPostRes.errors)
+                        throw new Error(subTopicPostRes.errors.join)
+                    }
                     const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
 
                     typeFormatEach.items.push({
@@ -52,7 +58,7 @@ module.exports = async function generateTypes(data) {
                         topic:type,
                         subTopic
                     })
-            }) 
+            })
         }
 
         
@@ -60,14 +66,19 @@ module.exports = async function generateTypes(data) {
 
     if(`${type.id}`===`${typesAll.listen.keyId}`){
         const result = await graphql(query)
+        .then(res=>{
+            if(res.errors){
+                console.log(res.errors)
+                throw new Error(res.errors.join)
+            }
+            return res
+        })
         .catch(error=>{
             console.log(error)
         })
 
         if(result.data && result.data.ac){
             const {podcasts,playlists} = result.data.ac
-
-
             if (playlists){
                 const playlistPage = {
                     title:ac_strings.playlist,

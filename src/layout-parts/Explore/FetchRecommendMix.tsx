@@ -2,14 +2,12 @@ import React from 'react'
 import { FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
 import api from '@/util/api'
 import RightImg from '@/components/PostItemCards/RightImg'
-import { getRandomArray } from '@/helpers'
-import { ITopicPostItems, IPostItem, ITopic } from '@/types'
-import topicFiter from '@/strings/topic-filters.json'
-const { formatIds, typeIds } = topicFiter
+import { getRandomArray, filterTopics } from '@/helpers'
+import { ITopic } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { OutlineButton } from '@/components/Button'
 interface IFetchPost {
-    topics?: ITopic[]
+    topics: ITopic[]
 }
 
 const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
@@ -19,11 +17,9 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
         api.recommended().then(res => {
-            const popularSlugs = res.popularTopics ? res.popularTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug) : []
-            const featuredSlugs = res.featuredTopics ? res.featuredTopics.filter(item => !formatIds[item.id] && !typeIds[item.id]).map(item => item.slug) : []
+
             const recommendSlugs = res.recommended
-            const allTopics = [...new Set([...featuredSlugs, ...popularSlugs])]
-            const randomTopics = getRandomArray(allTopics, 6)
+            const randomTopics = getRandomArray(topics, 6).map(t => t.slug)
             setIsFetchingMore(true)
             Promise.all(randomTopics.map(t => {
 

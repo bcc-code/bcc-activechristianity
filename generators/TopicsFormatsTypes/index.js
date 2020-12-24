@@ -4,7 +4,8 @@ const saveFile = require('../saveFile')
 const {topicQuery, postQuery} = require('gatsby-source-ac/helpers')
 const languagePostQuery = postQuery
 const ac_strings = require('../../src/strings/ac_strings.js')
-const {createArchivePages,formatScope,typeScope,groupAll} = require('./hjelper')
+const {formatScope,typeScope,groupAll} = require('../../src/strings/topic-ids.js')
+const {createArchivePages} = require('./hjelper')
 const generateFormat = require('./gFormat.js')
 const generateType = require('./gType.js')
 const generateTopic = require('./gTopic.js')
@@ -105,7 +106,7 @@ module.exports = function generateTopics(actions, graphql) {
                   }]
               }
                 // create achive of each topic, type, format
-                await createArchivePages({
+/*                 await createArchivePages({
                   graphql,
                   createPage,
                   paginatorInfo:node.pagination.paginatorInfo,
@@ -113,7 +114,7 @@ module.exports = function generateTopics(actions, graphql) {
                   baseUrl,
                   breadcrumb,
                   topicType
-                }) 
+                })  */
             
               const nodeInfo = {
                 key: '',
@@ -148,7 +149,7 @@ module.exports = function generateTopics(actions, graphql) {
                 }
 
                 if (topicType==='format'){
-                  const find = formatScope.find(f=>`${f.keyId}`===`${node.id}`)
+                  const find = formatScope.find(f=>`${f.keyId}`===`${node.id}` && f.keyname!=="podcast")
                   if(find){
                     nodeInfo.key=find.keyname
                     formatIds[`${node.id}`]=nodeInfo
@@ -181,8 +182,8 @@ module.exports = function generateTopics(actions, graphql) {
                         breadcrumb
                     })
                 }
-
               }
+
               if(topicType==="topic"){
                 
                 await generateTopic({

@@ -215,6 +215,7 @@ export interface IImage {
 
 
 export interface ITopicGroup {
+    id: number
     name: string
     slug: string
     icon: string

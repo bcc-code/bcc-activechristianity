@@ -52,7 +52,7 @@ const SignUpForm = () => {
         for (let field of fieldNames) {
             let value = fields[field]
             if (typeof value === 'string' && value.trim() === '') {
-                errorsFound[field] = 'Required'
+                errorsFound[field] = ac_strings.error_required
                 pass = false
             } else {
                 errorsFound[field] = ''
@@ -60,7 +60,7 @@ const SignUpForm = () => {
         }
 
         if (fields.password.length < 6) {
-            errorsFound['confirm'] = 'Password is too short'
+            errorsFound['confirm'] = ac_strings.error_password_too_short
             pass = false
         }
 
@@ -68,7 +68,7 @@ const SignUpForm = () => {
 
         if (!strongRegex.test(fields.password) && !mediumRegex.test(fields.password)) {
             setStrength('red')
-            errorsFound['password'] = 'Password must be at least 6 characters long and contain at least one letter AND one digit or special character.'
+            errorsFound['password'] = ac_strings.error_password_specs
             pass = false
         }
 

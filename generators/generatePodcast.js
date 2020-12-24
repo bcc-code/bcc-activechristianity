@@ -1,7 +1,8 @@
+const { reduceRight } = require('lodash')
 const _ = require('lodash')
 const path = require('path')
 const ac_strings=require('../src/strings/ac_strings.js')
-
+const {formatsAll, podcast:podcastIds} = require('../src/strings/topic-ids')
 /* SETUP */
 
 const query = `{
@@ -21,12 +22,12 @@ const query = `{
 
 module.exports = function generatePages(actions, graphql) {
   const { createPage } = actions
-  const themePages=[]
+
 
   const podcastHosts=[]
-  const aboutUsChildren=[]
+
   return graphql(query).then(result=>{
-    console.log("Generating pages")
+    console.log("Generating podcast")
     if (result.errors){
       result.errors.forEach(e => console.error(e.toString()))
       return Promise.reject(result.errors)
@@ -48,7 +49,7 @@ module.exports = function generatePages(actions, graphql) {
       
       // podcast and hosts
       const allHostsSlug= []
-      for (let i =0;i<podcastHosts.length;i++){
+/*       for (let i =0;i<podcastHosts.length;i++){
         const hostPage = podcastHosts[i]
         const hostPath = `${ac_strings.slug_host}/${hostPage.slug}`
         // const getHostImage = getPostImage(hostPage.slug)
@@ -66,14 +67,14 @@ module.exports = function generatePages(actions, graphql) {
 
           },
         })
-      }
+      } */
 
       createPage({
         path: ac_strings.slug_podcast_intro,
         component: path.resolve(`src/templates/page/podcast-intro.tsx`),
         context:{
           title:podcast.title,
-          postId:process.env.POCAST_INTRO_POST_ID,
+          postId:`${podcastIds.intro_post}`,
           breadcrumb:[
             {
               name:podcast.title,
@@ -90,7 +91,7 @@ module.exports = function generatePages(actions, graphql) {
         component: path.resolve(`src/templates/page/podcast.tsx`),
         context:{
           title:podcast.title,
-          id:process.env.PODCAST_FILTER_ID,
+          id:`${formatsAll.podcast.keyId}`,
           breadcrumb:[
             {
               name:podcast.title,

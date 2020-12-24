@@ -4,7 +4,7 @@ import Video16to9 from '@/components/Images/Video16to9'
 import ScrollSectionChild, { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import LeftSidebarLayout, { ISiderbar } from './index'
 import { Section } from 'react-scroll-section'
-import endpoints from '@/endpoints'
+import endpoints from '@/strings/endpoints'
 const imageUrl = endpoints.contact_hero
 interface IProps {
     sections: IScrollSectionChildProps[]
@@ -79,9 +79,9 @@ const ScrollSectionLayout: React.FC<IProps> = ({ sections, title }) => {
                 </div>
             </Section>
             {sections.map((item, k) =>
-                (
-                    <ScrollSectionChild key={k} {...item} background={k % 2 == 0} />
-                )
+            (
+                <ScrollSectionChild key={k} {...item} background={k % 2 == 0} />
+            )
             )}
         </div>
     )

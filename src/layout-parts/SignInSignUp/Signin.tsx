@@ -144,7 +144,7 @@ const SignInForm: React.FC = () => {
                                 onChange={(e) => {
                                     handleChange(e, 'email')
                                 }}
-                                error={errors.email ? 'Required' : undefined}
+                                error={errors.email ? ac_strings.error_required : undefined}
                             />
                             <InputText
                                 label={ac_strings.password}
@@ -153,7 +153,7 @@ const SignInForm: React.FC = () => {
                                 onChange={(e) => {
                                     handleChange(e, 'password')
                                 }}
-                                error={errors.password ? 'Required' : undefined}
+                                error={errors.password ? ac_strings.error_required : undefined}
                             />
                             <InputCheckbox
                                 label={ac_strings.remember_me}

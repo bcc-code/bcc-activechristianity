@@ -183,8 +183,15 @@
   "views": "views",
   "vocals": "Vocals",
   "watch": "Watch",
-  "with": "with %1$s",
+  "with": "with",
   "youMightBeInterestedIn": "You might be interested in",
   "recently_watched": "Recently watched videos",
-  "recently_viewed": "Recently viewed posts"
+  "recently_viewed": "Recently viewed posts",
+  "bookmarked_video": "Bookmarked videos",
+  "bookmarked_posts": "Bookmarked posts",
+  "error_email_password": "Incorrect email or password, please try again.",
+  "error_password_specs": "Password must be at least 6 characters long and contain at least one letter AND one digit or special character.",
+  "error_required": "Required",
+  "error_password_too_short": "Password is too short",
+  "error_something_went_wrong": "Something went wrong"
 }

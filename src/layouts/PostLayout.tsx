@@ -11,7 +11,7 @@ const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveC
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
 import ViewNext from '@/layout-parts/PostLayout/ViewNext'
-
+import { formatsAll } from '@/strings/topic-ids'
 import { PostH1 } from '@/components/Headers'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
@@ -132,8 +132,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const postId = id
     const imageUrl = image;
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
-    const isPodcast = format?.findIndex(f => `${f.id}` === process.env.PODCAST_FILTER_ID)
-
+    const isPodcast = format?.findIndex(f => `${f.id}` === formatsAll.podcast && formatsAll.podcast.keyId)
 
     const postFooter = (
         <LazyLoad>

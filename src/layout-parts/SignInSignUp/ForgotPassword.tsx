@@ -59,7 +59,7 @@ const ForgotPasswordForm: React.FC = () => {
                 if (res.forgotPassword) {
                     setInfo(ac_strings.message_after_reset_password)
                 } else {
-                    setResError('Something went wrong')
+                    setResError(ac_strings.error_something_went_wrong)
                 }
             }).catch(error => {
                 setResError(error.message)
@@ -94,7 +94,7 @@ const ForgotPasswordForm: React.FC = () => {
                     onChange={(e) => {
                         handleChange(e, 'email')
                     }}
-                    error={errors.email ? 'Required' : undefined}
+                    error={errors.email ? ac_strings.error_required : undefined}
                 />
 
                 <FormSubmitButton

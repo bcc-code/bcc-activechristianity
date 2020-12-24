@@ -1,78 +1,15 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
-const endpoints = require('./src/endpoints')
+const endpoints = require('./src/strings/endpoints')
+const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
 })
 
+
+
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
-
-const postQuery = `{
-  ac {
-    allPosts {
-      objectID: id
-      title
-      slug
-      excerpt
-      authors {
-          name
-          slug
-          id
-          pivot {
-              as
-          }
-      }
-      topics {
-          name
-          slug
-          id
-          group {
-              name
-              slug
-          }
-      }
-      published
-    }
-  }
-}`
-
-const queries = [
-  {
-    query: postQuery ,
-    transformer: ({ data }) => data.ac && data.ac.allPosts.map((node) => {
-      return { ...node, type: 'post' }
-    }), // (optional)
-    //index: ''// (optional) override default
-  }
-  ];
-if(process.env.LOCALE==="en"){
-  queries.push(
-    {
-      query: `{
-        ac {
-          playlists {  
-            id  
-            objectID: slug
-            title
-            slug
-            excerpt
-            image {
-              src
-              srcset
-              dataUri
-  
-          }
-          }
-        }
-      }`,
-      transformer: ({ data }) => data.ac && data.ac.playlists.map((node) => {
-        return { ...node, type: 'playlist' }
-      }), // (optional)
-      //index: ''// (optional) override default
-    }
-  )
-}
 
 const checkEnvVar = require('./check_env_var')
 checkEnvVar()
@@ -149,16 +86,7 @@ const plugins = [
   },
   "gatsby-plugin-webpack-bundle-analyser-v2",
   'gatsby-plugin-loadable-components-ssr',
-  {
-    resolve: `gatsby-plugin-algolia-search`,
-    options: {
-      appId: process.env.ALGOLIA_APP_ID,
-      apiKey: process.env.ALGOLIA_ADMIN_KEY,
-      indexName: 'posts', // for all queries
-      queries,
-      enablePartialUpdates: true
-    }
-  },
+
 
 ];
 
@@ -183,15 +111,16 @@ if (activeEnv === 'production') {
           enableS3StaticWebsiteHosting: false,
       },
     },
-/*     {
+    {
       resolve: `gatsby-plugin-algolia-search`,
       options: {
         appId: process.env.ALGOLIA_APP_ID,
         apiKey: process.env.ALGOLIA_ADMIN_KEY,
         indexName: 'posts', // for all queries
-        queries,
+        queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
         enablePartialUpdates: true
-      }, }*/
+      }
+    },
     {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
@@ -205,7 +134,7 @@ if (activeEnv === 'production') {
     }
   )
 
-  if(process.env.LANG_CODE==="en" || process.env.NO_FOLLOW==="true"){
+  if( process.env.NO_FOLLOW==="true"){
     plugins.push({
       resolve: 'gatsby-plugin-robots-txt',
       options: {

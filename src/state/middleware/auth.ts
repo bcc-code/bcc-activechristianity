@@ -5,7 +5,7 @@ import { setUser, setLogInError, setRegisterError, setLogout } from '@/state/act
 import { closeSignInModal, openSignInModal } from '@/state/action'
 import { getUserLibrary } from '@/state/action/userAction'
 import { IRootState } from '@/state/types'
-
+import ac_strings from '@/strings/ac_strings.js'
 /* import { IProfileRes } from '@/types/apiResType' */
 
 import acApi from '@/util/api'
@@ -60,10 +60,10 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
                         } else {
 
-                            throw new Error("Incorrect email or password, please try again.")
+                            throw new Error(ac_strings.error_email_password)
                         }
                     } else {
-                        throw new Error("Incorrect email or password, please try again.")
+                        throw new Error(ac_strings.error_email_password)
                     }
 
 
@@ -94,7 +94,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                         }
 
                     } else {
-                        store.dispatch(setRegisterError('Something went wrong'))
+                        store.dispatch(setRegisterError(ac_strings.error_something_went_wrong))
                     }
                 })
                 .catch((err: any) => {

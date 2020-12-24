@@ -167,6 +167,7 @@ export const recommendedPostsAndPopularTopic = () => `
     popularTopics{
       slug
       id
+      
     }
     featuredTopics:topics(featured:true) {
       slug

@@ -20,7 +20,7 @@ import "./src/styles/reset.css"
 import "./src/styles/tailwind-output.css"
 import Layout from "./src/layouts/App"
 
-import endpoints from './src/endpoints'
+import endpoints from './src/strings/endpoints'
 import wrapWithProvider from "./provider"
 
 export const wrapRootElement = wrapWithProvider
@@ -37,20 +37,25 @@ const addScript = url => {
 export const onClientEntry = () => {
   window.onload = () => {
     if(typeof window !== 'undefined') {
-      window.refTagger = {
-        settings: {
-          bibleVersion: process.env.BIBLE_VERSION,
-          addLogosLink: false,
-          appendIconToLibLinks: false,
-          caseInsensitive: true,
-          convertHyperlinks: false,
-          libronixBibleVersion: process.env.BIBLE_VERSION,
-          libronixLinkIcon: "light",
-          linksOpenNewWindow: false,
-          tagChapters: true,
-          useTooltip: true
+
+      if( process.env.LANG_CODE==="en"){
+        window.refTagger = {
+          settings: {
+            bibleVersion: "NKJV",
+            addLogosLink: false,
+            appendIconToLibLinks: false,
+            caseInsensitive: true,
+            convertHyperlinks: false,
+            libronixBibleVersion: "NKJV",
+            libronixLinkIcon: "light",
+            linksOpenNewWindow: false,
+            tagChapters: true,
+            useTooltip: true
+          }
         }
       }
+
+
     }
 
     addScript(endpoints.reftagger)

@@ -86,7 +86,7 @@ export const desktopMenu = getDesktopMenu();
 export const mobileMenuBase = getMobileMenu();
 export const sideMenu = ["about", "contact"].map(item => menusItems[item]);
 export const sideResourceMenu = getMobileMenu(true)
-if (process.env.LOCALE === "en") {
+if (process.env.LANG_CODE === "en") {
     sideResourceMenu.push(menusItems.glossary)
 }
 
@@ -189,8 +189,6 @@ export const iconMapNav: {
                 name="Bookmarks"
                 color="slate-light"
             />
-
-
         ),
         default: (
             <Icon

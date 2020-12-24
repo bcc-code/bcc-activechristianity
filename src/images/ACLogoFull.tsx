@@ -5,7 +5,6 @@ interface ILogoStyle {
     height: string
     iconOnly?: boolean
     width?: string
-    lang?: string
 }
 export default (props: ILogoStyle) => {
     const { height, width, iconOnly } = props

@@ -1,7 +1,7 @@
 const _ = require('lodash')
 const path = require('path')
 const formatTemplate= 'src/templates/recommend/format-recommend.tsx'
-const {formatScope} = require('./hjelper')
+
 
 module.exports = async function generateFormat(data) {
     const {actions, graphql,contextPosts,subTopics,node:format,nodeInfo,breadcrumb}=data

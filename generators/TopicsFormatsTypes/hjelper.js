@@ -1,77 +1,13 @@
 const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
+const {formatsAll,typesAll} = require('../../src/strings/topic-ids')
 const listTemplate = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
 const perPage= 12
 const languagePostQuery = postQuery
 
 
-
-const formatsAll = {
-  "animation":{
-    keyId: 108212,
-    keyname: "animation",
-  },
-  "message":{
-      keyId: 36170,
-      keyname: "message",
-  },
-  "song": {
-      keyId: 108204,
-      keyname: "song",
-  },
-  "edification":{
-      keyId: 108206,
-      keyname: "edification",
-  },
-  "testimony":{
-      keyId: 345,
-      keyname: "testimony",
-  },
-  "question":{
-      keyId: 1503,
-      keyname: "question",
-  },
-  "commentary":{
-      keyId: 108201,
-      keyname: "commentary",
-  },
-  "interview":{
-    keyId: 108211,
-    keyname: "interview",
-},
-}
-module.exports.formatsAll=formatsAll
-
-const typesAll={
-  "read":{
-      keyId:108196,
-      keyname:"read"
-  },
-  "watch":{
-      keyId:108198,
-      keyname:"watch"
-  },
-  "listen":{
-      keyId:108197,
-      keyname:"listen"
-  }
-}
-
-
-module.exports.typesAll = typesAll
-
-
-const groupAll={
-  format:4,  
-  type:5
-}
-
-module.exports.groupAll=groupAll
-module.exports.formatScope = Object.keys(formatsAll).map(key=>formatsAll[key])
-
-module.exports.typeScope = Object.keys(typesAll).map(key=>typesAll[key])
 
 module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
   ac {

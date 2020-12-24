@@ -1,6 +1,6 @@
 
 import * as request from './requests';
-import endpoints from '@/endpoints'
+import endpoints from '@/strings/endpoints'
 
 const baseUrl = endpoints.api_url
 const sendQuery = (query: string) => {
@@ -146,6 +146,7 @@ export default {
     recommended: () => {
         const query = request.recommendedPostsAndPopularTopic()
         return sendQuery(query).then(res => {
+            console.log(res)
             return res
         })
     },

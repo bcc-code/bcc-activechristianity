@@ -6,9 +6,9 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-
+const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 const buildTranslations = require('./generators/json/build-translations')
-
+const endpoints = require('./src/strings/endpoints')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -17,19 +17,17 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
           'process.env.LANG': JSON.stringify(process.env.LANG),
           'process.env.LANG_CODE': JSON.stringify(process.env.LANG_CODE),
           'process.env.LOCALE': JSON.stringify(process.env.LOCALE),
-          'process.env.BIBLE_VERSION': JSON.stringify(process.env.BIBLE_VERSION),
           'process.env.ALGOLIA_APP_ID': JSON.stringify(process.env.ALGOLIA_APP_ID),
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
-          'process.env.PODCAST_PLAYLIST_SLUG': JSON.stringify(process.env.PODCAST_PLAYLIST_SLUG),
-          'process.env.PODCAST_FILTER_ID':JSON.stringify(process.env.PODCAST_FILTER_ID),
+          'process.env.LISTEN_SECTION':JSON.stringify(process.env.LISTEN_SECTION)
         })
       ]
     })
   }
 
   exports.onPreInit = async () => {
-    console.log('loading pre PreInit')
+    await getIndexPostQuery(endpoints.api_url)
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()
   }
@@ -49,22 +47,28 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateSeries = require('./generators/generateSeries')
     
      const generators = [
-      generateAuthors(actions, graphql), 
+      generateAuthors(actions, graphql),
       generatePages(actions, graphql),
       generateExplore(actions, graphql),
       generateHome(actions, graphql), 
       generatePosts(actions, graphql),
+      generateTopics(actions, graphql),
       generateTopics(actions, graphql), 
       generateRedirect(actions, graphql)
     ]
+    if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast-only"){
+      generators.push(generatePodcast(actions, graphql))
+    }
 
     if (process.env.LANG_CODE==="en"){
       generators.push(generateSeries(actions, graphql))
       generators.push( generateGlossary(actions, graphql))
       generators.push(generatePlaylists(actions, graphql))
-      generators.push(generateScriptures(actions, graphql))
-      generators.push(generatePodcast(actions, graphql))
-    }
+      generators.push(generateScriptures(actions, graphql)) 
+  }
+  
+
+
     return Promise.all(generators)
 
 

@@ -44,12 +44,10 @@ export interface IDrawerNav {
 const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: { pathname: string } }> = (props) => {
     const { children, pageContext, location } = props
 
-    const isLandingPage = location && location.pathname && location.pathname.indexOf('online-church') > -1
+    const isLandingPage = location && location.pathname && location.pathname.indexOf('campaign/') > -1
     const cookieName = 'ac.revert_to_original'
-    const acSessionCookie = 'ac2_session'
-    const showInfoBanner = Cookies.get(cookieName);
-    const getLoggedInCookie = Cookies.get(acSessionCookie)
 
+    const showInfoBanner = Cookies.get(cookieName);
 
     const dispatch = useDispatch();
 
@@ -117,10 +115,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isModalOpen,
         isSignInModalOpen
     ])
-    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => {
-        console.log(item)
-        return ({ ...menusItems[item], icon: iconMapNav[item] })
-    })
+    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
     if (auth.loggedIn !== "success") {
         mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
     } else {

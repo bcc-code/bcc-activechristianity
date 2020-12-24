@@ -2,8 +2,9 @@ const _ = require('lodash')
 const path = require('path')
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
-const {getSubTopicPosts,createSubTopicPages, groupAll,formatScope} = require('./hjelper')
+const {getSubTopicPosts,createSubTopicPages} = require('./hjelper')
 const ac_strings = require('../../src/strings/ac_strings')
+const {groupAll,formatScope}= require('../../src/strings/topic-ids.js')
 module.exports = async function generateTopic(data) {
     const {actions, graphql,contextPosts,subTopics,node:topic,breadcrumb}=data
     const { createPage } = actions

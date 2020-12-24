@@ -28,7 +28,7 @@
     "csv-parser": "^2.3.2",
     "flickity": "^2.2.1",
     "gatsby": "^2.24.83",
-    "gatsby-plugin-algolia-search": "^0.5.7",
+    "gatsby-plugin-algolia-search": "file:gatsby-plugin-algolia-search",
     "gatsby-plugin-feed": "^2.5.3",
     "gatsby-plugin-feed-generator": "^2.0.5",
     "gatsby-plugin-google-analytics": "^2.3.19",
@@ -104,7 +104,7 @@
   "scripts": {
     "build": "gatsby build",
     "deploy": "gatsby-plugin-s3 deploy --yes && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths \"/*\"",
-    "develop": "ACTIVE_ENV=fr_development gatsby develop",
+    "develop": "ACTIVE_ENV=en_development gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
