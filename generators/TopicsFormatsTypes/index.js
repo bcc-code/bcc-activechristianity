@@ -106,7 +106,7 @@ module.exports = function generateTopics(actions, graphql) {
                   }]
               }
                 // create achive of each topic, type, format
-/*                 await createArchivePages({
+                await createArchivePages({
                   graphql,
                   createPage,
                   paginatorInfo:node.pagination.paginatorInfo,
@@ -114,7 +114,7 @@ module.exports = function generateTopics(actions, graphql) {
                   baseUrl,
                   breadcrumb,
                   topicType
-                })  */
+                })
             
               const nodeInfo = {
                 key: '',

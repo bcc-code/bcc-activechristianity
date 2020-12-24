@@ -23,12 +23,14 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
             setIsFetchingMore(true)
             Promise.all(randomTopics.map(t => {
 
-                const url = `${ac_strings.slug_topic}/${t}`
+                const url = `${ac_strings.slug_topic}/${t}/${ac_strings.slug_latest}`
                 return fetch(`/page-data/${url}/page-data.json`)
                     .then(res => res.json())
                     .then(res => {
+                        console.log(res)
                         if (res.result && res.result && res.result.pageContext.posts) {
-                            const posts: string[] = res.result.pageContext.posts.filter(p => typeof p === "string")
+                            console.log(res.result.pageContext.posts)
+                            const posts: string[] = res.result.pageContext.posts.filter(p => typeof p !== "undefined")
                             return getRandomArray(posts, 4)
 
                         }
@@ -39,6 +41,7 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
                         console.log(error)
                     })
             })).then(async (postArrays) => {
+                console.log(postArrays)
                 let allPostSlugs: string[] = recommendSlugs ? recommendSlugs.map(p => p.slug).filter(p => typeof p === "string") : []
                 postArrays.forEach((array => {
                     if (array) {
