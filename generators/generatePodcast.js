@@ -49,7 +49,7 @@ module.exports = function generatePages(actions, graphql) {
       
       // podcast and hosts
       const allHostsSlug= []
-/*       for (let i =0;i<podcastHosts.length;i++){
+      for (let i =0;i<podcastHosts.length;i++){
         const hostPage = podcastHosts[i]
         const hostPath = `${ac_strings.slug_host}/${hostPage.slug}`
         // const getHostImage = getPostImage(hostPage.slug)
@@ -67,7 +67,7 @@ module.exports = function generatePages(actions, graphql) {
 
           },
         })
-      } */
+      } 
 
       createPage({
         path: ac_strings.slug_podcast_intro,

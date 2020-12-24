@@ -183,10 +183,15 @@
   "views": "visninger",
   "vocals": "Vokalist",
   "watch": "Se på",
-  "with": "med %1$s",
+  "with": "med",
   "youMightBeInterestedIn": "Kanskje er du interessert i",
   "recently_watched": "Nylig sett videoer",
   "recently_viewed": "Nylig sett innlegg",
   "bookmarked_video": "Bokmerkede videoer",
-  "bookmarked_posts": "Bokmerkede poster"
+  "bookmarked_posts": "Bokmerkede poster",
+  "error_email_password": "Incorrect email or password, please try again.",
+  "error_password_specs": "Password must be at least 6 characters long and contain at least one letter AND one digit or special character.",
+  "error_required": "Required",
+  "error_password_too_short": "Password is too short",
+  "error_something_went_wrong": "Something went wrong"
 }
