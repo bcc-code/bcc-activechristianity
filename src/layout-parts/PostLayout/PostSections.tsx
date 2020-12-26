@@ -2,6 +2,7 @@ import * as React from 'react'
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
 import { INavItem, IPostAuthors, ITopicNavItem, IPostItem } from '@/types'
+import { fetchPostsFromOneTopicSlug, fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import Icon from '@/components/Icons/Icon'
@@ -225,7 +226,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPla
     }
 
     return (
-        <div className={`flex flex-col mx-3 py-2 absolute right-0 bottom-0 ${isPlayingAudio ? 'mb-40' : 'mb-24'} bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
+        <div className={`flex flex-col mx-3 py-2 fixed right-0 bottom-0 ${isPlayingAudio ? 'mb-40' : 'mb-24'} bg-white shadow rounded-full text-white text-sm`} style={{ zIndex: 60 }}>
             <button className="px-2 py-1" key={shortid()}>
                 <ToogleBookmark
                     id={id}
@@ -324,20 +325,22 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
 )
 
 export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[], topics?: ITopicNavItem[] }> = ({ postId, readMorePosts, topics }) => {
-    const [randomPosts, setRandomPosts] = React.useState<string[]>([])
+    const [randomPosts, setRandomPosts] = React.useState<IPostItem[]>([])
 
     React.useEffect(() => {
+        let readMore: string[] = []
+        if (readMorePosts.length > 0) {
+            const procssedReadMore = readMorePosts.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
+            readMore = procssedReadMore
+        }
+
         acApi.recommendedByPost(postId)
             .then(res => {
-
+                console.log(res)
                 /* setPosts(allSlugs) */
-                let readMore: string[] = []
-                if (readMorePosts.length > 0) {
-                    const procssedReadMore = readMorePosts.filter(item => typeof item === "string").map(item => item.replace(/^\/|\/$/g, ''))
-                    readMore = procssedReadMore
-                }
 
                 let randomRecommendPosts: string[] = []
+
                 if (res.recommendedByPost) {
                     let recommendedPosts = res.recommendedByPost.map((p: any) => p.slug)
                     let randName = [];
@@ -347,23 +350,51 @@ export const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: 
                         // prepare to remove dupicates in readmores 
                         randomRecommendPosts = randName.map(item => item.replace(/^\/|\/$/g, ''))
                     }
+                    let allPosts = [...randomRecommendPosts, ...readMore]
+                    readMore = [...new Set(allPosts)]
+                    fetchLocalPostsFromSlugs(readMore).then(res => {
+                        if (res) {
+                            setRandomPosts(res)
+                        }
+                    })
+
+                } else {
+                    const allTopics = topics ? topics : []
+                    console.log(allTopics)
+                    Promise.all(allTopics.map(item => fetchPostsFromOneTopicSlug(item.to)))
+                        .then(topicsPosts => {
+                            const topicPosts: IPostItem[] = []
+                            topicsPosts.forEach(postRes => {
+                                console.log(postRes)
+                                if (postRes) {
+                                    const getRandomFromTopic = getRandomArray(postRes, 2)
+                                    topicPosts.push(...getRandomFromTopic)
+                                }
+                            })
+
+                            return fetchLocalPostsFromSlugs(readMore).then(res => {
+                                if (res) {
+                                    let allPosts = [...res, ...topicPosts]
+                                    setRandomPosts(allPosts)
+                                } else {
+                                    setRandomPosts(topicPosts)
+                                }
+                            })
+
+                        })
+
+
+
                 }
-                let allPosts = [...randomRecommendPosts, ...readMore]
-                readMore = [...new Set(allPosts)]
-                setRandomPosts(readMore)
+
+
             })
             .catch(error => {
                 console.log(error)
             })
     }, [postId, readMorePosts])
+    console.log(randomPosts)
     return (
-        <FetchPostsFromSlugs
-
-            slugs={randomPosts}
-            layout="row"
-            render={({ posts }) => {
-                return <Row3ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={posts} />
-            }}
-        />
+        <Row3ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={randomPosts} />
     )
 }

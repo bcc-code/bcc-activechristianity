@@ -1,7 +1,7 @@
 import * as React from "react"
 import { IPostItem, IPlaylist } from '@/types'
 import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
-import { fetchLocalPostsFromSlugs, fetchOneLocalPostsFromSlug, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
+import { fetchLocalPostsFromSlugs, fetchOneLocalPostFromSlug, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -106,7 +106,7 @@ export const FetchOnePost: React.FC<IFetchOnePost> = ({ slug, render }) => {
     React.useEffect(() => {
         let isSubscribed = true
         setLoading(true)
-        fetchOneLocalPostsFromSlug(slug)
+        fetchOneLocalPostFromSlug(slug)
             .then(res => {
                 if (isSubscribed) {
                     setLoading(false)

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { INavItem, IImage, IEbook, IPostItem, IPlaylist, } from "@/types"
-import { fetchEbookFromSlug, fetchPlaylistFromSlug, fetchOneLocalPostsFromSlug } from '@/helpers/fetchLocalData'
+import { fetchEbookFromSlug, fetchPlaylistFromSlug, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import Ebook from '@/components/ScrollSection/Ebook'
 import DesktopHeaderPost from '@/layout-parts/Home/DesktopHeaderPost'
 import Playlist from '@/components/ScrollSection/Playlist'
@@ -114,7 +114,7 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
 
             })
         } else if (type == "post") {
-            fetchOneLocalPostsFromSlug(slug).then(res => {
+            fetchOneLocalPostFromSlug(slug).then(res => {
                 if (res) {
                     const toAdd = { ...res, ...modified }
                     setLoadedPost(toAdd)

@@ -33,7 +33,9 @@ const ExploreLayout: React.FC<{
     const formats = Object.keys(formatIds).map(id => formatIds[id])
 
     const randomTopics = getRandomArray(topics, 6)
-
+    const hasPlaylist = process.env.LISTEN_SECTION === "all"
+    const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
+    const hasScriptureSection = process.env.SCRIPTURE_SECTION === "true"
     return (
         <div className="bg-white max-w-tablet mx-auto pb-8">
             <div className="pt-6">
@@ -51,7 +53,7 @@ const ExploreLayout: React.FC<{
 
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
-                    {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" && (
+                    {hasPodcast && (
                         <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
@@ -62,7 +64,7 @@ const ExploreLayout: React.FC<{
                             </div>
                         </Link>
                     )}
-                    {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" && (
+                    {hasPlaylist && (
                         <Link key={shortid()} to={ac_strings.slug_playlist} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
@@ -89,7 +91,7 @@ const ExploreLayout: React.FC<{
                 </div>
             </div>
 
-            {ac_strings.slug_scripture && ac_strings.slug_scripture.toLowerCase() !== "false" && (
+            {hasScriptureSection && (
                 <ExplorePopularScripture
                     scriptureSlug={ac_strings.slug_scripture}
                 />

@@ -20,7 +20,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
           'process.env.ALGOLIA_APP_ID': JSON.stringify(process.env.ALGOLIA_APP_ID),
           'process.env.ALGOLIA_SEARCH_KEY': JSON.stringify(process.env.ALGOLIA_SEARCH_KEY),
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
-          'process.env.LISTEN_SECTION':JSON.stringify(process.env.LISTEN_SECTION)
+          'process.env.LISTEN_SECTION':JSON.stringify(process.env.LISTEN_SECTION),
+          'process.env.GLOSSARY_SECTION':JSON.stringify(process.env.GLOSSARY_SECTION),
+          'process.env.SCRIPTURE_SECTION':JSON.stringify(process.env.SCRIPTURE_SECTION)
         })
       ]
     })
@@ -53,24 +55,26 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       generateHome(actions, graphql), 
       generatePosts(actions, graphql),
       generateTopics(actions, graphql),
-      generateTopics(actions, graphql), 
-      generateRedirect(actions, graphql)
+      generateRedirect(actions, graphql),
+      generateSeries(actions, graphql)
     ]
-    if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast-only"){
+    if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
       generators.push(generatePodcast(actions, graphql))
     }
 
-    if (process.env.LANG_CODE==="en"){
-      generators.push(generateSeries(actions, graphql))
-      generators.push( generateGlossary(actions, graphql))
+    if (process.env.LISTEN_SECTION==="all"){
       generators.push(generatePlaylists(actions, graphql))
+    }
+
+    if (process.env.GLOSSARY_SECTION==="true"){
+      generators.push( generateGlossary(actions, graphql))
+    }
+
+    if (process.env.SCRIPTURE_SECTION==="true"){
       generators.push(generateScriptures(actions, graphql)) 
   }
-  
-
 
     return Promise.all(generators)
-
 
 }
 

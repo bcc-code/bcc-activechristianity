@@ -7,13 +7,13 @@ import PostMeta from '@/components/PostMeta/PostMeta'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
-import { fetchOneLocalPostsFromSlug } from '@/helpers/fetchLocalData'
+import { fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
 
     const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
     React.useEffect(() => {
-        fetchOneLocalPostsFromSlug(slug).then(res => {
+        fetchOneLocalPostFromSlug(slug).then(res => {
             if (res && res.media && res.media.video) {
                 setVideoUrl(res.media.video.src)
             }

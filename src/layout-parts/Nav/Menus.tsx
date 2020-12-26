@@ -41,6 +41,10 @@ export const menusItems = {
         name: ac_strings.topic,
         to: ac_strings.slug_topic
     },
+    "podcast": {
+        name: ac_strings.podcast,
+        to: `${ac_strings.slug_podcast}`
+    }
 }
 
 export const userMenuItems = {
@@ -67,26 +71,39 @@ export const userMenuItems = {
     "myContent": {
         name: ac_strings.my_content,
         to: `${slug_user}/${ac_strings.slug_user_content}`
-    }
+    },
+
 }
 const getDesktopMenu = () => {
-    const listen = ["read", "listen", "watch", "explore"]
-    const withoutListen = ["read", "watch", "explore", "about"]
-    const menu = process.env.LANG_CODE === "en" ? listen : withoutListen
+    const menuOptions = {
+        all: ["read", "listen", "watch", "explore"],
+        podcast_only: ["read", "podcast", "watch", "explore"],
+        other: ["read", "watch", "explore", "about"]
+    }
+    const listenSectionKey = process.env.LISTEN_SECTION
+    const menu = listenSectionKey && menuOptions[listenSectionKey] ? menuOptions[listenSectionKey] : menuOptions.other
     return menu.map(item => menusItems[item]);
 }
 
 const getMobileMenu = (withItems?: boolean) => {
     const listen = ["explore", "read", "listen", "watch"]
     const withoutListen = ["explore", "read", "watch", "topic"]
-    const menu = process.env.LANG_CODE === "en" ? listen : withoutListen
+
+    const menuOptions = {
+        all: ["explore", "read", "listen", "watch"],
+        podcast_only: ["read", "podcast", "watch", "explore"],
+        other: ["explore", "read", "watch", "topic"]
+    }
+
+    const listenSectionKey = process.env.LISTEN_SECTION
+    const menu = listenSectionKey && menuOptions[listenSectionKey] ? menuOptions[listenSectionKey] : menuOptions.other
     return withItems ? menu.map(item => menusItems[item]) : menu
 }
 export const desktopMenu = getDesktopMenu();
 export const mobileMenuBase = getMobileMenu();
 export const sideMenu = ["about", "contact"].map(item => menusItems[item]);
 export const sideResourceMenu = getMobileMenu(true)
-if (process.env.LANG_CODE === "en") {
+if (process.env.GLOSSARY === "true") {
     sideResourceMenu.push(menusItems.glossary)
 }
 
@@ -135,9 +152,21 @@ export const iconMapNav: {
                 name="Headset"
                 color="slate-light"
             />
+        ),
+        default: (
+            <Icon
+                name="Headset"
+                color="slate-light"
+            />
 
-
-
+        )
+    },
+    'podcast': {
+        selected: (
+            <Icon
+                name="Headset"
+                color="slate-light"
+            />
         ),
         default: (
             <Icon

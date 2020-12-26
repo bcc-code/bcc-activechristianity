@@ -33,7 +33,7 @@ const formatsAll = {
     }
 }
 
-if(process.env.LISTEN_SECTION==="all" || process.env.LISTEN_SECTION==="podcast-only"){
+if(process.env.LISTEN_SECTION==="all" || process.env.LISTEN_SECTION==="podcast_only"){
     formatsAll["podcast"]={
         keyId: 108205,
         keyname: "podcast"

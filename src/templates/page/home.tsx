@@ -40,6 +40,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
   const popularPosts = popularPostsAll.dynamic && popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
   const { featured, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
   const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
+
   React.useEffect(() => {
 
     const mixed = getRandomFeatured({ latest, popular, featured })

@@ -114,8 +114,8 @@ const SignInForm: React.FC = () => {
                             </button>
                         </div>
                         <div className="flex justify-center text-xs " onClick={setNotShowReminder}>
-                            Continue to sign in
-{/*                             <button
+                            {ac_strings.continue_to_sign_in}
+                            {/*                             <button
                                 className="text-xs bg-white text-blue-500 rounded p-2"
                                 onClick={() => {
                                     setShowReminder(false)

@@ -160,12 +160,13 @@ export const transformTopicsRes = (topics: ITopicRes[]) => {
     const filteredTopics: ITopicNavItem[] = []
     const format: ITopicNavItem[] = []
     topics.forEach((t) => {
-        if (t.noOfPosts > 0) {
+
+        if (t.noOfPosts !== 0) {
             const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
-            if (t.group && t.group.id === topicGroupAll.type) {
+            if (t.group && `${t.group.id}` === `${topicGroupAll.type}`) {
                 types.push(toAdd)
 
-            } else if (t.group && t.group.id === topicGroupAll.format) {
+            } else if (t.group && `${t.group.id}` === `${topicGroupAll.format}`) {
                 format.push(toAdd)
             } else {
                 toAdd.to = `${ac_strings.slug_topic}/${t.slug}`

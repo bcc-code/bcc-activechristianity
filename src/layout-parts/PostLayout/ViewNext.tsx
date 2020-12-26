@@ -8,7 +8,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import Flickity from "react-flickity-component";
 import SquareImage from '@/components/Images/Image1to1Rounded'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
-import { fetchPostslistFromArchivePage, fetchOneLocalPostsFromSlug } from '@/helpers/fetchLocalData'
+import { fetchPostslistFromArchivePage, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import { getRandomArray } from '@/helpers'
 import shortid from 'shortid'
 import acApi from '@/util/api'
@@ -47,7 +47,7 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
                 const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
                 const pickRandomSlugs = getRandomArray(allSlugs, 3)
                 return Promise.all(pickRandomSlugs.map(p => {
-                    return fetchOneLocalPostsFromSlug(p)
+                    return fetchOneLocalPostFromSlug(p)
                 })).then(res => {
                     const toAdd: IPostItem[] = []
                     if (res && Array.isArray(res)) {
@@ -70,7 +70,7 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
                 const allSlugs: string[] = res.recommended.map((p: any) => p.slug)
                 const pickRandomSlugs = getRandomArray(allSlugs, 3)
                 return Promise.all(pickRandomSlugs.map(p => {
-                    return fetchOneLocalPostsFromSlug(p)
+                    return fetchOneLocalPostFromSlug(p)
                 })).then(res => {
                     const toAdd: IPostItem[] = []
                     if (res && Array.isArray(res)) {

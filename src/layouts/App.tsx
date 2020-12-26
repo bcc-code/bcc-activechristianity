@@ -89,6 +89,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 }
             })
             .catch((err: any) => {
+                console.log(err)
                 dispatch(setLogout())
                 console.log('handle login error')
             })

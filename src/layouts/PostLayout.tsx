@@ -43,6 +43,7 @@ interface IPostProps extends IPostItem {
     recommendPosts: string[]
     readMorePosts: string[]
     credits?: string
+    seoTitle: string
 }
 type IMediaType = "audio" | "video"
 export const PostLayout: React.FC<IPostProps> = (post) => {
@@ -66,7 +67,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         likes,
         duration,
         media,
-        credits
+        credits,
+        seoTitle
     } = post
 
 
@@ -231,7 +233,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     </div>
                     {(currentMediaType === "audio") && (
                         <div className="block relative sm:pt-10 mb-12 ">
-                            <TwoToOneImg image={image} rounded />
+                            <TwoToOneImg image={image} rounded alt={seoTitle} />
                             {isPodcast && isPodcast > -1 ? (
                                 <div>
                                     <SubscribePodcast />
@@ -241,7 +243,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     )}
                     {(currentMediaType === "none") && (
                         <div className="hidden sm:block relative sm:pt-10 mb-12 ">
-                            <TwoToOneImg image={image} rounded />
+                            <TwoToOneImg image={image} rounded alt={seoTitle} />
                         </div>
                     )}
 

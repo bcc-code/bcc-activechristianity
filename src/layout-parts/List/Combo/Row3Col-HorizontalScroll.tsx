@@ -16,13 +16,15 @@ import { IPostItem } from '@/types'
 const Row2ColAndHorizontalScroll: React.FC<{ title: string, posts: IPostItem[] }> = ({ title, posts }) => {
 
     return (
-        <div className="py-6">
-            <PageSectionHeaderUpperCaseGray title={title} />
+        <div className="">
+            <div className="pb-4">
+                <PageSectionHeaderUpperCaseGray title={title} />
+            </div>
             <div className="hidden sm:block">
 
                 <PostRow3Col posts={posts.slice(0, 3)} />
             </div>
-            <div className="sm:hidden -ml-4 -mr-4 py-6">
+            <div className="sm:hidden -ml-4 -mr-4 pt-6">
 
                 <TopImgHorizontalScrollRow posts={posts} />
             </div>

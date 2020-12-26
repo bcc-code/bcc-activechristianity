@@ -1,4 +1,4 @@
-import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem, ITopic, ITopicPostItems } from '@/types'
+import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem, ITopic, ITopicPostItems, IPostRes } from '@/types'
 import { trimSlug, normalizePostRes, normalizeTracks } from './index'
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -7,7 +7,7 @@ import ac_strings from '@/strings/ac_strings.js'
 export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
     const filteredSlugs = slugs.filter(s => typeof s === "string" && s.trim() !== "")
     return Promise
-        .all(filteredSlugs.map(item => fetchOneLocalPostsFromSlug(item)))
+        .all(filteredSlugs.map(item => fetchOneLocalPostFromSlug(item)))
         .then(list => {
             const toReturn: IPostItem[] = []
             list.map(post => {
@@ -28,6 +28,7 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
+            console.log(res)
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: string[] = res.result.pageContext.posts
                 return fetchLocalPostsFromSlugs(posts)
@@ -127,7 +128,7 @@ export const fetchTopicFromSlug = (slug: string) => {
         })
 }
 
-export const fetchOneLocalPostsFromSlug = (slug: string) => {
+export const fetchOneLocalPostFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
@@ -141,6 +142,35 @@ export const fetchOneLocalPostsFromSlug = (slug: string) => {
         .catch(error => {
             console.log(error)
             return undefined
+        })
+}
+
+export const fetchPostsFromOneTopicSlug = (slug: string) => {
+    const foundPosts: IPostItem[] = []
+    return fetch(`/page-data/${slug}/page-data.json`)
+        .then(res => res.json())
+        .then(async (res) => {
+            if (res.result && res.result && res.result.pageContext.posts) {
+                const posts: IPostItem[] = []
+                const postsRes: IPostRes[] | string[] = res.result.pageContext.posts
+                for (let i = 0; i < postsRes.length; i++) {
+                    const onePostRes = postsRes[i]
+                    if (typeof onePostRes === "string") {
+                        const fullPost = await fetchOneLocalPostFromSlug(onePostRes)
+                        if (fullPost) {
+                            posts.push(fullPost)
+                        }
+                    } else if (typeof onePostRes === "object") {
+                        posts.push(normalizePostRes(onePostRes))
+                    }
+                }
+                /* const posts: IPostItem[]|string[] = res.result.pageContext.posts.map( p=>) */
+                foundPosts.push(...posts)
+            }
+            return foundPosts
+        }).catch(error => {
+            console.log(slug)
+            console.log(error)
         })
 }
 

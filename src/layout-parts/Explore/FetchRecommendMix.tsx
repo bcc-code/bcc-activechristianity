@@ -1,9 +1,10 @@
 import React from 'react'
-import { FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
+import { FetchOnePost } from '@/HOC/FetchPosts'
+import { fetchLocalPostsFromSlugs, fetchPostsFromOneTopicSlug } from '@/helpers/fetchLocalData'
 import api from '@/util/api'
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray, filterTopics } from '@/helpers'
-import { ITopic } from '@/types'
+import { ITopic, IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { OutlineButton } from '@/components/Button'
 interface IFetchPost {
@@ -11,47 +12,48 @@ interface IFetchPost {
 }
 
 const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
-    const [posts, setPosts] = React.useState<string[]>([])
+    const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [pageNumber, setPageNumber] = React.useState<number>(1)
     const postsPerPage = 12
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
-        api.recommended().then(res => {
 
-            const recommendSlugs = res.recommended
+        setIsFetchingMore(true)
+
+        const foundPosts: IPostItem[] = []
+        api.recommended().then(async (res) => {
+
+            // get recommended posts
+            const recommendSlugs: string[] = res.recommended
+            if (recommendSlugs) {
+                const recommendPostsRes = await fetchLocalPostsFromSlugs(recommendSlugs)
+                if (recommendPostsRes) {
+                    console.log(recommendPostsRes)
+                    foundPosts.push(...recommendPostsRes)
+                }
+            }
+
+            // get posts from recommended and popular topics
             const randomTopics = getRandomArray(topics, 6).map(t => t.slug)
-            setIsFetchingMore(true)
             Promise.all(randomTopics.map(t => {
 
-                const url = `${ac_strings.slug_topic}/${t}/${ac_strings.slug_latest}`
-                return fetch(`/page-data/${url}/page-data.json`)
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log(res)
-                        if (res.result && res.result && res.result.pageContext.posts) {
-                            console.log(res.result.pageContext.posts)
-                            const posts: string[] = res.result.pageContext.posts.filter(p => typeof p !== "undefined")
-                            return getRandomArray(posts, 4)
-
-                        }
-                        return undefined
-                    }).catch(error => {
-                        console.log(t)
-                        console.log(url)
-                        console.log(error)
-                    })
+                const url = `${ac_strings.slug_topic}/${t}`
+                return fetchPostsFromOneTopicSlug(url)
             })).then(async (postArrays) => {
-                console.log(postArrays)
-                let allPostSlugs: string[] = recommendSlugs ? recommendSlugs.map(p => p.slug).filter(p => typeof p === "string") : []
-                postArrays.forEach((array => {
-                    if (array) {
 
-                        allPostSlugs.push(...array)
-                    }
-                }))
-                const randomPostSlugs = getRandomArray(allPostSlugs, allPostSlugs.length)
+                const postsFromTopics: IPostItem[] = []
+                if (postArrays) {
+                    postArrays.forEach((array => {
+                        if (array) {
+                            const randomPosts = getRandomArray(array, 6)
+                            postsFromTopics.push(...randomPosts)
+                        }
+                    }))
+                }
+                const mixedTopicPosts = getRandomArray(postsFromTopics, postsFromTopics.length)
+                foundPosts.push(...mixedTopicPosts)
                 setIsFetchingMore(false)
-                setPosts(randomPostSlugs)
+                setPosts(foundPosts)
             })
         })
     }, [])
@@ -82,19 +84,10 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
             {posts.slice(0, end).map(p => {
 
                 return p ? (
-                    <FetchOnePost
-                        slug={p}
-                        render={({ post }) => {
-                            if (post) {
-                                return <RightImg {...post} />
-                            } else {
-                                return <></>
-                            }
-                        }}
-                    />
+                    <RightImg {...p} />
                 ) : <div></div>
             })}
-            {(posts.length > postsPerPage) && <div className="flex justify-center py-4">
+            {(posts.length > postsPerPage) && (pageNumber < lastPage) && <div className="flex justify-center py-4">
                 <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={handlePageChange} />
             </div>}
         </div>

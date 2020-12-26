@@ -1,3 +1,9 @@
+import { postQuery, topicQuery } from 'gatsby-source-ac/helpers'
+
+export interface IGetPostsAndTopics {
+  postsIds: string[]
+  topicsIds: string[]
+}
 
 export const loginMutation = (username: string, password: string, remember: boolean) => {
   return `
@@ -240,3 +246,20 @@ export const profileQuery = `
     }
   }
 `
+
+export const getPostsByIds = (ids: IGetPostsAndTopics) => {
+  const { postsIds, topicsIds } = ids
+  return `
+    query {
+      posts(ids: [${postsIds.join(",")}]) {
+          data {
+              ${postQuery}
+          }
+        }
+
+        topics(ids:[${topicsIds.join(",")}]){
+          ${topicQuery}
+        }
+  }
+  `
+}

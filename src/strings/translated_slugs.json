@@ -1,5 +1,5 @@
 {
-  "a-propos-de-nous": [
+  "om-os": [
     {
       "lang": "en",
       "slug": "about-us"
@@ -61,7 +61,7 @@
       "slug": "om-os"
     }
   ],
-  "contributeur": [
+  "bidragsyder": [
     {
       "lang": "en",
       "slug": "contributor"
@@ -123,7 +123,7 @@
       "slug": "bidragsyder"
     }
   ],
-  "compte": [
+  "konto": [
     {
       "lang": "en",
       "slug": "account"
@@ -185,7 +185,7 @@
       "slug": "konto"
     }
   ],
-  "contact": [
+  "kontakt": [
     {
       "lang": "en",
       "slug": "contact"
@@ -309,7 +309,7 @@
       "slug": "cookie-policy"
     }
   ],
-  "e-book": [
+  "e-bog": [
     {
       "lang": "en",
       "slug": "e-book"
@@ -371,7 +371,7 @@
       "slug": "e-bog"
     }
   ],
-  "explorer": [
+  "udforsk": [
     {
       "lang": "en",
       "slug": "explore"
@@ -433,7 +433,7 @@
       "slug": "udforsk"
     }
   ],
-  "glossaire": [
+  "Ordliste": [
     {
       "lang": "en",
       "slug": "glossary"
@@ -495,7 +495,7 @@
       "slug": "Ordliste"
     }
   ],
-  "animateur ": [
+  "vært": [
     {
       "lang": "en",
       "slug": "host"
@@ -557,7 +557,7 @@
       "slug": "vært"
     }
   ],
-  "le-plus-recent": [
+  "seneste": [
     {
       "lang": "en",
       "slug": "latest"
@@ -619,7 +619,7 @@
       "slug": "seneste"
     }
   ],
-  "ecouter": [
+  "lyt": [
     {
       "lang": "en",
       "slug": "listen"
@@ -681,7 +681,7 @@
       "slug": "lyt"
     }
   ],
-  "se-connecter": [
+  "log ind": [
     {
       "lang": "en",
       "slug": "login"
@@ -844,7 +844,7 @@
     },
     {
       "lang": "ro",
-      "slug": "living-the-gospel-intro"
+      "slug": "traieste-evanghelia-intro"
     },
     {
       "lang": "ru",
@@ -906,7 +906,7 @@
     },
     {
       "lang": "ro",
-      "slug": "privacy-policy"
+      "slug": "politica-de-confidentialitate"
     },
     {
       "lang": "ru",
@@ -929,7 +929,7 @@
       "slug": "privacy-policy"
     }
   ],
-  "lire": [
+  "læs": [
     {
       "lang": "en",
       "slug": "read"
@@ -991,7 +991,7 @@
       "slug": "læs"
     }
   ],
-  "sincrire ": [
+  "opret dig": [
     {
       "lang": "en",
       "slug": "register"
@@ -1053,7 +1053,69 @@
       "slug": "opret dig"
     }
   ],
-  "theme": [
+  "tema": [
+    {
+      "lang": "en",
+      "slug": "theme"
+    },
+    {
+      "lang": "nb",
+      "slug": "tema"
+    },
+    {
+      "lang": "es",
+      "slug": "tema"
+    },
+    {
+      "lang": "fr",
+      "slug": "theme"
+    },
+    {
+      "lang": "fi",
+      "slug": ""
+    },
+    {
+      "lang": "hu",
+      "slug": "tema"
+    },
+    {
+      "lang": "it",
+      "slug": "tema"
+    },
+    {
+      "lang": "pl",
+      "slug": "zagadnienie"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "tema"
+    },
+    {
+      "lang": "ro",
+      "slug": "teme"
+    },
+    {
+      "lang": "ru",
+      "slug": "tema"
+    },
+    {
+      "lang": "sv",
+      "slug": "tema"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "thema"
+    },
+    {
+      "lang": "da",
+      "slug": "tema"
+    }
+  ],
+  "temaer": [
     {
       "lang": "en",
       "slug": "topic"
@@ -1115,7 +1177,7 @@
       "slug": "temaer"
     }
   ],
-  "utilisateur": [
+  "bruger": [
     {
       "lang": "en",
       "slug": "user"
@@ -1177,7 +1239,7 @@
       "slug": "bruger"
     }
   ],
-  "ajoute-en-favoris": [
+  "bogmærket": [
     {
       "lang": "en",
       "slug": "bookmarked"
@@ -1239,7 +1301,7 @@
       "slug": "bogmærket"
     }
   ],
-  "mot-de-passe": [
+  "password": [
     {
       "lang": "en",
       "slug": "password"
@@ -1301,7 +1363,7 @@
       "slug": "password"
     }
   ],
-  "mon-contenu": [
+  "mit-indhold": [
     {
       "lang": "en",
       "slug": "my-content"
@@ -1363,7 +1425,7 @@
       "slug": "mit-indhold"
     }
   ],
-  "Supprimer-mon-profil": [
+  "slet-profil": [
     {
       "lang": "en",
       "slug": "delete-profile"
@@ -1425,7 +1487,7 @@
       "slug": "slet-profil"
     }
   ],
-  "suivis": [
+  "følger": [
     {
       "lang": "en",
       "slug": "followed"
@@ -1487,7 +1549,7 @@
       "slug": "følger"
     }
   ],
-  "historique": [
+  "historik": [
     {
       "lang": "en",
       "slug": "history"
@@ -1549,7 +1611,7 @@
       "slug": "historik"
     }
   ],
-  "visionner": [
+  "se": [
     {
       "lang": "en",
       "slug": "watch"

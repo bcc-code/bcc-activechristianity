@@ -13,6 +13,7 @@ const Post: React.FC<IPostProp> = (props) => {
     const { title, excerpt, date, topics, types, image, format } = post
     const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = postRes
     const breadcrumb: INavItem[] = []
+
     if (types) {
         breadcrumb.push(types[0])
     }
@@ -20,11 +21,11 @@ const Post: React.FC<IPostProp> = (props) => {
     if (format) {
         breadcrumb.push(format[0])
     }
-
+    const seoTitle = seo && seo.title ? seo.title : title
     return (
         <div>
             <MetaTag
-                title={seo && seo.title ? seo.title : title}
+                title={seoTitle}
                 type="article"
                 meta={{
                     description: seo && seo.desc ? seo.desc : excerpt,
@@ -40,6 +41,7 @@ const Post: React.FC<IPostProp> = (props) => {
 
             <PostLayout
                 {...post}
+                seoTitle={seoTitle}
                 langs={langs}
                 content={content}
                 recommendPosts={recommendPosts}
@@ -104,6 +106,7 @@ export const pageQuery = graphql`
                     slug
                     id
                     group {
+                        id
                         name
                         slug
                     }
