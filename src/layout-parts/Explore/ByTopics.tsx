@@ -140,7 +140,7 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
 
                     },
                     {
-                        title: ac_strings.byCategories,
+                        title: ac_strings.categories,
                         list: formatList
 
                     },

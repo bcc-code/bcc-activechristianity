@@ -74,36 +74,39 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
-    const { isCurrentMedia } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia }))
+    const { isCurrentMedia, isLoggedIn } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isLoggedIn: state.auth.loggedIn }))
     const [contentPosition, setContentPosition] = React.useState({ height: 0, top: 0 })
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
 
     React.useEffect(() => {
-        lastScroll.current = Date.now() + 5000
-        if (id) {
-            acApi
-                .visitsPost(id)
-                .catch((err: any) => {
-                    console.log(err)
-                })
-        }
-        const handleScroll = (e: any) => {
-            if (lastScroll.current < Date.now()) {
-                lastScroll.current = Date.now() + 5000
+        if (isLoggedIn === "success") {
+            lastScroll.current = Date.now() + 5000
+            if (id) {
+                acApi
+                    .visitsPost(id)
+                    .catch((err: any) => {
+                        console.log(err)
+                    })
+            }
+            const handleScroll = (e: any) => {
+                if (lastScroll.current < Date.now()) {
+                    lastScroll.current = Date.now() + 5000
 
-                if (id) {
-                    acApi
-                        .readingPost(id)
-                        .catch((err: any) => {
-                            console.log(err)
-                        })
+                    if (id) {
+                        acApi
+                            .readingPost(id)
+                            .catch((err: any) => {
+                                console.log(err)
+                            })
+                    }
                 }
             }
+            const debounceScroll = debounce(handleScroll, 1000)
+            window.addEventListener('scroll', debounceScroll);
+            return () => window.removeEventListener('scroll', debounceScroll);
         }
-        const debounceScroll = debounce(handleScroll, 1000)
-        window.addEventListener('scroll', debounceScroll);
-        return () => window.removeEventListener('scroll', debounceScroll);
+
     }, [post.slug])
 
 

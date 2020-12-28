@@ -80,7 +80,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             <div className="flex justify-center flex-col px-2 text-sm bg-ac-slate-dark text-white py-4">
 
                 <a className="pb-4" href={ac_strings.slug_privacy_policy} target="_blank">
-                    <span className="h-full font-semibold">{ac_strings.read} {ac_strings.consent_privacy_policy}</span><a href={ac_strings.slug_privacy_policy}> </a>
+                    <span className="h-full font-semibold">{ac_strings.consent_read_policy}</span>
                 </a>
                 <div className="pb-4">
                     {/* <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span> */}

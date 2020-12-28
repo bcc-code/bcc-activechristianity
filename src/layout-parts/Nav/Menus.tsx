@@ -38,7 +38,7 @@ export const menusItems = {
         to: ac_strings.slug_glossary
     },
     "topic": {
-        name: ac_strings.topic,
+        name: ac_strings.topics,
         to: ac_strings.slug_topic
     },
     "podcast": {

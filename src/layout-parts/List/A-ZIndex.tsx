@@ -20,9 +20,7 @@ const TaxonomyIndex: React.FC<IProps> = ({ groups }) => {
         groups.map(({ name, items }) => {
 
             desktopFlexItemArray.push(
-                <div
-                    className="font-bold border-t p-2 pr-8 uppercase"
-
+                <div className="font-bold border-t uppercase"
                 >
                     {name}
                 </div>)
@@ -33,7 +31,7 @@ const TaxonomyIndex: React.FC<IProps> = ({ groups }) => {
 
                 desktopFlexItemArray.push(
                     <div className="flex justify-between items-center">
-                        <Link className="block p-2 pr-8 text-xs" to={`/${t.to}`}>{t.name}</Link>
+                        <Link className="block text-xs" to={`/${t.to}`}>{t.name}</Link>
                         <ToggleBookmarkIconOnly id={t.id} />
 
                     </div>

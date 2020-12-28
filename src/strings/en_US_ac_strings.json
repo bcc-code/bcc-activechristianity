@@ -193,5 +193,6 @@
   "error_password_specs": "Password must be at least 6 characters long and contain at least one letter AND one digit or special character.",
   "error_required": "Required",
   "error_password_too_short": "Password is too short",
-  "error_something_went_wrong": "Something went wrong"
+  "error_something_went_wrong": "Something went wrong",
+  "continue_to_sign_in": "Continue to sign in"
 }

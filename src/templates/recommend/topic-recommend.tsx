@@ -71,33 +71,45 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                     <TopImgHorizontalScroll posts={popular.slice(5)} />
                 </div>
 
-                <FetchTopicPostItems
-                    topics={formats.map(f => ({ name: f.name, slug: `${topicSlug}/${f.to}`, id: '' }))}
-                    layout="list"
-                    render={({ topicPostItems }) => (
-                        <ScrollNavTabs tabs={topicPostItems.map(item => ({
-                            name: item.name,
-                            to: item.slug,
-                            content: (
-                                <div>
-                                    {item.posts.slice(0, 6).map(p => {
-                                        return (
-                                            <RightImgPostItem {...p} />
-                                        )
-                                    })}
-                                    <div className="w-full flex justify-center py-6">
-                                        <UnderlineLinkViewAll to={`${item.slug}`} />
+                {formats.length > 0 ? (
+                    <FetchTopicPostItems
+                        topics={formats.map(f => ({ name: f.name, slug: `${topicSlug}/${f.to}`, id: '' }))}
+                        layout="list"
+                        render={({ topicPostItems }) => (
+                            <ScrollNavTabs tabs={topicPostItems.map(item => ({
+                                name: item.name,
+                                to: item.slug,
+                                content: (
+                                    <div>
+                                        {item.posts.slice(0, 6).map(p => {
+                                            return (
+                                                <RightImgPostItem {...p} />
+                                            )
+                                        })}
+                                        <div className="w-full flex justify-center py-6">
+                                            <UnderlineLinkViewAll to={`${item.slug}`} />
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        }))} />
-                    )}
+                                )
+                            }))} />
+                        )}
 
-                />
-                <ByCatergories
-                    title={ac_strings.byCategories}
-                    types={formats.map(f => ({ name: f.name, to: `${topicSlug}/${f.to}`, id: '' }))}
-                />
+                    />
+                ) : (
+                        <div className="px-4">
+                            {latest.map(p => {
+                                return (
+                                    <RightImgPostItem {...p} />
+                                )
+                            })}
+                        </div>
+                    )}
+                {formats.length > 0 && (
+                    <ByCatergories
+                        title={ac_strings.categories}
+                        types={formats.map(f => ({ name: f.name, to: `${topicSlug}/${f.to}`, id: '' }))}
+                    />
+                )}
             </div>
             <RecommendDesktopLayout
                 topicId={id}

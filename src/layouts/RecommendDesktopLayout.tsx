@@ -65,7 +65,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                             <div className="standard-max-w-px pb-6">
 
                                 <PostMultiColLayout types={postsByTypesRow1} />
-                                <ByTaxonomies types={topics} title={ac_strings.byCategories} />
+                                <ByTaxonomies types={topics} title={ac_strings.categories} />
                                 <PostMultiColLayout types={postsByTypesRow2} />
                             </div>
                         ) : <div></div>

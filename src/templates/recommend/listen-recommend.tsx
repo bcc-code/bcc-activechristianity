@@ -96,17 +96,20 @@ const Listen: React.FC<IProps> = (props) => {
 
 
                 <LazyLoad>
-                    <div className="py-6 px-4">
+                    <div className="py-6">
                         <PageSectionHeader title={ac_strings.latest} />
-                        {latest.map((p, k) => <RightImgWDes key={k} {...p} />)}
-                        <div className="w-full flex justify-center items-center py-4">
+                        <div className=" px-4">
+                            {latest.map((p, k) => <RightImgWDes key={k} {...p} />)}
+                            <div className="w-full flex justify-center items-center py-4">
 
-                            <UnderlineLinkViewAll to={`${latestSlug}`} />
+                                <UnderlineLinkViewAll to={`${latestSlug}`} />
+                            </div>
                         </div>
+
 
                     </div>
                     <ByCatergories
-                        title={ac_strings.byCategories}
+                        title={ac_strings.categories}
                         types={allCategories}
                     />
                 </LazyLoad>

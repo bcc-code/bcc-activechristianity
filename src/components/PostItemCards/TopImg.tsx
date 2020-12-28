@@ -62,7 +62,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 wrapperClass={noBorder === true ? ' pt-4' : 'px-4 pt-4'}
                 postTitleProps={{
                     fontKey: 'text-lg-2xl',
-                    clamp: 3,
+                    clamp: 2,
                     className: "mb-2 text-ac-slate-dark"
                 }}
                 postExcerptProps={noExcerpt ? undefined : {

@@ -35,7 +35,7 @@ const OnePostByType: React.FC<IOnePostByType> = ({ type, post, postThumnailType,
             }
 
             default: {
-                return <TopImg showType {...post} fixedImageHeight />
+                return <TopImg showType {...post} />
             }
         }
     }

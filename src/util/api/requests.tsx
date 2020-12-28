@@ -134,6 +134,7 @@ export const readingPostMutation = (id: string) => `
     readingPost(postId:${id}){
       success
       timeRead
+      message
     }
   }
 
@@ -143,6 +144,7 @@ export const visitsPostMutation = (id: string) => `
   mutation {
     visitsPost(postId:${id}){
       success
+      message
     }
   }
 `
@@ -213,7 +215,7 @@ export const followingQuery = `
         slug
       }
     }
-}
+  }
 `
 export const latestHistoryQuery = `
   query {
