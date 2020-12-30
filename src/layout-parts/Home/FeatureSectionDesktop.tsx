@@ -10,6 +10,9 @@ import { ITopicPostSlugs, IPostItem, ITopicPostItems } from '@/types'
 import shortid from 'shortid'
 
 const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPosts }) => {
+    const hasPlaylist = process.env.LISTEN_SECTION === "all"
+    const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
+
     return (
         <div>
             <h3 className="relative mt-8 mb-2 sm:mb-8 pb-2 text-d4dark text-base sm:border-b">
@@ -18,7 +21,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                 </div>
             </h3>
             <div className="my-4 grid gap-4 sm:gap-6 md:gap-6 grid-cols-4">
-                {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" ? (
+                {hasPodcast ? (
                     <FetchLatestPodcast
                         key={shortid()}
                         layout="one"
@@ -29,7 +32,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                 ) : (
                         featuredPosts[2] && <TopImg {...featuredPosts[2]} />
                     )}
-                {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" ? (
+                {hasPlaylist ? (
                     <FetchLatestPlaylists
                         layout="one"
                         key={shortid()}

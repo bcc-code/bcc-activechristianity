@@ -19,6 +19,7 @@ const query = `{
 
 module.exports = async function generateTypes(data) {
     console.log('generating type recommendations')
+    
     const {actions, graphql,contextPosts,subTopics,node:type,nodeInfo,breadcrumb}=data
 
     const { createPage } = actions
@@ -77,6 +78,9 @@ module.exports = async function generateTypes(data) {
             console.log(error)
         })
 
+        const hasPlaylist = process.env.LISTEN_SECTION === "all"
+        const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
+
         if(result.data && result.data.ac){
             const {podcasts,playlists} = result.data.ac
             if (playlists){
@@ -84,7 +88,7 @@ module.exports = async function generateTypes(data) {
                     title:ac_strings.playlist,
                     slug:ac_strings.slug_playlist
                 }
-                if(ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false") {
+                if(hasPlaylist) {
                     const playlistItem = {key:"playlist",name:playlistPage.title,to:playlistPage.slug,count:playlists.length}
                 
                     typeFormatEach["playlist"]=playlistItem
@@ -99,7 +103,7 @@ module.exports = async function generateTypes(data) {
                 const podcastCount = podcasts.noOfPosts
 
                     
-                if(ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" ){
+                if(hasPodcast){
                     const podcastItem = {key:"podcast",name:podcastPage.title,to:podcastPage.slug,count:podcastCount}
                     typeFormatEach["podcast"]=podcastItem
                 }

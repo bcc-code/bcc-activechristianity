@@ -45,6 +45,9 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
     featured
 }) => {
 
+
+    const hasPlaylist = process.env.LISTEN_SECTION === "all"
+    const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
     return (
         <div className="hidden sm:block">
             <LayoutH1Wide title={name} />
@@ -55,7 +58,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
 
             </div>
 
-            {ac_strings.slug_playlist && ac_strings.slug_playlist.toLowerCase() !== "false" && (
+            {hasPlaylist && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink    {...playlist} />
@@ -84,7 +87,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     </div>
                 </LazyLoad>
             )}
-            {ac_strings.slug_podcast && ac_strings.slug_podcast.toLowerCase() !== "false" && (
+            {hasPodcast && (
                 <LazyLoad>
                     <div className="standard-max-w-px">
                         <UnderlineTitleLink {...podcast} />

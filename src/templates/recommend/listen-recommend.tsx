@@ -47,8 +47,8 @@ const Listen: React.FC<IProps> = (props) => {
         setMixedFeaturedPosts(mixed)
     }, [])
 
-    const hasPlaylist = ac_strings.slug_playlist.toLowerCase() !== "false"
-    const hasPodcast = ac_strings.slug_podcast.toLowerCase() !== "false"
+    const hasPlaylist = process.env.LISTEN_SECTION === "all"
+    const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
 
     return (
         <div >

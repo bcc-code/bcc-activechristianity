@@ -4,7 +4,7 @@
       "key": "testimony",
       "name": "Vittnesbörd",
       "to": "testimonies-sv",
-      "count": 134,
+      "count": 136,
       "image": {
         "src": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_center/v1607547258/en/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4.jpg",
         "srcset": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_center/v1607547258/en/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_center/v1607547258/en/FiYIuEwIhM7xEc2rGuOndAwOYlCUOuwD7Joa5uW4.jpg 1000w",
@@ -15,7 +15,7 @@
       "key": "question",
       "name": "Frågor och svar",
       "to": "questions-sv",
-      "count": 128,
+      "count": 129,
       "image": {
         "src": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,h_338,w_600,g_center/v1607547271/en/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl.jpg",
         "srcset": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,h_338,w_600,g_center/v1607547271/en/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,h_563,w_1000,g_center/v1607547271/en/wfMPflNdH8nJAMSVQh9oHsd4XgXUbTIU3Kir26Tl.jpg 1000w",
@@ -37,7 +37,7 @@
       "key": "commentary",
       "name": "Kommentaren",
       "to": "commentary-sv",
-      "count": 44,
+      "count": 47,
       "image": {
         "src": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_center/v1607547216/en/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh.jpg",
         "srcset": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_center/v1607547216/en/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_center/v1607547216/en/8qXs58ZmvKZZmF5HzxFBtt67PIwdVLQy4iUpcwvh.jpg 1000w",
@@ -48,7 +48,7 @@
       "key": "edification",
       "name": "Uppbyggelse",
       "to": "edification-sv",
-      "count": 302,
+      "count": 315,
       "image": {
         "src": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_south_east/v1607547288/en/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpg",
         "srcset": "https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_south_east/v1607547288/en/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,f_auto,g_south_east/v1607547288/en/1d63IElF17X2YpMpo1sSV8SNVMnahobHRuGZe08x.jpg 1000w",
@@ -72,14 +72,14 @@
       "key": "read",
       "name": "Läs",
       "to": "las",
-      "count": 613,
+      "count": 631,
       "image": null
     },
     "108198": {
       "key": "watch",
       "name": "Se",
       "to": "se",
-      "count": 6,
+      "count": 7,
       "image": null
     }
   }

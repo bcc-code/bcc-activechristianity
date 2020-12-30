@@ -1611,7 +1611,7 @@
       "slug": "historik"
     }
   ],
-  "se": [
+  "_videor": [
     {
       "lang": "en",
       "slug": "watch"
@@ -1658,7 +1658,7 @@
     },
     {
       "lang": "sv",
-      "slug": "se"
+      "slug": "_videor"
     },
     {
       "lang": "de",
