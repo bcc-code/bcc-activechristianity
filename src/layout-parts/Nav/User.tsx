@@ -46,13 +46,13 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     return authInfo.loggedIn === 'success' ? (
         <div className={`${col ? 'flex flex-col justify-center' : 'grid grid-cols-2'} ${className}`}>
             <Link
-                className="py-2 hover:text-ac-slate"
+                className="py-2 hover:text-ac-slate px-2"
                 onClick={onClick}
                 to={`/${slug_user}`}
             >
                 {ac_strings.title_user}
             </Link>
-            <button className="py-2 text-center hover:text-ac-slate" onClick={handleLogout}>{ac_strings.logout}</button>
+            <button className="py-2 text-center hover:text-ac-slate px-2" onClick={handleLogout}>{ac_strings.logout}</button>
 
         </div>
     ) : (

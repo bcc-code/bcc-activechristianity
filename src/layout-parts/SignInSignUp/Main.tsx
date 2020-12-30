@@ -28,6 +28,7 @@ const formText = {
 }
 
 const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> = ({ type }) => {
+    const [reDirecting, setRedirecting] = React.useState(false)
     const dispatch = useDispatch();
     const toggleOptions = () => {
         const next = type === 'signInOptions' ? 'signUpOptions' : 'signInOptions'
@@ -35,7 +36,9 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
     }
     const text = formText[type]
     const handleClick = () => dispatch(openSignInModal(type === "signInOptions" ? "signInForm" : "signUpForm"))
+
     const handleFacebookClick = () => {
+        setRedirecting(true)
         window.location.href = endpoints.facebook_login_redirect
     }
     return (
@@ -48,7 +51,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
                 <span className="block uppercase text-xs pb-4">{text.action}</span>
                 <button
                     className="rounded-lg text-white mt-4 px-2 py-4"
-                    style={{ background: "#3b5998" }}
+                    style={{ background: reDirecting ? "#8a8888" : "#3b5998" }}
                     onClick={handleFacebookClick}
                     onKeyDown={handleFacebookClick}
                 >
