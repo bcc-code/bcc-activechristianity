@@ -34,10 +34,6 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
 
     return (
         <div className="flex relative mt-12 items-start ">
-
-
-
-
             <div className="hidden sm:flex flex-col items-center bg-ac-slate-lighter " style={{ width: "400px", minHeight: "80vh" }}>
                 <StickyBox offsetTop={150} >
                     <div className="flex flex-col py-8">
