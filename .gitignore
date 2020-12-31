@@ -1,6 +1,9 @@
 # Enviroments
 .env.production
 .env.*
+.translated_slugs.json
+.topic-filters.json
+
 # Languages
 src/lang/*.json
 static/_redirects

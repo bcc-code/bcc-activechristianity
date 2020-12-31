@@ -16,7 +16,6 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
             render={(props: IQuery) => {
 
                 const { featuredTopics, popularTopics } = props.ac
-
                 const topicsSlugs = filterTopics({ topics: [featuredTopics, popularTopics], returnSlugs: true })
                 return (
                     <FetchTopics
