@@ -46,12 +46,12 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         popular={popular}
         popularTopicsAll={popularTopicsAll}
       />
-      {/*       <HomeDesktop
+      <HomeDesktop
         mixed={mixed}
         latest={latest}
         popular={popular}
         popularTopicsAll={popularTopicsAll}
-      /> */}
+      />
     </div >
 
   )
