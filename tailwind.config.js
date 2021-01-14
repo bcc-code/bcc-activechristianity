@@ -177,7 +177,14 @@ module.exports = {
       },    
       lineHeight: {
         '11': '2.75rem',
-      }   
+      },
+      fill: {
+        "primary": 'var(--primary)',
+        "secondary": 'var(--secondary)',
+        "slate-dark":'var(--slate-dark)',
+        "slate-light": 'var(--slate-light)',
+        "white": 'var(--white)'
+      }
     },
 
   },
