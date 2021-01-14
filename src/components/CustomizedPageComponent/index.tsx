@@ -6,17 +6,16 @@ import RightImgPostItem from '@/components/PostItemCards/RightImg'
 import PostRow2Col from '@/layout-parts/List/PostRow2Col'
 import PostRow3Col from '@/layout-parts/List/PostRow3Col'
 import PostRow4Col from '@/layout-parts/List/PostRow4Col'
-import DesktopHeaderPost from '@/layout-parts/Home/DesktopHeaderPost'
+import DesktopHeaderPost from '@/layout-parts/Home/HeaderPost'
 
 import Video16to9 from '@/components/Images/Video16to9'
 const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: string }> = ({ items, slug, title }) => {
 
     const comps: React.ReactNode[] = []
     items.map(c => {
-        console.log(c.type)
         if (c.type === "text") {
 
-            comps.push(<Content content={c.data.content} slug={slug} title={title} />)
+            comps.push(<Content content={c.data.content} />)
 
         } else if (c.type === "article_banner") {
             const post = c.data

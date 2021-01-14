@@ -1,13 +1,12 @@
 import * as React from "react"
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import FollowUs from '@/layout-parts/Home/FollowUs'
 import { ITopic, IPostItem, ITopicPostItems } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 
 const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
-const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/TopicsForYou'))
+const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/Desktop/TopicsForYou'))
 
 const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
 

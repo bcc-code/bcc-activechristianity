@@ -1,9 +1,7 @@
 import React from 'react'
-import axios from 'axios'
 import ac_strings from '@/strings/ac_strings.js'
 import endpoints from '@/strings/endpoints'
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
-import { LayoutH1 } from '@/components/Headers'
 
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
@@ -72,15 +70,15 @@ const ContactForm = () => {
 
             /*     const dataLayer = (window as any).dataLayer = (window as any).dataLayer || []; */
 
-            axios({
-                url: endpoints.contact_form_api,
-                method: "POST",
+            fetch(endpoints.contact_form_api, {
+
+                method: 'POST', // or 'PUT'
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json',
                 },
-                data,
+                body: JSON.stringify(data),
             }).then((result: any) => {
-                if (result.data.errorMessage) {
+                if (result.data && result.data.errorMessage) {
                     throw new Error(result.errorMessage)
                 } else {
                     setSuccess(true)
