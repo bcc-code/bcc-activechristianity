@@ -36,6 +36,10 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
     }
     const handleMouseUp = (e: any) => {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            const isGlossary = e.target.classList.contains("ac-glossary-link")
+            if (isGlossary) {
+                handleSelectedText(e)
+            }
             // true for mobile device
             /*             if (navigator.share) {
                             navigator.share({

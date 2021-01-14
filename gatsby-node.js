@@ -49,12 +49,12 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateSeries = require('./generators/generateSeries')
     
      const generators = [
-
+   
       generateExplore(actions, graphql),
       generateHome(actions, graphql), 
-      generatePosts(actions, graphql),
 /*       generateAuthors(actions, graphql),
       generatePages(actions, graphql),
+      generatePosts(actions, graphql),
       generateTopics(actions, graphql),
       generateRedirect(actions, graphql),
       generateSeries(actions, graphql) */

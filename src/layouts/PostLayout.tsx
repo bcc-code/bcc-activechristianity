@@ -138,16 +138,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const imageUrl = image;
     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
     const isPodcast = format?.findIndex(f => `${f.id}` === formatsAll.podcast && formatsAll.podcast.keyId)
-
-    const postFooter = (
-        <LazyLoad>
-            <div className="relative bg-white">
-                <ExclusiveContent />
-            </div>
-        </LazyLoad>
-
-    )
-
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,

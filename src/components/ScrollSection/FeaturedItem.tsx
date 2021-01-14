@@ -2,7 +2,7 @@ import * as React from 'react'
 import { INavItem, IImage, IEbook, IPostItem, IPlaylist, } from "@/types"
 import { fetchEbookFromSlug, fetchPlaylistFromSlug, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import Ebook from '@/components/ScrollSection/Ebook'
-import DesktopHeaderPost from '@/layout-parts/Home/DesktopHeaderPost'
+import DesktopHeaderPost from '@/layout-parts/Home/HeaderPost'
 import Playlist from '@/components/ScrollSection/Playlist'
 
 export interface IPageFeaturedPost {

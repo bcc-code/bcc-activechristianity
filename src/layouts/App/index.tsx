@@ -2,8 +2,8 @@ import * as React from 'react'
 import LazyLoad from 'react-lazyload';
 import loadable from '@loadable/component'
 import { StaticQuery, graphql } from "gatsby"
-import BottomMobile, { IMenuWithIcon } from '@/layout-parts/Nav/BottomMobile'
-import Breadcrumb from '@/components/Breadcrumb'
+import BottomMobile from '@/layout-parts/Nav/BottomMobile'
+import Breadcrumb from './Breadcrumb'
 import CookieConsent from "@/layouts/App/CookeConsent";
 import Helmet from 'react-helmet'
 import Link from '@/components/CustomLink';
@@ -26,8 +26,7 @@ import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-
 
 import acApi from '@/util/api'
 // type 
-import { IRootState } from '@/state/types'
-import { IUser, INavItem } from '@/types'
+import { IUser } from '@/types'
 
 
 import './Layout.css'
@@ -48,15 +47,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const dispatch = useDispatch();
 
-    const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
-        isSignInModalOpen: state.isSignInModalOpen,
-        currentMedia: state.currentMedia,
-        isModalOpen: state.isModalOpen,
-        breadcrumb: state.breadcrumb,
-        isPlay: state.isPlaying,
-        auth: state.auth
-
-    }));
+    /*     const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
+            isSignInModalOpen: state.isSignInModalOpen,
+            currentMedia: state.currentMedia,
+            isModalOpen: state.isModalOpen,
+            breadcrumb: state.breadcrumb,
+            isPlay: state.isPlaying,
+            auth: state.auth
+    
+        })); */
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
 
@@ -94,6 +93,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         dispatch(setIsModalOpen(status))
     }
 
+    const isModalOpen = false
+    const isSignInModalOpen = false;
     const NavProps = React.useMemo(() => {
         return (
             {
@@ -110,15 +111,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isModalOpen,
         isSignInModalOpen
     ])
-    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
-    if (auth.loggedIn !== "success") {
-        mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
-    } else {
-        mobileMenu.push({
-            ...userMenuItems.myContent,
-            icon: iconMapNav["my-content"]
-        })
-    }
 
     return (
         <div>
@@ -143,16 +135,11 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 ) : (
                         <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
 
-                            {breadcrumb.items.length > 0 && (
-                                <div className="relative z-50 w-full bg-white px-4 hidden sm:block standard-max-w i">
-                                    <Breadcrumb {...breadcrumb} />
-                                </div>
-                            )}
-                            {currentMedia.audio ? (
-                                <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                                    <MediaPlayer />
-                                </div>
-                            ) : null}
+                            <Breadcrumb />
+                            <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
+                                <MediaPlayer />
+                            </div>
+
 
                             {children}
                             <LazyLoad>
