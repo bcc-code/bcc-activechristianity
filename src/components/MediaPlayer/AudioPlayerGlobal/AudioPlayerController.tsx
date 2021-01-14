@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Media, Player, controls, utils } from 'react-media-player'
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowDownIcon, DescriptionIcon, VolumeUpRoundedIcon, MoreVertIcon, CloseIcon } from '@/components/Icons/MUI'
 import { withMediaProps } from 'react-media-player'
 import { setCurrentMedia, setIsPlaying, setIsModalOpen, addTracks } from '@/state/action'
 import FetchImage from '@/components/Images/ImageFromPost'
@@ -118,9 +118,8 @@ const MediaControl: React.FC<IProps> = (props) => {
                         className="flex justify-center py-2"
                         onClick={toggleInfo}
                     >
-                        <Icon
-                            name="KeyboardArrowDown"
-                            size="6"
+                        <KeyboardArrowDownIcon
+                            customSize="6"
                         />
                     </div>
                     <div className="flex flex-col px-4 py-2">
@@ -140,10 +139,9 @@ const MediaControl: React.FC<IProps> = (props) => {
                                         href={track.path}
                                         className="flex items-center"
                                     >
-                                        <Icon
-                                            name="Description"
-                                            size="4"
-                                            color="slate-light"
+                                        <DescriptionIcon
+                                            customSize="4"
+                                            className="fill-slate-light"
                                         />
                                         <span className="py-2 text-xs">
                                             {ac_strings.read}
@@ -166,10 +164,9 @@ const MediaControl: React.FC<IProps> = (props) => {
                                         onClick={() => { clickOnQueue(i) }}
                                     >
                                         <div className="mr-4">
-                                            <Icon
-                                                name="VolumeUp"
-                                                size="4"
-                                                color="slate-light"
+                                            <VolumeUpRoundedIcon
+                                                customSize="4"
+                                                className="fill-slate-light"
                                             />
                                         </div>
                                         <span className="text-left sm:text-lg">
@@ -272,17 +269,13 @@ const MediaControl: React.FC<IProps> = (props) => {
                                             className="py-3 sm:py-8 px-2"
                                             onClick={toggleInfo}
                                         >
-                                            <Icon
-                                                name="MoreVert"
-                                                color="slate-light"
+                                            <MoreVertIcon
+                                                className="fill-slate-light"
                                             />
                                         </button>
                                         <button className="bg-ac-slate py-3 px-2 sm:py-8" >
                                             <div onClick={handleCloseClickButton}>
-                                                <Icon
-                                                    name="Close"
-
-                                                />
+                                                <CloseIcon />
                                             </div>
 
                                         </button>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import Icon, { IButtonColour } from "@/components/Icons/Icon"
+import { ShareOutlinedIcon, IButtonColour } from '@/components/Icons/MUI'
 import ToolTipShare from '@/components/ToolTip/ShareIcons'
 
 //popoverClick
@@ -52,10 +52,9 @@ const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, color, size, pl
                 onKeyDown={handleShareClick}
             >
 
-                <Icon
-                    name="ShareOutlined"
-                    color={color ? color : "slate-light"}
-                    size={size ? size : "5"}
+                <ShareOutlinedIcon
+                    className={`${color ? color : "slate-light"}`}
+                    customSize={size ? size : "5"}
                 />{label && <span className="px-2 hidden sm:block text-xs">{label}</span>}
 
             </button>

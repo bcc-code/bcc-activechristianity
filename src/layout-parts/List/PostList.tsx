@@ -1,11 +1,9 @@
 import React from 'react'
 import { navigate } from "gatsby"
 import { IPaginate, IPostItem } from "@/types"
-import Icons from '@/components/Icons/Icon'
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
-import { fetchLocalPostsFromSlugs, } from '@/helpers/fetchLocalData'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { trimSlug } from '@/helpers'
 export interface IPostList {

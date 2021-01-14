@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
 import { IMedia } from '@/types'
-import MUIcon from '@/components/Icons/Icon'
+import { VolumeUpRoundedIcon, PlayArrowRoundedIcon, EqualizerIcon, PlayCircleOutlineIcon, HeadsetIcon } from '@/components/Icons/MUI'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
 import PlayPlaylistFromSlug from '@/HOC/SetAndUpdatePlayingPlaylist'
 import ac_strings from '@/strings/ac_strings.js'
@@ -29,7 +29,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
 
                 >
                     <div className="z-20">
-                        {track.video ? <MUIcon name="PlayCircleOutline" size="12" color="white" /> : <MUIcon name="Headset" size="12" color="white" />}
+                        {track.video ? <PlayCircleOutlineIcon customSize="12" className="fill-white" /> : <HeadsetIcon className="fill-white" customSize="12" />}
                     </div>
 
                 </div>
@@ -44,7 +44,7 @@ export const PostItemPlayButton: React.FC<IPlayButtonProps> = ({ track }) => {
 
         return (
             <PlayButtonTrack track={track}>
-                {track.video ? <MUIcon name="PlayArrowRounded" size="12" /> : <MUIcon name="VolumeUpRounded" size="12" />}
+                {track.video ? <PlayArrowRoundedIcon customSize="12" /> : <VolumeUpRoundedIcon customSize="12" />}
             </PlayButtonTrack>
         )
     } else {
@@ -57,7 +57,7 @@ export const PostItemPlayButtonSmall: React.FC<IPlayButtonProps> = ({ track }) =
 
         return (
             <PlayButtonTrack track={track}>
-                {track.video ? <MUIcon name="PlayArrowRounded" size="6" /> : <MUIcon name="VolumeUpRounded" size="6" />}
+                {track.video ? <PlayArrowRoundedIcon customSize="6" /> : <VolumeUpRoundedIcon customSize="6" />}
             </PlayButtonTrack>
         )
     } else {
@@ -71,7 +71,7 @@ export const PlaylistPlayButton: React.FC<{ slug: string }> = ({ slug }) => {
             slug={slug}
             clickable
             render={({ playing }) => {
-                return playing ? <MUIcon name="Equalizer" size="12" /> : <MUIcon name="VolumeUpRounded" size="12" />
+                return playing ? <EqualizerIcon customSize="12" /> : <VolumeUpRoundedIcon customSize="12" />
             }}
 
         />

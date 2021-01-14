@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { IPostAuthors, IMedia, IImage } from '@/types'
-import Icon from '@/components/Icons/Icon'
+import { EqualizerIcon, PlayCircleOutlineIcon, AccessTimeIcon, VisibilityIcon, DescriptionIcon } from '@/components/Icons/MUI'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import FetchAndSetCurrentMedia from '@/HOC/SetAndUpdatePlayingMedia'
 import ac_strings from '@/strings/ac_strings.js'
@@ -46,10 +46,9 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
 
     return (
         <span className={"mr-6 flex items-center"}>
-            <Icon
-                name="AccessTime"
-                color="slate-dark"
-                size="5"
+            <AccessTimeIcon
+                className="fill-slate-dark"
+                customSize="5"
             />
             <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
                 {read}
@@ -60,10 +59,9 @@ export const ReadingTimingIcon: React.FC<{ read?: string, listen?: string }> = (
 
 export const ReadIcon: React.FC<{ text?: string }> = ({ text }) => (
     <div className={"flex items-center"}>
-        <Icon
-            name="Description"
-            color="slate-dark"
-            size="5"
+        <DescriptionIcon
+            className="fill-slate-dark"
+            customSize="5"
         />
         <span className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap">
             {text ? text : ac_strings.read}
@@ -75,10 +73,9 @@ export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text
         <div className="">
             {playing ? (
                 <div className="flex items-center bg-ac-slate-dark  rounded-full py-1 px-2">
-                    <Icon
-                        name="Equalizer"
-                        size="5"
-                        color="slate-light"
+                    <EqualizerIcon
+                        customSize="5"
+                        className="fill-slate-light"
                     />
                     <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
                         {ac_strings.playing}
@@ -87,10 +84,9 @@ export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text
             ) : (
 
                     <div className="flex items-center rounded-full bg-ac-slate-lighter py-1 px-2">
-                        <Icon
-                            name="PlayCircleOutline"
-                            color="slate-dark"
-                            size="5"
+                        <PlayCircleOutlineIcon
+                            className="fill-slate-dark"
+                            customSize="5"
                         />
                         <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
                             {text ? text : ac_strings.listen}
@@ -140,10 +136,9 @@ interface ILikesViewsProps {
 export const Views: React.FC<{ views: string }> = ({ views }) => {
     return (
         <div className="mx-2 flex items-center">
-            <Icon
-                name="Visibility"
-                color="slate-dark"
-                size="5"
+            <VisibilityIcon
+                className="fill-slate-dark"
+                customSize="5"
             />
             <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
                 {views}

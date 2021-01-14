@@ -1,5 +1,5 @@
 import React from 'react'
-import Icons from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI'
 
 interface IProps {
     currentPage: number;
@@ -27,7 +27,7 @@ const PostList: React.FC<IProps> = (props) => {
                 onClick={() => onChange(currentPage - 1)}
                 onKeyDown={() => onChange(currentPage - 1)}
             >
-                <Icons name="KeyboardArrowLeft" />
+                <KeyboardArrowLeftIcon />
             </button>
             <form
                 onSubmit={handleSubmit}
@@ -41,7 +41,7 @@ const PostList: React.FC<IProps> = (props) => {
                 onClick={() => onChange(currentPage + 1)}
                 onKeyDown={() => onChange(currentPage + 1)}
             >
-                <Icons name="KeyboardArrowRight" />
+                <KeyboardArrowRightIcon />
             </button>
         </div>
     )

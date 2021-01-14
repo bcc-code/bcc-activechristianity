@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Icons from '@/components/Icons/Icon'
+import { FolderIcon } from '@/components/Icons/MUI'
 import { IIconProps } from '@/types'
 
 const Animation: React.FC<IIconProps> = ({ customSize, className }) => {
@@ -263,7 +263,7 @@ export const categoriesMap = {
     "ebook": <Ebooks customSize={20} />,
     "playlist": <Playlist customSize={20} />,
     "podcast": <Podcast customSize={20} />,
-    "fallback": <Icons name="Folder" color="white" size="5" />
+    "fallback": <FolderIcon className="fill-white" customSize="5" />
 }
 
 export default categoriesMap

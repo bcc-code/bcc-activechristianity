@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Icon from '@/components/Icons/Icon'
+import { SearchIcon, CloseIcon } from '@/components/Icons/MUI'
+
 
 interface ISearch {
     placedholderText: string
@@ -29,7 +30,7 @@ const Search: React.FC<ISearch> = ({ onChange, clearInput, value, setInputFocus,
             role="application"
 
         >
-            <Icon name="Search" size="6" />
+            <SearchIcon customSize="6" />
 
             <input
                 className="pl-2 flex-grow text-base placeholder-ac-slate-dark h-8 sm:h-12"
@@ -47,7 +48,7 @@ const Search: React.FC<ISearch> = ({ onChange, clearInput, value, setInputFocus,
                     onKeyDown={clearInput}
                 >
 
-                    <Icon name="Close" size="6" color="slate-light" />
+                    <CloseIcon customSize="6" className="fill-slate-light" />
                 </button>
             )}
         </div>

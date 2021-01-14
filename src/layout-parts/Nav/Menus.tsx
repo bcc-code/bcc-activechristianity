@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import Icon from '@/components/Icons/Icon'
+import { HeadsetIcon, HomeIcon, ExploreIcon, DescriptionIcon, LocalOfferIcon, BookmarksIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI'
 import ac_strings from '@/strings/ac_strings.js'
 export const slug_user = 'user'
 
@@ -115,80 +115,69 @@ export const iconMapNav: {
 } = {
     'home': {
         selected: (
-            <Icon
-                name="Home"
-                color="slate-light"
+            <HomeIcon
+                className="fill-slate-light"
             />
         ),
         default: (
-            <Icon
-                name="Home"
-                color="slate-light"
+            <HomeIcon
+                className="fill-slate-light"
             />
 
         )
     },
     'explore': {
         selected: (
-            <Icon
-                name="Explore"
-                color="slate-light"
+            <ExploreIcon
+                className="fill-slate-light"
             />
 
 
         ),
         default: (
-            <Icon
-                name="Explore"
-                color="slate-light"
-
+            <ExploreIcon
+                className="fill-slate-light"
             />
 
         )
     },
     'listen': {
         selected: (
-            <Icon
-                name="Headset"
-                color="slate-light"
+            <HeadsetIcon
+                className="fill-slate-light"
             />
         ),
         default: (
-            <Icon
-                name="Headset"
-                color="slate-light"
+            <HeadsetIcon
+                className="fill-slate-light"
             />
 
         )
     },
     'podcast': {
         selected: (
-            <Icon
-                name="Headset"
-                color="slate-light"
+            <HeadsetIcon
+                className="fill-slate-light"
             />
         ),
         default: (
-            <Icon
-                name="Headset"
-                color="slate-light"
+            <HeadsetIcon
+                className="fill-slate-light"
             />
 
         )
     },
     'read': {
         selected: (
-            <Icon
-                name="Description"
-                color="slate-light"
+            <DescriptionIcon
+                className="fill-slate-light"
             />
 
 
         ),
         default: (
-            <Icon
-                name="Description"
-                color="slate-light"
+            <DescriptionIcon
+                className="fill-slate-light"
             />
 
 
@@ -196,17 +185,15 @@ export const iconMapNav: {
     },
     'watch': {
         selected: (
-            <Icon
-                name="PlayCircleOutline"
-                color="slate-light"
+            <PlayCircleOutlineIcon
+                className="fill-slate-light"
             />
 
 
         ),
         default: (
-            <Icon
-                name="PlayCircleOutline"
-                color="slate-light"
+            <PlayCircleOutlineIcon
+                className="fill-slate-light"
             />
 
 
@@ -214,15 +201,13 @@ export const iconMapNav: {
     },
     'my-content': {
         selected: (
-            <Icon
-                name="Bookmarks"
-                color="slate-light"
+            <BookmarksIcon
+                className="fill-slate-light"
             />
         ),
         default: (
-            <Icon
-                name="Bookmarks"
-                color="slate-light"
+            <BookmarksIcon
+                className="fill-slate-light"
             />
 
 
@@ -230,19 +215,16 @@ export const iconMapNav: {
     },
     'topic': {
         selected: (
-            <Icon
-                name="LocalOffer"
-                color="slate-light"
+            <LocalOfferIcon
+                className="fill-slate-light"
             />
 
 
         ),
         default: (
-            <Icon
-                name="LocalOffer"
-                color="slate-light"
+            <LocalOfferIcon
+                className="fill-slate-light"
             />
-
 
         )
     }

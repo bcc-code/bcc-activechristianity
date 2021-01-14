@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowDownIcon } from '@/components/Icons/MUI'
 import './dropdown.css'
 
 export interface IOption {
@@ -54,7 +54,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
             >
                 <span className="whitespace-no-wrap">{selected ? selected.label : label}</span>
                 <span className="flex items-center mx-2" >
-                    <Icon name="KeyboardArrowDown" size="6" color="slate-dark" />
+                    <KeyboardArrowDownIcon customSize="6" className="fill-slate-dark" />
                 </span>
             </button>
             {showDropdown && (

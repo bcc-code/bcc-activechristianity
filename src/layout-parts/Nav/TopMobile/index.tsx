@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import { useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import LogoFull from '@/images/ACLogoFull'
-import Icon from '@/components/Icons/Icon'
+import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
 import { navigate } from "gatsby"
 
 import ac_strings from '@/strings/ac_strings.js'
@@ -165,19 +165,19 @@ const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, 
                             }
                         </div> */}
                         <Link className='px-4' to="/">
-                            <LogoFull height="24" full />
+                            <LogoFull height="24" />
                         </Link>
                         <div className="flex items-center">
                             {explorePage && (
                                 <Link to={explorePage.to}>
-                                    <Icon name="Search" size="6" />
+                                    <SearchIcon customSize="6" />
                                 </Link>
                             )}
                             <button
                                 className="p-2 px-4 uppdercase text-small"
                                 onClick={() => { setSideNavOpen(true) }}
                             >
-                                <Icon name="Menu" size="6" />
+                                <MenuIcon customSize="6" />
                             </button>
                         </div>
                     </div>

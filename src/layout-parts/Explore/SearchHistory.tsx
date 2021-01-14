@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Icon from '@/components/Icons/Icon'
+import { CloseIcon } from '@/components/Icons/MUI'
 import ac_strings from '@/strings/ac_strings.js'
 
 interface ISearchHistory {
@@ -30,7 +30,7 @@ const SearchHistory: React.FC<ISearchHistory> = ({ searches, removeSearchHistory
                                 </button>
                                 <button onClick={() => removeSearchHistory(search)}>
 
-                                    <Icon name="Close" size="4" color="secondary" />
+                                    <CloseIcon customSize="4" className="fill-secondary" />
                                 </button>
                             </div>
                         ))}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Icons from '@/components/Icons/Icon'
+import { SearchIcon } from '@/components/Icons/MUI'
 
 interface ISnackbar {
     text: string
@@ -13,7 +13,7 @@ const Snackbar: React.FC<ISnackbar> = ({ text, onClick, error }) => {
                 {text}
             </div>
             {onClick && <button onClick={onClick}>
-                <Icons name="Search" size="6" />
+                < SearchIcon customSize="6" />
             </button>}
         </div>
     )

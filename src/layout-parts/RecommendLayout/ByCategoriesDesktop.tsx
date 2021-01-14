@@ -3,7 +3,7 @@ import React from "react"
 import Link from '@/components/CustomLink'
 import { OutlineRightIcon } from "@/components/Button"
 import { INavItem } from "@/types"
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
 export interface ITypeCount extends INavItem {
     count?: number
 }
@@ -38,7 +38,7 @@ const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title, arrow, col, icon 
                         return (
                             <Link key={key} className="border-b w-full py-2 flex justify-between items-center pr-2" to={to}>
                                 <span>{name}</span>
-                                <Icon name="KeyboardArrowRight" size="4" color="slate-dark" />
+                                <KeyboardArrowRightIcon customSize="4" className="fill-slate-dark" />
                             </Link>
                         )
                     })}

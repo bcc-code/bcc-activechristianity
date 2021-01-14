@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.js'
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
 
 
 interface IButton {
@@ -137,7 +137,7 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
             <div className="text-xs sm:text:sm">
                 {count ? count : ''}
                 {arrow && (
-                    <Icon name="KeyboardArrowRight" size="6" />
+                    <KeyboardArrowRightIcon customSize="6" />
                 )}
             </div>
         </Button>
@@ -162,7 +162,7 @@ export const SideNavItem: React.FC<{ hideOnMobile?: boolean, hideOnDeskop?: bool
         >
             <span className="py-1">{children}</span>
             {next && <div className="absolute right-0 pr-4">
-                <Icon name="KeyboardArrowRight" size="6" />
+                <KeyboardArrowRightIcon customSize="6" />
             </div>}
         </Button>
     )

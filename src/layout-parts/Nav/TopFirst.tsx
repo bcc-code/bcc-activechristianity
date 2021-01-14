@@ -5,7 +5,7 @@ import ac_strings from '@/strings/ac_strings'
 
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import UserNav from '@/layout-parts/Nav/User'
-import Icon from '@/components/Icons/Icon'
+import { LaunchIcon } from '@/components/Icons/MUI'
 const TopDesktop: React.FC = () => {
 
     return (
@@ -21,7 +21,7 @@ const TopDesktop: React.FC = () => {
                         <a href={tagline.path} target="_window" className="flex items-center text-sm -mt-1 pl-1">
                             <span>{tagline.text}</span>
                             <span className="px-2">
-                                <Icon name="Launch" size="4" color="slate-dark" />
+                                <LaunchIcon customSize="4" className="fill-slate-dark" />
                             </span>
                         </a>
 

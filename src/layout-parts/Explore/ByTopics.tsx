@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { connectRefinementList } from 'react-instantsearch-dom'
-import Icon from '@/components/Icons/Icon'
+import { FilterListIcon, ExpandMoreIcon } from '@/components/Icons/MUI'
 import { OutlineSmallButton } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -121,13 +121,13 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
             <div className="flex items-end sm:items-center justify-end w-full">
                 <div className="hidden sm:flex flex-wrap flex-1 items-center">{allRefinement}</div>
                 <div className="flex items-center justify-end px-4 sm:pt-0" onClick={() => { setShowFilter(!showFilter) }} >
-                    <Icon name="FilterList" color="secondary" />
+                    <FilterListIcon className="fill-secondary" />
                     <p className="text-sm text-ac-secondary p-4">
                         <i>{topics.length} {ac_strings.filters}</i>
                         <i className="sm:hidden">, Selected ({currentRefinement.length})</i>
                     </p>
                     <button className="place-items-end">
-                        <Icon name="ExpandMore" color="secondary" />
+                        <ExpandMoreIcon className="fill-secondary" />
                     </button>
                 </div>
             </div>

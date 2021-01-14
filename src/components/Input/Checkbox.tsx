@@ -1,5 +1,5 @@
 import React from 'react'
-import Icon from '@/components/Icons/Icon'
+import { CheckBoxIcon, CheckBoxOutlineBlankIcon } from '@/components/Icons/MUI'
 import shortId from 'shortid'
 interface IProps {
     className?: string
@@ -15,7 +15,7 @@ const InputCheck: React.FC<IProps> = ({ value, label, onChange, error, className
 
             <label htmlFor={labalFor} className="relative w-full flex items-center">
                 <div>
-                    {value ? <Icon name="CheckBox" /> : <Icon name="CheckBoxOutlineBlank" />}
+                    {value ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
                 </div>
                 <span className="py-2 pr-2">
 

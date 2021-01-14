@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
 import ac_strings from '@/strings/ac_strings.js'
 
 const LatestSectionHeader: React.FC<{ latestSlug: string }> = ({ latestSlug }) => {
@@ -11,7 +11,7 @@ const LatestSectionHeader: React.FC<{ latestSlug: string }> = ({ latestSlug }) =
             </div>
             <div className="uppercase text-gray-400 tracking-wider flex items-center text-sm">
                 <span>{ac_strings.more}</span>
-                <span ><Icon name="KeyboardArrowRight" size="4" /></span>
+                <span ><KeyboardArrowRightIcon customSize="4" /></span>
             </div>
         </Link>
     )

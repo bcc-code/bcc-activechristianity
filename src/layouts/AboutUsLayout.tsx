@@ -2,7 +2,7 @@ import React from 'react';
 import StickyBox from "react-sticky-box";
 import { SideNavItem } from '@/components/Button'
 import endpoints from '@/strings/endpoints'
-import Icon from '@/components/Icons/Icon'
+import { PublishIcon } from '@/components/Icons/MUI'
 const imageUrl = endpoints.contact_hero
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
@@ -91,10 +91,9 @@ const App: React.FC<IProps> = ({ sections, title }) => {
                 <div className="hiddem sm:flex flex-col fixed bottom-0 right-0 mx-3 py-2 mb-16 bg-white shadow rounded-full text-white text-sm" style={{ zIndex: 60 }}>
 
                     <button className="px-2 py-1" onClick={scrollToTop}>
-                        <Icon
-                            name="Publish"
-                            color="secondary"
-                            size="6"
+                        <PublishIcon
+                            className="fill-secondary"
+                            customSize="6"
                         />
                     </button>
                 </div>

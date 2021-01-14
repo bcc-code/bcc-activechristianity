@@ -2,7 +2,7 @@
 import React from "react"
 import Link from '@/components/CustomLink'
 import { INavItem } from "@/types"
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
 import { PageSectionHeader } from '@/components/Headers'
 
 
@@ -28,7 +28,7 @@ const ByTaxonomies: React.FC<IByTaxonomies> = ({ types, title }) => {
                         return (
                             <Link key={key} className="px-4 border-b w-full py-2 flex justify-between items-center pr-2" to={to}>
                                 <span>{name}</span>
-                                <Icon name="KeyboardArrowRight" size="6" color="slate-light" />
+                                <KeyboardArrowRightIcon customSize="6" className="fill-slate-light" />
                             </Link>
                         )
                     })}

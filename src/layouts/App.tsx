@@ -7,7 +7,7 @@ import CookieConsent from "react-cookie-consent";
 import Footer from '@/layout-parts/Footer'
 import Helmet from 'react-helmet'
 import Link from '@/components/CustomLink';
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon, CloseIcon } from '@/components/Icons/MUI'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
@@ -156,18 +156,14 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                                 <a href={process.env.SITE_URL} className="standard-max-w-px text-left w-full mx-auto">
                                     Revert back to original version here. Note that your old login details will apply.
                     <button onClick={setNotIsInfoBarOpen}>
-                                        <Icon
-                                            name="KeyboardArrowRight"
-                                            size="4"
-
+                                        <KeyboardArrowRightIcon
+                                            customSize="4"
                                         />
                                     </button>
                                 </a>
                                 <div onClick={() => setIsInfoBarOpen(false)} className="p-2">
-                                    <Icon
-                                        name="Close"
-                                        size="4"
-
+                                    <CloseIcon
+                                        customSize="4"
                                     />
                                 </div>
 

@@ -5,7 +5,7 @@ import { INavItem, IPostAuthors, ITopicNavItem, IPostItem } from '@/types'
 import { fetchPostsFromOneTopicSlug, fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon, PublishIcon } from '@/components/Icons/MUI'
 const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
@@ -47,20 +47,6 @@ interface IDesktopPostMain extends IPostMain {
 
 }
 
-export const typeIcons: { [key: string]: JSX.Element } = {
-    'listen': <Icon
-        name="Headset"
-
-    />,
-    'read': <Icon
-        name="Description"
-
-    />,
-    'watch': <Icon
-        name="PlayCircleOutline"
-    />
-
-}
 
 const bgStyle = {
     filter: 'blur(15px)',
@@ -244,10 +230,9 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPla
 
             </button>
             <button key={shortid()} className="px-2 py-1" onClick={scrollToTop}>
-                <Icon
-                    name="Publish"
-                    color="secondary"
-                    size="6"
+                <PublishIcon
+                    className="fill-secondary"
+                    customSize="6"
                 />
             </button>
         </div>
@@ -319,7 +304,7 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
             to={`/${latestSlug}`}
         >
             <span>{ac_strings.moreLatest}</span>
-            <Icon name="KeyboardArrowRight" size="4" color="slate-dark" />
+            <KeyboardArrowRightIcon customSize="4" className="fill-slate-dark" />
         </Link>
     </div>
 )

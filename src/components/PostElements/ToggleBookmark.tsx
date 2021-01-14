@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Icon, { IButtonColour } from '@/components/Icons/Icon'
-
+import { CachedIcon, BookmarkBorderIcon, BookmarkIcon, IButtonColour } from '@/components/Icons/MUI'
 import FetchAndSetBookmark from '@/HOC/SetAndUPdateBookmarked'
 interface IProps {
     id: string
@@ -19,25 +18,22 @@ export const Bookmark: React.FC<IProps> = ({ id, color, size }) => {
                 return (
                     <div>
                         {bookmarked === "loading" && (
-                            <Icon
-                                name="Cached"
-                                color={buttonColor}
-                                size={buttonSize}
+                            <CachedIcon
+                                className={`fill-${buttonColor}`}
+                                customSize={buttonSize}
                             />
                         )}
                         {bookmarked === "false" && (
-                            <Icon
-                                name="BookmarkBorder"
-                                color={buttonColor}
-                                size={buttonSize}
+                            <BookmarkBorderIcon
+                                className={`fill-${buttonColor}`}
+                                customSize={buttonSize}
                             />
                         )}
                         {
                             bookmarked === "true" && (
-                                <Icon
-                                    name="Bookmark"
-                                    color={buttonColor}
-                                    size={buttonSize}
+                                <BookmarkIcon
+                                    className={`fill-${buttonColor}`}
+                                    customSize={buttonSize}
                                 />
                             )
                         }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import FetchAndSetFollowedTopics from '@/HOC/SetAndUpdateFollowedTopic'
 import FetchAndSetFollowedPlaylists from '@/HOC/SetAndUpdateFollowedPlaylist'
-import Icon, { IButtonColour } from "@/components/Icons/Icon"
+import { CachedIcon, CheckIcon, AddIcon, BookmarkIcon, BookmarkBorderIcon, LocalOfferIcon, IButtonColour } from '@/components/Icons/MUI'
 import Link from '@/components/CustomLink'
 import { ITopicNavItem } from '@/types'
 import { OutlineSmallRounded } from '@/components/Button'
@@ -10,17 +10,17 @@ import shortid from 'shortid'
 export const toggleFollowStatusMap = {
     "loading": {
         color: 'bg-slate-lighter text-ac-slate-dark',
-        icon: <Icon name="Cached" size="4" />,
+        icon: <CachedIcon customSize="4" />,
         text: ac_strings.loading
     },
     "true": {
         color: 'bg-slate-lighter text-ac-slate-dark',
-        icon: <Icon name="Check" size="4" />,
+        icon: <CheckIcon customSize="4" />,
         text: ac_strings.unfollow
     },
     "false": {
         color: 'bg-ac-slate-dark text-white',
-        icon: <Icon name="Add" size="4" />,
+        icon: <AddIcon customSize="4" />,
         text: ac_strings.follow
     },
 }
@@ -43,13 +43,13 @@ export const ToggleBookmarkIconOnly: React.FC<IToggleFollowProps> = ({ id }) => 
                 return (
                     <button>
                         {followed === "loading" && (
-                            <Icon name="Cached" size="4" key={shortid()} />
+                            <CachedIcon customSize="4" key={shortid()} />
                         )}
                         {followed === "true" && (
-                            <Icon name="Check" size="4" key={shortid()} />
+                            <CheckIcon customSize="4" key={shortid()} />
                         )}
                         {followed === "false" && (
-                            <Icon name="Add" size="4" key={shortid()} />
+                            <AddIcon customSize="4" key={shortid()} />
                         )}
                     </button>
                 )
@@ -74,13 +74,15 @@ export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => 
                             <span className="">{config.text}</span>
                             <span className="pl-2 flex items-center -mr-1">
                                 {followed === "loading" && (
-                                    <Icon name="Cached" size="4" key={shortid()} />
+                                    <CachedIcon customSize="4" key={shortid()} />
+
+
                                 )}
                                 {followed === "true" && (
-                                    <Icon name="Check" size="4" key={shortid()} />
+                                    <CheckIcon customSize="4" key={shortid()} />
                                 )}
                                 {followed === "false" && (
-                                    <Icon name="Add" size="4" key={shortid()} />
+                                    <AddIcon customSize="4" key={shortid()} />
                                 )}
                             </span>
                         </div>
@@ -106,13 +108,13 @@ export const ToggleFollowPlaylistOutlineBtn: React.FC<IToggleFollowProps> = ({ i
                             <span className="">{config.text}</span>
                             <span className="pl-2 flex items-center">
                                 {followed === "loading" && (
-                                    <Icon name="Cached" size="4" key={shortid()} />
+                                    <CachedIcon customSize="4" key={shortid()} />
                                 )}
                                 {followed === "true" && (
-                                    <Icon name="Check" size="4" key={shortid()} />
+                                    <CheckIcon customSize="4" key={shortid()} />
                                 )}
                                 {followed === "false" && (
-                                    <Icon name="Add" size="4" key={shortid()} />
+                                    <AddIcon customSize="4" key={shortid()} />
                                 )}
                             </span>
                         </div>
@@ -135,27 +137,23 @@ export const ToggleFollowPlaylistBookmark: React.FC<IToggleFollowProps> = ({ id,
                 return (
                     <div>
                         {followed === "loading" && (
-                            <Icon
-                                name="Cached"
-                                color={buttonColor}
-                                size={buttonSize}
+                            <CachedIcon
+                                customSize={buttonSize}
+                                className={`fill-${buttonColor}`}
                             />
                         )}
                         {followed === "false" && (
-                            <Icon
-                                name="BookmarkBorder"
-                                color={buttonColor}
-                                size={buttonSize}
+                            <BookmarkBorderIcon
+                                customSize={buttonSize}
+                                className={`fill-${buttonColor}`}
                             />
                         )}
                         {
                             followed === "true" && (
-                                <Icon
-                                    name="Bookmark"
-                                    color={buttonColor}
-                                    size={buttonSize}
+                                <BookmarkIcon
+                                    className={`fill-${buttonColor}`}
+                                    customSize={buttonSize}
                                 />
-                            )
                         }
 
                     </div>
@@ -180,13 +178,13 @@ export const SlateDarkFollowButton: React.FC<IToggleFollowProps> = ({ id, text }
                         <span>{text ? text : config.text}</span>
                         <span className="pl-2 flex items-center">
                             {followed === "loading" && (
-                                <Icon name="Cached" size="4" key={shortid()} />
+                                <CachedIcon customSize="4" key={shortid()} />
                             )}
                             {followed === "true" && (
-                                <Icon name="Check" size="4" key={shortid()} />
+                                <CheckIcon customSize="4" key={shortid()} />
                             )}
                             {followed === "false" && (
-                                <Icon name="Add" size="4" key={shortid()} />
+                                <AddIcon customSize="4" key={shortid()} />
                             )}
                         </span>
                     </div>
@@ -234,13 +232,13 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
                     return (
                         <span className="py-2 px-4">
                             {followed === "loading" && (
-                                <Icon name="Cached" size="4" key={shortid()} />
+                                <CachedIcon customSize="4" key={shortid()} />
                             )}
                             {followed === "true" && (
-                                <Icon name="Check" size="4" key={shortid()} />
+                                <CheckIcon customSize="4" key={shortid()} />
                             )}
                             {followed === "false" && (
-                                <Icon name="Add" size="4" key={shortid()} />
+                                <AddIcon customSize="4" key={shortid()} />
                             )}
                         </span>
 
@@ -259,10 +257,9 @@ export const TopicWithIcon: React.FC<ITopicNavItem> = ({ name, to }) => {
 
     return (
         <Link to={`${to}`} className="border border-ac-slate-light rounded-lg px-1 flex items-center mr-2 mb-2 py-1">
-            <Icon
-                size="2"
-                color="slate-light"
-                name="LocalOffer"
+            <LocalOfferIcon
+                customSize="2"
+                className="fill-slate-light"
             />
             <span className="px-1 text-ac-slate-light" style={{ fontSize: "12px" }}>{name}</span>
 
