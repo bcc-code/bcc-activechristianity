@@ -1,6 +1,6 @@
 import * as React from "react"
 import loadable from '@loadable/component'
-import { useSelector } from "react-redux";
+import LazyLoad from '@/components/LazyLoad';
 import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
@@ -73,28 +73,32 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <PageSectionHeader title={ac_strings.latest} className="pb-4" />
           <TopImgHorizontalScroll posts={latest} />
         </div>
-
-        <div className="py-6">
-          <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
-          <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
-        </div>
-        <div className="py-6">
-
+        <LazyLoad>
+          <div className="py-6">
+            <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
+            <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
+          </div>
           <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
           <FeaturedTopics featured={popularTopicsAll.static} />
+        </LazyLoad>
 
-          <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-            <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-            <TopImgHorizontalScroll posts={popular} />
-          </div>
-          <div className="w-full p-4">
-            <div className='w-full h-16'>
-              <BgImgTopicCard
-                name={ac_strings.browse_resource}
-                to={ac_strings.slug_explore}
-              />
+        <div className="py-6">
+          <LazyLoad>
+            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+              <PageSectionHeader title={ac_strings.popular} className="pb-4" />
+              <TopImgHorizontalScroll posts={popular} />
             </div>
-          </div>
+            <div className="w-full p-4">
+              <div className='w-full h-16'>
+                <BgImgTopicCard
+                  name={ac_strings.browse_resource}
+                  to={ac_strings.slug_explore}
+                />
+              </div>
+            </div>
+          </LazyLoad>
+
+
         </div>
 
       </div>
