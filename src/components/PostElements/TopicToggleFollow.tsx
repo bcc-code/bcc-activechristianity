@@ -154,8 +154,8 @@ export const ToggleFollowPlaylistBookmark: React.FC<IToggleFollowProps> = ({ id,
                                     className={`fill-${buttonColor}`}
                                     customSize={buttonSize}
                                 />
+                            )
                         }
-
                     </div>
                 )
             }}
