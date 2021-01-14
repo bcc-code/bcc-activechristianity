@@ -1,5 +1,5 @@
 import React from 'react';
-import Icons from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI'
 import PaginationShort from './InputLeftRight'
 interface IProps {
     currentPage: number;
@@ -29,7 +29,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
                             onClick={() => onChange(currentPage - 1)}
                             onKeyDown={() => onChange(currentPage - 1)}
                         >
-                            <Icons name="KeyboardArrowLeft" />
+                            <KeyboardArrowLeftIcon />
                         </button>
                     )}
                     {paginationStart > 5 && (
@@ -75,7 +75,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
                             onChange={() => onChange(currentPage + 1)}
                             onKeyDown={() => onChange(currentPage + 1)}
                         >
-                            <Icons name="KeyboardArrowRight" />
+                            <KeyboardArrowRightIcon />
                         </button>
                     )}
                 </div>

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useSwipeable } from "react-swipeable"
-import Icon from '@/components/Icons/Icon'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
 import { SolidDarkBgToggleActive } from '@/components/Button'
 import { ITab } from '@/types'
 import { SmoothHorizontalScrolling } from '@/helpers'
@@ -49,7 +49,7 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
     return (
         <div className="relative scroll-tabs-background">
             <div className="absolute right-0 z-40 pt-6 pr-2">
-                <Icon name="KeyboardArrowRight" size="4" color="slate-dark" />
+                <KeyboardArrowRightIcon customSize="4" className="fill-slate-dark" />
             </div>
             <div
                 ref={menuEl}
