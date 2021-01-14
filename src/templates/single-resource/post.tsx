@@ -38,7 +38,6 @@ const Post: React.FC<IPostProp> = (props) => {
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
-
             <PostLayout
                 {...post}
                 seoTitle={seoTitle}

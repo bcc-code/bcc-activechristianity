@@ -49,16 +49,17 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateSeries = require('./generators/generateSeries')
     
      const generators = [
-      generateAuthors(actions, graphql),
-      generatePages(actions, graphql),
+
       generateExplore(actions, graphql),
       generateHome(actions, graphql), 
       generatePosts(actions, graphql),
+/*       generateAuthors(actions, graphql),
+      generatePages(actions, graphql),
       generateTopics(actions, graphql),
       generateRedirect(actions, graphql),
-      generateSeries(actions, graphql)
+      generateSeries(actions, graphql) */
     ]
-    if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+/*     if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
       generators.push(generatePodcast(actions, graphql))
     }
 
@@ -72,7 +73,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
 
     if (process.env.SCRIPTURE_SECTION==="true"){
       generators.push(generateScriptures(actions, graphql)) 
-  }
+  } */
 
     return Promise.all(generators)
 

@@ -6,19 +6,19 @@ import { useSelector } from 'react-redux'
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
-const ContentPodcast = loadable(() => import('@/components/Content/ContentPodcast'))
+const PostContent = loadable(() => import('@/components/Content/PostContent'))
 const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
-const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
-import ViewNext from '@/layout-parts/PostLayout/ViewNext'
+
+/* import ViewNext from '@/layout-parts/PostLayout/ViewNext' */
 import { formatsAll } from '@/strings/topic-ids'
 import { PostH1 } from '@/components/Headers'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
-import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 
+const RecommendedPostsSection = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSection'))
+const FromAuthorsSection = loadable(() => import('@/layout-parts/PostLayout/FromAuthors'))
 import {
     AuthorBookmarkShareSection,
-    RecommendedPostsSection,
     Translations,
     ShareBookmarkTopShortCuts
 } from '@/layout-parts/PostLayout/PostSections'
@@ -252,7 +252,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     <div>
                         <div ref={contentEl}>
-                            <Content
+                            <PostContent
                                 content={content}
                                 glossary={glossary}
                                 slug={slug}
@@ -263,8 +263,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         {credits && (
                             <Content
                                 content={credits}
-                                slug={slug}
-                                title={title}
                             />
                         )}
                         <div className="flex flex-wrap border-ac-gray py-6">
@@ -283,46 +281,27 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                             />
                         </div>
-
-                        <div className="pt-6">
-                            <RecommendedPostsSection
-                                postId={id}
-                                topics={topics}
-                                readMorePosts={readMorePosts}
+                        <LazyLoad>
+                            <div className="pt-6">
+                                <RecommendedPostsSection
+                                    postId={id}
+                                    topics={topics}
+                                    readMorePosts={readMorePosts}
+                                />
+                            </div>
+                        </LazyLoad>
+                        <LazyLoad>
+                            <FromAuthorsSection
+                                authors={authors}
+                                postId={postId}
                             />
-                        </div>
-                        {authors?.map(item => {
-                            return (
-
-                                <div className="pt-6">
-                                    {item.authors.map(a => (
-                                        <FetchPostsFromArchivePage
-                                            slug={`${ac_strings.slug_ac_author}/${a.to}`}
-                                            layout="list"
-                                            render={({ posts }) => {
-                                                const filteredPosts = posts.filter(p => `${p.id}` !== `${postId}`).slice(0, 6)
-                                                return filteredPosts.length > 0 ? (
-                                                    <Row3ColAndXScroll
-                                                        title={`${ac_strings.more_from} ${a.name}`}
-                                                        posts={filteredPosts}
-                                                    />
-                                                ) : <div></div>
-                                            }}
-
-                                        />
-
-                                    ))}
-                                </div>
-
-                            )
-                        })}
-
-
+                        </LazyLoad>
                     </div>
-                    <Translations translatedUrls={tranlsatedUrl || []} />
+                    <LazyLoad>
+                        <Translations translatedUrls={tranlsatedUrl || []} />
+                    </LazyLoad>
+
                 </div>
-
-
             </div>
 
             <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 z-50">

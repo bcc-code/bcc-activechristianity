@@ -182,7 +182,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
               
                 if (words[word]){
      
-                    return `<span class="ac-glossary-link">${origialWord}</span>`
+                    return `<span class="ac-glossary-link rtBibleRef">${origialWord}</span>`
                 } else {
                     console.log(`Unable to find record for this word: ${word}`)
                 }
@@ -231,7 +231,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 const transformedPost = Object.assign({},post)
                 if(glossary.length>0){
                     const glossaryContent = scanForAllGlossary(transformedPost.content)
-
                     transformedPost.content = glossaryContent.text
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }

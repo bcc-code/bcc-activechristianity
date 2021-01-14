@@ -53,7 +53,7 @@ const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, color, size, pl
             >
 
                 <ShareOutlinedIcon
-                    className={`${color ? color : "slate-light"}`}
+                    className={`${color ? `fill-${color}` : "fill-slate-light"}`}
                     customSize={size ? size : "5"}
                 />{label && <span className="px-2 hidden sm:block text-xs">{label}</span>}
 

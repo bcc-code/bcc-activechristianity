@@ -28,7 +28,6 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
             if (recommendSlugs) {
                 const recommendPostsRes = await fetchLocalPostsFromSlugs(recommendSlugs)
                 if (recommendPostsRes) {
-                    console.log(recommendPostsRes)
                     foundPosts.push(...recommendPostsRes)
                 }
             }

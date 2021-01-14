@@ -230,7 +230,7 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
                 render={({ followed }) => {
                     const config = toggleFollowStatusMap[followed]
                     return (
-                        <span className="py-2 px-4">
+                        <span>
                             {followed === "loading" && (
                                 <CachedIcon customSize="4" key={shortid()} />
                             )}
