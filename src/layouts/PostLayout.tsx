@@ -290,12 +290,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         </LazyLoad>
-                        <LazyLoad>
+                        {/*                         <LazyLoad>
                             <FromAuthorsSection
                                 authors={authors}
                                 postId={postId}
                             />
-                        </LazyLoad>
+                        </LazyLoad> */}
                     </div>
                     <LazyLoad>
                         <Translations translatedUrls={tranlsatedUrl || []} />

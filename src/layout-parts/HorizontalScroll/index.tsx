@@ -65,9 +65,6 @@ export const HorizontalScrollSection: React.FC<IProps> = ({ name, slug, ...rest 
 }
 export default HorizontalScrollSection
 
-import React from "react"
-import { IPostItem } from '@/types'
-import TopImgPost from '@/components/PostItemCards/TopImg'
 
 
 import shortId from 'shortid'
@@ -189,13 +186,14 @@ export const HScrollBaseLarge: React.FC<IXScrollItem> = ({ items }) => {
 }
 
 import VideoTopImg from '@/components/PostItemCards/VideoTopImg'
+
 export const HSCardListVideo: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
     return (
         <div>
             <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 standard-max-w-px">
                 {posts.slice(0, 4).map((post, i) => {
                     return (
-                        <div key={post.slug} key={shortId()}>
+                        <div key={shortId()}>
                             < VideoTopImg {...post} />
                         </div>
                     )
@@ -204,7 +202,7 @@ export const HSCardListVideo: React.FC<{ posts: IPostItem[] }> = ({ posts }) => 
             <HScrollBase items={posts.map((item) => (
                 <VideoTopImg
                     key={shortId()}
-                    key={item.slug}
+
                     {...item}
 
                 />
