@@ -1,5 +1,5 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem, ITopic } from '@/types'
-import he from 'he'
+
 import ac_strings from '@/strings/ac_strings.js'
 import languages from '@/strings/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
@@ -243,15 +243,6 @@ export const filterTopics = (props: IFilteredTopics) => {
 
 }
 
-export const htmlTags2PlainText = (html: string) => {
-    if (html) {
-        let text = html.replace(/<\/?[^>]+>/ig, " ");
-        return he.decode(text);
-    } else {
-        return ''
-    }
-
-}
 
 export const ebookResToPost = (ebook: IEbook) => {
     const { id, authors, title, excerpt, image, slug, topics } = ebook
@@ -260,7 +251,7 @@ export const ebookResToPost = (ebook: IEbook) => {
     const post: IPostItem = {
         id,
         title,
-        excerpt: htmlTags2PlainText(excerpt),
+        excerpt,
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,
@@ -324,7 +315,7 @@ export const normalizePostRes = (post: IPostRes) => {
     const postItem: IPostItem = {
         id,
         title,
-        excerpt: htmlTags2PlainText(excerpt),
+        excerpt,
         authors: normalizeAuthors(authors),
         image: getImage(title, "640x320", image),
         slug,

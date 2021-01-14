@@ -17,6 +17,7 @@ module.exports = async function generateFormat(data) {
         context: {
           id:format.id,
           title:format.name,
+          image:format.image,
           formatType,
           breadcrumb,
           ...contextPosts

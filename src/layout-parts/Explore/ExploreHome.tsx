@@ -14,23 +14,21 @@ import SquareImages from '@/components/Images/Image1to1Rounded'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
 
-import typesFormats from '@/strings/topic-filters.json'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
 import PodcastImg from '@/images/format-Podcast-05.jpg'
 import { ITopic } from '@/types';
 
 const ExploreLayout: React.FC<{
     topics: ITopic[]
-    formatIds?: number[]
+    allFormats: ITopic[]
+    recommendFormats: ITopic[]
 }> = (props) => {
-    const { topics, formatIds: recommendFormatIds } = props
+    const { topics, recommendFormats, allFormats } = props
 
     const mediaSquareImages = {
         'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
     }
-    const { formatIds } = typesFormats
-    const formats = Object.keys(formatIds).map(id => formatIds[id])
 
     const randomTopics = getRandomArray(topics, 6)
     const hasPlaylist = process.env.LISTEN_SECTION === "all"
@@ -75,8 +73,8 @@ const ExploreLayout: React.FC<{
                             </div>
                         </Link>
                     )}
-                    {formats.map((card) => (
-                        <Link key={shortid()} to={card.to} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                    {allFormats.map((card) => (
+                        <Link key={shortid()} to={card.slug} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
                                 {...card.image}
@@ -85,7 +83,6 @@ const ExploreLayout: React.FC<{
                                 {card.name}
                             </div>
                         </Link>
-
                     ))}
 
                 </div>
@@ -102,7 +99,7 @@ const ExploreLayout: React.FC<{
                     name={ac_strings.recommend_for_you}
 
                 />
-                {recommendFormatIds && recommendFormatIds.length > 3 && <ExploreFormatRecommended ids={recommendFormatIds} />}
+                {recommendFormats && <ExploreFormatRecommended slugs={recommendFormats.map(item => item.slug)} />}
                 <FetchRecommendMix topics={topics} />
             </div>
         </div>

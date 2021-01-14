@@ -1,8 +1,10 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
+
+import { useSelector } from "react-redux"
+import { IRootState } from '@/state/types'
 import { INavItem } from '@/types'
-
-
+import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus'
 export interface IMenuWithIcon extends INavItem {
     icon: {
         selected: JSX.Element,
@@ -11,13 +13,13 @@ export interface IMenuWithIcon extends INavItem {
 }
 interface IProps {
     isSideNavOpen: boolean
-    isModalOpen: boolean
-    menu: IMenuWithIcon[]
 }
 
 
-const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu }) => {
-
+const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
+    const { auth } = useSelector((state: IRootState) => ({
+        auth: state.auth
+    }));
     const handlePathClick = (path: string, name: string) => {
         const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
         dataLayer.push({
@@ -26,12 +28,19 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu })
         })
     }
 
-
     let drawerClass = 'close'
     if (isSideNavOpen) {
         drawerClass = 'mobile-open'
-    } else if (isModalOpen) {
-        drawerClass = 'mobile-open-right'
+    }
+
+    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
+    if (auth.loggedIn !== "success") {
+        mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
+    } else {
+        mobileMenu.push({
+            ...userMenuItems.myContent,
+            icon: iconMapNav["my-content"]
+        })
     }
 
     return (
@@ -39,8 +48,9 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen, isModalOpen, menu })
             <div className="fixed bottom-0 z-40 bg-white w-full">
 
                 <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
-                    {menu.map((item, i) => (
+                    {mobileMenu.map((item, i) => (
                         <Link
+                            onClick={() => handlePathClick(item.to, item.name)}
                             key={i}
                             to={item.to}
                             className="flex flex-col items-center justify-between text-gray-600 flex-1 py-2"

@@ -6,7 +6,7 @@ import PostRow3Col from '@/layout-parts/List/PostRow3Col'
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import shortid from 'shortid'
 interface IFetchPost {
-    ids: number[]
+    slugs: string[]
 }
 
 const RecommendedSectionOne: React.FC<IFetchPost> = ({ ids }) => {
@@ -14,7 +14,7 @@ const RecommendedSectionOne: React.FC<IFetchPost> = ({ ids }) => {
     return (
         <FetchRecommendFormat
             layout="row"
-            ids={ids}
+            slugs={ids}
             render={({ posts }) => {
 
                 if (posts.length > 0) {

@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import loadable from '@loadable/component'
 import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch } from 'react-instantsearch-dom'
@@ -32,7 +31,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    const { popularTopics, featuredTopics, scripturePage, recommendFormats } = props.pageContext
+    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats } = props.pageContext
 
     const topics = filterTopics({ topics: [popularTopics, featuredTopics], returnSlugs: false })
 
@@ -106,7 +105,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
     }
 
     const title = ac_strings.explore
-
     return (
         <InstantSearch
             appId=''
@@ -148,7 +146,8 @@ const ExplorePage: React.FC<IResource> = (props) => {
                     )}
                 {showExploreHome && (
                     <ExploreHomeLayout
-                        formatIds={recommendFormats}
+                        allFormats={allFormats}
+                        recommendFormats={recommendFormats}
                         topics={topics}
                         scriptureSlug={scripturePage ? scripturePage.to : undefined}
                     />
@@ -170,11 +169,8 @@ const ExplorePage: React.FC<IResource> = (props) => {
                                 />
                             </div>
                         )}
-
                     </div>
                 )}
-
-
             </div>
 
         </InstantSearch>
@@ -191,7 +187,8 @@ interface IResource {
         scripturePage: INavItem
         featuredTopics: ITopicRes[]
         popularTopics: ITopicRes[]
-        recommendFormats: number[]
+        allFormats: ITopicRes[]
+        recommendFormats: ITopicRes[]
     }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from "react-redux";
 import Link from "@/components/CustomLink"
-import LogoFull from '@/images/ACLogoFull'
+import LogoFull from '@/images/ACLogo'
 import SocialPlatforms from '@/layout-parts/Nav/SocialPlatforms'
 import UserNav from '@/layout-parts/Nav/User'
 import ac_strings from '@/strings/ac_strings.js'

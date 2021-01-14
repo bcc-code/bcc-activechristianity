@@ -7,7 +7,7 @@ import { FetchOnePost } from '@/HOC/FetchPosts'
 import { IGlossary } from '@/types'
 import ToolTipGlossary from '@/components/ToolTip'
 import ac_strings from '@/strings/ac_strings'
-import { htmlTags2PlainText } from '@/helpers'
+
 import "./content.css"
 
 interface HTMLNode {
@@ -54,17 +54,11 @@ const Content: React.FC<{ content: string, glossary?: IGlossary[], title: string
                             const g = glossary.find(item => item.word.toLowerCase() === word)
 
                             if (g) {
-                                let shorten = htmlTags2PlainText(g.content)
 
-                                if (g.content.length > 235) {
-                                    let parts = shorten.substr(0, 220).split(' ')
-                                    parts.pop()
-                                    shorten = parts.join(' ')
-                                }
                                 return (
                                     <ToolTipGlossary popperContent={
                                         <span className="text-sm leading-normal font-normal font-sans max-w-64 py-6" >
-                                            {shorten}...
+                                            {g.content}...
                                             <a target="_blank" href={`${ac_strings.slug_glossary}/${g.slug}`}> {ac_strings.read_more} </a>
                                         </span>
                                     }>

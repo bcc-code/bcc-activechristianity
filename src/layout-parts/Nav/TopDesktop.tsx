@@ -1,15 +1,16 @@
 import React from 'react'
-
 import Link from '@/components/CustomLink'
 
 import { IDrawerNav } from '@/layouts/App'
 
-import LogoFull from '@/images/ACLogoFull'
+import LogoFull from '@/images/ACLogo'
 import TopFirst from './TopFirst'
+
+import { desktopMenu } from '@/layout-parts/Nav/Menus'
 import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
 import { INavItem } from '@/types'
 
-const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideNavOpen, setSideNavOpen, menu, explorePage }) => {
+const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideNavOpen, setSideNavOpen, explorePage }) => {
     return (
         <div className={`fixed top-0 z-50 bg-white hidden sm:block w-full py-1 border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
             <TopFirst />
@@ -19,7 +20,7 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
                 </Link>
                 <div className="flex">
                     <div className="flex justify-end pr-12">
-                        {menu.map((item, i) => (
+                        {desktopMenu.map((item, i) => (
                             <Link className="block p-2 hover:text-ac-slate-light" key={i} to={`${item.to}`}>
                                 {item.name}
                             </Link>

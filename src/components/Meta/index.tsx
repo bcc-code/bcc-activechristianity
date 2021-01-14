@@ -3,23 +3,10 @@ import Helmet from 'react-helmet'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateTranslationUrl, updateBreadcrumb } from '@/state/action'
 
-import { htmlTags2PlainText } from '@/helpers'
 import { Location } from '@reach/router'
 import { IRootState } from '@/state/types'
 import ac_strings from "@/strings/ac_strings.js"
-import translatedSlugs from '@/strings/translated_slugs.json'
 import { INavItem, ITranslations } from '@/types'
-
-function shorten(str: string, length: number) {
-    if (str.length < length) return str
-
-    let short = str.substr(0, length)
-    let parts = short.split(' ')
-    parts.pop()
-    short = parts.join(' ')
-
-    return short
-}
 
 export interface MetaTagProps {
     path?: string
@@ -33,14 +20,11 @@ export interface MetaTagProps {
     translatedUrls?: ITranslations[]
 }
 
-const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUrls, breadcrumb, path }) => {
+const MetaTag: React.FC<MetaTagProps> = ({ title, type, meta, translatedUrls, breadcrumb, path }) => {
 
     const dispatch = useDispatch()
-    const auth = useSelector((state: IRootState) => state.auth)
 
-    const { description: possiblyHTML, date, tags, categories, imageUrl, authors }: { [k: string]: any } = meta || {}
-
-    const description = shorten(htmlTags2PlainText(possiblyHTML), 160)
+    const { description, date, tags, categories, imageUrl, authors }: { [k: string]: any } = meta || {}
 
     const mediaTypes: { [k: string]: string } = {
         music: 'music.song',
@@ -51,11 +35,9 @@ const MetaTag: React.FC<MetaTagProps> = ({ wpId, title, type, meta, translatedUr
     }
 
     useEffect(() => {
-        const slug = path?.replace('/', '')
+
         if (translatedUrls) {
             dispatch(updateTranslationUrl({ translated: translatedUrls }))
-        } else if (slug && translatedSlugs[slug]) {
-            dispatch(updateTranslationUrl({ translated: translatedSlugs[slug] }))
         } else {
             dispatch(updateTranslationUrl({ translated: [] }))
         }

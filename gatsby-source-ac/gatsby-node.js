@@ -1,6 +1,14 @@
 const helpers = require('./helpers')
+const he = require('he')
 const {sendQuery,getMultiPosts, postQuery} = helpers
-
+const htmlTags2PlainText = (html) => {
+    if (html) {
+        let text = html.replace(/<\/?[^>]+>/ig, " ");
+        return he.decode(text);
+    } else {
+        return ''
+    }
+}
 const settingsQuery = `
 {
     settings {
@@ -140,7 +148,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 }
         }
         
-
             const words = {}
             const glossaryQuery = `{
                 glossary {
@@ -156,7 +163,14 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
             if(glossary.length>0){
                 glossary.forEach(g=>{
-                    words[g.word.toLowerCase()]=g
+                    let shorten = htmlTags2PlainText(g.content)
+
+                    if (g.content.length > 235) {
+                        let parts = shorten.substr(0, 220).split(' ')
+                        parts.pop()
+                        shorten = parts.join(' ')
+                    }
+                    words[g.word.toLowerCase()]={...g,content:shorten}
                 })
     
             }
@@ -217,6 +231,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 const transformedPost = Object.assign({},post)
                 if(glossary.length>0){
                     const glossaryContent = scanForAllGlossary(transformedPost.content)
+
                     transformedPost.content = glossaryContent.text
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }

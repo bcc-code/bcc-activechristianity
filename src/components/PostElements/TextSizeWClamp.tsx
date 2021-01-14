@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { htmlTags2PlainText } from '@/helpers'
+
 import './clamp.css'
 
 interface ItextSizeConfig {
@@ -126,7 +126,7 @@ const PostTitle: React.FC<ITextSizeWClampProps> = (props) => {
     const textClass = getClass(props)
     let title = props.rawText
     if (props.rawText) {
-        title = htmlTags2PlainText(props.rawText)
+        title = props.rawText
     } else {
         console.log('found page without title')
     }

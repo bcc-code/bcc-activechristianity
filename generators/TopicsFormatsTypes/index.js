@@ -200,12 +200,6 @@ module.exports = function generateTopics(actions, graphql) {
             
 
           }
-          const data = {
-            formatIds,
-            typeIds
-          }
-
-          saveFile('./src/strings', 'topic-filters', 'json',  data)
         }
     })
 

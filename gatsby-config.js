@@ -66,16 +66,14 @@ const plugins = [
       display: 'minimal-ui',
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
-  },{
-    resolve:'gatsby-plugin-preact'
   },
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
   // 'gatsby-plugin-offline',
-  {
+ /*  {
     resolve: `gatsby-plugin-nprogress`,
     showSpinner: true,
-  },{ 
+  } */{ 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -133,6 +131,9 @@ if (activeEnv === 'production') {
     },
     {
       resolve: 'gatsby-plugin-sitemap'
+    },
+    {
+      resolve:'gatsby-plugin-preact'
     }
   )
 

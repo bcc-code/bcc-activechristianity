@@ -5,7 +5,7 @@
  */
 
 import React from "react"
-import Layout from "./src/layouts/App.tsx"
+import Layout from "./src/layouts/App/index.tsx"
 
 import "react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"

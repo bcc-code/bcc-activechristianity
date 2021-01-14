@@ -2,7 +2,9 @@ const path = require('path')
 const {topicQuery} = require('gatsby-source-ac/helpers')
 const exploreTemplate='src/templates/page/explore.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
-const {formatsAll} = require('../src/strings/topic-ids.js')
+const {groupAll, formatsAll, formatsIds} = require('../src/strings/topic-ids.js')
+const {sendQuery}= require('gatsby-source-ac/helpers')
+
 /* SETUP */
  
 
@@ -15,11 +17,12 @@ const query = `{
     featuredTopics:topics(featured:true) {
         ${topicQuery}
     }
+    formatTopics:topics(group_id:${groupAll.format}){
+        ${topicQuery}
+      }
   }
 }`
 
-
-const perPage = 12
 
 module.exports = function generateTopics(actions, graphql) {
     const { createPage } = actions
@@ -33,12 +36,11 @@ module.exports = function generateTopics(actions, graphql) {
           } else {
 
                 const acData = result.data.ac
-                const {popularTopicsSlugs,featuredTopics} = acData
+                const {popularTopicsSlugs,featuredTopics,formatTopics} = acData
                 const explorePage = {
                     title:ac_strings.explore,
                     slug: ac_strings.slug_explore,
                 }
-
 
                 const popularTopicsRes = await graphql(`{
                     ac {
@@ -48,15 +50,26 @@ module.exports = function generateTopics(actions, graphql) {
                     }
                 }`)
 
+                const formats = []
+                const recommendFormats = []
+                formatTopics.forEach(f=>{
+                    if (formatsIds[f.id]){
+                        formats.push(f)
+                        if (["animation","song","testimony","interview"].includes(formatsIds[f.id].keyname)){
+                            recommendFormats.push(f)
+                        }
+                    }
+                })
+                
                 const {popularTopics} = popularTopicsRes.data.ac
 
-                  const {animation,song,testimony,interview}=formatsAll
                   const contextExplore = {
                     title: explorePage.title,
                     slug:  explorePage.slug,
                     popularTopics,
                     featuredTopics,
-                    recommendFormats:[animation,song,testimony,interview].map(f=>f.keyId)
+                    recommendFormats:recommendFormats,
+                    allFormats:formats
                 }
                 createPage({
                     path: explorePage.slug,
@@ -65,7 +78,9 @@ module.exports = function generateTopics(actions, graphql) {
                     })
                
           }
-    })
+    }).catch(error=>[
+        console.log(error)
+    ])
 
 }
 

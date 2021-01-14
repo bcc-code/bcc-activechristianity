@@ -14,10 +14,8 @@ import { INavItem } from '@/types';
 import loadable from '@loadable/component'
 const UserMenu = loadable(() => import('./UserMenu'))
 const ResourceMenu = loadable(() => import('./ResourceMenu'))
-interface ISideMobile extends IDrawerNav {
-    resoureMenu: INavItem[]
-}
-const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu, resoureMenu }) => {
+import { sideMenu, sideResourceMenu } from '@/layout-parts/Nav/Menus'
+const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
     const [openUserMenu, setOpenUserMenu] = React.useState(false)
     const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
 
@@ -66,7 +64,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
             }
 
             {openResourceMenu && <ResourceMenu
-                menu={resoureMenu}
+                menu={sideResourceMenu}
                 isSideNavOpen={openResourceMenu}
                 close={closeResourceMenu}
                 back={() => setOpenResourceMenu(false)}
@@ -85,7 +83,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, setSideNavOpen, menu
                 >
                     {ac_strings.resource}
                 </SideNavItem>
-                {menu.map((item, i) => {
+                {sideMenu.map((item, i) => {
                     return (
                         <SideNavItem
                             key={i}
