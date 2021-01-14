@@ -12,7 +12,7 @@ import acApi from '@/util/api'
 const MoreFromAuthor: React.FC<{ authors: IPostAuthors[], postId: string }> = ({ authors, postId }) => {
 
     return (
-        <div>
+        <div className="hidden sm:block">
             {authors?.map(item => {
                 return (
 
