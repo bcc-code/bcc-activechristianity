@@ -43,12 +43,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
     const { children, pageContext, location } = props
 
     const isLandingPage = location && location.pathname && location.pathname.indexOf('campaign/') > -1
-
-
     const dispatch = useDispatch();
-
-
-    const isSignInModalOpen = false
     const isModalOpen = false
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
@@ -56,8 +51,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         checkUser()
 
     }, [])
-
-
 
     const checkUser = () => {
         acApi
@@ -94,7 +87,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 isSideNavOpen,
                 setSideNavOpen: handleSideNavOpen,
                 isModalOpen,
-                isSignInModalOpen
             }
         )
     }, [
@@ -102,36 +94,36 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         setSideNavOpen,
         handleSideNavOpen,
         isModalOpen,
-        isSignInModalOpen
     ])
 
     console.log('app')
     return (
+        <div className="relative">
+            <SignInSignUpModal />
+            <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
+                <Helmet>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                </Helmet>
+                <Profiler id="Footer" onRender={(
+                    id, // the "id" prop of the Profiler tree that has just committed
+                    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+                    actualDuration, // time spent rendering the committed update
+                    baseDuration, // estimated time to render the entire subtree without memoization
+                    startTime, // when React began rendering this update
+                    commitTime, // when React committed this update
+                    interactions
+                ) => {
+                    console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
+                }}>
+                    <TopMobile
+                        {...NavProps}
+                        explorePage={menusItems.explore}
+                    />
+                </Profiler>
 
-        <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
-            <Helmet>
-                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-            </Helmet>
-            <Profiler id="Footer" onRender={(
-                id, // the "id" prop of the Profiler tree that has just committed
-                phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-                actualDuration, // time spent rendering the committed update
-                baseDuration, // estimated time to render the entire subtree without memoization
-                startTime, // when React began rendering this update
-                commitTime, // when React committed this update
-                interactions
-            ) => {
-                console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
-            }}>
-                <TopMobile
-                    {...NavProps}
-                    explorePage={menusItems.explore}
-                />
-            </Profiler>
-
-            {isSideNavOpen && <SideNav {...NavProps} />}
-            {/*             <Profiler id="Footer" onRender={(
+                {isSideNavOpen && <SideNav {...NavProps} />}
+                {/*             <Profiler id="Footer" onRender={(
                 id, // the "id" prop of the Profiler tree that has just committed
                 phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
                 actualDuration, // time spent rendering the committed update
@@ -145,9 +137,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 
             </Profiler> */}
                  with state and top mobile nav, removed google font
-            <LazyLoad>
-                <Footer />
-            </LazyLoad>
+            <Footer />
+            </div>
         </div>
 
     )

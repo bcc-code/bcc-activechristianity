@@ -73,7 +73,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             <div className="text-sm py-4 ">
                 <span>{text.optionText}</span>
                 <button
-                    className="text-blue-500 font-semibold"
+                    className="text-blue-500 font-semibold px-2"
                     onClick={toggleOptions}
                     onKeyDown={toggleOptions}
                 >
@@ -82,16 +82,16 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
             </div>
 
             <div className="flex justify-center flex-col px-2 text-sm bg-ac-slate-dark text-white py-4">
-
-                <a className="pb-4" href={ac_strings.slug_privacy_policy} target="_blank">
-                    <span className="h-full font-semibold">{ac_strings.consent_read_policy}</span>
-                </a>
                 <div className="pb-4">
                     {/* <span className=" h-full font-semibold ">{ac_strings.terms_of_use} </span> */}
                     <span className="leading-normal font-normal font-sans pt-6" >
                         {ac_strings.copyright}
                     </span>
                 </div>
+                <a className="pb-4 underline" href={ac_strings.slug_privacy_policy} target="_blank">
+                    <span className="h-full font-semibold">{ac_strings.consent_read_policy}</span>
+                </a>
+
 
             </div>
         </div>
