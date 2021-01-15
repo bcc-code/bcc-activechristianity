@@ -21,7 +21,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
 
     return (
         <Link className={className} style={style} to={slug}>
-            {track && (track.video || track.audio) && (
+            {/*             {track && (track.video || track.audio) && (
                 <div
                     id="play-button"
                     className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
@@ -33,7 +33,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                     </div>
 
                 </div>
-            )}
+            )} */}
             {children}
         </Link>
     )
