@@ -146,7 +146,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 <Footer />
             </Profiler>
                 name */}
-                 with state and side nav, removed 3rd party scripts
+                 with state and side nav, removed google font
         </div>
 
     )
