@@ -95,3 +95,16 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page)
   }
 }
+/* 
+exports.onCreateWebpackConfig = ({
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        'react-dom$': 'react-dom/profiling',
+        'scheduler/tracing': 'scheduler/tracing-profiling',
+      }
+    }
+  })
+} */

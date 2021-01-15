@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { Profiler } from 'react';
 import LazyLoad from 'react-lazyload';
 import loadable from '@loadable/component'
 import { StaticQuery, graphql } from "gatsby"
@@ -111,49 +111,43 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isModalOpen,
         isSignInModalOpen
     ])
-
+    console.log('render')
     return (
-        <div>
-            <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
-                <Helmet>
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                </Helmet>
 
+        <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
+            <Helmet>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Helmet>
+            {/*             <Profiler id="Nav Bar" onRender={(
+                id, // the "id" prop of the Profiler tree that has just committed
+                phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+                actualDuration, // time spent rendering the committed update
+                baseDuration, // estimated time to render the entire subtree without memoization
+                startTime, // when React began rendering this update
+                commitTime, // when React committed this update
+                interactions
+            ) => {
+                console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
+            }}>
                 <SideNav {...NavProps} />
-                <TopMobile
-                    {...NavProps}
-                    explorePage={menusItems.explore}
-                />
-                <SignInSignUpModal />
-                <TopDesktop {...NavProps} explorePage={menusItems.explore} />
-                {isLandingPage ? (
-                    <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
-                        {children}
-                        <Footer key={shortid()} />
-                    </div>
-                ) : (
-                        <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
-
-                            <Breadcrumb />
-                            <div className="fixed sm:relative w-full" style={{ zIndex: 5000 }}>
-                                <MediaPlayer />
-                            </div>
-
-
-                            {children}
-                            {/*                             <LazyLoad>
-                                <Footer key={shortid()} />
-                            </LazyLoad> */}
-                        </div>
-                    )}
-
-
-                {!isLandingPage && <BottomMobile key={shortid()} {...NavProps} />}
-                <CookieConsent />
-
-            </div>
+            </Profiler> */}
+            {/*             <Profiler id="Footer" onRender={(
+                id, // the "id" prop of the Profiler tree that has just committed
+                phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+                actualDuration, // time spent rendering the committed update
+                baseDuration, // estimated time to render the entire subtree without memoization
+                startTime, // when React began rendering this update
+                commitTime, // when React committed this update
+                interactions
+            ) => {
+                console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
+            }}>
+                <Footer />
+            </Profiler>
+                name */}
         </div>
+
     )
 
 }

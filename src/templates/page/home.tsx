@@ -62,7 +62,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         breadcrumb={[]}
       />
 
-      <div className="sm:hidden">
+      {/*       <div className="sm:hidden">
         <div className="w-full pb-4 pt-8">
 
           <FeaturedBanner featured={mixedFeaturedPosts} />
@@ -95,8 +95,8 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           </div>
         </div>
 
-      </div>
-      <div className="hidden sm:block">
+      </div> */}
+      {/*       <div className="hidden sm:block">
         <DesktopFeaturedPostLoader loading={typeof mixedFeaturedPosts[0] === "undefined"}>
           <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
         </DesktopFeaturedPostLoader>
@@ -129,7 +129,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div >
 
   )
