@@ -38,9 +38,9 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts })
             </div>
 
             <div className="col-start-3 lg:col-start-4 col-end-5 bg-gray-200 sm:bg-transparent py-6 overflow-hidden hidden sm:block">
-                <div className="hidden sm:flex">
+                {/* <div className="hidden sm:flex">
                     <PopularPostVertical title={ac_strings.popularOnAC} posts={popularPosts} small />
-                </div>
+                </div> */}
                 <FollowUs />
 
 

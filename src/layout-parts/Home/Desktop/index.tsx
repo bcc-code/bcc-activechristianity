@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { Profiler } from 'react';
 import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import LatestSection from '@/layout-parts/List/PostRow4Col'
@@ -38,12 +38,25 @@ const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popul
                 <FeatureSectionDesktop
                     featuredPosts={mixed.slice(2)}
                 />
-                <LowerSections
-                    lists={popularTopicsAll.static}
-                    newPostsForYou={[]}
-                    topicsForYou={popularTopicsAll.static}
-                    popularPosts={popular}
-                />
+                <Profiler id="Footer" onRender={(
+                    id, // the "id" prop of the Profiler tree that has just committed
+                    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+                    actualDuration, // time spent rendering the committed update
+                    baseDuration, // estimated time to render the entire subtree without memoization
+                    startTime, // when React began rendering this update
+                    commitTime, // when React committed this update
+                    interactions
+                ) => {
+                    console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
+                }}>
+                    <LowerSections
+                        lists={popularTopicsAll.static}
+                        newPostsForYou={[]}
+                        topicsForYou={popularTopicsAll.static}
+                        popularPosts={popular}
+                    />
+                </Profiler>
+
                 <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
                     <div className="col-start-1 col-end-3 lg:col-end-4">
                         {latest.slice(6, 12).map((item, i) => {

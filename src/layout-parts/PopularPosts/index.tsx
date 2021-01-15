@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Profiler } from 'react';
 import Link from '@/components/CustomLink'
 import { PostItemPlayButtonSmall } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
@@ -14,62 +14,74 @@ interface IProps {
 }
 const PopularPosts: React.FC<IProps> = ({ posts, title, playIcon, small }) => {
     return (
-        <div className="p-4 rounded-lg w-full" style={{ backgroundImage: 'linear-gradient(#edf2f7,#fff)' }}>
-            <div className="flex flex-col pb-4">
-                <h6 className="font-roboto block text-lg pb-4">{title}</h6>
-                <ol className="w-full">
-                    {posts.map((post, i) => {
+        <Profiler id="popular post" onRender={(
+            id, // the "id" prop of the Profiler tree that has just committed
+            phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+            actualDuration, // time spent rendering the committed update
+            baseDuration, // estimated time to render the entire subtree without memoization
+            startTime, // when React began rendering this update
+            commitTime, // when React committed this update
+            interactions
+        ) => {
+            console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
+        }}>
+            <div className="p-4 rounded-lg w-full" style={{ backgroundImage: 'linear-gradient(#edf2f7,#fff)' }}>
+                <div className="flex flex-col pb-4">
+                    <h6 className="font-roboto block text-lg pb-4">{title}</h6>
+                    <ol className="w-full">
+                        {posts.map((post, i) => {
 
-                        return (
-                            <div className="flex" key={post.slug}>
-                                <div className="flex items-center">
-                                    <div className="bg-white w-8 h-8 flex justify-center items-center mt-1" style={{ borderRadius: 9999 }}>
-                                        <div className="mx-4 text-gray-300 ">
-                                            {!small && (post.media.audio || post.media.video) ?
-                                                (
-                                                    <PostItemPlayButtonSmall track={post.media} />
-                                                )
-                                                : (
-                                                    <div className="-mt-1 mx-4">{i + 1}</div>
-                                                )}
+                            return (
+                                <div className="flex" key={post.slug}>
+                                    <div className="flex items-center">
+                                        <div className="bg-white w-8 h-8 flex justify-center items-center mt-1" style={{ borderRadius: 9999 }}>
+                                            <div className="mx-4 text-gray-300 ">
+                                                {!small && (post.media.audio || post.media.video) ?
+                                                    (
+                                                        <PostItemPlayButtonSmall track={post.media} />
+                                                    )
+                                                    : (
+                                                        <div className="-mt-1 mx-4">{i + 1}</div>
+                                                    )}
 
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <Link to={post.slug} className="flex-1 ml-4 my-2">
+                                        {small ? (
+                                            <h2 className="text-sm font-semibold">{post.title}</h2>
+                                        ) : (
+                                                <PostTitle
+                                                    rawText={post.title}
+                                                    fontKey="text-base-lg"
+                                                />
+                                            )}
+
+                                        {post.media.audio && !small && (
+                                            <span>
+                                                <ReadingTimingAuthor
+                                                    authors={[]}
+                                                    duration={post.duration?.listen}
+                                                />
+
+                                            </span>
+                                        )}
+                                        <div className="text-ac-slate-light text-xs py-2">
+                                            {post.views} {ac_string.views}</div>
+                                        {playIcon && (
+                                            <ReadingTimingAuthor duration={post.duration?.listen} authors={post.authors} />
+                                        )}
+                                    </Link>
                                 </div>
 
-                                <Link to={post.slug} className="flex-1 ml-4 my-2">
-                                    {small ? (
-                                        <h2 className="text-sm font-semibold">{post.title}</h2>
-                                    ) : (
-                                            <PostTitle
-                                                rawText={post.title}
-                                                fontKey="text-base-lg"
-                                            />
-                                        )}
+                            )
 
-                                    {post.media.audio && !small && (
-                                        <span>
-                                            <ReadingTimingAuthor
-                                                authors={[]}
-                                                duration={post.duration?.listen}
-                                            />
-
-                                        </span>
-                                    )}
-                                    <div className="text-ac-slate-light text-xs py-2">
-                                        {post.views} {ac_string.views}</div>
-                                    {playIcon && (
-                                        <ReadingTimingAuthor duration={post.duration?.listen} authors={post.authors} />
-                                    )}
-                                </Link>
-                            </div>
-
-                        )
-
-                    })}
-                </ol>
+                        })}
+                    </ol>
+                </div>
             </div>
-        </div>
+        </Profiler>
     )
 }
 
