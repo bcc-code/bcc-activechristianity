@@ -58,7 +58,7 @@ export const onClientEntry = () => {
 
     }
 
-    addScript(endpoints.reftagger)
+/*     addScript(endpoints.reftagger) */
 
   }
 

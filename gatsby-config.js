@@ -121,14 +121,14 @@ if (activeEnv === 'production') {
         enablePartialUpdates: true
       }
     },
-    {
+/*     {
       resolve: `gatsby-plugin-google-tagmanager`,
       options: {
         id: process.env.GTM_TAG||"GTM-WCW8RR4", 
         includeInDevelopment: false,
         gtmLocale: process.env.LOCALE,
       },
-    },
+    }, */
     {
       resolve: 'gatsby-plugin-sitemap'
     },
