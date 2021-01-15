@@ -10,7 +10,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import { IRootState } from '@/state/types'
 
 const Footer: React.FC = () => {
-    const authInfo = useSelector((state: IRootState) => state.auth);
+    /*     const authInfo = useSelector((state: IRootState) => state.auth); */
 
     return (
         <div className="w-full border-t relative bg-white">
@@ -29,17 +29,6 @@ const Footer: React.FC = () => {
                     <h6 className="font-roboto uppercase pb-4 text-center">{ac_strings.follow_us}</h6>
                     <SocialPlatforms />
                 </div>
-                <div className="sm:col-start-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
-                    {authInfo.loggedIn !== 'success' && (
-                        <div className="flex flex-col justify-center sm:justify-start">
-                            <h6 className="font-roboto  uppercase pb-4 text-center">{ac_strings.exclusiveContent}</h6>
-                            <div className="text-sm flex justify-center" >
-                                <UserNav />
-                            </div>
-                        </div>
-                    )}
-                </div>
-
                 {/*                 <div className="px-4 py-10 border-b sm:border-none sm:w-1/3">
                     <h6 className="font-roboto uppercase text-sm pb-4"> </h6>
                     <div><input type="text" placeholder="Email address" className="border rounded-xl px-4 py-2" /><button className="px-4 py-2 bg-ac-secondary border-ac-secondary text-white rounded-xl -m-4">{TS.subject}</button></div>
