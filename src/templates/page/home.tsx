@@ -30,23 +30,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   const mixed = getRandomFeatured({ latest, popular, featured })
 
-<<<<<<< HEAD
-=======
-  let home = <HomeDesktop
-    mixed={mixed}
-    latest={latest}
-    popular={popular}
-    popularTopicsAll={popularTopicsAll}
-  />
-  if (typeof window !== "undefined" && window.innerWidth <= 640) {
-    home = <HomeMobile
-      mixed={mixed}
-      latest={latest}
-      popular={popular}
-      popularTopicsAll={popularTopicsAll}
-    />
-  }
->>>>>>> 8762ecd67471522f51d24e3ba7d5dd3935c2ae97
   return (
 
     <div className="standard-max-w">
@@ -57,7 +40,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         translatedUrls={[]}
         breadcrumb={[]}
       />
-<<<<<<< HEAD
       <HomeMobile
         mixed={mixed}
         latest={latest}
@@ -70,9 +52,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         popular={popular}
         popularTopicsAll={popularTopicsAll}
       />
-=======
-      {home}
->>>>>>> 8762ecd67471522f51d24e3ba7d5dd3935c2ae97
     </div >
 
   )

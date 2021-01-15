@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { DesktopFeaturedPostLoader, OneTopImgPost } from '@/layout-parts/Loader/PlaceHolders'
+import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import LatestSection from '@/layout-parts/List/PostRow4Col'
 import FeatureSectionDesktop from './FeatureSectionDesktop'
