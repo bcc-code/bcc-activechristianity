@@ -8,7 +8,7 @@ import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 
 
 // Type
-import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
+import { IPostRes, ITopicPostItems } from '@/types'
 
 // Helpers
 import ac_strings from '@/strings/ac_strings.js'
