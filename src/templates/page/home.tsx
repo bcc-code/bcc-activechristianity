@@ -70,21 +70,12 @@ const HomeContent: React.FC<IHomeProps> = (props) => {
 
     const DesktopHome = loadable(() => import("@/layout-parts/Home/Desktop"));
     return (
-      <Suspense fallback={(
-        <MobileHome
-          mixed={mixedFeaturedPosts}
-          latest={latest}
-          popular={popular}
-          popularTopicsAll={popularTopicsAll}
-        />
-      )}>
-        <DesktopHome
-          mixed={mixedFeaturedPosts}
-          latest={latest}
-          popular={popular}
-          popularTopicsAll={popularTopicsAll}
-        />
-      </Suspense>
+      <DesktopHome
+        mixed={mixedFeaturedPosts}
+        latest={latest}
+        popular={popular}
+        popularTopicsAll={popularTopicsAll}
+      />
     );
   };
 }
