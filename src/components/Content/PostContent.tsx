@@ -1,11 +1,21 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
+import endpoints from '@/strings/endpoints'
 const ShareIconPopper = loadable(() => import('@/components/ToolTip/ShareIcons'))
 const GlossaryPopper = loadable(() => import('@/components/ToolTip/GlossaryPopper'))
+
+
+const addScript = (url: string) => {
+    const script = document.createElement("script")
+    script.src = url
+    script.async = true
+    document.body.appendChild(script)
+}
 
 import { IGlossary } from '@/types'
 import "./content.css"
 interface IPosition { top: number, right?: number, left?: number };
+
 const TextSelectPopper: React.FC<{ className?: string, content: string, glossary: IGlossary[], title: string, slug: string }> = ({ children, className, slug, title, glossary, content }) => {
     const [position, setPosition] = React.useState<IPosition>({ top: 0 })
     const [showGlossary, setShowGlossary] = React.useState(false)
@@ -17,6 +27,37 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
     const glossaryEl = React.useRef<HTMLDivElement>(null);
     const options = { shareUrl: process.env.SITE_URL + '/' + slug }
 
+    React.useEffect(() => {
+        window.onload = () => {
+            if (typeof window !== 'undefined') {
+
+                if (process.env.LANG_CODE === "en" && !window.refTagger.tag) {
+                    window.refTagger = {
+                        settings: {
+                            bibleVersion: "NKJV",
+                            addLogosLink: false,
+                            appendIconToLibLinks: false,
+                            caseInsensitive: true,
+                            convertHyperlinks: false,
+                            libronixBibleVersion: "NKJV",
+                            libronixLinkIcon: "light",
+                            linksOpenNewWindow: false,
+                            tagChapters: true,
+                            useTooltip: true
+                        }
+                    }
+                    addScript(endpoints.reftagger)
+                }
+            }
+        }
+
+        if (process.env.LANG_CODE === "en") {
+            setTimeout(() => {
+                window.refTagger && window.refTagger.tag && window.refTagger.tag();
+            }, 100)
+
+        }
+    }, [content])
     const closeOnClick = (e: any) => {
 
         if (popperEl && popperEl.current && !popperEl.current.contains(e.target)) {
