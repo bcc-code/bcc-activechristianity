@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import LazyLoad from '@/components/LazyLoad';
 import loadable from '@loadable/component'
 import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 import FeaturedBanner from '@/layout-parts/HorizontalScroll/FeaturedBanner'
@@ -11,11 +12,9 @@ import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics'
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/layout-parts/Home/HeaderPost'
 import { PageSectionHeader } from '@/components/Headers'
-import LowerSections from '@/layout-parts/Home/Desktop/LowerSections'
-import ShowMore from '@/layout-parts/ShowMorePosts'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
-import MobileHome from '@/layout-parts/Home/Mobile'
+
 import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 
 import RightImgWDes from '@/components/PostItemCards/RightImg'
@@ -50,47 +49,42 @@ const HomeContent: React.FC<{
   }
   React.useEffect(() => {
     setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
-    document.addEventListener('resize', checkIsMobile);
-    return () => {
-      document.removeEventListener('resize', checkIsMobile);
-    }
-
-  }, [
-    typeof window !== "undefined" && window.innerWidth
-  ])
+  }, [])
   console.log(isMobile)
   if (isMobile) {
     return (
       <div className="sm:hidden">
-        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-          <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-          <TopImgRowHorizontalScroll posts={latest} />
-        </div>
-
-        <div className="py-6">
-          <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
-          <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
-        </div>
-        <div className="py-6">
-          <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
-          <FeaturedTopics featured={popularTopicsAll.static} />
-
+        <LazyLoad>
           <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-            <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-            <TopImgRowHorizontalScroll posts={popular} />
+            <PageSectionHeader title={ac_strings.latest} className="pb-4" />
+            <TopImgRowHorizontalScroll posts={latest} />
           </div>
+          <div className="py-6">
+            <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
+            <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
+          </div>
+        </LazyLoad>
+        <LazyLoad>
+          <div className="py-6">
+            <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
+            <FeaturedTopics featured={popularTopicsAll.static} />
+
+            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+              <PageSectionHeader title={ac_strings.popular} className="pb-4" />
+              <TopImgRowHorizontalScroll posts={popular} />
+            </div>
 
 
-          <div className="w-full p-4">
-            <div className="w-full h-16">
-              <BgImgTopicCard
-                name={ac_strings.browse_resource}
-                to={ac_strings.slug_explore}
-              />
+            <div className="w-full p-4">
+              <div className="w-full h-16">
+                <BgImgTopicCard
+                  name={ac_strings.browse_resource}
+                  to={ac_strings.slug_explore}
+                />
+              </div>
             </div>
           </div>
-        </div>
-
+        </LazyLoad>
       </div>
     )
   } else {
