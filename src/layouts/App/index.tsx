@@ -105,22 +105,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                 </Helmet>
-                <Profiler id="Footer" onRender={(
-                    id, // the "id" prop of the Profiler tree that has just committed
-                    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-                    actualDuration, // time spent rendering the committed update
-                    baseDuration, // estimated time to render the entire subtree without memoization
-                    startTime, // when React began rendering this update
-                    commitTime, // when React committed this update
-                    interactions
-                ) => {
-                    console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
-                }}>
-                    <TopMobile
-                        {...NavProps}
-                        explorePage={menusItems.explore}
-                    />
-                </Profiler>
+                <TopMobile
+                    {...NavProps}
+                />
 
                 {isSideNavOpen && <SideNav {...NavProps} />}
                 {/*             <Profiler id="Footer" onRender={(
@@ -137,7 +124,10 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 
             </Profiler> */}
                  with state and top mobile nav, removed google font
-            <Footer />
+                 <Footer />
+                <BottomMobile {...NavProps} />
+
+
             </div>
         </div>
 

@@ -42,7 +42,6 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
             callback()
         }
     }
-    console.log('user nav')
     return authInfo.loggedIn === 'success' ? (
         <div className={`${col ? 'flex flex-col justify-center' : 'grid grid-cols-2'} ${className}`}>
             <Link

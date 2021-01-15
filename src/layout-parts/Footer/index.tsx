@@ -7,25 +7,21 @@ import ac_strings from '@/strings/ac_strings.js'
 import AcLogoOnly from '@/images/ACLogo/LogoOnly'
 
 const Footer: React.FC = () => {
-    console.log('render footer')
     return (
         <div className="w-full border-t relative bg-white">
-            <div className="grid sm:grid-cols-4 standard-max-w">
-                <div className="sm:col-start-1 sm:col-end-3 w-full flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10">
-                    <div className="m-4 "
-                    >
-                        <AcLogoOnly height="36px" width="36px" />
-                    </div>
-                    <div>
+            <div className="standard-max-w flex flex-col sm:flex-row">
+                <div className=" sm:w-1/2 w-full flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10">
+                    <AcLogoOnly height="36px" width="36px" />
+                    <div className="flex flex-col items-center">
                         <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{ac_strings.about_activechristianity_body}</div>
-                        <Link to={ac_strings.slug_about} className="pt-4 flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learnMoreAC}</Link>
+                        <Link to={ac_strings.slug_about} className="py-4 underline flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learnMoreAC}</Link>
                     </div>
                 </div>
-                <div className="sm:col-start-3 px-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
+                <div className="sm:w-1/4 px-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
                     <h6 className="font-roboto uppercase pb-4 text-center">{ac_strings.follow_us}</h6>
                     <SocialPlatforms />
                 </div>
-                <div className="sm:col-start-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
+                <div className="sm:w-1/4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
                     <div className="flex flex-col justify-center sm:justify-start">
                         <h6 className="font-roboto  uppercase pb-4 text-center">{ac_strings.exclusiveContent}</h6>
                         <div className="text-sm flex justify-center" >
