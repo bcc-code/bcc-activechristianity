@@ -114,7 +114,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     return (
         <div>
-            {isSignInModalOpen && <SignInSignUpModal />}
             <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
                 <Helmet>
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -126,6 +125,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                     {...NavProps}
                     explorePage={menusItems.explore}
                 />
+                <SignInSignUpModal />
                 <TopDesktop {...NavProps} explorePage={menusItems.explore} />
                 {isLandingPage ? (
                     <div className={`flex-grow relative z-0 pb-24 sm:pb-0 layout-children drawer-main ${isSideNavOpen ? 'drawer-main-open' : 'drawer-main-close'} `}>
@@ -142,9 +142,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
 
                             {children}
-                            <LazyLoad>
+                            {/*                             <LazyLoad>
                                 <Footer key={shortid()} />
-                            </LazyLoad>
+                            </LazyLoad> */}
                         </div>
                     )}
 
