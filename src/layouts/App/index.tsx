@@ -12,15 +12,16 @@ const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerG
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
-import TopMobile from '@/layout-parts/Nav/TopMobile'
+/* import TopMobile from '@/layout-parts/Nav/TopMobile'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 
-import shortid from 'shortid'
+import shortid from 'shortid' */
 import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
-import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus'
+/* 
+import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus' */
 
 // string
 
@@ -47,17 +48,16 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const dispatch = useDispatch();
 
-    /*     const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
-            isSignInModalOpen: state.isSignInModalOpen,
-            currentMedia: state.currentMedia,
-            isModalOpen: state.isModalOpen,
-            breadcrumb: state.breadcrumb,
-            isPlay: state.isPlaying,
-            auth: state.auth
-    
-        })); */
-    const [isSideNavOpen, setSideNavOpen] = React.useState(false)
+    const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
+        isSignInModalOpen: state.isSignInModalOpen,
+        currentMedia: state.currentMedia,
+        isModalOpen: state.isModalOpen,
+        breadcrumb: state.breadcrumb,
+        isPlay: state.isPlaying,
+        auth: state.auth
 
+    }))
+    const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
     React.useEffect(() => {
         checkUser()
@@ -93,8 +93,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         dispatch(setIsModalOpen(status))
     }
 
-    const isModalOpen = false
-    const isSignInModalOpen = false;
+
+
     const NavProps = React.useMemo(() => {
         return (
             {
@@ -111,7 +111,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isModalOpen,
         isSignInModalOpen
     ])
-    console.log('render')
+
     return (
 
         <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
@@ -119,8 +119,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Helmet>
-            Test site
-            {/*             <Profiler id="Nav Bar" onRender={(
+            <Profiler id="Nav Bar" onRender={(
                 id, // the "id" prop of the Profiler tree that has just committed
                 phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
                 actualDuration, // time spent rendering the committed update
@@ -132,7 +131,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
             }}>
                 <SideNav {...NavProps} />
-            </Profiler> */}
+            </Profiler>
             {/*             <Profiler id="Footer" onRender={(
                 id, // the "id" prop of the Profiler tree that has just committed
                 phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
@@ -147,6 +146,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 <Footer />
             </Profiler>
                 name */}
+                with state and side nav
         </div>
 
     )

@@ -48,7 +48,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
         setOpenResourceMenu(false)
         setSideNavOpen(false)
     }
-
+    console.log('render nav')
     return (
         <SideNavWrapper
             close={close}
