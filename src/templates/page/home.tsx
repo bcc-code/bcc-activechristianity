@@ -50,6 +50,7 @@ const HomeContent: React.FC<IHomeProps> = (props) => {
     setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
   }
   React.useEffect(() => {
+    setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
     document.addEventListener('resize', checkIsMobile);
     return () => {
       document.removeEventListener('resize', checkIsMobile);
