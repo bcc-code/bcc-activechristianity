@@ -110,7 +110,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                             next
                             onClick={() => { setOpenUserMenu(true) }}
                             hideOnDeskop
-
                         >
                             {ac_strings.my_profile}
                         </SideNavItem>

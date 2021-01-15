@@ -13,6 +13,7 @@ interface ITopNavMobile extends IDrawerNav {
 
 
 const TopNavMobile: React.FC<ITopNavMobile> = ({ isSideNavOpen, setSideNavOpen, explorePage }) => {
+    console.log('render top')
     return (
         <div className={`fixed py-2 w-full top-0 z-50 sm:hidden bg-white shadow-md drawer-main drawer-main-${isSideNavOpen ? 'mobile-open' : 'close'}`}>
             <div className="flex justify-between items-center w-full">

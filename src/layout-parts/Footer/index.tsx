@@ -1,24 +1,20 @@
 import React from 'react'
-import { useSelector } from "react-redux";
 import Link from "@/components/CustomLink"
-import LogoFull from '@/images/ACLogo'
 import SocialPlatforms from '@/layout-parts/Nav/SocialPlatforms'
 import UserNav from '@/layout-parts/Nav/User'
 import ac_strings from '@/strings/ac_strings.js'
 
-
-import { IRootState } from '@/state/types'
+import AcLogoOnly from '@/images/ACLogo/LogoOnly'
 
 const Footer: React.FC = () => {
-    const authInfo = useSelector((state: IRootState) => state.auth);
-
+    console.log('render footer')
     return (
         <div className="w-full border-t relative bg-white">
             <div className="grid sm:grid-cols-4 standard-max-w">
                 <div className="sm:col-start-1 sm:col-end-3 w-full flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10">
                     <div className="m-4 "
                     >
-                        <LogoFull height="36px" width="36px" iconOnly />
+                        <AcLogoOnly height="36px" width="36px" />
                     </div>
                     <div>
                         <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{ac_strings.about_activechristianity_body}</div>
@@ -30,14 +26,12 @@ const Footer: React.FC = () => {
                     <SocialPlatforms />
                 </div>
                 <div className="sm:col-start-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">
-                    {authInfo.loggedIn !== 'success' && (
-                        <div className="flex flex-col justify-center sm:justify-start">
-                            <h6 className="font-roboto  uppercase pb-4 text-center">{ac_strings.exclusiveContent}</h6>
-                            <div className="text-sm flex justify-center" >
-                                <UserNav />
-                            </div>
+                    <div className="flex flex-col justify-center sm:justify-start">
+                        <h6 className="font-roboto  uppercase pb-4 text-center">{ac_strings.exclusiveContent}</h6>
+                        <div className="text-sm flex justify-center" >
+                            <UserNav />
                         </div>
-                    )}
+                    </div>
                 </div>
 
                 {/*                 <div className="px-4 py-10 border-b sm:border-none sm:w-1/3">

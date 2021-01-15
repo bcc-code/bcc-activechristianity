@@ -7,7 +7,7 @@ import Breadcrumb from './Breadcrumb'
 import CookieConsent from "@/layouts/App/CookeConsent";
 import Helmet from 'react-helmet'
 import Link from '@/components/CustomLink';
-
+import TopMobile from '@/layout-parts/Nav/TopMobile'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
@@ -20,8 +20,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
-/* 
-import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus' */
+import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus'
 
 // string
 
@@ -48,15 +47,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const dispatch = useDispatch();
 
-    const { isModalOpen, currentMedia, isSignInModalOpen, breadcrumb, auth } = useSelector((state: IRootState) => ({
-        isSignInModalOpen: state.isSignInModalOpen,
-        currentMedia: state.currentMedia,
-        isModalOpen: state.isModalOpen,
-        breadcrumb: state.breadcrumb,
-        isPlay: state.isPlaying,
-        auth: state.auth
 
-    }))
+    const isSignInModalOpen = false
+    const isModalOpen = false
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
     React.useEffect(() => {
@@ -112,6 +105,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         isSignInModalOpen
     ])
 
+    console.log('app')
     return (
 
         <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
@@ -119,7 +113,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Helmet>
-            <Profiler id="Nav Bar" onRender={(
+            <Profiler id="Footer" onRender={(
                 id, // the "id" prop of the Profiler tree that has just committed
                 phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
                 actualDuration, // time spent rendering the committed update
@@ -130,8 +124,13 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             ) => {
                 console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
             }}>
-                <SideNav {...NavProps} />
+                <TopMobile
+                    {...NavProps}
+                    explorePage={menusItems.explore}
+                />
             </Profiler>
+
+            {isSideNavOpen && <SideNav {...NavProps} />}
             {/*             <Profiler id="Footer" onRender={(
                 id, // the "id" prop of the Profiler tree that has just committed
                 phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
@@ -144,9 +143,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
             }}>
                 <Footer />
-            </Profiler>
-                name */}
-                 with state and side nav, removed google font
+            </Profiler> */}
+                 with state and top mobile nav, removed google font
         </div>
 
     )
