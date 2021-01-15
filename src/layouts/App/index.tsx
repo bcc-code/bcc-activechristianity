@@ -142,9 +142,12 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             ) => {
                 console.log(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions)
             }}>
-                <Footer />
+                
             </Profiler> */}
                  with state and top mobile nav, removed google font
+            <LazyLoad>
+                <Footer />
+            </LazyLoad>
         </div>
 
     )
