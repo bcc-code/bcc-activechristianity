@@ -119,6 +119,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Helmet>
+            Test site
             {/*             <Profiler id="Nav Bar" onRender={(
                 id, // the "id" prop of the Profiler tree that has just committed
                 phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
