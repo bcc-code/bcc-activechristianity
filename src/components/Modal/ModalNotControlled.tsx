@@ -1,5 +1,5 @@
 import * as React from 'react'
-import CloseButtonRound from '@/components/Button/CloseButtonRound'
+
 import ReactModal from 'react-modal'
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -32,14 +32,7 @@ const Modal: React.FC<IModal> = ({ content, closeModal, isOpen }) => {
             contentLabel={ac_strings["ebookPreview"]}
             style={customStyles}
         >
-            <button
-                className="absolute top-0 right-0 z-10"
-                style={{ padding: '5px' }}
-                onClick={handleClose}
-                onKeyDown={handleClose}
-            >
-                <CloseButtonRound />
-            </button>
+
             {content}
 
         </ReactModal>

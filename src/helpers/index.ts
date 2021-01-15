@@ -407,7 +407,7 @@ export const processRecommendationContext = (data: {
 
     const featured = featuredPosts.map(p => normalizePostRes(p))
     const popular = popularPosts.map(p => normalizePostRes(p))
-    const latest = latestPosts.map(p => normalizePostRes(p))
+    const latest = latestPosts.slice(0, 6).map(p => normalizePostRes(p))
 
 
     return ({

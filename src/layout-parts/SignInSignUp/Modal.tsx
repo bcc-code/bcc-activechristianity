@@ -36,7 +36,7 @@ const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
         dispatch(closeSignInModal())
     }
     return (
-        <div className="absolute inset-0 h-screen w-screen p-2 flex justify-center items-center" style={{ backgroundColor: `rgba(255, 255, 255, 0.7`, zIndex: 60 }}>
+        <div className="absolute inset-0 h-screen w-screen p-2 flex justify-center items-center" style={{ backgroundColor: `rgba(255, 255, 255, 0.7`, zIndex: 200 }}>
 
             <div
                 className="flex flex-col bg-white text-grey-500 rounded-lg shadow-md relative w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-scroll"

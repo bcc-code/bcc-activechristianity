@@ -1,16 +1,17 @@
 import * as React from 'react';
 import ac_strings from '@/strings/ac_strings.js'
 import { Button } from '@/components/Button'
-import Cookies from 'js-cookie'
+
 export default () => {
-    const cookieName = 'ac.giveConsent'
+    const localStorageKey = 'ac.giveConsent'
 
-    const gaveConsent = Cookies.get(cookieName);
-    console.log(gaveConsent)
-    const [showConsent, setShowConsent] = React.useState(gaveConsent !== "true")
-
+    const [showConsent, setShowConsent] = React.useState(false)
+    React.useEffect(() => {
+        const gaveConsent = localStorage.getItem(localStorageKey)
+        setShowConsent(gaveConsent !== "true")
+    }, [])
     const setNotIsInfoBarOpen = () => {
-        Cookies.set(cookieName, 'true')
+        localStorage.setItem(localStorageKey, "true")
         setShowConsent(false)
     }
 

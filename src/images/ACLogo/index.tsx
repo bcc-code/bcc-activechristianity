@@ -11,7 +11,6 @@ export interface ILogoStyle {
 export default (props: ILogoStyle) => {
     const { iconOnly } = props
     let lang = iconOnly ? "icon" : process.env.LANG_CODE
-    console.log(lang, props)
     const langLogo = {
         "en": (
             <AcLogoEn {...props} />
