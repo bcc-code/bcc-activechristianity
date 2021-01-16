@@ -30,8 +30,9 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
     React.useEffect(() => {
         window.onload = () => {
             if (typeof window !== 'undefined') {
-
+                console.log("should load reftagger:" + (process.env.LANG_CODE === "en" && !window.refTagger))
                 if (process.env.LANG_CODE === "en" && !window.refTagger) {
+                    console.log('loading reftaggaer')
                     window.refTagger = {
                         settings: {
                             bibleVersion: "NKJV",
@@ -53,8 +54,9 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
 
         if (process.env.LANG_CODE === "en") {
             setTimeout(() => {
+                console.log('run refTagger')
                 window.refTagger && window.refTagger.tag && window.refTagger.tag();
-            }, 500)
+            }, 2000)
 
         }
     }, [content])
