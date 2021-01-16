@@ -36,7 +36,6 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
             dispatch(openSignInModal("signInOptions"))
         }
     }
-
     return (
         <div
             className={className ? className : ''}

@@ -22,7 +22,7 @@ export const PageSectionHeader: React.FC<{ title: string, className?: string }> 
 )
 
 export const PageSectionHeaderUpperCaseGray: React.FC<{ title: string }> = ({ title }) => (
-    <span className="block uppercase font-roboto text-gray-500 text-sm tracking-wider pb-2">
+    <span className="block uppercase font-roboto font-normal text-gray-500 text-sm tracking-wider pb-2">
         {title}
     </span>
 )

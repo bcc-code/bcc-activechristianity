@@ -21,7 +21,7 @@ const ACMediaPlayer: React.FC = () => {
 
     return currentMedia.audio ? (
         (
-            <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom ${fullScreenInfo ? 'top-0' : ''}`} ref={inputEl}>
+            <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom ${fullScreenInfo ? 'top-0' : ''}`} ref={inputEl} style={{ zIndex: 600 }}>
 
                 <div className={`w-full flex  ${fullScreenInfo ? 'h-full bg-mp-background' : 'bg-ac-slate-lighter'}`}>
                     <div className="mx-auto max-w-tablet w-full flex-1">

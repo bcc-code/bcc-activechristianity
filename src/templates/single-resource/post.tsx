@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
 import PostLayout from '@/layouts/PostLayout';
@@ -38,6 +38,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
+
             <PostLayout
                 {...post}
                 seoTitle={seoTitle}
@@ -47,6 +48,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 readMorePosts={readMorePosts}
                 credits={meta ? meta.credits : undefined}
             />
+
         </div>
     )
 }

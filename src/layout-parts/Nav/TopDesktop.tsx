@@ -1,18 +1,15 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
-
 import { IDrawerNav } from '@/layouts/App'
-
 import LogoFull from '@/images/ACLogo'
 import TopFirst from './TopFirst'
-
 import { desktopMenu } from '@/layout-parts/Nav/Menus'
 import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
 import { INavItem } from '@/types'
 
 const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideNavOpen, setSideNavOpen, explorePage }) => {
     return (
-        <div className={`fixed top-0 z-50 bg-white hidden sm:block w-full py-1 border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
+        <div style={{ zIndex: 100 }} className={`fixed top-0 bg-white hidden sm:block w-full py-1 border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
             <TopFirst />
             <div className="flex py-2 standard-max-w items-center">
                 <Link className='flex flex-1 justify-start items-center px-4 mt-1' to="/">

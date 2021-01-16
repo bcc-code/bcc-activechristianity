@@ -218,19 +218,16 @@ export const SlateDarkUnfollowButton: React.FC<IToggleFollowProps> = ({ id, text
 }
 
 export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) => {
-
     return (
-
-
-        <div className={`flex py-2 px-4 pr-0 mb-2 mr-2 text-center text-sm rounded-full font-semibold items-center bg-gray-300`}>
-            <Link to={to} className="">{name}</Link>
+        <div className={`flex py-2 px-4 mb-2 mr-2 text-center text-sm rounded-full font-semibold items-center bg-gray-300`}>
+            <Link to={to} className="pr-2">{name}</Link>
             <FetchAndSetFollowedTopics
                 id={id}
                 className=""
                 render={({ followed }) => {
                     const config = toggleFollowStatusMap[followed]
                     return (
-                        <span>
+                        <span className="">
                             {followed === "loading" && (
                                 <CachedIcon customSize="4" key={shortid()} />
                             )}
@@ -241,7 +238,6 @@ export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) 
                                 <AddIcon customSize="4" key={shortid()} />
                             )}
                         </span>
-
                     )
                 }}
             />

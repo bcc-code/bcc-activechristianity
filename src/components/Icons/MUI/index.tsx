@@ -108,8 +108,8 @@ export const BookmarkIcon: React.FC<IIconProps> = ({ customSize, className }) =>
             }}
             className={className ? className : `fill-current`}
         >
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
         </svg>
 
     )
@@ -126,7 +126,8 @@ export const BookmarkBorderIcon: React.FC<IIconProps> = ({ customSize, className
             }}
             className={className ? className : `fill-current`}
         >
-            <path d="M0 0h24v24H0z" fill="none" /><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
         </svg>
 
     )
@@ -466,9 +467,8 @@ export const HomeIcon: React.FC<IIconProps> = ({ customSize, className }) => {
             }}
             className={className ? className : `fill-current`}
         >
-            <path d="M0 0h24v24H0z" fill="none" opacity=".1" />
-            <path d="M12 1a9 9 0 00-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 00-9-9z" />
-
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
         </svg>
 
     )

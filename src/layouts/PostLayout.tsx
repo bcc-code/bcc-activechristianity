@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { useSelector } from 'react-redux'
+import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 /* const AudioPlayer */
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
@@ -167,7 +168,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 topics={topics}
                 formats={format}
             /> */}
-
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
                     <VideoMediaPlayer src={media.video.src} />
@@ -189,19 +189,18 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         ))}
                     </div>
                 )}
-
             </div>
-
             <div className="sm:hidden fixed inset-x top-0 w-full">
                 {mediaTypes.length > 0 ? (
-                    <div className='fixed bg-mp-background w-full' style={{ top: "50px", height: `${currentHeigt + 50}px` }}>
+                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 50}px` }}>
 
                     </div>
                 ) : (
                         <div
                             className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "50px", background: `url(${imageUrl.src}) center center no-repeat`, backgroundSize: "cover", height: "150px" }}
+                            style={{ top: "54px", backgroundSize: "cover", height: "150px" }}
                         >
+                            <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                         </div>
 
                     )}

@@ -97,7 +97,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             <CookieConsent />
             <SignInSignUpModal />
             <MediaPlayer />
-            <div className="relative" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
+            <div className="relative layout-children" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
                 <Helmet>
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -107,14 +107,10 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                     {...NavProps}
                 />
                 {isSideNavOpen && <SideNav {...NavProps} />}
-
                 <Breadcrumb />
-
                 {children}
                 <Footer />
                 <BottomMobile {...NavProps} />
-
-
             </div>
         </div>
 

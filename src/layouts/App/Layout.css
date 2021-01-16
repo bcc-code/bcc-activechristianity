@@ -67,13 +67,13 @@
 }
 
 .layout-children {
-    margin-top: 58px;
+    margin-top: 56px;
 }
 
 @media (min-width: 640px) {
 
     .layout-children {
-        margin-top: 90px;
+        margin-top: 94.5px;
 
     }
 }
