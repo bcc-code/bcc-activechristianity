@@ -13,10 +13,8 @@ import HomeTopFeaturePost from '@/layout-parts/Home/HeaderPost'
 import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
-
 import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 
-import RightImgWDes from '@/components/PostItemCards/RightImg'
 // Type
 import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 
@@ -42,14 +40,14 @@ const HomeContent: React.FC<{
   } = props
   const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
 
-  const checkIsMobile = () => {
-    console.log('resizing')
-    setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
-  }
+  /*   const checkIsMobile = () => {
+      console.log('resizing')
+      setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
+    } */
   React.useEffect(() => {
     setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
   }, [])
-  console.log(isMobile)
+
   if (isMobile) {
     return (
       <div className="sm:hidden">
@@ -85,7 +83,7 @@ const HomeContent: React.FC<{
       </div>
     )
   } else {
-
+    console.log('render')
     const DesktopHome = loadable(() => import("@/layout-parts/Home/Desktop"));
     return (
       <DesktopHome {...props} />

@@ -1,27 +1,22 @@
-import React, { Profiler } from 'react';
-import LazyLoad from 'react-lazyload';
+import React from 'react';
 import loadable from '@loadable/component'
-import { StaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import BottomMobile from '@/layout-parts/Nav/BottomMobile'
 import Breadcrumb from './Breadcrumb'
 import CookieConsent from "@/layouts/App/CookeConsent";
 import Helmet from 'react-helmet'
-import Link from '@/components/CustomLink';
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
-/* import TopMobile from '@/layout-parts/Nav/TopMobile'
 
-
-import shortid from 'shortid' */
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
-import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus'
+import { menusItems } from '@/layout-parts/Nav/Menus'
 
 // string
 
