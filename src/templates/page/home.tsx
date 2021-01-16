@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import LazyLoad from '@/components/LazyLoad';
 import loadable from '@loadable/component'
 import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
@@ -6,7 +6,6 @@ import FeaturedBanner from '@/layout-parts/HorizontalScroll/FeaturedBanner'
 import { TopImgRowHorizontalScroll } from '@/layout-parts/HorizontalScroll'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
 import LatestSection from '@/layout-parts/List/PostRow4Col'
-import FeatureSectionDesktop from '@/layout-parts/Home/Desktop/FeatureSectionDesktop'
 import FeatureSectionMobile from '@/layout-parts/Home/Mobile/FeatureSectionMobile'
 import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics'
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
@@ -54,11 +53,12 @@ const HomeContent: React.FC<{
   if (isMobile) {
     return (
       <div className="sm:hidden">
+
+        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+          <PageSectionHeader title={ac_strings.latest} className="pb-4" />
+          <TopImgRowHorizontalScroll posts={latest} />
+        </div>
         <LazyLoad>
-          <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-            <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-            <TopImgRowHorizontalScroll posts={latest} />
-          </div>
           <div className="py-6">
             <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
             <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
@@ -68,13 +68,10 @@ const HomeContent: React.FC<{
           <div className="py-6">
             <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
             <FeaturedTopics featured={popularTopicsAll.static} />
-
             <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
               <PageSectionHeader title={ac_strings.popular} className="pb-4" />
               <TopImgRowHorizontalScroll posts={popular} />
             </div>
-
-
             <div className="w-full p-4">
               <div className="w-full h-16">
                 <BgImgTopicCard

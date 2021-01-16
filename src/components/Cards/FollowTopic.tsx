@@ -1,13 +1,23 @@
 import * as React from "react"
+import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
+import { SlateDarkFollowButton } from '@/components/PostElements/TopicToggleFollow'
+import ac_strings from '@/strings/ac_strings.js'
+import { ITopic } from '@/types'
 
-const FollowTopic = () => (
-    <div className="flex justify-between items-center max-w-lg border rounded-lg content-center bg-gray-200">
-        <p className="m-2 font-semibold text-ac-gray-dark text-xs">
-            Follow <span className="text-ac-slate-dark">Demo topic 3</span> for more resources like this
-        </p>
-        <button className="m-2 ml-12 py-1 px-2 rounded-lg font-semibold text-ac-gray-dark text-xs border border-ac-gray">
-            Follow
-        </button>
+const FollowTopic: React.FC<ITopic> = ({ name, image, slug, id }) => (
+    <div className="flex flex-col items-center">
+        <div style={{ width: "100px", height: "138px" }}>
+            <ImgBgTopicCard
+                name={name}
+                image={image}
+                to={`${ac_strings.slug_topic}/${slug}`}
+                rounded="rounded-xxl"
+
+            />
+        </div>
+        <SlateDarkFollowButton
+            id={id}
+        />
     </div>
 )
 
