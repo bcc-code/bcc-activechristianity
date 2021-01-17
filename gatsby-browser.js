@@ -37,7 +37,7 @@ export const onClientEntry = () => {
 //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
   (function(){
     // create our custom link tag for the stylesheet
-    var url = "scripts/google-font-Merriweather.css"; // IMPORTANT: this is the CSS file that contains your @font-face rules
+    var url = "https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"; // IMPORTANT: this is the CSS file that contains your @font-face rules
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
     link.type = "text/css";
@@ -147,7 +147,6 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
       window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
     }
     
-  
       setTimeout(()=>{
         if(window.ga){
           console.log('ga tracking pageview')
