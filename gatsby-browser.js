@@ -70,7 +70,7 @@ export const onClientEntry = () => {
     }
     })();
 
-    
+   /*  
     (function(){
       window['GoogleAnalyticsObject'] = 'ga';
       if(!window['ga'] ){
@@ -91,7 +91,6 @@ export const onClientEntry = () => {
 
   window.ga('create', 'UA-80420826-1', 'auto');
 
-
     (function (f, b, e, v, n, t, s) {
       if (f.fbq) return;
       n = f.fbq = function () {
@@ -103,7 +102,7 @@ export const onClientEntry = () => {
       n.version = "2.0";
       n.queue = [];
       t = b.createElement(e);
-      t.async = !0;
+      t.async = 1;
       t.src = v;
       s = b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t, s);
@@ -132,7 +131,7 @@ export const onClientEntry = () => {
       gtag('config', 'AW-853531513');
       gtag('config', 'AW-929434073');
     },100)
-
+ */
   }
 
 
