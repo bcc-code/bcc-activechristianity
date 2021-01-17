@@ -3,7 +3,7 @@ import loadable from '@loadable/component'
 import endpoints from '@/strings/endpoints'
 const ShareIconPopper = loadable(() => import('@/components/ToolTip/ShareIcons'))
 const GlossaryPopper = loadable(() => import('@/components/ToolTip/GlossaryPopper'))
-
+import scripts from 'fetch-external-scripts'
 
 const addScript = (url: string) => {
     const script = document.createElement("script")
@@ -30,7 +30,6 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
     React.useEffect(() => {
         window.onload = () => {
             if (typeof window !== 'undefined') {
-                console.log("should load reftagger:" + (process.env.LANG_CODE === "en" && !window.refTagger))
                 if (process.env.LANG_CODE === "en" && !window.refTagger) {
                     console.log('loading reftaggaer')
                     window.refTagger = {
@@ -47,16 +46,16 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
                             useTooltip: true
                         }
                     }
-                    addScript(endpoints.reftagger)
+                    /* addScript(endpoints.reftagger) */
+                    addScript('/scripts/RefTagger.js')
                 }
             }
         }
 
         if (process.env.LANG_CODE === "en") {
             setTimeout(() => {
-                console.log('run refTagger')
                 window.refTagger && window.refTagger.tag && window.refTagger.tag();
-            }, 2000)
+            }, 100)
 
         }
     }, [content])
