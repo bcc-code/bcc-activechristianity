@@ -142,9 +142,9 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
     // Since the History Change trigger fires as soon as the event is dispatched, the content might not be there yet when the tracking tags fire.
     // By delaying the trigger, the tags won’t fire until the page has had time to load the content
    
-    if(window.gtag){
+/*     if(window.gtag){
       window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
-    }
+    } */
     
       setTimeout(()=>{
         if(window.ga){
