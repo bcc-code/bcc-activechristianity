@@ -70,7 +70,7 @@ export const onClientEntry = () => {
     }
     })();
 
-   /*  
+    
     (function(){
       window['GoogleAnalyticsObject'] = 'ga';
       if(!window['ga'] ){
@@ -131,7 +131,7 @@ export const onClientEntry = () => {
       gtag('config', 'AW-853531513');
       gtag('config', 'AW-929434073');
     },100)
- */
+
   }
 
 
