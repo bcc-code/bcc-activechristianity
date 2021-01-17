@@ -122,15 +122,13 @@ export const onClientEntry = () => {
     addScript('/scripts/adword-remarketing.js')
 
     window.dataLayer = window.dataLayer || [];
-    setTimeout(()=>{
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag=gtag
-      gtag('js', new Date());
-      gtag('config', 'AW-853531513');
-      gtag('config', 'AW-929434073');
-    },100)
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag=gtag
+    gtag('js', new Date());
+    gtag('config', 'AW-853531513');
+    gtag('config', 'AW-929434073');
 
   }
 
