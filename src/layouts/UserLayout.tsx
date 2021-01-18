@@ -25,7 +25,11 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
     }, [pathname])
 
     const handleLogout = () => {
-        dispatch(initiateLogout())
+        const r = confirm("You are logging out now");
+        if (r == true) {
+            dispatch(initiateLogout())
+        }
+
 
     }
 

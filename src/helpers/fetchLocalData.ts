@@ -28,7 +28,7 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: string[] = res.result.pageContext.posts
                 return fetchLocalPostsFromSlugs(posts)
@@ -169,13 +169,12 @@ export const fetchPostsFromOneTopicSlug = (slug: string) => {
             }
             return foundPosts
         }).catch(error => {
-            console.log(slug)
+
             console.log(error)
         })
 }
 
 export const fetchPostsFromTopics = (topics: ITopic[]) => {
-    console.log('fetch topics')
 
     return Promise.all(topics
         .map(t => {

@@ -43,8 +43,12 @@ export const menusItems = {
     },
     "podcast": {
         name: ac_strings.podcast,
-        to: `${ac_strings.slug_podcast}`
-    }
+        to: `${ac_strings.slug_podcast}/${ac_strings.slug_latest}`
+    },
+    "scripture": {
+        name: ac_strings.scripture,
+        to: `${ac_strings.slug_scripture}`
+    },
 }
 
 export const userMenuItems = {

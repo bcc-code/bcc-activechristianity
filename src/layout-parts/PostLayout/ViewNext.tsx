@@ -117,7 +117,6 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
         if (topics && formats) {
             const topicsToFetch = topics.map(t => ({ ...t, slug: `${t.to}/1` }))
             const formatsToFetch = formats.map(f => ({ ...f, slug: `${f.to}/${ac_strings.slug_latest}` }))
-            console.log('fetching topic')
             if (isSubscribed) {
                 Promise.all([
                     getTopicPosts(topicsToFetch),

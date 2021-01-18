@@ -28,7 +28,7 @@ module.exports = async function generateTypes(data) {
         info:nodeInfo,
         items:[]
     }
-/*     for(let j=0;j<subTopics.length;j++){
+    for(let j=0;j<subTopics.length;j++){
         const subTopic=subTopics[j]
         
         const find = formatScope.find(f=>`${f.keyId}`===`${subTopic.id}`)
@@ -48,7 +48,9 @@ module.exports = async function generateTypes(data) {
                     typeFormatEach.items.push({
                         key:find.keyname,
                         name:subTopic.name,
-                        to:`${type.slug}/${subTopic.slug}`,
+                        to:`${type.slug}/`,
+                        typeSlug:`${type.slug}`,
+                        formatSlug:`${subTopic.slug}`,
                         count:allPosts.length
                     })
                     
@@ -58,13 +60,13 @@ module.exports = async function generateTypes(data) {
                         createPage,allPosts,
                         topic:type,
                         subTopic
-                    })
+                    }) 
             })
         }
 
         
     } 
- */
+
     if(`${type.id}`===`${typesAll.listen.keyId}`){
         const result = await graphql(query)
         .then(res=>{

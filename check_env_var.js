@@ -7,7 +7,7 @@ const core = [
     "ALGOLIA_APP_ID",
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",
-    "GTM_TAG",
+    "GA_ID",
     "LISTEN_SECTION"
 ]
 
@@ -15,6 +15,9 @@ const core = [
 module.exports = function (){
     const missing = []
     core.forEach(item=>{
+        if(process["GTM_TAG"]){
+            throw new Error('Please remove GTM Tag')
+        }
         if (!process.env[item]){
             missing.push(item)
         }

@@ -146,7 +146,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
     return (
-        <article className="overflow-scroll sm:overflow-visible w-full relative">
+        <article className="overflow-scroll sm:overflow-visible w-full relative" style={{ paddingTop: "36px" }}>
             <ShareBookmarkTopShortCuts
                 id={id}
                 text={excerpt || title}
@@ -191,13 +191,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
             <div className="sm:hidden fixed inset-x top-0 w-full">
                 {mediaTypes.length > 0 ? (
-                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 50}px` }}>
+                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
 
                     </div>
                 ) : (
                         <div
                             className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "54px", backgroundSize: "cover", height: "150px" }}
+                            style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
                         >
                             <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                         </div>
@@ -266,6 +266,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 views={views}
                                 likes={likes}
                                 authors={authors}
+                                formats={format}
 
                             />
                         </div>
@@ -278,12 +279,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         </LazyLoad>
-                        <LazyLoad>
-                            <FromAuthorsSection
-                                authors={authors}
-                                postId={postId}
-                            />
-                        </LazyLoad>
+                        {authors && (
+                            <LazyLoad>
+                                <FromAuthorsSection
+                                    authors={authors}
+                                    postId={postId}
+                                />
+                            </LazyLoad>
+                        )}
                     </div>
                     <LazyLoad>
                         <Translations translatedUrls={tranlsatedUrl || []} />
@@ -292,7 +295,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 </div>
             </div>
 
-            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 z-50">
+            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">
                 <p className=""><em>{ac_strings.scripture_copyright}</em></p>
             </div>
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { INavItem, IPostAuthors } from '@/types'
+import { INavItem, IPostAuthors, ITopicNavItem } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import { KeyboardArrowRightIcon, PublishIcon } from '@/components/Icons/MUI'
@@ -97,12 +97,13 @@ export const AuthorFollowSection: React.FC<{ authors: IPostAuthors }> = ({ autho
         <div className="flex flex-col mb-4">
             <PageSectionHeaderUpperCaseGray title={authors.as} />
 
-            <span className="">{authors.authors.map(a => (
-                <Link className="block text-sm pt-1" to={`${ac_strings.slug_ac_author}/${a.to}`}>
-                    <div className="font-roboto ">{a.name}</div>
-                    <div className="text-gray-500">{a.excerpt}</div>
-                </Link>
-            ))}
+            <span className="">
+                {authors.authors.map(a => (
+                    <Link className="block text-sm pt-1" to={`${ac_strings.slug_ac_author}/${a.to}`}>
+                        <div className="font-roboto ">{a.name}</div>
+                        <div className="text-gray-500">{a.excerpt}</div>
+                    </Link>
+                ))}
             </span>
         </div>
     )
@@ -147,8 +148,8 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
     )
 }
 
-export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { authors?: IPostAuthors[] }> = (props) => {
-    const { id, shareSlug, text, views, likes, authors } = props
+export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { authors?: IPostAuthors[], formats?: ITopic[] }> = (props) => {
+    const { id, shareSlug, text, views, likes, authors, formats } = props
     return (
         <div className="relative bg-white border-ac-gray flex justify-between">
             <div className="flex flex-col">
@@ -157,6 +158,23 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
                         <AuthorFollowSection authors={item} />
                     )
                 })}
+                {formats && formats.length > 0 && (
+                    <span className="">
+                        <PageSectionHeaderUpperCaseGray title={ac_strings.categories} />
+                        {formats.map(a => (
+                            <div>
+                                <Link className="block text-sm pt-1" to={`${ac_strings.slug_ac_author}/${a.to}`}>
+                                    <div className="font-roboto ">{a.name}</div>
+                                    <div className="text-gray-500">{a.excerpt}</div>
+                                </Link>
+                            </div>
+                        ))}
+                    </span>
+                )
+
+                }
+
+
             </div>
             <div className="flex">
                 <BookmarksAndViews

@@ -265,3 +265,12 @@ export const getPostsByIds = (ids: IGetPostsAndTopics) => {
   }
   `
 }
+
+export const getScriptChapterPostsQuery = (bookId: string, ch: string) => `
+  query  {
+    biblePosts(id:"${bookId}", ch:${ch}){
+        slug
+      }
+  }
+
+`

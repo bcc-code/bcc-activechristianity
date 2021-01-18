@@ -33,17 +33,12 @@ const PostList: React.FC<IPostList> = (props) => {
             activePage = parseInt(nr)
         }
         if (paginate) {
-
+            console.log(paginate)
             const firstPagePath = `/${paginate.baseUrl}` + `${paginate.hasRecommendPage === true && isTopic ? '/1' : ''}`
             const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
             scrollToTop()
             navigate(fullPath)
         }
-    }
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        handleChange(pageInput)
     }
 
     return (

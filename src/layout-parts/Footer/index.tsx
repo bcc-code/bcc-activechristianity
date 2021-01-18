@@ -8,7 +8,7 @@ import AcLogoOnly from '@/images/ACLogo/LogoOnly'
 
 const Footer: React.FC = () => {
     return (
-        <div className="w-full border-t relative bg-white">
+        <div className="w-full border-t relative bg-white z-50">
             <div className="standard-max-w flex flex-col sm:flex-row">
                 <div className=" sm:w-1/2 w-full flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10">
                     <div className="p-4">

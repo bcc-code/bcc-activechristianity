@@ -74,14 +74,13 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .likePost(action.payload.id, !action.payload.bookmarked)
                 .then((resNewLike: any) => {
-                    console.log(resNewLike)
                     if (resNewLike.likePost && resNewLike.likePost.success === true) {
                         return acApi.liked()
                             .then((res: ILiked) => {
                                 if (Array.isArray(res.liked)) {
 
                                     const filtered = res.liked.filter(p => typeof p.id === "string")
-                                    console.log(filtered)
+
                                     store.dispatch(setUserLiked(filtered))
                                 }
                             })

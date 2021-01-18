@@ -11,7 +11,7 @@ const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerG
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
-
+import shortid from 'shortid'
 import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
@@ -99,15 +99,16 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                 </Helmet>
-                <TopDesktop {...NavProps} explorePage={menusItems.explore} />
+                <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
                 <TopMobile
                     {...NavProps}
+                    key={shortid()}
                 />
                 {isSideNavOpen && <SideNav {...NavProps} />}
-                <Breadcrumb />
+                <Breadcrumb key={shortid()} />
                 {children}
-                <Footer />
-                <BottomMobile {...NavProps} />
+                <Footer key={shortid()} />
+                <BottomMobile key={shortid()} {...NavProps} />
             </div>
         </div>
 

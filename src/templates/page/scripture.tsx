@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql } from "gatsby"
 import Link from '@/components/CustomLink'
 import { CSSTransition } from 'react-transition-group'
 import MetaTag from '@/components/Meta'
@@ -68,10 +67,9 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                     chpt.a ?
                         (
                             <Link
-                                to={`${path}/${chpt.bookId}/${chpt.v}`}
+                                to={`${path}-result?bookId=${chpt.bookId}&ch=${chpt.v}&bookName=${activeBook.name}`}
                                 className={`w-8 text-center py-1 text-ac-secondary font-semibold`}
                                 key={chpt.v}
-
                             >
                                 {chpt.v}
                             </Link>
@@ -90,7 +88,6 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
 
         </div>
     )
-
 
     return (
         <ResourceLayout title={title}>
@@ -131,16 +128,11 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                                     </div>
                                 )
                             })}
-                            <CSSTransition
-                                timeout={500}
-                                classNames="fade"
-                                style={{ order: activeBookOrder }}
-                                in={activeBookOrder !== undefined && activeBookOrder < bible.old.length}
-                                unmountOnExit
-                            >
 
+                            <div style={{ order: activeBookOrder }} className="w-full">
                                 {result}
-                            </CSSTransition>
+                            </div>
+
                         </PlaceHolder>
                     </div>
 

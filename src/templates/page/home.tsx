@@ -40,10 +40,6 @@ const HomeContent: React.FC<{
   } = props
   const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
 
-  /*   const checkIsMobile = () => {
-      console.log('resizing')
-      setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
-    } */
   React.useEffect(() => {
     setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
   }, [])
@@ -54,7 +50,7 @@ const HomeContent: React.FC<{
       </div>
     )
   } else {
-    console.log('render')
+
     const DesktopHome = loadable(() => import("@/layout-parts/Home/Desktop"));
     return (
       <DesktopHome {...props} />

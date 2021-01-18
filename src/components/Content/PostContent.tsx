@@ -28,10 +28,10 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
     const options = { shareUrl: process.env.SITE_URL + '/' + slug }
 
     React.useEffect(() => {
+
         window.onload = () => {
             if (typeof window !== 'undefined') {
-                if (process.env.LANG_CODE === "en" && !window.refTagger) {
-                    console.log('loading reftaggaer')
+                if (process.env.LANG_CODE === "en" && typeof window.refTagger === "undefined") {
                     window.refTagger = {
                         settings: {
                             bibleVersion: "NKJV",
@@ -46,9 +46,10 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
                             useTooltip: true
                         }
                     }
-                    /* addScript(endpoints.reftagger) */
+
                     addScript('/scripts/RefTagger.js')
                 }
+
             }
         }
 

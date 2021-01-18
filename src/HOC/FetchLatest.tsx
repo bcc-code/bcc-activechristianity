@@ -27,7 +27,6 @@ export const FetchLatestPlaylists: React.FC<IFetchLatestPlaylist> = ({ render, l
 
             })
             .catch(error => {
-                console.log(url)
                 console.log(error.message)
             })
     }, [])

@@ -23,9 +23,9 @@ const StaticPagination: React.FC<IProps> = (props) => {
         const pageArray = [...Array(totalPages).keys()]
         return (
             <div className="w-full sm:flex justify-center text-gray-500 font-roboto">
-                <div className="hidden sm:block">
+                <div className="hidden sm:flex items-center">
                     {currentPage !== 1 && (
-                        <button className="bg-ac-slate-lighter rounded  p-2 mr-2"
+                        <button className="bg-ac-slate-lighter rounded p-2 mr-2"
                             onClick={() => onChange(currentPage - 1)}
                             onKeyDown={() => onChange(currentPage - 1)}
                         >
@@ -72,7 +72,7 @@ const StaticPagination: React.FC<IProps> = (props) => {
                     )}
                     {currentPage !== totalPages && (
                         <button className="bg-ac-slate-lighter rounded  p-2"
-                            onChange={() => onChange(currentPage + 1)}
+                            onClick={() => onChange(currentPage + 1)}
                             onKeyDown={() => onChange(currentPage + 1)}
                         >
                             <KeyboardArrowRightIcon />

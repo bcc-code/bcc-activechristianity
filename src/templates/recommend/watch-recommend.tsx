@@ -3,7 +3,6 @@ import LazyLoad from '@/components/LazyLoad';
 
 import MetaTag from '@/components/Meta'
 import XScroll from '@/layout-parts/HorizontalScroll/BaseLarge'
-import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import VideoTopImg from '@/components/PostItemCards/VideoTopImg'
 import VideoRow4Col from '@/layout-parts/List/Combo/VideoRow4Col-HorizontalScroll'
@@ -23,12 +22,8 @@ const Watch: React.FC<IProps> = (props) => {
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
-    React.useEffect(() => {
+    const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
 
-        const mixed = getRandomFeatured({ latest, popular, featured })
-        setMixedFeaturedPosts(mixed)
-    }, [])
     return (
         <div>
             <MetaTag title={title} type="page" breadcrumb={[]} path={path} />
@@ -59,12 +54,12 @@ const Watch: React.FC<IProps> = (props) => {
                     posts={latest}
                     slug={latestSlug}
                 />
-                <div className="w-full pt-4">
+                {/*                 <div className="w-full pt-4">
                     <SectionTitleDesktopAndMobile
                         name={ac_strings.popular}
                     />
                     <HSCardListVideo posts={popular.slice(0, 5)} />
-                </div>
+                </div> */}
                 <FetchTopicPostItems
                     topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
                     layout="list"
@@ -81,7 +76,6 @@ const Watch: React.FC<IProps> = (props) => {
                             ))}
                         </div>
                     )}
-
                 />
             </div>
 

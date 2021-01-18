@@ -69,11 +69,10 @@ module.exports = function generateTaxonomies(actions, graphql) {
             if(chapterRes.data.ac.biblePosts){
               const posts=chapterRes.data.ac.biblePosts.map(i=>i.slug)
               chaptersCounts.push({
-                name:`${book.name} ${chapter}`,
-                to:pagePath,
+                ...book,
                 count:posts.length
               })
-              createPage({
+/*               createPage({
                 path:pagePath,
                 component:path.resolve(listTemplate),
                 context: {
@@ -82,7 +81,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                   slug:pagePath,
                   breadcrumb:[{name:page.title,to:page.slug}]
                 }
-              })
+              }) */
             } else {
               console.log(chapterRes.data.ac)
             }
@@ -98,6 +97,15 @@ module.exports = function generateTaxonomies(actions, graphql) {
           context:{
             bible,
             mostPopular,
+            title:page.title
+          },
+        })
+
+        createPage({
+          path: `${page.slug}-result`,
+          component: path.resolve(`./src/templates/page/${page.label}-result.tsx`),
+          context:{
+            bible,
             title:page.title
           },
         })

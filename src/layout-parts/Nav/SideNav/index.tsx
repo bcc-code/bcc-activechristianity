@@ -20,7 +20,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
     const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
 
     const close = () => {
-        console.log('clicked close')
         setSideNavOpen(false)
     }
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
@@ -36,7 +35,11 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
 
     }
     const handleLogout = () => {
-        dispatch(initiateLogout())
+        const r = confirm("You are logging out now");
+        if (r == true) {
+            dispatch(initiateLogout())
+
+        }
     }
 
     const closeUserMenu = () => {
@@ -48,7 +51,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
         setOpenResourceMenu(false)
         setSideNavOpen(false)
     }
-    console.log('render nav')
+
     return (
         <SideNavWrapper
             close={close}

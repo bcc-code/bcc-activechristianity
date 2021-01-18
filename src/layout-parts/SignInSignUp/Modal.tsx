@@ -36,7 +36,7 @@ const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
         dispatch(closeSignInModal())
     }
     return (
-        <div className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center" style={{ backgroundColor: `rgba(255, 255, 255, 0.7`, zIndex: 200 }}>
+        <div className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center" style={{ backgroundColor: `rgba(255, 255, 255, 0.8`, zIndex: 200 }}>
             <CloseButtonRound
                 className="absolute top-0 right-0 z-10 p-2"
                 onClick={handleClose}
@@ -48,13 +48,6 @@ const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
                 <GetContent option={option} />
             </div>
         </div>
-        // <Modal
-        //     isOpen={true}
-        //     content={(
-
-        //     )}
-        //     closeModal={handleClose}
-        // />
     )
 }
 

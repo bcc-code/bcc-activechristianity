@@ -34,7 +34,7 @@ const ShareIconPopper: React.FC<IProps> = ({ text, slug }) => {
             >
                 <div>
                     {text}...
-                    <a className="text-ac-secondary" target="_blank" href={`${ac_strings.slug_glossary}/${slug}`}> {ac_strings.read_more} </a>
+                    <a className="text-ac-secondary" target="_blank" href={`/${ac_strings.slug_glossary}/${slug}`}> {ac_strings.read_more} </a>
                 </div>
                 <div className="ac-popper" ref={setArrowElement} style={{ ...styles.arrow, bottom: `-5px` }} />
             </div>

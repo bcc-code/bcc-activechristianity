@@ -23,13 +23,11 @@ const UserContent = () => {
     const [otherPosts, setOtherPosts] = React.useState<IPostItem[]>([])
     const [topics, setTopics] = React.useState<ITopic[]>([])
     React.useEffect(() => {
-        console.log(followedTopics)
+
         const postsIds = bookmarkedPosts.map(p => p.id)
         const topicsIds = followedTopics.map(p => p.id) //
-        console.log(topicsIds)
         acApi.getPostsAndTopicsByIds({ postsIds, topicsIds })
             .then(postResData => {
-                console.log(postResData)
                 const postRes = postResData.posts.data
                 const topicRes = postResData.topics.data
                 const video: IPostItem[] = []
@@ -49,8 +47,6 @@ const UserContent = () => {
 
 
     }, [bookmarkedPosts])
-    console.log(videoPosts)
-    console.log(otherPosts)
     return (
         <div className="flex flex-col ">
 

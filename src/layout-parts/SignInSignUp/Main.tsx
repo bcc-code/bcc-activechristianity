@@ -39,7 +39,6 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
 
     const handleFacebookClick = () => {
         setRedirecting(true)
-        console.log(endpoints.facebook_login_redirect)
         window.location.href = endpoints.facebook_login_redirect
     }
     return (

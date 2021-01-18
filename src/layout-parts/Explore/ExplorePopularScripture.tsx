@@ -30,13 +30,13 @@ const ExplorePopularScripture: React.FC<{
         <div className="pt-6">
             <SectionTitleDesktopAndMobile
                 name={ac_strings.byScripture}
-                to={scriptureSlug}
+                to={`${ac_strings.slug_scripture}`}
 
             />
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 px-4">
                 {mostUsedScriptures.map(s => {
                     return (
-                        <Link to={s.to}>
+                        <Link to={`${ac_strings.slug_scripture}-result?bookId=${s.bookId}&ch=${s.v}&bookName=${s.name}`}>
                             < OutlineScriptureChapter>
                                 {s.name}
                             </ OutlineScriptureChapter>

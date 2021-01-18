@@ -22,7 +22,7 @@ const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[
 
         acApi.recommendedByPost(postId)
             .then(res => {
-                console.log(res)
+
                 /* setPosts(allSlugs) */
 
                 let randomRecommendPosts: string[] = []
@@ -38,10 +38,8 @@ const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[
                     }
                     let allPosts = [...randomRecommendPosts, ...readMore]
                     readMore = [...new Set(allPosts)]
-                    console.log(readMore)
                     fetchLocalPostsFromSlugs(readMore).then(res => {
                         if (res) {
-                            console.log(res)
                             setRandomPosts(res)
                         }
                     })

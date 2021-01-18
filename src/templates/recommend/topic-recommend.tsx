@@ -5,7 +5,7 @@ import MetaTag from '@/components/Meta'
 import LazyLoad from '@/components/LazyLoad';
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-
+import { menusItems } from '@/layout-parts/Nav/Menus'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
@@ -51,15 +51,15 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
             <MetaTag
                 title={title}
                 translatedUrls={[]} type="page"
-                breadcrumb={breadcrumb}
+                breadcrumb={[menusItems.topic]}
                 path={path}
             />
 
-            <div className="sm:hidden">
+            <div className="sm:hidden" style={{ paddingTop: "36px" }}>
                 <LayoutH1Wide
                     title={title}
                 />
-                <div className="px-4">
+                <div className="px-4 flex">
                     <ToggleFollowOutlineBtn id={id} />
                 </div>
                 <div className="w-full pb-4 pt-8">
@@ -110,6 +110,13 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                         types={formats.map(f => ({ name: f.name, to: `${topicSlug}/${f.to}`, id: '' }))}
                     />
                 )}
+                <div className="flex justify-center py-4">
+
+                    <UnderlineLinkViewAll
+
+                        to={latestSlug}
+                    />
+                </div>
             </div>
             <RecommendDesktopLayout
                 topicId={id}

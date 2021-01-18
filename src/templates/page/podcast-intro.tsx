@@ -29,7 +29,6 @@ export const PodcastPageHeadSection: React.FC = ({ children }) => {
 }
 
 const Host: React.FC<IPodcastIntro> = (props) => {
-    console.log(props)
     const { data, path } = props
     const { hosts: hostSlugs, breadcrumb } = props.pageContext
     const introPost = normalizePostRes(data.acNodePost)

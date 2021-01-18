@@ -62,17 +62,28 @@ module.exports = function generatePages(actions, graphql) {
           slug:ac_strings.slug_glossary,
           templateName:"glossaries"
         },
-        {
-          title:ac_strings.playlist,
-          slug:ac_strings.slug_playlist,
-          templateName:"playlists"
-        },
+   /*  */
         {
           title:ac_strings.contact,
           slug:ac_strings.slug_contact,
           templateName:"contact"
         }
       ]
+      if(process.env.LISTEN_SECTION="all"){
+        buildPages.push({
+          title:ac_strings.playlist,
+          slug:ac_strings.slug_playlist,
+          templateName:"playlists"
+        }   )
+
+        if(process.env.SCRIPTURE_SECTION="true"){
+          buildPages.push( {
+            title:ac_strings.scripture,
+            slug:ac_strings.slug_scripture,
+            templateName:"scripture"
+          })
+        }
+      }
 
       _.each(buildPages,page=>{
         createPage({

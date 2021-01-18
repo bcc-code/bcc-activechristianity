@@ -37,10 +37,14 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     }
 
     const handleLogout = () => {
-        dispatch(initiateLogout())
-        if (callback) {
-            callback()
+        const r = confirm("You are logging out now");
+        if (r == true) {
+            dispatch(initiateLogout())
+            if (callback) {
+                callback()
+            }
         }
+
     }
     return authInfo.loggedIn === 'success' ? (
         <div className={`${col ? 'flex flex-col justify-center' : 'grid grid-cols-2'} ${className}`}>

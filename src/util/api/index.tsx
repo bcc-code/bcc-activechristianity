@@ -81,7 +81,6 @@ export default {
     followTopic: (id: number, toggle: boolean) => {
 
         const query = request.followTopicMutation(id, !toggle)
-        console.log(query)
         return sendQuery(query)
     },
     visitsPost: (id: string) => {
@@ -120,7 +119,6 @@ export default {
     getPostsByIds: (ids: string[]) => {
         const query = request.getPostsByIds(ids)
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
@@ -128,8 +126,13 @@ export default {
         const { postsIds, topicsIds } = params
         const query = request.getPostsByIds({ postsIds, topicsIds })
         return sendQuery(query).then(res => {
-            console.log(res)
             return res
         })
     },
+    getScriptureChaptersPost: (bookId: string, ch: string) => {
+        const query = request.getScriptChapterPostsQuery(bookId, ch)
+        return sendQuery(query).then(res => {
+            return res
+        })
+    }
 }

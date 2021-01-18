@@ -4,7 +4,7 @@ import LogoFull from '@/images/ACLogo'
 import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
 import ac_strings from '@/strings/ac_strings.js'
 import { IDrawerNav } from '@/layouts/App'
-import { INavItem } from '@/types'
+
 import './topmobile.css'
 
 

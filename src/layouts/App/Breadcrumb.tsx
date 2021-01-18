@@ -7,7 +7,7 @@ const BreadcrumbWrapper = () => {
         breadcrumb: state.breadcrumb,
     }));
     return breadcrumb.items.length > 0 ? (
-        <div className="relative z-50 w-full bg-white px-4 hidden sm:block standard-max-w i">
+        <div className="fixed sm:relative z-50 w-full bg-white px-4 block standard-max-w i">
             <Breadcrumb {...breadcrumb} />
         </div>
     ) : null

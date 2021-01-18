@@ -48,6 +48,7 @@ const plugins = [
       }
     },
   },
+  "gatsby-plugin-use-query-params",
   'gatsby-plugin-sass',
   {
     resolve: 'gatsby-plugin-root-import',

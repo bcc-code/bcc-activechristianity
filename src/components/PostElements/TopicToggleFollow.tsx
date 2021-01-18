@@ -70,7 +70,7 @@ export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => 
                 const config = toggleFollowStatusMap[followed]
                 return (
                     <OutlineSmallRounded>
-                        <div className="flex">
+                        <div className="flex text-xs">
                             <span className="">{config.text}</span>
                             <span className="pl-2 flex items-center -mr-1">
                                 {followed === "loading" && (
@@ -216,6 +216,8 @@ export const SlateDarkUnfollowButton: React.FC<IToggleFollowProps> = ({ id, text
 
     )
 }
+
+
 
 export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) => {
     return (
