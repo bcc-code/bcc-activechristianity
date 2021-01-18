@@ -24,8 +24,6 @@ const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popul
     }
 
     return (
-
-
         <div className="hiddem sm:block">
             <div className="px-4">
 

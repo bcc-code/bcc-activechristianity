@@ -9,12 +9,12 @@ interface IFetchPost {
     slugs: string[]
 }
 
-const RecommendedSectionOne: React.FC<IFetchPost> = ({ ids }) => {
+const RecommendedSectionOne: React.FC<IFetchPost> = ({ slugs }) => {
 
     return (
         <FetchRecommendFormat
             layout="row"
-            slugs={ids}
+            slugs={slugs}
             render={({ posts }) => {
 
                 if (posts.length > 0) {

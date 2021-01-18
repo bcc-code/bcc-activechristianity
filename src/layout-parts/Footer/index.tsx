@@ -11,7 +11,9 @@ const Footer: React.FC = () => {
         <div className="w-full border-t relative bg-white">
             <div className="standard-max-w flex flex-col sm:flex-row">
                 <div className=" sm:w-1/2 w-full flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10">
-                    <AcLogoOnly height="36px" width="36px" />
+                    <div className="p-4">
+                        <AcLogoOnly height="36px" width="36px" />
+                    </div>
                     <div className="flex flex-col items-center">
                         <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{ac_strings.about_activechristianity_body}</div>
                         <Link to={ac_strings.slug_about} className="py-4 underline flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learnMoreAC}</Link>

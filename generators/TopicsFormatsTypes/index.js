@@ -196,9 +196,6 @@ module.exports = function generateTopics(actions, graphql) {
                 })
               }
             }
-
-            
-
           }
         }
     })

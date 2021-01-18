@@ -59,13 +59,13 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       generatePosts(actions, graphql),
       
 
-/*       generateAuthors(actions, graphql),
+      generateAuthors(actions, graphql),
       generatePages(actions, graphql),
-generateTopics(actions, graphql),
+      generateTopics(actions, graphql),
       generateRedirect(actions, graphql),
-      generateSeries(actions, graphql) */
+      generateSeries(actions, graphql)
     ]
-/*     if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+    if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
       generators.push(generatePodcast(actions, graphql))
     }
 
@@ -79,7 +79,7 @@ generateTopics(actions, graphql),
 
     if (process.env.SCRIPTURE_SECTION==="true"){
       generators.push(generateScriptures(actions, graphql)) 
-  } */
+    }
 
     return Promise.all(generators)
 

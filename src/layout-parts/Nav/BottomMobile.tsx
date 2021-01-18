@@ -44,7 +44,7 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
     }
 
     return (
-        <div className={`relative w-full drawer-main drawer-main-${drawerClass}`} style={{ zIndex: isSideNavOpen ? 60 : undefined }}>
+        <div style={{ zIndex: 100 }} className={`relative w-full drawer-main drawer-main-${drawerClass}`}>
             <div className="fixed bottom-0 z-40 bg-white w-full">
 
                 <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">

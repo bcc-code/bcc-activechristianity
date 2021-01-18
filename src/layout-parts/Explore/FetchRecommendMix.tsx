@@ -1,5 +1,4 @@
 import React from 'react'
-import { FetchOnePost } from '@/HOC/FetchPosts'
 import { fetchLocalPostsFromSlugs, fetchPostsFromOneTopicSlug } from '@/helpers/fetchLocalData'
 import api from '@/util/api'
 import RightImg from '@/components/PostItemCards/RightImg'

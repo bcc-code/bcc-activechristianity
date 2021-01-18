@@ -130,12 +130,11 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-   
-        for (let i = 1; i <=3 ; i++){
+        console.log(pageCount)
+        for (let i = 1; i <=pageCount ; i++){
             console.log(i)
             
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
-
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
                     throw new Error('Failed to fetch')
@@ -245,11 +244,9 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 }
                 createPostNode(transformedPost)
             }
-
             
       }
 
-  
   }
 
 exports.onPostBuild = async ({ cache }) => {

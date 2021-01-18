@@ -51,35 +51,6 @@ const HomeContent: React.FC<{
   if (isMobile) {
     return (
       <div className="sm:hidden">
-
-        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-          <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-          <TopImgRowHorizontalScroll posts={latest} />
-        </div>
-        <LazyLoad>
-          <div className="py-6">
-            <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
-            <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
-          </div>
-        </LazyLoad>
-        <LazyLoad>
-          <div className="py-6">
-            <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
-            <FeaturedTopics featured={popularTopicsAll.static} />
-            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
-              <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-              <TopImgRowHorizontalScroll posts={popular} />
-            </div>
-            <div className="w-full p-4">
-              <div className="w-full h-16">
-                <BgImgTopicCard
-                  name={ac_strings.browse_resource}
-                  to={ac_strings.slug_explore}
-                />
-              </div>
-            </div>
-          </div>
-        </LazyLoad>
       </div>
     )
   } else {
@@ -120,7 +91,38 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       />
 
       <div className="sm:hidden w-full pb-4 pt-8">
-        <FeaturedBanner featured={mixedFeaturedPosts} />
+
+        <div>
+          <FeaturedBanner featured={mixedFeaturedPosts} />
+        </div>
+        <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+          <PageSectionHeader title={ac_strings.latest} className="pb-4" />
+          <TopImgRowHorizontalScroll posts={latest} />
+        </div>
+        <LazyLoad>
+          <div className="py-6">
+            <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
+            <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
+          </div>
+        </LazyLoad>
+        <LazyLoad>
+          <div className="py-6">
+            <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
+            <FeaturedTopics featured={popularTopicsAll.static} />
+            <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
+              <PageSectionHeader title={ac_strings.popular} className="pb-4" />
+              <TopImgRowHorizontalScroll posts={popular} />
+            </div>
+            <div className="w-full p-4">
+              <div className="w-full h-16">
+                <BgImgTopicCard
+                  name={ac_strings.browse_resource}
+                  to={ac_strings.slug_explore}
+                />
+              </div>
+            </div>
+          </div>
+        </LazyLoad>
       </div>
 
       <div className="hidden sm:block">

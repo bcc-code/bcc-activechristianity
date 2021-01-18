@@ -40,7 +40,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     const isLandingPage = location && location.pathname && location.pathname.indexOf('campaign/') > -1
     const dispatch = useDispatch();
-    const isModalOpen = false
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
     React.useEffect(() => {
@@ -81,15 +80,13 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         return (
             {
                 isSideNavOpen,
-                setSideNavOpen: handleSideNavOpen,
-                isModalOpen,
+                setSideNavOpen: handleSideNavOpen
             }
         )
     }, [
         isSideNavOpen,
         setSideNavOpen,
-        handleSideNavOpen,
-        isModalOpen,
+        handleSideNavOpen
     ])
 
     return (
@@ -97,7 +94,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
             <CookieConsent />
             <SignInSignUpModal />
             <MediaPlayer />
-            <div className="relative layout-children" style={isModalOpen ? { height: '100vh', overflowY: "hidden" } : {}}>
+            <div className="relative layout-children">
                 <Helmet>
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />

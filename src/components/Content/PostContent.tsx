@@ -55,7 +55,7 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
         if (process.env.LANG_CODE === "en") {
             setTimeout(() => {
                 window.refTagger && window.refTagger.tag && window.refTagger.tag();
-            }, 100)
+            }, 300)
 
         }
     }, [content])

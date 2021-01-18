@@ -87,36 +87,35 @@ export const onClientEntry = () => {
       a.src = '/scripts/analytics.js'
       m.parentNode.insertBefore(a, m);
   
-  })();
+    })();
 
-  window.ga('create', 'UA-80420826-1', 'auto');
+    window.ga('create', `UA-80420826-${process.env.GA_ID}`, 'auto');
 
-    (function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = "2.0";
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = 1;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-  })(window, document, "script", "/scripts/fbevents.js")
+      (function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = 1;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+    })(window, document, "script", "/scripts/fbevents.js")
   
+    if(window.fbq){
+      console.log('running pixel')
+      window.fbq('init', '386848018393019');
+    }
 
-  if(window.fbq){
-    console.log('running pixel')
-    window.fbq('init', '386848018393019');
-  }
-
-  addScript('scripts/clicky.js');
-  const clicky_site_ids = window.clicky_site_ids || [];
-  clicky_site_ids.push(101288975);
+    addScript('scripts/clicky.js');
+    const clicky_site_ids = window.clicky_site_ids || [];
+    clicky_site_ids.push(101288975);
 
     addScript('/scripts/adword-adgrant-conversion.js')
     addScript('/scripts/adword-remarketing.js')
@@ -136,10 +135,7 @@ export const onClientEntry = () => {
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
   if (typeof window !== 'undefined' ) {
-    /* window.cue && window.cue.initialize(); */
-    // Since the History Change trigger fires as soon as the event is dispatched, the content might not be there yet when the tracking tags fire.
-    // By delaying the trigger, the tags won’t fire until the page has had time to load the content
-   
+
 /*     if(window.gtag){
       window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
     } */

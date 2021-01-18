@@ -28,7 +28,7 @@ module.exports = async function generateTypes(data) {
         info:nodeInfo,
         items:[]
     }
-    for(let j=0;j<subTopics.length;j++){
+/*     for(let j=0;j<subTopics.length;j++){
         const subTopic=subTopics[j]
         
         const find = formatScope.find(f=>`${f.keyId}`===`${subTopic.id}`)
@@ -41,7 +41,7 @@ module.exports = async function generateTypes(data) {
                 .then(subTopicPostRes=>{
                     if(subTopicPostRes.errors){
                         console.log(subTopicPostRes.errors)
-                        throw new Error(subTopicPostRes.errors.join)
+                        throw new Error(subTopicPostRes.errors)
                     }
                     const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
 
@@ -64,7 +64,7 @@ module.exports = async function generateTypes(data) {
 
         
     } 
-
+ */
     if(`${type.id}`===`${typesAll.listen.keyId}`){
         const result = await graphql(query)
         .then(res=>{

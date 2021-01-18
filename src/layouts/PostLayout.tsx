@@ -8,7 +8,6 @@ const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBa
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
 const PostContent = loadable(() => import('@/components/Content/PostContent'))
-const ExclusiveContent = loadable(() => import('@/layout-parts/Banner/ExclusiveContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 
 /* import ViewNext from '@/layout-parts/PostLayout/ViewNext' */
