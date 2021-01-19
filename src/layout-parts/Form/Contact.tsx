@@ -5,7 +5,7 @@ import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-
+import { validateEmail } from '@/helpers'
 const siteUrl = process.env.SITE_URL
 const contactFormTo = process.env.CONTACT_FROM_TO
 
@@ -34,22 +34,32 @@ const ContactForm = () => {
     const [fields, setFields] = React.useState<IContactFrom>(initialFields)
     const [errors, setErrors] = React.useState(initialFields)
     const [success, setSuccess] = React.useState(false)
-
     const [errorMessage, setErrorMessage] = React.useState<undefined | string>(undefined)
+    const [canSent, setCanSet] = React.useState(false)
     const validate = () => {
+        console.log('validating')
         const fieldNames = ['email', 'name', 'message'];
         const result = { ...errors }
         let pass = true;
-
         for (let field of fieldNames) {
-            if (fields[field].trim() === '') {
+
+            if (field === "email") {
+                if (!validateEmail(fields[field])) {
+                    result[field] = true
+                    pass = false
+                } else {
+                    result[field] = false
+                }
+
+            } else if (fields[field].trim() === '') {
                 result[field] = true
                 pass = false
             } else {
                 result[field] = false
             }
-
         }
+        console.log(result)
+        setCanSet(pass)
         setErrors(result)
         return pass;
     }
@@ -101,6 +111,9 @@ const ContactForm = () => {
     }
 
     const handleChange = (e: any, field: string) => {
+        validate()
+
+
         if (field === "consent") {
             setFields({
                 ...fields,
@@ -129,6 +142,7 @@ const ContactForm = () => {
                         name="name"
                         required
                         value={fields.name}
+                        error={errors.name ? ac_strings.error_required : undefined}
                         onChange={(e) => handleChange(e, 'name')}
                     />
                 </div>
@@ -138,6 +152,7 @@ const ContactForm = () => {
                         type='text'
                         name="location"
                         value={fields.location}
+                        error={errors.location}
                         onChange={(e) => handleChange(e, 'location')}
                     />
                 </div>
@@ -149,6 +164,7 @@ const ContactForm = () => {
                 name="email"
                 required
                 value={fields.email}
+                error={errors.email ? ac_strings.error_required : undefined}
                 onChange={(e) => handleChange(e, 'email')}
             />
             <InputText
@@ -156,6 +172,7 @@ const ContactForm = () => {
                 type='text'
                 name="subject"
                 value={fields.subject}
+                error={errors.subject ? ac_strings.error_required : undefined}
                 onChange={(e) => handleChange(e, 'subject')}
             />
             <InputTextArea
@@ -163,6 +180,7 @@ const ContactForm = () => {
                 required
                 name="message"
                 value={fields.message}
+                error={errors.message}
                 onChange={(e) => handleChange(e, 'message')}
             />
 
@@ -180,7 +198,7 @@ const ContactForm = () => {
                 </div>
                 <div className="flex justify-center">
                     <FormSubmitButton
-                        disabled={!fields.consent}
+                        disabled={!fields.consent || canSent}
                         onClick={handleSubmit}
                     />
                 </div>

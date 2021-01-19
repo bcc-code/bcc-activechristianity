@@ -61,6 +61,8 @@ export interface INavItemCount extends INavItem {
 
 export interface ISubtopicLinks extends INavItemCount {
     key: string
+    typeSlug: string
+    formatSlug: string
 }
 
 export type ScreenSizeType = 'sm' | 'md' | 'lg' | 'xl'

@@ -38,13 +38,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const latestSlug = `${path}/1`
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
-    React.useEffect(() => {
-
-        const mixed = getRandomFeatured({ latest, popular, featured })
-        setMixedFeaturedPosts(mixed)
-    }, [])
-
+    const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     const topicSlug = ac_strings.slug_topic
     return (
         <div>

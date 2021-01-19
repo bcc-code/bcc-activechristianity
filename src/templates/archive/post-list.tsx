@@ -18,9 +18,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     }
 
     let pageTitle = title
-    if (type) {
-        pageTitle = `${pageTypeNames[type]} / ${title}`
-    }
+
     if (isTopic) {
         pageTitle = `${breadcrumb[breadcrumb.length - 2].name} / ${title}`
     }
@@ -35,8 +33,13 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 breadcrumb={breadcrumb}
                 path={path}
             />
-            {isPodcast && <PodcastHeader />}
-            <div className="px-4 ">
+            {isPodcast && (
+                <div className={`pt-8 sm:pt-0`}>
+                    <PodcastHeader />
+                </div>
+            )}
+            <div className={`px-4 pt-8 sm:pt-0`}>
+
                 {!isPodcast && <LayoutH1 title={pageTitle} />}
                 {description && (
                     <div className="w-full py-4" dangerouslySetInnerHTML={{ __html: description }} />

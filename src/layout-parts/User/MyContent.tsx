@@ -28,8 +28,8 @@ const UserContent = () => {
         const topicsIds = followedTopics.map(p => p.id) //
         acApi.getPostsAndTopicsByIds({ postsIds, topicsIds })
             .then(postResData => {
-                const postRes = postResData.posts.data
-                const topicRes = postResData.topics.data
+                const postRes = postResData.posts && postResData.posts.data ? postResData.posts.data : []
+                const topicRes = postResData.topics ? postResData.topics : []
                 const video: IPostItem[] = []
                 const other: IPostItem[] = []
                 setTopics(topicRes)

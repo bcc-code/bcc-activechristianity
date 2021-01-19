@@ -11,6 +11,7 @@ interface IProps {
 }
 const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name, required }) => {
     const inputType = type ? type : 'text'
+    console.log(error)
     return (
         <div className="my-4 w-full">
             <label className="w-full text-sm pb-2 block font-roboto font-semibold" htmlFor={name}>

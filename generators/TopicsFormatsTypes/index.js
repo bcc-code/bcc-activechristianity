@@ -1,6 +1,5 @@
 const _ = require('lodash')
 const path = require('path')
-const saveFile = require('../saveFile')
 const {topicQuery, postQuery} = require('gatsby-source-ac/helpers')
 const languagePostQuery = postQuery
 const ac_strings = require('../../src/strings/ac_strings.js')
@@ -28,6 +27,19 @@ const query = `{
           }
       }
       
+    }
+
+    allPages {
+      id
+      title
+      slug
+      label
+      flexibleContent
+      parent {
+        id
+        title
+        slug
+      }
     }
       
   }
@@ -73,10 +85,14 @@ module.exports = function generateTopics(actions, graphql) {
             return Promise.reject(result.errors)
           } else {
             console.log("generating topics")
-            const topicInfo = result.data.ac.topics
-            const formatIds = {}
-            const typeIds={}
-            
+            const topicInfo = result.data.ac.topics          
+            const groupedTopics={}
+ /*            {
+              [key: string]: {
+                  info: INavItem
+                  topics: ITopicNavItem[]
+              }
+          } =  */
             for(let t=0;t<topicInfo .length;t++){
               const node = topicInfo[t]
                 
@@ -96,7 +112,18 @@ module.exports = function generateTopics(actions, graphql) {
                 to:baseUrl
               }]
               if(topicType==='topic'){
-           
+
+                const toAdd = { id: node.id, name: `${node.name} (${node.noOfPosts})`, to: `${ac_strings.slug_topic}/${node.slug}` }
+                if (groupedTopics[node.group.name]) {
+                  groupedTopics[node.group.name].topics.push(toAdd)
+                } else {
+                    groupedTopics[node.group.name] =
+                    {
+                        info: { name: node.group.name, to: ac_strings.slug_topic },
+                        topics: [toAdd]
+                    }
+                }
+
                 const navParentItem={name:ac_strings.topic,to:ac_strings.slug_topic}
                 breadcrumb=[
                     navParentItem, 
@@ -152,7 +179,6 @@ module.exports = function generateTopics(actions, graphql) {
                   const find = formatScope.find(f=>`${f.keyId}`===`${node.id}` && f.keyname!=="podcast")
                   if(find){
                     nodeInfo.key=find.keyname
-                    formatIds[`${node.id}`]=nodeInfo
                     //onst {actions, graphql,contextPosts,subTopics,node:format,nodeInfo}=data
                     await generateFormat({
                         actions,
@@ -170,7 +196,6 @@ module.exports = function generateTopics(actions, graphql) {
                 const findType=typeScope.find(t=>`${t.keyId}`===`${node.id}`)
                 if (findType){
                     nodeInfo.key=findType.keyname
-                    typeIds[`${node.id}`]=nodeInfo
                     await generateType({
                         actions,
                         graphql,
@@ -196,7 +221,33 @@ module.exports = function generateTopics(actions, graphql) {
                 })
               }
             }
+
+            //
+
           }
+
+          const pageInfo = result.data.ac.allPages
+
+          const themePages = []
+          _.each(pageInfo,(page)=>{
+          
+            if(page.parent && `${page.parent.id}`=="75"){
+              themePages.push(page)
+            }
+          })
+          createPage({
+            path: `${ac_strings.slug_topic}`,
+            component: path.resolve(`./src/templates/page/topics.tsx`),
+            context:{
+              title:ac_strings.topic,
+              themes: themePages.map(page=>({title:page.title,slug:page.slug})),
+              groupedTopics:Object.key(groupedTopics)
+                                .sort((a, b) => a.localeCompare(b))
+                                .map(groupName=>{
+                                  return groupedTopics[groupName]
+                                })
+            }
+          })
         }
     })
 

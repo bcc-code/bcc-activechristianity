@@ -8,6 +8,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
+import { validateEmail } from '@/helpers'
 const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
 const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
 
@@ -51,7 +52,15 @@ const SignUpForm = () => {
         const fieldNames: IFieldName[] = ['email', 'password', 'confirm']
         for (let field of fieldNames) {
             let value = fields[field]
-            if (typeof value === 'string' && value.trim() === '') {
+            if (field === "email") {
+                if (!validateEmail(fields[field])) {
+                    errorsFound[field] = ac_strings.error_required
+                    pass = false
+                } else {
+                    errorsFound[field] = ''
+                }
+
+            } else if (typeof value === 'string' && value.trim() === '') {
                 errorsFound[field] = ac_strings.error_required
                 pass = false
             } else {
@@ -148,7 +157,7 @@ const SignUpForm = () => {
                     onChange={(e) => {
                         handleChange(e, 'email')
                     }}
-                    error={errors.email}
+                    error={errors.email ? ac_strings.error_required : undefined}
                 />
                 <InputText
                     label={ac_strings.password}
@@ -157,7 +166,7 @@ const SignUpForm = () => {
                     onChange={(e) => {
                         handleChange(e, 'password')
                     }}
-                    error={errors.password}
+                    error={errors.password ? ac_strings.error_required : undefined}
                 />
 
                 <InputText

@@ -2,19 +2,16 @@ import React from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
 import ResourceLayout from "@/layouts/ResourceLayout"
-import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
-import { IPage } from "@/types"
-
+import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
+import { ITopicNavItem, IPage } from "@/types"
+import Link from '@/components/CustomLink'
 import { ITopicRes } from '@/types'
 import { sortTopicsByGroups } from '@/helpers'
 const AllTopic: React.FC<IAllTopic> = (props) => {
-
-    const { title, themes } = props.pageContext
+    console.log(props)
+    const { title, themes, groupedTopics } = props.pageContext
     const path = props.path
-    const sortedTopics = sortTopicsByGroups(props.data.ac.allTopics)
 
-    const { Format, Type, ...rest } = sortedTopics
-    const topicGroups = Object.keys(rest).map(k => ({ name: rest[k].info.name, items: rest[k].topics.map(item => ({ ...item })) }))
 
     return (
         <ResourceLayout
@@ -27,11 +24,28 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
                 breadcrumb={[]}
             />
             <div className="standard-max-w-px mb-8">
+                <div className="staggered-boxes-2col">
+                    {Object.keys(groupedTopics).map(k => {
+                        return (
+                            <div style={{ maxWidth: 320 }} className="staggered-boxes-items">
+                                <div className="font-bold border-t uppercase pb-2">{groupedTopics[k].info.name}</div>
+                                <div className="py-2">{groupedTopics[k].topics.map(t => {
+                                    return (
+                                        <div className="flex justify-between pb-2 ">
+                                            <Link className="block text-xs" to={`/${t.to}`}>{t.name}</Link>
+                                            <div className="px-4 flex">
+                                                <ToggleFollowOutlineBtn id={t.id} />
+                                            </div>
+                                        </div>
+                                    )
+                                })}</div>
+                            </div>
+                        )
+                    })}
 
+                </div>
             </div>
-            <div className="sm:mt-16">
-                <TaxonomyIndex groups={topicGroups} />
-            </div>
+
 
         </ResourceLayout>
     )
@@ -45,29 +59,16 @@ interface IAllTopic {
     pageContext: {
         title: string
         themes: IPage[]
-    }
-    data: {
-        ac: {
-            allTopics: ITopicRes[]
+        groupedTopics: {
+            [key: string]: {
+                info: {
+                    id: string
+                    name: string
+                },
+                topics: ITopicNavItem[]
+            }
         }
     }
+
 }
 
-export const pageQuery = graphql`
-    query getAllTopics {
-        ac {
-
-            allTopics {
-            group {
-                name
-                slug
-            }
-            noOfPosts
-            name
-            slug
-            id
-            }
-        }
-    }
-
-`

@@ -75,8 +75,6 @@ export const ToggleFollowOutlineBtn: React.FC<IToggleFollowProps> = ({ id }) => 
                             <span className="pl-2 flex items-center -mr-1">
                                 {followed === "loading" && (
                                     <CachedIcon customSize="4" key={shortid()} />
-
-
                                 )}
                                 {followed === "true" && (
                                     <CheckIcon customSize="4" key={shortid()} />

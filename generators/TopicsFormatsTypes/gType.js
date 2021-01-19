@@ -56,7 +56,10 @@ module.exports = async function generateTypes(data) {
                     
                     createSubTopicPages({
                         type:nodeInfo.key,
-                        breadcrumb:[],
+                        breadcrumb:[{
+                            name:type.name,
+                            to:type.slug
+                        }],
                         createPage,allPosts,
                         topic:type,
                         subTopic

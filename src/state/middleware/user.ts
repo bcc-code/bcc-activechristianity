@@ -114,7 +114,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .following()
                 .then((res: IFollowing) => {
-                    console.log(res)
                     if (Array.isArray(res.following.topics)) {
                         if (res.following.topics) {
                             const filtered = res.following.topics.filter(p => typeof p.id === "string")

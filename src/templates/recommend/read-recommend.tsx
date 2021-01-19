@@ -30,12 +30,8 @@ const Read: React.FC<IProps> = (props) => {
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
-    React.useEffect(() => {
 
-        const mixed = getRandomFeatured({ latest, popular, featured })
-        setMixedFeaturedPosts(mixed)
-    }, [])
+    const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     return (
         <div>
             <MetaTag
@@ -57,7 +53,7 @@ const Read: React.FC<IProps> = (props) => {
                 </div>
                 <LazyLoad>
                     <FetchTopicPostItems
-                        topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                        topics={items.map(f => ({ name: f.name, slug: `${f.typeSlug}/${f.formatSlug}`, id: '' }))}
                         layout="list"
                         render={({ topicPostItems }) => {
                             return (

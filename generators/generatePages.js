@@ -129,14 +129,7 @@ module.exports = function generatePages(actions, graphql) {
         })
       })
 
-      createPage({
-        path: `${ac_strings.slug_topic}`,
-        component: path.resolve(`./src/templates/page/topics.tsx`),
-        context:{
-          title:ac_strings.topic,
-          themes: parentIds.themes.children.map(page=>({title:page.title,slug:page.slug}))
-        }, 
-      })
+      
 
  // pages
       _.each(parentIds.pages.children,page=>{
@@ -150,7 +143,6 @@ module.exports = function generatePages(actions, graphql) {
               }
             ]
         }
-        console.log(page.slug)
         createPage({
           path: `${page.slug}`,
           component: path.resolve(`./src/templates/page/${parentIds.pages.templateName}.tsx`),
@@ -160,7 +152,6 @@ module.exports = function generatePages(actions, graphql) {
 
       // about us
       console.log('building about')
-      console.log(aboutMain)
       createPage({
         path: `${aboutMain.slug}`,
         component: path.resolve(`src/templates/page/about-us.tsx`),

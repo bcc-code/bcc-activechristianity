@@ -40,7 +40,7 @@ const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popul
                 <div className="grid grid-cols-4 gap-4 md:gap-6 sm:px-4">
                     <div className="col-start-1 col-end-3 lg:col-end-4">
 
-                        {latest.slice(6, 12).map((item, i) => {
+                        {latest.map((item, i) => {
                             return (
                                 <div className={`mt-6 sm:mt-8 mx-4 sm:mr-10 sm:ml-0 div-post`} key={shortid()}>
                                     <RightImgWDes key={i} {...item} />

@@ -25,7 +25,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
 
-    const allCategories: INavItem[] = [...items]
+    const allCategories: INavItem[] = [...items.map(t => ({ ...t, to: `${t.typeSlug}/${t.formatSlug}` }))]
 
     if (playlist && playlist.to) {
         allCategories.push(playlist)
@@ -39,13 +39,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
-    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
-
-    React.useEffect(() => {
-
-        const mixed = getRandomFeatured({ latest, popular, featured })
-        setMixedFeaturedPosts(mixed)
-    }, [])
+    const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
 
     const hasPlaylist = process.env.LISTEN_SECTION === "all"
     const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"

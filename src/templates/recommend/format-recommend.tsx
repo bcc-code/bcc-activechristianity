@@ -7,7 +7,7 @@ import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import { SectionTitleDesktopAndMobile, PageSectionHeader, LayoutH1Wide, } from '@/components/Headers'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
-import { FetchPostsFromSlugs, FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
+import { UnderlineLinkViewAll } from '@/components/Button'
 import { INavItemCount, ISubtopicLinks, IRecommendationPage, IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { processRecommendationContext, getRandomFeatured } from '@/helpers'
@@ -19,15 +19,9 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
     const latestSlug = `${info.to}/${ac_strings.slug_latest}`
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-    const [mixedFeaturedPosts, setMixedFeaturedPosts] = React.useState<IPostItem[]>([])
-    React.useEffect(() => {
-
-        const mixed = getRandomFeatured({ latest, popular, featured })
-        setMixedFeaturedPosts(mixed)
-    }, [])
-
+    const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     return (
-        <div>
+        <div className="pt-8 sm:pt-0">
             <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <LayoutH1Wide title={info.name} />
             {formatType.info.count > 10 ? (
@@ -35,12 +29,14 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                 <div className="sm:px-4 standard-max-w">
                     {mixedFeaturedPosts[0] ? <HeaderSection headerPost={mixedFeaturedPosts[0]} listPosts={popular.slice(0, 5)} /> : <div></div>}
 
-                    <div className="w-full pb-4 pt-8 sm:hidden">
-                        <PageSectionHeader title={ac_strings.featured} className="pb-4" />
+                    <div className="w-full pb-4 sm:hidden">
+                        {/*                  <PageSectionHeader title={ac_strings.featured} className="pb-4" /> */}
                         <FeaturedBanner featured={mixedFeaturedPosts} />
                     </div>
-
-
+                    <div className="bg-ac-slate-lighter sm:hidden py-6 overflow-hidden">
+                        <PageSectionHeader title={ac_strings.popular} className="pb-4" />
+                        <TopImgHorizontalScroll posts={popular.slice(0, 5)} />
+                    </div>
                     <div className="pb-6">
                         <SectionTitleDesktopAndMobile name={ac_strings.latest} to={latestSlug} />
                         <div className="sm:hidden px-4">
@@ -57,14 +53,11 @@ const Format: React.FC<IProps> = ({ path, pageContext }) => {
                                         </div>
                                     )
                                 })}
+                                <div className="w-full flex justify-center py-6">
+                                    <UnderlineLinkViewAll to={`${latestSlug}`} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-                    <div className="bg-ac-slate-lighter sm:hidden py-6 overflow-hidden">
-                        <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-                        <TopImgHorizontalScroll posts={popular.slice(0, 5)} />
                     </div>
                 </div>
 

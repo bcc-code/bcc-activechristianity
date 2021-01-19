@@ -89,7 +89,7 @@ export const onClientEntry = () => {
   
     })();
 
-    window.ga('create', `UA-80420826-${process.env.GA_ID}`, 'auto');
+    window.ga('create', `${process.env.GA_ID}`, 'auto');
 
       (function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
@@ -113,7 +113,7 @@ export const onClientEntry = () => {
       window.fbq('init', '386848018393019');
     }
 
-    addScript('scripts/clicky.js');
+    addScript('/scripts/clicky.js');
     const clicky_site_ids = window.clicky_site_ids || [];
     clicky_site_ids.push(101288975);
 

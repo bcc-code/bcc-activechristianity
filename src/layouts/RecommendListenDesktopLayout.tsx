@@ -108,7 +108,7 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
             <LatestDesktopRow posts={latestPosts.slice(0, 4)} latestSlug={latestSlug} />
             <LazyLoad >
                 <FetchTopicPostItems
-                    topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
+                    topics={topics.map(f => ({ name: f.name, slug: `${f.typeSlug}/${f.formatSlug}`, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)

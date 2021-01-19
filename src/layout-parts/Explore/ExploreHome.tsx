@@ -13,7 +13,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import SquareImages from '@/components/Images/Image1to1Rounded'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
-
+import { menusItems } from '@/layout-parts/Nav/Menus'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
 import PodcastImg from '@/images/format-Podcast-05.jpg'
 import { ITopic } from '@/types';
@@ -52,13 +52,13 @@ const ExploreLayout: React.FC<{
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
                     {hasPodcast && (
-                        <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
+                        <Link key={shortid()} to={menusItems.podcast.to} className="flex flex-col shadow rounded-lg overflow-hidden" >
                             <SquareImages
                                 className="rounded-t-lg"
                                 {...mediaSquareImages.podcast}
                             />
                             <div className="font-roboto font-semi text-center py-2 px-2">
-                                {ac_strings.podcast}
+                                {menusItems.podcast.name}
                             </div>
                         </Link>
                     )}

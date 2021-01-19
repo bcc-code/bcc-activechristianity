@@ -67,14 +67,14 @@ const MetaTag: React.FC<MetaTagProps> = ({ title, type, meta, translatedUrls, br
                             authors.map((a: INavItem, k: number) => <meta key={k} property="book:author" content={`${process.env.SITE_URL}/${ac_strings.slug_ac_author}/${a.to}`} />)
                         ) : null}
                         {imageUrl ? [
-                            (<meta key={1} property="og:image" content={imageUrl.src} />),
-                            (<meta key={2} name="twitter:image" content={imageUrl.src} />),
-                            (<meta key={3} property="og:image:secure_url" content={imageUrl.src} />),
+                            (<meta key={1} property="og:image" content={imageUrl} />),
+                            (<meta key={2} name="twitter:image" content={imageUrl} />),
+                            (<meta key={3} property="og:image:secure_url" content={imageUrl} />),
                             (<meta key={4} property="og:image:width" content="800" />),
                             (<meta key={5} property="og:image:height" content="400" />),
                             (<meta key={7} property="og:image:alt" content={title} />),
 
-                            (<meta key={9} name="twitter:image" content={imageUrl.src} />)
+                            (<meta key={9} name="twitter:image" content={imageUrl} />)
                         ] : null}
                         {translatedUrls ? (translatedUrls.map(url => {
                             if (process.env.LANG_CODE === url.lang) {

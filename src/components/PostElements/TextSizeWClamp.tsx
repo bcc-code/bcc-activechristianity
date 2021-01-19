@@ -13,7 +13,7 @@ interface ItextSizeConfig {
 const textSizeConfig: ItextSizeConfig = {
     "header-post": {
         s: 'text-xl md:text-3xl lg:text-4xl',
-        h2lines: 'max-h-15 md:max-h-28 lg:max-h-36',
+        h2lines: 'max-h-15 md:max-h-30 lg:max-h-34',
     },
     'text-sm': {
         s: 'text-sm',
@@ -53,11 +53,11 @@ const textSizeConfig: ItextSizeConfig = {
     'text-lg-2xl': {
         s: 'text-lg sm:text-2xl leading-snug',
         h2lines: 'max-h-14 sm:max-h-18 ',
-        h3lines: 'max-h-20 sm:max-h-28 '
+        h3lines: 'max-h-20 sm:max-h-30 '
     },
     'text-xl-3xl-4xl': {
         s: 'text-xl lg:text-3xl xl:text-4xl leading-tight', // text-2xl lg:text-4xl xl:text-5xl leading-tight'
-        h2lines: 'max-h-14 sm:max-h-24 lg:max-h-36 xl:max-h-48'
+        h2lines: 'max-h-14 sm:max-h-24 lg:max-h-34 xl:max-h-48'
     } //18px-64px
 }
 

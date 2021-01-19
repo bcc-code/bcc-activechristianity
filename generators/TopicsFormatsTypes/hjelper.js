@@ -124,8 +124,6 @@ module.exports.createArchivePages =async function ({
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
             return res.data.ac.topic.allPosts.data.map(p=>p.slug)
           } else {
-            console.log(query)
-            console.log(res)
             throw new Error('not able to get pages')
           }
 
@@ -167,19 +165,17 @@ module.exports.createSubTopicPages=({
     } else {
       const totalPages = Math.ceil(totalCount / perPage)
       const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
-  
-      const component = (`${topic.id}`===typesAll.watch || 
-      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
       const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
-  
-      pageBreadcrumb.push(
-  
-      {
+      pageBreadcrumb.push( {
         name:subTopic.name,
         to:subTopic.slug
-      }
-      )
+      })
       
+      const component = (`${topic.id}`===typesAll.watch || 
+      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      
+  
+     
       let currentPage = 1
     
       for (let i = 0; i < totalCount; i += perPage, currentPage++) {

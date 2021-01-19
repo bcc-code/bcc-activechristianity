@@ -106,6 +106,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
           component: path.resolve(`./src/templates/page/${page.label}-result.tsx`),
           context:{
             bible,
+            mostPopular,
             title:page.title
           },
         })

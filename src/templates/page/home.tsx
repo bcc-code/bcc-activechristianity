@@ -31,13 +31,7 @@ const HomeContent: React.FC<{
   }
 }> = (props) => {
 
-  const {
-    mixed,
-    popularTopicsAll,
-    popular,
-    latest
 
-  } = props
   const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
 
   React.useEffect(() => {

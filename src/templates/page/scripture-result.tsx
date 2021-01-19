@@ -42,7 +42,6 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
 
         if (typeof bookId === "string" && typeof ch === "string") {
             acApi.getScriptureChaptersPost(bookId, ch).then(res => {
-                console.log(res)
                 setPosts(res.biblePosts.map(item => item.slug))
             })
         }

@@ -61,21 +61,24 @@ const Watch: React.FC<IProps> = (props) => {
                     <HSCardListVideo posts={popular.slice(0, 5)} />
                 </div> */}
                 <FetchTopicPostItems
-                    topics={items.map(f => ({ name: f.name, slug: `${f.to}`, id: '' }))}
+                    topics={items.map(f => ({ name: f.name, slug: `${f.typeSlug}/${f.formatSlug}`, id: '' }))}
                     layout="list"
-                    render={({ topicPostItems }) => (
-                        <div>
+                    render={({ topicPostItems }) => {
+                        console.log(topicPostItems)
+                        return (
+                            <div>
 
-                            {topicPostItems.map(item => (
-                                <VideoRow4Col
-                                    name={item.name}
-                                    slug={item.slug}
-                                    posts={getRandomArray(item.posts, item.posts.length)}
-                                />
+                                {topicPostItems.map(item => (
+                                    <VideoRow4Col
+                                        name={item.name}
+                                        slug={item.slug}
+                                        posts={getRandomArray(item.posts, item.posts.length)}
+                                    />
 
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>
+                        )
+                    }}
                 />
             </div>
 
@@ -90,6 +93,7 @@ interface IPageContext extends IRecommendationPage {
     info: INavItemCount
     items: ISubtopicLinks[]
     menu: INavItemCount[]
+
 }
 
 interface IProps {

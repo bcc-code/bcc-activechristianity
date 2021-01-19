@@ -24,7 +24,7 @@ export const Button: React.FC<IButton> = ({ className, disabledClassName, enable
     } else if (onClick) {
         return (
             <button
-                className={`${className} ${disabled && disabledClassName ? disabledClassName : enabledClassName}`}
+                className={`cursor-pointer ${className} ${disabled && disabledClassName ? disabledClassName : enabledClassName}`}
                 onClick={onClick}
                 onKeyDown={onClick}
                 disabled={disabled}

@@ -9,7 +9,7 @@ import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
 import Cookies from 'js-cookie'
-
+import { validateEmail } from '@/helpers'
 
 const initialFieldsState = {
     email: '',
@@ -37,7 +37,14 @@ const SignInForm: React.FC = () => {
         let pass = true;
 
         for (let field of fieldNames) {
-            if (fields[field].trim() === '') {
+            if (field === "email") {
+                if (!validateEmail(fields[field])) {
+                    result[field] = true
+                    pass = false
+                } else {
+                    result[field] = false
+                }
+            } else if (fields[field].trim() === '') {
                 result[field] = true
                 pass = false
             } else {
