@@ -241,7 +241,7 @@ module.exports = function generateTopics(actions, graphql) {
             context:{
               title:ac_strings.topic,
               themes: themePages.map(page=>({title:page.title,slug:page.slug})),
-              groupedTopics:Object.key(groupedTopics)
+              groupedTopics:Object.keys(groupedTopics)
                                 .sort((a, b) => a.localeCompare(b))
                                 .map(groupName=>{
                                   return groupedTopics[groupName]
