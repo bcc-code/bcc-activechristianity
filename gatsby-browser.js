@@ -143,7 +143,11 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
       setTimeout(()=>{
         if(window.ga){
 
-         window.ga('send', 'pageview')
+         window.ga('send', {
+          hitType: 'pageview',
+          page: pathname + location.search + location.hash,
+          title:document.title
+        });
         }
         if(window.fbq){
           console.log('fb tracking pageview')
