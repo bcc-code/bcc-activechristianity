@@ -69,29 +69,27 @@ export const onClientEntry = () => {
       // repeat above for multiple fonts
     }
     })();
-    if (process.env.LANG_CODE !== "en"){
-      (function(){
-        window['GoogleAnalyticsObject'] = 'ga';
-        if(!window['ga'] ){
-          window['ga'] = function(){
-            window['ga'].q = window['ga'].q || [];
-            window['ga'].q.push(arguments);
-          }
-              window['ga'].l = 1 * new Date();
-        }
-  
-        var a = document.createElement('script');
-        var m = document.getElementsByTagName('script')[0];
-        a.async = 1;
-        a.src = '/scripts/analytics.js'
-        m.parentNode.insertBefore(a, m);
-    
-      })();
-  
-      window.ga('create', `${process.env.GA_ID}`, 'auto');
-    }
-    
 
+    
+    (function(){
+      window['GoogleAnalyticsObject'] = 'ga';
+      if(!window['ga'] ){
+        window['ga'] = function(){
+          window['ga'].q = window['ga'].q || [];
+          window['ga'].q.push(arguments);
+        }
+            window['ga'].l = 1 * new Date();
+      }
+
+      var a = document.createElement('script');
+      var m = document.getElementsByTagName('script')[0];
+      a.async = 1;
+      a.src = '/scripts/analytics.js'
+      m.parentNode.insertBefore(a, m);
+  
+    })();
+
+    window.ga('create', `${process.env.GA_ID}`, 'auto');
 
       (function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
@@ -144,9 +142,11 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
     
       setTimeout(()=>{
         if(window.ga){
+
          window.ga('send', 'pageview')
         }
         if(window.fbq){
+          console.log('fb tracking pageview')
           window.fbq('track', 'PageView');
         }
       },500)
