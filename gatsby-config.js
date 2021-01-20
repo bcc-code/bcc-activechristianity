@@ -91,6 +91,16 @@ const plugins = [
 
 ];
 
+if (process.env.LANG_CODE === "en"){
+  plugins.push({
+    resolve: `gatsby-plugin-google-tagmanager`,
+    options: {
+      id: process.env.GTM_TAG||"GTM-WCW8RR4", 
+      includeInDevelopment: false,
+      gtmLocale: process.env.LOCALE,
+    },
+  })
+}
 
 if (activeEnv === 'production') {
   

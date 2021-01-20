@@ -146,7 +146,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
     return (
-        <article className="overflow-scroll sm:overflow-visible w-full relative" style={{ paddingTop: "36px" }}>
+        <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             <ShareBookmarkTopShortCuts
                 id={id}
                 text={excerpt || title}
