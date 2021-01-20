@@ -23,7 +23,8 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
           'process.env.BRANCH': JSON.stringify(String(process.env.BRANCH).substr(0,6)),
           'process.env.LISTEN_SECTION':JSON.stringify(process.env.LISTEN_SECTION),
           'process.env.GLOSSARY_SECTION':JSON.stringify(process.env.GLOSSARY_SECTION),
-          'process.env.SCRIPTURE_SECTION':JSON.stringify(process.env.SCRIPTURE_SECTION)
+          'process.env.SCRIPTURE_SECTION':JSON.stringify(process.env.SCRIPTURE_SECTION),
+          'process.env.GA_ID':JSON.stringify(process.env.GA_ID)
         })
       ],
       node: {
