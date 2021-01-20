@@ -1,5 +1,5 @@
 {
-  "om-oss": [
+  "acerca-de-nosotros": [
     {
       "lang": "en",
       "slug": "about-us"
@@ -61,7 +61,7 @@
       "slug": "om-os"
     }
   ],
-  "bidragsyter": [
+  "colaborador": [
     {
       "lang": "en",
       "slug": "contributor"
@@ -123,7 +123,7 @@
       "slug": "bidragsyder"
     }
   ],
-  "konto": [
+  "cuenta": [
     {
       "lang": "en",
       "slug": "account"
@@ -185,7 +185,7 @@
       "slug": "konto"
     }
   ],
-  "kontakt": [
+  "contacto": [
     {
       "lang": "en",
       "slug": "contact"
@@ -309,7 +309,7 @@
       "slug": "cookie-policy"
     }
   ],
-  "e-bok": [
+  "e-book": [
     {
       "lang": "en",
       "slug": "e-book"
@@ -371,7 +371,7 @@
       "slug": "e-bog"
     }
   ],
-  "utforsk": [
+  "explorar": [
     {
       "lang": "en",
       "slug": "explore"
@@ -433,7 +433,7 @@
       "slug": "udforsk"
     }
   ],
-  "ordliste": [
+  "glosario": [
     {
       "lang": "en",
       "slug": "glossary"
@@ -495,7 +495,7 @@
       "slug": "Ordliste"
     }
   ],
-  "vert": [
+  "anfitrion": [
     {
       "lang": "en",
       "slug": "host"
@@ -557,7 +557,7 @@
       "slug": "vært"
     }
   ],
-  "nyeste": [
+  "novedades": [
     {
       "lang": "en",
       "slug": "latest"
@@ -619,7 +619,7 @@
       "slug": "seneste"
     }
   ],
-  "lytt": [
+  "escucha": [
     {
       "lang": "en",
       "slug": "listen"
@@ -681,7 +681,7 @@
       "slug": "lyt"
     }
   ],
-  "logg-pa": [
+  "iniciar-sesion": [
     {
       "lang": "en",
       "slug": "login"
@@ -929,7 +929,7 @@
       "slug": "privacy-policy"
     }
   ],
-  "les": [
+  "leer": [
     {
       "lang": "en",
       "slug": "read"
@@ -991,7 +991,7 @@
       "slug": "læs"
     }
   ],
-  "register": [
+  "registrarse": [
     {
       "lang": "en",
       "slug": "register"
@@ -1115,7 +1115,7 @@
       "slug": "temaer"
     }
   ],
-  "user": [
+  "usuario": [
     {
       "lang": "en",
       "slug": "user"
@@ -1177,7 +1177,7 @@
       "slug": "bruger"
     }
   ],
-  "merket": [
+  "guardado": [
     {
       "lang": "en",
       "slug": "bookmarked"
@@ -1239,7 +1239,7 @@
       "slug": "bogmærket"
     }
   ],
-  "endre-passord": [
+  "contraseña": [
     {
       "lang": "en",
       "slug": "password"
@@ -1301,7 +1301,7 @@
       "slug": "password"
     }
   ],
-  "mitt-innhold": [
+  "mi-contenido ": [
     {
       "lang": "en",
       "slug": "my-content"
@@ -1363,7 +1363,7 @@
       "slug": "mit-indhold"
     }
   ],
-  "slett-profil": [
+  "borrar-cuenta": [
     {
       "lang": "en",
       "slug": "delete-profile"
@@ -1425,7 +1425,7 @@
       "slug": "slet-profil"
     }
   ],
-  "folger": [
+  "seguido": [
     {
       "lang": "en",
       "slug": "followed"
@@ -1487,7 +1487,7 @@
       "slug": "følger"
     }
   ],
-  "historikk": [
+  "historial": [
     {
       "lang": "en",
       "slug": "history"
@@ -1549,7 +1549,7 @@
       "slug": "historik"
     }
   ],
-  "se-paa": [
+  "ver": [
     {
       "lang": "en",
       "slug": "watch"

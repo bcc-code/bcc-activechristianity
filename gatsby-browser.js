@@ -139,10 +139,9 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
 /*     if(window.gtag){
       window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
     } */
-    
+    const pathname=typeof location.pathname ==='string' && location.pathname==='/'?location.pathname:location.pathname.replace(/\/$/, "")
       setTimeout(()=>{
         if(window.ga){
-
          window.ga('send', {
           hitType: 'pageview',
           page: pathname + location.search + location.hash,

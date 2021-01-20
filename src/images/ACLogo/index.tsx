@@ -61,7 +61,7 @@ export default (props: ILogoStyle) => {
         "ru": (
             <RU {...props} />
         ),
-        "se": (
+        "sv": (
             <NO {...props} />
         )
     }
