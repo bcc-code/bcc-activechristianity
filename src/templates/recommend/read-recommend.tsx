@@ -32,6 +32,7 @@ const Read: React.FC<IProps> = (props) => {
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
+    const categoryItems = items.map(item => ({ ...item, to: `${item.typeSlug}/${item.formatSlug}` }))
     return (
         <div>
             <MetaTag
@@ -53,7 +54,7 @@ const Read: React.FC<IProps> = (props) => {
                 </div>
                 <LazyLoad>
                     <FetchTopicPostItems
-                        topics={items.map(f => ({ name: f.name, slug: `${f.typeSlug}/${f.formatSlug}`, id: '' }))}
+                        topics={categoryItems.map(f => ({ name: f.name, slug: `${f.typeSlug}/${f.formatSlug}`, id: '' }))}
                         layout="list"
                         render={({ topicPostItems }) => {
                             return (
@@ -127,7 +128,7 @@ const Read: React.FC<IProps> = (props) => {
 
                     <ByCatergories
                         title={`${ac_strings.read} ${ac_strings.categories}`}
-                        types={items}
+                        types={categoryItems}
                     />
                 </LazyLoad>
             </div>
@@ -136,7 +137,7 @@ const Read: React.FC<IProps> = (props) => {
                 latestPosts={latest}
                 popularPosts={popular}
                 featured={mixedFeaturedPosts}
-                topics={items}
+                topics={categoryItems}
                 name={title}
             />
 

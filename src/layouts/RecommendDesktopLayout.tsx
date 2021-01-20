@@ -57,7 +57,6 @@ const RecommendLayout: React.FC<IRecommandLayout> = ({
                     topics={topics.map(f => ({ name: f.name, slug: f.to, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
-
                         const { postsByTypesRow1, postsByTypesRow2 } = getFormatsDesktopLayout(topicPostItems)
                         return topics.length > 1 ? (
 
