@@ -43,9 +43,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generatePosts = require('./generators/generatePosts.js')
     const generatePages = require('./generators/generatePages.js')
     const generateAuthors = require('./generators/generateAuthors.js')
-    const generatePlaylists = require('./generators/generatePlaylists.js')
-    const generateScriptures=require('./generators/generateScriptures.js')
-    const generateGlossary = require('./generators/generateGlossary.js')
     const generateTopics = require('./generators/TopicsFormatsTypes/index.js')
     const generateHome = require('./generators/generateHome.js')
     const generateExplore = require('./generators/generateExplore')
@@ -64,18 +61,22 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       generateSeries(actions, graphql)
     ]
     if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+      console.log('generate podcast')
       generators.push(generatePodcast(actions, graphql))
     }
 
     if (process.env.LISTEN_SECTION==="all"){
+      console.log("generating playlist")
       generators.push(generatePlaylists(actions, graphql))
     }
 
     if (process.env.GLOSSARY_SECTION==="true"){
+      console.log("generating glossry")
       generators.push( generateGlossary(actions, graphql))
     }
 
     if (process.env.SCRIPTURE_SECTION==="true"){
+      console.log("generating scriptures")
       generators.push(generateScriptures(actions, graphql)) 
     }
 

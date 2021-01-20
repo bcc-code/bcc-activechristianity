@@ -23,7 +23,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         pageTitle = `${breadcrumb[breadcrumb.length - 2].name} / ${title}`
     }
 
-    const isPodcast = `${formatsAll["podcast"].keyId}` === `${id}`
+    const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag
