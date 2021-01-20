@@ -104,7 +104,7 @@ export const logoutMutation = `
 
 export const likePostMutation = (id: string, toggle: boolean) => `
   mutation {
-    likePost(postId:${id}, toggle:${toggle}){
+    bookmarkPost(postId:${id}, toggle:${toggle}){
       success
       message
     }
@@ -193,7 +193,7 @@ query {
 
 export const likedPostsQuery = `
   query {
-    liked {
+    bookmarks {
       id
       slug
     }
