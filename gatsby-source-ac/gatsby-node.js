@@ -1,5 +1,6 @@
 const helpers = require('./helpers')
 const he = require('he')
+const {decode} = require('html-entities');
 const {sendQuery,getMultiPosts, postQuery} = helpers
 const htmlTags2PlainText = (html) => {
     if (html) {
@@ -9,6 +10,8 @@ const htmlTags2PlainText = (html) => {
         return ''
     }
 }
+
+
 const settingsQuery = `
 {
     settings {
@@ -230,6 +233,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 const transformedPost = Object.assign({},post)
                 if(glossary.length>0){
                     const glossaryContent = scanForAllGlossary(transformedPost.content)
+                    transformedPost.title = decode(post.title)
+                    transformedPost.excerpt = decode(post.excerpt)
                     transformedPost.content = glossaryContent.text
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }

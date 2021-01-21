@@ -3,6 +3,7 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
+import shortid from 'shortid'
 /* const AudioPlayer */
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
@@ -169,11 +170,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             /> */}
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
-                    <VideoMediaPlayer src={media.video.src} />
+                    <VideoMediaPlayer src={media.video.src} key={shortid()} />
 
                 )}
                 {currentMediaType === "audio" && media.audio && (
-                    <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} />
+                    <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} key={shortid()} />
                 )}
 
                 {mediaTypes.length > 1 && (

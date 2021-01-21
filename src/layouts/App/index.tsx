@@ -91,9 +91,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
 
     return (
         <div className="relative">
-            <CookieConsent />
-            <SignInSignUpModal />
-            <MediaPlayer />
+            <CookieConsent key={shortid()} />
+            <SignInSignUpModal key={shortid()} />
+            <MediaPlayer key={shortid()} />
             <div className="relative layout-children">
                 <Helmet>
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
