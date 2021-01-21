@@ -50,6 +50,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generatePodcast = require('./generators/generatePodcast')
     const generateRedirect = require('./generators/generateRedirect')
     const generateSeries = require('./generators/generateSeries')
+    const generatePlaylists = require('./generators/generatePlaylists')
+    const generateGlossary = require('./generators/generateGlossary')
+    const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
       generateHome(actions, graphql),
