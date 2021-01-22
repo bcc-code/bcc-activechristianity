@@ -34,9 +34,9 @@ const ExplorePopularScripture: React.FC<{
 
             />
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 px-4">
-                {mostUsedScriptures.map(s => {
+                {mostUsedScriptures.map((s, i) => {
                     return (
-                        <Link to={`${ac_strings.slug_scripture}-result?bookId=${s.bookId}&ch=${s.v}&bookName=${s.name}`}>
+                        <Link key={i} to={`${ac_strings.slug_scripture}-result?bookId=${s.bookId}&ch=${s.v}&bookName=${s.name}`}>
                             < OutlineScriptureChapter>
                                 {s.name}
                             </ OutlineScriptureChapter>

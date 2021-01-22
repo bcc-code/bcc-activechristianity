@@ -92,7 +92,14 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
     console.log('render app')
     return (
         <div className="relative">
+            <CookieConsent key={shortid()} />
+            <SignInSignUpModal key={shortid()} />
+            <MediaPlayer key={shortid()} />
             <div className="relative layout-children">
+                <Helmet>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                </Helmet>
                 <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
                 <TopMobile
                     {...NavProps}
@@ -102,7 +109,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
                 <Breadcrumb key={shortid()} />
                 {children}
                 <Footer key={shortid()} />
-                <BottomMobile key={shortid()} />
+                <BottomMobile key={shortid()} {...NavProps} />
             </div>
         </div>
 
@@ -112,3 +119,28 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
 export default App
 
+
+
+const query = graphql`
+    query LayoutQuery {
+        ac {
+            menus {
+                id
+                slug
+                menuItems {
+                    name
+                    to:value
+                }
+            }
+
+            allPages {
+                    title
+                    slug
+                    label
+            }
+        }
+
+        
+    }
+
+`

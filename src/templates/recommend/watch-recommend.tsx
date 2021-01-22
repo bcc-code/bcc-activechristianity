@@ -69,6 +69,7 @@ const Watch: React.FC<IProps> = (props) => {
 
                                 {topicPostItems.map(item => (
                                     <VideoRow4Col
+                                        key={item.slug}
                                         name={item.name}
                                         slug={item.slug}
                                         posts={getRandomArray(item.posts, item.posts.length)}

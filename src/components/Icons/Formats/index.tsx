@@ -45,7 +45,7 @@ const Commentary: React.FC<IIconProps> = ({ customSize, className }) => {
             height={size}
         >
             <g filter="url(#filter0_d)">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.90909 1H21.0909C22.1453 1 23 1.87359 23 2.95122V15.9756C23 17.0532 22.1453 18.0732 21.0909 18.0732H15.9938L13 21L10.0062 18.0732H4.90909C3.85473 18.0732 3 17.0532 3 15.9756V2.95122C3 1.87359 3.85473 1 4.90909 1Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path fill-rule="evenodd" clipRule="evenodd" d="M4.90909 1H21.0909C22.1453 1 23 1.87359 23 2.95122V15.9756C23 17.0532 22.1453 18.0732 21.0909 18.0732H15.9938L13 21L10.0062 18.0732H4.90909C3.85473 18.0732 3 17.0532 3 15.9756V2.95122C3 1.87359 3.85473 1 4.90909 1Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M9 7.34146H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M9 11.2439H13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </g>
@@ -98,7 +98,7 @@ const Interview: React.FC<IIconProps> = ({ customSize, className }) => {
             height={size}
         >
             <g clip-path="url(#clip0)" filter="url(#filter0_d)">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.88886 18.6207L4.9 21L5.58477 16.9154C3.92535 15.5468 3 13.6508 3 11.5556C3 7.38274 6.67033 4 12.5 4C18.3297 4 22 7.38274 22 11.5556C22 15.7284 18.3297 19.1111 12.5 19.1111C11.1797 19.1111 9.97011 18.9376 8.88886 18.6207Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path fill-rule="evenodd" clipRule="evenodd" d="M8.88886 18.6207L4.9 21L5.58477 16.9154C3.92535 15.5468 3 13.6508 3 11.5556C3 7.38274 6.67033 4 12.5 4C18.3297 4 22 7.38274 22 11.5556C22 15.7284 18.3297 19.1111 12.5 19.1111C11.1797 19.1111 9.97011 18.9376 8.88886 18.6207Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M21.5556 14C22.4856 14.9235 23 16.147 23 17.4891C23 18.9335 22.4041 20.2406 21.3356 21.1841L21.7765 24L19.208 22.3597C18.5117 22.5782 17.7328 22.6978 16.8826 22.6978C13.8206 22.6978 11.6837 21.1462 11 19.013" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </g>
             <defs>
@@ -131,9 +131,9 @@ const Playlist: React.FC<IIconProps> = ({ customSize, className }) => {
             width={size}
             height={size}
         >
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.5769 11C19.9152 11 21 12.1193 21 13.5V18.5C21 19.8807 19.9152 21 18.5769 21H15.7754C15.3472 21 15 20.6418 15 20.2V11.8C15 11.3582 15.3472 11 15.7754 11H18.5769Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path fill-rule="evenodd" clipRule="evenodd" d="M18.5769 11C19.9152 11 21 12.1193 21 13.5V18.5C21 19.8807 19.9152 21 18.5769 21H15.7754C15.3472 21 15 20.6418 15 20.2V11.8C15 11.3582 15.3472 11 15.7754 11H18.5769Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M21 15.945C21 14.3783 21 12.8264 21 11.2893C21 5.60667 16.5228 1 11 1C5.47715 1 1 5.60667 1 11.2893C1 12.8476 1 14.4179 1 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.42308 11H6.22462C6.65285 11 7 11.3582 7 11.8V20.2C7 20.6418 6.65285 21 6.22462 21H3.42308C2.08485 21 1 19.8807 1 18.5V13.5C1 12.1193 2.08485 11 3.42308 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path fill-rule="evenodd" clipRule="evenodd" d="M3.42308 11H6.22462C6.65285 11 7 11.3582 7 11.8V20.2C7 20.6418 6.65285 21 6.22462 21H3.42308C2.08485 21 1 19.8807 1 18.5V13.5C1 12.1193 2.08485 11 3.42308 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
     )
 }
@@ -239,7 +239,7 @@ const Ebooks: React.FC<IIconProps> = ({ customSize, className }) => {
             width={size}
             height={size}
         >
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 20V4C3 2.89543 3.89543 2 5 2H21V18V22H5C3.89543 22 3 21.1046 3 20Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path fill-rule="evenodd" clipRule="evenodd" d="M3 20V4C3 2.89543 3.89543 2 5 2H21V18V22H5C3.89543 22 3 21.1046 3 20Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M8 8H16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M8 12H12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M3 18H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

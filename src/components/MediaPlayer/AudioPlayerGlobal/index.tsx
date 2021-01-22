@@ -12,16 +12,13 @@ import "../style/madia-player.css"
 const mod = (num: number, max: number) => ((num % max) + max) % max
 const ACMediaPlayer: React.FC = () => {
 
-    const inputEl = React.useRef(null);
-
     const { playlist, isAutoPlay, currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia, playlist: state.playlist, isAutoPlay: state.isAutoPlay }));
 
     const [isRepeat, setIsRepeat] = React.useState(false)
     const [fullScreenInfo, setFullScreenInfo] = React.useState(false)
-    console.log('render player')
     return currentMedia.audio ? (
         (
-            <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom ${fullScreenInfo ? 'top-0' : ''}`} ref={inputEl} style={{ zIndex: 550 }}>
+            <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom ${fullScreenInfo ? 'top-0' : ''}`} style={{ zIndex: 550 }}>
 
                 <div className={`w-full flex  ${fullScreenInfo ? 'h-full bg-mp-background' : 'bg-ac-slate-lighter'}`}>
                     <div className="mx-auto max-w-tablet w-full flex-1">
@@ -44,6 +41,12 @@ const ACMediaPlayer: React.FC = () => {
 }
 
 
-export default React.memo(ACMediaPlayer)
+export default React.memo(ACMediaPlayer, (prevProps, nextProps) => {
+    console.log(prevProps)
+    console.log(nextProps)
+    return false
+})
+
+
 
 

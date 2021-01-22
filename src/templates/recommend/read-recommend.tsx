@@ -65,7 +65,7 @@ const Read: React.FC<IProps> = (props) => {
                                         <div>
                                             {getRandomArray(item.posts, 3).map(p => {
                                                 return (
-                                                    <RightImg {...p} />
+                                                    <RightImg {...p} key={p.slug} />
                                                 )
                                             })}
                                             <div className="w-full flex justify-center py-6">

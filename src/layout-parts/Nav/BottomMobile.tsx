@@ -29,10 +29,10 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
     }
 
     let drawerClass = 'close'
-    if (isSideNavOpen) {
-        drawerClass = 'mobile-open'
-    }
-
+    /*     if (isSideNavOpen) {
+            drawerClass = 'mobile-open'
+        }
+     */
     let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
     if (auth.loggedIn !== "success") {
         mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
