@@ -102,7 +102,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
                 <Breadcrumb key={shortid()} />
                 {children}
                 <Footer key={shortid()} />
-                <BottomMobile key={shortid()} />
             </div>
         </div>
 

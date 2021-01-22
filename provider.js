@@ -68,14 +68,8 @@ export default ({ element }) => {
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                 </Helmet>
-{/*                 <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
-                <TopMobile
-                    {...NavProps}
-                    key={shortid()}
-                />
-                {isSideNavOpen && <SideNav {...NavProps} />} */}
                 {element}
-                <Footer key={shortid()} />
+
                 <BottomMobile key={shortid()}  />
             </div>
         </Provider>
