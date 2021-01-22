@@ -242,7 +242,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
                 transformedPost.content = removeUnwantedNodes(transformedPost.content)
                 transformedPost.content = checkingLinks(transformedPost.content)
-                console.log(transformedPost.content)
                 transformedPost.acId = post.id
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
@@ -314,6 +313,7 @@ const checkingLinks=(text)=>{
             console.log(node.rawAttrs)
         })
     }
+    return root.toString()
 }
 
 const createDummyPost = (transformedPost)=>{
