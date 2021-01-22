@@ -8,11 +8,11 @@ interface IXScrollItem {
 }
 const FeatureSection: React.FC<IXScrollItem> = ({ items, childeClassName }) => {
     return (
-        <div className="scroll-snap-x-container scroll-snap-x-container-start overflow-scroll mb-4 sm:hidden w-full" key={shortid()}>
+        <div className="scroll-snap-x-container scroll-snap-x-container-start overflow-scroll mb-4 sm:hidden w-full" >
             {items.map((c, i) => {
 
                 return (
-                    <div className={`scroll-snap-x-child-start ml-4 ${childeClassName}`}>
+                    <div className={`scroll-snap-x-child-start ml-4 ${childeClassName}`} key={shortid()}>
                         {c}
                     </div>
                 )

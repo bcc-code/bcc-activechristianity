@@ -1,6 +1,6 @@
 import React from 'react'
 import './horizontal-scroll.css';
-
+import shortid from 'shortid'
 
 interface IXScrollItem {
     items: JSX.Element[]
@@ -11,7 +11,7 @@ const FeatureSection: React.FC<IXScrollItem> = ({ items }) => {
             {items.map((c, i) => {
 
                 return (
-                    <div className="scroll-snap-x-child w-8/12 min-w-8/12 ml-4">
+                    <div className="scroll-snap-x-child w-8/12 min-w-8/12 ml-4" key={shortid()}>
                         {c}
                     </div>
                 )

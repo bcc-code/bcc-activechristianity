@@ -88,7 +88,7 @@ export const onClientEntry = () => {
       m.parentNode.insertBefore(a, m);
   
     })();
-    console.log(process.env.GA_ID)
+
     window.ga('create', `${process.env.GA_ID}`, 'auto');
 
       (function (f, b, e, v, n, t, s) {
@@ -149,7 +149,6 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
         });
         }
         if(window.fbq){
-          console.log('fb tracking pageview')
           window.fbq('track', 'PageView');
         }
       },500)

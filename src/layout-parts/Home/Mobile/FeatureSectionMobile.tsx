@@ -1,6 +1,6 @@
 import React from 'react'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-
+import shortid from 'shortid'
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray } from '@/helpers'
 import { ITopicPostItems, IPostItem } from '@/types'
@@ -20,7 +20,7 @@ const FeatureSection: React.FC<{ topicPosts: ITopicPostItems[] }> = ({ topicPost
         <div className="px-4">
             {posts.map(item => {
                 return (
-                    <RightImg {...item} />
+                    <RightImg {...item} key={shortid()} />
                 )
             })}
         </div>

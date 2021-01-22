@@ -25,8 +25,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                     <FetchLatestPodcast
                         key={shortid()}
                         layout="one"
-                        render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast"
-                        />}
+                        render={({ podcastEps }) => <FeaturedCard  {...podcastEps[0]} type="podcast" key={shortid()} />}
 
                     />
                 ) : (
@@ -40,7 +39,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                             const random = getRandomArray(playlists, 1)
                             const post = random.length ? random[0] : undefined
                             return post ? (
-                                <FeaturedCard {...playlistToPost(post)} type="playlist" />
+                                <FeaturedCard {...playlistToPost(post)} type="playlist" key={shortid()}/>
                             ) : (<div></div>)
                         }}
                     />

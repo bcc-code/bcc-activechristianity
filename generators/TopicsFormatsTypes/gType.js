@@ -70,7 +70,9 @@ module.exports = async function generateTypes(data) {
         
     } 
 
-    if(`${type.id}`===`${typesAll.listen.keyId}`){
+    const hasPlaylist = process.env.LISTEN_SECTION === "all"
+    const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
+    if(`${type.id}`===`${typesAll.listen.keyId}` && hasPodcast){
         const result = await graphql(query)
         .then(res=>{
             if(res.errors){
@@ -83,8 +85,7 @@ module.exports = async function generateTypes(data) {
             console.log(error)
         })
 
-        const hasPlaylist = process.env.LISTEN_SECTION === "all"
-        const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
+        
 
         if(result.data && result.data.ac){
             const {podcasts,playlists} = result.data.ac

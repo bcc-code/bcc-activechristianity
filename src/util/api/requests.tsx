@@ -193,7 +193,7 @@ query {
 
 export const likedPostsQuery = `
   query {
-    bookmarks {
+    bookmarked {
       id
       slug
     }

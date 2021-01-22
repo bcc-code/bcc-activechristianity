@@ -74,7 +74,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .likePost(action.payload.id, !action.payload.bookmarked)
                 .then((resNewLike: any) => {
-                    if (resNewLike.likePost && resNewLike.likePost.success === true) {
+                    console.log(resNewLike)
+                    if (resNewLike.bookmarkPost && resNewLike.bookmarkPost.success === true) {
                         return acApi.liked()
                             .then((res: ILiked) => {
                                 if (Array.isArray(res.liked)) {
@@ -99,8 +100,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .liked()
                 .then((res: ILiked) => {
-
-                    if (Array.isArray(res.liked)) {
+                    console.log(res)
+                    if (Array.isArray(res.bookmarks)) {
                         const filtered = res.liked.filter(p => typeof p.id === "string")
                         store.dispatch(setUserLiked(filtered))
                     }
@@ -164,8 +165,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 acApi.liked()
                     .then((res: ILiked) => {
                         console.log(res)
-                        if (Array.isArray(res.liked)) {
-                            return res.liked
+                        if (Array.isArray(res.bookmarked)) {
+                            return res.bookmarked
                         } else {
                             throw new Error('Error res.liked')
                         }

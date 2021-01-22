@@ -7,6 +7,7 @@ import { ITopicNavItem, IPage } from "@/types"
 import Link from '@/components/CustomLink'
 import { ITopicRes } from '@/types'
 import { sortTopicsByGroups } from '@/helpers'
+import shortid from 'shortid'
 const AllTopic: React.FC<IAllTopic> = (props) => {
     console.log(props)
     const { title, themes, groupedTopics } = props.pageContext
@@ -27,7 +28,7 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
                 <div className="staggered-boxes-2col">
                     {Object.keys(groupedTopics).map(k => {
                         return (
-                            <div style={{ maxWidth: 320 }} className="staggered-boxes-items">
+                            <div style={{ maxWidth: 320 }} className="staggered-boxes-items" key={shortid()}>
                                 <div className="font-bold border-t uppercase pb-2">{groupedTopics[k].info.name}</div>
                                 <div className="py-2">{groupedTopics[k].topics.map(t => {
                                     return (

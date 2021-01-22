@@ -5,7 +5,7 @@ import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-
+import shortid from 'shortid'
 import LazyLoad from '@/components/LazyLoad';
 import MetaTag from '@/components/Meta'
 import { PageSectionHeader } from '@/components/Headers'
@@ -117,7 +117,7 @@ const Read: React.FC<IProps> = (props) => {
 
                                         {popular.slice(0, 3).map(p => {
                                             return (
-                                                <RightImg {...p} />
+                                                <RightImg {...p} key={shortid()} />
                                             )
                                         })}
                                     </div>
