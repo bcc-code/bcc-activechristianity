@@ -1,6 +1,7 @@
 const helpers = require('./helpers')
 const he = require('he')
 const {decode} = require('html-entities');
+const {parse } =require('node-html-parser');
 const {sendQuery,getMultiPosts, postQuery} = helpers
 const htmlTags2PlainText = (html) => {
     if (html) {
@@ -133,8 +134,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-        console.log(pageCount)
-        for (let i = 1; i <=pageCount ; i++){
+        console.log(5)
+        for (let i = 1; i <=5 ; i++){
             console.log(i)
             
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
@@ -235,11 +236,14 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     const glossaryContent = scanForAllGlossary(transformedPost.content)
                     transformedPost.title = decode(post.title)
                     transformedPost.excerpt = decode(post.excerpt)
-                    transformedPost.content = glossaryContent.text
+                    transformedPost.content = glossaryContent.text 
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }
+
+                transformedPost.content = removeUnwantedNodes(transformedPost.content)
+                transformedPost.content = checkingLinks(transformedPost.content)
+                console.log(transformedPost.content)
                 transformedPost.acId = post.id
-                
                 transformedPost.readMorePosts=post.readMorePosts?post.readMorePosts.map(p=>p.slug):[]
                 transformedPost.recommendPosts=[]
                 if( k===0){
@@ -258,6 +262,58 @@ exports.onPostBuild = async ({ cache }) => {
     await cache.set(`key`, `value`)
     const cachedValue = await cache.get(`key`)
     console.log(cachedValue) // logs `value`
+}
+
+
+const removeUnwantedNodes=(text)=>{
+    const root = parse(text)
+    const scripts = root.querySelector("script")
+    const audio = root.querySelectorAll("audio")
+    const wpAudio = root.querySelector(".powerpress_player")
+    const podcastLinks = root.querySelectorAll(".powerpress_links")
+    const playlist = root.querySelector(".cue-playlist-container")
+    const quotes=(root.querySelectorAll(".wp-embedded-content"))
+    if(scripts){
+        scripts.remove()
+    }
+
+    if(wpAudio){
+        wpAudio.remove()
+    }
+
+    if(podcastLinks.length>0){
+       podcastLinks.forEach(node=>{
+           node.remove()
+       })
+    }
+
+    if(playlist){
+        playlist.remove()
+    }
+
+    if(quotes.length>0){
+        quotes.forEach(node=>{
+            node.remove()
+        })
+    }
+    
+    if(audio.length>0){
+        audio.forEach(node=>{
+            node.remove()
+        })
+     }
+
+     return root.toString()
+}
+
+const checkingLinks=(text)=>{
+    const root = parse(text)
+    const links = root.querySelectorAll("a")
+    if(links.length>0){
+        links.forEach(node=>{
+            console.log(node.rawAttrs)
+        })
+    }
 }
 
 const createDummyPost = (transformedPost)=>{
