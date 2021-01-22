@@ -44,7 +44,7 @@ const MediaControl: React.FC<IWithMediaProps> = (props) => {
     const { src, repeatTrack, autoPlay, isVideo } = props
     const dispatch = useDispatch()
     const handlePlay = () => {
-        dispatch(setCurrentMedia({ path: '' }))
+        /*  dispatch(setCurrentMedia({ path: '' })) */
     }
     return (
         <Media>

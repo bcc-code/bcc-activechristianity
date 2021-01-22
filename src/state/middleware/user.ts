@@ -74,7 +74,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
             acApi
                 .likePost(action.payload.id, !action.payload.bookmarked)
                 .then((resNewLike: any) => {
-                    console.log(resNewLike)
                     if (resNewLike.bookmarkPost && resNewLike.bookmarkPost.success === true) {
                         return acApi.liked()
                             .then((res: ILiked) => {

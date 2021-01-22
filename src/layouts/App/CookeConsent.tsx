@@ -16,7 +16,7 @@ export default () => {
     }
 
     return showConsent ? (
-        <div className="fixed bottom-0 w-full bg-ac-slate-dark text-ac-slate-lighter p-4" style={{ zIndex: 600 }}>
+        <div className="fixed bottom-0 w-full bg-ac-slate-dark text-ac-slate-lighter p-4" style={{ zIndex: 650 }}>
             <div className="standard-max-w">
                 <div className="text-xs">
                     {ac_strings.consent_general_main}

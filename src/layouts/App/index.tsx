@@ -35,10 +35,9 @@ export interface IDrawerNav {
 }
 
 
-const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: { pathname: string } }> = (props) => {
-    const { children, pageContext, location } = props
+const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props) => {
+    const { children } = props
 
-    const isLandingPage = location && location.pathname && location.pathname.indexOf('campaign/') > -1
     const dispatch = useDispatch();
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
@@ -48,6 +47,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
     }, [])
 
     const checkUser = () => {
+        console.log('checking user')
         acApi
             .profile()
             .then((res: IUser) => {
@@ -88,7 +88,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string }, location: 
         setSideNavOpen,
         handleSideNavOpen
     ])
-
+    console.log('render app')
     return (
         <div className="relative">
             <CookieConsent key={shortid()} />

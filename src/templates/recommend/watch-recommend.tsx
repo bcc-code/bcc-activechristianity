@@ -64,7 +64,6 @@ const Watch: React.FC<IProps> = (props) => {
                     topics={items.map(f => ({ name: f.name, slug: `${f.typeSlug}/${f.formatSlug}`, id: '' }))}
                     layout="list"
                     render={({ topicPostItems }) => {
-                        console.log(topicPostItems)
                         return (
                             <div>
 

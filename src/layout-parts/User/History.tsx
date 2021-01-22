@@ -15,11 +15,9 @@ const UserHistory = () => {
     React.useEffect(() => {
                 api.history().then(res=>{
                     const {history} = res
-                    console.log(res.history)
                     if(res && Array.isArray(history)){
                         const slugs = history.map(item=>item.slug)
                         return fetchLocalPostsFromSlugs(slugs).then(posts=>{
-                            console.log(posts)
                             setHistoryPosts(posts)
                         })
     /*                         console.log(history.map(item=>item.slug))
