@@ -134,10 +134,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-        console.log(5)
-        for (let i = 1; i <=5 ; i++){
-            console.log(i)
-            
+        for (let i = 1; i <=pageCount ; i++){            
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)
@@ -234,12 +231,12 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                 const transformedPost = Object.assign({},post)
                 if(glossary.length>0){
                     const glossaryContent = scanForAllGlossary(transformedPost.content)
-                    transformedPost.title = decode(post.title)
-                    transformedPost.excerpt = decode(post.excerpt)
+                    
                     transformedPost.content = glossaryContent.text 
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }
-
+                transformedPost.title = decode(post.title)
+                transformedPost.excerpt = decode(post.excerpt)
                 transformedPost.content = removeUnwantedNodes(transformedPost.content)
                 transformedPost.content = checkingLinks(transformedPost.content)
                 transformedPost.acId = post.id

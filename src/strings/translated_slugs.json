@@ -1134,7 +1134,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "user"
     },
     {
       "lang": "hu",
@@ -1196,7 +1196,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "bookmarked"
     },
     {
       "lang": "hu",
@@ -1258,7 +1258,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "password"
     },
     {
       "lang": "hu",
@@ -1320,7 +1320,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "my-content"
     },
     {
       "lang": "hu",
@@ -1382,7 +1382,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "delete-profile"
     },
     {
       "lang": "hu",
@@ -1444,7 +1444,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "followed"
     },
     {
       "lang": "hu",
@@ -1506,7 +1506,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "history"
     },
     {
       "lang": "hu",
@@ -1568,7 +1568,7 @@
     },
     {
       "lang": "fi",
-      "slug": ""
+      "slug": "watch"
     },
     {
       "lang": "hu",
