@@ -6,6 +6,7 @@
 
 # Languages
 src/lang/*.json
+src/lang/*.json
 static/_redirects
 
 # Redirect
@@ -22,7 +23,7 @@ src/languages.json
 src/audio-media.json
 
 static/libs/*
-
+static/scripts/*
 !static/libs/other.js
 !static/libs/**/
 
