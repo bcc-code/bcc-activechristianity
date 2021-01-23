@@ -100,8 +100,8 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 .liked()
                 .then((res: ILiked) => {
                     console.log(res)
-                    if (Array.isArray(res.bookmarks)) {
-                        const filtered = res.liked.filter(p => typeof p.id === "string")
+                    if (Array.isArray(res.bookmarked)) {
+                        const filtered = res.bookmarked.filter(p => typeof p.id === "string")
                         store.dispatch(setUserLiked(filtered))
                     }
 
