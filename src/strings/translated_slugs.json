@@ -1,5 +1,5 @@
 {
-  "acerca-de-nosotros": [
+  "about-us": [
     {
       "lang": "en",
       "slug": "about-us"
@@ -61,7 +61,7 @@
       "slug": "om-os"
     }
   ],
-  "colaborador": [
+  "contributor": [
     {
       "lang": "en",
       "slug": "contributor"
@@ -123,7 +123,7 @@
       "slug": "bidragsyder"
     }
   ],
-  "cuenta": [
+  "account": [
     {
       "lang": "en",
       "slug": "account"
@@ -185,7 +185,7 @@
       "slug": "konto"
     }
   ],
-  "contacto": [
+  "contact": [
     {
       "lang": "en",
       "slug": "contact"
@@ -371,7 +371,7 @@
       "slug": "e-bog"
     }
   ],
-  "explorar": [
+  "explore": [
     {
       "lang": "en",
       "slug": "explore"
@@ -433,7 +433,7 @@
       "slug": "udforsk"
     }
   ],
-  "glosario": [
+  "glossary": [
     {
       "lang": "en",
       "slug": "glossary"
@@ -495,7 +495,7 @@
       "slug": "Ordliste"
     }
   ],
-  "anfitrion": [
+  "host": [
     {
       "lang": "en",
       "slug": "host"
@@ -557,7 +557,7 @@
       "slug": "vært"
     }
   ],
-  "novedades": [
+  "latest": [
     {
       "lang": "en",
       "slug": "latest"
@@ -619,7 +619,7 @@
       "slug": "seneste"
     }
   ],
-  "escucha": [
+  "listen": [
     {
       "lang": "en",
       "slug": "listen"
@@ -681,7 +681,7 @@
       "slug": "lyt"
     }
   ],
-  "iniciar-sesion": [
+  "login": [
     {
       "lang": "en",
       "slug": "login"
@@ -743,10 +743,10 @@
       "slug": "log ind"
     }
   ],
-  "FALSE": [
+  "playlist": [
     {
       "lang": "en",
-      "slug": "scripture"
+      "slug": "playlist"
     },
     {
       "lang": "nb",
@@ -791,6 +791,68 @@
     {
       "lang": "sv",
       "slug": "FALSE"
+    },
+    {
+      "lang": "de",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "nl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "da",
+      "slug": "FALSE"
+    }
+  ],
+  "podcast": [
+    {
+      "lang": "en",
+      "slug": "podcast"
+    },
+    {
+      "lang": "nb",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "es",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fr",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fi",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "hu",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "it",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ro",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ru",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "sv",
+      "slug": "podcast"
     },
     {
       "lang": "de",
@@ -929,7 +991,7 @@
       "slug": "privacy-policy"
     }
   ],
-  "leer": [
+  "read": [
     {
       "lang": "en",
       "slug": "read"
@@ -991,7 +1053,7 @@
       "slug": "læs"
     }
   ],
-  "registrarse": [
+  "register": [
     {
       "lang": "en",
       "slug": "register"
@@ -1053,7 +1115,131 @@
       "slug": "opret dig"
     }
   ],
-  "tema": [
+  "scripture": [
+    {
+      "lang": "en",
+      "slug": "scripture"
+    },
+    {
+      "lang": "nb",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "es",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fr",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fi",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "hu",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "it",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ro",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ru",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "sv",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "de",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "nl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "da",
+      "slug": "FALSE"
+    }
+  ],
+  "theme": [
+    {
+      "lang": "en",
+      "slug": "theme"
+    },
+    {
+      "lang": "nb",
+      "slug": "tema"
+    },
+    {
+      "lang": "es",
+      "slug": "tema"
+    },
+    {
+      "lang": "fr",
+      "slug": "theme"
+    },
+    {
+      "lang": "fi",
+      "slug": "teemat"
+    },
+    {
+      "lang": "hu",
+      "slug": "tema"
+    },
+    {
+      "lang": "it",
+      "slug": "tema"
+    },
+    {
+      "lang": "pl",
+      "slug": "zagadnienie"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "tema"
+    },
+    {
+      "lang": "ro",
+      "slug": "teme"
+    },
+    {
+      "lang": "ru",
+      "slug": "tema"
+    },
+    {
+      "lang": "sv",
+      "slug": "tema"
+    },
+    {
+      "lang": "de",
+      "slug": ""
+    },
+    {
+      "lang": "nl",
+      "slug": "thema"
+    },
+    {
+      "lang": "da",
+      "slug": "tema"
+    }
+  ],
+  "topic": [
     {
       "lang": "en",
       "slug": "topic"
@@ -1115,7 +1301,7 @@
       "slug": "temaer"
     }
   ],
-  "usuario": [
+  "user": [
     {
       "lang": "en",
       "slug": "user"
@@ -1177,7 +1363,7 @@
       "slug": "bruger"
     }
   ],
-  "guardado": [
+  "bookmarked": [
     {
       "lang": "en",
       "slug": "bookmarked"
@@ -1239,7 +1425,7 @@
       "slug": "bogmærket"
     }
   ],
-  "contraseña": [
+  "password": [
     {
       "lang": "en",
       "slug": "password"
@@ -1301,7 +1487,7 @@
       "slug": "password"
     }
   ],
-  "mi-contenido ": [
+  "my-content": [
     {
       "lang": "en",
       "slug": "my-content"
@@ -1363,7 +1549,7 @@
       "slug": "mit-indhold"
     }
   ],
-  "borrar-cuenta": [
+  "delete-profile": [
     {
       "lang": "en",
       "slug": "delete-profile"
@@ -1425,7 +1611,7 @@
       "slug": "slet-profil"
     }
   ],
-  "seguido": [
+  "followed": [
     {
       "lang": "en",
       "slug": "followed"
@@ -1487,7 +1673,7 @@
       "slug": "følger"
     }
   ],
-  "historial": [
+  "history": [
     {
       "lang": "en",
       "slug": "history"
@@ -1549,7 +1735,7 @@
       "slug": "historik"
     }
   ],
-  "ver": [
+  "watch": [
     {
       "lang": "en",
       "slug": "watch"

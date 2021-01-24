@@ -58,31 +58,39 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       generateHome(actions, graphql),
       generateExplore(actions, graphql),
       generatePosts(actions, graphql),
-      generateAuthors(actions, graphql),
-      generatePages(actions, graphql),
-      generateTopics(actions, graphql),
-      generateRedirect(actions, graphql),
-      generateSeries(actions, graphql)
+
     ]
-    if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
-      console.log('generate podcast')
-      generators.push(generatePodcast(actions, graphql))
+
+    if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
+      generators.push(
+        generateAuthors(actions, graphql),
+        generatePages(actions, graphql),
+        generateTopics(actions, graphql),
+        generateRedirect(actions, graphql),
+        generateSeries(actions, graphql)
+      )
+
+      if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+        console.log('generate podcast')
+        generators.push(generatePodcast(actions, graphql))
+      }
+  
+      if (process.env.LISTEN_SECTION==="all"){
+        console.log("generating playlist")
+        generators.push(generatePlaylists(actions, graphql))
+      }
+  
+      if (process.env.GLOSSARY_SECTION==="true"){
+        console.log("generating glossry")
+        generators.push( generateGlossary(actions, graphql))
+      }
+  
+      if (process.env.SCRIPTURE_SECTION==="true"){
+        console.log("generating scriptures")
+        generators.push(generateScriptures(actions, graphql)) 
+      }
     }
 
-    if (process.env.LISTEN_SECTION==="all"){
-      console.log("generating playlist")
-      generators.push(generatePlaylists(actions, graphql))
-    }
-
-    if (process.env.GLOSSARY_SECTION==="true"){
-      console.log("generating glossry")
-      generators.push( generateGlossary(actions, graphql))
-    }
-
-    if (process.env.SCRIPTURE_SECTION==="true"){
-      console.log("generating scriptures")
-      generators.push(generateScriptures(actions, graphql)) 
-    }
 
     return Promise.all(generators)
 
