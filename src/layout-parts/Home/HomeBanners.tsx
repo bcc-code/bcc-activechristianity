@@ -1,18 +1,20 @@
 import * as React from 'react'
 import { IBannerBasic } from '@/types'
-export const HomeTop: React.FC<IBannerBasic> = ({ title, body, cta }) => (
-    <div className="bg-gray-400">
-        <div className="standard-max-w" style={{ minHeight: "500px", paddingTop: "122px" }}>
-            <div className="px-4 w-7/12">
+import Link from '@/components/CustomLink'
+export const HomeTop: React.FC<IBannerBasic & { darkbg?: boolean }> = ({ title, body, cta, bgImg, label, darkbg }) => (
+    <div style={{ backgroundImage: `url(${bgImg ? bgImg : `https://source.unsplash.com/random/1600x800`})`, backgroundSize: "cover" }}>
+        <div className="standard-max-w" style={{ minHeight: "500px", paddingTop: "72px" }}>
+            <div className={`px-4 w-7/12 ${darkbg ? 'text-white' : ''}`}>
+                <span className="uppercase">{label}</span>
                 <h2 className="text-6xl font-bold pb-12">{title}</h2>
-
                 <p className="text-2xl pb-12">{body}</p>
-                <button
-                    className="font-bold bg-white px-8 py-4 rounded-lg text-lg"
+                <Link
+                    className="font-bold bg-white px-8 py-4 rounded-lg text-lg text-ac-slate-dark"
+                    to={cta.path}
                 >
-                    {cta.text} >
-                </button>
+                    {cta.text}
+                </Link>
             </div>
         </div>
-    </div>
+    </div >
 )

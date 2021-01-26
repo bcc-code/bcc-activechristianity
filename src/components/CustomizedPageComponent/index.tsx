@@ -13,6 +13,7 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
 
     const comps: React.ReactNode[] = []
     items.map(c => {
+        console.log(c.type)
         if (c.type === "text") {
 
             comps.push(<Content content={c.data.content} />)

@@ -109,7 +109,11 @@ module.exports = function generatePages(actions, graphql) {
             .then(async(popularRes)=>{
                 const {popularPosts,popularTopics}=popularRes.data.ac
                 if (popularPosts){
-                    popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl,headers)
+                    popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl,headers).catch(err=>{
+                        console.log(err)
+                        throw new Error(err.message)
+                    })
+                   
                 }
                 
                 
@@ -124,18 +128,28 @@ module.exports = function generatePages(actions, graphql) {
                             const hasFormat=formatScope.find(f=>`${f.id}`===`${item}`)
                             if (!hasFormat){
                                 const getTopicQuery = getTopic(item)
+                                
                                 await graphql(getTopicQuery)
                                 .then(async res=>{
-                                    if(res.data && res.data.ac &&res.data.ac.topic && res.data.ac.topic.posts){
-                                        const topic = res.data.ac.topic
-                                        const allPosts = await getMultiPosts( topic.posts.slice(0,2),baseUrl,headers)
+                                    console.log(res)
+                                    if(res.data && res.data.ac &&res.data.ac.topic && res.data.ac.topic.somePosts.data){
+                                       const {somePosts,...topic}=res.data.ac.topic
+                                       const allPosts=somePosts.data
                                         popularTopicsAll["dynamic"].push({...topic,posts:allPosts})
+                                        
+                                        
                                     } else {
-                                        console.log(res)
+                                        console.log(getTopicQuery)
+                                        console.log(res.data.ac.topic)
+
                                         console.log(item)
                                         throw new Error('not able to find posts for this topic')
                                     }
                                     
+                                })
+                                .catch(err=>{
+                                    console.log(err)
+                                    throw new Error(err.message)
                                 })
                             }
                         }
@@ -154,10 +168,16 @@ module.exports = function generatePages(actions, graphql) {
                 popularPosts:popularPostsAll,
                 popularTopics:popularTopicsAll,
               }
-              console.log(context)
             createPage({
                 path: `/`,
                 component: path.resolve('./src/templates/page/home.tsx'),
+                context
+              })
+
+
+              createPage({
+                path: `/home-v2-beta`,
+                component: path.resolve('./src/templates/page/home-v2-beta.tsx'),
                 context
               })
         }

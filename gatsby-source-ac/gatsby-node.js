@@ -136,7 +136,8 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         const pageCount = Math.ceil(total/count)
 
         const useCount = process.env.SUPER_SLIM_DEV_MODE==="true"?3:pageCount
-        for (let i = 1; i <= useCount; i++){            
+        for (let i = 1; i <= useCount; i++){       
+            console.log(i)     
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)

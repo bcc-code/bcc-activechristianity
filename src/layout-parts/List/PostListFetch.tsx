@@ -7,9 +7,8 @@ import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { trimSlug } from '@/helpers'
 export interface IPostList {
-    audio?: boolean
     paginate?: IPaginate
-    posts: string[],
+    posts: IPostItem[],
     isTopic?: boolean
 
 }
@@ -53,22 +52,14 @@ const PostList: React.FC<IPostList> = (props) => {
                     </div>
                 </div>
             )}
-            <FetchPostsFromSlugs
-                slugs={posts}
-                layout="list"
-                render={({ posts: postList }) => {
+            <div>
+                {posts.map((p, k) => {
                     return (
-                        <div>
-                            {postList.map((p, k) => {
-                                return (
-                                    <RightImgWDes key={k} {...p} />
+                        <RightImgWDes key={k} {...p} />
 
-                                )
-                            })}
-                        </div>
                     )
-                }}
-            />
+                })}
+            </div>
 
 
             {paginate && (

@@ -189,6 +189,12 @@ interface IResource {
         popularTopics: ITopicRes[]
         allFormats: ITopicRes[]
         recommendFormats: ITopicRes[]
+        popularScriptures: {
+            bookName: string
+            bookId: string
+            chapter: number
+            count: number
+        }[]
     }
 }
 

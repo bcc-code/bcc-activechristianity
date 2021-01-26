@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const listTemplate = 'src/templates/archive/post-list.tsx'
+const listTemplate = 'src/templates/archive/post-list-local-data.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
 /* SETUP */
 const template = 'src/templates/single-resource/post.tsx'
@@ -35,7 +35,6 @@ module.exports = function generatePosts(actions, graphql) {
     // Iterate over the array of posts
     _.each(posts, (post) => {
       if(post.slug!=="dummy-content"){
-        console.log(post.slug)
         createPage({
           path: `${post.slug}`,
           component: path.resolve(template),

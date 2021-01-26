@@ -105,7 +105,9 @@ module.exports.createArchivePages =async function ({
   const {total,count}=paginatorInfo 
   const hasRecommendPage=total>10
   const totalPages = Math.ceil(total/count);
-      for (let i = 1; i <=totalPages; i++){
+
+  //*only create the first page, and use query strings for the rest
+      for (let i = 1; i <=1; i++){
         let currentPage = i
         let pagePath = `${baseUrl}/${currentPage}`
         if(i===1){
@@ -177,8 +179,8 @@ module.exports.createSubTopicPages=({
   
      
       let currentPage = 1
-    
-      for (let i = 0; i < totalCount; i += perPage, currentPage++) {
+      // 
+      for (let i = 0; i <=1; i += perPage, currentPage++) {
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
         console.log(pagePath)
   

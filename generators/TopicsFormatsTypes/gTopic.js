@@ -11,7 +11,7 @@ module.exports = async function generateTopic(data) {
     const {total}=topic.pagination.paginatorInfo
     const hasRecommendPage=total>10
     const topicFormat = []
-    for (let i =0;i<subTopics.length;i++){
+/*     for (let i =0;i<subTopics.length;i++){
                         
         const stTopic=subTopics [i]
 
@@ -47,7 +47,7 @@ module.exports = async function generateTopic(data) {
             })
           }
       }
-    }
+    } */
     // create recommend
     const pagePath = `${ac_strings.slug_topic}/${topic.slug}`
     console.log(topic.slug)

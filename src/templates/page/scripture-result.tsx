@@ -1,8 +1,8 @@
 import React from 'react'
-import MetaTag from '@/components/Meta'
 import { useLocation } from '@reach/router';
-import { LayoutH1 } from '@/components/Headers'
 import queryString from 'query-string';
+import MetaTag from '@/components/Meta'
+import { LayoutH1 } from '@/components/Headers'
 import { menusItems } from '@/layout-parts/Nav/Menus'
 // components
 
@@ -13,7 +13,6 @@ import acApi from '@/util/api'
 import PostList from '@/layout-parts/List/PostList'
 interface IBibleNavProps {
     path: string
-
     pageContext: {
         title: string
         breadcrumb: INavItem[]

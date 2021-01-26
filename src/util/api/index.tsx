@@ -134,5 +134,14 @@ export default {
         return sendQuery(query).then(res => {
             return res
         })
+    },
+    getOnePostById: (id: string) => {
+        const query = request.getOnePostByIdQuery(id)
+        return sendQuery(query)
+    },
+    getOnePagetById: (id: string) => {
+        const query = request.getOnePageByIdQuery(id)
+
+        return sendQuery(query)
     }
 }

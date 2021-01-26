@@ -56,10 +56,9 @@ module.exports = function generateTaxonomies(actions, graphql) {
       console.log("Generating scriptures")
       if (bible.new && bible.old){
         const allChapters=[...bible.old,...bible.new]
-        for (let i = 0; i < allChapters.length; i++) {
+/*         for (let i = 0; i < allChapters.length; i++) {
           console.log(`Generating scripture ${i}/${allChapters.length}`)
           const book=allChapters[i]
-          console.log(book)
           for (let j=0;j<book.chapters.length;j++){
             const chapter=book.chapters[j]
             const chapterQuery = perChapterQuery(book.id,chapter)
@@ -69,10 +68,12 @@ module.exports = function generateTaxonomies(actions, graphql) {
             if(chapterRes.data.ac.biblePosts){
               const posts=chapterRes.data.ac.biblePosts.map(i=>i.slug)
               chaptersCounts.push({
-                ...book,
+                bookName:book.name,
+                bookId:book.id,
+                chapter,
                 count:posts.length
               })
-/*               createPage({
+              createPage({
                 path:pagePath,
                 component:path.resolve(listTemplate),
                 context: {
@@ -81,13 +82,13 @@ module.exports = function generateTaxonomies(actions, graphql) {
                   slug:pagePath,
                   breadcrumb:[{name:page.title,to:page.slug}]
                 }
-              }) */
+              }) 
             } else {
               console.log(chapterRes.data.ac)
             }
 
           }
-        }
+        } */
 
         const mostPopular=chaptersCounts.sort((a,b)=>b.count-a.count).slice(0,10)
 
@@ -96,7 +97,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
           component: path.resolve(`./src/templates/page/${page.label}.tsx`),
           context:{
             bible,
-            mostPopular,
             title:page.title
           },
         })
@@ -105,8 +105,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
           path: `${page.slug}-result`,
           component: path.resolve(`./src/templates/page/${page.label}-result.tsx`),
           context:{
-            bible,
-            mostPopular,
             title:page.title
           },
         })
