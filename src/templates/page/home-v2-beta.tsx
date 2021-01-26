@@ -318,7 +318,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               return (
                 <BibleStudyItemCard
                   title={serie.title}
-                  slug={serie.slug}
+                  slug={`/series/${serie.slug}`}
                   image={serie.image}
                   label="Collection"
                 />
