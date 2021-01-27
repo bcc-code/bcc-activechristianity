@@ -8,6 +8,7 @@ const core = [
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",
     "GA_ID",
+    "CLICKY_ID",
     "LISTEN_SECTION"
 ]
 

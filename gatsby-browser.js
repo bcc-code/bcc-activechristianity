@@ -33,6 +33,18 @@ const addScript = (url) => {
   document.body.appendChild(script)
 }
 
+
+const addScriptToHead=(url)=>{
+  (function(){
+
+    var a = document.createElement('script');
+    var m = document.getElementsByTagName('script')[0];
+    a.async = 1;
+    a.src = url
+    m.parentNode.insertBefore(a, m);
+
+  })();
+}
 export const onClientEntry = () => {
 //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
   (function(){
@@ -113,10 +125,13 @@ export const onClientEntry = () => {
       window.fbq('init', '386848018393019');
     }
 
-    addScript('/scripts/clicky.js');
-    const clicky_site_ids = window.clicky_site_ids || [];
-    clicky_site_ids.push(101288975);
+   
+    window.clicky_site_ids = window.clicky_site_ids || [];
+    const clicky_id = parseInt(process.env.CLICKY_ID)
 
+    window.clicky_site_ids.push(clicky_id);
+
+    addScriptToHead('/scripts/clicky.js');
     addScript('/scripts/adword-adgrant-conversion.js')
     addScript('/scripts/adword-remarketing.js')
 

@@ -1,5 +1,5 @@
 {
-  "acerca-de-nosotros": [
+  "about-us": [
     {
       "lang": "en",
       "slug": "about-us"
@@ -61,7 +61,7 @@
       "slug": "om-os"
     }
   ],
-  "colaborador": [
+  "contributor": [
     {
       "lang": "en",
       "slug": "contributor"
@@ -112,7 +112,7 @@
     },
     {
       "lang": "de",
-      "slug": "mitwirkende"
+      "slug": "Mitwirkende"
     },
     {
       "lang": "nl",
@@ -123,7 +123,7 @@
       "slug": "bidragsyder"
     }
   ],
-  "cuenta": [
+  "account": [
     {
       "lang": "en",
       "slug": "account"
@@ -174,7 +174,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Konto"
     },
     {
       "lang": "nl",
@@ -185,7 +185,7 @@
       "slug": "konto"
     }
   ],
-  "contacto": [
+  "contact": [
     {
       "lang": "en",
       "slug": "contact"
@@ -236,7 +236,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Kontakt "
     },
     {
       "lang": "nl",
@@ -298,7 +298,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Cookie Richtlinien"
     },
     {
       "lang": "nl",
@@ -360,7 +360,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "eBook"
     },
     {
       "lang": "nl",
@@ -371,7 +371,7 @@
       "slug": "e-bog"
     }
   ],
-  "explorar": [
+  "explore": [
     {
       "lang": "en",
       "slug": "explore"
@@ -422,7 +422,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Erkunden"
     },
     {
       "lang": "nl",
@@ -433,7 +433,7 @@
       "slug": "udforsk"
     }
   ],
-  "glosario": [
+  "glossary": [
     {
       "lang": "en",
       "slug": "glossary"
@@ -484,7 +484,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Wörterbuch"
     },
     {
       "lang": "nl",
@@ -495,7 +495,7 @@
       "slug": "Ordliste"
     }
   ],
-  "anfitrion": [
+  "host": [
     {
       "lang": "en",
       "slug": "host"
@@ -546,7 +546,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Host"
     },
     {
       "lang": "nl",
@@ -557,7 +557,7 @@
       "slug": "vært"
     }
   ],
-  "novedades": [
+  "latest": [
     {
       "lang": "en",
       "slug": "latest"
@@ -608,7 +608,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Neueste"
     },
     {
       "lang": "nl",
@@ -619,7 +619,7 @@
       "slug": "seneste"
     }
   ],
-  "escucha": [
+  "listen": [
     {
       "lang": "en",
       "slug": "listen"
@@ -670,7 +670,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Hören"
     },
     {
       "lang": "nl",
@@ -681,7 +681,7 @@
       "slug": "lyt"
     }
   ],
-  "iniciar-sesion": [
+  "login": [
     {
       "lang": "en",
       "slug": "login"
@@ -732,7 +732,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Login"
     },
     {
       "lang": "nl",
@@ -743,10 +743,10 @@
       "slug": "log ind"
     }
   ],
-  "FALSE": [
+  "playlist": [
     {
       "lang": "en",
-      "slug": "scripture"
+      "slug": "playlist"
     },
     {
       "lang": "nb",
@@ -791,6 +791,68 @@
     {
       "lang": "sv",
       "slug": "FALSE"
+    },
+    {
+      "lang": "de",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "nl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "da",
+      "slug": "FALSE"
+    }
+  ],
+  "podcast": [
+    {
+      "lang": "en",
+      "slug": "podcast"
+    },
+    {
+      "lang": "nb",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "es",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fr",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fi",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "hu",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "it",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ro",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ru",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "sv",
+      "slug": "podcast"
     },
     {
       "lang": "de",
@@ -856,7 +918,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Das-Evangelium-leben-intro"
     },
     {
       "lang": "nl",
@@ -918,7 +980,7 @@
     },
     {
       "lang": "de",
-      "slug": "privacy-policy"
+      "slug": "Datenschutzbestimmungen"
     },
     {
       "lang": "nl",
@@ -929,7 +991,7 @@
       "slug": "privacy-policy"
     }
   ],
-  "leer": [
+  "read": [
     {
       "lang": "en",
       "slug": "read"
@@ -980,7 +1042,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Lesen"
     },
     {
       "lang": "nl",
@@ -991,7 +1053,7 @@
       "slug": "læs"
     }
   ],
-  "registrarse": [
+  "register": [
     {
       "lang": "en",
       "slug": "register"
@@ -1042,7 +1104,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Registrieren"
     },
     {
       "lang": "nl",
@@ -1053,7 +1115,131 @@
       "slug": "opret dig"
     }
   ],
-  "tema": [
+  "scripture": [
+    {
+      "lang": "en",
+      "slug": "scripture"
+    },
+    {
+      "lang": "nb",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "es",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fr",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "fi",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "hu",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "it",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ro",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "ru",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "sv",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "de",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "nl",
+      "slug": "FALSE"
+    },
+    {
+      "lang": "da",
+      "slug": "FALSE"
+    }
+  ],
+  "theme": [
+    {
+      "lang": "en",
+      "slug": "theme"
+    },
+    {
+      "lang": "nb",
+      "slug": "tema"
+    },
+    {
+      "lang": "es",
+      "slug": "tema"
+    },
+    {
+      "lang": "fr",
+      "slug": "theme"
+    },
+    {
+      "lang": "fi",
+      "slug": "teemat"
+    },
+    {
+      "lang": "hu",
+      "slug": "tema"
+    },
+    {
+      "lang": "it",
+      "slug": "tema"
+    },
+    {
+      "lang": "pl",
+      "slug": "zagadnienie"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "tema"
+    },
+    {
+      "lang": "ro",
+      "slug": "teme"
+    },
+    {
+      "lang": "ru",
+      "slug": "tema"
+    },
+    {
+      "lang": "sv",
+      "slug": "tema"
+    },
+    {
+      "lang": "de",
+      "slug": "Thema"
+    },
+    {
+      "lang": "nl",
+      "slug": "thema"
+    },
+    {
+      "lang": "da",
+      "slug": "tema"
+    }
+  ],
+  "topic": [
     {
       "lang": "en",
       "slug": "topic"
@@ -1104,7 +1290,7 @@
     },
     {
       "lang": "de",
-      "slug": "thema"
+      "slug": "Thema"
     },
     {
       "lang": "nl",
@@ -1115,7 +1301,7 @@
       "slug": "temaer"
     }
   ],
-  "usuario": [
+  "user": [
     {
       "lang": "en",
       "slug": "user"
@@ -1166,7 +1352,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Benutzer"
     },
     {
       "lang": "nl",
@@ -1177,7 +1363,7 @@
       "slug": "bruger"
     }
   ],
-  "guardado": [
+  "bookmarked": [
     {
       "lang": "en",
       "slug": "bookmarked"
@@ -1228,7 +1414,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Lesezeichen"
     },
     {
       "lang": "nl",
@@ -1239,7 +1425,7 @@
       "slug": "bogmærket"
     }
   ],
-  "contraseña": [
+  "password": [
     {
       "lang": "en",
       "slug": "password"
@@ -1290,7 +1476,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Passwort ändern"
     },
     {
       "lang": "nl",
@@ -1301,7 +1487,7 @@
       "slug": "password"
     }
   ],
-  "mi-contenido ": [
+  "my-content": [
     {
       "lang": "en",
       "slug": "my-content"
@@ -1352,7 +1538,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "Meine Inhalte"
     },
     {
       "lang": "nl",
@@ -1363,7 +1549,7 @@
       "slug": "mit-indhold"
     }
   ],
-  "borrar-cuenta": [
+  "delete-profile": [
     {
       "lang": "en",
       "slug": "delete-profile"
@@ -1414,7 +1600,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "profil-löschen"
     },
     {
       "lang": "nl",
@@ -1425,7 +1611,7 @@
       "slug": "slet-profil"
     }
   ],
-  "seguido": [
+  "followed": [
     {
       "lang": "en",
       "slug": "followed"
@@ -1476,7 +1662,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "gefolgt"
     },
     {
       "lang": "nl",
@@ -1487,7 +1673,7 @@
       "slug": "følger"
     }
   ],
-  "historial": [
+  "history": [
     {
       "lang": "en",
       "slug": "history"
@@ -1538,7 +1724,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "geschichte"
     },
     {
       "lang": "nl",
@@ -1549,7 +1735,7 @@
       "slug": "historik"
     }
   ],
-  "ver": [
+  "watch": [
     {
       "lang": "en",
       "slug": "watch"
@@ -1600,7 +1786,7 @@
     },
     {
       "lang": "de",
-      "slug": ""
+      "slug": "angucken"
     },
     {
       "lang": "nl",
