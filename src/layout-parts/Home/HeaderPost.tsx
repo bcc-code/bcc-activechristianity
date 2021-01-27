@@ -9,6 +9,7 @@ import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
 import { fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import shortid from 'shortid'
+import 'lazysizes';
 const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excerpt, authors, reading_time, id, slug, media }) => {
     /* const {  muted } = palette; */
 
@@ -32,10 +33,9 @@ const HeaderPost: React.FC<IPostItem> = ({ format, duration, image, title, excer
 
                 ) : (
                         <div className="m-0 relative w-full pb-square sm:pb-half">
-                            <LazysizesFeaturedImage
-                                key={shortid()}
+                            <img
+                                className={`lazyload absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image`}
                                 {...image}
-                                className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
                             />
                         </div>
                     )

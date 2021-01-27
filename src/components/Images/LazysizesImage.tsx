@@ -10,9 +10,10 @@ interface ILazysizes extends IImage {
 }
 const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
     const { src, srcset, dataUri, alt, className, style } = props
-    console.log(src)
+
     return (
         <img
+            alt={alt}
             className={`lazyload ${className}`}
             src={dataUri}
             data-sizes="auto"
