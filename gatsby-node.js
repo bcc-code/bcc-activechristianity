@@ -24,7 +24,8 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
           'process.env.LISTEN_SECTION':JSON.stringify(process.env.LISTEN_SECTION),
           'process.env.GLOSSARY_SECTION':JSON.stringify(process.env.GLOSSARY_SECTION),
           'process.env.SCRIPTURE_SECTION':JSON.stringify(process.env.SCRIPTURE_SECTION),
-          'process.env.GA_ID':JSON.stringify(process.env.GA_ID)
+          'process.env.GA_ID':JSON.stringify(process.env.GA_ID),
+          'process.env.CLICKY_ID':JSON.stringify(process.env.CLICKY_ID)
         })
       ],
       node: {
@@ -61,7 +62,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
 
     ]
 
-    if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
+  /*   if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
@@ -89,7 +90,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
         console.log("generating scriptures")
         generators.push(generateScriptures(actions, graphql)) 
       }
-    }
+    } */
 
 
     return Promise.all(generators)

@@ -1,5 +1,4 @@
 import * as React from "react"
-import { useSelector } from "react-redux";
 import { graphql } from "gatsby";
 
 import MetaTag from '@/components/Meta'
@@ -7,7 +6,6 @@ import { getRandomArray } from '@/helpers'
 import Image2To1 from '@/components/Images/Image2To1'
 import Image1To1 from '@/components/Images/Image1to1Rounded'
 // Type
-import { IRootState } from '@/state/types'
 import { IPostRes, ITopicPostItems, IPostItem, IImage } from '@/types'
 import formats from '@/strings/topic-filters.json'
 import Link from '@/components/CustomLink'
@@ -17,8 +15,6 @@ import { normalizePostRes } from '@/helpers'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 // Helpers
 import { HomeTop } from '@/layout-parts/Home/HomeBanners'
-
-
 import ac_strings from '@/strings/ac_strings.js'
 import bgImgBibleStudy from '@/images/demo-image/Take-up-your-cross.jpg'
 import onlineServer16to9 from '@/images/landingPage/online-church.jpg'

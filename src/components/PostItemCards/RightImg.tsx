@@ -82,7 +82,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
 
                         }} />
                     </Link>
-                    <div className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"> <AuthorLink authorGroups={authors} /></div>
+                    {/*    {authors && <div className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"> <AuthorLink authorGroups={authors} /></div>} */}
                 </div>
                 <div className="w-24 sm:w-64 md:w-64 flex justify-center">
                     <PostItemMediaImg
