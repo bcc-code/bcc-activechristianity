@@ -117,9 +117,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
 
       <div className="hidden sm:block">
-        <DesktopFeaturedPostLoader loading={typeof mixedFeaturedPosts[0] === "undefined"}>
-          <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
-        </DesktopFeaturedPostLoader>
+        <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
