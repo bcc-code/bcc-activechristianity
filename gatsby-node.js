@@ -25,7 +25,8 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
           'process.env.GLOSSARY_SECTION':JSON.stringify(process.env.GLOSSARY_SECTION),
           'process.env.SCRIPTURE_SECTION':JSON.stringify(process.env.SCRIPTURE_SECTION),
           'process.env.GA_ID':JSON.stringify(process.env.GA_ID),
-          'process.env.CLICKY_ID':JSON.stringify(process.env.CLICKY_ID)
+          'process.env.CLICKY_ID':JSON.stringify(process.env.CLICKY_ID),
+          'process.env.ADD_TRACKING_CODE':JSON.stringify(process.env.ADD_TRACKING_CODE)
         })
       ],
       node: {

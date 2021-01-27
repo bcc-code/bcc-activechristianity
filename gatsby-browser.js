@@ -35,15 +35,75 @@ const addScript = (url) => {
 
 
 const addScriptToHead=(url)=>{
-  (function(){
 
     var a = document.createElement('script');
     var m = document.getElementsByTagName('script')[0];
     a.async = 1;
     a.src = url
     m.parentNode.insertBefore(a, m);
+}
 
-  })();
+const addTrackingCode = ()=>{
+      (function(){
+        window['GoogleAnalyticsObject'] = 'ga';
+        if(!window['ga'] ){
+          window['ga'] = function(){
+            window['ga'].q = window['ga'].q || [];
+            window['ga'].q.push(arguments);
+          }
+              window['ga'].l = 1 * new Date();
+        }
+
+        var a = document.createElement('script');
+        var m = document.getElementsByTagName('script')[0];
+        a.async = 1;
+        a.src = '/scripts/analytics.js'
+        m.parentNode.insertBefore(a, m);
+
+      })();
+
+      window.ga('create', `${process.env.GA_ID}`, 'auto');
+
+        (function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = 1;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+      })(window, document, "script", "/scripts/fbevents.js")
+
+      if(window.fbq){
+        console.log('running pixel')
+        window.fbq('init', '386848018393019');
+      }
+
+    
+      window.clicky_site_ids = window.clicky_site_ids || [];
+      const clicky_id = parseInt(process.env.CLICKY_ID)
+
+      window.clicky_site_ids.push(clicky_id);
+
+      addScriptToHead('/scripts/clicky.js');
+      addScript('/scripts/adword-adgrant-conversion.js')
+      addScript('/scripts/adword-remarketing.js')
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag=gtag
+      gtag('js', new Date());
+      gtag('config', 'AW-853531513');
+      gtag('config', 'AW-929434073');
 }
 export const onClientEntry = () => {
 //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
@@ -82,67 +142,10 @@ export const onClientEntry = () => {
     }
     })();
 
+    if(process.env.ADD_TRACKING_CODE==="true"){
+        addTrackingCode()
+    }
     
-    (function(){
-      window['GoogleAnalyticsObject'] = 'ga';
-      if(!window['ga'] ){
-        window['ga'] = function(){
-          window['ga'].q = window['ga'].q || [];
-          window['ga'].q.push(arguments);
-        }
-            window['ga'].l = 1 * new Date();
-      }
-
-      var a = document.createElement('script');
-      var m = document.getElementsByTagName('script')[0];
-      a.async = 1;
-      a.src = '/scripts/analytics.js'
-      m.parentNode.insertBefore(a, m);
-  
-    })();
-
-    window.ga('create', `${process.env.GA_ID}`, 'auto');
-
-      (function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = 1;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-    })(window, document, "script", "/scripts/fbevents.js")
-  
-    if(window.fbq){
-      console.log('running pixel')
-      window.fbq('init', '386848018393019');
-    }
-
-   
-    window.clicky_site_ids = window.clicky_site_ids || [];
-    const clicky_id = parseInt(process.env.CLICKY_ID)
-
-    window.clicky_site_ids.push(clicky_id);
-
-    addScriptToHead('/scripts/clicky.js');
-    addScript('/scripts/adword-adgrant-conversion.js')
-    addScript('/scripts/adword-remarketing.js')
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    window.gtag=gtag
-    gtag('js', new Date());
-    gtag('config', 'AW-853531513');
-    gtag('config', 'AW-929434073');
 
   }
 

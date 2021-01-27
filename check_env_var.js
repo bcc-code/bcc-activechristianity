@@ -7,11 +7,13 @@ const core = [
     "ALGOLIA_APP_ID",
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",
-    "GA_ID",
-    "CLICKY_ID",
-    "LISTEN_SECTION"
+    "LISTEN_SECTION",
+    "ADD_TRACKING_CODE"
 ]
 
+if(process.env.ADD_TRACKING_CODE==="true"){
+    core.push("GA_ID","CLICKY_ID")
+}
 
 module.exports = function (){
     const missing = []
