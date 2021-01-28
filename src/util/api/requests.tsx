@@ -317,7 +317,7 @@ export const getScriptChapterPostsQuery = (bookId: string, ch: string) => `
 export const getPostsPerPageQuery = (id: string, page: number) => `{
   topic(id:${id}) {	
   
-    allPosts:somePosts(first:12,page:${page}){
+    somePosts(first:12,page:${page}){
       data{
         ${postQuery}
       }

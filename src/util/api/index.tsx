@@ -148,8 +148,8 @@ export default {
         const query = request.getPostsPerPageQuery(id, page)
         return sendQuery(query)
     },
-    getPostsPerPageQueryBySubtopicId: (id: string, subTopic: string, page: number) => {
-        const query = request.getPostsPerPageQuery(id, page)
+    getPostsPerPageQueryBySubtopicId: (id: string, subTopicId: string, page: number) => {
+        const query = request.getPostsPerPageBySubtopicId(id, subTopicId, page)
         return sendQuery(query)
     }
 }

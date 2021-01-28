@@ -85,9 +85,12 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
       topic(id: ${id1}) {
           id
           name
-          posts (hasTopics: { value: ${id2}, column: ID }){
-            ${languagePostQuery}
+          somePosts (hasTopics: { value: ${id2}, column: ID },first:12,page:1){
+            data {
+              ${postQuery}
+            }
           }
+            
         }
   }
 }`
@@ -186,7 +189,7 @@ module.exports.createSubTopicPages=({
           id:topic.id,
           subTopicId:subTopic.id,
           type,
-          posts: allPosts.slice(i,i+perPage),
+          posts: allPosts,
           paginate: {
             currentPage,
             totalPages,

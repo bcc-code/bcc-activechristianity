@@ -43,7 +43,7 @@ module.exports = async function generateTypes(data) {
                         console.log(subTopicPostRes.errors)
                         throw new Error(subTopicPostRes.errors)
                     }
-                    const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
+                    const allPosts = subTopicPostRes.data.ac.topic.somePosts.data
 
                     typeFormatEach.items.push({
                         key:find.keyname,
@@ -60,7 +60,8 @@ module.exports = async function generateTypes(data) {
                             name:type.name,
                             to:type.slug
                         }],
-                        createPage,allPosts,
+                        createPage,
+                        allPosts,
                         topic:type,
                         subTopic
                     }) 

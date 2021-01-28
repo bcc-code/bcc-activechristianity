@@ -31,8 +31,8 @@ const PostList: React.FC<IPostList> = (props) => {
                 api.getPostsPerPageQueryBySubtopicId(id, subTopicId, currentPage)
                     .then(res => {
                         if (res && res.topic && res.topic.allPosts && Array.isArray(res.topic.allPosts.data)) {
-                            console.log()
-                            const receivedPosts = res.topic.allPosts.data.map(item => normalizePostRes(item))
+
+                            const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
                             setLoading(false)
                             setPosts(receivedPosts)
                         }
@@ -42,7 +42,7 @@ const PostList: React.FC<IPostList> = (props) => {
                 api.getPostsPerPageQueryByTopicId(id, currentPage)
                     .then(res => {
                         if (res && res.topic && res.topic.allPosts && res.topic.allPosts.data) {
-                            const receivedPosts = res.topic.allPosts.data.map(item => normalizePostRes(item))
+                            const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
                             setLoading(false)
                             setPosts(receivedPosts)
                         }
