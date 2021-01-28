@@ -313,3 +313,40 @@ export const getScriptChapterPostsQuery = (bookId: string, ch: string) => `
   }
 
 `
+
+export const getPostsPerPageQuery = (id: string, page: number) => `{
+  topic(id:${id}) {	
+  
+    allPosts:somePosts(first:12,page:${page}){
+      data{
+        ${postQuery}
+      }
+    }
+  }
+}`
+
+export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `
+topic(id:${id}) {
+  id
+  name
+  somePosts (hasTopics: { value: ${subtopicId}, column: ID },first:12,page:${page}){
+    data {
+      ${postQuery}
+    }
+  }
+}
+
+`
+
+
+/* getSubTopicPosts=(id1,id2) =>`{
+  ac {
+      topic(id: ${id1}) {
+          id
+          name
+          posts (hasTopics: { value: ${id2}, column: ID }){
+            ${languagePostQuery}
+          }
+        }
+  }
+}` */

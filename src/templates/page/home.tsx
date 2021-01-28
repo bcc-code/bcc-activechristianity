@@ -1,7 +1,6 @@
 import React from "react";
 import LazyLoad from '@/components/LazyLoad';
 import loadable from '@loadable/component'
-import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 import FeaturedBanner from '@/layout-parts/HorizontalScroll/FeaturedBanner'
 import { TopImgRowHorizontalScroll } from '@/layout-parts/HorizontalScroll'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'

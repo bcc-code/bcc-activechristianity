@@ -143,5 +143,13 @@ export default {
         const query = request.getOnePageByIdQuery(id)
 
         return sendQuery(query)
+    },
+    getPostsPerPageQueryByTopicId: (id: string, page: number) => {
+        const query = request.getPostsPerPageQuery(id, page)
+        return sendQuery(query)
+    },
+    getPostsPerPageQueryBySubtopicId: (id: string, subTopic: string, page: number) => {
+        const query = request.getPostsPerPageQuery(id, page)
+        return sendQuery(query)
     }
 }

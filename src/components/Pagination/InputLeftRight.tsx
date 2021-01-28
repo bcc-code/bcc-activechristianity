@@ -11,6 +11,10 @@ const PostList: React.FC<IProps> = (props) => {
 
     const { currentPage, totalPages, onChange, } = props
     const [pageInput, setPageInput] = React.useState(currentPage)
+
+    React.useEffect(() => {
+        setPageInput(currentPage)
+    }, [currentPage])
     const handleInputChange = (e: any) => {
         e.preventDefault();
         setPageInput(e.target.value)

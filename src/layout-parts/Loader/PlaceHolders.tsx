@@ -83,12 +83,29 @@ export const TopImgPlaceholder = () => {
     )
 }
 
+export const RightImgListPlaceHolder: React.FC<{ count: number }> = ({ count }) => {
+    const LEN = count;
+    const arr = [];
+    for (let i = 0; i < LEN; i++) {
+        arr.push(0);
+    }
+    return (
+        <div>
+            {arr.map((item, i) => {
+                return (
+                    <RightImgPlaceholder key={i} />
+                )
+            })}
+        </div>
+    )
+}
+
 export const RightImgPlaceholder = () => {
     return (
-        <div className="flex">
+        <div className="flex items-center">
 
             <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
-            <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-32 md:min-h-32 mx-4" />
+            <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-32 md:min-h-32 mx-4 max-w-48" />
         </div>
     )
 }

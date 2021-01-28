@@ -2,7 +2,7 @@ const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
 const {formatsAll,typesAll} = require('../../src/strings/topic-ids')
-const listTemplate = 'src/templates/archive/post-list.tsx'
+const listTemplate = 'src/templates/archive/post-list-query.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
 const perPage= 12
 const languagePostQuery = postQuery
@@ -131,7 +131,6 @@ module.exports.createArchivePages =async function ({
 
         })
             console.log(pagePath)
-            
             createPage({
               path:pagePath,
               component,
@@ -183,23 +182,27 @@ module.exports.createSubTopicPages=({
       for (let i = 0; i <=1; i += perPage, currentPage++) {
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
         console.log(pagePath)
-  
+        const context = {
+          id:topic.id,
+          subTopicId:subTopic.id,
+          type,
+          posts: allPosts.slice(i,i+perPage),
+          paginate: {
+            currentPage,
+            totalPages,
+            baseUrl
+          },
+          title:subTopic.name,
+          breadcrumb:pageBreadcrumb,
+          isTopic
+/*            ...node */
+        }
+
+        console.log(context)
         createPage({
           path:pagePath,
           component,
-          context: {
-            type,
-            posts: allPosts.slice(i,i+perPage),
-            paginate: {
-              currentPage,
-              totalPages,
-              baseUrl
-            },
-            title:subTopic.name,
-            breadcrumb:pageBreadcrumb,
-            isTopic
-  /*            ...node */
-          },
+          context,
         })
       }
     }

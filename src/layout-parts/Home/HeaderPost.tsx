@@ -8,7 +8,7 @@ import Bookmark from '@/components/PostElements/ToggleBookmark'
 import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
 import { fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
-import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
+import { DesktopFeaturedPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
 const HeaderPost: React.FC<IPostItem> = (props) => {
     /* const {  muted } = palette; */
     const [post, setPost] = React.useState<null | IPostItem>(null)
@@ -85,10 +85,7 @@ const HeaderPost: React.FC<IPostItem> = (props) => {
 
         )
     } else {
-        return <DesktopFeaturedPostLoader
-
-            loading={false}
-        />
+        return <DesktopFeaturedPlaceholder />
     }
 }
 

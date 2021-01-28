@@ -33,8 +33,9 @@ interface IActiveBook extends IBibleBook {
 
 const BibleNav: React.FC<IBibleNavProps> = (props) => {
     const { pageContext: { title }, path } = props
-    const location = useLocation();
+
     const [posts, setPosts] = React.useState<string[]>([])
+    const location = useLocation();
     const parsed = queryString.parse(location.search);
     const { bookId, ch, bookName } = parsed
     React.useEffect(() => {

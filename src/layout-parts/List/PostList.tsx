@@ -5,6 +5,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import { RightImgListPlaceHolder } from '@/layout-parts/Loader/PlaceHolders'
 import { trimSlug } from '@/helpers'
 export interface IPostList {
     audio?: boolean
@@ -57,7 +58,7 @@ const PostList: React.FC<IPostList> = (props) => {
                 slugs={posts}
                 layout="list"
                 render={({ posts: postList }) => {
-                    return (
+                    return PostList.length > 0 ? (
                         <div>
                             {postList.map((p, k) => {
                                 return (
@@ -66,7 +67,9 @@ const PostList: React.FC<IPostList> = (props) => {
                                 )
                             })}
                         </div>
-                    )
+                    ) : (
+                            <RightImgListPlaceHolder count={12} />
+                        )
                 }}
             />
 

@@ -4,13 +4,16 @@ const PodcastHeader = loadable(() => import('@/layout-parts/PodcastHeader'))
 import { IPaginate, INavItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
-import PostList from '@/layout-parts/List/PostList'
+import { useLocation } from '@reach/router';
+import PostListSlugs from '@/layout-parts/List/PostList'
+import PostListQuery from '@/layout-parts/List/PostListQuery'
 import { formatsAll } from '@/strings/topic-ids'
 import ac_strings from '@/strings/ac_strings.js'
+import queryString from 'query-string';
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
-    const { title, breadcrumb, description, type, isTopic, id } = pageContext
+    const { title, breadcrumb, description, type, isTopic, id, paginate } = pageContext
 
     let pageTitle = title
 
@@ -20,6 +23,11 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
 
+    const location = useLocation();
+
+    const parsed = queryString.parse(location.search);
+    const pageNrQuery = parsed && parsed.pageNr && typeof parsed.pageNr === "string" && parseInt(parsed.pageNr)
+    const currentPage = typeof pageNrQuery === "number" && pageNrQuery <= paginate.totalPages && pageNrQuery > 1 ? pageNrQuery : 1
     console.log(pageContext)
     return (
         <div className="mx-auto max-w-sm sm:p-0">
@@ -41,10 +49,12 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 {description && (
                     <div className="w-full py-4" dangerouslySetInnerHTML={{ __html: description }} />
                 )}
-                <PostList
-                    /*            audio={type === "listen"} */
+                <PostListQuery
+                    firstPostsSlugs={pageContext.posts}
+                    totalPages={paginate.totalPages}
+                    path={path}
+                    currentPage={currentPage}
                     {...pageContext}
-                    isTopic={isTopic == true}
                 />
             </div>
         </div>
@@ -58,7 +68,8 @@ export default TaxonomyPage
 interface ITaxonomyPageProps {
 
     pageContext: {
-        id?: string
+        id: string
+        subTopicId?: string
         type: string
         slug: string
         title: string

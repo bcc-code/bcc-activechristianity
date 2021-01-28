@@ -1,6 +1,5 @@
 const _ = require('lodash')
 const path = require('path')
-const listTemplate = 'src/templates/archive/post-list.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
 
 const allBooksQuery =  `

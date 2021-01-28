@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const path = require('path')
-const listTemplate = 'src/templates/archive/post-list-local-data.tsx'
+const listTemplate = 'src/templates/archive/post-list.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
 /* SETUP */
 const template = 'src/templates/single-resource/post.tsx'
