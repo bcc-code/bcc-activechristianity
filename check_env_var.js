@@ -8,10 +8,9 @@ const core = [
     "ALGOLIA_SEARCH_KEY",
     "ALGOLIA_ADMIN_KEY",
     "LISTEN_SECTION",
-    "ADD_TRACKING_CODE"
 ]
 
-if(process.env.ADD_TRACKING_CODE==="true"){
+if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
     core.push("GA_ID","CLICKY_ID")
 }
 

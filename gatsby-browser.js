@@ -142,7 +142,7 @@ export const onClientEntry = () => {
     }
     })();
 
-    if(process.env.ADD_TRACKING_CODE==="true"){
+    if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
         addTrackingCode()
     }
     
