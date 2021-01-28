@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchLocalPostsFromSlugs, fetchPostsFromOneTopicSlug } from '@/helpers/fetchLocalData'
+import { fetchLocalPostsFromSlugs, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import api from '@/util/api'
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray, filterTopics } from '@/helpers'
@@ -36,7 +36,7 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
             Promise.all(randomTopics.map(t => {
 
                 const url = `${ac_strings.slug_topic}/${t}`
-                return fetchPostsFromOneTopicSlug(url)
+                return fetchPostslistFromArchivePage(url)
             })).then(async (postArrays) => {
 
                 const postsFromTopics: IPostItem[] = []

@@ -5,6 +5,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import { RightImgListPlaceHolder } from '@/layout-parts/Loader/PlaceHolders'
 import { trimSlug } from '@/helpers'
 export interface IPostList {
     audio?: boolean
@@ -16,7 +17,7 @@ export interface IPostList {
 const PostList: React.FC<IPostList> = (props) => {
 
     const { paginate, posts, isTopic } = props
-    const [pageInput, setPageInput] = React.useState(paginate ? paginate.currentPage : 1)
+
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
             window.scroll({
@@ -54,11 +55,10 @@ const PostList: React.FC<IPostList> = (props) => {
                 </div>
             )}
             <FetchPostsFromSlugs
-
                 slugs={posts}
                 layout="list"
                 render={({ posts: postList }) => {
-                    return (
+                    return PostList.length > 0 ? (
                         <div>
                             {postList.map((p, k) => {
                                 return (
@@ -67,7 +67,9 @@ const PostList: React.FC<IPostList> = (props) => {
                                 )
                             })}
                         </div>
-                    )
+                    ) : (
+                            <RightImgListPlaceHolder count={12} />
+                        )
                 }}
             />
 

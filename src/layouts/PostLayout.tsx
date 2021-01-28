@@ -31,21 +31,14 @@ import acApi from '@/util/api'
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
 
 
-import { IPostItem, IPostRes, ITranslations } from '@/types'
+import { IPostProps } from '@/types'
 import { IRootState } from '@/state/types'
 
 // mock data
 
 import ac_strings from '@/strings/ac_strings.js'
 
-interface IPostProps extends IPostItem {
-    content: string
-    langs: ITranslations[]
-    recommendPosts: string[]
-    readMorePosts: string[]
-    credits?: string
-    seoTitle: string
-}
+
 type IMediaType = "audio" | "video"
 export const PostLayout: React.FC<IPostProps> = (post) => {
 
@@ -146,7 +139,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
-    console.log(media.video)
+
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             <ShareBookmarkTopShortCuts

@@ -249,6 +249,45 @@ export const profileQuery = `
   }
 `
 
+export const getOnePostByIdQuery = (id: string) => {
+  return `
+    query {
+      post(id: ${id}) {
+          ${postQuery}
+          content
+          langs {
+              lang
+              slug
+          }
+          readMorePosts:posts {
+              slug
+          }
+          seo {
+              title
+              desc
+          }
+          meta {
+              credits
+              no_dict
+              url
+          }
+        }
+
+  }
+  `
+}
+
+export const getOnePageByIdQuery = (id: string) => {
+  return `
+    query {
+      page(id:${id}){
+        title
+        slug
+        flexibleContent
+      }
+    }
+  `
+}
 export const getPostsByIds = (ids: IGetPostsAndTopics) => {
   const { postsIds, topicsIds } = ids
   return `
@@ -274,3 +313,40 @@ export const getScriptChapterPostsQuery = (bookId: string, ch: string) => `
   }
 
 `
+
+export const getPostsPerPageQuery = (id: string, page: number) => `{
+  topic(id:${id}) {	
+  
+    somePosts(first:12,page:${page}){
+      data{
+        ${postQuery}
+      }
+    }
+  }
+}`
+
+export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `
+topic(id:${id}) {
+  id
+  name
+  somePosts (hasTopics: { value: ${subtopicId}, column: ID },first:12,page:${page}){
+    data {
+      ${postQuery}
+    }
+  }
+}
+
+`
+
+
+/* getSubTopicPosts=(id1,id2) =>`{
+  ac {
+      topic(id: ${id1}) {
+          id
+          name
+          posts (hasTopics: { value: ${id2}, column: ID }){
+            ${languagePostQuery}
+          }
+        }
+  }
+}` */

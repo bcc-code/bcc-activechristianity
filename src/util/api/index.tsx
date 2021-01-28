@@ -134,5 +134,22 @@ export default {
         return sendQuery(query).then(res => {
             return res
         })
+    },
+    getOnePostById: (id: string) => {
+        const query = request.getOnePostByIdQuery(id)
+        return sendQuery(query)
+    },
+    getOnePagetById: (id: string) => {
+        const query = request.getOnePageByIdQuery(id)
+
+        return sendQuery(query)
+    },
+    getPostsPerPageQueryByTopicId: (id: string, page: number) => {
+        const query = request.getPostsPerPageQuery(id, page)
+        return sendQuery(query)
+    },
+    getPostsPerPageQueryBySubtopicId: (id: string, subTopicId: string, page: number) => {
+        const query = request.getPostsPerPageBySubtopicId(id, subTopicId, page)
+        return sendQuery(query)
     }
 }

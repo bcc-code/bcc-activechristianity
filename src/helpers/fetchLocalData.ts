@@ -24,17 +24,31 @@ export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
 }
 
 export const fetchPostslistFromArchivePage = (slug: string) => {
-    let processSlug = trimSlug(slug)
-    return fetch(`/page-data/${processSlug}/page-data.json`)
+    const foundPosts: IPostItem[] = []
+    return fetch(`/page-data/${slug}/page-data.json`)
         .then(res => res.json())
-        .then(res => {
-
+        .then(async (res) => {
             if (res.result && res.result && res.result.pageContext.posts) {
-                const posts: string[] = res.result.pageContext.posts
-                return fetchLocalPostsFromSlugs(posts)
-
+                const posts: IPostItem[] = []
+                const postsRes: IPostRes[] | string[] = res.result.pageContext.posts
+                for (let i = 0; i < postsRes.length; i++) {
+                    const onePostRes = postsRes[i]
+                    if (typeof onePostRes === "string") {
+                        const fullPost = await fetchOneLocalPostFromSlug(onePostRes)
+                        if (fullPost) {
+                            posts.push(fullPost)
+                        }
+                    } else if (typeof onePostRes === "object") {
+                        posts.push(normalizePostRes(onePostRes))
+                    }
+                }
+                /* const posts: IPostItem[]|string[] = res.result.pageContext.posts.map( p=>) */
+                foundPosts.push(...posts)
             }
-            return undefined
+            return foundPosts
+        }).catch(error => {
+
+            console.log(error)
         })
 }
 
@@ -145,39 +159,11 @@ export const fetchOneLocalPostFromSlug = (slug: string) => {
         })
 }
 
-export const fetchPostsFromOneTopicSlug = (slug: string) => {
-    const foundPosts: IPostItem[] = []
-    return fetch(`/page-data/${slug}/page-data.json`)
-        .then(res => res.json())
-        .then(async (res) => {
-            if (res.result && res.result && res.result.pageContext.posts) {
-                const posts: IPostItem[] = []
-                const postsRes: IPostRes[] | string[] = res.result.pageContext.posts
-                for (let i = 0; i < postsRes.length; i++) {
-                    const onePostRes = postsRes[i]
-                    if (typeof onePostRes === "string") {
-                        const fullPost = await fetchOneLocalPostFromSlug(onePostRes)
-                        if (fullPost) {
-                            posts.push(fullPost)
-                        }
-                    } else if (typeof onePostRes === "object") {
-                        posts.push(normalizePostRes(onePostRes))
-                    }
-                }
-                /* const posts: IPostItem[]|string[] = res.result.pageContext.posts.map( p=>) */
-                foundPosts.push(...posts)
-            }
-            return foundPosts
-        }).catch(error => {
-
-            console.log(error)
-        })
-}
-
 export const fetchPostsFromTopics = (topics: ITopic[]) => {
 
     return Promise.all(topics
         .map(t => {
+
             return fetchPostslistFromArchivePage(t.slug)
                 .then(posts => {
 

@@ -41,11 +41,7 @@ const ACMediaPlayer: React.FC = () => {
 }
 
 
-export default React.memo(ACMediaPlayer, (prevProps, nextProps) => {
-    console.log(prevProps)
-    console.log(nextProps)
-    return false
-})
+export default React.memo(ACMediaPlayer)
 
 
 

@@ -35,7 +35,6 @@ module.exports = function generatePosts(actions, graphql) {
     // Iterate over the array of posts
     _.each(posts, (post) => {
       if(post.slug!=="dummy-content"){
-        console.log(post.slug)
         createPage({
           path: `${post.slug}`,
           component: path.resolve(template),

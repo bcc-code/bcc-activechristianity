@@ -1,21 +1,21 @@
 import React from 'react'
+import { navigate } from "gatsby"
 import loadable from '@loadable/component'
 const PodcastHeader = loadable(() => import('@/layout-parts/PodcastHeader'))
-import { IPaginate, INavItem } from "@/types"
+import { IPaginate, INavItem, IPostItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import PostList from '@/layout-parts/List/PostList'
 import { formatsAll } from '@/strings/topic-ids'
-import ac_strings from '@/strings/ac_strings.js'
+import RightImgWDes from '@/components/PostItemCards/RightImg'
+import Pagination from '@/components/Pagination'
+import InputLeftRight from '@/components/Pagination/InputLeftRight'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import { trimSlug } from '@/helpers'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
-    const { title, breadcrumb, description, type, isTopic, id } = pageContext
-    const pageTypeNames = {
-        'read': ac_strings.read,
-        'listen': ac_strings.listen,
-        'watch': ac_strings.watch
-    }
+    const { title, breadcrumb, description, type, isTopic, id, paginate, posts } = pageContext
 
     let pageTitle = title
 
@@ -24,6 +24,34 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     }
 
     const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
+
+    const scrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
+
+    const handleChange = (nr: number) => {
+        let activePage = nr
+        if (typeof nr === "string") {
+            activePage = parseInt(nr)
+        }
+        if (paginate && nr < paginate.totalPages + 1 && nr > -1) {
+            const firstPagePath = `/${paginate.baseUrl}` + `${isTopic ? '/1' : ''}`
+            const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
+            scrollToTop()
+            navigate(fullPath)
+        }
+    }
+    const [fetchedPosts, setFetchedPosts] = React.useState<IPostItem[] | null>(null)
+
+    React.useEffect(() => {
+
+    }, [])
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag
@@ -44,11 +72,47 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 {description && (
                     <div className="w-full py-4" dangerouslySetInnerHTML={{ __html: description }} />
                 )}
-                <PostList
+                {!fetchedPosts ? <PostList
                     /*            audio={type === "listen"} */
-                    {...pageContext}
+                    /* {...pageContext} */
+                    posts={posts}
+                    paginate={paginate}
                     isTopic={isTopic == true}
-                />
+                /> : (
+                        <div className="max-w-sm" >
+                            {paginate && (
+                                <div className="hidden sm:flex justify-end">
+                                    <div>
+                                        <InputLeftRight
+                                            currentPage={paginate.currentPage}
+                                            totalPages={paginate.totalPages}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+                            <div>
+                                {fetchedPosts.map((p, k) => {
+                                    return (
+                                        <RightImgWDes key={k} {...p} />
+
+                                    )
+                                })}
+                            </div>
+
+
+                            {paginate && (
+                                <div className="flex justify-item py-4">
+                                    <Pagination
+                                        currentPage={paginate.currentPage}
+                                        totalPages={paginate.totalPages}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            )}
+
+                        </div>
+                    )}
             </div>
         </div>
     )
@@ -61,7 +125,7 @@ export default TaxonomyPage
 interface ITaxonomyPageProps {
 
     pageContext: {
-        id: string
+        id?: string
         type: string
         slug: string
         title: string

@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { IImage } from '@/types'
-
+import shortid from 'shortid'
 import 'lazysizes';
 
 interface ILazysizes extends IImage {
@@ -10,8 +10,10 @@ interface ILazysizes extends IImage {
 }
 const LazysizesFeaturedImage: React.FC<ILazysizes> = (props) => {
     const { src, srcset, dataUri, alt, className, style } = props
+
     return (
         <img
+            alt={alt}
             className={`lazyload ${className}`}
             src={dataUri}
             data-sizes="auto"

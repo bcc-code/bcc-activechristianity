@@ -134,7 +134,10 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
-        for (let i = 1; i <=pageCount ; i++){            
+
+        const useCount = process.env.SUPER_SLIM_DEV_MODE==="true"?3:pageCount
+        for (let i = 1; i <= useCount; i++){       
+            console.log(i)     
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
                 if (Array.isArray(response) && response[0]){
                     console.log(response[0].errors)

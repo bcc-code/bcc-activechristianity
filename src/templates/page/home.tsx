@@ -1,7 +1,6 @@
 import React from "react";
 import LazyLoad from '@/components/LazyLoad';
 import loadable from '@loadable/component'
-import { DesktopFeaturedPostLoader } from '@/layout-parts/Loader/PlaceHolders'
 import FeaturedBanner from '@/layout-parts/HorizontalScroll/FeaturedBanner'
 import { TopImgRowHorizontalScroll } from '@/layout-parts/HorizontalScroll'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
@@ -69,7 +68,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-  console.log(mixedFeaturedPosts[0])
+
   return (
 
     <div className="standard-max-w">
@@ -117,9 +116,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
 
       <div className="hidden sm:block">
-        <DesktopFeaturedPostLoader loading={typeof mixedFeaturedPosts[0] === "undefined"}>
-          <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
-        </DesktopFeaturedPostLoader>
+        <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />

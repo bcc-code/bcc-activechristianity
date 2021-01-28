@@ -29,7 +29,7 @@ export const PostLabel: React.FC<{ text: string | JSX.Element }> = ({ text }) =>
 )
 
 export const AuthorLink: React.FC<{ authorGroups?: IPostAuthors[] }> = ({ authorGroups }) => {
-    return <span>{authorGroups && authorGroups[0] ? authorGroups[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={`${ac_strings.slug_ac_author}/${item.to}`}>{item.name}</Link>) : ''}</span>
+    return <span>{authorGroups && authorGroups[0] && authorGroups[0].authors ? authorGroups[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={`${ac_strings.slug_ac_author}/${item.to}`}>{item.name}</Link>) : ''}</span>
 }
 export const ReadingTimingAuthor: React.FC<IProps> = ({ duration, authors, className }) => {
 

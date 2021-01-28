@@ -470,6 +470,8 @@ export interface ICta {
     text: string;
 }
 export interface IBannerBasic {
+    label?: string
+    bgImg?: string
     title: string;
     body: string;
     cta: ICta;
@@ -482,4 +484,13 @@ export interface IRecommendationPage {
     featuredPosts: IPostRes[]
     latestPosts: IPostRes[]
 
+}
+
+export interface IPostProps extends IPostItem {
+    content: string
+    langs: ITranslations[]
+    recommendPosts: string[]
+    readMorePosts: string[]
+    credits?: string
+    seoTitle: string
 }

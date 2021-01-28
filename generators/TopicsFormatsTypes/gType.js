@@ -43,15 +43,15 @@ module.exports = async function generateTypes(data) {
                         console.log(subTopicPostRes.errors)
                         throw new Error(subTopicPostRes.errors)
                     }
-                    const allPosts = subTopicPostRes.data.ac.topic.posts.map(item=>item.slug)
-
+                    const allPosts = subTopicPostRes.data.ac.topic.somePosts.data
+                    const totalCount = subTopicPostRes.data.ac.topic.somePosts.paginatorInfo.total
                     typeFormatEach.items.push({
                         key:find.keyname,
                         name:subTopic.name,
                         to:`${type.slug}/`,
                         typeSlug:`${type.slug}`,
                         formatSlug:`${subTopic.slug}`,
-                        count:allPosts.length
+                        count:totalCount
                     })
                     
                     createSubTopicPages({
@@ -60,9 +60,11 @@ module.exports = async function generateTypes(data) {
                             name:type.name,
                             to:type.slug
                         }],
-                        createPage,allPosts,
+                        createPage,
+                        allPosts,
                         topic:type,
-                        subTopic
+                        subTopic,
+                        totalCount
                     }) 
             })
         }

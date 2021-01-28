@@ -80,6 +80,7 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
         fetchPostsFromTopics(topics)
             .then(res => {
                 if (res) {
+
                     setLoading(false)
                     setTopicPostItems(res)
                 } else {

@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-const Dummy: React.FC<IDummy> = (props) => {
+const Series: React.FC<IDummy> = (props) => {
+    console.log(props)
     return (
         <div>
             {props.pageContext.title}
@@ -8,7 +9,7 @@ const Dummy: React.FC<IDummy> = (props) => {
     )
 }
 
-export default Dummy
+export default Series
 
 interface IDummy {
     path: string
