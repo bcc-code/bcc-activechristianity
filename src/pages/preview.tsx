@@ -19,7 +19,6 @@ const Preview = () => {
     const [post, setPost] = React.useState<IPostProps | null>(null)
     const [page, setPage] = React.useState<ICustomizedPage | null>(null)
     React.useEffect(() => {
-        console.log(type, id)
         if (type === "post" && typeof id === "string") {
             console.log('getting post')
             setPage(null)
@@ -41,36 +40,23 @@ const Preview = () => {
 
                         setPost(postProps)
                     }
-                    console.log(res)
                 })
         }
         if (type === "page" && typeof id === "string") {
             setPost(null)
             api.getOnePagetById(id)
                 .then(res => {
-                    console.log(res)
                     if (res && res.page) {
                         const { flexibleContent, title, slug } = res.page
                         const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-                        console.log(componentConfig)
                         setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
                     }
 
                 })
         }
     }, [])
-
-    const getPost = () => {
-
-    }
     return (
         <main className="">
-            {/*             <h1 className="text-gray-200 text-center" style={{ fontSize: "120px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
-                This is a preview page
-                </h1>
-            <p>
-                Enter post id
-                </p> */}
             {
                 post && (
                     <div>
@@ -92,6 +78,19 @@ const Preview = () => {
 
                 </div>
             )}
+            {!post && !page && (
+                <div className="max-w-tablet mx-auto">
+                    <h1 className="text-gray-200 text-center" style={{ fontSize: "120px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
+                        This is a preview page
+                    </h1>
+                    <p>
+                        Please add the post type and id in the url, for example:
+                        {`${process.env.SITE_URL}/preivew?type=post&id=12345`}
+                    </p>
+                    <p>"Type" can be either "post" or "page". Make sure the post id is correct, and the post is published</p>
+                </div>
+            )
+            }
         </main>
     )
 }
