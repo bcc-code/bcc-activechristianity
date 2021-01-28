@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { ITopicNavItem, IPostItem } from '@/types'
-import { fetchPostsFromOneTopicSlug, fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { fetchPostslistFromArchivePage, fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import Row3ColAndXScroll from '@/layout-parts/List/Combo/Row3Col-HorizontalScroll'
 
 import ac_strings from '@/strings/ac_strings.js'
@@ -46,7 +46,7 @@ const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[
 
                 } else {
                     const allTopics = topics ? topics : []
-                    Promise.all(allTopics.map(item => fetchPostsFromOneTopicSlug(item.to)))
+                    Promise.all(allTopics.map(item => fetchPostslistFromArchivePage(item.to)))
                         .then(topicsPosts => {
                             const topicPosts: IPostItem[] = []
                             topicsPosts.forEach(postRes => {

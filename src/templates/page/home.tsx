@@ -68,7 +68,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-  console.log(mixedFeaturedPosts[0])
+
   return (
 
     <div className="standard-max-w">

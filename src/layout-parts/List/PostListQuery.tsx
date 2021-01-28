@@ -5,7 +5,6 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { RightImgListPlaceHolder } from '@/layout-parts/Loader/PlaceHolders'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { normalizePostRes } from '@/helpers'
 import api from '@/util/api'
 export interface IPostList {
@@ -15,12 +14,12 @@ export interface IPostList {
     subTopicId?: string
     totalPages: number
     path: string
-    firstPostsSlugs: string[]
+    firstPosts: IPostItem[]
 
 }
 const PostList: React.FC<IPostList> = (props) => {
 
-    const { currentPage, id, subTopicId, path, totalPages, firstPostsSlugs } = props
+    const { currentPage, id, subTopicId, path, totalPages, firstPosts } = props
 
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(false)
@@ -30,9 +29,9 @@ const PostList: React.FC<IPostList> = (props) => {
             if (id && subTopicId) {
                 api.getPostsPerPageQueryBySubtopicId(id, subTopicId, currentPage)
                     .then(res => {
-                        if (res && res.topic && res.topic.allPosts && Array.isArray(res.topic.allPosts.data)) {
-
+                        if (res && res.topic && res.topic.somePosts && Array.isArray(res.topic.somePosts.data)) {
                             const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
+
                             setLoading(false)
                             setPosts(receivedPosts)
                         }
@@ -41,25 +40,24 @@ const PostList: React.FC<IPostList> = (props) => {
             } else {
                 api.getPostsPerPageQueryByTopicId(id, currentPage)
                     .then(res => {
-                        if (res && res.topic && res.topic.allPosts && res.topic.allPosts.data) {
+                        if (res && res.topic && res.topic.somePosts && Array.isArray(res.topic.somePosts.data)) {
                             const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
+
                             setLoading(false)
                             setPosts(receivedPosts)
                         }
                     })
             }
         } else {
-            fetchLocalPostsFromSlugs(firstPostsSlugs).then(res => {
-                if (res) {
-                    setPosts(res)
-                    setLoading(false)
-                }
-            })
+            setPosts(firstPosts)
+            setLoading(false)
         }
 
 
 
     }, [id, currentPage, subTopicId])
+
+
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
             window.scroll({
@@ -79,12 +77,11 @@ const PostList: React.FC<IPostList> = (props) => {
         if (activePage < totalPages + 1 && activePage > -1) {
 
             const fullPath = activePage > 1 ? `${path}?pageNr=${activePage}` : path
-            console.log(fullPath)
+
             scrollToTop()
             navigate(fullPath)
         }
     }
-
 
     return (
         <div className="max-w-sm" >

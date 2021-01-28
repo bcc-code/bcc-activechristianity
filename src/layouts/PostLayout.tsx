@@ -139,7 +139,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
-    console.log(media.video)
+
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             <ShareBookmarkTopShortCuts

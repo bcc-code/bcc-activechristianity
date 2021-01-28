@@ -58,7 +58,7 @@ const ContactForm = () => {
                 result[field] = false
             }
         }
-        console.log(result)
+
         setCanSet(pass)
         setErrors(result)
         return pass;

@@ -13,7 +13,7 @@ module.exports = async function generateTopic(data) {
 
     // create recommend
     const pagePath = `${ac_strings.slug_topic}/${topic.slug}`
-    console.log(topic.slug)
+
     if(hasRecommendPage){
       createPage({
         path:pagePath,

@@ -131,7 +131,6 @@ module.exports = function generatePages(actions, graphql) {
                                 
                                 await graphql(getTopicQuery)
                                 .then(async res=>{
-                                    console.log(res)
                                     if(res.data && res.data.ac &&res.data.ac.topic && res.data.ac.topic.somePosts.data){
                                        const {somePosts,...topic}=res.data.ac.topic
                                        const allPosts=somePosts.data

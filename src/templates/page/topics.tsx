@@ -5,11 +5,10 @@ import ResourceLayout from "@/layouts/ResourceLayout"
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { ITopicNavItem, IPage } from "@/types"
 import Link from '@/components/CustomLink'
-import { ITopicRes } from '@/types'
-import { sortTopicsByGroups } from '@/helpers'
+
 import shortid from 'shortid'
 const AllTopic: React.FC<IAllTopic> = (props) => {
-    console.log(props)
+
     const { title, themes, groupedTopics } = props.pageContext
     const path = props.path
 

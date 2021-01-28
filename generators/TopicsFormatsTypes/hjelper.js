@@ -62,7 +62,7 @@ const getPostsPerPageQuery = (id,page)=>`{
   
       allPosts:somePosts(first:12,page:${page}){
         data{
-          slug
+           ${postQuery}
         }
       }
     }
@@ -86,12 +86,16 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
           id
           name
           somePosts (hasTopics: { value: ${id2}, column: ID },first:12,page:1){
+            paginatorInfo {
+              count
+              total
+            }
             data {
               ${postQuery}
             }
           }
             
-        }
+      }
   }
 }`
 
@@ -116,24 +120,24 @@ module.exports.createArchivePages =async function ({
         if(i===1){
             pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
         }
-        
         const component = (`${node.id}`===typesAll.watch || `${node.id}`===formatsAll.animation)?path.resolve(videoTemplate): path.resolve(listTemplate)
         const paginate = {
           currentPage,
-          totalPages:totalPages,
+          totalPages,
           baseUrl,
           hasRecommendPage
         }
+
         const query=getPostsPerPageQuery(node.id,i)
         const perPagePosts = await graphql(query).then(res=>{
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
-            return res.data.ac.topic.allPosts.data.map(p=>p.slug)
+            return res.data.ac.topic.allPosts.data
           } else {
             throw new Error('not able to get pages')
           }
 
         })
-            console.log(pagePath)
+        console.log(pagePath)
             createPage({
               path:pagePath,
               component,
@@ -158,33 +162,30 @@ module.exports.createSubTopicPages=({
   topic,
   subTopic,
   isTopic,
-  breadcrumb
+  breadcrumb,
+  totalCount
 })=>{
 
-    const totalCount = allPosts.length
+
 
     if (!totalCount) {
 
       console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
     } else {
-      const totalPages = Math.ceil(totalCount / perPage)
       const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
       const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
       pageBreadcrumb.push( {
         name:subTopic.name,
         to:subTopic.slug
       })
-      
+      const totalPages = Math.ceil(totalCount / perPage)
       const component = (`${topic.id}`===typesAll.watch || 
       `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
-      
-  
-     
+         
       let currentPage = 1
       // 
       for (let i = 0; i <=1; i += perPage, currentPage++) {
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-        console.log(pagePath)
         const context = {
           id:topic.id,
           subTopicId:subTopic.id,
@@ -200,8 +201,7 @@ module.exports.createSubTopicPages=({
           isTopic
 /*            ...node */
         }
-
-        console.log(context)
+        console.log(pagePath)
         createPage({
           path:pagePath,
           component,

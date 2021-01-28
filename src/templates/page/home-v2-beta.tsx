@@ -29,8 +29,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     popularPosts: popularPostsAll,
     latestPosts
   } = pageContext
-  console.log(pageContext)
-  console.log(data)
 
   const latestPostAsTopic = {
     id: '',
@@ -49,7 +47,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     playlistMaps[item.slug] = item
   })
 
-  console.log(playlistMaps)
+
   const dataFormat = {
     featuredFormats: [
       {

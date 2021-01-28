@@ -104,6 +104,7 @@ module.exports = function generateTopics(actions, graphql) {
               } else if (`${node.group.id}` ===`${groupAll.type}`) {
                 topicType='type'
                 baseUrl = `${node.slug}/${ac_strings.slug_latest}`
+
                 
               } 
                               
