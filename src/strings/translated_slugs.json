@@ -1,5 +1,5 @@
 {
-  "about-us": [
+  "meistä": [
     {
       "lang": "en",
       "slug": "about-us"
@@ -61,7 +61,7 @@
       "slug": "om-os"
     }
   ],
-  "contributor": [
+  "avustaja": [
     {
       "lang": "en",
       "slug": "contributor"
@@ -123,7 +123,7 @@
       "slug": "bidragsyder"
     }
   ],
-  "account": [
+  "tili": [
     {
       "lang": "en",
       "slug": "account"
@@ -185,7 +185,7 @@
       "slug": "konto"
     }
   ],
-  "contact": [
+  "kontakti": [
     {
       "lang": "en",
       "slug": "contact"
@@ -247,7 +247,7 @@
       "slug": "kontakt"
     }
   ],
-  "cookie-policy": [
+  "evästekäytännöt": [
     {
       "lang": "en",
       "slug": "cookie-policy"
@@ -309,7 +309,7 @@
       "slug": "cookie-policy"
     }
   ],
-  "e-book": [
+  "e-kirja": [
     {
       "lang": "en",
       "slug": "e-book"
@@ -371,7 +371,7 @@
       "slug": "e-bog"
     }
   ],
-  "explore": [
+  "tutki": [
     {
       "lang": "en",
       "slug": "explore"
@@ -433,7 +433,7 @@
       "slug": "udforsk"
     }
   ],
-  "glossary": [
+  "sanasto": [
     {
       "lang": "en",
       "slug": "glossary"
@@ -495,7 +495,7 @@
       "slug": "Ordliste"
     }
   ],
-  "host": [
+  "palvelin": [
     {
       "lang": "en",
       "slug": "host"
@@ -557,7 +557,7 @@
       "slug": "vært"
     }
   ],
-  "latest": [
+  "uusimmat": [
     {
       "lang": "en",
       "slug": "latest"
@@ -619,7 +619,7 @@
       "slug": "seneste"
     }
   ],
-  "listen": [
+  "kuuntele": [
     {
       "lang": "en",
       "slug": "listen"
@@ -681,7 +681,7 @@
       "slug": "lyt"
     }
   ],
-  "login": [
+  "kirjaudu": [
     {
       "lang": "en",
       "slug": "login"
@@ -743,379 +743,7 @@
       "slug": "log ind"
     }
   ],
-  "playlist": [
-    {
-      "lang": "en",
-      "slug": "playlist"
-    },
-    {
-      "lang": "nb",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "es",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "fr",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "fi",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "hu",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "it",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "pl",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "pt-pt",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "ro",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "ru",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "sv",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "de",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "nl",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "da",
-      "slug": "FALSE"
-    }
-  ],
-  "podcast": [
-    {
-      "lang": "en",
-      "slug": "podcast"
-    },
-    {
-      "lang": "nb",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "es",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "fr",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "fi",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "hu",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "it",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "pl",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "pt-pt",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "ro",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "ru",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "sv",
-      "slug": "podcast"
-    },
-    {
-      "lang": "de",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "nl",
-      "slug": "FALSE"
-    },
-    {
-      "lang": "da",
-      "slug": "FALSE"
-    }
-  ],
-  "living-the-gospel-intro": [
-    {
-      "lang": "en",
-      "slug": "living-the-gospel-intro"
-    },
-    {
-      "lang": "nb",
-      "slug": "living-the-gospel-intro"
-    },
-    {
-      "lang": "es",
-      "slug": "living-the-gospel-intro"
-    },
-    {
-      "lang": "fr",
-      "slug": "living-the-gospel-intro"
-    },
-    {
-      "lang": "fi",
-      "slug": "evankeliumin toteuttaminen köäytännössä - intro"
-    },
-    {
-      "lang": "hu",
-      "slug": "elni-az-evangeliumot-intro"
-    },
-    {
-      "lang": "it",
-      "slug": "vivere-il-vangelo-intro"
-    },
-    {
-      "lang": "pl",
-      "slug": "zycie-wg-ewangelii-wstep"
-    },
-    {
-      "lang": "pt-pt",
-      "slug": "Introducao-vivendo-o-evangelho"
-    },
-    {
-      "lang": "ro",
-      "slug": "traieste-evanghelia-intro"
-    },
-    {
-      "lang": "ru",
-      "slug": "zhizn-s-yevangeliyem-vstupleniye"
-    },
-    {
-      "lang": "sv",
-      "slug": "living-the-gospel-intro"
-    },
-    {
-      "lang": "de",
-      "slug": "Das-Evangelium-leben-intro"
-    },
-    {
-      "lang": "nl",
-      "slug": "leef-het-evangelie-intro"
-    },
-    {
-      "lang": "da",
-      "slug": "living-the-gospel-intro"
-    }
-  ],
-  "privacy-policy": [
-    {
-      "lang": "en",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "nb",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "es",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "fr",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "fi",
-      "slug": "evankeliumin toteuttaminen käytännössä - intro"
-    },
-    {
-      "lang": "hu",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "it",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "pl",
-      "slug": "Polityka prywatności"
-    },
-    {
-      "lang": "pt-pt",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "ro",
-      "slug": "politica-de-confidentialitate"
-    },
-    {
-      "lang": "ru",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "sv",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "de",
-      "slug": "Datenschutzbestimmungen"
-    },
-    {
-      "lang": "nl",
-      "slug": "privacy-policy"
-    },
-    {
-      "lang": "da",
-      "slug": "privacy-policy"
-    }
-  ],
-  "read": [
-    {
-      "lang": "en",
-      "slug": "read"
-    },
-    {
-      "lang": "nb",
-      "slug": "les"
-    },
-    {
-      "lang": "es",
-      "slug": "leer"
-    },
-    {
-      "lang": "fr",
-      "slug": "lire"
-    },
-    {
-      "lang": "fi",
-      "slug": "lue"
-    },
-    {
-      "lang": "hu",
-      "slug": "cikkek"
-    },
-    {
-      "lang": "it",
-      "slug": "leggi"
-    },
-    {
-      "lang": "pl",
-      "slug": "przeczytaj"
-    },
-    {
-      "lang": "pt-pt",
-      "slug": "ler"
-    },
-    {
-      "lang": "ro",
-      "slug": "citeste"
-    },
-    {
-      "lang": "ru",
-      "slug": "read"
-    },
-    {
-      "lang": "sv",
-      "slug": "las"
-    },
-    {
-      "lang": "de",
-      "slug": "Lesen"
-    },
-    {
-      "lang": "nl",
-      "slug": "lees"
-    },
-    {
-      "lang": "da",
-      "slug": "læs"
-    }
-  ],
-  "register": [
-    {
-      "lang": "en",
-      "slug": "register"
-    },
-    {
-      "lang": "nb",
-      "slug": "register"
-    },
-    {
-      "lang": "es",
-      "slug": "registrarse"
-    },
-    {
-      "lang": "fr",
-      "slug": "sincrire "
-    },
-    {
-      "lang": "fi",
-      "slug": "rekisteri"
-    },
-    {
-      "lang": "hu",
-      "slug": "regisztracio"
-    },
-    {
-      "lang": "it",
-      "slug": "registra"
-    },
-    {
-      "lang": "pl",
-      "slug": "zarejestruj"
-    },
-    {
-      "lang": "pt-pt",
-      "slug": "registrar-se"
-    },
-    {
-      "lang": "ro",
-      "slug": "inregistreaza-te"
-    },
-    {
-      "lang": "ru",
-      "slug": "register"
-    },
-    {
-      "lang": "sv",
-      "slug": "registrera dig"
-    },
-    {
-      "lang": "de",
-      "slug": "Registrieren"
-    },
-    {
-      "lang": "nl",
-      "slug": "Registreer"
-    },
-    {
-      "lang": "da",
-      "slug": "opret dig"
-    }
-  ],
-  "scripture": [
+  "FALSE": [
     {
       "lang": "en",
       "slug": "scripture"
@@ -1177,7 +805,255 @@
       "slug": "FALSE"
     }
   ],
-  "theme": [
+  "evankeliumin toteuttaminen köäytännössä - intro": [
+    {
+      "lang": "en",
+      "slug": "living-the-gospel-intro"
+    },
+    {
+      "lang": "nb",
+      "slug": "living-the-gospel-intro"
+    },
+    {
+      "lang": "es",
+      "slug": "living-the-gospel-intro"
+    },
+    {
+      "lang": "fr",
+      "slug": "living-the-gospel-intro"
+    },
+    {
+      "lang": "fi",
+      "slug": "evankeliumin toteuttaminen köäytännössä - intro"
+    },
+    {
+      "lang": "hu",
+      "slug": "elni-az-evangeliumot-intro"
+    },
+    {
+      "lang": "it",
+      "slug": "vivere-il-vangelo-intro"
+    },
+    {
+      "lang": "pl",
+      "slug": "zycie-wg-ewangelii-wstep"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "Introducao-vivendo-o-evangelho"
+    },
+    {
+      "lang": "ro",
+      "slug": "traieste-evanghelia-intro"
+    },
+    {
+      "lang": "ru",
+      "slug": "zhizn-s-yevangeliyem-vstupleniye"
+    },
+    {
+      "lang": "sv",
+      "slug": "living-the-gospel-intro"
+    },
+    {
+      "lang": "de",
+      "slug": "Das-Evangelium-leben-intro"
+    },
+    {
+      "lang": "nl",
+      "slug": "leef-het-evangelie-intro"
+    },
+    {
+      "lang": "da",
+      "slug": "living-the-gospel-intro"
+    }
+  ],
+  "evankeliumin toteuttaminen käytännössä - intro": [
+    {
+      "lang": "en",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "nb",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "es",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "fr",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "fi",
+      "slug": "evankeliumin toteuttaminen käytännössä - intro"
+    },
+    {
+      "lang": "hu",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "it",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "pl",
+      "slug": "Polityka prywatności"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "ro",
+      "slug": "politica-de-confidentialitate"
+    },
+    {
+      "lang": "ru",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "sv",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "de",
+      "slug": "Datenschutzbestimmungen"
+    },
+    {
+      "lang": "nl",
+      "slug": "privacy-policy"
+    },
+    {
+      "lang": "da",
+      "slug": "privacy-policy"
+    }
+  ],
+  "lue": [
+    {
+      "lang": "en",
+      "slug": "read"
+    },
+    {
+      "lang": "nb",
+      "slug": "les"
+    },
+    {
+      "lang": "es",
+      "slug": "leer"
+    },
+    {
+      "lang": "fr",
+      "slug": "lire"
+    },
+    {
+      "lang": "fi",
+      "slug": "lue"
+    },
+    {
+      "lang": "hu",
+      "slug": "cikkek"
+    },
+    {
+      "lang": "it",
+      "slug": "leggi"
+    },
+    {
+      "lang": "pl",
+      "slug": "przeczytaj"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "ler"
+    },
+    {
+      "lang": "ro",
+      "slug": "citeste"
+    },
+    {
+      "lang": "ru",
+      "slug": "read"
+    },
+    {
+      "lang": "sv",
+      "slug": "las"
+    },
+    {
+      "lang": "de",
+      "slug": "Lesen"
+    },
+    {
+      "lang": "nl",
+      "slug": "lees"
+    },
+    {
+      "lang": "da",
+      "slug": "læs"
+    }
+  ],
+  "rekisteri": [
+    {
+      "lang": "en",
+      "slug": "register"
+    },
+    {
+      "lang": "nb",
+      "slug": "register"
+    },
+    {
+      "lang": "es",
+      "slug": "registrarse"
+    },
+    {
+      "lang": "fr",
+      "slug": "sincrire "
+    },
+    {
+      "lang": "fi",
+      "slug": "rekisteri"
+    },
+    {
+      "lang": "hu",
+      "slug": "regisztracio"
+    },
+    {
+      "lang": "it",
+      "slug": "registra"
+    },
+    {
+      "lang": "pl",
+      "slug": "zarejestruj"
+    },
+    {
+      "lang": "pt-pt",
+      "slug": "registrar-se"
+    },
+    {
+      "lang": "ro",
+      "slug": "inregistreaza-te"
+    },
+    {
+      "lang": "ru",
+      "slug": "register"
+    },
+    {
+      "lang": "sv",
+      "slug": "registrera dig"
+    },
+    {
+      "lang": "de",
+      "slug": "Registrieren"
+    },
+    {
+      "lang": "nl",
+      "slug": "Registreer"
+    },
+    {
+      "lang": "da",
+      "slug": "opret dig"
+    }
+  ],
+  "teemat": [
     {
       "lang": "en",
       "slug": "theme"
@@ -1239,7 +1115,7 @@
       "slug": "tema"
     }
   ],
-  "topic": [
+  "teema": [
     {
       "lang": "en",
       "slug": "topic"
