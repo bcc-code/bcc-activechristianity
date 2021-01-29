@@ -386,7 +386,9 @@ export interface IResourceRef {
     v: number
 }
 
-
+export interface IBookmarked {
+    bookmarked: IResourceRef[]
+}
 export interface ILiked {
     liked: IResourceRef[]
 }

@@ -5,14 +5,14 @@ import {
 
 import { IRootState, IUserLibrary } from '../types'
 import {
-    setUserLiked,
+    setUserBookmarked,
     setUserHistory,
     setUserFollowingTopics,
     setUserUnfinished,
     setUserLibrary,
     setUserFollowingPlaylists
 } from '@/state/action/userAction'
-import { IHistory, ILiked, IUnfinished, IFollowing } from '@/types'
+import { IHistory, IBookmarked, IUnfinished, IFollowing } from '@/types'
 import acApi from '@/util/api'
 
 const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) => {
@@ -57,7 +57,7 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                                 const filtered = res.following.playlists.filter(p => typeof p.id === "string")
                                 store.dispatch(setUserFollowingPlaylists(filtered))
                             } else {
-                                console.log('reset playlist')
+
                                 store.dispatch(setUserFollowingPlaylists([]))
                             }
 
@@ -70,18 +70,21 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     console.log(error)
                 })
             break;
-        case 'NEW_USER_LIKED':
+        case 'NEW_USER_BOOKMARKED':
             acApi
-                .likePost(action.payload.id, !action.payload.bookmarked)
-                .then((resNewLike: any) => {
-                    if (resNewLike.bookmarkPost && resNewLike.bookmarkPost.success === true) {
-                        return acApi.liked()
-                            .then((res: ILiked) => {
-                                if (Array.isArray(res.liked)) {
+                .bookmarkedPost(action.payload.id, !action.payload.bookmarked)
+                .then((resNewBookmark: any) => {
 
-                                    const filtered = res.liked.filter(p => typeof p.id === "string")
+                    if (resNewBookmark.bookmarkPost && resNewBookmark.bookmarkPost.success === true) {
+                        return acApi.bookmarked()
+                            .then((res: IBookmarked) => {
 
-                                    store.dispatch(setUserLiked(filtered))
+                                if (Array.isArray(res.bookmarked)) {
+
+
+                                    const filtered = res.bookmarked.filter(p => typeof p.id === "string")
+
+                                    store.dispatch(setUserBookmarked(filtered))
                                 }
                             })
                     } else {
@@ -94,15 +97,14 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                     console.log(err)
                 })
             break;
-        case 'FETCH_USER_LIKED':
+        case 'FETCH_USER_BOOKMARKED':
 
             acApi
-                .liked()
-                .then((res: ILiked) => {
-                    console.log(res)
+                .bookmarked()
+                .then((res: IBookmarked) => {
                     if (Array.isArray(res.bookmarked)) {
                         const filtered = res.bookmarked.filter(p => typeof p.id === "string")
-                        store.dispatch(setUserLiked(filtered))
+                        store.dispatch(setUserBookmarked(filtered))
                     }
 
                 })
@@ -161,13 +163,12 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
 
         case 'FETCH_USER_LIBRARY':
             Promise.all([
-                acApi.liked()
-                    .then((res: ILiked) => {
-                        console.log(res)
+                acApi.bookmarked()
+                    .then((res: IBookmarked) => {
                         if (Array.isArray(res.bookmarked)) {
                             return res.bookmarked
                         } else {
-                            throw new Error('Error res.liked')
+                            throw new Error('Error res.bookmarked')
                         }
                     })
                     .catch((err: any) => {
@@ -176,7 +177,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
                 acApi
                     .following()
                     .then((res: IFollowing) => {
-                        console.log(res)
                         if (Array.isArray(res.following.topics)) {
                             if (res.following) {
                                 return res.following
@@ -219,7 +219,6 @@ const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) 
 
             ])
                 .then(res => {
-                    console.log(res)
                     const userLibrary: IUserLibrary = {
                         bookmarkedPosts: [],
                         followedTopics: [],

@@ -102,7 +102,7 @@ export const logoutMutation = `
   }
 `
 
-export const likePostMutation = (id: string, toggle: boolean) => `
+export const bookmarkPostMutation = (id: string, toggle: boolean) => `
   mutation {
     bookmarkPost(postId:${id}, toggle:${toggle}){
       success
@@ -191,7 +191,7 @@ query {
 }  
 `
 
-export const likedPostsQuery = `
+export const bookmarkedPostQuery = `
   query {
     bookmarked {
       id
