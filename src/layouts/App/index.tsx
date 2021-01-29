@@ -89,7 +89,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
         setSideNavOpen,
         handleSideNavOpen
     ])
-    console.log('render app')
+
     return (
         <div className="relative">
             <div className="relative layout-children">

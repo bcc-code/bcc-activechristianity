@@ -133,6 +133,7 @@ module.exports.createArchivePages =async function ({
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
             return res.data.ac.topic.allPosts.data
           } else {
+            console.log(query)
             throw new Error('not able to get pages')
           }
 

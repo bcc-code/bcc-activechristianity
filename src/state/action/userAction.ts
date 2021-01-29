@@ -7,8 +7,8 @@ export const setUserLibrary = (payload: IUserLibrary) => ({
     payload
 })
 
-export const setUserLiked = (payload: IApiItem[]) => ({
-    type: 'SET_USER_LIKED',
+export const setUserBookmarked = (payload: IApiItem[]) => ({
+    type: 'SET_USER_BOOKMARKED',
     payload
 })
 
@@ -45,7 +45,7 @@ export const getUserLibrary = () => ({
 
 
 export const setNewLike = (payload: { id: string, bookmarked: boolean }) => ({
-    type: 'NEW_USER_LIKED',
+    type: 'NEW_USER_BOOKMARKED',
     payload
 })
 

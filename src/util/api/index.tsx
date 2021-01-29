@@ -60,12 +60,12 @@ export default {
             return res.signOut
         })
     },
-    liked: () => {
-        const query = request.likedPostsQuery
+    bookmarked: () => {
+        const query = request.bookmarkedPostQuery
         return sendQuery(query)
     },
-    likePost: (id: string, toggle: boolean) => {
-        const query = request.likePostMutation(id, toggle)
+    bookmarkedPost: (id: string, toggle: boolean) => {
+        const query = request.bookmarkPostMutation(id, toggle)
         return sendQuery(query)
     },
     following: () => {

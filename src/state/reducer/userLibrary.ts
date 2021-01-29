@@ -3,7 +3,7 @@ import { IUserLibrary } from '../types'
 interface authAction {
     type:
     'SET_USER_LIBRARY' |
-    'SET_USER_LIKED' |
+    'SET_USER_BOOKMARKED' |
     'SET_USER_HISTORY' |
     'SET_USER_FOLLOW_TOPICS' |
     'SET_USER_FOLLOW_PLAYLISTS' |
@@ -28,7 +28,7 @@ const userLibrary = (state: IUserLibrary = initialState, action: authAction) => 
             return (action.payload)
         }
 
-        case 'SET_USER_LIKED': {
+        case 'SET_USER_BOOKMARKED': {
             return ({
                 ...state,
                 bookmarkedPosts: action.payload
