@@ -1,5 +1,5 @@
 import axios from 'axios'
-import endpoints from '@/strings/endpoints'
+import endpoints from '@/strings/static/endpoints'
 /* https://github.com/kennethjiang/js-file-download/blob/master/file-download.js */
 
 export const API_URL = `${endpoints.api_url}`;

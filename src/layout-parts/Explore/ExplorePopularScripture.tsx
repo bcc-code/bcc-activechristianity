@@ -16,7 +16,7 @@ const ExplorePopularScripture: React.FC<{
     return (
         <div className="pt-6">
             <SectionTitleDesktopAndMobile
-                name={ac_strings.byScripture}
+                name={ac_strings.by_scripture}
                 to={`${ac_strings.slug_scripture}`}
 
             />

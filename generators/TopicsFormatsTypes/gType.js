@@ -2,7 +2,7 @@ const _ = require('lodash')
 const path = require('path')
 const {getSubTopicPosts,createSubTopicPages} = require('./hjelper')
 const ac_strings=require('../../src/strings/ac_strings.js')
-const {formatScope,typesAll, formatsAll}=require('../../src/strings/topic-ids.js')
+const {formatScope,typesAll, formatsAll}=require('../../src/strings/static/topic-ids.js')
 const query = `{
     ac {
 

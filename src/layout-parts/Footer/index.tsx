@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
                     </div>
                     <div className="flex flex-col items-center">
                         <div className="text-sm text-center sm:text-left leading-normal" style={{ maxWidth: '440px' }}>{ac_strings.about_activechristianity_body}</div>
-                        <Link to={ac_strings.slug_about} className="py-4 underline flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learnMoreAC}</Link>
+                        <Link to={ac_strings.slug_about} className="py-4 underline flex text-gray-600 text-sm text-center sm:text-left">{ac_strings.learn_more_ac}</Link>
                     </div>
                 </div>
                 <div className="sm:w-1/4 px-4 py-10 text-sm border-b sm:border-none flex flex-col justify-center sm:justify-start">

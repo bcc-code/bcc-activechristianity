@@ -1,6 +1,6 @@
 import React from 'react'
 import ac_strings from '@/strings/ac_strings.js'
-import endpoints from '@/strings/endpoints'
+import endpoints from '@/strings/static/endpoints'
 import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 
 import Snackbar from '@/components/Snackbar'

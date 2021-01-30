@@ -4,7 +4,7 @@ import FetchSocialMediaPlatform from '@/HOC/FetchSocialMediaPlatforms'
 import ac_strings from '@/strings/ac_strings'
 import { LayoutH1 } from '@/components/Headers'
 import { MobileMainWrapper } from '@/layout-parts/PostLayout/PostSections'
-import endpoints from '@/strings/endpoints'
+import endpoints from '@/strings/static/endpoints'
 import ContactForm from '@/layout-parts/Form/Contact'
 
 const ContactPage = () => {

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
-import endpoints from '@/strings/endpoints'
+import endpoints from '@/strings/static/endpoints'
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_options_title,

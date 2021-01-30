@@ -1,108 +1,40 @@
-const {google} = require('googleapis');
+
 const axios = require(`axios`)
 const fs = require('fs')
 const path = require('path')
 const stringify = require(`json-stringify-safe`)
-const endpoints = require('../../src/strings/endpoints')
+const endpoints = require('../../src/strings/static/endpoints')
 
-const translationStrings =  async function() {
+const translationStrings = async function() {
   console.log('Loading AC Translations')
-  try {
-    const sheets = google.sheets({
-      version: 'v4',
-      auth: endpoints.translation_google_sheet_auth
-    });
+  let envLocale = process.env.LOCALE
+  if (!envLocale) throw new Error('Enviroment LOCALE does not seem to be set')
 
-    return await sheets.spreadsheets.values.get({
-      spreadsheetId: endpoints.translation_google_sheet_id,
-      range: 'A:Z',
-    }, (err, res) => {
-      let langs = 0
+  axios({
+    url: `${endpoints.slug_translation}`,
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  }).then(({data})=>{
+    if (data){
+      const strings = {}
+      data.forEach(string => {
+        strings[string.key] = string[process.env.LOCALE] || string.en // en as fallback
+      })
+      saveFile('./src/strings', `${envLocale}_ac_strings`, 'json', strings)
+    }
 
-      if (err) {
-        console.error('Could not fetch translations from Google Sheets');
-        throw err;
-      }
- 
-      const rows = res.data.values
-      if (rows.length === 0) {
-        console.log('No data found.');
-      } else {
-        const headers = rows[0]
-        if (headers[0] !== 'key') throw new Error('Translation file seems mulformed')
 
-        const langsObj = {}
-        const langsArr = []
-        const slugTranslatedUrl={}
-        let localeIndex = -1
-        let envLocale = process.env.LOCALE
-        if (!envLocale) throw new Error('Enviroment LOCALE does not seem to be set')
+  })
 
-        headers.forEach((lang, index) => {
-          if (lang && lang !== 'key') {
-            console.log(`Found ${lang} language`)
-            langs++
-            langsObj[lang] = {}
-            langsArr[index] = langsObj[lang]
-            if (lang === envLocale) {
-              localeIndex = index
-            }
-          }
-        })
-
-        rows.forEach(cols => {
-          let key = cols[0]
-
-          if (localeIndex > -1) {
-            if (!cols[localeIndex]) console.log(`string ${key} is not translated`)
-              
-            langsArr[localeIndex][key] = cols[localeIndex]? cols[localeIndex]:''
-            // langsArr[localeIndex][key] = cols[localeIndex] || defaultValue
-          } else langsArr.forEach((obj, index) => {
-            if (obj) {
-              if (!cols[index]) console.log(`string ${key} is not translated`)
-              obj[key] = cols[index]?cols[index]:''
-              // obj[key] = cols[index] || defaultValue 
-            }
-          })
-
-          // get slug translated urls
-          const match=key.match(new RegExp('slug_','gi'))
-          if (Array.isArray(match) && match.length>0){
-            slugTranslatedUrl[cols[localeIndex]]=cols.map((c,i)=>{
-              const locale_key = headers[i]
-              const langSlugKey=locale_slug_map[locale_key]
-              return {
-                lang:langSlugKey,
-                slug:cols[i]}
-            }).slice(1)
-
-          }
-          
-        })
-
-        if (localeIndex > -1) {
-          saveFile('./src/strings', `${envLocale}_ac_strings`, 'json', langsObj[envLocale])
-          saveFile('./src/strings',`translated_slugs`,'json',slugTranslatedUrl)
-        } else for (let locale in langsObj) {
-          saveFile('./src/strings', locale, 'json', langsObj[locale])
-        }
-
-      }
-      console.log(`Done ${langs} translations loaded`);
-      
-      return true
-    });
-  } catch (e) {
-    console.log('\nGatsby Source Api Server response error:\n', e.response.data && e.response.data.errors)
-  }
 }
 
 module.exports.translationStrings = translationStrings
 const languageSites = async function() {
 
   const options = {
-      url: `${endpoints.api_url}`,
+        url: `${endpoints.api_url}`,
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -137,21 +69,3 @@ function saveFile(folder, name, extension, data) {
 }
 module.exports.saveFile=saveFile
 module.exports.languageSites = languageSites
-
-const locale_slug_map={
-  "en_US":"en",
-  "es_ES":"es",
-  "fr_FR":"fr",
-  "fi":"fi",
-  "hu_HU":"hu",
-  "it_IT":"it",
-  "nb_NO":"nb",
-  "pl_PL":"pl",
-  "pt_PT":"pt-pt",
-  "ro_RO":"ro",
-  "ru_RU":"ru",
-  "sv_SE":"sv",
-  "de_DE":"de",
-  "nl_NL":"nl",
-  "da_DK":"da"
-}

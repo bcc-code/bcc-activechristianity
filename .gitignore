@@ -19,13 +19,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-src/languages.json
+src//generated/languages.json
 src/audio-media.json
 
 static/libs/*
 static/scripts/*
 !static/libs/other.js
 !static/libs/**/
+src/strings/generated/**
+!src/strings/generated/.gitkeep
+!static/scripts/.gitkeep
 
 
 # Runtime data

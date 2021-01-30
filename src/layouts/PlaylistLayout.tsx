@@ -61,7 +61,7 @@ export const PostLayout: React.FC<IPlaylist> = (post) => {
             </div>
             <LazyLoad  >
                 <div className="pt-6">
-                    <PageSectionHeaderUpperCaseGray title={ac_strings.youMightBeInterestedIn} />
+                    <PageSectionHeaderUpperCaseGray title={ac_strings.you_might_be_interested_in} />
                 </div>
                 <FetchLatestPlaylists
                     layout="row"

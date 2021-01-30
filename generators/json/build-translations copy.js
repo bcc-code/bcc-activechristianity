@@ -6,7 +6,7 @@ const axios = require(`axios`)
 const fs = require('fs')
 const path = require('path')
 const stringify = require(`json-stringify-safe`)
-const endpoints = require('../../src/strings/endpoints')
+const endpoints = require('../../src/strings/static/endpoints')
 
 const translationStrings =  async function() {
   console.log('Loading AC Translations')

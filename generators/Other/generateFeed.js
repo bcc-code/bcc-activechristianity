@@ -1,5 +1,5 @@
 
-const podcastProps = require('../../src/strings/podcastProperties.js')
+const podcastProps = require('../../src/strings/static/podcastProperties.js')
 const getAudio = require('../../src/helpers/podcast_playlist/getAudioSrc')
 const eposideNoteFooter = '<p class=\"p1\">Website: https://activechristianity.org/<br />\nInstagram: https://www.instagram.com/activechristianity/<br />\nFacebook: https://www.facebook.com/activechristianity/</p>\n'
 module.exports = {

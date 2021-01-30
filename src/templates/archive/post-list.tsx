@@ -6,7 +6,7 @@ import { IPaginate, INavItem, IPostItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import PostList from '@/layout-parts/List/PostList'
-import { formatsAll } from '@/strings/topic-ids'
+import { formatsAll } from '@/strings/static/topic-ids'
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
