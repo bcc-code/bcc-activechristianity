@@ -54,7 +54,7 @@ const languageSites = async function() {
   return axios(options)
   .then(res=>{
       const data = res.data.data.sites
-      saveFile('./src/strings', 'languages', 'json',  data)
+      saveFile('./src/strings/generated', 'languages', 'json',  data)
   })
 }
 function saveFile(folder, name, extension, data) {
