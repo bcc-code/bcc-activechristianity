@@ -2,7 +2,7 @@ const { reduceRight } = require('lodash')
 const _ = require('lodash')
 const path = require('path')
 const ac_strings=require('../src/strings/ac_strings.js')
-const {formatsAll, podcast:podcastIds} = require('../src/strings/topic-ids')
+const {formatsAll, podcast:podcastIds} = require('../src/strings/static/topic-ids')
 /* SETUP */
 
 const query = `{

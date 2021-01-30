@@ -14,7 +14,7 @@ import TopImg from '@/components/PostItemCards/TopImg'
 import RightImg from '@/components/PostItemCards/RightImg'
 // helpers
 import { PodcastPageHeadSection } from '@/templates/page/podcast-intro'
-import livingTheGospel from '@/strings/podcastProperties'
+import livingTheGospel from '@/strings/static/podcastProperties'
 
 import { INavItem } from '@/types'
 

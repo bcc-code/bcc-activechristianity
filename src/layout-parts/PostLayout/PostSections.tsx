@@ -78,7 +78,7 @@ export const Translations: React.FC<{ translatedUrls?: INavItem[] }> = ({ transl
 
         return (
             <div className="border-ac-gray border-t py-8 text-gray-600">
-                <PageSectionHeaderUpperCaseGray title={ac_strings.postAvailable} />
+                <PageSectionHeaderUpperCaseGray title={ac_strings.post_available} />
                 <div className="flex flex-wrap text-sm pt-4">
                     {translatedUrls.map(item => (
                         <a className="w-1/2 sm:w-1/3 md:w-1/4 pb-2" href={item.to}>{item.name}</a>
@@ -316,7 +316,7 @@ export const MoreLatestLink: React.FC<{ latestSlug: string }> = ({ latestSlug })
             className="flex items-center px-2 py-1 text-ac-secondary text-sm"
             to={`/${latestSlug}`}
         >
-            <span>{ac_strings.moreLatest}</span>
+            <span>{ac_strings.more_latest}</span>
             <KeyboardArrowRightIcon customSize="4" className="fill-slate-dark" />
         </Link>
     </div>

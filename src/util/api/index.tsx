@@ -1,6 +1,6 @@
 
 import * as request from './requests';
-import endpoints from '@/strings/endpoints'
+import endpoints from '@/strings/static/endpoints'
 import { IGetPostsAndTopics } from './requests'
 const baseUrl = endpoints.api_url
 const sendQuery = (query: string) => {

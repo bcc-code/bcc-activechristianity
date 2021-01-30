@@ -11,6 +11,7 @@ module.exports = {
     "api_url":"https://new.acadmin.net/graphql",
     "translation_google_sheet_auth":"AIzaSyASDGn4oZErww-RsW6kBPnQz7tCB6x3Fpk",
     "translation_google_sheet_id":"1waay0ca8OdtmJFyMtKzOsje_gocnWwfI2ZUFh5Bg90U",
-    "test":"test"
+    "test":"test",
+    "slug_translation":"https://new.acadmin.net/day4/string_translations"
 }
 

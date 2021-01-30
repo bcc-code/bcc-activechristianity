@@ -91,7 +91,7 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
                 // return
             })}
             <div className="flex justify-center py-4">
-                <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={handlePageChange} />
+                <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.show_more} onClick={handlePageChange} />
             </div>
         </div>
 

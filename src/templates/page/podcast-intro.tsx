@@ -3,7 +3,7 @@ import { IPostRes, INavItem, IAuthor } from '@/types'
 import { graphql } from "gatsby"
 
 import ImageRound from '@/components/Images/ImageRound'
-import livingTheGospel from '@/strings/podcastProperties'
+import livingTheGospel from '@/strings/static/podcastProperties'
 
 import ac_strings from '@/strings/ac_strings.js'
 import { PageSectionHeader } from '@/components/Headers'
@@ -100,7 +100,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
             </PodcastPageHeadSection>
             <div className="py-6 sm:hidden">
                 < PageSectionHeader
-                    title={ac_strings.meetTheHost}
+                    title={ac_strings.meet_the_host}
                 />
                 <Tabs
                     tabs={hosts.map(h => {
@@ -122,7 +122,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                 <div className="max-w-sm px-4 py-6 mx-auto">
 
                     < PageSectionHeader
-                        title={ac_strings.meetTheHost}
+                        title={ac_strings.meet_the_host}
                         className="pt-6"
                     />
                     <div>

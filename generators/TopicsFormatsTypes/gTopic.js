@@ -3,7 +3,7 @@ const path = require('path')
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
 const ac_strings = require('../../src/strings/ac_strings')
-const {groupAll,formatScope}= require('../../src/strings/topic-ids.js')
+const {groupAll,formatScope}= require('../../src/strings/static/topic-ids.js')
 module.exports = async function generateTopic(data) {
     const {actions, graphql,contextPosts,subTopics,node:topic,breadcrumb}=data
     const { createPage } = actions

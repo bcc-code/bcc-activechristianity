@@ -1,7 +1,7 @@
 const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
-const {formatsAll,typesAll} = require('../../src/strings/topic-ids')
+const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplate = 'src/templates/archive/post-list-query.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
 const perPage= 12

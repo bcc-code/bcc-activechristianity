@@ -7,8 +7,8 @@ import { LayoutH1 } from '@/components/Headers'
 import { useLocation } from '@reach/router';
 import PostListSlugs from '@/layout-parts/List/PostList'
 import PostListQuery from '@/layout-parts/List/PostListQuery'
-import { formatsAll } from '@/strings/topic-ids'
-import ac_strings from '@/strings/ac_strings.js'
+import { formatsAll } from '@/strings/static/topic-ids'
+
 import queryString from 'query-string';
 import { IPostItems } from '@/components/ScrollSection/FeaturedItem'
 

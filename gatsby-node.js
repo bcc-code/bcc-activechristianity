@@ -9,7 +9,7 @@ const _ = require('lodash')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 const buildTranslations = require('./generators/json/build-translations')
 const {fetchScripts} = require('./fetch-external-scripts.js')
-const endpoints = require('./src/strings/endpoints')
+const endpoints = require('./src/strings/static/endpoints')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -36,7 +36,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   }
 
   exports.onPreInit = async () => {
-    fetchScripts()
+    if (process.env.DONT_ADD_TRACKING_CODE!=="true"){
+      fetchScripts()
+    }
     await getIndexPostQuery(endpoints.api_url)
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()

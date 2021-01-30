@@ -7,6 +7,7 @@ import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { normalizePostRes } from '@/helpers'
 import api from '@/util/api'
+import shortid from 'shortid'
 export interface IPostList {
     currentPage: number
     paginate: IPaginate
@@ -100,7 +101,7 @@ const PostList: React.FC<IPostList> = (props) => {
                     <div>
                         {posts.map((p, k) => {
                             return (
-                                <RightImgWDes key={k} {...p} />
+                                <RightImgWDes key={shortid()} {...p} />
 
                             )
                         })}

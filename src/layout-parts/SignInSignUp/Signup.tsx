@@ -218,7 +218,7 @@ const SignUpForm = () => {
                     onClick={handleSignUpOpionts}
                     onKeyDown={handleSignUpOpionts}
                 >
-                    {ac_strings.allSignupOptions}
+                    {ac_strings.all_signup_options}
                 </span>
             </div>
         </div>

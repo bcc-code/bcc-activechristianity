@@ -1,11 +1,10 @@
 import { IPostRes, IPostItem, IAuthor, IAuthorRes, ITranslations, INavItem, IEbook, ITopicRes, IPlaylist, ITrackRes, IMedia, ITopicNavItem, ITopic } from '@/types'
 
 import ac_strings from '@/strings/ac_strings.js'
-import languages from '@/strings/languages.json'
+import languages from '@/strings/generated/languages.json'
 import { getImage } from '@/helpers/imageHelpers'
-import endpoints from '@/strings/endpoints'
-import topicIds from '@/strings/topic-ids'
-import { groupAll as topicGroupAll, formatsIds, typeIds } from '@/strings/topic-ids'
+import endpoints from '@/strings/static/endpoints'
+import { groupAll as topicGroupAll, formatsIds, typeIds } from '@/strings/static/topic-ids'
 
 
 export function trimSlug(slug: string) {

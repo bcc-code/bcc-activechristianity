@@ -13,7 +13,7 @@ import { normalizeAuthors } from '@/helpers'
 import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 
-import languages from '@/strings/languages.json'
+import languages from '@/strings/generated/languages.json'
 import ac_strings from '@/strings/ac_strings.js'
 
 interface IProps {

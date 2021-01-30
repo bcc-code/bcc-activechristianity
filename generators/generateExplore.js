@@ -2,8 +2,8 @@ const path = require('path')
 const {topicQuery} = require('gatsby-source-ac/helpers')
 const exploreTemplate='src/templates/page/explore.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
-const {groupAll, formatsAll, formatsIds} = require('../src/strings/topic-ids.js')
-const {sendQuery}= require('gatsby-source-ac/helpers')
+const {groupAll, formatsIds} = require('../src/strings/static/topic-ids.js')
+
 
 /* SETUP */
  

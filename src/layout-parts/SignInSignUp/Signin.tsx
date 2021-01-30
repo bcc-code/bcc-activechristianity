@@ -183,7 +183,7 @@ const SignInForm: React.FC = () => {
                                     onClick={handleSigninOpionts}
                                     onKeyDown={handleSigninOpionts}
                                 >
-                                    {ac_strings.allSigninOptions}
+                                    {ac_strings.all_signin_options}
                                 </button>
                                 <button className="text-ac-slate-light"
 

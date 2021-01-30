@@ -38,7 +38,7 @@ const ExploreSearchResult: React.FC<IExploreSearchResult> = (props) => {
     const { hits } = props
     return hits.length === 0 ? (
         <div className="m-4">
-            <p className="text-sm text-gray-800 p-4"><i>{ac_strings.noSearchNoResult}</i></p>
+            <p className="text-sm text-gray-800 p-4"><i>{ac_strings.no_search_no_result}</i></p>
         </div>
     ) : (
             <div className="m-4">

@@ -12,7 +12,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { INavItem, INavItemCount, ISubtopicLinks, IPostItem, IRecommendationPage } from '@/types'
-import podcastProperties from '@/strings/podcastProperties'
+import podcastProperties from '@/strings/static/podcastProperties'
 import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
 // helper
 

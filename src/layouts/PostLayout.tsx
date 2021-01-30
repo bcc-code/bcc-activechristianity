@@ -12,7 +12,7 @@ const PostContent = loadable(() => import('@/components/Content/PostContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 
 /* import ViewNext from '@/layout-parts/PostLayout/ViewNext' */
-import { formatsAll } from '@/strings/topic-ids'
+import { formatsAll } from '@/strings/static/topic-ids'
 import { PostH1 } from '@/components/Headers'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 

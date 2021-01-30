@@ -48,7 +48,7 @@ const ShowMorePosts: React.FC<{ startNr: number, slug: string }> = ({ startNr, s
                 )
             })}
             <div className="flex justify-center py-4">
-                <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.showMore} onClick={showMorePosts} />
+                <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.show_more} onClick={showMorePosts} />
             </div>
 
         </div>

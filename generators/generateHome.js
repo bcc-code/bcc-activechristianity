@@ -1,7 +1,7 @@
 const path = require('path')
 const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
-const {typeScope,formatScope} = require('../src/strings/topic-ids')
-const endpoints = require('../src/strings/endpoints')
+const {typeScope,formatScope} = require('../src/strings/static/topic-ids')
+const endpoints = require('../src/strings/static/endpoints')
 const baseUrl = endpoints.api_url
 //${postQuery}
 const headers = {

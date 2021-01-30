@@ -79,7 +79,7 @@ const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[
             })
     }, [postId, readMorePosts])
     return (
-        <Row3ColAndXScroll title={`${ac_strings.youMightBeInterestedIn}`} posts={randomPosts} />
+        <Row3ColAndXScroll title={`${ac_strings.you_might_be_interested_in}`} posts={randomPosts} />
     )
 }
 export default RecommendedPostsSection
