@@ -1,7 +1,7 @@
 import { Reducer } from 'redux'
 import { Dispatch } from 'redux'
 import { ADD_T_URLS_Payload } from '../types'
-import languages from '@/strings//generated/languages.json'
+import languages from '@/strings/generated/languages.json'
 import { ITranslations, INavItem } from '@/types'
 import { normalizeAvailableLanguages } from '@/helpers'
 
