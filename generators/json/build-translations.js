@@ -22,7 +22,7 @@ const translationStrings = async function() {
       data.forEach(string => {
         strings[string.key] = string[process.env.LOCALE] || string.en // en as fallback
       })
-      saveFile('./src/strings', `${envLocale}_ac_strings`, 'json', strings)
+      saveFile('./src/strings/generated', `${envLocale}_ac_strings`, 'json', strings)
     }
 
 
