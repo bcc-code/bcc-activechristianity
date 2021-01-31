@@ -7,9 +7,10 @@ const endpoints = require('../../src/strings/static/endpoints')
 
 const translationStrings = async function() {
   console.log('Loading AC Translations')
-  let envLocale = process.env.LOCALE
+  let envLocale = process.env.LANG_CODE
   if (!envLocale) throw new Error('Enviroment LOCALE does not seem to be set')
 
+  console.log(`getting strings for${envLocale}`)
   axios({
     url: `${endpoints.slug_translation}`,
     method: 'get',
@@ -20,9 +21,9 @@ const translationStrings = async function() {
     if (data){
       const strings = {}
       data.forEach(string => {
-        strings[string.key] = string[process.env.LOCALE] || string.en // en as fallback
+        strings[string.key] = string[envLocale] || string.en // en as fallback
       })
-      saveFile('./src/strings/generated', `${envLocale}_ac_strings`, 'json', strings)
+      saveFile('./src/strings/generated', `${process.env.LOCALE}_ac_strings`, 'json', strings)
     }
 
 
