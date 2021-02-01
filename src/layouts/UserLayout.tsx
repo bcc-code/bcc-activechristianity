@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { initiateLogout } from '@/state/action/authAction'
 import { INavItem } from '@/types'
 import { SideNavItem } from '@/components/Button'
-import { userMenuItems } from '@/layout-parts/Nav/Menus'
+import { userMenuItems } from '@/strings/generated/menus.json'
 
 const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ children, pathname, userLinks }) => {
 

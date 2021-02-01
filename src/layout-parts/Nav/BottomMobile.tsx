@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
-
+import { HeadsetIcon, HomeIcon, ExploreIcon, DescriptionIcon, LocalOfferIcon, BookmarksIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI'
 import { useSelector } from "react-redux"
 import { IRootState } from '@/state/types'
 import { INavItem } from '@/types'
-import { mobileMenuBase, menusItems, iconMapNav, userMenuItems } from '@/layout-parts/Nav/Menus'
+import { menusItems, mobile } from '@/strings/generated/menus.json'
 export interface IMenuWithIcon extends INavItem {
     icon: {
         selected: JSX.Element,
@@ -15,7 +15,15 @@ interface IProps {
     isSideNavOpen: boolean
 }
 
-
+const iconMapNav = {
+    HomeIcon,
+    ExploreIcon,
+    HeadsetIcon,
+    DescriptionIcon,
+    PlayCircleOutlineIcon,
+    BookmarksIcon,
+    LocalOfferIcon
+}
 const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
     const { auth } = useSelector((state: IRootState) => ({
         auth: state.auth
@@ -33,14 +41,9 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
             drawerClass = 'mobile-open'
         }
      */
-    let mobileMenu: IMenuWithIcon[] = mobileMenuBase.map(item => ({ ...menusItems[item], icon: iconMapNav[item] }))
-    if (auth.loggedIn !== "success") {
-        mobileMenu.unshift({ ...menusItems.home, icon: iconMapNav["home"] })
-    } else {
-        mobileMenu.push({
-            ...userMenuItems.myContent,
-            icon: iconMapNav["my-content"]
-        })
+    let mobileMenu = mobile.default
+    if (auth.loggedIn == "success") {
+        mobileMenu = mobile.loggedIn
     }
 
     return (
@@ -48,19 +51,24 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
             <div className="fixed bottom-0 z-40 bg-white w-full">
 
                 <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
-                    {mobileMenu.map((item, i) => (
-                        <Link
-                            onClick={() => handlePathClick(item.to, item.name)}
-                            key={i}
-                            to={item.to}
-                            className="flex flex-col items-center justify-between text-gray-600 flex-1 py-2"
-                            activeClassName="bg-gray-300"
-                        >
-                            <span className="flex-1 flex items-center pb-3">{item.icon.default}</span>
-                            <span className="block font-semibold" style={{ "fontSize": "10px" }}>{item.name}</span>
-                        </Link>
+                    {mobileMenu.map((item, i) => {
+                        console.log(item.iconName)
+                        const Icon = iconMapNav[item.iconName]
+                        console.log(Icon)
+                        return (
+                            <Link
+                                onClick={() => handlePathClick(item.to, item.name)}
+                                key={i}
+                                to={item.to}
+                                className="flex flex-col items-center justify-between text-gray-600 flex-1 py-2"
+                                activeClassName="bg-gray-300"
+                            >
+                                <span className="flex-1 flex items-center pb-3"><Icon className="fill-slate-light" /></span>
+                                <span className="block font-semibold" style={{ "fontSize": "10px" }}>{item.name}</span>
+                            </Link>
 
-                    ))}
+                        )
+                    })}
                 </div>
             </div>
         </div>

@@ -69,7 +69,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
     const { isCurrentMedia, isLoggedIn } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isLoggedIn: state.auth.loggedIn }))
-    const [contentPosition, setContentPosition] = React.useState({ height: 0, top: 0 })
+
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
 
@@ -130,7 +130,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const postId = id
     const imageUrl = image;
-    const ranlsatedUrl = normalizeAvailableLanguages(langs, false)
+    const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
     const isPodcast = format?.findIndex(f => `${f.id}` === formatsAll.podcast && formatsAll.podcast.keyId)
     const defaultHeight = {
         "audio": 88,

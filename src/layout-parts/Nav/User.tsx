@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IRootState } from '@/state/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { openSignInModal } from '@/state/action'
-import { slug_user } from '@/layout-parts/Nav/Menus'
+import { slugUser } from '@/strings/generated/menus.json'
 import { initiateLogout } from '@/state/action/authAction'
 
 interface IUserNav {
@@ -51,7 +51,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
             <Link
                 className="py-2 hover:text-ac-slate px-2"
                 onClick={onClick}
-                to={`/${slug_user}`}
+                to={`/${slugUser}`}
             >
                 {ac_strings.title_user}
             </Link>

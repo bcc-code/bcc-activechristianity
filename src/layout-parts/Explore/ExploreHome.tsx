@@ -13,7 +13,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import SquareImages from '@/components/Images/Image1to1Rounded'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers'
-import { menusItems } from '@/layout-parts/Nav/Menus'
+import { menusItems } from '@/strings/generated/menus.json'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
 import PodcastImg from '@/images/format-Podcast-05.jpg'
 import { ITopic } from '@/types';

@@ -8,13 +8,13 @@ import { openSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
-import { slug_user } from '@/layout-parts/Nav/Menus'
+
 import ac_strings from '@/strings/ac_strings.js'
-import { INavItem } from '@/types';
+
 import loadable from '@loadable/component'
 const UserMenu = loadable(() => import('./UserMenu'))
 const ResourceMenu = loadable(() => import('./ResourceMenu'))
-import { sideMenu, sideResourceMenu } from '@/layout-parts/Nav/Menus'
+import { side, sideResource, slugUser } from '@/strings/generated/menus.json'
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
     const [openUserMenu, setOpenUserMenu] = React.useState(false)
     const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
@@ -68,7 +68,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
             }
 
             {openResourceMenu && <ResourceMenu
-                menu={sideResourceMenu}
+                menu={sideResource}
                 isSideNavOpen={openResourceMenu}
                 close={closeResourceMenu}
                 back={() => setOpenResourceMenu(false)}
@@ -87,7 +87,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                 >
                     {ac_strings.resource}
                 </SideNavItem>
-                {sideMenu.map((item, i) => {
+                {side.map((item, i) => {
                     return (
                         <SideNavItem
                             key={i}
@@ -103,7 +103,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                     <div className={`w-full flex flex-col justify-center`}>
 
                         <SideNavItem
-                            to={`/${slug_user}`}
+                            to={`/${slugUser}`}
                             hideOnMobile
                             onClick={close}
 

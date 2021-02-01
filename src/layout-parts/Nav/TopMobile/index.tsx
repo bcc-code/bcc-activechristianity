@@ -13,7 +13,7 @@ const TopNavMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen }) =
         <div style={{ zIndex: 100 }} className={`fixed py-2 w-full top-0 z-50 sm:hidden bg-white shadow-md drawer-main drawer-main-${isSideNavOpen ? 'mobile-open' : 'close'}`}>
             <div className="flex justify-between items-center w-full">
                 <Link className='px-4' to="/">
-                    <LogoFull height="24" />
+                    <LogoFull />
                 </Link>
                 <div className="flex items-center">
                     <Link to={ac_strings.slug_explore}>

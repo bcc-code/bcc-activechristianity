@@ -4,7 +4,7 @@ import SideNavWrapper from './SideNavWrapper'
 
 import { SideNavItem } from '@/components/Button'
 import loadable from '@loadable/component'
-import { userMenuItems } from '@/layout-parts/Nav/Menus'
+import { userMenuItems } from '@/strings/generated/menus.json'
 
 const EditProfile = loadable(() => import('./EditProfile'))
 const EditAccountSettings = loadable(() => import('./EditAccountSettings'))

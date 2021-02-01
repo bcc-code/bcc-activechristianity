@@ -1,5 +1,5 @@
 const ac_strings = require('@/strings/ac_strings.js')
-const languages = require('@/strings/generated/languages.json')
+import {languages} from '@/strings/generated/menus.json'
 const { getImage } = require('@/helpers/imageHelpers')
 const  endpoints = require('@/strings/static/endpoints')
 const  { groupAll: topicGroupAll, formatsIds, typeIds } = require('@/strings/static/topic-ids')

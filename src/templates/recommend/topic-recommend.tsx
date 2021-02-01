@@ -2,10 +2,8 @@ import React from 'react'
 import loadable from '@loadable/component'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
-import LazyLoad from '@/components/LazyLoad';
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { menusItems } from '@/layout-parts/Nav/Menus'
+import { menusItems } from '@/strings/generated/menus.json'
 const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))

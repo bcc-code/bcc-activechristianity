@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
-import { menusItems } from '@/layout-parts/Nav/Menus'
+import { menusItems } from '@/strings/generated/menus.json'
 
 // string
 

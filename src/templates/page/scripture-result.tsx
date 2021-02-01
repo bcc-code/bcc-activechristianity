@@ -3,7 +3,7 @@ import { useLocation } from '@reach/router';
 import { getAllUrlParams } from '@/helpers'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
-import { menusItems } from '@/layout-parts/Nav/Menus'
+import { menusItems } from '@/strings/generated/menus.json'
 // components
 
 // Type

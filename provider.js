@@ -15,8 +15,7 @@ import BottomMobile from '@/layout-parts/Nav/BottomMobile'
 import CookieConsent from "@/layouts/App/CookeConsent";
 import Helmet from 'react-helmet'
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
-const Footer = loadable(() => import('@/layout-parts/Footer'))
-import { menusItems } from '@/layout-parts/Nav/Menus'
+
 export const preloadedState = {
     auth: {
         loggedIn: 'loading'

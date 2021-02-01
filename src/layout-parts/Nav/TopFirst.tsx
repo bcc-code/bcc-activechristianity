@@ -49,7 +49,7 @@ export interface ITagline {
 
 export const query = graphql`
 
-    query GetSiteUrl {
+    query GetSiteUrlTop {
         acNodeSetting{
             top_link
         }
