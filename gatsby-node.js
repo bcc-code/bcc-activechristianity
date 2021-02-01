@@ -8,6 +8,7 @@
 const _ = require('lodash')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 const buildTranslations = require('./generators/json/build-translations')
+const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
@@ -42,6 +43,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     await getIndexPostQuery(endpoints.api_url)
     await buildTranslations.translationStrings()
     await buildTranslations.languageSites()
+    await generateLogo()
   }
 
   exports.createPages = ({ page,actions, graphql }) => {

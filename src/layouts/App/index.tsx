@@ -1,16 +1,10 @@
 
 import React, { Profiler } from 'react'
 import loadable from '@loadable/component'
-import { graphql } from "gatsby"
-import BottomMobile from '@/layout-parts/Nav/BottomMobile'
 import Breadcrumb from './Breadcrumb'
-import CookieConsent from "@/layouts/App/CookeConsent";
-import Helmet from 'react-helmet'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
-const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
-const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
 import shortid from 'shortid'
 import { useDispatch } from "react-redux"

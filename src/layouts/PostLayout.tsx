@@ -130,7 +130,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const postId = id
     const imageUrl = image;
-    const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
+    const ranlsatedUrl = normalizeAvailableLanguages(langs, false)
     const isPodcast = format?.findIndex(f => `${f.id}` === formatsAll.podcast && formatsAll.podcast.keyId)
     const defaultHeight = {
         "audio": 88,
