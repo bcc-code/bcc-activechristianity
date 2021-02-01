@@ -70,7 +70,7 @@ const SignUpForm = () => {
         >
             <div className="flex flex-col justify-center bg-ac-primary py-12 px-4 rounded-lg text-white shadow w-full">
                 <h5 className="font-semibold pb-2">{ac_strings.signin_options_sub_title}</h5>
-                <span className="text-sm">{ac_strings.message_to_existing_user_after_reset_password_content}</span>
+                <span className="text-sm">{ac_strings.reset_password_review_terms}</span>
             </div>
             <form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>
                 {authInfo.errorMessage && (

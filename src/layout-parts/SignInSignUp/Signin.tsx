@@ -103,13 +103,13 @@ const SignInForm: React.FC = () => {
             className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full "
         >
             <div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
-                <h5 className="font-semibold pb-2">{ac_strings.signin_options_email}</h5>
+                <h5 className="font-semibold pb-2">{ac_strings.signin_email}</h5>
             </div>
             {showReminder ? (
                 <div className="w-full px-4 py-2">
                     <div className={`rounded  w-full bg-blue-500 text-white py-4 px-2 my-4 flex flex-col`}>
-                        <h2 className="pb-4 leading-normal">{ac_strings.message_to_existing_user_first_time_title}</h2>
-                        <p className="text-sm leading-normal">{ac_strings.message_to_existing_user_first_time_main}</p>
+                        <h2 className="pb-4 leading-normal">{ac_strings.reset_password_message_title}</h2>
+                        <p className="text-sm leading-normal">{ac_strings.reset_password_message}</p>
                         <div className="flex justify-center text-xs">
                             <button
                                 className="p-2 border border-white rounded font-semibold my-4"
@@ -117,7 +117,7 @@ const SignInForm: React.FC = () => {
                                 onKeyDown={handleForgotPassword}
 
                             >
-                                {ac_strings.message_to_existing_user_first_time_cta}
+                                {ac_strings.reset_password}
                             </button>
                         </div>
                         <div className="flex justify-center text-xs " onClick={setNotShowReminder}>
@@ -128,7 +128,7 @@ const SignInForm: React.FC = () => {
                                     setShowReminder(false)
                                 }}
                             >
-                                {ac_strings.signin_options_email}
+                                {ac_strings.signin_email}
                             </button> */}
                         </div>
                     </div>
@@ -190,7 +190,7 @@ const SignInForm: React.FC = () => {
                                     onClick={handleForgotPassword}
                                     onKeyDown={handleForgotPassword}
                                 >
-                                    {ac_strings.message_to_existing_user_first_time_cta}
+                                    {ac_strings.reset_password}
                                 </button>
                             </div>
                         </form>
