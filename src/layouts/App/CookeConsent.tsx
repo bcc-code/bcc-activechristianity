@@ -5,10 +5,13 @@ import { Button } from '@/components/Button'
 export default () => {
     const localStorageKey = 'ac.giveConsent'
 
-    const [showConsent, setShowConsent] = React.useState(false)
+    const [showConsent, setShowConsent] = React.useState(true)
     React.useEffect(() => {
         const gaveConsent = localStorage.getItem(localStorageKey)
-        setShowConsent(gaveConsent !== "true")
+        if (gaveConsent !== "true") {
+            setShowConsent(gaveConsent !== "true")
+        }
+
     }, [])
     const setNotIsInfoBarOpen = () => {
         localStorage.setItem(localStorageKey, "true")

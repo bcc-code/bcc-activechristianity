@@ -49,7 +49,7 @@ export default ({ element }) => {
 
     return (
         <Provider store={store}>
-         <CookieConsent key={shortid()} />
+            <CookieConsent key={shortid()} />
             <SignInSignUpModal key={shortid()} />
             <MediaPlayer key={shortid()} />
             <div className="relative layout-children">
