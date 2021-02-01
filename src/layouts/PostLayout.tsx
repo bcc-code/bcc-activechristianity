@@ -265,7 +265,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                             />
                         </div>
-                        <LazyLoad>
+                        {/*                         <LazyLoad>
                             <div className="pt-6">
                                 <RecommendedPostsSection
                                     postId={id}
@@ -273,7 +273,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                     readMorePosts={readMorePosts}
                                 />
                             </div>
-                        </LazyLoad>
+                        </LazyLoad> */}
                         {authors && (
                             <LazyLoad>
                                 <FromAuthorsSection
