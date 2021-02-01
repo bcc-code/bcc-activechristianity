@@ -57,7 +57,7 @@ const ForgotPasswordForm: React.FC = () => {
             acApi.forgotPassword(email).then(res => {
                 setLoading(false)
                 if (res.forgotPassword) {
-                    setInfo(ac_strings.message_after_reset_password)
+                    setInfo(ac_strings.reset_password_mail_sent)
                 } else {
                     setResError(ac_strings.error_something_went_wrong)
                 }
@@ -73,7 +73,7 @@ const ForgotPasswordForm: React.FC = () => {
             className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full "
         >
             <div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
-                <h5 className="font-semibold pb-2">{ac_strings.message_to_existing_user_first_time_cta}</h5>
+                <h5 className="font-semibold pb-2">{ac_strings.reset_password}</h5>
             </div>
             <div className="px-4 py-6">
                 {resError && (

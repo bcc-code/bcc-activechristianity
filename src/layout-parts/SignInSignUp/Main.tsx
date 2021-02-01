@@ -6,24 +6,24 @@ import ac_strings from '@/strings/ac_strings.js'
 import endpoints from '@/strings/static/endpoints'
 const formText = {
     "signUpOptions": {
-        "title": ac_strings.signup_options_title,
-        "subTitle": ac_strings.signup_options_sub_title,
-        "facebook": ac_strings.signup_options_facebook,
-        "email": ac_strings.signup_options_email,
-        "optionText": ac_strings.signup_options_option_text,
-        "optionButton": ac_strings.signup_options_option_button,
+        "title": ac_strings.signup_title,
+        "subTitle": ac_strings.signup_sub_title,
+        "facebook": ac_strings.signup_facebook,
+        "email": ac_strings.signup_email,
+        "optionText": ac_strings.signup_option_text,
+        "optionButton": ac_strings.signup_option_button,
         "disclaimer": ac_strings.consent_register,
-        "action": ac_strings.signup_options_action
+        "action": ac_strings.signup_action
     },
     "signInOptions": {
-        "title": ac_strings.signin_options_title,
-        "subTitle": ac_strings.signin_options_sub_title,
-        "facebook": ac_strings.signin_options_facebook,
-        "email": ac_strings.signin_options_email,
-        "optionText": ac_strings.signin_options_option_text,
-        "optionButton": ac_strings.signin_options_option_button,
+        "title": ac_strings.signin_title,
+        "subTitle": ac_strings.signin_sub_title,
+        "facebook": ac_strings.signin_facebook,
+        "email": ac_strings.signin_email,
+        "optionText": ac_strings.signin_option_text,
+        "optionButton": ac_strings.signin_option_button,
         "disclaimer": ac_strings.consent_register,
-        "action": ac_strings.signin_options_action
+        "action": ac_strings.signin_action
     }
 }
 
