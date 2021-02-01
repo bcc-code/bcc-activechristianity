@@ -8,8 +8,8 @@ import { useLocation } from '@reach/router';
 import PostListSlugs from '@/layout-parts/List/PostList'
 import PostListQuery from '@/layout-parts/List/PostListQuery'
 import { formatsAll } from '@/strings/static/topic-ids'
+import { getAllUrlParams } from '@/helpers'
 
-import queryString from 'query-string';
 import { IPostItems } from '@/components/ScrollSection/FeaturedItem'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
@@ -26,7 +26,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const location = useLocation();
 
-    const parsed = queryString.parse(location.search);
+    const parsed = getAllUrlParams(location.search);
     const pageNrQuery = parsed && parsed.pageNr && typeof parsed.pageNr === "string" && parseInt(parsed.pageNr)
     const currentPage = typeof pageNrQuery === "number" && pageNrQuery <= paginate.totalPages && pageNrQuery > 1 ? pageNrQuery : 1
 

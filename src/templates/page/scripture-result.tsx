@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from '@reach/router';
-import queryString from 'query-string';
+import { getAllUrlParams } from '@/helpers'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import { menusItems } from '@/layout-parts/Nav/Menus'
@@ -36,7 +36,7 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
 
     const [posts, setPosts] = React.useState<string[]>([])
     const location = useLocation();
-    const parsed = queryString.parse(location.search);
+    const parsed = getAllUrlParams(location.search);
     const { bookId, ch, bookName } = parsed
     React.useEffect(() => {
 

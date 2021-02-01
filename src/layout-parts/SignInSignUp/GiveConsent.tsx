@@ -69,7 +69,7 @@ const SignUpForm = () => {
             className="flex-1 flex flex-col items-center justify-center w-full h-full "
         >
             <div className="flex flex-col justify-center bg-ac-primary py-12 px-4 rounded-lg text-white shadow w-full">
-                <h5 className="font-semibold pb-2">{ac_strings.signin_options_sub_title}</h5>
+                <h5 className="font-semibold pb-2">{ac_strings.signin_sub_title}</h5>
                 <span className="text-sm">{ac_strings.reset_password_review_terms}</span>
             </div>
             <form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>

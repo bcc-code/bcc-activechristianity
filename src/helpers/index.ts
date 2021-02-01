@@ -440,8 +440,7 @@ export function validateEmail(email: string) {
 export function getAllUrlParams(url: string) {
 
     // get query string from url (optional) or window
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-
+    var queryString = url.split('?')[1]
     // we'll store the parameters here
     var obj: { [key: string]: string[] | string } = {};
 

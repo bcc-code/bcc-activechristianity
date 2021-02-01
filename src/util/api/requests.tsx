@@ -1,4 +1,66 @@
-import { postQuery, topicQuery } from 'gatsby-source-ac/helpers'
+const topicQuery = `
+    id
+    name
+    slug
+    noOfPosts
+    group {
+        id
+        name
+    }
+    image {
+        src
+        srcset
+        dataUri
+    }
+`
+const postQuery = `
+    id
+    title
+    slug
+    excerpt
+    image {
+        src
+        srcset
+        dataUri
+        colors
+
+    }
+    readtime
+    track {
+        url
+        title
+        duration
+        post {
+            title
+            slug
+        }
+        playlists {
+            slug
+            title
+        }
+    }
+    authors {
+        name
+        slug
+        pivot {
+            as
+        }
+        id 
+    }
+    topics {
+        name
+        slug
+        id
+        group {
+            name
+            slug
+            id
+        }
+    }
+    published 
+    likes
+    views
+`
 
 export interface IGetPostsAndTopics {
   postsIds: string[]

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from '@reach/router';
-import queryString from 'query-string';
+/* import queryString from 'query-string'; */
 import loadable from '@loadable/component'
 import api from '@/util/api'
 import MetaTag from '@/components/Meta'
@@ -10,11 +10,11 @@ import ac_strings from '@/strings/ac_strings.js'
 import Link from '@/components/CustomLink'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import { LayoutH1Wide } from '@/components/Headers'
-import { normalizePostRes } from '@/helpers'
+import { normalizePostRes, getAllUrlParams } from '@/helpers'
 import { IPostProps, INavItem } from '@/types'
 const Preview = () => {
     const location = useLocation();
-    const parsed = queryString.parse(location.search);
+    const parsed = getAllUrlParams(location.search);
     const { type, id } = parsed
     const [post, setPost] = React.useState<IPostProps | null>(null)
     const [page, setPage] = React.useState<ICustomizedPage | null>(null)

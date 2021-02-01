@@ -104,28 +104,28 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }, [post.slug])
 
 
-    React.useEffect(() => {
-
-        const toAddMediaType: IMediaType[] = []
-
-        let toUpdateCurrentMediaType: IMediaType | "none" = "none"
-        if (media.audio) {
-            toAddMediaType.push("audio")
-            toUpdateCurrentMediaType = "audio"
-        }
-        if (media.video && media.video.src) {
-
-            toAddMediaType.push("video")
-            toUpdateCurrentMediaType = "video"
-        }
-
-        if (toAddMediaType.length > 0) {
-            setMediaMtypes(toAddMediaType)
-        }
-        setCurrentMediaType(toUpdateCurrentMediaType)
-
-
-    }, [media])
+    /*     React.useEffect(() => {
+    
+            const toAddMediaType: IMediaType[] = []
+    
+            let toUpdateCurrentMediaType: IMediaType | "none" = "none"
+            if (media.audio) {
+                toAddMediaType.push("audio")
+                toUpdateCurrentMediaType = "audio"
+            }
+            if (media.video && media.video.src) {
+    
+                toAddMediaType.push("video")
+                toUpdateCurrentMediaType = "video"
+            }
+    
+            if (toAddMediaType.length > 0) {
+                setMediaMtypes(toAddMediaType)
+            }
+            setCurrentMediaType(toUpdateCurrentMediaType)
+    
+    
+        }, [media]) */
 
 
     const postId = id

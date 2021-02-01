@@ -62,7 +62,6 @@ const postQuery = `
     published 
     likes
     views
-
 `
 
 module.exports.allPostQueries=[]

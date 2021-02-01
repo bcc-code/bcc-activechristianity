@@ -2,9 +2,7 @@ import * as React from "react"
 import PostRow3Col from '@/layout-parts/List/PostRow3Col'
 import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
-import Flickity from 'react-flickity-component'
-import TopImgPost from '@/components/PostItemCards/TopImg'
-import shortid from 'shortid'
+
 const flickityOptions = {
     initialIndex: 2,
     autoPlay: true,
