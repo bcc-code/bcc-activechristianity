@@ -5,18 +5,16 @@ import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import shortid from 'shortid'
 /* const AudioPlayer */
+import Row3ColAndXScroll from '@/layout-parts/List/Combo/Row3Col-HorizontalScroll'
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
 const PostContent = loadable(() => import('@/components/Content/PostContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 
-/* import ViewNext from '@/layout-parts/PostLayout/ViewNext' */
-import { formatsAll } from '@/strings/static/topic-ids'
-import { PostH1 } from '@/components/Headers'
-import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
-const FromAuthorsSection = loadable(() => import('@/layout-parts/PostLayout/FromAuthors'))
+import { PostH1 } from '@/components/Headers'
+
 import {
     AuthorBookmarkShareSection,
     Translations,
@@ -27,10 +25,10 @@ import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 
 import acApi from '@/util/api'
-import { debounce, normalizeAvailableLanguages } from '@/helpers'
+import { debounce } from '@/helpers'
 
 
-import { IPostProps } from '@/types'
+import { IPostItem, ITopicPostItems, INavItem } from '@/types'
 import { IRootState } from '@/state/types'
 
 // mock data
@@ -39,6 +37,22 @@ import ac_strings from '@/strings/ac_strings.js'
 
 
 type IMediaType = "audio" | "video"
+
+export interface IMediaTypes {
+    types: IMediaType[]
+    default: IMediaType | "none"
+}
+interface IPostProps extends IPostItem {
+    content: string
+    allInterestedPosts: IPostItem[]
+    topicPosts: ITopicPostItems[]
+    authorPosts: ITopicPostItems[]
+    tranlsatedUrl: INavItem[]
+    credits?: string
+    seoTitle: string
+    mediaTypes: IMediaTypes
+}
+
 export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const {
@@ -48,25 +62,25 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         excerpt,
         authors,
         image,
-        types,
         topics,
         format,
-        reading_time,
         content,
-        langs,
+        tranlsatedUrl,
         glossary,
-        readMorePosts,
+        mediaTypes: mediaTypesDefault,
         views,
         likes,
         duration,
         media,
         credits,
-        seoTitle
+        seoTitle,
+        allInterestedPosts,
+        authorPosts
     } = post
 
 
-    const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
-    const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
+    const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
+
     const { isCurrentMedia, isLoggedIn } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isLoggedIn: state.auth.loggedIn }))
 
     const contentEl = React.useRef<HTMLDivElement>(null);
@@ -102,47 +116,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     }, [post.slug])
 
-
-    /*     React.useEffect(() => {
-    
-            const toAddMediaType: IMediaType[] = []
-    
-            let toUpdateCurrentMediaType: IMediaType | "none" = "none"
-            if (media.audio) {
-                toAddMediaType.push("audio")
-                toUpdateCurrentMediaType = "audio"
-            }
-            if (media.video && media.video.src) {
-    
-                toAddMediaType.push("video")
-                toUpdateCurrentMediaType = "video"
-            }
-    
-            if (toAddMediaType.length > 0) {
-                setMediaMtypes(toAddMediaType)
-            }
-            setCurrentMediaType(toUpdateCurrentMediaType)
-    
-    
-        }, [media]) */
-
-
-    const postId = id
-    const imageUrl = image;
-    const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
-    const isPodcast = format?.findIndex(f => `${f.id}` === formatsAll.podcast && formatsAll.podcast.keyId)
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
         "none": 100
     }
 
-    const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
+    const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
 
     return (
-
-
-
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             <ShareBookmarkTopShortCuts
                 id={id}
@@ -173,9 +155,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} key={shortid()} />
                 )}
 
-                {mediaTypes.length > 1 && (
+                {mediaTypesDefault.types.length > 1 && (
                     <div className="w-full flex justify-center pb-4  bg-mp-background sm:pt-4">
-                        {mediaTypes.map((item, i) => (
+                        {mediaTypesDefault.types.map((item, i) => (
                             <button
                                 key={item}
                                 className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
@@ -187,7 +169,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 )}
             </div>
             <div className="sm:hidden fixed inset-x top-0 w-full">
-                {mediaTypes.length > 0 ? (
+                {mediaTypesDefault.types.length > 0 ? (
                     <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
 
                     </div>
@@ -222,11 +204,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     {(currentMediaType === "audio") && (
                         <div className="block relative sm:pt-10 mb-12 ">
                             <TwoToOneImg image={image} rounded alt={seoTitle} />
-                            {isPodcast && isPodcast > -1 ? (
-                                <div>
-                                    <SubscribePodcast />
-                                </div>
-                            ) : null}
+
                         </div>
                     )}
                     {(currentMediaType === "none") && (
@@ -267,21 +245,27 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                             />
                         </div>
-                        {/*                         <LazyLoad>
+                        <LazyLoad>
                             <div className="pt-6">
-                                <RecommendedPostsSection
-                                    postId={id}
-                                    topics={topics}
-                                    readMorePosts={readMorePosts}
-                                />
+                                <Row3ColAndXScroll title={`${ac_strings.you_might_be_interested_in}`} posts={allInterestedPosts} />
                             </div>
-                        </LazyLoad> */}
+                        </LazyLoad>
                         {authors && (
                             <LazyLoad>
-                                <FromAuthorsSection
-                                    authors={authors}
-                                    postId={postId}
-                                />
+                                <div className="hidden sm:block">
+                                    {authorPosts.length > 0 && authorPosts.map(item => {
+                                        return (
+
+                                            <div className="pt-6">
+                                                <Row3ColAndXScroll
+                                                    title={`${ac_strings.more_from} ${item.name}`}
+                                                    posts={item.posts}
+                                                />
+                                            </div>
+
+                                        )
+                                    })}
+                                </div>
                             </LazyLoad>
                         )}
                     </div>
@@ -297,7 +281,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
 
         </article >
-
     )
 }
 

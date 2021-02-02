@@ -52,9 +52,7 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
 
                 <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
                     {mobileMenu.map((item, i) => {
-                        console.log(item.iconName)
                         const Icon = iconMapNav[item.iconName]
-                        console.log(Icon)
                         return (
                             <Link
                                 onClick={() => handlePathClick(item.to, item.name)}

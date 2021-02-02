@@ -77,6 +77,10 @@ const languageSites = async function() {
             title
             url
           }
+          settings {
+            key
+            value
+          }
         }
       ` })
   }

@@ -42,7 +42,7 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
         window.location.href = endpoints.facebook_login_redirect
     }
     return (
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center text-center overflow-scroll">
             <div className="flex flex-col justify-center bg-ac-primary py-12 px-4 rounded-lg text-white shadow w-full">
                 <h5 className="font-semibold pb-2">{text.title}</h5>
                 <span className="text-sm">{text.subTitle}</span>

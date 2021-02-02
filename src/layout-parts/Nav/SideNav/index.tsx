@@ -27,11 +27,13 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
 
     const handleSignIn = () => {
         dispatch(openSignInModal("signInOptions"))
+        closeUserMenu()
 
     }
 
     const handleSignUp = () => {
         dispatch(openSignInModal("signUpOptions"))
+        closeUserMenu()
 
     }
     const handleLogout = () => {

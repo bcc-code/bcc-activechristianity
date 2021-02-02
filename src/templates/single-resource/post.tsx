@@ -1,27 +1,20 @@
 import React, { Profiler } from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
-import PostLayout from '@/layouts/PostLayout';
-import { INavItem, IPostRes } from '@/types'
+import PostLayout, { IMediaTypes } from '@/layouts/PostLayoutUpdate';
+import { INavItem, IPostRes, IPostItem, ITopicPostItems } from '@/types'
 import { normalizePostRes } from '@/helpers'
 
 const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
     const postRes = data.acNodePost
-    const post = normalizePostRes(postRes)
 
-    const { title, excerpt, date, topics, types, image, format } = post
-    const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = postRes
-    const breadcrumb: INavItem[] = []
+    const { normalized: post, tranlsatedUrl, mediaTypes, authorPosts, topicPosts, allInterestedPosts, breadcrumb } = pageContext
+    const { title, excerpt, date, topics, types, image } = post
+    const { langs, content, meta, seo } = postRes
 
-    if (types) {
-        breadcrumb.push(types[0])
-    }
-
-    if (format) {
-        breadcrumb.push(format[0])
-    }
     const seoTitle = seo && seo.title ? seo.title : title
+
     return (
         <div>
             <MetaTag
@@ -39,15 +32,19 @@ const Post: React.FC<IPostProp> = (props) => {
                 path={props.path}
             />
 
+
             <PostLayout
                 {...post}
                 seoTitle={seoTitle}
-                langs={langs}
+                tranlsatedUrl={tranlsatedUrl}
                 content={content}
-                recommendPosts={recommendPosts}
-                readMorePosts={readMorePosts}
+                authorPosts={authorPosts}
+                topicPosts={topicPosts}
+                allInterestedPosts={allInterestedPosts}
+                mediaTypes={mediaTypes}
                 credits={meta ? meta.credits : undefined}
             />
+
 
         </div>
     )
@@ -62,6 +59,13 @@ interface IPostProp {
     }
     pageContext: {
         breadcrumb: INavItem[]
+        normalized: IPostItem
+        allInterestedPosts: IPostItem[]
+        topicPosts: ITopicPostItems[]
+        authorPosts: ITopicPostItems[]
+        tranlsatedUrl: INavItem[]
+        mediaTypes: IMediaTypes
+        //ITopicPostItems
     }
 }
 

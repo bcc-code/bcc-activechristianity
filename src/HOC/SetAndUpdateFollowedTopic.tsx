@@ -13,15 +13,13 @@ interface IFetchPost {
 
 const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
-    const [followed, setFollowed] = React.useState<IFollowStatus>("loading")
+    const [followed, setFollowed] = React.useState<IFollowStatus>("false")
     const dispatch = useDispatch()
     React.useEffect(() => {
         if (auth.loggedIn === "success") {
             const found = followedTopics.findIndex(p => p.id === id)
             const followed = found > -1
             setFollowed(followed ? "true" : "false")
-        } else if (auth.loggedIn === "notLoggedIn") {
-            setFollowed("false")
         }
 
     }, [id, followedTopics])

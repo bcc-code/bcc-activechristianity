@@ -86,17 +86,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     return (
         <div className="relative">
-            <div className="relative layout-children">
-                {/*                 <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
-                <TopMobile
-                    {...NavProps}
-                    key={shortid()}
-                />
-                {isSideNavOpen && <SideNav {...NavProps} />}
-                <Breadcrumb key={shortid()} /> */}
-                {children}
-                {/*         <Footer key={shortid()} /> */}
-            </div>
+            <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
+            <TopMobile
+                {...NavProps}
+                key={shortid()}
+            />
+            {isSideNavOpen && <SideNav {...NavProps} />}
+            <Breadcrumb key={shortid()} />
+            {children}
+            <Footer key={shortid()} />
         </div>
 
     )

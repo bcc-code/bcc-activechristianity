@@ -8,8 +8,8 @@ export default () => {
     const [showConsent, setShowConsent] = React.useState(true)
     React.useEffect(() => {
         const gaveConsent = localStorage.getItem(localStorageKey)
-        if (gaveConsent !== "true") {
-            setShowConsent(gaveConsent !== "true")
+        if (gaveConsent === "true") {
+            setShowConsent(false)
         }
 
     }, [])

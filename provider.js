@@ -59,8 +59,9 @@ export default ({ element }) => {
                 </Helmet>
                 {element}
 
-                <BottomMobile key={shortid()}  />
+               
             </div>
+            <BottomMobile key={shortid()}  />
         </Provider>
     )
 }

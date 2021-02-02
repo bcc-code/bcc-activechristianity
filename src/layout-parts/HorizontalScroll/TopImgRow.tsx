@@ -9,9 +9,9 @@ const FeatureSection: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
     return (
         <XScroll
             childeClassName="w-7/12 min-w-7/12"
-            items={posts.map((item, i) => (
+            items={posts.map((item, i) => item ? (
                 <TopImgPost  {...item} key={shortid()} noExcerpt showType />
-            ))}
+            ) : <div />)}
         />
     )
 }

@@ -12,13 +12,16 @@ interface IFetchPost {
 
 const Bookmark: React.FC<IFetchPost> = ({ id, render }) => {
     const { bookmarkedPosts, auth } = useSelector((state: IRootState) => ({ bookmarkedPosts: state.userLibrary.bookmarkedPosts, auth: state.auth }))
-    const [bookmarked, setBookmarked] = React.useState<bookmarkStatus>("loading")
+    const [bookmarked, setBookmarked] = React.useState<bookmarkStatus>("false")
     const dispatch = useDispatch()
     React.useEffect(() => {
-        const found = bookmarkedPosts.findIndex(p => p.id === id)
-        const bookmarked = found > -1
-        setBookmarked(bookmarked ? "true" : "false")
-    }, [id, bookmarkedPosts])
+        if (auth.loggedIn === "success") {
+            const found = bookmarkedPosts.findIndex(p => p.id === id)
+            const bookmarked = found > -1
+            setBookmarked(bookmarked ? "true" : "false")
+        }
+
+    }, [id, bookmarkedPosts, auth.loggedIn])
     const handleClick = () => {
         if (auth.loggedIn === "success") {
             if (bookmarked !== "loading") {

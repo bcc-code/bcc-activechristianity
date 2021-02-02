@@ -1,10 +1,46 @@
-const ac_strings = require('@/strings/ac_strings.js')
-import {languages} from '@/strings/generated/menus.json'
-const { getImage } = require('@/helpers/imageHelpers')
-const  endpoints = require('@/strings/static/endpoints')
-const  { groupAll: topicGroupAll, formatsIds, typeIds } = require('@/strings/static/topic-ids')
+const ac_strings = require('../strings/ac_strings.js')
+const {languages} = require('../strings/generated/menus.json')
+const  endpoints = require('../strings/static/endpoints')
 
+const  { groupAll: topicGroupAll, formatsIds, typeIds } = require('../strings/static/topic-ids')
+const BaseUrl = endpoints.dummy_image_api
 
+function stringToImage(str, size, bg, fc){
+    const IN = initials(str)
+    const BG = bg || intToRGB(hashCode(str))
+    const FC = fc || invertHex(BG)
+  
+    return `${BaseUrl}/${size}/${BG}/${FC}&text=${IN}`
+  }
+
+  
+function getImage(title, size, image) {
+
+    let toReturn = {
+      id: "",
+      src: "",
+      alt: "",
+      srcset: "",
+      dataUri: "",
+      sizes: "",
+      size: {
+        width: 0,
+        height: 0,
+      },
+      colors: [[0]],
+      created_at: '',
+      updated_at: ''
+    }
+    if (image) {
+      return image
+    } else {
+      toReturn.src = stringToImage(title, size, '384156', 'F1AD2C')
+      return toReturn
+    }
+  
+  
+  }
+  
 const normalizeAvailableLanguages = (langs, showAllLanguages) => {
     let translatedLinks = []
     languages.forEach(item => {
@@ -100,6 +136,7 @@ const normalizeTracks = (tracks) => {
 
 const filterTopics = (props) => {
     const { topics, returnSlugs } = props
+    console.log(topics)
     const allTopics= []
     topics.forEach(t => {
         if (t) {
@@ -120,17 +157,39 @@ const filterTopics = (props) => {
 }
 
 
+const transformTopicsRes = (topics) => {
+    const types = []
+    const filteredTopics = []
+    const format = []
+    topics.forEach((t) => {
+
+        if (t.noOfPosts !== 0) {
+            const toAdd = { id: t.id, name: t.name, to: `${t.slug}` }
+            if (t.group && `${t.group.id}` === `${topicGroupAll.type}`) {
+                types.push(toAdd)
+
+            } else if (t.group && `${t.group.id}` === `${topicGroupAll.format}`) {
+                format.push(toAdd)
+            } else {
+                toAdd.to = `${ac_strings.slug_topic}/${t.slug}`
+                filteredTopics.push(toAdd)
+            }
+        }
+    })
+    return ({ types, filteredTopics, format })
+}
 
 const secondesToMinutes = (seconds) => `${Math.round(seconds / 60)} ${ac_strings.mins}`
 const normalizePostRes = (post) => {
 
-    const { id, authors, title, excerpt, image, slug, readtime, track, topics, published, meta, glossary, views, likes } = post
+    const { id, authors, title, excerpt, image, slug, readtime, track, topics, published, meta, glossary, views, likes,acId } = post
 
     const { filteredTopics, types, format } = transformTopicsRes(topics)
 
     const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem = {
         id,
+        acId,
         title,
         excerpt,
         authors: normalizeAuthors(authors),
@@ -198,9 +257,29 @@ const processRecommendationContext = (data) => {
 
 }
 
+const getRandomArray = (pickFromArray, length) => {
+    if (pickFromArray.length > 0) {
+        const returnArrayLength = length > pickFromArray.length ? pickFromArray.length : length
+
+        let randName = [];
+        let processArray = [...pickFromArray]
+        do {
+            randName[randName.length] = processArray.splice(
+                Math.floor(Math.random() * processArray.length)
+                , 1)[0];
+        } while (randName.length < returnArrayLength);
+
+        return randName
+    } else {
+        return []
+    }
+
+}
+
 module.exports = {
     normalizePostRes,
     processRecommendationContext,
     filterTopics,
-    normalizeAvailableLanguages
+    normalizeAvailableLanguages,
+    getRandomArray
 }
