@@ -85,7 +85,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                 <SideNavItem
                     next
                     onClick={() => { setOpenResourceMenu(true) }}
-
                 >
                     {ac_strings.resource}
                 </SideNavItem>
