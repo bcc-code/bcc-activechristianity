@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useSelector } from "react-redux"
 import { IRootState } from '@/state/types'
 import Breadcrumb from '@/components/Breadcrumb'
+
 const BreadcrumbWrapper = () => {
     const { breadcrumb } = useSelector((state: IRootState) => ({
         breadcrumb: state.breadcrumb,

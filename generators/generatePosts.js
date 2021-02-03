@@ -57,7 +57,7 @@ const getPerPageQuery = (pageNr)=>{
 }
 const perPage = 12
 
-const getAuthorPosts = (index)=>{
+const getauthorsPosts = (index)=>{
   return `
     {
       ac {
@@ -142,7 +142,7 @@ module.exports = async function generatePosts(actions, graphql) {
               pageIndex.push(i);
             }
             await Promise.all(pageIndex.map(i=>{
-              const eachPageQuery=getAuthorPosts(i)
+              const eachPageQuery=getauthorsPosts(i)
                   return graphql(eachPageQuery)
                           .then(res =>{
                             
@@ -197,11 +197,11 @@ module.exports = async function generatePosts(actions, graphql) {
                                     const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
                                     let readMorePosts = node.readMorePosts
                                     let recommendedPosts = []
-                                    let authorPosts=[]
+                                    let authorsPosts=[]
                                     node.authors.map(a=>{
                                       const filtered = authorsWPosts[a.slug].posts.filter(slug=>slug!==normalized.slug)
                                       if(filtered.length>0){
-                                        authorPosts.push({
+                                        authorsPosts.push({
                                           name:a.name,
                                           slug:a.slug,
                                           posts:filtered
@@ -274,7 +274,7 @@ module.exports = async function generatePosts(actions, graphql) {
                                         const fullPostsInfo={
                                           normalized,
                                           allInterestedPosts,
-                                          authorPosts,
+                                          authorsPosts,
                                           topicPosts,
                                           tranlsatedUrl
                                         }
@@ -290,11 +290,10 @@ module.exports = async function generatePosts(actions, graphql) {
                           })
   
                           const allPostsSlugs = Object.keys(allNormalizedPosts)
-                          console.log(allPostsSlugs.length)
                           for(let k=0; k<allPostsSlugs.length;k++){
                             const slug = allPostsSlugs[k]
                             const post=allNormalizedPosts[slug]
-                              const {normalized,allInterestedPosts, authorPosts,topicPosts,tranlsatedUrl}=post
+                              const {normalized,allInterestedPosts, authorsPosts,topicPosts,tranlsatedUrl}=post
                               const {media, types,format}=normalized
                               const mediaTypes= []
                               let defaultMediaType = "none"
@@ -324,15 +323,22 @@ module.exports = async function generatePosts(actions, graphql) {
                                   if(allNormalizedPosts[s]){
                                     return allNormalizedPosts[s].normalized
                                   } else {
-                                    console.log('cannot find post for '+s)
+                                    console.log('cannot find interest post for ')
+                                    console.log(s)
                                   }
                                 }),
-                                authorPosts:authorPosts.map(s=>{
-                                  if(allNormalizedPosts[s]){
-                                    return allNormalizedPosts[s].normalized
-                                  } else {
-                                    console.log('cannot find post for '+s)
-                                  }
+                                authorsPosts:authorsPosts.map(a=>{
+                                  return ({
+                                    ...a,
+                                    posts:a.posts.map(s=>{
+                                      if(allNormalizedPosts[s]){
+                                        return allNormalizedPosts[s].normalized
+                                      } else {
+                                        console.log('cannot find interest post for ')
+                                        console.log(s)
+                                      }
+                                    })
+                                  })
                                 }),
                                 topicPosts:topicPosts.map(t=>({
                                   ...t,
@@ -340,7 +346,8 @@ module.exports = async function generatePosts(actions, graphql) {
                                     if(allNormalizedPosts[s]){
                                       return allNormalizedPosts[s].normalized
                                     } else {
-                                      console.log('cannot find post for '+s)
+                                      console.log('cannot find topic post for')
+                                      console.log(s)
                                     }
                                   })
                                 })),
