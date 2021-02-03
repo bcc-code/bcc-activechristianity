@@ -46,7 +46,7 @@ interface IPostProps extends IPostItem {
     content: string
     allInterestedPosts: IPostItem[]
     topicPosts: ITopicPostItems[]
-    authorPosts: ITopicPostItems[]
+    authorsPosts: ITopicPostItems[]
     tranlsatedUrl: INavItem[]
     credits?: string
     seoTitle: string
@@ -75,7 +75,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         credits,
         seoTitle,
         allInterestedPosts,
-        authorPosts
+        authorsPosts
     } = post
 
 
@@ -253,7 +253,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         {authors && (
                             <LazyLoad>
                                 <div className="hidden sm:block">
-                                    {authorPosts.length > 0 && authorPosts.map(item => {
+                                    {authorsPosts.length > 0 && authorsPosts.map(item => {
                                         return (
 
                                             <div className="pt-6">

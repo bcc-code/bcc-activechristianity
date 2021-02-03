@@ -9,7 +9,7 @@ const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
     const postRes = data.acNodePost
 
-    const { normalized: post, tranlsatedUrl, mediaTypes, authorPosts, topicPosts, allInterestedPosts, breadcrumb } = pageContext
+    const { normalized: post, tranlsatedUrl, mediaTypes, authorsPosts, topicPosts, allInterestedPosts, breadcrumb } = pageContext
     const { title, excerpt, date, topics, types, image } = post
     const { langs, content, meta, seo } = postRes
 
@@ -38,7 +38,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 seoTitle={seoTitle}
                 tranlsatedUrl={tranlsatedUrl}
                 content={content}
-                authorPosts={authorPosts}
+                authorsPosts={authorsPosts}
                 topicPosts={topicPosts}
                 allInterestedPosts={allInterestedPosts}
                 mediaTypes={mediaTypes}
@@ -62,7 +62,7 @@ interface IPostProp {
         normalized: IPostItem
         allInterestedPosts: IPostItem[]
         topicPosts: ITopicPostItems[]
-        authorPosts: ITopicPostItems[]
+        authorsPosts: ITopicPostItems[]
         tranlsatedUrl: INavItem[]
         mediaTypes: IMediaTypes
         //ITopicPostItems
