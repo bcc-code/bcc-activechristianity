@@ -18,7 +18,7 @@ const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 
 export const preloadedState = {
     auth: {
-        loggedIn: 'loading'
+        loggedIn: 'notLoggedIn'
     },
     translatedUrls:homeUrls,
     playlist:[],

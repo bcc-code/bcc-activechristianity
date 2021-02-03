@@ -1,9 +1,13 @@
 import * as React from 'react'
 import { useDispatch } from "react-redux";
-import { openSignInModal } from '@/state/action'
+import { openSignInModal, closeSignInModal } from '@/state/action'
+import { getUserLibrary } from '@/state/action/userAction'
+import { IUser } from '@/types'
+import { setLogout, setUser, } from '@/state/action/authAction'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
 import endpoints from '@/strings/static/endpoints'
+import acApi from '@/util/api'
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_title,
@@ -30,6 +34,37 @@ const formText = {
 const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> = ({ type }) => {
     const [reDirecting, setRedirecting] = React.useState(false)
     const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        checkUser()
+
+    }, [])
+
+    const checkUser = () => {
+
+        acApi
+            .profile()
+            .then((res: IUser) => {
+                if (res && res.id) {
+                    if (res.meta && res.meta.consented) {
+                        dispatch(setUser(res))
+                        dispatch(getUserLibrary())
+                        dispatch(closeSignInModal())
+                    } else {
+                        dispatch(openSignInModal("giveConsent"))
+                    }
+                } else {
+                    dispatch(setLogout())
+                }
+            })
+            .catch((err: any) => {
+                console.log(err)
+                dispatch(setLogout())
+                console.log('handle login error')
+            })
+    }
+
+
     const toggleOptions = () => {
         const next = type === 'signInOptions' ? 'signUpOptions' : 'signInOptions'
         dispatch(openSignInModal(next))

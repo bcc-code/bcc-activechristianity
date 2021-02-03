@@ -32,12 +32,16 @@ export interface IDrawerNav {
 
 const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props) => {
     const { children } = props
-
+    const localStorageKey = 'ac.loggedIn'
     const dispatch = useDispatch();
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)
 
     React.useEffect(() => {
-        checkUser()
+        const redirectedFromFb = window.location.href && window.location.href.indexOf('#_=_') > -1
+        const loggedIn = localStorage.getItem(localStorageKey)
+        if (loggedIn === "true" || redirectedFromFb) {
+            checkUser()
+        }
 
     }, [])
 

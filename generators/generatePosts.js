@@ -1,20 +1,9 @@
 const _ = require('lodash')
 const path = require('path')
-const {topicQuery, postQuery,sendQuery} = require('gatsby-source-ac/helpers')
-const listTemplate = 'src/templates/archive/post-list.tsx'
-const ac_strings=require('../src/strings/ac_strings.js')
-const endpoints = require('../src/strings/static/endpoints')
-const {normalizePostRes,filterTopics, getRandomArray,normalizeAvailableLanguages} = require('../src/helpers/normalizers')
-/* SETUP */const  { groupAll: topicGroupAll, formatsIds, typeIds } = require('../src/strings/static/topic-ids')
-const recommendedByPostQuery = (postId) => `
-  query { 
-    
-    recommendedByPost(postId:${postId}){
-      slug
-    }
-  }  
-`
-const { promises } = require('fs')
+const { postQuery} = require('gatsby-source-ac/helpers')
+const {normalizePostRes,getRandomArray,normalizeAvailableLanguages} = require('../src/helpers/normalizers')
+const  { formatsIds, typeIds } = require('../src/strings/static/topic-ids')
+
 const template = 'src/templates/single-resource/post.tsx'
 
 const query = `{
@@ -300,7 +289,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               return 
                           })
 
-                          
+                          console.log(allNormalizedPosts)
                           const allPostsSlugs = Object.keys(allNormalizedPosts)
                           for(let k=0; k<allPostsSlugs.length;k++){
                             const slug = allPostsSlugs[k]
@@ -328,16 +317,19 @@ module.exports = async function generatePosts(actions, graphql) {
                               if (format) {
                                   breadcrumb.push(format[0])
                               }
+
+                              console.log(allInterestedPosts)
+
                               const data = {
                                 normalized,
-                                allInterestedPosts:allInterestedPosts.map(s=>allNormalizedPosts[s]),
+                                allInterestedPosts:allInterestedPosts.map(s=>allNormalizedPosts[s].normalized),
                                 authorPosts:authorPosts.map(a=>({
                                   ...a,
-                                  posts:a.posts.map(s=>allNormalizedPosts[s])
+                                  posts:a.posts.map(s=>allNormalizedPosts[s].normalized)
                                 })),
                                 topicPosts:topicPosts.map(t=>({
                                   ...t,
-                                  posts:t.posts.map(s=>allNormalizedPosts[s])
+                                  posts:t.posts.map(s=>allNormalizedPosts[s].normalized)
                                 })),
                                 mediaTypes:{
                                   types:mediaTypes,
