@@ -288,9 +288,9 @@ module.exports = async function generatePosts(actions, graphql) {
                             
                               return 
                           })
-
-                          console.log(allPostsSlugs.length)
+  
                           const allPostsSlugs = Object.keys(allNormalizedPosts)
+                          console.log(allPostsSlugs.length)
                           for(let k=0; k<allPostsSlugs.length;k++){
                             const slug = allPostsSlugs[k]
                             const post=allNormalizedPosts[slug]
