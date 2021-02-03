@@ -289,7 +289,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               return 
                           })
 
-                          console.log(allNormalizedPosts)
+                          console.log(allPostsSlugs.length)
                           const allPostsSlugs = Object.keys(allNormalizedPosts)
                           for(let k=0; k<allPostsSlugs.length;k++){
                             const slug = allPostsSlugs[k]
@@ -318,18 +318,31 @@ module.exports = async function generatePosts(actions, graphql) {
                                   breadcrumb.push(format[0])
                               }
 
-                              console.log(allInterestedPosts)
-
                               const data = {
                                 normalized,
-                                allInterestedPosts:allInterestedPosts.map(s=>allNormalizedPosts[s].normalized),
-                                authorPosts:authorPosts.map(a=>({
-                                  ...a,
-                                  posts:a.posts.map(s=>allNormalizedPosts[s].normalized)
-                                })),
+                                allInterestedPosts:allInterestedPosts.map(s=>{
+                                  if(allNormalizedPosts[s]){
+                                    return allNormalizedPosts[s].normalized
+                                  } else {
+                                    console.log('cannot find post for '+s)
+                                  }
+                                }),
+                                authorPosts:authorPosts.map(s=>{
+                                  if(allNormalizedPosts[s]){
+                                    return allNormalizedPosts[s].normalized
+                                  } else {
+                                    console.log('cannot find post for '+s)
+                                  }
+                                }),
                                 topicPosts:topicPosts.map(t=>({
                                   ...t,
-                                  posts:t.posts.map(s=>allNormalizedPosts[s].normalized)
+                                  posts:t.posts.map(s=>{
+                                    if(allNormalizedPosts[s]){
+                                      return allNormalizedPosts[s].normalized
+                                    } else {
+                                      console.log('cannot find post for '+s)
+                                    }
+                                  })
                                 })),
                                 mediaTypes:{
                                   types:mediaTypes,
