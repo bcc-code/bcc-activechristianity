@@ -13,7 +13,9 @@ const PrivateRoute: React.FC<any> = ({ component: Component, location, ...rest }
     } else if (auth.loggedIn == 'loading') {
         return <div>{ac_strings.loading}</div>
     } else {
-        navigate('/')
+        if (typeof window !== "undefined") {
+            navigate('/')
+        }
         return null
     }
 
