@@ -89,7 +89,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
     ])
 
     return (
-        <div className="relative">
+        <>
             <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             <TopMobile
                 {...NavProps}
@@ -99,7 +99,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             <Breadcrumb key={shortid()} />
             {children}
             <Footer key={shortid()} />
-        </div>
+        </>
 
     )
 

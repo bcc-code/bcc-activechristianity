@@ -1,6 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 
+// Simple, no?
+if(typeof window!=="undefined"){
+  var {registerObserver} = require('react-perf-devtool')
+  registerObserver()
+}
+
 export default function HTML(props) {
   return (
     <html {...props.htmlAttributes}>
