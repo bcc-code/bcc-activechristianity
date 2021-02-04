@@ -4,14 +4,6 @@ phases:
         runtime-versions:
             nodejs: 12
         commands:
-            - echo update npm...
-            - npm install -g n
-            - n latest
-            - npm update -g npm
-            - echo node -v
-            - node -v
-            - echo npm -v
-            - npm -v
             - 'touch .npmignore'
             - 'npm install -g gatsby gatsby-cli'
     pre_build:
