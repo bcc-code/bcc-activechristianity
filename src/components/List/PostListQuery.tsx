@@ -2,7 +2,7 @@ import React from 'react'
 import { navigate } from "gatsby"
 import { IPaginate, IPostItem } from "@/types"
 import RightImgWDes from '@/components/PostItemCards/RightImg'
-import { RightImgListPlaceHolder } from '@/layout-parts/Loader/PlaceHolders'
+import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { normalizePostRes } from '@/helpers'

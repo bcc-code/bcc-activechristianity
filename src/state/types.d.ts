@@ -12,12 +12,13 @@ export interface IRootState {
   translatedUrls: ITranslationNavItem[]
   playlist: IMedia[]
   isAutoPlay: boolean,
-  isPlaying: boolean,
+
   isSignInModalOpen: ISignInModalContentType
   isModalOpen: boolean
   mpPlayPause: boolean
   userLibrary: IUserLibrary
-  currentMedia: IMedia
+  currentMedia: IMedia,
+  isPlaying: boolean,
   mpHeight: number
   breadcrumb: IBreadcrumb
 }

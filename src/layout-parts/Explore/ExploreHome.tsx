@@ -5,7 +5,7 @@ import Link from '@/components/CustomLink'
 import { SectionTitleDesktopAndMobile } from '@/components/Headers'
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 
-import TopicRowAndHorizontalScroll from '@/layout-parts/List/Combo/TopicRowAndHorizontalScroll'
+import TopicRowAndHorizontalScroll from '@/components/List/Combo/TopicRowAndHorizontalScroll'
 import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended'
 import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
 import ac_strings from '@/strings/ac_strings.js'

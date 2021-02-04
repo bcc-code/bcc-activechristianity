@@ -5,7 +5,7 @@ import { INavItem, IPostAuthors, ITopicNavItem } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import { KeyboardArrowRightIcon, PublishIcon } from '@/components/Icons/MUI'
-const Row3ColAndXScroll = loadable(() => import('@/layout-parts/List/Combo/Row3Col-HorizontalScroll'))
+const Row3ColAndXScroll = loadable(() => import('@/components/List/Combo/Row3Col-HorizontalScroll'))
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.js'

@@ -4,7 +4,6 @@ import React from "react"
 import { Provider } from "react-redux"
 import { createStore, applyMiddleware } from "redux"
 import reducers from "./src/state/reducer";
-import middleware from './src/state/middleware'
 import authApi from './src/state/middleware/auth'
 import userApi from './src/state/middleware/user'
 import {homeUrls} from "./src/state/reducer/translationUrl"
@@ -23,9 +22,10 @@ export const preloadedState = {
     translatedUrls:homeUrls,
     playlist:[],
     currentMedia:{},
+    isPlaying:false,
     isAutoPlay:false,
     mpPlayPause:false,
-    isPlaying:false,
+    
     isSignInModalOpen:null,
     isModalOpen:false,
     userLibrary:{
@@ -44,7 +44,7 @@ export const preloadedState = {
 }
 
 export default ({ element }) => {
-    const store = createStore(reducers, preloadedState,applyMiddleware(authApi,userApi,middleware ))
+    const store = createStore(reducers, preloadedState,applyMiddleware(authApi,userApi ))
 
 
     return (

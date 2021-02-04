@@ -5,10 +5,7 @@ import { languages } from '@/strings/generated/menus.json'
 import { ITranslations, INavItem } from '@/types'
 import { normalizeAvailableLanguages } from '@/helpers'
 
-export const homeUrls: INavItem[] = languages.map((item) => ({
-    name: item.title,
-    to: item.url
-}));
+export const homeUrls: INavItem[] = languages
 
 interface TURLStateAction {
     dispatch: Dispatch

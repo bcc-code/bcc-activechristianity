@@ -3,8 +3,8 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
-const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
+const LatestDesktopRow = loadable(() => import('@/components/List/Combo/Latest'))
+const PostMultiColLayout = loadable(() => import('@/components/List/PostMultiColLayout'))
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import { LayoutH1 } from '@/components/Headers'

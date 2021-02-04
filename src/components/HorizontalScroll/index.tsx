@@ -3,7 +3,7 @@ import { IPostItem } from '@/types'
 import { UnderlineTitleLink } from '@/components/Headers'
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
-import PostRow from '@/layout-parts/List/PostRow4Col'
+import PostRow from '@/components/List/PostRow4Col'
 import './horizontal-scroll.css';
 
 interface IPostHorizontalScroll {

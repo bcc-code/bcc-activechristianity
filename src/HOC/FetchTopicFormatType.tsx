@@ -1,7 +1,7 @@
 import * as React from "react"
 import { ITopic, ITopicPostItems } from '@/types'
-import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
+import { getPlaceholder } from '@/components/Loader/PlaceHolders'
+import Placeholder from '@/components/Loader/MainpagePlaceholder'
 import { fetchPostsFromTopics } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.js'
 interface IFetchTopics {

@@ -12,7 +12,7 @@ import { PageSectionHeader } from '@/components/Headers'
 import RightImg from '@/components/PostItemCards/RightImg'
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 
-const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+const HSCardList = loadable(() => import('@/components/HorizontalScroll/HSCardList'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 
 import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'

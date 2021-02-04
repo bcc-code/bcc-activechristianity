@@ -3,8 +3,8 @@ import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
-import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
-const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+import HSPlaylist from '@/components/HorizontalScroll/HSPlaylist'
+const HSCardList = loadable(() => import('@/components/HorizontalScroll/HSCardList'))
 import { PageSectionHeader } from '@/components/Headers'
 import LazyLoad from '@/components/LazyLoad';
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenDesktopLayout'))

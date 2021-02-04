@@ -1,5 +1,5 @@
 
-const axios = require(`axios`)
+const fetch = require('node-fetch')
 const fs = require('fs')
 const path = require('path')
 const stringify = require(`json-stringify-safe`)
@@ -11,13 +11,14 @@ const translationStrings = async function() {
   if (!envLocale) throw new Error('Enviroment LOCALE does not seem to be set')
 
   console.log(`getting strings for${envLocale}`)
-  await axios({
-    url: `${endpoints.slug_translation}`,
+  await fetch(endpoints.slug_translation,{
     method: 'get',
     headers: {
       'Content-Type': 'application/json'
     },
-  }).then(({data})=>{
+  })
+  .then(res=>res.json())
+  .then((data)=>{
     if (data){
       const strings = {}
       data.forEach(string => {

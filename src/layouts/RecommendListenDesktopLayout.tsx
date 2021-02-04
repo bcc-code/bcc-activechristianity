@@ -3,11 +3,11 @@ import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 const ByTaxonomies = loadable(() => import('@/layout-parts/RecommendLayout/ByCategoriesDesktop'))
-const LatestDesktopRow = loadable(() => import('@/layout-parts/List/Combo/Latest'))
-const PostMultiColLayout = loadable(() => import('@/layout-parts/List/PostMultiColLayout'))
+const LatestDesktopRow = loadable(() => import('@/components/List/Combo/Latest'))
+const PostMultiColLayout = loadable(() => import('@/components/List/PostMultiColLayout'))
 import getFormatsDesktopLayout from '@/layout-parts/RecommendLayout/getPostsLayout'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import PostRow from '@/layout-parts/List/PostRow4Col'
+import PostRow from '@/components/List/PostRow4Col'
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'

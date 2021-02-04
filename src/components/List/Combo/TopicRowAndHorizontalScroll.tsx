@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
+import XScrollCustomSize from '@/components/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import ac_strings from '@/strings/ac_strings.js'
 import { ITopic } from '@/types'

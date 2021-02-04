@@ -1,6 +1,6 @@
 import * as React from "react"
-import PostRow3Col from '@/layout-parts/List/PostRow3Col'
-import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
+import PostRow3Col from '@/components/List/PostRow3Col'
+import TopImgHorizontalScrollRow from '@/components/HorizontalScroll/TopImgRow'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 
 const flickityOptions = {

@@ -8,7 +8,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { IRootState } from '@/state/types'
-import Cookies from 'js-cookie'
+
 import { validateEmail } from '@/helpers'
 
 const initialFieldsState = {
@@ -23,8 +23,9 @@ const initialErrorState = {
 
 type IFormFieldType = 'email' | 'password'
 const SignInForm: React.FC = () => {
-    const cookieName = 'ac.signin.reset_password_reminder'
-    const userReminderOption = Cookies.get(cookieName);
+    const localStorageKey = 'ac.signin.reset_password_reminder'
+    const userReminderOption = typeof window !== "undefined" ? localStorage.getItem(localStorageKey) : "false"
+
 
     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const [fields, setFields] = React.useState(initialFieldsState)
@@ -57,7 +58,7 @@ const SignInForm: React.FC = () => {
     }
     const setNotShowReminder = () => {
         setShowReminder(false)
-        Cookies.set(cookieName, 'true')
+        localStorage.setItem(localStorageKey, "true")
     }
 
     const handleChange = (e: any, fieldName: string) => {

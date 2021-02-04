@@ -5,7 +5,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { RightImgListPlaceHolder } from '@/layout-parts/Loader/PlaceHolders'
+import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import { trimSlug } from '@/helpers'
 export interface IPostList {
     audio?: boolean

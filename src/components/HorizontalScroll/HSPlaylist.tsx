@@ -1,5 +1,5 @@
 import React from 'react'
-import XScroll from '@/layout-parts/HorizontalScroll/BaseCustomSize'
+import XScroll from '@/components/HorizontalScroll/BaseCustomSize'
 import { IPlaylist } from '@/types'
 import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg'
 import shortId from 'shortid'

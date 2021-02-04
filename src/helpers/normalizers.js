@@ -46,9 +46,9 @@ const normalizeAvailableLanguages = (langs, showAllLanguages) => {
     languages.forEach(item => {
         const find = langs.find(l => l.lang === item.locale)
         if (find) {
-            translatedLinks.push({ to: item.url + find.slug, name: item.lang })
+            translatedLinks.push({ to: item.to + find.slug, name: item.lang })
         } else if (showAllLanguages) {
-            translatedLinks.push({ to: item.url, name: item.lang })
+            translatedLinks.push({ to: item.to, name: item.name })
         }
     })
 

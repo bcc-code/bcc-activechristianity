@@ -10,7 +10,7 @@ import { menusItems } from '@/strings/generated/menus.json'
 import { INavItem, IBibleBook, IBible, } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import acApi from '@/util/api'
-import PostList from '@/layout-parts/List/PostList'
+import PostList from '@/components/List/PostList'
 interface IBibleNavProps {
     path: string
     pageContext: {

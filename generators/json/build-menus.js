@@ -1,10 +1,10 @@
 
-const axios = require(`axios`)
-const endpoints = require('../../src/strings/static/endpoints')
+const { sendQuery} = require('gatsby-source-ac/helpers')
+const endpoints = require('../../src/static/strings/static/endpoints')
 const {saveFile} = require('./build-translated-strings')
 
 const getMenus = () =>{
-  const {menusItems} = require('../../src/strings/static/menu')
+  const {menusItems} = require('../../src/static/strings/static/menu')
   const menus = {}
 
   const desktopMenuOptions = {
@@ -34,7 +34,7 @@ const listenSectionKey = process.env.LISTEN_SECTION
       const items = [...menu].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]}))
       menus['mobile']={
         loggedIn:[...menu,"my-content"].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]})),
-        default:["home",...menu].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]}))
+        default:[...menu].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]}))
       }
       return items
   }
@@ -62,39 +62,43 @@ const listenSectionKey = process.env.LISTEN_SECTION
 }
 
 const languageSites = async function() {
-    const {menusItems,userMenuItems,slug_user} = require('../../src/strings/static/menu')
-  const options = {
-        url: `${endpoints.api_url}`,
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: JSON.stringify({ query:`
-        {
-          sites {
-            lang
-            locale
-            title
-            url
-          }
-          settings {
-            key
-            value
-          }
-        }
-      ` })
+    const {menusItems,userMenuItems,slug_user} = require('../../src/static/strings/static/menu')
+  const query=`
+  {
+    sites {
+      lang
+      locale
+      title
+      url
+    }
+    settings {
+      key
+      value
+    }
   }
+`
   const menus=getMenus()
   
-  return axios(options)
+  return sendQuery(query,endpoints.api_url,{ "x-lang": process.env.LANG_CODE})
   .then(res=>{
-      const data = res.data.data.sites
-      menus["languages"]=data
+      const {sites,settings} = res
+      const metadata = {}
+      settings.forEach(s => {
+        metadata[s.key] = s.value
+      })
+
+      const {social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}=metadata
+      menus["languages"]=sites?sites.map((item) => ({
+        name: item.title,
+        to: item.url,
+        locale:item.locale
+    })):[];
       menus["menusItems"]=menusItems
       menus["userMenuItems"]=userMenuItems
       menus["slugUser"]=slug_user
-      menus["slugUser"]=slug_user
-      saveFile('./src/strings/generated', 'menus', 'json',  menus)
+      menus["topLink"]=metadata["top_link"]
+      menus["socialLinks"]={social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}
+      saveFile('./src/static/strings/generated', 'menus', 'json',  menus)
   })
 }
 

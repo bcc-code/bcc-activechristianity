@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { ITopicNavItem, IPostItem } from '@/types'
 import { fetchPostslistFromArchivePage, fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
-import Row3ColAndXScroll from '@/layout-parts/List/Combo/Row3Col-HorizontalScroll'
+import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 
 import ac_strings from '@/strings/ac_strings.js'
 

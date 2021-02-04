@@ -2,10 +2,10 @@ import * as React from 'react'
 import LazyLoad from '@/components/LazyLoad';
 
 import MetaTag from '@/components/Meta'
-import XScroll from '@/layout-parts/HorizontalScroll/BaseLarge'
+import XScroll from '@/components/HorizontalScroll/BaseLarge'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import VideoTopImg from '@/components/PostItemCards/VideoTopImg'
-import VideoRow4Col from '@/layout-parts/List/Combo/VideoRow4Col-HorizontalScroll'
+import VideoRow4Col from '@/components/List/Combo/VideoRow4Col-HorizontalScroll'
 import { LayoutH1Wide, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import { INavItemCount, ISubtopicLinks, IRecommendationPage, IPostItem } from '@/types'

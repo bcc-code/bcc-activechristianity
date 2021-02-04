@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import shortid from 'shortid'
 /* const AudioPlayer */
-import Row3ColAndXScroll from '@/layout-parts/List/Combo/Row3Col-HorizontalScroll'
+import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))

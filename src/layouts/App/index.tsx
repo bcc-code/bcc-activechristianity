@@ -1,12 +1,13 @@
 
 import React, { Profiler } from 'react'
 import loadable from '@loadable/component'
+import shortid from 'shortid'
 import Breadcrumb from './Breadcrumb'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
-import shortid from 'shortid'
+
 import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'

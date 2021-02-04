@@ -3,9 +3,9 @@ import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/F
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import Content from '@/components/Content'
 import RightImgPostItem from '@/components/PostItemCards/RightImg'
-import PostRow2Col from '@/layout-parts/List/PostRow2Col'
-import PostRow3Col from '@/layout-parts/List/PostRow3Col'
-import PostRow4Col from '@/layout-parts/List/PostRow4Col'
+import PostRow2Col from '@/components/List/PostRow2Col'
+import PostRow3Col from '@/components/List/PostRow3Col'
+import PostRow4Col from '@/components/List/PostRow4Col'
 import DesktopHeaderPost from '@/layout-parts/Home/HeaderPost'
 
 import Video16to9 from '@/components/Images/Video16to9'

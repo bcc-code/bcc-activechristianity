@@ -5,8 +5,8 @@ import { IPaginate, INavItem, IPostItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import { useLocation } from '@reach/router';
-import PostListSlugs from '@/layout-parts/List/PostList'
-import PostListQuery from '@/layout-parts/List/PostListQuery'
+import PostListSlugs from '@/components/List/PostList'
+import PostListQuery from '@/components/List/PostListQuery'
 import { formatsAll } from '@/strings/static/topic-ids'
 import { getAllUrlParams } from '@/helpers'
 

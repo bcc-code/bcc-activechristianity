@@ -1,6 +1,6 @@
 import * as React from "react"
 import { IPostItem, } from '@/types'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
+import Placeholder from '@/components/Loader/MainpagePlaceholder'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import acApi from '@/util/api'
 interface IFetchPost {
