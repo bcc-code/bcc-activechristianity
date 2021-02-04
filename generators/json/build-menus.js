@@ -62,7 +62,7 @@ const listenSectionKey = process.env.LISTEN_SECTION
 }
 
 const languageSites = async function() {
-    const {menusItems,userMenuItems,slug_user} = require('../../src/static/strings/static/menu')
+    const {menusItems,userMenuItems,slug_user} = require('../../src/strings/static/menu')
   const query=`
   {
     sites {
@@ -98,7 +98,7 @@ const languageSites = async function() {
       menus["slugUser"]=slug_user
       menus["topLink"]=metadata["top_link"]
       menus["socialLinks"]={social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}
-      saveFile('./src/static/strings/generated', 'menus', 'json',  menus)
+      saveFile('./src/strings/generated', 'menus', 'json',  menus)
   })
 }
 
