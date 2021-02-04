@@ -1,10 +1,10 @@
 
 const { sendQuery} = require('gatsby-source-ac/helpers')
-const endpoints = require('../../src/static/strings/static/endpoints')
+const endpoints = require('../../src/strings/static/endpoints')
 const {saveFile} = require('./build-translated-strings')
 
 const getMenus = () =>{
-  const {menusItems} = require('../../src/static/strings/static/menu')
+  const {menusItems} = require('../../src/strings/static/menu')
   const menus = {}
 
   const desktopMenuOptions = {
