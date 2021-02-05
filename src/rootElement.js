@@ -2,7 +2,9 @@
 
 import React from "react"
 import {languages} from './strings/generated/menus.json'
-
+import { Provider } from "react-redux"
+import { createStore, applyMiddleware } from "redux"
+import reducers from "./src/state/reducer";
 export const preloadedState = {
     auth: {
         loggedIn: 'notLoggedIn'
@@ -39,6 +41,11 @@ import "./styles/tailwind-output.css"
 export default ({ element }) => {
     
     return (
-      <div> nothing</div>
+        <Provider store={store}>
+                <div>
+                    nothing 
+                    {element}
+                </div>
+        </Provider>
     )
 }
