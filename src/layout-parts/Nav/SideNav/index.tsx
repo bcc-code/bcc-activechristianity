@@ -12,8 +12,8 @@ import SideNavWrapper from './SideNavWrapper'
 import ac_strings from '@/strings/ac_strings.js'
 
 import loadable from '@loadable/component'
-const UserMenu = loadable(() => import('./UserMenu'))
-const ResourceMenu = loadable(() => import('./ResourceMenu'))
+import UserMenu from './UserMenu'
+import ResourceMenu from './ResourceMenu'
 import { side, sideResource, slugUser } from '@/strings/generated/menus.json'
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
     const [openUserMenu, setOpenUserMenu] = React.useState(false)

@@ -7,7 +7,7 @@ import shortid from 'shortid'
 /* const AudioPlayer */
 const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
-const Content = loadable(() => import('@/components/Content'))
+import Content from '@/components/Content'
 const PostContent = loadable(() => import('@/components/Content/PostContent'))
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 
@@ -16,7 +16,7 @@ import { formatsAll } from '@/strings/static/topic-ids'
 import { PostH1 } from '@/components/Headers'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
-const FromAuthorsSection = loadable(() => import('@/layout-parts/PostLayout/FromAuthors'))
+import FromAuthorsSection from '@/layout-parts/PostLayout/FromAuthors'
 import {
     AuthorBookmarkShareSection,
     Translations,
