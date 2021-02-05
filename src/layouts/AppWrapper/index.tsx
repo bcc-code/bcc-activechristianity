@@ -98,9 +98,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     return (
         <>
-            {/* <CookieConsent key={shortid()} />
+            <CookieConsent key={shortid()} />
             <SignInSignUpModal key={shortid()} />
-            <MediaPlayer key={shortid()} /> */}
+            <MediaPlayer key={shortid()} />
             {/*          <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             <TopMobile
                 {...NavProps}
