@@ -13,10 +13,10 @@ import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
 import { processRecommendationContext, getRandomFeatured } from '@/helpers'
-import TopImgPost from '@/components/PostItemCards/TopImg'
+
 // Type
 import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
-import '@/components/HorizontalScroll/horizontal-scroll.css';
+
 // Helpers
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -85,70 +85,35 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         breadcrumb={[]}
       />
       <div>
-        <div className="scroll-snap-x-container overflow-scroll mb-4 sm:hidden w-full" >
-          {[featured[0]].map((c, i) => {
-
-            return (
-              <div className="scroll-snap-x-child ml-4" style={{ width: "88%", minWidth: "88%" }} key={shortid()}>
-                <TopImgPost {...c} />
-              </div>
-            )
-
-          })}
-          <div className="min-w-4">
-
-          </div>
-        </div>
+        <FeaturedBanner featured={featured} />
       </div>
 
       <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
         <PageSectionHeader title={ac_strings.latest} className="pb-4" />
-        <div className="scroll-snap-x-container overflow-scroll mb-4 sm:hidden w-full" >
-          {latest.map((c, i) => {
-
-            return (
-              <div className="scroll-snap-x-child ml-4" style={{ width: "88%", minWidth: "88%" }} key={shortid()}>
-                <TopImgPost {...c} />
-              </div>
-            )
-
-          })}
-        </div>
-
+        <TopImgRowHorizontalScroll posts={latest} />
       </div>
-      {/*       <LazyLoad>
+      <LazyLoad>
         <div className="py-6">
           <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
           <FeatureSectionMobile topicPosts={popularTopics.static} />
         </div>
-      </LazyLoad> */}
+      </LazyLoad>
       <LazyLoad>
         <div className="py-6">
           <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
-          {/* <FeaturedTopics featured={popularTopics.static} /> */}
+          <FeaturedTopics featured={popularTopics.static} />
           <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
             <PageSectionHeader title={ac_strings.popular} className="pb-4" />
-            <div className="scroll-snap-x-container overflow-scroll mb-4 sm:hidden w-full" >
-              {popular.map((c, i) => {
-
-                return (
-                  <div className="scroll-snap-x-child ml-4" style={{ width: "88%", minWidth: "88%" }} key={shortid()}>
-                    <TopImgPost {...c} />
-                  </div>
-                )
-
-              })}
-            </div>
-
+            <TopImgRowHorizontalScroll posts={popular} />
           </div>
-          {/*           <div className="w-full p-4">
+          <div className="w-full p-4">
             <div className="w-full h-16">
               <BgImgTopicCard
                 name={ac_strings.browse_resource}
                 to={ac_strings.slug_explore}
               />
             </div>
-          </div> */}
+          </div>
         </div>
       </LazyLoad>
     </div>

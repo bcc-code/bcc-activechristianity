@@ -29,11 +29,7 @@ const PostBase: React.FC<IPostBase> = (props) => {
 
     return (
         <div className={`flex flex-col flex-1 ${wrapperClass}`}>
-            {/* <h2>{title}</h2>
-            <span>{excerpt}</span> */}
-            {/*    <TextSizeTitle {...postTitleProps} rawText={title} />
-            {postExcerptProps && <TextSizeTitle {...postExcerptProps} rawText={excerpt} />} */}
-            {/*         <div className="flex flex-col flex-1 leading-normal">
+            <div className="flex flex-col flex-1 leading-normal">
                 <Link to={`${slug}`} >
                     <TextSizeTitle {...postTitleProps} rawText={title} />
                     {postExcerptProps && <TextSizeTitle {...postExcerptProps} rawText={excerpt} />}
@@ -50,11 +46,11 @@ const PostBase: React.FC<IPostBase> = (props) => {
                     />
                 )}
                 <div className="flex pr-4">
-
+                    {/* {views && <Views views={views} />} */}
                     <Bookmark id={id} color="slate-dark" size="5" />
                 </div>
 
-            </div> */}
+            </div>
         </div>
     )
 }
