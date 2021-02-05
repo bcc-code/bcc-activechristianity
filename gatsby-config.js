@@ -121,9 +121,9 @@ if (activeEnv === 'production') {
     {
       resolve: 'gatsby-plugin-sitemap'
     },
-    {
+/*     {
       resolve:'gatsby-plugin-preact'
-    }
+    } */
   )
 
   if( process.env.NO_FOLLOW==="true"){
