@@ -7,6 +7,7 @@ import { createStore, applyMiddleware} from "redux"
 import authApi from './state/middleware/auth'
 import userApi from './state/middleware/user'
 import reducers from "./state/reducer";
+import AppWrapper from './layouts/AppWrapper'
 export const preloadedState = {
     auth: {
         loggedIn: 'notLoggedIn'

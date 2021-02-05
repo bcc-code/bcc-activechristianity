@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
-import { IDrawerNav } from '@/layouts/App'
+import { IDrawerNav } from '@/layouts/AppWrapper'
 import LogoFull from '@/images/ACLogo'
 import TopFirst from './TopFirst'
 import { desktop } from '@/strings/generated/menus.json'

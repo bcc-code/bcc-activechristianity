@@ -3,7 +3,7 @@ import Link from '@/components/CustomLink'
 import LogoFull from '@/images/ACLogo'
 import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
 import ac_strings from '@/strings/ac_strings.js'
-import { IDrawerNav } from '@/layouts/App'
+import { IDrawerNav } from '@/layouts/AppWrapper'
 
 import './topmobile.css'
 

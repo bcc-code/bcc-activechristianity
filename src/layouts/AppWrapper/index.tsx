@@ -1,13 +1,13 @@
 
 import React, { Profiler } from 'react'
 import loadable from '@loadable/component'
-import shortid from 'shortid'
+/* import shortid from 'shortid'
 import Breadcrumb from './Breadcrumb'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
-
+ */
 import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
@@ -91,15 +91,15 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     return (
         <>
-            <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
+            {/*          <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             <TopMobile
                 {...NavProps}
                 key={shortid()}
             />
             {isSideNavOpen && <SideNav {...NavProps} />}
-            <Breadcrumb key={shortid()} />
+            <Breadcrumb key={shortid()} /> */}
             {children}
-            <Footer key={shortid()} />
+            {/*       <Footer key={shortid()} /> */}
         </>
 
     )

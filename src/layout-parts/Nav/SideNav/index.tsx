@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IDrawerNav } from '@/layouts/App'
+import { IDrawerNav } from '@/layouts/AppWrapper'
 import { useDispatch, useSelector } from 'react-redux'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
