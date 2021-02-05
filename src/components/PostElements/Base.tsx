@@ -29,13 +29,18 @@ const PostBase: React.FC<IPostBase> = (props) => {
 
     return (
         <div className={`flex flex-col flex-1 ${wrapperClass}`}>
-            {/*      <div className="flex flex-col flex-1 leading-normal">
+            {/* <h2>{title}</h2>
+            <span>{excerpt}</span> */}
+            {/*    <TextSizeTitle {...postTitleProps} rawText={title} />
+            {postExcerptProps && <TextSizeTitle {...postExcerptProps} rawText={excerpt} />} */}
+            {/*         <div className="flex flex-col flex-1 leading-normal">
                 <Link to={`${slug}`} >
                     <TextSizeTitle {...postTitleProps} rawText={title} />
                     {postExcerptProps && <TextSizeTitle {...postExcerptProps} rawText={excerpt} />}
                 </Link>
                 <div className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"> <AuthorLink authorGroups={authors} /></div>
-            </div> */}
+            </div>
+
 
             <div className={`pb-4 flex justify-between`}>
                 {hideTime !== true && (
@@ -44,12 +49,12 @@ const PostBase: React.FC<IPostBase> = (props) => {
                         {...duration}
                     />
                 )}
-                {/*           <div className="flex pr-4">
+                <div className="flex pr-4">
 
                     <Bookmark id={id} color="slate-dark" size="5" />
-                </div> */}
+                </div>
 
-            </div>
+            </div> */}
         </div>
     )
 }

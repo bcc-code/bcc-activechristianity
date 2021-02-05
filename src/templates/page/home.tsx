@@ -86,7 +86,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       />
       <div>
         <div className="scroll-snap-x-container overflow-scroll mb-4 sm:hidden w-full" >
-          {featured.map((c, i) => {
+          {[featured[0]].map((c, i) => {
 
             return (
               <div className="scroll-snap-x-child ml-4" style={{ width: "88%", minWidth: "88%" }} key={shortid()}>
