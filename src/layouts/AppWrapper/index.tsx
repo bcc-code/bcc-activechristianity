@@ -112,38 +112,21 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     return (
         <>
-            < Profiler id="cookie" onRender={onRenderCallback} >
-                <CookieConsent key={shortid()} />
-            </ Profiler>
-            < Profiler id="sign in" onRender={onRenderCallback} >
-                <SignInSignUpModal key={shortid()} />
+            <CookieConsent key={shortid()} />
+            <SignInSignUpModal key={shortid()} />
+            <MediaPlayer key={shortid()} />
+            <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
+            {isSideNavOpen && <SideNav {...NavProps} />}
+            <Breadcrumb key={shortid()} />
+            <Profiler id={"layout-children"} onRender={onRenderCallback}>
+                <div className="layout-children">
+                    {children}
+                </div>
             </Profiler>
-
-            < Profiler id="media player" onRender={onRenderCallback} >
-                <MediaPlayer key={shortid()} />
-            </Profiler>
-            < Profiler id="desktop top" onRender={onRenderCallback} >
-                <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
-            </Profiler>
-            < Profiler id="side nav" onRender={onRenderCallback} >
-                {isSideNavOpen && <SideNav {...NavProps} />}
-            </Profiler>
-            < Profiler id="bread crumb" onRender={onRenderCallback} >
-                <Breadcrumb key={shortid()} />
-            </Profiler>
-
-            {children}
-            < Profiler id="bottom mobile" onRender={onRenderCallback} >
-                <BottomMobile {...NavProps} key={shortid()} />
-            </Profiler>
-            < Profiler id="footer" onRender={onRenderCallback} >
-                <LazyLoad height={0} offset={80}>
-                    <Footer />
-                </LazyLoad>
-
-            </Profiler>
-            {/**/}
-            {/*       */}
+            <BottomMobile {...NavProps} key={shortid()} />
+            <LazyLoad height={0} offset={80}>
+                <Footer />
+            </LazyLoad>
         </>
 
     )

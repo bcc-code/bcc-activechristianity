@@ -1,7 +1,7 @@
 const ac_strings = require('../strings/ac_strings.js')
 const {languages} = require('../strings/generated/menus.json')
 const  endpoints = require('../strings/static/endpoints')
-
+const {initials,intToRGB,invertHex,hashCode} = require('./index-js')
 const  { groupAll: topicGroupAll, formatsIds, typeIds } = require('../strings/static/topic-ids')
 const BaseUrl = endpoints.dummy_image_api
 
@@ -46,9 +46,9 @@ const normalizeAvailableLanguages = (langs, showAllLanguages) => {
     languages.forEach(item => {
         const find = langs.find(l => l.lang === item.locale)
         if (find) {
-            translatedLinks.push({ to: item.to + find.slug, name: item.lang })
+            translatedLinks.push({ to: item.to + find.slug, name: item.name })
         } else if (showAllLanguages) {
-            translatedLinks.push({ to: item.to, name: item.name })
+            translatedLinks.push(item)
         }
     })
 
@@ -56,6 +56,24 @@ const normalizeAvailableLanguages = (langs, showAllLanguages) => {
         return (a.name < b.name ? -1 : 1)
     })
     return translatedLinks
+}
+
+const playlistToPost = (playlist)=> {
+    const { title, slug, image, excerpt, id } = playlist
+    const post = {
+        id,
+        title,
+        slug: `${ac_strings.slug_playlist}/${slug}`,
+        image: getImage(title, "640x320", image),
+        excerpt,
+        date: new Date(),
+        media: {
+            path: '',
+        },
+
+
+    }
+    return post
 }
 
 
@@ -276,10 +294,24 @@ const getRandomArray = (pickFromArray, length) => {
 
 }
 
+const getRandomFeatured = (data) => {
+    const { latest, featured, popular } = data
+    let toCheck = [...new Set([...popular, ...latest.slice(6)])]
+    const fixedPopularLatest = getRandomArray(toCheck, 6)
+    toCheck = [...new Set([...featured, ...fixedPopularLatest])]
+    const featuredMixed = getRandomArray(toCheck.slice(0, 6), 6)
+    return featuredMixed
+}
+
+
 module.exports = {
     normalizePostRes,
+    normalizeTracks,
+    normalizeAvailableLanguages,
     processRecommendationContext,
     filterTopics,
-    normalizeAvailableLanguages,
-    getRandomArray
+    playlistToPost,
+    getRandomArray,
+    getRandomFeatured,
+
 }

@@ -2,11 +2,12 @@ const path = require('path')
 const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
 const {typeScope,formatScope} = require('../src/strings/static/topic-ids')
 const endpoints = require('../src/strings/static/endpoints')
+const { processRecommendationContext, getRandomFeatured } = require('../src/helpers/normalizers')
 const baseUrl = endpoints.api_url
 //${postQuery}
 const headers = {
     "x-lang": process.env.LANG_CODE
-}
+    }
 const languagePostQuery = postQuery
 const topicQuery=`
     id
@@ -47,7 +48,6 @@ const query =`{
         featuredTopics:topics(featured:true) {
         	${topicQuery}
       }
-
     }
 }`
 
@@ -160,11 +160,20 @@ module.exports = function generatePages(actions, graphql) {
                 console.log('Failed to get popular posts and popular topics')
                 console.log(error)
             })
+            const latestPosts=ac.latestPosts.data
+            const popularPosts = popularPostsAll.dynamic && popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
+            const props =processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+            const { latest, popular, featured } = props
 
             const context = {
-                latestPosts:ac.latestPosts.data,
-                featuredPosts,
-                popularPosts:popularPostsAll,
+                latest,
+                featured,
+                popular,
+                mixedFeaturedPosts:[
+                    getRandomFeatured({ latest, popular, featured }),
+                    getRandomFeatured({ latest, popular, featured }),
+                    getRandomFeatured({ latest, popular, featured })
+                ],
                 popularTopics:popularTopicsAll,
               }
             createPage({

@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
+import { navigate } from 'gatsby'
 import { IMedia } from '@/types'
 import { VolumeUpRoundedIcon, PlayArrowRoundedIcon, EqualizerIcon, PlayCircleOutlineIcon, HeadsetIcon } from '@/components/Icons/MUI'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
@@ -19,6 +20,9 @@ export interface IPostItemMediaImg {
 
 export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, className, children, style }) => {
 
+    const handleClick = () => {
+        navigate(slug)
+    }
     return (
         <Link className={className} style={style} to={slug}>
             {/*             {track && (track.video || track.audio) && (
