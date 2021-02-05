@@ -1,6 +1,6 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
-const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
+const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
@@ -124,6 +124,7 @@ if (activeEnv === 'production') {
     {
       resolve:'gatsby-plugin-preact'
     }
+  )
 
   if( process.env.NO_FOLLOW==="true"){
     plugins.push({

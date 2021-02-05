@@ -62,9 +62,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
-   /*    generateHome(actions, graphql),
+      generateHome(actions, graphql),
       generateExplore(actions, graphql),
-      generatePosts(actions, graphql) */
+      generatePosts(actions, graphql)
 
     ]
 
