@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
+import HOCLoginCheck from '@/HOC/LogInCheck'
 import { HeadsetIcon, HomeIcon, ExploreIcon, DescriptionIcon, LocalOfferIcon, BookmarksIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI'
 import { useSelector } from "react-redux"
 import { IRootState } from '@/state/types'
@@ -25,9 +26,7 @@ const iconMapNav = {
     LocalOfferIcon
 }
 const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
-    const { auth } = useSelector((state: IRootState) => ({
-        auth: state.auth
-    }));
+
     const handlePathClick = (path: string, name: string) => {
         const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
         dataLayer.push({
@@ -41,35 +40,45 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
             drawerClass = 'mobile-open'
         }
      */
-    let mobileMenu = mobile.default
-    if (auth.loggedIn == "success") {
-        mobileMenu = mobile.loggedIn
-    }
 
     return (
-        <div style={{ zIndex: 600 }} className={`relative w-full drawer-main drawer-main-${drawerClass}`}>
-            <div className="fixed bottom-0 z-40 bg-white w-full">
+        <HOCLoginCheck
+            render={({ loginStatus }) => {
+                let mobileMenu = mobile.default
+                if (loginStatus === "success") {
+                    mobileMenu = mobile.loggedIn
+                }
 
-                <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
-                    {mobileMenu.map((item, i) => {
-                        const Icon = iconMapNav[item.iconName]
-                        return (
-                            <Link
-                                onClick={() => handlePathClick(item.to, item.name)}
-                                key={i}
-                                to={item.to}
-                                className="flex flex-col items-center justify-between text-gray-600 flex-1 py-2"
-                                activeClassName="bg-gray-300"
-                            >
-                                <span className="flex-1 flex items-center pb-3"><Icon className="fill-slate-light" /></span>
-                                <span className="block font-semibold" style={{ "fontSize": "10px" }}>{item.name}</span>
-                            </Link>
+                return (
+                    <div style={{ zIndex: 600 }} className={`relative w-full drawer-main drawer-main-${drawerClass}`}>
+                        <div className="fixed bottom-0 z-40 bg-white w-full">
 
-                        )
-                    })}
-                </div>
-            </div>
-        </div>
+                            <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
+
+                                {mobileMenu.map((item, i) => {
+                                    const Icon = iconMapNav[item.iconName]
+                                    return (
+                                        <Link
+                                            onClick={() => handlePathClick(item.to, item.name)}
+                                            key={i}
+                                            to={item.to}
+                                            className="flex flex-col items-center justify-between text-gray-600 flex-1 py-2"
+                                            activeClassName="bg-gray-300"
+                                        >
+                                            <span className="flex-1 flex items-center pb-3"><Icon className="fill-slate-light" /></span>
+                                            <span className="block font-semibold" style={{ "fontSize": "10px" }}>{item.name}</span>
+                                        </Link>
+
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                )
+            }}
+
+        />
+
     )
 }
 

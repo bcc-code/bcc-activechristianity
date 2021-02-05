@@ -1,18 +1,19 @@
 // https://github.com/souporserious/react-media-player
 import React from 'react'
 import { IRootState } from '@/state/types'
-import { setCurrentMedia } from '@/state/action'
 import MainController from './AudioPlayerController'
 import { useSelector, useDispatch } from "react-redux";
-import { IMedia } from '@/types'
+import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
+
 
 import "../style/madia-player.css"
 
 
 const mod = (num: number, max: number) => ((num % max) + max) % max
 const ACMediaPlayer: React.FC = () => {
-
-    const { playlist, isAutoPlay, currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia, playlist: state.playlist, isAutoPlay: state.isAutoPlay }));
+    const playlist = useSelector(playlistSelector)
+    const isAutoPlay = useSelector(isAutoPlaySelector)
+    const currentMedia = useSelector(currentMediaSelector)
 
     const [isRepeat, setIsRepeat] = React.useState(false)
     const [fullScreenInfo, setFullScreenInfo] = React.useState(false)

@@ -2,21 +2,19 @@
 import React, { Profiler } from 'react'
 import { useDispatch } from "react-redux"
 import loadable from '@loadable/component'
-/* import shortid from 'shortid'
-import Breadcrumb from './Breadcrumb'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
-import TopMobile from '@/layout-parts/Nav/TopMobile'
-const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
- */
 
+import Breadcrumb from './Breadcrumb'
+
+const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 import { openSignInModal } from '@/state/action'
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import shortid from 'shortid'
-import BottomMobile from '@/layout-parts/Nav/BottomMobile'
+import BottomMobile from '@/layout-parts/Nav/BottomMobileWrapper'
 
 import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 import Helmet from 'react-helmet'
@@ -122,17 +120,25 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             < Profiler id="media player" onRender={onRenderCallback} >
                 <MediaPlayer key={shortid()} />
             </Profiler>
+            < Profiler id="desktop top" onRender={onRenderCallback} >
+                <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
+            </Profiler>
+            < Profiler id="side nav" onRender={onRenderCallback} >
+                {isSideNavOpen && <SideNav {...NavProps} />}
+            </Profiler>
+            < Profiler id="bread crumb" onRender={onRenderCallback} >
+                <Breadcrumb key={shortid()} />
+            </Profiler>
 
-            {/*          <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
-            <TopMobile
-                {...NavProps}
-                key={shortid()}
-            />
-            {isSideNavOpen && <SideNav {...NavProps} />}
-            <Breadcrumb key={shortid()} /> */}
             {children}
-            {/* <BottomMobile key={shortid()}  /> */}
-            {/*       <Footer key={shortid()} /> */}
+            < Profiler id="bottom mobile" onRender={onRenderCallback} >
+                <BottomMobile {...NavProps} key={shortid()} />
+            </Profiler>
+            < Profiler id="footer" onRender={onRenderCallback} >
+                <Footer />
+            </Profiler>
+            {/**/}
+            {/*       */}
         </>
 
     )

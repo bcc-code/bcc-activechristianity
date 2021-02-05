@@ -67,6 +67,7 @@
     "react-swipeable": "^5.5.0",
     "react-transition-group": "^4.4.1",
     "redux-devtools-extension": "^2.13.8",
+    "reselect": "^4.0.0",
     "share-this": "git+https://github.com/besiw/share-this.git",
     "shortid": "^2.2.15"
   },

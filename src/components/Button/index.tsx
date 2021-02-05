@@ -3,7 +3,6 @@ import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.js'
 import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
 
-
 interface IButton {
     className?: string
     disabledClassName?: string

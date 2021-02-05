@@ -34,7 +34,7 @@ const listenSectionKey = process.env.LISTEN_SECTION
       const items = [...menu].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]}))
       menus['mobile']={
         loggedIn:[...menu,"my-content"].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]})),
-        default:[...menu].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]}))
+        default:["home",...menu].map(item => ({...menusItems[item],iconName:iconNameMapNav[item]}))
       }
       return items
   }

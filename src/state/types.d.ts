@@ -6,7 +6,7 @@ export interface StateAction extends Action {
   dispatch: Dispatch
   payload?: any
 }
-
+export type ILogginStatus = 'success' | 'loading' | 'notLoggedIn'
 export interface IRootState {
   auth: IUserState,
   translatedUrls: ITranslationNavItem[]
