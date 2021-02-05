@@ -4,7 +4,7 @@ import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import BottomMobile from '@/layout-parts/Nav/BottomMobile'
 import Breadcrumb from './Breadcrumb'
-import CookieConsent from "@/layouts/App/CookeConsent";
+import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 import Helmet from 'react-helmet'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'

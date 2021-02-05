@@ -1,5 +1,7 @@
 
 import React, { Profiler } from 'react'
+import { useDispatch } from "react-redux"
+import { openSignInModal } from '@/state/action'
 import loadable from '@loadable/component'
 /* import shortid from 'shortid'
 import Breadcrumb from './Breadcrumb'
@@ -8,10 +10,10 @@ import TopMobile from '@/layout-parts/Nav/TopMobile'
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
  */
-import { useDispatch } from "react-redux"
+/* 
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
-import { setIsModalOpen, openSignInModal } from '@/state/action'
+' */
 import { menusItems } from '@/strings/generated/menus.json'
 
 // string
@@ -71,7 +73,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     const handleSideNavOpen = (status: boolean) => {
         setSideNavOpen(status)
-        dispatch(setIsModalOpen(status))
     }
 
 
