@@ -7,7 +7,8 @@ import { createStore, applyMiddleware} from "redux"
 import authApi from './state/middleware/auth'
 import userApi from './state/middleware/user'
 import reducers from "./state/reducer";
-import AppWrapper from './layouts/AppWrapper'
+import loadable from '@loadable/component'
+const AppWrapper = loadable(() => import('@/layout-parts/AppWrapper'))
 export const preloadedState = {
     auth: {
         loggedIn: 'notLoggedIn'
@@ -45,10 +46,9 @@ export default ({ element }) => {
     const store = createStore(reducers, preloadedState,applyMiddleware(authApi,userApi ))
     return (
         <Provider store={store}>
-                <div>
-                    nothing 
+                <AppWrapper>
                     {element}
-                </div>
+                </AppWrapper>
         </Provider>
     )
 }

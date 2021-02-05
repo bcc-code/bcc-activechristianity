@@ -1,16 +1,25 @@
 
 import React, { Profiler } from 'react'
 import { useDispatch } from "react-redux"
-import { openSignInModal } from '@/state/action'
 import loadable from '@loadable/component'
-import shortid from 'shortid'
+/* import shortid from 'shortid'
 import Breadcrumb from './Breadcrumb'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
+ */
+
+import { openSignInModal } from '@/state/action'
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
+
+const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
+import shortid from 'shortid'
+import BottomMobile from '@/layout-parts/Nav/BottomMobile'
+import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
+import Helmet from 'react-helmet'
+const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 import { menusItems } from '@/strings/generated/menus.json'
 
 // string
@@ -45,7 +54,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     }, [])
 
-    const checkUser = async () => {
+    const checkUser = () => {
+        console.log('checking user')
         acApi
             .profile()
             .then((res: IUser) => {
@@ -88,6 +98,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     return (
         <>
+            {/* <CookieConsent key={shortid()} />
+            <SignInSignUpModal key={shortid()} />
+            <MediaPlayer key={shortid()} /> */}
             {/*          <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             <TopMobile
                 {...NavProps}
@@ -96,6 +109,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             {isSideNavOpen && <SideNav {...NavProps} />}
             <Breadcrumb key={shortid()} /> */}
             {children}
+            {/* <BottomMobile key={shortid()}  /> */}
             {/*       <Footer key={shortid()} /> */}
         </>
 
