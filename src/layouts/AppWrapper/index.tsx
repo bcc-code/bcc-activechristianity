@@ -17,12 +17,25 @@ import { getUserLibrary } from '@/state/action/userAction'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import shortid from 'shortid'
 import BottomMobile from '@/layout-parts/Nav/BottomMobile'
-/* 
-import CookieConsent from "@/layouts/AppWrapper/CookeConsent"; */
+
+import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 import Helmet from 'react-helmet'
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 import { menusItems } from '@/strings/generated/menus.json'
 
+function onRenderCallback(
+    id, // the "id" prop of the Profiler tree that has just committed
+    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+    actualDuration, // time spent rendering the committed update
+    baseDuration, // estimated time to render the entire subtree without memoization
+    startTime, // when React began rendering this update
+    commitTime, // when React committed this update
+    interactions // the Set of interactions belonging to this update
+) {
+    console.log(id)
+    console.log(actualDuration)
+    // Aggregate or log render timings...
+}
 // string
 
 import acApi from '@/util/api'
@@ -99,9 +112,17 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     return (
         <>
-            {/* <CookieConsent key={shortid()} /> */}
-            <SignInSignUpModal key={shortid()} />
-            <MediaPlayer key={shortid()} />
+            < Profiler id="cookie" onRender={onRenderCallback} >
+                <CookieConsent key={shortid()} />
+            </ Profiler>
+            < Profiler id="sign in" onRender={onRenderCallback} >
+                <SignInSignUpModal key={shortid()} />
+            </Profiler>
+
+            < Profiler id="media player" onRender={onRenderCallback} >
+                <MediaPlayer key={shortid()} />
+            </Profiler>
+
             {/*          <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             <TopMobile
                 {...NavProps}
