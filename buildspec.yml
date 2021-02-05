@@ -11,7 +11,7 @@ phases:
             - 'npm install'
     build:
         commands:
-            - 'SUPER_SLIM_DEV_MODE=true gatsby build'
+            - 'SUPER_SLIM_DEV_MODE=true gatsby build --profile'
     post_build:
         commands:
             - 'npm run deploy'

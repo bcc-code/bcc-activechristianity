@@ -1,9 +1,10 @@
 import React from 'react'
 
 const NotFound = () => (
-    <main className="flex items-center flex-col p-8 text-ac-secondary ">
+    <main className="flex items-center flex-col p-8 text-ac-secondary min-h-screen ">
+
         <h1 className="text-gray-200 text-center" style={{ fontSize: "120px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
-            404
+            A Long Page
             </h1>
         <h2 className="text-lg text-center py-6">Home</h2>
         <div className="flex items-center mx-auto">

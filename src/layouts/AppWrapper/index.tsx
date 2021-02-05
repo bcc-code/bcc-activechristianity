@@ -3,7 +3,9 @@ import React, { Profiler } from 'react'
 import { useDispatch } from "react-redux"
 import loadable from '@loadable/component'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
+
 const Footer = loadable(() => import('@/layout-parts/Footer'))
+import LazyLoad from 'react-lazyload';
 
 import Breadcrumb from './Breadcrumb'
 
@@ -135,7 +137,10 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
                 <BottomMobile {...NavProps} key={shortid()} />
             </Profiler>
             < Profiler id="footer" onRender={onRenderCallback} >
-                <Footer />
+                <LazyLoad height={0} offset={80}>
+                    <Footer />
+                </LazyLoad>
+
             </Profiler>
             {/**/}
             {/*       */}
