@@ -33,8 +33,8 @@ export const preloadedState = {
 
 import "react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"
-import "./src/styles/reset.css"
-import "./src/styles/tailwind-output.css"
+import "./styles/reset.css"
+import "./styles/tailwind-output.css"
 
 export default ({ element }) => {
     
