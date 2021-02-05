@@ -75,7 +75,7 @@ const addTrackingCode = ()=>{
           s = b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t, s); */
       })(window, document, "script", "/scripts/fbevents.js")
-
+/* 
       if(window.fbq){
         console.log('running pixel')
         window.fbq('init', '386848018393019');
@@ -98,7 +98,7 @@ const addTrackingCode = ()=>{
       window.gtag=gtag
       gtag('js', new Date());
       gtag('config', 'AW-853531513');
-      gtag('config', 'AW-929434073');
+      gtag('config', 'AW-929434073'); */
 }
 export const onClientEntry = () => {
 //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
