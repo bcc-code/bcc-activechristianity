@@ -75,30 +75,33 @@ const addTrackingCode = ()=>{
           s = b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t, s); */
       })(window, document, "script", "/scripts/fbevents.js")
+      setTimeout(()=>{
+        if(window.fbq){
+          console.log('running pixel')
+          window.fbq('init', '386848018393019');
+        }
+  
+      
+        window.clicky_site_ids = window.clicky_site_ids || [];
+        const clicky_id = parseInt(process.env.CLICKY_ID)
+  
+        window.clicky_site_ids.push(clicky_id);
+  
+        addScript('/scripts/clicky.js');
+        addScript('/scripts/adword-adgrant-conversion.js')
+        addScript('/scripts/adword-remarketing.js')
+  
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          window.dataLayer.push(arguments);
+        }
+        window.gtag=gtag
+        gtag('js', new Date());
+        gtag('config', 'AW-853531513');
+        gtag('config', 'AW-929434073');
+      },3000)
 /* 
-      if(window.fbq){
-        console.log('running pixel')
-        window.fbq('init', '386848018393019');
-      }
-
-    
-      window.clicky_site_ids = window.clicky_site_ids || [];
-      const clicky_id = parseInt(process.env.CLICKY_ID)
-
-      window.clicky_site_ids.push(clicky_id);
-
-      addScript('/scripts/clicky.js');
-      addScript('/scripts/adword-adgrant-conversion.js')
-      addScript('/scripts/adword-remarketing.js')
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag=gtag
-      gtag('js', new Date());
-      gtag('config', 'AW-853531513');
-      gtag('config', 'AW-929434073'); */
+       */
 }
 export const onClientEntry = () => {
 //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
