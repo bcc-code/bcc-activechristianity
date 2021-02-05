@@ -8,7 +8,7 @@ import authApi from './state/middleware/auth'
 import userApi from './state/middleware/user'
 import reducers from "./state/reducer";
 import loadable from '@loadable/component'
-const AppWrapper = loadable(() => import('@/layout-parts/AppWrapper'))
+const AppWrapper = loadable(() => import('@/layouts/AppWrapper'))
 export const preloadedState = {
     auth: {
         loggedIn: 'notLoggedIn'
