@@ -285,7 +285,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         </Profiler> */}
-                        <Profiler id={"interest"} onRender={onRenderCallback}>
+                        {/* <Profiler id={"interest"} onRender={onRenderCallback}>
                             <LazyLoad>
                                 <div className="pt-6">
                                     <Row3ColAndXScroll title={`${ac_strings.you_might_be_interested_in}`} posts={allInterestedPosts} />
@@ -312,14 +312,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                     </div>
                                 </LazyLoad>
                             )}
-                        </Profiler>
+                        </Profiler> */}
 
                     </div>
-                    <Profiler id={"translationn"} onRender={onRenderCallback}>
+                    {/*       <Profiler id={"translationn"} onRender={onRenderCallback}>
                         <LazyLoad>
                             <Translations translatedUrls={tranlsatedUrl || []} />
                         </LazyLoad>
-                    </Profiler>
+                    </Profiler> */}
 
 
                 </div>

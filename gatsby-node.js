@@ -69,7 +69,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
-/*       generators.push(
+      generators.push(
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
         generateTopics(actions, graphql),
@@ -95,7 +95,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       if (process.env.SCRIPTURE_SECTION==="true"){
         console.log("generating scriptures")
         generators.push(generateScriptures(actions, graphql)) 
-      } */
+      } 
     }
 
 

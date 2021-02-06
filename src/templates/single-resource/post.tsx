@@ -11,7 +11,7 @@ const Post: React.FC<IPostProp> = (props) => {
 
     const { normalized: post, tranlsatedUrl, mediaTypes, authorsPosts, topicPosts, allInterestedPosts, breadcrumb } = pageContext
     const { title, excerpt, date, topics, types, image } = post
-    const { langs, content, meta, seo } = postRes
+    const { content, meta, seo } = postRes
 
     const seoTitle = seo && seo.title ? seo.title : title
     console.log(data)
@@ -28,7 +28,7 @@ const Post: React.FC<IPostProp> = (props) => {
                     types,
                     imageUrl: image.src
                 }}
-                translatedUrls={langs}
+                translatedUrls={tranlsatedUrl}
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
@@ -129,5 +129,18 @@ export const pageQuery = graphql`
                     url
                 }
 
+    }
+
+    query PostById($id: String!) {
+        acNodePost(id: { eq: $id }) {
+                content
+                glossary {
+                    slug
+                    id
+                    content
+                    word
+                }
+
+            }
     }
 `
