@@ -48,15 +48,12 @@ const addTrackingCode = ()=>{
               window['ga'].l = 1 * new Date();
         }
 
-  /*       var a = document.createElement('script');
-        var m = document.getElementsByTagName('script')[0];
-        a.async = 1;
-        a.src = '/scripts/analytics.js'
-        m.parentNode.insertBefore(a, m); */
         addScript('/scripts/analytics.js');
       })();
 
-      window.ga('create', `${process.env.GA_ID}`, 'auto');
+
+  /*     setTimeout(()=>{
+          window.ga('create', `${process.env.GA_ID}`, 'auto');
 
         (function (f, b, e, v, n, t, s) {
           if (f.fbq) return;
@@ -69,13 +66,9 @@ const addTrackingCode = ()=>{
           n.version = "2.0";
           n.queue = [];
           addScript(v);
-/*           t = b.createElement(e);
-          t.async = 1;
-          t.src = v;
-          s = b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t, s); */
-      })(window, document, "script", "/scripts/fbevents.js")
-  /*     setTimeout(()=>{
+
+        })(window, document, "script", "/scripts/fbevents.js")
+
         if(window.fbq){
           console.log('running pixel')
           window.fbq('init', '386848018393019');
@@ -105,7 +98,7 @@ const addTrackingCode = ()=>{
 }
 export const onClientEntry = () => {
 //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
-  (function(){
+/*   (function(){
     // create our custom link tag for the stylesheet
     var url = "https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"; // IMPORTANT: this is the CSS file that contains your @font-face rules
     var head = document.getElementsByTagName('head')[0];
@@ -138,7 +131,7 @@ export const onClientEntry = () => {
 
       // repeat above for multiple fonts
     }
-    })();
+    })(); */
 
     if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
         addTrackingCode()
