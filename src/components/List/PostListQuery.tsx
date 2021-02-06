@@ -6,7 +6,7 @@ import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { normalizePostRes } from '@/helpers'
-import api from '@/util/api'
+const api = import('@/util/api')
 import shortid from 'shortid'
 export interface IPostList {
     currentPage: number

@@ -2,7 +2,7 @@ import React, { Profiler } from 'react'
 import { useLocation } from '@reach/router';
 /* import queryString from 'query-string'; */
 import loadable from '@loadable/component'
-import api from '@/util/api'
+const api = import('@/util/api')
 import MetaTag from '@/components/Meta'
 const PostLayout = loadable(() => import('@/layouts/PostLayout'))
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'

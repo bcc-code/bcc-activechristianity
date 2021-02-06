@@ -8,7 +8,7 @@ import ac_strings from '@/strings/ac_strings.js'
 
 import { getRandomArray } from "@/helpers"
 
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 
 const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[], topics?: ITopicNavItem[] }> = ({ postId, readMorePosts, topics }) => {
     const [randomPosts, setRandomPosts] = React.useState<IPostItem[]>([])

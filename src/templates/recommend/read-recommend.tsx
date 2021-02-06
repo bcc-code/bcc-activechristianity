@@ -127,7 +127,7 @@ const Read: React.FC<IProps> = (props) => {
                         )}
 
                     <ByCatergories
-                        title={`${ac_strings.read} ${ac_strings.categories}`}
+                        title={`${ac_strings.categories}`}
                         types={categoryItems}
                     />
                 </LazyLoad>

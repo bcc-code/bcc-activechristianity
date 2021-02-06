@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import HOCLoginCheck from '@/HOC/LogInCheck'
-import { HeadsetIcon, HomeIcon, ExploreIcon, DescriptionIcon, LocalOfferIcon, BookmarksIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI'
-import { useSelector } from "react-redux"
-import { IRootState } from '@/state/types'
+import { HeadsetIcon, HomeIcon, ExploreIcon, DescriptionIcon, LocalOfferIcon, BookmarksIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI/navIcons'
 import { INavItem } from '@/types'
-import { menusItems, mobile } from '@/strings/generated/menus.json'
+import { mobile } from '@/strings/generated/menus.json'
 export interface IMenuWithIcon extends INavItem {
     icon: {
         selected: JSX.Element,

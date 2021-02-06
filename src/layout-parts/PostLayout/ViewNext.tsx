@@ -11,7 +11,7 @@ import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFol
 import { fetchPostslistFromArchivePage, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import { getRandomArray } from '@/helpers'
 import shortid from 'shortid'
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 import seriesInfo from '@/strings/series.json'
 import './view-next.css'
 import { reference } from '@popperjs/core'

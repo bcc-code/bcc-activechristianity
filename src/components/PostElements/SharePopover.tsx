@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { ShareOutlinedIcon, IButtonColour } from '@/components/Icons/MUI'
+import { ShareOutlinedIcon } from '@/components/Icons/MUI/indexs'
 import loadable from '@loadable/component'
 const ToolTipShare = loadable(() => import('@/components/ToolTip/ShareIcons'))
 
@@ -10,7 +10,6 @@ interface IProps {
     shareUrl: string
     text: string,
     label?: string
-    color?: IButtonColour
     size?: string
     placement?: 'top' | 'right'
 }

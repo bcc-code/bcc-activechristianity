@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@/components/CustomLink';
 import { IBreadcrumb } from '@/types';
-import { HomeIcon } from '@/components/Icons/MUI'
+import { HomeIcon } from '@/components/Icons/MUI/navIcons'
 // https://developers.google.com/search/docs/data-types/breadcrumb
 
 import './breadcrumb.css'

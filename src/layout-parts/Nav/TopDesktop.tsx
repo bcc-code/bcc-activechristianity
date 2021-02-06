@@ -4,9 +4,22 @@ import { IDrawerNav } from '@/layouts/AppWrapper'
 import LogoFull from '@/images/ACLogo'
 import TopFirst from './TopFirst'
 import { desktop } from '@/strings/generated/menus.json'
-import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
+import { SearchIcon, MenuIcon } from '@/components/Icons/MUI/navIcons'
 import { INavItem } from '@/types'
 
+function onRenderCallback(
+    id, // the "id" prop of the Profiler tree that has just committed
+    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+    actualDuration, // time spent rendering the committed update
+    baseDuration, // estimated time to render the entire subtree without memoization
+    startTime, // when React began rendering this update
+    commitTime, // when React committed this update
+    interactions // the Set of interactions belonging to this update
+) {
+    console.log(id)
+    console.log(actualDuration)
+    // Aggregate or log render timings...
+}
 
 
 const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideNavOpen, setSideNavOpen, explorePage }) => {
@@ -26,7 +39,7 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
                 </Link>
                 <div className="flex">
                     <div className="hidden sm:flex justify-end pr-12">
-                        {!isMobile && desktop.map((item, i) => (
+                        {isMobile && desktop.map((item, i) => (
                             <Link className="block p-2 hover:text-ac-slate-light" key={i} to={`${item.to}`}>
                                 {item.name}
                             </Link>

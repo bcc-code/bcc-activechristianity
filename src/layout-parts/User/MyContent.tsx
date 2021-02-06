@@ -14,7 +14,7 @@ import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFo
 import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
 import { getRandomArray, normalizePostRes, } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.js'
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 import shortid from 'shortid'
 const UserContent = () => {
 

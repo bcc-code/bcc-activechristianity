@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import { KeyboardArrowDownIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowDownIcon } from '@/components/Icons/MUI/navIcons'
 import './dropdown.css'
 
 export interface IOption {

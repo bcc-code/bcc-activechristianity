@@ -13,7 +13,7 @@ import {
     setUserFollowingPlaylists
 } from '@/state/action/userAction'
 import { IHistory, IBookmarked, IUnfinished, IFollowing } from '@/types'
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 
 const apiMiddleware: Middleware<{}, IRootState> = (store) => (next) => (action) => {
     switch (action.type) {

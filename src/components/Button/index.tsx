@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.js'
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/navIcons'
 
 interface IButton {
     className?: string

@@ -1,6 +1,6 @@
 import React from 'react'
 import { fetchLocalPostsFromSlugs, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import api from '@/util/api'
+const api = import('@/util/api')
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray, filterTopics } from '@/helpers'
 import { ITopic, IPostItem } from '@/types'

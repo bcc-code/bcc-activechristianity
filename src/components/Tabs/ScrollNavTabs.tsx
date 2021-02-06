@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useSwipeable } from "react-swipeable"
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 import { SolidDarkBgToggleActive } from '@/components/Button'
 import { ITab } from '@/types'
 import { SmoothHorizontalScrolling } from '@/helpers'

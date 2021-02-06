@@ -38,7 +38,7 @@ function onRenderCallback(
 }
 // string
 
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 // type 
 import { IUser } from '@/types'
 
@@ -118,9 +118,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             {isSideNavOpen && <SideNav {...NavProps} />}
             <Breadcrumb key={shortid()} />
-            <div className="layout-children" key={shortid()}>
+            {/*          <div className="layout-children" key={shortid()}>
                 {children}
-            </div>
+            </div> */}
             {/* <Profiler id={"layout-children"} onRender={onRenderCallback}>
                 
             </Profiler> */}

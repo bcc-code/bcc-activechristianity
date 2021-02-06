@@ -1,14 +1,13 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
-import { IRootState } from '@/state/types'
+import { SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { IPostItem, IApiItem } from '@/types'
 
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/components/HorizontalScroll/HSCardListVideo'
-import api from '@/util/api' //history
+const api = import('@/util/api')
 import ac_strings from '@/strings/ac_strings.js'
 const UserHistory = () => {
     const [historyPosts, setHistoryPosts] = React.useState<IPostItem[]>([])

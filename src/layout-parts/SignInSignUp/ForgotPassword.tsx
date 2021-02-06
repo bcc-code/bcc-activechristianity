@@ -5,7 +5,7 @@ import { InputText } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 
 
 const initialFieldsState = {

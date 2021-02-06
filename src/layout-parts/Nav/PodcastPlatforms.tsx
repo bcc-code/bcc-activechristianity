@@ -1,5 +1,5 @@
 import React from 'react'
-import { socialLinks } from '@/static/strings/generated/menus.json'
+import { socialLinks } from '@/strings/generated/menus.json'
 import { GooglePodcastIcon, SpotifyIcon, ApplePodcastIcon } from '@/components/Icons/Podcast'
 import { YoutubeIcon } from '@/components/Icons/SocialMedia'
 import PlatformstNav from './PlatformsNav'

@@ -2,7 +2,7 @@ import * as React from "react"
 import { IPostItem, } from '@/types'
 import Placeholder from '@/components/Loader/MainpagePlaceholder'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 interface IFetchPost {
     postId: number | string,
     render: (data: { postSlugs: string[] }) => JSX.Element

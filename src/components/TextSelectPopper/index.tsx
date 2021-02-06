@@ -6,7 +6,6 @@ interface IPosition { top: number, right?: number, left?: number };
 const TextSelectPopper: React.FC<{ className?: string, content: string, glossary: IGlossary[], title: string, slug: string }> = ({ children, className, slug, title, glossary }) => {
     const [position, setPosition] = React.useState<IPosition>({ top: 0 })
     const [showGlossary, setGlossary] = React.useState(false)
-    const [glossaryContent, setGlossaryContent] = React.useState<null | IGlossary>(null)
     const [showPopper, setShowPopper] = React.useState(false)
     const [shareText, setShareText] = React.useState('')
     const contentEl = React.useRef<HTMLDivElement>(null);

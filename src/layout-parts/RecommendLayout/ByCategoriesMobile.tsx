@@ -2,7 +2,7 @@
 import React from "react"
 import Link from '@/components/CustomLink'
 import { INavItem } from "@/types"
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 import { PageSectionHeader } from '@/components/Headers'
 
 

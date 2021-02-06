@@ -5,10 +5,10 @@ import FollowUs from '@/layout-parts/Home/FollowUs'
 import { ITopic, IPostItem, ITopicPostItems } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 
-const PostListSection = loadable(() => import('@/layout-parts/Home/PostListSection'))
-const TopicsForYouSection = loadable(() => import('@/layout-parts/Home/Desktop/TopicsForYou'))
+import PostListSection from '@/layout-parts/Home/PostListSection'
+import TopicsForYouSection from '@/layout-parts/Home/Desktop/TopicsForYou'
 
-const PopularPostVertical = loadable(() => import('@/layout-parts/PopularPosts'))
+import PopularPostVertical from '@/layout-parts/PopularPosts'
 
 interface IHomeLowerSection {
     lists: ITopicPostItems[]

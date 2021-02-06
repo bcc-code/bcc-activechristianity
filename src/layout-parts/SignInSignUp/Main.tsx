@@ -6,8 +6,9 @@ import { IUser } from '@/types'
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
+
 import endpoints from '@/strings/static/endpoints'
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_title,

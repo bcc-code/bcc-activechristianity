@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import shortid from 'shortid'
 /* const AudioPlayer */
-const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
+import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 import Content from '@/components/Content'
-const PostContent = loadable(() => import('@/components/Content/PostContent'))
+import PostContent from '@/components/Content/PostContent'
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 
 /* import ViewNext from '@/layout-parts/PostLayout/ViewNext' */
@@ -26,7 +26,7 @@ import {
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
 
 

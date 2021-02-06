@@ -5,7 +5,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import { openSignInModal } from '@/state/action'
 import { slugUser } from '@/strings/generated/menus.json'
 import HOCLoginCheck from '@/HOC/LogInCheck'
-import { setLogout, setUser, } from '@/state/action/authAction'
+import { setLogout } from '@/state/action/authAction'
 
 interface IUserNav {
     className?: string
@@ -43,6 +43,13 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
         }
 
     }
+
+    const notLoggedIn = (
+        <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
+            <span className="whitespace-no-wrap px-2 py-1 text-center cursor-pointer hover:text-ac-slate" onClick={handleSignIn}>{ac_strings.login}</span>
+            <span className="px-2 py-1 text-center cursor-pointer bg-ac-slate-dark rounded mb-1 text-white hover:text-ac-slate-lighter" onClick={handleSignUp}>{ac_strings.register}</span>
+        </div>
+    )
     return (
         <HOCLoginCheck
             render={({ loginStatus }) => {
@@ -68,20 +75,10 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
                             </div>
                         )
                     case "notLoggedIn":
-                        return (
-                            <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
-                                <span className="whitespace-no-wrap px-2 py-1 text-center cursor-pointer hover:text-ac-slate" onClick={handleSignIn}>{ac_strings.login}</span>
-                                <span className="px-2 py-1 text-center cursor-pointer bg-ac-slate-dark rounded mb-1 text-white hover:text-ac-slate-lighter" onClick={handleSignUp}>{ac_strings.register}</span>
-                            </div>
-                        )
+                        return notLoggedIn
 
                     default:
-                        return (
-                            <div className={`${col ? 'flex flex-col' : 'grid grid-cols-2'} ${className}`}>
-                                <span className="whitespace-no-wrap px-2 py-1 text-center cursor-pointer hover:text-ac-slate" onClick={handleSignIn}>{ac_strings.login}</span>
-                                <span className="px-2 py-1 text-center cursor-pointer bg-ac-slate-dark rounded mb-1 text-white hover:text-ac-slate-lighter" onClick={handleSignUp}>{ac_strings.register}</span>
-                            </div>
-                        )
+                        return notLoggedIn
                 }
             }}
 

@@ -8,7 +8,7 @@ import { IRootState } from '@/state/types'
 import ac_strings from '@/strings/ac_strings.js'
 /* import { IProfileRes } from '@/types/apiResType' */
 
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 
 
 const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action) => {

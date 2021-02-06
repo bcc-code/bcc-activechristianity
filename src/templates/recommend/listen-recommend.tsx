@@ -49,7 +49,7 @@ const Listen: React.FC<IProps> = (props) => {
             <MetaTag title={title} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
-                {ac_strings.slug_podcast && hasPodcast && (
+                {hasPodcast && (
                     <div className="py-6">
                         <div className="w-full flex justify-between items-center pb-4 pr-4">
                             <PageSectionHeader title={podcastProperties.title} />
@@ -70,10 +70,10 @@ const Listen: React.FC<IProps> = (props) => {
                         <HSCardList posts={mixedFeaturedPosts} />
                     </div>
                 </div>
-                {ac_strings.slug_playlist && hasPlaylist && (
+                {hasPlaylist && (
                     <div className="py-6">
                         <div className="w-full flex justify-between items-center  pb-4 pr-4">
-                            <PageSectionHeader title={ac_strings.playlist} />
+                            <PageSectionHeader title={playlist.name} />
                             <UnderlineLinkViewAll to={`${playlist.to}`} />
                         </div>
 

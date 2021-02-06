@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CloseIcon } from '@/components/Icons/MUI'
+import { CloseIcon } from '@/components/Icons/MUI/arrowIcons'
 import ac_strings from '@/strings/ac_strings.js'
 
 interface ISearchHistory {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SearchIcon, CloseIcon } from '@/components/Icons/MUI'
+import { SearchIcon, CloseIcon } from '@/components/Icons/MUI/navIcons'
 
 
 interface ISearch {

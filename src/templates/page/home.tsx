@@ -3,17 +3,11 @@ import LazyLoad from '@/components/LazyLoad';
 import loadable from '@loadable/component'
 import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
 import { TopImgRowHorizontalScroll } from '@/components/HorizontalScroll'
-import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
-import LatestSection from '@/components/List/PostRow4Col'
 import FeatureSectionMobile from '@/layout-parts/Home/Mobile/FeatureSectionMobile'
 import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
-import HomeTopFeaturePost from '@/layout-parts/Home/HeaderPost'
 import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
-import shortid from 'shortid'
-import { processRecommendationContext, getRandomFeatured } from '@/helpers'
-
 // Type
 import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 

@@ -4,12 +4,12 @@ import { getAllUrlParams } from '@/helpers'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import { menusItems } from '@/strings/generated/menus.json'
+
 // components
 
 // Type
 import { INavItem, IBibleBook, IBible, } from '@/types'
-import ac_strings from '@/strings/ac_strings.js'
-import acApi from '@/util/api'
+const acApi = import('@/util/api')
 import PostList from '@/components/List/PostList'
 interface IBibleNavProps {
     path: string

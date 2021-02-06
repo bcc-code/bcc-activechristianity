@@ -2,10 +2,10 @@ import React from 'react'
 import Link from '@/components/CustomLink'
 import { navigate } from 'gatsby'
 import { IMedia } from '@/types'
-import { VolumeUpRoundedIcon, PlayArrowRoundedIcon, EqualizerIcon, PlayCircleOutlineIcon, HeadsetIcon } from '@/components/Icons/MUI'
+import { VolumeUpRoundedIcon, PlayArrowRoundedIcon, EqualizerIcon } from '@/components/Icons/MUI/postIcons'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
 import PlayPlaylistFromSlug from '@/HOC/SetAndUpdatePlayingPlaylist'
-import ac_strings from '@/strings/ac_strings.js'
+
 export interface IPlayButtonProps {
     track: IMedia
 

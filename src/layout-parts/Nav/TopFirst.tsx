@@ -1,12 +1,10 @@
 import React, { Profiler } from 'react'
-import loadable from '@loadable/component'
-import { StaticQuery, graphql } from "gatsby"
-import Link from '@/components/CustomLink'
+import { graphql } from "gatsby"
 import ac_strings from '@/strings/ac_strings'
 
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import UserNav from '@/layout-parts/Nav/User'
-import { LaunchIcon } from '@/components/Icons/MUI'
+import { LaunchIcon } from '@/components/Icons/MUI/navIcons'
 import { topLink } from '@/strings/generated/menus.json'
 
 const TopDesktop: React.FC = () => {

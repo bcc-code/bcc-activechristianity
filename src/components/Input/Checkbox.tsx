@@ -1,5 +1,5 @@
 import React from 'react'
-import { CheckBoxIcon, CheckBoxOutlineBlankIcon } from '@/components/Icons/MUI'
+import { CheckBoxIcon, CheckBoxOutlineBlankIcon } from '@/components/Icons/MUI/inputIcons'
 import shortId from 'shortid'
 interface IProps {
     className?: string

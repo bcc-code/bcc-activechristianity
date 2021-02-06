@@ -32,9 +32,8 @@ const Post: React.FC<IPostProp> = (props) => {
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
-            <div>post</div>
 
-            {/* <PostLayout
+            <PostLayout
                 {...post}
                 seoTitle={seoTitle}
                 tranlsatedUrl={tranlsatedUrl}
@@ -44,7 +43,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 allInterestedPosts={allInterestedPosts}
                 mediaTypes={mediaTypes}
                 credits={meta ? meta.credits : undefined}
-            /> */}
+            />
 
 
         </div>

@@ -1,6 +1,5 @@
 // https://github.com/souporserious/react-media-player
 import React from 'react'
-import { IRootState } from '@/state/types'
 import MainController from './AudioPlayerController'
 import { useSelector, useDispatch } from "react-redux";
 import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'

@@ -1,6 +1,6 @@
 import React from 'react'
-import { MenuIcon, KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI'
-
+import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
+import { MenuIcon } from '@/components/Icons/MUI/navIcons'
 import { useDispatch } from 'react-redux'
 import { setIsModalOpen } from '@/state/action'
 

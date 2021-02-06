@@ -1,7 +1,6 @@
 
 import React, { Profiler } from 'react'
 import ac_strings from '@/strings/ac_strings.js'
-import Link from '@/components/CustomLink'
 import { navigate } from 'gatsby'
 
 
