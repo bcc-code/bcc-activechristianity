@@ -75,7 +75,7 @@ const addTrackingCode = ()=>{
           s = b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t, s); */
       })(window, document, "script", "/scripts/fbevents.js")
-      setTimeout(()=>{
+  /*     setTimeout(()=>{
         if(window.fbq){
           console.log('running pixel')
           window.fbq('init', '386848018393019');
@@ -99,7 +99,7 @@ const addTrackingCode = ()=>{
         gtag('js', new Date());
         gtag('config', 'AW-853531513');
         gtag('config', 'AW-929434073');
-      },5000)
+      },5000) */
 /* 
        */
 }

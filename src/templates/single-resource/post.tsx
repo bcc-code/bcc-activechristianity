@@ -14,7 +14,8 @@ const Post: React.FC<IPostProp> = (props) => {
     const { langs, content, meta, seo } = postRes
 
     const seoTitle = seo && seo.title ? seo.title : title
-
+    console.log(data)
+    console.log(pageContext)
     return (
         <div>
             <MetaTag
