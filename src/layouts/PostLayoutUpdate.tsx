@@ -142,6 +142,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
+            page
             {/*             <Profiler id={"share shortcut"} onRender={onRenderCallback}>
 
 
@@ -167,7 +168,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 formats={format}
             /> */}
             <Profiler id={"media"} onRender={onRenderCallback}>
-                <div className="fixed sm:relative w-full z-50">
+                {/*     <div className="fixed sm:relative w-full z-50">
                     {currentMediaType === "video" && media.video && media.video.src && (
                         <VideoMediaPlayer src={media.video.src} key={shortid()} />
 
@@ -188,10 +189,10 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             ))}
                         </div>
                     )}
-                </div>
+                </div> */}
             </Profiler>
             <Profiler id={"mobile header"} onRender={onRenderCallback}>
-                <div className="sm:hidden fixed inset-x top-0 w-full">
+                {/*         <div className="sm:hidden fixed inset-x top-0 w-full">
                     {mediaTypesDefault.types.length > 0 ? (
                         <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
 
@@ -208,13 +209,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 </div>
                 <div className='w-full sm:hidden relative' style={{ top: "50px", height: `${currentHeigt}px` }}>
 
-                </div>
+                </div> */}
             </Profiler>
 
 
             <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50 flex justify-center" >
 
-                <div className="max-w-full sm:max-w-tablet relative">
+                {/*   <div className="max-w-full sm:max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
@@ -261,8 +262,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                     content={credits}
                                 />
                             )}
-                        </Profiler>
-                        {/*              <Profiler id={"topic follow"} onRender={onRenderCallback}>
+                        </Profiler> */}
+                {/*              <Profiler id={"topic follow"} onRender={onRenderCallback}>
                             <div className="flex flex-wrap border-ac-gray py-6">
                                 {topics && topics?.map(item => (
                                     <ToggleFollowWithName {...item} />
@@ -271,7 +272,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </Profiler> */}
 
 
-                        {/*                    <Profiler id={"author share bookmark"} onRender={onRenderCallback}>
+                {/*                    <Profiler id={"author share bookmark"} onRender={onRenderCallback}>
                             <div className="border-b pb-6">
                                 <AuthorBookmarkShareSection
                                     id={id}
@@ -285,7 +286,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         </Profiler> */}
-                        {/* <Profiler id={"interest"} onRender={onRenderCallback}>
+                {/* <Profiler id={"interest"} onRender={onRenderCallback}>
                             <LazyLoad>
                                 <div className="pt-6">
                                     <Row3ColAndXScroll title={`${ac_strings.you_might_be_interested_in}`} posts={allInterestedPosts} />
@@ -314,8 +315,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             )}
                         </Profiler> */}
 
-                    </div>
-                    {/*       <Profiler id={"translationn"} onRender={onRenderCallback}>
+            </div>
+            {/*       <Profiler id={"translationn"} onRender={onRenderCallback}>
                         <LazyLoad>
                             <Translations translatedUrls={tranlsatedUrl || []} />
                         </LazyLoad>
@@ -323,11 +324,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
 
                 </div>
-            </div>
+            </div >
 
-            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">
-                <p className=""><em>{ac_strings.scripture_copyright}</em></p>
-            </div>
+    <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">
+        <p className=""><em>{ac_strings.scripture_copyright}</em></p>
+    </div>
 
         </article >
     )

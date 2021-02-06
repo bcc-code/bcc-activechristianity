@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import Helmet from 'react-helmet'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { updateTranslationUrl, updateBreadcrumb } from '@/state/action'
 
 import { Location } from '@reach/router'
-import { IRootState } from '@/state/types'
 import ac_strings from "@/strings/ac_strings.js"
 import { INavItem, ITranslations } from '@/types'
 
