@@ -18,7 +18,7 @@ const Post: React.FC<IPostProp> = (props) => {
     console.log(pageContext)
     return (
         <div>
-            {/* <MetaTag
+            <MetaTag
                 title={seoTitle}
                 type="article"
                 meta={{
@@ -31,7 +31,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 translatedUrls={tranlsatedUrl}
                 breadcrumb={breadcrumb}
                 path={props.path}
-            /> */}
+            />
             <div>post</div>
 
             {/* <PostLayout

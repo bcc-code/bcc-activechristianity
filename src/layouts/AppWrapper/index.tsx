@@ -118,11 +118,12 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             {isSideNavOpen && <SideNav {...NavProps} />}
             <Breadcrumb key={shortid()} />
-            <Profiler id={"layout-children"} onRender={onRenderCallback}>
-                <div className="layout-children">
-                    {children}
-                </div>
-            </Profiler>
+            <div className="layout-children" key={shortid()}>
+                {children}
+            </div>
+            {/* <Profiler id={"layout-children"} onRender={onRenderCallback}>
+                
+            </Profiler> */}
             <BottomMobile {...NavProps} key={shortid()} />
             {/*  <LazyLoad height={0} offset={80}>
                 <Footer />

@@ -319,38 +319,9 @@ module.exports = async function generatePosts(actions, graphql) {
 
                               const data = {
                                 normalized,
-                                allInterestedPosts:allInterestedPosts.map(s=>{
-                                  if(allNormalizedPosts[s]){
-                                    return allNormalizedPosts[s].normalized
-                                  } else {
-                                    console.log('cannot find interest post for ')
-                                    console.log(s)
-                                  }
-                                }),
-                                authorsPosts:authorsPosts.map(a=>{
-                                  return ({
-                                    ...a,
-                                    posts:a.posts.map(s=>{
-                                      if(allNormalizedPosts[s]){
-                                        return allNormalizedPosts[s].normalized
-                                      } else {
-                                        console.log('cannot find interest post for ')
-                                        console.log(s)
-                                      }
-                                    })
-                                  })
-                                }),
-                                topicPosts:topicPosts.map(t=>({
-                                  ...t,
-                                  posts:t.posts.map(s=>{
-                                    if(allNormalizedPosts[s]){
-                                      return allNormalizedPosts[s].normalized
-                                    } else {
-                                      console.log('cannot find topic post for')
-                                      console.log(s)
-                                    }
-                                  })
-                                })),
+                                allInterestedPosts,
+                                authorsPosts,
+                                topicPosts:topicPosts,
                                 mediaTypes:{
                                   types:mediaTypes,
                                   default:defaultMediaType
