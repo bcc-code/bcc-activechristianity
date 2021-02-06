@@ -130,23 +130,4 @@ export const pageQuery = graphql`
                 }
 
     }
-
-    query PostById($id: String!) {
-        acNodePost(id: { eq: $id }) {
-                ...PostMain
-
-                langs {
-                    lang
-                    slug
-                }
-                content
-                glossary {
-                    slug
-                    id
-                    content
-                    word
-                }
-                readMorePosts
-            }
-    }
 `
