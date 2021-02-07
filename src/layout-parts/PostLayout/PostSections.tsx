@@ -6,7 +6,7 @@ import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 import { PublishIcon } from '@/components/Icons/MUI/pageIcons'
-const Row3ColAndXScroll = loadable(() => import('@/components/List/Combo/Row3Col-HorizontalScroll'))
+import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import ShareButton from '@/components/PostElements/SharePopover'
 import ToogleBookmark from '@/components/PostElements/ToggleBookmark'
 import ac_strings from '@/strings/ac_strings.js'

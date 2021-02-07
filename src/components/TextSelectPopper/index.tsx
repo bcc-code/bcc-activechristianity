@@ -1,5 +1,6 @@
 import * as React from 'react'
-import ShareIconPopper from '@/components/ToolTip/ShareIcons'
+import loadable from '@loadable/component'
+const ToolTipShare = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 import ac_strings from '@/strings/ac_strings.js'
 import { IGlossary } from '@/types'
 interface IPosition { top: number, right?: number, left?: number };
@@ -99,7 +100,7 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
                     ref={popperEl}
                     style={{ position: "absolute", ...position, background: "red", height: "0px" }}
                 >
-                    <ShareIconPopper
+                    <ToolTipShare
                         shareUrl={options.shareUrl}
                         text={shareText}
                         title={title}

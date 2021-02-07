@@ -1,7 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import endpoints from '@/strings/static/endpoints'
-const ShareIconPopper = loadable(() => import('@/components/ToolTip/ShareIcons'))
+const ShareIconPopper = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 import GlossaryPopper from '@/components/ToolTip/GlossaryPopper'
 
 
