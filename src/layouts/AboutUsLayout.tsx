@@ -2,7 +2,7 @@ import React from 'react';
 import StickyBox from "react-sticky-box";
 import { SideNavItem } from '@/components/Button'
 import endpoints from '@/strings/static/endpoints'
-import { PublishIcon } from '@/components/Icons/MUI/pageIcons'
+import { PublishIcon } from '@/components/Icons/MUI/postIcons'
 const imageUrl = endpoints.contact_hero
 import { IScrollSectionChildProps } from '@/components/ScrollSection/Section'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
