@@ -89,7 +89,7 @@ const languageSites = async function() {
 
       const {social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}=metadata
       menus["languages"]=sites?sites.map((item) => ({
-        name: item.title,
+        name: item.lang,
         to: item.url,
         locale:item.locale
     })):[];
