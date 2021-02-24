@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
+import TwoToOneImg from "@/components/Images/Image2To1"
 import { IMediaTypes } from '@/layouts/PostLayoutUpdate';
 import { INavItem, IPostRes, IPostItem, ITopicPostItems } from '@/types'
-import PostLayout from '@/layouts/PostLayoutUpdate'
+import { PostH1 } from '@/components/Headers'
+import Content from '@/components/Content'
+
 const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
     const postRes = data.acNodePost
@@ -29,17 +32,12 @@ const Post: React.FC<IPostProp> = (props) => {
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
-            <PostLayout
-                {...post}
-                seoTitle={seoTitle}
-                tranlsatedUrl={tranlsatedUrl}
+            <PostH1 title={title} />
+            <TwoToOneImg image={image} rounded alt={seoTitle} />
+            <Content
                 content={content}
-                authorsPosts={authorsPosts}
-                topicPosts={topicPosts}
-                allInterestedPosts={allInterestedPosts}
-                mediaTypes={mediaTypes}
-                credits={meta ? meta.credits : undefined}
             />
+            {/*             */}
 
 
         </div>
