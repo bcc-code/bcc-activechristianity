@@ -69,26 +69,29 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
     }, [])
 
     const checkUser = () => {
-        console.log('checking user')
-        acApi
-            .profile()
-            .then((res: IUser) => {
-                if (res && res.id) {
-                    if (res.meta && res.meta.consented) {
-                        dispatch(setUser(res))
-                        dispatch(getUserLibrary())
+        acApiModule.then(res => {
+            const acApi = res.default
+            acApi
+                .profile()
+                .then((res: IUser) => {
+                    if (res && res.id) {
+                        if (res.meta && res.meta.consented) {
+                            dispatch(setUser(res))
+                            dispatch(getUserLibrary())
+                        } else {
+                            dispatch(openSignInModal("giveConsent"))
+                        }
                     } else {
-                        dispatch(openSignInModal("giveConsent"))
+                        dispatch(setLogout())
                     }
-                } else {
+                })
+                .catch((err: any) => {
+                    console.log(err)
                     dispatch(setLogout())
-                }
-            })
-            .catch((err: any) => {
-                console.log(err)
-                dispatch(setLogout())
-                console.log('handle login error')
-            })
+                    console.log('handle login error')
+                })
+        })
+
     }
 
     const handleSideNavOpen = (status: boolean) => {

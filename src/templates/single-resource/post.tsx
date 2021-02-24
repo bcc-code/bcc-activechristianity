@@ -16,6 +16,8 @@ const Post: React.FC<IPostProp> = (props) => {
     const { content, meta, seo } = postRes
 
     const seoTitle = seo && seo.title ? seo.title : title
+    console.log(data)
+    console.log(pageContext)
     return (
         <div>
             <MetaTag
@@ -33,11 +35,21 @@ const Post: React.FC<IPostProp> = (props) => {
                 path={props.path}
             />
             <PostH1 title={title} />
-            <TwoToOneImg image={image} rounded alt={seoTitle} />
+            {/*  <TwoToOneImg image={image} rounded alt={seoTitle} /> */}
             <Content
                 content={content}
             />
-            {/*             */}
+            {/*            <PostLayout
+                {...post}
+                seoTitle={seoTitle}
+                tranlsatedUrl={tranlsatedUrl}
+                content={content}
+                authorsPosts={authorsPosts}
+                topicPosts={topicPosts}
+                allInterestedPosts={allInterestedPosts}
+                mediaTypes={mediaTypes}
+                credits={meta ? meta.credits : undefined}
+            /> */}
 
 
         </div>

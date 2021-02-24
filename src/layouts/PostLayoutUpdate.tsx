@@ -70,6 +70,11 @@ import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/st
 import { loggedInSelector } from '@/state/selectors/user'
 export const PostLayout: React.FC<IPostProps> = (post) => {
 
+    React.useEffect(() => {
+        window.addEventListener('load', (event) => {
+            console.log('The page has fully loaded');
+        });
+    }, [])
     const {
         id,
         title,
