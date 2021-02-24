@@ -1,10 +1,8 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
+import { PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { IPostItem, IPostRes, ITopic } from '@/types'
 import { IRootState } from '@/state/types'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { FetchTopics } from '@/HOC/FetchTopicFormatType'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/components/HorizontalScroll/HSCardListVideo'
 import XScrollCustomSize from '@/components/HorizontalScroll/BaseCustomSize'

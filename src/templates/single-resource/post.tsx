@@ -1,12 +1,9 @@
-import React, { Profiler } from 'react'
+import React from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
-import TwoToOneImg from "@/components/Images/Image2To1"
 import { IMediaTypes } from '@/layouts/PostLayoutUpdate';
 import { INavItem, IPostRes, IPostItem, ITopicPostItems } from '@/types'
-import { PostH1 } from '@/components/Headers'
-import Content from '@/components/Content'
-
+import PostLayout from '@/layouts/PostLayoutUpdate'
 const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
     const postRes = data.acNodePost
@@ -16,8 +13,6 @@ const Post: React.FC<IPostProp> = (props) => {
     const { content, meta, seo } = postRes
 
     const seoTitle = seo && seo.title ? seo.title : title
-    console.log(data)
-    console.log(pageContext)
     return (
         <div>
             <MetaTag
@@ -34,12 +29,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
-            <PostH1 title={title} />
-            <TwoToOneImg image={image} rounded alt={seoTitle} />
-            <Content
-                content={content}
-            />
-            {/*            <PostLayout
+            <PostLayout
                 {...post}
                 seoTitle={seoTitle}
                 tranlsatedUrl={tranlsatedUrl}
@@ -49,7 +39,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 allInterestedPosts={allInterestedPosts}
                 mediaTypes={mediaTypes}
                 credits={meta ? meta.credits : undefined}
-            /> */}
+            />
 
 
         </div>

@@ -109,7 +109,7 @@ const addTrackingCode = ()=>{
 export const onClientEntry = () => {
 
     if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
-        window.onload=()=>{
+ /*        window.onload=()=>{
           addTrackingCode();
 
           //https://nooshu.github.io/blog/2020/02/23/improving-perceived-performance-with-the-css-font-display-property/
@@ -147,7 +147,7 @@ export const onClientEntry = () => {
               // repeat above for multiple fonts
             }
             })();
-                }
+                } */
     }
     
 
