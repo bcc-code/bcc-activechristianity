@@ -2,7 +2,7 @@ import React, { Profiler } from 'react'
 import { useLocation } from '@reach/router';
 /* import queryString from 'query-string'; */
 import loadable from '@loadable/component'
-const api = import('@/util/api')
+const acApiModule = import('@/util/api')
 import MetaTag from '@/components/Meta'
 const PostLayout = loadable(() => import('@/layouts/PostLayout'))
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
@@ -22,37 +22,45 @@ const Preview = () => {
         if (type === "post" && typeof id === "string") {
             console.log('getting post')
             setPage(null)
-            api.getOnePostById(id)
-                .then(res => {
-                    if (res && res.post) {
-                        const simplePost = normalizePostRes(res.post)
-                        const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = res.post
-                        const postProps = {
-                            langs,
-                            content,
-                            meta,
-                            recommendPosts,
-                            readMorePosts,
-                            seo,
-                            ...simplePost
 
+            acApiModule.then(res => {
+                const api = res.default
+                api.getOnePostById(id)
+                    .then(res => {
+                        if (res && res.post) {
+                            const simplePost = normalizePostRes(res.post)
+                            const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = res.post
+                            const postProps = {
+                                langs,
+                                content,
+                                meta,
+                                recommendPosts,
+                                readMorePosts,
+                                seo,
+                                ...simplePost
+
+                            }
+
+                            setPost(postProps)
                         }
+                    })
+            })
 
-                        setPost(postProps)
-                    }
-                })
         }
         if (type === "page" && typeof id === "string") {
             setPost(null)
-            api.getOnePagetById(id)
-                .then(res => {
-                    if (res && res.page) {
-                        const { flexibleContent, title, slug } = res.page
-                        const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-                        setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
-                    }
+            acApiModule.then(res => {
+                const api = res.default
+                api.getOnePagetById(id)
+                    .then(res => {
+                        if (res && res.page) {
+                            const { flexibleContent, title, slug } = res.page
+                            const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
+                            setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
+                        }
+                    })
+            })
 
-                })
         }
     }, [])
     return (

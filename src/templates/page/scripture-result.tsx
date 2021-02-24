@@ -9,7 +9,7 @@ import { menusItems } from '@/strings/generated/menus.json'
 
 // Type
 import { INavItem, IBibleBook, IBible, } from '@/types'
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
 import PostList from '@/components/List/PostList'
 interface IBibleNavProps {
     path: string
@@ -41,8 +41,11 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
     React.useEffect(() => {
 
         if (typeof bookId === "string" && typeof ch === "string") {
-            acApi.getScriptureChaptersPost(bookId, ch).then(res => {
-                setPosts(res.biblePosts.map(item => item.slug))
+            acApiModule.then(res => {
+                const acApi = res.default
+                acApi.getScriptureChaptersPost(bookId, ch).then(res => {
+                    setPosts(res.biblePosts.map(item => item.slug))
+                })
             })
         }
     }, [])

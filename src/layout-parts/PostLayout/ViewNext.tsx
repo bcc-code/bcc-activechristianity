@@ -11,7 +11,7 @@ import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFol
 import { fetchPostslistFromArchivePage, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import { getRandomArray } from '@/helpers'
 import shortid from 'shortid'
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
 import seriesInfo from '@/strings/series.json'
 import './view-next.css'
 import { reference } from '@popperjs/core'
@@ -42,26 +42,32 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
     const viewNextEl = React.useRef<HTMLDivElement>(null);
 
     const getPostRelated = () => {
-        return acApi.recommendedByPost(postId)
-            .then(res => {
-                const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
-                const pickRandomSlugs = getRandomArray(allSlugs, 3)
-                return Promise.all(pickRandomSlugs.map(p => {
-                    return fetchOneLocalPostFromSlug(p)
-                })).then(res => {
-                    const toAdd: IPostItem[] = []
-                    if (res && Array.isArray(res)) {
-                        res.forEach(item => {
-                            if (item && item.id !== postId) { toAdd.push(item) }
-                        })
-                    }
-                    return toAdd
-                })
 
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        return acApiModule.then(res => {
+            const api = res.default
+            api.recommendedByPost(postId)
+                .then(res => {
+                    const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
+                    const pickRandomSlugs = getRandomArray(allSlugs, 3)
+                    return Promise.all(pickRandomSlugs.map(p => {
+                        return fetchOneLocalPostFromSlug(p)
+                    })).then(res => {
+                        const toAdd: IPostItem[] = []
+                        if (res && Array.isArray(res)) {
+                            res.forEach(item => {
+                                if (item && item.id !== postId) { toAdd.push(item) }
+                            })
+                        }
+                        return toAdd
+                    })
+
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
+
+
     }
 
     const getPersonalRecommend = () => {

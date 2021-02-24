@@ -6,7 +6,7 @@ import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { normalizePostRes } from '@/helpers'
-const api = import('@/util/api')
+const acApiModule = import('@/util/api')
 import shortid from 'shortid'
 export interface IPostList {
     currentPage: number
@@ -27,28 +27,33 @@ const PostList: React.FC<IPostList> = (props) => {
     React.useEffect(() => {
         setLoading(true)
         if (currentPage !== 1) {
-            if (id && subTopicId) {
-                api.getPostsPerPageQueryBySubtopicId(id, subTopicId, currentPage)
-                    .then(res => {
-                        if (res && res.topic && res.topic.somePosts && Array.isArray(res.topic.somePosts.data)) {
-                            const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
+            acApiModule.then(res => {
+                const api = res.default
+                if (id && subTopicId) {
 
-                            setLoading(false)
-                            setPosts(receivedPosts)
-                        }
+                    api.getPostsPerPageQueryBySubtopicId(id, subTopicId, currentPage)
+                        .then(res => {
+                            if (res && res.topic && res.topic.somePosts && Array.isArray(res.topic.somePosts.data)) {
+                                const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
 
-                    })
-            } else {
-                api.getPostsPerPageQueryByTopicId(id, currentPage)
-                    .then(res => {
-                        if (res && res.topic && res.topic.somePosts && Array.isArray(res.topic.somePosts.data)) {
-                            const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
+                                setLoading(false)
+                                setPosts(receivedPosts)
+                            }
 
-                            setLoading(false)
-                            setPosts(receivedPosts)
-                        }
-                    })
-            }
+                        })
+                } else {
+                    api.getPostsPerPageQueryByTopicId(id, currentPage)
+                        .then(res => {
+                            if (res && res.topic && res.topic.somePosts && Array.isArray(res.topic.somePosts.data)) {
+                                const receivedPosts = res.topic.somePosts.data.map(item => normalizePostRes(item))
+
+                                setLoading(false)
+                                setPosts(receivedPosts)
+                            }
+                        })
+                }
+            })
+
         } else {
             setPosts(firstPosts)
             setLoading(false)

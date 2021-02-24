@@ -1,11 +1,12 @@
 import React from 'react'
 import { fetchLocalPostsFromSlugs, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-const api = import('@/util/api')
+
 import RightImg from '@/components/PostItemCards/RightImg'
-import { getRandomArray, filterTopics } from '@/helpers'
+import { getRandomArray } from '@/helpers'
 import { ITopic, IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { OutlineButton } from '@/components/Button'
+const acApiModule = import('@/util/api')
 interface IFetchPost {
     topics: ITopic[]
 }
@@ -20,40 +21,44 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
         setIsFetchingMore(true)
 
         const foundPosts: IPostItem[] = []
-        api.recommended().then(async (res) => {
+        acApiModule.then(api => {
+            console.log(api)
+            api.default.recommended().then(async (res) => {
 
-            // get recommended posts
-            const recommendSlugs: string[] = res.recommended
-            if (recommendSlugs) {
-                const recommendPostsRes = await fetchLocalPostsFromSlugs(recommendSlugs)
-                if (recommendPostsRes) {
-                    foundPosts.push(...recommendPostsRes)
+                // get recommended posts
+                const recommendSlugs: string[] = res.recommended
+                if (recommendSlugs) {
+                    const recommendPostsRes = await fetchLocalPostsFromSlugs(recommendSlugs)
+                    if (recommendPostsRes) {
+                        foundPosts.push(...recommendPostsRes)
+                    }
                 }
-            }
 
-            // get posts from recommended and popular topics
-            const randomTopics = getRandomArray(topics, 6).map(t => t.slug)
-            Promise.all(randomTopics.map(t => {
+                // get posts from recommended and popular topics
+                const randomTopics = getRandomArray(topics, 6).map(t => t.slug)
+                Promise.all(randomTopics.map(t => {
 
-                const url = `${ac_strings.slug_topic}/${t}`
-                return fetchPostslistFromArchivePage(url)
-            })).then(async (postArrays) => {
+                    const url = `${ac_strings.slug_topic}/${t}`
+                    return fetchPostslistFromArchivePage(url)
+                })).then(async (postArrays) => {
 
-                const postsFromTopics: IPostItem[] = []
-                if (postArrays) {
-                    postArrays.forEach((array => {
-                        if (array) {
-                            const randomPosts = getRandomArray(array, 6)
-                            postsFromTopics.push(...randomPosts)
-                        }
-                    }))
-                }
-                const mixedTopicPosts = getRandomArray(postsFromTopics, postsFromTopics.length)
-                foundPosts.push(...mixedTopicPosts)
-                setIsFetchingMore(false)
-                setPosts(foundPosts)
+                    const postsFromTopics: IPostItem[] = []
+                    if (postArrays) {
+                        postArrays.forEach((array => {
+                            if (array) {
+                                const randomPosts = getRandomArray(array, 6)
+                                postsFromTopics.push(...randomPosts)
+                            }
+                        }))
+                    }
+                    const mixedTopicPosts = getRandomArray(postsFromTopics, postsFromTopics.length)
+                    foundPosts.push(...mixedTopicPosts)
+                    setIsFetchingMore(false)
+                    setPosts(foundPosts)
+                })
             })
         })
+
     }, [])
 
     const lastPage = Math.ceil(posts.length / postsPerPage)

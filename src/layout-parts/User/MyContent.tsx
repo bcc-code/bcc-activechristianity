@@ -14,7 +14,8 @@ import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFo
 import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
 import { getRandomArray, normalizePostRes, } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.js'
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
+
 import shortid from 'shortid'
 const UserContent = () => {
 
@@ -26,24 +27,29 @@ const UserContent = () => {
 
         const postsIds = bookmarkedPosts.map(p => p.id)
         const topicsIds = followedTopics.map(p => p.id) //
-        acApi.getPostsAndTopicsByIds({ postsIds, topicsIds })
-            .then(postResData => {
-                const postRes = postResData.posts && postResData.posts.data ? postResData.posts.data : []
-                const topicRes = postResData.topics ? postResData.topics : []
-                const video: IPostItem[] = []
-                const other: IPostItem[] = []
-                setTopics(topicRes)
-                postRes.map((p: IPostRes) => {
-                    const post = normalizePostRes(p)
-                    if (post.media.video) {
-                        video.push(post)
-                    } else {
-                        other.push(post)
-                    }
+        acApiModule.then(res => {
+            const api = res.default
+            api.getPostsAndTopicsByIds({ postsIds, topicsIds })
+                .then(postResData => {
+                    const postRes = postResData.posts && postResData.posts.data ? postResData.posts.data : []
+                    const topicRes = postResData.topics ? postResData.topics : []
+                    const video: IPostItem[] = []
+                    const other: IPostItem[] = []
+                    setTopics(topicRes)
+                    postRes.map((p: IPostRes) => {
+                        const post = normalizePostRes(p)
+                        if (post.media.video) {
+                            video.push(post)
+                        } else {
+                            other.push(post)
+                        }
+                    })
+                    setVideoPosts(video)
+                    setOtherPosts(other)
                 })
-                setVideoPosts(video)
-                setOtherPosts(other)
-            })
+        })
+
+
 
 
     }, [bookmarkedPosts])

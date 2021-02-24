@@ -23,8 +23,7 @@ import {
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
-
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
 import { debounce } from '@/helpers'
 
 
@@ -117,11 +116,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     lastScroll.current = Date.now() + 5000
 
                     if (id) {
-                        acApi
-                            .readingPost(id)
-                            .catch((err: any) => {
-                                console.log(err)
-                            })
+                        acApiModule.then(res => {
+                            const api = res.default
+                            api
+                                .readingPost(id)
+                                .catch((err: any) => {
+                                    console.log(err)
+                                })
+                        })
+
                     }
                 }
             }

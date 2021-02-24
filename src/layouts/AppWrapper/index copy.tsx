@@ -21,7 +21,7 @@ import { menusItems } from '@/strings/generated/menus.json'
 
 // string
 
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
 // type 
 import { IUser } from '@/types'
 

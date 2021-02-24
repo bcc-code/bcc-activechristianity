@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FetchOnePost } from '@/HOC/FetchPosts'
-const api = import('@/util/api')
+const acApiModule = import('@/util/api')
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray, filterTopics } from '@/helpers'
 import { ITopic } from '@/types'
@@ -16,39 +16,44 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
     const postsPerPage = 12
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
-        api.recommended().then(res => {
-            const recommendSlugs = res.recommended
-            const allTopics = filterTopics({ topics: [res.popularTopics, res.featuredTopics], returnSlugs: true })
-            const randomTopics = getRandomArray(allTopics, 6)
-            setIsFetchingMore(true)
-            Promise.all(randomTopics.map(t => {
+        acApiModule.then(res => {
+            const api = res.default
+            api.recommended().then(res => {
+                const recommendSlugs = res.recommended
+                const allTopics = filterTopics({ topics: [res.popularTopics, res.featuredTopics], returnSlugs: true })
+                const randomTopics = getRandomArray(allTopics, 6)
+                setIsFetchingMore(true)
+                Promise.all(randomTopics.map(t => {
 
-                const url = `/${ac_strings.slug_topic}/${t}/1`
-                return fetch(`/page-data/${url}/page-data.json`)
-                    .then(res => res.json())
-                    .then(res => {
-                        if (res.result && res.result && res.result.pageContext.posts) {
-                            const posts: string[] = res.result.pageContext.posts.filter(p => typeof p === "string")
-                            return getRandomArray(posts, 4)
+                    const url = `/${ac_strings.slug_topic}/${t}/1`
+                    return fetch(`/page-data/${url}/page-data.json`)
+                        .then(res => res.json())
+                        .then(res => {
+                            if (res.result && res.result && res.result.pageContext.posts) {
+                                const posts: string[] = res.result.pageContext.posts.filter(p => typeof p === "string")
+                                return getRandomArray(posts, 4)
 
+                            }
+                            return undefined
+                        }).catch(error => {
+                            console.log(error)
+                        })
+                })).then(async (postArrays) => {
+                    let allPostSlugs: string[] = recommendSlugs ? recommendSlugs.map(p => p.slug).filter(p => typeof p === "string") : []
+                    postArrays.forEach((array => {
+                        if (array) {
+
+                            allPostSlugs.push(...array)
                         }
-                        return undefined
-                    }).catch(error => {
-                        console.log(error)
-                    })
-            })).then(async (postArrays) => {
-                let allPostSlugs: string[] = recommendSlugs ? recommendSlugs.map(p => p.slug).filter(p => typeof p === "string") : []
-                postArrays.forEach((array => {
-                    if (array) {
-
-                        allPostSlugs.push(...array)
-                    }
-                }))
-                const randomPostSlugs = getRandomArray(allPostSlugs, allPostSlugs.length)
-                setIsFetchingMore(false)
-                setPosts(randomPostSlugs)
+                    }))
+                    const randomPostSlugs = getRandomArray(allPostSlugs, allPostSlugs.length)
+                    setIsFetchingMore(false)
+                    setPosts(randomPostSlugs)
+                })
             })
         })
+
+
     }, [])
 
     const lastPage = Math.ceil(posts.length / postsPerPage)

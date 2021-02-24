@@ -5,7 +5,7 @@ import { InputText } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
 
 
 const initialFieldsState = {
@@ -54,16 +54,20 @@ const ForgotPasswordForm: React.FC = () => {
         setInfo(undefined)
         if (validate()) {
             const { email } = fields
-            acApi.forgotPassword(email).then(res => {
-                setLoading(false)
-                if (res.forgotPassword) {
-                    setInfo(ac_strings.reset_password_mail_sent)
-                } else {
-                    setResError(ac_strings.error_something_went_wrong)
-                }
-            }).catch(error => {
-                setResError(error.message)
+            acApiModule.then(res => {
+                const api = res.default
+                api.forgotPassword(email).then(res => {
+                    setLoading(false)
+                    if (res.forgotPassword) {
+                        setInfo(ac_strings.reset_password_mail_sent)
+                    } else {
+                        setResError(ac_strings.error_something_went_wrong)
+                    }
+                }).catch(error => {
+                    setResError(error.message)
+                })
             })
+
 
         }
     }

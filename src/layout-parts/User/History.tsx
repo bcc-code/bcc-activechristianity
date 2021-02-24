@@ -1,28 +1,33 @@
 import * as React from "react"
-import { useSelector } from 'react-redux'
 import { SectionTitleDesktopAndMobile } from '@/components/Headers'
-import { IPostItem, IApiItem } from '@/types'
+import { IPostItem } from '@/types'
 
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/components/HorizontalScroll/HSCardListVideo'
-const api = import('@/util/api')
+const acApiModule = import('@/util/api')
 import ac_strings from '@/strings/ac_strings.js'
 const UserHistory = () => {
     const [historyPosts, setHistoryPosts] = React.useState<IPostItem[]>([])
     React.useEffect(() => {
-        api.history().then(res => {
-            const { history } = res
-            if (res && Array.isArray(history)) {
-                const slugs = history.map(item => item.slug)
-                return fetchLocalPostsFromSlugs(slugs).then(posts => {
-                    setHistoryPosts(posts)
-                })
-                /*                         console.log(history.map(item=>item.slug))
-                                    setHistoryPosts(history.map(item=>item.slug)) */
-            }
+        acApiModule.then(res => {
+            const api = res.default
+            api.history().then(res => {
+                const { history } = res
+                if (res && Array.isArray(history)) {
+                    const slugs = history.map(item => item.slug)
+                    return fetchLocalPostsFromSlugs(slugs).then(posts => {
+                        if (posts) {
+                            setHistoryPosts(posts)
+                        }
+                    })
+                    /*                         console.log(history.map(item=>item.slug))
+                                        setHistoryPosts(history.map(item=>item.slug)) */
+                }
+            })
         })
+
+
     }, [])
 
     const video: IPostItem[] = []

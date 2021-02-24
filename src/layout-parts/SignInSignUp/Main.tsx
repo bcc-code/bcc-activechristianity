@@ -8,7 +8,7 @@ import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
 
 import endpoints from '@/strings/static/endpoints'
-const acApi = import('@/util/api')
+const acApiModule = import('@/util/api')
 const formText = {
     "signUpOptions": {
         "title": ac_strings.signup_title,
@@ -42,27 +42,30 @@ const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> =
     }, [])
 
     const checkUser = () => {
-
-        acApi
-            .profile()
-            .then((res: IUser) => {
-                if (res && res.id) {
-                    if (res.meta && res.meta.consented) {
-                        dispatch(setUser(res))
-                        dispatch(getUserLibrary())
-                        dispatch(closeSignInModal())
+        acApiModule.then(res => {
+            const api = res.default
+            api
+                .profile()
+                .then((res: IUser) => {
+                    if (res && res.id) {
+                        if (res.meta && res.meta.consented) {
+                            dispatch(setUser(res))
+                            dispatch(getUserLibrary())
+                            dispatch(closeSignInModal())
+                        } else {
+                            dispatch(openSignInModal("giveConsent"))
+                        }
                     } else {
-                        dispatch(openSignInModal("giveConsent"))
+                        dispatch(setLogout())
                     }
-                } else {
+                })
+                .catch((err: any) => {
+                    console.log(err)
                     dispatch(setLogout())
-                }
-            })
-            .catch((err: any) => {
-                console.log(err)
-                dispatch(setLogout())
-                console.log('handle login error')
-            })
+                    console.log('handle login error')
+                })
+        })
+
     }
 
 
