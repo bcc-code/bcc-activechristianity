@@ -68,6 +68,7 @@
 
 .layout-children {
     margin-top: 56px;
+    padding-bottom: 70px;
 }
 
 @media (min-width: 640px) {
