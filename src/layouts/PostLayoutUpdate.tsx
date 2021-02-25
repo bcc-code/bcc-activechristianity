@@ -1,8 +1,11 @@
 import React, { Profiler } from 'react'
 import loadable from '@loadable/component'
-import LazyLoad from '@/components/LazyLoad';
+import ViewNext from '@/layout-parts/PostLayout/ViewNext'
+import LazyLoad from 'react-lazyload';
+import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
+import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import shortid from 'shortid'
 /* const AudioPlayer */
 
@@ -10,9 +13,6 @@ import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
 import PostContent from '@/components/Content/PostContent'
-
-
-
 import { PostH1 } from '@/components/Headers'
 
 import {
@@ -69,8 +69,7 @@ function onRenderCallback(
 import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 export const PostLayout: React.FC<IPostProps> = (post) => {
-    const isWindowLoaded = React.useRef<boolean | null>(null)
-    console.log(isWindowLoaded)
+    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
 
     const {
         id,
@@ -148,11 +147,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         () => {
             const handleWindowLoaded = () => {
                 console.log('The page has fully loaded');
-                isWindowLoaded.current = true
+                setIsWindowLoaded(true)
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
-                isWindowLoaded.current = true
+                setIsWindowLoaded(true)
             } else {
                 window.addEventListener('load', handleWindowLoaded);
             }
@@ -169,9 +168,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
-            {/*             <Profiler id={"share shortcut"} onRender={onRenderCallback}>
-
-
+            {isWindowLoaded && (
                 <ShareBookmarkTopShortCuts
                     id={id}
                     text={excerpt || title}
@@ -180,13 +177,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     likes={likes}
                     isPlayingAudio={!!isCurrentMedia.audio}
                 />
-            </Profiler> */}
+            )}
             {/*             <ViewNext
                 isPlayingAudio={!!isCurrentMedia.audio}
                 slug={slug}
 
-                position = {{
-                height: contentEl.current && contentEl.current.clientHeight,
+                position={{
+                    height: contentEl.current && contentEl.current.clientHeight,
                     top: contentEl.current && contentEl.current.offsetTop
                 }}
                 postId={id}
@@ -226,7 +223,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
                         >
                             {
-                                isWindowLoaded.current === true ? (
+                                isWindowLoaded === true ? (
                                     <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                                 ) : (
                                         <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
@@ -273,7 +270,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     <div>
                         {
-                            isWindowLoaded.current === true ? (
+                            isWindowLoaded === true ? (
                                 <div ref={contentEl}>
                                     <PostContent
                                         content={content}
@@ -289,71 +286,58 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 )
                         }
 
-                        <Profiler id={"credits"} onRender={onRenderCallback}>
-                            {credits && (
-                                <Content
-                                    content={credits}
-                                />
-                            )}
-                        </Profiler>
-                        {/*              <Profiler id={"topic follow"} onRender={onRenderCallback}>
-                            <div className="flex flex-wrap border-ac-gray py-6">
-                                {topics && topics?.map(item => (
-                                    <ToggleFollowWithName {...item} />
-                                ))}
-                            </div>
-                        </Profiler> */}
+                        {credits && (
+                            <Content
+                                content={credits}
+                            />
+                        )}
+                        {isWindowLoaded === true && (
+                            <div>
+                                <div className="flex flex-wrap border-ac-gray py-6">
+                                    {topics && topics?.map(item => (
+                                        <ToggleFollowWithName {...item} />
+                                    ))}
+                                </div>
 
 
-                        {/*                    <Profiler id={"author share bookmark"} onRender={onRenderCallback}>
-                            <div className="border-b pb-6">
-                                <AuthorBookmarkShareSection
-                                    id={id}
-                                    text={excerpt || title}
-                                    shareSlug={slug}
-                                    views={views}
-                                    likes={likes}
-                                    authors={authors}
-                                    formats={format}
+                                <div className="border-b pb-6">
+                                    <AuthorBookmarkShareSection
+                                        id={id}
+                                        text={excerpt || title}
+                                        shareSlug={slug}
+                                        views={views}
+                                        likes={likes}
+                                        authors={authors}
+                                        formats={format}
 
-                                />
-                            </div>
-                        </Profiler> */}
-                        {/* <Profiler id={"interest"} onRender={onRenderCallback}>
-                            <LazyLoad>
+                                    />
+                                </div>
                                 <div className="pt-6">
                                     <Row3ColAndXScroll title={`${ac_strings.you_might_be_interested_in}`} posts={allInterestedPosts} />
                                 </div>
-                            </LazyLoad>
-                        </Profiler>
+                                {authors && (
+                                    <LazyLoad>
+                                        <div className="hidden sm:block">
+                                            {authorsPosts.length > 0 && authorsPosts.map(item => {
+                                                return (
 
-                        <Profiler id={"author"} onRender={onRenderCallback}>
-                            {authors && (
-                                <LazyLoad>
-                                    <div className="hidden sm:block">
-                                        {authorsPosts.length > 0 && authorsPosts.map(item => {
-                                            return (
+                                                    <div className="pt-6">
+                                                        <Row3ColAndXScroll
+                                                            title={`${ac_strings.more_from} ${item.name}`}
+                                                            posts={item.posts}
+                                                        />
+                                                    </div>
 
-                                                <div className="pt-6">
-                                                    <Row3ColAndXScroll
-                                                        title={`${ac_strings.more_from} ${item.name}`}
-                                                        posts={item.posts}
-                                                    />
-                                                </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </LazyLoad>
+                                )}
 
-                                            )
-                                        })}
-                                    </div>
-                                </LazyLoad>
-                            )}
-                        </Profiler> */}
-
+                            </div>
+                        )}
                     </div>
-                    <Profiler id={"translationn"} onRender={onRenderCallback}>
-                        <LazyLoad>
-                            <Translations translatedUrls={tranlsatedUrl || []} />
-                        </LazyLoad>
-                    </Profiler>
+                    <Translations translatedUrls={tranlsatedUrl || []} />
 
 
                 </div>
