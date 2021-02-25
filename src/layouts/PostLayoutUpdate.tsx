@@ -69,8 +69,8 @@ function onRenderCallback(
 import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 export const PostLayout: React.FC<IPostProps> = (post) => {
-    //windowLoadedRef 
-    const windowLoadedRef = React.useRef<boolean | null>(null)
+    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
+
     const {
         id,
         title,
@@ -147,25 +147,20 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         () => {
             const handleWindowLoaded = () => {
                 console.log('The page has fully loaded');
-                windowLoadedRef.current = true
+                setTimeout(() => {
+                    console.log('add components after window load')
+                    setIsWindowLoaded(true)
+                }, 500)
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
-                windowLoadedRef.current = true
+                setIsWindowLoaded(true)
             } else {
                 window.addEventListener('load', handleWindowLoaded);
             }
-            setTimeout(() => {
 
-                if (windowLoadedRef.current !== true) {
-                    console.log('set window to loaded on time setout')
-                    windowLoadedRef.current = true
-                }
-            }, 5 * 1000)
             return () => window.removeEventListener('load', handleWindowLoaded);
         }, [])
-
-    const isWindowLoaded = windowLoadedRef.current
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
@@ -173,7 +168,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
-    console.log(isWindowLoaded)
+    console.log(isWindowLoaded === true)
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             {isWindowLoaded === true && (
