@@ -70,7 +70,7 @@ import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/st
 import { loggedInSelector } from '@/state/selectors/user'
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
-
+    const [showMobileImage, setShowMobileImage] = React.useState(false)
     const {
         id,
         title,
@@ -151,6 +151,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     console.log('add components after window load')
                     setIsWindowLoaded(true)
                 }, 5 * 1000)
+                setTimeout(() => {
+                    setShowMobileImage(true)
+                }, 2500)
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
@@ -224,7 +227,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             className={`fixed transition-transform background-image w-full flex items-end`}
                             style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
                         >
-                            <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                            {
+                                showMobileImage === true ? (
+                                    <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                                ) : (
+                                        <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                                    )
+                            }
                         </div>
 
                     )}
