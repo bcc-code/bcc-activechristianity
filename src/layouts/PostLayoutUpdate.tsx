@@ -168,7 +168,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
-    console.log(isWindowLoaded === true)
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             {isWindowLoaded === true && (
@@ -225,13 +224,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             className={`fixed transition-transform background-image w-full flex items-end`}
                             style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
                         >
-                            {
-                                isWindowLoaded === true ? (
-                                    <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                                ) : (
-                                        <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                                    )
-                            }
+                            <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                         </div>
 
                     )}
