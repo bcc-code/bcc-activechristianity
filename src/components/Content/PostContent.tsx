@@ -2,7 +2,7 @@ import * as React from 'react'
 import loadable from '@loadable/component'
 import endpoints from '@/strings/static/endpoints'
 const ShareIconPopper = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
-import GlossaryPopper from '@/components/ToolTip/GlossaryPopper'
+const GlossaryPopper = loadable(() => import('@/components/ToolTip/GlossaryPopper'))
 
 
 const addScript = (url: string) => {
@@ -84,7 +84,6 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
             if (isGlossary) {
                 handleSelectedText(e)
             }
-            ds
         } else {
             // false for not mobile device
             e.preventDefault();
@@ -128,11 +127,14 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
 
                         setPosition(toSetPostion)
                         if (isGlossary) {
+                            console.log(isGlossary)
+                            console.log(glossary)
                             const findGlossary = glossary?.find(g => {
                                 return g.word.toLocaleLowerCase() === e.target.textContent.toLocaleLowerCase()
                             })
 
                             if (findGlossary) {
+                                console.log(findGlossary)
                                 setGlossaryContent(findGlossary)
                                 setShowPopper(false)
                                 setShowGlossary(true)

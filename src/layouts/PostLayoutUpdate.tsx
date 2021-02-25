@@ -150,7 +150,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 setTimeout(() => {
                     console.log('add components after window load')
                     setIsWindowLoaded(true)
-                }, 500)
+                }, 5 * 1000)
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
