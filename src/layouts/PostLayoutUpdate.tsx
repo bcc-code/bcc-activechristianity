@@ -153,11 +153,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 }, 5 * 1000)
                 setTimeout(() => {
                     setShowMobileImage(true)
-                }, 2500)
+                }, 1500)
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
                 setIsWindowLoaded(true)
+                setShowMobileImage(true)
+
             } else {
                 window.addEventListener('load', handleWindowLoaded);
             }
