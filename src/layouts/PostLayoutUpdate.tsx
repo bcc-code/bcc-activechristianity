@@ -69,12 +69,9 @@ function onRenderCallback(
 import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 export const PostLayout: React.FC<IPostProps> = (post) => {
+    const isWindowLoaded = React.useRef<boolean | null>(null)
+    console.log(isWindowLoaded)
 
-    React.useEffect(() => {
-        window.addEventListener('load', (event) => {
-            console.log('The page has fully loaded');
-        });
-    }, [])
     const {
         id,
         title,
@@ -110,11 +107,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         if (isLoggedIn === "success") {
             lastScroll.current = Date.now() + 5000
             if (id) {
-                acApi
-                    .visitsPost(id)
-                    .catch((err: any) => {
-                        console.log(err)
-                    })
+                acApiModule.then(res => {
+                    const acApi = res.default
+                    acApi
+                        .visitsPost(id)
+                        .catch((err: any) => {
+                            console.log(err)
+                        })
+                })
+
             }
             const handleScroll = (e: any) => {
                 if (lastScroll.current < Date.now()) {
@@ -135,11 +136,29 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             }
             const debounceScroll = debounce(handleScroll, 1000)
             window.addEventListener('scroll', debounceScroll);
-            return () => window.removeEventListener('scroll', debounceScroll);
+
+            return () => {
+                window.removeEventListener('scroll', debounceScroll)
+            };
         }
 
     }, [post.slug])
 
+    React.useEffect(
+        () => {
+            const handleWindowLoaded = () => {
+                console.log('The page has fully loaded');
+                isWindowLoaded.current = true
+            }
+            if (document.readyState === 'complete') {
+                console.log('the page is loaded previously')
+                isWindowLoaded.current = true
+            } else {
+                window.addEventListener('load', handleWindowLoaded);
+            }
+
+            return () => window.removeEventListener('load', handleWindowLoaded);
+        }, [])
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
@@ -174,50 +193,52 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 topics={topics}
                 formats={format}
             /> */}
-            <Profiler id={"media"} onRender={onRenderCallback}>
-                <div className="fixed sm:relative w-full z-50">
-                    {currentMediaType === "video" && media.video && media.video.src && (
-                        <VideoMediaPlayer src={media.video.src} key={shortid()} />
+            <div className="fixed sm:relative w-full z-50">
+                {currentMediaType === "video" && media.video && media.video.src && (
+                    <VideoMediaPlayer src={media.video.src} key={shortid()} />
 
-                    )}
-                    {currentMediaType === "audio" && media.audio && (
-                        <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} key={shortid()} />
-                    )}
+                )}
+                {currentMediaType === "audio" && media.audio && (
+                    <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} key={shortid()} />
+                )}
 
-                    {mediaTypesDefault.types.length > 1 && (
-                        <div className="w-full flex justify-center pb-4  bg-mp-background sm:pt-4">
-                            {mediaTypesDefault.types.map((item, i) => (
-                                <button
-                                    key={item}
-                                    className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
-                                    onClick={() => setCurrentMediaType(item)}>
-                                    {item}
-                                </button>
-                            ))}
+                {mediaTypesDefault.types.length > 1 && (
+                    <div className="w-full flex justify-center pb-4  bg-mp-background sm:pt-4">
+                        {mediaTypesDefault.types.map((item, i) => (
+                            <button
+                                key={item}
+                                className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
+                                onClick={() => setCurrentMediaType(item)}>
+                                {item}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <div className="sm:hidden fixed inset-x top-0 w-full">
+                {mediaTypesDefault.types.length > 0 ? (
+                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
+
+                    </div>
+                ) : (
+                        <div
+                            className={`fixed transition-transform background-image w-full flex items-end`}
+                            style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
+                        >
+                            {
+                                isWindowLoaded.current === true ? (
+                                    <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                                ) : (
+                                        <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                                    )
+                            }
                         </div>
+
                     )}
-                </div>
-            </Profiler>
-            <Profiler id={"mobile header"} onRender={onRenderCallback}>
-                <div className="sm:hidden fixed inset-x top-0 w-full">
-                    {mediaTypesDefault.types.length > 0 ? (
-                        <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
+            </div>
+            <div className='w-full sm:hidden relative' style={{ top: "50px", height: `${currentHeigt}px` }}>
 
-                        </div>
-                    ) : (
-                            <div
-                                className={`fixed transition-transform background-image w-full flex items-end`}
-                                style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
-                            >
-                                <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                            </div>
-
-                        )}
-                </div>
-                <div className='w-full sm:hidden relative' style={{ top: "50px", height: `${currentHeigt}px` }}>
-
-                </div>
-            </Profiler>
+            </div>
 
 
             <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50 flex justify-center" >
@@ -229,15 +250,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <PostH1 title={title} />
                     <p className="text-ac-gray-dark mb-6 sm:mb-0 sm:font-medium sm:text-lg leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
                     <div className="border-b w-1/6 my-8 border-ac-gray"></div>
-                    <Profiler id={"read time author"} onRender={onRenderCallback}>
-                        <div className="pb-6 bg-white text-sm">
-                            <ReadingTimingAuthor
-                                duration={duration?.read}
-                                authors={authors}
+                    <div className="pb-6 bg-white text-sm">
+                        <ReadingTimingAuthor
+                            duration={duration?.read}
+                            authors={authors}
 
-                            />
-                        </div>
-                    </Profiler>
+                        />
+                    </div>
 
 
                     {(currentMediaType === "audio") && (
@@ -253,16 +272,23 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     )}
 
                     <div>
-                        <Profiler id={"content"} onRender={onRenderCallback}>
-                            <div ref={contentEl}>
-                                <PostContent
-                                    content={content}
-                                    glossary={glossary}
-                                    slug={slug}
-                                    title={title}
-                                />
-                            </div>
-                        </Profiler>
+                        {
+                            isWindowLoaded.current === true ? (
+                                <div ref={contentEl}>
+                                    <PostContent
+                                        content={content}
+                                        glossary={glossary}
+                                        slug={slug}
+                                        title={title}
+                                    />
+                                </div>
+                            ) : (
+                                    <Content
+                                        content={content}
+                                    />
+                                )
+                        }
+
                         <Profiler id={"credits"} onRender={onRenderCallback}>
                             {credits && (
                                 <Content

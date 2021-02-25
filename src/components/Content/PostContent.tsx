@@ -84,20 +84,7 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
             if (isGlossary) {
                 handleSelectedText(e)
             }
-            // true for mobile device
-            /*             if (navigator.share) {
-                            navigator.share({
-                                title,
-                                url: options.shareUrl,
-                                text: shareText
-                            }).then(() => {
-                                console.log('Thanks for sharing!');
-                            })
-                                .catch(console.error);
-                        } else {
-                            e.preventDefault();
-                            handleSelectedText(e)
-                        } */
+            ds
         } else {
             // false for not mobile device
             e.preventDefault();
