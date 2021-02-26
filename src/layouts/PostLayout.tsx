@@ -192,13 +192,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
             <div className="sm:hidden fixed inset-x top-0 w-full">
                 {mediaTypes.length > 0 ? (
-                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
+                    <div className='fixed bg-mp-background w-full' style={{ top: "96px", height: `${currentHeigt + 90}px` }}>
 
                     </div>
                 ) : (
                         <div
                             className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
+                            style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
                         >
                             <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                         </div>

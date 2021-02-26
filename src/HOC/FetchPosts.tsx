@@ -12,6 +12,7 @@ interface IFetchPost {
     render: (data: { posts: IPostItem[] }) => JSX.Element
 }
 export const FetchPostsFromSlugs: React.FC<IFetchPost> = ({ slugs, render, layout }) => {
+    console.log(slugs)
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {

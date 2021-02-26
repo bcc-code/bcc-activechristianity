@@ -147,8 +147,8 @@ export const fetchOneLocalPostFromSlug = (slug: string) => {
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
-            if (res.result && res.result.data && res.result.data['acNodePost']) {
-                const updatePost = normalizePostRes(res.result.data['acNodePost'])
+            if (res.result && res.result.data && res.result.pageContext && res.result.pageContext.normalized) {
+                const updatePost = res.result.pageContext.normalized
                 return updatePost
             }
             return undefined

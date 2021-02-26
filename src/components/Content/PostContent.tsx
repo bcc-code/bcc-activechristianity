@@ -1,9 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
-import endpoints from '@/strings/static/endpoints'
 const ShareIconPopper = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 const GlossaryPopper = loadable(() => import('@/components/ToolTip/GlossaryPopper'))
-
 
 const addScript = (url: string) => {
     const script = document.createElement("script")

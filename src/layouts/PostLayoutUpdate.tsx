@@ -8,13 +8,20 @@ import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import shortid from 'shortid'
 /* const AudioPlayer */
-
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
+const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
 
+import RightImgWDes from '@/components/PostItemCards/RightImg'
+import Link from '@/components/CustomLink'
+import { ITopicPostItems } from '@/types'
+import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
+import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
+import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg'
 import {
     AuthorBookmarkShareSection,
     Translations,
@@ -27,7 +34,7 @@ const acApiModule = import('@/util/api')
 import { debounce } from '@/helpers'
 
 
-import { IPostItem, ITopicPostItems, INavItem } from '@/types'
+import { IPostItem, ITopicPostSlugs, INavItem } from '@/types'
 import { IRootState } from '@/state/types'
 
 // mock data
@@ -43,36 +50,24 @@ export interface IMediaTypes {
 }
 interface IPostProps extends IPostItem {
     content: string
-    allInterestedPosts: IPostItem[]
-    topicPosts: ITopicPostItems[]
-    authorsPosts: ITopicPostItems[]
+    allInterestedPosts: string[]
+    topicPosts: ITopicPostSlugs[]
+    authorsPosts: ITopicPostSlugs[]
     tranlsatedUrl: INavItem[]
     credits?: string
     seoTitle: string
     mediaTypes: IMediaTypes
 }
 
-function onRenderCallback(
-    id, // the "id" prop of the Profiler tree that has just committed
-    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-    actualDuration, // time spent rendering the committed update
-    baseDuration, // estimated time to render the entire subtree without memoization
-    startTime, // when React began rendering this update
-    commitTime, // when React committed this update
-    interactions // the Set of interactions belonging to this update
-) {
-    console.log(id)
-    console.log(actualDuration)
-    // Aggregate or log render timings...
-}
-
-import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
+import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
+import { divide } from 'lodash';
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const [showMobileImage, setShowMobileImage] = React.useState(false)
     const {
         id,
+        acId,
         title,
         slug,
         excerpt,
@@ -91,9 +86,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         credits,
         seoTitle,
         allInterestedPosts,
-        authorsPosts
+        authorsPosts,
+        topicPosts
     } = post
-
 
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
 
@@ -153,7 +148,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 }, 5 * 1000)
                 setTimeout(() => {
                     setShowMobileImage(true)
-                }, 2500)
+                }, 2000)
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
@@ -169,12 +164,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
-        "none": 100
+        "none": typeof window !== 'undefined' ? (window.innerWidth / 2) - 30 : 135
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
-        <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
+        <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
             {isWindowLoaded === true && (
                 <ShareBookmarkTopShortCuts
                     id={id}
@@ -221,17 +217,17 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
             <div className="sm:hidden fixed inset-x top-0 w-full">
                 {mediaTypesDefault.types.length > 0 ? (
-                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
+                    <div className='fixed bg-mp-background w-full' style={{ top: "96px", height: `${currentHeigt + 90}px` }}>
 
                     </div>
                 ) : (
                         <div
-                            className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
+                            className={`fixed transition-transform background-image w-full`}
+                            style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
                         >
                             {
                                 showMobileImage === true ? (
-                                    <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                                    <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                                 ) : (
                                         <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                                     )
@@ -240,13 +236,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     )}
             </div>
-            <div className='w-full sm:hidden relative' style={{ top: "50px", height: `${currentHeigt}px` }}>
+            <div className='w-full sm:hidden relative' style={{ top: "60px", height: `${currentHeigt}px` }}>
 
             </div>
 
 
-            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-24 pt-4 px-4 z-50 flex justify-center" >
-
+            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-4 z-50 flex justify-center standard-max-w " >
                 <div className="max-w-full sm:max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
@@ -319,25 +314,34 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                                     />
                                 </div>
-                                <div className="pt-6">
-                                    <Row3ColAndXScroll title={`${ac_strings.you_might_be_interested_in}`} posts={allInterestedPosts} />
-                                </div>
+                                <RecommendedPosts
+                                    postId={acId ? acId : id}
+                                    topics={topicPosts}
+                                    readMorePosts={allInterestedPosts}
+                                />
+
                                 {authors && (
                                     <LazyLoad>
-                                        <div className="hidden sm:block">
-                                            {authorsPosts.length > 0 && authorsPosts.map(item => {
-                                                return (
+                                        {authorsPosts.length > 0 && authorsPosts.map(item => {
 
-                                                    <div className="pt-6">
-                                                        <Row3ColAndXScroll
-                                                            title={`${ac_strings.more_from} ${item.name}`}
-                                                            posts={item.posts}
-                                                        />
-                                                    </div>
+                                            return (
+                                                <FetchPostsFromSlugs
+                                                    layout="row"
+                                                    slugs={item.posts}
+                                                    render={({ posts }) => {
+                                                        return (
+                                                            <Row3ColAndXScroll
+                                                                className="pt-6"
+                                                                title={`${ac_strings.more_from} ${item.name}`}
+                                                                posts={posts}
+                                                            />
+                                                        )
+                                                    }}
+                                                />
 
-                                                )
-                                            })}
-                                        </div>
+
+                                            )
+                                        })}
                                     </LazyLoad>
                                 )}
 
@@ -348,6 +352,79 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
 
                 </div>
+                {isWindowLoaded === true && !isMobile && (
+                    <div className="bg-grey-300 hidden lg:flex flex-col w-full pl-4 justify-start">
+                        <div className="py-6">
+                            <PageSectionHeaderUpperCaseGray title='More from these topics' />
+                            {
+                                topicPosts.map(item => {
+                                    return (
+                                        <div className="md:flex md:flex-col" key={shortid()}>
+                                            {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
+                                                    {subHeader && <PageSectionHeaderUpperCaseGray title={subHeader} />}
+                                                    {header && <h4 className="font-roboto mb-6">{header}</h4>}
+                                        
+                                                </div> */}
+                                            <div className="w-full flex justify-between items-center text-sm mb-6">
+                                                <Link to={`${item.slug}`}>
+                                                    {/* <PageSectionHeaderUpperCaseGray title={ac_strings.popular_topic} /> */}
+                                                    <h4 className="font-roboto text-base">{item.name}</h4>
+                                                </Link>
+                                                <ToggleFollowOutlineBtn id={item.id} />
+                                            </div>
+                                            <FetchPostsFromSlugs
+                                                layout="list"
+                                                slugs={item.posts}
+                                                render={({ posts }) => {
+                                                    return (
+                                                        <div className="mb-2">
+                                                            {posts.slice(0, 5).map((item, k) => {
+                                                                return (
+                                                                    <SquareLeftImg {...item} key={k} />
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    )
+                                                }}
+                                            />
+
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div>
+                            {authorsPosts.length > 0 && authorsPosts.map(item => {
+
+                                return (
+                                    <FetchPostsFromSlugs
+                                        layout="list"
+                                        slugs={item.posts}
+                                        render={({ posts }) => {
+                                            return (
+                                                <div className="py-6">
+                                                    <PageSectionHeaderUpperCaseGray title={`${ac_strings.more_from} ${item.name}`} />
+
+                                                    <div className="mb-2">
+                                                        {posts.slice(0, 5).map((item, k) => {
+                                                            return (
+                                                                <SquareLeftImg {...item} key={k} />
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            )
+                                        }}
+                                    />
+
+
+                                )
+                            })}
+                        </div>
+
+                    </div>
+                )}
+
             </div>
 
             <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">

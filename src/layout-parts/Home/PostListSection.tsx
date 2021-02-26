@@ -28,8 +28,6 @@ const PostListSection: React.FC<ITopicPostItems> = ({ posts, ...topic }) => (
                     )
                 })}
             </div>
-
-
         </div>
     </div>
 )

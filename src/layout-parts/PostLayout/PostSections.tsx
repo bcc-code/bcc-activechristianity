@@ -1,7 +1,6 @@
 import * as React from 'react'
-import loadable from '@loadable/component'
 import Link from '@/components/CustomLink'
-import { INavItem, IPostAuthors, ITopicNavItem } from '@/types'
+import { INavItem, IPostAuthors } from '@/types'
 import { PageSectionHeaderUpperCaseGray, PostH1 } from '@/components/Headers'
 import { BookmarksAndViews } from '@/components/PostElements'
 import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
@@ -154,11 +153,11 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
     return (
         <div className="relative bg-white border-ac-gray flex justify-between">
             <div className="flex flex-col">
-                {/*      {authors?.map(item => {
+                {authors?.map(item => {
                     return (
                         <AuthorFollowSection authors={item} />
                     )
-                })} */}
+                })}
                 {formats && formats.length > 0 && (
                     <span className="">
                         <PageSectionHeaderUpperCaseGray title={ac_strings.categories} />
@@ -178,11 +177,11 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
 
             </div>
             <div className="flex">
-                {/* <BookmarksAndViews
+                <BookmarksAndViews
                     id={id}
                     views={views}
                     likes={likes}
-                /> */}
+                />
                 <ShareButton
                     shareUrl={shareSlug}
                     text={text ? text : ""}

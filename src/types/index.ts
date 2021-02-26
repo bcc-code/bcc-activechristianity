@@ -80,6 +80,7 @@ export interface IPostAuthors {
 
 export interface IPostItem {
     id: string
+    acId?: string
     title: string
     slug: string
     image: IImage

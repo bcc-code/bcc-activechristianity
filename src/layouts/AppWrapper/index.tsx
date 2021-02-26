@@ -120,8 +120,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             <MediaPlayer key={shortid()} />
             <TopDesktop key={shortid()} {...NavProps} explorePage={menusItems.explore} />
             {isSideNavOpen && <SideNav {...NavProps} />}
-            <Breadcrumb key={shortid()} />
             <div className="relative layout-children" key={shortid()}>
+                <Breadcrumb key={shortid()} />
                 {children}
             </div>
 

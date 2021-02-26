@@ -22,7 +22,6 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
 
         const foundPosts: IPostItem[] = []
         acApiModule.then(api => {
-            console.log(api)
             api.default.recommended().then(async (res) => {
 
                 // get recommended posts

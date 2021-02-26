@@ -86,11 +86,6 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 audioDuration
                 noBorder={noBorder}
             />
-            {/*          
-            */}
-            {/*  <Profiler id={`top image base ${slug}`} onRender={onRenderCallback}>
-                
-            </Profiler> */}
         </div>
 
 

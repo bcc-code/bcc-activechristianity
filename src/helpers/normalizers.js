@@ -154,7 +154,6 @@ const normalizeTracks = (tracks) => {
 
 const filterTopics = (props) => {
     const { topics, returnSlugs } = props
-    console.log(topics)
     const allTopics= []
     topics.forEach(t => {
         if (t) {
@@ -206,8 +205,7 @@ const normalizePostRes = (post) => {
 
     const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem = {
-        id,
-        acId,
+        id:acId,
         title,
         excerpt,
         authors: normalizeAuthors(authors),

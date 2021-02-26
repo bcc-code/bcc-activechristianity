@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
 import { IMediaTypes } from '@/layouts/PostLayoutUpdate';
-import { INavItem, IPostRes, IPostItem, ITopicPostItems } from '@/types'
+import { INavItem, IPostRes, IPostItem, ITopicPostItems, ITopicPostSlugs } from '@/types'
 import PostLayout from '@/layouts/PostLayoutUpdate'
 const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
@@ -56,9 +56,9 @@ interface IPostProp {
     pageContext: {
         breadcrumb: INavItem[]
         normalized: IPostItem
-        allInterestedPosts: IPostItem[]
-        topicPosts: ITopicPostItems[]
-        authorsPosts: ITopicPostItems[]
+        allInterestedPosts: string[]
+        topicPosts: ITopicPostSlugs[]
+        authorsPosts: ITopicPostSlugs[]
         tranlsatedUrl: INavItem[]
         mediaTypes: IMediaTypes
         //ITopicPostItems

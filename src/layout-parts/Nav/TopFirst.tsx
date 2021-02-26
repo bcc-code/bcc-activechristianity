@@ -23,8 +23,8 @@ const TopDesktop: React.FC = () => {
         return (
             <div className=" hidden sm:flex justify-between items-center border-gray-200 border-b py-2 sm:py-0 px-2 text-gray-500 text-sm ">
 
-                <a href={ac_strings.tagline} target="_blank" className="flex items-center text-sm -mt-1 pl-1">
-                    <span>{topLink}</span>
+                <a href={topLink} target="_blank" className="flex items-center text-sm -mt-1 pl-1">
+                    <span>{ac_strings.tagline}</span>
                     <span className="px-2">
                         <LaunchIcon customSize="4" className="fill-slate-dark" />
                     </span>

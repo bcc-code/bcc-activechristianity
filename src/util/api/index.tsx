@@ -17,7 +17,13 @@ const sendQuery = (query: string) => {
     return fetch(baseUrl, options)
         .then(response => response.json())
         .then(res => {
-            return res.data
+            if (res.errors) {
+                res.errors.forEach(e => console.error(e.toString()))
+                return Promise.reject(res.errors)
+            } else {
+                return res.data
+            }
+
         })
 }
 

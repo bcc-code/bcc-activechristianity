@@ -11,10 +11,10 @@ const flickityOptions = {
 
 import { IPostItem } from '@/types'
 
-const Row2ColAndHorizontalScroll: React.FC<{ title: string, posts: IPostItem[] }> = ({ title, posts }) => {
+const Row3ColAndHorizontalScroll: React.FC<{ title: string, posts: IPostItem[], className?: string }> = ({ title, posts, className }) => {
 
     return (
-        <div className="">
+        <div className={className}>
             <div className="pb-4">
                 <PageSectionHeaderUpperCaseGray title={title} />
             </div>
@@ -22,7 +22,7 @@ const Row2ColAndHorizontalScroll: React.FC<{ title: string, posts: IPostItem[] }
 
                 <PostRow3Col posts={posts.slice(0, 3)} />
             </div>
-            <div className="sm:hidden -ml-4 -mr-4 pt-6">
+            <div className="sm:hidden -ml-4 -mr-4">
 
                 <TopImgHorizontalScrollRow posts={posts} />
             </div>
@@ -30,4 +30,4 @@ const Row2ColAndHorizontalScroll: React.FC<{ title: string, posts: IPostItem[] }
     )
 }
 
-export default Row2ColAndHorizontalScroll
+export default Row3ColAndHorizontalScroll
