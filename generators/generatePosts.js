@@ -159,7 +159,6 @@ module.exports = async function generatePosts(actions, graphql) {
       for (let i = 1; i <= pageCount; i++) {
         console.log(i)
         const eachPageQuery=getauthorsPosts(i)
-        console.log(eachPageQuery)
         const res = await graphql(eachPageQuery)
         if (res.data && res.data.ac && res.data.ac.authors && res.data.ac.authors.data && res.data.ac.authors.data[0]){
           const allAuthors = res.data.ac.authors.data
@@ -256,6 +255,14 @@ module.exports = async function generatePosts(actions, graphql) {
                                 } else {
                 
                                   const topicPostsRes=await graphql(getTopicPostsPerPageQuery(t.id,getRandomCount))
+                                                                  .then((result) => {
+                                                                    if (result.errors) {
+                                                                      result.errors.forEach(e => console.error(e.toString()))
+                                                                      return Promise.reject(result.errors)
+                                                                    }else {
+                                                                      return result
+                                                                    }
+                                                                  })
                                 
                                   const topicPosts=topicPostsRes.data.ac.topic.somePosts.data.map(p=>p.slug)
                                   topicArchivePageCount[t.slug].posts[getRandomCount]=topicPosts
@@ -295,15 +302,55 @@ module.exports = async function generatePosts(actions, graphql) {
                               allInterestedPosts = [...new Set(allInterestedPosts)]
                               
 
-                              const fullPostsInfo={
+                              
+                             
+                              const {media, types,format}=normalized
+                              const mediaTypes= []
+                              let defaultMediaType = "none"
+                              if (media.audio) {
+                                  mediaTypes.push("audio")
+                                  defaultMediaType = "audio"
+                              }
+                              if (media.video && media.video.src) {
+          
+                                  mediaTypes.push("video")
+                                  defaultMediaType = "video"
+                              }
+                              
+                              const breadcrumb = []
+          
+                              if (types) {
+                                  breadcrumb.push(types[0])
+                              }
+                          
+                              if (format) {
+                                  breadcrumb.push(format[0])
+                              }
+          
+                              const data = {
                                 normalized,
                                 allInterestedPosts,
                                 authorsPosts,
-                                topicPosts,
-                                tranlsatedUrl
+                                topicPosts:topicPosts,
+                                mediaTypes:{
+                                  types:mediaTypes,
+                                  default:defaultMediaType
+                                },
+                                tranlsatedUrl,
+                                breadcrumb
+          
                               }
-                              
-                            allNormalizedPosts[node.slug]=fullPostsInfo
+                              if (process.env.SUPER_SLIM_DEV_MODE==="true"){
+                                console.log(normalized.slug)
+                              }
+                              createPage({
+                                path: `${normalized.slug}`,
+                                component: path.resolve(template),
+                                context: {
+                                  id:node.id,
+                                  ...data
+                                },
+                              })
 
                         }   
                       }
@@ -312,58 +359,6 @@ module.exports = async function generatePosts(actions, graphql) {
                   
                     return 
                 })
-
-                const allPostsSlugs = Object.keys(allNormalizedPosts)
-                for(let k=0; k<allPostsSlugs.length;k++){
-                  const slug = allPostsSlugs[k]
-                  const post=allNormalizedPosts[slug]
-                    const {normalized,allInterestedPosts, authorsPosts,topicPosts,tranlsatedUrl}=post
-                    const {media, types,format}=normalized
-                    const mediaTypes= []
-                    let defaultMediaType = "none"
-                    if (media.audio) {
-                        mediaTypes.push("audio")
-                        defaultMediaType = "audio"
-                    }
-                    if (media.video && media.video.src) {
-
-                        mediaTypes.push("video")
-                        defaultMediaType = "video"
-                    }
-                    
-                    const breadcrumb = []
-
-                    if (types) {
-                        breadcrumb.push(types[0])
-                    }
-                
-                    if (format) {
-                        breadcrumb.push(format[0])
-                    }
-
-                    const data = {
-                      normalized,
-                      allInterestedPosts,
-                      authorsPosts,
-                      topicPosts:topicPosts,
-                      mediaTypes:{
-                        types:mediaTypes,
-                        default:defaultMediaType
-                      },
-                      tranlsatedUrl,
-                      breadcrumb
-
-                    }
-                    console.log(normalized.slug)
-                    createPage({
-                      path: `${normalized.slug}`,
-                      component: path.resolve(template),
-                      context: {
-                        id: normalized.id,
-                        ...data
-                      },
-                    })
-                }
 
                 return
 }

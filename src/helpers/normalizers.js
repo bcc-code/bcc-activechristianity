@@ -154,6 +154,7 @@ const normalizeTracks = (tracks) => {
 
 const filterTopics = (props) => {
     const { topics, returnSlugs } = props
+    console.log(topics)
     const allTopics= []
     topics.forEach(t => {
         if (t) {
