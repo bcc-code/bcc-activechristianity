@@ -247,7 +247,7 @@ const normalizePostRes = (post) => {
             playlists: track.playlists
         }
     }
-
+    console.log(meta)
     if (meta && meta.url) {
         media["video"] = {
             src: meta.url,
