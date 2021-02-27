@@ -2,11 +2,11 @@ import React from 'react'
 
 import Link from '@/components/CustomLink'
 import { IAuthor, ITopicNavItem, ITopicPostItems, ITopic, IPostItem } from '@/types'
-
+import SquareImage from '@/components/Images/Image1to1Rounded'
 import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
 import ac_strings from '@/strings/ac_strings.js'
 /* import Flickity from "react-flickity-component"; */
-import SquareImage from '@/components/Images/Image1to1Rounded'
+
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { fetchPostslistFromArchivePage, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import { getRandomArray } from '@/helpers'

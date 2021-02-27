@@ -119,9 +119,8 @@ export const ReadOrListenIcon: React.FC<{ read?: string, listen?: string, track?
 
                     }} />
 
-            ) : (
-                    <ReadIcon text={read} />
-                )}
+            ) : read && <ReadIcon text={read} />}
+
         </span>
     )
 }

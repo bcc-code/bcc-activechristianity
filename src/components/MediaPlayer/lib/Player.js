@@ -74,8 +74,9 @@ var Player = function (_Component) {
         media.mute(media.isMuted);
         media.setVolume(media.volume);
       }
-
+      console.log('auto play before if')
       if (autoPlay) {
+        console.log('autoPlay')
         console.log(autoPlay)
         media.play();
       }

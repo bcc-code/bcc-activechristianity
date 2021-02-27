@@ -61,6 +61,11 @@ const MediaControl: React.FC<IProps> = (props) => {
 
     const dispatch = useDispatch()
 
+    const handleCloseClickButton = () => {
+
+        dispatch(setCurrentMedia({ path: undefined }))
+    }
+
     const playTrack = (track: IMedia) => {
         dispatch(setCurrentMedia(track))
         handleQueue(track)
@@ -106,18 +111,22 @@ const MediaControl: React.FC<IProps> = (props) => {
     return (
         <div className="w-full h-full flex flex-col">
             {fullScreenInfo && (
-                <div className="flex flex-col bg-white sm:bg-mp-background text-d4cadet-blue flex-1 layout-children">
-                    <div className="absolute right-0 top-0 up">
-                        close player
+                <div className="flex flex-col bg-mp-background sm:bg-mp-background text-d4cadet-blue flex-1 layout-children">
+                    <div className="absolute right-0 top-0 flex">
+                        <button className="uppercase text-xs pr-4 py-2" onClick={handleCloseClickButton}>
+                            close
+                        </button>
+                        <div
+                            className="flex justify-center items-center py-2 pr-4 uppercase text-xs"
+                            onClick={toggleInfo}
+                        >
+                            <span>Collapse</span>
+                            <KeyboardArrowDownIcon
+                                customSize="4"
+                            />
+                        </div>
                     </div>
-                    <div
-                        className="flex justify-center py-2"
-                        onClick={toggleInfo}
-                    >
-                        <KeyboardArrowDownIcon
-                            customSize="6"
-                        />
-                    </div>
+
                     <div className="flex flex-col px-4 py-2">
                         <div className="flex">
                             <div className="w-36">
@@ -228,7 +237,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                             </div>
 
                             <div className="w-full flex flex-row text-d4cadet-blue justify-center">
-                                <div className="flex items-center sm:hidden">
+                                <div className={`flex items-center sm:hidden ${fullScreenInfo ? 'py-4' : ''}`}>
                                     {fullScreenInfo && (
                                         <PrevTrack
                                             className="p-3"

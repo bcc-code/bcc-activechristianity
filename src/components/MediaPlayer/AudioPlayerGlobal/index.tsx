@@ -1,7 +1,7 @@
 // https://github.com/souporserious/react-media-player
 import React from 'react'
 import MainController from './AudioPlayerController'
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { playlistSelector, isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 
 
@@ -13,10 +13,8 @@ const ACMediaPlayer: React.FC = () => {
     const playlist = useSelector(playlistSelector)
     const isAutoPlay = useSelector(isAutoPlaySelector)
     const currentMedia = useSelector(currentMediaSelector)
-
     const [isRepeat, setIsRepeat] = React.useState(false)
     const [fullScreenInfo, setFullScreenInfo] = React.useState(false)
-    console.log('render playe index')
     return currentMedia.audio ? (
         (
             <div className={`fixed pb-14 sm:pb-0 bottom-0 right-0 left-0 mp--bottom ${fullScreenInfo ? 'top-0' : ''}`} style={{ zIndex: 550 }}>

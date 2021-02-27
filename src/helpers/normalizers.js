@@ -230,6 +230,17 @@ const normalizePostRes = (post) => {
     }
 
     const { media } = postItem
+
+    if (meta && meta.url) {
+        media["video"] = {
+            src: meta.url,
+            title: title,
+            type: "video"
+        }
+        delete postItem.duration.read
+
+    }
+
     if (track) {
         if (postItem.duration) {
             postItem.duration["listen"] = secondesToMinutes(track.duration)
@@ -247,14 +258,8 @@ const normalizePostRes = (post) => {
             playlists: track.playlists
         }
     }
-    console.log(meta)
-    if (meta && meta.url) {
-        media["video"] = {
-            src: meta.url,
-            title: title,
-            type: "video"
-        }
-    }
+
+
     return postItem
 }
 

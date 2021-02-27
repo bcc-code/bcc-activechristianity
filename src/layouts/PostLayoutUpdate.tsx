@@ -1,4 +1,6 @@
 import React, { Profiler } from 'react'
+import SquareImage from '@/components/Images/Image1to1Rounded'
+import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
 import loadable from '@loadable/component'
 import ViewNext from '@/layout-parts/PostLayout/ViewNext'
 import LazyLoad from 'react-lazyload';
@@ -9,7 +11,7 @@ import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import StickyBox from "react-sticky-box";
 import shortid from 'shortid'
 /* const AudioPlayer */
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
 import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
@@ -30,10 +32,11 @@ import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 const acApiModule = import('@/util/api')
 import { debounce } from '@/helpers'
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 import { IPostItem, ITopicPostSlugs, INavItem } from '@/types'
-import { IRootState } from '@/state/types'
+
 
 // mock data
 
@@ -61,6 +64,7 @@ interface IPostProps extends IPostItem {
 import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 import { divide } from 'lodash';
+import SimplePost from '@/components/PostItemCards/SquareLeftImg'
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const [showMobileImage, setShowMobileImage] = React.useState(false)
@@ -172,7 +176,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
-            {isWindowLoaded === true && (
+            {/*             {isWindowLoaded === true && (
                 <ShareBookmarkTopShortCuts
                     id={id}
                     text={excerpt || title}
@@ -181,6 +185,45 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     likes={likes}
                     isPlayingAudio={!!isCurrentMedia.audio}
                 />
+            )} */}
+            {isWindowLoaded === true && (
+                <div className={`sm:hidden fixed bottom-0 w-full  bg-red-400 ${!!isCurrentMedia.audio ? 'mb-32' : 'mb-16'}`} style={{ zIndex: 60 }}>
+                    <Carousel showThumbs={false} showStatus={false} showArrows={false} autoPlay infiniteLoop>
+
+                        <div style={{ height: 80 }} className="bg-d4athens">
+                            {/* 
+                        <p >{topicPosts[0].name}</p> */}
+                            <div className="p-2">
+                                <h5 className="block uppercase font-roboto text-gray-500 text-xs tracking-wider pb-2">Related Topic</h5>
+                                <div className="justify-between flex items-center">
+                                    <Link to={topicPosts[0].slug} className="font-roboto text-lg">
+                                        {topicPosts[0].name}
+                                    </Link>
+                                    <ToggleFollowOutlineBtn id={topicPosts[0].id} />
+                                </div>
+                            </div>
+                        </div>
+                        {topicPosts[0].posts.map(slug => {
+                            return (
+                                <FetchOnePost
+                                    slug={slug}
+                                    render={({ post }) => {
+                                        return (
+                                            <div className="bg-d4athens">
+                                                <SimplePostRightImg
+                                                    {...post}
+                                                />
+                                            </div>
+                                        )
+                                    }}
+
+                                />
+                            )
+                        })
+
+                        }
+                    </Carousel>
+                </div>
             )}
             {/*             <ViewNext
                 isPlayingAudio={!!isCurrentMedia.audio}
@@ -466,3 +509,24 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
 export default PostLayout
 
+const SimplePostRightImg: React.FC<IPostItem> = (post) => {
+    return (
+        <div className="text-sm flex" >
+            <Link to={post.slug} style={{ width: "80px", height: "80px" }}>
+                <SquareImage
+                    {...post.image}
+                />
+            </Link>
+            <div className="flex-1 p-2 text-left">
+
+                <Link to={post.slug} className="text-sm">
+                    <TextSizeTitle
+                        rawText={post.title}
+                        clamp={2}
+                        fontKey="text-sm"
+                    />
+                </Link>
+            </div>
+        </div>
+    )
+}
