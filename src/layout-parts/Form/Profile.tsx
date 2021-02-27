@@ -3,17 +3,16 @@ import { useDispatch } from "react-redux"
 
 import ac_strings from '@/strings/ac_strings.js'
 import { useSelector } from 'react-redux'
-import { IRootState } from '@/state/types'
 import { OutlineButton } from '@/components/Button'
 
 import { InputText } from '@/components/Input'
-
+import { authSelector } from '@/state/selectors/user'
 
 
 type IFormFieldType = 'email' | 'name'
 
 const Profile: React.FC<{ title: string }> = ({ title }) => {
-    const authInfo = useSelector((state: IRootState) => state.auth);
+    const authInfo = useSelector(authSelector);
     const { user } = authInfo
 
     const initialFieldsState = {

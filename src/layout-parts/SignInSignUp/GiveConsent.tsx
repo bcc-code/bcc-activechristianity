@@ -6,8 +6,9 @@ import { InputCheckbox } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { IRootState } from '@/state/types'
 import { initiateConsentNotify } from '@/state/action/authAction'
+import { loggedInErrorSelector } from '@/state/selectors/user'
+
 const initialFieldState = {
     consentReceiveEmail: false,
     consent: false
@@ -24,7 +25,7 @@ const SignUpForm = () => {
     const [fields, setFields] = React.useState(initialFieldState)
     const [errors, setErrors] = React.useState(initialErrorState)
 
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
+    const loggedInError = useSelector(loggedInErrorSelector)
 
     /*     React.useEffect(() => {
             validate()
@@ -73,9 +74,9 @@ const SignUpForm = () => {
                 <span className="text-sm">{ac_strings.reset_password_review_terms}</span>
             </div>
             <form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>
-                {authInfo.errorMessage && (
+                {loggedInError && (
                     <Snackbar
-                        text={authInfo.errorMessage}
+                        text={loggedInError}
                         error
                     />
                 )}

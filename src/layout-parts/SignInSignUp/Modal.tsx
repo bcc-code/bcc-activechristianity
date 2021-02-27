@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { closeSignInModal } from '@/state/action'
 import CloseButtonRound from '@/components/Button/CloseButtonRound'
 import Main from './Main'

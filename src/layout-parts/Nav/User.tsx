@@ -14,7 +14,6 @@ interface IUserNav {
 }
 const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
     const dispatch = useDispatch()
-    /*     const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth })); */
 
     const handleSignIn = () => {
         dispatch(openSignInModal("signInOptions"))

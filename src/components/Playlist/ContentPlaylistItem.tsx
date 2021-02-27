@@ -4,21 +4,20 @@ import { setAutoPlay, setCurrentMedia, addTracks, togglePlayMedia } from '@/stat
 import { ReadIcon, ListenIcon, ReadingTimingIcon } from '@/components/PostElements'
 
 import { IMedia } from '@/types'
-import { IRootState } from '@/state/types'
 
 interface IPlaylist {
     slug: string
     tracks: IMedia[]
     hideRead?: boolean
 }
-
+import { currentMediaSelector } from '@/state/selectors/other'
 const PostAudio: React.FC<IPlaylist> = ({
     tracks: allTracks,
     hideRead,
     slug
 }) => {
     const dispatch = useDispatch()
-    const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
+    const currentMedia = useSelector(currentMediaSelector)
     const handleTrackClick = (t: IMedia, index: number) => {
         const audioToAdd = { ...t }
         if (audioToAdd.audio) {

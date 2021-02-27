@@ -2,12 +2,12 @@ import * as React from "react"
 import { Link } from "gatsby";
 import { ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow'
 import ac_strings from '@/strings/ac_strings.js'
-import QPopularAndFeaturedTopics from '@/HOC/QPopularAndFeaturedTopics'
 import { getRandomArray } from '@/helpers'
 import { useSelector } from 'react-redux'
-import { IRootState } from '@/state/types'
 import { ITopic } from '@/types'
 import shortid from "shortid";
+import { followedTopicsSelector, loggedInSelector } from '@/state/selectors/user'
+
 const TopicItem: React.FC<ITopic> = ({ name, slug, id }) => {
     return (
         <div className="flex bg-white text-ac-slate-dark mt-4 mr-4 text-lg font-bold">
@@ -25,9 +25,11 @@ const TopicItem: React.FC<ITopic> = ({ name, slug, id }) => {
 }
 
 const TopicsForYou: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
-    const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
+    const followedTopics = useSelector(followedTopicsSelector)
+    const loggedIn = useSelector(loggedInSelector)
+
     let list = [...getRandomArray(featured, 6)]
-    if (auth.loggedIn === "success") {
+    if (loggedIn === "success") {
         const filtered = featured.filter(t => {
             const find = followedTopics.find(ft => `${ft.id}` === `${t.id}`)
 

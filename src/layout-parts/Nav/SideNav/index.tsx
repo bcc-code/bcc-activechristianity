@@ -5,24 +5,23 @@ import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
 import { SideNavItem } from '@/components/Button'
 import { openSignInModal } from '@/state/action'
-import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
 
 import ac_strings from '@/strings/ac_strings.js'
 
-import loadable from '@loadable/component'
 import UserMenu from './UserMenu'
 import ResourceMenu from './ResourceMenu'
 import { side, sideResource, slugUser } from '@/strings/generated/menus.json'
+import { loggedInSelector } from '@/state/selectors/user'
+
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
     const [openUserMenu, setOpenUserMenu] = React.useState(false)
     const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
-
+    const loggedIn = useSelector(loggedInSelector)
     const close = () => {
         setSideNavOpen(false)
     }
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const dispatch = useDispatch()
 
     const handleSignIn = () => {
@@ -100,7 +99,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                     )
                 })}
 
-                {authInfo.loggedIn === 'success' ? (
+                {loggedIn === 'success' ? (
                     <div className={`w-full flex flex-col justify-center`}>
 
                         <SideNavItem
@@ -122,7 +121,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
 
                     </div>
                 ) : (
-                        authInfo.loggedIn === "loading" ? (
+                        loggedIn === "loading" ? (
                             <div className="px-2">
                                 {ac_strings.loading}
                             </div>

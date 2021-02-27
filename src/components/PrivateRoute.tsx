@@ -4,13 +4,14 @@ import { IRootState } from '@/state/types'
 import { useSelector } from 'react-redux'
 import { navigate } from "gatsby"
 import ac_strings from '@/strings/ac_strings.js'
+import { loggedInSelector } from '@/state/selectors/user'
 const PrivateRoute: React.FC<any> = ({ component: Component, location, ...rest }) => {
-    const auth = useSelector((state: IRootState) => state.auth)
+    const loggedIn = useSelector(loggedInSelector)
 
 
-    if (auth.loggedIn === 'success') {
+    if (loggedIn === 'success') {
         return <Component {...rest} />
-    } else if (auth.loggedIn == 'loading') {
+    } else if (loggedIn == 'loading') {
         return <div>{ac_strings.loading}</div>
     } else {
         if (typeof window !== "undefined") {

@@ -13,9 +13,12 @@ export interface IPlayButtonProps {
     clickable?: boolean
     render: (data: { playing: boolean }) => JSX.Element
 }
+
+import { isPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, className, style, render, clickable }) => {
     const dispatch = useDispatch()
-    const { currentMedia, isPlaying } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia, isPlaying: state.isPlaying }))
+    const currentMedia = useSelector(currentMediaSelector)
+    const isPlaying = useSelector(isPlaySelector)
     const setCurrent = (toAdd: IMedia) => {
         dispatch(setCurrentMedia(toAdd))
         dispatch(setAutoPlay(true))

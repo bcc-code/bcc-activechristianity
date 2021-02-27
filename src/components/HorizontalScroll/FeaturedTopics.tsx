@@ -1,17 +1,19 @@
 import React from 'react'
 import XScrollCustomSize from './BaseCustomSize'
 import FollowTopic from '@/components/Cards/FollowTopic'
-import { useSelector } from 'react-redux'
-import { IRootState } from '@/state/types'
+import { useSelector, } from 'react-redux'
+
 import './horizontal-scroll.css';
 import { ITopic } from '@/types'
 import shortid from 'shortid'
 
+import { loggedInSelector, followedTopicsSelector } from '@/state/selectors/user'
 
 const FeatureSection: React.FC<{ featured: ITopic[] }> = ({ featured }) => {
-    const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
+    const loggedIn = useSelector(loggedInSelector)
+    const followedTopics = useSelector(followedTopicsSelector)
     let list = [...featured]
-    if (auth.loggedIn === "success") {
+    if (loggedIn === "success") {
         const filtered = featured.filter(t => {
             const find = followedTopics.find(ft => `${ft.id}` === `${t.id}`)
 
