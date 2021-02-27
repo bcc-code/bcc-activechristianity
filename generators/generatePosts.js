@@ -274,6 +274,9 @@ module.exports = async function generatePosts(actions, graphql) {
                                 }
                                 
                               }
+                              if(`${t.id}`===`108198`){
+                                console.log(node.meta)
+                              }
                               if(formatsIds[t.id]){
                                 formatPosts.push({
                                   ...t,
@@ -358,8 +361,8 @@ module.exports = async function generatePosts(actions, graphql) {
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){
                                 console.log(normalized.slug)
                               }
-                              console.log(normalized.slug)
-                              console.log(data.mediaTypes.types)
+/*                               console.log(normalized.slug)
+                              console.log(data.mediaTypes.types) */
                               createPage({
                                 path: `${normalized.slug}`,
                                 component: path.resolve(template),
