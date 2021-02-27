@@ -5,7 +5,7 @@ import { IMediaTypes } from '@/layouts/PostLayoutUpdate';
 import { INavItem, IPostRes, IPostItem, ITopicPostItems, ITopicPostSlugs } from '@/types'
 import PostLayout from '@/layouts/PostLayoutUpdate'
 const Post: React.FC<IPostProp> = (props) => {
-    console.log(props)
+
     const { pageContext, data } = props
     const postRes = data.acNodePost
 

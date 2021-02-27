@@ -7,8 +7,7 @@ import { InputText, InputCheckbox } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { IRootState } from '@/state/types'
-
+import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
 import { validateEmail } from '@/helpers'
 
 const initialFieldsState = {
@@ -25,9 +24,8 @@ type IFormFieldType = 'email' | 'password'
 const SignInForm: React.FC = () => {
     const localStorageKey = 'ac.signin.reset_password_reminder'
     const userReminderOption = typeof window !== "undefined" ? localStorage.getItem(localStorageKey) : "false"
-
-
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
+    const loggedIn = useSelector(loggedInSelector)
+    const loggedInError = useSelector(loggedInErrorSelector)
     const [fields, setFields] = React.useState(initialFieldsState)
     const [errors, setErrors] = React.useState(initialErrorState)
     const [showReminder, setShowReminder] = React.useState(userReminderOption !== "true")
@@ -137,9 +135,9 @@ const SignInForm: React.FC = () => {
 
             ) : (
                     <div className="w-full px-4">
-                        {authInfo.errorMessage && (
+                        {loggedInError && (
                             <Snackbar
-                                text={authInfo.errorMessage}
+                                text={loggedInError}
                                 error
                             />
                         )}
@@ -174,7 +172,7 @@ const SignInForm: React.FC = () => {
                             <div className="flex justify-center">
                                 <FormSubmitButton
                                     disabled={false}
-                                    loading={authInfo.loggedIn === "loading"}
+                                    loading={loggedIn === "loading"}
                                     onClick={handleSubmit}
                                 />
                             </div>

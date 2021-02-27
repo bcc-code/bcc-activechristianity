@@ -358,6 +358,8 @@ module.exports = async function generatePosts(actions, graphql) {
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){
                                 console.log(normalized.slug)
                               }
+                              console.log(normalized.slug)
+                              console.log(data.mediaTypes.types)
                               createPage({
                                 path: `${normalized.slug}`,
                                 component: path.resolve(template),

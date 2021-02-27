@@ -1,9 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Media, Player, controls, utils } from 'react-media-player'
+import { Media, Player, controls, utils, withMediaProps } from 'react-media-player'
 import { KeyboardArrowDownIcon, DescriptionIcon, VolumeUpRoundedIcon, MoreVertIcon } from '@/components/Icons/MUI/mediaPlayerIcons'
-import { CloseIcon } from '@/components/Icons/MUI/navIcons'
-import { withMediaProps } from 'react-media-player'
+
 import { setCurrentMedia, setIsPlaying, setIsModalOpen, addTracks } from '@/state/action'
 import FetchImage from '@/components/Images/ImageFromPost'
 import ac_strings from '@/strings/ac_strings.js'
@@ -193,7 +192,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 <Player
                                     src={track.audio?.src}
                                     loop={repeatTrack}
-                                    autoPlay={autoPlay}
+                                    autoPlay={true}
                                     onEnded={onNextTrack}
 
                                     onPlay={() => { setIsPlaying(true) }}

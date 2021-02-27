@@ -21,9 +21,9 @@ import { IRootState } from '@/state/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { useSelector } from "react-redux";
 import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
-
+import { loggedInSelector } from '@/state/selectors/user'
 const Read: React.FC<IProps> = (props) => {
-    const { loggedIn } = useSelector((state: IRootState) => state.auth)
+    const loggedIn = useSelector(loggedInSelector)
     const { pageContext, path } = props
     const { title, info, items, popularPosts, featuredPosts, latestPosts } = pageContext
 

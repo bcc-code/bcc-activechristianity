@@ -76,6 +76,7 @@ var Player = function (_Component) {
       }
 
       if (autoPlay) {
+        console.log(autoPlay)
         media.play();
       }
 

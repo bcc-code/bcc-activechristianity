@@ -27,9 +27,9 @@ import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 
 const acApiModule = import('@/util/api')
+import { currentMediaSelector } from '@/state/selectors/other'
+import { followedTopicsSelector, loggedInSelector } from '@/state/selectors/user'
 import { debounce, normalizeAvailableLanguages } from '@/helpers'
-
-
 import { IPostProps } from '@/types'
 import { IRootState } from '@/state/types'
 
@@ -39,6 +39,7 @@ import ac_strings from '@/strings/ac_strings.js'
 
 
 type IMediaType = "audio" | "video"
+
 export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const {
@@ -67,8 +68,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
-    const { isCurrentMedia, isLoggedIn } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isLoggedIn: state.auth.loggedIn }))
-
+    const isCurrentMeida = useSelector(currentMediaSelector)
+    const isLoggedIn = useSelector(loggedInSelector)
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
 
@@ -76,11 +77,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         if (isLoggedIn === "success") {
             lastScroll.current = Date.now() + 5000
             if (id) {
-                acApi
-                    .visitsPost(id)
-                    .catch((err: any) => {
-                        console.log(err)
-                    })
+                acApiModule.then(res => {
+                    const acApi = res.default
+                    acApi
+                        .visitsPost(id)
+                        .catch((err: any) => {
+                            console.log(err)
+                        })
+                })
+
             }
             const handleScroll = (e: any) => {
                 if (lastScroll.current < Date.now()) {

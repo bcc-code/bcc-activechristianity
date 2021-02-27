@@ -12,12 +12,13 @@ import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFo
 import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
 import { getRandomArray, normalizePostRes, } from '@/helpers'
 import ac_strings from '@/strings/ac_strings.js'
+import { followedTopicsSelector, bookmarkedSelector } from '@/state/selectors/user'
 const acApiModule = import('@/util/api')
 
 import shortid from 'shortid'
 const UserContent = () => {
-
-    const { followedTopics, bookmarkedPosts, followedPlaylists } = useSelector((state: IRootState) => state.userLibrary);
+    const followedTopics = useSelector(followedTopicsSelector)
+    const bookmarkedPosts = useSelector(bookmarkedSelector)
     const [videoPosts, setVideoPosts] = React.useState<IPostItem[]>([])
     const [otherPosts, setOtherPosts] = React.useState<IPostItem[]>([])
     const [topics, setTopics] = React.useState<ITopic[]>([])

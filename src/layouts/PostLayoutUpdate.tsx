@@ -89,7 +89,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         topicPosts,
         formatPosts
     } = post
-    console.log(mediaTypesDefault.default)
+
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
 
     const isCurrentMedia = useSelector(currentMediaSelector)
@@ -169,7 +169,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640
-    console.log(isMobile)
+
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
             {isWindowLoaded === true && (

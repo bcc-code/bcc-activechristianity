@@ -12,7 +12,7 @@ export const UserInitial: React.FC<{ name: string, className?: string }> = ({ na
     </svg>
 )
 const User: React.FC = () => {
-    const auth = useSelector((state: IRootState) => state.auth)
+
     return (
         <div></div>
     )

@@ -20,10 +20,8 @@ const RecommendedPostsSection: React.FC<{ postId: string, readMorePosts: string[
         }
         acApiModule.then(res => {
             const api = res.default
-            console.log(postId)
             api.recommendedByPost(postId)
                 .then(res => {
-                    console.log(res)
                     /* setPosts(allSlugs) */
 
                     let randomRecommendPosts: string[] = []

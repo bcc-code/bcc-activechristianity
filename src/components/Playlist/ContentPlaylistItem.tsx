@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAutoPlay, setCurrentMedia, addTracks, togglePlayMedia } from '@/state/action'
 import { ReadIcon, ListenIcon, ReadingTimingIcon } from '@/components/PostElements'
-
+import { currentMediaSelector } from '@/state/selectors/other'
 import { IMedia } from '@/types'
 
 interface IPlaylist {
@@ -10,7 +10,7 @@ interface IPlaylist {
     tracks: IMedia[]
     hideRead?: boolean
 }
-import { currentMediaSelector } from '@/state/selectors/other'
+
 const PostAudio: React.FC<IPlaylist> = ({
     tracks: allTracks,
     hideRead,

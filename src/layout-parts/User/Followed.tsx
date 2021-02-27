@@ -4,14 +4,14 @@ import { fetchLocalPostsFromSlugs, fetchTopicFromSlug } from '@/helpers/fetchLoc
 import { IRootState } from '@/state/types'
 import { ITopicNavItem } from '@/types'
 import { OutlineRightIcon } from "@/components/Button"
-
+import { followedTopicsSelector } from '@/state/selectors/user'
 const UserHistory = () => {
 
     const [followedTopic, setFollowedTopics] = React.useState<ITopicNavItem[]>([])
-    const userLibrary = useSelector((state: IRootState) => state.userLibrary);
+    const followedTopics = useSelector(followedTopicsSelector);
 
     React.useEffect(() => {
-        Promise.all(userLibrary.followedTopics.map(item => fetchTopicFromSlug(item.slug)))
+        Promise.all(followedTopics.map(item => fetchTopicFromSlug(item.slug)))
             .then(res => {
                 const topics: ITopicNavItem[] = []
                 res.forEach(item => {
@@ -23,7 +23,7 @@ const UserHistory = () => {
             })
 
 
-    }, [userLibrary.followedTopics])
+    }, [followedTopics])
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mx-4 sm:mt-12">
