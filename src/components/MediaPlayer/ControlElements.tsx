@@ -18,18 +18,18 @@ const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
     const { mpPlayPause } = useSelector((state: IRootState) => ({ mpPlayPause: state.mpPlayPause }));
     const { isPlaying, playPause } = media
 
-    useEffect(() => {
-
-        dispatch(setIsPlaying(isPlaying))
-    }, [isPlaying])
-
-    useEffect(() => {
-
-        if (mpPlayPause !== isPlaying) {
-            playPause()
-        }
-
-    }, [mpPlayPause])
+    /*     useEffect(() => {
+    
+            dispatch(setIsPlaying(isPlaying))
+        }, [isPlaying])
+    
+        useEffect(() => {
+    
+            if (mpPlayPause !== isPlaying) {
+                playPause()
+            }
+    
+        }, [mpPlayPause]) */
     return (
         <svg
             role="button"

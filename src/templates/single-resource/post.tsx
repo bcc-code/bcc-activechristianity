@@ -9,7 +9,7 @@ const Post: React.FC<IPostProp> = (props) => {
     const { pageContext, data } = props
     const postRes = data.acNodePost
 
-    const { normalized: post, tranlsatedUrl, mediaTypes, authorsPosts, topicPosts, allInterestedPosts, breadcrumb } = pageContext
+    const { normalized: post, tranlsatedUrl, mediaTypes, authorsPosts, topicPosts, formatPosts, allInterestedPosts, breadcrumb } = pageContext
     const { title, excerpt, date, topics, types, image } = post
     const { content, meta, seo } = postRes
 
@@ -40,6 +40,7 @@ const Post: React.FC<IPostProp> = (props) => {
                 allInterestedPosts={allInterestedPosts}
                 mediaTypes={mediaTypes}
                 credits={meta ? meta.credits : undefined}
+                formatPosts={formatPosts}
             />
 
 
@@ -60,6 +61,7 @@ interface IPostProp {
         allInterestedPosts: string[]
         topicPosts: ITopicPostSlugs[]
         authorsPosts: ITopicPostSlugs[]
+        formatPosts: ITopicPostSlugs[]
         tranlsatedUrl: INavItem[]
         mediaTypes: IMediaTypes
         //ITopicPostItems

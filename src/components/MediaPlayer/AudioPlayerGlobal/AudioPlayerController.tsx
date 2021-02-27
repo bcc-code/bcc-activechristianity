@@ -60,14 +60,7 @@ const MediaControl: React.FC<IProps> = (props) => {
         setHistory(toUpdatePlaylist)
     }, [track])
 
-
-
     const dispatch = useDispatch()
-
-    const handleCloseClickButton = () => {
-
-        dispatch(setCurrentMedia({ path: undefined }))
-    }
 
     const playTrack = (track: IMedia) => {
         dispatch(setCurrentMedia(track))
@@ -114,7 +107,10 @@ const MediaControl: React.FC<IProps> = (props) => {
     return (
         <div className="w-full h-full flex flex-col">
             {fullScreenInfo && (
-                <div className="flex flex-col bg-mp-background text-d4cadet-blue flex-1 layout-children">
+                <div className="flex flex-col bg-white sm:bg-mp-background text-d4cadet-blue flex-1 layout-children">
+                    <div className="absolute right-0 top-0 up">
+                        close player
+                    </div>
                     <div
                         className="flex justify-center py-2"
                         onClick={toggleInfo}
@@ -274,12 +270,12 @@ const MediaControl: React.FC<IProps> = (props) => {
                                                 className="fill-slate-light"
                                             />
                                         </button>
-                                        <button className="bg-ac-slate py-3 px-2 sm:py-8" >
+                                        {/*                                         <button className="bg-ac-slate py-3 px-2 sm:py-8" >
                                             <div onClick={handleCloseClickButton}>
                                                 <CloseIcon />
                                             </div>
 
-                                        </button>
+                                        </button> */}
                                     </div>
                                 )}
 

@@ -51,7 +51,7 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
                     <div style={{ zIndex: 600 }} className={`relative w-full drawer-main drawer-main-${drawerClass}`}>
                         <div className="fixed bottom-0 z-40 bg-white w-full">
 
-                            <div className="sm:hidden flex justify-around border border-t-2 border-t-gray-500">
+                            <div className="sm:hidden flex justify-around border border-t-1 border-t-gray-300">
 
                                 {mobileMenu.map((item, i) => {
                                     const Icon = iconMapNav[item.iconName]
@@ -60,11 +60,11 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
                                             onClick={() => handlePathClick(item.to, item.name)}
                                             key={i}
                                             to={item.to}
-                                            className="flex flex-col items-center justify-between text-gray-600 flex-1 py-2"
+                                            className="flex flex-col items-center justify-between text-gray-600 flex-1 pb-4 pt-2"
                                             activeClassName="bg-gray-300"
                                         >
-                                            <span className="flex-1 flex items-center pb-3"><Icon className="fill-slate-light" /></span>
-                                            <span className="block font-semibold" style={{ "fontSize": "10px" }}>{item.name}</span>
+                                            <span className="flex-1 flex items-center"><Icon className="fill-slate-light" /></span>
+                                            <span className="block font-semibold clamp1" style={{ "fontSize": "10px" }}>{item.name}</span>
                                         </Link>
 
                                     )

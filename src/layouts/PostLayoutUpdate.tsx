@@ -6,6 +6,7 @@ import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollo
 import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
+import StickyBox from "react-sticky-box";
 import shortid from 'shortid'
 /* const AudioPlayer */
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
@@ -15,10 +16,7 @@ const Content = loadable(() => import('@/components/Content'))
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
-
-import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Link from '@/components/CustomLink'
-import { ITopicPostItems } from '@/types'
 import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg'
@@ -53,6 +51,7 @@ interface IPostProps extends IPostItem {
     allInterestedPosts: string[]
     topicPosts: ITopicPostSlugs[]
     authorsPosts: ITopicPostSlugs[]
+    formatPosts: ITopicPostSlugs[]
     tranlsatedUrl: INavItem[]
     credits?: string
     seoTitle: string
@@ -87,9 +86,10 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         seoTitle,
         allInterestedPosts,
         authorsPosts,
-        topicPosts
+        topicPosts,
+        formatPosts
     } = post
-
+    console.log(mediaTypesDefault.default)
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
 
     const isCurrentMedia = useSelector(currentMediaSelector)
@@ -169,6 +169,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640
+    console.log(isMobile)
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
             {isWindowLoaded === true && (
@@ -241,7 +242,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
 
 
-            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-4 z-50 flex justify-center standard-max-w " >
+            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-4 z-50 flex justify-center lg:justify-start standard-max-w " >
                 <div className="max-w-full sm:max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
@@ -353,30 +354,59 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 </div>
                 {isWindowLoaded === true && !isMobile && (
-                    <div className="bg-grey-300 hidden lg:flex flex-col w-full pl-4 justify-start">
-                        <div className="py-6">
-                            <PageSectionHeaderUpperCaseGray title='More from these topics' />
-                            {
-                                topicPosts.map(item => {
-                                    return (
-                                        <div className="md:flex md:flex-col" key={shortid()}>
-                                            {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
+                    <StickyBox>
+                        <div className="bg-grey-300 hidden lg:flex flex-col w-full pl-6 justify-start">
+                            <div className="py-6">
+                                <PageSectionHeaderUpperCaseGray title='More from these topics' />
+                                {
+                                    topicPosts.map(item => {
+                                        return (
+                                            <div className="md:flex md:flex-col" key={shortid()}>
+                                                {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
                                                     {subHeader && <PageSectionHeaderUpperCaseGray title={subHeader} />}
                                                     {header && <h4 className="font-roboto mb-6">{header}</h4>}
                                         
                                                 </div> */}
-                                            <div className="w-full flex justify-between items-center text-sm mb-6">
-                                                <Link to={`${item.slug}`}>
-                                                    {/* <PageSectionHeaderUpperCaseGray title={ac_strings.popular_topic} /> */}
-                                                    <h4 className="font-roboto text-base">{item.name}</h4>
-                                                </Link>
-                                                <ToggleFollowOutlineBtn id={item.id} />
+                                                <div className="w-full flex justify-between items-center text-sm mb-6">
+                                                    <Link to={`${item.slug}`}>
+                                                        {/* <PageSectionHeaderUpperCaseGray title={ac_strings.popular_topic} /> */}
+                                                        <h4 className="font-roboto text-base">{item.name}</h4>
+                                                    </Link>
+                                                    <ToggleFollowOutlineBtn id={item.id} />
+                                                </div>
+                                                <FetchPostsFromSlugs
+                                                    layout="list"
+                                                    slugs={item.posts}
+                                                    render={({ posts }) => {
+                                                        return (
+                                                            <div className="mb-2">
+                                                                {posts.slice(0, 5).map((item, k) => {
+                                                                    return (
+                                                                        <SquareLeftImg {...item} key={k} />
+                                                                    )
+                                                                })}
+                                                            </div>
+                                                        )
+                                                    }}
+                                                />
+
                                             </div>
-                                            <FetchPostsFromSlugs
-                                                layout="list"
-                                                slugs={item.posts}
-                                                render={({ posts }) => {
-                                                    return (
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div>
+                                {authorsPosts.length > 0 && authorsPosts.map(item => {
+
+                                    return (
+                                        <FetchPostsFromSlugs
+                                            layout="list"
+                                            slugs={item.posts}
+                                            render={({ posts }) => {
+                                                return (
+                                                    <div className="py-6">
+                                                        <PageSectionHeaderUpperCaseGray title={`${ac_strings.more_from} ${item.name}`} />
+
                                                         <div className="mb-2">
                                                             {posts.slice(0, 5).map((item, k) => {
                                                                 return (
@@ -384,45 +414,44 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                                                 )
                                                             })}
                                                         </div>
-                                                    )
-                                                }}
-                                            />
-
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                        <div>
-                            {authorsPosts.length > 0 && authorsPosts.map(item => {
-
-                                return (
-                                    <FetchPostsFromSlugs
-                                        layout="list"
-                                        slugs={item.posts}
-                                        render={({ posts }) => {
-                                            return (
-                                                <div className="py-6">
-                                                    <PageSectionHeaderUpperCaseGray title={`${ac_strings.more_from} ${item.name}`} />
-
-                                                    <div className="mb-2">
-                                                        {posts.slice(0, 5).map((item, k) => {
-                                                            return (
-                                                                <SquareLeftImg {...item} key={k} />
-                                                            )
-                                                        })}
                                                     </div>
-                                                </div>
-                                            )
-                                        }}
-                                    />
+                                                )
+                                            }}
+                                        />
+                                    )
+                                })}
+                            </div>
+                            <div>
+                                {formatPosts.length > 0 && formatPosts.map(item => {
+
+                                    return (
+                                        <FetchPostsFromSlugs
+                                            layout="list"
+                                            slugs={item.posts}
+                                            render={({ posts }) => {
+                                                return (
+                                                    <div className="py-6">
+                                                        <PageSectionHeaderUpperCaseGray title={`${ac_strings.more_from} ${item.name}`} />
+
+                                                        <div className="mb-2">
+                                                            {posts.slice(0, 5).map((item, k) => {
+                                                                return (
+                                                                    <SquareLeftImg {...item} key={k} />
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }}
+                                        />
+                                    )
+                                })}
+                            </div>
 
 
-                                )
-                            })}
+
                         </div>
-
-                    </div>
+                    </StickyBox>
                 )}
 
             </div>

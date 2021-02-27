@@ -131,7 +131,7 @@ const getTopicPostsPerPageQuery = (id,page)=>`{
 
 const authorsWPosts = {}
 const topicArchivePageCount={}
-const allNormalizedPosts={}
+
 module.exports = async function generatePosts(actions, graphql) {
   const { createPage } = actions
    /* get all authors info and topics that belongs to each posts */
@@ -185,18 +185,20 @@ module.exports = async function generatePosts(actions, graphql) {
         }
       })
       const {topics}=topicsRes.data.ac
-        topics
-            .filter(item => {
-              return !formatsIds[item.id] && !typeIds[item.id]
-            })
-            .map(t=>{
-              topicArchivePageCount[t.slug]= {
-                count:Math.ceil(t.somePosts.paginatorInfo.total/ perPage),
-                posts:{
-                  top:t.somePosts.data.map(p=>p.slug)
-                }
-              }
-            }) 
+        for (let i = 0; i < topics.length ; i++) {
+          const t=topics[i]
+          const toAdd = {
+            count:Math.ceil(t.somePosts.paginatorInfo.total/ perPage),
+            posts:{
+              top:t.somePosts.data.map(p=>p.slug)
+            }
+          }
+
+         if (!typeIds[t.id]){
+            topicArchivePageCount[t.slug]=toAdd
+          }
+        }
+
         /*get all posts*/
         await graphql(query)
                 .then(async (result) => {
@@ -233,13 +235,14 @@ module.exports = async function generatePosts(actions, graphql) {
                             return authorsWPosts[a.slug]
                           })
                           const topicPosts = []
-                          const nodeTopics = node.topics.filter(item => {
-                            return !formatsIds[item.id] && !typeIds[item.id]
-                          })
+                          const formatPosts = []
                           
-                            for (let j = 0; j < nodeTopics.length ; j++) {
-                              const t=nodeTopics[j]
-                              const info = topicArchivePageCount[t.slug]
+                            for (let j = 0; j < node.topics.length ; j++) {
+                              const t=node.topics[j]
+                              
+
+                              if (!typeIds[t.id]){
+                                const info = topicArchivePageCount[t.slug]
                               const getRandomCount = Math.ceil(Math.random() * info.count)
                               let toAdd = []
                               if(getRandomCount===1 ){
@@ -264,19 +267,29 @@ module.exports = async function generatePosts(actions, graphql) {
                                                                     }
                                                                   })
                                 
-                                  const topicPosts=topicPostsRes.data.ac.topic.somePosts.data.map(p=>p.slug)
-                                  topicArchivePageCount[t.slug].posts[getRandomCount]=topicPosts
-                                  toAdd = getRandomArray(topicPosts,3)
+                                  const posts=topicPostsRes.data.ac.topic.somePosts.data.map(p=>p.slug)
+                                  topicArchivePageCount[t.slug].posts[getRandomCount]=posts
+                                  toAdd = getRandomArray(posts,3)
                                 
                                 }
                                 
                               }
+                              if(formatsIds[t.id]){
+                                formatPosts.push({
+                                  ...t,
+                                  posts:toAdd
+                                })
+                              } else {
+                                topicPosts.push({
+                                  ...t,
+                                  posts:toAdd
+                                })
+                              }
+                              }
                               
                               
-                              topicPosts.push({
-                                ...t,
-                                posts:toAdd
-                              })
+                              
+                              
             
                             }  
                           // add recommendedPosts to readmore post
@@ -306,6 +319,7 @@ module.exports = async function generatePosts(actions, graphql) {
                              
                               const {media, types,format}=normalized
                               const mediaTypes= []
+
                               let defaultMediaType = "none"
                               if (media.audio) {
                                   mediaTypes.push("audio")
@@ -316,7 +330,7 @@ module.exports = async function generatePosts(actions, graphql) {
                                   mediaTypes.push("video")
                                   defaultMediaType = "video"
                               }
-                              
+
                               const breadcrumb = []
           
                               if (types) {
@@ -331,7 +345,8 @@ module.exports = async function generatePosts(actions, graphql) {
                                 normalized,
                                 allInterestedPosts,
                                 authorsPosts,
-                                topicPosts:topicPosts,
+                                topicPosts,
+                                formatPosts,
                                 mediaTypes:{
                                   types:mediaTypes,
                                   default:defaultMediaType

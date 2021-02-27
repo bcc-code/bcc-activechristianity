@@ -14,7 +14,7 @@ const RecommendedSectionOne: React.FC<IFetchPost> = ({ slugs }) => {
             layout="row"
             slugs={slugs}
             render={({ posts }) => {
-
+                console.log(posts)
                 if (posts.length > 0) {
                     return (
                         <div className="px-4">

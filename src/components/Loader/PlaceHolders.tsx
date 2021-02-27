@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactPlaceholder from 'react-placeholder'
-import { TextBlock, RectShape } from 'react-placeholder/lib/placeholders';
+import { TextBlock, RectShape, TextRow, } from 'react-placeholder/lib/placeholders';
 
 
 export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
@@ -24,9 +24,9 @@ export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, childr
 
 export const ListPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     const customerPlaceholder = (
-        <div className="standard-max-w flex">
+        <div className="standard-max-w sm:px-4 flex">
 
-            {["", "", "", ""].map((item, k) => {
+            {[""].map((item, k) => {
                 return (
                     <RightImgPlaceholder key={k} />
                 )
@@ -34,9 +34,12 @@ export const ListPlaceholder: React.FC<{ loading: boolean }> = ({ loading, child
         </div>
     )
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={customerPlaceholder}>
+        <ReactPlaceholder type='media' rows={3} ready={!loading} color="WhiteSmoke" className="pb-4">
             {children}
         </ReactPlaceholder>
+        /*         <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={customerPlaceholder}>
+                    {children}
+                </ReactPlaceholder> */
 
     )
 }
@@ -83,6 +86,24 @@ export const TopImgPlaceholder = () => {
     )
 }
 
+export const RightImgPlaceholder = () => {
+    return (
+        /*         <div className="flex items-center">
+                    <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
+                    <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-32 md:min-h-32 mx-4 max-w-48" />
+                </div> */
+        <div className="flex">
+            <TextRow
+
+            />
+            <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
+            {/*  <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-w-12 sm:min-w-12 md:min-w-12" /> */}
+
+        </div>
+    )
+}
+
+
 export const RightImgListPlaceHolder: React.FC<{ count: number }> = ({ count }) => {
     const LEN = count;
     const arr = [];
@@ -100,15 +121,6 @@ export const RightImgListPlaceHolder: React.FC<{ count: number }> = ({ count }) 
     )
 }
 
-export const RightImgPlaceholder = () => {
-    return (
-        <div className="flex items-center">
-
-            <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
-            <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-32 md:min-h-32 mx-4 max-w-48" />
-        </div>
-    )
-}
 
 
 export const SingleLineTitle = () => {
