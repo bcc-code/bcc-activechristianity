@@ -37,6 +37,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     const topicSlug = ac_strings.slug_topic
     return (
         <div>
@@ -110,15 +111,17 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                     />
                 </div>
             </div>
-            <RecommendDesktopLayout
-                topicId={id}
-                latestSlug={latestSlug}
-                popularPosts={popular}
-                latestPosts={latest}
-                featured={mixedFeaturedPosts}
-                topics={formats.map(f => ({ ...f, to: `${topicSlug}/${f.to}` }))}
-                name={title}
-            />
+            {isMobile !== true && (
+                <RecommendDesktopLayout
+                    topicId={id}
+                    latestSlug={latestSlug}
+                    popularPosts={popular}
+                    latestPosts={latest}
+                    featured={mixedFeaturedPosts}
+                    topics={formats.map(f => ({ ...f, to: `${topicSlug}/${f.to}` }))}
+                    name={title}
+                />
+            )}
 
         </div>
     )

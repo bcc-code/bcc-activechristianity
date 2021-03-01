@@ -18,6 +18,7 @@ const sendQuery = (query: string) => {
         .then(response => response.json())
         .then(res => {
             if (res.errors) {
+                console.log(res.errors)
                 res.errors.forEach(e => console.error(e.toString()))
                 return Promise.reject(res.errors)
             } else {

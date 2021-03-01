@@ -61,8 +61,7 @@ interface IPostProps extends IPostItem {
 
 import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
-import { divide } from 'lodash';
-import SimplePost from '@/components/PostItemCards/SquareRightImg'
+
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const [showMobileImage, setShowMobileImage] = React.useState(false)

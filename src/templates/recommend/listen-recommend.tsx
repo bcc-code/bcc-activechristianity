@@ -43,7 +43,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     const hasPlaylist = process.env.LISTEN_SECTION === "all"
     const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
-
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
         <div >
             <MetaTag title={title} breadcrumb={[]} type="page" path={path} />
@@ -108,16 +108,18 @@ const Listen: React.FC<IProps> = (props) => {
                     />
                 </LazyLoad>
             </div>
-            <RecommendDesktopLayout
-                playlist={playlist}
-                podcast={podcast}
-                latestSlug={latestSlug}
-                popularPosts={popular}
-                topics={allCategories}
-                name={title}
-                latestPosts={latest}
-                featured={mixedFeaturedPosts}
-            />
+            {isMobile !== true && (
+                <RecommendDesktopLayout
+                    playlist={playlist}
+                    podcast={podcast}
+                    latestSlug={latestSlug}
+                    popularPosts={popular}
+                    topics={allCategories}
+                    name={title}
+                    latestPosts={latest}
+                    featured={mixedFeaturedPosts}
+                />
+            )}
 
         </div>
     )

@@ -33,6 +33,7 @@ const Read: React.FC<IProps> = (props) => {
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     const categoryItems = items.map(item => ({ ...item, to: `${item.typeSlug}/${item.formatSlug}` }))
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
         <div>
             <MetaTag
@@ -132,14 +133,16 @@ const Read: React.FC<IProps> = (props) => {
                     />
                 </LazyLoad>
             </div>
-            <RecommendDesktopLayout
-                latestSlug={latestSlug}
-                latestPosts={latest}
-                popularPosts={popular}
-                featured={mixedFeaturedPosts}
-                topics={categoryItems}
-                name={title}
-            />
+            {isMobile !== true && (
+                <RecommendDesktopLayout
+                    latestSlug={latestSlug}
+                    latestPosts={latest}
+                    popularPosts={popular}
+                    featured={mixedFeaturedPosts}
+                    topics={categoryItems}
+                    name={title}
+                />
+            )}
 
         </div>
     )

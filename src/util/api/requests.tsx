@@ -387,13 +387,14 @@ export const getPostsPerPageQuery = (id: string, page: number) => `{
   }
 }`
 
-export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `
-topic(id:${id}) {
-  id
-  name
-  somePosts (hasTopics: { value: ${subtopicId}, column: ID },first:12,page:${page}){
-    data {
-      ${postQuery}
+export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `{
+  topic(id:${id}) {
+    id
+    name
+    somePosts (hasTopics: { value: ${subtopicId}, column: ID },first:12,page:${page}){
+      data {
+        ${postQuery}
+      }
     }
   }
 }

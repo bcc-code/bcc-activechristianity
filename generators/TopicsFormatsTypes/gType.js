@@ -54,7 +54,7 @@ module.exports = async function generateTypes(data) {
                         count:totalCount
                     })
                     
-                    createSubTopicPages({
+                    return createSubTopicPages({
                         type:nodeInfo.key,
                         breadcrumb:[{
                             name:type.name,
