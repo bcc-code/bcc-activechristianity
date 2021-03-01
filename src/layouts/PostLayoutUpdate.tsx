@@ -2,13 +2,12 @@ import React, { Profiler } from 'react'
 import SquareImage from '@/components/Images/Image1to1Rounded'
 import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
 import loadable from '@loadable/component'
-import ViewNext from '@/layout-parts/PostLayout/ViewNext'
 import LazyLoad from 'react-lazyload';
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
-import StickyBox from "react-sticky-box";
+
 import shortid from 'shortid'
 /* const AudioPlayer */
 import { FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
@@ -16,16 +15,15 @@ import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
+const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/DesktopRightBar'))
+const MobileBottomSlider = loadable(() => import('@/layout-parts/PostLayout/MobileBottomSlider'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
 import Link from '@/components/CustomLink'
-import { PageSectionHeaderUpperCaseGray } from '@/components/Headers'
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
-import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg'
 import {
     AuthorBookmarkShareSection,
     Translations,
-    ShareBookmarkTopShortCuts
 } from '@/layout-parts/PostLayout/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
@@ -64,7 +62,7 @@ interface IPostProps extends IPostItem {
 import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 import { divide } from 'lodash';
-import SimplePost from '@/components/PostItemCards/SquareLeftImg'
+import SimplePost from '@/components/PostItemCards/SquareRightImg'
 export const PostLayout: React.FC<IPostProps> = (post) => {
     const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const [showMobileImage, setShowMobileImage] = React.useState(false)
@@ -95,7 +93,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     } = post
 
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
-
+    const [showBottomSlider, setShowBottomSlider] = React.useState(false)
     const isCurrentMedia = useSelector(currentMediaSelector)
     const isLoggedIn = useSelector(loggedInSelector)
     const contentEl = React.useRef<HTMLDivElement>(null);
@@ -118,7 +116,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             const handleScroll = (e: any) => {
                 if (lastScroll.current < Date.now()) {
                     lastScroll.current = Date.now() + 5000
-
+                    if (showBottomSlider !== true) {
+                        setShowBottomSlider(true)
+                    }
                     if (id) {
                         acApiModule.then(res => {
                             const api = res.default
@@ -186,57 +186,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     isPlayingAudio={!!isCurrentMedia.audio}
                 />
             )} */}
-            {isWindowLoaded === true && (
-                <div className={`sm:hidden fixed bottom-0 w-full  bg-red-400 ${!!isCurrentMedia.audio ? 'mb-32' : 'mb-16'}`} style={{ zIndex: 60 }}>
-                    <Carousel showThumbs={false} showStatus={false} showArrows={false} autoPlay infiniteLoop>
-
-                        <div style={{ height: 80 }} className="bg-d4athens">
-                            {/* 
-                        <p >{topicPosts[0].name}</p> */}
-                            <div className="p-2">
-                                <h5 className="block uppercase font-roboto text-gray-500 text-xs tracking-wider pb-2">Related Topic</h5>
-                                <div className="justify-between flex items-center">
-                                    <Link to={topicPosts[0].slug} className="font-roboto text-lg">
-                                        {topicPosts[0].name}
-                                    </Link>
-                                    <ToggleFollowOutlineBtn id={topicPosts[0].id} />
-                                </div>
-                            </div>
-                        </div>
-                        {topicPosts[0].posts.map(slug => {
-                            return (
-                                <FetchOnePost
-                                    slug={slug}
-                                    render={({ post }) => {
-                                        return (
-                                            <div className="bg-d4athens">
-                                                <SimplePostRightImg
-                                                    {...post}
-                                                />
-                                            </div>
-                                        )
-                                    }}
-
-                                />
-                            )
-                        })
-
-                        }
-                    </Carousel>
-                </div>
+            {isWindowLoaded === true && isMobile && (
+                <MobileBottomSlider
+                    isPlayingMedia={!!isCurrentMedia.audio}
+                    topicPosts={topicPosts}
+                    formatPosts={formatPosts}
+                />
             )}
-            {/*             <ViewNext
-                isPlayingAudio={!!isCurrentMedia.audio}
-                slug={slug}
 
-                position={{
-                    height: contentEl.current && contentEl.current.clientHeight,
-                    top: contentEl.current && contentEl.current.offsetTop
-                }}
-                postId={id}
-                topics={topics}
-                formats={format}
-            /> */}
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
                     <VideoMediaPlayer src={media.video.src} key={shortid()} />
@@ -393,108 +350,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         )}
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
-
-
                 </div>
                 {isWindowLoaded === true && !isMobile && (
-                    <StickyBox>
-                        <div className="bg-grey-300 hidden lg:flex flex-col w-full pl-6 justify-start">
-                            <div className="py-6">
-                                <PageSectionHeaderUpperCaseGray title='More from these topics' />
-                                {
-                                    topicPosts.map(item => {
-                                        return (
-                                            <div className="md:flex md:flex-col" key={shortid()}>
-                                                {/*         <div className="flex flex-col sm:flex-row sm:items-center mt-5 sm:mt-4">
-                                                    {subHeader && <PageSectionHeaderUpperCaseGray title={subHeader} />}
-                                                    {header && <h4 className="font-roboto mb-6">{header}</h4>}
-                                        
-                                                </div> */}
-                                                <div className="w-full flex justify-between items-center text-sm mb-6">
-                                                    <Link to={`${item.slug}`}>
-                                                        {/* <PageSectionHeaderUpperCaseGray title={ac_strings.popular_topic} /> */}
-                                                        <h4 className="font-roboto text-base">{item.name}</h4>
-                                                    </Link>
-                                                    <ToggleFollowOutlineBtn id={item.id} />
-                                                </div>
-                                                <FetchPostsFromSlugs
-                                                    layout="list"
-                                                    slugs={item.posts}
-                                                    render={({ posts }) => {
-                                                        return (
-                                                            <div className="mb-2">
-                                                                {posts.slice(0, 5).map((item, k) => {
-                                                                    return (
-                                                                        <SquareLeftImg {...item} key={k} />
-                                                                    )
-                                                                })}
-                                                            </div>
-                                                        )
-                                                    }}
-                                                />
-
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
-                            <div>
-                                {authorsPosts.length > 0 && authorsPosts.map(item => {
-
-                                    return (
-                                        <FetchPostsFromSlugs
-                                            layout="list"
-                                            slugs={item.posts}
-                                            render={({ posts }) => {
-                                                return (
-                                                    <div className="py-6">
-                                                        <PageSectionHeaderUpperCaseGray title={`${ac_strings.more_from} ${item.name}`} />
-
-                                                        <div className="mb-2">
-                                                            {posts.slice(0, 5).map((item, k) => {
-                                                                return (
-                                                                    <SquareLeftImg {...item} key={k} />
-                                                                )
-                                                            })}
-                                                        </div>
-                                                    </div>
-                                                )
-                                            }}
-                                        />
-                                    )
-                                })}
-                            </div>
-                            <div>
-                                {formatPosts.length > 0 && formatPosts.map(item => {
-
-                                    return (
-                                        <FetchPostsFromSlugs
-                                            layout="list"
-                                            slugs={item.posts}
-                                            render={({ posts }) => {
-                                                return (
-                                                    <div className="py-6">
-                                                        <PageSectionHeaderUpperCaseGray title={`${ac_strings.more_from} ${item.name}`} />
-
-                                                        <div className="mb-2">
-                                                            {posts.slice(0, 5).map((item, k) => {
-                                                                return (
-                                                                    <SquareLeftImg {...item} key={k} />
-                                                                )
-                                                            })}
-                                                        </div>
-                                                    </div>
-                                                )
-                                            }}
-                                        />
-                                    )
-                                })}
-                            </div>
-
-
-
-                        </div>
-                    </StickyBox>
+                    <DesktopRightBar
+                        topicPosts={topicPosts}
+                        authorsPosts={authorsPosts}
+                        formatPosts={formatPosts}
+                    />
                 )}
 
             </div>

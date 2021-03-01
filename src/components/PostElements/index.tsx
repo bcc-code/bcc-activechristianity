@@ -125,6 +125,44 @@ export const ReadOrListenIcon: React.FC<{ read?: string, listen?: string, track?
     )
 }
 
+export const SimpleSmallListenIcon: React.FC<{ media: IMedia }> = ({ media }) => {
+    return (
+        <FetchAndSetCurrentMedia
+            track={media}
+            clickable
+            render={({ playing }) => {
+                return (
+                    <div>
+                        {playing ? (
+                            <div className="flex items-center rounded-full pr-2">
+                                <EqualizerIcon
+                                    customSize="5"
+                                    className="fill-slate-light"
+                                />
+                                <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
+                                    {ac_strings.playing}
+                                </span>
+                            </div>
+                        ) : (
+
+                                <div className="flex items-center rounded-full pr-2">
+                                    <PlayCircleOutlineIcon
+                                        className="fill-slate-dark"
+                                        customSize="5"
+                                    />
+                                    <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
+                                        {ac_strings.listen}
+                                    </span>
+                                </div>
+
+
+                            )}
+                    </div>
+                )
+
+            }} />
+    )
+}
 
 interface ILikesViewsProps {
     id: string
