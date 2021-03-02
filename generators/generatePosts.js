@@ -296,15 +296,6 @@ module.exports = async function generatePosts(actions, graphql) {
                               
             
                             }  
-                          // add recommendedPosts to readmore post
-                            /* await sendQuery(recommendedByPostQuery(node.acId),endpoints.api_url,{ "x-lang": process.env.LANG_CODE})
-                            .then(res=>{
-                              if(res && res.recommendedByPost){
-                                recommendedPosts=res.recommendedByPost.map(p=>p.slug)
-                                
-                              }
-                              return
-                            }) */
                             
                               let randName = [];
                               let recommendPostsSlugs = [...recommendedPosts]

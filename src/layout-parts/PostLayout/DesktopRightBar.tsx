@@ -11,9 +11,9 @@ import { ITopicPostSlugs, } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 
 interface IPostProps {
-    topicPosts: ITopicPostSlugs[]
-    authorsPosts: ITopicPostSlugs[]
-    formatPosts: ITopicPostSlugs[]
+    topicPosts?: ITopicPostSlugs[]
+    authorsPosts?: ITopicPostSlugs[]
+    formatPosts?: ITopicPostSlugs[]
 
 }
 
@@ -25,7 +25,7 @@ const PostSidebarRight: React.FC<IPostProps> = ({ topicPosts, authorsPosts, form
                 <div className="py-6">
                     <PageSectionHeaderUpperCaseGray title='More from these topics' />
                     {
-                        topicPosts.map(item => {
+                        topicPosts && topicPosts.map(item => {
                             return (
                                 <div className="md:flex md:flex-col" key={shortid()}>
 
@@ -58,7 +58,7 @@ const PostSidebarRight: React.FC<IPostProps> = ({ topicPosts, authorsPosts, form
                     }
                 </div>
                 <div>
-                    {authorsPosts.length > 0 && authorsPosts.map(item => {
+                    {authorsPosts && authorsPosts.length > 0 && authorsPosts.map(item => {
 
                         return (
                             <FetchPostsFromSlugs
@@ -84,7 +84,7 @@ const PostSidebarRight: React.FC<IPostProps> = ({ topicPosts, authorsPosts, form
                     })}
                 </div>
                 <div>
-                    {formatPosts.length > 0 && formatPosts.map(item => {
+                    {formatPosts && formatPosts.length > 0 && formatPosts.map(item => {
 
                         return (
                             <FetchPostsFromSlugs

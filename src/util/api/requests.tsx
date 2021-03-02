@@ -333,12 +333,43 @@ export const getOnePostByIdQuery = (id: string) => {
               no_dict
               url
           }
+          updated_at
         }
+        
 
   }
   `
 }
 
+export const getOnePreviewPostByIdQuery = (id: string) => {
+  return `
+    query {
+      previewPost(id: ${id}) {
+          ${postQuery}
+          content
+          langs {
+              lang
+              slug
+          }
+          readMorePosts:posts {
+              slug
+          }
+          seo {
+              title
+              desc
+          }
+          meta {
+              credits
+              no_dict
+              url
+          }
+          updated_at
+        }
+        
+
+  }
+  `
+}
 export const getOnePageByIdQuery = (id: string) => {
   return `
     query {
@@ -350,6 +381,19 @@ export const getOnePageByIdQuery = (id: string) => {
     }
   `
 }
+
+export const getOnePreviewPageByIdQuery = (id: string) => {
+  return `
+    query {
+      previewPage(id:${id}){
+        title
+        slug
+        flexibleContent
+      }
+    }
+  `
+}
+
 export const getPostsByIds = (ids: IGetPostsAndTopics) => {
   const { postsIds, topicsIds } = ids
   return `

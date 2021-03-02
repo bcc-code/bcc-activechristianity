@@ -19,7 +19,6 @@ const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/Desktop
 const MobileBottomSlider = loadable(() => import('@/layout-parts/PostLayout/MobileBottomSlider'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
-import Link from '@/components/CustomLink'
 
 import {
     AuthorBookmarkShareSection,
@@ -48,10 +47,10 @@ export interface IMediaTypes {
 }
 interface IPostProps extends IPostItem {
     content: string
-    allInterestedPosts: string[]
-    topicPosts: ITopicPostSlugs[]
-    authorsPosts: ITopicPostSlugs[]
-    formatPosts: ITopicPostSlugs[]
+    allInterestedPosts?: string[]
+    topicPosts?: ITopicPostSlugs[]
+    authorsPosts?: ITopicPostSlugs[]
+    formatPosts?: ITopicPostSlugs[]
     tranlsatedUrl: INavItem[]
     credits?: string
     seoTitle: string
@@ -315,13 +314,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                                     />
                                 </div>
-                                <RecommendedPosts
+                                {allInterestedPosts && <RecommendedPosts
                                     postId={acId ? acId : id}
                                     topics={topicPosts}
                                     readMorePosts={allInterestedPosts}
-                                />
+                                />}
 
-                                {authors && (
+                                {authors && authorsPosts && (
                                     <LazyLoad>
                                         {authorsPosts.length > 0 && authorsPosts.map(item => {
 
@@ -350,6 +349,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         )}
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
+                    <div className="max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">
+                        <p className=""><em>{ac_strings.scripture_copyright}</em></p>
+                    </div>
                 </div>
                 {isWindowLoaded === true && !isMobile && (
                     <DesktopRightBar
@@ -361,9 +363,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
             </div>
 
-            <div className="mx-auto max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">
-                <p className=""><em>{ac_strings.scripture_copyright}</em></p>
-            </div>
+
 
         </article >
     )

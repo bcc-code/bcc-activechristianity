@@ -151,6 +151,15 @@ export default {
 
         return sendQuery(query)
     },
+    getOnePreviewPostById: (id: string) => {
+        const query = request.getOnePreviewPostByIdQuery(id)
+        return sendQuery(query)
+    },
+    getOnePreviewPagetById: (id: string) => {
+        const query = request.getOnePreviewPageByIdQuery(id)
+
+        return sendQuery(query)
+    },
     getPostsPerPageQueryByTopicId: (id: string, page: number) => {
         const query = request.getPostsPerPageQuery(id, page)
         return sendQuery(query)

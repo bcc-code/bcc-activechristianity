@@ -11,70 +11,74 @@ import { Carousel } from 'react-responsive-carousel';
 import { ITopicPostSlugs } from '@/types'
 
 interface IPostProps {
-    topicPosts: ITopicPostSlugs[]
-    authorsPosts: ITopicPostSlugs[]
-    formatPosts: ITopicPostSlugs[]
+    topicPosts?: ITopicPostSlugs[]
+    authorsPosts?: ITopicPostSlugs[]
+    formatPosts?: ITopicPostSlugs[]
     isPlayingMedia: boolean
 
 }
 
 const MobileBottomSlider: React.FC<IPostProps> = ({ topicPosts, isPlayingMedia, formatPosts }) => {
     const slides: React.ReactChild[] = []
-    formatPosts.map(item => {
-        item.posts.map(slug => {
-            slides.push(
-                <FetchOnePost
-                    slug={slug}
-                    render={({ post }) => {
-                        return post ? (
-                            <div className="bg-d4athens pb-4" style={{ height: 80 }}>
-                                <SquareRightImg
-                                    {...post}
-                                />
-                            </div>
-                        ) : <div />
-                    }}
+    if (formatPosts) {
+        formatPosts.map(item => {
+            item.posts.map(slug => {
+                slides.push(
+                    <FetchOnePost
+                        slug={slug}
+                        render={({ post }) => {
+                            return post ? (
+                                <div className="bg-d4athens pb-4" style={{ height: 80 }}>
+                                    <SquareRightImg
+                                        {...post}
+                                    />
+                                </div>
+                            ) : <div />
+                        }}
 
-                />
-            )
+                    />
+                )
+            })
+
         })
+    }
 
-    })
-
-    topicPosts.map(item => {
-        slides.push(
-            <div style={{ height: 80 }} className="bg-d4athens pb-4">
-                {/* 
-        <p >{topicPosts[0].name}</p> */}
-                <div className="p-2">
-                    <h5 className="block uppercase font-roboto text-gray-500 text-xs tracking-wider pb-2 w-full text-left">More from this topic</h5>
-                    <div className="justify-between flex items-center">
-                        <Link to={topicPosts[0].slug} className="font-roboto text-lg">
-                            {topicPosts[0].name}
-                        </Link>
-                        <ToggleFollowOutlineBtn id={topicPosts[0].id} />
+    if (topicPosts) {
+        topicPosts.map(item => {
+            slides.push(
+                <div style={{ height: 80 }} className="bg-d4athens pb-4">
+                    {/* 
+            <p >{topicPosts[0].name}</p> */}
+                    <div className="p-2">
+                        <h5 className="block uppercase font-roboto text-gray-500 text-xs tracking-wider pb-2 w-full text-left">More from this topic</h5>
+                        <div className="justify-between flex items-center">
+                            <Link to={topicPosts[0].slug} className="font-roboto text-lg">
+                                {topicPosts[0].name}
+                            </Link>
+                            <ToggleFollowOutlineBtn id={topicPosts[0].id} />
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
-        item.posts.map(slug => {
-            slides.push(
-                <FetchOnePost
-                    slug={slug}
-                    render={({ post }) => {
-                        return post ? (
-                            <div className="bg-d4athens pb-4" style={{ height: 80 }}>
-                                <SquareRightImg
-                                    {...post}
-                                />
-                            </div>
-                        ) : <div />
-                    }}
-
-                />
             )
+            item.posts.map(slug => {
+                slides.push(
+                    <FetchOnePost
+                        slug={slug}
+                        render={({ post }) => {
+                            return post ? (
+                                <div className="bg-d4athens pb-4" style={{ height: 80 }}>
+                                    <SquareRightImg
+                                        {...post}
+                                    />
+                                </div>
+                            ) : <div />
+                        }}
+
+                    />
+                )
+            })
         })
-    })
+    }
 
 
     return (

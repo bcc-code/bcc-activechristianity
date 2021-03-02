@@ -4,14 +4,14 @@ import { useLocation } from '@reach/router';
 import loadable from '@loadable/component'
 const acApiModule = import('@/util/api')
 import MetaTag from '@/components/Meta'
-const PostLayout = loadable(() => import('@/layouts/PostLayout'))
+const PostLayout = loadable(() => import('@/layouts/PostLayoutUpdate'))
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import ac_strings from '@/strings/ac_strings.js'
 import Link from '@/components/CustomLink'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import { LayoutH1Wide } from '@/components/Headers'
 import { getAllUrlParams } from '@/helpers/index-js'
-import { normalizePostRes } from '@/helpers/normalizers'
+import { normalizePostRes, normalizeAvailableLanguages } from '@/helpers/normalizers'
 import { IPostProps, INavItem } from '@/types'
 const Preview = () => {
     const location = useLocation();
@@ -26,23 +26,48 @@ const Preview = () => {
 
             acApiModule.then(res => {
                 const api = res.default
-                api.getOnePostById(id)
+                api.getOnePreviewPostById(id)
                     .then(res => {
-                        if (res && res.post) {
-                            const simplePost = normalizePostRes(res.post)
-                            const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = res.post
+
+                        if (res && res.previewPost) {
+                            const normalized = normalizePostRes(res.previewPost)
+                            const { id, langs, content, meta, recommendPosts, readMorePosts, seo, updated_at } = res.previewPost
+
+                            const { media, types, format } = normalized
+                            const mediaTypes = []
+
+                            let defaultMediaType = "none"
+                            if (media.audio) {
+                                mediaTypes.push("audio")
+                                defaultMediaType = "audio"
+                            }
+                            if (media.video && media.video.src) {
+
+                                mediaTypes.push("video")
+                                defaultMediaType = "video"
+                            }
+
+                            const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
                             const postProps = {
                                 langs,
                                 content,
                                 meta,
+                                updated_at,
+                                mediaTypes: {
+                                    types: mediaTypes,
+                                    default: defaultMediaType
+                                },
+                                tranlsatedUrl,
                                 recommendPosts,
                                 readMorePosts,
-                                seo,
-                                ...simplePost
+                                seoTitle: seo,
+                                ...normalized
 
                             }
 
                             setPost(postProps)
+                        } else {
+                            console.log(res)
                         }
                     })
             })
@@ -52,10 +77,10 @@ const Preview = () => {
             setPost(null)
             acApiModule.then(res => {
                 const api = res.default
-                api.getOnePagetById(id)
+                api.getOnePreviewPagetById(id)
                     .then(res => {
-                        if (res && res.page) {
-                            const { flexibleContent, title, slug } = res.page
+                        if (res && res.previewPage) {
+                            const { flexibleContent, title, slug } = res.previewPage
                             const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
                             setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
                         }
@@ -67,22 +92,7 @@ const Preview = () => {
     return (
         <main className="">
             {
-                post && (
-                    <div>
-                        <Profiler id="post-layout-original" onRender={(
-                            id, // the "id" prop of the Profiler tree that has just committed
-                            phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
-                            actualDuration, // time spent rendering the committed update
-                            baseDuration, // estimated time to render the entire subtree without memoization
-                            startTime, // when React began rendering this update
-                            commitTime, // when React committed this update
-                            interactions // the Set of interactions belonging to this update
-                        ) => {
-                            console.log(actualDuration)
-                        }}>
-                            <PostLayout {...post} />
-                        </Profiler>
-                    </div>
+                post && (<PostLayout {...post} />
                 )
             }
             {page && (
