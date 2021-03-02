@@ -4,7 +4,7 @@ import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import TopImg from '@/components/PostItemCards/TopImg'
 import ac_strings from '@/strings/ac_strings.js'
 import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
-import { playlistToPost, getRandomArray } from '@/helpers'
+import { playlistToPost, getRandomArray } from '@/helpers/normalizers'
 import { IPostItem } from '@/types'
 import shortid from 'shortid'
 

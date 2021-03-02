@@ -28,10 +28,10 @@ import TwoToOneImg from "@/components/Images/Image2To1"
 
 const acApiModule = import('@/util/api')
 import { currentMediaSelector } from '@/state/selectors/other'
-import { followedTopicsSelector, loggedInSelector } from '@/state/selectors/user'
-import { debounce, normalizeAvailableLanguages } from '@/helpers'
+import { loggedInSelector } from '@/state/selectors/user'
+import { normalizeAvailableLanguages } from '@/helpers/normalizers'
+import { debounce } from '@/helpers/index-js'
 import { IPostProps } from '@/types'
-import { IRootState } from '@/state/types'
 
 // mock data
 

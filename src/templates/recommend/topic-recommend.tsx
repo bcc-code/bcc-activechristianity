@@ -15,7 +15,7 @@ import { LayoutH1Wide, PageSectionHeader } from '@/components/Headers'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { IPostItem, ISubtopicLinks, IRecommendationPage } from '@/types'
-import { processRecommendationContext, getRandomFeatured } from '@/helpers'
+import { getRandomFeatured } from '@/helpers/normalizers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -28,14 +28,11 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         title,
         formats,
         breadcrumb,
-        popularPosts,
-        latestPosts,
-        featuredPosts
+        latest, popular, featured
     } = pageContext
 
     const latestSlug = `${path}/1`
 
-    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     const topicSlug = ac_strings.slug_topic

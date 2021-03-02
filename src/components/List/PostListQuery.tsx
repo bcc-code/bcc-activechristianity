@@ -5,7 +5,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
-import { normalizePostRes } from '@/helpers'
+import { normalizePostRes } from '@/helpers/normalizers'
 const acApiModule = import('@/util/api')
 import shortid from 'shortid'
 export interface IPostList {

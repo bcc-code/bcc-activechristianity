@@ -10,7 +10,7 @@ import { LayoutH1Wide, SectionTitleDesktopAndMobile } from '@/components/Headers
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import { INavItemCount, ISubtopicLinks, IRecommendationPage, IPostItem } from '@/types'
 
-import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
+import { getRandomArray, getRandomFeatured } from "@/helpers/normalizers"
 import ac_strings from '@/strings/ac_strings.js'
 
 
@@ -18,10 +18,9 @@ const Watch: React.FC<IProps> = (props) => {
 
     const { pageContext, path } = props
 
-    const { title, items, popularPosts, featuredPosts, latestPosts } = pageContext
+    const { title, items, latest, popular, featured } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
-    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
 
     return (

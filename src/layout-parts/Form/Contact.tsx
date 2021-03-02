@@ -5,7 +5,7 @@ import { InputText, InputCheckbox, InputTextArea } from '@/components/Input'
 
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { validateEmail } from '@/helpers'
+import { validateEmail } from '@/helpers/index-js'
 const siteUrl = process.env.SITE_URL
 const contactFormTo = process.env.CONTACT_FROM_TO
 

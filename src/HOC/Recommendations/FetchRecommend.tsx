@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FetchOnePost } from '@/HOC/FetchPosts'
 const acApiModule = import('@/util/api')
 import RightImg from '@/components/PostItemCards/RightImg'
-import { getRandomArray, filterTopics } from '@/helpers'
+import { getRandomArray, filterTopics } from '@/helpers/normalizers'
 import { ITopic } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { OutlineButton } from '@/components/Button'

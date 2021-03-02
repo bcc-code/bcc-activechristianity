@@ -29,7 +29,7 @@ import {
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 const acApiModule = import('@/util/api')
-import { debounce } from '@/helpers'
+import { debounce } from '@/helpers/index-js'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 

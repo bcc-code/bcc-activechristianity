@@ -1,12 +1,12 @@
 import * as React from 'react'
 
 import { ITopicPostSlugs, IPostItem } from '@/types'
-import { fetchPostslistFromArchivePage, fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import ac_strings from '@/strings/ac_strings.js'
 
-import { getRandomArray } from "@/helpers"
+import { getRandomArray } from "@/helpers/normalizers"
 
 const acApiModule = import('@/util/api')
 

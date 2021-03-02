@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from '@reach/router';
-import { getAllUrlParams } from '@/helpers'
+import { getAllUrlParams } from '@/helpers/index-js'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import { menusItems } from '@/strings/generated/menus.json'

@@ -1,5 +1,6 @@
 import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem, ITopic, ITopicPostItems, IPostRes } from '@/types'
-import { trimSlug, normalizePostRes, normalizeTracks } from './index'
+import { trimSlug } from './index-js'
+import { normalizePostRes, normalizeTracks } from '@/helpers/normalizers'
 import ac_strings from '@/strings/ac_strings.js'
 
 

@@ -8,17 +8,16 @@ import { SectionTitleDesktopAndMobile, PageSectionHeader, LayoutH1Wide, } from '
 const FeaturedBanner = loadable(() => import('@/components/HorizontalScroll/FeaturedBanner'))
 const TopImgHorizontalScroll = loadable(() => import('@/components/HorizontalScroll/TopImgRow'))
 import { UnderlineLinkViewAll } from '@/components/Button'
-import { INavItemCount, ISubtopicLinks, IRecommendationPage, IPostItem } from '@/types'
+import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
-import { processRecommendationContext, getRandomFeatured } from '@/helpers'
+import { getRandomFeatured } from '@/helpers/normalizers'
 const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
-    const { formatType, breadcrumb, popularPosts, latestPosts, featuredPosts } = pageContext
+    const { formatType, breadcrumb, latest, popular, featured } = pageContext
 
     const { info, items } = formatType
 
     const latestSlug = `${info.to}/${ac_strings.slug_latest}`
-    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     return (
         <div className="pt-8 sm:pt-0">

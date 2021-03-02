@@ -7,8 +7,7 @@ import { InputText } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { IRootState } from '@/state/types'
-import { validateEmail } from '@/helpers'
+import { validateEmail } from '@/helpers/index-js'
 import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
 const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
 const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")

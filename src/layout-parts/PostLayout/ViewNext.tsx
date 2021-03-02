@@ -9,7 +9,7 @@ import ac_strings from '@/strings/ac_strings.js'
 
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { fetchPostslistFromArchivePage, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import shortid from 'shortid'
 const acApiModule = import('@/util/api')
 /* import seriesInfo from '@/strings/series.json' */

@@ -483,9 +483,9 @@ export interface IBannerBasic {
 export interface IRecommendationPage {
     title: string
     breadcrumb: INavItem[]
-    popularPosts: IPostRes[]
-    featuredPosts: IPostRes[]
-    latestPosts: IPostRes[]
+    latest: IPostItem[]
+    popular: IPostItem[]
+    featured: IPostItem[]
 
 }
 

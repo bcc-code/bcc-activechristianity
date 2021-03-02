@@ -14,7 +14,7 @@ import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
 
 import { LayoutH1Wide, UnderlineTitleLink } from '@/components/Headers'
 import { ISubtopicLinks, INavItem, IPostItem } from "@/types"
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import shortId from 'shortid'
 import ac_strings from '@/strings/ac_strings.js'
 

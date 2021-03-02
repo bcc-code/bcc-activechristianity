@@ -1,8 +1,7 @@
-import React from "react"
+
 import { IOnePostByType } from '@/layout-parts/RecommendLayout/PostsByTypes'
-import { IOnePostByTypeRow } from '@/layout-parts/RecommendLayout/PostsByTypeRow'
 import { ITopicPostItems } from '@/types'
-import { getRandomArray } from '@/helpers'
+
 const PostsByTypesLayout = (collection: ITopicPostItems[]) => {
 
     const postsByTypesRow1: IOnePostByType[] = []

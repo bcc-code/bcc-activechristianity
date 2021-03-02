@@ -11,7 +11,7 @@ import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { trimSlug } from '@/helpers'
+import { trimSlug } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props

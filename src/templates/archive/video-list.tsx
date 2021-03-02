@@ -3,7 +3,6 @@ import React from 'react'
 import LazyLoad from '@/components/LazyLoad';
 import { navigate } from "gatsby"
 import { IPaginate, INavItem, IPostItem } from "@/types"
-import { normalizePostRes } from '@/helpers'
 import VideoItem from '@/components/PostItemCards/TopImg'
 import Pagination from '@/components/Pagination'
 import { LayoutH1Wide } from '@/components/Headers'

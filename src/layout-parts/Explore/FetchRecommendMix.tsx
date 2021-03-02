@@ -2,7 +2,7 @@ import React from 'react'
 import { fetchLocalPostsFromSlugs, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 
 import RightImg from '@/components/PostItemCards/RightImg'
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import { ITopic, IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { OutlineButton } from '@/components/Button'

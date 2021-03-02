@@ -8,7 +8,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
 import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
-import { validateEmail } from '@/helpers'
+import { validateEmail } from '@/helpers/index-js'
 
 const initialFieldsState = {
     email: '',

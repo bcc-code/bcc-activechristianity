@@ -9,7 +9,7 @@ import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import ac_strings from '@/strings/ac_strings.js'
 import ExploreHomeLayout from '@/layout-parts/Explore/ExploreHome'
-import { filterTopics } from '@/helpers'
+import { filterTopics } from '@/helpers/normalizers'
 import { Stats } from 'react-instantsearch-dom';
 import { INavItem, ITopicRes } from "@/types"
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import { IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'

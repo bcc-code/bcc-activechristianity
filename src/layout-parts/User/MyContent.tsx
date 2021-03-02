@@ -10,7 +10,7 @@ import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFollow'
 import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
-import { getRandomArray, normalizePostRes, } from '@/helpers'
+import { normalizePostRes, getRandomArray } from '@/helpers/normalizers'
 import ac_strings from '@/strings/ac_strings.js'
 import { followedTopicsSelector, bookmarkedSelector } from '@/state/selectors/user'
 const acApiModule = import('@/util/api')

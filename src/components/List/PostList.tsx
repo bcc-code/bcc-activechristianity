@@ -6,7 +6,7 @@ import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
-import { trimSlug } from '@/helpers'
+import { trimSlug } from '@/helpers/index-js'
 export interface IPostList {
     audio?: boolean
     paginate?: IPaginate

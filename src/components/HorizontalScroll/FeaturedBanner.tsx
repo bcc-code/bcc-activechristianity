@@ -5,7 +5,7 @@ import XScroll from './BaseLarge'
 import './horizontal-scroll.css';
 import { IPostItem } from '@/types'
 import shortid from 'shortid'
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 const FeatureSection: React.FC<{ featured: IPostItem[] }> = ({ featured }) => {
     console.log('featured')
     const [mixed, setMixed] = React.useState<null | IPostItem[]>(null)

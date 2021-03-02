@@ -1,12 +1,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { IImage } from '@/types'
-import RandomImage1 from '@/images/topic-random-01.jpg'
-import RandomImage2 from '@/images/topic-random-02.jpg'
-import RandomImage3 from '@/images/topic-random-03.jpg'
-import RandomImage4 from '@/images/topic-random-04.jpg'
 
-import { getRandomArray } from '@/helpers'
 export const asImageWDataUri = (uri: string) => ({
 
     "src": uri,
@@ -19,10 +14,6 @@ function getRandomInt(max: number) {
 }
 
 
-const getRandomImage = () => {
-    const randomNr = getRandomInt(4)
-    return asImageWDataUri([RandomImage1, RandomImage3, RandomImage2, RandomImage4][randomNr])
-}
 export interface IBgImgTopicCard {
     name: string | JSX.Element
     to: string

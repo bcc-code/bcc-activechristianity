@@ -8,7 +8,7 @@ const {createArchivePages} = require('./hjelper')
 const generateFormat = require('./gFormat.js')
 const generateType = require('./gType.js')
 const generateTopic = require('./gTopic.js')
-
+const { processRecommendationContext, getRandomFeatured } = require('../../src/helpers/normalizers')
 
 /* SETUP */
  
@@ -170,10 +170,12 @@ module.exports = function generateTopics(actions, graphql) {
                 const popularPosts = popularPostsRes.data
                 const latestPosts=latestPostsRes.data
                 const featuredPosts=featuredPostsRes
+                const props =processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
+            const { latest, popular, featured } = props
                 const contextPosts = {
-                    popularPosts,
-                    latestPosts,
-                    featuredPosts
+                  latest,
+                  featured,
+                  popular,
                 }
 
                 if (topicType==='format'){

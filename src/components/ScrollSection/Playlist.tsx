@@ -2,7 +2,7 @@ import React from 'react'
 import { PlaylistBackground, PostLabel } from '@/components/PostElements'
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
 import { getImage } from '@/helpers/imageHelpers'
-import { normalizeTracks } from "@/helpers"
+import { normalizeTracks } from "@/helpers/normalizers"
 import { IPlaylist, IMedia } from '@/types'
 import { PostH1 } from '@/components/Headers'
 import { OutlineButton } from '@/components/Button'

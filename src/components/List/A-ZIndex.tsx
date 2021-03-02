@@ -1,7 +1,6 @@
 import React from 'react'
 import { ITopicNavItem } from '@/types'
 import Link from '@/components/CustomLink'
-import { chunkArray } from '@/helpers'
 import { SlateDarkUnfollowButton, ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow.tsx'
 interface ILinkGroup {
     name: string

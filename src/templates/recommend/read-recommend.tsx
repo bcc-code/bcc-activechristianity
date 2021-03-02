@@ -14,22 +14,18 @@ import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 
 const HSCardList = loadable(() => import('@/components/HorizontalScroll/HSCardList'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
-
 import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
-import { IRootState } from '@/state/types'
 
 import ac_strings from '@/strings/ac_strings.js'
 import { useSelector } from "react-redux";
-import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
+import { getRandomArray, getRandomFeatured } from "@/helpers/normalizers"
 import { loggedInSelector } from '@/state/selectors/user'
 const Read: React.FC<IProps> = (props) => {
     const loggedIn = useSelector(loggedInSelector)
     const { pageContext, path } = props
-    const { title, info, items, popularPosts, featuredPosts, latestPosts } = pageContext
+    const { title, info, items, latest, popular, featured } = pageContext
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
-
-    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     const categoryItems = items.map(item => ({ ...item, to: `${item.typeSlug}/${item.formatSlug}` }))

@@ -5,12 +5,10 @@ import Link from '@/components/CustomLink'
 
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import SquareRightImg from '@/components/PostItemCards/SquareRightImg'
-const acApiModule = import('@/util/api')
-import { debounce } from '@/helpers'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
-import { IPostItem, ITopicPostSlugs, INavItem } from '@/types'
+import { ITopicPostSlugs } from '@/types'
 
 interface IPostProps {
     topicPosts: ITopicPostSlugs[]

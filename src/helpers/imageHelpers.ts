@@ -1,4 +1,4 @@
-import { initials } from './index'
+import { initials } from './index-js'
 import { IImage } from '@/types'
 import endpoinsts from '@/strings/static/endpoints'
 const BaseUrl = endpoinsts.dummy_image_api

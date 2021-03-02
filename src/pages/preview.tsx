@@ -10,7 +10,8 @@ import ac_strings from '@/strings/ac_strings.js'
 import Link from '@/components/CustomLink'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import { LayoutH1Wide } from '@/components/Headers'
-import { normalizePostRes, getAllUrlParams } from '@/helpers'
+import { getAllUrlParams } from '@/helpers/index-js'
+import { normalizePostRes } from '@/helpers/normalizers'
 import { IPostProps, INavItem } from '@/types'
 const Preview = () => {
     const location = useLocation();

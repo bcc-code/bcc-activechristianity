@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "gatsby";
 import { ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow'
 import ac_strings from '@/strings/ac_strings.js'
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import { useSelector } from 'react-redux'
 import { ITopic } from '@/types'
 import shortid from "shortid";

@@ -7,7 +7,7 @@ import { LayoutH1 } from '@/components/Headers'
 import { useLocation } from '@reach/router';
 import PostListQuery from '@/components/List/PostListQuery'
 import { formatsAll } from '@/strings/static/topic-ids'
-import { getAllUrlParams } from '@/helpers'
+import { getAllUrlParams } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props

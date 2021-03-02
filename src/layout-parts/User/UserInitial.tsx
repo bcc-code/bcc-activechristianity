@@ -1,9 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import Link from '@/components/CustomLink'
-import { IRootState } from '@/state/types'
 
-import { initials } from '@/helpers'
+
+import { initials } from '@/helpers/index-js'
 
 export const UserInitial: React.FC<{ name: string, className?: string }> = ({ name, className }) => (
     <svg viewBox="0 0 100 100" className={`block m-0 ${className}`}>
