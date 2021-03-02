@@ -141,7 +141,7 @@ if (activeEnv === 'production') {
           allSitePage.nodes.map((node) => {
             return node.context.updated_at? ({
               url: `${process.env.SITE_URL}${node.path}`,
-              lastmod: `${node.context.updated_at}`,
+              lastmodISO: `${node.context.updated_at}`,
             }):({
               url: `${process.env.SITE_URL}${node.path}`,
             });
