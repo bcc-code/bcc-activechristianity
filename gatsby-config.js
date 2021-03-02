@@ -123,6 +123,11 @@ if (activeEnv === 'production') {
       options: {
         createLinkInHead: true,
         query: `{
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
           allSitePage {
             nodes {
               path
