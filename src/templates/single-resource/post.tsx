@@ -11,7 +11,7 @@ const Post: React.FC<IPostProp> = (props) => {
 
     const { normalized: post, tranlsatedUrl, mediaTypes, authorsPosts, topicPosts, formatPosts, allInterestedPosts, breadcrumb } = pageContext
     const { title, excerpt, date, topics, types, image } = post
-    const { content, meta, seo } = postRes
+    const { content, meta, seo, updated_at } = postRes
 
     const seoTitle = seo && seo.title ? seo.title : title
     return (
@@ -31,7 +31,9 @@ const Post: React.FC<IPostProp> = (props) => {
                 path={props.path}
             />
             <PostLayout
+
                 {...post}
+                updated_at={updated_at}
                 seoTitle={seoTitle}
                 tranlsatedUrl={tranlsatedUrl}
                 content={content}
@@ -138,6 +140,7 @@ export const pageQuery = graphql`
                     content
                     word
                 }
+                updated_at
 
             }
     }

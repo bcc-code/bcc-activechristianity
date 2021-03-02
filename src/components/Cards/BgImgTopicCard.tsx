@@ -1,17 +1,15 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { IImage } from '@/types'
-
+import { dummyImage } from '@/helpers/imageHelpers'
+import endpoinsts from '@/strings/static/endpoints'
 export const asImageWDataUri = (uri: string) => ({
-
+    ...dummyImage,
     "src": uri,
     "dataUri": uri,
     "srcset": uri
 })
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
 
 
 export interface IBgImgTopicCard {
@@ -29,7 +27,7 @@ const BgImgTopicCard: React.FC<IBgImgTopicCard> = ({ name, image, to, overlay, r
         medium: { background: '#384156', opacity: "0.3" }
     }
 
-    const useImage: IImage = image ? image : getRandomImage()
+    const useImage: IImage = image ? image : asImageWDataUri(`${endpoinsts.random_image_api}/400x300`)
 
     return (
         <Link

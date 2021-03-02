@@ -10,7 +10,7 @@ import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 
 import shortid from 'shortid'
 /* const AudioPlayer */
-import { FetchPostsFromSlugs, FetchOnePost } from '@/HOC/FetchPosts'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
@@ -20,7 +20,7 @@ const MobileBottomSlider = loadable(() => import('@/layout-parts/PostLayout/Mobi
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
 import Link from '@/components/CustomLink'
-import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
+
 import {
     AuthorBookmarkShareSection,
     Translations,
@@ -31,7 +31,6 @@ import TwoToOneImg from "@/components/Images/Image2To1"
 const acApiModule = import('@/util/api')
 import { debounce } from '@/helpers/index-js'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 
 import { IPostItem, ITopicPostSlugs, INavItem } from '@/types'
 
@@ -57,6 +56,7 @@ interface IPostProps extends IPostItem {
     credits?: string
     seoTitle: string
     mediaTypes: IMediaTypes
+    updated_at: string
 }
 
 import { currentMediaSelector } from '@/state/selectors/other'
@@ -88,7 +88,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         allInterestedPosts,
         authorsPosts,
         topicPosts,
-        formatPosts
+        formatPosts,
+        updated_at
     } = post
 
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
@@ -172,7 +173,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640
-
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
             {/*             {isWindowLoaded === true && (
@@ -293,6 +293,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 content={credits}
                             />
                         )}
+                        <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div>
                         {isWindowLoaded === true && (
                             <div>
                                 <div className="flex flex-wrap border-ac-gray py-6">
@@ -370,24 +371,3 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
 export default PostLayout
 
-const SimplePostRightImg: React.FC<IPostItem> = (post) => {
-    return (
-        <div className="text-sm flex" >
-            <Link to={post.slug} style={{ width: "80px", height: "80px" }}>
-                <SquareImage
-                    {...post.image}
-                />
-            </Link>
-            <div className="flex-1 p-2 text-left">
-
-                <Link to={post.slug} className="text-sm">
-                    <TextSizeTitle
-                        rawText={post.title}
-                        clamp={2}
-                        fontKey="text-sm"
-                    />
-                </Link>
-            </div>
-        </div>
-    )
-}
