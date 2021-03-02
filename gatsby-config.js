@@ -132,7 +132,7 @@ if (activeEnv === 'production') {
             }
           }
         }`,
-        serialize: ({ site, allSitePage }) =>
+        serialize: ({ allSitePage }) =>
           allSitePage.nodes.map((node) => {
             return node.context.updated_at? ({
               url: `${process.env.SITE_URL}${node.path}`,
