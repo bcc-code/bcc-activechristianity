@@ -49,6 +49,7 @@ const getPerPageQuery = (pageNr)=>{
               content
               word
           }
+          updated_at
         }
         
       }
@@ -343,7 +344,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               if (format) {
                                   breadcrumb.push(format[0])
                               }
-          
+                              const updated_at_IOS = new Date(node.updated_at); 
                               const data = {
                                 normalized,
                                 allInterestedPosts,
@@ -355,7 +356,8 @@ module.exports = async function generatePosts(actions, graphql) {
                                   default:defaultMediaType
                                 },
                                 tranlsatedUrl,
-                                breadcrumb
+                                breadcrumb,
+                                updated_at:updated_at_IOS.toISOString()
           
                               }
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){

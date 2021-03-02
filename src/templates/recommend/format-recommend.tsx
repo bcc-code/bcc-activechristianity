@@ -5,7 +5,7 @@ import TopImgPost from '@/components/PostItemCards/TopImg'
 import RightImg from '@/components/PostItemCards/RightImg'
 import HeaderSection from '@/layout-parts/RecommendLayout/HeaderSection'
 import { SectionTitleDesktopAndMobile, PageSectionHeader, LayoutH1Wide, } from '@/components/Headers'
-const FeaturedBanner = loadable(() => import('@/components/HorizontalScroll/FeaturedBanner'))
+import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
 const TopImgHorizontalScroll = loadable(() => import('@/components/HorizontalScroll/TopImgRow'))
 import { UnderlineLinkViewAll } from '@/components/Button'
 import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'

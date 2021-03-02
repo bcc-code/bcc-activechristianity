@@ -4,7 +4,7 @@ import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
 import { menusItems } from '@/strings/generated/menus.json'
-const FeaturedBanner = loadable(() => import('@/components/HorizontalScroll/FeaturedBanner'))
+import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
 const TopImgHorizontalScroll = loadable(() => import('@/components/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'

@@ -59,6 +59,7 @@ const postQuery = `
             id
         }
     }
+    updated_at
     published 
     likes
     views
