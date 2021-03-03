@@ -1,6 +1,4 @@
-import React, { Profiler } from 'react'
-import SquareImage from '@/components/Images/Image1to1Rounded'
-import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
+import React from 'react'
 import loadable from '@loadable/component'
 import LazyLoad from 'react-lazyload';
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'

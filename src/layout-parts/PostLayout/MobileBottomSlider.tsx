@@ -19,6 +19,7 @@ interface IPostProps {
 }
 
 const MobileBottomSlider: React.FC<IPostProps> = ({ topicPosts, isPlayingMedia, formatPosts }) => {
+    const [close, setClose] = React.useState(false)
     const slides: React.ReactChild[] = []
     if (formatPosts) {
         formatPosts.map(item => {
@@ -83,7 +84,17 @@ const MobileBottomSlider: React.FC<IPostProps> = ({ topicPosts, isPlayingMedia, 
 
     return (
         <div className={`sm:hidden fixed bottom-0 w-full`} style={{ zIndex: 60, marginBottom: !!isPlayingMedia ? '116px' : '64px' }} >
-            <Carousel showThumbs={false} showStatus={false} showArrows={false} autoPlay infiniteLoop className="h-20" showIndicators={false}>
+            <Carousel
+                showThumbs={false}
+                showStatus={false}
+                showArrows={false}
+                autoPlay
+                infiniteLoop
+                className="h-20"
+                showIndicators={false}
+                interval={10 * 1000}
+
+            >
                 {slides}
             </Carousel>
         </div>
