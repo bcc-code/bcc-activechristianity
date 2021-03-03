@@ -19,8 +19,11 @@ const sendQuery = (query: string) => {
         .then(res => {
             if (res.errors) {
                 console.log(res.errors)
-                res.errors.forEach(e => console.error(e.toString()))
-                return Promise.reject(res.errors)
+                let error = ""
+                res.errors.map(e => {
+                    error += " " + e.message
+                })
+                return Promise.reject(error)
             } else {
                 return res.data
             }

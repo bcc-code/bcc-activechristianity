@@ -79,13 +79,13 @@ export const UnderlineLinkViewAll: React.FC<{ to: string }> = ({ to, children })
     </Button>
 }
 
-export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClick, loading }) => {
+export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClick, loading, className }) => {
     const isDisabled = disabled || loading
     return (
         <SolidDarkBgToggleActive
             disabled={isDisabled}
             onClick={onClick}
-            className="w-auto px-4 py-2"
+            className={`w-auto px-4 py-2 ${className}`}
             active={!isDisabled}
         >
             {loading ? ac_strings.loading : ac_strings.send}
