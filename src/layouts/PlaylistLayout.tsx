@@ -9,8 +9,7 @@ import { MobileHeaderBackground, MobilePostMain, DesktopPostMain, ShareSection }
 import { FetchLatestPlaylists } from '@/HOC/FetchLatest'
 import ContentPlaylist from '@/components/Playlist/ContentPlaylistItem'
 import { PlaylistBackground } from '@/components/PostElements'
-import { getRandomArray } from "@/helpers"
-import { normalizeTracks } from '@/helpers'
+import { normalizeTracks, getRandomArray } from '@/helpers/normalizers'
 import { getImage } from '@/helpers/imageHelpers'
 import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg'
 import { IPlaylist, IMedia } from '@/types'

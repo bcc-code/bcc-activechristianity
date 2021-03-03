@@ -1,16 +1,16 @@
 import React from 'react'
 import { useLocation } from '@reach/router';
-import queryString from 'query-string';
+import { getAllUrlParams } from '@/helpers/index-js'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
-import { menusItems } from '@/layout-parts/Nav/Menus'
+import { menusItems } from '@/strings/generated/menus.json'
+
 // components
 
 // Type
 import { INavItem, IBibleBook, IBible, } from '@/types'
-import ac_strings from '@/strings/ac_strings.js'
-import acApi from '@/util/api'
-import PostList from '@/layout-parts/List/PostList'
+const acApiModule = import('@/util/api')
+import PostList from '@/components/List/PostList'
 interface IBibleNavProps {
     path: string
     pageContext: {
@@ -36,13 +36,16 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
 
     const [posts, setPosts] = React.useState<string[]>([])
     const location = useLocation();
-    const parsed = queryString.parse(location.search);
+    const parsed = getAllUrlParams(location.search);
     const { bookId, ch, bookName } = parsed
     React.useEffect(() => {
 
         if (typeof bookId === "string" && typeof ch === "string") {
-            acApi.getScriptureChaptersPost(bookId, ch).then(res => {
-                setPosts(res.biblePosts.map(item => item.slug))
+            acApiModule.then(res => {
+                const acApi = res.default
+                acApi.getScriptureChaptersPost(bookId, ch).then(res => {
+                    setPosts(res.biblePosts.map(item => item.slug))
+                })
             })
         }
     }, [])

@@ -1,8 +1,7 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
 import ac_strings from '@/strings/ac_strings.js'
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
-
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/navIcons'
 
 interface IButton {
     className?: string
@@ -80,13 +79,13 @@ export const UnderlineLinkViewAll: React.FC<{ to: string }> = ({ to, children })
     </Button>
 }
 
-export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClick, loading }) => {
+export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClick, loading, className }) => {
     const isDisabled = disabled || loading
     return (
         <SolidDarkBgToggleActive
             disabled={isDisabled}
             onClick={onClick}
-            className="w-auto px-4 py-2"
+            className={`w-auto px-4 py-2 ${className}`}
             active={!isDisabled}
         >
             {loading ? ac_strings.loading : ac_strings.send}

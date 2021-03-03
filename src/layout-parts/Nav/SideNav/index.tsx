@@ -1,37 +1,38 @@
 import * as React from 'react';
-import { IDrawerNav } from '@/layouts/App'
+import { IDrawerNav } from '@/layouts/AppWrapper'
 import { useDispatch, useSelector } from 'react-redux'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
 import { SideNavItem } from '@/components/Button'
 import { openSignInModal } from '@/state/action'
-import { IRootState } from '@/state/types'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
-import { slug_user } from '@/layout-parts/Nav/Menus'
+
 import ac_strings from '@/strings/ac_strings.js'
-import { INavItem } from '@/types';
-import loadable from '@loadable/component'
-const UserMenu = loadable(() => import('./UserMenu'))
-const ResourceMenu = loadable(() => import('./ResourceMenu'))
-import { sideMenu, sideResourceMenu } from '@/layout-parts/Nav/Menus'
+
+import UserMenu from './UserMenu'
+import ResourceMenu from './ResourceMenu'
+import { side, sideResource, slugUser } from '@/strings/generated/menus.json'
+import { loggedInSelector } from '@/state/selectors/user'
+
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
     const [openUserMenu, setOpenUserMenu] = React.useState(false)
     const [openResourceMenu, setOpenResourceMenu] = React.useState(false)
-
+    const loggedIn = useSelector(loggedInSelector)
     const close = () => {
         setSideNavOpen(false)
     }
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
     const dispatch = useDispatch()
 
     const handleSignIn = () => {
         dispatch(openSignInModal("signInOptions"))
+        closeUserMenu()
 
     }
 
     const handleSignUp = () => {
         dispatch(openSignInModal("signUpOptions"))
+        closeUserMenu()
 
     }
     const handleLogout = () => {
@@ -68,7 +69,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
             }
 
             {openResourceMenu && <ResourceMenu
-                menu={sideResourceMenu}
+                menu={sideResource}
                 isSideNavOpen={openResourceMenu}
                 close={closeResourceMenu}
                 back={() => setOpenResourceMenu(false)}
@@ -83,11 +84,10 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                 <SideNavItem
                     next
                     onClick={() => { setOpenResourceMenu(true) }}
-
                 >
                     {ac_strings.resource}
                 </SideNavItem>
-                {sideMenu.map((item, i) => {
+                {side.map((item, i) => {
                     return (
                         <SideNavItem
                             key={i}
@@ -99,11 +99,11 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                     )
                 })}
 
-                {authInfo.loggedIn === 'success' ? (
+                {loggedIn === 'success' ? (
                     <div className={`w-full flex flex-col justify-center`}>
 
                         <SideNavItem
-                            to={`/${slug_user}`}
+                            to={`/${slugUser}`}
                             hideOnMobile
                             onClick={close}
 
@@ -121,7 +121,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
 
                     </div>
                 ) : (
-                        authInfo.loggedIn === "loading" ? (
+                        loggedIn === "loading" ? (
                             <div className="px-2">
                                 {ac_strings.loading}
                             </div>

@@ -1,5 +1,6 @@
 import { IPostItem, IMedia, IEbook, IPlaylist, ITopicNavItem, ITopic, ITopicPostItems, IPostRes } from '@/types'
-import { trimSlug, normalizePostRes, normalizeTracks } from './index'
+import { trimSlug } from './index-js'
+import { normalizePostRes, normalizeTracks } from '@/helpers/normalizers'
 import ac_strings from '@/strings/ac_strings.js'
 
 
@@ -147,8 +148,8 @@ export const fetchOneLocalPostFromSlug = (slug: string) => {
     return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
-            if (res.result && res.result.data && res.result.data['acNodePost']) {
-                const updatePost = normalizePostRes(res.result.data['acNodePost'])
+            if (res.result && res.result.data && res.result.pageContext && res.result.pageContext.normalized) {
+                const updatePost = res.result.pageContext.normalized
                 return updatePost
             }
             return undefined

@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import './clamp.css'
-
 interface ItextSizeConfig {
     [key: string]: {
         s: string
@@ -34,7 +32,7 @@ const textSizeConfig: ItextSizeConfig = {
     'text-base-lg': {
         s: 'text-base sm:text-lg',
         h2lines: 'max-h-12 sm:max-h-18',
-        h3lines: 'max-h-16 sm:max-h-22'//'max-h-20 sm:max-h-24'
+        h3lines: 'max-h-16 sm:max-h-28'//'max-h-20 sm:max-h-24'
     },
     'text-sm-base-lg': {
         s: 'text-sm md:text-base lg:text-lg',

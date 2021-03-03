@@ -1,7 +1,6 @@
 import React from 'react'
-import { setIsPlaying, setCurrentMedia } from '@/state/action'
-import { useSelector, useDispatch } from "react-redux";
-import { Media, controls, utils } from 'react-media-player'
+import { useDispatch } from "react-redux";
+import { Media, utils } from 'react-media-player'
 import Player from '../lib/Player'
 import { withMediaProps } from 'react-media-player'
 import ControlBar from '../ControlBar'

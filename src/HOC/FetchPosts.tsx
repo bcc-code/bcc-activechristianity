@@ -1,8 +1,8 @@
 import * as React from "react"
 import { IPostItem, IPlaylist } from '@/types'
-import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
+import { getPlaceholder } from '@/components/Loader/PlaceHolders'
 import { fetchLocalPostsFromSlugs, fetchOneLocalPostFromSlug, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
+import Placeholder from '@/components/Loader/MainpagePlaceholder'
 import ac_strings from '@/strings/ac_strings.js'
 
 
@@ -12,6 +12,7 @@ interface IFetchPost {
     render: (data: { posts: IPostItem[] }) => JSX.Element
 }
 export const FetchPostsFromSlugs: React.FC<IFetchPost> = ({ slugs, render, layout }) => {
+
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
@@ -19,6 +20,7 @@ export const FetchPostsFromSlugs: React.FC<IFetchPost> = ({ slugs, render, layou
         let isSubscribed = true
         fetchLocalPostsFromSlugs(slugs)
             .then(res => {
+
                 if (isSubscribed) {
                     setLoading(false)
                     if (res) {

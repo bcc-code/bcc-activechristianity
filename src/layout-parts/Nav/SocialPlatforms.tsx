@@ -1,5 +1,5 @@
 import React from 'react'
-import FetchSocialMediaPlatforms from '@/HOC/FetchSocialMediaPlatforms'
+import FetchSocialMediaPlatforms from '@/layout-parts/Nav/SocialPlatformsAll'
 
 interface ISMPlatform {
     name: string

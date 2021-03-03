@@ -1,7 +1,6 @@
 import * as React from "react"
 import { IPlaylist, IPostItem } from '@/types'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { getPlaceholder } from '@/layout-parts/Loader/PlaceHolders'
+import { getPlaceholder } from '@/components/Loader/PlaceHolders'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.js'
 

@@ -7,8 +7,8 @@ import { InputText } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { IRootState } from '@/state/types'
-import { validateEmail } from '@/helpers'
+import { validateEmail } from '@/helpers/index-js'
+import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
 const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
 const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
 
@@ -35,7 +35,8 @@ const SignUpForm = () => {
     const [errors, setErrors] = React.useState(initialErrorState)
     const [touched, setTouched] = React.useState(false)
     const [strength, setStrength] = React.useState<'white' | 'green' | 'orange' | 'red'>('white')
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
+    const loggedIn = useSelector(loggedInSelector)
+    const loggedInError = useSelector(loggedInErrorSelector)
 
     React.useEffect(() => {
         if (touched) {
@@ -145,9 +146,9 @@ const SignUpForm = () => {
 
 
             <form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>
-                {authInfo.errorMessage && (
+                {loggedInError && (
                     <Snackbar
-                        text={authInfo.errorMessage}
+                        text={loggedInError}
                         error
                     />
                 )}
@@ -206,7 +207,7 @@ const SignUpForm = () => {
                     <div className="flex justify-center">
                         <FormSubmitButton
                             /*    disabled={fields.consent !== true} */
-                            loading={authInfo.loggedIn === "loading"}
+                            loading={loggedIn === "loading"}
                             onClick={handleSubmit}
                         />
                     </div>

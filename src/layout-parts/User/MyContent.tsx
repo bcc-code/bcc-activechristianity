@@ -1,24 +1,24 @@
 import * as React from "react"
 import { useSelector } from 'react-redux'
-import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
+import { PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { IPostItem, IPostRes, ITopic } from '@/types'
 import { IRootState } from '@/state/types'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { FetchTopics } from '@/HOC/FetchTopicFormatType'
 import PostItem from '@/components/PostItemCards/RightImg'
-import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
-import XScrollCustomSize from '@/layout-parts/HorizontalScroll/BaseCustomSize'
+import HSCardListVideo from '@/components/HorizontalScroll/HSCardListVideo'
+import XScrollCustomSize from '@/components/HorizontalScroll/BaseCustomSize'
 import ImgBgTopicCard from '@/components/Cards/BgImgTopicCard'
 import QPopularAndFeaturedPosts from '@/HOC/QPopularAndFeaturedTopics'
 import { SlateDarkUnfollowButton } from '@/components/PostElements/TopicToggleFollow'
-import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics.tsx'
-import { getRandomArray, normalizePostRes, } from '@/helpers'
+import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
+import { normalizePostRes, getRandomArray } from '@/helpers/normalizers'
 import ac_strings from '@/strings/ac_strings.js'
-import acApi from '@/util/api'
+import { followedTopicsSelector, bookmarkedSelector } from '@/state/selectors/user'
+const acApiModule = import('@/util/api')
+
 import shortid from 'shortid'
 const UserContent = () => {
-
-    const { followedTopics, bookmarkedPosts, followedPlaylists } = useSelector((state: IRootState) => state.userLibrary);
+    const followedTopics = useSelector(followedTopicsSelector)
+    const bookmarkedPosts = useSelector(bookmarkedSelector)
     const [videoPosts, setVideoPosts] = React.useState<IPostItem[]>([])
     const [otherPosts, setOtherPosts] = React.useState<IPostItem[]>([])
     const [topics, setTopics] = React.useState<ITopic[]>([])
@@ -26,24 +26,29 @@ const UserContent = () => {
 
         const postsIds = bookmarkedPosts.map(p => p.id)
         const topicsIds = followedTopics.map(p => p.id) //
-        acApi.getPostsAndTopicsByIds({ postsIds, topicsIds })
-            .then(postResData => {
-                const postRes = postResData.posts && postResData.posts.data ? postResData.posts.data : []
-                const topicRes = postResData.topics ? postResData.topics : []
-                const video: IPostItem[] = []
-                const other: IPostItem[] = []
-                setTopics(topicRes)
-                postRes.map((p: IPostRes) => {
-                    const post = normalizePostRes(p)
-                    if (post.media.video) {
-                        video.push(post)
-                    } else {
-                        other.push(post)
-                    }
+        acApiModule.then(res => {
+            const api = res.default
+            api.getPostsAndTopicsByIds({ postsIds, topicsIds })
+                .then(postResData => {
+                    const postRes = postResData.posts && postResData.posts.data ? postResData.posts.data : []
+                    const topicRes = postResData.topics ? postResData.topics : []
+                    const video: IPostItem[] = []
+                    const other: IPostItem[] = []
+                    setTopics(topicRes)
+                    postRes.map((p: IPostRes) => {
+                        const post = normalizePostRes(p)
+                        if (post.media.video) {
+                            video.push(post)
+                        } else {
+                            other.push(post)
+                        }
+                    })
+                    setVideoPosts(video)
+                    setOtherPosts(other)
                 })
-                setVideoPosts(video)
-                setOtherPosts(other)
-            })
+        })
+
+
 
 
     }, [bookmarkedPosts])

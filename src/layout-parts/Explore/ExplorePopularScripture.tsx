@@ -2,11 +2,9 @@
 
 import * as React from 'react';
 import Link from '@/components/CustomLink';
-import { SectionTitleDesktopAndMobile, TitleWithIcon } from '@/components/Headers'
+import { SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { OutlineScriptureChapter } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.js'
-import { INavItem, } from "@/types"
-import { trimSlug } from '@/helpers'
 const ExplorePopularScripture: React.FC<{
 
     scriptureSlug: string

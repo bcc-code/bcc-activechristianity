@@ -10,7 +10,7 @@ import './leftverticle.css'
 const TopImgPost: React.FC<IPostItem> = (props) => {
     const {
         title,
-        excerpt,
+        slug,
         image,
         media,
         format,
@@ -22,7 +22,7 @@ const TopImgPost: React.FC<IPostItem> = (props) => {
             <PostItemMediaImg
                 className="relative flex justify-end left-vert-img "
                 track={media}
-                slug={props.slug}
+                slug={slug}
             >
                 {format && format[0] && (
                     <div className="absolute p-3  top-0 left-0 flex">

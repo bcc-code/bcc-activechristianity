@@ -1,14 +1,15 @@
 import * as React from "react"
 import { useSwipeable } from "react-swipeable"
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 import { SolidDarkBgToggleActive } from '@/components/Button'
 import { ITab } from '@/types'
-import { SmoothHorizontalScrolling } from '@/helpers'
+
 import './scrollNavTabs.css'
 
 interface IProps {
     tabs: ITab[]
 }
+
 const HScrollNav: React.FC<IProps> = ({ tabs }) => {
     const [activeTab, setActiveTab] = React.useState<number>(0)
     const menuEl = React.useRef<HTMLDivElement>(null);
@@ -97,3 +98,35 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
 }
 
 export default HScrollNav
+
+export function SmoothVerticalScrolling(e: any, time: number, where: string) {
+    var eTop = e.getBoundingClientRect().top;
+    var eAmt = eTop / 100;
+    var curTime = 0;
+    while (curTime <= time) {
+        window.setTimeout(SVS_B, curTime, eAmt, where);
+        curTime += time / 100;
+    }
+}
+
+export function SVS_B(eAmt: number, where: string) {
+    if (where == "center" || where == "")
+        window.scrollBy(0, eAmt / 2);
+    if (where == "top")
+        window.scrollBy(0, eAmt);
+}
+
+export function SmoothHorizontalScrolling(e: any, time: number, amount: number, start: number) {
+    var eAmt = amount / 100;
+    var curTime = 0;
+    var scrollCounter = 0;
+    while (curTime <= time) {
+        window.setTimeout(SHS_B, curTime, e, scrollCounter, eAmt, start);
+        curTime += time / 100;
+        scrollCounter++;
+    }
+}
+
+export function SHS_B(e: any, sc: number, eAmt: number, start: number) {
+    e.scrollLeft = (eAmt * sc) + start;
+}

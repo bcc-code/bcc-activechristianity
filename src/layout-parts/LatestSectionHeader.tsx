@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from '@/components/CustomLink'
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 import ac_strings from '@/strings/ac_strings.js'
 
 const LatestSectionHeader: React.FC<{ latestSlug: string }> = ({ latestSlug }) => {

@@ -2,9 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setAutoPlay, setCurrentMedia, addTracks, togglePlayMedia } from '@/state/action'
 import { ReadIcon, ListenIcon, ReadingTimingIcon } from '@/components/PostElements'
-
+import { currentMediaSelector } from '@/state/selectors/other'
 import { IMedia } from '@/types'
-import { IRootState } from '@/state/types'
 
 interface IPlaylist {
     slug: string
@@ -18,7 +17,7 @@ const PostAudio: React.FC<IPlaylist> = ({
     slug
 }) => {
     const dispatch = useDispatch()
-    const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
+    const currentMedia = useSelector(currentMediaSelector)
     const handleTrackClick = (t: IMedia, index: number) => {
         const audioToAdd = { ...t }
         if (audioToAdd.audio) {

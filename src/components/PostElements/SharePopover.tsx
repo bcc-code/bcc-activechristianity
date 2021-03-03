@@ -1,15 +1,14 @@
 import * as React from 'react'
+import loadable from '@loadable/component'
+import { ShareOutlinedIcon } from '@/components/Icons/MUI/postIcons'
 
-import { ShareOutlinedIcon, IButtonColour } from '@/components/Icons/MUI'
-import ToolTipShare from '@/components/ToolTip/ShareIcons'
-
+const ToolTipShare = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 //popoverClick
 interface IProps {
 
     shareUrl: string
     text: string,
     label?: string
-    color?: IButtonColour
     size?: string
     placement?: 'top' | 'right'
 }

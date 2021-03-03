@@ -7,7 +7,9 @@
 // You can delete this file if you're not using it
 const _ = require('lodash')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
-const buildTranslations = require('./generators/json/build-translations')
+const buildTranslatedStrings = require('./generators/json/build-translated-strings')
+const buildMenus = require('./generators/json/build-menus')
+const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
@@ -40,8 +42,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       fetchScripts()
     }
     await getIndexPostQuery(endpoints.api_url)
-    await buildTranslations.translationStrings()
-    await buildTranslations.languageSites()
+    await buildTranslatedStrings.translationStrings()
+    await buildMenus.languageSites()
+    await generateLogo()
   }
 
   exports.createPages = ({ page,actions, graphql }) => {
@@ -92,7 +95,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       if (process.env.SCRIPTURE_SECTION==="true"){
         console.log("generating scriptures")
         generators.push(generateScriptures(actions, graphql)) 
-      }
+      } 
     }
 
 

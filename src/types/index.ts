@@ -80,6 +80,7 @@ export interface IPostAuthors {
 
 export interface IPostItem {
     id: string
+    acId?: string
     title: string
     slug: string
     image: IImage
@@ -482,9 +483,9 @@ export interface IBannerBasic {
 export interface IRecommendationPage {
     title: string
     breadcrumb: INavItem[]
-    popularPosts: IPostRes[]
-    featuredPosts: IPostRes[]
-    latestPosts: IPostRes[]
+    latest: IPostItem[]
+    popular: IPostItem[]
+    featured: IPostItem[]
 
 }
 

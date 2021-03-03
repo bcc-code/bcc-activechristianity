@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { closeSignInModal } from '@/state/action'
 import CloseButtonRound from '@/components/Button/CloseButtonRound'
 import Main from './Main'
@@ -36,10 +36,10 @@ const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
         dispatch(closeSignInModal())
     }
     return (
-        <div className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center" style={{ backgroundColor: `rgba(255, 255, 255, 0.8`, zIndex: 200 }}>
+        <div className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center overflow-scroll" style={{ backgroundColor: `rgba(255, 255, 255, 0.8`, zIndex: 700 }}>
 
             <div
-                className="relative flex flex-col bg-white text-grey-500 rounded-lg shadow-md w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-scroll"
+                className="relative flex flex-col bg-white text-grey-500 rounded-lg shadow-md w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-hidden"
             >
                 <CloseButtonRound
                     className="absolute top-0 right-0 z-10 p-2"

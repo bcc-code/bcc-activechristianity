@@ -3,7 +3,7 @@ import React from "react"
 import Link from '@/components/CustomLink'
 import { OutlineRightIcon } from "@/components/Button"
 import { INavItem } from "@/types"
-import { KeyboardArrowRightIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 export interface ITypeCount extends INavItem {
     count?: number
 }

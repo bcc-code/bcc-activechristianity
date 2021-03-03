@@ -1,23 +1,31 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import Link from '@/components/CustomLink'
-import { IDrawerNav } from '@/layouts/App'
+import { IDrawerNav } from '@/layouts/AppWrapper'
 import LogoFull from '@/images/ACLogo'
 import TopFirst from './TopFirst'
-import { desktopMenu } from '@/layout-parts/Nav/Menus'
-import { SearchIcon, MenuIcon } from '@/components/Icons/MUI'
+import { desktop } from '@/strings/generated/menus.json'
+import { SearchIcon, MenuIcon } from '@/components/Icons/MUI/navIcons'
 import { INavItem } from '@/types'
 
+
 const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideNavOpen, setSideNavOpen, explorePage }) => {
+    const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
+
+    React.useEffect(() => {
+        setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
+    }, [])
+
     return (
-        <div style={{ zIndex: 100 }} className={`fixed top-0 bg-white hidden sm:block w-full py-1 border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
+        <div style={{ zIndex: 100 }} className={`fixed top-0 bg-white shadow-md sm:shadow-none block w-full py-2 sm:py-1 sm:border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
             <TopFirst />
+
             <div className="flex py-2 standard-max-w items-center">
                 <Link className='flex flex-1 justify-start items-center px-4 mt-1' to="/">
-                    <LogoFull height="24px" />
+                    <LogoFull />
                 </Link>
                 <div className="flex">
-                    <div className="flex justify-end pr-12">
-                        {desktopMenu.map((item, i) => (
+                    <div className="hidden sm:flex justify-end pr-12">
+                        {isMobile !== true && desktop.map((item, i) => (
                             <Link className="block p-2 hover:text-ac-slate-light" key={i} to={`${item.to}`}>
                                 {item.name}
                             </Link>
@@ -35,9 +43,6 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
                         </button>
                     </div>
                 </div>
-                <div className="flex">
-
-                </div>
             </div>
         </div>
 
@@ -45,6 +50,6 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
 
 }
 
-export default React.memo(TopDesktop)
+export default TopDesktop
 
 

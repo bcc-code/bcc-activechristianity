@@ -1,9 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
-import endpoints from '@/strings/static/endpoints'
-const ShareIconPopper = loadable(() => import('@/components/ToolTip/ShareIcons'))
+const ShareIconPopper = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 const GlossaryPopper = loadable(() => import('@/components/ToolTip/GlossaryPopper'))
-import scripts from 'fetch-external-scripts'
 
 const addScript = (url: string) => {
     const script = document.createElement("script")
@@ -84,20 +82,6 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
             if (isGlossary) {
                 handleSelectedText(e)
             }
-            // true for mobile device
-            /*             if (navigator.share) {
-                            navigator.share({
-                                title,
-                                url: options.shareUrl,
-                                text: shareText
-                            }).then(() => {
-                                console.log('Thanks for sharing!');
-                            })
-                                .catch(console.error);
-                        } else {
-                            e.preventDefault();
-                            handleSelectedText(e)
-                        } */
         } else {
             // false for not mobile device
             e.preventDefault();
@@ -141,11 +125,14 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
 
                         setPosition(toSetPostion)
                         if (isGlossary) {
+                            console.log(isGlossary)
+                            console.log(glossary)
                             const findGlossary = glossary?.find(g => {
                                 return g.word.toLocaleLowerCase() === e.target.textContent.toLocaleLowerCase()
                             })
 
                             if (findGlossary) {
+                                console.log(findGlossary)
                                 setGlossaryContent(findGlossary)
                                 setShowPopper(false)
                                 setShowGlossary(true)

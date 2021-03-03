@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 
 import { OutlineButton } from '@/components/Button'
 import { InputText } from '@/components/Input'
-import ac_strings from '@/strings/ac_strings'
+import ac_strings from '@/strings/ac_strings.js'
 const initialFieldsState = {
     existingPassword: '',
 

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setIsPlaying, setCurrentMedia } from '@/state/action'
-import { IRootState } from '@/state/types'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setIsPlaying } from '@/state/action'
 import { withMediaProps } from 'react-media-player'
 import { IMediaProps } from './MediaController'
 
@@ -15,21 +14,20 @@ const fillColor = "#9ca6be"
 
 const PlayPauseButton: React.FC<IPlayPauseProps> = ({ media, className }) => {
     const dispatch = useDispatch()
-    const { mpPlayPause } = useSelector((state: IRootState) => ({ mpPlayPause: state.mpPlayPause }));
     const { isPlaying, playPause } = media
 
     useEffect(() => {
-
         dispatch(setIsPlaying(isPlaying))
     }, [isPlaying])
-
-    useEffect(() => {
-
-        if (mpPlayPause !== isPlaying) {
-            playPause()
-        }
-
-    }, [mpPlayPause])
+    /*     
+    
+        useEffect(() => {
+    
+            if (mpPlayPause !== isPlaying) {
+                playPause()
+            }
+    
+        }, [mpPlayPause]) */
     return (
         <svg
             role="button"

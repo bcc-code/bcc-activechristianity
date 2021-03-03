@@ -6,18 +6,19 @@ export interface StateAction extends Action {
   dispatch: Dispatch
   payload?: any
 }
-
+export type ILogginStatus = 'success' | 'loading' | 'notLoggedIn'
 export interface IRootState {
   auth: IUserState,
   translatedUrls: ITranslationNavItem[]
   playlist: IMedia[]
   isAutoPlay: boolean,
-  isPlaying: boolean,
+
   isSignInModalOpen: ISignInModalContentType
   isModalOpen: boolean
   mpPlayPause: boolean
   userLibrary: IUserLibrary
-  currentMedia: IMedia
+  currentMedia: IMedia,
+  isPlaying: boolean,
   mpHeight: number
   breadcrumb: IBreadcrumb
 }

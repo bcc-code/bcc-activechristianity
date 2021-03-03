@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Link from '@/components/CustomLink'
 import { IPostAuthors, IMedia, IImage } from '@/types'
-import { EqualizerIcon, PlayCircleOutlineIcon, AccessTimeIcon, VisibilityIcon, DescriptionIcon } from '@/components/Icons/MUI'
+import { EqualizerIcon, PlayCircleOutlineIcon, AccessTimeIcon, VisibilityIcon, DescriptionIcon } from '@/components/Icons/MUI/postIcons'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import FetchAndSetCurrentMedia from '@/HOC/SetAndUpdatePlayingMedia'
 import ac_strings from '@/strings/ac_strings.js'
@@ -29,7 +29,8 @@ export const PostLabel: React.FC<{ text: string | JSX.Element }> = ({ text }) =>
 )
 
 export const AuthorLink: React.FC<{ authorGroups?: IPostAuthors[] }> = ({ authorGroups }) => {
-    return <span>{authorGroups && authorGroups[0] && authorGroups[0].authors ? authorGroups[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={`${ac_strings.slug_ac_author}/${item.to}`}>{item.name}</Link>) : ''}</span>
+    return <span>{authorGroups && authorGroups[0] && authorGroups[0].authors ?
+        authorGroups[0].authors.map((item, k) => <Link key={k} className="inline-block post-meta-commar" to={`${ac_strings.slug_author}/${item.to}`}>{item.name}</Link>) : ''}</span>
 }
 export const ReadingTimingAuthor: React.FC<IProps> = ({ duration, authors, className }) => {
 
@@ -118,13 +119,50 @@ export const ReadOrListenIcon: React.FC<{ read?: string, listen?: string, track?
 
                     }} />
 
-            ) : (
-                    <ReadIcon text={read} />
-                )}
+            ) : read && <ReadIcon text={read} />}
+
         </span>
     )
 }
 
+export const SimpleSmallListenIcon: React.FC<{ media: IMedia }> = ({ media }) => {
+    return (
+        <FetchAndSetCurrentMedia
+            track={media}
+            clickable
+            render={({ playing }) => {
+                return (
+                    <div>
+                        {playing ? (
+                            <div className="flex items-center rounded-full pr-2">
+                                <EqualizerIcon
+                                    customSize="5"
+                                    className="fill-slate-light"
+                                />
+                                <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
+                                    {ac_strings.playing}
+                                </span>
+                            </div>
+                        ) : (
+
+                                <div className="flex items-center rounded-full pr-2">
+                                    <PlayCircleOutlineIcon
+                                        className="fill-slate-dark"
+                                        customSize="5"
+                                    />
+                                    <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
+                                        {ac_strings.listen}
+                                    </span>
+                                </div>
+
+
+                            )}
+                    </div>
+                )
+
+            }} />
+    )
+}
 
 interface ILikesViewsProps {
     id: string

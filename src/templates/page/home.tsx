@@ -1,18 +1,17 @@
 import React from "react";
 import LazyLoad from '@/components/LazyLoad';
 import loadable from '@loadable/component'
-import FeaturedBanner from '@/layout-parts/HorizontalScroll/FeaturedBanner'
-import { TopImgRowHorizontalScroll } from '@/layout-parts/HorizontalScroll'
+import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
+import { TopImgRowHorizontalScroll } from '@/components/HorizontalScroll'
 import LatestSectionHeader from '@/layout-parts/LatestSectionHeader'
-import LatestSection from '@/layout-parts/List/PostRow4Col'
+import LatestSection from '@/components/List/PostRow4Col'
 import FeatureSectionMobile from '@/layout-parts/Home/Mobile/FeatureSectionMobile'
-import FeaturedTopics from '@/layout-parts/HorizontalScroll/FeaturedTopics'
+import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
 import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/layout-parts/Home/HeaderPost'
 import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
-import { processRecommendationContext, getRandomFeatured } from '@/helpers'
 
 // Type
 import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
@@ -53,16 +52,13 @@ const HomeContent: React.FC<{
 const IndexPage: React.FC<IHomeProps> = (props) => {
   const { pageContext, path } = props
   const {
-    featuredPosts: featuredPosts,
-    popularTopics: popularTopicsAll,
-    popularPosts: popularPostsAll,
-    latestPosts: latestPosts
+    featured,
+    popularTopics,
+    popular,
+    latest
 
   } = pageContext
-  const popularPosts = popularPostsAll.dynamic && popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
-  const { featured, latest, popular } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
-  const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
   const latestPostAsTopic = {
     id: '',
     name: ac_strings.latest,
@@ -80,10 +76,10 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         breadcrumb={[]}
       />
 
-      <div className="sm:hidden w-full pb-4 pt-8">
+      <div className="sm:hidden w-full pt-8">
 
         <div>
-          <FeaturedBanner featured={mixedFeaturedPosts} />
+          <FeaturedBanner featured={featured} />
         </div>
         <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
           <PageSectionHeader title={ac_strings.latest} className="pb-4" />
@@ -92,13 +88,13 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         <LazyLoad>
           <div className="py-6">
             <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
-            <FeatureSectionMobile topicPosts={popularTopicsAll.static} />
+            <FeatureSectionMobile topicPosts={popularTopics.static} />
           </div>
         </LazyLoad>
         <LazyLoad>
-          <div className="py-6">
+          <div className="pt-6">
             <PageSectionHeader title={ac_strings.topics_for_you} className="pb-4" />
-            <FeaturedTopics featured={popularTopicsAll.static} />
+            <FeaturedTopics featured={popularTopics.static} />
             <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
               <PageSectionHeader title={ac_strings.popular} className="pb-4" />
               <TopImgRowHorizontalScroll posts={popular} />
@@ -116,17 +112,17 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
 
       <div className="hidden sm:block">
-        <HomeTopFeaturePost {...mixedFeaturedPosts[0]} key={shortid()} />
+        <HomeTopFeaturePost {...featured[0]} key={shortid()} />
         <div className="px-4">
           <LatestSectionHeader latestSlug={latestPostAsTopic.slug} />
           <LatestSection posts={latest.slice(0, 4)} />
         </div>
       </div>
       <HomeContent
-        mixed={mixedFeaturedPosts}
+        mixed={featured}
         latest={latest}
         popular={popular}
-        popularTopicsAll={popularTopicsAll}
+        popularTopicsAll={popularTopics}
       />
     </div >
 
@@ -136,15 +132,16 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 export default IndexPage
 
 
+
+
 interface IHomeProps {
   path: string
   pageContext: {
     featuredPosts: IPostRes[]
-    latestPosts: IPostRes[]
-    popularPosts: {
-      static: IPostRes[]
-      dynamic: IPostRes[]
-    }
+    latest: IPostItem[]
+    popular: IPostItem[]
+    featured: IPostItem[]
+    mixedFeaturedPosts: IPostItem[][]
     popularTopics: {
       static: ITopicPostItems[]
       dynamic: ITopicPostItems[]

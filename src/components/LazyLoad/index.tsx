@@ -7,7 +7,7 @@ interface ICustomLazyLoad {
 }
 const CustomLazyLoad: React.FC<ICustomLazyLoad> = ({ height, offset, children }) => {
     return (
-        <LazyLoad height={height ? height : 200} offset={offset ? offset : 100}>
+        <LazyLoad height={height ? height : 50} offset={offset ? offset : 100}>
             {children}
         </LazyLoad>
     )

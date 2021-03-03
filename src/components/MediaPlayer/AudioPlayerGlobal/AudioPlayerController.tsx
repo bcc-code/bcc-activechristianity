@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Media, Player, controls, utils } from 'react-media-player'
-import { KeyboardArrowDownIcon, DescriptionIcon, VolumeUpRoundedIcon, MoreVertIcon, CloseIcon } from '@/components/Icons/MUI'
-import { withMediaProps } from 'react-media-player'
+import { Media, Player, controls, utils, withMediaProps } from 'react-media-player'
+import { KeyboardArrowDownIcon, DescriptionIcon, VolumeUpRoundedIcon, MoreVertIcon } from '@/components/Icons/MUI/mediaPlayerIcons'
+
 import { setCurrentMedia, setIsPlaying, setIsModalOpen, addTracks } from '@/state/action'
 import FetchImage from '@/components/Images/ImageFromPost'
 import ac_strings from '@/strings/ac_strings.js'
@@ -59,8 +59,6 @@ const MediaControl: React.FC<IProps> = (props) => {
         setHistory(toUpdatePlaylist)
     }, [track])
 
-
-
     const dispatch = useDispatch()
 
     const handleCloseClickButton = () => {
@@ -113,15 +111,22 @@ const MediaControl: React.FC<IProps> = (props) => {
     return (
         <div className="w-full h-full flex flex-col">
             {fullScreenInfo && (
-                <div className="flex flex-col bg-mp-background text-d4cadet-blue flex-1 layout-children">
-                    <div
-                        className="flex justify-center py-2"
-                        onClick={toggleInfo}
-                    >
-                        <KeyboardArrowDownIcon
-                            customSize="6"
-                        />
+                <div className="flex flex-col bg-mp-background sm:bg-mp-background text-d4cadet-blue flex-1 layout-children">
+                    <div className="absolute right-0 top-0 flex">
+                        <button className="uppercase text-xs pr-4 py-2" onClick={handleCloseClickButton}>
+                            close
+                        </button>
+                        <div
+                            className="flex justify-center items-center py-2 pr-4 uppercase text-xs"
+                            onClick={toggleInfo}
+                        >
+                            <span>Collapse</span>
+                            <KeyboardArrowDownIcon
+                                customSize="4"
+                            />
+                        </div>
                     </div>
+
                     <div className="flex flex-col px-4 py-2">
                         <div className="flex">
                             <div className="w-36">
@@ -196,7 +201,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                                 <Player
                                     src={track.audio?.src}
                                     loop={repeatTrack}
-                                    autoPlay={autoPlay}
+                                    autoPlay={true}
                                     onEnded={onNextTrack}
 
                                     onPlay={() => { setIsPlaying(true) }}
@@ -232,7 +237,7 @@ const MediaControl: React.FC<IProps> = (props) => {
                             </div>
 
                             <div className="w-full flex flex-row text-d4cadet-blue justify-center">
-                                <div className="flex items-center sm:hidden">
+                                <div className={`flex items-center sm:hidden ${fullScreenInfo ? 'py-4' : ''}`}>
                                     {fullScreenInfo && (
                                         <PrevTrack
                                             className="p-3"
@@ -273,12 +278,12 @@ const MediaControl: React.FC<IProps> = (props) => {
                                                 className="fill-slate-light"
                                             />
                                         </button>
-                                        <button className="bg-ac-slate py-3 px-2 sm:py-8" >
+                                        {/*                                         <button className="bg-ac-slate py-3 px-2 sm:py-8" >
                                             <div onClick={handleCloseClickButton}>
                                                 <CloseIcon />
                                             </div>
 
-                                        </button>
+                                        </button> */}
                                     </div>
                                 )}
 

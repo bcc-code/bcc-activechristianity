@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { openSignInModal } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { setNewFollowPlaylists } from '@/state/action/userAction'
-
+import { followedPlaylistsSelector, loggedInSelector } from '@/state/selectors/user'
 export type IFollowStatus = "loading" | "true" | "false"
 interface IFetchPost {
     id: string,
@@ -11,8 +11,10 @@ interface IFetchPost {
     render: (data: { followed: IFollowStatus }) => JSX.Element
 }
 
+
 const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
-    const { followedPlaylists, auth } = useSelector((state: IRootState) => ({ followedPlaylists: state.userLibrary.followedPlaylists, auth: state.auth }))
+    const followedPlaylists = useSelector(followedPlaylistsSelector)
+    const loggedIn = useSelector(loggedInSelector)
     const [followed, setFollowed] = React.useState<IFollowStatus>("loading")
     const dispatch = useDispatch()
 
@@ -25,7 +27,7 @@ const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
     }, [id, followedPlaylists])
 
     const handleClick = () => {
-        if (auth.loggedIn === "success") {
+        if (loggedIn === "success") {
             if (followed !== "loading") {
                 setFollowed("loading")
                 dispatch(setNewFollowPlaylists({ id, followed: followed === "true" }))

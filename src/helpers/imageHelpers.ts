@@ -1,4 +1,4 @@
-import { initials } from './index'
+import { initials } from './index-js'
 import { IImage } from '@/types'
 import endpoinsts from '@/strings/static/endpoints'
 const BaseUrl = endpoinsts.dummy_image_api
@@ -33,24 +33,25 @@ function stringToImage(str: string, size: TSize, bg?: string, fc?: string): stri
   return `${BaseUrl}/${size}/${BG}/${FC}&text=${IN}`
 }
 
+export const dummyImage: IImage = {
+  id: "",
+  src: "",
+  alt: "",
+  srcset: "",
+  dataUri: "",
+  sizes: "",
+  size: {
+    width: 0,
+    height: 0,
+  },
+  colors: [[0]],
+  created_at: '',
+  updated_at: ''
+}
 
 export function getImage(title: string, size: TSize, image?: IImage): IImage {
 
-  let toReturn: IImage = {
-    id: "",
-    src: "",
-    alt: "",
-    srcset: "",
-    dataUri: "",
-    sizes: "",
-    size: {
-      width: 0,
-      height: 0,
-    },
-    colors: [[0]],
-    created_at: '',
-    updated_at: ''
-  }
+  let toReturn: IImage = { ...dummyImage }
   if (image) {
     return image
   } else {
@@ -60,5 +61,6 @@ export function getImage(title: string, size: TSize, image?: IImage): IImage {
 
 
 }
+
 
 export default stringToImage

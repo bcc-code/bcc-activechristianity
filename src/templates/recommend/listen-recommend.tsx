@@ -3,8 +3,8 @@ import loadable from '@loadable/component'
 import MetaTag from '@/components/Meta'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import { FetchLatestPodcast, FetchLatestPlaylists } from '@/HOC/FetchLatest'
-import HSPlaylist from '@/layout-parts/HorizontalScroll/HSPlaylist'
-const HSCardList = loadable(() => import('@/layout-parts/HorizontalScroll/HSCardList'))
+import HSPlaylist from '@/components/HorizontalScroll/HSPlaylist'
+const HSCardList = loadable(() => import('@/components/HorizontalScroll/HSCardList'))
 import { PageSectionHeader } from '@/components/Headers'
 import LazyLoad from '@/components/LazyLoad';
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenDesktopLayout'))
@@ -13,7 +13,7 @@ import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { INavItem, INavItemCount, ISubtopicLinks, IPostItem, IRecommendationPage } from '@/types'
 import podcastProperties from '@/strings/static/podcastProperties'
-import { getRandomArray, processRecommendationContext, getRandomFeatured } from "@/helpers"
+import { getRandomArray, getRandomFeatured } from "@/helpers/normalizers"
 // helper
 
 import ac_strings from '@/strings/ac_strings.js'
@@ -23,7 +23,7 @@ const Listen: React.FC<IProps> = (props) => {
 
     const { pageContext, path, } = props
 
-    const { title, items, popularPosts, featuredPosts, latestPosts, playlist, podcast } = pageContext
+    const { title, items, latest, popular, featured, playlist, podcast } = pageContext
 
     const allCategories: INavItem[] = [...items.map(t => ({ ...t, to: `${t.typeSlug}/${t.formatSlug}` }))]
 
@@ -37,19 +37,18 @@ const Listen: React.FC<IProps> = (props) => {
 
     const latestSlug = `${path}/${ac_strings.slug_latest}`
 
-    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
 
     const hasPlaylist = process.env.LISTEN_SECTION === "all"
     const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
-
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
         <div >
             <MetaTag title={title} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
-                {ac_strings.slug_podcast && hasPodcast && (
+                {hasPodcast && (
                     <div className="py-6">
                         <div className="w-full flex justify-between items-center pb-4 pr-4">
                             <PageSectionHeader title={podcastProperties.title} />
@@ -70,10 +69,10 @@ const Listen: React.FC<IProps> = (props) => {
                         <HSCardList posts={mixedFeaturedPosts} />
                     </div>
                 </div>
-                {ac_strings.slug_playlist && hasPlaylist && (
+                {hasPlaylist && (
                     <div className="py-6">
                         <div className="w-full flex justify-between items-center  pb-4 pr-4">
-                            <PageSectionHeader title={ac_strings.playlist} />
+                            <PageSectionHeader title={playlist.name} />
                             <UnderlineLinkViewAll to={`${playlist.to}`} />
                         </div>
 
@@ -108,16 +107,18 @@ const Listen: React.FC<IProps> = (props) => {
                     />
                 </LazyLoad>
             </div>
-            <RecommendDesktopLayout
-                playlist={playlist}
-                podcast={podcast}
-                latestSlug={latestSlug}
-                popularPosts={popular}
-                topics={allCategories}
-                name={title}
-                latestPosts={latest}
-                featured={mixedFeaturedPosts}
-            />
+            {isMobile !== true && (
+                <RecommendDesktopLayout
+                    playlist={playlist}
+                    podcast={podcast}
+                    latestSlug={latestSlug}
+                    popularPosts={popular}
+                    topics={allCategories}
+                    name={title}
+                    latestPosts={latest}
+                    featured={mixedFeaturedPosts}
+                />
+            )}
 
         </div>
     )

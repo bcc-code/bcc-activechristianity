@@ -1,30 +1,34 @@
 import * as React from "react"
-import { useSelector } from 'react-redux'
-import { LayoutH1, PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
-import { IRootState } from '@/state/types'
-import { IPostItem, IApiItem } from '@/types'
+import { SectionTitleDesktopAndMobile } from '@/components/Headers'
+import { IPostItem } from '@/types'
 
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import PostItem from '@/components/PostItemCards/RightImg'
-import HSCardListVideo from '@/layout-parts/HorizontalScroll/HSCardListVideo'
-import api from '@/util/api' //history
+import HSCardListVideo from '@/components/HorizontalScroll/HSCardListVideo'
+const acApiModule = import('@/util/api')
 import ac_strings from '@/strings/ac_strings.js'
 const UserHistory = () => {
     const [historyPosts, setHistoryPosts] = React.useState<IPostItem[]>([])
     React.useEffect(() => {
-                api.history().then(res=>{
-                    const {history} = res
-                    if(res && Array.isArray(history)){
-                        const slugs = history.map(item=>item.slug)
-                        return fetchLocalPostsFromSlugs(slugs).then(posts=>{
+        acApiModule.then(res => {
+            const api = res.default
+            api.history().then(res => {
+                const { history } = res
+                if (res && Array.isArray(history)) {
+                    const slugs = history.map(item => item.slug)
+                    return fetchLocalPostsFromSlugs(slugs).then(posts => {
+                        if (posts) {
                             setHistoryPosts(posts)
-                        })
-    /*                         console.log(history.map(item=>item.slug))
-                        setHistoryPosts(history.map(item=>item.slug)) */
-                    }
-                })
-        },[])
+                        }
+                    })
+                    /*                         console.log(history.map(item=>item.slug))
+                                        setHistoryPosts(history.map(item=>item.slug)) */
+                }
+            })
+        })
+
+
+    }, [])
 
     const video: IPostItem[] = []
     const other: IPostItem[] = []
@@ -35,7 +39,7 @@ const UserHistory = () => {
             other.push(p)
         }
     })
-  return (
+    return (
         <div>
             <div className="py-6">
                 <SectionTitleDesktopAndMobile name={ac_strings.recently_watched} />
@@ -50,7 +54,7 @@ const UserHistory = () => {
                 </div>
             </div>
         </div>
-  )
+    )
 }
 
 export default UserHistory

@@ -1,10 +1,8 @@
 import React from 'react'
 
-import TopImgHorizontalScrollRow from '@/layout-parts/HorizontalScroll/TopImgRow'
+import TopImgHorizontalScrollRow from '@/components/HorizontalScroll/TopImgRow'
 import FetchRecommendFormat from '@/HOC/Recommendations/FetchRecommendFormat'
-import PostRow3Col from '@/layout-parts/List/PostRow3Col'
-import TopImgPost from '@/components/PostItemCards/TopImg'
-import shortid from 'shortid'
+import PostRow3Col from '@/components/List/PostRow3Col'
 interface IFetchPost {
     slugs: string[]
 }
@@ -16,7 +14,7 @@ const RecommendedSectionOne: React.FC<IFetchPost> = ({ slugs }) => {
             layout="row"
             slugs={slugs}
             render={({ posts }) => {
-
+                console.log(posts)
                 if (posts.length > 0) {
                     return (
                         <div className="px-4">

@@ -1,8 +1,7 @@
 import React from 'react'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import shortid from 'shortid'
 import RightImg from '@/components/PostItemCards/RightImg'
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import { ITopicPostItems, IPostItem } from '@/types'
 
 const FeatureSection: React.FC<{ topicPosts: ITopicPostItems[] }> = ({ topicPosts }) => {

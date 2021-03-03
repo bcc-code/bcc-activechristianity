@@ -1,12 +1,12 @@
 import * as React from 'react'
-import ShareIconPopper from '@/components/ToolTip/ShareIcons'
+import loadable from '@loadable/component'
+const ToolTipShare = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 import ac_strings from '@/strings/ac_strings.js'
 import { IGlossary } from '@/types'
 interface IPosition { top: number, right?: number, left?: number };
 const TextSelectPopper: React.FC<{ className?: string, content: string, glossary: IGlossary[], title: string, slug: string }> = ({ children, className, slug, title, glossary }) => {
     const [position, setPosition] = React.useState<IPosition>({ top: 0 })
     const [showGlossary, setGlossary] = React.useState(false)
-    const [glossaryContent, setGlossaryContent] = React.useState<null | IGlossary>(null)
     const [showPopper, setShowPopper] = React.useState(false)
     const [shareText, setShareText] = React.useState('')
     const contentEl = React.useRef<HTMLDivElement>(null);
@@ -100,7 +100,7 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
                     ref={popperEl}
                     style={{ position: "absolute", ...position, background: "red", height: "0px" }}
                 >
-                    <ShareIconPopper
+                    <ToolTipShare
                         shareUrl={options.shareUrl}
                         text={shareText}
                         title={title}

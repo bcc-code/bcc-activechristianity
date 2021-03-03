@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import { IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
@@ -22,6 +22,7 @@ const RecommendedSectionOne: React.FC<IFetchLatestRecommendFormatPosts> = ({ slu
         Promise.all(formatSlugs.map(slug => fetchPostslistFromArchivePage(`${slug}/${ac_strings.slug_latest}`))).then(res => {
             const allPosts: IPostItem[] = []
             if (res && Array.isArray(res)) {
+                console.log(res)
                 res.forEach(array => {
                     if (array) {
                         allPosts.push(...array)

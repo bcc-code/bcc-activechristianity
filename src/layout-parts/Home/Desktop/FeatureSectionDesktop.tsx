@@ -1,12 +1,11 @@
 import React from 'react'
-import { FetchOnePost } from '@/HOC/FetchPosts'
-import FeaturedCard, { IFeaturedCard } from '@/components/PostItemCards/FeaturedCard'
+import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 
 import TopImg from '@/components/PostItemCards/TopImg'
 import ac_strings from '@/strings/ac_strings.js'
 import { FetchLatestPlaylists, FetchLatestPodcast } from '@/HOC/FetchLatest'
-import { playlistToPost, getRandomArray } from '@/helpers'
-import { ITopicPostSlugs, IPostItem, ITopicPostItems } from '@/types'
+import { playlistToPost, getRandomArray } from '@/helpers/normalizers'
+import { IPostItem } from '@/types'
 import shortid from 'shortid'
 
 const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPosts }) => {
@@ -39,7 +38,7 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                             const random = getRandomArray(playlists, 1)
                             const post = random.length ? random[0] : undefined
                             return post ? (
-                                <FeaturedCard {...playlistToPost(post)} type="playlist" key={shortid()}/>
+                                <FeaturedCard {...playlistToPost(post)} type="playlist" key={shortid()} />
                             ) : (<div></div>)
                         }}
                     />

@@ -1,6 +1,6 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
-const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
+const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
@@ -48,7 +48,6 @@ const plugins = [
       }
     },
   },
-  "gatsby-plugin-use-query-params",
   'gatsby-plugin-sass',
   {
     resolve: 'gatsby-plugin-root-import',
@@ -120,7 +119,34 @@ if (activeEnv === 'production') {
       }
     },
     {
-      resolve: 'gatsby-plugin-sitemap'
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        createLinkInHead: true,
+        query: `{
+          site {
+            siteMetadata {
+              siteUrl
+            }
+          }
+          allSitePage {
+            nodes {
+              path
+              context {
+                updated_at
+              }
+            }
+          }
+        }`,
+        serialize: ({ allSitePage }) =>
+          allSitePage.nodes.map((node) => {
+            return node.context.updated_at? ({
+              url: `${process.env.SITE_URL}${node.path}`,
+              lastmodISO: `${node.context.updated_at}`,
+            }):({
+              url: `${process.env.SITE_URL}${node.path}`,
+            });
+          }),
+      },
     },
     {
       resolve:'gatsby-plugin-preact'

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StaticQuery, graphql } from "gatsby";
 import { FetchTopics } from '@/HOC/FetchTopicFormatType'
-import { filterTopics } from '@/helpers'
+import { filterTopics } from '@/helpers/normalizers'
 import { ITopic } from '@/types'
 
 interface QProps {

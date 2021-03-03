@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { openSignInModal } from '@/state/action'
-import { IRootState } from '@/state/types'
 import { setNewFollowTopic } from '@/state/action/userAction'
-
+import { followedTopicsSelector, loggedInSelector } from '@/state/selectors/user'
 export type IFollowStatus = "loading" | "true" | "false"
 interface IFetchPost {
     id: string,
@@ -12,22 +11,22 @@ interface IFetchPost {
 }
 
 const FollowTopic: React.FC<IFetchPost> = ({ id, className, render }) => {
-    const { followedTopics, auth } = useSelector((state: IRootState) => ({ followedTopics: state.userLibrary.followedTopics, auth: state.auth }))
-    const [followed, setFollowed] = React.useState<IFollowStatus>("loading")
+    const followedTopics = useSelector(followedTopicsSelector)
+    const loggedIn = useSelector(loggedInSelector)
+
+    const [followed, setFollowed] = React.useState<IFollowStatus>("false")
     const dispatch = useDispatch()
     React.useEffect(() => {
-        if (auth.loggedIn === "success") {
+        if (loggedIn === "success") {
             const found = followedTopics.findIndex(p => p.id === id)
             const followed = found > -1
             setFollowed(followed ? "true" : "false")
-        } else if (auth.loggedIn === "notLoggedIn") {
-            setFollowed("false")
         }
 
     }, [id, followedTopics])
 
     const handleClick = () => {
-        if (auth.loggedIn === "success") {
+        if (loggedIn === "success") {
             if (followed !== "loading") {
                 setFollowed("loading")
                 dispatch(setNewFollowTopic({ id, followed: followed === "true" }))

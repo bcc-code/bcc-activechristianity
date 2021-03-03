@@ -5,13 +5,13 @@ const PodcastHeader = loadable(() => import('@/layout-parts/PodcastHeader'))
 import { IPaginate, INavItem, IPostItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
-import PostList from '@/layout-parts/List/PostList'
+import PostList from '@/components/List/PostList'
 import { formatsAll } from '@/strings/static/topic-ids'
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { trimSlug } from '@/helpers'
+import { trimSlug } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props

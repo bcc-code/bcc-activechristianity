@@ -5,7 +5,7 @@ import { PostItemPlayButtonSmall } from '@/components/PostElements/PlayButton'
 import { IPostItem } from '@/types'
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import PostTitle from '@/components/PostElements/TextSizeWClamp'
-import ac_string from '@/strings/ac_strings.js'
+import ac_strings from '@/strings/ac_strings.js'
 
 interface ITopImgPost {
     small?: boolean
@@ -62,7 +62,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                     </span>
                 )}
                 <div className="text-ac-slate-light text-xs py-2">
-                    {views} {ac_string.views}</div>
+                    {views} {ac_strings.views}</div>
                 {playIcon && (
                     <ReadingTimingAuthor duration={duration?.listen} authors={authors} />
                 )}

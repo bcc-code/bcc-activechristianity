@@ -1,10 +1,12 @@
 import React from 'react'
 import Link from '@/components/CustomLink'
+import { navigate } from 'gatsby'
 import { IMedia } from '@/types'
-import { VolumeUpRoundedIcon, PlayArrowRoundedIcon, EqualizerIcon, PlayCircleOutlineIcon, HeadsetIcon } from '@/components/Icons/MUI'
+import { VolumeUpRoundedIcon, PlayArrowRoundedIcon, EqualizerIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI/postIcons'
+import { HeadsetIcon } from '@/components/Icons/MUI/navIcons'
 import PlayButtonTrack from './PlayBtnWrapperByTrackSlug'
 import PlayPlaylistFromSlug from '@/HOC/SetAndUpdatePlayingPlaylist'
-import ac_strings from '@/strings/ac_strings.js'
+
 export interface IPlayButtonProps {
     track: IMedia
 
@@ -19,9 +21,12 @@ export interface IPostItemMediaImg {
 
 export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, className, children, style }) => {
 
+    const handleClick = () => {
+        navigate(slug)
+    }
     return (
         <Link className={className} style={style} to={slug}>
-            {/*             {track && (track.video || track.audio) && (
+            {track && (track.video || track.audio) && (
                 <div
                     id="play-button"
                     className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
@@ -33,7 +38,7 @@ export const PostItemMediaImg: React.FC<IPostItemMediaImg> = ({ track, slug, cla
                     </div>
 
                 </div>
-            )} */}
+            )}
             {children}
         </Link>
     )

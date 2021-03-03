@@ -2,12 +2,10 @@ import React from 'react'
 import loadable from '@loadable/component'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
-import LazyLoad from '@/components/LazyLoad';
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import { menusItems } from '@/layout-parts/Nav/Menus'
-const FeaturedBanner = loadable(() => import('@/layout-parts/HorizontalScroll/FeaturedBanner'))
-const TopImgHorizontalScroll = loadable(() => import('@/layout-parts/HorizontalScroll/TopImgRow'))
+import { menusItems } from '@/strings/generated/menus.json'
+import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
+const TopImgHorizontalScroll = loadable(() => import('@/components/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
@@ -17,7 +15,7 @@ import { LayoutH1Wide, PageSectionHeader } from '@/components/Headers'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
 import { IPostItem, ISubtopicLinks, IRecommendationPage } from '@/types'
-import { processRecommendationContext, getRandomFeatured } from '@/helpers'
+import { getRandomFeatured } from '@/helpers/normalizers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
 
@@ -30,15 +28,13 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         title,
         formats,
         breadcrumb,
-        popularPosts,
-        latestPosts,
-        featuredPosts
+        latest, popular, featured
     } = pageContext
 
     const latestSlug = `${path}/1`
 
-    const { latest, popular, featured } = processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     const topicSlug = ac_strings.slug_topic
     return (
         <div>
@@ -112,15 +108,17 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                     />
                 </div>
             </div>
-            <RecommendDesktopLayout
-                topicId={id}
-                latestSlug={latestSlug}
-                popularPosts={popular}
-                latestPosts={latest}
-                featured={mixedFeaturedPosts}
-                topics={formats.map(f => ({ ...f, to: `${topicSlug}/${f.to}` }))}
-                name={title}
-            />
+            {isMobile !== true && (
+                <RecommendDesktopLayout
+                    topicId={id}
+                    latestSlug={latestSlug}
+                    popularPosts={popular}
+                    latestPosts={latest}
+                    featured={mixedFeaturedPosts}
+                    topics={formats.map(f => ({ ...f, to: `${topicSlug}/${f.to}` }))}
+                    name={title}
+                />
+            )}
 
         </div>
     )

@@ -1,6 +1,7 @@
 import * as React from "react"
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { getRandomArray, trimSlug } from "@/helpers"
+import Placeholder from '@/components/Loader/MainpagePlaceholder'
+import { getRandomArray } from "@/helpers/normalizers"
+import { trimSlug } from "@/helpers/index-js"
 import { IPostItem, } from '@/types'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 interface IFetchPost {

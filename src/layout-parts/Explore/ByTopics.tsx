@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { connectRefinementList } from 'react-instantsearch-dom'
-import { FilterListIcon, ExpandMoreIcon } from '@/components/Icons/MUI'
+import { FilterListIcon, ExpandMoreIcon } from '@/components/Icons/MUI/inputIcons'
 import { OutlineSmallButton } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.js'
 

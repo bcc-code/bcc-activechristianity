@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import ResourceLayout from "@/layouts/ResourceLayout"
 // components
 import MetaTag from '@/components/Meta';
-import TaxonomyIndex from '@/layout-parts/List/A-ZIndex'
+import TaxonomyIndex from '@/components/List/A-ZIndex'
 
 //types
 import { INavItem, IGlossary } from "@/types"

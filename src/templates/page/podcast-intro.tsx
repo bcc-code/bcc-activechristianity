@@ -9,7 +9,8 @@ import ac_strings from '@/strings/ac_strings.js'
 import { PageSectionHeader } from '@/components/Headers'
 import { ReadOrListenIcon } from '@/components/PostElements'
 import Tabs from '@/components/Tabs/ImageTab'
-import { normalizePostRes, dateToString } from '@/helpers'
+import { dateToString } from '@/helpers/index-js'
+import { normalizePostRes } from '@/helpers/normalizers'
 import MetaTag from '@/components/Meta'
 
 export const PodcastPageHeadSection: React.FC = ({ children }) => {

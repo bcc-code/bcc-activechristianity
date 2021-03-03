@@ -1,4 +1,66 @@
-import { postQuery, topicQuery } from 'gatsby-source-ac/helpers'
+const topicQuery = `
+    id
+    name
+    slug
+    noOfPosts
+    group {
+        id
+        name
+    }
+    image {
+        src
+        srcset
+        dataUri
+    }
+`
+const postQuery = `
+    id
+    title
+    slug
+    excerpt
+    image {
+        src
+        srcset
+        dataUri
+        colors
+
+    }
+    readtime
+    track {
+        url
+        title
+        duration
+        post {
+            title
+            slug
+        }
+        playlists {
+            slug
+            title
+        }
+    }
+    authors {
+        name
+        slug
+        pivot {
+            as
+        }
+        id 
+    }
+    topics {
+        name
+        slug
+        id
+        group {
+            name
+            slug
+            id
+        }
+    }
+    published 
+    likes
+    views
+`
 
 export interface IGetPostsAndTopics {
   postsIds: string[]
@@ -271,12 +333,43 @@ export const getOnePostByIdQuery = (id: string) => {
               no_dict
               url
           }
+          updated_at
         }
+        
 
   }
   `
 }
 
+export const getOnePreviewPostByIdQuery = (id: string) => {
+  return `
+    query {
+      previewPost(id: ${id}) {
+          ${postQuery}
+          content
+          langs {
+              lang
+              slug
+          }
+          readMorePosts:posts {
+              slug
+          }
+          seo {
+              title
+              desc
+          }
+          meta {
+              credits
+              no_dict
+              url
+          }
+          updated_at
+        }
+        
+
+  }
+  `
+}
 export const getOnePageByIdQuery = (id: string) => {
   return `
     query {
@@ -288,6 +381,19 @@ export const getOnePageByIdQuery = (id: string) => {
     }
   `
 }
+
+export const getOnePreviewPageByIdQuery = (id: string) => {
+  return `
+    query {
+      previewPage(id:${id}){
+        title
+        slug
+        flexibleContent
+      }
+    }
+  `
+}
+
 export const getPostsByIds = (ids: IGetPostsAndTopics) => {
   const { postsIds, topicsIds } = ids
   return `
@@ -325,13 +431,14 @@ export const getPostsPerPageQuery = (id: string, page: number) => `{
   }
 }`
 
-export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `
-topic(id:${id}) {
-  id
-  name
-  somePosts (hasTopics: { value: ${subtopicId}, column: ID },first:12,page:${page}){
-    data {
-      ${postQuery}
+export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `{
+  topic(id:${id}) {
+    id
+    name
+    somePosts (hasTopics: { value: ${subtopicId}, column: ID },first:12,page:${page}){
+      data {
+        ${postQuery}
+      }
     }
   }
 }

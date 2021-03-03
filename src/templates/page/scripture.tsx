@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import MetaTag from '@/components/Meta'
 // components
 import ResourceLayout from "@/layouts/ResourceLayout"
-import PlaceHolder from '@/layout-parts/Loader/ScripturePlaceholder'
+import PlaceHolder from '@/components/Loader/ScripturePlaceholder'
 import { OutlineScriptureChapter } from '@/components/Button'
 // Type
 import { INavItem, IBibleBook, IBible, } from '@/types'

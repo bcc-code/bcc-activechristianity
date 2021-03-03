@@ -1,5 +1,4 @@
-
-import * as React from 'react';
+import React, { Profiler } from 'react'
 import { IPostItem } from '@/types'
 import PostBase from '@/components/PostElements/Base'
 import { PostLabel } from '@/components/PostElements'
@@ -15,10 +14,24 @@ interface ITopImgPost {
     noBg?: boolean
 }
 
+function onRenderCallback(
+    id, // the "id" prop of the Profiler tree that has just committed
+    phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
+    actualDuration, // time spent rendering the committed update
+    baseDuration, // estimated time to render the entire subtree without memoization
+    startTime, // when React began rendering this update
+    commitTime, // when React committed this update
+    interactions // the Set of interactions belonging to this update
+) {
+    /*     console.log(id)
+        console.log(actualDuration) */
+    // Aggregate or log render timings...
+}
+
 const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
     const {
         title,
-        excerpt,
+        slug,
         image,
         noBorder,
         noExcerpt,
@@ -29,8 +42,8 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
         fixedImageHeight
     } = props
     return (
-        <div
-            className={`sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}>
+
+        <div className={`sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}>
             <PostItemMediaImg
                 className={`relative w-full sm:pl-0 flex justify-end overflow-hidden ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
                 track={media}
@@ -74,6 +87,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 noBorder={noBorder}
             />
         </div>
+
 
     )
 }

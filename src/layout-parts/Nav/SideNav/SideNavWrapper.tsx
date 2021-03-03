@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
 
 
 export interface ISideMobile {

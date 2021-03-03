@@ -1,68 +1,155 @@
-import React from 'react'
+import React, { Profiler } from 'react'
 import { useLocation } from '@reach/router';
-import queryString from 'query-string';
+/* import queryString from 'query-string'; */
 import loadable from '@loadable/component'
-import api from '@/util/api'
+const acApiModule = import('@/util/api')
 import MetaTag from '@/components/Meta'
-const PostLayout = loadable(() => import('@/layouts/PostLayout'))
+const PostLayout = loadable(() => import('@/layouts/PostLayoutUpdate'))
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import ac_strings from '@/strings/ac_strings.js'
 import Link from '@/components/CustomLink'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
-import { LayoutH1Wide } from '@/components/Headers'
-import { normalizePostRes } from '@/helpers'
+import { LayoutH1, LayoutH1Wide } from '@/components/Headers'
+import { getAllUrlParams } from '@/helpers/index-js'
+import { normalizePostRes, normalizeAvailableLanguages } from '@/helpers/normalizers'
+import Dropdown, { IOption } from '@/components/Dropdown'
+import { InputText } from '@/components/Input'
+import { FormSubmitButton } from '@/components/Button'
+import Snackbar from '@/components/Snackbar'
+/* export interface IDropdownProps {
+    label: string
+    options: IOption[],
+    selected: IOption | undefined
+    onChange?: (selected: IOption) => void
+    className?: string
+} */
+
+const options = [{ label: "Post", value: "post" }, { label: "Page", value: "page" }]
 import { IPostProps, INavItem } from '@/types'
 const Preview = () => {
     const location = useLocation();
-    const parsed = queryString.parse(location.search);
+    const parsed = getAllUrlParams(location.search);
     const { type, id } = parsed
     const [post, setPost] = React.useState<IPostProps | null>(null)
     const [page, setPage] = React.useState<ICustomizedPage | null>(null)
-    React.useEffect(() => {
-        if (type === "post" && typeof id === "string") {
-            console.log('getting post')
-            setPage(null)
-            api.getOnePostById(id)
+    const [selectedType, setSelectedType] = React.useState<IOption | undefined>(options[0])
+    const [errorMessage, setErrorMessage] = React.useState<string | null>(null)
+    const [inputId, setInputId] = React.useState('')
+    const [loading, setLoading] = React.useState(false)
+
+    const handleInputId = (e: any) => {
+        setInputId(e.target.value)
+
+    }
+
+    const handleSubmitPreivewForm = () => {
+        console.log(selectedType)
+        if (selectedType?.value === "post") {
+            getPost(inputId)
+        }
+
+        if (selectedType?.value === "page") {
+            getPage(inputId)
+        }
+    }
+    const getPage = (id: string) => {
+        acApiModule.then(res => {
+            const api = res.default
+            api.getOnePreviewPagetById(id)
                 .then(res => {
-                    if (res && res.post) {
-                        const simplePost = normalizePostRes(res.post)
-                        const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = res.post
+                    setLoading(false)
+                    if (res && res.previewPage) {
+                        const { flexibleContent, title, slug } = res.previewPage
+                        const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
+                        setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
+                    } else {
+                        setLoading(false)
+                        setErrorMessage('Something went wrong')
+                    }
+                }).catch(err => {
+                    setLoading(false)
+                    setErrorMessage(err)
+                })
+        })
+    }
+    const getPost = (id: string) => {
+
+        acApiModule.then(res => {
+            const api = res.default
+            setLoading(true)
+            api.getOnePreviewPostById(id)
+                .then(res => {
+
+                    if (res && res.previewPost) {
+                        const normalized = normalizePostRes(res.previewPost)
+                        const { id, langs, content, meta, recommendPosts, readMorePosts, seo, updated_at } = res.previewPost
+
+                        const { media } = normalized
+                        const mediaTypes = []
+
+                        let defaultMediaType = "none"
+                        if (media.audio) {
+                            mediaTypes.push("audio")
+                            defaultMediaType = "audio"
+                        }
+                        if (media.video && media.video.src) {
+
+                            mediaTypes.push("video")
+                            defaultMediaType = "video"
+                        }
+
+                        const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
                         const postProps = {
                             langs,
                             content,
                             meta,
+                            updated_at,
+                            mediaTypes: {
+                                types: mediaTypes,
+                                default: defaultMediaType
+                            },
+                            tranlsatedUrl,
                             recommendPosts,
                             readMorePosts,
-                            seo,
-                            ...simplePost
+                            seoTitle: seo,
+                            ...normalized
 
                         }
-
+                        setLoading(false)
                         setPost(postProps)
+                    } else {
+                        setErrorMessage('Something went wrong')
+                        setLoading(false)
                     }
                 })
+                .catch(err => {
+                    setLoading(false)
+                    setErrorMessage(err)
+                })
+        })
+    }
+    React.useEffect(() => {
+        if (type === "post" && typeof id === "string") {
+            console.log('getting post')
+            setPage(null)
+            getPost(id)
+
+
         }
         if (type === "page" && typeof id === "string") {
             setPost(null)
-            api.getOnePagetById(id)
-                .then(res => {
-                    if (res && res.page) {
-                        const { flexibleContent, title, slug } = res.page
-                        const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-                        setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
-                    }
+            setLoading(true)
+            getPage(id)
 
-                })
         }
     }, [])
-    return (
+    return !loading ? (
         <main className="">
-            {
-                post && (
-                    <div>
+            <div className="max-w-tablet mx-auto"></div>
 
-                        <PostLayout {...post} />
-                    </div>
+
+            {
+                post && (<PostLayout {...post} />
                 )
             }
             {page && (
@@ -79,20 +166,54 @@ const Preview = () => {
                 </div>
             )}
             {!post && !page && (
-                <div className="max-w-tablet mx-auto">
-                    <h1 className="text-gray-200 text-center" style={{ fontSize: "120px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
-                        This is a preview page
-                    </h1>
-                    <p>
-                        Please add the post type and id in the url, for example:
-                        {`${process.env.SITE_URL}/preivew?type=post&id=12345`}
-                    </p>
-                    <p>"Type" can be either "post" or "page". Make sure the post id is correct, and the post is published</p>
+                <div className="max-w-tablet mx-auto px-4">
+                    <LayoutH1 title={"Preview"} />
+                    {errorMessage && (
+                        <Snackbar
+                            text={errorMessage}
+                            error
+                        />
+                    )}
+
+                    <div className="text-lg flex px-4 flex-col">
+                        <div style={{ position: "relative", zIndex: 0 }}>
+                            <InputText
+
+                                label="Id"
+                                value={inputId}
+                                onChange={handleInputId}
+                            />
+                        </div>
+                        <div className="">
+                            <span className="w-full text-sm pb-2 block font-roboto font-semibold">Type</span>
+                            <div className="text-ac-secondary border p-2 rounded opacity-70" style={{ zIndex: 60 }}>
+                                <Dropdown
+                                    label="Content type"
+                                    options={options}
+                                    selected={selectedType}
+                                    onChange={setSelectedType}
+
+                                />
+                            </div>
+                        </div>
+                        <FormSubmitButton
+                            className="my-6"
+                            onClick={handleSubmitPreivewForm}
+                        />
+
+                    </div>
                 </div>
             )
             }
         </main>
-    )
+    ) : (
+            <div className="max-w-tablet mx-auto">
+                <h1 className="text-gray-200 text-center" style={{ fontSize: "80px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
+                    Loading
+                </h1>
+
+            </div>
+        )
 }
 
 export default Preview

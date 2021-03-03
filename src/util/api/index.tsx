@@ -17,7 +17,17 @@ const sendQuery = (query: string) => {
     return fetch(baseUrl, options)
         .then(response => response.json())
         .then(res => {
-            return res.data
+            if (res.errors) {
+                console.log(res.errors)
+                let error = ""
+                res.errors.map(e => {
+                    error += " " + e.message
+                })
+                return Promise.reject(error)
+            } else {
+                return res.data
+            }
+
         })
 }
 
@@ -141,6 +151,15 @@ export default {
     },
     getOnePagetById: (id: string) => {
         const query = request.getOnePageByIdQuery(id)
+
+        return sendQuery(query)
+    },
+    getOnePreviewPostById: (id: string) => {
+        const query = request.getOnePreviewPostByIdQuery(id)
+        return sendQuery(query)
+    },
+    getOnePreviewPagetById: (id: string) => {
+        const query = request.getOnePreviewPageByIdQuery(id)
 
         return sendQuery(query)
     },

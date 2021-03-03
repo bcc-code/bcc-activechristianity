@@ -5,12 +5,9 @@ import { IPaginate, INavItem, IPostItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import { useLocation } from '@reach/router';
-import PostListSlugs from '@/layout-parts/List/PostList'
-import PostListQuery from '@/layout-parts/List/PostListQuery'
+import PostListQuery from '@/components/List/PostListQuery'
 import { formatsAll } from '@/strings/static/topic-ids'
-
-import queryString from 'query-string';
-import { IPostItems } from '@/components/ScrollSection/FeaturedItem'
+import { getAllUrlParams } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
@@ -26,8 +23,9 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
     const location = useLocation();
 
-    const parsed = queryString.parse(location.search);
-    const pageNrQuery = parsed && parsed.pageNr && typeof parsed.pageNr === "string" && parseInt(parsed.pageNr)
+    const parsed = getAllUrlParams(location.search);
+    const pageNrQuery = parsed && parsed.pagenr && typeof parsed.pagenr === "string" && parseInt(parsed.pagenr)
+
     const currentPage = typeof pageNrQuery === "number" && pageNrQuery <= paginate.totalPages && pageNrQuery > 1 ? pageNrQuery : 1
 
     return (

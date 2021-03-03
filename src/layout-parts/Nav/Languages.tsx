@@ -1,13 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { IRootState } from '@/state/types'
-
+import { tranlationUlrsSelector } from '@/state/selectors/other'
 import Dropdown from '@/components/Dropdown'
 
 const Languages: React.FC<{ className?: string }> = ({ className }) => {
 
-    const { translatedUrls } = useSelector((state: IRootState) => ({ authInfo: state.auth, translatedUrls: state.translatedUrls }));
 
+    const translatedUrls = useSelector(tranlationUlrsSelector)
     const languageOptions = translatedUrls.map(i => ({ label: i.name, href: i.to }))
 
     return (

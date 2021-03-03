@@ -2,16 +2,14 @@ import * as React from "react"
 import { useSelector } from 'react-redux'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
 import { IPostItem } from '@/types'
-import { IRootState } from '@/state/types'
-
+import { bookmarkedSelector } from '@/state/selectors/user'
 import PostItem from '@/components/PostItemCards/RightImg'
 const UserHistory = () => {
     const [likedPosts, setLikePosts] = React.useState<IPostItem[]>([])
-    const userLibrary = useSelector((state: IRootState) => state.userLibrary);
-
+    const bookmarkedPosts = useSelector(bookmarkedSelector)
     React.useEffect(() => {
-        fetchLocalPostsFromSlugs(userLibrary.bookmarkedPosts.map(p => p.slug))
-    }, [userLibrary.bookmarkedPosts])
+        fetchLocalPostsFromSlugs(bookmarkedPosts.map(p => p.slug))
+    }, [bookmarkedPosts])
 
     return (
         <div className="flex flex-col">

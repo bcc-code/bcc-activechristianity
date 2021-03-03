@@ -12,6 +12,8 @@ interface authAction {
     payload: any
 }
 
+const localStorageKey = 'ac.loggedIn'
+
 const initialState: IUserState = {
     loggedIn: 'loading'
 }
@@ -39,6 +41,7 @@ const auth = (state: IUserState = initialState, action: authAction) => {
         }
 
         case 'SET_USER': {
+            localStorage.setItem(localStorageKey, "true")
             return ({
                 ...state,
                 user: action.payload,
@@ -47,6 +50,7 @@ const auth = (state: IUserState = initialState, action: authAction) => {
         }
 
         case 'SET_LOGOUT': {
+            localStorage.removeItem(localStorageKey)
             return ({
                 loggedIn: 'notLoggedIn'
             })

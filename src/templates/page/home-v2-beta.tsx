@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby";
 
 import MetaTag from '@/components/Meta'
-import { getRandomArray } from '@/helpers'
+
 import Image2To1 from '@/components/Images/Image2To1'
 import Image1To1 from '@/components/Images/Image1to1Rounded'
 // Type
@@ -11,7 +11,8 @@ import formats from '@/strings/topic-filters.json'
 import Link from '@/components/CustomLink'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import { AuthorLink } from '@/components/PostElements'
-import { normalizePostRes } from '@/helpers'
+
+import { normalizePostRes, getRandomArray } from '@/helpers/normalizers'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 // Helpers
 import { HomeTop } from '@/layout-parts/Home/HomeBanners'

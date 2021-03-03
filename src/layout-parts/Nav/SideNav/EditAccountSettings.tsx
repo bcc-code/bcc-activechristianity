@@ -4,7 +4,7 @@ import SideNavWrapper from './SideNavWrapper'
 
 import { SideNavItem } from '@/components/Button'
 import loadable from '@loadable/component'
-const ChangePassword = loadable(() => import('./ChangePassword'))
+import ChangePassword from './ChangePassword'
 
 const SideMobile: React.FC<{
     isSideNavOpen: boolean

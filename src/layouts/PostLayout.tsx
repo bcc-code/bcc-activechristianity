@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import shortid from 'shortid'
 /* const AudioPlayer */
-const AudioMediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioBanner'))
+import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
-const Content = loadable(() => import('@/components/Content'))
-const PostContent = loadable(() => import('@/components/Content/PostContent'))
+import Content from '@/components/Content'
+import PostContent from '@/components/Content/PostContent'
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
 
 /* import ViewNext from '@/layout-parts/PostLayout/ViewNext' */
@@ -16,8 +16,7 @@ import { formatsAll } from '@/strings/static/topic-ids'
 import { PostH1 } from '@/components/Headers'
 import { SubscribePodcast } from "@/components/Podcast/PodcastPlatforms"
 
-const RecommendedPostsSection = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSection'))
-const FromAuthorsSection = loadable(() => import('@/layout-parts/PostLayout/FromAuthors'))
+import FromAuthorsSection from '@/layout-parts/PostLayout/FromAuthors'
 import {
     AuthorBookmarkShareSection,
     Translations,
@@ -27,12 +26,12 @@ import {
 import { ReadingTimingAuthor } from '@/components/PostElements'
 import TwoToOneImg from "@/components/Images/Image2To1"
 
-import acApi from '@/util/api'
-import { debounce, normalizeAvailableLanguages } from '@/helpers'
-
-
+const acApiModule = import('@/util/api')
+import { currentMediaSelector } from '@/state/selectors/other'
+import { loggedInSelector } from '@/state/selectors/user'
+import { normalizeAvailableLanguages } from '@/helpers/normalizers'
+import { debounce } from '@/helpers/index-js'
 import { IPostProps } from '@/types'
-import { IRootState } from '@/state/types'
 
 // mock data
 
@@ -40,6 +39,7 @@ import ac_strings from '@/strings/ac_strings.js'
 
 
 type IMediaType = "audio" | "video"
+
 export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const {
@@ -68,8 +68,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">("none")
     const [mediaTypes, setMediaMtypes] = React.useState<IMediaType[]>([])
-    const { isCurrentMedia, isLoggedIn } = useSelector((state: IRootState) => ({ isCurrentMedia: state.currentMedia, isLoggedIn: state.auth.loggedIn }))
-    const [contentPosition, setContentPosition] = React.useState({ height: 0, top: 0 })
+    const isCurrentMeida = useSelector(currentMediaSelector)
+    const isLoggedIn = useSelector(loggedInSelector)
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
 
@@ -77,22 +77,30 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         if (isLoggedIn === "success") {
             lastScroll.current = Date.now() + 5000
             if (id) {
-                acApi
-                    .visitsPost(id)
-                    .catch((err: any) => {
-                        console.log(err)
-                    })
+                acApiModule.then(res => {
+                    const acApi = res.default
+                    acApi
+                        .visitsPost(id)
+                        .catch((err: any) => {
+                            console.log(err)
+                        })
+                })
+
             }
             const handleScroll = (e: any) => {
                 if (lastScroll.current < Date.now()) {
                     lastScroll.current = Date.now() + 5000
 
                     if (id) {
-                        acApi
-                            .readingPost(id)
-                            .catch((err: any) => {
-                                console.log(err)
-                            })
+                        acApiModule.then(res => {
+                            const api = res.default
+                            api
+                                .readingPost(id)
+                                .catch((err: any) => {
+                                    console.log(err)
+                                })
+                        })
+
                     }
                 }
             }
@@ -104,28 +112,28 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }, [post.slug])
 
 
-    React.useEffect(() => {
-
-        const toAddMediaType: IMediaType[] = []
-
-        let toUpdateCurrentMediaType: IMediaType | "none" = "none"
-        if (media.audio) {
-            toAddMediaType.push("audio")
-            toUpdateCurrentMediaType = "audio"
-        }
-        if (media.video && media.video.src) {
-
-            toAddMediaType.push("video")
-            toUpdateCurrentMediaType = "video"
-        }
-
-        if (toAddMediaType.length > 0) {
-            setMediaMtypes(toAddMediaType)
-        }
-        setCurrentMediaType(toUpdateCurrentMediaType)
-
-
-    }, [media])
+    /*     React.useEffect(() => {
+    
+            const toAddMediaType: IMediaType[] = []
+    
+            let toUpdateCurrentMediaType: IMediaType | "none" = "none"
+            if (media.audio) {
+                toAddMediaType.push("audio")
+                toUpdateCurrentMediaType = "audio"
+            }
+            if (media.video && media.video.src) {
+    
+                toAddMediaType.push("video")
+                toUpdateCurrentMediaType = "video"
+            }
+    
+            if (toAddMediaType.length > 0) {
+                setMediaMtypes(toAddMediaType)
+            }
+            setCurrentMediaType(toUpdateCurrentMediaType)
+    
+    
+        }, [media]) */
 
 
     const postId = id
@@ -141,6 +149,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypes.length > 1 ? 39 : 0)
 
     return (
+
+
+
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-8 sm:pt-0">
             <ShareBookmarkTopShortCuts
                 id={id}
@@ -186,13 +197,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
             <div className="sm:hidden fixed inset-x top-0 w-full">
                 {mediaTypes.length > 0 ? (
-                    <div className='fixed bg-mp-background w-full' style={{ top: "54px", height: `${currentHeigt + 90}px` }}>
+                    <div className='fixed bg-mp-background w-full' style={{ top: "96px", height: `${currentHeigt + 90}px` }}>
 
                     </div>
                 ) : (
                         <div
                             className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "54px", backgroundSize: "cover", height: "200px" }}
+                            style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
                         >
                             <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                         </div>
@@ -265,7 +276,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                             />
                         </div>
-                        <LazyLoad>
+                        {/*                         <LazyLoad>
                             <div className="pt-6">
                                 <RecommendedPostsSection
                                     postId={id}
@@ -273,7 +284,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                     readMorePosts={readMorePosts}
                                 />
                             </div>
-                        </LazyLoad>
+                        </LazyLoad> */}
                         {authors && (
                             <LazyLoad>
                                 <FromAuthorsSection
@@ -295,6 +306,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
 
         </article >
+
     )
 }
 

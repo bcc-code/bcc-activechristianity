@@ -2,17 +2,17 @@ import React from 'react'
 
 import Link from '@/components/CustomLink'
 import { IAuthor, ITopicNavItem, ITopicPostItems, ITopic, IPostItem } from '@/types'
-
+import SquareImage from '@/components/Images/Image1to1Rounded'
 import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
 import ac_strings from '@/strings/ac_strings.js'
-import Flickity from "react-flickity-component";
-import SquareImage from '@/components/Images/Image1to1Rounded'
+/* import Flickity from "react-flickity-component"; */
+
 import { ToggleFollowOutlineBtn } from '@/components/PostElements/TopicToggleFollow'
 import { fetchPostslistFromArchivePage, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
-import { getRandomArray } from '@/helpers'
+import { getRandomArray } from '@/helpers/normalizers'
 import shortid from 'shortid'
-import acApi from '@/util/api'
-import seriesInfo from '@/strings/series.json'
+const acApiModule = import('@/util/api')
+/* import seriesInfo from '@/strings/series.json' */
 import './view-next.css'
 import { reference } from '@popperjs/core'
 
@@ -42,26 +42,32 @@ const ReadNext: React.FC<IFetchPost> = ({ topics, formats, postId, position, isP
     const viewNextEl = React.useRef<HTMLDivElement>(null);
 
     const getPostRelated = () => {
-        return acApi.recommendedByPost(postId)
-            .then(res => {
-                const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
-                const pickRandomSlugs = getRandomArray(allSlugs, 3)
-                return Promise.all(pickRandomSlugs.map(p => {
-                    return fetchOneLocalPostFromSlug(p)
-                })).then(res => {
-                    const toAdd: IPostItem[] = []
-                    if (res && Array.isArray(res)) {
-                        res.forEach(item => {
-                            if (item && item.id !== postId) { toAdd.push(item) }
-                        })
-                    }
-                    return toAdd
-                })
 
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        return acApiModule.then(res => {
+            const api = res.default
+            api.recommendedByPost(postId)
+                .then(res => {
+                    const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
+                    const pickRandomSlugs = getRandomArray(allSlugs, 3)
+                    return Promise.all(pickRandomSlugs.map(p => {
+                        return fetchOneLocalPostFromSlug(p)
+                    })).then(res => {
+                        const toAdd: IPostItem[] = []
+                        if (res && Array.isArray(res)) {
+                            res.forEach(item => {
+                                if (item && item.id !== postId) { toAdd.push(item) }
+                            })
+                        }
+                        return toAdd
+                    })
+
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
+
+
     }
 
     const getPersonalRecommend = () => {

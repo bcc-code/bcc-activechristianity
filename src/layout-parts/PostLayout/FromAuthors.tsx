@@ -1,13 +1,10 @@
 import * as React from 'react'
 import { FetchPostsFromArchivePage } from '@/HOC/FetchPosts'
 import { IPostAuthors } from '@/types'
-import Row3ColAndXScroll from '@/layout-parts/List/Combo/Row3Col-HorizontalScroll'
+import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 
 import ac_strings from '@/strings/ac_strings.js'
 
-import { getRandomArray } from "@/helpers"
-
-import acApi from '@/util/api'
 
 const MoreFromAuthor: React.FC<{ authors: IPostAuthors[], postId: string }> = ({ authors, postId }) => {
 

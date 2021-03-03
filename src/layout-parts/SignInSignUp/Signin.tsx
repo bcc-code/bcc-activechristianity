@@ -7,9 +7,8 @@ import { InputText, InputCheckbox } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
 import { FormSubmitButton } from "@/components/Button"
-import { IRootState } from '@/state/types'
-import Cookies from 'js-cookie'
-import { validateEmail } from '@/helpers'
+import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
+import { validateEmail } from '@/helpers/index-js'
 
 const initialFieldsState = {
     email: '',
@@ -23,10 +22,10 @@ const initialErrorState = {
 
 type IFormFieldType = 'email' | 'password'
 const SignInForm: React.FC = () => {
-    const cookieName = 'ac.signin.reset_password_reminder'
-    const userReminderOption = Cookies.get(cookieName);
-
-    const { authInfo } = useSelector((state: IRootState) => ({ authInfo: state.auth }));
+    const localStorageKey = 'ac.signin.reset_password_reminder'
+    const userReminderOption = typeof window !== "undefined" ? localStorage.getItem(localStorageKey) : "false"
+    const loggedIn = useSelector(loggedInSelector)
+    const loggedInError = useSelector(loggedInErrorSelector)
     const [fields, setFields] = React.useState(initialFieldsState)
     const [errors, setErrors] = React.useState(initialErrorState)
     const [showReminder, setShowReminder] = React.useState(userReminderOption !== "true")
@@ -57,7 +56,7 @@ const SignInForm: React.FC = () => {
     }
     const setNotShowReminder = () => {
         setShowReminder(false)
-        Cookies.set(cookieName, 'true')
+        localStorage.setItem(localStorageKey, "true")
     }
 
     const handleChange = (e: any, fieldName: string) => {
@@ -136,9 +135,9 @@ const SignInForm: React.FC = () => {
 
             ) : (
                     <div className="w-full px-4">
-                        {authInfo.errorMessage && (
+                        {loggedInError && (
                             <Snackbar
-                                text={authInfo.errorMessage}
+                                text={loggedInError}
                                 error
                             />
                         )}
@@ -173,7 +172,7 @@ const SignInForm: React.FC = () => {
                             <div className="flex justify-center">
                                 <FormSubmitButton
                                     disabled={false}
-                                    loading={authInfo.loggedIn === "loading"}
+                                    loading={loggedIn === "loading"}
                                     onClick={handleSubmit}
                                 />
                             </div>

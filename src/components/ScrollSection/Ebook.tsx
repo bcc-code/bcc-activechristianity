@@ -4,7 +4,7 @@ import { EbookHardCover } from '@/components/Ebook/EbookItem'
 import EbookDownload from '@/components/Ebook/EbookDownload'
 import MetaTag from '@/components/Meta'
 
-import { normalizeAuthors, normalizeAvailableLanguages, } from '@/helpers'
+import { normalizeAvailableLanguages, } from '@/helpers/normalizers'
 import { getImage } from '@/helpers/imageHelpers'
 import { INavItem, IEbook } from '@/types'
 import { PostLabel } from '@/components/PostElements'

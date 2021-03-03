@@ -4,6 +4,7 @@ import { setCurrentMedia, setAutoPlay, addTracks } from '@/state/action'
 import { IRootState } from '@/state/types'
 import { IMedia } from '@/types'
 import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
+import { isPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 
 interface IPlaylistList {
     slug: string
@@ -11,8 +12,9 @@ interface IPlaylistList {
     clickable?: boolean
     render: (data: { playing: boolean }) => JSX.Element
 }
+
 const PlaylistPlay: React.FC<IPlaylistList> = ({ slug, className, render, clickable }) => {
-    const { currentMedia } = useSelector((state: IRootState) => ({ currentMedia: state.currentMedia }))
+    const currentMedia = useSelector(currentMediaSelector)
 
     const dispatch = useDispatch()
 

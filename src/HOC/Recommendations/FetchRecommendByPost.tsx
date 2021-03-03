@@ -1,8 +1,6 @@
 import * as React from "react"
-import { IPostItem, } from '@/types'
-import Placeholder from '@/layout-parts/Loader/MainpagePlaceholder'
-import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
-import acApi from '@/util/api'
+import Placeholder from '@/components/Loader/MainpagePlaceholder'
+const acApiModule = import('@/util/api')
 interface IFetchPost {
     postId: number | string,
     render: (data: { postSlugs: string[] }) => JSX.Element
@@ -10,14 +8,19 @@ interface IFetchPost {
 const FetchPosts: React.FC<IFetchPost> = ({ render, postId }) => {
     const [posts, setPosts] = React.useState<string[]>([])
     React.useEffect(() => {
-        acApi.recommendedByPost(postId)
-            .then(res => {
-                const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
-                setPosts(allSlugs)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        acApiModule.then(res => {
+            const api = res.default
+            api.recommendedByPost(postId)
+                .then(res => {
+                    const allSlugs: string[] = res.recommendedByPost.map((p: any) => p.slug)
+                    setPosts(allSlugs)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
+
+
     }, [postId])
 
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI'
+import { KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI/arrowIcons'
 import PaginationShort from './InputLeftRight'
 interface IProps {
     currentPage: number;

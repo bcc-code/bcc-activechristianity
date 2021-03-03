@@ -1,26 +1,18 @@
-import React, { Profiler } from 'react'
+import React from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
-import PostLayout from '@/layouts/PostLayout';
-import { INavItem, IPostRes } from '@/types'
-import { normalizePostRes } from '@/helpers'
-
+import { IMediaTypes } from '@/layouts/PostLayoutUpdate';
+import { INavItem, IPostRes, IPostItem, ITopicPostItems, ITopicPostSlugs } from '@/types'
+import PostLayout from '@/layouts/PostLayoutUpdate'
 const Post: React.FC<IPostProp> = (props) => {
+
     const { pageContext, data } = props
     const postRes = data.acNodePost
-    const post = normalizePostRes(postRes)
 
-    const { title, excerpt, date, topics, types, image, format } = post
-    const { id, langs, content, meta, recommendPosts, readMorePosts, seo } = postRes
-    const breadcrumb: INavItem[] = []
+    const { normalized: post, tranlsatedUrl, mediaTypes, authorsPosts, topicPosts, formatPosts, allInterestedPosts, breadcrumb } = pageContext
+    const { title, excerpt, date, topics, types, image } = post
+    const { content, meta, seo, updated_at } = postRes
 
-    if (types) {
-        breadcrumb.push(types[0])
-    }
-
-    if (format) {
-        breadcrumb.push(format[0])
-    }
     const seoTitle = seo && seo.title ? seo.title : title
     return (
         <div>
@@ -34,20 +26,25 @@ const Post: React.FC<IPostProp> = (props) => {
                     types,
                     imageUrl: image.src
                 }}
-                translatedUrls={langs}
+                translatedUrls={tranlsatedUrl}
                 breadcrumb={breadcrumb}
                 path={props.path}
             />
-
             <PostLayout
+
                 {...post}
+                updated_at={updated_at}
                 seoTitle={seoTitle}
-                langs={langs}
+                tranlsatedUrl={tranlsatedUrl}
                 content={content}
-                recommendPosts={recommendPosts}
-                readMorePosts={readMorePosts}
+                authorsPosts={authorsPosts}
+                topicPosts={topicPosts}
+                allInterestedPosts={allInterestedPosts}
+                mediaTypes={mediaTypes}
                 credits={meta ? meta.credits : undefined}
+                formatPosts={formatPosts}
             />
+
 
         </div>
     )
@@ -62,6 +59,14 @@ interface IPostProp {
     }
     pageContext: {
         breadcrumb: INavItem[]
+        normalized: IPostItem
+        allInterestedPosts: string[]
+        topicPosts: ITopicPostSlugs[]
+        authorsPosts: ITopicPostSlugs[]
+        formatPosts: ITopicPostSlugs[]
+        tranlsatedUrl: INavItem[]
+        mediaTypes: IMediaTypes
+        //ITopicPostItems
     }
 }
 
@@ -128,12 +133,6 @@ export const pageQuery = graphql`
 
     query PostById($id: String!) {
         acNodePost(id: { eq: $id }) {
-                ...PostMain
-
-                langs {
-                    lang
-                    slug
-                }
                 content
                 glossary {
                     slug
@@ -141,7 +140,8 @@ export const pageQuery = graphql`
                     content
                     word
                 }
-                readMorePosts
+                updated_at
+
             }
     }
 `

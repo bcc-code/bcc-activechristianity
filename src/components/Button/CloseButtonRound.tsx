@@ -1,5 +1,5 @@
 import * as React from "react"
-import { CloseIcon } from '@/components/Icons/MUI'
+import { CloseIcon } from '@/components/Icons/MUI/navIcons'
 
 interface IButton {
     onClick?: () => void

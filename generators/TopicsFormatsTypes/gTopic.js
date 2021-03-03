@@ -15,7 +15,7 @@ module.exports = async function generateTopic(data) {
     const pagePath = `${ac_strings.slug_topic}/${topic.slug}`
 
     if(hasRecommendPage){
-      createPage({
+      return createPage({
         path:pagePath,
         component:path.resolve(topicRecommendTemplate),
         context: {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 const Series: React.FC<IDummy> = (props) => {
-    console.log(props)
+
     return (
         <div>
             {props.pageContext.title}

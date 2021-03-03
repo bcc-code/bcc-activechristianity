@@ -1,14 +1,12 @@
 import * as React from 'react'
 import ToggleBookmark from '@/components/PostElements/ToggleBookmark'
 import { ToggleFollowPlaylistBookmark } from '@/components/PostElements/TopicToggleFollow'
-import { PostLabel } from '@/components/PostElements'
 import Link from '@/components/CustomLink'
-import Ebook from '@/components/Ebook/EbookItem'
 import { IPostItem } from '@/types'
 import PostTitle from '@/components/PostElements/TextSizeWClamp'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 import ac_strings from '@/strings/ac_strings.js'
-import { VolumeUpRoundedIcon } from '@/components/Icons/MUI'
+import { VolumeUpRoundedIcon } from '@/components/Icons/MUI/postIcons'
 export interface IFeaturedCard extends IPostItem {
     showOnMobile?: boolean
     likes?: number
@@ -54,15 +52,10 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                             <SquareImg rounded {...image} alt={title} />
                         </div>
                     )}
-                    {
-                        type === "ebook" && (
-                            <Ebook image={image} title={title} full={showOnMobile} />
-                        )
-                    }
                 </Link>
                 <Link to={postSlug} className="flex flex-col">
                     <div className="flex flex-col justify-center sm:justify-end z-30 h-12 sm:h-15 md:h-18">
-                        {type == "playlist" && <span className="text-xs text-white text-center py-2" >{ac_strings.playlist} </span>}
+                        {type == "playlist" && <span className="text-xs text-white text-center py-2" >{ac_strings.playlist}  </span>}
                         <PostTitle
                             rawText={title}
                             bold={"font-semibold"}
