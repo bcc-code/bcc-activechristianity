@@ -44,25 +44,6 @@ const addScriptToHead=(url)=>{
 }
 
 const addTrackingCode = ()=>{
-      (function(){
-        window['GoogleAnalyticsObject'] = 'ga';
-        if(!window['ga'] ){
-          window['ga'] = function(){
-            window['ga'].q = window['ga'].q || [];
-            window['ga'].q.push(arguments);
-          }
-              window['ga'].l = 1 * new Date();
-        }
-
-        var a = document.createElement('script');
-        var m = document.getElementsByTagName('script')[0];
-        a.async = 1;
-        a.src = '/scripts/analytics.js'
-        m.parentNode.insertBefore(a, m);
-
-      })();
-
-      window.ga('create', `${process.env.GA_ID}`, 'auto');
 
         (function (f, b, e, v, n, t, s) {
           if (f.fbq) return;
@@ -109,6 +90,27 @@ const addTrackingCode = ()=>{
 export const onClientEntry = () => {
 
     if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
+
+      (function(){
+        window['GoogleAnalyticsObject'] = 'ga';
+        if(!window['ga'] ){
+          window['ga'] = function(){
+            window['ga'].q = window['ga'].q || [];
+            window['ga'].q.push(arguments);
+          }
+              window['ga'].l = 1 * new Date();
+        }
+
+        var a = document.createElement('script');
+        var m = document.getElementsByTagName('script')[0];
+        a.async = 1;
+        a.src = '/scripts/analytics.js'
+        m.parentNode.insertBefore(a, m);
+
+      })();
+
+      window.ga('create', `${process.env.GA_ID}`, 'auto');
+      
         window.onload=()=>{
           addTrackingCode();
 
