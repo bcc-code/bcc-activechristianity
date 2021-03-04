@@ -268,7 +268,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     )}
 
                     <div>
-                        {
+                        {/*                  {
                             isWindowLoaded === true ? (
                                 <div ref={contentEl}>
                                     <PostContent
@@ -283,7 +283,15 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                         content={content}
                                     />
                                 )
-                        }
+                        } */}
+                        <div ref={contentEl}>
+                            <PostContent
+                                content={content}
+                                glossary={glossary}
+                                slug={slug}
+                                title={title}
+                            />
+                        </div>
 
                         {credits && (
                             <Content
