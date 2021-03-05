@@ -8,6 +8,7 @@ import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import { trimSlug } from '@/helpers/index-js'
 export interface IPostList {
+    fetchedPost?: boolean
     audio?: boolean
     paginate?: IPaginate
     posts: string[],
@@ -16,7 +17,7 @@ export interface IPostList {
 }
 const PostList: React.FC<IPostList> = (props) => {
 
-    const { paginate, posts, isTopic } = props
+    const { paginate, posts, isTopic, fetchedPost } = props
 
     const scrollToTop = () => {
         if (typeof window !== 'undefined') {
@@ -34,7 +35,7 @@ const PostList: React.FC<IPostList> = (props) => {
             activePage = parseInt(nr)
         }
         if (paginate && nr < paginate.totalPages + 1 && nr > -1) {
-            const firstPagePath = `/${paginate.baseUrl}` + `${isTopic ? '/1' : ''}`
+            const firstPagePath = `/${paginate.baseUrl}` + `${isTopic || fetchedPost ? '/1' : ''}`
             const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
             scrollToTop()
             navigate(fullPath)
@@ -54,24 +55,31 @@ const PostList: React.FC<IPostList> = (props) => {
                     </div>
                 </div>
             )}
-            <FetchPostsFromSlugs
-                slugs={posts}
-                layout="list"
-                render={({ posts: postList }) => {
-                    return PostList.length > 0 ? (
-                        <div>
-                            {postList.map((p, k) => {
-                                return (
-                                    <RightImgWDes key={k} {...p} />
+            {fetchedPost ? (<div>
+                {posts.map((p, k) => {
+                    return (
+                        <RightImgWDes key={k} {...p} />
 
-                                )
-                            })}
-                        </div>
-                    ) : (
-                            <RightImgListPlaceHolder count={12} />
-                        )
-                }}
-            />
+                    )
+                })}
+            </div>) : <FetchPostsFromSlugs
+                    slugs={posts}
+                    layout="list"
+                    render={({ posts: postList }) => {
+                        return PostList.length > 0 ? (
+                            <div>
+                                {postList.map((p, k) => {
+                                    return (
+                                        <RightImgWDes key={k} {...p} />
+
+                                    )
+                                })}
+                            </div>
+                        ) : (
+                                <RightImgListPlaceHolder count={12} />
+                            )
+                    }}
+                />}
 
 
             {paginate && (

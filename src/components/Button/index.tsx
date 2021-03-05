@@ -145,7 +145,7 @@ export const OutlineRightIcon: React.FC<IOutlineRightIcon> = ({ to, name, count,
 
 export const SolidDarkBgToggleActive: React.FC<{ active?: boolean, className?: string } & IButton> = ({ children, active, className, onClick }) => (
     <Button
-        className={`flex justify-center py-1 px-2 my-2 text-center text-sm rounded-full font-semibold ${className ? className : ''} ${active === true ? 'bg-ac-slate-dark text-white' : 'bg-ac-slate-lighter text-ac-slate-dark'}`}
+        className={`flex justify-center py-1 px-2 my-2 text-center text-sm rounded-full font-semibold whitespace-nowrap min-w-12 ${className ? className : ''} ${active === true ? 'bg-ac-slate-dark text-white' : 'bg-ac-slate-lighter text-ac-slate-dark'}`}
         onClick={onClick}
     >
         {children}

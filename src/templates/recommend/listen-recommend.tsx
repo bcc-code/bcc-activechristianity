@@ -48,7 +48,7 @@ const Listen: React.FC<IProps> = (props) => {
             <MetaTag title={title} breadcrumb={[]} type="page" path={path} />
 
             <div className="sm:hidden">
-                {hasPodcast && (
+                {/*                 {hasPodcast && (
                     <div className="py-6">
                         <div className="w-full flex justify-between items-center pb-4 pr-4">
                             <PageSectionHeader title={podcastProperties.title} />
@@ -60,7 +60,7 @@ const Listen: React.FC<IProps> = (props) => {
 
                         />
                     </div>
-                )}
+                )} */}
                 <div style={{ backgroundImage: 'linear-gradient(#fff,#EDF1FA)' }}>
 
                     <div className="w-full py-6 sm:hidden">

@@ -59,14 +59,14 @@ const bgStyle = {
 export const MobileHeaderBackground: React.FC<{ imgUrl: string }> = ({ imgUrl, children }) => {
 
     return (
-        <div className="sm:hidden fixed inset-x top-0 w-full flex items-center" style={{ top: "50px", height: "330px" }}>
+        <div className="sm:hidden fixed inset-x top-0 w-full flex items-center" style={{ top: "96px", height: "330px" }}>
             <div
                 className={`absolute w-full flex items-end`}
                 style={{ ...bgStyle, backgroundImage: `url(${imgUrl})`, }}
             />
             <div className=" absolute left-0 top-0 bottom-0 right-0" style={{ background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%)' }}></div>
 
-            <div className="flex flex-col justify-center items-center w-full" style={{ transform: "translateY(-15px)" }}>
+            <div className="flex flex-col justify-center items-center w-full" style={{ transform: "translateY(-30px)" }}>
                 {children}
             </div>
         </div>

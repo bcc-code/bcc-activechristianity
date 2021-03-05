@@ -353,7 +353,7 @@ export interface IEbook {
     authors: IAuthorRes[]
     topics: ITopicRes[]
 }
-
+export type IPlaylistType = 'AUDIO_POSTS' | 'SONGS' | 'PODCAST' | 'MIXED'
 export interface IPlaylist {
     id: string
     title: string
@@ -362,6 +362,7 @@ export interface IPlaylist {
     image: IImage
     featured: boolean
     tracks: ITrackRes[]
+    type?: IPlaylistType
 }
 
 export interface ISeries {

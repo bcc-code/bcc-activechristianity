@@ -45,17 +45,6 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
         postReadingTime = media.audio.duration
     }
 
-    const topImgClasses = {
-        mainClass: 'flex flex-col max-w-lg bg-white text-gray-800 h-full overflow-hidden ',
-        imageWrapper: {
-            className: "relative block w-full sm:pl-0 flex justify-end",
-            /* style: { minWidth: '84px', height: "180px" } */
-        },
-        imageClass: "w-full h-full pointer-events-none w-auto object-cover g-image",
-        postbaseWrapperClass: 'pt-4'
-
-    }
-
 
     return (
         <div className={`${border !== false ? 'border-b border-gray-300 last:border-b-1 pb-4' : ''}`}>

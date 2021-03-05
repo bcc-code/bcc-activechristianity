@@ -49,13 +49,14 @@ const HScrollNav: React.FC<IProps> = ({ tabs }) => {
 
     return (
         <div className="relative scroll-tabs-background">
-            <div className="absolute right-0 z-40 pt-6 pr-2">
+            <div className="absolute right-0 z-40 pr-2" style={{ top: "50%" }}>
                 <KeyboardArrowRightIcon customSize="4" className="fill-slate-dark" />
             </div>
             <div
                 ref={menuEl}
                 className="scroll-snap-x-container scroll-snap-x-container-start overflow-x-auto whitespace-no-wrap flex items-center relative pt-4 pb-2"
             >
+
 
                 {tabs.map((item, i) => {
                     return (

@@ -27,12 +27,12 @@ const TwoToThreeTabs: React.FC<IProps> = ({ tabs }) => {
     return (
         <div className="relative  mt-8 pb-2">
 
-            <span className="flex items-center pb-6 relative">
+            <span className="flex items-center mb-6 relative">
                 {tabs.map((item, i) => {
 
                     return (
                         <button
-                            className="w-1/2  bg-white mr-4 focus:outline-none"
+                            className={`w-1/2 font-semibold py-1 ${activeTab === i ? 'text-white' : ''} mr-4 focus:outline-none`}
                             onClick={() => { handleTabClick(i) }}
                             key={i}
                         >
@@ -42,7 +42,7 @@ const TwoToThreeTabs: React.FC<IProps> = ({ tabs }) => {
                 })}
 
                 <span
-                    className="absolute bottom-0 mb-3 h-1 block border-b border-ac-primary ac-tab-marker"
+                    className="absolute top-0 bottom-0 rounded-full block bg-ac-slate-dark text-white ac-tab-marker"
                     style={{ left: `${activeTab * (100 / tabs.length)}%`, width: `${(100 / tabs.length)}%` }}
                 />
             </span>

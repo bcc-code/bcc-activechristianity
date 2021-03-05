@@ -3,9 +3,9 @@ const path = require('path')
 const { postQuery} = require('gatsby-source-ac/helpers')
 const {normalizePostRes,getRandomArray,normalizeAvailableLanguages} = require('../src/helpers/normalizers')
 const  { formatsIds, typeIds } = require('../src/strings/static/topic-ids')
-
+const ac_strings=require('../src/strings/ac_strings.js')
 const template = 'src/templates/single-resource/post.tsx'
-
+const postListTemplate = 'src/templates/archive/post-list.tsx'
 const query = `{
     allAcNodePost(limit:12) {
       pageInfo {
@@ -151,16 +151,13 @@ module.exports = async function generatePosts(actions, graphql) {
 
       const {count,total}= authors.paginatorInfo
       const pageCount=Math.ceil(total/count)
-      const pageIndex= [];
 
-      for (let i = 1; i <= pageCount; i++) {
-        pageIndex.push(i);
-      }
-
+     
       for (let i = 1; i <= pageCount; i++) {
         console.log(i)
         const eachPageQuery=getauthorsPosts(i)
         const res = await graphql(eachPageQuery)
+       
         if (res.data && res.data.ac && res.data.ac.authors && res.data.ac.authors.data && res.data.ac.authors.data[0]){
           const allAuthors = res.data.ac.authors.data
           _.each(allAuthors, (author)=>{
@@ -211,14 +208,28 @@ module.exports = async function generatePosts(actions, graphql) {
                   const pageInfo = result.data.allAcNodePost.pageInfo
                   const {totalCount,itemCount}=pageInfo
                   const pageCount=Math.ceil(totalCount/itemCount)
+                  
+                  const baseUrl = `${ac_strings.slug_latest}`
+                  let currentPage = 1
                   for (let i = 0; i < pageCount ; i++) {
+                    
                       const postsRes = await graphql(getPerPageQuery(i))
                       const posts = postsRes.data.allAcNodePost.edges
+
+                      // create latest page 
+                      let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
+
+                      
+                      const postsForlatest = []
+                      
                       for (let k=0; k<posts.length;k++){
                         const {node}=posts[k]
+                        
                         const checkId = isNumeric(node.acId)
                         if(checkId){
                           const normalized = normalizePostRes(node)
+                          postsForlatest.push(normalized)
+
                           const {langs}=node
                           const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
                           let readMorePosts = node.readMorePosts
@@ -275,9 +286,7 @@ module.exports = async function generatePosts(actions, graphql) {
                                 }
                                 
                               }
-                              if(`${t.id}`===`108198`){
-                                console.log(node.meta)
-                              }
+
                               if(formatsIds[t.id]){
                                 formatPosts.push({
                                   ...t,
@@ -367,7 +376,23 @@ module.exports = async function generatePosts(actions, graphql) {
 
                         }   
                       }
-            
+                      const context = {
+                        fetchedPost:true,
+                        posts: postsForlatest,
+                        paginate: {
+                          currentPage,
+                          totalPages:pageCount,
+                          baseUrl
+                        },
+                        title:ac_strings.latest
+                      }
+                      console.log(context)
+                      createPage({
+                        path:pagePath,
+                        component:path.resolve(postListTemplate),
+                        context,
+                      })
+                      currentPage++
                     }
                   
                     return 
