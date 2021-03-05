@@ -128,6 +128,7 @@ export const pageQuery = graphql`
                     credits
                     url
                 }
+  
 
     }
 
@@ -141,6 +142,14 @@ export const pageQuery = graphql`
                     word
                 }
                 updated_at
+                seo {
+                    desc
+                    title
+                 }
+                 meta {
+                    credits
+                    url
+                }
 
             }
     }

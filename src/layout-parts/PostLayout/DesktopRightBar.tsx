@@ -14,9 +14,7 @@ interface IPostProps {
     topicPosts?: ITopicPostSlugs[]
     authorsPosts?: ITopicPostSlugs[]
     formatPosts?: ITopicPostSlugs[]
-
 }
-
 
 const PostSidebarRight: React.FC<IPostProps> = ({ topicPosts, authorsPosts, formatPosts }) => {
     return (
