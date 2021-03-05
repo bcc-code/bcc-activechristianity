@@ -4,16 +4,45 @@ import { graphql } from "gatsby"
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import { LayoutH1Wide } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
-import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg'
+import PlaylistTopImg from '@/components/PostItemCards/PlaylistTopImg'
+import shortId from 'shortid'
 // types
 import { IPlaylist, ITranslations } from '@/types'
-import shortId from 'shortid'
+import TwoToThreeTabs from '@/components/Tabs/TwoToThreeTabs'
+import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 import ac_strings from '@/strings/ac_strings.js'
+
 const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path, data }) => {
 
     const { title, slug, } = pageContext
     const translatedUrls: ITranslations[] = []
     const { audio, podcasts, songs, playlists } = data.ac
+
+
+    const panels = [
+        {
+            name: ac_strings.all,
+            list: playlists
+        },
+
+        {
+            name: ac_strings.audio_posts,
+            list: audio
+        },
+        {
+            name: ac_strings.songs,
+            list: songs
+        },
+        {
+            name: ac_strings.podcast,
+            list: podcasts
+        }
+    ]
+    {/* <PodcastTopImg
+                            key={shortId()}
+                            {...p}
+                            slug={`${ac_strings.slug_playlist}/${p.slug}`}
+                        /> */}
     return (
         <div className="max-w-tablet mx-auto pt-6">
             <MetaTag
@@ -25,50 +54,61 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path,
 
             />
             <LayoutH1Wide title={title} />
-            <h2>Playlist</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  grid-h70  gap-2 sm:gap-x-4 sm:gap-y-8 md:gap-x-6 md:gap-y-12 py-8 px-4">
-                {playlists.map((p) => {
+            <div className="hidden sm:block">
+                <TwoToThreeTabs
+                    tabs={panels.map(panel => {
+                        return ({
+                            name: panel.name,
+                            to: ac_strings.slug_playlist,
+                            content: (
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  grid-h70  gap-4 sm:gap-x-4 sm:gap-y-8 md:gap-x-6 md:gap-y-12 py-8">
+                                    {panel.list.map((p) => {
 
-                    return (
+                                        return (
 
-                        <PodcastTopImg
-                            key={shortId()}
-                            {...p}
-                            slug={`${ac_strings.slug_playlist}/${p.slug}`}
-                        />
-                    )
-                })}
+                                            <PlaylistTopImg
+                                                key={shortId()}
+                                                {...p}
+                                                slug={`${ac_strings.slug_playlist}/${p.slug}`}
+                                            />
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })
+                    })}
+
+                />
             </div>
-            <h2>Songs</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  grid-h70  gap-2 sm:gap-x-4 sm:gap-y-8 md:gap-x-6 md:gap-y-12 py-8 px-4">
-                {songs.map((p) => {
+            <div className="sm:hidden">
+                <ScrollNavTabs
+                    tabs={panels.map(panel => {
+                        return ({
+                            name: panel.name,
+                            to: ac_strings.slug_playlist,
+                            content: (
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  grid-h70  gap-4 sm:gap-x-4 sm:gap-y-8 md:gap-x-6 md:gap-y-12 py-8">
+                                    {panel.list.map((p) => {
 
-                    return (
+                                        return (
 
-                        <PodcastTopImg
-                            key={shortId()}
-                            {...p}
-                            slug={`${ac_strings.slug_playlist}/${p.slug}`}
-                        />
-                    )
-                })}
+                                            <PlaylistTopImg
+                                                key={shortId()}
+                                                {...p}
+                                                slug={`${ac_strings.slug_playlist}/${p.slug}`}
+                                            />
+                                        )
+                                    })}
+                                </div>
+                            )
+                        })
+                    })}
+
+                />
             </div>
-            <h2>Audio Posts</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  grid-h70  gap-2 sm:gap-x-4 sm:gap-y-8 md:gap-x-6 md:gap-y-12 py-8 px-4">
-                {audio.map((p) => {
-
-                    return (
-
-                        <PodcastTopImg
-                            key={shortId()}
-                            {...p}
-                            slug={`${ac_strings.slug_playlist}/${p.slug}`}
-                        />
-                    )
-                })}
-            </div>
-
         </div>
+
+
     )
 }
 
@@ -104,6 +144,7 @@ fragment PlaylistSimple on AcGraphql_Playlist {
                     srcset
                     dataUri
                 }
+                type
 }
     query AllPlaylists {
         ac {

@@ -11,6 +11,7 @@ const query = `
         title
         slug
         excerpt
+        type
         tracks {
           url
           title

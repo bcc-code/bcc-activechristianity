@@ -59,7 +59,7 @@ const bgStyle = {
 export const MobileHeaderBackground: React.FC<{ imgUrl: string }> = ({ imgUrl, children }) => {
 
     return (
-        <div className="sm:hidden fixed inset-x top-0 w-full flex items-center" style={{ top: "50px", height: "330px" }}>
+        <div className="sm:hidden fixed inset-x top-0 w-full flex items-center" style={{ top: "96px", height: "330px" }}>
             <div
                 className={`absolute w-full flex items-end`}
                 style={{ ...bgStyle, backgroundImage: `url(${imgUrl})`, }}
