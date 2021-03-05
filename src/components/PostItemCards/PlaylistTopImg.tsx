@@ -24,8 +24,8 @@ const PlaylistTopImg: React.FC<IPlaylist> = ({ slug, image, title, excerpt, type
             list: podcasts
         } */
     const typeMap = {
-        'AUDIO_POSTS': ac_strings.podcast,
-        'PODCAST': ac_strings.audio_posts,
+        'AUDIO_POSTS': ac_strings.audio_posts,
+        'PODCAST': ac_strings.podcast,
         'SONGS': ac_strings.songs,
         'MIXED': 'mixed'
 
