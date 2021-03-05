@@ -66,7 +66,7 @@ export const MobileHeaderBackground: React.FC<{ imgUrl: string }> = ({ imgUrl, c
             />
             <div className=" absolute left-0 top-0 bottom-0 right-0" style={{ background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%)' }}></div>
 
-            <div className="flex flex-col justify-center items-center w-full" style={{ transform: "translateY(-15px)" }}>
+            <div className="flex flex-col justify-center items-center w-full" style={{ transform: "translateY(-30px)" }}>
                 {children}
             </div>
         </div>
