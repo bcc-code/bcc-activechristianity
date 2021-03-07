@@ -68,7 +68,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                       const allAuthors = res.data.ac.authors.data
                       _.each(allAuthors, (author)=>{
                         const {name,id,slug,posts} =author
-                        const firstDate =dateToISODateString(posts[0])
+                        const firstDate =dateToISODateString(posts[0].updated_at)
                         const totalCount = posts.length
                         const perPage = 12
                         if (!totalCount) return null
