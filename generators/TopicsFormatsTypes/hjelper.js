@@ -4,6 +4,7 @@ const ac_strings = require('../../src/strings/ac_strings')
 const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplate = 'src/templates/archive/post-list-query.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
+const {dateToISODateString} = require('../../src/helpers/index-js')
 const perPage= 12
 const languagePostQuery = postQuery
 
@@ -114,6 +115,7 @@ module.exports.createArchivePages =async function ({
   const totalPages = Math.ceil(total/count);
 
   //*only create the first page, and use query strings for the rest
+    let firstPostsDate = ''
       for (let i = 1; i <=1; i++){
         let currentPage = i
         let pagePath = `${baseUrl}/${currentPage}`
@@ -131,6 +133,11 @@ module.exports.createArchivePages =async function ({
         const query=getPostsPerPageQuery(node.id,i)
         const perPagePosts = await graphql(query).then(res=>{
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
+            const posts = res.data.ac.topic.allPosts.data
+            if(i===1){
+              firstPostsDate=dateToISODateString(posts[0].updated_at)
+
+            }
             return res.data.ac.topic.allPosts.data
           } else {
             console.log(query)
@@ -143,6 +150,8 @@ module.exports.createArchivePages =async function ({
               path:pagePath,
               component,
               context: {
+                type:node.topicType,
+                updated_at:firstPostsDate,
                 posts: perPagePosts,
                 paginate,
                 id:node.id,

@@ -73,7 +73,8 @@ const plugins = [
  /*  {
     resolve: `gatsby-plugin-nprogress`,
     showSpinner: true,
-  } */{ 
+  } */
+  { 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -117,10 +118,11 @@ if (activeEnv === 'production') {
         queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
         enablePartialUpdates: true
       }
-    },
+    }, 
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
+        output: `/other-pages.xml`,
         createLinkInHead: true,
         query: `{
           site {
@@ -132,13 +134,18 @@ if (activeEnv === 'production') {
             nodes {
               path
               context {
+                type
                 updated_at
               }
             }
           }
         }`,
         serialize: ({ allSitePage }) =>
-          allSitePage.nodes.map((node) => {
+          allSitePage.nodes
+          .filter((node)=>{
+            console.log(node.context.type)
+            return node.context.type!=="post"
+          }).map((node) => {
             return node.context.updated_at? ({
               url: `${process.env.SITE_URL}${node.path}`,
               lastmodISO: `${node.context.updated_at}`,
@@ -147,10 +154,85 @@ if (activeEnv === 'production') {
             });
           }),
       },
+    }, 
+    {
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options: {
+        // 1 query for each data type
+       query: `{
+        site {
+          siteMetadata {
+            siteUrl
+          }
+        }
+        allSitePage {
+          edges {
+            node {
+              id
+              slug:path
+              context {
+                type
+                updated_at
+              }
+            }
+          }
+        }
+        posts:allSitePage {
+          edges {
+            node {
+              id
+              slug:path
+              context {
+                type
+                updated_at
+                normalized {
+                  image {
+                      src
+                  }
+                }
+              }
+            }
+          }
+        }
+        }`,
+        mapping: {
+          posts:{
+            sitemap: `posts`,
+            serializer: (nodes) => {
+              return nodes
+                .filter(({node}) => {
+                  let toReturn = false
+                  const { context} = node
+                  if(!!context){
+                    toReturn=context.type==="post"
+                  }
+                  return toReturn
+                })
+                .map(({node}) => {
+                    const {slug, context }=node
+                    return ({
+                      node:{
+                        ...node,
+                        slug,
+                        updated_at:context.updated_at,
+                        feature_image:context.normalized.image.src
+                      }
+                    })
+                })
+            }
+          }
+        },
+        additionalSitemaps: [ // optional: add additional sitemaps, which are e. g. generated somewhere else, but need to be indexed for this domain
+          {
+              name: `other-pages`,
+              url: `/other-pages.xml`,
+          },
+      ],
+      }
     },
     {
       resolve:'gatsby-plugin-preact'
-    }
+    } 
   )
 
   if( process.env.NO_FOLLOW==="true"){

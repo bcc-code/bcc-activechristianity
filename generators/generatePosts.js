@@ -357,7 +357,7 @@ module.exports = async function generatePosts(actions, graphql) {
                                 },
                                 tranlsatedUrl,
                                 breadcrumb,
-                                updated_at:updated_at_IOS.toISOString()
+                                updated_at:node.updated_at
           
                               }
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){

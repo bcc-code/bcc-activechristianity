@@ -130,8 +130,10 @@ function formatAMPM(date) {
 
 const dateToString = (date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`
 const timeToString = (date) => `${formatAMPM(date)} (${Intl.DateTimeFormat().resolvedOptions().timeZone}), ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
-
-
+const dateToISODateString=(date=>{
+    const updated_at_IOS = new Date(date)
+    return updated_at_IOS.toISOString().split('T')[0]
+})
 module.exports = {
         trimSlug,
         validateEmail,
@@ -142,5 +144,6 @@ module.exports = {
         debounce,
         dateToString,
         timeToString,
+        dateToISODateString,
         getAllUrlParams
 }

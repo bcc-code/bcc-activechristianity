@@ -43,7 +43,6 @@ const Preview = () => {
     }
 
     const handleSubmitPreivewForm = () => {
-        console.log(selectedType)
         if (selectedType?.value === "post") {
             getPost(inputId)
         }

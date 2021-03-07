@@ -2,7 +2,7 @@ const _ = require('lodash')
 const path = require('path')
 const ac_strings = require('../src/strings/ac_strings')
 const template = 'src/templates/archive/post-list.tsx'
-
+const {dateToISODateString} = require('../src/helpers/index-js')
 const getPageCountQuery = `
   {
     ac {
@@ -31,6 +31,7 @@ const getEachPagePosts = (index)=>{
             excerpt
             posts {
               slug
+              updated_at
             }
           }
         }
@@ -67,7 +68,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                       const allAuthors = res.data.ac.authors.data
                       _.each(allAuthors, (author)=>{
                         const {name,id,slug,posts} =author
-
+                        const firstDate =dateToISODateString(posts[0])
                         const totalCount = posts.length
                         const perPage = 12
                         if (!totalCount) return null
@@ -84,6 +85,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                             path:pagePath,
                             component:path.resolve(template),
                             context: {
+                              updated_at:firstDate,
                               posts: allPosts.slice(i,i+perPage),
                               paginate: {
                                 currentPage,

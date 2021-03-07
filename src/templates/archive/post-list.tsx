@@ -24,7 +24,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     }
 
     const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
-    console.log(pageContext)
+
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag
