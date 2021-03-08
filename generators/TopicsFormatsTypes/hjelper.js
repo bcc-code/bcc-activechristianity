@@ -4,7 +4,7 @@ const ac_strings = require('../../src/strings/ac_strings')
 const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplate = 'src/templates/archive/post-list-query.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
-const {dateToISODateString} = require('../../src/helpers/index-js')
+
 const perPage= 12
 const languagePostQuery = postQuery
 
@@ -134,8 +134,8 @@ module.exports.createArchivePages =async function ({
         const perPagePosts = await graphql(query).then(res=>{
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
             const posts = res.data.ac.topic.allPosts.data
-            if(i===1){
-              firstPostsDate=dateToISODateString(posts[0].updated_at)
+            if(i===1 && posts.length>0){
+              firstPostsDate=posts[0].updated_at
 
             }
             return res.data.ac.topic.allPosts.data
@@ -145,11 +145,12 @@ module.exports.createArchivePages =async function ({
           }
 
         })
-        console.log(pagePath)
+
             createPage({
               path:pagePath,
               component,
               context: {
+                pageType:"topic",
                 type:node.topicType,
                 updated_at:firstPostsDate,
                 posts: perPagePosts,
@@ -173,7 +174,7 @@ module.exports.createSubTopicPages=({
   subTopic,
   isTopic,
   breadcrumb,
-  totalCount
+  totalCount,
 })=>{
 
 

@@ -171,7 +171,7 @@ module.exports = function generateTopics(actions, graphql) {
                 const latestPosts=latestPostsRes.data
                 const featuredPosts=featuredPostsRes
                 const props =processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
-            const { latest, popular, featured } = props
+                const { latest, popular, featured } = props
                 const contextPosts = {
                   latest,
                   featured,

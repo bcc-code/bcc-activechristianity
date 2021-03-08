@@ -64,7 +64,8 @@ module.exports = async function generateTypes(data) {
                         allPosts,
                         topic:type,
                         subTopic,
-                        totalCount
+                        totalCount,
+                        isTopic:false
                     }) 
             })
         }
@@ -136,6 +137,7 @@ module.exports = async function generateTypes(data) {
 
     const typekey=nodeInfo.key
     const context= {
+        pageType:"home",
         typekey,
         title:type.name,
         breadcrumb,

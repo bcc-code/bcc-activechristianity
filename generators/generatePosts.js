@@ -173,6 +173,7 @@ module.exports = async function generatePosts(actions, graphql) {
           console.log(res)
         }
       }
+
     /* get all topics */
       const topicsRes = await graphql(topicsQuery).then((result) => {
         if (result.errors) {
@@ -357,8 +358,8 @@ module.exports = async function generatePosts(actions, graphql) {
                                 },
                                 tranlsatedUrl,
                                 breadcrumb,
-                                updated_at:node.updated_at
-          
+                                updated_at:node.updated_at,
+                                pageType:'post'
                               }
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){
                                 console.log(normalized.slug)
@@ -386,7 +387,6 @@ module.exports = async function generatePosts(actions, graphql) {
                         },
                         title:ac_strings.latest
                       }
-                      console.log(context)
                       createPage({
                         path:pagePath,
                         component:path.resolve(postListTemplate),

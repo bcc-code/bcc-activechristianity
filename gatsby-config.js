@@ -1,6 +1,7 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
 const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
+const generateSitemap = require('./generators/Other/generateSitemap')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
@@ -74,7 +75,7 @@ const plugins = [
     resolve: `gatsby-plugin-nprogress`,
     showSpinner: true,
   } */
-  { 
+/*   { 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -85,7 +86,7 @@ const plugins = [
       purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
     }
   },
-  "gatsby-plugin-webpack-bundle-analyser-v2",
+  "gatsby-plugin-webpack-bundle-analyser-v2", */
   'gatsby-plugin-loadable-components-ssr'
 ];
 
@@ -93,7 +94,7 @@ if (activeEnv === 'production') {
   
 
   plugins.push(
-    {
+/*     {
       resolve: `gatsby-plugin-s3`,
       options: {
           bucketName: process.env.S3_BUCKET_NAME,
@@ -119,6 +120,9 @@ if (activeEnv === 'production') {
         enablePartialUpdates: true
       }
     }, 
+        {
+      resolve:'gatsby-plugin-preact'
+    } , */
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
@@ -134,7 +138,7 @@ if (activeEnv === 'production') {
             nodes {
               path
               context {
-                type
+                pageType
                 updated_at
               }
             }
@@ -143,13 +147,10 @@ if (activeEnv === 'production') {
         serialize: ({ allSitePage }) =>
           allSitePage.nodes
           .filter((node)=>{
-            console.log(node.context.type)
-            return node.context.type!=="post"
+            console.log(node.context.pageType)
+            return node.context.pageType!=="post"
           }).map((node) => {
-            return node.context.updated_at? ({
-              url: `${process.env.SITE_URL}${node.path}`,
-              lastmodISO: `${node.context.updated_at}`,
-            }):({
+            return ({
               url: `${process.env.SITE_URL}${node.path}`,
             });
           }),
@@ -157,82 +158,9 @@ if (activeEnv === 'production') {
     }, 
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
-      options: {
-        // 1 query for each data type
-       query: `{
-        site {
-          siteMetadata {
-            siteUrl
-          }
-        }
-        allSitePage {
-          edges {
-            node {
-              id
-              slug:path
-              context {
-                type
-                updated_at
-              }
-            }
-          }
-        }
-        posts:allSitePage {
-          edges {
-            node {
-              id
-              slug:path
-              context {
-                type
-                updated_at
-                normalized {
-                  image {
-                      src
-                  }
-                }
-              }
-            }
-          }
-        }
-        }`,
-        mapping: {
-          posts:{
-            sitemap: `posts`,
-            serializer: (nodes) => {
-              return nodes
-                .filter(({node}) => {
-                  let toReturn = false
-                  const { context} = node
-                  if(!!context){
-                    toReturn=context.type==="post"
-                  }
-                  return toReturn
-                })
-                .map(({node}) => {
-                    const {slug, context }=node
-                    return ({
-                      node:{
-                        ...node,
-                        slug,
-                        updated_at:context.updated_at,
-                        feature_image:context.normalized.image.src
-                      }
-                    })
-                })
-            }
-          }
-        },
-        additionalSitemaps: [ // optional: add additional sitemaps, which are e. g. generated somewhere else, but need to be indexed for this domain
-          {
-              name: `other-pages`,
-              url: `/other-pages.xml`,
-          },
-      ],
-      }
+      options: generateSitemap.options
     },
-    {
-      resolve:'gatsby-plugin-preact'
-    } 
+
   )
 
   if( process.env.NO_FOLLOW==="true"){

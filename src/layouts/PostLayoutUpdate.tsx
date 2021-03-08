@@ -172,7 +172,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
-            {/*             {isWindowLoaded === true && (
+            {isWindowLoaded === true && (
                 <ShareBookmarkTopShortCuts
                     id={id}
                     text={excerpt || title}
@@ -181,14 +181,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     likes={likes}
                     isPlayingAudio={!!isCurrentMedia.audio}
                 />
-            )} */}
-            {isWindowLoaded === true && isMobile && (
+            )}
+            {/*             {isWindowLoaded === true && isMobile && (
                 <MobileBottomSlider
                     isPlayingMedia={!!isCurrentMedia.audio}
                     topicPosts={topicPosts}
                     formatPosts={formatPosts}
                 />
-            )}
+            )} */}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
@@ -218,20 +218,20 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     </div>
                 ) : (
-                        <div
-                            className={`fixed transition-transform background-image w-full`}
-                            style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
-                        >
-                            {
-                                showMobileImage === true ? (
-                                    <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                                ) : (
-                                        <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                                    )
-                            }
-                        </div>
+                    <div
+                        className={`fixed transition-transform background-image w-full`}
+                        style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
+                    >
+                        {
+                            showMobileImage === true ? (
+                                <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                            ) : (
+                                <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                            )
+                        }
+                    </div>
 
-                    )}
+                )}
             </div>
             <div className='w-full sm:hidden relative' style={{ top: "60px", height: `${currentHeigt}px` }}>
 
@@ -299,27 +299,26 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                             />
                         )}
                         <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div>
+                        <div className="flex flex-wrap border-ac-gray py-6">
+                            {topics && topics?.map(item => (
+                                <ToggleFollowWithName {...item} />
+                            ))}
+                        </div>
+                        <div className="border-b pb-6">
+                            <AuthorBookmarkShareSection
+                                id={id}
+                                text={excerpt || title}
+                                shareSlug={slug}
+                                views={views}
+                                likes={likes}
+                                authors={authors}
+                                formats={format}
+
+                            />
+                        </div>
                         {isWindowLoaded === true && (
                             <div>
-                                <div className="flex flex-wrap border-ac-gray py-6">
-                                    {topics && topics?.map(item => (
-                                        <ToggleFollowWithName {...item} />
-                                    ))}
-                                </div>
 
-
-                                <div className="border-b pb-6">
-                                    <AuthorBookmarkShareSection
-                                        id={id}
-                                        text={excerpt || title}
-                                        shareSlug={slug}
-                                        views={views}
-                                        likes={likes}
-                                        authors={authors}
-                                        formats={format}
-
-                                    />
-                                </div>
                                 {allInterestedPosts && <RecommendedPosts
                                     postId={acId ? acId : id}
                                     topics={topicPosts}

@@ -43,7 +43,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                 path:baseUrl,
                 component:path.resolve(template),
                 context: {
-                  type:"glossary",
+                  pageType:"glossary",
                   glossary,
                   title:glossary.word,
                   slug:glossary.slug,
