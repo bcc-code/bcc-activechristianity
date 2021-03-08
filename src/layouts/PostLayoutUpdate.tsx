@@ -321,25 +321,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </div>
                         {isWindowLoaded === true && (
                             <div>
-                                <div className="flex flex-wrap border-ac-gray py-6">
-                                    {topics && topics?.map(item => (
-                                        <ToggleFollowWithName {...item} />
-                                    ))}
-                                </div>
-
-
-                                <div className="border-b pb-6">
-                                    <AuthorBookmarkShareSection
-                                        id={id}
-                                        text={excerpt || title}
-                                        shareSlug={slug}
-                                        views={views}
-                                        likes={likes}
-                                        authors={authors}
-                                        formats={format}
-
-                                    />
-                                </div>
                                 {allInterestedPosts && <RecommendedPosts
                                     postId={acId ? acId : id}
                                     topics={topicPosts}
