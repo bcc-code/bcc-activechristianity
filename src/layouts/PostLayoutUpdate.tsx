@@ -21,6 +21,7 @@ import { PostH1 } from '@/components/Headers'
 import {
     AuthorBookmarkShareSection,
     Translations,
+    ShareBookmarkTopShortCuts
 } from '@/layout-parts/PostLayout/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
