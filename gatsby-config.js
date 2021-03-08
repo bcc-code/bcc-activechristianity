@@ -1,7 +1,6 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
-const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
-const generateSitemap = require('./generators/Other/generateSitemap')
+const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
@@ -74,8 +73,7 @@ const plugins = [
  /*  {
     resolve: `gatsby-plugin-nprogress`,
     showSpinner: true,
-  } */
-/*   { 
+  } */{ 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -86,7 +84,7 @@ const plugins = [
       purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
     }
   },
-  "gatsby-plugin-webpack-bundle-analyser-v2", */
+  "gatsby-plugin-webpack-bundle-analyser-v2",
   'gatsby-plugin-loadable-components-ssr'
 ];
 
@@ -94,7 +92,7 @@ if (activeEnv === 'production') {
   
 
   plugins.push(
-/*     {
+    {
       resolve: `gatsby-plugin-s3`,
       options: {
           bucketName: process.env.S3_BUCKET_NAME,
@@ -119,48 +117,13 @@ if (activeEnv === 'production') {
         queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
         enablePartialUpdates: true
       }
-    }, 
-        {
-      resolve:'gatsby-plugin-preact'
-    } , */
-    {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        output: `/other-pages.xml`,
-        createLinkInHead: true,
-        query: `{
-          site {
-            siteMetadata {
-              siteUrl
-            }
-          }
-          allSitePage {
-            nodes {
-              path
-              context {
-                pageType
-                updated_at
-              }
-            }
-          }
-        }`,
-        serialize: ({ allSitePage }) =>
-          allSitePage.nodes
-          .filter((node)=>{
-            console.log(node.context.pageType)
-            return node.context.pageType!=="post"
-          }).map((node) => {
-            return ({
-              url: `${process.env.SITE_URL}${node.path}`,
-            });
-          }),
-      },
-    }, 
-    {
-      resolve: `gatsby-plugin-advanced-sitemap`,
-      options: generateSitemap.options
     },
-
+    {
+      resolve: 'gatsby-plugin-sitemap'
+    },
+    {
+      resolve:'gatsby-plugin-preact'
+    }
   )
 
   if( process.env.NO_FOLLOW==="true"){
