@@ -119,34 +119,7 @@ if (activeEnv === 'production') {
       }
     },
     {
-      resolve: `gatsby-plugin-sitemap`,
-      options: {
-        createLinkInHead: true,
-        query: `{
-          site {
-            siteMetadata {
-              siteUrl
-            }
-          }
-          allSitePage {
-            nodes {
-              path
-              context {
-                updated_at
-              }
-            }
-          }
-        }`,
-        serialize: ({ allSitePage }) =>
-          allSitePage.nodes.map((node) => {
-            return node.context.updated_at? ({
-              url: `${process.env.SITE_URL}${node.path}`,
-              lastmodISO: `${node.context.updated_at}`,
-            }):({
-              url: `${process.env.SITE_URL}${node.path}`,
-            });
-          }),
-      },
+      resolve: `gatsby-plugin-sitemap`
     },
     {
       resolve:'gatsby-plugin-preact'
