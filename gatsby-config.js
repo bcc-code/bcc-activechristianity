@@ -119,11 +119,7 @@ if (activeEnv === 'production') {
       }
     },
     {
-<<<<<<< HEAD
-      resolve: 'gatsby-plugin-sitemap'
-=======
       resolve: `gatsby-plugin-sitemap`
->>>>>>> master
     },
     {
       resolve:'gatsby-plugin-preact'
