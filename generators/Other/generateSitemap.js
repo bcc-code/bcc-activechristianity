@@ -1,40 +1,14 @@
 
 
-const pageType = (node)=>{
-    const {slug, context }=node
-/*     if (slug.startsWith(`/${ac_strings.slug_ac_author}`)){
-        return 'contributor'
-    } else if (slug.startsWith(`/${ac_strings.slug_topic}`)) {
-        return 'topic'
-    } 
-    else if (slug.startsWith(`/${ac_strings.slug_glossary}`)) {
-        return 'glossary'
-    }
-    else if (slug.startsWith(`/${ac_strings.slug_playlist}`)) {
-        return 'playlist'
-    } else  */if(!!context){
-        if (context.pageType==="post"){
-            return 'post'
-        } else if (context.pageType==="home"){
-            return 'home'
-        } else  if (context.pageType==='contributor'){
-            return 'contributor'
-        } else {
-            return 'other'
-        }
-      } else {
-        return 'other'
-      }
-}
-
 const nodeMaps={
 
 }
 
 const processNodes = (nodes)=>{
     nodes.forEach(({node}) => {
-        const getType=pageType(node)
+     
         const {slug, context }=node
+        const getType=context.pageType?context.pageType:"other"
         const toAdd = {
             node:{
               ...node,
@@ -119,16 +93,30 @@ const options = {
           contributors:{
             sitemap: `contributor`,
             serializer: (nodes) => {
-                processNodes(nodes)
                 console.log(nodeMaps['contributor'])
               return nodeMaps['contributor']
+ 
+            }
+          },
+          topics:{
+            sitemap: `topic`,
+            serializer: (nodes) => {
+                console.log(nodeMaps['topic'])
+              return nodeMaps['topic']
+ 
+            }
+          },
+          glossaries:{
+            sitemap: `glossary`,
+            serializer: (nodes) => {
+                console.log(nodeMaps['glossary'])
+              return nodeMaps['glossary']
  
             }
           },
           homes:{
             sitemap: `home`,
             serializer: (nodes) => {
-                processNodes(nodes)
                 console.log(nodeMaps['home'])
               return nodeMaps['home']
  

@@ -21,6 +21,7 @@ import { PostH1 } from '@/components/Headers'
 import {
     AuthorBookmarkShareSection,
     Translations,
+    ShareBookmarkTopShortCuts
 } from '@/layout-parts/PostLayout/PostSections'
 
 import { ReadingTimingAuthor } from '@/components/PostElements'
@@ -298,27 +299,30 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 content={credits}
                             />
                         )}
-                        {/* <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
+                        {/*  <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
                         <div className="flex flex-wrap border-ac-gray py-6">
                             {topics && topics?.map(item => (
                                 <ToggleFollowWithName {...item} />
                             ))}
                         </div>
-                        <div className="border-b pb-6">
-                            <AuthorBookmarkShareSection
-                                id={id}
-                                text={excerpt || title}
-                                shareSlug={slug}
-                                views={views}
-                                likes={likes}
-                                authors={authors}
-                                formats={format}
+                        {isWindowLoaded === true && (
+                            <div className="border-b pb-6">
+                                <AuthorBookmarkShareSection
+                                    id={id}
+                                    text={excerpt || title}
+                                    shareSlug={slug}
+                                    views={views}
+                                    likes={likes}
+                                    authors={authors}
+                                    formats={format}
 
-                            />
-                        </div>
+                                />
+                            </div>
+                        )}
+
+
                         {isWindowLoaded === true && (
                             <div>
-
                                 {allInterestedPosts && <RecommendedPosts
                                     postId={acId ? acId : id}
                                     topics={topicPosts}

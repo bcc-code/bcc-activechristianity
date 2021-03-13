@@ -60,6 +60,7 @@ module.exports = function generatePlaylists(actions, graphql) {
             title:playlist.title,
             slug: playlist.slug,
             playlist,
+            pageType:'playlist',
             breadcrumb:[{name:playlistMain.title,to:playlistMain.slug}]
           },
         })
