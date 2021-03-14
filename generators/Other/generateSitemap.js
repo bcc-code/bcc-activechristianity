@@ -112,6 +112,13 @@ const options = {
  
             }
           },
+          others:{
+            sitemap: `other`,
+            serializer: (nodes) => {
+              return Array.isArray(nodeMaps['other'])?nodeMaps['other']:[]
+ 
+            }
+          },
           
         },
         additionalSitemaps: [ // optional: add additional sitemaps, which are e. g. generated somewhere else, but need to be indexed for this domain
