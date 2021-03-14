@@ -3,18 +3,24 @@
 const nodeMaps={
 
 }
-
+const packageJson = require('../../package.json')
 const processNodes = (nodes)=>{
     nodes.forEach(({node}) => {
      
         const {slug, context }=node
-        const getType=context.pageType?context.pageType:"other"
+        const getType=context && context.pageType?context.pageType:"other"
+        let versionUpdated = packageJson['version-updated-at']
+        if (context && context.updated_at){
+          const d1 = new Date(versionUpdated);
+          const d2 = new Date(context.updated_at);
+          versionUpdated =d2>d1?context.updated_at:versionUpdated
+        }
         const toAdd = {
             node:{
               ...node,
               slug,
-              updated_at:context.updated_at,
-              feature_image:context.normalized.image.src
+              updated_at:versionUpdated,
+              feature_image:context && context.normalized && context.normalized.image && context.normalized.image.src
             }
           }
         if(nodeMaps[getType]){
@@ -33,7 +39,6 @@ const pagesQuery = `
         id
         slug:path
         context {
-            type
             pageType
             normalized {
             image {
@@ -54,30 +59,20 @@ const options = {
             allSitePage {
                 ${pagesQuery}
             }
-            posts:site {
-                siteMetadata {
-                siteUrl
-                }
+            posts:allSitePage {
+              ${pagesQuery}
             }
-            contributors:site {
-                siteMetadata {
-                siteUrl
-                }
+            contributors:allSitePage {
+              ${pagesQuery}
             }
-            topics:site {
-                siteMetadata {
-                siteUrl
-                }
+            topics:allSitePage {
+              ${pagesQuery}
             }
-            glossaries:site {
-                siteMetadata {
-                siteUrl
-                }
+            glossaries:allSitePage {
+              ${pagesQuery}
             }
-            homes:site {
-                siteMetadata {
-                siteUrl
-                }
+            homes:allSitePage {
+              ${pagesQuery}
             }
         }`,
         mapping: {
@@ -85,40 +80,35 @@ const options = {
             sitemap: `posts`,
             serializer: (nodes) => {
                 processNodes(nodes)
-                console.log(nodeMaps['post'])
-              return nodeMaps['post']
+                /* console.log(nodeMaps['post']) */
+                return Array.isArray(nodeMaps['post'])?nodeMaps['post']:[] 
  
             }
           },
           contributors:{
             sitemap: `contributor`,
             serializer: (nodes) => {
-                console.log(nodeMaps['contributor'])
-              return nodeMaps['contributor']
+              return Array.isArray(nodeMaps['contributor'])?nodeMaps['contributor']:[] 
  
             }
           },
           topics:{
             sitemap: `topic`,
             serializer: (nodes) => {
-                console.log(nodeMaps['topic'])
-              return nodeMaps['topic']
+              return Array.isArray(nodeMaps['topic'])?nodeMaps['topic']:[] 
  
             }
           },
           glossaries:{
             sitemap: `glossary`,
             serializer: (nodes) => {
-                console.log(nodeMaps['glossary'])
-              return nodeMaps['glossary']
- 
+              return Array.isArray(nodeMaps['glossary'])?nodeMaps['glossary']:[]
             }
           },
           homes:{
             sitemap: `home`,
             serializer: (nodes) => {
-                console.log(nodeMaps['home'])
-              return nodeMaps['home']
+              return Array.isArray(nodeMaps['home'])?nodeMaps['home']:[]
  
             }
           },

@@ -70,7 +70,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
                         const {name,id,slug,posts} =author
                         if(posts.length>0){
                           const firstDate =posts[0].updated_at
-                          console.log(firstDate)
                           const totalCount = posts.length
                           const perPage = 12
                           if (!totalCount) return null

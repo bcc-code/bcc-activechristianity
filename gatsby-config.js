@@ -1,5 +1,6 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
+const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
@@ -119,7 +120,8 @@ if (activeEnv === 'production') {
       }
     },
     {
-      resolve: `gatsby-plugin-sitemap`
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options:SitemapOptions
     },
     {
       resolve:'gatsby-plugin-preact'
