@@ -37,7 +37,6 @@ const ContactForm = () => {
     const [errorMessage, setErrorMessage] = React.useState<undefined | string>(undefined)
     const [canSent, setCanSet] = React.useState(false)
     const validate = () => {
-        console.log('validating')
         const fieldNames = ['email', 'name', 'message'];
         const result = { ...errors }
         let pass = true;

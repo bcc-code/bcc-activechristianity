@@ -10,6 +10,7 @@ const processNodes = (nodes)=>{
         const {slug, context }=node
         const getType=context && context.pageType?context.pageType:"other"
         let versionUpdated = packageJson['version-updated-at']
+
         if (context && context.updated_at){
           const d1 = new Date(versionUpdated);
           const d2 = new Date(context.updated_at);
@@ -40,6 +41,7 @@ const pagesQuery = `
         slug:path
         context {
             pageType
+            updated_at
             normalized {
             image {
                 src
@@ -72,6 +74,9 @@ const options = {
               ${pagesQuery}
             }
             homes:allSitePage {
+              ${pagesQuery}
+            }
+            latest:allSitePage {
               ${pagesQuery}
             }
         }`,
@@ -119,6 +124,13 @@ const options = {
  
             }
           },
+          latest:{
+            sitemap: `latest`,
+            serializer: (nodes) => {
+              return Array.isArray(nodeMaps['latest'])?nodeMaps['latest']:[]
+ 
+            }
+          }
           
         },
         additionalSitemaps: [ // optional: add additional sitemaps, which are e. g. generated somewhere else, but need to be indexed for this domain

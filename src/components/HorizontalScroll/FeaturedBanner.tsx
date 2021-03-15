@@ -9,10 +9,12 @@ import { getRandomArray } from '@/helpers/normalizers'
 const FeatureSection: React.FC<{ featured: IPostItem[] }> = ({ featured }) => {
 
     const [mixed, setMixed] = React.useState<null | IPostItem[]>(null)
+
     React.useEffect(() => {
         const random = getRandomArray(featured, featured.length)
         setMixed(random)
     }, [])
+
     return (
         <OneTopImgPost
             loading={mixed === null}

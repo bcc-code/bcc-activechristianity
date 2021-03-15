@@ -20,24 +20,23 @@ const ShareIconPopper: React.FC<IProps> = ({ popperContent, children, placement 
         modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
     });
     const PopperEl = React.useRef<HTMLDivElement>(null);
-
+    const ToolTipEl = React.useRef<HTMLInputElement>(null);
     const closeOnClick = (e: any) => {
-        /*      if (PopperEl && PopperEl.current && !PopperEl.current.contains(e.target)) {
-                 
-             }
-      */
-        setShowPopper(false)
-        document.removeEventListener('click', closeOnClick);
+        if (ToolTipEl && ToolTipEl.current && !ToolTipEl.current.contains(e.target)) {
+            setShowPopper(false)
+            document.removeEventListener('click', closeOnClick);
+        }
+
+
 
     }
     const handleShowPopper = (e: any) => {
         e.preventDefault()
-        setShowPopper(!showPopper)
+        setShowPopper(true)
         document.addEventListener('click', closeOnClick);
     }
-
     return (
-        <>
+        <div ref={ToolTipEl} className="flex justify-center items-center">
             <button onClick={handleShowPopper} onKeyDown={handleShowPopper} type="button" ref={setReferenceElement}>
                 {children}
             </button>
@@ -49,14 +48,15 @@ const ShareIconPopper: React.FC<IProps> = ({ popperContent, children, placement 
                     style={styles.popper} {...attributes.popper}
 
                 >
-                    <div className="flex" ref={PopperEl}>
+                    <div className="flex" ref={PopperEl} style={placement === "right" ? { left: "-20px" } : { top: "-20px" }}>
+
                         {popperContent}
                     </div>
                     {/*          <div className="ac-popper" ref={setArrowElement} style={{ ...styles.arrow, bottom: "-5px" }} /> */}
 
                 </div>
             )}
-        </>
+        </div>
     );
 };
 

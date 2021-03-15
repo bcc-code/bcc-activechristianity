@@ -64,7 +64,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-
   return (
 
     <div className="standard-max-w">

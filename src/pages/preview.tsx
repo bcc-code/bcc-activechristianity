@@ -129,7 +129,7 @@ const Preview = () => {
     }
     React.useEffect(() => {
         if (type === "post" && typeof id === "string") {
-            console.log('getting post')
+
             setPage(null)
             getPost(id)
 
@@ -206,13 +206,13 @@ const Preview = () => {
             }
         </main>
     ) : (
-            <div className="max-w-tablet mx-auto">
-                <h1 className="text-gray-200 text-center" style={{ fontSize: "80px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
-                    Loading
+        <div className="max-w-tablet mx-auto">
+            <h1 className="text-gray-200 text-center" style={{ fontSize: "80px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
+                Loading
                 </h1>
 
-            </div>
-        )
+        </div>
+    )
 }
 
 export default Preview

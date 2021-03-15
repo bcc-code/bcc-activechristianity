@@ -212,7 +212,7 @@ module.exports.createSubTopicPages=({
           isTopic
 /*            ...node */
         }
-        console.log(pagePath)
+
         createPage({
           path:pagePath,
           component,

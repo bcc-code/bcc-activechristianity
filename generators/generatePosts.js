@@ -345,7 +345,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               if (format) {
                                   breadcrumb.push(format[0])
                               }
-                              const updated_at_IOS = new Date(node.updated_at); 
+
                               const data = {
                                 normalized,
                                 allInterestedPosts,
@@ -385,6 +385,7 @@ module.exports = async function generatePosts(actions, graphql) {
                           totalPages:pageCount,
                           baseUrl
                         },
+                        pageType:"latest",
                         title:ac_strings.latest
                       }
                       createPage({
