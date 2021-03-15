@@ -79,6 +79,12 @@ const options = {
             latest:allSitePage {
               ${pagesQuery}
             }
+            catergory:allSitePage {
+              ${pagesQuery}
+            }
+            playlist:allSitePage {
+              ${pagesQuery}
+            }
         }`,
         mapping: {
           posts:{
@@ -130,7 +136,22 @@ const options = {
               return Array.isArray(nodeMaps['latest'])?nodeMaps['latest']:[]
  
             }
+          },
+          categories:{
+            sitemap: `category`,
+            serializer: (nodes) => {
+              return Array.isArray(nodeMaps['category'])?nodeMaps['category']:[]
+ 
+            }
+          },
+          playlists:{
+            sitemap: `playlist`,
+            serializer: (nodes) => {
+              return Array.isArray(nodeMaps['playlist'])?nodeMaps['playlist']:[]
+ 
+            }
           }
+          
           
         },
         additionalSitemaps: [ // optional: add additional sitemaps, which are e. g. generated somewhere else, but need to be indexed for this domain
