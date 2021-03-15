@@ -6,7 +6,7 @@ import AcLogoOnly from '@/images/ACLogo/LogoOnly'
 
 const Footer: React.FC = () => {
     return (
-        <div className="w-full border-t relative bg-white z-50">
+        <div className="w-full border-t relative bg-white z-50 pb-32">
             <div className="standard-max-w flex flex-col sm:flex-row">
                 <div className=" sm:w-1/2 w-full flex flex-col sm:flex-row items-center sm:items-start border-b sm:border-none px-4 sm:py-10">
                     <div className="p-4">
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="w-full sm:border-t">
-                <div className="standard-max-w  w-full flex flex-col sm:flex-row px-4 py-8 text-sm sm:justify-between">
+                <div className="standard-max-w  w-full flex flex-col sm:flex-row px-4 pt-8 pb-16 text-sm sm:justify-between">
                     <div className="text-d4cadet-blue order-2 sm:order-1 sm:max-w-1/2">
                         {ac_strings.copyright}
                     </div>

@@ -1,6 +1,4 @@
 import * as React from 'react'
-import loadable from '@loadable/component'
-const ToolTip = loadable(() => import('./'))
 
 import {
     EmailShareButton,
@@ -39,46 +37,38 @@ const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, o
     const shareContent = `Title: ${title} - Quote: "${text}"`
     return (
         <>
-            <ToolTip
-
-                popperContent={
-                    <div
-                        className="bg-ac-slate-dark text-white rounded-lg px-2 mr-4"
-
-
+            <div
+                className="bg-ac-slate-dark text-white rounded-lg px-2"
+            >
+                <div className="flex">
+                    <FacebookShareButton
+                        url={shareUrl}
+                        quote={text}
                     >
-                        <div className="flex">
-
-                            <FacebookShareButton
-                                url={shareUrl}
-                                quote={text}
-                            >
-                                <FacebookIcon {...IconProps} />
-                            </FacebookShareButton>
-                            <TwitterShareButton url={options.shareUrl}>
-                                <TwitterIcon {...IconProps} />
-                            </TwitterShareButton>
-                            <WhatsappShareButton url={options.shareUrl}>
-                                <WhatsappIcon {...IconProps} />
-                            </WhatsappShareButton>
-                            <TelegramShareButton
-                                url={options.shareUrl}
-                                title={shareContent}
-                            >
-                                <TelegramIcon {...IconProps} />
-                            </TelegramShareButton>
-                            <EmailShareButton
-                                url={options.shareUrl}
-                                subject={title}
-                                body={text}
-                            >
-                                <EmailIcon {...IconProps} />
-                            </EmailShareButton>
-                        </div>
-                        {/* <div className="ac-popper" ref={setArrowElement} style={{ ...styles.arrow, bottom: `-5px` }} /> */}
-                    </div>
-                }
-            />
+                        <FacebookIcon {...IconProps} />
+                    </FacebookShareButton>
+                    <TwitterShareButton url={options.shareUrl}>
+                        <TwitterIcon {...IconProps} />
+                    </TwitterShareButton>
+                    <WhatsappShareButton url={options.shareUrl}>
+                        <WhatsappIcon {...IconProps} />
+                    </WhatsappShareButton>
+                    <TelegramShareButton
+                        url={options.shareUrl}
+                        title={shareContent}
+                    >
+                        <TelegramIcon {...IconProps} />
+                    </TelegramShareButton>
+                    <EmailShareButton
+                        url={options.shareUrl}
+                        subject={title}
+                        body={text}
+                    >
+                        <EmailIcon {...IconProps} />
+                    </EmailShareButton>
+                </div>
+                {/* <div className="ac-popper" ref={setArrowElement} style={{ ...styles.arrow, bottom: `-5px` }} /> */}
+            </div>
 
         </>
     );

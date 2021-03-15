@@ -20,7 +20,6 @@ export interface IDropdownProps {
 }
 const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label, className }) => {
     const [showDropdown, setShowDropdown] = React.useState(false)
-    console.log(selected)
     const inputEl = React.useRef<HTMLInputElement>(null);
 
     const closeOnClick = (e: any) => {

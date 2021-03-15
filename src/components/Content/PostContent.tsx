@@ -115,7 +115,7 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
                             /* toSetPostion.top =  */
                             toSetPostion.top = toSetPostion.top + (position.bottom - position.top)
                         } else {
-                            toSetPostion.top = toSetPostion.top - 30
+                            toSetPostion.top = toSetPostion.top - 45
                         }
                         if (isForward) {
                             toSetPostion.right = contentEl.current.clientWidth - position.right + contentDivPosition.left
@@ -125,14 +125,11 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
 
                         setPosition(toSetPostion)
                         if (isGlossary) {
-                            console.log(isGlossary)
-                            console.log(glossary)
                             const findGlossary = glossary?.find(g => {
                                 return g.word.toLocaleLowerCase() === e.target.textContent.toLocaleLowerCase()
                             })
 
                             if (findGlossary) {
-                                console.log(findGlossary)
                                 setGlossaryContent(findGlossary)
                                 setShowPopper(false)
                                 setShowGlossary(true)

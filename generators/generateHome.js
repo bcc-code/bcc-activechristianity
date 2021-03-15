@@ -8,7 +8,7 @@ const baseUrl = endpoints.api_url
 const headers = {
     "x-lang": process.env.LANG_CODE
     }
-const languagePostQuery = postQuery
+
 const topicQuery=`
     id
     name
@@ -22,7 +22,7 @@ const topicQuery=`
       }
     somePosts(first:12){
         data {
-            ${languagePostQuery}
+            ${postQuery}
         }
       }
 `
@@ -30,10 +30,10 @@ const query =`{
     allAcNodeSetting {
         nodes {
             popular_posts {
-                ${languagePostQuery}
+                ${postQuery}
             }
             featured_posts {
-                ${languagePostQuery}
+                ${postQuery}
             }
         }
     }
@@ -42,7 +42,7 @@ const query =`{
 
         latestPosts:posts(page:1,first:12){
             data {
-                ${languagePostQuery}
+                ${postQuery}
             }
           }
         featuredTopics:topics(featured:true) {

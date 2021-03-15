@@ -17,16 +17,13 @@ const query = `{
   ac {
     topics(hasPosts: true) {
       ${topicQuery}
-
       pagination:somePosts(first:12){
-
           paginatorInfo {
               total
               count
               currentPage
           }
       }
-      
     }
 
     allPages {
@@ -154,7 +151,6 @@ module.exports = function generateTopics(actions, graphql) {
 
               if (["type","format","topic"].includes(topicType)){//["type","format","topic"]
                 const contextPostsQuery = getContextPostsQuery(node.id)
-                
                 const contextPostsRes = await graphql(contextPostsQuery)
                   .then(res=>{
                       if(res.errors){
