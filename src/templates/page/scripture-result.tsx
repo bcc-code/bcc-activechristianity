@@ -37,13 +37,14 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
     const [posts, setPosts] = React.useState<string[]>([])
     const location = useLocation();
     const parsed = getAllUrlParams(location.search);
-    const { bookId, ch, bookName } = parsed
+    const { bookid, ch, bookname } = parsed
     React.useEffect(() => {
 
-        if (typeof bookId === "string" && typeof ch === "string") {
+        if (typeof bookid === "string" && typeof ch === "string") {
             acApiModule.then(res => {
                 const acApi = res.default
-                acApi.getScriptureChaptersPost(bookId, ch).then(res => {
+                acApi.getScriptureChaptersPost(bookid, ch).then(res => {
+                    console.log(res)
                     setPosts(res.biblePosts.map(item => item.slug))
                 })
             })
@@ -58,10 +59,13 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                 translatedUrls={[]}
                 breadcrumb={[menusItems.scripture]}
             />
-            <LayoutH1 title={`${bookName ? `${bookName} ${ch}` : title}`} />
-            <PostList
-                posts={posts}
-            />
+            <div className={`px-4 pt-8 sm:pt-0`}>
+                <PostList
+                    posts={posts}
+                />
+            </div>
+            <LayoutH1 title={`${bookname ? `${bookname} ${ch}` : title}`} />
+
         </div>
     )
 }
