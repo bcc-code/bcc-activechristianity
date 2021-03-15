@@ -84,12 +84,7 @@ module.exports = function generateTopics(actions, graphql) {
             console.log("generating topics")
             const topicInfo = result.data.ac.topics          
             const groupedTopics={}
- /*            {
-              [key: string]: {
-                  info: INavItem
-                  topics: ITopicNavItem[]
-              }
-          } =  */
+
             for(let t=0;t<topicInfo .length;t++){
               const node = topicInfo[t]
                 
