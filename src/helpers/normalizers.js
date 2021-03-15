@@ -154,7 +154,7 @@ const normalizeTracks = (tracks) => {
 
 const filterTopics = (props) => {
     const { topics, returnSlugs } = props
-    console.log(topics)
+
     const allTopics= []
     topics.forEach(t => {
         if (t) {
@@ -269,7 +269,6 @@ const processRecommendationContext = (data) => {
     const featured = featuredPosts.map(p => normalizePostRes(p))
     const popular = popularPosts.map(p => normalizePostRes(p))
     const latest = latestPosts.slice(0, 6).map(p => normalizePostRes(p))
-    console.log(featured)
 
     return ({
         featured,

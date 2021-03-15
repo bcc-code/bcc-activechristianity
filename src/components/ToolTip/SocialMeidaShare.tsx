@@ -38,7 +38,7 @@ const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, o
     return (
         <>
             <div
-                className="bg-ac-slate-dark text-white rounded-lg px-2 mr-4"
+                className="bg-ac-slate-dark text-white rounded-lg px-2"
             >
                 <div className="flex">
                     <FacebookShareButton

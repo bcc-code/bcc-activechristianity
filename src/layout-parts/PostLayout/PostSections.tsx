@@ -187,6 +187,7 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
                     text={text ? text : ""}
                     label={ac_strings.share}
                     color="slate-dark"
+                    placement="left"
                 />
             </div>
         </div>
