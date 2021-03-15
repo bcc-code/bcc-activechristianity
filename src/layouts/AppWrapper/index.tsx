@@ -17,7 +17,6 @@ import { getUserLibrary } from '@/state/action/userAction'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import shortid from 'shortid'
 import BottomMobile from '@/layout-parts/Nav/BottomMobile'
-
 import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 import Helmet from 'react-helmet'
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
@@ -126,6 +125,9 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             </div>
 
             <BottomMobile {...NavProps} key={shortid()} />
+            <LazyLoad>
+                <Footer />
+            </LazyLoad>
         </>
 
     )

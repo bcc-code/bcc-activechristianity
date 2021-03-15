@@ -237,7 +237,7 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPla
                     text={text ? text : ""}
                     color="secondary"
                     size="6"
-                    placement="right"
+                    placement="left"
                 />
 
 

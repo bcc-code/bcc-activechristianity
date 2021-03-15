@@ -138,19 +138,18 @@ module.exports.createArchivePages =async function ({
           }
 
         })
-        console.log(pagePath)
-            createPage({
-              path:pagePath,
-              component,
-              context: {
-                posts: perPagePosts,
-                paginate,
-                id:node.id,
-                title:node.name,
-                image:node.image,
-                breadcrumb
-              },
-            })
+        createPage({
+          path:pagePath,
+          component,
+          context: {
+            posts: perPagePosts,
+            paginate,
+            id:node.id,
+            title:node.name,
+            image:node.image,
+            breadcrumb
+          },
+        })
 
 
       }
@@ -202,7 +201,7 @@ module.exports.createSubTopicPages=({
           isTopic
 /*            ...node */
         }
-        console.log(pagePath)
+
         createPage({
           path:pagePath,
           component,

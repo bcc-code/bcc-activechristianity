@@ -1,7 +1,7 @@
 import * as React from 'react'
 import loadable from '@loadable/component'
 import { ShareOutlinedIcon } from '@/components/Icons/MUI/postIcons'
-
+import ToolTip from '@/components/ToolTip'
 const ToolTipShare = loadable(() => import('@/components/ToolTip/SocialMeidaShare'))
 //popoverClick
 interface IProps {
@@ -34,29 +34,33 @@ const SharePopover: React.FC<IProps> = ({ shareUrl, text, label, color, size, pl
         document.addEventListener('click', closeOnClick);
 
     }
+
     return (
-        <div className="relative flex items-center font-roboto" ref={popoverEl}>
-            {active && (
-                <div className="absolute" style={placement === "right" ? { left: "-20px" } : { top: "-20px" }}>
+        <div className="relative flex items-center font-roboto">
+            <ToolTip
+                placement={placement}
+                popperContent={(
                     <ToolTipShare
                         shareUrl={options.shareUrl}
                         text={text}
                         placement={placement}
+
                     />
-                </div>
-            )}
-            <button
-                className="flex items-center"
-                onClick={handleShareClick}
-                onKeyDown={handleShareClick}
+                )}
             >
+                <button
+                    className="flex items-center"
+                    onClick={handleShareClick}
+                    onKeyDown={handleShareClick}
+                >
 
-                <ShareOutlinedIcon
-                    className={`${color ? `fill-${color}` : "fill-slate-light"}`}
-                    customSize={size ? size : "5"}
-                />{label && <span className="px-2 hidden sm:block text-xs">{label}</span>}
+                    <ShareOutlinedIcon
+                        className={`${color ? `fill-${color}` : "fill-slate-light"}`}
+                        customSize={size ? size : "5"}
+                    />{label && <span className="px-2 hidden sm:block text-xs">{label}</span>}
 
-            </button>
+                </button>
+            </ToolTip>
         </div>
 
     )

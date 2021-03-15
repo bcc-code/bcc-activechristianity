@@ -206,7 +206,7 @@ const normalizePostRes = (post) => {
 
     const readingTimeMinutes = secondesToMinutes(readtime)
     const postItem = {
-        id:acId,
+        id:acId?acId:id,
         title,
         excerpt,
         authors: normalizeAuthors(authors),
@@ -269,7 +269,7 @@ const processRecommendationContext = (data) => {
     const featured = featuredPosts.map(p => normalizePostRes(p))
     const popular = popularPosts.map(p => normalizePostRes(p))
     const latest = latestPosts.slice(0, 6).map(p => normalizePostRes(p))
-
+    console.log(featured)
 
     return ({
         featured,
