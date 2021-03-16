@@ -326,6 +326,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               const mediaTypes= []
 
                               let defaultMediaType = "none"
+                              
                               if (media.audio) {
                                   mediaTypes.push("audio")
                                   defaultMediaType = "audio"
@@ -366,6 +367,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               }
 /*                               console.log(normalized.slug)
                               console.log(data.mediaTypes.types) */
+                              
                               createPage({
                                 path: `${normalized.slug}`,
                                 component: path.resolve(template),

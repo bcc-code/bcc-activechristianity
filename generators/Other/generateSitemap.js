@@ -4,30 +4,51 @@ const nodeMaps={
 
 }
 const packageJson = require('../../package.json')
+
 const processNodes = (nodes)=>{
     nodes.forEach(({node}) => {
      
         const {slug, context }=node
         const getType=context && context.pageType?context.pageType:"other"
+        const isVideo=context && context.mediaTypes && context.mediaTypes.types && context.mediaTypes.types==="video"
         let versionUpdated = packageJson['version-updated-at']
-
+        const thumbnail = context && context.normalized && context.normalized.image && context.normalized.image.src;
         if (context && context.updated_at){
           const d1 = new Date(versionUpdated);
           const d2 = new Date(context.updated_at);
           versionUpdated =d2>d1?context.updated_at:versionUpdated
         }
+        
         const toAdd = {
             node:{
               ...node,
               slug,
               updated_at:versionUpdated,
-              feature_image:context && context.normalized && context.normalized.image && context.normalized.image.src
+              feature_image:thumbnail
             }
           }
         if(nodeMaps[getType]){
             nodeMaps[getType].push(toAdd)
         } else {
             nodeMaps[getType]=[toAdd]
+        }
+
+        if(isVideo){
+          const toAddVideo = {
+            node:{
+              ...node,
+              slug,
+              updated_at:versionUpdated,
+              video: {
+                thumbnail_loc:thumbnail,
+                title:context.normalized.title,
+                expect:context.normalized.exceprt,
+                content_loc:context.normalized.media.video.src
+              }
+            }
+          }
+
+          nodeMaps["videos"]=[toAddVideo]
         }
     });
 
@@ -43,9 +64,11 @@ const pagesQuery = `
             pageType
             updated_at
             normalized {
-            image {
-                src
-            }
+              title
+              excerpt
+              image {
+                  src
+              }
             }
         }
         }
@@ -54,9 +77,9 @@ const pagesQuery = `
 const options = {
     query: `{
             site {
-            siteMetadata {
-                siteUrl
-            }
+              siteMetadata {
+                  siteUrl
+              }
             }
             allSitePage {
                 ${pagesQuery}
@@ -82,9 +105,13 @@ const options = {
             catergory:allSitePage {
               ${pagesQuery}
             }
-            playlist:allSitePage {
+            playlists:allSitePage {
               ${pagesQuery}
             }
+            videos:allSitePage {
+              ${pagesQuery}
+            }
+            
         }`,
         mapping: {
           posts:{
@@ -97,7 +124,7 @@ const options = {
             }
           },
           contributors:{
-            sitemap: `contributor`,
+            sitemap: `contributors`,
             serializer: (nodes) => {
               return Array.isArray(nodeMaps['contributor'])?nodeMaps['contributor']:[] 
  
@@ -123,7 +150,7 @@ const options = {
  
             }
           },
-          others:{
+          allSitePage:{
             sitemap: `other`,
             serializer: (nodes) => {
               return Array.isArray(nodeMaps['other'])?nodeMaps['other']:[]
@@ -138,16 +165,23 @@ const options = {
             }
           },
           categories:{
-            sitemap: `category`,
+            sitemap: `categories`,
             serializer: (nodes) => {
               return Array.isArray(nodeMaps['category'])?nodeMaps['category']:[]
  
             }
           },
           playlists:{
-            sitemap: `playlist`,
+            sitemap: `playlists`,
             serializer: (nodes) => {
               return Array.isArray(nodeMaps['playlist'])?nodeMaps['playlist']:[]
+ 
+            }
+          },
+          videos:{
+            sitemap: `videos`,
+            serializer: (nodes) => {
+              return Array.isArray(nodeMaps['video'])?nodeMaps['video']:[]
  
             }
           }

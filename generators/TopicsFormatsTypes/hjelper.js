@@ -2,7 +2,8 @@ const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
 const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
-const listTemplate = 'src/templates/archive/post-list-query.tsx'
+const listTemplateQuery = 'src/templates/archive/post-list-query.tsx'
+const listTemplateStatic = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
 
 const perPage= 12
@@ -113,16 +114,20 @@ module.exports.createArchivePages =async function ({
   const {total,count}=paginatorInfo 
   const hasRecommendPage=total>10
   const totalPages = Math.ceil(total/count);
-
+  const isTopic = topicType==='topic'
+  const isType = topicType==='type'
+  const generatePageCount = isType?totalPages:1
   //*only create the first page, and use query strings for the rest
     let firstPostsDate = ''
-      for (let i = 1; i <=1; i++){
+      for (let i = generatePageCount; i <=1; i++){
         let currentPage = i
         let pagePath = `${baseUrl}/${currentPage}`
+       
         if(i===1){
-            pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
+            pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
-        const component = (`${node.id}`===typesAll.watch || `${node.id}`===formatsAll.animation)?path.resolve(videoTemplate): path.resolve(listTemplate)
+        const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
+      
         const paginate = {
           currentPage,
           totalPages,
@@ -150,7 +155,8 @@ module.exports.createArchivePages =async function ({
               path:pagePath,
               component,
               context: {
-                pageType:"topic",
+                fetchedPost: isType,
+                pageType:isType?"category":"topic",
                 type:node.topicType,
                 updated_at:firstPostsDate,
                 posts: perPagePosts,
@@ -191,7 +197,7 @@ module.exports.createSubTopicPages=({
       })
       const totalPages = Math.ceil(totalCount / perPage)
       const component = (`${topic.id}`===typesAll.watch || 
-      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplateQuery)
          
       let currentPage = 1
       // 

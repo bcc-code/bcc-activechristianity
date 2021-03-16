@@ -52,7 +52,7 @@ module.exports = function generatePlaylists(actions, graphql) {
       console.log("Generating playlist")
       _.each(playlists, (playlist) => {
         const basePath = `/${ac_strings.slug_playlist}/${playlist.slug}`
-
+        console.log(basePath)
         createPage({
           path: basePath,
           component: path.resolve(template),
