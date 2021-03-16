@@ -74,7 +74,8 @@ const plugins = [
  /*  {
     resolve: `gatsby-plugin-nprogress`,
     showSpinner: true,
-  } */{ 
+  } */
+/*   { 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -85,7 +86,7 @@ const plugins = [
       purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
     }
   },
-  "gatsby-plugin-webpack-bundle-analyser-v2",
+  "gatsby-plugin-webpack-bundle-analyser-v2", */
   'gatsby-plugin-loadable-components-ssr'
 ];
 

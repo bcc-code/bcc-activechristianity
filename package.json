@@ -3,7 +3,7 @@
   "private": true,
   "description": "Gatsby built site for ActiveChristianity",
   "version": "2.1.0",
-  "version-updated-at":"2021-03-02",
+  "version-updated-at": "2021-03-02",
   "author": "activechristianity@gmail.com",
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
@@ -21,7 +21,7 @@
     "algoliasearch": "^4.4.0",
     "autoprefixer": "^10.2.1",
     "gatsby": "^2.30.2",
-    "gatsby-plugin-advanced-sitemap": "^1.6.0",
+    "gatsby-plugin-advanced-sitemap": "file:gatsby-plugin-advanced-sitemap",
     "gatsby-plugin-algolia-search": "file:gatsby-plugin-algolia-search",
     "gatsby-plugin-feed": "^2.11.0",
     "gatsby-plugin-feed-generator": "^2.0.5",
