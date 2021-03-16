@@ -41,6 +41,7 @@ const processNodes = (nodes, key)=>{
               ...node,
               slug,
               updated_at:versionUpdated,
+              feature_image:thumbnail,
               video: {
                 thumbnail_loc:thumbnail,
                 title:context.normalized.title,
