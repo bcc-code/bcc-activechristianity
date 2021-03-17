@@ -212,11 +212,15 @@ module.exports = async function generatePosts(actions, graphql) {
                   
                   const baseUrl = `${ac_strings.slug_latest}`
                   let currentPage = 1
+                  let firstPostsDate = ''
                   for (let i = 0; i < pageCount ; i++) {
                     
                       const postsRes = await graphql(getPerPageQuery(i))
                       const posts = postsRes.data.allAcNodePost.edges
-
+                      if(i===1 && posts.length>0){
+                        firstPostsDate=posts[0].updated_at
+          
+                      }
                       // create latest page 
                       let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
 
@@ -256,7 +260,7 @@ module.exports = async function generatePosts(actions, graphql) {
 
                               if (!typeIds[t.id]){
                                 const info = topicArchivePageCount[t.slug]
-                              const getRandomCount = Math.ceil(Math.random() * info.count)
+                                const getRandomCount = Math.ceil(Math.random() * info.count)
                               let toAdd = []
                               if(getRandomCount===1 ){
                             
@@ -388,7 +392,8 @@ module.exports = async function generatePosts(actions, graphql) {
                           baseUrl
                         },
                         pageType:"latest",
-                        title:ac_strings.latest
+                        title:ac_strings.latest,
+                        updated_at:firstPostsDate,
                       }
                       createPage({
                         path:pagePath,

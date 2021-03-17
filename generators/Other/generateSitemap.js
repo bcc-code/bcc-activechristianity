@@ -116,7 +116,7 @@ const options = {
             latest:allSitePage {
               ${pagesQuery}
             }
-            catergory:allSitePage {
+            catergories:allSitePage {
               ${pagesQuery}
             }
             playlists:allSitePage {
