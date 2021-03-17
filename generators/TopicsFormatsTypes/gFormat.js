@@ -16,6 +16,7 @@ module.exports = async function generateFormat(data) {
         path:format.slug,
         component:path.resolve(formatTemplate),
         context: {
+          pageType:"topic",
           updated_at:today.toDateString(),
           id:format.id,
           title:format.name,

@@ -68,6 +68,17 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
+  { 
+    resolve: `gatsby-plugin-purgecss`,
+    options: {
+      printRejected: true, // Print removed selectors and processed file names
+      //develop: true, // Enable while using `gatsby develop`
+     tailwind: true, // Enable tailwindcss support
+      // whitelist: ['whitelist'], // Don't remove this selector
+      // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+      purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
+    }
+  },
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
   // 'gatsby-plugin-offline',

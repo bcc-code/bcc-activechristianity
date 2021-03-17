@@ -203,10 +203,11 @@ module.exports.createSubTopicPages=({
       // 
       for (let i = 0; i <=1; i += perPage, currentPage++) {
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
+        const pageType="topic"
         const context = {
           id:topic.id,
           subTopicId:subTopic.id,
-          pageType:isType?"category":"topic",
+          pageType,
           type,
           posts: allPosts,
           paginate: {

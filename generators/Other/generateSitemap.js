@@ -116,7 +116,7 @@ const options = {
             latest:allSitePage {
               ${pagesQuery}
             }
-            catergories:allSitePage {
+            categories:allSitePage {
               ${pagesQuery}
             }
             playlists:allSitePage {
@@ -182,6 +182,7 @@ const options = {
             sitemap: `categories`,
             serializer: (nodes) => {
               const posts = processNodes(nodes,'category')
+
               return Array.isArray(posts)?posts:[] 
  
             }
@@ -191,7 +192,6 @@ const options = {
             serializer: (nodes) => {
               const posts = processNodes(nodes,'playlist')
               return Array.isArray(posts)?posts:[] 
- 
             }
           },
           videos:{
