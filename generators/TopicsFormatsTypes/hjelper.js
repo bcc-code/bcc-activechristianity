@@ -119,13 +119,14 @@ module.exports.createArchivePages =async function ({
   const generatePageCount = isType?totalPages:1
   //*only create the first page, and use query strings for the rest
     let firstPostsDate = ''
-      for (let i = generatePageCount; i <=1; i++){
+      for (let i = 1; i <=generatePageCount; i++){
         let currentPage = i
         let pagePath = `${baseUrl}/${currentPage}`
        
         if(i===1){
             pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
+        console.log(pagePath)
         const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
       
         const paginate = {
