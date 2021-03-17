@@ -33,6 +33,8 @@ var RESOURCESFILE = "/sitemap-:resource.xml";
 
 var XSLFILE = _path.default.resolve(__dirname, "./static/sitemap.xsl");
 
+var XSLVIDEOFILE = _path.default.resolve(__dirname, "./static/sitemap-video.xsl");
+
 var DEFAULTQUERY = "{\n  allSitePage {\n    edges {\n      node {\n        id\n        slug: path\n        url: path\n      }\n    }\n  }\n  site {\n    siteMetadata {\n      siteUrl\n    }\n  }\n}";
 var DEFAULTMAPPING = {
   allSitePage: {
@@ -43,7 +45,7 @@ var siteURL;
 
 var copyStylesheet = /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(_ref) {
-    var siteUrl, pathPrefix, indexOutput, siteRegex, data, sitemapStylesheet;
+    var siteUrl, pathPrefix, indexOutput, siteRegex, data, dataVideo, sitemapStylesheet, sitemapVideoStylesheet;
     return _regenerator.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -56,14 +58,24 @@ var copyStylesheet = /*#__PURE__*/function () {
 
           case 4:
             data = _context.sent;
+            _context.next = 7;
+            return utils.readFile(XSLVIDEOFILE);
+
+          case 7:
+            dataVideo = _context.sent;
             // Replace the `{{blog-url}}` variable with our real site URL
-            sitemapStylesheet = data.toString().replace(siteRegex, _url.default.resolve(siteUrl, _path.default.join(pathPrefix, indexOutput))); // Save the updated stylesheet to the public folder, so it will be
+            sitemapStylesheet = data.toString().replace(siteRegex, _url.default.resolve(siteUrl, _path.default.join(pathPrefix, indexOutput)));
+            sitemapVideoStylesheet = dataVideo.toString().replace(siteRegex, _url.default.resolve(siteUrl, _path.default.join(pathPrefix, indexOutput))); // Save the updated stylesheet to the public folder, so it will be
             // available for the xml sitemap files
 
-            _context.next = 8;
+            _context.next = 12;
             return utils.writeFile(_path.default.join(PUBLICPATH, "sitemap.xsl"), sitemapStylesheet);
 
-          case 8:
+          case 12:
+            _context.next = 14;
+            return utils.writeFile(_path.default.join(PUBLICPATH, "sitemap-video.xsl"), sitemapVideoStylesheet);
+
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -451,7 +463,7 @@ exports.onPostBuild = /*#__PURE__*/function () {
 
           case 38:
             if (!(_i < _resourcesSiteMapsArr.length)) {
-              _context2.next = 52;
+              _context2.next = 53;
               break;
             }
 
@@ -459,32 +471,33 @@ exports.onPostBuild = /*#__PURE__*/function () {
             filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type); // Save the generated xml files in the public folder
 
             _context2.prev = 41;
-            _context2.next = 44;
+            console.log(sitemap.xml);
+            _context2.next = 45;
             return utils.writeFile(filePath, sitemap.xml);
 
-          case 44:
-            _context2.next = 49;
+          case 45:
+            _context2.next = 50;
             break;
 
-          case 46:
-            _context2.prev = 46;
+          case 47:
+            _context2.prev = 47;
             _context2.t1 = _context2["catch"](41);
             console.error(_context2.t1);
 
-          case 49:
+          case 50:
             _i++;
             _context2.next = 38;
             break;
 
-          case 52:
+          case 53:
             return _context2.abrupt("return");
 
-          case 53:
+          case 54:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[29, 34], [41, 46]]);
+    }, _callee2, null, [[29, 34], [41, 47]]);
   }));
 
   return function (_x2, _x3) {

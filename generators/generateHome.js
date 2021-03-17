@@ -164,8 +164,9 @@ module.exports = function generatePages(actions, graphql) {
             const popularPosts = popularPostsAll.dynamic && popularPostsAll.dynamic.length > 0 ? popularPostsAll.dynamic : popularPostsAll.static
             const props =processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
             const { latest, popular, featured } = props
+            const today=new Date()
             const context = {
-                pageType:"home",
+                updated_at:today.toDateString(),
                 latest,
                 featured,
                 popular,

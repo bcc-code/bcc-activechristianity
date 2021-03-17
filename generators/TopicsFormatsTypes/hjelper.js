@@ -183,7 +183,7 @@ module.exports.createSubTopicPages=({
   totalCount,
 })=>{
 
-
+  const isType = type==='type'
 
     if (!totalCount) {
 
@@ -206,6 +206,7 @@ module.exports.createSubTopicPages=({
         const context = {
           id:topic.id,
           subTopicId:subTopic.id,
+          pageType:isType?"category":"topic",
           type,
           posts: allPosts,
           paginate: {

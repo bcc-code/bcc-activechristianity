@@ -163,16 +163,8 @@ const options = {
               return Array.isArray(posts)?posts:[] 
             }
           },
-          homes:{
-            sitemap: `home`,
-            serializer: (nodes) => {
-              const posts = processNodes(nodes,'home')
-              return Array.isArray(posts)?posts:[] 
- 
-            }
-          },
           allSitePage:{
-            sitemap: `other`,
+            sitemap: `page`,
             serializer: (nodes) => {
               const posts = processNodes(nodes,'other')
               return Array.isArray(posts)?posts:[] 
@@ -210,12 +202,7 @@ const options = {
  
             }
           }
-        },
-        additionalSitemaps: [ // optional: add additional sitemaps, which are e. g. generated somewhere else, but need to be indexed for this domain
-          {
-              name: `other-pages`,
-              url: `/other-pages.xml`,
-          }]
+        }
 }
 
 module.exports.options=options

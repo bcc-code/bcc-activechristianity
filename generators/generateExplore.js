@@ -64,7 +64,6 @@ module.exports = function generateTopics(actions, graphql) {
                 const {popularTopics} = popularTopicsRes.data.ac
 
                   const contextExplore = {
-                    pageType:"home",
                     title: explorePage.title,
                     slug:  explorePage.slug,
                     popularTopics,

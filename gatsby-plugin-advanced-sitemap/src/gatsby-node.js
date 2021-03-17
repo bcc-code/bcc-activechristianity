@@ -10,6 +10,7 @@ import * as utils from './utils';
 const PUBLICPATH = `./public`;
 const RESOURCESFILE = `/sitemap-:resource.xml`;
 const XSLFILE = path.resolve(__dirname, `./static/sitemap.xsl`);
+const XSLVIDEOFILE = path.resolve(__dirname, `./static/sitemap-video.xsl`);
 const DEFAULTQUERY = `{
   allSitePage {
     edges {
@@ -38,13 +39,14 @@ const copyStylesheet = async ({siteUrl, pathPrefix, indexOutput}) => {
 
     // Get our stylesheet template
     const data = await utils.readFile(XSLFILE);
-
+    const dataVideo = await utils.readFile(XSLVIDEOFILE);
     // Replace the `{{blog-url}}` variable with our real site URL
     const sitemapStylesheet = data.toString().replace(siteRegex, url.resolve(siteUrl, path.join(pathPrefix, indexOutput)));
-
+    const sitemapVideoStylesheet = dataVideo.toString().replace(siteRegex, url.resolve(siteUrl, path.join(pathPrefix, indexOutput)));
     // Save the updated stylesheet to the public folder, so it will be
     // available for the xml sitemap files
     await utils.writeFile(path.join(PUBLICPATH, `sitemap.xsl`), sitemapStylesheet);
+    await utils.writeFile(path.join(PUBLICPATH, `sitemap-video.xsl`), sitemapVideoStylesheet);
 };
 
 const serializeMarkdownNodes = (node) => {
@@ -354,6 +356,7 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
 
         // Save the generated xml files in the public folder
         try {
+            console.log(sitemap.xml)
             await utils.writeFile(filePath, sitemap.xml);
         } catch (err) {
             console.error(err);

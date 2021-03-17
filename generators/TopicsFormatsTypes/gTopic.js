@@ -13,13 +13,14 @@ module.exports = async function generateTopic(data) {
 
     // create recommend
     const pagePath = `${ac_strings.slug_topic}/${topic.slug}`
-
+    const today=new Date()
     if(hasRecommendPage){
       return createPage({
         path:pagePath,
         component:path.resolve(topicRecommendTemplate),
         context: {
-          pageType:"home",
+          pageType:"topic",
+          updated_at:today.toDateString(),
           id:topic.id,
           title:topic.name,
           slug:topic.slug,

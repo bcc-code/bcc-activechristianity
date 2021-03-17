@@ -8,7 +8,7 @@
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <title>XML Sitemap</title>
+                <title>XML Video Sitemap</title>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <style type="text/css">
                     body {
@@ -92,8 +92,9 @@
                         <table id="sitemap" cellpadding="3">
                             <thead>
                                 <tr>
-                                    <th width="70%">URL (<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/> total)</th>
+                                    <th width="55%">URL (<xsl:value-of select="count(sitemap:urlset/sitemap:url)"/> total)</th>
                                     <th width="15%">Images</th>
+                                    <th width="15%">Video</th>
                                     <th title="Last Modification Time" width="15%">Last Modified</th>
                                 </tr>
                             </thead>
@@ -112,6 +113,9 @@
                                         </td>
                                         <td>
                                             <xsl:value-of select="count(image:image)"/>
+                                        </td>
+                                        <td>
+                                            <xsl:value-of select="count(video:video)"/>
                                         </td>
                                         <td>
                                             <xsl:value-of select="concat(substring(sitemap:lastmod,0,11),concat(' ', substring(sitemap:lastmod,12,5)))"/>

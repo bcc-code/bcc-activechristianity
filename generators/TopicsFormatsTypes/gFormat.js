@@ -11,11 +11,12 @@ module.exports = async function generateFormat(data) {
         items:[]
     }
     console.log(format.slug)
+    const today=new Date()
     createPage({
         path:format.slug,
         component:path.resolve(formatTemplate),
         context: {
-          pageType:"home",
+          updated_at:today.toDateString(),
           id:format.id,
           title:format.name,
           image:format.image,

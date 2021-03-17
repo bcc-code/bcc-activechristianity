@@ -134,10 +134,12 @@ module.exports = async function generateTypes(data) {
             return b.count - a.count
         }
     })
-
+    const today=new Date()
+ 
     const typekey=nodeInfo.key
     const context= {
-        pageType:"home",
+        pageType:"category",
+        updated_at:today.toDateString(),
         typekey,
         title:type.name,
         breadcrumb,
