@@ -86,18 +86,9 @@ const plugins = [
     resolve: `gatsby-plugin-nprogress`,
     showSpinner: true,
   } */
-/*   { 
-    resolve: `gatsby-plugin-purgecss`,
-    options: {
-      printRejected: true, // Print removed selectors and processed file names
-      //develop: true, // Enable while using `gatsby develop`
-     tailwind: true, // Enable tailwindcss support
-      // whitelist: ['whitelist'], // Don't remove this selector
-      // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-      purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
-    }
-  },
+/*   
   "gatsby-plugin-webpack-bundle-analyser-v2", */
+  
   'gatsby-plugin-loadable-components-ssr'
 ];
 

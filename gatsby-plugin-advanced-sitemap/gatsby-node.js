@@ -463,7 +463,7 @@ exports.onPostBuild = /*#__PURE__*/function () {
 
           case 38:
             if (!(_i < _resourcesSiteMapsArr.length)) {
-              _context2.next = 53;
+              _context2.next = 52;
               break;
             }
 
@@ -471,33 +471,32 @@ exports.onPostBuild = /*#__PURE__*/function () {
             filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type); // Save the generated xml files in the public folder
 
             _context2.prev = 41;
-            console.log(sitemap.xml);
-            _context2.next = 45;
+            _context2.next = 44;
             return utils.writeFile(filePath, sitemap.xml);
 
-          case 45:
-            _context2.next = 50;
+          case 44:
+            _context2.next = 49;
             break;
 
-          case 47:
-            _context2.prev = 47;
+          case 46:
+            _context2.prev = 46;
             _context2.t1 = _context2["catch"](41);
             console.error(_context2.t1);
 
-          case 50:
+          case 49:
             _i++;
             _context2.next = 38;
             break;
 
-          case 53:
+          case 52:
             return _context2.abrupt("return");
 
-          case 54:
+          case 53:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[29, 34], [41, 47]]);
+    }, _callee2, null, [[29, 34], [41, 46]]);
   }));
 
   return function (_x2, _x3) {

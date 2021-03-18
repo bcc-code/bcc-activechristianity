@@ -166,7 +166,6 @@ export default class BaseSiteMapGenerator {
      * feature set, we can detect if a node has changed.
      */
     updateLookups(datum, node) {
-        console.log(node)
         this.nodeLookup[datum.id] = node;
         this.nodeTimeLookup[datum.id] = this.getLastModifiedForDatum(datum);
     }

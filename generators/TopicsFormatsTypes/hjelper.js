@@ -186,7 +186,7 @@ module.exports.createSubTopicPages=({
   totalCount,
 })=>{
 
-  const isType = type==='type'
+
 
     if (!totalCount) {
 
@@ -214,7 +214,7 @@ module.exports.createSubTopicPages=({
 
         }
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-        const pageType="topic"
+        const pageType=isTopic?"topic":"category"
         const context = {
           id:topic.id,
           subTopicId:subTopic.id,

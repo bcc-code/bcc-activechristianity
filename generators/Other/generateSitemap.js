@@ -91,6 +91,15 @@ const pagesQuery = `
 `
 
 const options = {
+      exclude: [
+        `/dev-404-page`,
+        `/404`,
+        `/404.html`,
+        `/offline-plugin-app-shell-fallback`,
+        `/preview/`,
+        `/user/`,
+        ///(\/)?hash-\S*/, // you can also pass valid RegExp to exclude internal tags for example
+    ],
     query: `{
             site {
               siteMetadata {

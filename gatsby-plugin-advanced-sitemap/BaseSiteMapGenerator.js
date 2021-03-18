@@ -190,7 +190,6 @@ var BaseSiteMapGenerator = /*#__PURE__*/function () {
   ;
 
   _proto.updateLookups = function updateLookups(datum, node) {
-    console.log(node);
     this.nodeLookup[datum.id] = node;
     this.nodeTimeLookup[datum.id] = this.getLastModifiedForDatum(datum);
   };

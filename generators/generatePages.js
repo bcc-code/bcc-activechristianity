@@ -103,7 +103,7 @@ module.exports = function generatePages(actions, graphql) {
 
      
       // themes pages
-      _.each(parentIds.themes.children,page=>{
+ /*      _.each(parentIds.themes.children,page=>{
 
         let context = {
           ...page,
@@ -121,7 +121,7 @@ module.exports = function generatePages(actions, graphql) {
           component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
           context,
         })
-      })
+      }) */
 
       
 
