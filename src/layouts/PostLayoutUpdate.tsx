@@ -358,7 +358,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         )}
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
-                    <div className="max-w-tablet main-content py-8 relative bg-white px-4 sm:px-0 z-50">
+                    <div className="max-w-tablet main-content py-8 relative bg-white z-50">
                         <p className=""><em>{ac_strings.scripture_copyright}</em></p>
                     </div>
                 </div>

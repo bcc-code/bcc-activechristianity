@@ -5,11 +5,11 @@ import loadable from '@loadable/component'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 
 const Footer = loadable(() => import('@/layout-parts/Footer'))
-import LazyLoad from 'react-lazyload';
+import LazyLoad from '@/components/LazyLoad';
 
 import Breadcrumb from './Breadcrumb'
 
-const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
+const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index'))
 import { openSignInModal } from '@/state/action'
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'

@@ -64,7 +64,7 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
                                             activeClassName="bg-gray-300"
                                         >
                                             <span className="flex-1 flex items-center"><Icon className="fill-slate-light" /></span>
-                                            <span className="block font-semibold clamp1" style={{ "fontSize": "10px" }}>{item.name}</span>
+                                            <span className="block font-semibold clamp1 mt-1" style={{ "fontSize": "10px" }}>{item.name}</span>
                                         </Link>
 
                                     )
