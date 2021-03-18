@@ -140,8 +140,8 @@ module.exports.createArchivePages =async function ({
         const perPagePosts = await graphql(query).then(res=>{
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
             const posts = res.data.ac.topic.allPosts.data
+            
             if(i===1 && posts.length>0){
-              console.log(posts[0])
               console.log(posts[0].updated_at)
               firstPostsDate=posts[0].updated_at
 
