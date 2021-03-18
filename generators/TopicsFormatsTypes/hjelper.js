@@ -141,6 +141,8 @@ module.exports.createArchivePages =async function ({
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
             const posts = res.data.ac.topic.allPosts.data
             if(i===1 && posts.length>0){
+              console.log(posts[0])
+              console.log(posts[0].updated_at)
               firstPostsDate=posts[0].updated_at
 
             }
@@ -202,13 +204,22 @@ module.exports.createSubTopicPages=({
          
       let currentPage = 1
       // 
+      let firstPostsDate = ''
+      
       for (let i = 0; i <=1; i += perPage, currentPage++) {
+        if(i===1 && allPosts.length>0){
+          console.log(allPosts[0])
+          console.log(allPosts[0].updated_at)
+          firstPostsDate=allPosts[0].updated_at
+
+        }
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
         const pageType="topic"
         const context = {
           id:topic.id,
           subTopicId:subTopic.id,
           pageType,
+          updated_at:firstPostsDate,
           type,
           posts: allPosts,
           paginate: {
