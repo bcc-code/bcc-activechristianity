@@ -420,7 +420,7 @@ const SectionWrapper: React.FC<{ title: string }> = ({ title, children }) => {
   )
 }
 
-const BibleStudyItemCard: React.FC<{ image: IImage, title: string, slug: string, excerpt?: string, start?: boolean, label: string, squareImge?: boolean }> = (item) => {
+const BibleStudyItemCard: React.FC<{ image: IImage, title: string, slug: string, excerpt?: string | null, start?: boolean, label: string, squareImge?: boolean }> = (item) => {
   return (
     <Link to={item.slug} className="flex flex-col shadow rounded-lg overflow-hidden">
 
@@ -428,9 +428,9 @@ const BibleStudyItemCard: React.FC<{ image: IImage, title: string, slug: string,
         className="rounded-t-lg"
         {...item.image}
       /> : <Image2To1
-          className="rounded-t-lg"
-          image={item.image}
-        />}
+        className="rounded-t-lg"
+        image={item.image}
+      />}
       <div style={{ overflow: "hidden", padding: "25px 14px 14px 14px", backgroundColor: "#fff" }}>
         <div style={{ paddingBottom: "20px" }}>
           <div className="uppercase font-bold" style={{ fontSize: '12px', color: '#828282', paddingBottom: '5px' }}>{item.label}</div>

@@ -219,7 +219,7 @@ const normalizePostRes = (post) => {
             read: readingTimeMinutes
         },
         reading_time: { text: readingTimeMinutes, minutes: 0 },
-        date: new Date(published),
+        date: published,
         media: {
             path: slug,
         },

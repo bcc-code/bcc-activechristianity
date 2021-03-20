@@ -33,7 +33,7 @@ export interface IShareLikesViewsProps extends ILikesViewsProps {
 interface ILikesViewsProps {
     id: string
     likes?: number
-    views?: string
+    views?: number | string
 }
 
 interface IDesktopPostMain extends IPostMain {

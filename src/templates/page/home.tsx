@@ -64,6 +64,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
+  console.log(props)
   return (
 
     <div className="standard-max-w">
@@ -133,10 +134,9 @@ export default IndexPage
 
 
 
-interface IHomeProps {
+export interface IHomeProps {
   path: string
   pageContext: {
-    featuredPosts: IPostRes[]
     latest: IPostItem[]
     popular: IPostItem[]
     featured: IPostItem[]

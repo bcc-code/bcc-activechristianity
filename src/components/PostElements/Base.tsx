@@ -32,7 +32,7 @@ const PostBase: React.FC<IPostBase> = (props) => {
             <div className="flex flex-col flex-1 leading-normal">
                 <Link to={`${slug}`} >
                     <TextSizeTitle {...postTitleProps} rawText={title} />
-                    {postExcerptProps && <TextSizeTitle {...postExcerptProps} rawText={excerpt} />}
+                    {postExcerptProps && excerpt && <TextSizeTitle {...postExcerptProps} rawText={excerpt} />}
                 </Link>
                 <div className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"> <AuthorLink authorGroups={authors} /></div>
             </div>

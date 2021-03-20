@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { IIconProps } from '@/types'
 
-const sizeMap = {
+const sizeMap: {
+    [key: string]: number | string
+} = {
     '0': 0,
     '1': 0.25,
     '2': 0.5,

@@ -37,13 +37,16 @@ export interface ITrack {
     contributor?: string
     artworkSrc?: string
     duration?: string
-    playlists?: IPlaylist[]
+    playlists?: {
+        "slug": string
+        "title": string
+    }[]
     playlistSlug?: string
     article?: IArticle
     type: ITrackType
 }
 
-export type ITrackType = "audio" | "video"
+export type ITrackType = "audio" | "video" | string
 
 export interface INavItem {
     name: string
@@ -84,8 +87,8 @@ export interface IPostItem {
     title: string
     slug: string
     image: IImage
-    excerpt: string
-    date: Date
+    excerpt?: string | null
+    date: string
     types?: ITopicNavItem[]
     format?: ITopicNavItem[]
     topics?: ITopicNavItem[]
@@ -102,7 +105,7 @@ export interface IPostItem {
     media: IMedia
     glossary?: IGlossary[]
     likes?: number
-    views?: string
+    views?: number | string
 
 }
 
@@ -153,7 +156,7 @@ export interface IConfig extends IOptions {
 
 export interface IImageProps {
     imageUrl: string
-    alt: string
+    alt?: string
 }
 
 
@@ -200,19 +203,19 @@ export interface IPage {
 }
 
 export interface IImage {
-    id: string
+    id?: string
     src: string
-    alt: string
+    alt?: string
     srcset: string
     dataUri: string
-    sizes: string
-    size: {
+    sizes?: string
+    size?: {
         width: number
         height: number
     }
-    colors: number[][]
-    created_at: string
-    updated_at: string
+    colors?: number[][]
+    created_at?: string
+    updated_at?: string
 }
 
 
@@ -230,7 +233,7 @@ export interface ITopicRes {
     name: string
     slug: string
     noOfPosts: number
-    excerpt?: string
+    excerpt?: string | null
     image: IImage
     group: ITopicGroup
     posts: IPostRes[]
@@ -245,8 +248,8 @@ export interface ITopicRes {
 
 export interface IAuthor extends INavItem {
     as: string
-    image?: IImage
-    excerpt?: string
+    image?: IImage | null
+    excerpt?: string | null
 }
 
 export interface IAuthorRes {
@@ -298,7 +301,7 @@ export interface IPostRes {
     recommendPosts: string[]
     readMorePosts: string[]
     likes: number
-    views: number
+    views: number | string
     seo: {
         desc: string
         title: string
@@ -444,8 +447,8 @@ export interface ITopic {
     name: string
     slug: string
     noOfPosts?: number
-    excerpt?: string
-    image?: IImage
+    excerpt?: string | null
+    image?: IImage | null
     followed?: boolean
 }
 
@@ -466,7 +469,7 @@ export interface ITab extends INavItem {
 export interface INavItemWKey extends INavItem {
     key: string
     count: number
-    image?: IImage
+    image?: IImage | null
 }
 
 export interface ICta {
