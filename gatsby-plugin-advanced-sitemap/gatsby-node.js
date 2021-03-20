@@ -436,11 +436,18 @@ exports.onPostBuild = /*#__PURE__*/function () {
             options.sources = serializeSources(options);
             options.sources.forEach(function (type) {
               if (!type.url) {
-                // for each passed name we want to receive the related source type
-                resourcesSiteMapsArray.push({
-                  type: type.name,
-                  xml: manager.getSiteMapXml(type.sitemap, options)
-                });
+                var xml = manager.getSiteMapXml(type.sitemap, options);
+                console.log(type.name);
+
+                if (xml) {
+                  // for each passed name we want to receive the related source type
+                  resourcesSiteMapsArray.push({
+                    type: type.name,
+                    xml: xml
+                  });
+                } else {
+                  delete options.mapping[type.name];
+                }
               }
             });
             indexSiteMap = manager.getIndexXml(options); // Save the generated xml files in the public folder

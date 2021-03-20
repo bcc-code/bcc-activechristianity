@@ -22,7 +22,7 @@ export default class BaseSiteMapGenerator {
     }
 
     generateXmlFromNodes(options) {
-        console.log(this.nodeLookup)
+        
         const self = this;
         // Get a mapping of node to timestamp
         const timedNodes = _.map(this.nodeLookup, function (node, id) {

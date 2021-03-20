@@ -51,7 +51,7 @@ module.exports = function generatePages(actions, graphql) {
           children:[]
         },
         pages:{
-          "id": "76",
+          "id": "1",
           templateName:`page`,
           children:[]
         }

@@ -47,6 +47,12 @@ export default class SiteMapManager {
     }
 
     getSiteMapXml(type, options) {
+        const nodes = this[type].nodeLookup
+        console.log(nodes)
+        if(nodes  && Object.keys(nodes).length === 0 && nodes.constructor === Object){
+            console.log(`no nodes found for type ${type}`)
+            return
+        }
         return this[type].getXml(options);
     }
 

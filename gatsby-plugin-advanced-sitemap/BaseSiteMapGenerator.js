@@ -36,7 +36,6 @@ var BaseSiteMapGenerator = /*#__PURE__*/function () {
   var _proto = BaseSiteMapGenerator.prototype;
 
   _proto.generateXmlFromNodes = function generateXmlFromNodes(options) {
-    console.log(this.nodeLookup);
     var self = this; // Get a mapping of node to timestamp
 
     var timedNodes = _lodash.default.map(this.nodeLookup, function (node, id) {
