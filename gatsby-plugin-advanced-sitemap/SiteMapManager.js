@@ -59,7 +59,6 @@ var SiteMapManager = /*#__PURE__*/function () {
 
   _proto.getSiteMapXml = function getSiteMapXml(type, options) {
     var nodes = this[type].nodeLookup;
-    console.log(nodes);
 
     if (nodes && Object.keys(nodes).length === 0 && nodes.constructor === Object) {
       console.log("no nodes found for type " + type);

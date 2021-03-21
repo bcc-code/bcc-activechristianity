@@ -334,7 +334,6 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
     options.sources.forEach((type) => {
         if (!type.url) {
             const xml = manager.getSiteMapXml(type.sitemap, options)
-            console.log(type.name)
             if(xml){
                 // for each passed name we want to receive the related source type
                 resourcesSiteMapsArray.push({
