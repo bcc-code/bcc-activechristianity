@@ -46,7 +46,7 @@ module.exports.getSubTopics = (id)=>`{
 module.exports.getTopicPagination=(id)=>`
   topic(id:${id}) {
     name
-    somePosts(first:12){
+    somePosts(first:${perPage}){
           paginatorInfo {
             total
             count
@@ -58,9 +58,8 @@ module.exports.getTopicPagination=(id)=>`
 `
 const getPostsPerPageQuery = (id,page)=>`{
   ac {
-    topic(id:${id}) {	
-  
-      allPosts:somePosts(first:12,page:${page}){
+    topic(id:${id}) {
+      allPosts:somePosts(first:${perPage},page:${page}){
         data{
            ${postQuery}
         }
@@ -85,7 +84,7 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
       topic(id: ${id1}) {
           id
           name
-          somePosts (hasTopics: { value: ${id2}, column: ID },first:12,page:1){
+          somePosts (hasTopics: { value: ${id2}, column: ID },first:${perPage},page:1){
             paginatorInfo {
               count
               total
@@ -109,9 +108,10 @@ module.exports.createArchivePages =async function ({
   breadcrumb,
   topicType
 }){
-  const {total,count}=paginatorInfo 
-  const hasRecommendPage=total>10
-  const totalPages = Math.ceil(total/count);
+  const count = 10
+  const {total}=paginatorInfo
+  const hasRecommendPage=total>count
+  const totalPages = Math.ceil(total/perPage);
 
   //*only create the first page, and use query strings for the rest
       for (let i = 1; i <=1; i++){
@@ -165,9 +165,6 @@ module.exports.createSubTopicPages=({
   breadcrumb,
   totalCount
 })=>{
-
-
-
     if (!totalCount) {
 
       console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
@@ -180,7 +177,7 @@ module.exports.createSubTopicPages=({
       })
       const totalPages = Math.ceil(totalCount / perPage)
       const component = (`${topic.id}`===typesAll.watch || 
-      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      `${subTopic.id}`===typesAll.watch) ? path.resolve(videoTemplate) : path.resolve(listTemplate)
          
       let currentPage = 1
       // 

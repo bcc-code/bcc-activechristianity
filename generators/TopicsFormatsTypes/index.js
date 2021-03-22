@@ -17,13 +17,6 @@ const query = `{
   ac {
     topics(hasPosts: true) {
       ${topicQuery}
-      pagination:somePosts(first:12){
-          paginatorInfo {
-              total
-              count
-              currentPage
-          }
-      }
     }
 
     allPages {
@@ -129,7 +122,10 @@ module.exports = function generateTopics(actions, graphql) {
                 await createArchivePages({
                   graphql,
                   createPage,
-                  paginatorInfo:node.pagination.paginatorInfo,
+                  paginatorInfo: {
+                    total: node.noOfPosts,
+                    count: perPage
+                  },
                   node,
                   baseUrl,
                   breadcrumb,
