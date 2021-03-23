@@ -63,6 +63,10 @@ const PostList: React.FC<IPostList> = ({ title, path, paginate, posts }) => {
                                 scrollToTop()
                                 navigate(fullPath)
                             }}
+                            getLinkPath={(activePage: number) => {
+                                const fullPath = activePage > 1 ? `${path}/${activePage}` : path
+                                return fullPath
+                            }}
                         />
                     </div>
                 )

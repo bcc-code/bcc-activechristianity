@@ -305,20 +305,22 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 <ToggleFollowWithName {...item} />
                             ))}
                         </div>
+                        {isWindowLoaded === true && (
+                            <div className="border-b pb-6">
+                                <AuthorBookmarkShareSection
+                                    id={id}
+                                    text={excerpt || title}
+                                    shareSlug={slug}
+                                    views={views}
+                                    likes={likes}
+                                    authors={authors}
+                                    formats={format}
+
+                                />
+                            </div>
+                        )}
 
 
-                        <div className="border-b pb-6">
-                            <AuthorBookmarkShareSection
-                                id={id}
-                                text={excerpt || title}
-                                shareSlug={slug}
-                                views={views}
-                                likes={likes}
-                                authors={authors}
-                                formats={format}
-
-                            />
-                        </div>
                         {isWindowLoaded === true && (
                             <div>
                                 {allInterestedPosts && <RecommendedPosts

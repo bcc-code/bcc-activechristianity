@@ -2,8 +2,10 @@ const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
 const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
-const listTemplate = 'src/templates/archive/post-list-query.tsx'
+const listTemplateQuery = 'src/templates/archive/post-list-query.tsx'
+const listTemplateStatic = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
+
 const perPage= 12
 const languagePostQuery = postQuery
 
@@ -112,15 +114,21 @@ module.exports.createArchivePages =async function ({
   const {total,count}=paginatorInfo 
   const hasRecommendPage=total>10
   const totalPages = Math.ceil(total/count);
-
+  const isTopic = topicType==='topic'
+  const isType = topicType==='type'
+  const generatePageCount = isType?totalPages:1
   //*only create the first page, and use query strings for the rest
-      for (let i = 1; i <=1; i++){
+    let firstPostsDate = ''
+      for (let i = 1; i <=generatePageCount; i++){
         let currentPage = i
         let pagePath = `${baseUrl}/${currentPage}`
+       
         if(i===1){
-            pagePath=`${baseUrl}${hasRecommendPage && topicType==='topic'?'/1':''}`
+            pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
-        const component = (`${node.id}`===typesAll.watch || `${node.id}`===formatsAll.animation)?path.resolve(videoTemplate): path.resolve(listTemplate)
+        console.log(pagePath)
+        const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
+      
         const paginate = {
           currentPage,
           totalPages,
@@ -131,6 +139,13 @@ module.exports.createArchivePages =async function ({
         const query=getPostsPerPageQuery(node.id,i)
         const perPagePosts = await graphql(query).then(res=>{
           if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
+            const posts = res.data.ac.topic.allPosts.data
+            
+            if(i===1 && posts.length>0){
+              console.log(posts[0].updated_at)
+              firstPostsDate=posts[0].updated_at
+
+            }
             return res.data.ac.topic.allPosts.data
           } else {
             console.log(query)
@@ -138,18 +153,23 @@ module.exports.createArchivePages =async function ({
           }
 
         })
-        createPage({
-          path:pagePath,
-          component,
-          context: {
-            posts: perPagePosts,
-            paginate,
-            id:node.id,
-            title:node.name,
-            image:node.image,
-            breadcrumb
-          },
-        })
+
+            createPage({
+              path:pagePath,
+              component,
+              context: {
+                fetchedPost: isType,
+                pageType:isType?"category":"topic",
+                type:node.topicType,
+                updated_at:firstPostsDate,
+                posts: perPagePosts,
+                paginate,
+                id:node.id,
+                title:node.name,
+                image:node.image,
+                breadcrumb
+              },
+            })
 
 
       }
@@ -163,7 +183,7 @@ module.exports.createSubTopicPages=({
   subTopic,
   isTopic,
   breadcrumb,
-  totalCount
+  totalCount,
 })=>{
 
 
@@ -180,15 +200,26 @@ module.exports.createSubTopicPages=({
       })
       const totalPages = Math.ceil(totalCount / perPage)
       const component = (`${topic.id}`===typesAll.watch || 
-      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplate)
+      `${subTopic.id}`===typesAll.watch)?path.resolve(videoTemplate):path.resolve(listTemplateQuery)
          
       let currentPage = 1
       // 
+      let firstPostsDate = ''
+      
       for (let i = 0; i <=1; i += perPage, currentPage++) {
+        if(i===1 && allPosts.length>0){
+          console.log(allPosts[0])
+          console.log(allPosts[0].updated_at)
+          firstPostsDate=allPosts[0].updated_at
+
+        }
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
+        const pageType=isTopic?"topic":"category"
         const context = {
           id:topic.id,
           subTopicId:subTopic.id,
+          pageType,
+          updated_at:firstPostsDate,
           type,
           posts: allPosts,
           paginate: {
