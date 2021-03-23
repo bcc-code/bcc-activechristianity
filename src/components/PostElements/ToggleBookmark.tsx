@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CachedIcon, BookmarkBorderIcon, BookmarkIcon } from '@/components/Icons/MUI/bookmarkIcons'
-export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light" | "white"
+import { IButtonColour } from '@/components/Icons/MUI/Base'
 import FetchAndSetBookmark from '@/HOC/SetAndUPdateBookmarked'
 interface IProps {
     id: string

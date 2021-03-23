@@ -26,7 +26,7 @@ const HeaderPost: React.FC<IPostItem> = (props) => {
         const { format, duration, image, title, excerpt, authors, reading_time, id, slug, media } = post
         return (
             <div className="w-full z-10 grid grid-cols-1 md:grid-cols-8 md:gap-6 lg:gap-12 relative sm:pt-16 px-4">
-                <Link to={`/${slug}`} className="md:col-start-1 md:col-end-6 relative pb-6">
+                <Link to={`/${slug}`} className="md:col-start-1 md:col-end-6 relative pb-6 tst-desktop-header-post">
 
 
                     {videoUrl !== null ? (
@@ -37,14 +37,14 @@ const HeaderPost: React.FC<IPostItem> = (props) => {
                         />
 
                     ) : (
-                            <div className="m-0 relative w-full pb-square sm:pb-half">
-                                <LazysizesFeaturedImage
+                        <div className="m-0 relative w-full pb-square sm:pb-half">
+                            <LazysizesFeaturedImage
 
-                                    {...image}
-                                    className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
-                                />
-                            </div>
-                        )
+                                {...image}
+                                className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                            />
+                        </div>
+                    )
                     }
 
                 </Link>

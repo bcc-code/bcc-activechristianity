@@ -49,6 +49,7 @@
     "he": "^1.2.0",
     "html-entities": "^2.0.2",
     "identity-obj-proxy": "^3.0.0",
+    "jest-fetch-mock": "^3.0.3",
     "lazysizes": "^5.3.0",
     "lodash": "^4.17.19",
     "lodash.camelcase": "^4.3.0",
@@ -117,10 +118,11 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "jest",
-    "clear_jest": "jest --clearCache",
+    "clear-jest": "jest --clearCache",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-tailwind": "npx tailwind build src/styles/tailwind.css -o src/styles/tailwind-output.css"
+    "build-tailwind": "npx tailwind build src/styles/tailwind.css -o src/styles/tailwind-output.css",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",

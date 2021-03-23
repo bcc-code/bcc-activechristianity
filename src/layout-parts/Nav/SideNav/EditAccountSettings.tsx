@@ -23,6 +23,7 @@ const SideMobile: React.FC<{
             isSideNavOpen={isSideNavOpen}
             back={back}
             className="flex flex-col"
+            testName='tst-side-nav-edit-account'
         >
             {openChangePassword && <ChangePassword
                 isSideNavOpen={openChangePassword}

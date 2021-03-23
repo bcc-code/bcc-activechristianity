@@ -15,7 +15,7 @@ export const asImageWDataUri = (uri: string) => ({
 export interface IBgImgTopicCard {
     name: string | JSX.Element
     to: string
-    image?: IImage
+    image?: IImage | null
     overlay?: "dark" | "light" | "medium"
     rounded?: "rounded-xxl" | "rounded-xl" | "rounded" | "rounded-md" | "rounded-lg "
 }

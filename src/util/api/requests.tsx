@@ -394,7 +394,7 @@ export const getOnePreviewPageByIdQuery = (id: string) => {
   `
 }
 
-export const getPostsByIds = (ids: IGetPostsAndTopics) => {
+export const getPostsByIdsQuery = (ids: IGetPostsAndTopics) => {
   const { postsIds, topicsIds } = ids
   return `
     query {

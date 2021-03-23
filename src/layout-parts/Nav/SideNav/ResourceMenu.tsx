@@ -16,7 +16,8 @@ const SideMobile: React.FC<{
             title={ac_strings.resource}
             isSideNavOpen={isSideNavOpen}
             back={back}
-            className="flex flex-col "
+            className="flex flex-col"
+            testName='tst-side-menu-resource'
         >
             <div className="mx-auto flex-1 flex flex-col font-roboto items-center justify-center font-semibold">
                 {menu.map((item, i) => {

@@ -15,7 +15,7 @@ export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, childr
         </div>
     )
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={customerPlaceholder}>
+        <ReactPlaceholder ready={!loading} customPlaceholder={customerPlaceholder}>
             {children}
         </ReactPlaceholder>
 
@@ -46,7 +46,7 @@ export const ListPlaceholder: React.FC<{ loading: boolean }> = ({ loading, child
 
 export const OneTopImgPost: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={<TopImgPlaceholder />}>
+        <ReactPlaceholder ready={!loading} customPlaceholder={<TopImgPlaceholder />}>
             {children}
         </ReactPlaceholder>
 
@@ -55,7 +55,7 @@ export const OneTopImgPost: React.FC<{ loading: boolean }> = ({ loading, childre
 
 export const DesktopFeaturedPostLoader: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     return (
-        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={<DesktopFeaturedPlaceholder />}>
+        <ReactPlaceholder ready={!loading} customPlaceholder={<DesktopFeaturedPlaceholder />}>
             {children}
         </ReactPlaceholder>
 
@@ -94,7 +94,7 @@ export const RightImgPlaceholder = () => {
                 </div> */
         <div className="flex">
             <TextRow
-
+                color="WhiteSmoke"
             />
             <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
             {/*  <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-w-12 sm:min-w-12 md:min-w-12" /> */}

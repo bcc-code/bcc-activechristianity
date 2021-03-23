@@ -14,7 +14,7 @@ import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
 
 // Type
-import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
+import { IPostItem, ITopicPostItems } from '@/types'
 
 // Helpers
 import ac_strings from '@/strings/ac_strings.js'
@@ -64,7 +64,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     name: ac_strings.latest,
     slug: ac_strings.slug_latest
   }
-  console.log(props)
+
   return (
 
     <div className="standard-max-w">

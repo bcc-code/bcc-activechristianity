@@ -49,7 +49,7 @@ export const dummyImage: IImage = {
   updated_at: ''
 }
 
-export function getImage(title: string, size: TSize, image?: IImage): IImage {
+export function getImage(title: string, size: TSize, image?: IImage | null): IImage {
 
   let toReturn: IImage = { ...dummyImage }
   if (image) {

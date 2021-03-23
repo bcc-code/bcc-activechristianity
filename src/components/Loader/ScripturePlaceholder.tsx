@@ -19,7 +19,6 @@ const ScripturePlaceholder: React.FC<{ loading: boolean }> = ({ loading, childre
 
     return (
         <ReactPlaceholder
-            showLoadingAnimation
             ready={!loading}
             customPlaceholder={customerPlaceholder}
         >
