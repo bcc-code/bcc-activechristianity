@@ -63,8 +63,9 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     
      const generators = [
       generateHome(actions, graphql),
-      generateExplore(actions, graphql),
-      generatePosts(actions, graphql),
+/*       generateExplore(actions, graphql),
+      generatePosts(actions, graphql), */
+      generateTopics(actions, graphql),
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
