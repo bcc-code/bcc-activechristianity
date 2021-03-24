@@ -386,7 +386,6 @@ module.exports = async function generatePosts(actions, graphql) {
                         },
                         title:ac_strings.latest
                       }
-                      console.log(context)
                       createPage({
                         path:pagePath,
                         component:path.resolve(postListTemplate),

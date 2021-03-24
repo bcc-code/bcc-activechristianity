@@ -4,6 +4,7 @@ const ac_strings = require('../../src/strings/ac_strings')
 const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplate = 'src/templates/archive/post-list-query.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
+const {  normalizePostRes } = require('../../src/helpers/normalizers')
 const perPage= 12
 const languagePostQuery = postQuery
 
@@ -142,7 +143,7 @@ module.exports.createArchivePages =async function ({
           path:pagePath,
           component,
           context: {
-            posts: perPagePosts,
+            posts: perPagePosts.map(p=>normalizePostRes(p)),
             paginate,
             id:node.id,
             title:node.name,
