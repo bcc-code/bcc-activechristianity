@@ -3,12 +3,12 @@ const path = require('path')
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
 const ac_strings = require('../../src/strings/ac_strings')
-const {groupAll,formatScope}= require('../../src/strings/static/topic-ids.js')
+
 module.exports = async function generateTopic(data) {
-    const {actions, graphql,contextPosts,subTopics,node:topic,breadcrumb}=data
+    const {actions, contextPosts,node:topic,breadcrumb}=data
     const { createPage } = actions
-    if(topic && topic.pagination){
-      const {total}=topic.pagination.paginatorInfo
+    if(topic && topic.noOfPosts){
+      const {total}=topic.noOfPosts
       const hasRecommendPage=total>10
       const topicFormat = []
   
@@ -30,10 +30,10 @@ module.exports = async function generateTopic(data) {
             posts: contextPosts.latestPosts,
           },
         })
-      } else {
-        console.log('something went wrong')
-        console.log(topic)
-      }
+      } 
+    }else {
+      console.log('something went wrong')
+      console.log(topic)
     }
    
 
