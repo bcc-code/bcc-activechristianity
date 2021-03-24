@@ -65,7 +65,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       generateHome(actions, graphql),
       generateExplore(actions, graphql),
       generatePosts(actions, graphql), 
-      generateTopics(actions, graphql),
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
@@ -97,7 +96,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
         generators.push(generateScriptures(actions, graphql)) 
       } 
     }
-
 
     return Promise.all(generators)
 
