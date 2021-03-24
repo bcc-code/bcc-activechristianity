@@ -6,7 +6,7 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
+const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
 const buildTranslatedStrings = require('./generators/json/build-translated-strings')
 const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
@@ -73,7 +73,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
         generatePages(actions, graphql),
         generateTopics(actions, graphql),
         generateRedirect(actions, graphql),
-        generateSeries(actions, graphql)
+       /*  generateSeries(actions, graphql) */
       )
 
       if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
@@ -117,16 +117,130 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page)
   }
 }
-/* 
-exports.onCreateWebpackConfig = ({
-  actions,
-}) => {
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        'react-dom$': 'react-dom/profiling',
-        'scheduler/tracing': 'scheduler/tracing-profiling',
+
+
+
+exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
+  const ac_strings=require('./src/strings/ac_strings.js')
+  const allPagesQuery = `{
+    allSitePage {
+      edges {
+          node {
+            id
+            slug:path
+            context {
+                pageType
+                updated_at
+                mediaTypes {
+                  default
+                }
+              }
+            }
+          }
       }
     }
-  })
-} */
+
+  `
+
+    const allPagesRes = await graphql(allPagesQuery)
+    const findPages=[
+      ac_strings.slug_about,
+      ac_strings.slug_contact,
+      ac_strings.slug_explore,
+      ac_strings.slug_scripture,
+      ac_strings.slug_playlist,
+      ac_strings.slug_glossary,
+    ]
+
+    const {data}=allPagesRes
+      
+    if(data && data.allSitePage && data.allSitePage.edges){
+      const nodes = data.allSitePage.edges
+      const nodeMaps={
+
+      }
+
+      nodes.forEach(({node}) => {
+          const {slug, context }=node
+          const getType=context && context.pageType?context.pageType:"other"
+          const toAdd = slug
+
+          if(nodeMaps[getType]){
+              nodeMaps[getType].push(toAdd)
+          } else {
+              nodeMaps[getType]=[toAdd]
+          }
+      });
+
+      //
+      console.log(Array.isArray(nodeMaps.contributor) && nodeMaps.contributor.length)
+      console.log(Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length)
+      console.log(Array.isArray(nodeMaps.playlist) && nodeMaps.playlist.length)
+      console.log(Array.isArray(nodeMaps.post) && nodeMaps.post.length)
+      console.log(nodeMaps.other)
+
+      const validate={
+        home:{
+          slug:'/',
+          validate:false
+        },
+        explore:{
+          slug:ac_strings.slug_explore,
+          validate:false
+        },
+        contact:{
+          slug:ac_strings.slug_contact,
+          validate:false
+        },
+        about:{
+          slug:ac_strings.slug_about,
+          validate:false
+        }
+      }
+
+      //ac_strings.slug_home
+      //ac_strings.slug_explore
+      //ac_strings.slug_contact
+      //ac_strings.slug_about
+
+      // read + latest + subtopics
+      // watch + latest + subtopics
+
+    
+      // pageType:'contributor' shoud be >400
+      // pageType:'topic' should be > 80
+      // catch
+
+      // check topic (example id)
+
+      // check format + latest
+
+      if (process.env.LISTEN_SECTION ==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+        /*  console.log('check podcast') */
+        // check listen
+        // check listen latest 1 + 2 + subtopics
+        //
+      }
+  
+      if (process.env.LISTEN_SECTION==="all"){
+        console.log("check playlist")
+        //slug_playlist
+      }
+  
+      if (process.env.GLOSSARY_SECTION==="true"){
+        console.log("check glossry")
+        //slug_glossary
+      }
+  
+      if (process.env.SCRIPTURE_SECTION==="true"){
+        console.log("check scriptures")
+        //slug_scripture
+        //`${page.slug}-result`
+
+      } 
+    } else {
+      throw Error ('not able to find pages')
+    }
+
+
+}

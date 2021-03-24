@@ -8,7 +8,7 @@ const {createArchivePages} = require('./hjelper')
 const generateFormat = require('./gFormat.js')
 const generateType = require('./gType.js')
 const generateTopic = require('./gTopic.js')
-const { processRecommendationContext, getRandomFeatured } = require('../../src/helpers/normalizers')
+const { processRecommendationContext } = require('../../src/helpers/normalizers')
 
 /* SETUP */
  
