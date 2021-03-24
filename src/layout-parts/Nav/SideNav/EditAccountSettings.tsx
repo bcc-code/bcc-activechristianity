@@ -3,7 +3,6 @@ import ac_strings from '@/strings/ac_strings.js'
 import SideNavWrapper from './SideNavWrapper'
 
 import { SideNavItem } from '@/components/Button'
-import loadable from '@loadable/component'
 import ChangePassword from './ChangePassword'
 
 const SideMobile: React.FC<{
