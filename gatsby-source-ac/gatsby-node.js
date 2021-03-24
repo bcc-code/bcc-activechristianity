@@ -239,8 +239,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }
                 transformedPost.title = decode(post.title)
-                console.log(transformedPost.title )
-                console.log(transformedPost.id )
                 transformedPost.excerpt = decode(post.excerpt)
                 transformedPost.content = removeUnwantedNodes(transformedPost.content)
                 transformedPost.content = checkingLinks(transformedPost.content)
