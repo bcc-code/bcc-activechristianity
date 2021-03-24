@@ -24,6 +24,7 @@ const PostList: React.FC<IPostList> = (props) => {
 
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(false)
+
     React.useEffect(() => {
         setLoading(true)
         if (currentPage !== 1) {
@@ -103,15 +104,15 @@ const PostList: React.FC<IPostList> = (props) => {
             {loading ? (
                 <RightImgListPlaceHolder count={12} />
             ) : (
-                    <div>
-                        {posts.map((p, k) => {
-                            return (
-                                <RightImgWDes key={shortid()} {...p} />
+                <div>
+                    {posts.map((p, k) => {
+                        return (
+                            <RightImgWDes key={shortid()} {...p} />
 
-                            )
-                        })}
-                    </div>
-                )}
+                        )
+                    })}
+                </div>
+            )}
 
             <div className="flex justify-item py-4">
                 <Pagination

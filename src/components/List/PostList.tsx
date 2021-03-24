@@ -63,23 +63,23 @@ const PostList: React.FC<IPostList> = (props) => {
                     )
                 })}
             </div>) : <FetchPostsFromSlugs
-                    slugs={posts}
-                    layout="list"
-                    render={({ posts: postList }) => {
-                        return PostList.length > 0 ? (
-                            <div>
-                                {postList.map((p, k) => {
-                                    return (
-                                        <RightImgWDes key={k} {...p} />
+                slugs={posts}
+                layout="list"
+                render={({ posts: postList }) => {
+                    return PostList.length > 0 ? (
+                        <div>
+                            {postList.map((p, k) => {
+                                return (
+                                    <RightImgWDes key={k} {...p} />
 
-                                    )
-                                })}
-                            </div>
-                        ) : (
-                                <RightImgListPlaceHolder count={12} />
-                            )
-                    }}
-                />}
+                                )
+                            })}
+                        </div>
+                    ) : (
+                        <RightImgListPlaceHolder count={12} />
+                    )
+                }}
+            />}
 
 
             {paginate && (

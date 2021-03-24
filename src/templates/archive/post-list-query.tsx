@@ -11,7 +11,7 @@ import { getAllUrlParams } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const { pageContext, path } = props
-    const { title, breadcrumb, description, type, isTopic, id, paginate } = pageContext
+    const { title, breadcrumb, description, isTopic, id, paginate } = pageContext
 
     let pageTitle = title
 
