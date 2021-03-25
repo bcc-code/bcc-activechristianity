@@ -97,7 +97,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       } 
     }
 
-
     return Promise.all(generators)
 
 }
