@@ -24,6 +24,7 @@ const PostList: React.FC<IPostList> = (props) => {
 
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [loading, setLoading] = React.useState(false)
+
     React.useEffect(() => {
         setLoading(true)
         if (currentPage !== 1) {

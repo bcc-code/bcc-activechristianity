@@ -5,7 +5,7 @@ const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplateQuery = 'src/templates/archive/post-list-query.tsx'
 const listTemplateStatic = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
-
+const {  normalizePostRes } = require('../../src/helpers/normalizers')
 const perPage= 12
 const languagePostQuery = postQuery
 
@@ -162,7 +162,7 @@ module.exports.createArchivePages =async function ({
                 pageType:isType?"category":"topic",
                 type:node.topicType,
                 updated_at:firstPostsDate,
-                posts: perPagePosts,
+                posts: perPagePosts.map(p=>normalizePostRes(p)),
                 paginate,
                 id:node.id,
                 title:node.name,
