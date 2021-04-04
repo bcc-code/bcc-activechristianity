@@ -31,7 +31,7 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
         .then(async (res) => {
             if (res.result && res.result && res.result.pageContext.posts) {
                 const posts: IPostItem[] = []
-                const postsRes: IPostRes[] | string[] = res.result.pageContext.posts
+                const postsRes: IPostItem[] | string[] = res.result.pageContext.posts
                 for (let i = 0; i < postsRes.length; i++) {
                     const onePostRes = postsRes[i]
                     if (typeof onePostRes === "string") {
@@ -40,7 +40,7 @@ export const fetchPostslistFromArchivePage = (slug: string) => {
                             posts.push(fullPost)
                         }
                     } else if (typeof onePostRes === "object") {
-                        posts.push(normalizePostRes(onePostRes))
+                        posts.push(onePostRes)
                     }
                 }
                 /* const posts: IPostItem[]|string[] = res.result.pageContext.posts.map( p=>) */

@@ -1,20 +1,22 @@
 import React from 'react'
 import { fetchLocalPostsFromSlugs, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 
-import RightImg from '@/components/PostItemCards/RightImg'
+import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg'
+import RightImgPost from '@/components/PostItemCards/RightImg'
 import { getRandomArray } from '@/helpers/normalizers'
 import { ITopic, IPostItem } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
-import { OutlineButton } from '@/components/Button'
+
 const acApiModule = import('@/util/api')
 interface IFetchPost {
     topics: ITopic[]
+    isMobile?: boolean
 }
 
-const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
+const RecommendedForYou: React.FC<IFetchPost> = ({ topics, isMobile }) => {
     const [posts, setPosts] = React.useState<IPostItem[]>([])
     const [pageNumber, setPageNumber] = React.useState<number>(1)
-    const postsPerPage = 12
+    const postsPerPage = 4
     const [isFetchingMore, setIsFetchingMore] = React.useState(true)
     React.useEffect(() => {
 
@@ -40,11 +42,10 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
                     const url = `${ac_strings.slug_topic}/${t}`
                     return fetchPostslistFromArchivePage(url)
                 })).then(async (postArrays) => {
-                    console.log(postArrays)
                     const postsFromTopics: IPostItem[] = []
                     if (postArrays) {
                         postArrays.forEach((array => {
-                            console.log(array)
+
                             if (array) {
                                 const randomPosts = getRandomArray(array, 6)
                                 postsFromTopics.push(...randomPosts)
@@ -86,13 +87,15 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
         <div className="px-4">
             {posts.slice(0, end).map(p => {
 
-                return p ? (
-                    <RightImg {...p} />
-                ) : <div></div>
+                return isMobile ? (
+                    <SquareLeftImg small {...p} />
+                ) : (
+                    <RightImgPost {...p} />
+                )
             })}
-            {(posts.length > postsPerPage) && (pageNumber < lastPage) && <div className="flex justify-center py-4">
+            {/* {(posts.length > postsPerPage) && (pageNumber < lastPage) && <div className="flex justify-center py-4">
                 <OutlineButton name={isFetchingMore ? ac_strings.loading : ac_strings.show_more} onClick={handlePageChange} />
-            </div>}
+            </div>} */}
         </div>
 
 

@@ -31,7 +31,6 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    console.log(props.pageContext)
     const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats, questions, featuredVideos, songs, edification } = props.pageContext
 
     const topics = filterTopics({ topics: [popularTopics, featuredTopics], returnSlugs: false })
