@@ -1,37 +1,45 @@
 import * as React from 'react';
 
 import { asImageWDataUri } from '@/components/Cards/BgImgTopicCard'
-import Link from '@/components/CustomLink'
 import { SectionTitleDesktopAndMobile } from '@/components/Headers'
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 
 import TopicRowAndHorizontalScroll from '@/components/List/Combo/TopicRowAndHorizontalScroll'
-import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended'
-import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
+import SquareCard from '@/components/Cards/SquareCategoryCard'
+import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg'
+import RightImgPost from '@/components/PostItemCards/RightImg'
+import TitleLink from '@/components/PostItemCards/TitleLink'
+import Row3ColHorizontalScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import ac_strings from '@/strings/ac_strings.js'
-
-import SquareImages from '@/components/Images/Image1to1Rounded'
+import { KeyboardArrowRightIcon } from '@/components/Icons/MUI/arrowIcons'
 import shortid from 'shortid'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from '@/helpers/normalizers'
 import PlaylistImg from '@/images/format-Playlist-02.jpg'
-import PodcastImg from '@/images/format-Podcast-05.jpg'
-import { ITopic } from '@/types';
+import { ITopic, ITopicPostSlugs } from '@/types';
 
 const ExploreLayout: React.FC<{
     topics: ITopic[]
     allFormats: ITopic[]
     recommendFormats: ITopic[]
+    questions: ITopicPostSlugs
+    featuredVideos: ITopicPostSlugs
+    edification: ITopicPostSlugs
+    songs: ITopicPostSlugs
 }> = (props) => {
-    const { topics, recommendFormats, allFormats } = props
+    const { topics, recommendFormats, allFormats, questions, songs, featuredVideos, edification } = props
+    const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
+
+    React.useEffect(() => {
+        setIsMobile(typeof window !== "undefined" && window.innerWidth < 640)
+    }, [])
 
     const mediaSquareImages = {
-        'podcast': asImageWDataUri(PodcastImg),
         'playlist': asImageWDataUri(PlaylistImg)
     }
 
     const randomTopics = getRandomArray(topics, 6)
     const hasPlaylist = process.env.LISTEN_SECTION === "all"
-    const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
     const hasScriptureSection = process.env.SCRIPTURE_SECTION === "true"
     return (
         <div className="bg-white max-w-tablet mx-auto pb-8">
@@ -44,63 +52,129 @@ const ExploreLayout: React.FC<{
                     topics={randomTopics}
                 />
             </div>
+            <div className="pt-6 text-sm " >
+                <SectionTitleDesktopAndMobile
+                    name={edification.name}
+                    to={edification.slug}
+                />
+                <FetchPostsFromSlugs
+                    layout={"list"}
+                    slugs={getRandomArray(edification.posts, 4)}
+                    render={({ posts }) => {
+                        return (
+                            <div className="px-4">
+                                {posts.map(p => {
+                                    return isMobile ? (
+                                        <SquareLeftImg small {...p} />
+                                    ) : (
+                                        <RightImgPost {...p} />
+                                    )
+                                })}
+                            </div>
+                        );
+                    }}
+                />
+
+            </div>
+            <div className="pt-6">
+                <FetchPostsFromSlugs
+                    layout={"list"}
+                    slugs={getRandomArray(featuredVideos.posts, 4)}
+                    render={({ posts }) => {
+                        return (
+                            <div className="px-4">
+                                <Row3ColHorizontalScroll
+                                    largeTitle posts={posts}
+                                    title={featuredVideos.name}
+                                    to={featuredVideos.slug}
+                                />
+                            </div>
+                        );
+                    }}
+                />
+            </div>
+            <div className="pt-6">
+                <SectionTitleDesktopAndMobile
+                    name={questions.name}
+                    to={questions.slug}
+                />
+                <FetchPostsFromSlugs
+                    layout={"list"}
+                    slugs={getRandomArray(questions.posts, 4)}
+                    render={({ posts }) => {
+                        return (
+                            <div className="px-4">
+                                {posts.map(p => {
+                                    return (
+                                        <TitleLink
+                                            title={p.title}
+                                            slug={p.slug}
+                                        />
+                                    )
+                                })}
+                            </div>
+                        );
+                    }}
+                />
+            </div>
+            <div className="pt-6">
+                <FetchPostsFromSlugs
+                    layout={"list"}
+                    slugs={getRandomArray(songs.posts, 4)}
+                    render={({ posts }) => {
+                        return (
+                            <div className="px-4">
+                                <Row3ColHorizontalScroll
+                                    largeTitle
+                                    posts={posts}
+                                    title={songs.name}
+                                    to={songs.slug}
+                                />
+                            </div>
+                        );
+                    }}
+                />
+            </div>
+            {hasScriptureSection && (
+                <ExplorePopularScripture
+                    isMobile={isMobile}
+                />
+            )}
             <div className="pt-6">
                 <SectionTitleDesktopAndMobile
                     name={ac_strings.categories}
 
                 />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 px-4">
-                    {hasPodcast && (
-                        <Link key={shortid()} to={ac_strings.slug_podcast} className="flex flex-col shadow rounded-lg overflow-hidden" >
-                            <SquareImages
-                                className="rounded-t-lg"
-                                {...mediaSquareImages.podcast}
-                            />
-                            <div className="font-roboto font-semi text-center py-2 px-2">
-                                {ac_strings.podcast}
-                            </div>
-                        </Link>
-                    )}
                     {hasPlaylist && (
-                        <Link key={shortid()} to={ac_strings.slug_playlist} className="flex flex-col shadow rounded-lg overflow-hidden" >
-                            <SquareImages
-                                className="rounded-t-lg"
-                                {...mediaSquareImages.playlist}
-                            />
-                            <div className="font-roboto font-semi text-center py-2 px-2">
-                                {ac_strings.playlist}
-                            </div>
-                        </Link>
+                        <SquareCard
+                            image={mediaSquareImages.playlist}
+                            title={ac_strings.playlist}
+                            to={ac_strings.slug_playlist}
+                        />
                     )}
                     {allFormats.map((card) => (
-                        <Link key={shortid()} to={card.slug} className="flex flex-col shadow rounded-lg overflow-hidden" >
-                            <SquareImages
-                                className="rounded-t-lg"
-                                {...card.image}
-                            />
-                            <div className="font-roboto font-semi text-center py-2 px-2">
-                                {card.name}
-                            </div>
-                        </Link>
-                    ))}
+                        <SquareCard
+                            key={shortid()}
+                            to={card.slug}
+                            image={card.image}
+                            title={card.name}
+                        />
 
+                    ))}
                 </div>
             </div>
 
-            {hasScriptureSection && (
-                <ExplorePopularScripture
-                    scriptureSlug={ac_strings.slug_scripture}
-                />
-            )}
 
-            <div className="pt-6">
+
+            {/*             <div className="pt-6">
                 <SectionTitleDesktopAndMobile
                     name={ac_strings.recommend_for_you}
 
                 />
                 {recommendFormats && <ExploreFormatRecommended slugs={recommendFormats.map(item => item.slug)} />}
                 <FetchRecommendMix topics={topics} />
-            </div>
+            </div> */}
         </div>
     )
 }

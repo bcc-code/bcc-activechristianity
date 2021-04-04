@@ -40,10 +40,11 @@ const RecommendedForYou: React.FC<IFetchPost> = ({ topics }) => {
                     const url = `${ac_strings.slug_topic}/${t}`
                     return fetchPostslistFromArchivePage(url)
                 })).then(async (postArrays) => {
-
+                    console.log(postArrays)
                     const postsFromTopics: IPostItem[] = []
                     if (postArrays) {
                         postArrays.forEach((array => {
+                            console.log(array)
                             if (array) {
                                 const randomPosts = getRandomArray(array, 6)
                                 postsFromTopics.push(...randomPosts)

@@ -11,7 +11,7 @@ import ac_strings from '@/strings/ac_strings.js'
 import ExploreHomeLayout from '@/layout-parts/Explore/ExploreHome'
 import { filterTopics } from '@/helpers/normalizers'
 import { Stats } from 'react-instantsearch-dom';
-import { INavItem, ITopicRes } from "@/types"
+import { INavItem, ITopicRes, ITopicPostSlugs } from "@/types"
 
 
 const RefinementListByTopics = loadable(() => import('@/layout-parts/Explore/ByTopics'))
@@ -31,7 +31,8 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats } = props.pageContext
+    console.log(props.pageContext)
+    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats, questions, featuredVideos, songs, edification } = props.pageContext
 
     const topics = filterTopics({ topics: [popularTopics, featuredTopics], returnSlugs: false })
 
@@ -142,14 +143,18 @@ const ExplorePage: React.FC<IResource> = (props) => {
                         />
                     </div>
                 ) : (
-                        <div className="min-h-8 min-w-8"></div>
-                    )}
+                    <div className="min-h-8 min-w-8"></div>
+                )}
                 {showExploreHome && (
                     <ExploreHomeLayout
                         allFormats={allFormats}
                         recommendFormats={recommendFormats}
                         topics={topics}
+                        edification={edification}
                         scriptureSlug={scripturePage ? scripturePage.to : undefined}
+                        questions={questions}
+                        featuredVideos={featuredVideos}
+                        songs={songs}
                     />
                 )}
 
@@ -189,6 +194,10 @@ interface IResource {
         popularTopics: ITopicRes[]
         allFormats: ITopicRes[]
         recommendFormats: ITopicRes[]
+        questions: ITopicPostSlugs
+        featuredVideos: ITopicPostSlugs
+        edification: ITopicPostSlugs
+        songs: ITopicPostSlugs
         popularScriptures: {
             bookName: string
             bookId: string
