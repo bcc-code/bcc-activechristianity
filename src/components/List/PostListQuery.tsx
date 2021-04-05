@@ -83,13 +83,24 @@ const PostList: React.FC<IPostList> = (props) => {
         }
         if (activePage < totalPages + 1 && activePage > -1) {
 
-            const fullPath = activePage > 1 ? `${path}?pageNr=${activePage}` : path
-
+            const fullPath = getLinkPath(nr)
             scrollToTop()
             navigate(fullPath)
         }
     }
 
+    const getLinkPath = (nr: number) => {
+        let activePage = nr
+        let toReturnPath = '/'
+        if (typeof nr === "string") {
+            activePage = parseInt(nr)
+        }
+
+        if (activePage < totalPages + 1 && activePage > -1) {
+            toReturnPath = activePage > 1 ? `${path}?pageNr=${activePage}` : path
+        }
+        return toReturnPath
+    }
     return (
         <div className="max-w-sm" >
             <div className="hidden sm:flex justify-end">
@@ -98,6 +109,7 @@ const PostList: React.FC<IPostList> = (props) => {
                         currentPage={currentPage}
                         totalPages={totalPages}
                         onChange={handleChange}
+                        getLinkPath={getLinkPath}
                     />
                 </div>
             </div>
@@ -119,6 +131,7 @@ const PostList: React.FC<IPostList> = (props) => {
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onChange={handleChange}
+                    getLinkPath={getLinkPath}
                 />
             </div>
         </div>

@@ -68,6 +68,10 @@ const PostList: React.FC<ITaxonomyPageProps> = ({ pageContext, path }) => {
                                 scrollToTop()
                                 navigate(fullPath)
                             }}
+                            getLinkPath={(activePage: number) => {
+                                const fullPath = activePage > 1 ? `${path}/${activePage}` : path
+                                return fullPath
+                            }}
                         />
                     </div>
                 )

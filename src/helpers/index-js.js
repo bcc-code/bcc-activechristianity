@@ -64,15 +64,15 @@ function getAllUrlParams(url) {
 
       // split our query string into its component parts
       var arr = queryString.split('&');
-
+        console.log(arr)
       for (var i = 0; i < arr.length; i++) {
           // separate the keys and the values
           var a = arr[i].split('=');
-
+          console.log(a)
           // set parameter name and value (use 'true' if empty)
           var paramName = a[0];
           var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-
+            
           // (optional) keep case consistent
           paramName = paramName.toLowerCase();
           if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
@@ -94,6 +94,7 @@ function getAllUrlParams(url) {
                   obj[key].push(paramValue);
               }
           } else {
+              console.log(paramName)
               // we're dealing with a string
               if (!obj[paramName]) {
                   // if it doesn't exist, create property
@@ -130,8 +131,10 @@ function formatAMPM(date) {
 
 const dateToString = (date) => `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${date.getFullYear()}`
 const timeToString = (date) => `${formatAMPM(date)} (${Intl.DateTimeFormat().resolvedOptions().timeZone}), ${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}`;
-
-
+const dateToISODateString=(date=>{
+    const updated_at_IOS = new Date(date)
+    return updated_at_IOS.toISOString().split('T')[0]
+})
 module.exports = {
         trimSlug,
         validateEmail,
@@ -142,5 +145,6 @@ module.exports = {
         debounce,
         dateToString,
         timeToString,
+        dateToISODateString,
         getAllUrlParams
 }

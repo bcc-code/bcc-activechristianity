@@ -67,7 +67,6 @@ module.exports = function generateTopics(actions, graphql) {
           } else {
 
                 const acData = result.data.ac
-                console.log(acData)
                 const {popularTopicsSlugs,featuredTopics,formatTopics,questions,songs,featuredVideos,edification} = acData
                 const explorePage = {
                     title:ac_strings.explore,

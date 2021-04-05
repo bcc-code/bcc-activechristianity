@@ -1,6 +1,7 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
-const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
+const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
+const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 /* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
@@ -69,13 +70,7 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
-  // this (optional) plugin enables Progressive Web App + Offline functionality
-  // To learn more, visit: https://gatsby.app/offline
-  // 'gatsby-plugin-offline',
- /*  {
-    resolve: `gatsby-plugin-nprogress`,
-    showSpinner: true,
-  } */{ 
+  { 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -86,7 +81,16 @@ const plugins = [
       purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
     }
   },
-  "gatsby-plugin-webpack-bundle-analyser-v2",
+  // this (optional) plugin enables Progressive Web App + Offline functionality
+  // To learn more, visit: https://gatsby.app/offline
+  // 'gatsby-plugin-offline',
+ /*  {
+    resolve: `gatsby-plugin-nprogress`,
+    showSpinner: true,
+  } */
+/*   
+  "gatsby-plugin-webpack-bundle-analyser-v2", */
+  
   'gatsby-plugin-loadable-components-ssr',
   {
     resolve: `gatsby-plugin-algolia-search`,
@@ -121,7 +125,8 @@ if (activeEnv === 'production') {
       },
     },
     {
-      resolve: `gatsby-plugin-sitemap`
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options:SitemapOptions
     },
     {
       resolve:'gatsby-plugin-preact'

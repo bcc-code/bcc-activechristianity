@@ -1,17 +1,18 @@
 import React from 'react'
 import { KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI/arrowIcons'
-
+import Link from '@/components/CustomLink'
 interface IProps {
     currentPage: number;
     totalPages: number;
     onChange: Function
+    getLinkPath: Function
 
 }
 const PostList: React.FC<IProps> = (props) => {
 
-    const { currentPage, totalPages, onChange, } = props
+    const { currentPage, totalPages, onChange, getLinkPath } = props
     const [pageInput, setPageInput] = React.useState(currentPage)
-
+    console.log(props)
     React.useEffect(() => {
         setPageInput(currentPage)
     }, [currentPage])
@@ -27,12 +28,11 @@ const PostList: React.FC<IProps> = (props) => {
 
     return (
         <div className="flex justify-center text-gray-500 font-roboto">
-            <button className="bg-ac-slate-lighter rounded  p-2 mr-2"
-                onClick={() => onChange(currentPage - 1)}
-                onKeyDown={() => onChange(currentPage - 1)}
+            <Link className="bg-ac-slate-lighter rounded  p-2 mr-2"
+                to={getLinkPath(currentPage - 1)}
             >
                 <KeyboardArrowLeftIcon />
-            </button>
+            </Link>
             <form
                 onSubmit={handleSubmit}
                 className="flex border rounded py-1 overflow-hidden">
@@ -41,12 +41,11 @@ const PostList: React.FC<IProps> = (props) => {
             <div className="flex items-center p-2 ">
                 <span className=" block text-xs align-middle"> / {totalPages}</span>
             </div>
-            <button className="bg-ac-slate-lighter rounded  p-2"
-                onClick={() => onChange(currentPage + 1)}
-                onKeyDown={() => onChange(currentPage + 1)}
+            <Link className="bg-ac-slate-lighter rounded  p-2"
+                to={getLinkPath(currentPage + 1)}
             >
                 <KeyboardArrowRightIcon />
-            </button>
+            </Link>
         </div>
     )
 }

@@ -30,18 +30,27 @@ const PostList: React.FC<IPostList> = (props) => {
     }
 
     const handleChange = (nr: number) => {
-        let activePage = nr
-        if (typeof nr === "string") {
-            activePage = parseInt(nr)
-        }
         if (paginate && nr < paginate.totalPages + 1 && nr > -1) {
-            const firstPagePath = `/${paginate.baseUrl}` + `${isTopic || fetchedPost ? '/1' : ''}`
-            const fullPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
+            const fullPath = getLinkPath(nr)
             scrollToTop()
             navigate(fullPath)
         }
     }
 
+    const getLinkPath = (nr: number) => {
+        let activePage = nr
+        let toReturnPath = '/'
+        if (typeof nr === "string") {
+            activePage = parseInt(nr)
+        }
+
+        if (paginate && nr < paginate.totalPages + 1 && nr > -1) {
+            const firstPagePath = `/${paginate.baseUrl}` + `${isTopic || fetchedPost ? '/1' : ''}`
+            toReturnPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : firstPagePath
+
+        }
+        return toReturnPath
+    }
     return (
         <div className="max-w-sm" >
             {paginate && (
@@ -51,6 +60,7 @@ const PostList: React.FC<IPostList> = (props) => {
                             currentPage={paginate.currentPage}
                             totalPages={paginate.totalPages}
                             onChange={handleChange}
+                            getLinkPath={getLinkPath}
                         />
                     </div>
                 </div>
@@ -87,6 +97,7 @@ const PostList: React.FC<IPostList> = (props) => {
                     <Pagination
                         currentPage={paginate.currentPage}
                         totalPages={paginate.totalPages}
+                        getLinkPath={getLinkPath}
                         onChange={handleChange}
                     />
                 </div>

@@ -3,7 +3,6 @@ const path = require('path')
 
 const topicRecommendTemplate = 'src/templates/recommend/topic-recommend.tsx'
 const ac_strings = require('../../src/strings/ac_strings')
-
 module.exports = async function generateTopic(data) {
     const {actions, contextPosts,node:topic,breadcrumb}=data
     const { createPage } = actions
@@ -22,6 +21,7 @@ module.exports = async function generateTopic(data) {
           path:pagePath,
           component:path.resolve(topicRecommendTemplate),
           context: {
+            pageType:"topic",
             id:topic.id,
             title:topic.name,
             slug:topic.slug,

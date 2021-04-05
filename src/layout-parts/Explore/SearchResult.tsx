@@ -38,65 +38,65 @@ const ExploreSearchResult: React.FC<IExploreSearchResult> = (props) => {
     const { hits } = props
     return hits.length === 0 ? (
         <div className="m-4">
-            <p className="text-sm text-gray-800 p-4"><i>{ac_strings.no_search_no_result}</i></p>
+            <p className="text-sm text-gray-800 p-4"><i>{ac_strings.no_search_results}</i></p>
         </div>
     ) : (
-            <div className="m-4">
-                {hits.map((hit, i) => {
+        <div className="m-4">
+            {hits.map((hit, i) => {
 
-                    if (hit.type === "post") {
+                if (hit.type === "post") {
 
-                        const post = normalizePostRes(hit)
-                        return (
-                            <FetchOnePost
-                                slug={hit.slug}
+                    const post = normalizePostRes(hit)
+                    return (
+                        <FetchOnePost
+                            slug={hit.slug}
 
-                                render={({ post }) => {
-                                    if (post) {
-                                        return (
-                                            <RightImgWDes {...post} />
-                                        )
-                                    } else {
-                                        return <div> </div>
-                                    }
-                                }}
-                            />
-                        )
-                    } else if (hit.type = "playlist") {
-                        return (
-                            <FetchOnePlaylist
+                            render={({ post }) => {
+                                if (post) {
+                                    return (
+                                        <RightImgWDes {...post} />
+                                    )
+                                } else {
+                                    return <div> </div>
+                                }
+                            }}
+                        />
+                    )
+                } else if (hit.type = "playlist") {
+                    return (
+                        <FetchOnePlaylist
 
-                                slug={hit.slug}
-                                render={({ post }) => {
-                                    if (post) {
-                                        const fetched = playlistToPost(post)
-                                        return (
-                                            <div className="flex flex-col">
-                                                <div className="pb-2">
-                                                    <span className="text-xxs text-gray-600">{ac_strings.playlist}</span>
-                                                </div>
-
-                                                <FeaturedCard
-                                                    {...fetched}
-
-                                                    type="playlist"
-                                                />
+                            slug={hit.slug}
+                            render={({ post }) => {
+                                if (post) {
+                                    const fetched = playlistToPost(post)
+                                    return (
+                                        <div className="flex flex-col">
+                                            <div className="pb-2">
+                                                <span className="text-xxs text-gray-600">{ac_strings.playlist}</span>
                                             </div>
-                                        )
-                                    } else {
-                                        return <div> </div>
 
-                                    }
+                                            <FeaturedCard
+                                                {...fetched}
 
-                                }}
-                            />
-                            /*                             */
-                        )
-                    }
+                                                type="playlist"
+                                            />
+                                        </div>
+                                    )
+                                } else {
+                                    return <div> </div>
 
-                })}
-            </div>
-        )
+                                }
+
+                            }}
+                        />
+                        /*                             */
+                    )
+                }
+
+            })}
+        </div>
+    )
 
 
 }

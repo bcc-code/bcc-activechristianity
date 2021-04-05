@@ -173,6 +173,7 @@ module.exports = async function generatePosts(actions, graphql) {
           console.log(res)
         }
       }
+
     /* get all topics */
       const topicsRes = await graphql(topicsQuery).then((result) => {
         if (result.errors) {
@@ -211,11 +212,15 @@ module.exports = async function generatePosts(actions, graphql) {
                   
                   const baseUrl = `${ac_strings.slug_latest}`
                   let currentPage = 1
+                  let firstPostsDate = ''
                   for (let i = 0; i < pageCount ; i++) {
                     
                       const postsRes = await graphql(getPerPageQuery(i))
                       const posts = postsRes.data.allAcNodePost.edges
-
+                      if(i===1 && posts.length>0){
+                        firstPostsDate=posts[0].updated_at
+          
+                      }
                       // create latest page 
                       let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
 
@@ -255,7 +260,7 @@ module.exports = async function generatePosts(actions, graphql) {
 
                               if (!typeIds[t.id]){
                                 const info = topicArchivePageCount[t.slug]
-                              const getRandomCount = Math.ceil(Math.random() * info.count)
+                                const getRandomCount = Math.ceil(Math.random() * info.count)
                               let toAdd = []
                               if(getRandomCount===1 ){
                             
@@ -325,6 +330,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               const mediaTypes= []
 
                               let defaultMediaType = "none"
+                              
                               if (media.audio) {
                                   mediaTypes.push("audio")
                                   defaultMediaType = "audio"
@@ -344,7 +350,7 @@ module.exports = async function generatePosts(actions, graphql) {
                               if (format) {
                                   breadcrumb.push(format[0])
                               }
-                              const updated_at_IOS = new Date(node.updated_at); 
+
                               const data = {
                                 normalized,
                                 allInterestedPosts,
@@ -357,14 +363,15 @@ module.exports = async function generatePosts(actions, graphql) {
                                 },
                                 tranlsatedUrl,
                                 breadcrumb,
-                                updated_at:updated_at_IOS.toISOString()
-          
+                                updated_at:node.updated_at,
+                                pageType:'post'
                               }
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){
                                 console.log(normalized.slug)
                               }
 /*                               console.log(normalized.slug)
                               console.log(data.mediaTypes.types) */
+                              
                               createPage({
                                 path: `${normalized.slug}`,
                                 component: path.resolve(template),
@@ -384,7 +391,9 @@ module.exports = async function generatePosts(actions, graphql) {
                           totalPages:pageCount,
                           baseUrl
                         },
-                        title:ac_strings.latest
+                        pageType:"latest",
+                        title:ac_strings.latest,
+                        updated_at:firstPostsDate,
                       }
                       createPage({
                         path:pagePath,
