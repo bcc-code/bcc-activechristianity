@@ -6,7 +6,7 @@ const {groupAll, formatsIds} = require('../src/strings/static/topic-ids.js')
 
 
 /* SETUP */
- 
+ //108206
 
 const query = `{
   ac {
@@ -19,6 +19,37 @@ const query = `{
     }
     formatTopics:topics(group_id:${groupAll.format}){
         ${topicQuery}
+    }
+
+    edification:topic(id:108206){
+        name
+        slug
+        posts(isFeatured:true){
+          slug
+        }
+     }
+    questions:topic(id:1503){
+        name
+        slug
+        posts(isFeatured:true){
+          slug
+        }
+     }
+      
+    songs:topic(id:108204){
+        name
+        slug
+        posts(isFeatured:true){
+          slug
+        }
+      }
+      
+    featuredVideos:topic(id:108198){
+        name
+        slug
+        posts(isFeatured:true){
+          slug
+        }
       }
   }
 }`
@@ -36,7 +67,7 @@ module.exports = function generateTopics(actions, graphql) {
           } else {
 
                 const acData = result.data.ac
-                const {popularTopicsSlugs,featuredTopics,formatTopics} = acData
+                const {popularTopicsSlugs,featuredTopics,formatTopics,questions,songs,featuredVideos,edification} = acData
                 const explorePage = {
                     title:ac_strings.explore,
                     slug: ac_strings.slug_explore,
@@ -55,12 +86,19 @@ module.exports = function generateTopics(actions, graphql) {
                 formatTopics.forEach(f=>{
                     if (formatsIds[f.id]){
                         formats.push(f)
-                        if (["animation","song","testimony","interview"].includes(formatsIds[f.id].keyname)){
+                        if (["animation","testimony","interview"].includes(formatsIds[f.id].keyname)){
                             recommendFormats.push(f)
                         }
                     }
                 })
-                
+                const topicsPosts=(topic)=>{
+                    return ({
+                        id: topic.id,
+                        name: topic.name,
+                        slug: topic.slug,
+                        posts:topic.posts?topic.posts.map(p=>p.slug):[]
+                    })
+                }
                 const {popularTopics} = popularTopicsRes.data.ac
 
                   const contextExplore = {
@@ -69,8 +107,13 @@ module.exports = function generateTopics(actions, graphql) {
                     popularTopics,
                     featuredTopics,
                     recommendFormats:recommendFormats,
-                    allFormats:formats
+                    allFormats:formats,
+                    questions:topicsPosts(questions),
+                    songs:topicsPosts(songs),
+                    featuredVideos:topicsPosts(featuredVideos),
+                    edification:topicsPosts(edification)
                 }
+
                 createPage({
                     path: explorePage.slug,
                     component: path.resolve(exploreTemplate),

@@ -331,6 +331,7 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
     // we need and which types they are assigned to, independently from where they
     // come from
     options.sources = serializeSources(options);
+    const addSource=[]
     options.sources.forEach((type) => {
         if (!type.url) {
             const xml = manager.getSiteMapXml(type.sitemap, options)
@@ -340,13 +341,14 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
                     type: type.name,
                     xml
                 });
+                addSource.push(type)
             } else {
                 delete options.mapping[type.name]
             }
 
         }
     });
-    
+    options.sources=addSource
     const indexSiteMap = manager.getIndexXml(options);
     // Save the generated xml files in the public folder
     try {

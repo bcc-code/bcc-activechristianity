@@ -63,18 +63,18 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                         style={{ minWidth: '84px', height: "180px" }}
                     />
                 ) : (
-                        <Image2To1
-                            image={image}
-                            imageClassName={` h-full pointer-events-none w-auto object-cover g-image ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
-                            alt={title}
-                        />
-                    )}
+                    <Image2To1
+                        image={image}
+                        imageClassName={` h-full pointer-events-none w-auto object-cover g-image ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
+                        alt={title}
+                    />
+                )}
             </PostItemMediaImg>
             <PostBase
                 post={props}
                 wrapperClass={noBorder === true ? ' pt-4' : 'px-4 pt-4'}
                 postTitleProps={{
-                    fontKey: 'text-lg-2xl',
+                    fontKey: 'text-sm-base-lg',
                     clamp: 2,
                     className: "mb-2 text-ac-slate-dark"
                 }}

@@ -54,6 +54,9 @@ var SiteMapManager = /*#__PURE__*/function () {
   };
 
   _proto.getIndexXml = function getIndexXml(options) {
+    console.log(options.sources);
+    console.log(options.mapping);
+    console.log(this.index.getXml(options));
     return this.index.getXml(options);
   };
 

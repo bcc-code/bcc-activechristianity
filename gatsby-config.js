@@ -45,8 +45,10 @@ const plugins = [
       // URL to query from
       baseUrl: endpoints.api_url,
       headers: {
-        "x-lang": process.env.LANG_CODE
-      }
+        "x-lang": process.env.LANG_CODE,
+
+      },
+      slimMode:process.env.SUPER_SLIM_DEV_MODE
     },
   },
   'gatsby-plugin-sass',

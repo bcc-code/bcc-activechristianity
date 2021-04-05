@@ -5,7 +5,7 @@ import { TextBlock, RectShape, TextRow, } from 'react-placeholder/lib/placeholde
 
 export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     const customerPlaceholder = (
-        <div className="standard-max-w sm:px-4 grid sm:grid-cols-2 md:grid-cols-4 gap-4 pb-16 w-full">
+        <div className="standard-max-w px-4 grid sm:grid-cols-2 md:grid-cols-4 gap-4 pb-16 w-full">
 
             {["", "", "", ""].map((item, k) => {
                 return (
@@ -24,7 +24,7 @@ export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, childr
 
 export const ListPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
     const customerPlaceholder = (
-        <div className="standard-max-w sm:px-4 flex">
+        <div className="standard-max-w px-4 flex">
 
             {[""].map((item, k) => {
                 return (

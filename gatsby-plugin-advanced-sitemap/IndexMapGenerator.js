@@ -34,7 +34,9 @@ var SiteMapIndexGenerator = /*#__PURE__*/function () {
   var _proto = SiteMapIndexGenerator.prototype;
 
   _proto.getXml = function getXml(options) {
+    console.log(options);
     var urlElements = this.generateSiteMapUrlElements(options);
+    console.log(urlElements);
     var data = {
       // Concat the elements to the _attr declaration
       sitemapindex: [XMLNS_DECLS].concat(urlElements)
