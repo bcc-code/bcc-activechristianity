@@ -44,7 +44,7 @@ module.exports = async function generateTypes(data) {
                         throw new Error(subTopicPostRes.errors)
                     }
                     const allPosts = subTopicPostRes.data.ac.topic.somePosts.data
-                    const totalCount = subTopicPostRes.data.ac.topic.somePosts.paginatorInfo.total
+                    const totalCount = subTopicPostRes.data.ac.topic.noOfPosts
                     typeFormatEach.items.push({
                         key:find.keyname,
                         name:subTopic.name,

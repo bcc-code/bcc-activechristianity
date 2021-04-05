@@ -59,7 +59,7 @@ const getPostsQuery = (pageNr)=>`
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
-    const {fieldName,baseUrl,headers} = options
+    const {fieldName,baseUrl,headers,slimMode} = options
        
         const createPostNode = (post)=>{
             const nodeContent = JSON.stringify(post)
@@ -135,7 +135,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
 
-        const useCount = process.env.SUPER_SLIM_DEV_MODE==="true"?3:pageCount
+        const useCount = slimMode==="true"?3:pageCount
         for (let i = 1; i <= useCount; i++){       
             console.log(i)     
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)

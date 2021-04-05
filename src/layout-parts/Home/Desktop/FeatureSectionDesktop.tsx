@@ -8,7 +8,7 @@ import { playlistToPost, getRandomArray } from '@/helpers/normalizers'
 import { IPostItem } from '@/types'
 import shortid from 'shortid'
 
-const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPosts }) => {
+const FeatureSection: React.FC<{ featuredPosts: IPostItem[] | null }> = ({ featuredPosts }) => {
     const hasPlaylist = process.env.LISTEN_SECTION === "all"
     const hasPodcast = process.env.LISTEN_SECTION === "all" || process.env.LISTEN_SECTION === "podcast_only"
 
@@ -28,8 +28,8 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
 
                     />
                 ) : (
-                        featuredPosts[2] && <TopImg {...featuredPosts[2]} />
-                    )}
+                    featuredPosts && featuredPosts[2] && <TopImg {...featuredPosts[2]} />
+                )}
                 {hasPlaylist ? (
                     <FetchLatestPlaylists
                         layout="one"
@@ -43,10 +43,10 @@ const FeatureSection: React.FC<{ featuredPosts: IPostItem[] }> = ({ featuredPost
                         }}
                     />
                 ) : (
-                        featuredPosts[3] && <TopImg {...featuredPosts[3]} key={shortid()} />
-                    )}
-                {featuredPosts[0] && <TopImg {...featuredPosts[0]} key={shortid()} />}
-                {featuredPosts[1] && <TopImg {...featuredPosts[1]} key={shortid()} />}
+                    featuredPosts && featuredPosts[3] && <TopImg {...featuredPosts[3]} key={shortid()} />
+                )}
+                {featuredPosts && featuredPosts[0] && <TopImg {...featuredPosts[0]} key={shortid()} />}
+                {featuredPosts && featuredPosts[1] && <TopImg {...featuredPosts[1]} key={shortid()} />}
 
             </div>
 

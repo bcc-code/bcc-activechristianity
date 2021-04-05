@@ -6703,10 +6703,10 @@ gatsby-recipes@^0.9.2:
     cli-progress "^3.8.2"
     node-fetch "^2.6.0"
 
-gatsby-source-graphql@^2.12.0:
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-graphql/-/gatsby-source-graphql-2.14.0.tgz#9b2217da7c9ccf215f166cca18e304d59ff8de09"
-  integrity sha512-sl23ngwJRbw6ZdFJk9dBF3vONvpfw4DIhp4FZcQ0o8qWsGbkHhBxd9osNIFhIT+SwIDsqzEhsDg+acy31pGKbw==
+gatsby-source-graphql@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-graphql/-/gatsby-source-graphql-3.2.0.tgz#6d8bf01cf861deab3bf298de7194150af24dde87"
+  integrity sha512-uce3fXQRjm55MroAQNemPoQSlZj3pc5mI8NH9IwW9R1wGp04X2LynVQpT48JL0pDXZftHK+d/Hy7ESSW0KWhmg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@graphql-tools/links" "^7.0.3"

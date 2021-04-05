@@ -43,8 +43,7 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
         if (typeof bookid === "string" && typeof ch === "string") {
             acApiModule.then(res => {
                 const acApi = res.default
-                acApi.getScriptureChaptersPost(bookid, ch).then(res => {
-                    console.log(res)
+                acApi.getScriptureChaptersPost(bookid.toLowerCase(), ch).then(res => {
                     setPosts(res.biblePosts.map(item => item.slug))
                 })
             })
@@ -59,12 +58,14 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
                 translatedUrls={[]}
                 breadcrumb={[menusItems.scripture]}
             />
+
             <div className={`px-4 pt-8 sm:pt-0`}>
+                <LayoutH1 title={`${bookname ? `${bookname.toUpperCase()} ${ch}` : title}`} />
                 <PostList
                     posts={posts}
                 />
             </div>
-            <LayoutH1 title={`${bookname ? `${bookname} ${ch}` : title}`} />
+
 
         </div>
     )

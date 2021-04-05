@@ -9,18 +9,21 @@ import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
 import { fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import { DesktopFeaturedPlaceholder } from '@/components/Loader/PlaceHolders'
-const HeaderPost: React.FC<IPostItem> = (props) => {
+const HeaderPost: React.FC<{ mixed: IPostItem[] | null }> = ({ mixed }) => {
     /* const {  muted } = palette; */
     const [post, setPost] = React.useState<null | IPostItem>(null)
     const [videoUrl, setVideoUrl] = React.useState<string | null>(null)
     React.useEffect(() => {
-        setPost(props)
-        fetchOneLocalPostFromSlug(props.slug).then(res => {
-            if (res && res.media && res.media.video) {
-                setVideoUrl(res.media.video.src)
-            }
-        })
-    }, [props.slug])
+        if (mixed) {
+            const firstPost = mixed[0]
+            setPost(firstPost)
+            fetchOneLocalPostFromSlug(firstPost.slug).then(res => {
+                if (res && res.media && res.media.video) {
+                    setVideoUrl(res.media.video.src)
+                }
+            })
+        }
+    }, [mixed])
 
     if (post) {
         const { format, duration, image, title, excerpt, authors, reading_time, id, slug, media } = post
@@ -37,14 +40,14 @@ const HeaderPost: React.FC<IPostItem> = (props) => {
                         />
 
                     ) : (
-                            <div className="m-0 relative w-full pb-square sm:pb-half">
-                                <LazysizesFeaturedImage
+                        <div className="m-0 relative w-full pb-square sm:pb-half">
+                            <LazysizesFeaturedImage
 
-                                    {...image}
-                                    className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
-                                />
-                            </div>
-                        )
+                                {...image}
+                                className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
+                            />
+                        </div>
+                    )
                     }
 
                 </Link>
