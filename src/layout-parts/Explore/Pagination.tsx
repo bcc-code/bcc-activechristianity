@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connectPagination } from 'react-instantsearch-dom'
-import Pagination from '@/components/Pagination'
+import Pagination from '@/components/Pagination/dynamic'
 
 interface ISearchPagination {
     currentRefinement: number
