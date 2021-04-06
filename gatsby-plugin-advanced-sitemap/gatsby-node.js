@@ -409,10 +409,9 @@ exports.onPostBuild = /*#__PURE__*/function () {
             _context2.next = 21;
             return serialize(queryRecords, defaultQueryRecords, options).forEach(function (source) {
               var _loop3 = function _loop3(type) {
-                source[type].forEach(function (allNode) {
-                  var node = allNode.node; // "feed" the sitemaps manager with our serialized records
-
-                  manager.addUrls(type, allNode);
+                source[type].forEach(function (node) {
+                  // "feed" the sitemaps manager with our serialized records
+                  manager.addUrls(type, node);
                 });
               };
 
