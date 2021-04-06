@@ -85,7 +85,7 @@ const addTrackingCode = ()=>{
       gtag('js', new Date());
       gtag('config', 'AW-853531513');
       gtag('config', 'AW-929434073');
-      gtag('config', 'G-W0X557YJGP');
+      gtag('config', 'G-BP822ZKN7N');
 }
 
 export const onClientEntry = () => {
