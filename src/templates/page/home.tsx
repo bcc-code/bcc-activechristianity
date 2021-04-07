@@ -54,6 +54,7 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
   const {
     featured,
     popularTopics,
+    mixedFeaturedPosts,
     popular,
     latest
 
@@ -67,7 +68,8 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
   const [mixed, setMixed] = React.useState<null | IPostItem[]>(null)
 
   React.useEffect(() => {
-    const random = getRandomArray(featured, featured.length)
+    const getPosts = featured.length > 5 ? featured : mixedFeaturedPosts[0]
+    const random = getRandomArray(getPosts, 6)
     setMixed(random)
   }, [])
 
@@ -82,7 +84,7 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
         </div>
       </div>
       <HomeContent
-        mixed={mixed}
+        mixed={mixed && mixed.length > 0 ? mixed?.slice(1) : []}
         latest={latest}
         popular={popular}
         popularTopicsAll={popularTopics}
