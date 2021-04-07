@@ -57,26 +57,25 @@ const MetaTag: React.FC<MetaTagProps> = ({ title, type, meta, translatedUrls, br
                         {categories && categories.length ? <meta property="article:section" content={categories[0].name} /> : null}
                         {date ? <meta property="article:published_time" content={date} /> : null}
 
-                        <meta name="og:title" content={title} />
+                        <meta property="og:title" content={title} />
                         <meta property="og:site_name" content={ac_strings.site_title} />
-                        <meta name="og:description" content={description} />
+                        <meta property="og:description" content={description} />
                         <meta property="og:type" content={mediaTypes[type] ? mediaTypes[type] : type} />
                         {authors ? (
                             authors.map((a: INavItem, k: number) => <meta key={k} property="book:author" content={`${process.env.SITE_URL}/${ac_strings.slug_ac_author}/${a.to}`} />)
                         ) : null}
                         {imageUrl ? [
                             (<meta key={1} property="og:image" content={imageUrl} />),
-                            (<meta key={2} name="twitter:image" content={imageUrl} />),
+                            (<meta key={2} property="twitter:image" content={imageUrl} />),
                             (<meta key={3} property="og:image:secure_url" content={imageUrl} />),
                             (<meta key={4} property="og:image:width" content="800" />),
                             (<meta key={5} property="og:image:height" content="400" />),
                             (<meta key={7} property="og:image:alt" content={title} />),
-
-                            (<meta key={9} name="twitter:image" content={imageUrl} />)
+                            (<meta key={9} property="twitter:image" content={imageUrl} />)
                         ] : null}
-                        <meta name="twitter:card" content="summary" />
-                        <meta name="twitter:title" content={title} />
-                        <meta name="twitter:description" content={description} />
+                        <meta property="twitter:card" content="summary" />
+                        <meta property="twitter:title" content={title} />
+                        <meta property="twitter:description" content={description} />
                     </Helmet>
 
                 </div>
