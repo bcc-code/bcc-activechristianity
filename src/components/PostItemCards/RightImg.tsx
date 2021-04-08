@@ -31,11 +31,8 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
         reading_time,
         authors,
         media,
-        date,
         audioDuration,
         duration,
-        likes,
-        views,
     } = props
     let postAuthors = authors
     let postReadingTime = reading_time?.text

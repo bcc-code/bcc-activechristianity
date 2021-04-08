@@ -97,6 +97,7 @@ module.exports = function generateTopics(actions, graphql) {
                 name:node.name,
                 to:baseUrl
               }]
+              
               if(topicType==='topic'){
 
                 const toAdd = { id: node.id, name: `${node.name} (${node.noOfPosts})`, to: `${ac_strings.slug_topic}/${node.slug}` }

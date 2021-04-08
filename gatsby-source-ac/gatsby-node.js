@@ -59,7 +59,11 @@ const getPostsQuery = (pageNr)=>`
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },options) => {
     const { createNode } = actions
+<<<<<<< HEAD
     const {fieldName,baseUrl,headers,slim} = options
+=======
+    const {fieldName,baseUrl,headers,slimMode} = options
+>>>>>>> master
        
         const createPostNode = (post)=>{
             const nodeContent = JSON.stringify(post)
@@ -135,7 +139,11 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         const {count,total}=firstQueryRes.posts.paginatorInfo
         const pageCount = Math.ceil(total/count)
 
+<<<<<<< HEAD
         const useCount = slim==="true"?3:pageCount
+=======
+        const useCount = slimMode==="true"?3:pageCount
+>>>>>>> master
         for (let i = 1; i <= useCount; i++){       
             console.log(i)     
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
@@ -239,8 +247,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
                     transformedPost.glossary = glossaryContent.postGlossaries
                 }
                 transformedPost.title = decode(post.title)
-                console.log(transformedPost.title )
-                console.log(transformedPost.id )
                 transformedPost.excerpt = decode(post.excerpt)
                 transformedPost.content = removeUnwantedNodes(transformedPost.content)
                 transformedPost.content = checkingLinks(transformedPost.content)

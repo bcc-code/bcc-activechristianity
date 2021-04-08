@@ -8,7 +8,7 @@ import { IPostItem, ITopicPostItems } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 
 interface IHomeMobileProps {
-    mixed: IPostItem[]
+    mixed: IPostItem[] | null
     latest: IPostItem[]
     popular: IPostItem[]
     popularTopicsAll: {
@@ -28,7 +28,7 @@ const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popul
             <div className="px-4">
 
                 <FeatureSectionDesktop
-                    featuredPosts={mixed.slice(2)}
+                    featuredPosts={mixed}
                 />
 
                 <LowerSections

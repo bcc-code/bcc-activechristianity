@@ -143,7 +143,6 @@ module.exports = function generatePages(actions, graphql) {
                                     } else {
                                         console.log(getTopicQuery)
                                         console.log(res.data.ac.topic)
-
                                         console.log(item)
                                         throw new Error('not able to find posts for this topic')
                                     }

@@ -66,8 +66,8 @@ export const SectionTitleDesktopAndMobile: React.FC<IUnderlineTitleLink> = ({ na
                 <UnderlineTitleLink name={name} to={to} />
             </div>
             <div className="block sm:hidden">
-                <div className="w-full flex justify-between pt-6 pr-4">
-                    <PageSectionHeader title={name} className="pb-4" />
+                <div className="w-full flex justify-between items-center pt-6 pr-4 pb-4">
+                    <PageSectionHeader title={name} className="" />
                     {to && <UnderlineLinkViewAll to={`${to}`} />}
                 </div>
             </div>

@@ -62,6 +62,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
+
       generateHome(actions, graphql),
       generateExplore(actions, graphql),
       generatePosts(actions, graphql), 
@@ -69,6 +70,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
+        generateTopics(actions, graphql),
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
         generateTopics(actions, graphql),
@@ -96,7 +98,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
         generators.push(generateScriptures(actions, graphql)) 
       } 
     }
-
 
     return Promise.all(generators)
 

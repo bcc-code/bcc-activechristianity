@@ -84,20 +84,15 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
       topic(id: ${id1}) {
           id
           name
+          noOfPosts (hasTopics: { value: ${id2}, column: ID })
           somePosts (hasTopics: { value: ${id2}, column: ID },first:${perPage},page:1){
-            paginatorInfo {
-              count
-              total
-            }
             data {
               ${postQuery}
             }
           }
-            
       }
   }
 }`
-
 
 module.exports.createArchivePages =async function ({
   graphql,

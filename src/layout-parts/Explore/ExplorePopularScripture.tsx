@@ -7,8 +7,8 @@ import { OutlineScriptureChapter } from '@/components/Button'
 import ac_strings from '@/strings/ac_strings.js'
 const ExplorePopularScripture: React.FC<{
 
-    scriptureSlug: string
-}> = ({ scriptureSlug }) => {
+    isMobile: boolean
+}> = ({ isMobile }) => {
 
 
     return (
@@ -19,7 +19,7 @@ const ExplorePopularScripture: React.FC<{
 
             />
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 px-4">
-                {popularScriptures.map((s, i) => {
+                {popularScriptures.slice(0, isMobile ? 4 : 8).map((s, i) => {
                     return (
                         <Link key={i} to={`${ac_strings.slug_scripture}-result?bookId=${s.bookId}&ch=${s.chapter}&bookName=${s.bookName}`}>
                             < OutlineScriptureChapter>

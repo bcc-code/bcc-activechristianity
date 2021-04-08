@@ -205,6 +205,7 @@ const normalizePostRes = (post) => {
     const { filteredTopics, types, format } = transformTopicsRes(topics)
 
     const readingTimeMinutes = secondesToMinutes(readtime)
+
     const postItem = {
         id:acId?acId:id,
         title,
@@ -226,7 +227,6 @@ const normalizePostRes = (post) => {
         glossary,//Math.round(num * 100) / 100
         views: views > 999 ? `${(views / 1000).toFixed(1)}K` : `${views}`,
         likes
-
     }
 
     const { media } = postItem
@@ -238,7 +238,6 @@ const normalizePostRes = (post) => {
             type: "video"
         }
         delete postItem.duration.read
-
     }
 
     if (track) {
@@ -275,7 +274,6 @@ const processRecommendationContext = (data) => {
         popular,
         latest
     })
-
 }
 
 const getRandomArray = (pickFromArray, length) => {

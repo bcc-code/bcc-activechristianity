@@ -4,7 +4,7 @@ const formatTemplate= 'src/templates/recommend/format-recommend.tsx'
 
 
 module.exports = async function generateFormat(data) {
-    const {actions, graphql,contextPosts,subTopics,node:format,nodeInfo,breadcrumb}=data
+    const {actions, contextPosts,node:format,nodeInfo,breadcrumb}=data
     const { createPage } = actions
     const formatType={
         info:nodeInfo,
