@@ -241,15 +241,21 @@ module.exports = async function generatePosts(actions, graphql) {
                           let recommendedPosts = []
                           let authorsPosts=[]
                           node.authors.map(a=>{
-                            const filtered = authorsWPosts[a.slug].posts.filter(slug=>slug!==normalized.slug)
-                            if(filtered.length>0){
-                              authorsPosts.push({
-                                name:a.name,
-                                slug:a.slug,
-                                posts:filtered
-                              })
+                            if(a.slug && authorsWPosts[a.slug]){
+                              const filtered = authorsWPosts[a.slug].posts.filter(slug=>slug!==normalized.slug)
+                              if(filtered.length>0){
+                                authorsPosts.push({
+                                  name:a.name,
+                                  slug:a.slug,
+                                  posts:filtered
+                                })
+                              }
+                              return authorsWPosts[a.slug]
+                            } else {
+                              console.log(a)
+                              throw Error('Unable to find author')
                             }
-                            return authorsWPosts[a.slug]
+       
                           })
                           const topicPosts = []
                           const formatPosts = []

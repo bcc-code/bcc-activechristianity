@@ -67,7 +67,6 @@ module.exports = function generateTopics(actions, graphql) {
           } else {
 
                 const acData = result.data.ac
-                console.log(acData)
                 const {popularTopicsSlugs,featuredTopics,formatTopics,questions,songs,featuredVideos,edification} = acData
                 const explorePage = {
                     title:ac_strings.explore,
@@ -108,11 +107,14 @@ module.exports = function generateTopics(actions, graphql) {
                     popularTopics,
                     featuredTopics,
                     recommendFormats:recommendFormats,
-                    allFormats:formats,
-                    questions:topicsPosts(questions),
-                    songs:topicsPosts(songs),
-                    featuredVideos:topicsPosts(featuredVideos),
-                    edification:topicsPosts(edification)
+                    allFormats:formats
+                }
+
+                if(process.env.LANG_CODE==="en"){
+                    contextExplore["questions"]=topicsPosts(questions)
+                    contextExplore["songs"]=topicsPosts(songs)
+                    contextExplore["featuredVideos"]=topicsPosts(featuredVideos)
+                    contextExplore["edification"]=topicsPosts(edification)
                 }
 
                 createPage({

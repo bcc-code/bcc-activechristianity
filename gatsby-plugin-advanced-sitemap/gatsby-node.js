@@ -359,7 +359,7 @@ var serialize = function serialize(_temp, _ref8, _ref9) {
 
 exports.onPostBuild = /*#__PURE__*/function () {
   var _ref13 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(_ref12, pluginOptions) {
-    var graphql, pathPrefix, queryRecords, options, indexSitemapFile, resourcesSitemapFile, defaultQueryRecords, manager, resourcesSiteMapsArray, indexSiteMap, _i, _resourcesSiteMapsArr, sitemap, filePath;
+    var graphql, pathPrefix, queryRecords, options, indexSitemapFile, resourcesSitemapFile, defaultQueryRecords, manager, resourcesSiteMapsArray, addSource, indexSiteMap, _i, _resourcesSiteMapsArr, sitemap, filePath;
 
     return _regenerator.default.wrap(function _callee2$(_context2) {
       while (1) {
@@ -434,6 +434,7 @@ exports.onPostBuild = /*#__PURE__*/function () {
             // come from
 
             options.sources = serializeSources(options);
+            addSource = [];
             options.sources.forEach(function (type) {
               if (!type.url) {
                 var xml = manager.getSiteMapXml(type.sitemap, options);
@@ -444,65 +445,67 @@ exports.onPostBuild = /*#__PURE__*/function () {
                     type: type.name,
                     xml: xml
                   });
+                  addSource.push(type);
                 } else {
                   delete options.mapping[type.name];
                 }
               }
             });
+            options.sources = addSource;
             indexSiteMap = manager.getIndexXml(options); // Save the generated xml files in the public folder
 
-            _context2.prev = 29;
-            _context2.next = 32;
+            _context2.prev = 31;
+            _context2.next = 34;
             return utils.writeFile(indexSitemapFile, indexSiteMap);
 
-          case 32:
-            _context2.next = 37;
+          case 34:
+            _context2.next = 39;
             break;
 
-          case 34:
-            _context2.prev = 34;
-            _context2.t0 = _context2["catch"](29);
+          case 36:
+            _context2.prev = 36;
+            _context2.t0 = _context2["catch"](31);
             console.error(_context2.t0);
 
-          case 37:
+          case 39:
             _i = 0, _resourcesSiteMapsArr = resourcesSiteMapsArray;
 
-          case 38:
+          case 40:
             if (!(_i < _resourcesSiteMapsArr.length)) {
-              _context2.next = 52;
+              _context2.next = 54;
               break;
             }
 
             sitemap = _resourcesSiteMapsArr[_i];
             filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type); // Save the generated xml files in the public folder
 
-            _context2.prev = 41;
-            _context2.next = 44;
+            _context2.prev = 43;
+            _context2.next = 46;
             return utils.writeFile(filePath, sitemap.xml);
 
-          case 44:
-            _context2.next = 49;
+          case 46:
+            _context2.next = 51;
             break;
 
-          case 46:
-            _context2.prev = 46;
-            _context2.t1 = _context2["catch"](41);
+          case 48:
+            _context2.prev = 48;
+            _context2.t1 = _context2["catch"](43);
             console.error(_context2.t1);
 
-          case 49:
+          case 51:
             _i++;
-            _context2.next = 38;
+            _context2.next = 40;
             break;
 
-          case 52:
+          case 54:
             return _context2.abrupt("return");
 
-          case 53:
+          case 55:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[29, 34], [41, 46]]);
+    }, _callee2, null, [[31, 36], [43, 48]]);
   }));
 
   return function (_x2, _x3) {

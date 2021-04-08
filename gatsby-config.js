@@ -90,7 +90,17 @@ const plugins = [
 /*   
   "gatsby-plugin-webpack-bundle-analyser-v2", */
   
-  'gatsby-plugin-loadable-components-ssr'
+  'gatsby-plugin-loadable-components-ssr',
+  {
+    resolve: `gatsby-plugin-algolia-search`,
+    options: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_ADMIN_KEY,
+      indexName: 'posts', // for all queries
+      queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
+      enablePartialUpdates: true
+    }
+  }
 ];
 
 if (activeEnv === 'production' && process.env.SUPER_SLIM_DEV_MODE!=='true') {
@@ -112,16 +122,6 @@ if (activeEnv === 'production' && process.env.SUPER_SLIM_DEV_MODE!=='true') {
           generateRedirectObjectsForPermanentRedirects: true,
           enableS3StaticWebsiteHosting: false,
       },
-    },
-    {
-      resolve: `gatsby-plugin-algolia-search`,
-      options: {
-        appId: process.env.ALGOLIA_APP_ID,
-        apiKey: process.env.ALGOLIA_ADMIN_KEY,
-        indexName: 'posts', // for all queries
-        queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
-        enablePartialUpdates: true
-      }
     },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
