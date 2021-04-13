@@ -6,12 +6,14 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
+const  {getIndexPostQuery, sendQuery } = require('gatsby-source-ac/helpers')
+const {formatScope,typeScope,groupAll} = require('./src/strings/static/topic-ids.js')
 const buildTranslatedStrings = require('./generators/json/build-translated-strings')
 const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
+
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -62,17 +64,17 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
-
       generateHome(actions, graphql),
       generateExplore(actions, graphql),
-      generatePosts(actions, graphql), 
+      generatePages(actions, graphql),
+
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
+        generatePosts(actions, graphql), 
         generateTopics(actions, graphql),
         generateAuthors(actions, graphql),
-        generatePages(actions, graphql),
         generateTopics(actions, graphql),
         generateRedirect(actions, graphql),
        /*  generateSeries(actions, graphql) */
@@ -143,29 +145,157 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
 
   `
 
+  const postBuildTestQuery = `
+    query {
+      posts {
+        paginatorInfo {
+          count
+          total
+        }
+      }
+  
+      formats:topics (group_id:4){
+        slug
+        id
+        noOfPosts
+      }
+  
+      types:topics(group_id:5){
+        id
+        slug
+        noOfPosts
+        subTopics {
+            id
+            slug
+        }
+        
+      }
+      testTopic1:topic(id:83819){
+        slug
+        noOfPosts
+      }
+      testTopic2:topic(id:134){
+        slug
+        noOfPosts
+      }
+      testAuthor1:author(id:1508){
+        slug
+      }
+      testAuthor2:author(id:1597){
+          slug
+      }
+      authorsCount:authors{
+        paginatorInfo {
+          total
+        }
+      }
+    }
+  `
     const allPagesRes = await graphql(allPagesQuery)
-    const findPages=[
-      ac_strings.slug_about,
-      ac_strings.slug_contact,
-      ac_strings.slug_explore,
-      ac_strings.slug_scripture,
-      ac_strings.slug_playlist,
-      ac_strings.slug_glossary,
-    ]
+    const allPostAndTopicTestData = await sendQuery(postBuildTestQuery,endpoints.api_url,{ "x-lang": process.env.LANG_CODE})
+    const {posts,formats,types,testTopic1,testTopic2,authorsCount,testAuthor2,testAuthor1}=allPostAndTopicTestData
 
+ 
     const {data}=allPagesRes
-      
+
     if(data && data.allSitePage && data.allSitePage.edges){
       const nodes = data.allSitePage.edges
-      const nodeMaps={
+      const nodeMaps={}
 
+      const slugsToValidateArray=[
+        ac_strings.slug_explore,
+        ac_strings.slug_contact,
+        ac_strings.slug_about,
+        ac_strings.slug_privacy_policy,
+        ac_strings.slug_cookie_policy,
+        ac_strings.slug_read,
+        ac_strings.slug_watch,
+        ac_strings.slug_latest,
+        ac_strings.slug_topic,
+        `${ac_strings.slug_read}/${ac_strings.slug_latest}`,
+        `${ac_strings.slug_ac_author}/${testAuthor2.slug}`,
+        `${ac_strings.slug_ac_author}/${testAuthor1.slug}`
+      ]
+      
+
+      const postTotal=posts.paginatorInfo.total
+      const pageCount=Math.ceil(postTotal/12)
+      slugsToValidateArray.push(`${ac_strings.slug_latest}/2`,`${ac_strings.slug_latest}/${pageCount}`)
+      formats.forEach(node=>{
+        console.log(node)
+        const find = formatScope.find(f=>`${f.keyId}`===`${node.id}`)
+        if(find && node.noOfPosts>0){
+          slugsToValidateArray.push(`${node.slug}`,`${node.slug}/${ac_strings.slug_latest}`)
+        }
+      })
+
+      types.forEach(node=>{
+        const find = typeScope.find(t=>`${t.keyId}`===`${node.id}`)
+        if(find && node.noOfPosts>0){
+          const topicPageTotal=node.noOfPosts
+          const pageCount=Math.ceil(topicPageTotal/12)
+          slugsToValidateArray.push(`${node.slug}/${ac_strings.slug_latest}`,`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
+          node.subTopics.forEach(t=>{
+            slugsToValidateArray.push(`${node.slug}/${t.slug}`)
+          })
+        }
+
+      })
+
+      const testTopics=[testTopic1,testTopic2]
+
+      testTopics.forEach(node=>{
+        slugsToValidateArray.push(`${ac_strings.slug_topic}/${node.slug}/${ac_strings.slug_latest}`,
+        `${ac_strings.slug_topic}/${node.slug}/1`)
+      })
+
+      const slugsToValidateObject={
+        '/':false
+      }
+ 
+      const missingPagesSlugs=[]
+
+      if (process.env.LISTEN_SECTION ==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+        slugsToValidateArray.push(ac_strings.slug_listen)
+        slugsToValidateArray.push(`${ac_strings.slug_listen}/${ac_strings.slug_latest}`)
       }
 
+      if (process.env.LISTEN_SECTION ==="all"){
+        console.log("check playlist")
+        slugsToValidateArray.push(ac_strings.slug_playlist)
+      }
+
+      if (process.env.SCRIPTURE_SECTION==="true"){
+        console.log("check scriptures")
+        slugsToValidateArray.push(ac_strings.slug_scripture,`${ac_strings.slug_scripture}-result`)
+      }
+
+      if (process.env.GLOSSARY_SECTION==="true"){
+        console.log(Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length)
+        console.log("check glossry")
+        //slug_glossary
+      }
+
+      slugsToValidateArray.forEach((item,i)=>{
+        if(typeof item==="string" && item!==""){
+          let toValidateSlug = item
+          if (!item.startsWith("/")){
+            toValidateSlug=`/${item}`
+          }
+          slugsToValidateObject[toValidateSlug]=false
+        } else {
+          throw new Error(`Unable to find slug on index ${i}`)
+        }
+      })
+
+   
       nodes.forEach(({node}) => {
           const {slug, context }=node
           const getType=context && context.pageType?context.pageType:"other"
           const toAdd = slug
-
+          if(slugsToValidateObject[slug]!==undefined){
+            slugsToValidateObject[slug]=true
+          }
           if(nodeMaps[getType]){
               nodeMaps[getType].push(toAdd)
           } else {
@@ -173,74 +303,47 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
           }
       });
 
-      //
-      console.log(Array.isArray(nodeMaps.contributor) && nodeMaps.contributor.length)
-      console.log(Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length)
-      console.log(Array.isArray(nodeMaps.playlist) && nodeMaps.playlist.length)
-      console.log(Array.isArray(nodeMaps.post) && nodeMaps.post.length)
-      console.log(nodeMaps.other)
-
-      const validate={
-        home:{
-          slug:'/',
-          validate:false
-        },
-        explore:{
-          slug:ac_strings.slug_explore,
-          validate:false
-        },
-        contact:{
-          slug:ac_strings.slug_contact,
-          validate:false
-        },
-        about:{
-          slug:ac_strings.slug_about,
-          validate:false
+      const checkFoundSlugsArray = Object.keys(slugsToValidateObject)
+      checkFoundSlugsArray.forEach(item=>{
+        console.log(slugsToValidateObject[item])
+        if (slugsToValidateObject[item]===false){
+          console.log(item)
+            missingPagesSlugs.push(item)//
+          
         }
+      })
+
+      if(missingPagesSlugs.length>0){
+        console.log(missingPagesSlugs)
+        throw new Error(`Did not generate pages.`)
       }
+      let hasPost=Array.isArray(nodeMaps.post) && nodeMaps.post.length>0 
+      console.log(nodeMaps.other)
+       if(!hasPost || posts.paginatorInfo.total!== nodeMaps.post.length){
+         console.log(`${nodeMaps.post.length} posts generated`)
+         console.log(`However, ${posts.paginatorInfo.total} posts should be generated`)
+        throw new Error('some posts are missing')
+       }
 
-      //ac_strings.slug_home
-      //ac_strings.slug_explore
-      //ac_strings.slug_contact
-      //ac_strings.slug_about
 
-      // read + latest + subtopics
-      // watch + latest + subtopics
-
-    
-      // pageType:'contributor' shoud be >400
-      // pageType:'topic' should be > 80
-      // catch
-
-      // check topic (example id)
-
-      // check format + latest
-
-      if (process.env.LISTEN_SECTION ==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
-        /*  console.log('check podcast') */
-        // check listen
-        // check listen latest 1 + 2 + subtopics
-        //
-      }
-  
       if (process.env.LISTEN_SECTION==="all"){
-        console.log("check playlist")
-        //slug_playlist
+        const hasPlaylists = Array.isArray(nodeMaps.playlist) && nodeMaps.playlist.length>0
+        if(!hasPlaylists){
+          throw new Error('no playlist generated')
+        }
+
       }
   
       if (process.env.GLOSSARY_SECTION==="true"){
-        console.log("check glossry")
+        const hasGlossary = Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length>0
+        if(!hasGlossary){
+          throw new Error('no glossary generated')
+        }
         //slug_glossary
       }
   
-      if (process.env.SCRIPTURE_SECTION==="true"){
-        console.log("check scriptures")
-        //slug_scripture
-        //`${page.slug}-result`
-
-      } 
     } else {
-      throw Error ('not able to find pages')
+      throw new Error ('not able to find pages')
     }
 
 

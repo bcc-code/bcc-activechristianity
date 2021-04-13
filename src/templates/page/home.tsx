@@ -65,8 +65,6 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
     slug: ac_strings.slug_latest
   }
 
-<<<<<<< HEAD
-=======
   const [mixed, setMixed] = React.useState<null | IPostItem[]>(null)
 
   React.useEffect(() => {
@@ -77,7 +75,6 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
 
   return (
     <>
-
       <div className="hidden sm:block">
         <HomeTopFeaturePost mixed={mixed} key={shortid()} />
         <div className="px-4">
@@ -104,7 +101,6 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
   } = pageContext
 
->>>>>>> master
   return (
 
     <div className="standard-max-w">
@@ -115,12 +111,8 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         translatedUrls={[]}
         breadcrumb={[]}
       />
-
       <div className="sm:hidden w-full pt-8">
-
-        <div>
-          <FeaturedBanner featured={featured} />
-        </div>
+        <FeaturedBanner featured={featured} />
         <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
           <PageSectionHeader title={ac_strings.latest} className="pb-4" />
           <TopImgRowHorizontalScroll posts={latest} />
@@ -160,7 +152,6 @@ export default IndexPage
 
 
 interface IHomePropsContent {
-  featuredPosts: IPostRes[]
   latest: IPostItem[]
   popular: IPostItem[]
   featured: IPostItem[]
@@ -173,19 +164,6 @@ interface IHomePropsContent {
 
 export interface IHomeProps {
   path: string
-<<<<<<< HEAD
-  pageContext: {
-    latest: IPostItem[]
-    popular: IPostItem[]
-    featured: IPostItem[]
-    mixedFeaturedPosts: IPostItem[][]
-    popularTopics: {
-      static: ITopicPostItems[]
-      dynamic: ITopicPostItems[]
-    }
-  }
-=======
   pageContext: IHomePropsContent
->>>>>>> master
 
 }

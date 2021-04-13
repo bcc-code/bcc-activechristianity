@@ -142,6 +142,7 @@ module.exports.createArchivePages =async function ({
             }
             return res.data.ac.topic.allPosts.data
           } else {
+            console.log(perPagePosts)
             console.log(query)
             throw new Error('not able to get pages')
           }

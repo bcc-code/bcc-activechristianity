@@ -1,14 +1,11 @@
 const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
 const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
-const  {getIndexPostQuery} = require('gatsby-source-ac/helpers')
 
 console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
 })
-
-
 
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
 
@@ -69,7 +66,7 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
-  { 
+/*   { 
     resolve: `gatsby-plugin-purgecss`,
     options: {
       printRejected: true, // Print removed selectors and processed file names
@@ -79,7 +76,7 @@ const plugins = [
       // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
       purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
     }
-  },
+  }, */
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
   // 'gatsby-plugin-offline',
@@ -91,7 +88,7 @@ const plugins = [
   "gatsby-plugin-webpack-bundle-analyser-v2", */
   
   'gatsby-plugin-loadable-components-ssr',
-  {
+/*   {
     resolve: `gatsby-plugin-algolia-search`,
     options: {
       appId: process.env.ALGOLIA_APP_ID,
@@ -100,12 +97,11 @@ const plugins = [
       queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
       enablePartialUpdates: true
     }
-  }
+  } */
 ];
 
 if (activeEnv === 'production' && process.env.SUPER_SLIM_DEV_MODE!=='true') {
   
-
   plugins.push(
     {
       resolve: `gatsby-plugin-s3`,
