@@ -167,6 +167,7 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
         subTopics {
             id
             slug
+            group_id
         }
         
       }
@@ -231,12 +232,16 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
 
       types.forEach(node=>{
         const find = typeScope.find(t=>`${t.keyId}`===`${node.id}`)
+
         if(find && node.noOfPosts>0){
           const topicPageTotal=node.noOfPosts
           const pageCount=Math.ceil(topicPageTotal/12)
           slugsToValidateArray.push(`${node.slug}/${ac_strings.slug_latest}`,`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
           node.subTopics.forEach(t=>{
-            slugsToValidateArray.push(`${node.slug}/${t.slug}`)
+            const find = formatScope.find(f=>`${f.keyId}`===`${t.id}`)
+            if(find){
+              slugsToValidateArray.push(`${node.slug}/${t.slug}`)
+            }
           })
         }
 
@@ -245,7 +250,7 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
       const testTopics=[testTopic1,testTopic2]
 
       testTopics.forEach(node=>{
-        slugsToValidateArray.push(`${ac_strings.slug_topic}/${node.slug}/${ac_strings.slug_latest}`,
+        slugsToValidateArray.push(`${ac_strings.slug_topic}/${node.slug}`,
         `${ac_strings.slug_topic}/${node.slug}/1`)
       })
 
@@ -273,9 +278,9 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
       if (process.env.GLOSSARY_SECTION==="true"){
         console.log(Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length)
         console.log("check glossry")
-        //slug_glossary
       }
 
+      // generate slug map to validate all pages
       slugsToValidateArray.forEach((item,i)=>{
         if(typeof item==="string" && item!==""){
           let toValidateSlug = item
@@ -287,15 +292,19 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
           throw new Error(`Unable to find slug on index ${i}`)
         }
       })
-
+      console.log(slugsToValidateObject)
    
+      
       nodes.forEach(({node}) => {
           const {slug, context }=node
           const getType=context && context.pageType?context.pageType:"other"
           const toAdd = slug
+          //try to find  pages the needs to be validated, if not add them to the missing page array
           if(slugsToValidateObject[slug]!==undefined){
             slugsToValidateObject[slug]=true
-          }
+          } 
+
+          //  at the same sort all pages by type
           if(nodeMaps[getType]){
               nodeMaps[getType].push(toAdd)
           } else {
@@ -312,16 +321,20 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
           
         }
       })
-
+      
       if(missingPagesSlugs.length>0){
         console.log(missingPagesSlugs)
         throw new Error(`Did not generate pages.`)
+      } else {
+        console.log(slugsToValidateObject)
+        console.log('Found all these pages')
       }
+
       let hasPost=Array.isArray(nodeMaps.post) && nodeMaps.post.length>0 
-      console.log(nodeMaps.other)
-       if(!hasPost || posts.paginatorInfo.total!== nodeMaps.post.length){
          console.log(`${nodeMaps.post.length} posts generated`)
-         console.log(`However, ${posts.paginatorInfo.total} posts should be generated`)
+         console.log(`${posts.paginatorInfo.total} posts should be generated`)
+       if(!hasPost || posts.paginatorInfo.total!== nodeMaps.post.length){
+         
         throw new Error('some posts are missing')
        }
 
@@ -330,6 +343,8 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
         const hasPlaylists = Array.isArray(nodeMaps.playlist) && nodeMaps.playlist.length>0
         if(!hasPlaylists){
           throw new Error('no playlist generated')
+        } else {
+          console.log(`${nodeMaps.playlist.length} playlists generated`)
         }
 
       }
@@ -338,8 +353,9 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
         const hasGlossary = Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length>0
         if(!hasGlossary){
           throw new Error('no glossary generated')
+        } else {
+          console.log(`${nodeMaps.glossary.length} glossary generated`)
         }
-        //slug_glossary
       }
   
     } else {

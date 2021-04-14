@@ -78,8 +78,6 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                 console.log(error)
             })
     }
-    console.log(introPost.date)
-    console.log(typeof introPost.date)
     return (
         <div className="max-w-sm mx-auto">
             <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={[...breadcrumb, { name: introPost.title, to: path }]} path={path} />
@@ -96,7 +94,7 @@ const Host: React.FC<IPodcastIntro> = (props) => {
                         />
                     </div>
                     <div className="text-xs text-white mx-4">
-                        {/* {dateToString(introPost.date)} */}
+                        {introPost.date}
                     </div>
                 </div>
             </PodcastPageHeadSection>
