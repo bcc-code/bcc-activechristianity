@@ -209,11 +209,9 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
         ac_strings.slug_about,
         ac_strings.slug_privacy_policy,
         ac_strings.slug_cookie_policy,
-        ac_strings.slug_read,
-        ac_strings.slug_watch,
+
         ac_strings.slug_latest,
         ac_strings.slug_topic,
-        `${ac_strings.slug_read}/${ac_strings.slug_latest}`,
         `${ac_strings.slug_ac_author}/${testAuthor2.slug}`,
         `${ac_strings.slug_ac_author}/${testAuthor1.slug}`
       ]
@@ -230,22 +228,42 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
         }
       })
 
-      types.forEach(node=>{
+      for(let j=0;j<types.length;j++){
+        const node=types[j]
         const find = typeScope.find(t=>`${t.keyId}`===`${node.id}`)
-
         if(find && node.noOfPosts>0){
           const topicPageTotal=node.noOfPosts
           const pageCount=Math.ceil(topicPageTotal/12)
-          slugsToValidateArray.push(`${node.slug}/${ac_strings.slug_latest}`,`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
-          node.subTopics.forEach(t=>{
-            const find = formatScope.find(f=>`${f.keyId}`===`${t.id}`)
-            if(find){
-              slugsToValidateArray.push(`${node.slug}/${t.slug}`)
-            }
-          })
-        }
+          slugsToValidateArray.push(`${node.slug}`,`${node.slug}/${ac_strings.slug_latest}`,`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
+          for(let k=0;k<node.subTopics.length;k++){
+            const subTopic=node.subTopics[k]
+            const noOfPostsQuery = `
+              query {
+                topic(id: ${node.id}) {
+                  id
+                  name
+                  noOfPosts (hasTopics: { value: ${subTopic.id}, column: ID })
 
-      })
+                }
+              }
+            `
+            const noOfPostRes = await sendQuery(noOfPostsQuery,endpoints.api_url,{ "x-lang": process.env.LANG_CODE})
+
+            if(noOfPostRes && noOfPostRes.topic && noOfPostRes.topic.noOfPosts){
+
+              const {noOfPosts}=noOfPostRes.topic
+              if(noOfPosts>0 && subTopic.id!==node.id){
+                slugsToValidateArray.push(`${node.slug}/${subTopic.slug}`)
+              }
+            } else {
+              console.log(`cannot find number of posts for this topic: ${node.slug}/${subTopic.slug}`)
+            }
+            
+          }
+          
+        }
+      }
+
 
       const testTopics=[testTopic1,testTopic2]
 
@@ -292,8 +310,6 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
           throw new Error(`Unable to find slug on index ${i}`)
         }
       })
-      console.log(slugsToValidateObject)
-   
       
       nodes.forEach(({node}) => {
           const {slug, context }=node
@@ -314,14 +330,12 @@ exports.onPostBuild = async ({graphql, pathPrefix}, pluginOptions) => {
 
       const checkFoundSlugsArray = Object.keys(slugsToValidateObject)
       checkFoundSlugsArray.forEach(item=>{
-        console.log(slugsToValidateObject[item])
         if (slugsToValidateObject[item]===false){
-          console.log(item)
             missingPagesSlugs.push(item)//
           
         }
       })
-      
+
       if(missingPagesSlugs.length>0){
         console.log(missingPagesSlugs)
         throw new Error(`Did not generate pages.`)
