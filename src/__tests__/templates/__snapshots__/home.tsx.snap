@@ -1,0 +1,2120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  <div
+    className="fixed bottom-0 w-full bg-ac-slate-dark text-ac-slate-lighter p-4"
+    style={
+      Object {
+        "zIndex": 650,
+      }
+    }
+  >
+    <div
+      className="standard-max-w"
+    >
+      <div
+        className="text-xs"
+      >
+        This website uses cookies to recognize repeat visits and preferences, to provide social media features and to analyze traffic. By clicking “I Accept,” or by using our site, you consent to the use of cookies and our Terms of Use.
+        <button
+          className="underline pt-2"
+          onClick={[Function]}
+        >
+          View Cookie Policy
+        </button>
+      </div>
+      <button
+        className="text-sm bg-ac-primary px-4 inline-block rounded-full py-1 mt-2"
+        onClick={[Function]}
+      >
+        I Accept
+      </button>
+    </div>
+  </div>,
+  <div
+    className="fixed top-0 bg-white shadow-md sm:shadow-none block w-full py-2 sm:py-1 sm:border-b border-gray-200 drawer-main drawer-main-close"
+    style={
+      Object {
+        "zIndex": 100,
+      }
+    }
+  >
+    <div
+      className=" hidden sm:flex justify-between items-center border-gray-200 border-b py-2 sm:py-0 px-2 text-gray-500 text-sm "
+    >
+      <a
+        className="flex items-center text-sm -mt-1 pl-1"
+        href="https://bcc.no/en/om_oss/"
+        target="_blank"
+      >
+        <span>
+          By Brunstad Christian Church
+        </span>
+        <span
+          className="px-2"
+        >
+          <svg
+            className="fill-slate-dark"
+            style={
+              Object {
+                "height": "1rem",
+                "width": "1rem",
+              }
+            }
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0h24v24H0z"
+              fill="none"
+            />
+            <path
+              d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+            />
+          </svg>
+        </span>
+      </a>
+      <div
+        className="hidden sm:flex items-center text-sm"
+      >
+        <div
+          className="grid grid-cols-2 pr-4"
+        >
+          <span
+            className="whitespace-no-wrap px-2 py-1 text-center cursor-pointer hover:text-ac-slate"
+            onClick={[Function]}
+          >
+            Login
+          </span>
+          <span
+            className="px-2 py-1 text-center cursor-pointer bg-ac-slate-dark rounded mb-1 text-white hover:text-ac-slate-lighter"
+            onClick={[Function]}
+          >
+            Register
+          </span>
+        </div>
+        <a
+          className="py-2 pr-4 hover:text-ac-slate"
+          href="contact"
+          target="_blank"
+        >
+          Contact
+        </a>
+        <div
+          className="relative flex items-center border-l pl-2 p-0"
+        >
+          <button
+            className=" w-full flex items-center justify-between"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            <span
+              className="whitespace-no-wrap"
+            >
+              English
+            </span>
+            <span
+              className="flex items-center mx-2"
+            >
+              <svg
+                className="fill-slate-dark"
+                style={
+                  Object {
+                    "height": "1.5rem",
+                    "width": "1.5rem",
+                  }
+                }
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 0h24v24H0V0z"
+                  fill="none"
+                />
+                <path
+                  d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="flex py-2 standard-max-w items-center"
+    >
+      <a
+        aria-current="page"
+        className="flex flex-1 justify-start items-center px-4 mt-1"
+        href="/"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        style={Object {}}
+      >
+        <svg
+          fill="none"
+          style={
+            Object {
+              "height": "24px",
+              "width": "190px",
+            }
+          }
+          viewBox="0 0 314 39"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 3C9 1.34315 10.3431 0 12 0H14C15.6569 0 17 1.34315 17 3V5C17 6.65685 15.6569 8 14 8H12C10.3431 8 9 6.65685 9 5V3Z"
+            fill="#FFAE0C"
+          />
+          <path
+            d="M18 12C18 10.3431 19.3431 9 21 9H23C24.6569 9 26 10.3431 26 12V14C26 15.6569 24.6569 17 23 17H21C19.3431 17 18 15.6569 18 14V12Z"
+            fill="#FFAE0C"
+          />
+          <path
+            d="M9 34C9 32.3431 10.3431 31 12 31H14C15.6569 31 17 32.3431 17 34V36C17 37.6569 15.6569 39 14 39H12C10.3431 39 9 37.6569 9 36V34Z"
+            fill="#FFAE0C"
+          />
+          <path
+            d="M0 14V12C0 10.3431 1.34315 9 3 9H14C15.6569 9 17 10.3431 17 12V27C17 28.6569 15.6569 30 14 30H12C10.3431 30 9 28.6569 9 27V17H3C1.34315 17 0 15.6569 0 14Z"
+            fill="#FFAE0C"
+          />
+          <path
+            d="M55.578 31H59.08L50.444 6.996H46.908L38.272 31H41.74L44.12 24.098H53.164L55.578 31ZM48.71 10.294C48.71 10.294 49.22 12.47 49.628 13.694L52.28 21.31H45.004L47.69 13.694C48.098 12.47 48.642 10.294 48.642 10.294H48.71ZM60.7096 22.398C60.7096 27.566 64.5176 31.408 69.9236 31.408C74.4116 31.408 76.7916 28.654 76.7916 28.654L75.4656 26.24C75.4656 26.24 73.3576 28.552 70.1616 28.552C66.5916 28.552 64.0756 25.866 64.0756 22.364C64.0756 18.828 66.5916 16.244 70.0596 16.244C72.9836 16.244 74.8196 18.216 74.8196 18.216L76.3836 15.904C76.3836 15.904 74.2416 13.388 69.9236 13.388C64.5176 13.388 60.7096 17.298 60.7096 22.398ZM81.2414 24.71C81.2414 30.456 85.6274 31.136 87.8374 31.136C88.5174 31.136 88.9934 31.068 88.9934 31.068V28.144C88.9934 28.144 88.6874 28.212 88.2114 28.212C86.9534 28.212 84.5394 27.77 84.5394 24.336V16.686H88.6874V14.034H84.5394V9.07H81.3434V14.034H78.9974V16.686H81.2414V24.71ZM92.6789 10.362H96.0109V6.996H92.6789V10.362ZM92.7129 31H96.0109V13.796H92.7129V31ZM105.26 31H109.068L115.426 13.796H111.958L107.776 25.424C107.436 26.376 107.198 27.77 107.164 27.77H107.096C107.062 27.77 106.858 26.376 106.518 25.424L102.336 13.796H98.8337L105.26 31ZM117.056 22.398C117.056 27.498 120.762 31.408 126.168 31.408C130.282 31.408 132.832 28.96 132.832 28.96L131.472 26.546C131.472 26.546 129.33 28.552 126.372 28.552C123.312 28.552 120.626 26.648 120.456 22.874H133.002C133.002 22.874 133.104 21.888 133.104 21.446C133.104 16.992 130.52 13.388 125.658 13.388C120.762 13.388 117.056 16.924 117.056 22.398ZM120.558 20.392C121.034 17.57 123.074 16.006 125.59 16.006C127.8 16.006 129.636 17.434 129.738 20.392H120.558ZM136.153 18.862C136.153 25.9 141.219 31.408 148.427 31.408C154.445 31.408 157.743 27.6 157.743 27.6L155.941 25.186C155.941 25.186 153.051 28.314 148.529 28.314C143.191 28.314 139.621 23.962 139.621 18.828C139.621 13.728 143.123 9.648 148.495 9.648C152.643 9.648 155.431 12.266 155.431 12.266L157.097 9.75C157.097 9.75 154.139 6.588 148.359 6.588C141.389 6.588 136.153 11.892 136.153 18.862ZM161.643 31H164.941V22.942C164.941 22.126 165.009 21.344 165.213 20.664C165.927 18.182 168.069 16.414 170.653 16.414C173.407 16.414 173.917 18.318 173.917 20.732V31H177.215V19.984C177.215 15.598 175.345 13.388 171.299 13.388C167.865 13.388 165.689 15.564 164.941 17.23H164.873C164.873 17.23 164.941 16.618 164.941 15.802V6.996H161.643V31ZM182.129 31H185.427V23.962C185.427 22.908 185.529 21.854 185.835 20.868C186.617 18.318 188.555 16.822 190.663 16.822C191.173 16.822 191.615 16.924 191.615 16.924V13.66C191.615 13.66 191.207 13.592 190.765 13.592C188.113 13.592 186.107 15.564 185.325 18.08H185.257C185.257 18.08 185.325 17.502 185.325 16.788V13.796H182.129V31ZM194.845 10.362H198.177V6.996H194.845V10.362ZM194.879 31H198.177V13.796H194.879V31ZM201.952 28.892C201.952 28.892 204.264 31.408 208.48 31.408C212.254 31.408 214.702 29.266 214.702 26.41C214.702 20.766 205.862 21.446 205.862 18.352C205.862 16.856 207.256 16.244 208.684 16.244C211.404 16.244 212.934 17.774 212.934 17.774L214.26 15.292C214.26 15.292 212.492 13.388 208.718 13.388C205.284 13.388 202.496 15.156 202.496 18.284C202.496 23.894 211.336 23.248 211.336 26.41C211.336 27.804 209.908 28.552 208.48 28.552C205.488 28.552 203.55 26.546 203.55 26.546L201.952 28.892ZM219.3 24.71C219.3 30.456 223.686 31.136 225.896 31.136C226.576 31.136 227.052 31.068 227.052 31.068V28.144C227.052 28.144 226.746 28.212 226.27 28.212C225.012 28.212 222.598 27.77 222.598 24.336V16.686H226.746V14.034H222.598V9.07H219.402V14.034H217.056V16.686H219.3V24.71ZM230.738 10.362H234.07V6.996H230.738V10.362ZM230.772 31H234.07V13.796H230.772V31ZM237.844 26.172C237.844 29.606 240.734 31.408 243.692 31.408C247.806 31.408 249.2 28.008 249.2 28.008H249.268C249.268 28.008 249.2 28.586 249.2 29.368V31H252.26V20.12C252.26 15.768 249.812 13.388 245.46 13.388C241.516 13.388 239.034 15.428 239.034 15.428L240.394 17.842C240.394 17.842 242.536 16.176 245.188 16.176C247.364 16.176 248.962 17.128 248.962 19.95V20.256H248.214C245.324 20.256 237.844 20.494 237.844 26.172ZM241.176 26.002C241.176 22.908 245.664 22.738 248.146 22.738H248.996V23.282C248.996 25.832 247.194 28.756 244.406 28.756C242.264 28.756 241.176 27.396 241.176 26.002ZM257.201 31H260.499V22.942C260.499 22.092 260.567 21.31 260.771 20.63C261.485 18.148 263.593 16.414 266.211 16.414C268.965 16.414 269.475 18.318 269.475 20.732V31H272.773V19.984C272.773 15.598 270.903 13.388 266.857 13.388C263.117 13.388 261.077 15.836 260.397 17.332H260.329C260.329 17.332 260.397 16.754 260.397 16.074V13.796H257.201V31ZM277.654 10.362H280.986V6.996H277.654V10.362ZM277.688 31H280.986V13.796H277.688V31ZM286.868 24.71C286.868 30.456 291.254 31.136 293.464 31.136C294.144 31.136 294.62 31.068 294.62 31.068V28.144C294.62 28.144 294.314 28.212 293.838 28.212C292.58 28.212 290.166 27.77 290.166 24.336V16.686H294.314V14.034H290.166V9.07H286.97V14.034H284.624V16.686H286.868V24.71ZM295.926 37.086C295.926 37.086 297.32 38.14 299.258 38.14C301.672 38.14 303.78 36.746 304.834 34.094L312.892 13.796H309.322L305.14 25.084C304.834 25.968 304.562 27.124 304.562 27.124H304.494C304.494 27.124 304.188 25.934 303.848 25.05L299.53 13.796H295.824L303.032 30.796L302.182 32.768C301.536 34.332 300.414 35.284 299.088 35.284C298.034 35.284 297.082 34.57 297.082 34.57L295.926 37.086Z"
+            fill="#212336"
+          />
+        </svg>
+      </a>
+      <div
+        className="flex"
+      >
+        <div
+          className="hidden sm:flex justify-end pr-12"
+        >
+          <a
+            className="block p-2 hover:text-ac-slate-light"
+            href="/read"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Read
+          </a>
+          <a
+            className="block p-2 hover:text-ac-slate-light"
+            href="/listen"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Listen
+          </a>
+          <a
+            className="block p-2 hover:text-ac-slate-light"
+            href="/watch"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Watch
+          </a>
+          <a
+            className="block p-2 hover:text-ac-slate-light"
+            href="/explore"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            Explore
+          </a>
+        </div>
+        <div
+          className="flex flex-row justify-end items-center mt-1"
+        >
+          <a
+            className="px-2"
+            href="/explore"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <svg
+              className="fill-current"
+              style={
+                Object {
+                  "height": "1.5rem",
+                  "width": "1.5rem",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+              />
+            </svg>
+          </a>
+          <button
+            className="pl-2 pr-4"
+            onClick={[Function]}
+          >
+            <svg
+              className="fill-current"
+              style={
+                Object {
+                  "height": "1.5rem",
+                  "width": "1.5rem",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="relative layout-children"
+  >
+    <div
+      className="standard-max-w"
+    >
+      <div />
+      <div
+        className="sm:hidden w-full pt-8"
+      >
+        <div>
+          <div
+            className="flex flex-col"
+          >
+            <div
+              className="rect-shape text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-32 md:min-h-32"
+              style={
+                Object {
+                  "backgroundColor": "WhiteSmoke",
+                  "height": "100%",
+                  "marginRight": 10,
+                  "width": "100%",
+                }
+              }
+            />
+            <div
+              className="text-block mt-4"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            >
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": 0,
+                    "maxHeight": "14.285714285714286%",
+                    "width": "97%",
+                  }
+                }
+              />
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": "0.7em",
+                    "maxHeight": "14.285714285714286%",
+                    "width": "100%",
+                  }
+                }
+              />
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": "0.7em",
+                    "maxHeight": "14.285714285714286%",
+                    "width": "94%",
+                  }
+                }
+              />
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": "0.7em",
+                    "maxHeight": "14.285714285714286%",
+                    "width": "90%",
+                  }
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden"
+        >
+          <div
+            className="px-4 text-2xl pb-4"
+          >
+            Latest
+          </div>
+          <div
+            className="scroll-snap-x-container scroll-snap-x-container-start overflow-scroll mb-4 sm:hidden w-full"
+          >
+            <div
+              className="scroll-snap-x-child-start ml-4 w-7/12 min-w-7/12"
+            >
+              <div
+                className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+              >
+                <a
+                  className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                  href="/show-and-tell"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <div
+                    className="absolute p-3  top-0 left-0 flex z-10"
+                  >
+                    <span
+                      className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                    >
+                      Commentary
+                    </span>
+                  </div>
+                  <div
+                    className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                  >
+                    <img
+                      alt="“Show and tell”"
+                      className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                      data-sizes="auto"
+                      data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_west/v1614625186/en/zeqtudmi5mefolnkhfww.jpg"
+                      data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_west/v1614625186/en/zeqtudmi5mefolnkhfww.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_west/v1614625186/en/zeqtudmi5mefolnkhfww.jpg 800w"
+                      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABoAAADAQEBAAAAAAAAAAAAAAAEBQYHAwEQAAICAgEFAQEAAAAAAAAAAAECAwQABREGEhMhMSJBAQEBAQEAAAAAAAAAAAAAAAAEAwACEQACAwEBAQEBAAAAAAAAAAABAgARIQMSBEJS/9oADAMBAAIRAxEAPwDTkjJbB7V2vXYAsOcEj2sT9xRsjdvaHlaUEnCggEkC9ifJNAmqE0mqonj71+HDIIwj5mup6zhWExN6YY/0+7Nyy3v1lhlQ7HTKy5IsaFjiNL0M3d2n5gHVOzavAQuZtQ3skcrA/wBzM21OkS19Sh3eyDu0OAV9okMQTPPEluRnJ94js0rAmYKDxhn5/wBZsQjj87KPREvXJLYLsowr/pvRxNX2D1U7UzpettNXVz9yvFEdAQTg2bqzIxBAonJzOvhSTyD4cpNJZhrzrwcl0ssyopx/rKIP7LYk8gq3DN09mqqG9XbOEwgD3mWJYkDmTj1lfuwGcqcTLUQwNkGcAXWztBZ83kGrdQSxyAKCcuq10Swo7AcnIPWUomlfkfDlWsHCgBsj0+hLphL8/nerBn//2Q=="
+                    />
+                  </div>
+                </a>
+                <div
+                  className="flex flex-col flex-1 px-4 pt-4"
+                >
+                  <div
+                    className="flex flex-col flex-1 leading-normal"
+                  >
+                    <a
+                      href="/show-and-tell"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                    >
+                      <h2
+                        className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                      >
+                        “Show and tell”
+                      </h2>
+                    </a>
+                    <div
+                      className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                    >
+                       
+                      <span>
+                        <a
+                          className="inline-block post-meta-commar"
+                          href="/contributor/maggie-pope"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                        >
+                          Maggie Pope
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="pb-4 flex justify-between"
+                  >
+                    <span>
+                      <div
+                        className="flex items-center"
+                      >
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                          />
+                        </svg>
+                        <span
+                          className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                        >
+                          5 mins
+                        </span>
+                      </div>
+                    </span>
+                    <div
+                      className="flex pr-4"
+                    >
+                      <div
+                        className="hover:shadow-md flex items-center"
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                      >
+                        <div>
+                          <svg
+                            className="fill-slate-dark"
+                            style={
+                              Object {
+                                "height": "1.25rem",
+                                "width": "1.25rem",
+                              }
+                            }
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 0h24v24H0V0z"
+                              fill="none"
+                            />
+                            <path
+                              d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="scroll-snap-x-child-start ml-4 w-7/12 min-w-7/12"
+            >
+              <div
+                className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+              >
+                <a
+                  className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                  href="/the-covenant-and-the-promises-why-obedience-is-more-than-worthwhile"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <div
+                    className="absolute p-3  top-0 left-0 flex z-10"
+                  >
+                    <span
+                      className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                    >
+                      Edification
+                    </span>
+                  </div>
+                  <div
+                    className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                  >
+                    <img
+                      alt="The covenant and the promises: Why obedience is more than worthwhile"
+                      className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                      data-sizes="auto"
+                      data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613399781/en/lusi9peurecoxkzb3zzx.jpg"
+                      data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613399781/en/lusi9peurecoxkzb3zzx.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_center/v1613399781/en/lusi9peurecoxkzb3zzx.jpg 800w"
+                      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABpAAABBQEBAAAAAAAAAAAAAAAFAQMEBgcCCBAAAgIDAQEBAAMAAAAAAAAAAQIAAwQFERIhMQYUIgEBAQEBAQAAAAAAAAAAAAAAAwIBAAQRAAICAwEBAAAAAAAAAAAAAAABAhEDEiEiQf/aAAwDAQACEQMRAD8A09148hbE8p+QpYvT0QZngio/IIo5hfaFg7P2xxbPHYIO2aghSZWdvmnJt9AyHKkXCKlKrDm0zWvp9mUjItQ2DknPkt/WAZoCyHX12G+9JyR1lQuW3+f2DRWzDoEdsZ3ERbSo5KRB6QVuIOmN2GtlIJEzyzf5Lj50SK25ySP0xqNs7/kHiqxiDK3SLbueQTHrrnzLwthl41evoVE4ohT1ar6erFjaexTM7XXrSrgHkAOD3jibNsMWtsVhz8EzfIxkJnKPkLKrk2CqURgRyM2Yg9GS6FC3ss4vvCWFfM1IE//Z"
+                    />
+                  </div>
+                </a>
+                <div
+                  className="flex flex-col flex-1 px-4 pt-4"
+                >
+                  <div
+                    className="flex flex-col flex-1 leading-normal"
+                  >
+                    <a
+                      href="/the-covenant-and-the-promises-why-obedience-is-more-than-worthwhile"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                    >
+                      <h2
+                        className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                      >
+                        The covenant and the promises: Why obedience is more than worthwhile
+                      </h2>
+                    </a>
+                    <div
+                      className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                    >
+                       
+                      <span>
+                        <a
+                          className="inline-block post-meta-commar"
+                          href="/contributor/sigurd-bratlie"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                        >
+                          Sigurd Bratlie
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="pb-4 flex justify-between"
+                  >
+                    <span>
+                      <div
+                        className="flex items-center"
+                      >
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                          />
+                        </svg>
+                        <span
+                          className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                        >
+                          3 mins
+                        </span>
+                      </div>
+                    </span>
+                    <div
+                      className="flex pr-4"
+                    >
+                      <div
+                        className="hover:shadow-md flex items-center"
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                      >
+                        <div>
+                          <svg
+                            className="fill-slate-dark"
+                            style={
+                              Object {
+                                "height": "1.25rem",
+                                "width": "1.25rem",
+                              }
+                            }
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 0h24v24H0V0z"
+                              fill="none"
+                            />
+                            <path
+                              d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="scroll-snap-x-child-start ml-4 w-7/12 min-w-7/12"
+            >
+              <div
+                className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+              >
+                <a
+                  className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                  href="/our-time-on-earth-is-hastening-to-its-closing"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <div
+                    className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
+                    id="play-button"
+                  >
+                    <div
+                      className="z-20"
+                    >
+                      <svg
+                        className="fill-white"
+                        style={
+                          Object {
+                            "height": "3rem",
+                            "width": "3rem",
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        />
+                        <path
+                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-3.5l7-4.5-7-4.5v9z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div
+                    className="absolute p-3  top-0 left-0 flex z-10"
+                  >
+                    <span
+                      className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                    >
+                      Songs
+                    </span>
+                  </div>
+                  <div
+                    className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                  >
+                    <img
+                      alt="Our time on earth is hastening to its closing"
+                      className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                      data-sizes="auto"
+                      data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_south/v1613748948/en/i7a5nwtv8k2hddl00rlw.jpg"
+                      data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_south/v1613748948/en/i7a5nwtv8k2hddl00rlw.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_south/v1613748948/en/i7a5nwtv8k2hddl00rlw.jpg 800w"
+                      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIgSUNDX1BST0ZJTEUAAQEAAAIQYXBwbAQAAABtbnRyUkdCIFhZWiAH5QABAA4ABwA5AChhY3NwQVBQTAAAAABBUFBMAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWFwcGyUggvkmRZL289tR+PVO+DLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/AAAAGJjcHJ0AAABYAAAACN3dHB0AAABhAAAABRyWFlaAAABmAAAABRnWFlaAAABrAAAABRiWFlaAAABwAAAABRyVFJDAAAB1AAAABBjaGFkAAAB5AAAACxiVFJDAAAB1AAAABBnVFJDAAAB1AAAABBkZXNjAAAAAAAAAAhDMjRGMzkwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdGV4dAAAAABDb3B5cmlnaHQgQXBwbGUgSW5jLiwgMjAyMQAAWFlaIAAAAAAAAPPYAAEAAAABFghYWVogAAAAAAAAZbgAADSDAAAB2VhZWiAAAAAAAABr7gAAvKIAAA7uWFlaIAAAAAAAACUvAAAO2wAAwmZwYXJhAAAAAAAAAAAAAfYEc2YzMgAAAAAAAQu3AAAFlv//81cAAAcpAAD91///+7f///2mAAAD2gAAwPb/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABpAAACAgMBAAAAAAAAAAAAAAADBAIFAAYHARAAAgICAgAGAwEAAAAAAAAAAQIAAwQFETEGEhUWISIUQVFSAQEBAQEAAAAAAAAAAAAAAAABAgADEQEBAQEBAAAAAAAAAAAAAAAAESEBAv/aAAwDAQACEQMRAD8A2enb1FRzLJNhjMsqH1dPSsI3ThY6LwWE1SeGZi8E8ydW2qU8BpSZldFVZKmU+PeoY8iNPOOhjbUlO4ou2Q2H5mpWZCeRvLFqL+SFPZk3T3zlroibCph3J/l1/wBmsUKir8vDfX/UqubkHunNjFHiPLt7JjT6OgDuZTqqk6kOtDbb5LkgmBGztVpZHXJx3F/TV5P2hToA2lsh6pcCCBCtgKPjmeDCHXMK2gP4iy0Mh7ny/wCw9usRuzA+lVD9xrP/2Q=="
+                    />
+                  </div>
+                </a>
+                <div
+                  className="flex flex-col flex-1 px-4 pt-4"
+                >
+                  <div
+                    className="flex flex-col flex-1 leading-normal"
+                  >
+                    <a
+                      href="/our-time-on-earth-is-hastening-to-its-closing"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                    >
+                      <h2
+                        className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                      >
+                        Our time on earth is hastening to its closing
+                      </h2>
+                    </a>
+                    <div
+                      className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                    >
+                       
+                      <span>
+                        <a
+                          className="inline-block post-meta-commar"
+                          href="/contributor/christen-zurcher"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                        >
+                          Christen Zürcher
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="pb-4 flex justify-between"
+                  >
+                    <span />
+                    <div
+                      className="flex pr-4"
+                    >
+                      <div
+                        className="hover:shadow-md flex items-center"
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                      >
+                        <div>
+                          <svg
+                            className="fill-slate-dark"
+                            style={
+                              Object {
+                                "height": "1.25rem",
+                                "width": "1.25rem",
+                              }
+                            }
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 0h24v24H0V0z"
+                              fill="none"
+                            />
+                            <path
+                              d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="scroll-snap-x-child-start ml-4 w-7/12 min-w-7/12"
+            >
+              <div
+                className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+              >
+                <a
+                  className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                  href="/when-war-broke-out-in-heaven"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <div
+                    className="absolute p-3  top-0 left-0 flex z-10"
+                  >
+                    <span
+                      className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                    >
+                      Commentary
+                    </span>
+                  </div>
+                  <div
+                    className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                  >
+                    <img
+                      alt="When war broke out in heaven"
+                      className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                      data-sizes="auto"
+                      data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613400870/en/devidet7u5yjib68rkk3.jpg"
+                      data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613400870/en/devidet7u5yjib68rkk3.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_center/v1613400870/en/devidet7u5yjib68rkk3.jpg 800w"
+                      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABnAAEAAgMBAAAAAAAAAAAAAAAFBAYAAwcBEAABBAIDAQEBAAAAAAAAAAABAAIDBAURBhIxIUEVAQADAQEAAAAAAAAAAAAAAAACAwQAAREBAAMAAwEAAAAAAAAAAAAAAQACEQMiMRL/2gAMAwEAAhEDEQA/AOX164cl62NZI4IWCwGp/H2SZGq6pRitSNxcYbM3YR1vANgdovCt0uSFSjv9IXOLeVsWZTtx9SrtRj8MJZaPHK84+yBQ7/GxE49Uhx4T77OcdKdm7hjadFFT5zWax1lCmw7wVo/ngfCVLORlJKjune47RFuJ8IhraCsJBTVCyI3guR0cQJSsFNjmkqIUfZQGxS9l2yRdFVXSHvsJY02k+rG0WEolbTYzdTzc0EXQLXPlZJwQ9K1cVA71eWsXAzxd757O4ysvnH4FHM5SktNgUQ1m7Q5aCz//2Q=="
+                    />
+                  </div>
+                </a>
+                <div
+                  className="flex flex-col flex-1 px-4 pt-4"
+                >
+                  <div
+                    className="flex flex-col flex-1 leading-normal"
+                  >
+                    <a
+                      href="/when-war-broke-out-in-heaven"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                    >
+                      <h2
+                        className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                      >
+                        When war broke out in heaven
+                      </h2>
+                    </a>
+                    <div
+                      className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                    >
+                       
+                      <span>
+                        <a
+                          className="inline-block post-meta-commar"
+                          href="/contributor/heather-crawford"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                        >
+                          Heather Crawford
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="pb-4 flex justify-between"
+                  >
+                    <span>
+                      <div
+                        className="flex items-center"
+                      >
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                          />
+                        </svg>
+                        <span
+                          className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                        >
+                          7 mins
+                        </span>
+                      </div>
+                    </span>
+                    <div
+                      className="flex pr-4"
+                    >
+                      <div
+                        className="hover:shadow-md flex items-center"
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                      >
+                        <div>
+                          <svg
+                            className="fill-slate-dark"
+                            style={
+                              Object {
+                                "height": "1.25rem",
+                                "width": "1.25rem",
+                              }
+                            }
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 0h24v24H0V0z"
+                              fill="none"
+                            />
+                            <path
+                              d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="scroll-snap-x-child-start ml-4 w-7/12 min-w-7/12"
+            >
+              <div
+                className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+              >
+                <a
+                  className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                  href="/not-everyone-who-says-to-me-lord-lord"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <div
+                    className="absolute p-3  top-0 left-0 flex z-10"
+                  >
+                    <span
+                      className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                    >
+                      Edification
+                    </span>
+                  </div>
+                  <div
+                    className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                  >
+                    <img
+                      alt="Not everyone who says to Me, “Lord, Lord!”"
+                      className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                      data-sizes="auto"
+                      data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1612967648/en/edr4rkg38vvcey9fcoye.jpg"
+                      data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1612967648/en/edr4rkg38vvcey9fcoye.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_center/v1612967648/en/edr4rkg38vvcey9fcoye.jpg 800w"
+                      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABuAAACAwEBAAAAAAAAAAAAAAAFBgMEBwACEAABBAICAQQDAAAAAAAAAAABAAIDBAUREiEGExQxUSIyQQEAAwEBAAAAAAAAAAAAAAAAAAIDBAERAAICAgIDAAAAAAAAAAAAAAECAAMRQRITITFR/9oADAMBAAIRAxEAPwDZYYm8R0rQib9JTj8jgAAROvmY5vhHNRuARjqHAxoQfL268dWUFw3pdNkdscAsxztm2S/WyFN7NLLVVZOW8Yme5k8rMjh9oQZ2lutojlXcW7I0UnSzkP6KzLUTNjWqsMc2gFVHa2qbZif6o3zHacIZMuPc3R9WeM7IKuVrrq35OPSbbFaN8R2EmWoA8ujVLauts5iU2CxCMQ/XzlObrmNqWc1ZG7Ois4nw0lfcrJ1Ey7b4Fpk+EosUxeBEO5ShjZweWll2ZxkEBJici1y5ZLiPUKHe0ks/tImDDU4V+xT7C8ElO7PGmuG/VCEWMOI5S3mE4kzP/9k="
+                    />
+                  </div>
+                </a>
+                <div
+                  className="flex flex-col flex-1 px-4 pt-4"
+                >
+                  <div
+                    className="flex flex-col flex-1 leading-normal"
+                  >
+                    <a
+                      href="/not-everyone-who-says-to-me-lord-lord"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                    >
+                      <h2
+                        className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                      >
+                        Not everyone who says to Me, “Lord, Lord!”
+                      </h2>
+                    </a>
+                    <div
+                      className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                    >
+                       
+                      <span>
+                        <a
+                          className="inline-block post-meta-commar"
+                          href="/contributor/steve-lenk"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                        >
+                          Steve Lenk
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="pb-4 flex justify-between"
+                  >
+                    <span>
+                      <div
+                        className="flex items-center"
+                      >
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                          />
+                        </svg>
+                        <span
+                          className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                        >
+                          5 mins
+                        </span>
+                      </div>
+                    </span>
+                    <div
+                      className="flex pr-4"
+                    >
+                      <div
+                        className="hover:shadow-md flex items-center"
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                      >
+                        <div>
+                          <svg
+                            className="fill-slate-dark"
+                            style={
+                              Object {
+                                "height": "1.25rem",
+                                "width": "1.25rem",
+                              }
+                            }
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 0h24v24H0V0z"
+                              fill="none"
+                            />
+                            <path
+                              d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="scroll-snap-x-child-start ml-4 w-7/12 min-w-7/12"
+            >
+              <div
+                className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+              >
+                <a
+                  className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                  href="/holding-fast-to-faith-even-when-life-seems-to-be-falling-apart"
+                  onClick={[Function]}
+                  onMouseEnter={[Function]}
+                >
+                  <div
+                    className="absolute p-3  top-0 left-0 flex z-10"
+                  >
+                    <span
+                      className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                    >
+                      Testimonies
+                    </span>
+                  </div>
+                  <div
+                    className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                  >
+                    <img
+                      alt="Holding fast to faith even when life seems to be “falling apart”"
+                      className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                      data-sizes="auto"
+                      data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_east/v1613662092/en/genti5fdsardoyvaxlmd.jpg"
+                      data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_east/v1613662092/en/genti5fdsardoyvaxlmd.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_east/v1613662092/en/genti5fdsardoyvaxlmd.jpg 800w"
+                      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABtAAADAQEBAAAAAAAAAAAAAAAFBgcDBAAQAAEEAgEEAQUAAAAAAAAAAAEAAgMEBREGEhMUISIVIzFBcQEBAQEBAAAAAAAAAAAAAAAAAwIAAREAAwEAAgIDAAAAAAAAAAAAAAECESExA1ESQXH/2gAMAwEAAhEDEQA/AJG4OleS1q2jLo094ipjQ89wtQLNQVWWXGFw0tNp8NGqGuUzPE/KUlNF3IzU6wMR0Uu43pa0uCPWKXkUusuRVLfkGms8eBji+Vt2nnuO2qBiiTcckniOLawGTqTvjfV14XX3JU58a/ABzoHUSJ4d4+nwfxcPOdCKNaYmVngQ7P6SK5jtg1LaRIsXiprZP3dLhyuOdWkIMm0Pr5azAPg4hYT3ZrDiZHErJUc2fR11LJY0t2iAzMrGdnfpLHcLT6XhIesEq8RGspeI5IaLNOCP4zl0HlF5UiktFzANIhjS3e9KLX2JFNceyi8pz7L7GhgQ6nyNsNdkZH4S1YlJQ0u9oWlXYm4f/9k="
+                    />
+                  </div>
+                </a>
+                <div
+                  className="flex flex-col flex-1 px-4 pt-4"
+                >
+                  <div
+                    className="flex flex-col flex-1 leading-normal"
+                  >
+                    <a
+                      href="/holding-fast-to-faith-even-when-life-seems-to-be-falling-apart"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                    >
+                      <h2
+                        className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                      >
+                        Holding fast to faith even when life seems to be “falling apart”
+                      </h2>
+                    </a>
+                    <div
+                      className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                    >
+                       
+                      <span>
+                        <a
+                          className="inline-block post-meta-commar"
+                          href="/contributor/gadiel-lazcano"
+                          onClick={[Function]}
+                          onMouseEnter={[Function]}
+                        >
+                          Gadiel Lazcano
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="pb-4 flex justify-between"
+                  >
+                    <span>
+                      <div
+                        className="flex items-center"
+                      >
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                          />
+                        </svg>
+                        <span
+                          className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                        >
+                          6 mins
+                        </span>
+                      </div>
+                    </span>
+                    <div
+                      className="flex pr-4"
+                    >
+                      <div
+                        className="hover:shadow-md flex items-center"
+                        onClick={[Function]}
+                        onKeyDown={[Function]}
+                      >
+                        <div>
+                          <svg
+                            className="fill-slate-dark"
+                            style={
+                              Object {
+                                "height": "1.25rem",
+                                "width": "1.25rem",
+                              }
+                            }
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M0 0h24v24H0V0z"
+                              fill="none"
+                            />
+                            <path
+                              d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="min-w-4"
+            />
+          </div>
+        </div>
+        <div
+          className="lazyload-placeholder"
+          style={
+            Object {
+              "height": 50,
+            }
+          }
+        />
+        <div
+          className="lazyload-placeholder"
+          style={
+            Object {
+              "height": 50,
+            }
+          }
+        />
+      </div>
+      <div
+        className="hidden sm:block"
+      >
+        <div
+          className="z-10 grid grid-cols-8 gap-12 standard-max-w-px relative pt-8 sm:pt-16 md:pt-20 lg:pt-24"
+        >
+          <div
+            className="col-start-1 col-end-6 "
+          >
+            <div
+              className="rect-shape text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-64 md:min-h-64"
+              style={
+                Object {
+                  "backgroundColor": "WhiteSmoke",
+                  "height": "100%",
+                  "marginRight": 10,
+                  "width": "100%",
+                }
+              }
+            />
+          </div>
+          <div
+            className="col-start-6 col-end-9 ml-5 flex flex-col justify-center pt-0"
+          >
+            <div
+              className="text-block mt-4"
+              style={
+                Object {
+                  "width": "100%",
+                }
+              }
+            >
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": 0,
+                    "maxHeight": "14.285714285714286%",
+                    "width": "97%",
+                  }
+                }
+              />
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": "0.7em",
+                    "maxHeight": "14.285714285714286%",
+                    "width": "100%",
+                  }
+                }
+              />
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": "0.7em",
+                    "maxHeight": "14.285714285714286%",
+                    "width": "94%",
+                  }
+                }
+              />
+              <div
+                className="text-row"
+                style={
+                  Object {
+                    "backgroundColor": "WhiteSmoke",
+                    "height": "1em",
+                    "marginTop": "0.7em",
+                    "maxHeight": "14.285714285714286%",
+                    "width": "90%",
+                  }
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          className="px-4"
+        >
+          <a
+            className="font-roboto relative flex justify-between mt-8 pt-4 sm:pt-12 pb-2 text-d4dark text-base sm:border-b"
+            href="/latest"
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+          >
+            <div
+              className="flex items-center"
+            >
+              <span
+                className="block text-lg"
+              >
+                Latest
+              </span>
+            </div>
+            <div
+              className="uppercase text-gray-400 tracking-wider flex items-center text-sm"
+            >
+              <span>
+                More
+              </span>
+              <span>
+                <svg
+                  className="fill-current"
+                  style={
+                    Object {
+                      "height": "1rem",
+                      "width": "1rem",
+                    }
+                  }
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 0h24v24H0V0z"
+                    fill="none"
+                  />
+                  <path
+                    d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+                  />
+                </svg>
+              </span>
+            </div>
+          </a>
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 grid-h py-8"
+          >
+            <div
+              className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+            >
+              <a
+                className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                href="/show-and-tell"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <div
+                  className="absolute p-3  top-0 left-0 flex z-10"
+                >
+                  <span
+                    className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                  >
+                    Commentary
+                  </span>
+                </div>
+                <div
+                  className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                >
+                  <img
+                    alt="“Show and tell”"
+                    className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                    data-sizes="auto"
+                    data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_west/v1614625186/en/zeqtudmi5mefolnkhfww.jpg"
+                    data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_west/v1614625186/en/zeqtudmi5mefolnkhfww.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_west/v1614625186/en/zeqtudmi5mefolnkhfww.jpg 800w"
+                    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABoAAADAQEBAAAAAAAAAAAAAAAEBQYHAwEQAAICAgEFAQEAAAAAAAAAAAECAwQABREGEhMhMSJBAQEBAQEAAAAAAAAAAAAAAAAEAwACEQACAwEBAQEBAAAAAAAAAAABAgARIQMSBEJS/9oADAMBAAIRAxEAPwDTkjJbB7V2vXYAsOcEj2sT9xRsjdvaHlaUEnCggEkC9ifJNAmqE0mqonj71+HDIIwj5mup6zhWExN6YY/0+7Nyy3v1lhlQ7HTKy5IsaFjiNL0M3d2n5gHVOzavAQuZtQ3skcrA/wBzM21OkS19Sh3eyDu0OAV9okMQTPPEluRnJ94js0rAmYKDxhn5/wBZsQjj87KPREvXJLYLsowr/pvRxNX2D1U7UzpettNXVz9yvFEdAQTg2bqzIxBAonJzOvhSTyD4cpNJZhrzrwcl0ssyopx/rKIP7LYk8gq3DN09mqqG9XbOEwgD3mWJYkDmTj1lfuwGcqcTLUQwNkGcAXWztBZ83kGrdQSxyAKCcuq10Swo7AcnIPWUomlfkfDlWsHCgBsj0+hLphL8/nerBn//2Q=="
+                  />
+                </div>
+              </a>
+              <div
+                className="flex flex-col flex-1 px-4 pt-4"
+              >
+                <div
+                  className="flex flex-col flex-1 leading-normal"
+                >
+                  <a
+                    href="/show-and-tell"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                  >
+                    <h2
+                      className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                    >
+                      “Show and tell”
+                    </h2>
+                    <h2
+                      className="text-sm max-h-16 clamp3 flex items-stretch mb-4 text-gray-600"
+                    >
+                      Remember “show and tell” at school? I thought about how that applies to how I share the gospel …
+                    </h2>
+                  </a>
+                  <div
+                    className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                  >
+                     
+                    <span>
+                      <a
+                        className="inline-block post-meta-commar"
+                        href="/contributor/maggie-pope"
+                        onClick={[Function]}
+                        onMouseEnter={[Function]}
+                      >
+                        Maggie Pope
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="pb-4 flex justify-between"
+                >
+                  <span>
+                    <div
+                      className="flex items-center"
+                    >
+                      <svg
+                        className="fill-slate-dark"
+                        style={
+                          Object {
+                            "height": "1.25rem",
+                            "width": "1.25rem",
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        />
+                        <path
+                          d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                        />
+                      </svg>
+                      <span
+                        className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                      >
+                        5 mins
+                      </span>
+                    </div>
+                  </span>
+                  <div
+                    className="flex pr-4"
+                  >
+                    <div
+                      className="hover:shadow-md flex items-center"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                    >
+                      <div>
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0V0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+            >
+              <a
+                className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                href="/the-covenant-and-the-promises-why-obedience-is-more-than-worthwhile"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <div
+                  className="absolute p-3  top-0 left-0 flex z-10"
+                >
+                  <span
+                    className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                  >
+                    Edification
+                  </span>
+                </div>
+                <div
+                  className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                >
+                  <img
+                    alt="The covenant and the promises: Why obedience is more than worthwhile"
+                    className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                    data-sizes="auto"
+                    data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613399781/en/lusi9peurecoxkzb3zzx.jpg"
+                    data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613399781/en/lusi9peurecoxkzb3zzx.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_center/v1613399781/en/lusi9peurecoxkzb3zzx.jpg 800w"
+                    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABpAAABBQEBAAAAAAAAAAAAAAAFAQMEBgcCCBAAAgIDAQEBAAMAAAAAAAAAAQIAAwQFERIhMQYUIgEBAQEBAQAAAAAAAAAAAAAAAwIBAAQRAAICAwEBAAAAAAAAAAAAAAABAhEDEiEiQf/aAAwDAQACEQMRAD8A09148hbE8p+QpYvT0QZngio/IIo5hfaFg7P2xxbPHYIO2aghSZWdvmnJt9AyHKkXCKlKrDm0zWvp9mUjItQ2DknPkt/WAZoCyHX12G+9JyR1lQuW3+f2DRWzDoEdsZ3ERbSo5KRB6QVuIOmN2GtlIJEzyzf5Lj50SK25ySP0xqNs7/kHiqxiDK3SLbueQTHrrnzLwthl41evoVE4ohT1ar6erFjaexTM7XXrSrgHkAOD3jibNsMWtsVhz8EzfIxkJnKPkLKrk2CqURgRyM2Yg9GS6FC3ss4vvCWFfM1IE//Z"
+                  />
+                </div>
+              </a>
+              <div
+                className="flex flex-col flex-1 px-4 pt-4"
+              >
+                <div
+                  className="flex flex-col flex-1 leading-normal"
+                >
+                  <a
+                    href="/the-covenant-and-the-promises-why-obedience-is-more-than-worthwhile"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                  >
+                    <h2
+                      className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                    >
+                      The covenant and the promises: Why obedience is more than worthwhile
+                    </h2>
+                    <h2
+                      className="text-sm max-h-16 clamp3 flex items-stretch mb-4 text-gray-600"
+                    >
+                      When you enter into a covenant with God, like Jesus did in His days as a man, you have unbelievable promises for your life!
+                    </h2>
+                  </a>
+                  <div
+                    className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                  >
+                     
+                    <span>
+                      <a
+                        className="inline-block post-meta-commar"
+                        href="/contributor/sigurd-bratlie"
+                        onClick={[Function]}
+                        onMouseEnter={[Function]}
+                      >
+                        Sigurd Bratlie
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="pb-4 flex justify-between"
+                >
+                  <span>
+                    <div
+                      className="flex items-center"
+                    >
+                      <svg
+                        className="fill-slate-dark"
+                        style={
+                          Object {
+                            "height": "1.25rem",
+                            "width": "1.25rem",
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        />
+                        <path
+                          d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                        />
+                      </svg>
+                      <span
+                        className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                      >
+                        3 mins
+                      </span>
+                    </div>
+                  </span>
+                  <div
+                    className="flex pr-4"
+                  >
+                    <div
+                      className="hover:shadow-md flex items-center"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                    >
+                      <div>
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0V0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+            >
+              <a
+                className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                href="/our-time-on-earth-is-hastening-to-its-closing"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <div
+                  className="absolute p-3 text-white inset-0 flex justify-center items-center z-10"
+                  id="play-button"
+                >
+                  <div
+                    className="z-20"
+                  >
+                    <svg
+                      className="fill-white"
+                      style={
+                        Object {
+                          "height": "3rem",
+                          "width": "3rem",
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M0 0h24v24H0z"
+                        fill="none"
+                      />
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-3.5l7-4.5-7-4.5v9z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="absolute p-3  top-0 left-0 flex z-10"
+                >
+                  <span
+                    className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                  >
+                    Songs
+                  </span>
+                </div>
+                <div
+                  className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                >
+                  <img
+                    alt="Our time on earth is hastening to its closing"
+                    className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                    data-sizes="auto"
+                    data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_south/v1613748948/en/i7a5nwtv8k2hddl00rlw.jpg"
+                    data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_south/v1613748948/en/i7a5nwtv8k2hddl00rlw.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_south/v1613748948/en/i7a5nwtv8k2hddl00rlw.jpg 800w"
+                    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gIgSUNDX1BST0ZJTEUAAQEAAAIQYXBwbAQAAABtbnRyUkdCIFhZWiAH5QABAA4ABwA5AChhY3NwQVBQTAAAAABBUFBMAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWFwcGyUggvkmRZL289tR+PVO+DLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/AAAAGJjcHJ0AAABYAAAACN3dHB0AAABhAAAABRyWFlaAAABmAAAABRnWFlaAAABrAAAABRiWFlaAAABwAAAABRyVFJDAAAB1AAAABBjaGFkAAAB5AAAACxiVFJDAAAB1AAAABBnVFJDAAAB1AAAABBkZXNjAAAAAAAAAAhDMjRGMzkwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdGV4dAAAAABDb3B5cmlnaHQgQXBwbGUgSW5jLiwgMjAyMQAAWFlaIAAAAAAAAPPYAAEAAAABFghYWVogAAAAAAAAZbgAADSDAAAB2VhZWiAAAAAAAABr7gAAvKIAAA7uWFlaIAAAAAAAACUvAAAO2wAAwmZwYXJhAAAAAAAAAAAAAfYEc2YzMgAAAAAAAQu3AAAFlv//81cAAAcpAAD91///+7f///2mAAAD2gAAwPb/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABpAAACAgMBAAAAAAAAAAAAAAADBAIFAAYHARAAAgICAgAGAwEAAAAAAAAAAQIAAwQFETEGEhUWISIUQVFSAQEBAQEAAAAAAAAAAAAAAAABAgADEQEBAQEBAAAAAAAAAAAAAAAAESEBAv/aAAwDAQACEQMRAD8A2enb1FRzLJNhjMsqH1dPSsI3ThY6LwWE1SeGZi8E8ydW2qU8BpSZldFVZKmU+PeoY8iNPOOhjbUlO4ou2Q2H5mpWZCeRvLFqL+SFPZk3T3zlroibCph3J/l1/wBmsUKir8vDfX/UqubkHunNjFHiPLt7JjT6OgDuZTqqk6kOtDbb5LkgmBGztVpZHXJx3F/TV5P2hToA2lsh6pcCCBCtgKPjmeDCHXMK2gP4iy0Mh7ny/wCw9usRuzA+lVD9xrP/2Q=="
+                  />
+                </div>
+              </a>
+              <div
+                className="flex flex-col flex-1 px-4 pt-4"
+              >
+                <div
+                  className="flex flex-col flex-1 leading-normal"
+                >
+                  <a
+                    href="/our-time-on-earth-is-hastening-to-its-closing"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                  >
+                    <h2
+                      className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                    >
+                      Our time on earth is hastening to its closing
+                    </h2>
+                    <h2
+                      className="text-sm max-h-16 clamp3 flex items-stretch mb-4 text-gray-600"
+                    >
+                      SONG: While we are here, we can use our time to prepare ourselves for the day of Christ’s return!
+                    </h2>
+                  </a>
+                  <div
+                    className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                  >
+                     
+                    <span>
+                      <a
+                        className="inline-block post-meta-commar"
+                        href="/contributor/christen-zurcher"
+                        onClick={[Function]}
+                        onMouseEnter={[Function]}
+                      >
+                        Christen Zürcher
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="pb-4 flex justify-between"
+                >
+                  <span />
+                  <div
+                    className="flex pr-4"
+                  >
+                    <div
+                      className="hover:shadow-md flex items-center"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                    >
+                      <div>
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0V0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden bg-white   rounded-xxl sm:rounded-lg border  "
+            >
+              <a
+                className="relative w-full sm:pl-0 flex justify-end overflow-hidden rounded-lg rounded-b-none"
+                href="/when-war-broke-out-in-heaven"
+                onClick={[Function]}
+                onMouseEnter={[Function]}
+              >
+                <div
+                  className="absolute p-3  top-0 left-0 flex z-10"
+                >
+                  <span
+                    className="font-roboto rounded uppercase p-1 text-xxs bg-white opacity-75"
+                  >
+                    Commentary
+                  </span>
+                </div>
+                <div
+                  className="pointer-events-none relative w-full pb-half overflow-hidden  "
+                >
+                  <img
+                    alt="When war broke out in heaven"
+                    className="lazyload w-full max-w-full absolute h-auto bg-center bg-cover  h-full pointer-events-none w-auto object-cover g-image rounded-lg rounded-b-none"
+                    data-sizes="auto"
+                    data-src="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613400870/en/devidet7u5yjib68rkk3.jpg"
+                    data-srcset="https://cdn.activechristianity.org/image/upload/c_thumb,h_300,w_600,g_center/v1613400870/en/devidet7u5yjib68rkk3.jpg 600w, https://cdn.activechristianity.org/image/upload/c_thumb,h_400,w_800,g_center/v1613400870/en/devidet7u5yjib68rkk3.jpg 800w"
+                    src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAgICAgJCAkKCgkNDgwODRMSEBASEx0VFhUWFR0sHCAcHCAcLCcvJiQmLydGNzExN0ZRREBEUWJYWGJ8dnyiotkBCAgICAkICQoKCQ0ODA4NExIQEBITHRUWFRYVHSwcIBwcIBwsJy8mJCYvJ0Y3MTE3RlFEQERRYlhYYnx2fKKi2f/AABEIAB4APAMBIgACEQEDEQH/xABnAAEAAgMBAAAAAAAAAAAAAAAFBAYAAwcBEAABBAIDAQEBAAAAAAAAAAABAAIDBAURBhIxIUEVAQADAQEAAAAAAAAAAAAAAAACAwQAAREBAAMAAwEAAAAAAAAAAAAAAQACEQMiMRL/2gAMAwEAAhEDEQA/AOX164cl62NZI4IWCwGp/H2SZGq6pRitSNxcYbM3YR1vANgdovCt0uSFSjv9IXOLeVsWZTtx9SrtRj8MJZaPHK84+yBQ7/GxE49Uhx4T77OcdKdm7hjadFFT5zWax1lCmw7wVo/ngfCVLORlJKjune47RFuJ8IhraCsJBTVCyI3guR0cQJSsFNjmkqIUfZQGxS9l2yRdFVXSHvsJY02k+rG0WEolbTYzdTzc0EXQLXPlZJwQ9K1cVA71eWsXAzxd757O4ysvnH4FHM5SktNgUQ1m7Q5aCz//2Q=="
+                  />
+                </div>
+              </a>
+              <div
+                className="flex flex-col flex-1 px-4 pt-4"
+              >
+                <div
+                  className="flex flex-col flex-1 leading-normal"
+                >
+                  <a
+                    href="/when-war-broke-out-in-heaven"
+                    onClick={[Function]}
+                    onMouseEnter={[Function]}
+                  >
+                    <h2
+                      className="text-lg sm:text-2xl leading-snug max-h-14 sm:max-h-18  clamp2 mb-2 text-ac-slate-dark"
+                    >
+                      When war broke out in heaven
+                    </h2>
+                    <h2
+                      className="text-sm max-h-16 clamp3 flex items-stretch mb-4 text-gray-600"
+                    >
+                      “Michael and his angels fought with the dragon; and the dragon and his angels fought, but they did not prevail, nor was a place found for them in heaven any longer.”
+                    </h2>
+                  </a>
+                  <div
+                    className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"
+                  >
+                     
+                    <span>
+                      <a
+                        className="inline-block post-meta-commar"
+                        href="/contributor/heather-crawford"
+                        onClick={[Function]}
+                        onMouseEnter={[Function]}
+                      >
+                        Heather Crawford
+                      </a>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="pb-4 flex justify-between"
+                >
+                  <span>
+                    <div
+                      className="flex items-center"
+                    >
+                      <svg
+                        className="fill-slate-dark"
+                        style={
+                          Object {
+                            "height": "1.25rem",
+                            "width": "1.25rem",
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        />
+                        <path
+                          d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                        />
+                      </svg>
+                      <span
+                        className="text-xs sm:text-sm text-ac-slate-dark px-2 whitespace-no-wrap"
+                      >
+                        7 mins
+                      </span>
+                    </div>
+                  </span>
+                  <div
+                    className="flex pr-4"
+                  >
+                    <div
+                      className="hover:shadow-md flex items-center"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                    >
+                      <div>
+                        <svg
+                          className="fill-slate-dark"
+                          style={
+                            Object {
+                              "height": "1.25rem",
+                              "width": "1.25rem",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 0h24v24H0V0z"
+                            fill="none"
+                          />
+                          <path
+                            d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="relative w-full drawer-main drawer-main-close"
+    style={
+      Object {
+        "zIndex": 600,
+      }
+    }
+  >
+    <div
+      className="fixed bottom-0 z-40 bg-white w-full"
+    >
+      <div
+        className="sm:hidden flex justify-around border border-t-1 border-t-gray-300"
+      >
+        <a
+          aria-current="page"
+          className="flex flex-col items-center justify-between text-gray-600 flex-1 pb-4 pt-2 bg-gray-300"
+          href="/"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          style={Object {}}
+        >
+          <span
+            className="flex-1 flex items-center"
+          >
+            <svg
+              className="fill-slate-light"
+              style={
+                Object {
+                  "height": "24",
+                  "width": "24",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
+              />
+            </svg>
+          </span>
+          <span
+            className="block font-semibold clamp1 mt-1"
+            style={
+              Object {
+                "fontSize": "10px",
+              }
+            }
+          >
+            Home
+          </span>
+        </a>
+        <a
+          className="flex flex-col items-center justify-between text-gray-600 flex-1 pb-4 pt-2"
+          href="/explore"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <span
+            className="flex-1 flex items-center"
+          >
+            <svg
+              className="fill-slate-light"
+              style={
+                Object {
+                  "height": "24",
+                  "width": "24",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"
+              />
+            </svg>
+          </span>
+          <span
+            className="block font-semibold clamp1 mt-1"
+            style={
+              Object {
+                "fontSize": "10px",
+              }
+            }
+          >
+            Explore
+          </span>
+        </a>
+        <a
+          className="flex flex-col items-center justify-between text-gray-600 flex-1 pb-4 pt-2"
+          href="/read"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <span
+            className="flex-1 flex items-center"
+          >
+            <svg
+              className="fill-slate-light"
+              style={
+                Object {
+                  "height": "24",
+                  "width": "24",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+              />
+            </svg>
+          </span>
+          <span
+            className="block font-semibold clamp1 mt-1"
+            style={
+              Object {
+                "fontSize": "10px",
+              }
+            }
+          >
+            Read
+          </span>
+        </a>
+        <a
+          className="flex flex-col items-center justify-between text-gray-600 flex-1 pb-4 pt-2"
+          href="/listen"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <span
+            className="flex-1 flex items-center"
+          >
+            <svg
+              className="fill-slate-light"
+              style={
+                Object {
+                  "height": "24",
+                  "width": "24",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+                opacity=".1"
+              />
+              <path
+                d="M12 1a9 9 0 00-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 00-9-9z"
+              />
+            </svg>
+          </span>
+          <span
+            className="block font-semibold clamp1 mt-1"
+            style={
+              Object {
+                "fontSize": "10px",
+              }
+            }
+          >
+            Listen
+          </span>
+        </a>
+        <a
+          className="flex flex-col items-center justify-between text-gray-600 flex-1 pb-4 pt-2"
+          href="/watch"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+        >
+          <span
+            className="flex-1 flex items-center"
+          >
+            <svg
+              className="fill-slate-light"
+              style={
+                Object {
+                  "height": "24",
+                  "width": "24",
+                }
+              }
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-3.5l7-4.5-7-4.5v9z"
+              />
+            </svg>
+          </span>
+          <span
+            className="block font-semibold clamp1 mt-1"
+            style={
+              Object {
+                "fontSize": "10px",
+              }
+            }
+          >
+            Watch
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="lazyload-placeholder"
+    style={
+      Object {
+        "height": 50,
+      }
+    }
+  />,
+]
+`;

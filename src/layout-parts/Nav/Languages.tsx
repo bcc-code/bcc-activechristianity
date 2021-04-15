@@ -12,7 +12,7 @@ const Languages: React.FC<{ className?: string }> = ({ className }) => {
     return (
         <Dropdown
             className={className}
-
+            testName="tst-languages"
             label={process.env.LANG ? process.env.LANG : ''}
             options={languageOptions}
             selected={undefined}

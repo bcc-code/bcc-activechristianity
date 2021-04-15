@@ -83,7 +83,12 @@ module.exports = function generatePages(actions, graphql) {
           component: path.resolve(`./src/templates/page/${page.templateName}.tsx`),
           context:{
             title:page.title,
-            slug:page.slug
+            slug:page.slug,
+            pageType:"page",
+            mediaTypes:{
+              types:[],
+              default:"none"
+            },
           },
         })
       })

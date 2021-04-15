@@ -60,13 +60,13 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                             clamp: 3,
                             className: "mb-2 text-ac-slate-dark"
                         }} />
-                        <TextSizeTitle {...{
+                        {excerpt && <TextSizeTitle {...{
                             rawText: excerpt,
                             fontKey: "text-sm",
                             clamp: 2,
                             className: "mb-4 leading-tight text-gray-600"
 
-                        }} />
+                        }} />}
                     </Link>
                     {authors && <div className="text-xs text-ac-slate-dark sm:text-ac-slate-light mb-4"> <AuthorLink authorGroups={authors} /></div>}
                 </div>

@@ -33,7 +33,7 @@ module.exports = async function generateTopic(data) {
           },
         })
       } 
-    }else {
+    } else {
       console.log('something went wrong')
       console.log(topic)
     }

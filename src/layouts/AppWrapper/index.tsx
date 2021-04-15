@@ -22,7 +22,7 @@ import Helmet from 'react-helmet'
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 import { menusItems } from '@/strings/generated/menus.json'
 
-function onRenderCallback(
+/* function onRenderCallback(
     id, // the "id" prop of the Profiler tree that has just committed
     phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
     actualDuration, // time spent rendering the committed update
@@ -36,7 +36,7 @@ function onRenderCallback(
     // Aggregate or log render timings...
 }
 // string
-
+ */
 const acApiModule = import('@/util/api')
 // type 
 import { IUser } from '@/types'

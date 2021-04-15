@@ -394,7 +394,7 @@ export const getOnePreviewPageByIdQuery = (id: string) => {
   `
 }
 
-export const getPostsByIds = (ids: IGetPostsAndTopics) => {
+export const getPostsByIdsQuery = (ids: IGetPostsAndTopics) => {
   const { postsIds, topicsIds } = ids
   return `
     query {
@@ -444,16 +444,3 @@ export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page
 }
 
 `
-
-
-/* getSubTopicPosts=(id1,id2) =>`{
-  ac {
-      topic(id: ${id1}) {
-          id
-          name
-          posts (hasTopics: { value: ${id2}, column: ID }){
-            ${languagePostQuery}
-          }
-        }
-  }
-}` */

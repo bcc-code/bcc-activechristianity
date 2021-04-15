@@ -20,13 +20,13 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
             <TopFirst />
 
             <div className="flex py-2 standard-max-w items-center">
-                <Link className='flex flex-1 justify-start items-center px-4 mt-1' to="/">
+                <Link className='flex flex-1 justify-start items-center px-4 mt-1 tst-top-nav-logo' to="/">
                     <LogoFull />
                 </Link>
                 <div className="flex">
                     <div className="hidden sm:flex justify-end pr-12">
                         {isMobile !== true && desktop.map((item, i) => (
-                            <Link className="block p-2 hover:text-ac-slate-light" key={i} to={`${item.to}`}>
+                            <Link className={`block p-2 hover:text-ac-slate-light tst-top-nav-${item.to}`} activeClassName="text-ac-slate-light" key={i} to={`${item.to}`}>
                                 {item.name}
                             </Link>
                         ))}
@@ -34,11 +34,11 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
 
                     <div className="flex flex-row justify-end items-center mt-1">
                         {explorePage && (
-                            <Link to={explorePage.to} className="px-2">
+                            <Link to={explorePage.to} className={`px-2 tst-top-nav-search-icon`}>
                                 <SearchIcon customSize="6" />
                             </Link>
                         )}
-                        <button className="pl-2 pr-4" onClick={() => { setSideNavOpen(!isSideNavOpen) }}>
+                        <button className={`tst-top-nav-menu-icon pr-4`} onClick={() => { setSideNavOpen(!isSideNavOpen) }}>
                             <MenuIcon customSize="6" />
                         </button>
                     </div>

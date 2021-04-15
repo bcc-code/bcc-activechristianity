@@ -84,18 +84,18 @@ export const ListenIcon: React.FC<{ text?: string, playing: boolean }> = ({ text
                 </div>
             ) : (
 
-                    <div className="flex items-center rounded-full bg-ac-slate-lighter py-1 px-2">
-                        <PlayCircleOutlineIcon
-                            className="fill-slate-dark"
-                            customSize="5"
-                        />
-                        <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
-                            {text ? text : ac_strings.listen}
-                        </span>
-                    </div>
+                <div className="flex items-center rounded-full bg-ac-slate-lighter py-1 px-2">
+                    <PlayCircleOutlineIcon
+                        className="fill-slate-dark"
+                        customSize="5"
+                    />
+                    <span className="text-xs sm:text-sm text-ac-slate-dark pl-2 whitespace-no-wrap">
+                        {text ? text : ac_strings.listen}
+                    </span>
+                </div>
 
 
-                )}
+            )}
 
         </div>
     )
@@ -145,18 +145,18 @@ export const SimpleSmallListenIcon: React.FC<{ media: IMedia }> = ({ media }) =>
                             </div>
                         ) : (
 
-                                <div className="flex items-center rounded-full pr-2">
-                                    <PlayCircleOutlineIcon
-                                        className="fill-slate-dark"
-                                        customSize="5"
-                                    />
-                                    <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
-                                        {ac_strings.listen}
-                                    </span>
-                                </div>
+                            <div className="flex items-center rounded-full pr-2">
+                                <PlayCircleOutlineIcon
+                                    className="fill-slate-dark"
+                                    customSize="5"
+                                />
+                                <span className="text-xs sm:text-sm text-white pl-2 whitespace-no-wrap">
+                                    {ac_strings.listen}
+                                </span>
+                            </div>
 
 
-                            )}
+                        )}
                     </div>
                 )
 
@@ -167,11 +167,11 @@ export const SimpleSmallListenIcon: React.FC<{ media: IMedia }> = ({ media }) =>
 interface ILikesViewsProps {
     id: string
     likes?: number
-    views?: string
+    views?: number | string
     className?: string
 }
 
-export const Views: React.FC<{ views: string }> = ({ views }) => {
+export const Views: React.FC<{ views: number | string }> = ({ views }) => {
     return (
         <div className="mx-2 flex items-center">
             <VisibilityIcon
