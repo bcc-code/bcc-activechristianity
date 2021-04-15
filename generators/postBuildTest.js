@@ -109,7 +109,7 @@ exports.onPostBuildTest = async ({graphql}) => {
         for(let j=0;j<types.length;j++){
           const node=types[j]
           const find = typeScope.find(t=>`${t.keyId}`===`${node.id}`)
-          if(find && node.noOfPosts>0){
+          if(find && node.noOfPosts>0 ){
             const topicPageTotal=node.noOfPosts
             const pageCount=Math.ceil(topicPageTotal/12)
             slugsToValidateArray.push(`${node.slug}`,`${node.slug}/${ac_strings.slug_latest}`,`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
@@ -130,7 +130,7 @@ exports.onPostBuildTest = async ({graphql}) => {
               if(noOfPostRes && noOfPostRes.topic && noOfPostRes.topic.noOfPosts){
   
                 const {noOfPosts}=noOfPostRes.topic
-                if(noOfPosts>0 && subTopic.id!==node.id){
+                if(noOfPosts>0 && `${subTopic.group_id}`!==`5`){
                   slugsToValidateArray.push(`${node.slug}/${subTopic.slug}`)
                 }
               } else {
