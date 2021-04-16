@@ -70,6 +70,9 @@ exports.onPostBuildTest = async ({graphql}) => {
         }
       }
     `
+
+    try {
+
       const allPagesRes = await graphql(allPagesQuery)
       const allPostAndTopicTestData = await sendQuery(postBuildTestQuery,endpoints.api_url,{ "x-lang": process.env.LANG_CODE})
       const {posts,formats,types,testTopic1,testTopic2,authorsCount,testAuthor2,testAuthor1}=allPostAndTopicTestData
@@ -257,5 +260,11 @@ exports.onPostBuildTest = async ({graphql}) => {
         throw new Error ('not able to find pages')
       }
   
+      
+    } catch(err) {
+      console.log(err)
+      process.exit()
+    }
+      
   
   }
