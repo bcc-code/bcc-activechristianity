@@ -112,7 +112,10 @@ exports.onPostBuildTest = async ({graphql}) => {
           if(find && node.noOfPosts>0 ){
             const topicPageTotal=node.noOfPosts
             const pageCount=Math.ceil(topicPageTotal/12)
-            slugsToValidateArray.push(`${node.slug}`,`${node.slug}/${ac_strings.slug_latest}`,`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
+            slugsToValidateArray.push(`${node.slug}`,`${node.slug}/${ac_strings.slug_latest}`)
+            if(pageCount>1){
+              slugsToValidateArray.push(`${node.slug}/${ac_strings.slug_latest}/${pageCount}`)
+            }
             for(let k=0;k<node.subTopics.length;k++){
               const subTopic=node.subTopics[k]
               const noOfPostsQuery = `
