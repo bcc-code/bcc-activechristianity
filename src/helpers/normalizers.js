@@ -41,12 +41,24 @@ function getImage(title, size, image) {
   
   }
   
+const showAllLanguages =(langs)=>{
+    let translatedLinks = []
+    languages.forEach(item => {
+        const find = langs.find(l => l.name === item.name)
+        if (find) {
+            translatedLinks.push(find)
+        } else {
+            translatedLinks.push(item)
+        }
+    })
+    return translatedLinks
+} 
 const normalizeAvailableLanguages = (langs, showAllLanguages) => {
     let translatedLinks = []
     languages.forEach(item => {
         const find = langs.find(l => l.lang === item.locale)
         if (find) {
-            translatedLinks.push({ to: item.to + find.slug, name: item.name })
+            translatedLinks.push({ to: `${item.to}/${find.slug}`, name: item.name })
         } else if (showAllLanguages) {
             translatedLinks.push(item)
         }
@@ -309,6 +321,7 @@ module.exports = {
     normalizePostRes,
     normalizeTracks,
     normalizeAvailableLanguages,
+    showAllLanguages,
     processRecommendationContext,
     filterTopics,
     playlistToPost,
