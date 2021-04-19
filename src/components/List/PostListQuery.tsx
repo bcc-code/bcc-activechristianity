@@ -90,6 +90,7 @@ const PostList: React.FC<IPostList> = (props) => {
     }
 
     const getLinkPath = (nr: number) => {
+        console.log(path)
         let activePage = nr
         let toReturnPath = '/'
         if (typeof nr === "string") {
@@ -99,6 +100,7 @@ const PostList: React.FC<IPostList> = (props) => {
         if (activePage < totalPages + 1 && activePage > -1) {
             toReturnPath = activePage > 1 ? `${path}?pageNr=${activePage}` : path
         }
+        console.log(toReturnPath)
         return toReturnPath
     }
     return (
