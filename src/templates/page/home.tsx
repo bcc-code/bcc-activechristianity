@@ -101,7 +101,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     latest
 
   } = pageContext
-
+  console.log(popularTopics)
   return (
 
     <div className="standard-max-w">
