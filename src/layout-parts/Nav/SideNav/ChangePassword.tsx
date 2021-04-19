@@ -14,8 +14,8 @@ const SideMobile: React.FC<{
             isSideNavOpen={isSideNavOpen}
             back={back}
             className="flex flex-col "
-            testName='tst-side-nav-change-password'
         >
+
             <div className="mx-auto flex-1 flex flex-col font-roboto items-center justify-center font-semibold">
                 <div>
                     <div><label htmlFor="">{ac_strings.password}</label><input type="text" name="" id="" /></div>

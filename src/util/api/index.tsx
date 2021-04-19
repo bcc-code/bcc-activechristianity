@@ -4,13 +4,13 @@ import endpoints from '@/strings/static/endpoints'
 import { IGetPostsAndTopics } from './requests'
 const baseUrl = endpoints.api_url
 const sendQuery = (query: string) => {
-    const options: RequestInit = {
+    const options = {
         method: 'POST',
         'credentials': 'include',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            "x-lang": process.env.LANG_CODE ? process.env.LANG_CODE : "en"
+            "x-lang": process.env.LANG_CODE
         },
         body: JSON.stringify({ query })
     }
@@ -20,7 +20,7 @@ const sendQuery = (query: string) => {
             if (res.errors) {
                 console.log(res.errors)
                 let error = ""
-                res.errors.map((e: any) => {
+                res.errors.map(e => {
                     error += " " + e.message
                 })
                 return Promise.reject(error)
@@ -126,9 +126,15 @@ export default {
         const query = request.recommendedPostsAndPopularTopic()
         return sendQuery(query)
     },
+    getPostsByIds: (ids: string[]) => {
+        const query = request.getPostsByIds(ids)
+        return sendQuery(query).then(res => {
+            return res
+        })
+    },
     getPostsAndTopicsByIds: (params: IGetPostsAndTopics) => {
         const { postsIds, topicsIds } = params
-        const query = request.getPostsByIdsQuery({ postsIds, topicsIds })
+        const query = request.getPostsByIds({ postsIds, topicsIds })
         return sendQuery(query).then(res => {
             return res
         })

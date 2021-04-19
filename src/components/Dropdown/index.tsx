@@ -17,9 +17,8 @@ export interface IDropdownProps {
     selected: IOption | undefined
     onChange?: (selected: IOption) => void
     className?: string
-    testName?: string
 }
-const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label, className, testName }) => {
+const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label, className }) => {
     const [showDropdown, setShowDropdown] = React.useState(false)
     const inputEl = React.useRef<HTMLInputElement>(null);
 
@@ -46,9 +45,9 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
     }
 
     return (
-        <div className={`relative flex items-center ${className ? className : ''} ${testName}`} ref={inputEl}>
+        <div className={`relative flex items-center ${className ? className : ''}`} ref={inputEl}>
             <button
-                className={`w-full flex items-center justify-between ${testName}-click`}
+                className=" w-full flex items-center justify-between"
                 onClick={handleClick}
                 onKeyDown={handleClick}
             >
@@ -58,7 +57,7 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
                 </span>
             </button>
             {showDropdown && (
-                <div className={`absolute dropdown-list-content ${testName}-list`}>
+                <div className={`absolute dropdown-list-content`}>
                     {options.map((item, i) => {
                         if (onChange) {
                             return (
@@ -73,11 +72,11 @@ const Dropdown: React.FC<IDropdownProps> = ({ options, onChange, selected, label
                             )
                         } else if (item.to) {
                             return (
-                                <Link className={`bg-white py-2 block tst-${item.label}`} activeClassName='' key={i} to={item.to}>{item.label}</Link>
+                                <Link className="bg-white py-2 block" activeClassName='' key={i} to={item.to}>{item.label}</Link>
                             )
                         } else if (item.href) {
                             return (
-                                <a className={`bg-white py-2 block tst-${item.label}`} key={i} href={item.href}>{item.label}</a>
+                                <a className="bg-white py-2 block" key={i} href={item.href}>{item.label}</a>
                             )
                         } else {
                             return (

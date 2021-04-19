@@ -285,7 +285,7 @@ module.exports = async function generatePosts(actions, graphql) {
                                                                     if (result.errors) {
                                                                       result.errors.forEach(e => console.error(e.toString()))
                                                                       return Promise.reject(result.errors)
-                                                                    } else {
+                                                                    }else {
                                                                       return result
                                                                     }
                                                                   })

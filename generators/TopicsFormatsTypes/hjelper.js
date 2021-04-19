@@ -1,6 +1,7 @@
 const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
+const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplateQuery = 'src/templates/archive/post-list-query.tsx'
 const listTemplateStatic = 'src/templates/archive/post-list.tsx'
 const videoTemplate = 'src/templates/archive/video-list.tsx'
@@ -136,12 +137,12 @@ module.exports.createArchivePages =async function ({
             const posts = res.data.ac.topic.allPosts.data
             
             if(i===1 && posts.length>0){
+              console.log(posts[0].updated_at)
               firstPostsDate=posts[0].updated_at
 
             }
             return res.data.ac.topic.allPosts.data
           } else {
-            console.log(perPagePosts)
             console.log(query)
             throw new Error('not able to get pages')
           }

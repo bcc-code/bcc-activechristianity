@@ -17,7 +17,7 @@ export const PostH1: React.FC<{ title: string }> = ({ title }) => (
     <h1 className=" font-semibold text-ac-slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
 )
 
-export const PageSectionHeader: React.FC<{ title: string | JSX.Element, className?: string }> = ({ title, className }) => (
+export const PageSectionHeader: React.FC<{ title: string, className?: string }> = ({ title, className }) => (
     <div className={`px-4 text-2xl ${className ? className : ''}`}>{title}</div>
 )
 
@@ -36,7 +36,7 @@ export const LayoutH1Wide: React.FC<{ title: string | JSX.Element }> = ({ title 
 )
 
 interface IUnderlineTitleLink {
-    name: string | JSX.Element
+    name: string;
     to?: string;
 }
 

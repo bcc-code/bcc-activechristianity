@@ -13,8 +13,7 @@ const SideMobile: React.FC<{
             title={ac_strings.edit_profile}
             isSideNavOpen={isSideNavOpen}
             back={back}
-            className="flex flex-col"
-            testName='tst-side-menu-profile'
+            className="flex flex-col "
         >
             {/*            <ChangePassword
                 isSideNavOpen={openChangePassword}

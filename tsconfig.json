@@ -1,5 +1,5 @@
 {
-    "include": ["./src/**/*", "provider.js", "fetch-external-scripts.js", "jest.config.ts"],
+    "include": ["./src/**/*", "provider.js", "fetch-external-scripts.js"],
     "compilerOptions": {
         "target": "esnext",
         "module": "commonjs",

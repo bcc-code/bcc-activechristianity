@@ -59,7 +59,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
             close={close}
             isSideNavOpen={isSideNavOpen}
             className="flex flex-col justify-between p-4"
-            testName='tst-side-menu-profile'
         >
             {openUserMenu && <UserMenu
                 isSideNavOpen={openUserMenu}
@@ -85,7 +84,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                 <SideNavItem
                     next
                     onClick={() => { setOpenResourceMenu(true) }}
-                    className="tst-side-menu-resource"
                 >
                     {ac_strings.resource}
                 </SideNavItem>
@@ -95,7 +93,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                             key={i}
                             to={item.to}
                             onClick={close}
-                            className={`tst-side-menu-${item.to}`}
                         >
                             {item.name}
                         </SideNavItem>
@@ -108,7 +105,6 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                         <SideNavItem
                             to={`/${slugUser}`}
                             hideOnMobile
-                            className={`tst-side-menu-${ac_strings.my_profile}`}
                             onClick={close}
 
                         >
@@ -118,41 +114,25 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
                             next
                             onClick={() => { setOpenUserMenu(true) }}
                             hideOnDeskop
-                            className={`tst-side-menu-${ac_strings.my_profile}`}
                         >
                             {ac_strings.my_profile}
                         </SideNavItem>
-                        <SideNavItem
-                            onClick={handleLogout}
-                            className={`text-ac-slate-light tst-side-menu-${ac_strings.logout}`}
-                        >
-                            {ac_strings.logout}
-                        </SideNavItem>
+                        <SideNavItem onClick={handleLogout} className="text-ac-slate-light">{ac_strings.logout}</SideNavItem>
 
                     </div>
                 ) : (
-                    loggedIn === "loading" ? (
-                        <div className="px-2">
-                            {ac_strings.loading}
-                        </div>
-                    ) : (
-                        <div className={`flex flex-col`}>
-                            <SideNavItem
-                                onClick={handleSignIn}
-                                className={`text-ac-slate-light tst-side-menu-${ac_strings.logout}`}
-                            >
-                                {ac_strings.login}
-                            </SideNavItem>
-                            <SideNavItem
-                                onClick={handleSignUp}
-                                className={`text-ac-slate-light tst-side-menu-${ac_strings.register}`}
-                            >
-                                {ac_strings.register}
-                            </SideNavItem>
-                        </div>
+                        loggedIn === "loading" ? (
+                            <div className="px-2">
+                                {ac_strings.loading}
+                            </div>
+                        ) : (
+                                <div className={`flex flex-col`}>
+                                    <SideNavItem onClick={handleSignIn}>{ac_strings.login}</SideNavItem>
+                                    <SideNavItem onClick={handleSignUp}>{ac_strings.register}</SideNavItem>
+                                </div>
 
-                    )
-                )}
+                            )
+                    )}
 
             </div>
 

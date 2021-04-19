@@ -140,11 +140,8 @@ module.exports = function generateTopics(actions, graphql) {
                 count:node.noOfPosts,
                 image:node.image
               }
-              
-            const topicScopefull=["type","format","topic"]
-            const toGenerate=process.env.NODE_ENV==="development" || process.env.SUPER_SLIM_DEV_MODE==="true"?["type","format"]:topicScopefull
 
-              if (toGenerate.includes(topicType)){//["type","format","topic"]
+              if (["type","format","topic"].includes(topicType)){//["type","format","topic"]
                 const contextPostsQuery = getContextPostsQuery(node.id)
                 const contextPostsRes = await graphql(contextPostsQuery)
                   .then(res=>{

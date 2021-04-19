@@ -17,7 +17,7 @@ export interface IPageFeaturedPost {
 export interface IModifiedFields {
     exceprt?: string
     title?: string
-    image?: IImage | null
+    image?: IImage
 }
 
 export interface IPageTextComp {
