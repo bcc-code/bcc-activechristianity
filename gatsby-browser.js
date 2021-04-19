@@ -12,10 +12,13 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
+import React from "react"
+
 import "react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"
 import "./src/styles/reset.css"
 import "./src/styles/tailwind-output.css"
+import Layout from "./src/layouts/AppWrapper"
 
 import wrapWithProvider from "./src/rootElement"
 
@@ -158,6 +161,9 @@ export const onClientEntry = () => {
 export const onRouteUpdate = ({ location, prevLocation }) => {
   if (typeof window !== 'undefined' ) {
 
+/*     if(window.gtag){
+      window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
+    } */
     const pathname=typeof location.pathname ==='string' && location.pathname==='/'?location.pathname:location.pathname.replace(/\/$/, "")
       setTimeout(()=>{
         if(window.ga){

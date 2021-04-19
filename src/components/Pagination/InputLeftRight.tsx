@@ -12,6 +12,7 @@ const PostList: React.FC<IProps> = (props) => {
 
     const { currentPage, totalPages, onChange, getLinkPath } = props
     const [pageInput, setPageInput] = React.useState(currentPage)
+    console.log(props)
     React.useEffect(() => {
         setPageInput(currentPage)
     }, [currentPage])

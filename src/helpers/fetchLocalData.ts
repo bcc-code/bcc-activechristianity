@@ -3,7 +3,7 @@ import { trimSlug } from './index-js'
 import { normalizePostRes, normalizeTracks } from '@/helpers/normalizers'
 import ac_strings from '@/strings/ac_strings.js'
 
-const baseURL = process.env.SITE_URL
+
 
 export const fetchLocalPostsFromSlugs = (slugs: string[]) => {
     const filteredSlugs = slugs.filter(s => typeof s === "string" && s.trim() !== "")
@@ -83,7 +83,7 @@ export const fetchTracksFromSlug = (slug: string) => {
 
 export const fetchEbookFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
-    return fetch(`${baseURL}/page-data/${ac_strings.slug_ebook}/${processSlug}/page-data.json`)
+    return fetch(`/page-data/${ac_strings.slug_ebook}/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
@@ -97,7 +97,7 @@ export const fetchEbookFromSlug = (slug: string) => {
 }
 
 export const fetchLatestEbooks = () => {
-    return fetch(`${baseURL}/page-data/${ac_strings.slug_ebook}/page-data.json`)
+    return fetch(`/page-data/${ac_strings.slug_ebook}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result && res.result.data.ac) {
@@ -110,7 +110,7 @@ export const fetchLatestEbooks = () => {
 }
 
 export const fetchLatestPlaylists = () => {
-    return fetch(`${baseURL}/page-data/${ac_strings.slug_playlist}/page-data.json`)
+    return fetch(`/page-data/${ac_strings.slug_playlist}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.data.ac.playlists) {
@@ -125,7 +125,7 @@ export const fetchLatestPlaylists = () => {
 
 export const fetchTopicFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
-    return fetch(`${baseURL}/page-data/${ac_strings.slug_topic}/${processSlug}/page-data.json`)
+    return fetch(`/page-data/${ac_strings.slug_topic}/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result && res.result.pageContext) {
@@ -145,8 +145,7 @@ export const fetchTopicFromSlug = (slug: string) => {
 
 export const fetchOneLocalPostFromSlug = (slug: string) => {
     let processSlug = trimSlug(slug)
-
-    return fetch(`${baseURL}/page-data/${processSlug}/page-data.json`)
+    return fetch(`/page-data/${processSlug}/page-data.json`)
         .then(res => res.json())
         .then(res => {
             if (res.result && res.result.data && res.result.pageContext && res.result.pageContext.normalized) {

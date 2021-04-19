@@ -2,7 +2,6 @@ import * as React from 'react';
 import FetchAndSetFollowedTopics from '@/HOC/SetAndUpdateFollowedTopic'
 import FetchAndSetFollowedPlaylists from '@/HOC/SetAndUpdateFollowedPlaylist'
 import { CachedIcon, CheckIcon, AddIcon, BookmarkIcon, BookmarkBorderIcon, LocalOfferIcon } from '@/components/Icons/MUI/bookmarkIcons'
-import { IButtonColour } from '@/components/Icons/MUI/Base'
 import Link from '@/components/CustomLink'
 import { ITopicNavItem } from '@/types'
 import { OutlineSmallRounded } from '@/components/Button'

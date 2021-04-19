@@ -32,8 +32,7 @@ const SideMobile: React.FC<{
             title={ac_strings.my_profile}
             isSideNavOpen={isSideNavOpen}
             back={back}
-            className="flex flex-col"
-            testName="tst-side-menu-user-menu"
+            className="flex flex-col "
         >
             {openEditProfile && <EditProfile
                 close={closeEditProfile}

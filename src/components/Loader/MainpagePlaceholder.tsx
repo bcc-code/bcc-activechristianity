@@ -13,7 +13,7 @@ const MainpageLoadingPeplacer: React.FC<{ loading: boolean }> = ({ loading, chil
         </div>
     )
     return (
-        <ReactPlaceholder ready={!loading} customPlaceholder={customerPlaceholder}>
+        <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={customerPlaceholder}>
             {children}
         </ReactPlaceholder>
 

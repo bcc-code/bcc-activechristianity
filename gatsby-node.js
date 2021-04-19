@@ -6,15 +6,12 @@
 
 // You can delete this file if you're not using it
 const _ = require('lodash')
-const  {getIndexPostQuery, sendQuery } = require('gatsby-source-ac/helpers')
-
+const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 const buildTranslatedStrings = require('./generators/json/build-translated-strings')
 const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
-const postBuild = require('./generators/postBuildTest.js')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
-
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -65,19 +62,20 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
+
       generateHome(actions, graphql),
       generateExplore(actions, graphql),
-      generatePages(actions, graphql),
-
+      generatePosts(actions, graphql),
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
-        generatePosts(actions, graphql), 
+        generateTopics(actions, graphql),
         generateAuthors(actions, graphql),
+        generatePages(actions, graphql),
         generateTopics(actions, graphql),
         generateRedirect(actions, graphql),
-       /*  generateSeries(actions, graphql) */
+        generateSeries(actions, graphql)
       )
 
       if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
@@ -120,7 +118,16 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page)
   }
 }
-
-
-
-exports.onPostBuild = postBuild.onPostBuildTest
+/* 
+exports.onCreateWebpackConfig = ({
+  actions,
+}) => {
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        'react-dom$': 'react-dom/profiling',
+        'scheduler/tracing': 'scheduler/tracing-profiling',
+      }
+    }
+  })
+} */

@@ -14,7 +14,7 @@ import MetaTag from '@/components/Meta'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers/normalizers'
 // Type
-import { IPostItem, ITopicPostItems } from '@/types'
+import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
 
 // Helpers
 import ac_strings from '@/strings/ac_strings.js'
@@ -75,6 +75,7 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
 
   return (
     <>
+
       <div className="hidden sm:block">
         <HomeTopFeaturePost mixed={mixed} key={shortid()} />
         <div className="px-4">
@@ -111,8 +112,12 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
         translatedUrls={[]}
         breadcrumb={[]}
       />
+
       <div className="sm:hidden w-full pt-8">
-        <FeaturedBanner featured={featured} />
+
+        <div>
+          <FeaturedBanner featured={featured} />
+        </div>
         <div className="div6 bg-gray-200 sm:bg-transparent py-6 overflow-hidden">
           <PageSectionHeader title={ac_strings.latest} className="pb-4" />
           <TopImgRowHorizontalScroll posts={latest} />
@@ -152,6 +157,7 @@ export default IndexPage
 
 
 interface IHomePropsContent {
+  featuredPosts: IPostRes[]
   latest: IPostItem[]
   popular: IPostItem[]
   featured: IPostItem[]
@@ -162,7 +168,7 @@ interface IHomePropsContent {
   }
 }
 
-export interface IHomeProps {
+interface IHomeProps {
   path: string
   pageContext: IHomePropsContent
 

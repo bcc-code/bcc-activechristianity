@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { IIconProps } from '@/types'
-export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light" | "white"
 
-const sizeMap: {
-    [key: string]: number | string
-} = {
+const sizeMap = {
     '0': 0,
     '1': 0.25,
     '2': 0.5,
@@ -31,6 +28,7 @@ const sizeMap: {
 }
 
 
+export type IButtonColour = "primary" | "secondary" | "slate-dark" | "slate-light" | "white"
 
 const SVGWrap: React.FC<IIconProps> = ({ customSize, className, children }) => {
     const size = customSize ? `${sizeMap[customSize]}rem` : "24"

@@ -2,7 +2,7 @@ const path = require('path')
 const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
 const {typeScope,formatScope} = require('../src/strings/static/topic-ids')
 const endpoints = require('../src/strings/static/endpoints')
-const { processRecommendationContext, getRandomFeatured, normalizePostRes, getRandomArray } = require('../src/helpers/normalizers')
+const { processRecommendationContext, getRandomFeatured } = require('../src/helpers/normalizers')
 const baseUrl = endpoints.api_url
 //${postQuery}
 const headers = {
@@ -97,7 +97,7 @@ module.exports = function generatePages(actions, graphql) {
                 staticTopics.push(
                     {
                         ...item,
-                        posts:item.somePosts.data?item.somePosts.data.map(p=>normalizePostRes(p)):[]
+                        posts:item.somePosts.data
                     }
                 )
             }
@@ -113,14 +113,12 @@ module.exports = function generatePages(actions, graphql) {
                         console.log(err)
                         throw new Error(err.message)
                     })
-                    if(popularPostsAll["dynamic"]){
-                        popularPostsAll["dynamic"]=popularPostsAll["dynamic"].map(p=>normalizePostRes(p)) 
-                    }                
+                   
                 }
                 
                 
                 if(popularTopics){
-                    const popularTopicsUnfilteredIDs=getRandomArray(popularTopics,5).map(node=>node.id)
+                    const popularTopicsUnfilteredIDs=popularTopics.map(node=>node.id)
                     popularTopicsAll["dynamic"]=[]
                    
                     for (let k =0;k<popularTopicsUnfilteredIDs.length;k++){
@@ -135,8 +133,7 @@ module.exports = function generatePages(actions, graphql) {
                                 .then(async res=>{
                                     if(res.data && res.data.ac &&res.data.ac.topic && res.data.ac.topic.somePosts.data){
                                        const {somePosts,...topic}=res.data.ac.topic
-              
-                                       const allPosts=somePosts.data?getRandomArray(somePosts.data).map(p=>normalizePostRes(p)):[]
+                                       const allPosts=somePosts.data
                                         popularTopicsAll["dynamic"].push({...topic,posts:allPosts})
                                         
                                         
