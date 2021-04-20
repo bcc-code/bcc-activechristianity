@@ -15,7 +15,7 @@ const { processRecommendationContext } = require('../../src/helpers/normalizers'
 
 const query = `{
   ac {
-    topics(hasPosts:true) {
+    topics(group_id:"4" hasPosts:true) {
       ${topicQuery}
     }
 

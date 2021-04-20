@@ -13,11 +13,12 @@ phases:
     build:
         commands:
             - 'npm run slim_build'
-            - 'echo $'
-            - '$CODEBUILD_BUILD_SUCCEEDING:$'
-            - 'echo $CODEBUILD_BUILD_SUCCEEDING'
+
     post_build:
         commands:
+            - 'echo $'
+            - 'CODEBUILD_BUILD_SUCCEEDING:$'
+            - 'echo $CODEBUILD_BUILD_SUCCEEDING'
             - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
             - 'npm run deploy'
 artifacts:
