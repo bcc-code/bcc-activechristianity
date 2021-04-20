@@ -27,7 +27,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const pageNrQuery = parsed && parsed.pagenr && typeof parsed.pagenr === "string" && parseInt(parsed.pagenr)
 
     const currentPage = typeof pageNrQuery === "number" && pageNrQuery <= paginate.totalPages && pageNrQuery > 1 ? pageNrQuery : 1
-    console.log(path)
+    console.log(`post-list-query: ${path}`)
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag

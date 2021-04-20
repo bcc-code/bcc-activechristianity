@@ -121,7 +121,7 @@ module.exports.createArchivePages =async function ({
         if(i===1){
             pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
-        console.log(pagePath)
+        console.log(`createArchivePages ${pagePath}`)
         const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
       
         const paginate = {
@@ -184,6 +184,7 @@ module.exports.createSubTopicPages=({
       console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
     } else {
       const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
+      console.log(`createSubTopicPages ${baseUrl}`)
       const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
       pageBreadcrumb.push( {
         name:subTopic.name,
