@@ -16,16 +16,16 @@ import ac_strings from '@/strings/ac_strings.js'
 
 const Watch: React.FC<IProps> = (props) => {
 
-    const { pageContext, path } = props
+    const { pageContext } = props
 
-    const { title, items, latest, popular, featured } = pageContext
+    const { title, items, latest, popular, featured, pagePath } = pageContext
 
-    const latestSlug = `${path}/${ac_strings.slug_latest}`
+    const latestSlug = `${pagePath}/${ac_strings.slug_latest}`
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
 
     return (
         <div>
-            <MetaTag title={title} type="page" breadcrumb={[]} path={path} />
+            <MetaTag title={title} type="page" breadcrumb={[]} path={pagePath} />
             <div className="hidden sm:block standard-max-w">
                 <LayoutH1Wide title={title} />
                 <div className="px-4">

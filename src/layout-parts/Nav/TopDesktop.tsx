@@ -16,7 +16,7 @@ const TopDesktop: React.FC<IDrawerNav & { explorePage?: INavItem }> = ({ isSideN
     }, [])
 
     return (
-        <div style={{ zIndex: 100 }} className={`fixed top-0 bg-white shadow-md sm:shadow-none block w-full py-2 sm:py-1 sm:border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
+        <div style={{ zIndex: 100 }} className={`fixed top-0 bg-white block w-full py-2 sm:py-1 border-b border-gray-200 drawer-main drawer-main-${isSideNavOpen ? 'open' : 'close'}`} >
             <TopFirst />
 
             <div className="flex py-2 standard-max-w items-center">

@@ -143,11 +143,11 @@ input:focus {
 }
 
 .main-content h1 {
-    @apply font-medium text-2xl leading-tight font-medium mt-8;
+    @apply font-medium text-3xl leading-tight font-medium;
 }
 
 .main-content h2 {
-    @apply font-medium text-3xl leading-normal font-semibold mt-8;
+    @apply font-medium text-2xl leading-normal font-semibold;
 }
 
 
