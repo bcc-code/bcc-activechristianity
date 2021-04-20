@@ -12,6 +12,7 @@ const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
+const {onPostBuildTest} = require('./generators/postBuildTests.js')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -131,3 +132,5 @@ exports.onCreateWebpackConfig = ({
     }
   })
 } */
+
+/* exports.onPostBuild=onPostBuildTest */
