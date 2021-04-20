@@ -31,7 +31,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats, questions, featuredVideos, songs, edification } = props.pageContext
+    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats, questions, featuredVideos, songs, edification, pagePath } = props.pageContext
 
     const topics = filterTopics({ topics: [popularTopics, featuredTopics], returnSlugs: false })
 
@@ -118,7 +118,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
             onSearchStateChange={onSearchStateChange}
             stalledSearchDelay={500}
         >
-            <MetaTag title={title} type="page" breadcrumb={[]} />
+            <MetaTag title={title} type="page" breadcrumb={[]} path={pagePath} />
             <div
                 className={`bg-ac-gray-light pb-8 relative`}
             >
@@ -184,9 +184,10 @@ const ExplorePage: React.FC<IResource> = (props) => {
 export default ExplorePage
 
 interface IResource {
-    path: string
+
 
     pageContext: {
+        pagePath: string
         title: string
         scripturePage: INavItem
         featuredTopics: ITopicRes[]

@@ -100,8 +100,9 @@ module.exports = function generateTopics(actions, graphql) {
                     })
                 }
                 const {popularTopics} = popularTopicsRes.data.ac
-
+                    const pagePath = explorePage.slug
                   const contextExplore = {
+                    pagePath,
                     title: explorePage.title,
                     slug:  explorePage.slug,
                     popularTopics,
@@ -118,7 +119,7 @@ module.exports = function generateTopics(actions, graphql) {
                 }
 
                 createPage({
-                    path: explorePage.slug,
+                    path: pagePath,
                     component: path.resolve(exploreTemplate),
                     context:contextExplore,
                     })

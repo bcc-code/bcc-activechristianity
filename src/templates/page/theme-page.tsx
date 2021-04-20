@@ -43,6 +43,7 @@ interface ICustomizedPage {
         }
     }
     pageContext: {
+        pagePath: string
         title: string
         breadcrumb: INavItem[]
 

@@ -57,10 +57,12 @@ module.exports = function generatePages(actions, graphql) {
         // const result = await graphql(getHostImage)
         allHostsSlug.push(hostPath)
   
+        const pagePath=hostPath
         createPage({
-          path: hostPath,
+          path: pagePath,
           component: path.resolve(`src/templates/page/podcast-host.tsx`),
           context:{
+            pagePath,
             title:hostPage.title,
             id:hostPage.id,
             breadcrumb:[]
@@ -69,10 +71,12 @@ module.exports = function generatePages(actions, graphql) {
         })
       } 
 
+
       createPage({
         path: ac_strings.slug_podcast_intro,
         component: path.resolve(`src/templates/page/podcast-intro.tsx`),
         context:{
+          pagePath:ac_strings.slug_podcast_intro,
           title:podcast.title,
           postId:`${podcastIds.intro_post}`,
           breadcrumb:[

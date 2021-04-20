@@ -4,42 +4,43 @@ import MetaTag from '@/components/Meta'
 import { LayoutH1Wide } from '@/components/Headers'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 
-const Host: React.FC<IHost> = ({ path, pageContext, data }) => {
+const Host: React.FC<IHost> = ({ pageContext, data }) => {
     const { breadcrumb } = pageContext
     const { flexibleContent, title, slug } = data.ac.page
     const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-    return (
-        <div>
-            <MetaTag
-                title={title}
-                translatedUrls={[]}
-                type="page"
-                breadcrumb={breadcrumb}
-                path={path}
-            />
-            <LayoutH1Wide title={title} />
-            <div className="standard-max-w-px">
-                {componentConfig.map((item, i) => {
+    const path = pageContext.
+        return(
+            <div>
+                <MetaTag
+                    title={title}
+                    translatedUrls={[]}
+                    type="page"
+                    breadcrumb={breadcrumb}
+                    path={path}
+                />
+                <LayoutH1Wide title={title} />
+                <div className="standard-max-w-px">
+                    {componentConfig.map((item, i) => {
 
-                    if (item.type === "featured_items") {
-                        const childItems = item.data
+                        if (item.type === "featured_items") {
+                            const childItems = item.data
 
-                        return (
-                            <div>
-                                {childItems.map((child, k) => {
-                                    return (
-                                        <RenderFeaturedPost withBg={i == 0 && k === 0} {...child} />
-                                    )
-                                })}
-                            </div>
-                        )
-                    } else {
-                        return null
-                    }
-                })}
+                            return (
+                                <div>
+                                    {childItems.map((child, k) => {
+                                        return (
+                                            <RenderFeaturedPost withBg={i == 0 && k === 0} {...child} />
+                                        )
+                                    })}
+                                </div>
+                            )
+                        } else {
+                            return null
+                        }
+                    })}
+                </div>
             </div>
-        </div>
-    )
+        )
 }
 
 export default Host
@@ -68,6 +69,7 @@ interface IHost {
         }
     }
     pageContext: {
+        pagePath: string
         title: string
         breadcrumb: []
 

@@ -1,5 +1,5 @@
 version: 0.2
-exit_code: 0
+CODEBUILD_BUILD_SUCCEEDING: 0
 phases:
     install:
         runtime-versions:
@@ -13,11 +13,12 @@ phases:
     build:
         commands:
             - 'npm run slim_build'
-            - 'echo $exit_code'
-            - 'echo ${exit_code}'
             - 'echo $'
+            - '$CODEBUILD_BUILD_SUCCEEDING:$'
+            - 'echo $CODEBUILD_BUILD_SUCCEEDING'
     post_build:
         commands:
+            - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
             - 'npm run deploy'
 artifacts:
     base-directory: public

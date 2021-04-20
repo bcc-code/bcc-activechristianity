@@ -165,7 +165,9 @@ module.exports = function generatePages(actions, graphql) {
             const props =processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
             const { latest, popular, featured } = props
             const today=new Date()
+            const pagePath='/'
             const context = {
+                pagePath,
                 updated_at:today.toDateString(),
                 latest,
                 featured,
@@ -178,7 +180,7 @@ module.exports = function generatePages(actions, graphql) {
                 popularTopics:popularTopicsAll,
               }
             createPage({
-                path: `/`,
+                path: pagePath,
                 component: path.resolve('./src/templates/page/home.tsx'),
                 context
               })

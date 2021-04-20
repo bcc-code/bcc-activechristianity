@@ -185,7 +185,7 @@ export interface IPage {
     id: string
     title: string
     slug: string
-    path: string
+    pagePath: string
     langs: ITranslations[]
     label: string
     is_active: Boolean

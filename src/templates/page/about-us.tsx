@@ -9,9 +9,9 @@ import AboutUsLayout from '@/layouts/AboutUsLayout'
 
 import { ScrollingProvider } from 'react-scroll-section';
 
-const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
+const Page: React.FC<IAboutProps> = ({ pageContext }) => {
 
-    const { title, childPages } = pageContext
+    const { title, childPages, pagePath } = pageContext
     const allPages = childPages.map(item => {
         const customLayout: IPageCompTypes[] = JSON.parse(item.flexibleContent)
 
@@ -28,7 +28,7 @@ const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
             <MetaTag
                 type="article"
                 title={title}
-                path={path}
+                path={pagePath}
                 breadcrumb={[]}
             />
 
@@ -46,9 +46,9 @@ export default Page
 
 interface IAboutProps {
     pageContext: {
+        pagePath: string
         title: string
         breadcrumb: INavItem[]
         childPages: IPage[]
     }
-    path: string
 }

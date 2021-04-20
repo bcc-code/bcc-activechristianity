@@ -21,6 +21,7 @@ module.exports = async function generateTopic(data) {
           path:pagePath,
           component:path.resolve(topicRecommendTemplate),
           context: {
+            pagePath,
             pageType:"topic",
             id:topic.id,
             title:topic.name,

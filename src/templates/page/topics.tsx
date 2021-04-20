@@ -10,7 +10,7 @@ import shortid from 'shortid'
 const AllTopic: React.FC<IAllTopic> = (props) => {
 
     const { title, themes, groupedTopics } = props.pageContext
-    const path = props.path
+    const path = props.pageContext.groupedTopics
 
 
     return (
@@ -57,6 +57,7 @@ interface IAllTopic {
     path: string
 
     pageContext: {
+        pagePath: string
         title: string
         themes: IPage[]
         groupedTopics: {

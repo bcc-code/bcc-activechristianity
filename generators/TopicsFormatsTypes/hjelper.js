@@ -121,7 +121,7 @@ module.exports.createArchivePages =async function ({
         if(i===1){
             pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
-        console.log(`createArchivePages ${pagePath}`)
+
         const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
       
         const paginate = {
@@ -147,11 +147,12 @@ module.exports.createArchivePages =async function ({
           }
 
         })
-
+        console.log(`createArchivePages ${pagePath}`)
             createPage({
               path:pagePath,
               component,
               context: {
+                pagePath,
                 fetchedPost: isType,
                 pageType:isType?"category":"topic",
                 type:node.topicType,
