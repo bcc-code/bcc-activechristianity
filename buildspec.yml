@@ -10,8 +10,11 @@ phases:
         commands:
             - 'npm install'
     build:
+        - exit_code=0
         commands:
             - 'npm run slim_build'
+            - 'echo $exit_code'
+            - 'echo $'
     post_build:
         commands:
             - 'npm run deploy'
