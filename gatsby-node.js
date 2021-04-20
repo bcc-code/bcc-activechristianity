@@ -62,15 +62,15 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
-
-      generateHome(actions, graphql),
-      generateExplore(actions, graphql),
-      generatePosts(actions, graphql),
+      generateTopics(actions, graphql),
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
-        generateTopics(actions, graphql),
+        generateHome(actions, graphql),
+        generateExplore(actions, graphql),
+        generatePosts(actions, graphql),
+
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
         generateTopics(actions, graphql),

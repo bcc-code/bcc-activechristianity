@@ -137,7 +137,6 @@ module.exports.createArchivePages =async function ({
             const posts = res.data.ac.topic.allPosts.data
             
             if(i===1 && posts.length>0){
-              console.log(posts[0].updated_at)
               firstPostsDate=posts[0].updated_at
 
             }
@@ -199,8 +198,6 @@ module.exports.createSubTopicPages=({
       
       for (let i = 0; i <=1; i += perPage, currentPage++) {
         if(i===1 && allPosts.length>0){
-          console.log(allPosts[0])
-          console.log(allPosts[0].updated_at)
           firstPostsDate=allPosts[0].updated_at
 
         }
