@@ -9,9 +9,7 @@ import Link from '@/components/CustomLink'
 import shortid from 'shortid'
 const AllTopic: React.FC<IAllTopic> = (props) => {
 
-    const { title, themes, groupedTopics } = props.pageContext
-    const path = props.pageContext.groupedTopics
-
+    const { title, groupedTopics, pagePath } = props.pageContext
 
     return (
         <ResourceLayout
@@ -20,7 +18,7 @@ const AllTopic: React.FC<IAllTopic> = (props) => {
             <MetaTag
                 title={title}
                 type="page"
-                path={path}
+                path={pagePath}
                 breadcrumb={[]}
             />
             <div className="standard-max-w-px mb-8">

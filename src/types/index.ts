@@ -482,6 +482,7 @@ export interface IBannerBasic {
 };
 
 export interface IRecommendationPage {
+    pagePath: string
     title: string
     breadcrumb: INavItem[]
     latest: IPostItem[]

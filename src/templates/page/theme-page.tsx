@@ -8,16 +8,16 @@ import Link from '@/components/CustomLink'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import { LayoutH1Wide } from '@/components/Headers'
 
-const CustomizedPage: React.FC<ICustomizedPage> = ({ path, pageContext, data }) => {
-    const { breadcrumb } = pageContext
+const CustomizedPage: React.FC<ICustomizedPage> = ({ pageContext, data }) => {
+    const { breadcrumb, pagePath } = pageContext
     const { flexibleContent, title, slug } = data.ac.page
     const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
 
     return (
         <div>
-            <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
+            <MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={pagePath} />
             <LayoutH1Wide title={title} />
-            <CustomizedPageComponent items={componentConfig} slug={path} title={title} />
+            <CustomizedPageComponent items={componentConfig} slug={pagePath} title={title} />
             <div className="w-full flex justify-center py-6">
                 <Link to={`${ac_strings.slug_topic}/${slug}`} className="bg-ac-slate-dark px-4 py-2 rounded text-white text-lg">
                     More on this topic
@@ -36,6 +36,7 @@ interface ICustomizedPage {
     data: {
         ac: {
             page: {
+                pagePath: string
                 flexibleContent: string
                 slug: string
                 title: string

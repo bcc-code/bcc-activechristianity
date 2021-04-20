@@ -51,7 +51,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 <PostListQuery
                     firstPosts={pageContext.posts}
                     totalPages={paginate.totalPages}
-                    path={path}
+                    path={pagePath}
                     currentPage={currentPage}
                     {...pageContext}
                 />

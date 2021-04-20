@@ -14,6 +14,7 @@ import PostList from '@/components/List/PostList'
 interface IBibleNavProps {
     path: string
     pageContext: {
+        pagePath: string
         title: string
         breadcrumb: INavItem[]
         bible: IBible
@@ -32,7 +33,7 @@ interface IActiveBook extends IBibleBook {
 }
 
 const BibleNav: React.FC<IBibleNavProps> = (props) => {
-    const { pageContext: { title }, path } = props
+    const { pageContext: { title, pagePath } } = props
 
     const [posts, setPosts] = React.useState<string[]>([])
     const location = useLocation();
@@ -54,7 +55,7 @@ const BibleNav: React.FC<IBibleNavProps> = (props) => {
             <MetaTag
                 title={title}
                 type="page"
-                path={path}
+                path={pagePath}
                 translatedUrls={[]}
                 breadcrumb={[menusItems.scripture]}
             />

@@ -5,42 +5,42 @@ import { LayoutH1Wide } from '@/components/Headers'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 
 const Host: React.FC<IHost> = ({ pageContext, data }) => {
-    const { breadcrumb } = pageContext
+    const { breadcrumb, pagePath } = pageContext
     const { flexibleContent, title, slug } = data.ac.page
     const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-    const path = pageContext.
-        return(
-            <div>
-                <MetaTag
-                    title={title}
-                    translatedUrls={[]}
-                    type="page"
-                    breadcrumb={breadcrumb}
-                    path={path}
-                />
-                <LayoutH1Wide title={title} />
-                <div className="standard-max-w-px">
-                    {componentConfig.map((item, i) => {
 
-                        if (item.type === "featured_items") {
-                            const childItems = item.data
+    return (
+        <div>
+            <MetaTag
+                title={title}
+                translatedUrls={[]}
+                type="page"
+                breadcrumb={breadcrumb}
+                path={pagePath}
+            />
+            <LayoutH1Wide title={title} />
+            <div className="standard-max-w-px">
+                {componentConfig.map((item, i) => {
 
-                            return (
-                                <div>
-                                    {childItems.map((child, k) => {
-                                        return (
-                                            <RenderFeaturedPost withBg={i == 0 && k === 0} {...child} />
-                                        )
-                                    })}
-                                </div>
-                            )
-                        } else {
-                            return null
-                        }
-                    })}
-                </div>
+                    if (item.type === "featured_items") {
+                        const childItems = item.data
+
+                        return (
+                            <div>
+                                {childItems.map((child, k) => {
+                                    return (
+                                        <RenderFeaturedPost withBg={i == 0 && k === 0} {...child} />
+                                    )
+                                })}
+                            </div>
+                        )
+                    } else {
+                        return null
+                    }
+                })}
             </div>
-        )
+        </div>
+    )
 }
 
 export default Host
