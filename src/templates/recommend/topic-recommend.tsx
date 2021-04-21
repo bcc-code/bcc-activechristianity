@@ -21,16 +21,17 @@ import ac_strings from '@/strings/ac_strings.js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
-    const { pageContext, path } = props
+    const { pageContext } = props
 
     const {
         id,
         title,
         formats,
         breadcrumb,
+        pagePath,
         latest, popular, featured
     } = pageContext
-
+    const path = pagePath
     const latestSlug = `${path}/1`
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
@@ -86,14 +87,14 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
                     />
                 ) : (
-                        <div className="px-4">
-                            {latest.map(p => {
-                                return (
-                                    <RightImgPostItem {...p} />
-                                )
-                            })}
-                        </div>
-                    )}
+                    <div className="px-4">
+                        {latest.map(p => {
+                            return (
+                                <RightImgPostItem {...p} />
+                            )
+                        })}
+                    </div>
+                )}
                 {formats.length > 0 && (
                     <ByCatergories
                         title={ac_strings.categories}

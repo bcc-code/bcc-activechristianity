@@ -31,7 +31,7 @@ const TopDesktop: React.FC = () => {
                 </a>
                 <div className="hidden sm:flex items-center text-sm">
                     <UserNav className="pr-4" />
-                    <a target="_blank" href={`${ac_strings.slug_contact}`} className={"py-2 pr-4 hover:text-ac-slate"}>
+                    <a target="_blank" href={`/${ac_strings.slug_contact}`} className={"py-2 pr-4 hover:text-ac-slate"}>
                         {ac_strings.contact}
                     </a>
                     <LanguageDropdown className="border-l pl-2 p-0" />

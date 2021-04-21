@@ -14,7 +14,7 @@ export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Elemen
 )
 
 export const PostH1: React.FC<{ title: string }> = ({ title }) => (
-    <h1 className=" font-semibold text-ac-slate-dark text-2xl sm:text-4xl sm:leading-tight mb-4 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
+    <h1 className=" font-semibold text-ac-slate-dark text-3xl sm:text-4xl sm:leading-tight mb-2 sm:mb-6" dangerouslySetInnerHTML={{ __html: title }} />
 )
 
 export const PageSectionHeader: React.FC<{ title: string, className?: string }> = ({ title, className }) => (

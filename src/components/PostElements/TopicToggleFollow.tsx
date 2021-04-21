@@ -219,7 +219,7 @@ export const SlateDarkUnfollowButton: React.FC<IToggleFollowProps> = ({ id, text
 
 export const ToggleFollowWithName: React.FC<ITopicNavItem> = ({ id, name, to }) => {
     return (
-        <div className={`flex py-2 px-4 mb-2 mr-2 text-center text-sm rounded-full font-semibold items-center bg-gray-300`}>
+        <div className={`flex py-2 px-4 mb-2 mr-2 text-center text-sm rounded-sm items-center bg-gray-200 text-gray-500`}>
             <Link to={to} className="pr-2">{name}</Link>
             <FetchAndSetFollowedTopics
                 id={id}

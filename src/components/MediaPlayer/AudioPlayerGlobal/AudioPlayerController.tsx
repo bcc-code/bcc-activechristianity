@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Media, Player, controls, utils, withMediaProps } from 'react-media-player'
 import { KeyboardArrowDownIcon, DescriptionIcon, VolumeUpRoundedIcon, MoreVertIcon } from '@/components/Icons/MUI/mediaPlayerIcons'
-
+import ReactPlayer from 'react-player'
 import { setCurrentMedia, setIsPlaying, setIsModalOpen, addTracks } from '@/state/action'
 import FetchImage from '@/components/Images/ImageFromPost'
 import ac_strings from '@/strings/ac_strings.js'
@@ -107,7 +107,7 @@ const MediaControl: React.FC<IProps> = (props) => {
         }
     }
     const audioTitle = track.audio?.title
-
+    console.log(track.audio?.src)
     return (
         <div className="w-full h-full flex flex-col">
             {fullScreenInfo && (
@@ -185,6 +185,8 @@ const MediaControl: React.FC<IProps> = (props) => {
                     </div>
                 </div>
             )}
+
+            {/*        {track.audio && track.audio?.src && <ReactPlayer url={track.audio?.src} />} */}
             <Media>
                 {(mediaProps: IMediaProps) => {
                     return (
@@ -227,13 +229,13 @@ const MediaControl: React.FC<IProps> = (props) => {
                                         </div>
                                     </div>
                                 ) : (
-                                        <div className="w-full bg-gray-300">
-                                            <div
-                                                className="h-1 bg-ac-slate-light"
-                                                style={{ width: `${(mediaProps.currentTime / mediaProps.duration) * 100}%` }}>
-                                            </div>
+                                    <div className="w-full bg-gray-300">
+                                        <div
+                                            className="h-1 bg-ac-slate-light"
+                                            style={{ width: `${(mediaProps.currentTime / mediaProps.duration) * 100}%` }}>
                                         </div>
-                                    )}
+                                    </div>
+                                )}
                             </div>
 
                             <div className="w-full flex flex-row text-d4cadet-blue justify-center">

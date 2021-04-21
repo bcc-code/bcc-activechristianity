@@ -12,6 +12,7 @@ const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
+const {onPostBuildTest} = require('./generators/postBuildTests.js')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -62,15 +63,15 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateScriptures = require('./generators/generateScriptures')
     
      const generators = [
-
-      generateHome(actions, graphql),
-      generateExplore(actions, graphql),
-      generatePosts(actions, graphql),
+      generateTopics(actions, graphql),
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
-        generateTopics(actions, graphql),
+        generateHome(actions, graphql),
+        generateExplore(actions, graphql),
+        generatePosts(actions, graphql),
+
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
         generateTopics(actions, graphql),
@@ -131,3 +132,5 @@ exports.onCreateWebpackConfig = ({
     }
   })
 } */
+
+exports.onPostBuild=onPostBuildTest

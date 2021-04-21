@@ -1,4 +1,5 @@
 version: 0.2
+CODEBUILD_BUILD_SUCCEEDING: 0
 phases:
     install:
         runtime-versions:
@@ -11,9 +12,11 @@ phases:
             - 'npm install'
     build:
         commands:
-            - 'gatsby build'
+            - 'npm run build'
+
     post_build:
         commands:
+            - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
             - 'npm run deploy'
 artifacts:
     base-directory: public

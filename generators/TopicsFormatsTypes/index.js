@@ -15,7 +15,7 @@ const { processRecommendationContext } = require('../../src/helpers/normalizers'
 
 const query = `{
   ac {
-    topics(hasPosts: true) {
+    topics(hasPosts:true) {
       ${topicQuery}
     }
 
@@ -226,10 +226,12 @@ module.exports = function generateTopics(actions, graphql) {
               themePages.push(page)
             }
           })
+          const pagePath=`${ac_strings.slug_topic}`
           createPage({
-            path: `${ac_strings.slug_topic}`,
+            path: pagePath,
             component: path.resolve(`./src/templates/page/topics.tsx`),
             context:{
+              pagePath,
               title:ac_strings.topic,
               themes: themePages.map(page=>({title:page.title,slug:page.slug})),
               groupedTopics:Object.keys(groupedTopics)

@@ -121,7 +121,7 @@ module.exports.createArchivePages =async function ({
         if(i===1){
             pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
-        console.log(pagePath)
+
         const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
       
         const paginate = {
@@ -137,7 +137,6 @@ module.exports.createArchivePages =async function ({
             const posts = res.data.ac.topic.allPosts.data
             
             if(i===1 && posts.length>0){
-              console.log(posts[0].updated_at)
               firstPostsDate=posts[0].updated_at
 
             }
@@ -148,11 +147,12 @@ module.exports.createArchivePages =async function ({
           }
 
         })
-
+        console.log(`createArchivePages ${pagePath}`)
             createPage({
               path:pagePath,
               component,
               context: {
+                pagePath,
                 fetchedPost: isType,
                 pageType:isType?"category":"topic",
                 type:node.topicType,
@@ -185,6 +185,7 @@ module.exports.createSubTopicPages=({
       console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
     } else {
       const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
+      console.log(`createSubTopicPages ${baseUrl}`)
       const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
       pageBreadcrumb.push( {
         name:subTopic.name,
@@ -199,8 +200,6 @@ module.exports.createSubTopicPages=({
       
       for (let i = 0; i <=1; i += perPage, currentPage++) {
         if(i===1 && allPosts.length>0){
-          console.log(allPosts[0])
-          console.log(allPosts[0].updated_at)
           firstPostsDate=allPosts[0].updated_at
 
         }

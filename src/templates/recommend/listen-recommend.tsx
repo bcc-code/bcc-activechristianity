@@ -21,9 +21,9 @@ import ac_strings from '@/strings/ac_strings.js'
 
 const Listen: React.FC<IProps> = (props) => {
 
-    const { pageContext, path, } = props
+    const { pageContext, } = props
 
-    const { title, items, latest, popular, featured, playlist, podcast } = pageContext
+    const { title, items, latest, popular, featured, playlist, podcast, pagePath } = pageContext
 
     const allCategories: INavItem[] = [...items.map(t => ({ ...t, to: `${t.typeSlug}/${t.formatSlug}` }))]
 
@@ -35,7 +35,7 @@ const Listen: React.FC<IProps> = (props) => {
         allCategories.push(podcast)
     }
 
-    const latestSlug = `${path}/${ac_strings.slug_latest}`
+    const latestSlug = `${pagePath}/${ac_strings.slug_latest}`
 
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
@@ -45,7 +45,7 @@ const Listen: React.FC<IProps> = (props) => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
         <div >
-            <MetaTag title={title} breadcrumb={[]} type="page" path={path} />
+            <MetaTag title={title} breadcrumb={[]} type="page" path={pagePath} />
 
             <div className="sm:hidden">
                 {/*                 {hasPodcast && (
