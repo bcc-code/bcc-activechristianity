@@ -51,13 +51,12 @@ module.exports = function generatePlaylists(actions, graphql) {
     }
       console.log("Generating playlist")
       _.each(playlists, (playlist) => {
-        const pagePath = `/${ac_strings.slug_playlist}/${playlist.slug}`
-        console.log(pagePath)
+        const basePath = `/${ac_strings.slug_playlist}/${playlist.slug}`
+        console.log(basePath)
         createPage({
-          path: pagePath,
+          path: basePath,
           component: path.resolve(template),
           context: {
-            pagePath,
             title:playlist.title,
             slug: playlist.slug,
             playlist,

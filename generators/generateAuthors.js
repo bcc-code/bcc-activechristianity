@@ -86,7 +86,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
                               path:pagePath,
                               component:path.resolve(template),
                               context: {
-                                pagePath,
                                 pageType:'contributor',
                                 updated_at:firstDate,
                                 posts: allPosts.slice(i,i+perPage),

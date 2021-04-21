@@ -4,9 +4,9 @@ import MetaTag from '@/components/Meta'
 import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 import CustomizedPageComponent from '@/components/CustomizedPageComponent'
 import { PostH1 } from '@/components/Headers'
-const Page: React.FC<IAboutProps> = ({ pageContext }) => {
+const Page: React.FC<IAboutProps> = ({ pageContext, path }) => {
 
-    const { title, flexibleContent, pagePath } = pageContext
+    const { title, slug, flexibleContent } = pageContext
     const customLayout: IPageCompTypes[] = JSON.parse(flexibleContent)
 
     //CustomizedLayoutProps
@@ -15,7 +15,7 @@ const Page: React.FC<IAboutProps> = ({ pageContext }) => {
             <MetaTag
                 type="article"
                 title={title}
-                path={pagePath}
+                path={path}
                 breadcrumb={[]}
             />
 

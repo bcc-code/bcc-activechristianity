@@ -24,11 +24,11 @@ import '@/styles/react-tabs.css'
 
 
 const Listen: React.FC<IListenPageProps> = (props) => {
-    const { data, pageContext } = props
+    const { data, pageContext, path } = props
     const { posts } = data.ac.topics[0]
     const postSlugList = posts.map(p => p.slug)
     const { breadcrumb } = pageContext
-    const path = pageContext.pagePath
+
     return (
         <div className="max-w-sm mx-auto">
             <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
@@ -124,7 +124,6 @@ interface IListenPageProps {
         }
     }
     pageContext: {
-        pagePath: string
         breadcrumb: INavItem[]
         hosts: string[]
     }

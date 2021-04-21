@@ -377,12 +377,11 @@ module.exports = async function generatePosts(actions, graphql) {
                               }
 /*                               console.log(normalized.slug)
                               console.log(data.mediaTypes.types) */
-                              const pagePathPost=`${normalized.slug}`
+                              
                               createPage({
-                                path: pagePathPost,
+                                path: `${normalized.slug}`,
                                 component: path.resolve(template),
                                 context: {
-                                  pagePath:pagePathPost,
                                   id:node.id,
                                   ...data
                                 },
@@ -391,7 +390,6 @@ module.exports = async function generatePosts(actions, graphql) {
                         }   
                       }
                       const context = {
-                        pagePath,
                         fetchedPost:true,
                         posts: postsForlatest,
                         paginate: {

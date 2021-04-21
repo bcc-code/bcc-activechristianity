@@ -10,9 +10,8 @@ import { formatsAll } from '@/strings/static/topic-ids'
 import { getAllUrlParams } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
-
-    const { pageContext } = props
-    const { title, breadcrumb, description, isTopic, id, paginate, pagePath } = pageContext
+    const { pageContext, path } = props
+    const { title, breadcrumb, description, isTopic, id, paginate } = pageContext
 
     let pageTitle = title
 
@@ -28,6 +27,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     const pageNrQuery = parsed && parsed.pagenr && typeof parsed.pagenr === "string" && parseInt(parsed.pagenr)
 
     const currentPage = typeof pageNrQuery === "number" && pageNrQuery <= paginate.totalPages && pageNrQuery > 1 ? pageNrQuery : 1
+
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag
@@ -35,7 +35,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 title={title}
                 translatedUrls={[]}
                 breadcrumb={breadcrumb}
-                path={pagePath}
+                path={path}
             />
             {isPodcast && (
                 <div className={`pt-8 sm:pt-0`}>
@@ -51,7 +51,7 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 <PostListQuery
                     firstPosts={pageContext.posts}
                     totalPages={paginate.totalPages}
-                    path={pagePath}
+                    path={path}
                     currentPage={currentPage}
                     {...pageContext}
                 />
@@ -67,7 +67,6 @@ export default TaxonomyPage
 interface ITaxonomyPageProps {
 
     pageContext: {
-        pagePath: string
         id: string
         subTopicId?: string
         type: string

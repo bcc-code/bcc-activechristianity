@@ -21,7 +21,7 @@ const Breadcrumb: React.FC<IBreadcrumb> = ({ items }) => {
                     return (
                         <li key={i} className="breadcrumb-item flex justify-center items-center" >
                             <Link activeClassName="text-gray-300" to={`/${item.to}`}>
-                                {item.name}
+                                {typeof item.name === "string" ? String(item.name).toUpperCase() : item.name}
                             </Link>
                         </li>
                     )

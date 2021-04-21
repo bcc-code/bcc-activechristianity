@@ -4,11 +4,10 @@ import MetaTag from '@/components/Meta'
 import { LayoutH1Wide } from '@/components/Headers'
 import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
 
-const Host: React.FC<IHost> = ({ pageContext, data }) => {
-    const { breadcrumb, pagePath } = pageContext
+const Host: React.FC<IHost> = ({ path, pageContext, data }) => {
+    const { breadcrumb } = pageContext
     const { flexibleContent, title, slug } = data.ac.page
     const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-
     return (
         <div>
             <MetaTag
@@ -16,7 +15,7 @@ const Host: React.FC<IHost> = ({ pageContext, data }) => {
                 translatedUrls={[]}
                 type="page"
                 breadcrumb={breadcrumb}
-                path={pagePath}
+                path={path}
             />
             <LayoutH1Wide title={title} />
             <div className="standard-max-w-px">
@@ -69,7 +68,6 @@ interface IHost {
         }
     }
     pageContext: {
-        pagePath: string
         title: string
         breadcrumb: []
 

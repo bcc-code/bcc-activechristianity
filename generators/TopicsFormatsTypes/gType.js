@@ -137,9 +137,7 @@ module.exports = async function generateTypes(data) {
     const today=new Date()
  
     const typekey=nodeInfo.key
-    const pagePath= `${type.slug}`
     const context= {
-        pagePath,
         pageType:"category",
         updated_at:today.toDateString(),
         typekey,
@@ -151,7 +149,7 @@ module.exports = async function generateTypes(data) {
     }
 
     createPage({
-        path: pagePath,
+        path: `${type.slug}`,
         component: path.resolve(`./src/templates/recommend/${typekey}-recommend.tsx`),
         context,
     })

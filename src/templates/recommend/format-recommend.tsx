@@ -11,9 +11,9 @@ import { UnderlineLinkViewAll } from '@/components/Button'
 import { INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 import { getRandomFeatured } from '@/helpers/normalizers'
-const Format: React.FC<IProps> = ({ pageContext }) => {
+const Format: React.FC<IProps> = ({ path, pageContext }) => {
 
-    const { formatType, breadcrumb, latest, popular, featured, pagePath } = pageContext
+    const { formatType, breadcrumb, latest, popular, featured } = pageContext
 
     const { info, items } = formatType
 
@@ -21,7 +21,7 @@ const Format: React.FC<IProps> = ({ pageContext }) => {
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     return (
         <div className="pt-8 sm:pt-0">
-            <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={pagePath} />
+            <MetaTag title={info.name} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
             <LayoutH1Wide title={info.name} />
             {formatType.info.count > 10 ? (
 
@@ -64,14 +64,14 @@ const Format: React.FC<IProps> = ({ pageContext }) => {
 
 
             ) : (
-                <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
-                    { latest.map(p => {
-                        return (
-                            <TopImgPost {...p} key={p.slug} />
-                        )
-                    })}
-                </div>
-            )}
+                    <div className="standard-max-w-px grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 pb-6">
+                        { latest.map(p => {
+                            return (
+                                <TopImgPost {...p} key={p.slug} />
+                            )
+                        })}
+                    </div>
+                )}
         </div>
     )
 

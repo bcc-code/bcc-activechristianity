@@ -93,19 +93,20 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
   )
 }
 const IndexPage: React.FC<IHomeProps> = (props) => {
-  const { pageContext } = props
+  const { pageContext, path } = props
   const {
-    pagePath,
     featured,
     popularTopics,
     popular,
     latest
+
   } = pageContext
+
   return (
 
     <div className="standard-max-w">
       <MetaTag
-        path={pagePath}
+        path={path}
         title={`${ac_strings.site_title} - ${ac_strings.tagline}`}
         type="website"
         translatedUrls={[]}
@@ -156,7 +157,6 @@ export default IndexPage
 
 
 interface IHomePropsContent {
-  pagePath: string
   featuredPosts: IPostRes[]
   latest: IPostItem[]
   popular: IPostItem[]

@@ -12,9 +12,9 @@ import TwoToThreeTabs from '@/components/Tabs/TwoToThreeTabs'
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs'
 import ac_strings from '@/strings/ac_strings.js'
 
-const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, data }) => {
+const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, path, data }) => {
 
-    const { title, pagePath } = pageContext
+    const { title, slug, } = pageContext
     const translatedUrls: ITranslations[] = []
     const { audio, podcasts, songs, playlists } = data.ac
 
@@ -50,7 +50,7 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, data 
                 translatedUrls={translatedUrls}
                 type="page"
                 breadcrumb={[]}
-                path={pagePath}
+                path={path}
 
             />
             <LayoutH1Wide title={title} />
@@ -119,7 +119,6 @@ export default PlaylistOverview
 interface IPlaylistOverviewProps {
     path: string
     pageContext: {
-        pagePath: string
         title: string
         slug: string
 

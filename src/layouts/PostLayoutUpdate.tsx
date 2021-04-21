@@ -196,10 +196,10 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <VideoMediaPlayer src={media.video.src} key={shortid()} />
 
                 )}
-                {/*          {currentMediaType === "audio" && media.audio && (
+                {currentMediaType === "audio" && media.audio && (
                     <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} key={shortid()} />
                 )}
- */}
+
                 {mediaTypesDefault.types.length > 1 && (
                     <div className="w-full flex justify-center pb-4  bg-mp-background sm:pt-4">
                         {mediaTypesDefault.types.map((item, i) => (
@@ -239,13 +239,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
             </div>
 
 
-            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-6 z-50 flex justify-center lg:justify-start standard-max-w " >
+            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-4 z-50 flex justify-center lg:justify-start standard-max-w " >
                 <div className="max-w-full sm:max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
                     <PostH1 title={title} />
-
                     <p className="text-ac-gray-dark mb-6 sm:mb-0 sm:font-medium sm:text-lg leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
                     <div className="border-b w-1/6 my-8 border-ac-gray"></div>
                     <div className="pb-6 bg-white text-sm">
@@ -258,13 +257,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
 
                     {(currentMediaType === "audio") && (
-                        <div className="block relative sm:pt-10 mb-4 sm:mb-8">
+                        <div className="block relative sm:pt-10 mb-12 ">
                             <TwoToOneImg image={image} rounded alt={seoTitle} />
 
                         </div>
                     )}
                     {(currentMediaType === "none") && (
-                        <div className="hidden sm:block relative sm:pt-10 mb-4 sm:mb-8">
+                        <div className="hidden sm:block relative sm:pt-10 mb-12 ">
                             <TwoToOneImg image={image} rounded alt={seoTitle} />
                         </div>
                     )}
@@ -296,9 +295,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </div>
 
                         {credits && (
-                            <div className="text-sm text-gray-600 leading-6" dangerouslySetInnerHTML={{ __html: credits }}>
-
-                            </div>
+                            <Content
+                                content={credits}
+                            />
                         )}
                         {/*  <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
                         <div className="flex flex-wrap border-ac-gray py-6">

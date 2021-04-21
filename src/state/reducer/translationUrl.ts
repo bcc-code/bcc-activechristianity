@@ -3,7 +3,7 @@ import { Dispatch } from 'redux'
 import { ADD_T_URLS_Payload } from '../types'
 import { languages } from '@/strings/generated/menus.json'
 import { ITranslations, INavItem } from '@/types'
-import { showAllLanguages } from '@/helpers/normalizers'
+import { normalizeAvailableLanguages } from '@/helpers/normalizers'
 
 export const homeUrls: INavItem[] = languages
 
@@ -16,9 +16,10 @@ interface TURLStateAction {
 const defaultState = homeUrls
 
 const translationLocation: Reducer<INavItem[], TURLStateAction> = (state = defaultState, action: TURLStateAction) => {
+
     switch (action.type) {
         case 'ADD_T_URLS': {
-            let translated_items: INavItem[] = showAllLanguages(action.payload.translated)
+            let translated_items: INavItem[] = normalizeAvailableLanguages(action.payload.translated, true)
             return translated_items
         }
         default:

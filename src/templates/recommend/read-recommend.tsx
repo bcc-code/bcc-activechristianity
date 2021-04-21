@@ -22,10 +22,10 @@ import { getRandomArray, getRandomFeatured } from "@/helpers/normalizers"
 import { loggedInSelector } from '@/state/selectors/user'
 const Read: React.FC<IProps> = (props) => {
     const loggedIn = useSelector(loggedInSelector)
-    const { pageContext } = props
-    const { title, info, items, latest, popular, featured, pagePath } = pageContext
+    const { pageContext, path } = props
+    const { title, info, items, latest, popular, featured } = pageContext
 
-    const latestSlug = `${pagePath}/${ac_strings.slug_latest}`
+    const latestSlug = `${path}/${ac_strings.slug_latest}`
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
     const categoryItems = items.map(item => ({ ...item, to: `${item.typeSlug}/${item.formatSlug}` }))
@@ -36,7 +36,7 @@ const Read: React.FC<IProps> = (props) => {
                 title={title}
                 type="page"
                 breadcrumb={[]}
-                path={pagePath}
+                path={path}
             />
 
             <div className="sm:hidden">
@@ -98,30 +98,30 @@ const Read: React.FC<IProps> = (props) => {
                             </div>
                         </>
                     ) : (
-                        <>
-                            <div className="bg-ac-slate-lighter py-6 overflow-hidden">
+                            <>
+                                <div className="bg-ac-slate-lighter py-6 overflow-hidden">
 
-                                <div className="w-full flex justify-between items-center py-6 pr-4">
-                                    <PageSectionHeader title={ac_strings.latest} />
-                                    <UnderlineLinkViewAll to={`${latestSlug}`} />
+                                    <div className="w-full flex justify-between items-center py-6 pr-4">
+                                        <PageSectionHeader title={ac_strings.latest} />
+                                        <UnderlineLinkViewAll to={`${latestSlug}`} />
+                                    </div>
+                                    <HSCardList posts={latest} />
+
                                 </div>
-                                <HSCardList posts={latest} />
+                                <div className=' py-6'>
+                                    <PageSectionHeader title={ac_strings.popular} />
+                                    <div className="px-4">
 
-                            </div>
-                            <div className=' py-6'>
-                                <PageSectionHeader title={ac_strings.popular} />
-                                <div className="px-4">
-
-                                    {popular.slice(0, 3).map(p => {
-                                        return (
-                                            <RightImg {...p} key={shortid()} />
-                                        )
-                                    })}
+                                        {popular.slice(0, 3).map(p => {
+                                            return (
+                                                <RightImg {...p} key={shortid()} />
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
 
-                        </>
-                    )}
+                            </>
+                        )}
 
                     <ByCatergories
                         title={`${ac_strings.categories}`}

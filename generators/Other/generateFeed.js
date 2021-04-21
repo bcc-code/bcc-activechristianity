@@ -1,6 +1,6 @@
 
 const podcastProps = require('../../src/strings/static/podcastProperties.js')
-
+const getAudio = require('../../src/helpers/podcast_playlist/getAudioSrc')
 const eposideNoteFooter = '<p class=\"p1\">Website: https://activechristianity.org/<br />\nInstagram: https://www.instagram.com/activechristianity/<br />\nFacebook: https://www.facebook.com/activechristianity/</p>\n'
 module.exports = {
     setup:() => ({
@@ -136,7 +136,7 @@ module.exports = {
                 itunes_podcast_info:{description,episode_notes,duration,image}
             }
         })=>{
-          const audioSrc = ''
+          const audioSrc = getAudio.getAudioSrc(content)
 
             return ({
               title,
