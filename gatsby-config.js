@@ -2,7 +2,7 @@ const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
 const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
-/* const generateFeed = require('./generators/Other/generateFeed') */
+const generateFeed = require('./generators/Other/generateFeed')
 console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
@@ -109,6 +109,30 @@ if (activeEnv === 'production') {
         // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
         purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
       }
+    },   
+/*      {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `{
+          site {
+            siteMetadata {
+              title
+              description
+              author
+              language
+            }
+          }
+        }`,
+        feeds:[generateFeed.siteFeed]
+      },
+    }, */
+
+    {
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options:SitemapOptions
+    },
+    {
+      resolve:'gatsby-plugin-preact'
     },
     {
       resolve: `gatsby-plugin-s3`,
@@ -126,13 +150,6 @@ if (activeEnv === 'production') {
           enableS3StaticWebsiteHosting: false,
       },
     },
-    {
-      resolve: `gatsby-plugin-advanced-sitemap`,
-      options:SitemapOptions
-    },
-    {
-      resolve:'gatsby-plugin-preact'
-    }
   )
 
   if( process.env.NO_FOLLOW==="true"){
