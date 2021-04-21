@@ -7,11 +7,11 @@ import { navigate } from 'gatsby'
 export default () => {
     const localStorageKey = 'ac.giveConsent'
 
-    const [showConsent, setShowConsent] = React.useState(true)
+    const [showConsent, setShowConsent] = React.useState(false)
     React.useEffect(() => {
         const gaveConsent = localStorage.getItem(localStorageKey)
-        if (gaveConsent === "true") {
-            setShowConsent(false)
+        if (gaveConsent !== "true") {
+            setShowConsent(true)
         }
 
     }, [])
