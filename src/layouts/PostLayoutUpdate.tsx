@@ -320,15 +320,18 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         )}
-
-
                         {isWindowLoaded === true && (
                             <div>
-                                {allInterestedPosts && <RecommendedPosts
-                                    postId={acId ? acId : id}
-                                    topics={topicPosts}
-                                    readMorePosts={allInterestedPosts}
-                                />}
+                                {allInterestedPosts && (
+                                    <LazyLoad>
+                                        <RecommendedPosts
+                                            postId={acId ? acId : id}
+                                            topics={topicPosts}
+                                            readMorePosts={allInterestedPosts}
+                                        />
+
+                                    </LazyLoad>
+                                )}
 
                                 {authors && authorsPosts && (
                                     <LazyLoad>

@@ -133,4 +133,4 @@ exports.onCreateWebpackConfig = ({
   })
 } */
 
-/* exports.onPostBuild=onPostBuildTest */
+exports.onPostBuild=onPostBuildTest
