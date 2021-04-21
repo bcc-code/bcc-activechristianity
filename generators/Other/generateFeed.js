@@ -33,18 +33,22 @@ feeds: [
           authors
         }=node
         if(acId!=="dummy-content"){
-          posts.push({
+          const p = {
             title,
             description:excerpt,
             url: site.siteMetadata.siteUrl + slug,
             guid:acId,
             date:updated_at,
-            image_url: image.src,
+/*             image_url: image.src, */
             author: (authors ? authors.map(a => a.name).join(', ')  : ''),
             custom_elements: [
               {'content:encoded': content}],
         
-          })
+          }
+          if(image){
+            p["image_url"]=image.src
+          }
+          posts.push(p)
         }
       })
       return posts
