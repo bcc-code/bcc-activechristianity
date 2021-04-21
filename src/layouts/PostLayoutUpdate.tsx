@@ -196,10 +196,10 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     <VideoMediaPlayer src={media.video.src} key={shortid()} />
 
                 )}
-                {currentMediaType === "audio" && media.audio && (
+                {/*          {currentMediaType === "audio" && media.audio && (
                     <AudioMediaPlayer media={media} duration={duration?.listen} stopScrollingTitle={!!isCurrentMedia.audio} key={shortid()} />
                 )}
-
+ */}
                 {mediaTypesDefault.types.length > 1 && (
                     <div className="w-full flex justify-center pb-4  bg-mp-background sm:pt-4">
                         {mediaTypesDefault.types.map((item, i) => (
@@ -296,8 +296,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </div>
 
                         {credits && (
-                            <div className="text-sm text-gray-600">
-                                {credits}
+                            <div className="text-sm text-gray-600 leading-6" dangerouslySetInnerHTML={{ __html: credits }}>
+
                             </div>
                         )}
                         {/*  <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
