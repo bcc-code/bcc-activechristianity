@@ -2,6 +2,7 @@
 const podcastProps = require('../../src/strings/static/podcastProperties.js')
 
 const eposideNoteFooter = '<p class=\"p1\">Website: https://activechristianity.org/<br />\nInstagram: https://www.instagram.com/activechristianity/<br />\nFacebook: https://www.facebook.com/activechristianity/</p>\n'
+const  siteUrl=process.env.SITE_URL
 module.exports = {
     setup:() => ({
         title:podcastProps.title,
@@ -44,62 +45,59 @@ module.exports = {
       }),
     siteFeed:{
         query: `{
-            allWordpressPost {
-              totalCount
-              edges {
+          allSitePage(filter: {context: {pageType: {eq: "post"}}}){
+            totalCount
+            edges {
                 node {
-                  wordpress_id
-                  title
-                  excerpt
-                  content
-                  slug
-                  date
-                  featured_media {
-                    source_url
+                  context {
+                      normalized {
+                        image {
+            
+                        src
+                        }
+                        title
+                        excerpt
+                        authors {
+                            as 
+                          authors {
+                            name
+                          }
+                        }
+                        topics {
+                          name
+                          to
+                        }
+                      }
+                    
                   }
-                  ac_authors { name }
-                  ac_contributor_with
-                  categories { name }
                 }
-              }
             }
-          }`,
-        serialize: ({ query: { allWordpressPost } }) => {
-          const siteUrl = `${process.env.SITE_URL}`.replace(/\/$/, '')
-          return allWordpressPost.edges.map(({
-            node: {
-              wordpress_id: guid,
-              title,
-              excerpt: description,
-              content,
-              slug,
-              date,
-              featured_media,
-              ac_authors,
-              ac_contributor_with,
-              categories,
-            }
-          }) => {
-            if (ac_contributor_with) {
-              ac_authors.push({ name: ac_contributor_with })
-            }
-            const image_url = (featured_media ? (featured_media.localFile ? featured_media.localFile.publicURL : featured_media.source_url) : '')
+          }
+        }`,
+          serializer: (props) => {
+            console.log(props)
+            const { query: { allSitePage } }=props
+            const posts = allSitePage.edges.map(({node})=>{
+              const {slug, context, updated_at}=node
+              const {title,excerpt,image,topics}=context.normalized
 
-            return {
-              title,
-              description,
-              url: `${siteUrl}/${slug}`,
-              guid,
-              date,
-              image_url: image_url,
-              author: (ac_authors ? ac_authors.map(a => a.name).join(', ')  : ''),
-              categories: categories.map(c => c.name),
-              custom_elements: [
-                {'content:encoded': content},
-              ],
-            }
-          })
-        },
+          return {
+          title,
+           description:excerpt,
+          url: `${siteUrl}/${slug}`,
+          guid:slug,
+          date:updated_at,
+          image_url: image.src,
+    /*       author: (ac_authors ? ac_authors.map(a => a.name).join(', ')  : ''), */
+          categories: topics.map(c => c.name),
+          custom_elements: [
+           {'content:encoded': excerpt},
+           ],
+          }
+            })
+            return Array.isArray(posts)?posts:[] 
+
+          }        ,
         output: "/feed.xml",
         title: `${process.env.TITLE} RSS`,
       },

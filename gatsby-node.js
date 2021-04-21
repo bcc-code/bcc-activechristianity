@@ -66,11 +66,11 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       generateHome(actions, graphql),
       generateExplore(actions, graphql),
       generatePosts(actions, graphql),
-
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
+       
         generateTopics(actions, graphql),
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
@@ -133,4 +133,4 @@ exports.onCreateWebpackConfig = ({
   })
 } */
 
-exports.onPostBuild=onPostBuildTest
+/* exports.onPostBuild=onPostBuildTest */

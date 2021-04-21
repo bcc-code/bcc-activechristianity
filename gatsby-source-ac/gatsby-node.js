@@ -260,7 +260,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 exports.onPostBuild = async ({ cache }) => {
     await cache.set(`key`, `value`)
     const cachedValue = await cache.get(`key`)
-    console.log(cachedValue) // logs `value`
 }
 
 

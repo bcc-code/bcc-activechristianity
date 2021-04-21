@@ -2,7 +2,7 @@ const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
 const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
-const generateFeed = require('./generators/Other/generateFeed')
+/* const generateFeed = require('./generators/Other/generateFeed') */
 console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
@@ -70,6 +70,66 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
+  {
+    resolve: `gatsby-plugin-feed`,
+    options: {
+      query: `
+        {
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+              site_url: siteUrl
+            }
+          }
+        }
+      `,
+      feeds: [
+        {
+          serialize: ({ query: { site, allMarkdownRemark } }) => {
+            return allMarkdownRemark.edges.map(edge => {
+              return Object.assign({}, edge.node.frontmatter, {
+                description: edge.node.excerpt,
+                date: edge.node.frontmatter.date,
+                url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                custom_elements: [{ "content:encoded": edge.node.html }],
+              })
+            })
+          },
+          query: `
+            {
+              allMarkdownRemark(
+                sort: { order: DESC, fields: [frontmatter___date] },
+              ) {
+                edges {
+                  node {
+                    excerpt
+                    html
+                    fields { slug }
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            }
+          `,
+          output: "/rss.xml",
+          title: "Your Site's RSS Feed",
+          // optional configuration to insert feed reference in pages:
+          // if `string` is used, it will be used to create RegExp and then test if pathname of
+          // current page satisfied this regular expression;
+          // if not provided or `undefined`, all pages will have feed reference inserted
+          match: "^/blog/",
+          // optional configuration to specify external rss feed, such as feedburner
+          link: "https://feeds.feedburner.com/gatsby/blog",
+        },
+      ],
+    },
+  },
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
   // 'gatsby-plugin-offline',
@@ -109,30 +169,6 @@ if (activeEnv === 'production') {
         // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
         purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
       }
-    },   
-/*      {
-      resolve: `gatsby-plugin-feed`,
-      options: {
-        query: `{
-          site {
-            siteMetadata {
-              title
-              description
-              author
-              language
-            }
-          }
-        }`,
-        feeds:[generateFeed.siteFeed]
-      },
-    }, */
-
-    {
-      resolve: `gatsby-plugin-advanced-sitemap`,
-      options:SitemapOptions
-    },
-    {
-      resolve:'gatsby-plugin-preact'
     },
     {
       resolve: `gatsby-plugin-s3`,
@@ -150,6 +186,13 @@ if (activeEnv === 'production') {
           enableS3StaticWebsiteHosting: false,
       },
     },
+    {
+      resolve: `gatsby-plugin-advanced-sitemap`,
+      options:SitemapOptions
+    },
+    {
+      resolve:'gatsby-plugin-preact'
+    }
   )
 
   if( process.env.NO_FOLLOW==="true"){
