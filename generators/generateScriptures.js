@@ -55,7 +55,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
         path: `${page.slug}`,
         component: path.resolve(`./src/templates/page/${page.label}.tsx`),
         context:{
-          pagePath:`${page.slug}`,
           bible,
           title:page.title
         },
@@ -65,7 +64,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
         path: `${page.slug}-result`,
         component: path.resolve(`./src/templates/page/${page.label}-result.tsx`),
         context:{
-          pagePath:`${page.slug}-result`,
           title:page.title
         },
       })

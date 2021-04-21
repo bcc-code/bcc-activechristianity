@@ -33,6 +33,7 @@ const MetaTag: React.FC<MetaTagProps> = ({ title, type, meta, translatedUrls, br
     }
 
     useEffect(() => {
+
         if (translatedUrls) {
             dispatch(updateTranslationUrl({ translated: translatedUrls }))
         } else {

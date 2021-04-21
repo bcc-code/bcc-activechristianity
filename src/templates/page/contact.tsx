@@ -12,7 +12,7 @@ const ContactPage = () => {
     const height = 190
     return (
         <div className="">
-            <MetaTag title={ac_strings.contact} path={ac_strings.contact} type="page" breadcrumb={[]} />
+            <MetaTag title={ac_strings.contact} type="page" breadcrumb={[]} />
             <Header
                 className={`fixed transition-transform background-image w-full flex flex-col justify-center px-4 pb-12 sm:hidden`}
                 imageUrl={imageUrl}

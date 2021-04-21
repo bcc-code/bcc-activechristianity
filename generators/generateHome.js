@@ -1,6 +1,6 @@
 const path = require('path')
 const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
-const {typeScope,formatScope,formatsIds,typeIds} = require('../src/strings/static/topic-ids')
+const {typeScope,formatScope} = require('../src/strings/static/topic-ids')
 const endpoints = require('../src/strings/static/endpoints')
 const { processRecommendationContext, getRandomFeatured } = require('../src/helpers/normalizers')
 const baseUrl = endpoints.api_url
@@ -93,16 +93,13 @@ module.exports = function generatePages(actions, graphql) {
             const staticTopics = []
             for (let i=0;i<ac.featuredTopics.length;i++){
                 const item=ac.featuredTopics[i]
-                const shouldFilter = formatsIds[`${item.id}`]  || typeIds[`${item.id}`]
-                if(!shouldFilter){
-                    staticTopics.push(
-                        {
-                            ...item,
-                            posts:item.somePosts.data
-                        }
-                    )
-                }
-  
+                
+                staticTopics.push(
+                    {
+                        ...item,
+                        posts:item.somePosts.data
+                    }
+                )
             }
             const popularTopicsAll = {
                 "static":staticTopics
@@ -115,9 +112,11 @@ module.exports = function generatePages(actions, graphql) {
                     popularPostsAll["dynamic"]= await getMultiPosts(popularPosts.map(node=>node.id),baseUrl,headers).catch(err=>{
                         console.log(err)
                         throw new Error(err.message)
-                    })                  
+                    })
+                   
                 }
-                             
+                
+                
                 if(popularTopics){
                     const popularTopicsUnfilteredIDs=popularTopics.map(node=>node.id)
                     popularTopicsAll["dynamic"]=[]
@@ -165,9 +164,7 @@ module.exports = function generatePages(actions, graphql) {
             const props =processRecommendationContext({ popularPosts, featuredPosts, latestPosts })
             const { latest, popular, featured } = props
             const today=new Date()
-            const pagePath='/'
             const context = {
-                pagePath,
                 updated_at:today.toDateString(),
                 latest,
                 featured,
@@ -180,7 +177,7 @@ module.exports = function generatePages(actions, graphql) {
                 popularTopics:popularTopicsAll,
               }
             createPage({
-                path: pagePath,
+                path: `/`,
                 component: path.resolve('./src/templates/page/home.tsx'),
                 context
               })

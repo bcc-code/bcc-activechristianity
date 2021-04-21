@@ -168,11 +168,10 @@ interface IPodcastIntro {
         acNodePost: IPostRes
     }
     pageContext: {
-        pagePath: string
         title: string
         postId: string
         breadcrumb: INavItem[]
         hosts: string[]
 
     }
-}
+} 

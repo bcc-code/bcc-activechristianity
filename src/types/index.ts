@@ -185,7 +185,7 @@ export interface IPage {
     id: string
     title: string
     slug: string
-    pagePath: string
+    path: string
     langs: ITranslations[]
     label: string
     is_active: Boolean
@@ -482,7 +482,6 @@ export interface IBannerBasic {
 };
 
 export interface IRecommendationPage {
-    pagePath: string
     title: string
     breadcrumb: INavItem[]
     latest: IPostItem[]

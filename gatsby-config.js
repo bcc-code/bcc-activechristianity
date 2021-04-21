@@ -70,6 +70,17 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
+  { 
+    resolve: `gatsby-plugin-purgecss`,
+    options: {
+      printRejected: true, // Print removed selectors and processed file names
+      //develop: true, // Enable while using `gatsby develop`
+     tailwind: true, // Enable tailwindcss support
+      // whitelist: ['whitelist'], // Don't remove this selector
+      // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+      purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
+    }
+  },
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
   // 'gatsby-plugin-offline',
@@ -80,11 +91,8 @@ const plugins = [
 /*   
   "gatsby-plugin-webpack-bundle-analyser-v2", */
   
-  'gatsby-plugin-loadable-components-ssr'
-];
-
-if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
-  plugins.push(  {
+  'gatsby-plugin-loadable-components-ssr',
+  {
     resolve: `gatsby-plugin-algolia-search`,
     options: {
       appId: process.env.ALGOLIA_APP_ID,
@@ -93,23 +101,13 @@ if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
       enablePartialUpdates: true
     }
-  })
-}
+  }
+];
+
 if (activeEnv === 'production') {
   
 
   plugins.push(
-    { 
-      resolve: `gatsby-plugin-purgecss`,
-      options: {
-        printRejected: true, // Print removed selectors and processed file names
-        //develop: true, // Enable while using `gatsby develop`
-       tailwind: true, // Enable tailwindcss support
-        // whitelist: ['whitelist'], // Don't remove this selector
-        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-        purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
-      }
-    },
     {
       resolve: `gatsby-plugin-s3`,
       options: {
