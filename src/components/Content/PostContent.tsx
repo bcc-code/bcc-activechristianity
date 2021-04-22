@@ -25,40 +25,6 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
     const glossaryEl = React.useRef<HTMLDivElement>(null);
     const options = { shareUrl: process.env.SITE_URL + '/' + slug }
 
-    React.useEffect(() => {
-
-        if (typeof window !== 'undefined') {
-
-            if (process.env.LANG_CODE === "en" && typeof window.refTagger === "undefined") {
-                window.refTagger = {
-                    settings: {
-                        bibleVersion: "NKJV",
-                        addLogosLink: false,
-                        appendIconToLibLinks: false,
-                        caseInsensitive: true,
-                        convertHyperlinks: false,
-                        libronixBibleVersion: "NKJV",
-                        libronixLinkIcon: "light",
-                        linksOpenNewWindow: false,
-                        tagChapters: true,
-                        useTooltip: true
-                    }
-                }
-
-                addScript('/scripts/RefTagger.js')
-            }
-
-        }
-
-        if (process.env.LANG_CODE === "en") {
-
-            /*    setTimeout(() => {
-                   window.refTagger && window.refTagger.tag && window.refTagger.tag();
-               }, 1500) */
-
-        }
-    }, [content])
-
     const closeOnClick = (e: any) => {
 
         if (popperEl && popperEl.current && !popperEl.current.contains(e.target)) {

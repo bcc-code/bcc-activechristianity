@@ -37,6 +37,12 @@ import { IPostItem, ITopicPostSlugs, INavItem } from '@/types'
 
 import ac_strings from '@/strings/ac_strings.js'
 
+const addScript = (url: string) => {
+    const script = document.createElement("script")
+    script.src = url
+    script.async = true
+    document.body.appendChild(script)
+}
 
 type IMediaType = "audio" | "video"
 
@@ -96,10 +102,12 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const isLoggedIn = useSelector(loggedInSelector)
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
-
+    const triggeredTagger = React.useRef<null | true>(null);
     React.useEffect(() => {
+
+
+        lastScroll.current = Date.now() + 5000
         if (isLoggedIn === "success") {
-            lastScroll.current = Date.now() + 5000
             if (id) {
                 acApiModule.then(res => {
                     const acApi = res.default
@@ -111,12 +119,39 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 })
 
             }
-            const handleScroll = (e: any) => {
-                if (lastScroll.current < Date.now()) {
-                    lastScroll.current = Date.now() + 5000
-                    if (showBottomSlider !== true) {
-                        setShowBottomSlider(true)
+        }
+        const handleScroll = (e: any) => {
+            if (triggeredTagger.current !== true && window.scrollY > 200) {
+                if (typeof window !== 'undefined') {
+
+                    if (process.env.LANG_CODE === "en" && typeof window.refTagger === "undefined") {
+                        window.refTagger = {
+                            settings: {
+                                bibleVersion: "NKJV",
+                                addLogosLink: false,
+                                appendIconToLibLinks: false,
+                                caseInsensitive: true,
+                                convertHyperlinks: false,
+                                libronixBibleVersion: "NKJV",
+                                libronixLinkIcon: "light",
+                                linksOpenNewWindow: false,
+                                tagChapters: true,
+                                useTooltip: true
+                            }
+                        }
+                        console.log('add refTagger')
+                        addScript('/scripts/RefTagger.js')
+                        triggeredTagger.current = true
                     }
+
+                }
+            }
+            if (lastScroll.current < Date.now()) {
+                lastScroll.current = Date.now() + 5000
+                /* if (showBottomSlider !== true) {
+                    setShowBottomSlider(true)
+                } */
+                if (isLoggedIn === "success") {
                     if (id) {
                         acApiModule.then(res => {
                             const api = res.default
@@ -130,13 +165,19 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     }
                 }
             }
-            const debounceScroll = debounce(handleScroll, 1000)
-            window.addEventListener('scroll', debounceScroll);
-
-            return () => {
-                window.removeEventListener('scroll', debounceScroll)
-            };
         }
+        const debounceScroll = debounce(handleScroll, 500)
+        window.addEventListener('scroll', debounceScroll);
+        if (process.env.LANG_CODE === "en") {
+
+            setTimeout(() => {
+                window.refTagger && window.refTagger.tag && window.refTagger.tag();
+            }, 100)
+
+        }
+        return () => {
+            window.removeEventListener('scroll', debounceScroll)
+        };
 
     }, [post.slug])
 
