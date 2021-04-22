@@ -54,7 +54,7 @@ const TextSelectPopper: React.FC<{ className?: string, content: string, glossary
 
             setTimeout(() => {
                 window.refTagger && window.refTagger.tag && window.refTagger.tag();
-            }, 100)
+            }, 1500)
 
         }
     }, [content])
