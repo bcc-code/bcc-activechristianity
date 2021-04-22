@@ -296,8 +296,8 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </div>
 
                         {credits && (
-                            <div className="text-sm text-gray-600">
-                                {credits}
+                            <div className="text-sm text-gray-600" dangerouslySetInnerHTML={{ __html: credits }}>
+
                             </div>
                         )}
                         {/*  <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
