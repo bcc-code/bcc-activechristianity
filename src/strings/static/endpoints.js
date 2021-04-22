@@ -13,6 +13,8 @@ module.exports = {
     "translation_google_sheet_auth":"AIzaSyASDGn4oZErww-RsW6kBPnQz7tCB6x3Fpk",
     "translation_google_sheet_id":"1waay0ca8OdtmJFyMtKzOsje_gocnWwfI2ZUFh5Bg90U",
     "test":"test",
-    "slug_translation":"https://acadmin.net/day4/string_translations"
+    "slug_translation":"https://acadmin.net/day4/string_translations",
+    "gtm_id":"GTM-TPNPVVV"
+    
 }
 
