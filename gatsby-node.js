@@ -39,9 +39,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   }
 
   exports.onPreInit = async () => {
-    if (process.env.DONT_ADD_TRACKING_CODE!=="true"){
-      fetchScripts()
-    }
+    fetchScripts()
     await getIndexPostQuery(endpoints.api_url)
     await buildTranslatedStrings.translationStrings()
     await buildMenus.languageSites()
