@@ -108,7 +108,16 @@ if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_o
     },
   })
 }
-
+if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
+  plugins.push(
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: endpoints.gtm_id,
+      },
+    },
+  )
+}
 if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
   plugins.push(  {
     resolve: `gatsby-plugin-algolia-search`,
