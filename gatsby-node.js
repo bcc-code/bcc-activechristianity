@@ -8,11 +8,11 @@
 const _ = require('lodash')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 const buildTranslatedStrings = require('./generators/json/build-translated-strings')
+const {onPostBuildTest} = require('./generators/postBuildTests')
 const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
 const endpoints = require('./src/strings/static/endpoints')
-const {onPostBuildTest} = require('./generators/postBuildTests.js')
 exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     actions.setWebpackConfig({
       plugins: [
@@ -131,4 +131,4 @@ exports.onCreateWebpackConfig = ({
   })
 } */
 
-exports.onPostBuild=onPostBuildTest
+exports.onPostBuild =onPostBuildTest
