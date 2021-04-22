@@ -101,7 +101,8 @@ module.exports = {
       fontFamily: {
         sans: ['Source Sans Pro', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['Source Sans Pro', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        roboto: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+        roboto: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'serif'],
+        arial: ['Arial', '-apple-system', 'BlinkMacSystemFont', 'serif']
       },
       width:widthStandard,
       height:heightStandard,

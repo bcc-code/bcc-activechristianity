@@ -126,7 +126,7 @@ input:focus {
 .main-content p,
 .main-content ul,
 .main-content ol {
-    @apply font-light text-base font-serif leading-7 tracking-wide py-4;
+    @apply font-light text-base font-arial leading-7 tracking-wide py-4;
 }
 
 .main-content a {
