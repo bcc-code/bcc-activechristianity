@@ -126,11 +126,7 @@ input:focus {
 .main-content p,
 .main-content ul,
 .main-content ol {
-<<<<<<< HEAD
-    @apply font-light text-base font-arial py-4;
-=======
     @apply font-light text-base py-4;
->>>>>>> new-master-branch
 }
 
 .main-content a {
