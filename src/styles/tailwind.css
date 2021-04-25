@@ -126,7 +126,11 @@ input:focus {
 .main-content p,
 .main-content ul,
 .main-content ol {
+<<<<<<< HEAD
     @apply font-light text-base font-arial py-4;
+=======
+    @apply font-light text-base py-4;
+>>>>>>> new-master-branch
 }
 
 .main-content a {
@@ -147,7 +151,7 @@ input:focus {
 }
 
 .main-content h2 {
-    @apply font-medium text-2xl leading-normal font-semibold;
+    @apply font-medium text-2xl leading-tight font-semibold;
 }
 
 
