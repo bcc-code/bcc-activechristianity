@@ -56,4 +56,8 @@ module.exports = function generateTaxonomies(actions, graphql) {
     }
 
   })
+  .catch(err=>{
+    console.log(getGlossaryQuery)
+    console.log(err)
+  })
 }

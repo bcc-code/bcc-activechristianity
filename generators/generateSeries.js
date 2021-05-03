@@ -50,4 +50,9 @@ module.exports = function generatePlaylists(actions, graphql) {
       })
 
     })
+    .catch(err=>{
+      console.log(query)
+      console.log(err)
+    })
+    
   }

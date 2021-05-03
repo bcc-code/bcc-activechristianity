@@ -161,6 +161,10 @@ module.exports = function generatePages(actions, graphql) {
           breadcrumb:[]
         },
       })
+      .catch(err=>{
+        console.log(query)
+        console.log(err)
+      })
 
 
 

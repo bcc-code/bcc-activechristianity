@@ -242,6 +242,9 @@ module.exports = function generateTopics(actions, graphql) {
             }
           })
         }
+    }).catch(err=>{
+      console.log(query)
+      console.log(err)
     })
 
 }

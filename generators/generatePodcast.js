@@ -109,6 +109,10 @@ module.exports = function generatePages(actions, graphql) {
 
     }
   })
+  .catch(err=>{
+    console.log(query)
+    console.log(err)
+  })
 
   
 

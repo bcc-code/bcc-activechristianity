@@ -413,6 +413,10 @@ module.exports = async function generatePosts(actions, graphql) {
                   
                     return 
                 })
+                .catch(err=>{
+                  console.log(query)
+                  console.log(err)
+                })
 
                 return
 }

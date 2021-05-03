@@ -147,6 +147,10 @@ module.exports.createArchivePages =async function ({
           }
 
         })
+        .catch(err=>{
+          console.log(query)
+          console.log(err)
+        })
         console.log(`createArchivePages ${pagePath}`)
             createPage({
               path:pagePath,
