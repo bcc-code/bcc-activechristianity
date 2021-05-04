@@ -17,7 +17,7 @@ export const FetchTopicsB: React.FC<IFetchTopics> = ({ topics: topicSlugs, rende
         setLoading(true)
         Promise.all(topicSlugs
 
-            .map(slug => fetch(`/page-data/${pac_strings.slug_topic}/${slug}/page-data.json`)
+            .map(slug => fetch(`/page-data/${ac_strings.slug_topic}/${slug}/page-data.json`)
                 .then(res => res.json())
                 .then(topicRes => {
                     const data = topicRes.result.pageContext
