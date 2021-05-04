@@ -26,7 +26,8 @@ const query = `{
 module.exports = function generatePages(actions, graphql) {
   const { createPage } = actions
 
-  return graphql(query).then(result=>{
+  return graphql(query)
+  .then(result=>{
     console.log("Generating pages")
     if (result.errors){
       result.errors.forEach(e => console.error(e.toString()))
@@ -103,30 +104,9 @@ module.exports = function generatePages(actions, graphql) {
           }
       })
 
-     
-      // themes pages
- /*      _.each(parentIds.themes.children,page=>{
 
-        let context = {
-          ...page,
-            breadcrumb:[
-              {
-                name:page.title,
-                to:page.slug
-              }
-            ]
-        }
-        const themePath=`${ac_strings.slug_theme}/${page.slug}`
-        console.log(themePath)
-        createPage({
-          path: themePath,
-          component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
-          context,
-        })
-      }) */
 
-      
-
+    
  // pages
       _.each(parentIds.pages.children,page=>{
         const pagePath= `${page.slug}`
@@ -161,19 +141,11 @@ module.exports = function generatePages(actions, graphql) {
           breadcrumb:[]
         },
       })
-      .catch(err=>{
-        console.log(query)
-        console.log(err)
-      })
-
-
-
-
-
     }
+  }).catch(err=>{
+    console.log(query)
+    console.log(err)
   })
-
   
-
 }
 

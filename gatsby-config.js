@@ -2,7 +2,7 @@ const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
 const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
-/* const generateFeed = require('./generators/Other/generateFeed') */
+const generateFeed = require('./generators/Other/generateFeed')
 console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
@@ -13,7 +13,7 @@ require("dotenv").config({
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
 
 const checkEnvVar = require('./check_env_var')
-const generateFeed = require('./generators/Other/generateFeed')
+
 checkEnvVar()
 
 
@@ -118,6 +118,7 @@ if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
     },
   )
 }
+
 if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
   plugins.push(  {
     resolve: `gatsby-plugin-algolia-search`,
