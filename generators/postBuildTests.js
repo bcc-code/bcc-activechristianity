@@ -149,8 +149,11 @@ exports.onPostBuildTest = async ({graphql}) => {
       const testTopics=[testTopic1,testTopic2]
 
       testTopics.forEach(node=>{
-        slugsToValidateArray.push(`${ac_strings.slug_topic}/${node.slug}`,
-        `${ac_strings.slug_topic}/${node.slug}/1`)
+        if(node){
+          slugsToValidateArray.push(`${ac_strings.slug_topic}/${node.slug}`,
+          `${ac_strings.slug_topic}/${node.slug}/1`)
+        }
+
       })
 
       const slugsToValidateObject={
