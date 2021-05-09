@@ -311,39 +311,28 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </div>
                         <div>
                             {allInterestedPosts && (
-                                <LazyLoad>
-                                    <RecommendedPosts
-                                        postId={acId ? acId : id}
-                                        topics={topicPosts}
-                                        readMorePosts={allInterestedPosts}
-                                    />
+                                <RecommendedPosts
+                                    postId={acId ? acId : id}
+                                    topics={topicPosts}
+                                    readMorePosts={allInterestedPosts}
+                                />
 
-                                </LazyLoad>
                             )}
 
                             {authors && authorsPosts && (
-                                <LazyLoad>
-                                    {authorsPosts.length > 0 && authorsPosts.map(item => {
-
+                                <FetchPostsFromSlugs
+                                    layout="row"
+                                    slugs={item.posts}
+                                    render={({ posts }) => {
                                         return (
-                                            <FetchPostsFromSlugs
-                                                layout="row"
-                                                slugs={item.posts}
-                                                render={({ posts }) => {
-                                                    return (
-                                                        <Row3ColAndXScroll
-                                                            className="pt-6"
-                                                            title={`${ac_strings.more_from} ${item.name}`}
-                                                            posts={posts}
-                                                        />
-                                                    )
-                                                }}
+                                            <Row3ColAndXScroll
+                                                className="pt-6"
+                                                title={`${ac_strings.more_from} ${item.name}`}
+                                                posts={posts}
                                             />
-
-
                                         )
-                                    })}
-                                </LazyLoad>
+                                    }}
+                                />
                             )}
 
                         </div>
