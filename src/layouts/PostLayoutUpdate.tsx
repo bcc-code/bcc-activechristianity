@@ -318,22 +318,23 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
 
                             )}
-
-                            {authors && authorsPosts && (
-                                <FetchPostsFromSlugs
-                                    layout="row"
-                                    slugs={item.posts}
-                                    render={({ posts }) => {
-                                        return (
-                                            <Row3ColAndXScroll
-                                                className="pt-6"
-                                                title={`${ac_strings.more_from} ${item.name}`}
-                                                posts={posts}
-                                            />
-                                        )
-                                    }}
-                                />
-                            )}
+                            {authors && authorsPosts && authorsPosts.length > 0 && authorsPosts.map(item => {
+                                return (
+                                    <FetchPostsFromSlugs
+                                        layout="row"
+                                        slugs={item.posts}
+                                        render={({ posts }) => {
+                                            return (
+                                                <Row3ColAndXScroll
+                                                    className="pt-6"
+                                                    title={`${ac_strings.more_from} ${item.name}`}
+                                                    posts={posts}
+                                                />
+                                            )
+                                        }}
+                                    />
+                                )
+                            })}
 
                         </div>
                     </div>
