@@ -3,7 +3,7 @@
   "private": true,
   "description": "Gatsby built site for ActiveChristianity",
   "version": "2.1.1",
-  "version-updated-at": "2021-04-19",
+  "version-updated-at": "2021-05-09",
   "author": "activechristianity@gmail.com",
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
