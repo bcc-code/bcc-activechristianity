@@ -11,8 +11,10 @@ import shortid from 'shortid'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
+const Content = loadable(() => import('@/components/Content'))
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
 const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/DesktopRightBar'))
+const MobileBottomSlider = loadable(() => import('@/layout-parts/PostLayout/MobileBottomSlider'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
 
@@ -65,6 +67,7 @@ import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 
 export const PostLayout: React.FC<IPostProps> = (post) => {
+    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const {
         id,
         acId,
@@ -98,6 +101,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
     const triggeredTagger = React.useRef<null | true>(null);
+
     React.useEffect(() => {
 
 
@@ -176,7 +180,26 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
     }, [post.slug])
 
+    React.useEffect(
+        () => {
+            const handleWindowLoaded = () => {
+                console.log('The page has fully loaded');
+                setTimeout(() => {
+                    console.log('add components after window load')
+                    setIsWindowLoaded(true)
+                }, 5 * 1000)
 
+            }
+            if (document.readyState === 'complete') {
+                console.log('the page is loaded previously')
+                setIsWindowLoaded(true)
+
+            } else {
+                window.addEventListener('load', handleWindowLoaded);
+            }
+
+            return () => window.removeEventListener('load', handleWindowLoaded);
+        }, [])
     const defaultHeight = {
         "audio": 88,
         "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
@@ -184,17 +207,19 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
     }
 
     const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0)
-
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 640
     return (
         <article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
-            <ShareBookmarkTopShortCuts
-                id={id}
-                text={excerpt || title}
-                shareSlug={slug}
-                views={views}
-                likes={likes}
-                isPlayingAudio={!!isCurrentMedia.audio}
-            />
+            {isWindowLoaded === true && (
+                <ShareBookmarkTopShortCuts
+                    id={id}
+                    text={excerpt || title}
+                    shareSlug={slug}
+                    views={views}
+                    likes={likes}
+                    isPlayingAudio={!!isCurrentMedia.audio}
+                />
+            )}
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
@@ -289,18 +314,20 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 <ToggleFollowWithName {...item} />
                             ))}
                         </div>
-                        <div className="border-b pb-6">
-                            <AuthorBookmarkShareSection
-                                id={id}
-                                text={excerpt || title}
-                                shareSlug={slug}
-                                views={views}
-                                likes={likes}
-                                authors={authors}
-                                formats={format}
+                        {isWindowLoaded === true && (
+                            <div className="border-b pb-6">
+                                <AuthorBookmarkShareSection
+                                    id={id}
+                                    text={excerpt || title}
+                                    shareSlug={slug}
+                                    views={views}
+                                    likes={likes}
+                                    authors={authors}
+                                    formats={format}
 
-                            />
-                        </div>
+                                />
+                            </div>
+                        )}
                         <div>
                             {allInterestedPosts && (
                                 <RecommendedPosts
@@ -308,7 +335,6 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                     topics={topicPosts}
                                     readMorePosts={allInterestedPosts}
                                 />
-
                             )}
 
                             {authors && authorsPosts && (
@@ -343,11 +369,13 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         <p className=""><em>{ac_strings.scripture_copyright}</em></p>
                     </div>
                 </div>
-                <DesktopRightBar
-                    topicPosts={topicPosts}
-                    authorsPosts={authorsPosts}
-                    formatPosts={formatPosts}
-                />
+                {isWindowLoaded === true && !isMobile && (
+                    <DesktopRightBar
+                        topicPosts={topicPosts}
+                        authorsPosts={authorsPosts}
+                        formatPosts={formatPosts}
+                    />
+                )}
 
             </div>
 
