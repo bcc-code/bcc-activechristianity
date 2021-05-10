@@ -65,8 +65,6 @@ import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 
 export const PostLayout: React.FC<IPostProps> = (post) => {
-    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
-    const [showMobileImage, setShowMobileImage] = React.useState(false)
     const {
         id,
         acId,
@@ -230,13 +228,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         className={`fixed transition-transform background-image w-full`}
                         style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
                     >
-                        {
-                            showMobileImage === true ? (
-                                <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                            ) : (
-                                <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                            )
-                        }
+                        <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                     </div>
 
                 )}
