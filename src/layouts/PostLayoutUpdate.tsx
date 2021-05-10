@@ -67,7 +67,7 @@ import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 
 export const PostLayout: React.FC<IPostProps> = (post) => {
-    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
+
     const {
         id,
         acId,
@@ -94,8 +94,9 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         formatPosts,
         updated_at
     } = post
-
+    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
+    const [showBottomSlider, setShowBottomSlider] = React.useState(false)
     const isCurrentMedia = useSelector(currentMediaSelector)
     const isLoggedIn = useSelector(loggedInSelector)
     const contentEl = React.useRef<HTMLDivElement>(null);
@@ -221,6 +222,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 />
             )}
 
+
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
                     <VideoMediaPlayer src={media.video.src} key={shortid()} />
@@ -328,41 +330,46 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         )}
-                        <div>
-                            {allInterestedPosts && (
-                                <RecommendedPosts
-                                    postId={acId ? acId : id}
-                                    topics={topicPosts}
-                                    readMorePosts={allInterestedPosts}
-                                />
-                            )}
+                        {isWindowLoaded === true && (
+                            <div>
+                                {allInterestedPosts && (
+                                    <LazyLoad>
+                                        <RecommendedPosts
+                                            postId={acId ? acId : id}
+                                            topics={topicPosts}
+                                            readMorePosts={allInterestedPosts}
+                                        />
 
-                            {authors && authorsPosts && (
-                                <LazyLoad>
-                                    {authorsPosts.length > 0 && authorsPosts.map(item => {
+                                    </LazyLoad>
+                                )}
 
-                                        return (
-                                            <FetchPostsFromSlugs
-                                                layout="row"
-                                                slugs={item.posts}
-                                                render={({ posts }) => {
-                                                    return (
-                                                        <Row3ColAndXScroll
-                                                            className="pt-6"
-                                                            title={`${ac_strings.more_from} ${item.name}`}
-                                                            posts={posts}
-                                                        />
-                                                    )
-                                                }}
-                                            />
+                                {authors && authorsPosts && (
+                                    <LazyLoad>
+                                        {authorsPosts.length > 0 && authorsPosts.map(item => {
+
+                                            return (
+                                                <FetchPostsFromSlugs
+                                                    layout="row"
+                                                    slugs={item.posts}
+                                                    render={({ posts }) => {
+                                                        return (
+                                                            <Row3ColAndXScroll
+                                                                className="pt-6"
+                                                                title={`${ac_strings.more_from} ${item.name}`}
+                                                                posts={posts}
+                                                            />
+                                                        )
+                                                    }}
+                                                />
 
 
-                                        )
-                                    })}
-                                </LazyLoad>
-                            )}
+                                            )
+                                        })}
+                                    </LazyLoad>
+                                )}
 
-                        </div>
+                            </div>
+                        )}
                     </div>
                     <Translations translatedUrls={tranlsatedUrl || []} />
                     <div className="max-w-tablet main-content py-8 relative bg-white z-50">
