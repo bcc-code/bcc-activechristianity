@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
-
+import { motion } from 'framer-motion'
 
 export interface ISideMobile {
     isSideNavOpen: boolean
@@ -12,7 +12,9 @@ export interface ISideMobile {
 }
 const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, close, back, title, children, className }) => {
     return (
-        <div
+        <motion.div
+            initial={{ x: 20 }}
+            animate={{ x: 0, transition: { delay: 0.1 } }}
             style={{ zIndex: 700 }}
             className={`drawer-side ${isSideNavOpen ? 'drawer-side-open' : 'drawer-side-close'} drawer-side-submenu bg-ac-slate-lighter w-full h-full flex flex-col justify-between xs:w-mobile xs:left-auto xs:shadow overflow-y-scroll fixed top-0 right-0 bottom-0 `}
         >
@@ -30,7 +32,7 @@ const SideMobile: React.FC<ISideMobile> = ({ isSideNavOpen, close, back, title, 
             <div className={`flex-1 ${className ? className : ''}`}>
                 {children}
             </div>
-        </div >
+        </motion.div >
     )
 }
 

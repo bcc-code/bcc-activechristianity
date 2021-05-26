@@ -6,7 +6,7 @@ import { PostLabel } from '@/components/PostElements'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import './leftverticle.css'
-
+import { PostListItemMotion } from '@/components/Motion/StaggerChildren'
 const TopImgPost: React.FC<IPostItem> = (props) => {
     const {
         title,
@@ -17,7 +17,7 @@ const TopImgPost: React.FC<IPostItem> = (props) => {
     } = props
 
     return (
-        <div
+        <PostListItemMotion
             className={`h-full overflow-hidden left-vert w-full  rounded-xxl sm:rounded-xl border`}>
             <PostItemMediaImg
                 className="relative flex justify-end left-vert-img "
@@ -51,7 +51,7 @@ const TopImgPost: React.FC<IPostItem> = (props) => {
                     className: "flex items-stretch mb-4 text-gray-600"
                 }}
                 audioDuration />
-        </div>
+        </PostListItemMotion>
 
     )
 }

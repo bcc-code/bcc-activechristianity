@@ -5,7 +5,7 @@ import { PostLabel } from '@/components/PostElements'
 import Image2To1 from '@/components/Images/Image2To1'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import LazysizesImage from '@/components/Images/LazysizesImage'
-
+import { motion } from 'framer-motion'
 interface ITopImgPost {
     fixedImageHeight?: boolean
     noBorder?: boolean
@@ -43,7 +43,13 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
     } = props
     return (
 
-        <div className={`sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}>
+        <motion.div
+            variants={{
+                hidden: { opacity: 0, y: 20 },
+                show: { opacity: 1, y: 0 }
+            }}
+            className={`sm:hover:shadow-md flex flex-col max-w-lg text-gray-800 h-full overflow-hidden ${noBg === true ? 'bg-none' : 'bg-white '} ${noBorder !== true ? ' rounded-xxl sm:rounded-lg border ' : ''} `}
+        >
             <PostItemMediaImg
                 className={`relative w-full sm:pl-0 flex justify-end overflow-hidden ${noBorder === true ? 'rounded-lg' : 'rounded-lg rounded-b-none'}`}
                 track={media}
@@ -86,7 +92,7 @@ const TopImgPost: React.FC<IPostItem & ITopImgPost> = (props) => {
                 audioDuration
                 noBorder={noBorder}
             />
-        </div>
+        </motion.div>
 
 
     )

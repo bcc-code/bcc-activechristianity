@@ -20,6 +20,7 @@
     "@types/shortid": "0.0.29",
     "algoliasearch": "^4.4.0",
     "autoprefixer": "^10.2.1",
+    "framer-motion": "^4.1.17",
     "gatsby": "^2.30.2",
     "gatsby-plugin-advanced-sitemap": "file:gatsby-plugin-advanced-sitemap",
     "gatsby-plugin-algolia-search": "file:gatsby-plugin-algolia-search",

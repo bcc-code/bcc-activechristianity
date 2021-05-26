@@ -8,7 +8,7 @@ import SignInForm from './Signin'
 /* import ForgotPassword from '@/layout-parts/Form/ForgotPassword' */
 import ForgotPassword from './ForgotPassword'
 import GiveConsent from './GiveConsent'
-import { IRootState } from '@/state/types'
+import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
 
 const GetContent: React.FC<{ option: string }> = ({ option }) => {
 
@@ -41,10 +41,13 @@ const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
             <div
                 className="relative flex flex-col bg-white text-grey-500 rounded-lg shadow-md w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-hidden"
             >
-                <CloseButtonRound
-                    className="absolute top-0 right-0 z-10 p-2"
+                <button
+                    className="absolute top-0 right-0 z-10 p-2 text-white"
                     onClick={handleClose}
-                />
+                >
+                    <CloseIcon />
+                </button>
+
                 <GetContent option={option} />
             </div>
         </div>

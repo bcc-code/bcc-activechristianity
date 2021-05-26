@@ -6,6 +6,7 @@ import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import Pagination from '@/components/Pagination'
 import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { normalizePostRes } from '@/helpers/normalizers'
+import MotionStagger from '@/components/Motion/StaggerChildren'
 const acApiModule = import('@/util/api')
 import shortid from 'shortid'
 export interface IPostList {
@@ -116,14 +117,14 @@ const PostList: React.FC<IPostList> = (props) => {
             {loading ? (
                 <RightImgListPlaceHolder count={12} />
             ) : (
-                <div>
+                <MotionStagger>
                     {posts.map((p, k) => {
                         return (
                             <RightImgWDes key={shortid()} {...p} />
 
                         )
                     })}
-                </div>
+                </MotionStagger>
             )}
 
             <div className="flex justify-item py-4">

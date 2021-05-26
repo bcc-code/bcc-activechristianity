@@ -4,6 +4,7 @@ import { UnderlineTitleLink } from '@/components/Headers'
 import TopImgPost from '@/components/PostItemCards/TopImg'
 import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import PostRow from '@/components/List/PostRow4Col'
+import MotionStagger from '@/components/Motion/StaggerChildren'
 import './horizontal-scroll.css';
 
 interface IPostHorizontalScroll {
@@ -14,13 +15,15 @@ interface IPostHorizontalScroll {
 
 export const PostlistHorizontalSimple: React.FC<{ posts: IPostItem[] }> = ({ posts }) => {
     return (
-        <div className="scroll-snap-x-container h-full">
+        <MotionStagger
+            className="scroll-snap-x-container h-full"
+        >
             {posts.map(item => (
                 <div key={item.slug} className="scroll-snap-x-child w-10/12 min-w-10/12 ml-4 h-full">
                     <TopImgPost  {...item} />
                 </div>
             ))}
-        </div>
+        </MotionStagger>
     )
 }
 
@@ -34,7 +37,9 @@ export const PostHorizontalScrollTypes: React.FC<IPostHorizontalScroll> = ({ pos
     const PostComponent = map[postThumnailType]
     let isFeature = postThumnailType === 'ebook' || postThumnailType === 'playlist'
     return (
-        <div className="scroll-snap-x-container">
+        <MotionStagger
+            className="scroll-snap-x-container"
+        >
             {posts.map(post => (
                 <div className={`scroll-snap-x-child min-w-10/12 md:min-w-4/12 lg:min-w-3/12 ml-4 md:ml-0 md:pl-4`}>
                     <PostComponent {...post} type={postThumnailType} {...postProps} />
@@ -43,7 +48,7 @@ export const PostHorizontalScrollTypes: React.FC<IPostHorizontalScroll> = ({ pos
             <div className="min-w-4">
 
             </div>
-        </div>
+        </MotionStagger>
     )
 }
 

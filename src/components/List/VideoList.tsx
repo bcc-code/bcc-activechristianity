@@ -8,6 +8,7 @@ import VideoItem from '@/components/PostItemCards/TopImg'
 import Pagination from '@/components/Pagination'
 import { LayoutH1Wide } from '@/components/Headers'
 import { fetchLocalPostsFromSlugs } from '@/helpers/fetchLocalData'
+import MotionStagger from '@/components/Motion/StaggerChildren'
 export interface IPostList {
     title: string
     path: string
@@ -38,7 +39,7 @@ const PostList: React.FC<IPostList> = ({ title, path, paginate, posts }) => {
     return (
         <div className="standard-max-w-px" >
             <LayoutH1Wide title={title} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-4">
+            <MotionStagger className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 px-4">
                 {postList.map(post => {
                     return (
 
@@ -50,7 +51,7 @@ const PostList: React.FC<IPostList> = ({ title, path, paginate, posts }) => {
                     )
 
                 })}
-            </div>
+            </MotionStagger>
 
             {
                 paginate && (

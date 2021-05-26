@@ -9,6 +9,7 @@ import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp'
 import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements'
 import { fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
 import { DesktopFeaturedPlaceholder } from '@/components/Loader/PlaceHolders'
+import MotionAppear from '@/components/Motion/AppareY'
 const HeaderPost: React.FC<{ mixed: IPostItem[] | null }> = ({ mixed }) => {
     /* const {  muted } = palette; */
     const [post, setPost] = React.useState<null | IPostItem>(null)
@@ -28,7 +29,7 @@ const HeaderPost: React.FC<{ mixed: IPostItem[] | null }> = ({ mixed }) => {
     if (post) {
         const { format, duration, image, title, excerpt, authors, reading_time, id, slug, media } = post
         return (
-            <div className="w-full z-10 grid grid-cols-1 md:grid-cols-8 md:gap-6 lg:gap-12 relative sm:pt-16 px-4">
+            <MotionAppear className="w-full z-10 grid grid-cols-1 md:grid-cols-8 md:gap-6 lg:gap-12 relative sm:pt-16 px-4">
                 <Link to={`/${slug}`} className="md:col-start-1 md:col-end-6 relative pb-6">
 
 
@@ -84,7 +85,7 @@ const HeaderPost: React.FC<{ mixed: IPostItem[] | null }> = ({ mixed }) => {
                     </div>
 
                 </div>
-            </div>
+            </MotionAppear>
 
         )
     } else {
