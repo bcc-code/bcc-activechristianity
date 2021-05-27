@@ -8,15 +8,18 @@ interface IProps {
     error?: string
     type?: 'text' | 'password' | 'hidden' | 'email'
     required?: boolean
+    hideLabel?: boolean
 }
-const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name, required }) => {
+const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name, required, hideLabel }) => {
     const inputType = type ? type : 'text'
     return (
         <div className="my-4 w-full">
-            <label className="w-full text-sm pb-2 block font-roboto font-semibold" htmlFor={name}>
-                {label}
-                {required ? <span className="text-red-600">*</span> : ''}
-            </label>
+            {hideLabel !== true && (
+                <label className="w-full text-sm pb-2 block font-roboto font-semibold" htmlFor={name}>
+                    {label}
+                    {required ? <span className="text-red-600">*</span> : ''}
+                </label>
+            )}
             <div className={`opacity-70 w-full rounded border overflow-hidden focus:${error ? 'border-red-600' : 'border-ac-slate-light'}`}>
                 <input
                     className={`w-full block p-2 opacity-70 text-black`}

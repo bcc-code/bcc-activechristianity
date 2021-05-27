@@ -7,7 +7,7 @@ import Image2To1 from '@/components/Images/Image2To1'
 import Image1To1 from '@/components/Images/Image1to1Rounded'
 // Type
 import { IPostRes, ITopicPostItems, IPostItem, IImage } from '@/types'
-import formats from '@/strings/topic-filters.json'
+/* import formats from '@/strings/topic-filters.json' */
 import Link from '@/components/CustomLink'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import { AuthorLink } from '@/components/PostElements'
@@ -387,7 +387,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
       </div>
       <div className="mx-auto standard-max-w w-full" style={{ paddingTop: "70px", paddingBottom: "70px" }}>
         <h2 className="text-center" style={{ fontSize: "42px", fontWeight: "bold", paddingBottom: "32px" }}>All Categories</h2>
-        <div className=" grid grid-cols-4 gap-3">
+        {/*         <div className=" grid grid-cols-4 gap-3">
           {Object.keys(formats.formatIds).map(item => {
             const format = formats.formatIds[item]
             return (
@@ -401,7 +401,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
 
             )
           })}
-        </div>
+        </div> */}
 
       </div>
     </div>
@@ -428,9 +428,9 @@ const BibleStudyItemCard: React.FC<{ image: IImage, title: string, slug: string,
         className="rounded-t-lg"
         {...item.image}
       /> : <Image2To1
-          className="rounded-t-lg"
-          image={item.image}
-        />}
+        className="rounded-t-lg"
+        image={item.image}
+      />}
       <div style={{ overflow: "hidden", padding: "25px 14px 14px 14px", backgroundColor: "#fff" }}>
         <div style={{ paddingBottom: "20px" }}>
           <div className="uppercase font-bold" style={{ fontSize: '12px', color: '#828282', paddingBottom: '5px' }}>{item.label}</div>

@@ -208,6 +208,7 @@ module.exports = async function generatePosts(actions, graphql) {
 
                   const pageInfo = result.data.allAcNodePost.pageInfo
                   const {totalCount,itemCount}=pageInfo
+                  console.log('generating ' + totalCount + 'posts')
                   const pageCount=Math.ceil(totalCount/itemCount)
                   
                   const baseUrl = `${ac_strings.slug_latest}`
@@ -226,15 +227,16 @@ module.exports = async function generatePosts(actions, graphql) {
 
                       
                       const postsForlatest = []
-                      
                       for (let k=0; k<posts.length;k++){
+                        
                         const {node}=posts[k]
                         
                         const checkId = isNumeric(node.acId)
+                        console.log(node.slug)
+                        console.log(checkId)
                         if(checkId){
                           const normalized = normalizePostRes(node)
                           postsForlatest.push(normalized)
-
                           const {langs}=node
                           const tranlsatedUrl = normalizeAvailableLanguages(langs, false)
                           let readMorePosts = node.readMorePosts
@@ -373,11 +375,12 @@ module.exports = async function generatePosts(actions, graphql) {
                                 pageType:'post'
                               }
                               if (process.env.SUPER_SLIM_DEV_MODE==="true"){
-                                console.log(normalized.slug)
+                                
                               }
 /*                               console.log(normalized.slug)
                               console.log(data.mediaTypes.types) */
                               const pagePathPost=`${normalized.slug}`
+                              console.log('generate post ' + pagePathPost)
                               createPage({
                                 path: pagePathPost,
                                 component: path.resolve(template),
@@ -388,6 +391,9 @@ module.exports = async function generatePosts(actions, graphql) {
                                 },
                               })
 
+                        } else {
+                          console.log('did generate post ' )
+                          console.log(node)
                         }   
                       }
                       const context = {
