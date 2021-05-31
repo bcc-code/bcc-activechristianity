@@ -6,7 +6,6 @@ import { initiateLogIn } from '@/state/action/authAction'
 import { InputText, InputCheckbox } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
-import { FormSubmitButton } from "@/components/Button"
 import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
 import { validateEmail } from '@/helpers/index-js'
 
@@ -54,10 +53,6 @@ const SignInForm: React.FC = () => {
         setErrors(result)
         return pass;
     }
-    const setNotShowReminder = () => {
-        setShowReminder(false)
-        localStorage.setItem(localStorageKey, "true")
-    }
 
     const handleChange = (e: any, fieldName: string) => {
         validate()
@@ -81,7 +76,6 @@ const SignInForm: React.FC = () => {
         if (validate()) {
             const { email, password, keepSignedIn } = fields
 
-            const dataLayer = (window as any).dataLayer = (window as any).dataLayer || [];
             dispatch(initiateLogIn({
                 email,
                 password,
@@ -90,9 +84,6 @@ const SignInForm: React.FC = () => {
         }
     }
 
-    const handleSigninOpionts = () => {
-        dispatch(openSignInModal("signInOptions"))
-    }
     const handleForgotPassword = () => {
         dispatch(openSignInModal("forgotPassword"))
     }
@@ -139,13 +130,13 @@ const SignInForm: React.FC = () => {
                         value={fields.keepSignedIn}
                     />
 
-                    <div className="flex justify-center">
+                    {/*                     <div className="flex justify-center">
                         <FormSubmitButton
                             disabled={false}
                             loading={loggedIn === "loading"}
                             onClick={handleSubmit}
                         />
-                    </div>
+                    </div> */}
                     <div className="text-sm flex flex-col py-4">
                         <button className="text-ac-slate-light"
 

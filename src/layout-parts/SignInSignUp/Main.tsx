@@ -6,8 +6,12 @@ import { IUser } from '@/types'
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
-import Signin from './Signin'
+import checkUser from '@/state/reducer/checkUser'
+import NewLoginForm from './NewLoginForm'
+import NewRegisterForm from './NewRegisterForm'
 import endpoints from '@/strings/static/endpoints'
+
+import './loginStyle.css'
 const acApiModule = import('@/util/api')
 const formText = {
     "signUpOptions": {
@@ -32,96 +36,80 @@ const formText = {
     }
 }
 
-const SigninSignUpModal: React.FC<{ type: 'signInOptions' | 'signUpOptions' }> = ({ type }) => {
+export const socialLoginlocalStorageKey = 'ac.signin.socialLogin'
+
+const SigninSignUpModal: React.FC<{ option: 'signInOptions' | 'signUpOptions' }> = (props) => {
+
+    const { option } = props
+
     const [reDirecting, setRedirecting] = React.useState(false)
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        checkUser()
+        checkUser(dispatch)
 
     }, [])
 
-    const checkUser = () => {
-        acApiModule.then(res => {
-            const api = res.default
-            api
-                .profile()
-                .then((res: IUser) => {
-                    if (res && res.id) {
-                        if (res.meta && res.meta.consented) {
-                            dispatch(setUser(res))
-                            dispatch(getUserLibrary())
-                            dispatch(closeSignInModal())
-                        } else {
-                            dispatch(openSignInModal("giveConsent"))
-                        }
-                    } else {
-                        dispatch(setLogout())
-                    }
-                })
-                .catch((err: any) => {
-                    console.log(err)
-                    dispatch(setLogout())
-                    console.log('handle login error')
-                })
-        })
+
+
+
+    const handleTabClick = (current: 'signUpOptions' | 'signInOptions') => {
+        if (option !== current) {
+            dispatch(openSignInModal(current))
+        }
 
     }
 
-
-    const toggleOptions = () => {
-        const next = type === 'signInOptions' ? 'signUpOptions' : 'signInOptions'
-        dispatch(openSignInModal(next))
-    }
-    const text = formText[type]
-    const handleClick = () => dispatch(openSignInModal(type === "signInOptions" ? "signInForm" : "signUpForm"))
-
-    const handleFacebookClick = () => {
+    const handleRedirect = (platform: string) => {
+        localStorage.setItem(localStorageKey, "true")
         setRedirecting(true)
-        window.location.href = endpoints.facebook_login_redirect
+        window.location.href = endpoints[`${platform}_login_redirect`]
     }
-    return (
-        <div className="flex flex-col items-center text-center overflow-scroll">
-            <div className="flex flex-col justify-center bg-ac-primary py-8 px-4 rounded-lg text-white shadow w-full">
-                <h5 className="font-semibold pb-2">{text.action}</h5>
 
-            </div>
-            <div className="flex flex-col justify-center py-4 w-full px-2">
-                {/*                 <span className="block uppercase text-xs pb-4">{text.action}</span> */}
-                <button
-                    className="rounded-lg text-white mt-4 px-2 py-4"
-                    style={{ background: reDirecting ? "#8a8888" : "#3b5998" }}
-                    onClick={handleFacebookClick}
-                    onKeyDown={handleFacebookClick}
-                >
-                    {text.facebook}
-                </button>
-                <Seperator />
-                <Signin />
-            </div>
-            {/*             <div className="text-sm text-gray-500 leading-normal">
-                {text.disclaimer}
-            </div>
-            <div className="text-sm py-4 ">
-                <span>{text.optionText}</span>
-                <button
-                    className="text-blue-500 font-semibold px-2"
-                    onClick={toggleOptions}
-                    onKeyDown={toggleOptions}
-                >
-                    {text.optionButton}
-                </button>
-            </div> */}
-            {/*             <div className="flex justify-center flex-col px-2 text-sm bg-ac-slate-dark text-white py-4">
-                <div className="pb-4">
-                    <span className="leading-normal font-normal font-sans pt-6" >
-                        {ac_strings.copyright}
-                    </span>
+    const tabs = [
+        {
+            text: ac_strings.login,
+            option: "signInOptions"
+        },
+        {
+            text: ac_strings.register,
+            option: "signUpOptions"
+        },
+    ]
+    return (
+        <div className="flex flex-col items-center text-center overflow-scroll relative form-wrapper">
+            <div className="flex flex-col justify-center bg-ac-primary pt-8 px-4 rounded-t-lg text-white shadow w-full">
+                {/*                 <div className="flex justify-center pb-4">
+                    <Logo customColor="#fff" height={36} width={36} />
+                </div> */}
+                <div className="flex">
+                    {tabs.map(item => (
+                        <button
+                            className={`w-1/2 py-2 ${option == item.option ? ' font-semibold text-lg' : ''}`}
+                            onClick={() => { handleTabClick(item.option) }}
+                        >
+                            {item.text}
+                        </button>
+                    ))}
                 </div>
-                <a className="pb-4 underline" href={ac_strings.slug_privacy_policy} target="_blank">
-                    <span className="h-full font-semibold">{ac_strings.consent_read_policy}</span>
-                </a>
-            </div> */}
+            </div>
+            <>
+                <div className="relative pt-6">
+                    {['facebook', 'google'].map(platform => {
+                        return (
+                            <button key={platform} className={`social-button social-button-${platform}`} type="button" onClick={() => handleRedirect(platform)}>
+                                <div className={`social-button-icon social-button-icon-${platform}`}></div>
+                                <div className="social-button-text">Sign in with {platform}</div>
+                            </button>
+                        )
+                    })}
+                </div>
+                <div className="flex flex-col justify-center py-2 w-full px-2">
+                    <Seperator />
+                </div>
+            </>
+            {option === "signInOptions" && <NewLoginForm key="signIn" />}
+            {option === "signUpOptions" && <NewRegisterForm key="signUp" />}
         </div>
     )
 }

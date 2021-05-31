@@ -4,6 +4,7 @@ import endpoints from '@/strings/static/endpoints'
 import { IGetPostsAndTopics } from './requests'
 const baseUrl = endpoints.api_url
 const sendQuery = (query: string) => {
+
     const options = {
         method: 'POST',
         'credentials': 'include',
@@ -18,12 +19,12 @@ const sendQuery = (query: string) => {
         .then(response => response.json())
         .then(res => {
             if (res.errors) {
-                console.log(res.errors)
                 let error = ""
                 res.errors.map(e => {
+                    console.log(e)
                     error += " " + e.message
                 })
-                return Promise.reject(error)
+                throw Error(error)
             } else {
                 return res.data
             }
@@ -34,7 +35,7 @@ const sendQuery = (query: string) => {
 export default {
     login: (username: string, password: string, remember: boolean) => {
         const query = request.loginMutation(username, password, remember)
-
+        console.log('logging in')
         return sendQuery(query)
     },
     register: (email: string, password: string, remember: boolean) => {

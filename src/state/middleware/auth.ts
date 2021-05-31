@@ -18,7 +18,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             const { receivedEmail, consent } = action.payload
             acApiModule.then(res => {
                 const api = res.default
-                api.toggleNotifyAndGiveConsent(receivedEmail)
+                return api.toggleNotifyAndGiveConsent(receivedEmail)
                     .then(res => {
                         if (res.consent.success) {
                             return api.profile().then(userRes => {
@@ -48,9 +48,10 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             // fetch data from an API that may take a while to respond
             acApiModule.then(res => {
                 const api = res.default;
-                api.login(login_email, login_password, remember)
+                return api.login(login_email, login_password, remember)
                     .then((res: any) => {
                         if (res) {
+                            console.log(res)
                             const data = res.signIn
                             if (data.success && data.user) {
 
@@ -74,11 +75,13 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
                     })
                     .catch((err: any) => {
+                        console.log(typeof err)
                         const message = err[0] || err.message
-                        store.dispatch(setLogout())
+                        /* store.dispatch(setLogout()) */
                         store.dispatch(setLogInError(message))
                     })
             })
+            break
 
 
 
@@ -87,7 +90,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             next(action)
 
             const { email: register_email, password: register_password, consent: register_consent, receiveEmail: register_receive_email } = action.payload
-
+            console.log('register')
             /* const reguster_data = { register_fullname, register_email, register_password, register_remember } */
             acApiModule.then(res => {
                 const api = res.default;
@@ -103,20 +106,21 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                             }
 
                         } else {
-                            store.dispatch(setRegisterError(ac_strings.error_something_went_wrong))
+
+                            store.dispatch(setLogInError(ac_strings.error_something_went_wrong))
                         }
                     })
                     .catch((err: any) => {
                         const message = err[0] || err.message
                         store.dispatch(setLogout())
-                        store.dispatch(setRegisterError(message))
+                        store.dispatch(setLogInError(message))
                     })
             })
 
         case 'INITIATE_LOGOUT':
             acApiModule.then(res => {
                 const api = res.default;
-                api
+                return api
                     .logout()
                     .then(() => {
                         store.dispatch(setLogout())

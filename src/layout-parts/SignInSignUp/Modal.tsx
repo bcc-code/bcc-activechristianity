@@ -1,44 +1,59 @@
 import * as React from 'react'
 import { useDispatch } from "react-redux";
 import { closeSignInModal } from '@/state/action'
-import CloseButtonRound from '@/components/Button/CloseButtonRound'
 import Main from './Main'
-import SignUpForm from './Signup'
-import SignInForm from './Signin'
 /* import ForgotPassword from '@/layout-parts/Form/ForgotPassword' */
 import ForgotPassword from './ForgotPassword'
 import GiveConsent from './GiveConsent'
-import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
-
+import { CloseIcon } from '@/components/Icons/MUI/arrowIcons'
+import { motion } from 'framer-motion'
 const GetContent: React.FC<{ option: string }> = ({ option }) => {
-
     switch (option) {
-        case 'signUpOptions':
-            return <Main type='signUpOptions' />
-        case 'signInOptions':
-            return <Main type='signInOptions' />
-
-        case 'signUpForm':
-            return <SignUpForm />
-        case 'signInForm':
-            return <SignInForm />
+        case 'signUpOptions' || 'signInOptions' || 'signUpForm' || 'signInForm':
+            return <Main option={option} />
         case 'forgotPassword':
             return <ForgotPassword />
         case 'giveConsent':
             return <GiveConsent />;
         default:
-            return <Main type='signUpOptions' />
+            return <Main option={option} />
     }
 }
 const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
     const dispatch = useDispatch();
     const handleClose = () => {
+        console.log('handle close')
         dispatch(closeSignInModal())
     }
+
+    const modalEl = React.useRef<HTMLInputElement>(null);
+    const closeOnClick = (e: any) => {
+        if (modalEl && modalEl.current && !modalEl.current.contains(e.target)) {
+
+            /*  handleClose() */
+
+        }
+    }
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            document.addEventListener('click', closeOnClick);
+        }, 500)
+        return () => {
+            document.removeEventListener('click', closeOnClick);
+        }
+    }, [option])
+
+
     return (
-        <div className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center overflow-scroll" style={{ backgroundColor: `rgba(255, 255, 255, 0.8`, zIndex: 700 }}>
+        <motion.div
+
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center overflow-scroll" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 700 }}>
 
             <div
+                ref={modalEl}
                 className="relative flex flex-col bg-white text-grey-500 rounded-lg shadow-md w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-hidden"
             >
                 <button
@@ -50,7 +65,7 @@ const SigninSignUpModal: React.FC<{ option: string }> = ({ option }) => {
 
                 <GetContent option={option} />
             </div>
-        </div>
+        </motion.div>
     )
 }
 
