@@ -1,8 +1,10 @@
 import React from 'react'
-import { socialLinks } from '@/strings/generated/menus.json'
+
+import menus from '@/strings/generated/menus.json'
 import { GooglePodcastIcon, SpotifyIcon, ApplePodcastIcon } from '@/components/Icons/Podcast'
 import { YoutubeIcon } from '@/components/Icons/SocialMedia'
 import PlatformstNav from './PlatformsNav'
+const { socialLinks } = menus
 const { social_youtube, social_rss, social_itunes, social_spotify } = socialLinks
 
 const platforms = [

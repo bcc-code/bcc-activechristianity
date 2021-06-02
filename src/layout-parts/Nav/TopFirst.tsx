@@ -5,8 +5,8 @@ import ac_strings from '@/strings/ac_strings'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import UserNav from '@/layout-parts/Nav/User'
 import { LaunchIcon } from '@/components/Icons/MUI/navIcons'
-import { topLink } from '@/strings/generated/menus.json'
-
+import menus from '@/strings/generated/menus.json'
+const { topLink } = menus
 const TopDesktop: React.FC = () => {
     const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
 

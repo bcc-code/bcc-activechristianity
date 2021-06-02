@@ -1,8 +1,9 @@
 import { Reducer } from 'redux'
 import { Dispatch } from 'redux'
 import { ADD_T_URLS_Payload } from '../types'
-import { languages } from '@/strings/generated/menus.json'
-import { ITranslations, INavItem } from '@/types'
+import menus from '@/strings/generated/menus.json'
+const { languages } = menus
+import { INavItem } from '@/types'
 import { showAllLanguages } from '@/helpers/normalizers'
 
 export const homeUrls: INavItem[] = languages

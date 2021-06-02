@@ -3,7 +3,8 @@ import Link from '@/components/CustomLink'
 import HOCLoginCheck from '@/HOC/LogInCheck'
 import { HeadsetIcon, HomeIcon, ExploreIcon, DescriptionIcon, LocalOfferIcon, BookmarksIcon, PlayCircleOutlineIcon } from '@/components/Icons/MUI/navIcons'
 import { INavItem } from '@/types'
-import { mobile } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { mobile } = menus
 export interface IMenuWithIcon extends INavItem {
     icon: {
         selected: JSX.Element,

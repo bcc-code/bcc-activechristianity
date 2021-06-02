@@ -3,7 +3,8 @@ import { useLocation } from '@reach/router';
 import { getAllUrlParams } from '@/helpers/index-js'
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
-import { menusItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { menusItems } = menus
 
 // components
 

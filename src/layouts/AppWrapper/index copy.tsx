@@ -9,7 +9,7 @@ import Helmet from 'react-helmet'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
-const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index.tsx'))
+const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav'))
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
 import shortid from 'shortid'
@@ -17,7 +17,8 @@ import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 import { setIsModalOpen, openSignInModal } from '@/state/action'
-import { menusItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { menusItems } = menus;
 
 // string
 

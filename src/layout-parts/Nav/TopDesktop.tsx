@@ -3,14 +3,14 @@ import Link from '@/components/CustomLink'
 import { IDrawerNav } from '@/layouts/AppWrapper'
 import LogoFull from '@/images/ACLogo'
 import TopFirst from './TopFirst'
-import { desktop } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
 import { SearchIcon, MenuIcon } from '@/components/Icons/MUI/navIcons'
 import { INavItem } from '@/types'
 import loadable from '@loadable/component'
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav/index'))
 import BottomMobile from '@/layout-parts/Nav/BottomMobile'
 import shortid from 'shortid'
-
+const { desktop } = menus
 const TopDesktop: React.FC<{ explorePage?: INavItem }> = ({ explorePage }) => {
     const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
     const [isSideNavOpen, setSideNavOpen] = React.useState(false)

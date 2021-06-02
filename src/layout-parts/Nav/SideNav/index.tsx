@@ -12,7 +12,8 @@ import ac_strings from '@/strings/ac_strings.js'
 
 import UserMenu from './UserMenu'
 import ResourceMenu from './ResourceMenu'
-import { side, sideResource, slugUser } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { side, sideResource, slugUser } = menus
 import { loggedInSelector } from '@/state/selectors/user'
 
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
@@ -121,18 +122,18 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
 
                     </div>
                 ) : (
-                        loggedIn === "loading" ? (
-                            <div className="px-2">
-                                {ac_strings.loading}
-                            </div>
-                        ) : (
-                                <div className={`flex flex-col`}>
-                                    <SideNavItem onClick={handleSignIn}>{ac_strings.login}</SideNavItem>
-                                    <SideNavItem onClick={handleSignUp}>{ac_strings.register}</SideNavItem>
-                                </div>
+                    loggedIn === "loading" ? (
+                        <div className="px-2">
+                            {ac_strings.loading}
+                        </div>
+                    ) : (
+                        <div className={`flex flex-col`}>
+                            <SideNavItem onClick={handleSignIn}>{ac_strings.login}</SideNavItem>
+                            <SideNavItem onClick={handleSignUp}>{ac_strings.register}</SideNavItem>
+                        </div>
 
-                            )
-                    )}
+                    )
+                )}
 
             </div>
 

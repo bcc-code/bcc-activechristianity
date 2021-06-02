@@ -16,7 +16,8 @@ import shortid from 'shortid'
 import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 import { socialLoginlocalStorageKey } from '@/layout-parts/SignInSignUp/Main'
-import { menusItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { menusItems } = menus
 
 
 import './Layout.css'
