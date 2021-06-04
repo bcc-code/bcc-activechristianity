@@ -11,7 +11,7 @@ import auth from './authReducer'
 import userLibrary from './userLibrary'
 import mpHeight from './mp_height'
 import breadcrumb from './breadcrumb'
-
+import infobar from './infobar'
 export default combineReducers({
     auth,
     userLibrary,
@@ -24,5 +24,6 @@ export default combineReducers({
     isPlaying,
     currentMedia,
     mpHeight,
-    breadcrumb
+    breadcrumb,
+    infobar
 });

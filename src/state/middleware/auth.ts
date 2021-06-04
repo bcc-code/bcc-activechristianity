@@ -2,7 +2,7 @@
 import { Middleware } from 'redux'
 
 import { setUser, setLogInError, setRegisterError, setLogout } from '@/state/action/authAction'
-import { closeSignInModal, openSignInModal } from '@/state/action'
+import { closeSignInModal, openSignInModal, openInfo } from '@/state/action'
 import { getUserLibrary } from '@/state/action/userAction'
 import { IRootState } from '@/state/types'
 import ac_strings from '@/strings/ac_strings.js'
@@ -51,17 +51,17 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                 return api.login(login_email, login_password, remember)
                     .then((res: any) => {
                         if (res) {
-                            console.log(res)
                             const data = res.signIn
                             if (data.success && data.user) {
 
                                 if (data.user.meta && data.user.meta.consented) {
                                     store.dispatch(setUser(data.user))
+                                    store.dispatch(openInfo({ text: "You logged in!" }))
                                     store.dispatch(closeSignInModal())
                                     store.dispatch(setLogInError(''))
                                 } else {
-                                    store.dispatch(setLogInError(''))
                                     store.dispatch(openSignInModal("giveConsent"))
+                                    store.dispatch(setLogInError(''))
                                 }
 
                             } else {
@@ -122,8 +122,9 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                 const api = res.default;
                 return api
                     .logout()
-                    .then(() => {
+                    .then((res) => {
                         store.dispatch(setLogout())
+                        store.dispatch(openInfo({ text: "You logged out!" }))
                     })
                     .catch((err: any) => {
                         console.log(err)

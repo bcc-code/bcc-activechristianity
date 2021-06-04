@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
 import { SideNavItem } from '@/components/Button'
+import { confirm } from '@/components/Confirm'
 import { openSignInModal } from '@/state/action'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
@@ -36,12 +37,9 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
         closeUserMenu()
 
     }
-    const handleLogout = () => {
-        const r = confirm("You are logging out now");
-        if (r == true) {
-            closeUserMenu()
+    const handleLogout = async () => {
+        if (await confirm("Are your sure?")) {
             dispatch(initiateLogout())
-
         }
     }
 

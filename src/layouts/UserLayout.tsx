@@ -2,6 +2,7 @@ import React from 'react'
 import StickyBox from "react-sticky-box";
 import ac_strings from '@/strings/ac_strings.js'
 import { useDispatch } from 'react-redux'
+import { confirm } from '@/components/Confirm'
 import { initiateLogout } from '@/state/action/authAction'
 import { INavItem } from '@/types'
 import { SideNavItem } from '@/components/Button'
@@ -25,13 +26,10 @@ const AccountLayout: React.FC<{ pathname: string, userLinks: INavItem[] }> = ({ 
         }
     }, [pathname])
 
-    const handleLogout = () => {
-        const r = confirm("You are logging out now");
-        if (r == true) {
+    const handleLogout = async () => {
+        if (await confirm("Are your sure?")) {
             dispatch(initiateLogout())
         }
-
-
     }
 
     const title = ac_strings.title_user

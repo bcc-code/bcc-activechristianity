@@ -1,5 +1,5 @@
 import { Dispatch, Action } from 'redux'
-import { ITrack, IUser, IMedia, ITrackType, INavItem, ITranslations, IApiItem, IBreadcrumb } from '@/types'
+import { ITrack, IUser, IMedia, ITrackType, INavItem, ITranslations, IApiItem, IBreadcrumb, IInfobar } from '@/types'
 
 
 export interface StateAction extends Action {
@@ -12,7 +12,6 @@ export interface IRootState {
   translatedUrls: ITranslationNavItem[]
   playlist: IMedia[]
   isAutoPlay: boolean,
-
   isSignInModalOpen: ISignInModalContentType
   isModalOpen: boolean
   mpPlayPause: boolean
@@ -21,6 +20,7 @@ export interface IRootState {
   isPlaying: boolean,
   mpHeight: number
   breadcrumb: IBreadcrumb
+  infobar: null | IInfobar
 }
 
 export interface IUserLibrary {
@@ -49,3 +49,4 @@ export interface SET_SCREEN_SIZE_Payload {
   width: number,
   height: number
 }
+

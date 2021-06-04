@@ -12,7 +12,7 @@ import Breadcrumb from './Breadcrumb'
 import checkUser from '@/state/reducer/checkUser'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 import shortid from 'shortid'
-
+import Infobar from '@/layouts/AppWrapper/Infobar'
 import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 import { socialLoginlocalStorageKey } from '@/layout-parts/SignInSignUp/Main'
@@ -41,14 +41,12 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
         if (loggedIn === "true" || redirectedFromSocialPlatform === "true") {
             checkUser(dispatch)
         }
-
     }, [])
-
-
 
 
     return (
         <>
+            <Infobar key={shortid()} showDuration={7000} />
             <CookieConsent key={shortid()} />
             <SignInSignUpModal key={shortid()} />
             <MediaPlayer key={shortid()} />

@@ -3,7 +3,7 @@ import loadable from '@loadable/component'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import { menusItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
 import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
 const TopImgHorizontalScroll = loadable(() => import('@/components/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
@@ -18,6 +18,8 @@ import { IPostItem, ISubtopicLinks, IRecommendationPage } from '@/types'
 import { getRandomFeatured } from '@/helpers/normalizers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
+
+const { menusItems } = menus;
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 

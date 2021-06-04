@@ -499,3 +499,8 @@ export interface IPostProps extends IPostItem {
     credits?: string
     seoTitle: string
 }
+
+export interface IInfobar {
+    text: string
+    error?: boolean
+}

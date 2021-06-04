@@ -1,7 +1,7 @@
 
 import { Action } from 'redux'
-import { ADD_T_URLS_Payload, ISignInModalContentType } from '../types'
-import { IMedia, IBreadcrumb } from '@/types'
+import { ADD_T_URLS_Payload, ISignInModalContentType, } from '../types'
+import { IMedia, IBreadcrumb, IInfobar } from '@/types'
 
 interface ILogin {
   email: string
@@ -74,4 +74,13 @@ export const setAutoPlay = (payload: boolean) => ({
 
 export const removeTracks = () => ({
   type: 'REMOVE_TRACKS'
+})
+
+export const openInfo = (payload: IInfobar) => ({
+  type: 'OPEN_INFO_BAR',
+  payload
+})
+
+export const closeInfo = () => ({
+  type: 'CLOSE_INFO_BAR'
 })

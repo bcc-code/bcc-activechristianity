@@ -1,9 +1,6 @@
 import * as React from 'react'
 import { useDispatch } from "react-redux";
-import { openSignInModal, closeSignInModal } from '@/state/action'
-import { getUserLibrary } from '@/state/action/userAction'
-import { IUser } from '@/types'
-import { setLogout, setUser, } from '@/state/action/authAction'
+import { openSignInModal } from '@/state/action'
 import { Seperator } from '@/layout-parts/SignInSignUp/Seperator'
 import ac_strings from '@/strings/ac_strings.js'
 import checkUser from '@/state/reducer/checkUser'
@@ -12,29 +9,7 @@ import NewRegisterForm from './NewRegisterForm'
 import endpoints from '@/strings/static/endpoints'
 
 import './loginStyle.css'
-const acApiModule = import('@/util/api')
-const formText = {
-    "signUpOptions": {
-        "title": ac_strings.signup_title,
-        "subTitle": ac_strings.signup_sub_title,
-        "facebook": ac_strings.signup_facebook,
-        "email": ac_strings.signup_email,
-        "optionText": ac_strings.signup_option_text,
-        "optionButton": ac_strings.signup_option_button,
-        "disclaimer": ac_strings.consent_register,
-        "action": ac_strings.signup_action
-    },
-    "signInOptions": {
-        "title": ac_strings.signin_title,
-        "subTitle": ac_strings.signin_sub_title,
-        "facebook": ac_strings.signin_facebook,
-        "email": ac_strings.signin_email,
-        "optionText": ac_strings.signin_option_text,
-        "optionButton": ac_strings.signin_option_button,
-        "disclaimer": ac_strings.consent_register,
-        "action": ac_strings.signin_action
-    }
-}
+
 
 export const socialLoginlocalStorageKey = 'ac.signin.socialLogin'
 
@@ -42,7 +17,7 @@ const SigninSignUpModal: React.FC<{ option: 'signInOptions' | 'signUpOptions' }>
 
     const { option } = props
 
-    const [reDirecting, setRedirecting] = React.useState(false)
+    const [redirecting, setRedirecting] = React.useState(false)
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -61,9 +36,11 @@ const SigninSignUpModal: React.FC<{ option: 'signInOptions' | 'signUpOptions' }>
     }
 
     const handleRedirect = (platform: string) => {
-        localStorage.setItem(localStorageKey, "true")
+        localStorage.setItem(socialLoginlocalStorageKey, "true")
         setRedirecting(true)
-        window.location.href = endpoints[`${platform}_login_redirect`]
+        setTimeout(() => {
+            window.location.href = endpoints[`${platform}_login_redirect`]
+        }, 100)
     }
 
     const tabs = [
@@ -95,14 +72,22 @@ const SigninSignUpModal: React.FC<{ option: 'signInOptions' | 'signUpOptions' }>
             </div>
             <>
                 <div className="relative pt-6">
-                    {['facebook', 'google'].map(platform => {
-                        return (
-                            <button key={platform} className={`social-button social-button-${platform}`} type="button" onClick={() => handleRedirect(platform)}>
-                                <div className={`social-button-icon social-button-icon-${platform}`}></div>
-                                <div className="social-button-text">Sign in with {platform}</div>
-                            </button>
-                        )
-                    })}
+                    {redirecting ? (
+                        <div className="text-gray-600 text-sm text-center">
+                            Redirecting ...
+                        </div>
+                    ) : (
+                        <>
+                            {['facebook', 'google'].map(platform => {
+                                return (
+                                    <button key={platform} className={`social-button social-button-${platform}`} type="button" onClick={() => handleRedirect(platform)}>
+                                        <div className={`social-button-icon social-button-icon-${platform}`}></div>
+                                        <div className="social-button-text">Sign in with {platform}</div>
+                                    </button>
+                                )
+                            })}
+                        </>
+                    )}
                 </div>
                 <div className="flex flex-col justify-center py-2 w-full px-2">
                     <Seperator />
