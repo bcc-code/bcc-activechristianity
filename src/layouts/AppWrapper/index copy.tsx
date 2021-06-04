@@ -16,7 +16,7 @@ import shortid from 'shortid'
 import { useDispatch } from "react-redux"
 import { setLogout, setUser, } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
-import { setIsModalOpen, openSignInModal } from '@/state/action'
+import { openSignInModal } from '@/state/action'
 import menus from '@/strings/generated/menus.json'
 const { menusItems } = menus;
 
@@ -73,7 +73,6 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
     const handleSideNavOpen = (status: boolean) => {
         setSideNavOpen(status)
-        dispatch(setIsModalOpen(status))
     }
 
 

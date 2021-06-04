@@ -1,9 +1,6 @@
 import React from 'react'
 import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
 import { MenuIcon } from '@/components/Icons/MUI/navIcons'
-import { useDispatch } from 'react-redux'
-import { setIsModalOpen } from '@/state/action'
-
 import "./leftSidebarLayout.css"
 import { INavItem } from '@/types';
 
@@ -18,7 +15,6 @@ interface IProps {
     parent?: INavItem
 }
 const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIcon }) => {
-    const dispatch = useDispatch()
     const [openMobileNav, setOpenMobileNav] = React.useState(false)
 
     React.useEffect(() => {
@@ -28,11 +24,9 @@ const ScrollSectionLayout: React.FC<IProps> = ({ title, sidebar, content, menuIc
     }, [])
     const closeMobileNav = () => {
         setOpenMobileNav(false)
-        dispatch(setIsModalOpen(false))
     }
     const toggleNav = () => {
         setOpenMobileNav(!openMobileNav)
-        dispatch(setIsModalOpen(!openMobileNav))
     }
     return (
         <div className="relative mt-12 flex items-start ">

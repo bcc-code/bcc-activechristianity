@@ -26,7 +26,6 @@ import './Layout.css'
 export interface IDrawerNav {
     isSideNavOpen: boolean
     setSideNavOpen: (status: boolean) => void
-    isModalOpen?: boolean
 }
 
 

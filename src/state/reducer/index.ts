@@ -6,7 +6,7 @@ import currentMedia from "./mp_currentMedia"
 import isPlaying from "./mp_isPlaying"
 import mpPlayPause from "./mp_playpause"
 import isSignInModalOpen from './signInModalOpen'
-import isModalOpen from './modalOpen'
+/* import isModalOpen from './modalOpen' */
 import auth from './authReducer'
 import userLibrary from './userLibrary'
 import mpHeight from './mp_height'
@@ -19,7 +19,6 @@ export default combineReducers({
     playlist,
     isAutoPlay,
     isSignInModalOpen,
-    isModalOpen,
     mpPlayPause,
     isPlaying,
     currentMedia,

@@ -13,7 +13,6 @@ export interface IRootState {
   playlist: IMedia[]
   isAutoPlay: boolean,
   isSignInModalOpen: ISignInModalContentType
-  isModalOpen: boolean
   mpPlayPause: boolean
   userLibrary: IUserLibrary
   currentMedia: IMedia,
