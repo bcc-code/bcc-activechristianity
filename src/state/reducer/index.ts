@@ -9,7 +9,6 @@ import isSignInModalOpen from './signInModalOpen'
 /* import isModalOpen from './modalOpen' */
 import auth from './authReducer'
 import userLibrary from './userLibrary'
-import mpHeight from './mp_height'
 import breadcrumb from './breadcrumb'
 import infobar from './infobar'
 export default combineReducers({
@@ -22,7 +21,6 @@ export default combineReducers({
     mpPlayPause,
     isPlaying,
     currentMedia,
-    mpHeight,
     breadcrumb,
     infobar
 });

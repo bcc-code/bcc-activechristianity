@@ -11,6 +11,7 @@ import Breadcrumb from './Breadcrumb'
 
 import checkUser from '@/state/reducer/checkUser'
 const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
+const MediaPlayerNew = loadable(() => import('@/components/MediaPlayerNew/GlobalAudioPlayer'))
 import shortid from 'shortid'
 import Infobar from '@/layouts/AppWrapper/Infobar'
 import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
@@ -48,7 +49,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             <Infobar key={shortid()} showDuration={7000} />
             <CookieConsent key={shortid()} />
             <SignInSignUpModal key={shortid()} />
-            <MediaPlayer key={shortid()} />
+            {/* <MediaPlayer key={shortid()} /> */}
+            <MediaPlayerNew key={shortid()} />
             <TopDesktop key={shortid()} explorePage={menusItems.explore} />
 
             <div className="relative layout-children" key={shortid()}>
