@@ -21,7 +21,6 @@ export const preloadedState = {
     mpPlayPause:false,
     
     isSignInModalOpen:null,
-    isModalOpen:false,
     userLibrary:{
         bookmarkedPosts: [],
         unfinishedPosts: [],
@@ -30,7 +29,6 @@ export const preloadedState = {
         followedAuthors: [],
         historyPosts: []
     },
-    mpHeight:0,
     breadcrumb:{
         items:[],
         title:''

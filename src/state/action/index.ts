@@ -34,9 +34,6 @@ export const closeSignInModal = () => ({
   type: 'CLOSE_SIGNIN_MODAL'
 })
 
-export const fixPlayer: fixPlayer = () => ({
-  type: 'FIX_PLAYER'
-})
 
 export const togglePlayMedia: fixPlayer = () => ({
   type: 'FLOAT_PLAYER'
@@ -54,11 +51,6 @@ export const updateTranslationUrl = (payload: ADD_T_URLS_Payload) => ({
 
 export const addTracks = (payload: IMedia[]) => ({
   type: 'ADD_TRACKS',
-  payload
-})
-
-export const setMpHeight = (payload: number) => ({
-  type: 'SET_MP_HEIGHT',
   payload
 })
 

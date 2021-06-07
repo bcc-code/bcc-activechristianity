@@ -280,12 +280,6 @@ const MediaControl: React.FC<IProps> = (props) => {
                                                 className="fill-slate-light"
                                             />
                                         </button>
-                                        {/*                                         <button className="bg-ac-slate py-3 px-2 sm:py-8" >
-                                            <div onClick={handleCloseClickButton}>
-                                                <CloseIcon />
-                                            </div>
-
-                                        </button> */}
                                     </div>
                                 )}
 

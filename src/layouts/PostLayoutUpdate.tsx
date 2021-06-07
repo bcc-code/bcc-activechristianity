@@ -313,7 +313,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         {/*  <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
                         <div className="flex flex-wrap border-ac-gray py-6">
                             {topics && topics?.map(item => (
-                                <ToggleFollowWithName {...item} />
+                                <ToggleFollowWithName key={item.id} {...item} />
                             ))}
                         </div>
                         {isWindowLoaded === true && (
