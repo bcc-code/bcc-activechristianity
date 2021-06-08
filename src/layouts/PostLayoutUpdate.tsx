@@ -203,7 +203,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         }, [])
     const defaultHeight = {
         "audio": 88,
-        "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
+        "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) : 250,
         "none": typeof window !== 'undefined' ? (window.innerWidth / 2) - 30 : 135
     }
 
@@ -260,7 +260,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                 )}
             </div>
-            <div className='w-full sm:hidden relative' style={{ top: "60px", height: `${currentHeigt}px` }}>
+            <div className='w-full sm:hidden relative' style={{ top: "0px", height: `${currentHeigt}px` }}>
 
             </div>
 
