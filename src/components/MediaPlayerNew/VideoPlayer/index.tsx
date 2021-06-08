@@ -49,11 +49,12 @@ const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
     return (
         <div>
             <div
-                className={`flex justify-center bg-mp-background mp--video`}
+                className={`flex justify-center bg-black mp--video`}
 
             >
                 <ReactPlayer
                     url={src}
+                    controls={true}
                     ref={playerEl}
                     playing={playPause}
                     fullScreen={false}
@@ -62,7 +63,7 @@ const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
                     han
                 />
             </div>
-
+            {/* 
             <div className="text-mp-text flex w-full py-3 sm:py-8 mx-auto max-w-tablet items-center">
                 <PlayPauseControl
                     fullScreenInfo={false}
@@ -85,7 +86,7 @@ const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
                 <button className="px-4 flex items-center" onClick={handleClickFullscreen}>
                     <FullScreenIcon />
                 </button>
-            </div>
+            </div> */}
         </div>
     )
 }
