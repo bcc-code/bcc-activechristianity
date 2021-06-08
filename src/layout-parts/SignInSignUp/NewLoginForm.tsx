@@ -1,5 +1,6 @@
 import React from 'react';
 import * as yup from 'yup';
+import { FormSubmitButton } from "@/components/Button"
 import { openSignInModal } from '@/state/action'
 import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -110,12 +111,16 @@ function LoginForm() {
                     >
                         {ac_strings.reset_password}
                     </button>
+                    <button
+                        key="loginbutton"
+                        className="flex justify-center py-1 px-4 mb-2 mt-4  text-center text-sm rounded-full font-semibold whitespace-nowrap min-w-12 mx-4 bg-ac-slate-dark text-white" type="submit">
+                        {ac_strings.login}
+                    </button>
                 </div>
-                <button
-                    key="loginbutton"
-                    className="left-0 right-0 bottom-0  py-4 bg-blue-500 w-full text-white text-lg font-semibold" type="submit">
+                {/*                 <FormSubmitButton key="loginbutton" type="submit">
                     {ac_strings.login}
-                </button>
+                </FormSubmitButton> */}
+
             </form>
         </div>
     )
