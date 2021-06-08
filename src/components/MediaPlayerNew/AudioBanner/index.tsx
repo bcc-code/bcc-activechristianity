@@ -2,6 +2,7 @@
 import React from 'react'
 import { IMedia } from '@/types'
 import PlayMedia from '@/HOC/SetAndUpdatePlayingMedia'
+import { PlayButton, PauseButton } from '../Elements/Buttons'
 import "../style/madia-player.css"
 
 type IAllProps = {
@@ -21,31 +22,15 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration, stopScrollingTitl
             track={media}
             render={({ playing }) => {
                 return (
-                    <div className={`w-full flex mx-auto standard-max-w py-6`}>
+                    <div className={`w-full flex mx-auto sm:px-4 max-w-tablet py-6`}>
 
                         <div className="text-d4cadet-blue flex items-center text-xs mx-4 sm:ml-0">
 
-                            <svg
-                                role="button"
-                                width="36px"
-                                height="36px"
-                                viewBox="0 0 36 36"
-                                className={`border border-d4cadet-blue rounded-lg fill-current`}
-
-                            >
-                                {playing ?
-                                    <g key="pause" style={{ transformOrigin: '0% 50%' }}>
-                                        <rect x="12" y="11" width="4" height="14" />
-                                        <rect x="20" y="11" width="4" height="14" />
-                                    </g> :
-                                    <polygon
-                                        key="play"
-                                        points="14,11 26,18 14,25"
-                                        style={{ transformOrigin: '100% 50%' }}
-                                    />
-                                }
-
-                            </svg>
+                            {playing ? (
+                                <PauseButton border />
+                            ) : (
+                                <PlayButton border />
+                            )}
 
                         </div>
 

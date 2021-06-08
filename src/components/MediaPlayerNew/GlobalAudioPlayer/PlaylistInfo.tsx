@@ -14,10 +14,10 @@ interface IProps {
     handlePlaylistItemClick: (index: number) => void
     collaps: () => void
 }
-const PlaylistInfo: React.FC<IProps> = ({ track, queue, handlePlaylistItemClick, collaps, close }) => {
+const PlaylistInfo: React.FC<IProps> = ({ track, queue, handlePlaylistItemClick, collaps }) => {
 
     return (
-        <div className="flex flex-col px-4 py-2 text-ac-slate-light flex-1 max-w-tablet mx-auto">
+        <div className="flex flex-col px-4 py-2 text-ac-slate-light flex-1 max-w-tablet mx-auto w-full">
             <div className="absolute right-0 top-0 flex">
                 <div
                     className="flex justify-center items-center py-2 pr-4 uppercase text-xs"

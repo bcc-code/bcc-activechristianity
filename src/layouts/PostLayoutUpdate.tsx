@@ -9,8 +9,8 @@ import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import shortid from 'shortid'
 /* const AudioPlayer */
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
-const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
+import AudioMediaPlayer from '@/components/MediaPlayerNew/AudioBanner'
+const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayerNew/VideoPlayer'))
 const Content = loadable(() => import('@/components/Content'))
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
 const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/DesktopRightBar'))

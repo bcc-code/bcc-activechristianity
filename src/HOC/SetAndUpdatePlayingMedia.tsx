@@ -1,9 +1,9 @@
 import React from 'react'
+import { isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 import { setCurrentMedia, setAutoPlay, addTracks, togglePlayMedia } from '@/state/action'
 import { IMedia } from '@/types'
 import { fetchTracksFromSlug } from '@/helpers/fetchLocalData'
 import { useDispatch, useSelector } from 'react-redux'
-import { IRootState } from '@/state/types'
 
 export interface IPlayButtonProps {
     track: IMedia
@@ -14,11 +14,11 @@ export interface IPlayButtonProps {
     render: (data: { playing: boolean }) => JSX.Element
 }
 
-import { isPlaySelector, currentMediaSelector } from '@/state/selectors/other'
+
 const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, className, style, render, clickable }) => {
     const dispatch = useDispatch()
     const currentMedia = useSelector(currentMediaSelector)
-    const isPlaying = useSelector(isPlaySelector)
+    const isPlaying = useSelector(isAutoPlaySelector)
     const setCurrent = (toAdd: IMedia) => {
         dispatch(setCurrentMedia(toAdd))
         dispatch(setAutoPlay(true))
@@ -27,7 +27,7 @@ const PlayButton: React.FC<IPlayButtonProps> = ({ track, playlistTracks, classNa
     const handleClick = () => {
         if (currentMedia.audio) {
             if (currentMedia.path === track.path) {
-                dispatch(togglePlayMedia())
+                dispatch(setAutoPlay(!isPlaying))
             } else {
                 setCurrent(track)
                 handlePlaylist()

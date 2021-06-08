@@ -1,13 +1,13 @@
 import React from 'react'
-import { PlayButton, PauseButton, PrevTrack, NextTrack, Playlist as PlaylistIcon } from '../Buttons'
+import { PrevTrack, NextTrack, Playlist as PlaylistIcon, PlayPauseControl } from '../Elements/Buttons'
 import { isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
 import ReactPlayer from 'react-player'
 import { setIsModalOpen } from '@/state/action'
 import { useSelector, useDispatch } from "react-redux";
 import { setAutoPlay } from '@/state/action'
 import { ITrack } from '@/types'
-import Duration from './Duration'
-
+import DurationFormat from '../Elements/Duration'
+import Seekbar from '../Elements/Seekbar'
 
 interface IProps {
     track: ITrack
@@ -43,7 +43,6 @@ const Controller: React.FC<IProps> = ({ track, onPrevTrack, onNextTrack, fullScr
     }
 
     const handleDuration = (duration: any) => {
-        console.log('onDuration', duration)
         setDuration(duration)
     }
     const {
@@ -64,36 +63,13 @@ const Controller: React.FC<IProps> = ({ track, onPrevTrack, onNextTrack, fullScr
 
     const audioTitle = track.title
 
-    const seekBar = (
-        <div className="w-full items-center flex flex-col relative text-mp-text">
-
-            <div className="flex items-center relative flex-1 w-full pt-2 sm:py-2">
-                <progress
-                    max="100"
-                    className="mp--progress absolute my-0 mx-4 rounded"
-                    value={loaded * 100}
-                >
-                </progress>
-                <input
-                    type="range"
-                    step="any"
-                    value={played}
-                    max={0.999999}
-                    className="mp--seekbar mx-4 my-0"
-                    style={{
-                        backgroundSize: `${(played) * 100}% 100%`
-                    }}
-                    onChange={handleSeekChange}
-                />
-
-            </div>
-        </div>
-    )
-
     const playPauseControl = (
-        <div className={`flex items-center mx-4 ${fullScreenInfo ? 'py-2 sm:py-8' : ''}`}>
-            <button onClick={handlePlayPause}>{playPause ? <PauseButton border={!fullScreenInfo} /> : <PlayButton border={!fullScreenInfo} />}</button>
-        </div>
+        <PlayPauseControl
+            fullScreenInfo={fullScreenInfo}
+            playPause={playPause}
+            border={!fullScreenInfo}
+            handleClick={handlePlayPause}
+        />
     )
     return track.src ? (
         <>
@@ -111,27 +87,12 @@ const Controller: React.FC<IProps> = ({ track, onPrevTrack, onNextTrack, fullScr
                 <div className="sm:hidden ">
                     {fullScreenInfo ? (
                         <div className="w-full items-center flex flex-col relative text-mp-text">
-
-                            <div className="flex items-center relative flex-1 w-full pt-2">
-                                <progress
-                                    max="100"
-                                    className="mp--progress absolute my-0 mx-4 rounded"
-                                    value={loaded * 100}
-                                >
-                                </progress>
-                                <input
-                                    type="range"
-                                    step="any"
-                                    value={played}
-                                    max={0.999999}
-                                    className="mp--seekbar mx-4 my-0"
-                                    style={{
-                                        backgroundSize: `${(played) * 100}% 100%`
-                                    }}
-                                    onChange={handleSeekChange}
-                                />
-
-                            </div>
+                            <Seekbar
+                                className="pt-2 sm:py-2"
+                                loaded={loaded}
+                                played={played}
+                                handleSeekChange={handleSeekChange}
+                            />
                         </div>
                     ) : (
                         <div className="w-full bg-gray-300">
@@ -191,9 +152,14 @@ const Controller: React.FC<IProps> = ({ track, onPrevTrack, onNextTrack, fullScr
                                 </div>
                                 <div className="w-full hidden sm:flex items-center">
 
-                                    <Duration className="text-mini sm:text-xxs" seconds={duration * played} />
-                                    {seekBar}
-                                    <Duration className="text-mini sm:text-xxs" seconds={duration} />
+                                    <DurationFormat className="text-mini sm:text-xxs" seconds={duration * played} />
+                                    <Seekbar
+                                        className="pt-2 sm:py-2"
+                                        loaded={loaded}
+                                        played={played}
+                                        handleSeekChange={handleSeekChange}
+                                    />
+                                    <DurationFormat className="text-mini sm:text-xxs" seconds={duration} />
                                 </div>
                             </div>
                             <button className="sm:py-8 px-2 ml-4" >

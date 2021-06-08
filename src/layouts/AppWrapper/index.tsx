@@ -10,7 +10,6 @@ import LazyLoad from '@/components/LazyLoad';
 import Breadcrumb from './Breadcrumb'
 
 import checkUser from '@/state/reducer/checkUser'
-const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
 const MediaPlayerNew = loadable(() => import('@/components/MediaPlayerNew/GlobalAudioPlayer'))
 import shortid from 'shortid'
 import Infobar from '@/layouts/AppWrapper/Infobar'

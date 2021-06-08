@@ -14,8 +14,12 @@
     transition: all 1s cubic-bezier(.19, 1, .22, 1);
 }
 
-.mp--title-scrolling-animation {
-    animation: scrolling-title 15s linear infinite;
+.mp--title-scrolling-animation {}
+
+@media (max-width: 640px) {
+    .mp--title-scrolling-animation {
+        animation: scrolling-title 15s linear infinite;
+    }
 }
 
 .mp--title-scrolling {

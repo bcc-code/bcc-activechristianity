@@ -8,7 +8,7 @@ import CookieConsent from "@/layouts/AppWrapper/CookeConsent";
 import Helmet from 'react-helmet'
 import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 import TopMobile from '@/layout-parts/Nav/TopMobile'
-const MediaPlayer = loadable(() => import('@/components/MediaPlayer/AudioPlayerGlobal'))
+const MediaPlayer = loadable(() => import('@/components/MediaPlayerNew/GlobalAudioPlayer'))
 const SideNav = loadable(() => import('@/layout-parts/Nav/SideNav'))
 const SignInSignUpModal = loadable(() => import('@/layout-parts/SignInSignUp'))
 const Footer = loadable(() => import('@/layout-parts/Footer'))
