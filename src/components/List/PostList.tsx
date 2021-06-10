@@ -66,14 +66,16 @@ const PostList: React.FC<IPostList> = (props) => {
                     </div>
                 </div>
             )}
-            {fetchedPost ? (<div>
-                {posts.map((p, k) => {
-                    return (
-                        <RightImgWDes key={k} {...p} />
+            {fetchedPost ? (
+                <div>
+                    {posts.map((p, k) => {
+                        return (
+                            <RightImgWDes key={k} {...p} />
 
-                    )
-                })}
-            </div>) : <FetchPostsFromSlugs
+                        )
+                    })}
+                </div>
+            ) : <FetchPostsFromSlugs
                 slugs={posts}
                 layout="list"
                 render={({ posts: postList }) => {

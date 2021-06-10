@@ -23,12 +23,12 @@ import ac_strings from '@/strings/ac_strings.js'
 import '@/styles/react-tabs.css'
 
 
-const Listen: React.FC<IListenPageProps> = (props) => {
-    const { data, pageContext } = props
+const Podcast: React.FC<IListenPageProps> = (props) => {
+    const { data, pageContext, path } = props
     const { posts } = data.ac.topics[0]
     const postSlugList = posts.map(p => p.slug)
     const { breadcrumb } = pageContext
-    const path = pageContext.pagePath
+    const pagePath = pageContext.pagePath || path
     return (
         <div className="max-w-sm mx-auto">
             <MetaTag title={ac_strings.podcast} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={path} />
@@ -86,7 +86,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
 
                                     <UnderlineLinkViewAll
 
-                                        to={`${path}/${ac_strings.slug_latest}`}
+                                        to={`${pagePath}/${ac_strings.slug_latest}`}
                                     />
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ const Listen: React.FC<IListenPageProps> = (props) => {
     )
 }
 
-export default Listen
+export default Podcast
 
 
 export const pageQuery = graphql`

@@ -6,7 +6,7 @@ module.exports = {
     "google_login_redirect":"https://acadmin.net/social/google/redirect",
     "contact_form_api":"https://q4jq50xsab.execute-api.us-east-1.amazonaws.com/prod",
     "dummy_image_api":"https://dummyimage.com",
-    "random_image_api":"https://source.unsplash.com/random/",
+    "random_image_api":"https://source.unsplash.com/collection/1308823",
     "about_us_video":"https://www.youtube.com/embed/sAbW36EzKIc",
     "reftagger":"https://api.reftagger.com/v2/RefTagger.js",
     "api_host":"https://acadmin.net",

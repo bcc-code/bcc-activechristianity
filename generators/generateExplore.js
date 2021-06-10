@@ -2,7 +2,7 @@ const path = require('path')
 const {topicQuery} = require('gatsby-source-ac/helpers')
 const exploreTemplate='src/templates/page/explore.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
-const {groupAll, formatsIds} = require('../src/strings/static/topic-ids.js')
+const {groupAll, formatsIds, typeIds} = require('../src/strings/static/topic-ids.js')
 
 
 /* SETUP */
@@ -20,7 +20,9 @@ const query = `{
     formatTopics:topics(group_id:${groupAll.format}){
         ${topicQuery}
     }
-
+    typeTopics:topics(group_id:${groupAll.type}){
+        ${topicQuery}
+    }
     edification:topic(id:108206){
         name
         slug
@@ -67,7 +69,16 @@ module.exports = function generateTopics(actions, graphql) {
           } else {
 
                 const acData = result.data.ac
-                const {popularTopicsSlugs,featuredTopics,formatTopics,questions,songs,featuredVideos,edification} = acData
+                const {
+                    popularTopicsSlugs,
+                    featuredTopics,
+                    formatTopics,
+                    typeTopics,
+                    questions,
+                    songs,
+                    featuredVideos,
+                    edification
+                } = acData
                 const explorePage = {
                     title:ac_strings.explore,
                     slug: ac_strings.slug_explore,
@@ -83,12 +94,24 @@ module.exports = function generateTopics(actions, graphql) {
 
                 const formats = []
                 const recommendFormats = []
+                const sortTopicsMap = {
+                    types: {},
+                    formats: {}
+                }
+
                 formatTopics.forEach(f=>{
                     if (formatsIds[f.id]){
                         formats.push(f)
                         if (["animation","testimony","interview"].includes(formatsIds[f.id].keyname)){
                             recommendFormats.push(f)
                         }
+                        sortTopicsMap.formats[f.name]=true
+                    }
+                })
+
+                typeTopics.forEach(t=>{
+                    if (typeIds[t.id]){
+                        sortTopicsMap.types[t.name]=true
                     }
                 })
                 const topicsPosts=(topic)=>{
@@ -108,7 +131,8 @@ module.exports = function generateTopics(actions, graphql) {
                     popularTopics,
                     featuredTopics,
                     recommendFormats:recommendFormats,
-                    allFormats:formats
+                    allFormats:formats,
+                    sortTopicsMap
                 }
 
                 if(process.env.LANG_CODE==="en"){

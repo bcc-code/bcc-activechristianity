@@ -1,14 +1,13 @@
 import React from "react"
-import loadable from '@loadable/component'
 import LazyLoad from '@/components/LazyLoad';
 import FollowUs from '@/layout-parts/Home/FollowUs'
+import Bookshop from '@/layout-parts/Banner/BookShop'
 import { ITopic, IPostItem, ITopicPostItems } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
 
 import PostListSection from '@/layout-parts/Home/PostListSection'
 import TopicsForYouSection from '@/layout-parts/Home/Desktop/TopicsForYou'
-
-import PopularPostVertical from '@/layout-parts/PopularPosts'
+import { Button } from '@/components/Button'
 
 interface IHomeLowerSection {
     lists: ITopicPostItems[]
@@ -33,10 +32,8 @@ const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts, t
                 })}
             </div>
             <div className="col-start-3 lg:col-start-4 col-end-5 bg-gray-200 sm:bg-transparent py-6 overflow-hidden hidden sm:block">
-                <div className="hidden sm:flex">
-                    <PopularPostVertical title={ac_strings.popular_on_ac} posts={popularPosts} small />
-                </div>
                 <FollowUs />
+                <Bookshop />
             </div>
             <TopicsForYouSection featured={topicsForYou} />
         </div>

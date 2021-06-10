@@ -23,7 +23,6 @@ const GetContent: React.FC<{ option: string }> = ({ option }) => {
 const SigninSignUpModal: React.FC<{ option: string, isOpen: boolean }> = ({ option, isOpen }) => {
     const dispatch = useDispatch();
     const handleClose = () => {
-        console.log('handle close')
         dispatch(closeSignInModal())
     }
 
@@ -47,13 +46,6 @@ const SigninSignUpModal: React.FC<{ option: string, isOpen: boolean }> = ({ opti
 
 
     return (
-        /*         <motion.div
-        
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="fixed inset-0 h-screen w-screen p-2 flex justify-center items-center overflow-scroll" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 700 }}
-                    > */
         <Modal
             isOpen={isOpen}
             handleClose={handleClose}

@@ -11,7 +11,6 @@ export default (dispatch: any) => {
         api
             .profile()
             .then((res: IUser) => {
-                console.log(res)
                 if (res && res.id) {
                     if (res.meta && res.meta.consented) {
                         dispatch(setUser(res))

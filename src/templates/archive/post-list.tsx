@@ -23,8 +23,8 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         pageTitle = `${breadcrumb[breadcrumb.length - 2].name} / ${title}`
     }
 
-    const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
-
+    /*     const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
+     */
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag
@@ -34,21 +34,14 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 breadcrumb={breadcrumb}
                 path={path}
             />
-            {isPodcast && (
-                <div className={`pt-8 sm:pt-0`}>
-                    <PodcastHeader />
-                </div>
-            )}
             <div className={`px-4 pt-8 sm:pt-0`}>
 
-                {!isPodcast && <LayoutH1 title={pageTitle} />}
+                <LayoutH1 title={pageTitle} />
                 {description && (
                     <div className="w-full py-4" dangerouslySetInnerHTML={{ __html: description }} />
                 )}
                 <PostList
                     fetchedPost={fetchedPost}
-                    /*            audio={type === "listen"} */
-                    /* {...pageContext} */
                     posts={posts}
                     paginate={paginate}
                     isTopic={isTopic == true}

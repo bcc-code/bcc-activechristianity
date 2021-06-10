@@ -11,7 +11,7 @@ const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendListenD
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import { UnderlineLinkViewAll } from '@/components/Button'
 
-import { INavItem, INavItemCount, ISubtopicLinks, IPostItem, IRecommendationPage } from '@/types'
+import { INavItem, INavItemCount, ISubtopicLinks, IRecommendationPage } from '@/types'
 import { getRandomArray, getRandomFeatured } from "@/helpers/normalizers"
 // helper
 

@@ -11,6 +11,7 @@ import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/layout-parts/Home/HeaderPost'
 import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
+import Bookshop from '@/layout-parts/Banner/BookShop'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers/normalizers'
 // Type
@@ -142,6 +143,9 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                   to={ac_strings.slug_explore}
                 />
               </div>
+            </div>
+            <div className="px-4">
+              <Bookshop />
             </div>
           </div>
         </LazyLoad>

@@ -12,10 +12,7 @@ import ExploreHomeLayout from '@/layout-parts/Explore/ExploreHome'
 import { filterTopics } from '@/helpers/normalizers'
 import { Stats } from 'react-instantsearch-dom';
 import { INavItem, ITopicRes, ITopicPostSlugs } from "@/types"
-
-
 const RefinementListByTopics = loadable(() => import('@/layout-parts/Explore/ByTopics'))
-
 const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'))
 
 import localStorageHelper from '@/helpers/localStorage'
@@ -31,7 +28,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
     const [isInputFocus, setInputFocus] = React.useState(false);
     const [searchState, setSearchState] = React.useState<any>({})
 
-    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats, questions, featuredVideos, songs, edification, pagePath } = props.pageContext
+    const { popularTopics, featuredTopics, scripturePage, recommendFormats, allFormats, questions, featuredVideos, songs, edification, pagePath, sortTopicsMap } = props.pageContext
 
     const topics = filterTopics({ topics: [popularTopics, featuredTopics], returnSlugs: false })
 
@@ -139,6 +136,7 @@ const ExplorePage: React.FC<IResource> = (props) => {
                             setTaxonomyFilter={setTaxonomyFilter}
                             showMore
                             showMoreLimit={30}
+                            sortTopicsMap={sortTopicsMap}
                         />
                     </div>
                 ) : (
@@ -198,6 +196,7 @@ interface IResource {
         featuredVideos: ITopicPostSlugs
         edification: ITopicPostSlugs
         songs: ITopicPostSlugs
+        sortTopicsMap: any
         popularScriptures: {
             bookName: string
             bookId: string

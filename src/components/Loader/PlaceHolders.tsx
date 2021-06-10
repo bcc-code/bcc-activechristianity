@@ -23,18 +23,8 @@ export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, childr
 }
 
 export const ListPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
-    const customerPlaceholder = (
-        <div className="standard-max-w px-4 flex">
-
-            {[""].map((item, k) => {
-                return (
-                    <RightImgPlaceholder key={k} />
-                )
-            })}
-        </div>
-    )
     return (
-        <ReactPlaceholder type='media' rows={3} ready={!loading} color="WhiteSmoke" className="pb-4">
+        <ReactPlaceholder type='media' rows={3} ready={!loading} color="WhiteSmoke" className="pb-4 px-4">
             {children}
         </ReactPlaceholder>
         /*         <ReactPlaceholder showLoadingAnimation ready={!loading} customPlaceholder={customerPlaceholder}>
@@ -79,7 +69,7 @@ export const DesktopFeaturedPlaceholder = () => {
 
 export const TopImgPlaceholder = () => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col px-4">
             <RectShape color="WhiteSmoke" className="text-gray-300 w-full sm:my-10 min-h-48 sm:min-h-32 md:min-h-32" />
             <TextBlock color="WhiteSmoke" className="mt-4" rows={4} />
         </div>
@@ -111,7 +101,7 @@ export const RightImgListPlaceHolder: React.FC<{ count: number }> = ({ count }) 
         arr.push(0);
     }
     return (
-        <div>
+        <div className="px-4">
             {arr.map((item, i) => {
                 return (
                     <RightImgPlaceholder key={i} />

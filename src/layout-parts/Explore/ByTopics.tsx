@@ -12,12 +12,7 @@ interface IByTaxonomyProps {
     setTaxonomyFilter: (filters: string[]) => void
 }
 
-interface IRefinement {
-    key: string
-    label: string
-}
-
-interface ISortMap {
+export interface ISortTopicsMap {
     types: {
         [key: string]: { key: string, name: string }
     },
@@ -28,10 +23,7 @@ interface ISortMap {
 }
 
 const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
-    const [sortTopicsMap, setSortTopicsMap] = React.useState<ISortMap>({
-        types: {},
-        formats: {}
-    })
+
     const [showFilter, setShowFilter] = React.useState(false)
 
     const {
@@ -39,10 +31,8 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
         refine,
         currentRefinement,
         setTaxonomyFilter,
-        resource
+        sortTopicsMap
     } = props
-    // move this to buid process
-
 
     const refinedType = (item: any) => {
         refine(item.value)
@@ -62,7 +52,6 @@ const ByTaxonomy: React.FC<IByTaxonomyProps & any> = (props) => {
     const allRefinement: JSX.Element[] = []
 
     Array.isArray(topics) ? topics.map(topic => {
-
         const { label, count } = topic
         const refinementIndex = currentRefinement.findIndex((filter: string) => label === filter)
         const isRefined = refinementIndex !== -1

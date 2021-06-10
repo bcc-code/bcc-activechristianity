@@ -94,6 +94,7 @@ module.exports = function generatePages(actions, graphql) {
         path: podcast.slug,
         component: path.resolve(`src/templates/page/podcast.tsx`),
         context:{
+          pagePath:podcast.slug,
           title:podcast.title,
           id:`${formatsAll.podcast.keyId}`,
           breadcrumb:[

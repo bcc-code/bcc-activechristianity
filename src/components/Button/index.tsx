@@ -20,7 +20,14 @@ export const Button: React.FC<IButton> = ({ className, disabledClassName, enable
                 {children}
             </Link>
         )
-    } else if (onClick) {
+    } else if (href) {
+        return (
+            <a href={href} className={`block ${className}`} onClick={onClick} target="blank">
+                {children}
+            </a>
+        )
+    }
+    else if (onClick) {
         return (
             <button
                 className={`cursor-pointer ${className} ${disabled && disabledClassName ? disabledClassName : enabledClassName}`}
@@ -30,12 +37,6 @@ export const Button: React.FC<IButton> = ({ className, disabledClassName, enable
             >
                 {children}
             </button>
-        )
-    } else if (href) {
-        return (
-            <a href={href} className={`block ${className}`}>
-                {children}
-            </a>
         )
     } else {
         return (
@@ -92,13 +93,15 @@ export const FormSubmitButton: React.FC<IFormSubmitButton> = ({ disabled, onClic
         </SolidDarkBgToggleActive>
     )
 }
-export const OutlineButton: React.FC<IButtonName> = ({ name, disabled, onClick }) => {
+export const OutlineButton: React.FC<IButtonName> = ({ name, disabled, onClick, href, to, className }) => {
 
     return (
         <Button
             disabled={disabled}
+            to={to}
+            href={href}
             onClick={onClick}
-            className="border rounded-full flex justify-between items-center text-base sm:text-lg px-4 py-2"
+            className={`border rounded-full flex justify-between items-center text-base sm:text-lg px-4 py-2 font-semibold ${className ? className : ''}`}
             disabledClassName="border-ac-gray text-gray-500"
             enabledClassName="border-ac-secondary text-ac-secondary"
         >
@@ -152,12 +155,13 @@ export const SolidDarkBgToggleActive: React.FC<{ active?: boolean, className?: s
     </Button>
 )
 
-export const SideNavItem: React.FC<{ hideOnMobile?: boolean, hideOnDeskop?: boolean, next?: boolean } & IButton> = ({ onClick, children, to, hideOnMobile, hideOnDeskop, next, className }) => {
+export const SideNavItem: React.FC<{ hideOnMobile?: boolean, hideOnDeskop?: boolean, next?: boolean } & IButton> = ({ onClick, children, to, href, hideOnMobile, hideOnDeskop, next, className }) => {
     return (
         <Button
             className={`w-full py-4 font-roboto font-semibold flex justify-center relative ${hideOnDeskop ? ' sm:hidden' : ''} ${hideOnMobile ? ' hidden sm:flex' : ''} ${className ? ` ${className}` : ''}`}
             onClick={onClick}
             to={to}
+            href={href}
         >
             <span className="py-1">{children}</span>
             {next && <div className="absolute right-0 pr-4">
