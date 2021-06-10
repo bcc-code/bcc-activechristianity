@@ -1,5 +1,5 @@
 import * as React from 'react'
-import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem'
+import RenderFeaturedPost, { IPageCompTypes } from './FeaturedItem'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import Content from '@/components/Content'
 import RightImgPostItem from '@/components/PostItemCards/RightImg'
@@ -10,13 +10,16 @@ import DesktopHeaderPost from '@/layout-parts/Home/HeaderPost'
 
 import Video16to9 from '@/components/Images/Video16to9'
 const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: string }> = ({ items, slug, title }) => {
-
+    console.log(items)
     const comps: React.ReactNode[] = []
     items.map(c => {
 
         if (c.type === "text") {
 
-            comps.push(<Content content={c.data.content} />)
+            comps.push(
+                <div className="standard-max-w-px mx-auto  py-6">
+                    <Content content={c.data.content} />
+                </div>)
 
         } else if (c.type === "article_banner") {
             const post = c.data
@@ -51,10 +54,10 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
             )
         } else if (c.type === "embed") {
             comps.push(
-                <div>
+                <div className="standard-max-w-px mx-auto  py-6">
                     <Video16to9
                         src={c.data.url}
-                        className={`rounded-xxl sm:rounded-xl overflow-hidden mt-8`}
+                        className={`rounded-xxl sm:rounded-xl overflow-hidden`}
                     />
                 </div>
             )
@@ -67,12 +70,20 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
                         if (posts.length === 1) {
                             return <DesktopHeaderPost {...posts[0]} />
                         } else if (posts.length === 2) {
-                            return <PostRow2Col posts={posts} />
+                            return (
+                                <div className="standard-max-w-px mx-auto py-6">
+                                    <PostRow2Col posts={posts} />
+                                </div>
+                            )
                         } else if (posts.length === 3) {
-                            return <PostRow3Col posts={posts} />
+                            return (
+                                <div className="standard-max-w-px mx-auto py-6">
+                                    <PostRow3Col posts={posts} />
+                                </div>
+                            )
                         } else if (posts.length === 4) {
                             return (
-                                <div className="">
+                                <div className="standard-max-w-px mx-auto py-6">
                                     <div className="hidden sm:block">
                                         <PostRow4Col posts={posts} />
                                     </div>
@@ -89,7 +100,7 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
                             )
                         } else {
                             return (
-                                <div>
+                                <div className="standard-max-w-px mx-auto">
                                     {posts.map(p => {
                                         return (
                                             <RightImgPostItem {...p} />
@@ -109,9 +120,12 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
 
     return (
         <div>
+            <div className="bg-ac-slate-dark w-full text-white">
+                <h1 className="standard-max-w-px  px-4 text-3xl font-bold leading-snug mx-auto w-full pt-8">{title}</h1>
+            </div>
             {comps.map((section, k) => {
                 return (
-                    <div className={`standard-max-w-px py-6 ${k % 2 == 1 ? 'bg-ac-slate-lighter' : ''}`}>
+                    <div className={`${k % 2 == 1 ? 'bg-ac-slate-lighter' : ''}`}>
                         {section}
                     </div>
                 )

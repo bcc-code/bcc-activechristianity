@@ -1,10 +1,8 @@
 import * as React from 'react'
 import { INavItem, IImage, IEbook, IPostItem, IPlaylist, } from "@/types"
 import { fetchEbookFromSlug, fetchPlaylistFromSlug, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
-import Link from '@/components/CustomLink'
-import endpoints from '@/strings/static/endpoints'
-import DesktopHeaderPost from '@/components/PostItemCards/FeaturedPost'
-import Playlist from '@/components/ScrollSection/Playlist'
+import FeaturedBannerTop from './FeaturedBannerTop'
+import Playlist from './Playlist'
 
 export interface IPageFeaturedPost {
     type: "playlist" | "ebook" | "post"
@@ -130,24 +128,7 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = (props)
     if (loadedPost) {
         const bgImg = ''
         const darkbg = true
-        return (
-            <div style={{ backgroundImage: `url(${bgImg ? bgImg : `https://source.unsplash.com//collection/9303016/1600x800`})`, backgroundSize: "cover" }}>
-                <div className="standard-max-w" style={{ minHeight: "500px", paddingTop: "72px" }}>
-                    <div className={`px-4 w-7/12 ${darkbg ? 'text-white' : ''}`}>
-                        <span className="uppercase">{loadedPost.format && loadedPost.format[0] ? loadedPost.format[0].name : null}</span>
-                        <h2 className="text-6xl font-bold pb-12">{loadedPost.title}</h2>
-                        <p className="text-2xl pb-12">{loadedPost.excerpt}</p>
-                        <Link
-                            className="font-bold bg-white px-8 py-4 rounded-lg text-lg text-ac-slate-dark"
-                            to={loadedPost.slug}
-                        >
-                            {loadedPost.types && loadedPost.types[0] ? loadedPost.types[0].name : 'Learn more'}
-                        </Link>
-                    </div>
-                </div>
-            </div >
-        )
-        /*         return <DesktopHeaderPost {...loadedPost} videoUrl={loadedPost && loadedPost.media && loadedPost.media.video ? loadedPost.media.video.src : null} /> */
+        return <FeaturedBannerTop {...loadedPost} videoUrl={loadedPost && loadedPost.media && loadedPost.media.video ? loadedPost.media.video.src : null} />
     } else if (loadedPlaylist) {
         return <Playlist {...loadedPlaylist} />
     } else {
