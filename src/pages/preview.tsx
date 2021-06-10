@@ -1,4 +1,5 @@
-import React, { Profiler } from 'react'
+import React from 'react'
+import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router';
 /* import queryString from 'query-string'; */
 import loadable from '@loadable/component'
@@ -43,13 +44,8 @@ const Preview = () => {
     }
 
     const handleSubmitPreivewForm = () => {
-        if (selectedType?.value === "post") {
-            getPost(inputId)
-        }
-
-        if (selectedType?.value === "page") {
-            getPage(inputId)
-        }
+        let path = `/preview?id=${inputId}&type=${type}`
+        navigate(path)
     }
     const getPage = (id: string) => {
         acApiModule.then(res => {

@@ -144,9 +144,12 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 />
               </div>
             </div>
-            <div className="px-4">
-              <Bookshop />
-            </div>
+            {process.env.LANG_CODE === "en" && (
+              <div className="px-4">
+                <Bookshop />
+              </div>
+            )}
+
           </div>
         </LazyLoad>
       </div>
