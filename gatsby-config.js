@@ -169,7 +169,8 @@ if (activeEnv === 'production') {
     },
     {
       resolve:'gatsby-plugin-preact'
-    }
+    },
+    "gatsby-plugin-webpack-bundle-analyser-v2"
   )
 
   if( process.env.NO_FOLLOW==="true"){

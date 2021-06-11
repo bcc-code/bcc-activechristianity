@@ -6,10 +6,12 @@ import TopDesktop from '@/layout-parts/Nav/TopDesktop'
 
 const Footer = loadable(() => import('@/layout-parts/Footer'))
 import LazyLoad from '@/components/LazyLoad';
+import { LazyMotion, domAnimation } from "framer-motion"
 
 import Breadcrumb from './Breadcrumb'
 
 import checkUser from '@/state/reducer/checkUser'
+
 const MediaPlayerNew = loadable(() => import('@/components/MediaPlayerNew/GlobalAudioPlayer'))
 import shortid from 'shortid'
 import Infobar from '@/layouts/AppWrapper/Infobar'
@@ -44,7 +46,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
 
 
     return (
-        <>
+        < LazyMotion features={domAnimation}>
             <Infobar key={shortid()} showDuration={7000} />
             <CookieConsent key={shortid()} />
             <SignInSignUpModal key={shortid()} />
@@ -60,7 +62,7 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             <LazyLoad>
                 <Footer />
             </LazyLoad>
-        </>
+        </ LazyMotion>
 
     )
 

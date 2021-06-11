@@ -1,7 +1,7 @@
 import React from 'react'
 import { PrevTrack, NextTrack, Playlist as PlaylistIcon, PlayPauseControl } from '../Elements/Buttons'
 import { isAutoPlaySelector, currentMediaSelector } from '@/state/selectors/other'
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player/file'
 import { setIsModalOpen } from '@/state/action'
 import { useSelector, useDispatch } from "react-redux";
 import { setAutoPlay } from '@/state/action'

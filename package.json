@@ -96,5 +96,10 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "add": "^2.0.6",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.22",
+    "yarn": "^1.22.10"
   }
 }

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { closeInfo } from '@/state/action/'
 import { infobarSelector } from '@/state/selectors/other'
 import Snackbar from '@/components/Snackbar'
-import { AnimatePresence, motion } from 'framer-motion'
+import { m as motion, AnimatePresence, } from 'framer-motion'
 
 export default (props: { showDuration?: number }) => {
 

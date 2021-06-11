@@ -1,5 +1,5 @@
 import React from 'react'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 const PostRow: React.FC<any> = (props) => {
     return (
         <motion.div

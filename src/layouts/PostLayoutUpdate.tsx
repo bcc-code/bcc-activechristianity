@@ -11,10 +11,8 @@ import shortid from 'shortid'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import AudioMediaPlayer from '@/components/MediaPlayerNew/AudioBanner'
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayerNew/VideoPlayer'))
-const Content = loadable(() => import('@/components/Content'))
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
 const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/DesktopRightBar'))
-const MobileBottomSlider = loadable(() => import('@/layout-parts/PostLayout/MobileBottomSlider'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
 

@@ -5,7 +5,7 @@ import { PostLabel } from '@/components/PostElements'
 import Image2To1 from '@/components/Images/Image2To1'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 import LazysizesImage from '@/components/Images/LazysizesImage'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 interface ITopImgPost {
     fixedImageHeight?: boolean
     noBorder?: boolean

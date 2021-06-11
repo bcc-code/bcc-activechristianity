@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { KeyboardArrowLeftIcon, CloseIcon } from '@/components/Icons/MUI/arrowIcons'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 
 export interface ISideMobile {
     isSideNavOpen: boolean

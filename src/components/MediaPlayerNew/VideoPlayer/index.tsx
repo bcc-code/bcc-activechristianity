@@ -1,51 +1,9 @@
 import React from 'react'
 import { findDOMNode } from 'react-dom'
-import ReactPlayer from 'react-player'
-import { PlayPauseControl, FullScreenIcon } from '../Elements/Buttons'
-import Seekbar from '../Elements/Seekbar'
-import DurationFormat from '../Elements/Duration'
+import ReactPlayer from 'react-player/youtube'
 import screenfull from 'screenfull'
 const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
     const playerEl = React.useRef<any>(null);
-    const [playPause, setPlayPause] = React.useState(false)
-    const [duration, setDuration] = React.useState(0)
-    const [progressBarState, setProgressBarState] = React.useState(
-        {
-            playedSeconds: 0,
-            played: 0,
-            loadedSeconds: 0,
-            loaded: 0
-        }
-    )
-    const handleSeekChange = (e: any) => {
-        setProgressBarState({ ...progressBarState, played: parseFloat(e.target.value) })
-        playerEl.current.seekTo(parseFloat(e.target.value))
-    }
-    const handleProgress = (state: any) => {
-
-        // We only want to update time slider if we are not currently seeking
-        setProgressBarState(state)
-    }
-
-    const handlePlayPause = () => {
-        setPlayPause(!playPause)
-    }
-
-    const handleDuration = (duration: any) => {
-        setDuration(duration)
-    }
-
-    const handleClickFullscreen = () => {
-        if (playerEl.current) {
-            screenfull.request(findDOMNode(playerEl.current))
-        }
-
-    }
-    const {
-        played,
-        loaded
-    } = progressBarState
-
     return (
         <div>
             <div
@@ -56,11 +14,6 @@ const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
                     url={src}
                     controls={true}
                     ref={playerEl}
-                    playing={playPause}
-                    fullScreen={false}
-                    onProgress={handleProgress}
-                    onDuration={handleDuration}
-                    han
                 />
             </div>
             {/* 
