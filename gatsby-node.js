@@ -59,11 +59,12 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generatePlaylists = require('./generators/generatePlaylists')
     const generateGlossary = require('./generators/generateGlossary')
     const generateScriptures = require('./generators/generateScriptures')
-    
+    const generateWallpapers = require('./generators/generateQuoteWallpapers')
      const generators = [
       generateHome(actions, graphql),
+      generateWallpapers(actions, graphql),
       generateExplore(actions, graphql), 
-      generatePosts(actions, graphql),
+      generatePosts(actions, graphql), 
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
@@ -96,6 +97,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
         console.log("generating scriptures")
         generators.push(generateScriptures(actions, graphql)) 
       }
+
     }
 
     return Promise.all(generators)
