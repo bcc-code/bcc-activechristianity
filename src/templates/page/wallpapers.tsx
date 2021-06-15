@@ -36,7 +36,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
     const [swipeViewArray, setSwipeViewArray] = React.useState<any[]>([])
     const [isOpen, setIsOpen] = React.useState(false)
     const { quotes } = pageContext
-    const sortedQuotes = quotes
+    const sortedQuotes = quotes.filter(q => q.color !== null)
 
     const arrayData = React.useRef(sortedQuotes)
     const handleClose = () => {
@@ -225,22 +225,22 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                 </div>}
             </Modal>
             <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-                {sortedQuotes.filter(q => q.color !== null).map((q, i) => {
+                {sortedQuotes.map((q, k) => {
 
                     const { color, size, id } = q
 
                     return (
-                        <LazyLoad>
+                        <LazyLoad key={id}>
                             <StaggerChildrenItem>
                                 <FetchWallpaper
                                     id={id}
                                     render={(({ wallpaper }) => {
                                         if (wallpaper) {
-                                            updateArray(wallpaper, i)
+                                            updateArray(wallpaper, k)
                                         }
                                         return (
 
-                                            < div onClick={() => handleOpen(i)} key={id}>
+                                            < div onClick={() => handleOpen(k)} key={id}>
                                                 {wallpaper ? (
                                                     <WallPaperAllSizes
 
@@ -252,7 +252,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                                                     className="rounded-lg overflow-hidden"
                                                     style={{
                                                         backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
-                                                        paddingBottom: `${size === "square" ? 50 : 177}%`
+                                                        paddingBottom: `177%`
                                                     }}
 
                                                 >
@@ -263,22 +263,10 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                                 />
                             </StaggerChildrenItem>
                         </LazyLoad>
-                        /*                         <div className="wallpapers-layout-container-large" style={{ backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})` }}>
-                                                    <LazysizesFeaturedImage {...img} className="rounded-2xl w-full" />
-                                                </div> */
+
                     )
                 })}
             </StaggerChildren>
-            {/*                 <MetaTag
-                path={path}
-                title={title}
-                type="article"
-                translatedUrls={[]}
-                breadcrumb={[...breadcrumb, { name: title, to: path }]}
-            />
-            <PostH1 title={title} />
-            <div className="border-b w-1/6 my-8 border-ac-gray"></div>
-            <Content content={glossary.content} title={title} slug={path} /> */}
         </div>
     )
 }
