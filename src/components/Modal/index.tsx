@@ -19,7 +19,7 @@ const CustomModal: React.FC<{ handleClose: () => void, isOpen: boolean }> = ({ c
             style={{ overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: 700 } }}
         >
             <div
-                className="relative flex flex-col bg-white text-grey-500 rounded-lg shadow-md w-5/6 sm:w-3/4 md:w-mobile max-h-full overflow-hidden"
+                className="relative flex flex-col bg-white text-grey-500 rounded-lg shadow-md w-5/6 sm:w-6/12 md:w-3/12 max-h-full overflow-hidden"
             >
                 <button
                     className="absolute top-0 right-0 z-10 p-2 text-white"

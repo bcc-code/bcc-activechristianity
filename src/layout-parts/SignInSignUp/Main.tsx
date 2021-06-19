@@ -89,7 +89,7 @@ const SigninSignUpModal: React.FC<{ option: 'signInOptions' | 'signUpOptions' }>
                         </>
                     )}
                 </div>
-                <div className="flex flex-col justify-center py-2 w-full px-2">
+                <div className="flex flex-col justify-center py-2 w-full px-4">
                     <Seperator />
                 </div>
             </>

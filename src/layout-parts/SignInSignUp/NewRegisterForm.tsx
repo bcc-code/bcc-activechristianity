@@ -64,7 +64,7 @@ function RegisterForm() {
                 </div>
             )}
             <form action="" className="w-full" onSubmit={handleSubmit(onSubmit)}>
-                <div className="text-sm flex flex-col pb-4 px-4">
+                <div className="lex flex-col pb-4 px-4 text-sm">
                     <Controller
                         key="email"
                         name="email"
@@ -99,8 +99,10 @@ function RegisterForm() {
                         {ac_strings.consent_register}
                     </div>
                     <button
+                        className={`w-full sm:w-auto sm:text-base px-4 py-2 sm:py-4 mt-4 sm:px-12 rounded-lg font-semibold  ${!isValid ? 'bg-gray-400' : 'bg-blue-600 border-blue-600'} text-white text-lg  hover:bg-blue-400`}
+                        type="submit"
                         key="registerbutton"
-                        className="flex justify-center py-1 px-4 mb-2 mt-4  text-center text-sm rounded-full font-semibold whitespace-nowrap min-w-12 mx-4 bg-ac-slate-dark text-white" type="submit">
+                    >
                         {ac_strings.register}
                     </button>
                 </div>

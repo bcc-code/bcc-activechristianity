@@ -307,6 +307,12 @@ export const profileQuery = `
         consented
         notify
       }
+      subscriber {
+        email
+        locale
+        sent
+        unsubscribed_at
+      }
     }
   }
 `
@@ -445,15 +451,35 @@ export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page
 
 `
 
-
-/* getSubTopicPosts=(id1,id2) =>`{
-  ac {
-      topic(id: ${id1}) {
-          id
-          name
-          posts (hasTopics: { value: ${id2}, column: ID }){
-            ${languagePostQuery}
-          }
-        }
+export const checkUserSubscription = `
+  query GetUserAndSubscription {
+    me {
+      name
+      email
+      subscriber {
+        email
+        locale
+        sent
+        unsubscribed_at
+      }
+    }
   }
-}` */
+`
+
+export const subscribeMutation = (email: string) => `
+mutation subscribeNewOrUpdate {
+  subscribe(input: {email: "${email}"}) {
+    success
+    message
+  }
+}
+`
+
+export const unsubscribeMutation = (email: string) => `
+  mutation Unsubscribe {
+    unsubscribe(input:  {email: ${email}}) {
+      success
+      message
+    }
+  }
+`

@@ -171,5 +171,10 @@ export default {
     getPostsPerPageQueryBySubtopicId: (id: string, subTopicId: string, page: number) => {
         const query = request.getPostsPerPageBySubtopicId(id, subTopicId, page)
         return sendQuery(query)
+    },
+    subscribeNewsletter: (email: string) => {
+        const query = request.subscribeMutation(email)
+        console.log(query)
+        return sendQuery(query)
     }
 }

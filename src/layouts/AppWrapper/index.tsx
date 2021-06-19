@@ -11,7 +11,8 @@ import { LazyMotion, domAnimation } from "framer-motion"
 import Breadcrumb from './Breadcrumb'
 
 import checkUser from '@/state/reducer/checkUser'
-
+import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent copy'
+import NewsLetter from '@/layout-parts/Banner/NewsLetter'
 const MediaPlayerNew = loadable(() => import('@/components/MediaPlayerNew/GlobalAudioPlayer'))
 import shortid from 'shortid'
 import Infobar from '@/layouts/AppWrapper/Infobar'
@@ -60,6 +61,8 @@ const App: React.FC<{ pageContext: { title?: string, slug?: string } }> = (props
             </div>
 
             <LazyLoad>
+                <NewsLetter />
+                {/*                 <ExclusiveContent /> */}
                 <Footer />
             </LazyLoad>
         </ LazyMotion>

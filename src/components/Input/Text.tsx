@@ -16,16 +16,16 @@ const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name
     const [focused, setFocused] = React.useState(false)
 
     return (
-        <div className={`w-full`}>
+        <div className={`w-full sm:text-sm`}>
             {hideLabel !== true && (
-                <label className="w-full text-sm pb-2 block font-roboto font-semibold" htmlFor={name}>
+                <label className="w-full pb-2 block font-roboto font-semibold" htmlFor={name}>
                     {label}
                     {required ? <span className="text-red-600">*</span> : ''}
                 </label>
             )}
-            <div className={`opacity-70 w-full rounded border overflow-hidden input-wrap ${focused ? ' border-gray-500' : ''} ${error ? ' border-red-700' : ''}`}>
+            <div className={`w-full rounded-lg border overflow-hidden input-wrap ${focused ? ' border-gray-500' : ''} ${error ? ' border-red-700' : ''}`}>
                 <input
-                    className={`w-full block p-2 opacity-70 text-black`}
+                    className={`w-full block p-2 text-black`}
                     type={inputType}
                     value={value}
                     onChange={onChange}

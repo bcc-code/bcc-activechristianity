@@ -62,7 +62,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generateWallpapers = require('./generators/generateQuoteWallpapers')
      const generators = [
       generateHome(actions, graphql),
-      generateWallpapers(actions, graphql),
+/*       generateWallpapers(actions, graphql), */
       generateExplore(actions, graphql), 
       generatePosts(actions, graphql), 
     ]

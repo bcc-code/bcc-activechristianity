@@ -18,12 +18,12 @@ const Banner = () => {
                     </div>
                 </div>
                 <div className="flex w-full xs:w-4/12 items-center justify-center py-8">
-                    <button className="w-1/2 sm:text-base sm:w-auto py-2 sm:py-4 px-4 sm:px-12 mr-2 rounded-xxl font-semibold text-blue-600 text-lg border border-blue-600 hover:bg-blue-400 hover:text-white">
+                    <button className="w-1/2 sm:text-base sm:w-auto py-2 sm:py-4 px-4 sm:px-12 mr-2 rounded-lg font-semibold text-blue-600 text-lg border border-blue-600 hover:bg-blue-400 hover:text-white">
                         Login
-                </button>
-                    <button className="w-1/2 sm:text-base sm:w-auto py-2 sm:py-4 px-4 sm:px-12 rounded-xxl font-semibold bg-blue-600 text-white text-lg border border-blue-600 hover:bg-blue-400 ">
+                    </button>
+                    <button className="w-1/2 sm:text-base sm:w-auto py-2 sm:py-4 px-4 sm:px-12 rounded-lg font-semibold bg-blue-600 text-white text-lg border border-blue-600 hover:bg-blue-400 ">
                         Register
-                </button>
+                    </button>
                 </div>
             </div>
         </div>
