@@ -7,29 +7,12 @@ import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import StaggerChildrenItem from '@/components/Motion/StaggerChildrenItem'
 import StaggerChildren from '@/components/Motion/StaggerChildren'
 import SwipeableViews from 'react-swipeable-views';
+import Wallpaper from '@/components/QuoteImage'
 import Modal from 'react-modal';
 import { CloseIcon, KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI/arrowIcons'
 
 import { IImage } from '@/types';
 
-const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[][] }> = ({ size, image, color }) => {
-    if (size === "square") {
-        return <div
-            className="rounded-lg overflow-hidden relative"
-            style={{
-                backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
-                paddingBottom: `177%`
-            }}
-
-        >
-            <div className="inset-0 absolute flex items-center">
-                <LazysizesFeaturedImage {...image} className="w-full" />
-            </div>
-        </div>
-    } else {
-        return <LazysizesFeaturedImage {...image} className="w-full rounded-lg overflow-hidden" />
-    }
-}
 
 const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) => {
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
@@ -164,17 +147,16 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                             console.log(w)
                             const data = w.wallpaper
                             return (
-                                <WallPaperAllSizes
+                                <Wallpaper
                                     key={w.id}
                                     image={data.images[0]}
                                     size={w.size}
                                     color={w.color}
                                 />
-                                /*                                 <LazysizesFeaturedImage key={w.id}  {...data.images[0]} className="w-full rounded-lg overflow-hidden" /> */
                             )
                         })}
                     </SwipeableViews>
-                    {/* {activeWallpaper && <LazysizesFeaturedImage key={activeWallpaper.id}  {...activeWallpaper.images[0]} className="w-full rounded-lg overflow-hidden" />} */}
+
                     <div className="absolute bottom-1/2 right-0 left-0 z-10 text-white w-full flex p-2 justify-between"
                     /*             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} */
 
@@ -216,10 +198,10 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                         <div className="text-xs">
                             <button className="p-2 mr-2">
                                 share
-                        </button>
+                            </button>
                             <CustomLink className="p-2" to={`wallpaper/${swipeViewArray[activeWallpaperIndex].id}`}>
                                 Link
-                        </CustomLink>
+                            </CustomLink>
                         </div>
                     </div>
                 </div>}
@@ -242,8 +224,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
 
                                             < div onClick={() => handleOpen(k)} key={id}>
                                                 {wallpaper ? (
-                                                    <WallPaperAllSizes
-
+                                                    <Wallpaper
                                                         image={wallpaper.images[0]}
                                                         size={size}
                                                         color={color}

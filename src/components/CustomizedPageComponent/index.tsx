@@ -7,10 +7,10 @@ import PostRow2Col from '@/components/List/PostRow2Col'
 import PostRow3Col from '@/components/List/PostRow3Col'
 import PostRow4Col from '@/components/List/PostRow4Col'
 import DesktopHeaderPost from '@/layout-parts/Home/HeaderPost'
-
+import Wallpaper from '@/components/QuoteImage'
 import Video16to9 from '@/components/Images/Video16to9'
+
 const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: string }> = ({ items, slug, title }) => {
-    console.log(items)
     const comps: React.ReactNode[] = []
     items.map(c => {
 
@@ -114,6 +114,33 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[], slug: string, title: s
 
                 />
 
+            )
+        } else if (c.type === "quote_block") {
+            comps.push(
+                <div className="bg-white px-4 py-12 standard-max-w-px mx-auto ">
+                    <div className="text-center italic rounded-lg py-6 text-ac-slate-dark">
+                        <span className="leading-loose text-2xl font-bold pb-8 block">{c.data.content}</span>
+                        <span className="block">{c.data.source}</span>
+                    </div>
+                </div>
+            )
+        } else if (c.type === "gallery") {
+            comps.push(
+                (
+                    <div className="standard-max-w-px grid grid-cols-2 sm:grid-cols-4 gap-4 py-24">
+                        {c.data.map(({ image }) => {
+                            const size = image.size.height / image.size.width === 1 ? 'square' : 'landscape';
+                            const color = image.colors && image.colors[0]
+                            return (
+                                < Wallpaper
+                                    image={image}
+                                    size={size}
+                                    color={color}
+                                />
+                            )
+                        })}
+                    </div>
+                )
             )
         }
     })
