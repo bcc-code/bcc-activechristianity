@@ -56,6 +56,7 @@ const Preview = () => {
                     if (res && res.previewPage) {
                         const { flexibleContent, title, slug } = res.previewPage
                         const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
+                        console.log(componentConfig)
                         setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
                     } else {
                         setLoading(false)
@@ -63,7 +64,7 @@ const Preview = () => {
                     }
                 }).catch(err => {
                     setLoading(false)
-                    setErrorMessage(err)
+                    setErrorMessage(err.messasge)
                 })
         })
     }
@@ -138,12 +139,10 @@ const Preview = () => {
 
         }
     }, [type, id])
-    console.log(page && page.customizedPageComponents)
+
     return !loading ? (
         <main className="">
             <div className="max-w-tablet mx-auto"></div>
-
-
             {post && (<PostLayout {...post} />)}
             {page && (
                 <div>
@@ -156,7 +155,6 @@ const Preview = () => {
                             More on this topic
                         </Link>
                     </div>
-
                 </div>
             )}
             {!post && !page && (

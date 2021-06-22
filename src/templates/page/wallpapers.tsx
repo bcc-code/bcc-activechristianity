@@ -67,7 +67,6 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
     }
 
     const download = (e: any, id: number) => {
-        console.log(e.target.href)
         e.preventDefault();
         fetch(e.target.href, {
             method: "GET",
@@ -90,7 +89,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
 
     const getRandom = () => {
         const randomNumb = Math.floor(Math.random() * quotes.length)
-        console.log(randomNumb)
+
         let indexs: number[] = []
         if (randomNumb < quotes.length - 3) {
             indexs = [randomNumb, randomNumb + 1, randomNumb + 2]
