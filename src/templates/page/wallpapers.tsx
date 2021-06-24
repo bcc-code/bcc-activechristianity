@@ -3,16 +3,13 @@ import LazyLoad from '@/components/LazyLoad';
 import CustomLink from '@/components/CustomLink'
 import { PostH1 } from '@/components/Headers'
 import FetchWallpaper, { fetchWallpaperById } from '@/HOC/FetchWallpaper'
-import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
+
 import StaggerChildrenItem from '@/components/Motion/StaggerChildrenItem'
 import StaggerChildren from '@/components/Motion/StaggerChildren'
 import SwipeableViews from 'react-swipeable-views';
 import Wallpaper from '@/components/QuoteImage'
 import Modal from 'react-modal';
 import { CloseIcon, KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI/arrowIcons'
-
-import { IImage } from '@/types';
-
 
 const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) => {
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)

@@ -9,8 +9,8 @@ export const TitleWithIcon: React.FC<{ title: string | JSX.Element, icon: JSX.El
         <span> {title}</span>
     </span>
 )
-export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Element }> = ({ title, icon }) => (
-    <h1 className="font-semibold text-xl sm:text-2xl md:text-3xl py-6 flex items-center">{icon && <div className="pr-4">{icon} </div>}<div>{title}</div></h1>
+export const LayoutH1: React.FC<{ title: string | JSX.Element, icon?: JSX.Element, className?: string }> = ({ title, icon, className }) => (
+    <h1 className={`font-semibold text-xl sm:text-2xl md:text-3xl py-6 flex items-center ${className}`}>{icon && <div className="pr-4">{icon} </div>}<div>{title}</div></h1>
 )
 
 export const PostH1: React.FC<{ title: string }> = ({ title }) => (

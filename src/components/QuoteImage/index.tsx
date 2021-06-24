@@ -3,7 +3,7 @@ import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { IImage } from '@/types';
 
 
-const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[][] }> = ({ size, image, color }) => {
+const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[] }> = ({ size, image, color }) => {
     if (size === "square") {
         return (
             <div

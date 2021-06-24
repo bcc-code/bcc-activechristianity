@@ -307,12 +307,12 @@ const removeUnwantedNodes=(text)=>{
 
 const checkingLinks=(text)=>{
     const root = parse(text)
-    const links = root.querySelectorAll("a")
+/*     const links = root.querySelectorAll("a")
     if(links.length>0){
         links.forEach(node=>{
             console.log(node.rawAttrs)
         })
-    }
+    } */
     return root.toString()
 }
 
