@@ -74,7 +74,8 @@ function sortArrayByHsl(rgbArr) {
 module.exports = function generateTaxonomies(actions, graphql) {
   const { createPage } = actions
 
-  return graphql(getQuoteQuery).then((result) => {
+  return graphql(getQuoteQuery)
+  .then((result) => {
     console.log("Generating backgrounds and quotes")
     if (result.errors) {
       result.errors.forEach(e => console.error(e.toString()))
@@ -84,7 +85,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
 
     if (result.data.ac && result.data.ac.quotes){
         const allQuotes= result.data.ac.quotes
-                .filter(q=>q.images!==null && q.images[0]!==null)
+                .filter(q=>q.images && q.images[0])
                 .map(q=>{
                   return ({
                     ...q,

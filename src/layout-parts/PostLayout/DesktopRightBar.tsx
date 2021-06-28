@@ -28,7 +28,7 @@ const PostSidebarRight: React.FC<IPostProps> = ({ topicPosts, authorsPosts, form
                                 <div className="md:flex md:flex-col" key={shortid()}>
 
                                     <div className="w-full flex justify-between items-center text-sm mb-6">
-                                        <Link to={`${item.slug}`}>
+                                        <Link to={`${ac_strings.slug_topic}/${item.slug}`}>
                                             {/* <PageSectionHeaderUpperCaseGray title={ac_strings.popular_topic} /> */}
                                             <h4 className="font-roboto text-base">{item.name}</h4>
                                         </Link>
@@ -112,4 +112,4 @@ const PostSidebarRight: React.FC<IPostProps> = ({ topicPosts, authorsPosts, form
     )
 }
 
-export default PostSidebarRight 
+export default PostSidebarRight

@@ -1,68 +1,11 @@
 import * as React from "react"
-import { ITopic, ITopicPostItems } from '@/types'
+import { ITopic, ITopicPostItems, IPostItem } from '@/types'
 import { getPlaceholder } from '@/components/Loader/PlaceHolders'
-import { fetchPostsFromTopics } from '@/helpers/fetchLocalData'
+import { fetchPostsFromTopics, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
 import ac_strings from '@/strings/ac_strings.js'
 
-interface IFetchTopics {
-    topics: string[]
-    layout: "row" | "list",
-    render: (data: { topics: ITopic[] }) => JSX.Element
-}
-export const FetchTopicsB: React.FC<IFetchTopics> = ({ topics: topicSlugs, render, layout }) => {
-    const [topics, setTopics] = React.useState<ITopic[]>([])
-    const [loading, setLoading] = React.useState(true)
-    React.useEffect(() => {
 
-        setLoading(true)
-        Promise.all(topicSlugs
 
-            .map(slug => fetch(`/page-data/${ac_strings.slug_topic}/${slug}/page-data.json`)
-                .then(res => res.json())
-                .then(topicRes => {
-                    const data = topicRes.result.pageContext
-                    const topic = {
-                        id: data.id,
-                        name: data.title,
-                        slug,
-                        image: data.image
-                    }
-
-                    return topic
-                })
-                .catch(error => {
-                    console.log(slug)
-                    console.log(error.message)
-                })
-
-            ))
-            .then(res => {
-                setLoading(false)
-                const toAdd: ITopic[] = []
-                res.forEach(item => {
-                    if (item) {
-                        toAdd.push(item)
-                    }
-                })
-                setTopics(toAdd)
-            })
-            .catch(error => {
-                setLoading(false)
-                console.log(error)
-            })
-    }, [topicSlugs])
-    const CustomPlaceholder = getPlaceholder[layout]
-    return (
-        < CustomPlaceholder
-            loading={loading}
-        >
-            {render({ topics })}
-        </ CustomPlaceholder>
-    )
-
-}
-
-export const FetchTopics = React.memo(FetchTopicsB)
 interface IFetchTopicsWithPosts {
     topics: ITopic[]
     layout: "row" | "list"
@@ -103,3 +46,26 @@ export const FetchTopicPostItems: React.FC<IFetchTopicsWithPosts> = ({ topics, r
 
 }
 
+
+export const FetchAuthorPosts: React.FC<{ slug: string, render: (data: { posts: IPostItem[], loading: boolean }) => JSX.Element }> = ({ slug, render }) => {
+    const [posts, setPosts] = React.useState<IPostItem[]>([])
+    const [loading, setLoading] = React.useState(true)
+    React.useEffect(() => {
+        setLoading(true)
+        let isSubscribed = true
+        fetchPostslistFromArchivePage(`${ac_strings.slug_ac_author}/${slug}`).then(res => {
+            if (isSubscribed) {
+                setLoading(false)
+                if (res) {
+                    setPosts(res)
+                }
+            }
+        })
+    }, [])
+
+    return (
+        <div>
+            {render({ posts, loading })}
+        </div>
+    )
+}

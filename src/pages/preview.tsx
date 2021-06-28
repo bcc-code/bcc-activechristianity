@@ -56,7 +56,6 @@ const Preview = () => {
                     if (res && res.previewPage) {
                         const { flexibleContent, title, slug } = res.previewPage
                         const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent)
-                        console.log(componentConfig)
                         setPage({ title, slug, customizedPageComponents: componentConfig, breadcrumb: [] })
                     } else {
                         setLoading(false)
@@ -125,19 +124,26 @@ const Preview = () => {
         })
     }
     React.useEffect(() => {
-        if (type === "post" && typeof id === "string") {
+        let isSubscribed = true
+        if (isSubscribed) {
+            if (type === "post" && typeof id === "string") {
 
-            setPage(null)
-            getPost(id)
+                setPage(null)
+                getPost(id)
 
 
+            }
+            if (type === "page" && typeof id === "string") {
+                setPost(null)
+                setLoading(true)
+                getPage(id)
+
+            }
         }
-        if (type === "page" && typeof id === "string") {
-            setPost(null)
-            setLoading(true)
-            getPage(id)
-
+        return () => {
+            isSubscribed = false
         }
+
     }, [type, id])
 
     return !loading ? (

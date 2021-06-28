@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { closeSignInModal } from '@/state/action'
 import Main from './Main'
 import Modal from '@/components/Modal';
-/* import ForgotPassword from '@/layout-parts/Form/ForgotPassword' */
 import ForgotPassword from './ForgotPassword'
 import GiveConsent from './GiveConsent'
 

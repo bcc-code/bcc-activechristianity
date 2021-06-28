@@ -1,38 +1,34 @@
 import React from 'react'
 import { graphql } from "gatsby"
-import MetaTag from '@/components/Meta'
-import Content from '@/components/Content'
-import { PostH1 } from '@/components/Headers'
-
-
+import { IQuote } from '@/types'
+import { WallpaperModalContent } from '@/components/CustomizedPageComponent/Gallery/Modal'
 import { INavItem, IGlossary } from '@/types'
 
 const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
-    console.log(props)
+    console.log(props.data.ac.quote)
+    const wallpaper = props.data.ac.quote
+    const image = wallpaper.images && wallpaper.images[0]
+    const color = image?.colors[0]
     return (
-        <div className="relativeh-full pt-4 max-w-tablet m-auto px-4 wallpapers-layout-container ">
-            {/*                 <MetaTag
-                path={path}
-                title={title}
-                type="article"
-                translatedUrls={[]}
-                breadcrumb={[...breadcrumb, { name: title, to: path }]}
+        <div className="relativeh-full pt-4 max-w-tablet m-auto px-4 wallpapers-layout-container md:grid md:grid-cols-2">
+            <WallpaperModalContent
+                isActive={true}
+                color={color}
+                wallpaper={wallpaper}
+
             />
-            <PostH1 title={title} />
-            <div className="border-b w-1/6 my-8 border-ac-gray"></div>
-            <Content content={glossary.content} title={title} slug={path} /> */}
         </div>
     )
 }
 
 export default Wallpaper
+
 interface IQuoteWallpaperProps {
     path: string
-    pageContext: {
-        title: string
-        slug: string
-        glossary: IGlossary
-        breadcrumb: INavItem[]
+    data: {
+        ac: {
+            quote: IQuote
+        }
     }
 }
 
@@ -41,6 +37,7 @@ export const wallpaperQuery = graphql`
         ac {
             quote(id:$id){
                 author {
+                    id
                     name
                     slug
                 }
@@ -52,6 +49,14 @@ export const wallpaperQuery = graphql`
                     srcset
                     dataUri
                     colors
+                }
+                post {
+                    slug
+                }
+                topics {
+                    id
+                    name
+                    slug
                 }
             }
         }

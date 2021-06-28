@@ -63,7 +63,6 @@ const BlockWrapper: React.FC<IBlockWrapper> = ({ children, theme, h1, content })
         <MotionAppear className={`${themeColorCSS} flex flex-col items-center`} style={{ minHeight: '360px' }}>
             {h1 && <LayoutH1 className="standard-max-w-px mx-auto px-4 tablet:px-0 pb-0 w-full " title={h1} />}
             <div className={`standard-max-w-px mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full`} >
-
                 {readerBlock}
             </div>
         </MotionAppear>
@@ -155,10 +154,13 @@ export interface IQuoteBlock {
     }
 }
 
+export interface IGalleryImage extends IImage {
+    quote_id: number
+}
 export interface IGallery {
     type: "gallery"
     data: {
-        "image": IImage
+        "image": IGalleryImage
         type: "quoteimage"
     }[]
 }
