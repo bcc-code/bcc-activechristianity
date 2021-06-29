@@ -24,7 +24,6 @@ interface ISwipeViewContent {
 const mod = (index: number, max: number) => ((index % max) + max) % max
 
 const WallpaperModal: React.FC<IWallpaperModal> = ({ isOpen, handleClose, swipeViewArray, startIndex }) => {
-    console.log(startIndex)
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
     React.useEffect(() => {
         setActiveWallpaperIndex(startIndex)

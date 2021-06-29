@@ -6,12 +6,14 @@ import StaggerChildrenItem from '@/components/Motion/StaggerChildrenItem'
 import StaggerChildren from '@/components/Motion/StaggerChildren'
 import WallpaperModal from '@/components/CustomizedPageComponent/Gallery/Modal'
 import Wallpaper from '@/components/QuoteImage'
-
-
+import WallpaperFilter from '@/layout-parts/WallpaperOverview/Filter'
+import MetaTag from '@/components/Meta'
+import ac_strings from '@/strings/ac_strings'
 const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) => {
+    console.log(pageContext)
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
     const [isOpen, setIsOpen] = React.useState(false)
-    const { quotes } = pageContext
+    const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb } = pageContext
     const sortedQuotes = quotes.filter(q => q.color !== null)
     const arrayData = React.useRef(sortedQuotes)
 
@@ -61,16 +63,27 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
             setActiveWallpaperIndex(0)
         })
     }
+
+    const filterProps = { byColors, byFeaturedAuthors, byTopics, slug }
     return (
         <div className="relativeh-full pt-4 standard-max-w-px">
-            <PostH1 title={"Wallpaper"} />
+            <MetaTag
+                title={title}
+                type="page"
+                path={pagePath}
+                breadcrumb={breadcrumb}
+            />
+            <PostH1 title={title} />
             <WallpaperModal
                 swipeViewArray={arrayData.current ? arrayData.current : []}
                 startIndex={activeWallpaperIndex}
                 isOpen={isOpen}
                 handleClose={handleClose}
             />
-            <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            {isHomePage === true && (
+                <WallpaperFilter {...filterProps} />
+            )}
+            <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-12">
                 {sortedQuotes.map((q, k) => {
 
                     const { color, size, id } = q
@@ -86,7 +99,14 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                                         }
                                         return (
 
-                                            < div onClick={() => handleOpen(k)} key={id}>
+                                            < a
+                                                onClick={(e) => {
+                                                    e.preventDefault()
+                                                    handleOpen(k)
+                                                }}
+                                                key={id}
+                                                href={`wallpaper/${id}`}
+                                            >
                                                 {wallpaper ? (
                                                     <Wallpaper
                                                         image={wallpaper.images[0]}
@@ -102,7 +122,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
 
                                                 >
                                                 </div>}
-                                            </div>
+                                            </a>
                                         )
                                     })}
                                 />

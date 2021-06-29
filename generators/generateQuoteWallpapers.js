@@ -3,6 +3,7 @@ const path = require('path')
 const template = 'src/templates/single-resource/quote-wallpaper.tsx'
 const overviewTemplate = 'src/templates/page/wallpapers.tsx'
 const ac_strings=require('../src/strings/ac_strings.js')
+const sortQuotes = require('./color-sort')
 const getQuoteQuery = `
   {
     ac {
@@ -10,6 +11,7 @@ const getQuoteQuery = `
             author {
               name
               slug
+              id
             }
             id
             content
@@ -23,6 +25,11 @@ const getQuoteQuery = `
                 srcset
                 dataUri
                 colors
+            }
+            topics {
+                name
+                slug
+                id
             }
       }
  
@@ -65,7 +72,7 @@ function sortArrayByHsl(rgbArr) {
   }).map(function (data) {
       // Retrieve original RGB color
       return rgbArr[data.index];
-  });
+  }).reverse();
 
   return sortedRgbArr
 }
@@ -87,51 +94,140 @@ module.exports = function generateTaxonomies(actions, graphql) {
         const allQuotes= result.data.ac.quotes
                 .filter(q=>q.images && q.images[0])
                 .map(q=>{
+                  const image=q.images && q.images[0]
+                  const color=image.colors && image.colors[0]
+                  const size = image.size.height/image.size.width===1?'square':'landscape'
                   return ({
                     ...q,
-                    image:q.images[0]
+                    color,
+                    size,
+                    image:q.images[0],
                   })
                 })
         const sortedByColorQuotes=sortArrayByHsl(allQuotes)
         const wallpapersPage = {
-          title:'Bible verse and quote Wallpapers',
+          title:'Bible verse and quote wallpapers',
           slug:'wallpaper'
         }
 
 
         const navParentItem={name: wallpapersPage.title,to: wallpapersPage.slug}
         
+        const sortedQuotes = sortQuotes(allQuotes)
+
+        const homepageContext={
+          pagePath:wallpapersPage.slug,
+          pageType:"wallpaper",
+          byColors:sortedQuotes.byColors.map(item=>({name:item.name,slug:item.name,color:item.leadColor})),
+          byFeaturedAuthors:sortedQuotes.byFeaturedAuthors.map(item=>({name:item.name,slug:item.slug, nrOfQuotes:item.nrOfQuotes})),
+          byTopics: sortedQuotes.byTopics.map(item=>({name:item.name,slug:item.slug, nrOfQuotes:item.nrOfQuotes})),
+          quotes:sortedByColorQuotes.map(item=>{
+
+            return ({
+              id:item.id,
+              color:item.color,
+              size:item.size
+            })
+        }),
+        }
+
         createPage({
           path:wallpapersPage.slug,
           component:path.resolve(overviewTemplate),
           context: {
             pagePath:wallpapersPage.slug,
-            pageType:"wallpaper",
-            quotes:sortedByColorQuotes.map(item=>{
-              const size=item.image.size.height/item.image.size.width===1?'square':'landscape'
-              return ({
-                id:item.id,
-                color:item.image.colors && item.image.colors[0],
-                size
-              })
-          }),
+            isHomePage:true,
+            ...homepageContext,
+            ...wallpapersPage
           }
       })
+      sortedQuotes.byColors.forEach(color=>{
+        const pagePath=`${ wallpapersPage.slug}/${color.name}`
+        const {quotes, ...rest}=color
+        createPage({
+          path:pagePath,
+          component:path.resolve(overviewTemplate),
+          context: {
+              pagePath,
+              ...rest,
+                title:color.name,
+                tag:wallpapersPage.title, 
+                breadcrumb:[navParentItem, {name:color.name,to:pagePath}],
+                quotes:quotes.map(item=>{
 
-        allQuotes.forEach(quote=>{
-            const pagePath=`${ wallpapersPage.slug}/${quote.id}`
-            createPage({
-                path:pagePath,
-                component:path.resolve(template),
-                context: {
-                  pagePath,
-                  pageType:"wallpaper",
-                  quote,
-                  breadcrumb:[navParentItem],
-                  id:quote.id
-                }
-            })
+                  return ({
+                    id:item.id,
+                    color:item.color,
+                    size:item.size
+                  })
+              })
+            }
+
+          })
         })
+      
+        sortedQuotes.byTopics.forEach(topic=>{
+          const pagePath=`${ wallpapersPage.slug}/${topic.slug}`
+          const {quotes, ...rest}=topic
+         
+          createPage({
+            path:pagePath,
+            component:path.resolve(overviewTemplate),
+            context: {
+                  ...rest,
+                  pagePath,
+                  title:topic.name,
+                  tag:wallpapersPage.title, 
+                  breadcrumb:[navParentItem, {name:topic.name,to:pagePath}],
+                  quotes:quotes.map(item=>{
+
+                    return ({
+                      id:item.id,
+                      color:item.color,
+                      size:item.size
+                    })
+                })
+              }
+            })
+          })
+      
+          sortedQuotes.byFeaturedAuthors.forEach(author=>{
+            const pagePath=`${ wallpapersPage.slug}/${author.slug}`
+            const {quotes, ...rest}=author
+            createPage({
+              path:pagePath,
+              component:path.resolve(overviewTemplate),
+              context: {
+                    pagePath,
+                    title:author.name,
+                    tag:wallpapersPage.title, 
+                    ...rest,
+                    breadcrumb:[navParentItem, {name:author.name,to:pagePath}],
+                    quotes:quotes.map(item=>{
+
+                      return ({
+                        id:item.id,
+                        color:item.color,
+                        size:item.size
+                      })
+                  })
+                }
+              })
+            })
+      allQuotes.forEach(quote=>{
+        const pagePath=`${ wallpapersPage.slug}/${quote.id}`
+        createPage({
+            path:pagePath,
+            component:path.resolve(template),
+            context: {
+              pagePath,
+              pageType:"wallpaper",
+              quote,
+              breadcrumb:[navParentItem],
+              id:quote.id
+            }
+        })
+    })
     }
 
   })
