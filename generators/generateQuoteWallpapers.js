@@ -125,13 +125,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                 title:color.name,
                 tag:wallpapersPage.title, 
                 breadcrumb:[navParentItem, {name:color.name,to:pagePath}],
-                quotes:quotes.map(item=>{
-                  return ({
-                    id:item.id,
-                    color:item.color,
-                    size:item.size
-                  })
-              })
+                quotes
             }
 
           })
@@ -150,14 +144,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                   title:topic.name,
                   tag:wallpapersPage.title, 
                   breadcrumb:[navParentItem, {name:topic.name,to:pagePath}],
-                  quotes:quotes.map(item=>{
-
-                    return ({
-                      id:item.id,
-                      color:item.color,
-                      size:item.size
-                    })
-                })
+                  quotes
               }
             })
           })
@@ -174,14 +161,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                     tag:wallpapersPage.title, 
                     ...rest,
                     breadcrumb:[navParentItem, {name:author.name,to:pagePath}],
-                    quotes:quotes.map(item=>{
-
-                      return ({
-                        id:item.id,
-                        color:item.color,
-                        size:item.size
-                      })
-                  })
+                    quotes
                 }
               })
             })

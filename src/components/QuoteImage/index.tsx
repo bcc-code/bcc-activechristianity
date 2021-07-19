@@ -16,7 +16,7 @@ const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[]
 
             >
                 <div className="inset-0 absolute flex items-center">
-                    <LazysizesFeaturedImage {...image} className="w-full md:h-full" alt={alt} />
+                    <LazysizesFeaturedImage {...image} className="w-full " alt={alt} />
                 </div>
             </div>
         )
