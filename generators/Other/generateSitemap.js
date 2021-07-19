@@ -14,7 +14,7 @@ const processNodes = (nodes, key)=>{
         const isVideo=context && context.mediaTypes && context.mediaTypes.default && context.mediaTypes.default==="video"
 
         let versionUpdated = packageJson['version-updated-at']
-        const thumbnail = context.image && context.image.src|| context && context.normalized && context.normalized.image && context.normalized.image.src;
+        const thumbnail = context && context.normalized && context.normalized.image && context.normalized.image.src||context && context.image && context.image.src;
         if (context && context.updated_at){
           const d1 = new Date(versionUpdated);
           const d2 = new Date(context.updated_at);
@@ -71,6 +71,9 @@ const pagesQuery = `
             updated_at
             mediaTypes {
               default
+            }
+            image {
+              src
             }
             normalized {
               

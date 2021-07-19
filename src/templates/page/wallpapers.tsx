@@ -18,7 +18,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
     const [isOpen, setIsOpen] = React.useState(false)
     const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb, paginate } = pageContext
-    console.log(pageContext)
+
     const sortedQuotes = quotes.filter(q => q.color !== null)
     const arrayData = React.useRef(sortedQuotes)
 
@@ -54,14 +54,11 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                     return new Promise(() => arrayData.current[i])
                 } else {
                     return fetchWallpaperById(arrayData.current[i].id).then(w => {
-                        console.log(arrayData.current[i])
-                        console.log(w)
                         arrayData.current[i] = { ...arrayData.current[i], wallpaper: w, index: i }
                         return arrayData.current[i]
                     })
                 }
             } else {
-                console.log(indexs)
             }
         })).then(res => {
             console.log(res)

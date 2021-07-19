@@ -82,7 +82,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
         const totalPages = Math.ceil(sortedRgbAllQuotes.length/perPage);
 
         const filterContext = {
-          pageType:"wallpaper",
+          pageType:"wallpaper-archive",
           byColors: allColors.map(item=>({name:item.name,slug:item.name,color:item.color})),
           byBrightness: byBrightness.map(item=>({name:item.name,slug:item.name,color:item.color})),
           byFeaturedAuthors: byFeaturedAuthors.map(item=>({name:item.name,slug:item.slug, nrOfQuotes:item.nrOfQuotes})),
