@@ -14,7 +14,7 @@ const processNodes = (nodes, key)=>{
         const isVideo=context && context.mediaTypes && context.mediaTypes.default && context.mediaTypes.default==="video"
 
         let versionUpdated = packageJson['version-updated-at']
-        const thumbnail = context && context.normalized && context.normalized.image && context.normalized.image.src;
+        const thumbnail = context.image && context.image.src|| context && context.normalized && context.normalized.image && context.normalized.image.src;
         if (context && context.updated_at){
           const d1 = new Date(versionUpdated);
           const d2 = new Date(context.updated_at);
@@ -134,6 +134,9 @@ const options = {
             videos:allSitePage {
               ${pagesQuery}
             }
+            wallpapers:allSitePage {
+              ${pagesQuery}
+            }
             allSitePage {
               ${pagesQuery}
             }
@@ -209,6 +212,13 @@ const options = {
               const posts = processNodes(nodes,'video')
               return Array.isArray(posts)?posts:[] 
  
+            }
+          },
+          wallpapers:{
+            sitemape:`wallpapers`,
+            serializer: (nodes) => {
+              const posts = processNodes(nodes,'wallpaper')
+              return Array.isArray(posts)?posts:[] 
             }
           }
         }

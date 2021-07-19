@@ -1,17 +1,15 @@
 import React from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
-import { WallpaperModalContent } from '@/components/CustomizedPageComponent/Gallery/Modal'
-import { CloseIcon, KeyboardArrowRightIcon, KeyboardArrowLeftIcon, KeyboardArrowDownIcon } from '@/components/Icons/MUI/arrowIcons'
+import WallpaperModalContent from '@/components/QuoteImage/QuoteModalContent'
+import { CloseIcon, KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/components/Icons/MUI/arrowIcons'
 import Link from '@/components/CustomLink'
 import Modal from 'react-modal';
 import ac_strings from '@/strings/ac_strings.js'
 
 const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
-    console.log(props)
     const moreInfo = props.data.ac.quote
     const wallpaper = props.pageContext
-    console.log(wallpaper)
     const { image, color, size, nextId, previousId, pagePath, breadcrumb, content } = wallpaper
 
     return (
@@ -39,7 +37,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
 
                 >
                     <Link
-                        className=""
+                        className="p-4"
                         to={`${ac_strings.wallpaper_slug}`}
                     >
                         <CloseIcon />

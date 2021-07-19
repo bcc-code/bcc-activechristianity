@@ -16,12 +16,12 @@ const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[]
 
             >
                 <div className="inset-0 absolute flex items-center">
-                    <LazysizesFeaturedImage {...image} className="w-full" alt={alt} />
+                    <LazysizesFeaturedImage {...image} className="w-full md:h-full" alt={alt} />
                 </div>
             </div>
         )
     } else {
-        return <LazysizesFeaturedImage {...image} className={`w-full rounded-lg overflow-hidden ${customClassName}`} />
+        return <LazysizesFeaturedImage {...image} className={`w-full md:h-full rounded-lg overflow-hidden ${customClassName}`} />
     }
 }
 

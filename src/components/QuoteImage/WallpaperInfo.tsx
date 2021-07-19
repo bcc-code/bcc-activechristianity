@@ -2,21 +2,16 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { IQuote } from '@/types'
 import ColorBlockNoImg from '@/components/PostItemCards/ColorBlockNoImg'
-import { FetchOnePost } from '@/HOC/FetchPosts'
 import ac_strings from '@/strings/ac_strings'
-
 import { FetchTopicPostItems, FetchAuthorPosts } from '@/HOC/FetchTopicFormatType'
-
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
-
-
+import { FetchOnePost } from '@/HOC/FetchPosts'
 
 const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
     const isAcArticle = typeof wallpaper.source === "string" && wallpaper.source.toLowerCase() === "ac articles"
     const isBibleQuote = wallpaper.author && `${wallpaper.author.id}` === "108501"
     const postSectionHeader = isAcArticle ? "Quote is founded in this post" : "Explore this subject";
     const hasNotBibleAuthor = !isBibleQuote && wallpaper.author
-    console.log(wallpaper.post)
     return (
         <div className="pt-10">
             {<div className="italic pb-4 ">{wallpaper.content}</div>}
@@ -28,7 +23,6 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
                 <FetchOnePost
                     slug={wallpaper.post.slug}
                     render={({ post }) => {
-                        console.log(post)
                         return post ? (
                             <ColorBlockNoImg  {...post} />
                         ) : <div></div>
@@ -58,7 +52,6 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
                             layout="list"
                             topics={[wallpaper.topics[0]].map(t => ({ ...t, slug: `${ac_strings.slug_topic}/${t.slug}/1` }))}
                             render={({ topicPostItems }) => {
-                                console.log(topicPostItems)
                                 return (
                                     <>
                                         {topicPostItems.map(t => {
@@ -85,6 +78,7 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
                     })}
                 </div>
             )}
+
         </div>
     )
 }
