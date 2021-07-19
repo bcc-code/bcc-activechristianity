@@ -2,18 +2,23 @@ import React from 'react'
 import LazyLoad from '@/components/LazyLoad';
 import { PostH1 } from '@/components/Headers'
 import FetchWallpaper, { fetchWallpaperById } from '@/HOC/FetchWallpaper'
+import Link from '@/components/CustomLink'
 import StaggerChildrenItem from '@/components/Motion/StaggerChildrenItem'
 import StaggerChildren from '@/components/Motion/StaggerChildren'
 import WallpaperModal from '@/components/CustomizedPageComponent/Gallery/Modal'
 import Wallpaper from '@/components/QuoteImage'
 import WallpaperFilter from '@/layout-parts/WallpaperOverview/Filter'
 import MetaTag from '@/components/Meta'
-import ac_strings from '@/strings/ac_strings'
+import { navigate } from "gatsby"
+import Pagination from '@/components/Pagination'
+import { trimSlug } from '@/helpers/index-js'
+import ac_strings from '@/strings/ac_strings.js'
 const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) => {
-    console.log(pageContext)
+
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
     const [isOpen, setIsOpen] = React.useState(false)
-    const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb } = pageContext
+    const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb, paginate } = pageContext
+    console.log(pageContext)
     const sortedQuotes = quotes.filter(q => q.color !== null)
     const arrayData = React.useRef(sortedQuotes)
 
@@ -64,7 +69,40 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
         })
     }
 
-    const filterProps = { byColors, byFeaturedAuthors, byTopics, slug }
+
+    const scrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
+
+    const handleChange = (nr: number) => {
+        if (paginate && nr < paginate.totalPages + 1 && nr > -1) {
+            const fullPath = getLinkPath(nr)
+            scrollToTop()
+            navigate(fullPath)
+        }
+    }
+
+    const getLinkPath = (nr: number) => {
+        let activePage = nr
+        let toReturnPath = '/'
+        if (typeof nr === "string") {
+            activePage = parseInt(nr)
+        }
+
+        if (paginate && nr < paginate.totalPages + 1 && nr > -1) {
+            toReturnPath = activePage > 1 ? `/${trimSlug(paginate.baseUrl)}/${activePage}` : paginate.baseUrl
+
+        }
+        return toReturnPath
+    }
+    const filterProps = { byColors, byFeaturedAuthors, byTopics, slug };
+
     return (
         <div className="relativeh-full pt-4 standard-max-w-px">
             <MetaTag
@@ -83,55 +121,41 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
             {isHomePage === true && (
                 <WallpaperFilter {...filterProps} />
             )}
-            <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pb-12">
+            <StaggerChildren className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 pb-12">
                 {sortedQuotes.map((q, k) => {
-
-                    const { color, size, id } = q
-
+                    const { color, id, size, image } = q
+                    /*  size: string, image: IImage, color: number[] */
                     return (
                         <LazyLoad key={id}>
                             <StaggerChildrenItem>
-                                <FetchWallpaper
-                                    id={id}
-                                    render={(({ wallpaper }) => {
-                                        if (wallpaper) {
-                                            updateArray(wallpaper, k)
-                                        }
-                                        return (
+                                <Link
+                                    to={`${ac_strings.wallpaper_slug}/${id}`}
+                                    className="rounded-lg overflow-hidden"
+                                    style={{
+                                        backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
+                                        paddingBottom: `177%`
+                                    }}
 
-                                            < a
-                                                onClick={(e) => {
-                                                    e.preventDefault()
-                                                    handleOpen(k)
-                                                }}
-                                                key={id}
-                                                href={`wallpaper/${id}`}
-                                            >
-                                                {wallpaper ? (
-                                                    <Wallpaper
-                                                        image={wallpaper.images[0]}
-                                                        size={size}
-                                                        color={color}
-                                                    />
-                                                ) : <div
-                                                    className="rounded-lg overflow-hidden"
-                                                    style={{
-                                                        backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,
-                                                        paddingBottom: `177%`
-                                                    }}
+                                >
+                                    <Wallpaper size={size} image={image} color={color} alt={`${q.content} ${title}`} />
+                                </Link>
 
-                                                >
-                                                </div>}
-                                            </a>
-                                        )
-                                    })}
-                                />
                             </StaggerChildrenItem>
                         </LazyLoad>
 
                     )
                 })}
             </StaggerChildren>
+            {paginate && (
+                <div className="flex justify-item py-4">
+                    <Pagination
+                        currentPage={paginate.currentPage}
+                        totalPages={paginate.totalPages}
+                        getLinkPath={getLinkPath}
+                        onChange={handleChange}
+                    />
+                </div>
+            )}
         </div>
     )
 }

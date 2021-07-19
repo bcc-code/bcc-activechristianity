@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
 import { IGalleryImage, IQuote } from '@/types'
 import ShowWallpaperRelatedInfo from './ShowRelatedInfo'
 import Wallpaper from '@/components/QuoteImage'
@@ -123,7 +122,7 @@ const WallpaperModal: React.FC<IWallpaperModal> = ({ isOpen, handleClose, swipeV
 
 export default WallpaperModal
 
-export const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, background?: string }> = ({ image, color, size, wallpaper, isActive, background, id }) => {
+export const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, background?: string }> = ({ image, color, size, wallpaper, isActive, background, id, }) => {
     const findImage = wallpaper && wallpaper.images && wallpaper.images[0] || image
     const download = (e: any, id: number) => {
         e.preventDefault();
@@ -155,6 +154,7 @@ export const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: bo
                         image={findImage}
                         size={size}
                         color={color}
+                        alt={''}
                     />
                 )}
 
@@ -173,7 +173,7 @@ export const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: bo
                             <div className="px-4 py-2 font-semibold ml-4">Share</div>
                             {/* <a href={`/wallpaper/${id || image?.quote_id}`}>link</a> */}
                         </div>
-                        {image && <ShowWallpaperRelatedInfo image={image} />}
+                        {/* {image && <ShowWallpaperRelatedInfo image={image} />} */}
                         {wallpaper && <WallpaperInfo  {...wallpaper} />}
                     </div>
                 )}

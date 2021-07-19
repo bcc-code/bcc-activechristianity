@@ -1,9 +1,9 @@
 import React from 'react'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
-import { IImage } from '@/types';
+import { IImage, IQuote } from '@/types';
 
 
-const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[], className?: string }> = ({ size, image, color, className }) => {
+const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[], className?: string, alt: string }> = ({ size, image, color, className, alt }) => {
     const customClassName = className ? className : `rounded-lg`;
     if (size === "square") {
         return (
@@ -16,7 +16,7 @@ const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[]
 
             >
                 <div className="inset-0 absolute flex items-center">
-                    <LazysizesFeaturedImage {...image} className="w-full" />
+                    <LazysizesFeaturedImage {...image} className="w-full" alt={alt} />
                 </div>
             </div>
         )
