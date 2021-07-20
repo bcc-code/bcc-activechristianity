@@ -29,7 +29,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
         />
     )
     return (
-        <div>
+        <div className="pt-9 sm:pt-0">
             <MetaTag
                 title={`${isBibleQuote ? source : ''} Bibleverse wallpaper - ${content} `}
                 type="page"

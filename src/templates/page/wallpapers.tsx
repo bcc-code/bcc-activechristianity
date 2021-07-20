@@ -102,7 +102,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
     const filterProps = { byColors, byFeaturedAuthors, byTopics, slug };
 
     return (
-        <div className="relativeh-full py-4 standard-max-w-px">
+        <div className="relativeh-full pt-9 sm:pt-4 pb-4 standard-max-w-px">
             <MetaTag
                 title={metaTitle || title}
                 type="page"
