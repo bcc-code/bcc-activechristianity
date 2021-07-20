@@ -218,8 +218,9 @@ const options = {
             }
           },
           wallpapers:{
-            sitemape:`wallpapers`,
+            sitemap:`wallpapers`,
             serializer: (nodes) => {
+              console.log('generating wallpaper sitemap')
               const posts = processNodes(nodes,'wallpaper')
               return Array.isArray(posts)?posts:[] 
             }

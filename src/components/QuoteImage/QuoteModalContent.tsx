@@ -12,11 +12,12 @@ interface ISwipeViewContent {
     id?: string | number
     image?: IGalleryImage
     wallpaper?: IQuote
+    border?: boolean
     color: number[]
     size: string
 }
 
-const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, background?: string }> = ({ image, color, size, wallpaper, isActive, background, id, }) => {
+const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, background?: string }> = ({ image, color, size, wallpaper, isActive, background, border }) => {
     const findImage = wallpaper && wallpaper.images && wallpaper.images[0] || image
     const download = (e: any, id: number) => {
         e.preventDefault();
@@ -38,12 +39,13 @@ const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, 
                 console.log(err);
             });
     };
+
     return (
         <div className="pb-8 sm:w-3/4 md:w-tablet mx-auto md:grid md:grid-cols-2">
             <div className="relative">
                 {findImage && isActive && (
                     <Wallpaper
-                        className="rounded-t-lg rounded-b-none md:rounded-l-lg md:rounded-r-none"
+                        className={`rounded-t-lg rounded-b-none md:rounded-l-lg md:rounded-r-none ${border ? 'border-t border-l border-b' : ""}`}
                         key={findImage.id}
                         image={findImage}
                         size={size}
@@ -59,7 +61,7 @@ const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, 
                     <KeyboardArrowDownIcon />
                 </div>
             </div>
-            <div className="py-6 px-4 bg-white rounded-b-lg md:rounded-r-lg md:rounded-l-none">
+            <div className={`py-6 px-4 bg-white rounded-b-lg md:rounded-r-lg md:rounded-l-none ${border ? 'border-t border-r border-b' : ""}`}>
                 {isActive && (
                     < div >
                         <div className="flex justify-between flex-col md:flex-row">

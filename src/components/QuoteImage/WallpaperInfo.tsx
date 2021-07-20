@@ -11,6 +11,7 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
     const isAcArticle = typeof wallpaper.source === "string" && wallpaper.source.toLowerCase() === "ac articles"
     const isBibleQuote = wallpaper.author && `${wallpaper.author.id}` === "108501"
     const postSectionHeader = isAcArticle ? "Quote is founded in this post" : "Explore this subject";
+    console.log(wallpaper)
     const hasNotBibleAuthor = !isBibleQuote && wallpaper.author
     return (
         <div className="pt-10">
@@ -20,14 +21,15 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
 
             {wallpaper.post && <h3 className="font-semibold pb-4">{postSectionHeader}</h3>}
             {wallpaper.post && (
-                <FetchOnePost
-                    slug={wallpaper.post.slug}
-                    render={({ post }) => {
-                        return post ? (
-                            <ColorBlockNoImg  {...post} />
-                        ) : <div></div>
-                    }}
-                />
+                /*              <FetchOnePost
+                                 slug={wallpaper.post.slug}
+                                 render={({ post }) => {
+                                     return post ? (
+                                         
+                                     ) : <div></div>
+                                 }}
+                             /> */
+                <ColorBlockNoImg  {...wallpaper.post} />
             )}
             {
                 wallpaper.author && !isBibleQuote && (

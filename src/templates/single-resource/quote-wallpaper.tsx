@@ -6,21 +6,37 @@ import { CloseIcon, KeyboardArrowRightIcon, KeyboardArrowLeftIcon } from '@/comp
 import Link from '@/components/CustomLink'
 import Modal from 'react-modal';
 import ac_strings from '@/strings/ac_strings.js'
-
+import { useLocation } from '@reach/router';
+import { getAllUrlParams } from '@/helpers/index-js'
+import { normalizePostRes } from '@/helpers/normalizers'
 const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
-    const moreInfo = props.data.ac.quote
+    const { post, ...moreInfo } = props.data.ac.quote
+    console.log(post)
     const wallpaper = props.pageContext
-    const { image, color, size, nextId, previousId, pagePath, breadcrumb, content } = wallpaper
+    const normalizedPost = normalizePostRes(post)
+    const { image, color, size, nextId, previousId, pagePath, breadcrumb, content, isBibleQuote, source } = wallpaper
+    const location = useLocation();
+    const parsed = getAllUrlParams(location.search);
 
+    const child = (
+        <WallpaperModalContent
+            image={image}
+            wallpaper={{ ...wallpaper, ...moreInfo, post: normalizedPost }}
+            isActive={true}
+            size={size}
+            color={color}
+            border={parsed.openmodal !== "true"}
+        />
+    )
     return (
         <div>
             <MetaTag
-                title={`${content} ${ac_strings.wallpaper_title}`}
+                title={`${isBibleQuote ? source : ''} Bibleverse wallpaper - ${content} `}
                 type="page"
                 path={pagePath}
                 breadcrumb={breadcrumb}
             />
-            <Modal
+            {parsed.openmodal === "true" ? (<Modal
                 isOpen={true}
                 className="inset-0 h-screen w-screen px-2 flex justify-center items-center overflow-scroll"
                 style={{
@@ -59,15 +75,15 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                             <KeyboardArrowRightIcon />
                         </Link>
                     </div>
-                    <WallpaperModalContent
-                        image={image}
-                        wallpaper={{ ...wallpaper, ...moreInfo }}
-                        isActive={true}
-                        size={size}
-                        color={color}
-                    />
+                    {child}
                 </div>
             </Modal>
+            ) : (
+                <div className="py-6">
+
+                    {child}
+                </div>
+            )}
         </div>
     )
 }
@@ -97,7 +113,48 @@ export const wallpaperQuery = graphql`
                 }
 
                 post {
+                    title
                     slug
+
+                    excerpt
+                    image {
+                        src
+                        srcset
+                        dataUri
+                        colors
+
+                    }
+                    track {
+                        url
+                        title
+                        duration
+                        playlists {
+                            slug
+                            title
+                        }
+                        post {
+                            title
+                            slug
+                        }
+                    }
+                    authors {
+                        name
+                        slug
+                        id
+                        pivot {
+                            as
+                        }
+                    }
+                    topics {
+                        name
+                        slug
+                        id
+                        group {
+                            id
+                            name
+                            slug
+                        }
+                    }
                 }
                 topics {
                     id

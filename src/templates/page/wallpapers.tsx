@@ -1,6 +1,7 @@
 import React from 'react'
 import LazyLoad from '@/components/LazyLoad';
 import { PostH1 } from '@/components/Headers'
+
 import FetchWallpaper, { fetchWallpaperById } from '@/HOC/FetchWallpaper'
 import Link from '@/components/CustomLink'
 import StaggerChildrenItem from '@/components/Motion/StaggerChildrenItem'
@@ -17,7 +18,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
 
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
     const [isOpen, setIsOpen] = React.useState(false)
-    const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb, paginate } = pageContext
+    const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb, paginate, metaTitle } = pageContext
 
     const sortedQuotes = quotes.filter(q => q.color !== null)
     const arrayData = React.useRef(sortedQuotes)
@@ -101,9 +102,9 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
     const filterProps = { byColors, byFeaturedAuthors, byTopics, slug };
 
     return (
-        <div className="relativeh-full pt-4 standard-max-w-px">
+        <div className="relativeh-full py-4 standard-max-w-px">
             <MetaTag
-                title={title}
+                title={metaTitle || title}
                 type="page"
                 path={pagePath}
                 breadcrumb={breadcrumb}
@@ -126,7 +127,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                         <LazyLoad key={id}>
                             <StaggerChildrenItem>
                                 <Link
-                                    to={`${ac_strings.wallpaper_slug}/${id}`}
+                                    to={`${ac_strings.wallpaper_slug}/${id}?openModal=true`}
                                     className="rounded-lg overflow-hidden"
                                     style={{
                                         backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,

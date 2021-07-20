@@ -27,7 +27,7 @@ interface IProps {
 
 const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, offSetBottom }) => {
 
-    const options = { shareUrl: window ? window.location.href : process.env.SITE_URL + '/' }
+    const options = { shareUrl: process.env.SITE_URL + '/' + shareUrl }
     const IconProps = {
         size: 40,
         iconFillColor: 'var(--slate-dark)',
