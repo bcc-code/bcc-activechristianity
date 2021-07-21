@@ -18,7 +18,7 @@ interface ISwipeViewContent {
 }
 
 const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, background?: string }> = ({ image, color, size, wallpaper, isActive, background, border }) => {
-    const findImage = wallpaper && wallpaper.images && wallpaper.images[0] || image
+    const findImage = image || wallpaper && wallpaper.images && wallpaper.images[0]
     const download = (e: any, id: number) => {
         e.preventDefault();
         fetch(e.target.href, {
@@ -50,7 +50,7 @@ const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, 
                         image={findImage}
                         size={size}
                         color={color}
-                        alt={''}
+                        alt={findImage.alt}
                     />
                 )}
 

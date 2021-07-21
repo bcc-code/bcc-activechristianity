@@ -61,7 +61,6 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
             } else {
             }
         })).then(res => {
-            console.log(res)
             setActiveWallpaperIndex(0)
         })
     }
@@ -134,7 +133,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                                     }}
 
                                 >
-                                    <Wallpaper size={size} image={image} color={color} alt={`${q.content} ${title}`} />
+                                    <Wallpaper size={size} image={image} color={color} alt={`${q.source} ${title} ${q.content}`} />
                                 </Link>
 
                             </StaggerChildrenItem>

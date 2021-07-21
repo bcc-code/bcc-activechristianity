@@ -69,8 +69,6 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
-
-        generateTopics(actions, graphql),
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
         generateTopics(actions, graphql),

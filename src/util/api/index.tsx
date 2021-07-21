@@ -179,7 +179,6 @@ export default {
     },
     subscribeNewsletter: (email: string) => {
         const query = request.subscribeMutation(email)
-        console.log(query)
         return sendQuery(query)
     }
 }

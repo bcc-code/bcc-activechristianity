@@ -48,9 +48,12 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
 
 
     }, [])
+
+    const metaTitle = `${isBibleQuote ? source : ''} Bibleverse wallpaper - ${content} `
+
     const child = (
         <WallpaperModalContent
-            image={image}
+            image={{ ...image, alt: metaTitle }}
             wallpaper={{ ...wallpaper, ...moreInfo, post: post ? normalizePostRes(post) : null }}
             isActive={true}
             size={size}
@@ -62,7 +65,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
     return (
         <div className="pt-9 sm:pt-0">
             <MetaTag
-                title={`${isBibleQuote ? source : ''} Bibleverse wallpaper - ${content} `}
+                title={metaTitle}
                 type="page"
                 path={pagePath}
                 breadcrumb={breadcrumb}
