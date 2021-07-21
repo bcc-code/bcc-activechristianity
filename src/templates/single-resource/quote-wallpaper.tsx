@@ -67,48 +67,49 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                 path={pagePath}
                 breadcrumb={breadcrumb}
             />
-            {openmodal === "true" ? (<Modal
-                isOpen={true}
-                className="inset-0 h-screen w-screen px-2 flex justify-center items-center overflow-scroll"
-                style={{
-                    overlay: {
-                        backgroundColor: color ? `rgba(${color[0]}, ${color[1]}, ${color[2]}` : 'rgba(0, 0, 0, 0.5)',
-                        zIndex: 700,
-                        transition: `background-color 1000ms linear`
-                    }
-                }}
-            >
-                <div
-                    className="absolute top-0 right-0 left-0 z-10 text-white w-full flex justify-end"
-                    style={{ background: 'linear-gradient( to top, transparent, rgba(0, 0, 0, 0.5) )' }}
-
+            {openmodal === "true" ? (
+                <Modal
+                    isOpen={true}
+                    className="inset-0 h-screen w-screen px-2 flex justify-center items-center overflow-scroll"
+                    style={{
+                        overlay: {
+                            backgroundColor: color ? `rgba(${color[0]}, ${color[1]}, ${color[2]}` : 'rgba(0, 0, 0, 0.5)',
+                            zIndex: 700,
+                            transition: `background-color 1000ms linear`
+                        }
+                    }}
                 >
-                    <Link
-                        className="p-4"
-                        to={parent}
-                    >
-                        <CloseIcon />
-                    </Link>
-                </div>
-                <div className="h-full w-full pt-10 overflow-scroll relative ">
-                    <div className="absolute bottom-1/2 right-0 left-0 z-10 text-white w-full flex p-2 justify-between">
+                    <div
+                        className="absolute top-0 right-0 left-0 z-10 text-white w-full flex justify-end"
+                        style={{ background: 'linear-gradient( to top, transparent, rgba(0, 0, 0, 0.5) )' }}
 
+                    >
                         <Link
-                            className=""
-                            to={preNextIds.previousId}
+                            className="p-4"
+                            to={parent}
                         >
-                            <KeyboardArrowLeftIcon />
-                        </Link>
-                        <Link
-                            className=""
-                            to={preNextIds.nextId}
-                        >
-                            <KeyboardArrowRightIcon />
+                            <CloseIcon />
                         </Link>
                     </div>
-                    {child}
-                </div>
-            </Modal>
+                    <div className="h-full w-full pt-10 overflow-scroll relative ">
+                        <div className="absolute bottom-1/2 right-0 left-0 z-10 text-white w-full flex p-2 justify-between">
+
+                            <Link
+                                className=""
+                                to={preNextIds.previousId}
+                            >
+                                <KeyboardArrowLeftIcon />
+                            </Link>
+                            <Link
+                                className=""
+                                to={preNextIds.nextId}
+                            >
+                                <KeyboardArrowRightIcon />
+                            </Link>
+                        </div>
+                        {child}
+                    </div>
+                </Modal>
             ) : (
                 <div className="py-6">
 
