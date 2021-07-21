@@ -12,7 +12,7 @@ import { normalizePostRes } from '@/helpers/normalizers'
 const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
     const { post, ...moreInfo } = props.data.ac.quote
     const wallpaper = props.pageContext
-    const normalizedPost = normalizePostRes(post)
+
     const { image, color, size, nextId, previousId, pagePath, breadcrumb, content, isBibleQuote, source } = wallpaper
     const location = useLocation();
     const parsed: any = getAllUrlParams(location.search);
@@ -51,7 +51,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
     const child = (
         <WallpaperModalContent
             image={image}
-            wallpaper={{ ...wallpaper, ...moreInfo, post: normalizedPost }}
+            wallpaper={{ ...wallpaper, ...moreInfo, post: post ? normalizePostRes(post) : null }}
             isActive={true}
             size={size}
             color={color}
