@@ -19,7 +19,6 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
     const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState<any>(null)
     const [isOpen, setIsOpen] = React.useState(false)
     const { quotes, isHomePage, byColors, byFeaturedAuthors, byTopics, slug, title, pagePath, breadcrumb, paginate, metaTitle } = pageContext
-
     const sortedQuotes = quotes.filter(q => q.color !== null)
     const arrayData = React.useRef(sortedQuotes)
 
@@ -127,7 +126,7 @@ const AllWallpapers: React.FC<IQuoteWallpaperProps> = ({ pageContext, path }) =>
                         <LazyLoad key={id}>
                             <StaggerChildrenItem>
                                 <Link
-                                    to={`${ac_strings.wallpaper_slug}/${id}?openModal=true`}
+                                    to={`${ac_strings.wallpaper_slug}/${id}?openModal=true&parent=${pagePath}&index=${k}&filter=${!isHomePage}`}
                                     className="rounded-lg overflow-hidden"
                                     style={{
                                         backgroundColor: `rgb(${color[0]},${color[1]},${color[2]})`,

@@ -13,7 +13,6 @@ export default (dispatch: any) => {
             .then((res: IUser) => {
                 if (res && res.id) {
                     if (res.meta && res.meta.consented) {
-                        console.log(res)
                         dispatch(setUser(res))
                         dispatch(getUserLibrary())
                         dispatch(closeSignInModal())

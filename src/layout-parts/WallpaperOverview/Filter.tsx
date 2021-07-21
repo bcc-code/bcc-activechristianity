@@ -1,22 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { FilterListIcon, ExpandMoreIcon } from '@/components/Icons/MUI/inputIcons'
+import { CloseIcon } from '@/components/Icons/MUI/arrowIcons'
 import ScrollLinks from '@/components/Tabs/ScrollNavLinks'
+import Modal from 'react-modal';
 import Link from '@/components/CustomLink'
 const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) => {
+    const [toggleFilter, setToggleFilter] = useState(false)
     return (
         <>
-            <div className="-mx-4 py-4 sm:hidden">
-                <h3 className="text-sm px-4 pb-2">Topics</h3>
-                <ScrollLinks
-                    links={byTopics.map(t => ({ name: t.name, nr: t.nrOfQuotes, to: `${slug}/${t.slug}` }))}
-                    className={`py-1 px-2 my-1  bg-white flex justify-between items-center rounded-lg bg-ac-slate-lighter whitespace-nowrap`}
-                />
-                <h3 className="text-sm px-4 pb-2 mt-4">Authors</h3>
-                <ScrollLinks
-                    links={byFeaturedAuthors.map(t => ({ name: t.name, nr: t.nrOfQuotes, to: `${slug}/${t.slug}` }))}
-                    className={`py-1 px-2 my-1  bg-white flex justify-between items-center rounded-lg bg-ac-slate-lighter whitespace-nowrap`}
-                />
-                <h3 className="text-sm px-4 pb-2 mt-4">Colors</h3>
-                <div className="flex flex-wrap px-4">
+            <Modal
+                isOpen={toggleFilter}
+                className="inset-0 h-screen w-screen px-2 flex  flex-col overflow-scroll  px-4"
+                style={{
+                    overlay: {
+                        backgroundColor: 'white',
+                        zIndex: 700,
+                        transition: `background-color 1000ms linear`
+                    }
+                }}
+            >
+                <button className="p-4 absolute right-0 top-0" onClick={() => setToggleFilter(false)}><CloseIcon /></button>
+                <h3 className="text-sm pb-2 mt-4">Colors</h3>
+                <div className="flex flex-wrap">
                     {byColors.map(c => {
                         const color = c.color
                         const rgbaColor = `rgb(${color[0]},${color[1]},${color[2]})`
@@ -26,6 +31,47 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                             </Link>
                         )
                     })}
+                </div>
+                <h3 className="text-sm pb-2 mt-4">Authors</h3>
+                <div className="flex flex-wrap">
+                    {byFeaturedAuthors.map(t => {
+                        ({ name: t.name, nr: t.nrOfQuotes, to: `${slug}/${t.slug}` })
+                        return (
+                            <Link to={`${slug}/${t.slug}`} className={`mr-2 py-1 px-2 my-1 text-xs  bg-white flex justify-between items-center rounded-lg bg-ac-slate-lighter whitespace-nowrap`}>
+                                <span>{t.name}</span>
+                                <span>({t.nrOfQuotes})</span>
+                            </Link>
+                        )
+                    })}
+                </div>
+                <h3 className="text-sm pb-2 mt-4">Topics</h3>
+                <div className="flex flex-wrap">
+                    {byTopics.map(t => {
+                        ({ name: t.name, nr: t.nrOfQuotes, to: `${slug}/${t.slug}` })
+                        return (
+                            <Link to={`${slug}/${t.slug}`} className={`mr-2 py-1 px-2 my-1 text-xs  bg-white flex justify-between items-center rounded-lg bg-ac-slate-lighter whitespace-nowrap`}>
+                                <span>{t.name}</span>
+                                <span>({t.nrOfQuotes})</span>
+                            </Link>
+                        )
+                    })}
+                </div>
+            </Modal>
+            <div className="-mx-4 py-4 sm:hidden">
+                <div className="px-4">
+                    <div className="grid grid-cols-2 gap-2 ">
+
+                        {byFeaturedAuthors.slice(0, 3).map(t => {
+                            return (
+                                <Link key={t.slug} className="text-sm font-medium underline" to={`${slug}/${t.slug}`}>{t.slug === "the-bible" ? "Bible verse wallpapers" : `${t.name}`}</Link>)
+                        })}
+                        {byTopics.slice(0, 3).map(t => {
+                            return (
+                                <Link key={t.slug} className="text-sm font-medium underline" to={`${slug}/${t.slug}`}>{t.name}</Link>)
+                        })}
+
+                    </div>
+                    <button onClick={() => { setToggleFilter(true) }} className="mt-4 flex py-1 px-2 justify-center items-center rounded-lg bg-ac-slate-lighter"><FilterListIcon /><span className="text-sm italic px-4"> Filters</span></button>
                 </div>
             </div>
             <div className="hidden sm:block py-6">

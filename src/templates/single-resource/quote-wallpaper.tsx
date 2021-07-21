@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from "gatsby"
 import MetaTag from '@/components/Meta'
 import WallpaperModalContent from '@/components/QuoteImage/QuoteModalContent'
@@ -11,13 +11,43 @@ import { getAllUrlParams } from '@/helpers/index-js'
 import { normalizePostRes } from '@/helpers/normalizers'
 const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
     const { post, ...moreInfo } = props.data.ac.quote
-    console.log(post)
     const wallpaper = props.pageContext
     const normalizedPost = normalizePostRes(post)
     const { image, color, size, nextId, previousId, pagePath, breadcrumb, content, isBibleQuote, source } = wallpaper
     const location = useLocation();
-    const parsed = getAllUrlParams(location.search);
+    const parsed: any = getAllUrlParams(location.search);
 
+    const { parent, filter, index, openmodal } = parsed
+
+    const getIndex = parseInt(index)
+    const paramString = `openmodal=${openmodal}&parent=${parent}&filter=${filter}`
+
+    const [preNextIds, setPreNextIds] = useState({
+        previousId: `${ac_strings.wallpaper_slug}/${previousId}?${paramString}`,
+        nextId: `${ac_strings.wallpaper_slug}/${nextId}?${paramString}`
+    })
+    React.useEffect(() => {
+
+        if (typeof parent === "string" && filter === "true") {
+            console.log('fetching')
+            fetch(`/page-data/${parent}/page-data.json`)
+                .then(res => res.json())
+                .then((res) => {
+
+
+                    const { quotes } = res.result.pageContext
+
+                    setPreNextIds({
+                        previousId: getIndex < 1 ? parent : `${ac_strings.wallpaper_slug}/${quotes[getIndex - 1].id}?${paramString}&index=${getIndex - 1}`,
+                        nextId: getIndex > 10 ? parent : `${ac_strings.wallpaper_slug}/${quotes[getIndex + 1].id}?${paramString}&index=${getIndex + 1}`,
+                    })
+                })
+        } else {
+            console.log('na')
+        }
+
+
+    }, [])
     const child = (
         <WallpaperModalContent
             image={image}
@@ -25,9 +55,10 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
             isActive={true}
             size={size}
             color={color}
-            border={parsed.openmodal !== "true"}
+            border={openmodal !== "true"}
         />
     )
+
     return (
         <div className="pt-9 sm:pt-0">
             <MetaTag
@@ -36,7 +67,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                 path={pagePath}
                 breadcrumb={breadcrumb}
             />
-            {parsed.openmodal === "true" ? (<Modal
+            {openmodal === "true" ? (<Modal
                 isOpen={true}
                 className="inset-0 h-screen w-screen px-2 flex justify-center items-center overflow-scroll"
                 style={{
@@ -54,7 +85,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                 >
                     <Link
                         className="p-4"
-                        to={`${ac_strings.wallpaper_slug}`}
+                        to={parent}
                     >
                         <CloseIcon />
                     </Link>
@@ -64,13 +95,13 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
 
                         <Link
                             className=""
-                            to={`${ac_strings.wallpaper_slug}/${previousId}`}
+                            to={preNextIds.previousId}
                         >
                             <KeyboardArrowLeftIcon />
                         </Link>
                         <Link
                             className=""
-                            to={`${ac_strings.wallpaper_slug}/${nextId}`}
+                            to={preNextIds.nextId}
                         >
                             <KeyboardArrowRightIcon />
                         </Link>
