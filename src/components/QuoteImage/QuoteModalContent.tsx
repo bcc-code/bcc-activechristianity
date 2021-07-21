@@ -55,7 +55,7 @@ const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, 
                 )}
 
                 <div
-                    className=" absolute bottom-0 left-0 right-0 z-10 h-12 text-white w-full flex justify-center items-center"
+                    className=" absolute bottom-0 left-0 right-0 z-10 h-12 text-white w-full flex justify-center items-center md:hidden"
                     style={{ background: `linear-gradient( to bottom, transparent, ${background} )` }}
                 >
                     <KeyboardArrowDownIcon />

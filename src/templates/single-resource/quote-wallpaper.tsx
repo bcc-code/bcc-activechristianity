@@ -98,13 +98,13 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                                 className=""
                                 to={preNextIds.previousId}
                             >
-                                <KeyboardArrowLeftIcon />
+                                <KeyboardArrowLeftIcon className="shadow" />
                             </Link>
                             <Link
                                 className=""
                                 to={preNextIds.nextId}
                             >
-                                <KeyboardArrowRightIcon />
+                                <KeyboardArrowRightIcon className="shadow" />
                             </Link>
                         </div>
                         {child}

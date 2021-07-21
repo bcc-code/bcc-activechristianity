@@ -10,7 +10,7 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
         <>
             <Modal
                 isOpen={toggleFilter}
-                className="inset-0 h-screen w-screen px-2 flex  flex-col overflow-scroll  px-4"
+                className="inset-0 h-screen w-screen flex  flex-col overflow-scroll  px-4"
                 style={{
                     overlay: {
                         backgroundColor: 'white',
@@ -63,15 +63,15 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
 
                         {byFeaturedAuthors.slice(0, 3).map(t => {
                             return (
-                                <Link key={t.slug} className="text-sm font-medium underline" to={`${slug}/${t.slug}`}>{t.slug === "the-bible" ? "Bible verse wallpapers" : `${t.name}`}</Link>)
+                                <Link key={t.slug} className="text-sm font-medium border rounded-lg p-2 flex items-center justify-center text-center" to={`${slug}/${t.slug}`}>{t.slug === "the-bible" ? "Bible verse wallpapers" : `${t.name}`}</Link>)
                         })}
                         {byTopics.slice(0, 3).map(t => {
                             return (
-                                <Link key={t.slug} className="text-sm font-medium underline" to={`${slug}/${t.slug}`}>{t.name}</Link>)
+                                <Link key={t.slug} className="text-sm font-medium border rounded-lg p-2 flex items-center justify-center text-center" to={`${slug}/${t.slug}`}>{t.name}</Link>)
                         })}
 
                     </div>
-                    <button onClick={() => { setToggleFilter(true) }} className="mt-4 flex py-1 px-2 justify-center items-center rounded-lg bg-ac-slate-lighter"><FilterListIcon /><span className="text-sm italic px-4"> Filters</span></button>
+                    <button onClick={() => { setToggleFilter(true) }} className="mt-4 flex py-1 px-2 justify-center items-center rounded-lg bg-ac-slate-lighter"><FilterListIcon /><span className="text-sm italic px-4"> All filters</span></button>
                 </div>
             </div>
             <div className="hidden sm:block py-6">
