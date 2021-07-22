@@ -63,10 +63,11 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
      const generators = [
       generateHome(actions, graphql),
       generateExplore(actions, graphql), 
-      generatePosts(actions, graphql),
-      generateWallpapers(actions, graphql),
+      generatePosts(actions, graphql)
     ]
-
+    if(process.env.LANG_CODE==="en"){
+      generators.push(      generateWallpapers(actions, graphql))
+    }
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
         generateAuthors(actions, graphql),

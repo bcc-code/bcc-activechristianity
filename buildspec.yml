@@ -16,7 +16,6 @@ phases:
 
     post_build:
         commands:
-            - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
             - 'npm run deploy'
 artifacts:
     base-directory: public
