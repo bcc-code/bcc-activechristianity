@@ -12,6 +12,7 @@ phases:
             - 'npm install'
     build:
         commands:
+            - n latest
             - 'npm run build'
 
     post_build:
