@@ -6,18 +6,18 @@ phases:
             nodejs: 12
         commands:
             - 'touch .npmignore'
-            - 'npm install -g gatsby gatsby-cli'
+            - 'npm install -g yarn gatsby gatsby-cli'
     pre_build:
         commands:
-            - 'npm install'
+            - 'yarn install'
     build:
         commands:
-            - 'npm run build'
+            - 'gatsby build'
 
     post_build:
         commands:
             - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
-            - 'npm run deploy'
+            - 'yarn run deploy'
 artifacts:
     base-directory: public
     files:
