@@ -3,7 +3,7 @@ import loadable from '@loadable/component'
 import ByCatergories from '@/layout-parts/RecommendLayout/ByCategoriesMobile'
 import MetaTag from '@/components/Meta'
 import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType'
-import { menusItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
 import FeaturedBanner from '@/components/HorizontalScroll/FeaturedBanner'
 const TopImgHorizontalScroll = loadable(() => import('@/components/HorizontalScroll/TopImgRow'))
 const RecommendDesktopLayout = loadable(() => import('@/layouts/RecommendDesktopLayout'))
@@ -19,18 +19,21 @@ import { getRandomFeatured } from '@/helpers/normalizers'
 // Types 
 import ac_strings from '@/strings/ac_strings.js'
 
+const { menusItems } = menus;
+
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
-    const { pageContext, path } = props
+    const { pageContext } = props
 
     const {
         id,
         title,
         formats,
         breadcrumb,
+        pagePath,
         latest, popular, featured
     } = pageContext
-
+    const path = pagePath
     const latestSlug = `${path}/1`
 
     const mixedFeaturedPosts = getRandomFeatured({ latest, popular, featured })
@@ -86,14 +89,14 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
 
                     />
                 ) : (
-                        <div className="px-4">
-                            {latest.map(p => {
-                                return (
-                                    <RightImgPostItem {...p} />
-                                )
-                            })}
-                        </div>
-                    )}
+                    <div className="px-4">
+                        {latest.map(p => {
+                            return (
+                                <RightImgPostItem {...p} />
+                            )
+                        })}
+                    </div>
+                )}
                 {formats.length > 0 && (
                     <ByCatergories
                         title={ac_strings.categories}

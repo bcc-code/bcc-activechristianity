@@ -4,6 +4,7 @@ import SquareImage from '@/components/Images/Image1to1Rounded'
 import TextSizeTitle, { ITextSizeWClamp } from '@/components/PostElements/TextSizeWClamp'
 import { IPlaylist, IPlaylistType } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
+
 const PlaylistTopImg: React.FC<IPlaylist> = ({ slug, image, title, excerpt, type }) => {
     //'AUDIO_POSTS' | 'SONGS' | 'PODCAST' | 'MIXED'
     /*     {

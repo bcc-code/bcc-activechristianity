@@ -8,6 +8,7 @@
 const _ = require('lodash')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
 const buildTranslatedStrings = require('./generators/json/build-translated-strings')
+const {onPostBuildTest} = require('./generators/postBuildTests')
 const buildMenus = require('./generators/json/build-menus')
 const generateLogo = require('./generators/Other/generateLogo')
 const {fetchScripts} = require('./fetch-external-scripts.js')
@@ -38,9 +39,7 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
   }
 
   exports.onPreInit = async () => {
-    if (process.env.DONT_ADD_TRACKING_CODE!=="true"){
-      fetchScripts()
-    }
+    fetchScripts()
     await getIndexPostQuery(endpoints.api_url)
     await buildTranslatedStrings.translationStrings()
     await buildMenus.languageSites()
@@ -60,16 +59,17 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
     const generatePlaylists = require('./generators/generatePlaylists')
     const generateGlossary = require('./generators/generateGlossary')
     const generateScriptures = require('./generators/generateScriptures')
-    
+    const generateWallpapers = require('./generators/generateQuoteWallpapers')
      const generators = [
-
       generateHome(actions, graphql),
-      generateExplore(actions, graphql),
-      generatePosts(actions, graphql),
+/*       generateWallpapers(actions, graphql), */
+      generateExplore(actions, graphql), 
+      generatePosts(actions, graphql), 
     ]
 
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
+       
         generateTopics(actions, graphql),
         generateAuthors(actions, graphql),
         generatePages(actions, graphql),
@@ -96,7 +96,8 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       if (process.env.SCRIPTURE_SECTION==="true"){
         console.log("generating scriptures")
         generators.push(generateScriptures(actions, graphql)) 
-      } 
+      }
+
     }
 
     return Promise.all(generators)
@@ -131,3 +132,5 @@ exports.onCreateWebpackConfig = ({
     }
   })
 } */
+
+exports.onPostBuild =onPostBuildTest

@@ -11,6 +11,7 @@ import BgImgTopicCard from '@/components/Cards/BgImgTopicCard'
 import HomeTopFeaturePost from '@/layout-parts/Home/HeaderPost'
 import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
+import Bookshop from '@/layout-parts/Banner/BookShop'
 import shortid from 'shortid'
 import { getRandomArray } from '@/helpers/normalizers'
 // Type
@@ -93,20 +94,19 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
   )
 }
 const IndexPage: React.FC<IHomeProps> = (props) => {
-  const { pageContext, path } = props
+  const { pageContext } = props
   const {
+    pagePath,
     featured,
     popularTopics,
     popular,
     latest
-
   } = pageContext
-
   return (
 
     <div className="standard-max-w">
       <MetaTag
-        path={path}
+        path={pagePath}
         title={`${ac_strings.site_title} - ${ac_strings.tagline}`}
         type="website"
         translatedUrls={[]}
@@ -144,6 +144,12 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
                 />
               </div>
             </div>
+            {process.env.LANG_CODE === "en" && (
+              <div className="px-4">
+                <Bookshop />
+              </div>
+            )}
+
           </div>
         </LazyLoad>
       </div>
@@ -157,6 +163,7 @@ export default IndexPage
 
 
 interface IHomePropsContent {
+  pagePath: string
   featuredPosts: IPostRes[]
   latest: IPostItem[]
   popular: IPostItem[]

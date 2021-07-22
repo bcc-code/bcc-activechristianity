@@ -2,7 +2,7 @@ const activeEnv = process.env.ACTIVE_ENV || process.env.NODE_ENV || "staging"
 const endpoints = require('./src/strings/static/endpoints')
 const {options:SitemapOptions} = require('./generators/Other/generateSitemap')
 const  {getIndexPostQuery,allPostQueries} = require('gatsby-source-ac/helpers')
-/* const generateFeed = require('./generators/Other/generateFeed') */
+const generateFeed = require('./generators/Other/generateFeed')
 console.log(activeEnv)
 require("dotenv").config({
   path: `.env.${activeEnv}`,
@@ -13,6 +13,7 @@ require("dotenv").config({
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
 
 const checkEnvVar = require('./check_env_var')
+
 checkEnvVar()
 
 
@@ -70,16 +71,9 @@ const plugins = [
       icon: './src/images/AC_Logo.png', // This path is relative to the root of the site.
     },
   },
-  { 
-    resolve: `gatsby-plugin-purgecss`,
-    options: {
-      printRejected: true, // Print removed selectors and processed file names
-      //develop: true, // Enable while using `gatsby develop`
-     tailwind: true, // Enable tailwindcss support
-      // whitelist: ['whitelist'], // Don't remove this selector
-      // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-      purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
-    }
+  {
+    resolve: `gatsby-plugin-feed`,
+    options: generateFeed.mainFeedOptions,
   },
   // this (optional) plugin enables Progressive Web App + Offline functionality
   // To learn more, visit: https://gatsby.app/offline
@@ -91,8 +85,42 @@ const plugins = [
 /*   
   "gatsby-plugin-webpack-bundle-analyser-v2", */
   
-  'gatsby-plugin-loadable-components-ssr',
-  {
+  'gatsby-plugin-loadable-components-ssr'
+];
+
+if (process.env.LISTEN_SECTION==="all"|| process.env.LISTEN_SECTION==="podcast_only"){
+  plugins.push({
+    resolve: `gatsby-plugin-feed`,
+    options: {
+
+      query: `{
+        site {
+          siteMetadata {
+            title
+            description
+            author
+            language
+          }
+        }
+      }`,
+      feeds:[generateFeed.podcastFeed],
+      
+    },
+  })
+}
+if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
+  plugins.push(
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: endpoints.gtm_id,
+      },
+    },
+  )
+}
+
+if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
+  plugins.push(  {
     resolve: `gatsby-plugin-algolia-search`,
     options: {
       appId: process.env.ALGOLIA_APP_ID,
@@ -101,13 +129,24 @@ const plugins = [
       queries: ()=>{return getIndexPostQuery(endpoints.api_url)},
       enablePartialUpdates: true
     }
-  }
-];
-
+  })
+}
 if (activeEnv === 'production') {
-  
+
 
   plugins.push(
+ 
+    { 
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        printRejected: true, // Print removed selectors and processed file names
+        //develop: true, // Enable while using `gatsby develop`
+       tailwind: true, // Enable tailwindcss support
+        // whitelist: ['whitelist'], // Don't remove this selector
+        // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
+        purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
+      }
+    },
     {
       resolve: `gatsby-plugin-s3`,
       options: {
@@ -130,7 +169,8 @@ if (activeEnv === 'production') {
     },
     {
       resolve:'gatsby-plugin-preact'
-    }
+    },
+    "gatsby-plugin-webpack-bundle-analyser-v2"
   )
 
   if( process.env.NO_FOLLOW==="true"){

@@ -5,6 +5,7 @@ import FeaturedCard from '@/components/PostItemCards/FeaturedCard'
 import LeftImg from '@/components/PostItemCards/LeftImg'
 import TopImg from '@/components/PostItemCards/TopImg'
 import './post-multi-col-layout.css'
+import MotionStagger from '@/components/Motion/StaggerChildren'
 export interface IOnePostByType {
     type: INavItem,
     post: IPostItem,
@@ -53,14 +54,14 @@ const OnePostByType: React.FC<IOnePostByType> = ({ type, post, postThumnailType,
 
 const PostMultiColLayout: React.FC<IPostByTypeList> = ({ types }) => {
     return (
-        <div className="desktop-multi-col-layout hidden sm:grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 grid-h80 mt-12">
+        <MotionStagger className="desktop-multi-col-layout hidden sm:grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 grid-h80 mt-12">
             {types.map((item, i) => {
 
                 return (
                     <OnePostByType {...item} key={i} />
                 )
             })}
-        </div>
+        </MotionStagger>
     )
 }
 

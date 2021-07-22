@@ -9,7 +9,7 @@ const signInModalSelector = createSelector(isSignInModalOpen, ({ status }) => st
 
 const SigninSignUpModal: React.FC = () => {
     const isSignInModalOpen = useSelector(signInModalSelector);
-    return isSignInModalOpen !== null ? <Modal option={isSignInModalOpen} /> : null
+    return isSignInModalOpen !== null ? <Modal option={isSignInModalOpen} isOpen={isSignInModalOpen !== null} /> : null
 }
 
 export default SigninSignUpModal

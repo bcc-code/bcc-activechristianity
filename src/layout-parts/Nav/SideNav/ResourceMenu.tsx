@@ -26,8 +26,11 @@ const SideMobile: React.FC<{
                         </SideNavItem>
                     )
                 })}
-
-
+                {process.env.LANG_CODE === "en" && (
+                    <SideNavItem href={ac_strings.banner_ebook_cta_url} className=" px-4 py-2" onClick={close}>
+                        {ac_strings.banner_ebook_bookshop || "Bookshop"}
+                    </SideNavItem>
+                )}
             </div>
 
         </SideNavWrapper>

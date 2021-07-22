@@ -5,9 +5,8 @@ import TextSizeTitle from '@/components/PostElements/TextSizeWClamp'
 import Bookmark from '@/components/PostElements/ToggleBookmark'
 import { AuthorLink, Views, ReadOrListenIcon } from '@/components/PostElements'
 import { IPostItem } from '@/types'
-
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
-
+import { PostListItemMotion } from '@/components/Motion/StaggerChildren'
 import { PostItemMediaImg } from '@/components/PostElements/PlayButton'
 
 import 'lazysizes';
@@ -44,7 +43,9 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
 
 
     return (
-        <div className={`${border !== false ? 'border-b border-gray-300 last:border-b-1 pb-4' : ''}`}>
+        <PostListItemMotion
+            className={`${border !== false ? 'border-b border-gray-300 last:border-b-1 pb-4' : ''}`}
+        >
             <div className="flex items-start sm:items-stretch w-full cursor-pointer mt-5">
                 <div className={`pr-4 flex flex-col w-8/12 sm:w-6/12 md:w-8/12 items-start `}>
                     {format && format[0] && (
@@ -96,7 +97,7 @@ const RightImgWDes: React.FC<IRightImgNoDes> = (props) => {
                     <Bookmark id={id} color="slate-dark" size="5" />
                 </div>
             </div>
-        </div>
+        </PostListItemMotion>
 
     )
 }

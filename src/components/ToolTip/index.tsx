@@ -37,9 +37,9 @@ const ShareIconPopper: React.FC<IProps> = ({ popperContent, children, placement 
     }
     return (
         <div ref={ToolTipEl} className="flex justify-center items-center">
-            <button onClick={handleShowPopper} onKeyDown={handleShowPopper} type="button" ref={setReferenceElement}>
+            <div onClick={handleShowPopper} onKeyDown={handleShowPopper} ref={setReferenceElement}>
                 {children}
-            </button>
+            </div>
 
             {showPopper && (
                 <div

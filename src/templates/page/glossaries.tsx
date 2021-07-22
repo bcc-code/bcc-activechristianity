@@ -19,7 +19,7 @@ function compare(a: INavItem, b: INavItem) {
 }
 
 
-const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { breadcrumb, title }, path, data }) => {
+const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { breadcrumb, title, pagePath }, data }) => {
     const { glossary } = data.ac
 
 
@@ -51,7 +51,7 @@ const GlossaryOverview: React.FC<IGlossaryOverviewProps> = ({ pageContext: { bre
                 translatedUrls={[]}
                 type="page"
                 breadcrumb={breadcrumb}
-                path={path}
+                path={pagePath}
             />
             <div className="standard-max-w-px mt-8 sm:mt-16">
                 <TaxonomyIndex groups={nameGroups} />
@@ -65,6 +65,7 @@ export default GlossaryOverview
 interface IGlossaryOverviewProps {
     path: string
     pageContext: {
+        pagePath: string
         title: string
         breadcrumb: INavItem[]
     }

@@ -2,7 +2,7 @@
 import { Middleware } from 'redux'
 
 import { setUser, setLogInError, setRegisterError, setLogout } from '@/state/action/authAction'
-import { closeSignInModal, openSignInModal } from '@/state/action'
+import { closeSignInModal, openSignInModal, openInfo } from '@/state/action'
 import { getUserLibrary } from '@/state/action/userAction'
 import { IRootState } from '@/state/types'
 import ac_strings from '@/strings/ac_strings.js'
@@ -18,7 +18,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             const { receivedEmail, consent } = action.payload
             acApiModule.then(res => {
                 const api = res.default
-                api.toggleNotifyAndGiveConsent(receivedEmail)
+                return api.toggleNotifyAndGiveConsent(receivedEmail)
                     .then(res => {
                         if (res.consent.success) {
                             return api.profile().then(userRes => {
@@ -48,7 +48,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             // fetch data from an API that may take a while to respond
             acApiModule.then(res => {
                 const api = res.default;
-                api.login(login_email, login_password, remember)
+                return api.login(login_email, login_password, remember)
                     .then((res: any) => {
                         if (res) {
                             const data = res.signIn
@@ -56,11 +56,12 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
                                 if (data.user.meta && data.user.meta.consented) {
                                     store.dispatch(setUser(data.user))
+                                    store.dispatch(openInfo({ text: "You logged in!" }))
                                     store.dispatch(closeSignInModal())
                                     store.dispatch(setLogInError(''))
                                 } else {
-                                    store.dispatch(setLogInError(''))
                                     store.dispatch(openSignInModal("giveConsent"))
+                                    store.dispatch(setLogInError(''))
                                 }
 
                             } else {
@@ -74,11 +75,13 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
                     })
                     .catch((err: any) => {
+                        console.log(typeof err)
                         const message = err[0] || err.message
-                        store.dispatch(setLogout())
+                        /* store.dispatch(setLogout()) */
                         store.dispatch(setLogInError(message))
                     })
             })
+            break
 
 
 
@@ -87,7 +90,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
             next(action)
 
             const { email: register_email, password: register_password, consent: register_consent, receiveEmail: register_receive_email } = action.payload
-
+            console.log('register')
             /* const reguster_data = { register_fullname, register_email, register_password, register_remember } */
             acApiModule.then(res => {
                 const api = res.default;
@@ -103,23 +106,25 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                             }
 
                         } else {
-                            store.dispatch(setRegisterError(ac_strings.error_something_went_wrong))
+
+                            store.dispatch(setLogInError(ac_strings.error_something_went_wrong))
                         }
                     })
                     .catch((err: any) => {
                         const message = err[0] || err.message
                         store.dispatch(setLogout())
-                        store.dispatch(setRegisterError(message))
+                        store.dispatch(setLogInError(message))
                     })
             })
 
         case 'INITIATE_LOGOUT':
             acApiModule.then(res => {
                 const api = res.default;
-                api
+                return api
                     .logout()
-                    .then(() => {
+                    .then((res) => {
                         store.dispatch(setLogout())
+                        store.dispatch(openInfo({ text: "You logged out!" }))
                     })
                     .catch((err: any) => {
                         console.log(err)

@@ -1,7 +1,7 @@
 
 import { Action } from 'redux'
-import { ADD_T_URLS_Payload, ISignInModalContentType } from '../types'
-import { IMedia, IBreadcrumb } from '@/types'
+import { ADD_T_URLS_Payload, ISignInModalContentType, } from '../types'
+import { IMedia, IBreadcrumb, IInfobar } from '@/types'
 
 interface ILogin {
   email: string
@@ -34,9 +34,6 @@ export const closeSignInModal = () => ({
   type: 'CLOSE_SIGNIN_MODAL'
 })
 
-export const fixPlayer: fixPlayer = () => ({
-  type: 'FIX_PLAYER'
-})
 
 export const togglePlayMedia: fixPlayer = () => ({
   type: 'FLOAT_PLAYER'
@@ -57,11 +54,6 @@ export const addTracks = (payload: IMedia[]) => ({
   payload
 })
 
-export const setMpHeight = (payload: number) => ({
-  type: 'SET_MP_HEIGHT',
-  payload
-})
-
 export const setCurrentMedia = (payload: IMedia) => ({
   type: 'SET_CURRENT_MEDIA',
   payload
@@ -74,4 +66,13 @@ export const setAutoPlay = (payload: boolean) => ({
 
 export const removeTracks = () => ({
   type: 'REMOVE_TRACKS'
+})
+
+export const openInfo = (payload: IInfobar) => ({
+  type: 'OPEN_INFO_BAR',
+  payload
+})
+
+export const closeInfo = () => ({
+  type: 'CLOSE_INFO_BAR'
 })

@@ -1,0 +1,51 @@
+.form-wrapper {
+	transition: height 1s ease;
+}
+
+.social-button {
+	display: inline-block;
+	margin-right: 4px;
+	margin-left: 4px;
+	width: 40px;
+	height: 40px;
+	display: relative;
+	border-radius: 40px;
+	transition: background-color 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.social-button:hover {
+	background-color: rgb(223, 223, 223, 0.5);
+}
+
+.social-button-facebook {
+	background-color: #3b5998;
+}
+
+.social-button-google {
+	background-color: rgb(223, 223, 223);
+	border: 1px solid #dee0e2;
+}
+
+.social-button-icon {
+	box-sizing: content-box;
+	width: 40px;
+	height: 40px;
+	top: 0;
+	left: 0;
+	background-repeat: no-repeat;
+	background-size: 50%;
+	background-position: center center;
+}
+
+.social-button-text {
+	display: none;
+}
+
+.social-button-icon-facebook {
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjRweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8cGF0aCBkPSJNMjIuNjY2NjY2NywwIEwxLjMzMzMzMzMzLDAgQzAuNTk2OTUzNjY3LC00LjUwOTAyNTAxZS0xNyA5LjAxODA1MDAxZS0xNywwLjU5Njk1MzY2NyAwLDEuMzMzMzMzMzMgTDAsMjIuNjY2NjY2NyBDOS4wMTgwNTAwMWUtMTcsMjMuNDAzMDQ2MyAwLjU5Njk1MzY2NywyNCAxLjMzMzMzMzMzLDI0IEwxMi44MiwyNCBMMTIuODIsMTQuNzIgTDkuNzAzMzMzMzMsMTQuNzIgTDkuNzAzMzMzMzMsMTEuMDg2NjY2NyBMMTIuODIsMTEuMDg2NjY2NyBMMTIuODIsOC40MiBDMTIuODIsNS4zMiAxNC43MTMzMzMzLDMuNjMgMTcuNDg2NjY2NywzLjYzIEMxOC40MTk2ODM2LDMuNjI3MjczMzEgMTkuMzUyMTYyNSwzLjY3NTEyMTI4IDIwLjI4LDMuNzczMzMzMzMgTDIwLjI4LDcgTDE4LjM2NjY2NjcsNyBDMTYuODYzMzMzMyw3IDE2LjU3LDcuNzE2NjY2NjcgMTYuNTcsOC43NjY2NjY2NyBMMTYuNTcsMTEuMDggTDIwLjE2NjY2NjcsMTEuMDggTDE5LjcsMTQuNzEzMzMzMyBMMTYuNTcsMTQuNzEzMzMzMyBMMTYuNTcsMjQgTDIyLjY2NjY2NjcsMjQgQzIzLjQwMzA0NjMsMjQgMjQsMjMuNDAzMDQ2MyAyNCwyMi42NjY2NjY3IEwyNCwxLjMzMzMzMzMzIEMyNCwwLjU5Njk1MzY2NyAyMy40MDMwNDYzLDQuNTA5MDI1MDFlLTE3IDIyLjY2NjY2NjcsMCBaIiBpZD0iUGF0aCIgZmlsbD0iI0ZGRkZGRiI+PC9wYXRoPgogICAgPC9nPgo8L3N2Zz4=);
+}
+
+.social-button-icon-google {
+	background-image: url("https://a3e811289234f4ab3b16db2d.blob.core.windows.net/bcc-sso/googleg_standard_color_128dp.png")
+}

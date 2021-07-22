@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby";
+import Link from '@/components/CustomLink'
 import { ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow'
 import ac_strings from '@/strings/ac_strings.js'
 import { getRandomArray } from '@/helpers/normalizers'

@@ -126,7 +126,7 @@ input:focus {
 .main-content p,
 .main-content ul,
 .main-content ol {
-    @apply font-light text-base font-serif leading-7 tracking-wide py-4;
+    @apply font-light text-base py-4;
 }
 
 .main-content a {
@@ -143,11 +143,11 @@ input:focus {
 }
 
 .main-content h1 {
-    @apply font-medium text-2xl leading-tight font-medium mt-8;
+    @apply font-medium text-3xl leading-tight font-medium;
 }
 
 .main-content h2 {
-    @apply font-medium text-3xl leading-normal font-semibold mt-8;
+    @apply font-medium text-2xl leading-tight font-semibold;
 }
 
 

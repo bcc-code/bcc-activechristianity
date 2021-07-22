@@ -7,6 +7,7 @@ import PostTitle from '@/components/PostElements/TextSizeWClamp'
 import SquareImg from '@/components/Images/Image1to1Rounded'
 import ac_strings from '@/strings/ac_strings.js'
 import { VolumeUpRoundedIcon } from '@/components/Icons/MUI/postIcons'
+import { PostListItemMotion } from '@/components/Motion/StaggerChildren'
 export interface IFeaturedCard extends IPostItem {
     showOnMobile?: boolean
     likes?: number
@@ -34,7 +35,7 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
     }
 
     return (
-        <div
+        <PostListItemMotion
 
             className={`${className ? className : ''} relative justify-end select-none block rounded-xxl sm:rounded-xl border border-gray-300 hover:shadow-md p-2 md:p-4 h-full w-full text-white overflow-hidden`}
 
@@ -88,7 +89,7 @@ const FeaturedCard: React.FC<IFeaturedCard> = ({ type, title, id, authors, likes
                 </div>
             </div >
 
-        </div >
+        </PostListItemMotion>
     )
 }
 

@@ -7,6 +7,7 @@ import InputLeftRight from '@/components/Pagination/InputLeftRight'
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { RightImgListPlaceHolder } from '@/components/Loader/PlaceHolders'
 import { trimSlug } from '@/helpers/index-js'
+import MotionStagger from '@/components/Motion/StaggerChildren'
 export interface IPostList {
     fetchedPost?: boolean
     audio?: boolean
@@ -65,26 +66,28 @@ const PostList: React.FC<IPostList> = (props) => {
                     </div>
                 </div>
             )}
-            {fetchedPost ? (<div>
-                {posts.map((p, k) => {
-                    return (
-                        <RightImgWDes key={k} {...p} />
+            {fetchedPost ? (
+                <div>
+                    {posts.map((p, k) => {
+                        return (
+                            <RightImgWDes key={k} {...p} />
 
-                    )
-                })}
-            </div>) : <FetchPostsFromSlugs
+                        )
+                    })}
+                </div>
+            ) : <FetchPostsFromSlugs
                 slugs={posts}
                 layout="list"
                 render={({ posts: postList }) => {
                     return PostList.length > 0 ? (
-                        <div>
+                        <MotionStagger>
                             {postList.map((p, k) => {
                                 return (
                                     <RightImgWDes key={k} {...p} />
 
                                 )
                             })}
-                        </div>
+                        </MotionStagger>
                     ) : (
                         <RightImgListPlaceHolder count={12} />
                     )

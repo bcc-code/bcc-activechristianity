@@ -53,7 +53,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
     }
     const {count,total}= result.data.ac.authors.paginatorInfo
     const pageCount=Math.ceil(total/count)
-    console.log("Generating authros")
+    console.log("Generating authors")
     const pageIndex= [];
 
     for (let i = 1; i <= pageCount; i++) {
@@ -86,6 +86,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
                               path:pagePath,
                               component:path.resolve(template),
                               context: {
+                                pagePath,
                                 pageType:'contributor',
                                 updated_at:firstDate,
                                 posts: allPosts.slice(i,i+perPage),
@@ -109,6 +110,10 @@ module.exports = function generateTaxonomies(actions, graphql) {
                       console.log('unexpected response')
                       console.log(res)
                     }
+            })
+            .catch(err=>{
+              console.log(getPageCountQuery)
+              console.log(err)
             })
         }))
 

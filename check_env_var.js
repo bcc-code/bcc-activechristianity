@@ -17,9 +17,9 @@ if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
 module.exports = function (){
     const missing = []
     core.forEach(item=>{
-        if(process["GTM_TAG"]){
+/*         if(process["GTM_TAG"]){
             throw new Error('Please remove GTM Tag')
-        }
+        } */
         if (!process.env[item]){
             missing.push(item)
         }

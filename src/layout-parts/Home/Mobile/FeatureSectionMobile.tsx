@@ -3,7 +3,7 @@ import shortid from 'shortid'
 import RightImg from '@/components/PostItemCards/RightImg'
 import { getRandomArray } from '@/helpers/normalizers'
 import { ITopicPostItems, IPostItem } from '@/types'
-
+import MotionStagger from '@/components/Motion/StaggerChildren'
 const FeatureSection: React.FC<{ topicPosts: ITopicPostItems[] }> = ({ topicPosts }) => {
 
     let postSlugs: IPostItem[] = []
@@ -16,13 +16,15 @@ const FeatureSection: React.FC<{ topicPosts: ITopicPostItems[] }> = ({ topicPost
     }, [])
     return (
 
-        <div className="px-4">
+        <MotionStagger
+            className="px-4"
+        >
             {posts.map(item => {
                 return (
                     <RightImg {...item} key={shortid()} />
                 )
             })}
-        </div>
+        </MotionStagger>
 
 
     )

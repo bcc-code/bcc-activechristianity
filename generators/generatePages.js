@@ -26,7 +26,8 @@ const query = `{
 module.exports = function generatePages(actions, graphql) {
   const { createPage } = actions
 
-  return graphql(query).then(result=>{
+  return graphql(query)
+  .then(result=>{
     console.log("Generating pages")
     if (result.errors){
       result.errors.forEach(e => console.error(e.toString()))
@@ -78,10 +79,12 @@ module.exports = function generatePages(actions, graphql) {
       }
 
       _.each(buildPages,page=>{
+        const pagePath=page.slug
         createPage({
-          path: `${page.slug}`,
+          path: pagePath,
           component: path.resolve(`./src/templates/page/${page.templateName}.tsx`),
           context:{
+            pagePath,
             title:page.title,
             slug:page.slug
           },
@@ -101,34 +104,14 @@ module.exports = function generatePages(actions, graphql) {
           }
       })
 
-     
-      // themes pages
- /*      _.each(parentIds.themes.children,page=>{
 
-        let context = {
-          ...page,
-            breadcrumb:[
-              {
-                name:page.title,
-                to:page.slug
-              }
-            ]
-        }
-        const themePath=`${ac_strings.slug_theme}/${page.slug}`
-        console.log(themePath)
-        createPage({
-          path: themePath,
-          component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
-          context,
-        })
-      }) */
 
-      
-
+    
  // pages
       _.each(parentIds.pages.children,page=>{
-
+        const pagePath= `${page.slug}`
         let context = {
+          pagePath,
           ...page,
             breadcrumb:[
               {
@@ -137,8 +120,9 @@ module.exports = function generatePages(actions, graphql) {
               }
             ]
         }
+        
         createPage({
-          path: `${page.slug}`,
+          path:pagePath,
           component: path.resolve(`./src/templates/page/${parentIds.pages.templateName}.tsx`),
           context,
         })
@@ -146,24 +130,22 @@ module.exports = function generatePages(actions, graphql) {
 
       // about us
       console.log('building about')
+      const pagePath=`${aboutMain.slug}`
       createPage({
-        path: `${aboutMain.slug}`,
+        path: pagePath,
         component: path.resolve(`src/templates/page/about-us.tsx`),
         context:{
+          pagePath,
           title:aboutMain.title,
           childPages:parentIds.about.children,
           breadcrumb:[]
         },
       })
-
-
-
-
-
     }
+  }).catch(err=>{
+    console.log(query)
+    console.log(err)
   })
-
   
-
 }
 

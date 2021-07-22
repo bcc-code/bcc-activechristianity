@@ -5,8 +5,8 @@ import ac_strings from '@/strings/ac_strings'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import UserNav from '@/layout-parts/Nav/User'
 import { LaunchIcon } from '@/components/Icons/MUI/navIcons'
-import { topLink } from '@/strings/generated/menus.json'
-
+import menus from '@/strings/generated/menus.json'
+const { topLink } = menus
 const TopDesktop: React.FC = () => {
     const [isMobile, setIsMobile] = React.useState(typeof window !== "undefined" && window.innerWidth < 640)
 
@@ -31,7 +31,7 @@ const TopDesktop: React.FC = () => {
                 </a>
                 <div className="hidden sm:flex items-center text-sm">
                     <UserNav className="pr-4" />
-                    <a target="_blank" href={`${ac_strings.slug_contact}`} className={"py-2 pr-4 hover:text-ac-slate"}>
+                    <a target="_blank" href={`/${ac_strings.slug_contact}`} className={"py-2 pr-4 hover:text-ac-slate"}>
                         {ac_strings.contact}
                     </a>
                     <LanguageDropdown className="border-l pl-2 p-0" />

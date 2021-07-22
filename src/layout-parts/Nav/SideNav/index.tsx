@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import LanguageDropdown from '@/layout-parts/Nav/Languages'
 import SocialPlatformas from '@/layout-parts/Nav/SocialPlatforms'
 import { SideNavItem } from '@/components/Button'
+import { confirm } from '@/components/Confirm'
 import { openSignInModal } from '@/state/action'
 import { initiateLogout } from '@/state/action/authAction'
 import SideNavWrapper from './SideNavWrapper'
@@ -12,7 +13,8 @@ import ac_strings from '@/strings/ac_strings.js'
 
 import UserMenu from './UserMenu'
 import ResourceMenu from './ResourceMenu'
-import { side, sideResource, slugUser } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { side, sideResource, slugUser } = menus
 import { loggedInSelector } from '@/state/selectors/user'
 
 const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) => {
@@ -35,12 +37,11 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
         closeUserMenu()
 
     }
-    const handleLogout = () => {
-        const r = confirm("You are logging out now");
-        if (r == true) {
-            closeUserMenu()
+    const handleLogout = async () => {
+        if (await confirm("Are your sure?")) {
             dispatch(initiateLogout())
-
+            setOpenUserMenu(false)
+            setSideNavOpen(false)
         }
     }
 
@@ -121,18 +122,18 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen, }) =>
 
                     </div>
                 ) : (
-                        loggedIn === "loading" ? (
-                            <div className="px-2">
-                                {ac_strings.loading}
-                            </div>
-                        ) : (
-                                <div className={`flex flex-col`}>
-                                    <SideNavItem onClick={handleSignIn}>{ac_strings.login}</SideNavItem>
-                                    <SideNavItem onClick={handleSignUp}>{ac_strings.register}</SideNavItem>
-                                </div>
+                    loggedIn === "loading" ? (
+                        <div className="px-2">
+                            {ac_strings.loading}
+                        </div>
+                    ) : (
+                        <div className={`flex flex-col`}>
+                            <SideNavItem onClick={handleSignIn}>{ac_strings.login}</SideNavItem>
+                            <SideNavItem onClick={handleSignUp}>{ac_strings.register}</SideNavItem>
+                        </div>
 
-                            )
-                    )}
+                    )
+                )}
 
             </div>
 

@@ -61,6 +61,7 @@ module.exports = function generateEbooks(actions, graphql) {
           path: basePath,
           component: path.resolve(template),
           context: {
+            pagePath:basePath,
             title:ebook.title,
             slug: ebook.slug,
             ebook,
@@ -69,5 +70,9 @@ module.exports = function generateEbooks(actions, graphql) {
         })
       })
   
+    })
+    .catch(err=>{
+      console.log(query)
+      console.log(err)
     })
   }

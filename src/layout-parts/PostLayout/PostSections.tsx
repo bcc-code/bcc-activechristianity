@@ -114,7 +114,7 @@ export const AuthorsFollowAndPosts: React.FC<{ authors: IPostAuthors[], postId: 
             <div className="border-ac-gray border-b pt-6">
                 {authors?.map(item => {
                     return (
-                        <AuthorFollowSection authors={item} />
+                        <AuthorFollowSection key={shortid()} authors={item} />
                     )
                 })}
             </div>
@@ -155,7 +155,7 @@ export const AuthorBookmarkShareSection: React.FC<IShareLikesViewsProps & { auth
             <div className="flex flex-col">
                 {authors?.map(item => {
                     return (
-                        <AuthorFollowSection authors={item} />
+                        <AuthorFollowSection key={shortid()} authors={item} />
                     )
                 })}
                 {formats && formats.length > 0 && (

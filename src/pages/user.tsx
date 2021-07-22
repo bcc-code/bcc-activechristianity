@@ -13,8 +13,8 @@ import ChangePassword from "@/layout-parts/Form/ChangePassword"
 import DeleteProfile from "@/layout-parts/Form/Delete"
 import ac_strings from '@/strings/ac_strings.js'
 import { IPage } from '@/types'
-import { menusItems, slugUser, userMenuItems } from '@/strings/generated/menus.json'
-
+import menus from '@/strings/generated/menus.json'
+const { slugUser, userMenuItems } = menus
 
 const componentMap = {
     "bookmarked": Bookmarked,

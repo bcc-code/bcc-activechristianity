@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { INavItem, IImage, IEbook, IPostItem, IPlaylist, } from "@/types"
 import { fetchEbookFromSlug, fetchPlaylistFromSlug, fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData'
-
-import DesktopHeaderPost from '@/layout-parts/Home/HeaderPost'
+import Link from '@/components/CustomLink'
+import endpoints from '@/strings/static/endpoints'
+import DesktopHeaderPost from '@/components/PostItemCards/FeaturedPost'
 import Playlist from '@/components/ScrollSection/Playlist'
 
 export interface IPageFeaturedPost {
@@ -66,14 +67,16 @@ export interface IPagePost {
 
 export type IPageCompTypes = IPagePost | IPageFeaturedItems | IPageTextComp | IPostItems | IPageEmbedComp
 
-const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
-    type,
-    id,
-    image,
-    slug,
-    sub,
-    title
-}) => {
+const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = (props) => {
+
+    const {
+        type,
+        id,
+        image,
+        slug,
+        sub,
+        title
+    } = props
 
     const [loadedEbook, setLoadedEbook] = React.useState<IEbook | undefined>(undefined)
     const [loadedPost, setLoadedPost] = React.useState<IPostItem | undefined>(undefined)
@@ -116,6 +119,7 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
         } else if (type == "post") {
             fetchOneLocalPostFromSlug(slug).then(res => {
                 if (res) {
+                    console.log(res)
                     const toAdd = { ...res, ...modified }
                     setLoadedPost(toAdd)
                 }
@@ -124,7 +128,26 @@ const FeaturedItem: React.FC<IPageFeaturedPost & { withBg?: boolean }> = ({
     }
 
     if (loadedPost) {
-        return <DesktopHeaderPost {...loadedPost} />
+        const bgImg = ''
+        const darkbg = true
+        return (
+            <div style={{ backgroundImage: `url(${bgImg ? bgImg : `https://source.unsplash.com//collection/9303016/1600x800`})`, backgroundSize: "cover" }}>
+                <div className="standard-max-w" style={{ minHeight: "500px", paddingTop: "72px" }}>
+                    <div className={`px-4 w-7/12 ${darkbg ? 'text-white' : ''}`}>
+                        <span className="uppercase">{loadedPost.format && loadedPost.format[0] ? loadedPost.format[0].name : null}</span>
+                        <h2 className="text-6xl font-bold pb-12">{loadedPost.title}</h2>
+                        <p className="text-2xl pb-12">{loadedPost.excerpt}</p>
+                        <Link
+                            className="font-bold bg-white px-8 py-4 rounded-lg text-lg text-ac-slate-dark"
+                            to={loadedPost.slug}
+                        >
+                            {loadedPost.types && loadedPost.types[0] ? loadedPost.types[0].name : 'Learn more'}
+                        </Link>
+                    </div>
+                </div>
+            </div >
+        )
+        /*         return <DesktopHeaderPost {...loadedPost} videoUrl={loadedPost && loadedPost.media && loadedPost.media.video ? loadedPost.media.video.src : null} /> */
     } else if (loadedPlaylist) {
         return <Playlist {...loadedPlaylist} />
     } else {

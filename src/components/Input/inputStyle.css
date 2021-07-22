@@ -1,0 +1,7 @@
+.input-wrap {
+    transition: border-color 0.8s;
+}
+
+.input-wrap::placeholder {
+    color: #a0a0a0;
+}

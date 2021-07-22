@@ -92,7 +92,7 @@ export const onClientEntry = () => {
 
     if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
 
-      (function(){
+/*       (function(){
         window['GoogleAnalyticsObject'] = 'ga';
         if(!window['ga'] ){
           window['ga'] = function(){
@@ -150,7 +150,7 @@ export const onClientEntry = () => {
               // repeat above for multiple fonts
             }
             })();
-                }
+                } */
     }
     
 
@@ -164,7 +164,7 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
 /*     if(window.gtag){
       window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
     } */
-    const pathname=typeof location.pathname ==='string' && location.pathname==='/'?location.pathname:location.pathname.replace(/\/$/, "")
+/*     const pathname=typeof location.pathname ==='string' && location.pathname==='/'?location.pathname:location.pathname.replace(/\/$/, "")
       setTimeout(()=>{
         if(window.ga){
          window.ga('send', {
@@ -176,7 +176,7 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
         if(window.fbq){
           window.fbq('track', 'PageView');
         }
-      },500)
+      },500) */
     
   }
 }

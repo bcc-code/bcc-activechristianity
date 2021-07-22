@@ -9,12 +9,10 @@ import Row3ColAndXScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
 import shortid from 'shortid'
 /* const AudioPlayer */
 import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
-import AudioMediaPlayer from '@/components/MediaPlayer/AudioBanner'
-const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayer/VideoPlayer'))
-const Content = loadable(() => import('@/components/Content'))
+import AudioMediaPlayer from '@/components/MediaPlayerNew/AudioBanner'
+const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayerNew/VideoPlayer'))
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'))
 const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/DesktopRightBar'))
-const MobileBottomSlider = loadable(() => import('@/layout-parts/PostLayout/MobileBottomSlider'))
 import PostContent from '@/components/Content/PostContent'
 import { PostH1 } from '@/components/Headers'
 
@@ -37,6 +35,12 @@ import { IPostItem, ITopicPostSlugs, INavItem } from '@/types'
 
 import ac_strings from '@/strings/ac_strings.js'
 
+const addScript = (url: string) => {
+    const script = document.createElement("script")
+    script.src = url
+    script.async = true
+    document.body.appendChild(script)
+}
 
 type IMediaType = "audio" | "video"
 
@@ -61,8 +65,7 @@ import { currentMediaSelector } from '@/state/selectors/other'
 import { loggedInSelector } from '@/state/selectors/user'
 
 export const PostLayout: React.FC<IPostProps> = (post) => {
-    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
-    const [showMobileImage, setShowMobileImage] = React.useState(false)
+
     const {
         id,
         acId,
@@ -89,17 +92,20 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         formatPosts,
         updated_at
     } = post
-
+    const [isWindowLoaded, setIsWindowLoaded] = React.useState(false)
     const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | "none">(mediaTypesDefault.default)
     const [showBottomSlider, setShowBottomSlider] = React.useState(false)
     const isCurrentMedia = useSelector(currentMediaSelector)
     const isLoggedIn = useSelector(loggedInSelector)
     const contentEl = React.useRef<HTMLDivElement>(null);
     const lastScroll = React.useRef(null);
+    const triggeredTagger = React.useRef<null | true>(null);
 
     React.useEffect(() => {
+
+
+        lastScroll.current = Date.now() + 5000
         if (isLoggedIn === "success") {
-            lastScroll.current = Date.now() + 5000
             if (id) {
                 acApiModule.then(res => {
                     const acApi = res.default
@@ -111,12 +117,39 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                 })
 
             }
-            const handleScroll = (e: any) => {
-                if (lastScroll.current < Date.now()) {
-                    lastScroll.current = Date.now() + 5000
-                    if (showBottomSlider !== true) {
-                        setShowBottomSlider(true)
+        }
+        const handleScroll = (e: any) => {
+            if (triggeredTagger.current !== true && window.scrollY > 200) {
+                if (typeof window !== 'undefined') {
+
+                    if (process.env.LANG_CODE === "en" && typeof window.refTagger === "undefined") {
+                        window.refTagger = {
+                            settings: {
+                                bibleVersion: "NKJV",
+                                addLogosLink: false,
+                                appendIconToLibLinks: false,
+                                caseInsensitive: true,
+                                convertHyperlinks: false,
+                                libronixBibleVersion: "NKJV",
+                                libronixLinkIcon: "light",
+                                linksOpenNewWindow: false,
+                                tagChapters: true,
+                                useTooltip: true
+                            }
+                        }
+                        console.log('add refTagger')
+                        addScript('/scripts/RefTagger.js')
+                        triggeredTagger.current = true
                     }
+
+                }
+            }
+            if (lastScroll.current < Date.now()) {
+                lastScroll.current = Date.now() + 5000
+                /* if (showBottomSlider !== true) {
+                    setShowBottomSlider(true)
+                } */
+                if (isLoggedIn === "success") {
                     if (id) {
                         acApiModule.then(res => {
                             const api = res.default
@@ -130,13 +163,19 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     }
                 }
             }
-            const debounceScroll = debounce(handleScroll, 1000)
-            window.addEventListener('scroll', debounceScroll);
-
-            return () => {
-                window.removeEventListener('scroll', debounceScroll)
-            };
         }
+        const debounceScroll = debounce(handleScroll, 500)
+        window.addEventListener('scroll', debounceScroll);
+        if (process.env.LANG_CODE === "en") {
+
+            setTimeout(() => {
+                window.refTagger && window.refTagger.tag && window.refTagger.tag();
+            }, 100)
+
+        }
+        return () => {
+            window.removeEventListener('scroll', debounceScroll)
+        };
 
     }, [post.slug])
 
@@ -148,14 +187,11 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     console.log('add components after window load')
                     setIsWindowLoaded(true)
                 }, 5 * 1000)
-                setTimeout(() => {
-                    setShowMobileImage(true)
-                }, 2000)
+
             }
             if (document.readyState === 'complete') {
                 console.log('the page is loaded previously')
                 setIsWindowLoaded(true)
-                setShowMobileImage(true)
 
             } else {
                 window.addEventListener('load', handleWindowLoaded);
@@ -165,7 +201,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
         }, [])
     const defaultHeight = {
         "audio": 88,
-        "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) + 60 : 250,
+        "video": typeof window !== 'undefined' ? ((9 / 16) * (window.innerWidth)) : 250,
         "none": typeof window !== 'undefined' ? (window.innerWidth / 2) - 30 : 135
     }
 
@@ -183,13 +219,7 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                     isPlayingAudio={!!isCurrentMedia.audio}
                 />
             )}
-            {/*             {isWindowLoaded === true && isMobile && (
-                <MobileBottomSlider
-                    isPlayingMedia={!!isCurrentMedia.audio}
-                    topicPosts={topicPosts}
-                    formatPosts={formatPosts}
-                />
-            )} */}
+
 
             <div className="fixed sm:relative w-full z-50">
                 {currentMediaType === "video" && media.video && media.video.src && (
@@ -223,28 +253,23 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         className={`fixed transition-transform background-image w-full`}
                         style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
                     >
-                        {
-                            showMobileImage === true ? (
-                                <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                            ) : (
-                                <img src={image.dataUri} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                            )
-                        }
+                        <LazysizesFeaturedImage style={{ objectFit: "cover" }} {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
                     </div>
 
                 )}
             </div>
-            <div className='w-full sm:hidden relative' style={{ top: "60px", height: `${currentHeigt}px` }}>
+            <div className='w-full sm:hidden relative' style={{ top: "0px", height: `${currentHeigt}px` }}>
 
             </div>
 
 
-            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-4 z-50 flex justify-center lg:justify-start standard-max-w " >
+            <div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-6 z-50 flex justify-center lg:justify-start standard-max-w " >
                 <div className="max-w-full sm:max-w-tablet relative">
                     <svg className="mx-auto mb-5 sm:hidden" width="44" height="5" viewBox="0 0 44 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="44" height="5" rx="2.5" fill="#D4D4D4" />
                     </svg>
                     <PostH1 title={title} />
+
                     <p className="text-ac-gray-dark mb-6 sm:mb-0 sm:font-medium sm:text-lg leading-normal" dangerouslySetInnerHTML={{ __html: excerpt }} />
                     <div className="border-b w-1/6 my-8 border-ac-gray"></div>
                     <div className="pb-6 bg-white text-sm">
@@ -257,34 +282,18 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
 
                     {(currentMediaType === "audio") && (
-                        <div className="block relative sm:pt-10 mb-12 ">
+                        <div className="block relative sm:pt-10 mb-4 sm:mb-8">
                             <TwoToOneImg image={image} rounded alt={seoTitle} />
 
                         </div>
                     )}
                     {(currentMediaType === "none") && (
-                        <div className="hidden sm:block relative sm:pt-10 mb-12 ">
+                        <div className="hidden sm:block relative sm:pt-10 mb-4 sm:mb-8">
                             <TwoToOneImg image={image} rounded alt={seoTitle} />
                         </div>
                     )}
 
                     <div>
-                        {/*                  {
-                            isWindowLoaded === true ? (
-                                <div ref={contentEl}>
-                                    <PostContent
-                                        content={content}
-                                        glossary={glossary}
-                                        slug={slug}
-                                        title={title}
-                                    />
-                                </div>
-                            ) : (
-                                    <Content
-                                        content={content}
-                                    />
-                                )
-                        } */}
                         <div ref={contentEl}>
                             <PostContent
                                 content={content}
@@ -295,14 +304,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                         </div>
 
                         {credits && (
-                            <Content
-                                content={credits}
-                            />
+                            <div className="text-sm text-gray-600" dangerouslySetInnerHTML={{ __html: credits }}>
+
+                            </div>
                         )}
                         {/*  <div className="text-gray-500 text-sm uppercase py-6">Last modified: {updated_at.split(" ")[0]}</div> */}
                         <div className="flex flex-wrap border-ac-gray py-6">
                             {topics && topics?.map(item => (
-                                <ToggleFollowWithName {...item} />
+                                <ToggleFollowWithName key={item.id} {...item} />
                             ))}
                         </div>
                         {isWindowLoaded === true && (
@@ -319,15 +328,18 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
                                 />
                             </div>
                         )}
-
-
                         {isWindowLoaded === true && (
                             <div>
-                                {allInterestedPosts && <RecommendedPosts
-                                    postId={acId ? acId : id}
-                                    topics={topicPosts}
-                                    readMorePosts={allInterestedPosts}
-                                />}
+                                {allInterestedPosts && (
+                                    <LazyLoad>
+                                        <RecommendedPosts
+                                            postId={acId ? acId : id}
+                                            topics={topicPosts}
+                                            readMorePosts={allInterestedPosts}
+                                        />
+
+                                    </LazyLoad>
+                                )}
 
                                 {authors && authorsPosts && (
                                     <LazyLoad>

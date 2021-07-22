@@ -1,24 +1,32 @@
 import * as React from 'react';
 
 import { asImageWDataUri } from '@/components/Cards/BgImgTopicCard'
-import { SectionTitleDesktopAndMobile } from '@/components/Headers'
+import { Button } from '@/components/Button'
+import BookShop from '@/layout-parts/Banner/BookShop'
+
+import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended'
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture'
 
-import TopicRowAndHorizontalScroll from '@/components/List/Combo/TopicRowAndHorizontalScroll'
+import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
+import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
+
+import PlaylistImg from '@/images/format-Playlist-02.jpg'
+
+import RightImgPost from '@/components/PostItemCards/RightImg'
+import Row3ColHorizontalScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
+
 import SquareCard from '@/components/Cards/SquareCategoryCard'
 import SquareCardSmall from '@/components/Cards/SquareCategoryCardLong'
 import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg'
-import RightImgPost from '@/components/PostItemCards/RightImg'
+import { SectionTitleDesktopAndMobile } from '@/components/Headers'
+
 import TitleLink from '@/components/PostItemCards/TitleLink'
-import Row3ColHorizontalScroll from '@/components/List/Combo/Row3Col-HorizontalScroll'
+import TopicRowAndHorizontalScroll from '@/components/List/Combo/TopicRowAndHorizontalScroll'
+
 import ac_strings from '@/strings/ac_strings.js'
-import shortid from 'shortid'
-import { FetchPostsFromSlugs } from '@/HOC/FetchPosts'
 import { getRandomArray } from '@/helpers/normalizers'
-import PlaylistImg from '@/images/format-Playlist-02.jpg'
+import shortid from 'shortid'
 import { ITopic, ITopicPostSlugs } from '@/types';
-import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended'
-import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix'
 
 const ExploreLayout: React.FC<{
     topics: ITopic[]
@@ -172,6 +180,7 @@ const ExploreLayout: React.FC<{
 
                         ))}
                     </div>
+
                 </div>
             ) : (
                 <>
@@ -221,19 +230,24 @@ const ExploreLayout: React.FC<{
                         </div>
                     </div>
                 </>
+
+            )}
+            {process.env.LANG_CODE === "en" && (
+                <div className="pt-6">
+                    <SectionTitleDesktopAndMobile
+                        name={ac_strings.banner_ebook_title}
+                    />
+                    <div className="px-4 text-sm">{ac_strings.banner_ebook_content}</div>
+                    <Button
+                        className="text-sm sm:text-base mx-4 mt-4 text-ac-secondary"
+                        href={ac_strings.banner_ebook_cta_url}
+                    >
+                        {ac_strings.banner_ebook_cta_label}
+                    </Button>
+                </div>
             )}
 
 
-
-
-            {/*             <div className="pt-6">
-                <SectionTitleDesktopAndMobile
-                    name={ac_strings.recommend_for_you}
-
-                />
-                {recommendFormats && <ExploreFormatRecommended slugs={recommendFormats.map(item => item.slug)} />}
-                <FetchRecommendMix topics={topics} />
-            </div> */}
         </div>
     )
 }

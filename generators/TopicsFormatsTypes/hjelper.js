@@ -1,15 +1,11 @@
 const {postQuery} = require('gatsby-source-ac/helpers')
 const path = require('path')
 const ac_strings = require('../../src/strings/ac_strings')
-const {formatsAll,typesAll} = require('../../src/strings/static/topic-ids')
 const listTemplateQuery = 'src/templates/archive/post-list-query.tsx'
 const listTemplateStatic = 'src/templates/archive/post-list.tsx'
-const videoTemplate = 'src/templates/archive/video-list.tsx'
 const {  normalizePostRes } = require('../../src/helpers/normalizers')
 const perPage= 12
 const languagePostQuery = postQuery
-
-
 
 module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
   ac {
@@ -121,7 +117,7 @@ module.exports.createArchivePages =async function ({
         if(i===1){
             pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
         }
-        console.log(pagePath)
+
         const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
       
         const paginate = {
@@ -137,7 +133,6 @@ module.exports.createArchivePages =async function ({
             const posts = res.data.ac.topic.allPosts.data
             
             if(i===1 && posts.length>0){
-              console.log(posts[0].updated_at)
               firstPostsDate=posts[0].updated_at
 
             }
@@ -148,11 +143,16 @@ module.exports.createArchivePages =async function ({
           }
 
         })
-
+        .catch(err=>{
+          console.log(query)
+          console.log(err)
+        })
+        console.log(`createArchivePages ${pagePath}`)
             createPage({
               path:pagePath,
               component,
               context: {
+                pagePath,
                 fetchedPost: isType,
                 pageType:isType?"category":"topic",
                 type:node.topicType,
@@ -185,6 +185,7 @@ module.exports.createSubTopicPages=({
       console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
     } else {
       const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
+      console.log(`createSubTopicPages ${baseUrl}`)
       const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
       pageBreadcrumb.push( {
         name:subTopic.name,
@@ -199,8 +200,6 @@ module.exports.createSubTopicPages=({
       
       for (let i = 0; i <=1; i += perPage, currentPage++) {
         if(i===1 && allPosts.length>0){
-          console.log(allPosts[0])
-          console.log(allPosts[0].updated_at)
           firstPostsDate=allPosts[0].updated_at
 
         }

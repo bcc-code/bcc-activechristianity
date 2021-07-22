@@ -1,4 +1,5 @@
-import React, { Profiler } from 'react'
+import React from 'react'
+import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router';
 /* import queryString from 'query-string'; */
 import loadable from '@loadable/component'
@@ -43,13 +44,8 @@ const Preview = () => {
     }
 
     const handleSubmitPreivewForm = () => {
-        if (selectedType?.value === "post") {
-            getPost(inputId)
-        }
-
-        if (selectedType?.value === "page") {
-            getPage(inputId)
-        }
+        let path = `/preview?id=${inputId}&type=${selectedType.value}`
+        navigate(path)
     }
     const getPage = (id: string) => {
         acApiModule.then(res => {
@@ -141,7 +137,7 @@ const Preview = () => {
             getPage(id)
 
         }
-    }, [])
+    }, [type, id])
     return !loading ? (
         <main className="">
             <div className="max-w-tablet mx-auto"></div>
@@ -154,7 +150,8 @@ const Preview = () => {
             {page && (
                 <div>
                     <MetaTag title={page.title} translatedUrls={[]} type="page" breadcrumb={page.breadcrumb} path={page.slug} />
-                    <LayoutH1Wide title={page.title} />
+                    {/* <LayoutH1Wide title={page.title} /> */}
+
                     <CustomizedPageComponent items={page.customizedPageComponents} slug={page.slug} title={page.title} />
                     <div className="w-full flex justify-center py-6">
                         <Link to={`${ac_strings.slug_topic}/${page.slug}`} className="bg-ac-slate-dark px-4 py-2 rounded text-white text-lg">

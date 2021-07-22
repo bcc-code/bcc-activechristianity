@@ -3,9 +3,12 @@ import Link from '@/components/CustomLink'
 import { useDispatch } from 'react-redux'
 import ac_strings from '@/strings/ac_strings.js'
 import { openSignInModal } from '@/state/action'
-import { slugUser } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
 import HOCLoginCheck from '@/HOC/LogInCheck'
-import { setLogout } from '@/state/action/authAction'
+import { confirm } from '@/components/Confirm'
+import { initiateLogout } from '@/state/action/authAction'
+
+const { slugUser } = menus
 
 interface IUserNav {
     className?: string
@@ -35,12 +38,10 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
         }
     }
 
-    const handleLogout = () => {
-        const r = confirm("You are logging out now");
-        if (r == true) {
-            dispatch(setLogout())
+    const handleLogout = async () => {
+        if (await confirm("Are your sure?")) {
+            dispatch(initiateLogout())
         }
-
     }
 
     const notLoggedIn = (

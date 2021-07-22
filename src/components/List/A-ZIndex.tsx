@@ -1,7 +1,8 @@
 import React from 'react'
 import { ITopicNavItem } from '@/types'
 import Link from '@/components/CustomLink'
-import { SlateDarkUnfollowButton, ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow.tsx'
+import MotionStagger from '@/components/Motion/StaggerChildren'
+import { SlateDarkUnfollowButton, ToggleBookmarkIconOnly } from '@/components/PostElements/TopicToggleFollow'
 interface ILinkGroup {
     name: string
     items: ITopicNavItem[]
@@ -58,16 +59,16 @@ const TaxonomyIndex: React.FC<IProps> = ({ groups }) => {
     /*     const mobileFlexItem = groups.map(item => ({title: item.name, topic: chunkArray(item.items, 4) })) */
     return (
         <div className="w-full">
-            <div className="hidden sm:block staggered-boxes standard-max-w-px">
+            <MotionStagger className="hidden sm:block staggered-boxes standard-max-w-px">
                 {desktopFlexItem}
-            </div>
-            <div className="flex flex-col sm:hidden pt-4 mx-4">
+            </MotionStagger>
+            <MotionStagger className="flex flex-col sm:hidden pt-4 mx-4">
                 {desktopFlexItem.map((item, k) => (
                     <div className="mb-4" key={k}>
                         {desktopFlexItem}
                     </div>
                 ))}
-            </div>
+            </MotionStagger>
         </div>
     )
 }

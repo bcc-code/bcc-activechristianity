@@ -10,7 +10,8 @@ import { PodcastPageHeadSection } from '@/templates/page/podcast-intro'
 import livingTheGospel from '@/strings/static/podcastProperties'
 
 import ac_strings from '@/strings/ac_strings.js'
-import { menusItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
+const { menusItems } = menus
 
 
 const PodcastHeader = () => {

@@ -10,8 +10,9 @@ import { formatsAll } from '@/strings/static/topic-ids'
 import { getAllUrlParams } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
-    const { pageContext, path } = props
-    const { title, breadcrumb, description, isTopic, id, paginate } = pageContext
+
+    const { pageContext } = props
+    const { title, breadcrumb, description, isTopic, id, paginate, pagePath } = pageContext
 
     let pageTitle = title
 
@@ -19,15 +20,12 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
         pageTitle = `${breadcrumb[breadcrumb.length - 2].name} / ${title}`
     }
 
-    const isPodcast = formatsAll["podcast"] && `${formatsAll["podcast"].keyId}` === `${id}`
-
     const location = useLocation();
 
     const parsed = getAllUrlParams(location.search);
     const pageNrQuery = parsed && parsed.pagenr && typeof parsed.pagenr === "string" && parseInt(parsed.pagenr)
 
     const currentPage = typeof pageNrQuery === "number" && pageNrQuery <= paginate.totalPages && pageNrQuery > 1 ? pageNrQuery : 1
-
     return (
         <div className="mx-auto max-w-sm sm:p-0">
             <MetaTag
@@ -35,23 +33,19 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
                 title={title}
                 translatedUrls={[]}
                 breadcrumb={breadcrumb}
-                path={path}
+                path={pagePath}
             />
-            {isPodcast && (
-                <div className={`pt-8 sm:pt-0`}>
-                    <PodcastHeader />
-                </div>
-            )}
+
             <div className={`px-4 pt-8 sm:pt-0`}>
 
-                {!isPodcast && <LayoutH1 title={pageTitle} />}
+                <LayoutH1 title={pageTitle} />
                 {description && (
                     <div className="w-full py-4" dangerouslySetInnerHTML={{ __html: description }} />
                 )}
                 <PostListQuery
                     firstPosts={pageContext.posts}
                     totalPages={paginate.totalPages}
-                    path={path}
+                    path={pagePath}
                     currentPage={currentPage}
                     {...pageContext}
                 />
@@ -67,6 +61,7 @@ export default TaxonomyPage
 interface ITaxonomyPageProps {
 
     pageContext: {
+        pagePath: string
         id: string
         subTopicId?: string
         type: string

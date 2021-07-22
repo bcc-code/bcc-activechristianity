@@ -136,6 +136,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
         const pageCount = Math.ceil(total/count)
 
         const useCount = slimMode==="true"?3:pageCount
+        console.log('generating' + total + ' nodes')
         for (let i = 1; i <= useCount; i++){       
             console.log(i)     
             const response = await sendQuery(getPostsQuery(i),baseUrl,headers)
@@ -260,7 +261,6 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest },opti
 exports.onPostBuild = async ({ cache }) => {
     await cache.set(`key`, `value`)
     const cachedValue = await cache.get(`key`)
-    console.log(cachedValue) // logs `value`
 }
 
 

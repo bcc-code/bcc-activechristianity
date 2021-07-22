@@ -3,10 +3,12 @@ import ac_strings from '@/strings/ac_strings.js'
 import SideNavWrapper from './SideNavWrapper'
 
 import { SideNavItem } from '@/components/Button'
-import { userMenuItems } from '@/strings/generated/menus.json'
+import menus from '@/strings/generated/menus.json'
 
 import EditProfile from './EditProfile'
 import EditAccountSettings from './EditAccountSettings'
+
+const { userMenuItems } = menus
 
 const SideMobile: React.FC<{
     isSideNavOpen: boolean

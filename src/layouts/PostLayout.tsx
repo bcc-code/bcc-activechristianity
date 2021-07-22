@@ -201,14 +201,14 @@ export const PostLayout: React.FC<IPostProps> = (post) => {
 
                     </div>
                 ) : (
-                        <div
-                            className={`fixed transition-transform background-image w-full flex items-end`}
-                            style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
-                        >
-                            <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
-                        </div>
+                    <div
+                        className={`fixed transition-transform background-image w-full flex items-end`}
+                        style={{ top: "96px", backgroundSize: "cover", height: "200px" }}
+                    >
+                        <LazysizesFeaturedImage {...image} alt={image.alt ? image.alt : title} className={`w-full bg-center bg-cover`} />
+                    </div>
 
-                    )}
+                )}
             </div>
             <div className='w-full sm:hidden relative' style={{ top: "50px", height: `${currentHeigt}px` }}>
 

@@ -63,43 +63,43 @@ const listenSectionKey = process.env.LISTEN_SECTION
 
 const languageSites = async function() {
     const {menusItems,userMenuItems,slug_user} = require('../../src/strings/static/menu')
-  const query=`
-  {
-    sites {
-      lang
-      locale
-      title
-      url
+    const query=`
+    {
+      sites {
+        lang
+        locale
+        title
+        url
+      }
+      settings {
+        key
+        value
+      }
     }
-    settings {
-      key
-      value
-    }
-  }
-`
+  `
   const menus=getMenus()
   
   return sendQuery(query,endpoints.api_url,{ "x-lang": process.env.LANG_CODE})
-  .then(res=>{
-      const {sites,settings} = res
-      const metadata = {}
-      settings.forEach(s => {
-        metadata[s.key] = s.value
-      })
+          .then(res=>{
+              const {sites,settings} = res
+              const metadata = {}
+              settings.forEach(s => {
+                metadata[s.key] = s.value
+              })
 
-      const {social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}=metadata
-      menus["languages"]=sites?sites.map((item) => ({
-        name: item.lang,
-        to: item.url,
-        locale:item.locale
-    })):[];
-      menus["menusItems"]=menusItems
-      menus["userMenuItems"]=userMenuItems
-      menus["slugUser"]=slug_user
-      menus["topLink"]=metadata["top_link"]
-      menus["socialLinks"]={social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}
-      saveFile('./src/strings/generated', 'menus', 'json',  menus)
-  })
+              const {social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}=metadata
+              menus["languages"]=sites?sites.map((item) => ({
+                name: item.lang,
+                to: item.url,
+                locale:item.locale
+            })):[];
+              menus["menusItems"]=menusItems
+              menus["userMenuItems"]=userMenuItems
+              menus["slugUser"]=slug_user
+              menus["topLink"]=metadata["top_link"]
+              menus["socialLinks"]={social_facebook, social_instagram, social_youtube, social_rss, social_itunes, social_spotify}
+              saveFile('./src/strings/generated', 'menus', 'json',  menus)
+          })
 }
 
 

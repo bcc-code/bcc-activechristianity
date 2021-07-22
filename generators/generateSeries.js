@@ -43,10 +43,16 @@ module.exports = function generatePlaylists(actions, graphql) {
           path: basePath,
           component: path.resolve(template),
           context: {
+            pagePath:basePath,
             ...node
           }
         })
       })
 
     })
+    .catch(err=>{
+      console.log(query)
+      console.log(err)
+    })
+    
   }

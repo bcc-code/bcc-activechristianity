@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch } from "react-redux"
-
 import { InputText } from '@/components/Input'
 import ac_strings from '@/strings/ac_strings.js'
 import Snackbar from '@/components/Snackbar'
