@@ -113,10 +113,10 @@ export const RightImgListPlaceHolder: React.FC<{ count: number }> = ({ count }) 
 
 
 
-export const SingleLineTitle = () => {
+export const SingleLineTitle: React.FC<{ nrOfRows?: number }> = ({ nrOfRows }) => {
     return (
         <div className="flex flex-col">
-            <TextBlock color="WhiteSmoke" className="mt-4" rows={2} />
+            <TextBlock color="WhiteSmoke" className="mt-4" rows={nrOfRows ? nrOfRows : 3} />
         </div>
     )
 }

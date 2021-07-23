@@ -1,13 +1,13 @@
 import React from 'react'
-import { findDOMNode } from 'react-dom'
+
 import ReactPlayer from 'react-player/youtube'
-import screenfull from 'screenfull'
+
 const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
     const playerEl = React.useRef<any>(null);
     return (
-        <div>
+        <div className="standard-max-w bg-black">
             <div
-                className={`flex justify-center bg-black mp--video`}
+                className={`flex justify-center  mp--video `}
 
             >
                 <ReactPlayer

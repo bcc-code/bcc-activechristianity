@@ -483,3 +483,22 @@ export const unsubscribeMutation = (email: string) => `
     }
   }
 `
+
+interface IUpdateProfile {
+  email?: string
+  lang?: string
+  name?: string
+
+}
+export const updateProfileMutation = (props: IUpdateProfile) => {
+  const toAdd = Object.keys(props).map(key => `${key}:"${props[key]}"`)
+  const inputString = toAdd.join(",")
+  return `
+  mutation updateProfile {
+    profile(input: {${inputString}}) {
+      success
+      message
+    }
+  }`
+}
+

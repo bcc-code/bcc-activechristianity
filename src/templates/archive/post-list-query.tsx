@@ -1,12 +1,10 @@
 import React from 'react'
 import loadable from '@loadable/component'
-const PodcastHeader = loadable(() => import('@/layout-parts/PodcastHeader'))
 import { IPaginate, INavItem, IPostItem } from "@/types"
 import MetaTag from '@/components/Meta'
 import { LayoutH1 } from '@/components/Headers'
 import { useLocation } from '@reach/router';
 import PostListQuery from '@/components/List/PostListQuery'
-import { formatsAll } from '@/strings/static/topic-ids'
 import { getAllUrlParams } from '@/helpers/index-js'
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
@@ -21,7 +19,6 @@ const TaxonomyPage: React.FC<ITaxonomyPageProps> = (props) => {
     }
 
     const location = useLocation();
-
     const parsed = getAllUrlParams(location.search);
     const pageNrQuery = parsed && parsed.pagenr && typeof parsed.pagenr === "string" && parseInt(parsed.pagenr)
 

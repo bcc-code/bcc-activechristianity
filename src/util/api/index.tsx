@@ -21,8 +21,13 @@ const sendQuery = (query: string) => {
             if (res.errors) {
                 let error = ""
                 res.errors.map(e => {
-                    console.log(e)
-                    error += " " + e.message
+                    if (e.extensions && e.extensions.validation) {
+                        const { validation } = e.extensions
+                        error += " " + Object.keys(validation).map(key => `${key}:${validation[key]}`).join(", ")
+                    } else {
+                        error += " " + e.message
+                    }
+
                 })
                 throw Error(error)
             } else {
@@ -174,7 +179,6 @@ export default {
     },
     subscribeNewsletter: (email: string) => {
         const query = request.subscribeMutation(email)
-        console.log(query)
         return sendQuery(query)
     }
 }

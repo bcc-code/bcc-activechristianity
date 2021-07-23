@@ -63,7 +63,7 @@ const Preview = () => {
                     }
                 }).catch(err => {
                     setLoading(false)
-                    setErrorMessage(err)
+                    setErrorMessage(err.messasge)
                 })
         })
     }
@@ -124,29 +124,32 @@ const Preview = () => {
         })
     }
     React.useEffect(() => {
-        if (type === "post" && typeof id === "string") {
+        let isSubscribed = true
+        if (isSubscribed) {
+            if (type === "post" && typeof id === "string") {
 
-            setPage(null)
-            getPost(id)
+                setPage(null)
+                getPost(id)
 
 
+            }
+            if (type === "page" && typeof id === "string") {
+                setPost(null)
+                setLoading(true)
+                getPage(id)
+
+            }
         }
-        if (type === "page" && typeof id === "string") {
-            setPost(null)
-            setLoading(true)
-            getPage(id)
-
+        return () => {
+            isSubscribed = false
         }
+
     }, [type, id])
+
     return !loading ? (
         <main className="">
             <div className="max-w-tablet mx-auto"></div>
-
-
-            {
-                post && (<PostLayout {...post} />
-                )
-            }
+            {post && (<PostLayout {...post} />)}
             {page && (
                 <div>
                     <MetaTag title={page.title} translatedUrls={[]} type="page" breadcrumb={page.breadcrumb} path={page.slug} />
@@ -156,9 +159,8 @@ const Preview = () => {
                     <div className="w-full flex justify-center py-6">
                         <Link to={`${ac_strings.slug_topic}/${page.slug}`} className="bg-ac-slate-dark px-4 py-2 rounded text-white text-lg">
                             More on this topic
-                            </Link>
+                        </Link>
                     </div>
-
                 </div>
             )}
             {!post && !page && (
@@ -206,7 +208,7 @@ const Preview = () => {
         <div className="max-w-tablet mx-auto">
             <h1 className="text-gray-200 text-center" style={{ fontSize: "80px", textShadow: "-1px -1px 0 var(--secondary), 0 0 1px var(--secondary), 4px 4px 0 var(--secondary)" }}>
                 Loading
-                </h1>
+            </h1>
 
         </div>
     )
