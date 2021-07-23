@@ -504,3 +504,23 @@ export interface IInfobar {
     text: string
     error?: boolean
 }
+
+export interface IQuote {
+    active_from?: string
+    active_to?: string
+    author?: IAuthorRes
+    author_id?: number
+    content: string
+    id: number
+    post?: IPostRes
+    post_id?: number
+    public: 1
+    source?: string
+    topics?: ITopicRes[]
+    images?: IImage[]
+
+}
+
+export interface IGalleryImage extends IImage {
+    quote_id: number
+}

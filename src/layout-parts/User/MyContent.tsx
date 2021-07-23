@@ -2,7 +2,6 @@ import * as React from "react"
 import { useSelector } from 'react-redux'
 import { PageSectionHeader, SectionTitleDesktopAndMobile } from '@/components/Headers'
 import { IPostItem, IPostRes, ITopic } from '@/types'
-import { IRootState } from '@/state/types'
 import PostItem from '@/components/PostItemCards/RightImg'
 import HSCardListVideo from '@/components/HorizontalScroll/HSCardListVideo'
 import XScrollCustomSize from '@/components/HorizontalScroll/BaseCustomSize'
@@ -13,6 +12,8 @@ import FeaturedTopics from '@/components/HorizontalScroll/FeaturedTopics'
 import { normalizePostRes, getRandomArray } from '@/helpers/normalizers'
 import ac_strings from '@/strings/ac_strings.js'
 import { followedTopicsSelector, bookmarkedSelector } from '@/state/selectors/user'
+import StaggerChildrenMotion from '@/components/Motion/StaggerChildren'
+import StaggerChildrenItemMotion from '@/components/Motion/StaggerChildrenItem'
 const acApiModule = import('@/util/api')
 
 import shortid from 'shortid'
@@ -60,20 +61,20 @@ const UserContent = () => {
                     <>
                         <SectionTitleDesktopAndMobile name={ac_strings.following} />
 
-                        <div className="hidden sm:grid grid-cols-6 gap-4 px-4">
+                        <StaggerChildrenMotion className="hidden sm:grid grid-cols-6 gap-4 px-4">
                             {topics.map(({ name, slug: to, id, image }) => {
                                 return (
-                                    <div className="flex flex-col items-center" key={shortid()} >
+                                    <StaggerChildrenItemMotion className="flex flex-col items-center" key={shortid()} >
                                         <div style={{ width: "100px", height: "138px" }}>
                                             <ImgBgTopicCard name={name} to={`${ac_strings.slug_topic}/${to}`} image={image} />
                                         </div>
                                         <SlateDarkUnfollowButton
                                             id={id}
                                         />
-                                    </div>
+                                    </StaggerChildrenItemMotion>
                                 )
                             })}
-                        </div>
+                        </StaggerChildrenMotion>
                         <XScrollCustomSize
                             childeClassName=""
                             items={topics.map(({ name, slug, id, image }) => {
@@ -99,21 +100,21 @@ const UserContent = () => {
                         />
                     </>
                 ) : (
-                        <div>
-                            <SectionTitleDesktopAndMobile name={ac_strings.no_followed_topics} />
-                            <QPopularAndFeaturedPosts
-                                render={({ topics }) => {
-                                    const randomTopics = getRandomArray(topics, 6)
-                                    return (
-                                        <FeaturedTopics
-                                            featured={randomTopics}
-                                        />
-                                    )
-                                }}
+                    <div>
+                        <SectionTitleDesktopAndMobile name={ac_strings.no_followed_topics} />
+                        <QPopularAndFeaturedPosts
+                            render={({ topics }) => {
+                                const randomTopics = getRandomArray(topics, 6)
+                                return (
+                                    <FeaturedTopics
+                                        featured={randomTopics}
+                                    />
+                                )
+                            }}
 
-                            />
-                        </div>
-                    )}
+                        />
+                    </div>
+                )}
             </div>
             {/*             {followedPlaylists.length > 0 && (
                 <div>{followedPlaylists.map(p => p.name)}</div>
@@ -141,10 +142,10 @@ const UserContent = () => {
 
                 </div>
             ) : (
-                    <div className="py-6">
-                        <PageSectionHeader title={ac_strings.no_bookmark} />
-                    </div>
-                )}
+                <div className="py-6">
+                    <PageSectionHeader title={ac_strings.no_bookmark} />
+                </div>
+            )}
 
 
 

@@ -23,7 +23,7 @@
     "autoprefixer": "^10.2.6",
     "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
-    "gatsby": "3.4",
+    "gatsby": "^3.10.1",
     "gatsby-plugin-advanced-sitemap": "file:gatsby-plugin-advanced-sitemap",
     "gatsby-plugin-algolia-search": "file:gatsby-plugin-algolia-search",
     "gatsby-plugin-feed": "^3.6.0",

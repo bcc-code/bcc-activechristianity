@@ -144,7 +144,7 @@ if (activeEnv === 'production') {
        tailwind: true, // Enable tailwindcss support
         // whitelist: ['whitelist'], // Don't remove this selector
         // ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-        purgeOnly : ['/src/styles/tailwind-output.css'], // Purge only these files/folders
+
       }
     },
     {

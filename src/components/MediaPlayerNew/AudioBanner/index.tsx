@@ -22,7 +22,7 @@ const ACMediaPlayer: React.FC<IAllProps> = ({ media, duration, stopScrollingTitl
             track={media}
             render={({ playing }) => {
                 return (
-                    <div className={`w-full flex mx-auto sm:px-4 max-w-tablet py-6`}>
+                    <div className={`w-full flex mx-auto sm:px-4 standard-max-w py-6`}>
 
                         <div className="text-d4cadet-blue flex items-center text-xs mx-4 sm:ml-0">
 
