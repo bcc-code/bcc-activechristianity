@@ -12,21 +12,12 @@ phases:
             - 'yarn install'
     build:
         commands:
-<<<<<<< HEAD
             - 'gatsby build'
 
     post_build:
         commands:
             - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
             - 'yarn run deploy'
-=======
-            - 'n latest'
-            - 'npm run build'
-
-    post_build:
-        commands:
-            - 'npm run deploy'
->>>>>>> new-master-branch
 artifacts:
     base-directory: public
     files:
