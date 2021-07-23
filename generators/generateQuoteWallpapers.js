@@ -132,7 +132,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
           byTopics: byTopics.map(item=>({name:item.name,slug:item.slug, nrOfQuotes:item.nrOfQuotes})),
         }
         const baseUrl = `${wallpapersPage.slug}/${ac_strings.slug_latest}`
-        for (let i = 1; i <=totalPages; i++){
+         for (let i = 1; i <=totalPages; i++){
           let pagePath = i===1?wallpapersPage.slug:`${baseUrl}/${i}`
           const quotes = sortedRgbAllQuotes.slice((i-1)*perPage,(i)*perPage)
           console.log(pagePath)          
