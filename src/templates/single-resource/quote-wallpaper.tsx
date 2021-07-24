@@ -101,16 +101,16 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                         <div className="absolute bottom-1/2 right-0 left-0 z-10 text-white w-full flex p-2 justify-between">
 
                             <Link
-                                className=""
+                                className="shadow bg-white opacity-50 rounded-lg"
                                 to={preNextIds.previousId}
                             >
-                                <KeyboardArrowLeftIcon className="shadow" />
+                                <KeyboardArrowLeftIcon className="text-ac-slate-dark" />
                             </Link>
                             <Link
-                                className=""
+                                className="shadow bg-white opacity-50 rounded-lg"
                                 to={preNextIds.nextId}
                             >
-                                <KeyboardArrowRightIcon className="shadow" />
+                                <KeyboardArrowRightIcon className="text-ac-slate-dark" />
                             </Link>
                         </div>
                         {child}

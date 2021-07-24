@@ -59,7 +59,9 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
 
                                             return (
                                                 <>
-                                                    <h3 className="font-semibold pb-4">{ac_strings.posts_from_same_topic}<Link className="text-ac-secondary" to={`${ac_strings.slug_topic}/${t.slug}`}>{t.name}</Link></h3>
+                                                    <h3 className="font-semibold pb-4">
+                                                        {ac_strings.posts_from_same_topic} <Link className="text-ac-secondary" to={`${ac_strings.slug_topic}/${t.slug}`}>{t.name}</Link>
+                                                    </h3>
                                                     {t.posts[0] && <ColorBlockNoImg {...t.posts[0]} />}
                                                 </>
 
