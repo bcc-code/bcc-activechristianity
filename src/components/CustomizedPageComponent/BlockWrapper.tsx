@@ -74,8 +74,8 @@ const BlockWrapper: React.FC<IBlockWrapper> = ({ children, theme, h1, content })
     const readerBlock = getContentBlock(content)
     return (
         <MotionAppear className={`${themeColorCSS} flex flex-col items-center`} style={{ minHeight: '360px' }}>
-            {h1 && <LayoutH1 className="standard-max-w-px mx-auto px-4 tablet:px-0 pb-0 w-full " title={h1} />}
-            <div className={`standard-max-w-px mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full`} >
+            {h1 && <LayoutH1 className="mx-auto px-4 tablet:px-0 pb-0 w-full max-w-tablet" title={h1} />}
+            <div className={`mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full max-w-tablet`} >
                 {readerBlock}
             </div>
         </MotionAppear>

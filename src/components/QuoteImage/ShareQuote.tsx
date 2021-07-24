@@ -26,7 +26,7 @@ interface IProps {
 
 
 const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, imageUrl }) => {
-
+    console.log(title)
     const options = { shareUrl: process.env.SITE_URL + '/' + shareUrl }
     const IconProps = {
         size: 40,
@@ -44,7 +44,7 @@ const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, i
 
                 <FacebookShareButton
                     url={shareUrl}
-                    quote={text}
+                    quote={title}
                 >
                     <FacebookIcon {...IconProps} />
                 </FacebookShareButton>
@@ -60,7 +60,7 @@ const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, i
                 <EmailShareButton
                     url={options.shareUrl}
                     subject={title}
-                    body={text}
+                    body={title}
                 >
                     <EmailIcon {...IconProps} />
                 </EmailShareButton>
