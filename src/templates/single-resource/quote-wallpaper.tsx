@@ -46,7 +46,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
 
 
     }, [])
-    console.log(wallpaper)
+
     const metaTitle = `${isBibleQuote ? source : ''} Bibleverse wallpaper - ${content} `
 
     const child = (
@@ -60,7 +60,6 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
         />
     )
 
-    console.log(wallpaper)
     return (
         <div className="pt-9 sm:pt-0">
             <MetaTag
