@@ -20,10 +20,10 @@ const Breadcrumb: React.FC<IBreadcrumb> = ({ items }) => {
                 if (item) {
                     return (
                         <li key={i} className="breadcrumb-item flex justify-center items-center" >
-                            <Link activeClassName="text-gray-300 sm:hidden" to={`/${item.to}`}>
+                            <Link className="sm:hidden" to={`/${item.to}`}>
                                 {typeof item.name === "string" ? `${item.name.slice(0, 15)}${item.name.length > 15 ? '...' : ''}` : item.name}
                             </Link>
-                            <Link activeClassName="text-gray-300 hidden sm:block" to={`/${item.to}`}>
+                            <Link className="hidden sm:block" to={`/${item.to}`}>
                                 {item.name}
                             </Link>
                         </li>
