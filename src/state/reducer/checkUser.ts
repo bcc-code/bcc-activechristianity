@@ -3,6 +3,7 @@ import { openSignInModal, closeSignInModal, openInfo } from '@/state/action'
 import { setLogout, setUser } from '@/state/action/authAction'
 import { getUserLibrary } from '@/state/action/userAction'
 const acApiModule = import('@/util/api')
+import ac_strings from '@/strings/ac_strings.js'
 import { IUser } from '@/types'
 
 export default (dispatch: any) => {
@@ -16,7 +17,7 @@ export default (dispatch: any) => {
                         dispatch(setUser(res))
                         dispatch(getUserLibrary())
                         dispatch(closeSignInModal())
-                        dispatch(openInfo({ text: "You logged in!" }))
+                        dispatch(openInfo({ text: ac_strings.logged_in_welcome || "You're logged in!" }))
                     } else {
                         dispatch(openSignInModal("giveConsent"))
                     }

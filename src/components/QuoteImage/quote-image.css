@@ -1,0 +1,4 @@
+.wallpaper-dont-download {
+    user-select: none;
+    pointer-events: none;
+}

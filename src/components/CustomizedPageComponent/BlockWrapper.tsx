@@ -6,6 +6,8 @@ import MotionAppear from '@/components/Motion/AppareY'
 import QuoteBlock from './QuoteBlock'
 import PostItems from './PostItems'
 import Gallery from './Gallery'
+import Content from '@/components/Content'
+import Video16to9 from '@/components/Images/Video16to9'
 const getContentBlock = (block: IPageCompTypes) => {
     switch (block.type) {
         case "featured_items":
@@ -32,6 +34,17 @@ const getContentBlock = (block: IPageCompTypes) => {
         case "gallery":
             return (
                 <Gallery {...block} />
+            )
+        case "text":
+            return (
+                <Content content={block.data.content} />
+            )
+        case "embed":
+            return (
+                <Video16to9
+                    src={block.data.url}
+                    className={`rounded-xxl sm:rounded-xl overflow-hidden`}
+                />
             )
         default:
             return <div>section</div>;

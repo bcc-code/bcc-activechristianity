@@ -42,13 +42,11 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                         nextId: getIndex > 10 ? parent : `${ac_strings.wallpaper_slug}/${quotes[getIndex + 1].id}?${paramString}&index=${getIndex + 1}`,
                     })
                 })
-        } else {
-            console.log('na')
         }
 
 
     }, [])
-
+    console.log(wallpaper)
     const metaTitle = `${isBibleQuote ? source : ''} Bibleverse wallpaper - ${content} `
 
     const child = (
@@ -62,6 +60,7 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
         />
     )
 
+    console.log(wallpaper)
     return (
         <div className="pt-9 sm:pt-0">
             <MetaTag
@@ -69,6 +68,10 @@ const Wallpaper: React.FC<IQuoteWallpaperProps> = (props) => {
                 type="page"
                 path={pagePath}
                 breadcrumb={breadcrumb}
+                meta={{
+                    description: wallpaper.content,
+                    imageUrl: image.src
+                }}
             />
             {openmodal === "true" ? (
                 <Modal

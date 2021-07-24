@@ -1,22 +1,22 @@
 import * as React from 'react'
 
 import {
+    PinterestShareButton,
     EmailShareButton,
     FacebookShareButton,
     TelegramShareButton,
-    TwitterShareButton,
     WhatsappShareButton,
     EmailIcon,
     FacebookIcon,
     TelegramIcon,
-    TwitterIcon,
-    WhatsappIcon
+    WhatsappIcon,
+    PinterestIcon
 
 } from "react-share";
 
 
 interface IProps {
-
+    imageUrl: string
     shareUrl: string
     text?: string
     title?: string
@@ -25,7 +25,7 @@ interface IProps {
 }
 
 
-const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, offSetBottom }) => {
+const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, imageUrl }) => {
 
     const options = { shareUrl: process.env.SITE_URL + '/' + shareUrl }
     const IconProps = {
@@ -34,19 +34,20 @@ const ShareIconPopper: React.FC<IProps> = ({ shareUrl, placement, text, title, o
         bgStyle: { fill: "none" }
     }
 
-    const shareContent = `Title: ${title} - Quote: "${text}"`
+    const shareContent = title
     return (
         <>
             <div className="flex p-2 text-ac-slate-dark justify-center order-2 sm:order-1">
+                <PinterestShareButton url={shareUrl} media={imageUrl}>
+                    <PinterestIcon {...IconProps} />
+                </PinterestShareButton>
+
                 <FacebookShareButton
                     url={shareUrl}
                     quote={text}
                 >
                     <FacebookIcon {...IconProps} />
                 </FacebookShareButton>
-                <TwitterShareButton url={options.shareUrl}>
-                    <TwitterIcon {...IconProps} />
-                </TwitterShareButton>
                 <WhatsappShareButton url={options.shareUrl}>
                     <WhatsappIcon {...IconProps} />
                 </WhatsappShareButton>
