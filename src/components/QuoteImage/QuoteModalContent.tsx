@@ -65,16 +65,18 @@ const WallpaperModalContent: React.FC<ISwipeViewContent & { isActive?: boolean, 
                 {isActive && (
                     < div >
                         <div className="flex justify-between flex-col md:flex-row">
-                            <ShareInfo shareUrl={`${ac_strings.wallpaper_slug}/${wallpaper.id}`} text={wallpaper.content} />
+                            {wallpaper && findImage && (
+                                <ShareInfo
+                                    title={findImage.alt}
+                                    imageUrl={findImage?.src}
+                                    shareUrl={`${ac_strings.wallpaper_slug}/${wallpaper.id}`}
+                                    text={wallpaper.content}
+                                />
+                            )}
                             <div className="flex items-center md:order-2">
-                                <a className="w-full rounded-lg bg-ac-slate-dark text-white text-lg px-4 py-2 font-semibold text-center" href={findImage && findImage.src} onClick={(e) => download(e, findImage && findImage.id ? findImage.id : 1)}>Download</a>
+                                <a className="w-full rounded-lg bg-ac-slate-dark text-white text-lg px-4 py-2 font-semibold text-center" href={findImage && findImage.src} onClick={(e) => download(e, findImage && findImage.id ? findImage.id : 1)}>{ac_strings.download}</a>
                             </div>
-
-                            {/*  <div className="px-4 py-2 font-semibold ml-4"><ShareInfo shareUrl={`${ac_strings.wallpaper_slug}/${wallpaper.id}`} text={wallpaper?.content} /></div> */}
-                            {/* <a href={`/wallpaper/${id || image?.quote_id}`}>link</a> */}
                         </div>
-
-                        {/* {image && <ShowWallpaperRelatedInfo image={image} />} */}
                         {wallpaper && <WallpaperInfo  {...wallpaper} />}
                     </div>
                 )}

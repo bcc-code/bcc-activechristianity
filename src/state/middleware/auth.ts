@@ -56,7 +56,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
 
                                 if (data.user.meta && data.user.meta.consented) {
                                     store.dispatch(setUser(data.user))
-                                    store.dispatch(openInfo({ text: "You logged in!" }))
+                                    store.dispatch(openInfo({ text: ac_strings.logged_in_welcome || "You're logged in!" }))
                                     store.dispatch(closeSignInModal())
                                     store.dispatch(setLogInError(''))
                                 } else {
@@ -124,7 +124,7 @@ const apiMiddleware: Middleware<void, IRootState> = (store) => (next) => (action
                     .logout()
                     .then((res) => {
                         store.dispatch(setLogout())
-                        store.dispatch(openInfo({ text: "You logged out!" }))
+                        store.dispatch(openInfo({ text: ac_strings.logged_out_info || "You are logged out!" }))
                     })
                     .catch((err: any) => {
                         console.log(err)

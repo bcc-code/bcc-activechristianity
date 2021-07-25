@@ -6,6 +6,8 @@ import MotionAppear from '@/components/Motion/AppareY'
 import QuoteBlock from './QuoteBlock'
 import PostItems from './PostItems'
 import Gallery from './Gallery'
+import Content from '@/components/Content'
+import Video16to9 from '@/components/Images/Video16to9'
 const getContentBlock = (block: IPageCompTypes) => {
     switch (block.type) {
         case "featured_items":
@@ -32,6 +34,17 @@ const getContentBlock = (block: IPageCompTypes) => {
         case "gallery":
             return (
                 <Gallery {...block} />
+            )
+        case "text":
+            return (
+                <Content content={block.data.content} />
+            )
+        case "embed":
+            return (
+                <Video16to9
+                    src={block.data.url}
+                    className={`rounded-xxl sm:rounded-xl overflow-hidden`}
+                />
             )
         default:
             return <div>section</div>;
@@ -61,8 +74,8 @@ const BlockWrapper: React.FC<IBlockWrapper> = ({ children, theme, h1, content })
     const readerBlock = getContentBlock(content)
     return (
         <MotionAppear className={`${themeColorCSS} flex flex-col items-center`} style={{ minHeight: '360px' }}>
-            {h1 && <LayoutH1 className="standard-max-w-px mx-auto px-4 tablet:px-0 pb-0 w-full " title={h1} />}
-            <div className={`standard-max-w-px mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full`} >
+            {h1 && <LayoutH1 className="mx-auto px-4 tablet:px-0 pb-0 w-full max-w-tablet" title={h1} />}
+            <div className={`mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full max-w-tablet`} >
                 {readerBlock}
             </div>
         </MotionAppear>

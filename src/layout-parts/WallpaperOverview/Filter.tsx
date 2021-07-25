@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { FilterListIcon, ExpandMoreIcon } from '@/components/Icons/MUI/inputIcons'
+import { FilterListIcon } from '@/components/Icons/MUI/inputIcons'
 import { CloseIcon } from '@/components/Icons/MUI/arrowIcons'
-import ScrollLinks from '@/components/Tabs/ScrollNavLinks'
 import Modal from 'react-modal';
 import Link from '@/components/CustomLink'
+import ac_strings from '@/strings/ac_strings.js'
+
 const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) => {
     const [toggleFilter, setToggleFilter] = useState(false)
     return (
@@ -20,7 +21,7 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                 }}
             >
                 <button className="p-4 absolute right-0 top-0" onClick={() => setToggleFilter(false)}><CloseIcon /></button>
-                <h3 className="text-sm pb-2 mt-4">Colors</h3>
+                <h3 className="text-sm pb-2 mt-4">{ac_strings.colors}</h3>
                 <div className="flex flex-wrap">
                     {byColors.map(c => {
                         const color = c.color
@@ -32,7 +33,7 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                         )
                     })}
                 </div>
-                <h3 className="text-sm pb-2 mt-4">Authors</h3>
+                <h3 className="text-sm pb-2 mt-4">{ac_strings.authors}</h3>
                 <div className="flex flex-wrap">
                     {byFeaturedAuthors.map(t => {
                         ({ name: t.name, nr: t.nrOfQuotes, to: `${slug}/${t.slug}` })
@@ -44,7 +45,7 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                         )
                     })}
                 </div>
-                <h3 className="text-sm pb-2 mt-4">Topics</h3>
+                <h3 className="text-sm pb-2 mt-4">{ac_strings.topics}</h3>
                 <div className="flex flex-wrap">
                     {byTopics.map(t => {
                         ({ name: t.name, nr: t.nrOfQuotes, to: `${slug}/${t.slug}` })
@@ -71,13 +72,19 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                         })}
 
                     </div>
-                    <button onClick={() => { setToggleFilter(true) }} className="mt-4 flex py-1 px-2 justify-center items-center rounded-lg bg-ac-slate-lighter"><FilterListIcon /><span className="text-sm italic px-4"> All filters</span></button>
+                    <button
+                        onClick={() => { setToggleFilter(true) }}
+                        className="mt-4 flex py-1 px-2 justify-center items-center rounded-lg bg-ac-slate-lighter"
+                    >
+                        <FilterListIcon />
+                        <span className="text-sm italic px-4">{ac_strings.all_filter}</span>
+                    </button>
                 </div>
             </div>
             <div className="hidden sm:block py-6">
 
                 <div className="pb-4 w-full flex">
-                    <h3 className="font-semibold pb-4 py-1 w-32 min-w-20">Topics</h3>
+                    <h3 className="font-semibold pb-4 py-1 w-32 min-w-20">{ac_strings.topics}</h3>
 
                     <div className="flex flex-wrap">
                         {byTopics.slice(0, 8).map(topic => {
@@ -97,7 +104,7 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                     </div>
                 </div>
                 <div className="flex pb-4">
-                    <h3 className="font-semibold pb-4 py-1 w-32 min-w-20">Authors</h3>
+                    <h3 className="font-semibold pb-4 py-1 w-32 min-w-20">{ac_strings.authors}</h3>
                     <div className="flex flex-wrap">
                         {byFeaturedAuthors.map(author => {
 
@@ -116,7 +123,7 @@ const Filter: React.FC<any> = ({ byTopics, byFeaturedAuthors, byColors, slug }) 
                     </div>
                 </div>
                 <div className="flex pb-4">
-                    <h3 className="font-semibold pb-4 py-1 w-32 min-w-20">Colors</h3>
+                    <h3 className="font-semibold pb-4 py-1 w-32 min-w-20">{ac_strings.colors}</h3>
                     <div className="flex flex-wrap">
                         {byColors.map(c => {
                             const color = c.color

@@ -1,7 +1,7 @@
 import React from 'react'
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage'
 import { IImage, IQuote } from '@/types';
-
+import './quote-image.css'
 
 const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[], className?: string, alt: string }> = ({ size, image, color, className, alt }) => {
     const customClassName = className ? className : `rounded-lg`;
@@ -16,12 +16,12 @@ const WallPaperAllSizes: React.FC<{ size: string, image: IImage, color: number[]
 
             >
                 <div className="inset-0 absolute flex items-center">
-                    <LazysizesFeaturedImage {...image} className="w-full " alt={alt} />
+                    <LazysizesFeaturedImage {...image} className="w-full wallpaper-dont-download" alt={alt} />
                 </div>
             </div>
         )
     } else {
-        return <LazysizesFeaturedImage {...image} className={`w-full md:h-full rounded-lg overflow-hidden ${customClassName}`} alt={alt} />
+        return <LazysizesFeaturedImage {...image} className={`wallpaper-dont-download w-full md:h-full rounded-lg overflow-hidden ${customClassName}`} alt={alt} />
     }
 }
 

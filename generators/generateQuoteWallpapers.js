@@ -191,7 +191,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
         const {quotes, ...rest}=author
         const isBibleQuote = `${author.id}` === bibleAuthorId
         createArhcivePages({
-          baseTitle:isBibleQuote?'Bible verse wallpapers':`${author.name} quote wallpapers`,
+          baseTitle:isBibleQuote?ac_strings.wallpaper_bible_verse:`${author.name} ${ac_strings.wallpaper_quote_wallpapers}`,
           context:{...rest,tag:wallpapersPage.title},
           baseUrl:pagePath,
           breadcrumb:[navParentItem, {name:author.name,to:pagePath}],

@@ -2,22 +2,21 @@ import * as React from 'react'
 import Link from '@/components/CustomLink'
 import { IQuote } from '@/types'
 import ColorBlockNoImg from '@/components/PostItemCards/ColorBlockNoImg'
-import ac_strings from '@/strings/ac_strings'
 import { FetchTopicPostItems, FetchAuthorPosts } from '@/HOC/FetchTopicFormatType'
 import { ToggleFollowWithName } from '@/components/PostElements/TopicToggleFollow'
-import { FetchOnePost } from '@/HOC/FetchPosts'
+import ac_strings from '@/strings/ac_strings'
 
 const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
     const isAcArticle = typeof wallpaper.source === "string" && wallpaper.source.toLowerCase() === "ac articles"
     const isBibleQuote = wallpaper.author && `${wallpaper.author.id}` === "108501"
-    const postSectionHeader = isAcArticle ? "Quote is founded in this post" : "Explore this subject";
+    const postSectionHeader = isAcArticle ? ac_strings.quotes_found_post : ac_strings.explore_subject;
 
     const hasNotBibleAuthor = !isBibleQuote && wallpaper.author
     return (
         <div className="pt-10">
             {<div className="italic pb-4 ">{wallpaper.content}</div>}
-            {!isBibleQuote && wallpaper.author && <h3 className="pb-4 italic">By {wallpaper.author.name}</h3>}
-            {!isAcArticle && wallpaper.source && <h3 className="pb-4 italic">From {wallpaper.source}</h3>}
+            {!isBibleQuote && wallpaper.author && <h3 className="pb-4 italic">{ac_strings.by} {wallpaper.author.name}</h3>}
+            {!isAcArticle && wallpaper.source && <h3 className="pb-4 italic">{ac_strings.from} {wallpaper.source}</h3>}
 
             {wallpaper.post && <h3 className="font-semibold pb-4">{postSectionHeader}</h3>}
             {wallpaper.post && (
@@ -34,7 +33,7 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
             {
                 wallpaper.author && !isBibleQuote && (
                     <>
-                        <h3 className="font-semibold pb-4">More from <Link className="text-ac-secondary" to={`${ac_strings.slug_ac_author}/${wallpaper.author.slug}`}>{wallpaper.author.name}</Link></h3>
+                        <h3 className="font-semibold pb-4">{ac_strings.more_from} <Link className="text-ac-secondary" to={`${ac_strings.slug_ac_author}/${wallpaper.author.slug}`}>{wallpaper.author.name}</Link></h3>
                         <FetchAuthorPosts
                             slug={wallpaper.author.slug}
                             render={({ posts, loading }) => {
@@ -60,7 +59,9 @@ const ShowWallpaperRelatedInfo: React.FC<IQuote> = (wallpaper) => {
 
                                             return (
                                                 <>
-                                                    <h3 className="font-semibold pb-4">Posts from the same topic <Link className="text-ac-secondary" to={`${ac_strings.slug_topic}/${t.slug}`}>{t.name}</Link></h3>
+                                                    <h3 className="font-semibold pb-4">
+                                                        {ac_strings.posts_from_same_topic} <Link className="text-ac-secondary" to={`${ac_strings.slug_topic}/${t.slug}`}>{t.name}</Link>
+                                                    </h3>
                                                     {t.posts[0] && <ColorBlockNoImg {...t.posts[0]} />}
                                                 </>
 
