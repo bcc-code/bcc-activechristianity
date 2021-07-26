@@ -63,16 +63,16 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
      const generators = [
       generateHome(actions, graphql),
       generateExplore(actions, graphql), 
-      generatePosts(actions, graphql)
+      generatePosts(actions, graphql),
+      generatePages(actions, graphql),
+      
     ]
-    if(process.env.WALLPAPER_SECTION==="true"){
-      generators.push(
-        generateWallpapers(actions, graphql))
-    }
+    generators.push(generatePlaylists(actions, graphql))
+
     if (process.env.SUPER_SLIM_DEV_MODE!=="true"){
       generators.push(
         generateAuthors(actions, graphql),
-        generatePages(actions, graphql),
+        
         generateTopics(actions, graphql),
         generateRedirect(actions, graphql),
         generateSeries(actions, graphql)
@@ -96,6 +96,11 @@ exports.onCreateWebpackConfig = ({ actions, plugins }) => {
       if (process.env.SCRIPTURE_SECTION==="true"){
         console.log("generating scriptures")
         generators.push(generateScriptures(actions, graphql)) 
+      }
+
+      if(process.env.WALLPAPER_SECTION==="true"){
+        generators.push(
+          generateWallpapers(actions, graphql))
       }
 
     }
