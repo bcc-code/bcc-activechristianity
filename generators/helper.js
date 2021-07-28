@@ -19,7 +19,7 @@ module.exports = {
             }
         ]
         if(hasPlaylist){
-            const playlistUri=`https://cdn.activechristianity.org/image/upload/c_thumb,h_600,w_600,g_center/v1627455675/en/zykmzzcgyvuhux84bvl3.jpg`
+            const playlistUri=`https://cdn.activechristianity.org/image/upload/c_thumb,h_600,w_600,g_center/v1627475704/en/bljke6pnvdxx0dfdh8fo.png`
 
             toReturn.push({
                 id:'playlist',
@@ -55,7 +55,11 @@ module.exports = {
                 }
             })
         }
-        toReturn.push({
+        toReturn.push(
+            {
+            id: 108201,
+            keyname: "commentary",
+            },{
             id: 108204,
             keyname: "song",
           },
