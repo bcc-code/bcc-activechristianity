@@ -206,6 +206,7 @@ module.exports.createSubTopicPages=({
         let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
         const pageType=isTopic?"topic":"category"
         const context = {
+          pagePath,
           id:topic.id,
           subTopicId:subTopic.id,
           pageType,

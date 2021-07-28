@@ -17,7 +17,7 @@ interface IHomeLowerSection {
 }
 const HomeLowerSections: React.FC<IHomeLowerSection> = ({ lists, popularPosts, topicsForYou }) => {
     return (
-        <div className="grid grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-4 gap-4 md:gap-6 pt-6">
             <div className="col-start-1 col-end-3 lg:col-end-4">
                 {lists.slice(0, 4).map((slot, i) => {
                     return (
