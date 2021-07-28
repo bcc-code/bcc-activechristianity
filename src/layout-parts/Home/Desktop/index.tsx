@@ -4,19 +4,20 @@ import LowerSections from './LowerSections'
 import ShowMore from '@/layout-parts/ShowMorePosts'
 import RightImgWDes from '@/components/PostItemCards/RightImg'
 import shortid from 'shortid'
-import { IPostItem, ITopicPostItems } from '@/types'
+import { IPostItem, ITopicPostItems, ITopic } from '@/types'
 import ac_strings from '@/strings/ac_strings.js'
-
+import Categories from './Categories'
 interface IHomeMobileProps {
     mixed: IPostItem[] | null
     latest: IPostItem[]
     popular: IPostItem[]
+    formats: ITopic[]
     popularTopicsAll: {
         static: ITopicPostItems[]
         dynamic: ITopicPostItems[]
     }
 }
-const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popularTopicsAll }) => {
+const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popularTopicsAll, formats }) => {
     const latestPostAsTopic = {
         id: '',
         name: ac_strings.latest,
@@ -30,6 +31,7 @@ const HomeDesktop: React.FC<IHomeMobileProps> = ({ mixed, latest, popular, popul
                 <FeatureSectionDesktop
                     featuredPosts={mixed}
                 />
+                <Categories formats={formats} />
 
                 <LowerSections
                     lists={popularTopicsAll.static}

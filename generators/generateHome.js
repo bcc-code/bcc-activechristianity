@@ -1,8 +1,10 @@
 const path = require('path')
-const {postQuery,getMultiPosts}= require('gatsby-source-ac/helpers')
-const {typeScope,formatScope,formatsIds,typeIds} = require('../src/strings/static/topic-ids')
+const {postQuery,getMultiPosts, }= require('gatsby-source-ac/helpers')
+//const {topicQuery} = require('gatsby-source-ac/helpers')
+const {typeScope,formatScope,formatsIds,typeIds,groupAll} = require('../src/strings/static/topic-ids')
 const endpoints = require('../src/strings/static/endpoints')
 const { processRecommendationContext, getRandomFeatured } = require('../src/helpers/normalizers')
+const {categorySorted} = require('./helper')
 const baseUrl = endpoints.api_url
 //${postQuery}
 const headers = {
@@ -47,7 +49,10 @@ const query =`{
           }
         featuredTopics:topics(featured:true) {
         	${topicQuery}
-      }
+        }
+        formats:topics(group_id:${groupAll.format}){
+            ${topicQuery}
+        }
     }
 }`
 
@@ -166,12 +171,30 @@ module.exports = function generatePages(actions, graphql) {
             const { latest, popular, featured } = props
             const today=new Date()
             const pagePath='/'
+
+            const categoryOrder=categorySorted()
+            let formats = []
+            console.log(ac.formats)
+            categoryOrder.forEach(element => {
+                const find = ac.formats.find(item=>`${item.id}`===`${element.id}`)
+                if(find){
+                    formats.push(find)
+                } else {
+                    formats.push(element)
+                }
+                
+                console.log(element)
+            });
+
+            formats = formats.filter(item=>item && item.image)
+
             const context = {
                 pagePath,
                 updated_at:today.toDateString(),
                 latest,
                 featured,
                 popular,
+                formats,
                 mixedFeaturedPosts:[
                     getRandomFeatured({ latest, popular, featured }),
                     getRandomFeatured({ latest, popular, featured }),

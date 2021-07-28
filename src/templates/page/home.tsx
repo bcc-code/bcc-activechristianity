@@ -13,9 +13,12 @@ import { PageSectionHeader } from '@/components/Headers'
 import MetaTag from '@/components/Meta'
 import Bookshop from '@/layout-parts/Banner/BookShop'
 import shortid from 'shortid'
+import { SectionTitleDesktopAndMobile } from '@/components/Headers'
+import SquareCard from '@/components/Cards/SquareCategoryCard'
+import Categories from '@/layout-parts/Home/Desktop/Categories'
 import { getRandomArray } from '@/helpers/normalizers'
 // Type
-import { IPostItem, IPostRes, ITopicPostItems } from '@/types'
+import { IPostItem, IPostRes, ITopicPostItems, ITopic } from '@/types'
 
 // Helpers
 import ac_strings from '@/strings/ac_strings.js'
@@ -24,6 +27,7 @@ const HomeContent: React.FC<{
   mixed: IPostItem[] | null
   latest: IPostItem[]
   popular: IPostItem[]
+  formats: ITopic[]
   popularTopicsAll: {
     static: ITopicPostItems[]
     dynamic: ITopicPostItems[]
@@ -57,8 +61,8 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
     popularTopics,
     mixedFeaturedPosts,
     popular,
-    latest
-
+    latest,
+    formats
   } = props
   const latestPostAsTopic = {
     id: '',
@@ -88,6 +92,7 @@ const DesktopHomeWrapper: React.FC<IHomePropsContent> = (props) => {
         mixed={mixed && mixed.length > 0 ? mixed?.slice(1) : []}
         latest={latest}
         popular={popular}
+        formats={formats}
         popularTopicsAll={popularTopics}
       />
     </>
@@ -100,8 +105,10 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
     featured,
     popularTopics,
     popular,
+    formats,
     latest
   } = pageContext
+  console.log(props)
   return (
 
     <div className="standard-max-w">
@@ -123,6 +130,17 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
           <TopImgRowHorizontalScroll posts={latest} />
         </div>
         <LazyLoad>
+          <div className="pt-6">
+            <SectionTitleDesktopAndMobile
+              name={ac_strings.categories}
+
+            />
+            <Categories formats={formats} />
+
+
+          </div>
+        </LazyLoad>
+        <LazyLoad>
           <div className="py-6">
             <PageSectionHeader title={ac_strings.recommend_for_you} className="pb-4" />
             <FeatureSectionMobile topicPosts={popularTopics.static} />
@@ -136,7 +154,7 @@ const IndexPage: React.FC<IHomeProps> = (props) => {
               <PageSectionHeader title={ac_strings.popular} className="pb-4" />
               <TopImgRowHorizontalScroll posts={popular} />
             </div>
-            <div className="w-full p-4">
+            <div className="w-full px-4 py-12">
               <div className="w-full h-16">
                 <BgImgTopicCard
                   name={ac_strings.browse_resource}
@@ -168,6 +186,7 @@ interface IHomePropsContent {
   latest: IPostItem[]
   popular: IPostItem[]
   featured: IPostItem[]
+  formats: ITopic[]
   mixedFeaturedPosts: IPostItem[][]
   popularTopics: {
     static: ITopicPostItems[]

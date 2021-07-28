@@ -1,32 +1,32 @@
 const formatsAll = {
+    "edification":{
+        keyId: 108206,
+        keyname: "edification",
+    },
+    "testimony":{
+        keyId: 345,
+        keyname: "testimony",
+    },
+    "question":{
+        keyId: 1503,
+        keyname: "question",
+    },
+  "commentary":{
+      keyId: 108201,
+      keyname: "commentary",
+  },
   "animation":{
     keyId: 108212,
     keyname: "animation",
-  },
-  "message":{
-      keyId: 36170,
-      keyname: "message",
   },
   "song": {
       keyId: 108204,
       keyname: "song",
   },
-  "edification":{
-      keyId: 108206,
-      keyname: "edification",
-  },
-  "testimony":{
-      keyId: 345,
-      keyname: "testimony",
-  },
-  "question":{
-      keyId: 1503,
-      keyname: "question",
-  },
-  "commentary":{
-      keyId: 108201,
-      keyname: "commentary",
-  },
+  "message":{
+        keyId: 36170,
+        keyname: "message",
+    },
   "interview":{
     keyId: 108211,
     keyname: "interview",
