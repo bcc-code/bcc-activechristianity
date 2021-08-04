@@ -126,7 +126,20 @@ input:focus {
 .main-content p,
 .main-content ul,
 .main-content ol {
-    @apply font-light text-base py-4;
+    @apply font-light text-base;
+}
+
+.main-content ul,
+.main-content ol {
+    @apply px-6;
+}
+
+.main-content p {
+    @apply py-4;
+}
+
+.main-content ol {
+    list-style: decimal;
 }
 
 .main-content a {
