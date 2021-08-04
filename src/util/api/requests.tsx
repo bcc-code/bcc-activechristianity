@@ -12,7 +12,7 @@ const topicQuery = `
         srcset
         dataUri
     }
-`
+`;
 const postQuery = `
     id
     title
@@ -60,15 +60,15 @@ const postQuery = `
     published 
     likes
     views
-`
+`;
 
 export interface IGetPostsAndTopics {
-  postsIds: string[]
-  topicsIds: string[]
+	postsIds: string[];
+	topicsIds: string[];
 }
 
 export const loginMutation = (username: string, password: string, remember: boolean) => {
-  return `
+	return `
   mutation {
       signIn(input:{
         username:"${username}"
@@ -87,8 +87,8 @@ export const loginMutation = (username: string, password: string, remember: bool
         }
       }
     }
-  `
-}
+  `;
+};
 
 export const registerMutation = (email: string, password: string, remember: boolean) => `
   mutation {
@@ -110,7 +110,7 @@ export const registerMutation = (email: string, password: string, remember: bool
       }
     }
   }
-`
+`;
 
 export const forgotPasswordMutation = (email: string) => `
   mutation {
@@ -119,7 +119,7 @@ export const forgotPasswordMutation = (email: string) => `
       message
     } 
   }
-`
+`;
 
 export const toggleNotifyAndGiveConsent = (agree: boolean) => `
 mutation ToggleNotify {
@@ -135,7 +135,7 @@ mutation ToggleNotify {
 }
 
 
-`
+`;
 export const toggleNotify = (agree: boolean) => `
   mutation ToggleNotify {
     notifications(allow: ${agree}) {
@@ -145,7 +145,7 @@ export const toggleNotify = (agree: boolean) => `
 
   }
 
-`
+`;
 
 export const giveConsent = `
   mutation {
@@ -154,7 +154,7 @@ export const giveConsent = `
       message
     }
   }
-`
+`;
 
 export const logoutMutation = `
   mutation {
@@ -162,7 +162,7 @@ export const logoutMutation = `
       status
     }
   }
-`
+`;
 
 export const bookmarkPostMutation = (id: string, toggle: boolean) => `
   mutation {
@@ -171,7 +171,7 @@ export const bookmarkPostMutation = (id: string, toggle: boolean) => `
       message
     }
   }
-`
+`;
 export const followTopicMutation = (id: number, toggle: boolean) => `
   mutation {
     follow (type:TOPIC,id:${id},toggle:${toggle}){
@@ -179,7 +179,7 @@ export const followTopicMutation = (id: number, toggle: boolean) => `
       message
     }
   }
-`
+`;
 
 export const followPlaylistMutation = (id: number, toggle: boolean) => `
   mutation {
@@ -188,8 +188,7 @@ export const followPlaylistMutation = (id: number, toggle: boolean) => `
       message
     }
   }
-`
-
+`;
 
 export const readingPostMutation = (id: string) => `
   mutation {
@@ -200,7 +199,7 @@ export const readingPostMutation = (id: string) => `
     }
   }
 
-`
+`;
 
 export const visitsPostMutation = (id: string) => `
   mutation {
@@ -209,7 +208,7 @@ export const visitsPostMutation = (id: string) => `
       message
     }
   }
-`
+`;
 export const biblePostsQuery = (bookId: number, ch: number) => `
 query {
     biblePosts(id:"${bookId}", ch:${ch}){
@@ -217,7 +216,7 @@ query {
     }
   }
 
-`
+`;
 
 export const recommendedByPostQuery = (postId: number | string) => `
   query { 
@@ -226,7 +225,7 @@ export const recommendedByPostQuery = (postId: number | string) => `
       slug
     }
   }  
-`
+`;
 
 export const recommendedPostsAndPopularTopic = () => `
   query { 
@@ -244,14 +243,14 @@ export const recommendedPostsAndPopularTopic = () => `
       id
     }
   }  
-`
+`;
 export const topicReommendedPostsQuery = (topicId: number) => `
 query {
   rankingTopicPosts(topicId:${topicId}){
     slug
   }
 }  
-`
+`;
 
 export const bookmarkedPostQuery = `
   query {
@@ -260,7 +259,7 @@ export const bookmarkedPostQuery = `
       slug
     }
   }
-`
+`;
 export const followingQuery = `
   query {
     following {
@@ -278,7 +277,7 @@ export const followingQuery = `
       }
     }
   }
-`
+`;
 export const latestHistoryQuery = `
   query {
     history(limit:10) {
@@ -286,7 +285,7 @@ export const latestHistoryQuery = `
       slug
     }
   }
-`
+`;
 
 export const unfinishedQuery = `
   query {
@@ -295,7 +294,7 @@ export const unfinishedQuery = `
       slug
     }
   }
-`
+`;
 
 export const profileQuery = `
   query {
@@ -315,10 +314,10 @@ export const profileQuery = `
       }
     }
   }
-`
+`;
 
 export const getOnePostByIdQuery = (id: string) => {
-  return `
+	return `
     query {
       post(id: ${id}) {
           ${postQuery}
@@ -344,11 +343,11 @@ export const getOnePostByIdQuery = (id: string) => {
         
 
   }
-  `
-}
+  `;
+};
 
 export const getOnePreviewPostByIdQuery = (id: string) => {
-  return `
+	return `
     query {
       previewPost(id: ${id}) {
           ${postQuery}
@@ -374,10 +373,10 @@ export const getOnePreviewPostByIdQuery = (id: string) => {
         
 
   }
-  `
-}
+  `;
+};
 export const getOnePageByIdQuery = (id: string) => {
-  return `
+	return `
     query {
       page(id:${id}){
         title
@@ -385,11 +384,11 @@ export const getOnePageByIdQuery = (id: string) => {
         flexibleContent
       }
     }
-  `
-}
+  `;
+};
 
 export const getOnePreviewPageByIdQuery = (id: string) => {
-  return `
+	return `
     query {
       previewPage(id:${id}){
         title
@@ -397,25 +396,25 @@ export const getOnePreviewPageByIdQuery = (id: string) => {
         flexibleContent
       }
     }
-  `
-}
+  `;
+};
 
 export const getPostsByIds = (ids: IGetPostsAndTopics) => {
-  const { postsIds, topicsIds } = ids
-  return `
+	const { postsIds, topicsIds } = ids;
+	return `
     query {
-      posts(ids: [${postsIds.join(",")}]) {
+      posts(ids: [${postsIds.join(',')}]) {
           data {
               ${postQuery}
           }
         }
 
-        topics(ids:[${topicsIds.join(",")}]){
+        topics(ids:[${topicsIds.join(',')}]){
           ${topicQuery}
         }
   }
-  `
-}
+  `;
+};
 
 export const getScriptChapterPostsQuery = (bookId: string, ch: string) => `
   query  {
@@ -424,7 +423,7 @@ export const getScriptChapterPostsQuery = (bookId: string, ch: string) => `
       }
   }
 
-`
+`;
 
 export const getPostsPerPageQuery = (id: string, page: number) => `{
   topic(id:${id}) {	
@@ -435,7 +434,7 @@ export const getPostsPerPageQuery = (id: string, page: number) => `{
       }
     }
   }
-}`
+}`;
 
 export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page: number) => `{
   topic(id:${id}) {
@@ -449,7 +448,7 @@ export const getPostsPerPageBySubtopicId = (id: string, subtopicId: string, page
   }
 }
 
-`
+`;
 
 export const checkUserSubscription = `
   query GetUserAndSubscription {
@@ -464,7 +463,7 @@ export const checkUserSubscription = `
       }
     }
   }
-`
+`;
 
 export const subscribeMutation = (email: string) => `
 mutation subscribeNewOrUpdate {
@@ -473,7 +472,7 @@ mutation subscribeNewOrUpdate {
     message
   }
 }
-`
+`;
 
 export const unsubscribeMutation = (email: string) => `
   mutation Unsubscribe {
@@ -482,23 +481,21 @@ export const unsubscribeMutation = (email: string) => `
       message
     }
   }
-`
+`;
 
 interface IUpdateProfile {
-  email?: string
-  lang?: string
-  name?: string
-
+	email?: string;
+	lang?: string;
+	name?: string;
 }
 export const updateProfileMutation = (props: IUpdateProfile) => {
-  const toAdd = Object.keys(props).map(key => `${key}:"${props[key]}"`)
-  const inputString = toAdd.join(",")
-  return `
+	const toAdd = Object.keys(props).map(key => `${key}:"${props[key]}"`);
+	const inputString = toAdd.join(',');
+	return `
   mutation updateProfile {
     profile(input: {${inputString}}) {
       success
       message
     }
-  }`
-}
-
+  }`;
+};

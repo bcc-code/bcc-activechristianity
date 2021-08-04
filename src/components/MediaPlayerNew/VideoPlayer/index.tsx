@@ -1,22 +1,14 @@
-import React from 'react'
-
-import ReactPlayer from 'react-player/youtube'
+import React from 'react';
+import ReactPlayer from 'react-player/youtube';
 
 const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
-    const playerEl = React.useRef<any>(null);
-    return (
-        <div className="standard-max-w bg-black">
-            <div
-                className={`flex justify-center  mp--video `}
-
-            >
-                <ReactPlayer
-                    url={src}
-                    controls={true}
-                    ref={playerEl}
-                />
-            </div>
-            {/* 
+	const playerEl = React.useRef<any>(null);
+	return (
+		<div className="standard-max-w bg-black">
+			<div className={`flex justify-center  mp--video `}>
+				<ReactPlayer url={src} controls={true} ref={playerEl} />
+			</div>
+			{/* 
             <div className="text-mp-text flex w-full py-3 sm:py-8 mx-auto max-w-tablet items-center">
                 <PlayPauseControl
                     fullScreenInfo={false}
@@ -40,8 +32,8 @@ const VideoPlayer: React.FC<{ src: string }> = ({ src }) => {
                     <FullScreenIcon />
                 </button>
             </div> */}
-        </div>
-    )
-}
+		</div>
+	);
+};
 
-export default VideoPlayer
+export default VideoPlayer;

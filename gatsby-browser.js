@@ -12,87 +12,81 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-import React from "react"
+import React from 'react';
 
-import "react-placeholder/lib/reactPlaceholder.css"
-import "normalize.css/normalize.css"
-import "./src/styles/reset.css"
-import "./src/styles/tailwind-output.css"
-import Layout from "./src/layouts/AppWrapper"
+import 'react-placeholder/lib/reactPlaceholder.css';
+import 'normalize.css/normalize.css';
+import './src/styles/reset.css';
+import './src/styles/tailwind-output.css';
+import Layout from './src/layouts/AppWrapper';
 
-import wrapWithProvider from "./src/rootElement"
+import wrapWithProvider from './src/rootElement';
 
-export const wrapRootElement = wrapWithProvider
+export const wrapRootElement = wrapWithProvider;
 /* 
 export const wrapPageElement = ({ element, props }) => <Layout {...props}>{element}</Layout> */
 
-const addScript = (url) => {
-  const script = document.createElement("script")
-  script.src = url
-  script.async = true
-  document.body.appendChild(script)
-}
+const addScript = url => {
+	const script = document.createElement('script');
+	script.src = url;
+	script.async = true;
+	document.body.appendChild(script);
+};
 
+const addScriptToHead = url => {
+	var a = document.createElement('script');
+	var m = document.getElementsByTagName('script')[0];
+	a.async = 1;
+	a.src = url;
+	m.parentNode.insertBefore(a, m);
+};
 
-const addScriptToHead=(url)=>{
+const addTrackingCode = () => {
+	(function (f, b, e, v, n, t, s) {
+		if (f.fbq) return;
+		n = f.fbq = function () {
+			n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+		};
+		if (!f._fbq) f._fbq = n;
+		n.push = n;
+		n.loaded = !0;
+		n.version = '2.0';
+		n.queue = [];
+		t = b.createElement(e);
+		t.async = 1;
+		t.src = v;
+		s = b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t, s);
+	})(window, document, 'script', '/scripts/fbevents.js');
 
-    var a = document.createElement('script');
-    var m = document.getElementsByTagName('script')[0];
-    a.async = 1;
-    a.src = url
-    m.parentNode.insertBefore(a, m);
-}
+	if (window.fbq) {
+		console.log('running pixel');
+		window.fbq('init', '386848018393019');
+	}
 
-const addTrackingCode = ()=>{
+	window.clicky_site_ids = window.clicky_site_ids || [];
+	const clicky_id = parseInt(process.env.CLICKY_ID);
 
-        (function (f, b, e, v, n, t, s) {
-          if (f.fbq) return;
-          n = f.fbq = function () {
-              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-          };
-          if (!f._fbq) f._fbq = n;
-          n.push = n;
-          n.loaded = !0;
-          n.version = "2.0";
-          n.queue = [];
-          t = b.createElement(e);
-          t.async = 1;
-          t.src = v;
-          s = b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t, s);
-      })(window, document, "script", "/scripts/fbevents.js")
+	window.clicky_site_ids.push(clicky_id);
 
-      if(window.fbq){
-        console.log('running pixel')
-        window.fbq('init', '386848018393019');
-      }
+	addScriptToHead('/scripts/clicky.js');
+	addScript('/scripts/adword-adgrant-conversion.js');
+	addScript('/scripts/adword-remarketing.js');
 
-    
-      window.clicky_site_ids = window.clicky_site_ids || [];
-      const clicky_id = parseInt(process.env.CLICKY_ID)
-
-      window.clicky_site_ids.push(clicky_id);
-
-      addScriptToHead('/scripts/clicky.js');
-      addScript('/scripts/adword-adgrant-conversion.js')
-      addScript('/scripts/adword-remarketing.js')
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag=gtag
-      gtag('js', new Date());
-      gtag('config', 'AW-853531513');
-      gtag('config', 'AW-929434073');
-      gtag('config', 'G-BP822ZKN7N');
-}
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		window.dataLayer.push(arguments);
+	}
+	window.gtag = gtag;
+	gtag('js', new Date());
+	gtag('config', 'AW-853531513');
+	gtag('config', 'AW-929434073');
+	gtag('config', 'G-BP822ZKN7N');
+};
 
 export const onClientEntry = () => {
-
-    if(process.env.DONT_ADD_TRACKING_CODE!=="true"){
-
-/*       (function(){
+	if (process.env.DONT_ADD_TRACKING_CODE !== 'true') {
+		/*       (function(){
         window['GoogleAnalyticsObject'] = 'ga';
         if(!window['ga'] ){
           window['ga'] = function(){
@@ -151,20 +145,15 @@ export const onClientEntry = () => {
             }
             })();
                 } */
-    }
-    
-
-  }
-
-
+	}
+};
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
-  if (typeof window !== 'undefined' ) {
-
-/*     if(window.gtag){
+	if (typeof window !== 'undefined') {
+		/*     if(window.gtag){
       window.gtag('event', 'conversion', {'send_to': 'AW-929434073/6OI-CMPitfEBENmTmLsD'});
     } */
-/*     const pathname=typeof location.pathname ==='string' && location.pathname==='/'?location.pathname:location.pathname.replace(/\/$/, "")
+		/*     const pathname=typeof location.pathname ==='string' && location.pathname==='/'?location.pathname:location.pathname.replace(/\/$/, "")
       setTimeout(()=>{
         if(window.ga){
          window.ga('send', {
@@ -177,7 +166,5 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
           window.fbq('track', 'PageView');
         }
       },500) */
-    
-  }
-}
-
+	}
+};

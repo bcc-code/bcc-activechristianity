@@ -1,23 +1,23 @@
-import { Reducer, Dispatch } from 'redux'
+import { Reducer, Dispatch } from 'redux';
 
 interface TIsAutoPlayStateAction {
-    dispatch: Dispatch
-    payload: boolean
-    type: 'SET_IS_AUTOPLAY'
+	dispatch: Dispatch;
+	payload: boolean;
+	type: 'SET_IS_AUTOPLAY';
 }
 
-const defaultState = false
+const defaultState = false;
 
 const autoPlay: Reducer<boolean, TIsAutoPlayStateAction> = (state = defaultState, action: TIsAutoPlayStateAction) => {
-    switch (action.type) {
-        case 'SET_IS_AUTOPLAY': {
-            const { payload } = action
-            return payload
-        }
+	switch (action.type) {
+		case 'SET_IS_AUTOPLAY': {
+			const { payload } = action;
+			return payload;
+		}
 
-        default:
-            return state
-    }
-}
+		default:
+			return state;
+	}
+};
 
-export default autoPlay
+export default autoPlay;

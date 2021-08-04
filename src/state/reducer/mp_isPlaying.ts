@@ -1,23 +1,23 @@
-import { Reducer, Dispatch } from 'redux'
+import { Reducer, Dispatch } from 'redux';
 
 interface TIsPlayingStateAction {
-    dispatch: Dispatch
-    payload: boolean
-    type: 'SET_IS_PLAYING'
+	dispatch: Dispatch;
+	payload: boolean;
+	type: 'SET_IS_PLAYING';
 }
 
-const defaultState = false
+const defaultState = false;
 
 const isPlaying: Reducer<boolean, TIsPlayingStateAction> = (state = defaultState, action: TIsPlayingStateAction) => {
-    switch (action.type) {
-        case 'SET_IS_PLAYING': {
-            const { payload } = action
-            return payload
-        }
+	switch (action.type) {
+		case 'SET_IS_PLAYING': {
+			const { payload } = action;
+			return payload;
+		}
 
-        default:
-            return state
-    }
-}
+		default:
+			return state;
+	}
+};
 
-export default isPlaying
+export default isPlaying;

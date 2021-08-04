@@ -1,13 +1,13 @@
-const {postQuery} = require('gatsby-source-ac/helpers')
-const path = require('path')
-const ac_strings = require('../../src/strings/ac_strings')
-const listTemplateQuery = 'src/templates/archive/post-list-query.tsx'
-const listTemplateStatic = 'src/templates/archive/post-list.tsx'
-const {  normalizePostRes } = require('../../src/helpers/normalizers')
-const perPage= 12
-const languagePostQuery = postQuery
+const { postQuery } = require('gatsby-source-ac/helpers');
+const path = require('path');
+const ac_strings = require('../../src/strings/ac_strings');
+const listTemplateQuery = 'src/templates/archive/post-list-query.tsx';
+const listTemplateStatic = 'src/templates/archive/post-list.tsx';
+const { normalizePostRes } = require('../../src/helpers/normalizers');
+const perPage = 12;
+const languagePostQuery = postQuery;
 
-module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
+module.exports.getSubTopicsAndFeaturedPosts = id => `{
   ac {
       topic(id: ${id}) {
           id
@@ -24,9 +24,9 @@ module.exports.getSubTopicsAndFeaturedPosts = (id)=>`{
       }
       
   }
-}`
+}`;
 
-module.exports.getSubTopics = (id)=>`{
+module.exports.getSubTopics = id => `{
   ac {
       topic(id: ${id}) {
           id
@@ -40,8 +40,8 @@ module.exports.getSubTopics = (id)=>`{
       }
       
   }
-}`
-module.exports.getTopicPagination=(id)=>`
+}`;
+module.exports.getTopicPagination = id => `
   topic(id:${id}) {
     name
     somePosts(first:${perPage}){
@@ -53,8 +53,8 @@ module.exports.getTopicPagination=(id)=>`
         }
     }
   }
-`
-const getPostsPerPageQuery = (id,page)=>`{
+`;
+const getPostsPerPageQuery = (id, page) => `{
   ac {
     topic(id:${id}) {
       allPosts:somePosts(first:${perPage},page:${page}){
@@ -64,10 +64,10 @@ const getPostsPerPageQuery = (id,page)=>`{
       }
     }
   }
-}`
-module.exports.getPostsPerPageQuery=getPostsPerPageQuery
+}`;
+module.exports.getPostsPerPageQuery = getPostsPerPageQuery;
 
-module.exports.getPopularPosts=(id)=>`
+module.exports.getPopularPosts = id => `
   popularPosts:topic(id:${id}) {
     somePosts(orderBy:{column:VIEWS, order:DESC}){
       data {
@@ -75,9 +75,9 @@ module.exports.getPopularPosts=(id)=>`
       }
     }
   }
-`
+`;
 
-module.exports.getSubTopicPosts=(id1,id2) =>`{
+module.exports.getSubTopicPosts = (id1, id2) => `{
   ac {
       topic(id: ${id1}) {
           id
@@ -90,146 +90,140 @@ module.exports.getSubTopicPosts=(id1,id2) =>`{
           }
       }
   }
-}`
+}`;
 
-module.exports.createArchivePages =async function ({
-  graphql,
-  createPage, 
-  paginatorInfo,
-  node,
-  baseUrl,
-  breadcrumb,
-  topicType
-}){
-  const count = 10
-  const {total}=paginatorInfo
-  const hasRecommendPage=total>count
-  const totalPages = Math.ceil(total/perPage);
-  const isTopic = topicType==='topic'
-  const isType = topicType==='type'
-  const generatePageCount = isType?totalPages:1
-  //*only create the first page, and use query strings for the rest
-    let firstPostsDate = ''
-      for (let i = 1; i <=generatePageCount; i++){
-        let currentPage = i
-        let pagePath = `${baseUrl}/${currentPage}`
-       
-        if(i===1){
-            pagePath=`${baseUrl}${hasRecommendPage && isTopic ?'/1':''}`
-        }
+module.exports.createArchivePages = async function ({
+	graphql,
+	createPage,
+	paginatorInfo,
+	node,
+	baseUrl,
+	breadcrumb,
+	topicType
+}) {
+	const count = 10;
+	const { total } = paginatorInfo;
+	const hasRecommendPage = total > count;
+	const totalPages = Math.ceil(total / perPage);
+	const isTopic = topicType === 'topic';
+	const isType = topicType === 'type';
+	const generatePageCount = isType ? totalPages : 1;
+	//*only create the first page, and use query strings for the rest
+	let firstPostsDate = '';
+	for (let i = 1; i <= generatePageCount; i++) {
+		let currentPage = i;
+		let pagePath = `${baseUrl}/${currentPage}`;
 
-        const component = isType?path.resolve(listTemplateStatic):path.resolve(listTemplateQuery)
-      
-        const paginate = {
-          currentPage,
-          totalPages,
-          baseUrl,
-          hasRecommendPage
-        }
+		if (i === 1) {
+			pagePath = `${baseUrl}${hasRecommendPage && isTopic ? '/1' : ''}`;
+		}
 
-        const query=getPostsPerPageQuery(node.id,i)
-        const perPagePosts = await graphql(query).then(res=>{
-          if(res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts){
-            const posts = res.data.ac.topic.allPosts.data
-            
-            if(i===1 && posts.length>0){
-              firstPostsDate=posts[0].updated_at
+		const component = isType ? path.resolve(listTemplateStatic) : path.resolve(listTemplateQuery);
 
-            }
-            return res.data.ac.topic.allPosts.data
-          } else {
-            console.log(query)
-            throw new Error('not able to get pages')
-          }
+		const paginate = {
+			currentPage,
+			totalPages,
+			baseUrl,
+			hasRecommendPage
+		};
 
-        })
-        .catch(err=>{
-          console.log(query)
-          console.log(err)
-        })
-        console.log(`createArchivePages ${pagePath}`)
-            createPage({
-              path:pagePath,
-              component,
-              context: {
-                pagePath,
-                fetchedPost: isType,
-                pageType:isType?"category":"topic",
-                type:node.topicType,
-                updated_at:firstPostsDate,
-                posts: perPagePosts.map(p=>normalizePostRes(p)),
-                paginate,
-                id:node.id,
-                title:node.name,
-                image:node.image,
-                breadcrumb
-              },
-            })
+		const query = getPostsPerPageQuery(node.id, i);
+		const perPagePosts = await graphql(query)
+			.then(res => {
+				if (res.data.ac && res.data.ac.topic && res.data.ac.topic.allPosts) {
+					const posts = res.data.ac.topic.allPosts.data;
 
+					if (i === 1 && posts.length > 0) {
+						firstPostsDate = posts[0].updated_at;
+					}
+					return res.data.ac.topic.allPosts.data;
+				} else {
+					console.log(query);
+					throw new Error('not able to get pages');
+				}
+			})
+			.catch(err => {
+				console.log(query);
+				console.log(err);
+			});
+		console.log(`createArchivePages ${pagePath}`);
+		createPage({
+			path: pagePath,
+			component,
+			context: {
+				pagePath,
+				fetchedPost: isType,
+				pageType: isType ? 'category' : 'topic',
+				type: node.topicType,
+				updated_at: firstPostsDate,
+				posts: perPagePosts.map(p => normalizePostRes(p)),
+				paginate,
+				id: node.id,
+				title: node.name,
+				image: node.image,
+				breadcrumb
+			}
+		});
+	}
+};
 
-      }
-}
+module.exports.createSubTopicPages = ({
+	type,
+	createPage,
+	allPosts,
+	topic,
+	subTopic,
+	isTopic,
+	breadcrumb,
+	totalCount
+}) => {
+	if (!totalCount) {
+		console.log('No posts for this topic' + topic.name + '/' + subTopic.name);
+	} else {
+		const baseUrl = `${isTopic === true ? `${ac_strings.slug_topic}/` : ''}${topic.slug}/${subTopic.slug}`;
+		console.log(`createSubTopicPages ${baseUrl}`);
+		const pageBreadcrumb = breadcrumb ? [...breadcrumb] : [];
+		pageBreadcrumb.push({
+			name: subTopic.name,
+			to: subTopic.slug
+		});
+		const totalPages = Math.ceil(totalCount / perPage);
+		const component = path.resolve(listTemplateQuery);
 
-module.exports.createSubTopicPages=({
-  type,
-  createPage, 
-  allPosts,
-  topic,
-  subTopic,
-  isTopic,
-  breadcrumb,
-  totalCount,
-})=>{
-    if (!totalCount) {
+		let currentPage = 1;
+		//
+		let firstPostsDate = '';
 
-      console.log('No posts for this topic' + topic.name + '/' +subTopic.name)
-    } else {
-      const baseUrl = `${isTopic===true?`${ac_strings.slug_topic}/`:''}${topic.slug}/${subTopic.slug}`
-      console.log(`createSubTopicPages ${baseUrl}`)
-      const pageBreadcrumb = breadcrumb?[...breadcrumb]:[]
-      pageBreadcrumb.push( {
-        name:subTopic.name,
-        to:subTopic.slug
-      })
-      const totalPages = Math.ceil(totalCount / perPage)
-      const component = path.resolve(listTemplateQuery)
-         
-      let currentPage = 1
-      // 
-      let firstPostsDate = ''
-      
-      for (let i = 0; i <=1; i += perPage, currentPage++) {
-        if(i===1 && allPosts.length>0){
-          firstPostsDate=allPosts[0].updated_at
+		for (let i = 0; i <= 1; i += perPage, currentPage++) {
+			if (i === 1 && allPosts.length > 0) {
+				firstPostsDate = allPosts[0].updated_at;
+			}
+			let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`;
+			const pageType = isTopic ? 'topic' : 'category';
+			const context = {
+				pagePath,
+				id: topic.id,
+				subTopicId: subTopic.id,
+				pageType,
+				updated_at: firstPostsDate,
+				type,
+				posts: allPosts,
+				paginate: {
+					currentPage,
+					totalPages,
+					baseUrl
+				},
+				title: subTopic.name,
+				breadcrumb: pageBreadcrumb,
+				isTopic
+				/*            ...node */
+			};
 
-        }
-        let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`
-        const pageType=isTopic?"topic":"category"
-        const context = {
-          pagePath,
-          id:topic.id,
-          subTopicId:subTopic.id,
-          pageType,
-          updated_at:firstPostsDate,
-          type,
-          posts: allPosts,
-          paginate: {
-            currentPage,
-            totalPages,
-            baseUrl
-          },
-          title:subTopic.name,
-          breadcrumb:pageBreadcrumb,
-          isTopic
-/*            ...node */
-        }
-
-        createPage({
-          path:pagePath,
-          component,
-          context,
-        })
-      }
-    }
-
-}
+			createPage({
+				path: pagePath,
+				component,
+				context
+			});
+		}
+	}
+};

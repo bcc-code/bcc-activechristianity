@@ -1,192 +1,180 @@
-import React from 'react'
-import { useDispatch, useSelector } from "react-redux"
+import { FormSubmitButton } from '@/components/Button';
+import { InputText } from '@/components/Input';
+import Snackbar from '@/components/Snackbar';
+import { validateEmail } from '@/helpers/index-js';
+import { openSignInModal } from '@/state/action';
+import { initiateRegister } from '@/state/action/authAction';
+import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user';
+import ac_strings from '@/strings/ac_strings.js';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { initiateRegister } from '@/state/action/authAction'
-import { openSignInModal } from '@/state/action'
-import { InputText } from '@/components/Input'
-import ac_strings from '@/strings/ac_strings.js'
-import Snackbar from '@/components/Snackbar'
-import { FormSubmitButton } from "@/components/Button"
-import { validateEmail } from '@/helpers/index-js'
-import { loggedInSelector, loggedInErrorSelector } from '@/state/selectors/user'
-const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
-const mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})")
+const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})');
+const mediumRegex = new RegExp(
+	'^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
+);
 
 const initialFieldState = {
-    username: '',
-    email: '',
-    password: '',
-    confirm: '',
-    keepSignedIn: false
-}
+	username: '',
+	email: '',
+	password: '',
+	confirm: '',
+	keepSignedIn: false
+};
 
 const initialErrorState = {
-    username: '',
-    email: '',
-    password: '',
-    confirm: '',
-    keepSignedIn: ''
-}
+	username: '',
+	email: '',
+	password: '',
+	confirm: '',
+	keepSignedIn: ''
+};
 
-type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'keepSignedIn'
+type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'keepSignedIn';
 const SignUpForm = () => {
-    const dispatch = useDispatch()
-    const [fields, setFields] = React.useState(initialFieldState)
-    const [errors, setErrors] = React.useState(initialErrorState)
-    const [touched, setTouched] = React.useState(false)
-    const [strength, setStrength] = React.useState<'white' | 'green' | 'orange' | 'red'>('white')
-    const loggedIn = useSelector(loggedInSelector)
-    const loggedInError = useSelector(loggedInErrorSelector)
+	const dispatch = useDispatch();
+	const [fields, setFields] = React.useState(initialFieldState);
+	const [errors, setErrors] = React.useState(initialErrorState);
+	const [touched, setTouched] = React.useState(false);
+	const [strength, setStrength] = React.useState<'white' | 'green' | 'orange' | 'red'>('white');
+	const loggedIn = useSelector(loggedInSelector);
+	const loggedInError = useSelector(loggedInErrorSelector);
 
-    React.useEffect(() => {
-        if (touched) {
-            validate()
-        }
+	React.useEffect(() => {
+		if (touched) {
+			validate();
+		}
+	}, [fields]);
 
-    }, [fields]);
+	const validate = () => {
+		const errorsFound = {
+			...initialErrorState
+		};
+		let pass = true;
+		const fieldNames: IFieldName[] = ['email', 'password', 'confirm'];
+		for (const field of fieldNames) {
+			const value = fields[field];
+			if (field === 'email') {
+				if (!validateEmail(fields[field])) {
+					errorsFound[field] = ac_strings.error_required;
+					pass = false;
+				} else {
+					errorsFound[field] = '';
+				}
+			} else if (typeof value === 'string' && value.trim() === '') {
+				errorsFound[field] = ac_strings.error_required;
+				pass = false;
+			} else {
+				errorsFound[field] = '';
+			}
+		}
 
-    const validate = () => {
-        const errorsFound = {
-            ...initialErrorState
-        }
-        let pass = true;
-        const fieldNames: IFieldName[] = ['email', 'password', 'confirm']
-        for (let field of fieldNames) {
-            let value = fields[field]
-            if (field === "email") {
-                if (!validateEmail(fields[field])) {
-                    errorsFound[field] = ac_strings.error_required
-                    pass = false
-                } else {
-                    errorsFound[field] = ''
-                }
+		if (fields.password.length < 6) {
+			errorsFound['confirm'] = ac_strings.error_password_too_short;
+			pass = false;
+		}
 
-            } else if (typeof value === 'string' && value.trim() === '') {
-                errorsFound[field] = ac_strings.error_required
-                pass = false
-            } else {
-                errorsFound[field] = ''
-            }
-        }
+		if (!strongRegex.test(fields.password) && !mediumRegex.test(fields.password)) {
+			setStrength('red');
+			errorsFound['password'] = ac_strings.error_password_specs;
+			pass = false;
+		}
 
-        if (fields.password.length < 6) {
-            errorsFound['confirm'] = ac_strings.error_password_too_short
-            pass = false
-        }
+		if (fields.password !== fields.confirm) {
+			errorsFound['confirm'] = ac_strings.passwords_mismatch;
+			pass = false;
+		}
+		setErrors(errorsFound);
+		return pass;
+	};
 
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+		const passValidation = validate();
+		if (passValidation) {
+			const { email, password } = fields;
 
+			const data = {
+				email,
+				password
+			};
+			dispatch(initiateRegister(data));
+		}
+	};
 
-        if (!strongRegex.test(fields.password) && !mediumRegex.test(fields.password)) {
-            setStrength('red')
-            errorsFound['password'] = ac_strings.error_password_specs
-            pass = false
-        }
+	const handleChange = (e: any, field: IFieldName) => {
+		if (!touched) {
+			setTouched(true);
+		}
+		const result = { ...fields };
+		validate();
+		if (field === 'keepSignedIn') {
+			setFields({
+				...fields,
+				keepSignedIn: !fields.keepSignedIn
+			});
+		} else {
+			result[field] = e.target.value;
+			setFields(result);
 
-        if (fields.password !== fields.confirm) {
-            errorsFound['confirm'] = ac_strings.passwords_mismatch
-            pass = false
-        }
-        setErrors(errorsFound)
-        return pass
-    }
+			if (field === 'password') {
+				if (strongRegex.test(result[field])) {
+					setStrength('green');
+				} else if (mediumRegex.test(result[field])) {
+					setStrength('orange');
+				} else {
+					setStrength('red');
+				}
+			}
+		}
+	};
+	const handleSignUpOpionts = () => {
+		dispatch(openSignInModal('signUpOptions'));
+	};
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        const passValidation = validate()
-        if (passValidation) {
+	return (
+		<div className="flex-1 flex flex-col items-center justify-center w-full h-full ">
+			<div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
+				<h5 className="font-semibold pb-2">{ac_strings.signup_email}</h5>
+			</div>
 
-            const { email, password } = fields
+			<form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>
+				{loggedInError && <Snackbar text={loggedInError} error />}
+				<InputText
+					label={ac_strings.email}
+					value={fields['email']}
+					onChange={e => {
+						handleChange(e, 'email');
+					}}
+					error={errors.email ? ac_strings.error_required : undefined}
+				/>
+				<InputText
+					label={ac_strings.password}
+					type="password"
+					value={fields.password}
+					onChange={e => {
+						handleChange(e, 'password');
+					}}
+					error={errors.password ? ac_strings.error_required : undefined}
+				/>
 
-            const data = {
-                email,
-                password,
-            }
-            dispatch(initiateRegister(data))
-        }
-    }
-
-    const handleChange = (e: any, field: IFieldName) => {
-        if (!touched) {
-            setTouched(true)
-        }
-        const result = { ...fields }
-        validate()
-        if (field === 'keepSignedIn') {
-            setFields({
-                ...fields,
-                keepSignedIn: !fields.keepSignedIn
-            })
-        } else {
-            result[field] = e.target.value
-            setFields(result)
-
-            if (field === 'password') {
-                if (strongRegex.test(result[field])) {
-                    setStrength('green')
-                } else if (mediumRegex.test(result[field])) {
-                    setStrength('orange')
-                } else {
-                    setStrength('red')
-                }
-            }
-        }
-
-    }
-    const handleSignUpOpionts = () => {
-        dispatch(openSignInModal("signUpOptions"))
-    }
-
-    return (
-        <div
-            className="flex-1 flex flex-col items-center justify-center w-full h-full "
-        >
-            <div className="flex flex-col justify-center bg-ac-primary py-4 px-4 rounded-top-lg text-white shadow w-full">
-                <h5 className="font-semibold pb-2">{ac_strings.signup_email}</h5>
-            </div>
-
-
-            <form action="" className="w-full px-4 py-6" onSubmit={handleSubmit}>
-                {loggedInError && (
-                    <Snackbar
-                        text={loggedInError}
-                        error
-                    />
-                )}
-                <InputText
-                    label={ac_strings.email}
-                    value={fields["email"]}
-                    onChange={(e) => {
-                        handleChange(e, 'email')
-                    }}
-                    error={errors.email ? ac_strings.error_required : undefined}
-                />
-                <InputText
-                    label={ac_strings.password}
-                    type="password"
-                    value={fields.password}
-                    onChange={(e) => {
-                        handleChange(e, 'password')
-                    }}
-                    error={errors.password ? ac_strings.error_required : undefined}
-                />
-
-                <InputText
-                    label={ac_strings.confirm_password}
-                    type="password"
-                    value={fields.confirm}
-                    onChange={(e) => {
-                        handleChange(e, 'confirm')
-                    }}
-                    error={errors.confirm}
-                />
-                {/*                 <InputCheckbox
+				<InputText
+					label={ac_strings.confirm_password}
+					type="password"
+					value={fields.confirm}
+					onChange={e => {
+						handleChange(e, 'confirm');
+					}}
+					error={errors.confirm}
+				/>
+				{/*                 <InputCheckbox
                     label={ac_strings.remember_me}
                     onChange={(e) => {
                         handleChange(e, 'keepSignedIn')
                     }}
                     value={fields.keepSignedIn}
                 /> */}
-                {/*                 <InputCheckbox
+				{/*                 <InputCheckbox
                     label={ac_strings.consent_signup_email_checkbox_first}
                     onChange={(e) => {
                         handleChange(e, 'consent')
@@ -203,28 +191,27 @@ const SignUpForm = () => {
                     error={errors.consentReceiveEmail}
                 />
  */}
-                <div className="flex flex-col justify-center w-full text-sm sm:text-base">
-                    <div className="flex justify-center">
-                        <FormSubmitButton
-                            /*    disabled={fields.consent !== true} */
-                            loading={loggedIn === "loading"}
-                            onClick={handleSubmit}
-                        />
-                    </div>
-                </div>
-            </form>
-            <div className="text-sm mb-6">
-                <span
-                    className="text-blue-500 font-semibold "
-                    onClick={handleSignUpOpionts}
-                    onKeyDown={handleSignUpOpionts}
-                >
-                    {ac_strings.all_signup_options}
-                </span>
-            </div>
-        </div>
+				<div className="flex flex-col justify-center w-full text-sm sm:text-base">
+					<div className="flex justify-center">
+						<FormSubmitButton
+							/*    disabled={fields.consent !== true} */
+							loading={loggedIn === 'loading'}
+							onClick={handleSubmit}
+						/>
+					</div>
+				</div>
+			</form>
+			<div className="text-sm mb-6">
+				<span
+					className="text-blue-500 font-semibold "
+					onClick={handleSignUpOpionts}
+					onKeyDown={handleSignUpOpionts}
+				>
+					{ac_strings.all_signup_options}
+				</span>
+			</div>
+		</div>
+	);
+};
 
-    )
-}
-
-export default SignUpForm
+export default SignUpForm;

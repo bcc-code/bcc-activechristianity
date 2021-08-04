@@ -1,21 +1,15 @@
-import * as React from 'react'
+import * as React from 'react';
 
-const Series: React.FC<IDummy> = (props) => {
+const Series: React.FC<IDummy> = props => {
+	return <div>{props.pageContext.title}</div>;
+};
 
-    return (
-        <div>
-            {props.pageContext.title}
-        </div>
-    )
-}
-
-export default Series
+export default Series;
 
 interface IDummy {
-    path: string
+	path: string;
 
-    pageContext: {
-        title: string
-
-    }
+	pageContext: {
+		title: string;
+	};
 }
