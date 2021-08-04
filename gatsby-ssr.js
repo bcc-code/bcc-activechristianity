@@ -4,8 +4,6 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
+import wrapWithProvider from './src/rootElement';
 
-import wrapWithProvider from "./src/rootElement"
-
-export const wrapRootElement = wrapWithProvider
-
+export const wrapRootElement = wrapWithProvider;

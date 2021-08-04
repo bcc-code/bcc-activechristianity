@@ -1,16 +1,12 @@
+import { Middleware } from 'redux';
 
-import {
-    Middleware,
-} from 'redux'
+import { IRootState } from '../types';
 
-import { IRootState } from '../types'
+const middleware: Middleware<{}, IRootState> = store => next => action => {
+	switch (action.type) {
+		default:
+			next(action);
+	}
+};
 
-
-const middleware: Middleware<{}, IRootState> = (store) => (next) => (action) => {
-    switch (action.type) {
-
-        default: next(action)
-    }
-}
-
-export default middleware
+export default middleware;

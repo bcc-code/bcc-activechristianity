@@ -1,25 +1,26 @@
-import { Reducer } from 'redux'
-import { IBreadcrumb } from '@/types'
+import { IBreadcrumb } from '@/types';
+import { Reducer } from 'redux';
 
 interface UpdateBreadcrumbAction {
-    type: 'UPDATE_BREADCRUMB',
-    payload: IBreadcrumb
+	type: 'UPDATE_BREADCRUMB';
+	payload: IBreadcrumb;
 }
 
+const updateBreadcrumb: Reducer<IBreadcrumb, UpdateBreadcrumbAction> = (
+	state = {
+		items: [],
+		title: ''
+	},
+	action: UpdateBreadcrumbAction
+) => {
+	switch (action.type) {
+		case 'UPDATE_BREADCRUMB': {
+			return action.payload;
+		}
 
-const updateBreadcrumb: Reducer<IBreadcrumb, UpdateBreadcrumbAction> = (state = {
-    items: [],
-    title: ''
-}, action: UpdateBreadcrumbAction) => {
-
-    switch (action.type) {
-        case 'UPDATE_BREADCRUMB': {
-            return action.payload
-        }
-
-        default:
-            return state
-    }
-}
+		default:
+			return state;
+	}
+};
 
 export default updateBreadcrumb;

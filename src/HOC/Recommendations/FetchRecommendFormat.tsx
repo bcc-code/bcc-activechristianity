@@ -1,49 +1,45 @@
-import React from 'react'
-
-import { getRandomArray } from '@/helpers/normalizers'
-import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import { IPostItem } from '@/types'
-import ac_strings from '@/strings/ac_strings.js'
-
+import { fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData';
+import { getRandomArray } from '@/helpers/normalizers';
+import ac_strings from '@/strings/ac_strings.js';
+import { IPostItem } from '@/types';
+import React from 'react';
 
 interface IFetchLatestRecommendFormatPosts {
-    slugs: string[]
-    layout: "row" | "list" | "one"
-    render: (data: { posts: IPostItem[] }) => JSX.Element
+	slugs: string[];
+	layout: 'row' | 'list' | 'one';
+	render: (data: { posts: IPostItem[] }) => JSX.Element;
 }
 
 const RecommendedSectionOne: React.FC<IFetchLatestRecommendFormatPosts> = ({ slugs, render }) => {
-    const [posts, setPosts] = React.useState<IPostItem[]>([])
+	const [posts, setPosts] = React.useState<IPostItem[]>([]);
 
-    React.useEffect(() => {
-        const formatSlugs: string[] = slugs
-        let isSubscribed = true
+	React.useEffect(() => {
+		const formatSlugs: string[] = slugs;
+		let isSubscribed = true;
 
-        Promise.all(formatSlugs.map(slug => fetchPostslistFromArchivePage(`${slug}/${ac_strings.slug_latest}`))).then(res => {
-            const allPosts: IPostItem[] = []
-            if (res && Array.isArray(res)) {
+		Promise.all(formatSlugs.map(slug => fetchPostslistFromArchivePage(`${slug}/${ac_strings.slug_latest}`))).then(
+			res => {
+				const allPosts: IPostItem[] = [];
+				if (res && Array.isArray(res)) {
+					res.forEach(array => {
+						if (array) {
+							allPosts.push(...array);
+						}
+					});
+				}
+				if (isSubscribed) {
+					const random = getRandomArray(allPosts, 12);
+					setPosts(random);
+				}
+				return () => {
+					isSubscribed = false;
+				};
+				/*      */
+			}
+		);
+	}, [slugs]);
 
-                res.forEach(array => {
-                    if (array) {
-                        allPosts.push(...array)
+	return render({ posts });
+};
 
-                    }
-                })
-            }
-            if (isSubscribed) {
-                const random = getRandomArray(allPosts, 12)
-                setPosts(random)
-            }
-            return () => {
-                isSubscribed = false
-            }
-            /*      */
-
-        })
-    }, [slugs])
-
-    return render({ posts })
-
-}
-
-export default RecommendedSectionOne
+export default RecommendedSectionOne;

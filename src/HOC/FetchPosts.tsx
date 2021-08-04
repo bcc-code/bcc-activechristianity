@@ -1,186 +1,145 @@
-import * as React from "react"
-import { IPostItem, IPlaylist } from '@/types'
-import { getPlaceholder } from '@/components/Loader/PlaceHolders'
-import { fetchLocalPostsFromSlugs, fetchOneLocalPostFromSlug, fetchPostslistFromArchivePage } from '@/helpers/fetchLocalData'
-import Placeholder from '@/components/Loader/MainpagePlaceholder'
-import ac_strings from '@/strings/ac_strings.js'
-
+import Placeholder from '@/components/Loader/MainpagePlaceholder';
+import { getPlaceholder } from '@/components/Loader/PlaceHolders';
+import {
+	fetchLocalPostsFromSlugs,
+	fetchOneLocalPostFromSlug,
+	fetchPostslistFromArchivePage
+} from '@/helpers/fetchLocalData';
+import ac_strings from '@/strings/ac_strings.js';
+import { IPostItem, IPlaylist } from '@/types';
+import * as React from 'react';
 
 interface IFetchPost {
-    slugs: string[],
-    layout: "row" | "list" | "one",
-    render: (data: { posts: IPostItem[] }) => JSX.Element
+	slugs: string[];
+	layout: 'row' | 'list' | 'one';
+	render: (data: { posts: IPostItem[] }) => JSX.Element;
 }
 export const FetchPostsFromSlugs: React.FC<IFetchPost> = ({ slugs, render, layout }) => {
+	const [posts, setPosts] = React.useState<IPostItem[]>([]);
+	const [loading, setLoading] = React.useState(true);
+	React.useEffect(() => {
+		setLoading(true);
+		let isSubscribed = true;
+		fetchLocalPostsFromSlugs(slugs)
+			.then(res => {
+				if (isSubscribed) {
+					setLoading(false);
+					if (res) {
+						setPosts(res);
+					}
+				}
+			})
+			.catch(error => {
+				if (isSubscribed) {
+					setLoading(false);
+					console.log(error);
+				}
+			});
+		return () => {
+			isSubscribed = false;
+		};
+	}, [slugs]);
 
-    const [posts, setPosts] = React.useState<IPostItem[]>([])
-    const [loading, setLoading] = React.useState(true)
-    React.useEffect(() => {
-        setLoading(true)
-        let isSubscribed = true
-        fetchLocalPostsFromSlugs(slugs)
-            .then(res => {
-
-                if (isSubscribed) {
-                    setLoading(false)
-                    if (res) {
-                        setPosts(res)
-                    }
-                }
-
-            })
-            .catch(error => {
-                if (isSubscribed) {
-                    setLoading(false)
-                    console.log(error)
-                }
-
-            })
-        return () => {
-            isSubscribed = false
-        }
-    }, [slugs])
-
-    const CustomPlaceholder = getPlaceholder[layout]
-    return (
-
-        <CustomPlaceholder
-            loading={loading}
-        >
-            {render({ posts })}
-        </CustomPlaceholder>
-    )
-
-}
+	const CustomPlaceholder = getPlaceholder[layout];
+	return <CustomPlaceholder loading={loading}>{render({ posts })}</CustomPlaceholder>;
+};
 interface IFetchPostsFromArchivePage {
-    slug: string
-    layout: "row" | "list" | "one",
-    render: (data: { posts: IPostItem[] }) => JSX.Element
+	slug: string;
+	layout: 'row' | 'list' | 'one';
+	render: (data: { posts: IPostItem[] }) => JSX.Element;
 }
 
 export const FetchPostsFromArchivePage: React.FC<IFetchPostsFromArchivePage> = ({ slug, render }) => {
-    const [postItems, setPostItems] = React.useState<IPostItem[]>([])
-    const [loading, setLoading] = React.useState(true)
-    React.useEffect(() => {
-        let isSubscribed = true
-        fetchPostslistFromArchivePage(slug)
-            .then(res => {
-                if (isSubscribed) {
-                    setLoading(false)
-                    if (res) {
+	const [postItems, setPostItems] = React.useState<IPostItem[]>([]);
+	const [loading, setLoading] = React.useState(true);
+	React.useEffect(() => {
+		let isSubscribed = true;
+		fetchPostslistFromArchivePage(slug)
+			.then(res => {
+				if (isSubscribed) {
+					setLoading(false);
+					if (res) {
+						setPostItems(res);
+					}
+				}
+			})
+			.catch(error => {
+				if (isSubscribed) {
+					setLoading(false);
+					console.log(error);
+				}
+			});
 
-                        setPostItems(res)
-                    }
-                }
+		return () => {
+			isSubscribed = false;
+		};
+	}, []);
 
-            })
-            .catch(error => {
-                if (isSubscribed) {
-                    setLoading(false)
-                    console.log(error)
-                }
-
-            })
-
-        return () => {
-            isSubscribed = false
-        }
-    }, [])
-
-    return (
-        <Placeholder
-            loading={loading}
-        >
-            {render({ posts: postItems })}
-        </Placeholder>
-    )
-
-}
-
+	return <Placeholder loading={loading}>{render({ posts: postItems })}</Placeholder>;
+};
 
 interface IFetchOnePost {
-    slug: string,
-    render: (data: { post: IPostItem | null }) => JSX.Element
+	slug: string;
+	render: (data: { post: IPostItem | null }) => JSX.Element;
 }
 export const FetchOnePost: React.FC<IFetchOnePost> = ({ slug, render }) => {
-    const [post, setPost] = React.useState<IPostItem | null>(null)
-    const [loading, setLoading] = React.useState(true)
-    React.useEffect(() => {
-        let isSubscribed = true
-        setLoading(true)
-        fetchOneLocalPostFromSlug(slug)
-            .then(res => {
-                if (isSubscribed) {
-                    setLoading(false)
-                    if (res) {
-                        setPost(res)
-                    }
-                }
+	const [post, setPost] = React.useState<IPostItem | null>(null);
+	const [loading, setLoading] = React.useState(true);
+	React.useEffect(() => {
+		const isSubscribed = true;
+		setLoading(true);
+		fetchOneLocalPostFromSlug(slug)
+			.then(res => {
+				if (isSubscribed) {
+					setLoading(false);
+					if (res) {
+						setPost(res);
+					}
+				}
+			})
+			.catch(error => {
+				if (isSubscribed) {
+					setLoading(false);
+					console.log(error);
+				}
+			});
+	}, [slug]);
 
-            })
-            .catch(error => {
-                if (isSubscribed) {
-                    setLoading(false)
-                    console.log(error)
-                }
-
-            })
-    }, [slug])
-
-
-    const CustomPlaceholder = getPlaceholder["one"]
-    return (
-
-        <CustomPlaceholder
-            loading={loading}
-        >
-            {render({ post })}
-        </CustomPlaceholder>
-    )
-
-}
+	const CustomPlaceholder = getPlaceholder['one'];
+	return <CustomPlaceholder loading={loading}>{render({ post })}</CustomPlaceholder>;
+};
 
 interface IFetchOnePlaylist {
-    slug: string
-    render: (data: { post: IPlaylist | null }) => JSX.Element
+	slug: string;
+	render: (data: { post: IPlaylist | null }) => JSX.Element;
 }
 
 export const FetchOnePlaylist: React.FC<IFetchOnePlaylist> = ({ slug, render }) => {
-    const [post, setPost] = React.useState<IPlaylist | null>(null)
-    const [loading, setLoading] = React.useState(true)
-    React.useEffect(() => {
-        setLoading(true)
-        fetch(`/page-data/${ac_strings.slug_playlist}/${slug}/page-data.json`)
-            .then(res => res.json())
-            .then(res => {
-                if (res.result && res.result.pageContext && res.result.pageContext['playlist']) {
-                    const updatePost = res.result.pageContext && res.result.pageContext['playlist']
-                    return updatePost
-                }
-                return undefined
-            })
-            .then(res => {
+	const [post, setPost] = React.useState<IPlaylist | null>(null);
+	const [loading, setLoading] = React.useState(true);
+	React.useEffect(() => {
+		setLoading(true);
+		fetch(`/page-data/${ac_strings.slug_playlist}/${slug}/page-data.json`)
+			.then(res => res.json())
+			.then(res => {
+				if (res.result && res.result.pageContext && res.result.pageContext['playlist']) {
+					const updatePost = res.result.pageContext && res.result.pageContext['playlist'];
+					return updatePost;
+				}
+				return undefined;
+			})
+			.then(res => {
+				setLoading(false);
+				if (res) {
+					setPost(res);
+				}
+			})
+			.catch(error => {
+				setLoading(false);
+				console.log(error);
+			});
+	}, [slug]);
 
-                setLoading(false)
-                if (res) {
-                    setPost(res)
-                }
-            })
-            .catch(error => {
-                setLoading(false)
-                console.log(error)
-            })
-    }, [slug])
-
-
-    const CustomPlaceholder = getPlaceholder["one"]
-    return (
-
-        <CustomPlaceholder
-            loading={loading}
-        >
-            {render({ post })}
-        </CustomPlaceholder>
-    )
-
-}
+	const CustomPlaceholder = getPlaceholder['one'];
+	return <CustomPlaceholder loading={loading}>{render({ post })}</CustomPlaceholder>;
+};

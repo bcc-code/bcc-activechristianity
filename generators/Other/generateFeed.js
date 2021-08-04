@@ -1,9 +1,9 @@
+const podcastProps = require('../../src/strings/static/podcastProperties.js');
 
-const podcastProps = require('../../src/strings/static/podcastProperties.js')
-
-const eposideNoteFooter = '<p class=\"p1\">Website: https://activechristianity.org/<br />\nInstagram: https://www.instagram.com/activechristianity/<br />\nFacebook: https://www.facebook.com/activechristianity/</p>\n'
+const eposideNoteFooter =
+	'<p class="p1">Website: https://activechristianity.org/<br />\nInstagram: https://www.instagram.com/activechristianity/<br />\nFacebook: https://www.facebook.com/activechristianity/</p>\n';
 const mainFeedOptions = {
-  query: `
+	query: `
   {
     site {
       siteMetadata {
@@ -15,45 +15,36 @@ const mainFeedOptions = {
     }
   }
 `,
-feeds: [
-  {
-    serialize: (props) => {
-      const { query: { site, allAcNodePost } } = props
-      const posts=[]
-      allAcNodePost.edges.map(edge => {
-        const {node}=edge
-        const {
-          acId,
-          slug,
-          excerpt,
-          content,
-          image,
-          updated_at,
-          title,
-          authors
-        }=node
-        if(acId!=="dummy-content"){
-          const p = {
-            title,
-            description:excerpt,
-            url: site.siteMetadata.siteUrl + slug,
-            guid:acId,
-            date:updated_at,
-/*             image_url: image.src, */
-            author: (authors ? authors.map(a => a.name).join(', ')  : ''),
-            custom_elements: [
-              {'content:encoded': content}],
-        
-          }
-          if(image){
-            p["image_url"]=image.src
-          }
-          posts.push(p)
-        }
-      })
-      return posts
-    },
-    query: `
+	feeds: [
+		{
+			serialize: props => {
+				const {
+					query: { site, allAcNodePost }
+				} = props;
+				const posts = [];
+				allAcNodePost.edges.map(edge => {
+					const { node } = edge;
+					const { acId, slug, excerpt, content, image, updated_at, title, authors } = node;
+					if (acId !== 'dummy-content') {
+						const p = {
+							title,
+							description: excerpt,
+							url: site.siteMetadata.siteUrl + slug,
+							guid: acId,
+							date: updated_at,
+							/*             image_url: image.src, */
+							author: authors ? authors.map(a => a.name).join(', ') : '',
+							custom_elements: [{ 'content:encoded': content }]
+						};
+						if (image) {
+							p['image_url'] = image.src;
+						}
+						posts.push(p);
+					}
+				});
+				return posts;
+			},
+			query: `
       {
         allAcNodePost {
           edges {
@@ -72,56 +63,60 @@ feeds: [
         }
       }
     `,
-    output: "/feed.xml",
-    title: `${process.env.TITLE} RSS`,
-  },
-],
-}
+			output: '/feed.xml',
+			title: `${process.env.TITLE} RSS`
+		}
+	]
+};
 const podcastAdditionalOptions = {
-  title:podcastProps.title,
-  description:podcastProps.description,
-  language:'en-US',
-  url:process.env.SITE_URL,
-  feed_url: `${process.env.SITE_URL}/podcast_feed.xml`,
-  site_url: process.env.SITE_URL,
-  copyright:'© 2019 ActiveChristianity',
-  custom_namespaces: {
-    itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd',
-    media:'http://search.yahoo.com/mrss/'
-  },
-  custom_elements: [
-    { 'itunes:explicit': 'clean' },
-    {'itunes:subtitle': podcastProps.subtitle},
-    {'itunes:author': podcastProps.author},
-    {'itunes:summary': podcastProps.description},
-    {'itunes:owner': [
-      {'itunes:name': podcastProps.title},
-      {'itunes:email': podcastProps.email}
-    ]},
-    {'itunes:image': {
-      _attr: {
-        href: podcastProps.artworkSrc
-      }
-    }},
-    {'itunes:category': [   
-      {_attr: {
-          text: podcastProps.ituneTopCatgory
-          }
-      },
-      {'itunes:category': {
-        _attr: {
-          text: podcastProps.ituneChildCatgory
-        }
-      }}
-    ]}
-  ],
-}
+	title: podcastProps.title,
+	description: podcastProps.description,
+	language: 'en-US',
+	url: process.env.SITE_URL,
+	feed_url: `${process.env.SITE_URL}/podcast_feed.xml`,
+	site_url: process.env.SITE_URL,
+	copyright: '© 2019 ActiveChristianity',
+	custom_namespaces: {
+		itunes: 'http://www.itunes.com/dtds/podcast-1.0.dtd',
+		media: 'http://search.yahoo.com/mrss/'
+	},
+	custom_elements: [
+		{ 'itunes:explicit': 'clean' },
+		{ 'itunes:subtitle': podcastProps.subtitle },
+		{ 'itunes:author': podcastProps.author },
+		{ 'itunes:summary': podcastProps.description },
+		{ 'itunes:owner': [{ 'itunes:name': podcastProps.title }, { 'itunes:email': podcastProps.email }] },
+		{
+			'itunes:image': {
+				_attr: {
+					href: podcastProps.artworkSrc
+				}
+			}
+		},
+		{
+			'itunes:category': [
+				{
+					_attr: {
+						text: podcastProps.ituneTopCatgory
+					}
+				},
+				{
+					'itunes:category': {
+						_attr: {
+							text: podcastProps.ituneChildCatgory
+						}
+					}
+				}
+			]
+		}
+	]
+};
 module.exports = {
-    mainFeedOptions,
-    podcastAdditionalOptions,
-      podcastFeed:{
-        ...podcastAdditionalOptions,
-        query:`{
+	mainFeedOptions,
+	podcastAdditionalOptions,
+	podcastFeed: {
+		...podcastAdditionalOptions,
+		query: `{
           allAcNodePost(filter: {topics: {elemMatch: {id: {eq: "108205"}}}}) {
               edges {
                 node {
@@ -142,50 +137,44 @@ module.exports = {
                 }
               }
             }
-          }`
-      ,
-      serialize:(props)=>{
-        const { query: { site, allAcNodePost } } = props
-        return allAcNodePost.edges.map(({
-            node: {
-                excerpt,
-                title,
-                slug,
-                updated_at,
-                track
-            }
-        })=>{
-
-            return ({
-              title,
-              url: site.siteMetadata.siteUrl + slug,
-              date:updated_at,
-              description:excerpt,
-              custom_elements: [
-                  {'itunes:summary': excerpt},
-                  {'itunes:duration': track.duration},
-                  {'itunes:explicit':'no'},
-                  {
-                    enclosure:{
-                      _attr: {
-                          url: track.url,
-                          type:'audio/mpeg',
-                          length:'1' 
-                        }
-                  }},
-                  {'media:description':excerpt},
-                  {'content:encoded': eposideNoteFooter},
-                  {'itunes:image': {
-                    _attr: {
-                      href: podcastProps.artworkSrc
-                    }
-                  }}
-                ]
-              
-            })
-        })
-      },
-      output: "/podcast_feed.xml",
-      title: `Living The Gospel RSS`,
-    }
-}
+          }`,
+		serialize: props => {
+			const {
+				query: { site, allAcNodePost }
+			} = props;
+			return allAcNodePost.edges.map(({ node: { excerpt, title, slug, updated_at, track } }) => {
+				return {
+					title,
+					url: site.siteMetadata.siteUrl + slug,
+					date: updated_at,
+					description: excerpt,
+					custom_elements: [
+						{ 'itunes:summary': excerpt },
+						{ 'itunes:duration': track.duration },
+						{ 'itunes:explicit': 'no' },
+						{
+							enclosure: {
+								_attr: {
+									url: track.url,
+									type: 'audio/mpeg',
+									length: '1'
+								}
+							}
+						},
+						{ 'media:description': excerpt },
+						{ 'content:encoded': eposideNoteFooter },
+						{
+							'itunes:image': {
+								_attr: {
+									href: podcastProps.artworkSrc
+								}
+							}
+						}
+					]
+				};
+			});
+		},
+		output: '/podcast_feed.xml',
+		title: `Living The Gospel RSS`
+	}
+};
