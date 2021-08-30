@@ -9,16 +9,11 @@ import { ToggleFollowPlaylistBookmark } from '@/components/PostElements/TopicTog
 import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg';
 import { getImage } from '@/helpers/imageHelpers';
 import { normalizeTracks, getRandomArray } from '@/helpers/normalizers';
-import {
-	MobileHeaderBackground,
-	MobilePostMain,
-	DesktopPostMain,
-	ShareSection
-} from '@/layout-parts/PostLayout/PostSections';
+import { MobileHeaderBackground, MobilePostMain, DesktopPostMain } from '@/layout-parts/PostLayout/PostSections';
 import ac_strings from '@/strings/ac_strings.js';
 import { IPlaylist, IMedia } from '@/types';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import shortid from 'shortid';
 
 export const PostLayout: React.FC<IPlaylist> = post => {
 	const { id, image, title, slug, tracks, excerpt } = post;
@@ -60,7 +55,13 @@ export const PostLayout: React.FC<IPlaylist> = post => {
 						return (
 							<div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-6">
 								{randomPlaylist.map(p => {
-									return <PodcastTopImg {...p} slug={`${ac_strings.slug_playlist}/${p.slug}`} />;
+									return (
+										<PodcastTopImg
+											key={shortid()}
+											{...p}
+											slug={`${ac_strings.slug_playlist}/${p.slug}`}
+										/>
+									);
 								})}
 							</div>
 						);

@@ -42,7 +42,7 @@ const Controller: React.FC<IProps> = ({ track, onPrevTrack, onNextTrack, fullScr
 	const handleDuration = (duration: any) => {
 		setDuration(duration);
 	};
-	const { playedSeconds, played, loadedSeconds, loaded } = progressBarState;
+	const { played, loaded } = progressBarState;
 
 	const handlePlayPause = () => {
 		dispatch(setAutoPlay(!playPause));
@@ -74,6 +74,7 @@ const Controller: React.FC<IProps> = ({ track, onPrevTrack, onNextTrack, fullScr
 				width="100%"
 				onProgress={handleProgress}
 				onDuration={handleDuration}
+				onEnded={onNextTrack}
 			/>
 			<div className="flex flex-col w-full relative">
 				<div className="sm:hidden ">

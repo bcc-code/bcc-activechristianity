@@ -179,7 +179,6 @@ module.exports = function generatePages(actions, graphql) {
 
 			const categoryOrder = categorySorted();
 			let formats = [];
-			console.log(ac.formats);
 			categoryOrder.forEach(element => {
 				const find = ac.formats.find(item => `${item.id}` === `${element.id}`);
 				if (find) {
@@ -187,8 +186,6 @@ module.exports = function generatePages(actions, graphql) {
 				} else {
 					formats.push(element);
 				}
-
-				console.log(element);
 			});
 
 			formats = formats.filter(item => item && item.image);
