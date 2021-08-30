@@ -41,6 +41,7 @@ const ACMediaPlayer: React.FC = () => {
 			dispatch(addTracks([currentMedia, ...queue]));
 		}
 	};
+
 	const onNextTrack = () => {
 		if (queue.length > 0) {
 			dispatch(setCurrentMedia(queue[0]));
@@ -61,9 +62,8 @@ const ACMediaPlayer: React.FC = () => {
 			style={{ zIndex: 550 }}
 		>
 			<div
-				className={`w-full flex  ${
-					fullScreenInfo ? 'h-full bg-mp-background pt-6' : 'bg-white sm:bg-ac-slate-lighter'
-				}`}
+				className={`w-full flex  ${fullScreenInfo ? 'h-full bg-mp-background pt-6' : 'bg-white sm:bg-ac-slate-lighter'
+					}`}
 			>
 				<div className="w-full h-full flex flex-col">
 					{fullScreenInfo && (
@@ -79,7 +79,6 @@ const ACMediaPlayer: React.FC = () => {
 						setFullScreenInfo={setFullScreenInfo}
 						track={currentMedia.audio}
 						onNextTrack={onNextTrack}
-						onPrevTrack={onPrevTrack}
 					/>
 				</div>
 			</div>
