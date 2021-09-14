@@ -15,30 +15,30 @@ interface IProps {
 
 /* const confirmable = (Component) => class extends React.Component {
 
-    const [show,setShow]=React.St
+	const [show,setShow]=React.St
   dismiss() {
-    this.setState({
-      show: false,
-    }, () => {
-      this.props.dispose();
-    });
+	this.setState({
+	  show: false,
+	}, () => {
+	  this.props.dispose();
+	});
   }
   cancel(value) {
-    this.setState({
-      show: false,
-    }, () => {
-      this.props.reject(value);
-    });
+	this.setState({
+	  show: false,
+	}, () => {
+	  this.props.reject(value);
+	});
   }
   proceed(value) {
-    this.setState({
-      show: false,
-    }, () => {
-      this.props.resolve(value);
-    });
+	this.setState({
+	  show: false,
+	}, () => {
+	  this.props.resolve(value);
+	});
   }
   render() {
-    return <Component proceed={::this.proceed} cancel={::this.cancel} dismiss={::this.dismiss} show={this.state.show} {...this.props}/>
+	return <Component proceed={::this.proceed} cancel={::this.cancel} dismiss={::this.dismiss} show={this.state.show} {...this.props}/>
   }
 }
  */
@@ -46,7 +46,7 @@ interface IProps {
 const Confirmation: React.FC<IProps> = ({ show, proceed, confirmation, title, proceedLabel, cancelLabel }) => {
 	return (
 		<Modal isOpen={show} handleClose={() => proceed(false)}>
-			<div className="flex-1 flex flex-col items-center justify-center max-w-mobile w-full h-full ">
+			<div className="flex-1 flex flex-col items-center justify-center w-full h-full ">
 				<div className=" bg-ac-primary py-4 px-4 rounded-top-lg text-xl text-white shadow w-full font-semibold">
 					Confirm
 				</div>
