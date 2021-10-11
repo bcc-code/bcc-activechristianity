@@ -1,5 +1,5 @@
 import { FormSubmitButton } from '@/components/Button';
-import { InputText } from '@/components/Input';
+import { InputText, InputCheckbox } from '@/components/Input';
 import Snackbar from '@/components/Snackbar';
 import { validateEmail } from '@/helpers/index-js';
 import { openSignInModal } from '@/state/action';
@@ -19,7 +19,8 @@ const initialFieldState = {
 	email: '',
 	password: '',
 	confirm: '',
-	keepSignedIn: false
+	keepSignedIn: false,
+	consent: false
 };
 
 const initialErrorState = {
@@ -30,7 +31,7 @@ const initialErrorState = {
 	keepSignedIn: ''
 };
 
-type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'keepSignedIn';
+type IFieldName = 'username' | 'email' | 'password' | 'confirm' | 'keepSignedIn' | 'consent';
 const SignUpForm = () => {
 	const dispatch = useDispatch();
 	const [fields, setFields] = React.useState(initialFieldState);
@@ -167,6 +168,14 @@ const SignUpForm = () => {
 					}}
 					error={errors.confirm}
 				/>
+				<InputCheckbox
+					label={ac_strings.consent_signup_email_checkbox_first}
+					onChange={e => {
+						handleChange(e, 'consent');
+					}}
+					value={fields.consent}
+					error={errors.consent}
+				/>
 				{/*                 <InputCheckbox
                     label={ac_strings.remember_me}
                     onChange={(e) => {
@@ -194,7 +203,7 @@ const SignUpForm = () => {
 				<div className="flex flex-col justify-center w-full text-sm sm:text-base">
 					<div className="flex justify-center">
 						<FormSubmitButton
-							/*    disabled={fields.consent !== true} */
+							disabled={fields.consent !== true}
 							loading={loggedIn === 'loading'}
 							onClick={handleSubmit}
 						/>
