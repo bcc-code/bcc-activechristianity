@@ -1,4 +1,4 @@
-import { InputText } from '@/components/Input';
+import { InputText, InputCheckbox } from '@/components/Input';
 import Snackbar from '@/components/Snackbar';
 import { initiateRegister, setLogInError } from '@/state/action/authAction';
 import { loggedInErrorSelector } from '@/state/selectors/user';
@@ -16,9 +16,9 @@ const schema = yup.object().shape({
 		.required('Please Enter your password')
 		.test('len', 'Must be 6 characters or more', val => val !== undefined && val.length > 5),
 	/*         .matches(
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-                "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-            ), */
+				/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+				"Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+			), */
 	passwordConfirmation: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
 });
 
@@ -28,13 +28,16 @@ function RegisterForm() {
 	const defaultValues = {
 		email: '',
 		password: '',
-		passwordConfirmation: ''
+		passwordConfirmation: '',
+		consent: false
 	};
-	const { control, formState, handleSubmit } = useForm({
+	const { control, formState, handleSubmit, watch } = useForm({
 		mode: 'onChange',
 		defaultValues,
 		resolver: yupResolver(schema)
 	});
+
+	const isConsent = watch('consent');
 	const { isValid, dirtyFields, errors } = formState;
 	function onSubmit(model: any) {
 		const { email, password, remember } = model;
@@ -53,6 +56,7 @@ function RegisterForm() {
 		};
 	}, []);
 
+	const canSubmit = isValid && isConsent;
 	return (
 		<div className="flex-1 flex flex-col items-center justify-center max-w-mobile sm:max-w-tablet w-full h-full ">
 			{loggedInError && (
@@ -109,15 +113,27 @@ function RegisterForm() {
 							);
 						}}
 					/>
-					<div className="text-xs sm:text-sm text-gray-500 leading-normal pb-4 px-2">
-						{ac_strings.consent_register}
+					<div className="flex">
+						<div className="max-h-8 max-w-8">
+							<Controller
+								key="consent"
+								name="consent"
+								control={control}
+								render={({ field }) => {
+									return <InputCheckbox error={errors?.consent?.message} {...field} />;
+								}}
+							/>
+						</div>
+						<div className="text-xs sm:text-sm text-gray-500 leading-normal pb-4 px-2">
+							{ac_strings.consent_register}
+						</div>
 					</div>
 					<button
-						className={`w-full sm:w-auto sm:text-base px-4 py-2 sm:py-4 mt-4 sm:px-12 rounded-lg font-semibold  ${
-							!isValid ? 'bg-gray-400' : 'bg-blue-600 border-blue-600'
-						} text-white text-lg  hover:bg-blue-400`}
+						className={`w-full sm:w-auto sm:text-base px-4 py-2 sm:py-4 mt-4 sm:px-12 rounded-lg font-semibold  ${!canSubmit ? 'bg-gray-400' : 'bg-blue-600 border-blue-600'
+							} text-white text-lg  hover:bg-blue-400`}
 						type="submit"
 						key="registerbutton"
+						disabled={!canSubmit}
 					>
 						{ac_strings.register}
 					</button>

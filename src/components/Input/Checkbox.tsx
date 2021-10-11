@@ -4,7 +4,7 @@ import shortId from 'shortid';
 
 interface IProps {
 	className?: string;
-	label: string;
+	label?: string;
 	value: boolean;
 	onChange: (e: any) => void;
 	error?: string;
@@ -24,7 +24,7 @@ const InputCheck: React.FC<IProps> = ({ value, label, onChange, error, className
 						onChange={onChange}
 					/>
 				</span>
-				<span className="text-xs">{label}</span>
+				{label && <span className="text-xs">{label}</span>}
 			</label>
 			<div className="w-full text:mini">{error}</div>
 		</div>
