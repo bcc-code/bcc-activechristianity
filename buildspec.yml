@@ -3,7 +3,7 @@ CODEBUILD_BUILD_SUCCEEDING: 0
 phases:
     install:
         runtime-versions:
-            nodejs: 12
+            nodejs: 14
         commands:
             - 'touch .npmignore'
             - 'npm install -g yarn gatsby gatsby-cli'
