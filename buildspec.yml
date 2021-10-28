@@ -7,11 +7,11 @@ phases:
             - 'npm install -g yarn gatsby gatsby-cli'
     pre_build:
         commands:
-            - n latest
+            - n lts
             - 'yarn install'
     build:
         commands:
-            - n latest
+            - n lts
             - 'gatsby build'
 
     post_build:
