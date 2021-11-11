@@ -14,7 +14,7 @@ const InputCheck: React.FC<IProps> = ({ value, label, onChange, error, className
 	return (
 		<div className={`flex flex-col w-full overflow-hidden mb-4 ${className ? className : ''}`}>
 			<label htmlFor={labalFor} className="relative w-full flex items-center">
-				<div>{value ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}</div>
+				<div>{value ? <CheckBoxIcon className="w-6" /> : <CheckBoxOutlineBlankIcon className="w-6" />}</div>
 				<span className="py-2 pr-2">
 					<input
 						className="block border rounded border-gray-600 absolute w-full opacity-0 inset-0 min-h-8"
