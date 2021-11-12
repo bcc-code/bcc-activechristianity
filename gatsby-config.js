@@ -133,7 +133,11 @@ if (activeEnv === 'production') {
 				printRejected: true, // Print removed selectors and processed file names
 				//develop: true, // Enable while using `gatsby develop`
 				tailwind: true,
-				ignore: ['src/components/Tabs/scrollNavTabs.css', 'src/components/List/post-multi-col-layout.css'] // Enable tailwindcss support
+				ignore: [
+					'src/components/Tabs/scrollNavTabs.css',
+					'src/components/List/post-multi-col-layout.css',
+					'src/layout-parts/SignInSignUp/loginStyle.css'
+				] // Enable tailwindcss support
 				// whitelist: ['whitelist'], // Don't remove this selector
 				// ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
 			}
