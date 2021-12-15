@@ -7,6 +7,7 @@ import * as React from 'react';
 
 const Page: React.FC<IAboutProps> = ({ pageContext }) => {
 	const { title, flexibleContent, pagePath } = pageContext;
+	console.log(title);
 	const customLayout: IPageCompTypes[] = JSON.parse(flexibleContent);
 
 	//CustomizedLayoutProps
@@ -14,11 +15,9 @@ const Page: React.FC<IAboutProps> = ({ pageContext }) => {
 		<div>
 			<MetaTag type="article" title={title} path={pagePath} breadcrumb={[]} />
 
-			<div>
-				<div className="max-w-tablet mx-auto px-4 pt-16">
-					<PostH1 title={title} />
-					<CustomizedPageComponent items={customLayout} />
-				</div>
+			<div className="max-w-tablet mx-auto px-4 pt-16">
+				<PostH1 title={title} />
+				<CustomizedPageComponent items={customLayout} />
 			</div>
 		</div>
 	);

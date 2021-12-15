@@ -2,7 +2,7 @@ const helpers = require('./helpers');
 const he = require('he');
 const { decode } = require('html-entities');
 const { parse } = require('node-html-parser');
-const { sendQuery, getMultiPosts, postQuery } = helpers;
+const { sendQuery, getMultiPosts, postQuery, getHtmlArray } = helpers;
 const htmlTags2PlainText = html => {
 	if (html) {
 		let text = html.replace(/<\/?[^>]+>/gi, ' ');
@@ -233,7 +233,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, opt
 			transformedPost.title = decode(post.title);
 			transformedPost.excerpt = decode(post.excerpt);
 			transformedPost.content = removeUnwantedNodes(transformedPost.content);
-			transformedPost.content = checkingLinks(transformedPost.content);
+			transformedPost.contentAdBannerSlot = getHtmlArray(transformedPost.content);
 			transformedPost.acId = post.id;
 			transformedPost.readMorePosts = post.readMorePosts ? post.readMorePosts.map(p => p.slug) : [];
 			transformedPost.recommendPosts = [];
@@ -318,6 +318,7 @@ const createDummyPost = transformedPost => {
 	dummyContentPost.topics = [];
 	dummyContentPost.title = 'dummy-content';
 	dummyContentPost.slug = 'dummy-content';
+	dummyContentPost.contentAdBannerSlot = ['', ''];
 	dummyContentPost.track = {
 		url: 'dummy-content',
 		title: 'dummy-content',

@@ -9,6 +9,8 @@ import ac_strings from '@/strings/ac_strings.js';
 import { INavItem, ITopicRes, ITopicPostSlugs } from '@/types';
 import loadable from '@loadable/component';
 import algoliasearch from 'algoliasearch/lite';
+import { getAllUrlParams } from '@/helpers/index-js';
+import { useLocation } from '@reach/router';
 import * as React from 'react';
 import { InstantSearch } from 'react-instantsearch-dom';
 import { Stats } from 'react-instantsearch-dom';
@@ -19,6 +21,10 @@ const SearchResult = loadable(() => import('@/layout-parts/Explore/SearchResult'
 const searchClient = algoliasearch(`${process.env.ALGOLIA_APP_ID}`, `${process.env.ALGOLIA_SEARCH_KEY}`);
 
 const ExplorePage: React.FC<IResource> = props => {
+	const location = useLocation();
+	const parsed = getAllUrlParams(location.search);
+	const { search } = parsed;
+	const [paramQuery,setparamQuery]= React.useState(null);
 	const [query, setQuery] = React.useState('');
 	const [searchHistory, setSearchHistory] = React.useState<string[]>([]);
 	const [taxonomyFilter, setTaxonomyFilter] = React.useState<string[] | null>(null);
@@ -47,9 +53,20 @@ const ExplorePage: React.FC<IResource> = props => {
 		setSearchHistory(search);
 	}, [query]);
 
+	React.useEffect(() => {
+		if (search) {
+			setQuery(search);
+			setparamQuery(search);
+		}
+	}, [search]);
+
 	const handleQueryChange = (searchQuery: string) => {
 		localStorageHelper.storeQuery(searchQuery);
 		setQuery(searchQuery);
+		if(paramQuery){
+			setparamQuery(null);
+		}
+
 	};
 	const onSearchStateChange = (state: any) => {
 		if (state.page) {
@@ -94,6 +111,7 @@ const ExplorePage: React.FC<IResource> = props => {
 	const showSearchHistory = isInputFocus && !hasSearchProps;
 
 	const customSearchBoxProps = {
+		paramQuery,
 		query,
 		setQuery: handleQueryChange,
 		isInputFocus,

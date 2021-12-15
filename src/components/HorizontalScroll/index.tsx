@@ -6,13 +6,9 @@ import PodcastTopImg from '@/components/PostItemCards/PlaylistTopImg';
 import TopImgPost from '@/components/PostItemCards/TopImg';
 import VideoTopImg from '@/components/PostItemCards/VideoTopImg';
 import { IPostItem } from '@/types';
-import { IPlaylist } from '@/types';
 import React from 'react';
-import shortId from 'shortid';
 import shortid from 'shortid';
 
-import './horizontal-scroll.css';
-import './horizontal-scroll.css';
 import './horizontal-scroll.css';
 
 interface IPostHorizontalScroll {

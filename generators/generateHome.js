@@ -210,11 +210,11 @@ module.exports = function generatePages(actions, graphql) {
 				context
 			});
 
-			/*               createPage({
-                path: `/home-v2-beta`,
-                component: path.resolve('./src/templates/page/home-v2-beta.tsx'),
-                context
-              }) */
+			/* createPage({
+				path: `/home-v2-beta`,
+				component: path.resolve('./src/templates/page/home-v2-beta.tsx'),
+				context
+			}); */
 		}
 	});
 };

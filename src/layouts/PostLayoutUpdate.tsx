@@ -48,6 +48,7 @@ export interface IMediaTypes {
 }
 interface IPostProps extends IPostItem {
 	content: string;
+	contentAdBannerSlot: string[];
 	allInterestedPosts?: string[];
 	topicPosts?: ITopicPostSlugs[];
 	authorsPosts?: ITopicPostSlugs[];
@@ -84,7 +85,7 @@ export const PostLayout: React.FC<IPostProps> = post => {
 		authorsPosts,
 		topicPosts,
 		formatPosts,
-		updated_at
+		contentAdBannerSlot
 	} = post;
 	const [isWindowLoaded, setIsWindowLoaded] = React.useState(false);
 	const [currentMediaType, setCurrentMediaType] = React.useState<IMediaType | 'none'>(mediaTypesDefault.default);
@@ -134,8 +135,8 @@ export const PostLayout: React.FC<IPostProps> = post => {
 			if (lastScroll.current < Date.now()) {
 				lastScroll.current = Date.now() + 5000;
 				/* if (showBottomSlider !== true) {
-                    setShowBottomSlider(true)
-                } */
+					setShowBottomSlider(true)
+				} */
 				if (isLoggedIn === 'success') {
 					if (id) {
 						acApiModule.then(res => {
@@ -216,9 +217,8 @@ export const PostLayout: React.FC<IPostProps> = post => {
 						{mediaTypesDefault.types.map((item, i) => (
 							<button
 								key={item}
-								className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${
-									i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'
-								} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
+								className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'
+									} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
 								onClick={() => setCurrentMediaType(item)}
 							>
 								{item}
@@ -285,6 +285,30 @@ export const PostLayout: React.FC<IPostProps> = post => {
 
 					<div>
 						<div ref={contentEl}>
+							{contentAdBannerSlot[0] && (
+								<PostContent
+									content={contentAdBannerSlot[0]}
+									glossary={glossary}
+									slug={slug}
+									title={title}
+								/>
+							)}
+							<div className="w-full bg-gray-50 min-h-64 rounded-lg">
+								<div>More after jump! Continue reading below ↓</div>
+								Ad block
+							</div>
+							{contentAdBannerSlot[1] &&
+								contentAdBannerSlot.slice(1).map((block, i) => {
+									return (
+										<PostContent
+											key={i}
+											content={block}
+											glossary={glossary}
+											slug={slug}
+											title={title}
+										/>
+									);
+								})}
 							<PostContent content={content} glossary={glossary} slug={slug} title={title} />
 						</div>
 

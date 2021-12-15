@@ -1,4 +1,4 @@
-import FetchWallpaper, { fetchWallpaperById } from '@/HOC/FetchWallpaper';
+import { fetchWallpaperById } from '@/HOC/FetchWallpaper';
 import Link from '@/components/CustomLink';
 import WallpaperModal from '@/components/CustomizedPageComponent/Gallery/Modal';
 import { PostH1 } from '@/components/Headers';

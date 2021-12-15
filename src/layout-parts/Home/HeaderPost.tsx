@@ -1,13 +1,5 @@
-import Link from '@/components/CustomLink';
-import LazysizesFeaturedImage from '@/components/Images/LazysizesImage';
-import VideoHeader from '@/components/Images/Video16to9';
 import { DesktopFeaturedPlaceholder } from '@/components/Loader/PlaceHolders';
-import MotionAppear from '@/components/Motion/AppareY';
-import { ReadingTimingAuthor, PostLabel } from '@/components/PostElements';
-import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp';
-import Bookmark from '@/components/PostElements/ToggleBookmark';
 import FeaturedPost from '@/components/PostItemCards/FeaturedPost';
-import PostMeta from '@/components/PostMeta/PostMeta';
 import { fetchOneLocalPostFromSlug } from '@/helpers/fetchLocalData';
 import { IPostItem } from '@/types';
 import * as React from 'react';

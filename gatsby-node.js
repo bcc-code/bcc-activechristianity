@@ -61,12 +61,15 @@ exports.createPages = ({ page, actions, graphql }) => {
 	const generateGlossary = require('./generators/generateGlossary');
 	const generateScriptures = require('./generators/generateScriptures');
 	const generateWallpapers = require('./generators/generateQuoteWallpapers');
+	const generateHomeNew = require('./generators/generateHomeNew');
 	const generators = [
 		generateHome(actions, graphql),
-		generateExplore(actions, graphql),
+		generateHomeNew(actions, graphql),
+		generatePages(actions, graphql),
 		generatePosts(actions, graphql),
-		generatePages(actions, graphql)
+		generateExplore(actions, graphql)
 	];
+
 	generators.push(generatePlaylists(actions, graphql));
 
 	if (process.env.SUPER_SLIM_DEV_MODE !== 'true') {

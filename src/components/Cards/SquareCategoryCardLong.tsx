@@ -9,7 +9,7 @@ export interface ISimpleSolidCard {
 	className?: string;
 	image: IImage;
 }
-const SimpleSolidCard: React.FC<ISimpleSolidCard> = ({ title, to, className, image }) => {
+const SimpleSolidCard: React.FC<ISimpleSolidCard> = ({ title, to, image }) => {
 	return (
 		<Link to={to} className="flex shadow rounded-lg overflow-hidden items-center">
 			<div className="h-16 w-16">

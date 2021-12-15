@@ -20,7 +20,7 @@ const Post: React.FC<IPostProp> = props => {
 		breadcrumb
 	} = pageContext;
 	const { title, excerpt, date, topics, types, image } = post;
-	const { content, meta, seo, updated_at } = postRes;
+	const { content, contentAdBannerSlot, meta, seo, updated_at } = postRes;
 
 	const seoTitle = seo && seo.title ? seo.title : title;
 	return (
@@ -41,6 +41,7 @@ const Post: React.FC<IPostProp> = props => {
 			/>
 			<PostLayout
 				{...post}
+				contentAdBannerSlot={contentAdBannerSlot}
 				updated_at={updated_at}
 				seoTitle={seoTitle}
 				tranlsatedUrl={tranlsatedUrl}
@@ -138,6 +139,7 @@ export const pageQuery = graphql`
 	query PostById($id: String!) {
 		acNodePost(id: { eq: $id }) {
 			content
+			contentAdBannerSlot
 			glossary {
 				slug
 				id

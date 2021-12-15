@@ -4,17 +4,17 @@ import Video16to9 from '@/components/Images/Video16to9';
 import MotionAppear from '@/components/Motion/AppareY';
 import { IImage, IAuthor, IPostRes } from '@/types';
 import * as React from 'react';
-
 import Gallery from './Gallery';
 import OnePostBanner from './OnePostBanner';
 import PostItems from './PostItems';
 import QuoteBlock from './QuoteBlock';
 
 const getContentBlock = (block: IPageCompTypes) => {
+	console.log(block.type);
 	switch (block.type) {
 		case 'featured_items':
 			return (
-				<div className="">
+				<div className="py-8">
 					{block.data.map((child, k) => {
 						return <OnePostBanner key={k} {...child} />;
 					})}
@@ -35,39 +35,47 @@ const getContentBlock = (block: IPageCompTypes) => {
 			return <div>section</div>;
 	}
 };
+
+export const getTheme = (themeName?: IThemeName) => {
+	switch (themeName) {
+		case 'primary':
+			return 'bg-ac-slate-lighter';
+		case 'secondary':
+			return 'bg-gray-100';
+		case 'light':
+			return '';
+		case 'dark':
+			return 'bg-ac-slate-dark w-full text-white';
+		case 'black':
+			return 'bg-black w-full text-white';
+		default:
+			return 'bg-ac-slate-lighter';
+	}
+};
+
 const BlockWrapper: React.FC<IBlockWrapper> = ({ children, theme, h1, content }) => {
 	let customTHemeName = theme;
 	if (content.type === 'featured_items' && content.data.length === 1 && content.data[0].type === 'post') {
 		customTHemeName = 'dark';
 	}
-	const getTheme = (themeName?: IThemeName) => {
-		switch (themeName) {
-			case 'primary':
-				return 'bg-ac-slate-lighter';
-			case 'secondary':
-				return 'bg-gray-100';
-			case 'light':
-				return '';
-			case 'dark':
-				return 'bg-ac-slate-dark w-full text-white';
-			default:
-				return 'bg-ac-slate-lighter';
-		}
-	};
 
-	const themeColorCSS = getTheme(customTHemeName);
-	const readerBlock = getContentBlock(content);
+	const themeColorClassname = getTheme(customTHemeName);
+	const renderBlock = getContentBlock(content);
+
 	return (
-		<MotionAppear className={`${themeColorCSS} flex flex-col items-center`} style={{ minHeight: '360px' }}>
-			{h1 && <LayoutH1 className="mx-auto px-4 tablet:px-0 pb-0 w-full max-w-tablet" title={h1} />}
-			<div className={`mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full max-w-tablet`}>{readerBlock}</div>
+		<MotionAppear
+			className={`${themeColorClassname} flex flex-col items-center justify-center`}
+			style={{ minHeight: '360px' }}
+		>
+			{h1 && <LayoutH1 className="mx-auto px-4 tablet:px-0 pb-0 w-full standard-max-w" title={h1} />}
+			<div className={`mx-auto px-4 tablet:px-0 py-8 sm:py-12 w-full standard-max-w`}>{renderBlock}</div>
 		</MotionAppear>
 	);
 };
 
 export default BlockWrapper;
 
-type IThemeName = 'primary' | 'secondary' | 'light' | 'dark';
+export type IThemeName = 'primary' | 'secondary' | 'light' | 'dark' | 'black';
 
 interface IBlockWrapper {
 	h1?: string;

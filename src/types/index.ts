@@ -274,6 +274,7 @@ export interface IPostRes {
 	image: IImage;
 	video: string;
 	content: string;
+	contentAdBannerSlot: string[];
 	readtime: number;
 	meta: {
 		no_dict: boolean;
@@ -463,6 +464,7 @@ export interface ICta {
 	text: string;
 }
 export interface IBannerBasic {
+	image: IImage;
 	label?: string;
 	bgImg?: string;
 	title: string;

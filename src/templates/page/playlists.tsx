@@ -1,7 +1,6 @@
 import { LayoutH1Wide } from '@/components/Headers';
 import MetaTag from '@/components/Meta';
 // components
-import FeaturedCard from '@/components/PostItemCards/FeaturedCard';
 import PlaylistTopImg from '@/components/PostItemCards/PlaylistTopImg';
 import ScrollNavTabs from '@/components/Tabs/ScrollNavTabs';
 import TwoToThreeTabs from '@/components/Tabs/TwoToThreeTabs';
@@ -38,10 +37,10 @@ const PlaylistOverview: React.FC<IPlaylistOverviewProps> = ({ pageContext, data 
 	];
 	{
 		/* <PodcastTopImg
-                            key={shortId()}
-                            {...p}
-                            slug={`${ac_strings.slug_playlist}/${p.slug}`}
-                        /> */
+							key={shortId()}
+							{...p}
+							slug={`${ac_strings.slug_playlist}/${p.slug}`}
+						/> */
 	}
 	return (
 		<div className="max-w-tablet mx-auto pt-6">

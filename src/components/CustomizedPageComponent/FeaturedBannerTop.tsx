@@ -1,7 +1,6 @@
 import Link from '@/components/CustomLink';
 import LazysizesFeaturedImage from '@/components/Images/LazysizesImage';
 import VideoHeader from '@/components/Images/Video16to9';
-import TextSizeWClamp from '@/components/PostElements/TextSizeWClamp';
 import { IPostItem } from '@/types';
 import * as React from 'react';
 
@@ -14,7 +13,7 @@ const HeaderPost: React.FC<IPostItem & { videoUrl: string | null; bgImg?: string
 				{videoUrl !== null ? (
 					<VideoHeader src={videoUrl} className={`rounded-xxl sm:rounded-xl overflow-hidden`} />
 				) : (
-					<div className="m-0 relative w-full pb-square sm:pb-half">
+					<div className="m-0 relative w-full pb-half">
 						<LazysizesFeaturedImage
 							{...image}
 							className="absolute w-full h-full inset-0 rounded-xxl sm:rounded-xl object-cover g-image"
@@ -25,10 +24,8 @@ const HeaderPost: React.FC<IPostItem & { videoUrl: string | null; bgImg?: string
 			<div className="md:col-start-8 md:col-end-13 md:ml-5 flex flex-col justify-center pt-0 sm:px-4 text-white sm:pb-12">
 				<span className="uppercase text-sm md:text-base">{format && format[0] ? format[0].name : null}</span>
 
-				<h2 className="text-2xl sm:text-3xl md:text-6xl font-bold pb-4 sm:pb-8 md:pb-12 sm:leading-none">
-					{title}
-				</h2>
-				<p className="sm:text-lg md:text-2xl ">{excerpt}</p>
+				<h2 className="text-2xl sm:text-3xl  pb-4 sm:pb-8 md:pb-12 sm:leading-none">{title}</h2>
+				<p className="sm:text-lg ">{excerpt}</p>
 				{/*                     <Link
                         className="font-bold bg-white px-8 py-4 rounded-lg text-lg text-ac-slate-dark"
                         to={slug}

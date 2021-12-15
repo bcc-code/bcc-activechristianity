@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const { parse } = require('node-html-parser');
 
 const topicQuery = `
     id
@@ -272,3 +273,49 @@ module.exports.getIndexPostQuery = async baseUrl => {
 };
 
 module.exports.allPostQueries = queries;
+
+module.exports.getHtmlArray = text => {
+	const blocks = [];
+	const root = parse(text);
+	root.childNodes.forEach((child, index) => {
+		let updated = child.childNodes;
+		const adIndex = getBannerIndex(child.childNodes);
+
+		let before = null;
+		let after = null;
+
+		if (adIndex === 0 || adIndex) {
+			before = [...updated.slice(0, adIndex)];
+			after = [...updated.slice(adIndex)];
+			if (before && before.length > 0) {
+				const beforeDom = parse(text);
+				beforeDom.childNodes = before;
+				blocks.push(beforeDom.toString());
+			}
+
+			if (after) {
+				const afterDom = parse(text);
+				afterDom.childNodes = after;
+				blocks.push(afterDom.toString());
+			}
+		} else {
+			blocks.push(updated.toString());
+		}
+	});
+
+	return blocks;
+};
+
+const getBannerIndex = list => {
+	let h2Index = 0;
+	let index = 0;
+	while (!h2Index && index < list.length) {
+		const item = list[index];
+
+		if (index > 3 && item && item.rawTagName === 'h2') {
+			h2Index = index;
+		}
+		index++;
+	}
+	return h2Index;
+};

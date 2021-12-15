@@ -16,6 +16,12 @@ const query = `{
         title
         slug
       }
+	  image {
+			src
+			srcset
+			dataUri
+			colors
+		}
     }
   }
 }`;
@@ -92,6 +98,8 @@ module.exports = function generatePages(actions, graphql) {
 
 				_.each(pageInfo, page => {
 					if (page.parent) {
+						console.log(page.title);
+						console.log(page.parent.id);
 						if (`${page.parent.id}` == `${parentIds.about.id}`) {
 							parentIds.about.children.push(page);
 						} else if (`${page.parent.id}` == `${parentIds.themes.id}`) {
@@ -123,6 +131,35 @@ module.exports = function generatePages(actions, graphql) {
 					});
 				});
 
+				const themePage = {
+					name: 'Bible Studies',
+					to: ac_strings.slug_theme
+				};
+
+				// theme pages
+				_.each(parentIds.themes.children, page => {
+					const pagePath = `${themePage.to}/${page.slug}`;
+
+					let context = {
+						pagePath,
+						...page,
+						breadcrumb: [
+							{
+								name: page.title,
+								to: page.slug
+							}
+						]
+					};
+
+					createPage({
+						path: pagePath,
+						component: path.resolve(`./src/templates/page/${parentIds.themes.templateName}.tsx`),
+						context
+					});
+				});
+
+				const perPage = 12;
+
 				// about us
 				console.log('building about');
 				const pagePath = `${aboutMain.slug}`;
@@ -135,6 +172,57 @@ module.exports = function generatePages(actions, graphql) {
 						childPages: parentIds.about.children,
 						breadcrumb: []
 					}
+				});
+
+				const overviewTemplate = './src/templates/page/theme-overview.tsx';
+
+				const createThemeArhcivePages = ({ themes, baseUrl, createPage, baseTitle, breadcrumb, context }) => {
+					if (themes.length > 16) {
+						const totalPages = Math.ceil(themes.length / perPage);
+						for (let i = 1; i <= totalPages; i++) {
+							let pagePath = i === 1 ? baseUrl : `${baseUrl}/${i}`;
+							let pageTitle = i === 1 ? baseTitle : `${baseTitle} ${i}`;
+							const perPageQuotes = themes.slice((i - 1) * perPage, i * perPage);
+							createPage({
+								path: pagePath,
+								component: path.resolve(overviewTemplate),
+								context: {
+									pagePath,
+									...context,
+									title: pageTitle,
+									metaTitle: pageTitle,
+									tag: pageTitle,
+									breadcrumb,
+									themes: perPageQuotes,
+									paginate: {
+										totalPages,
+										currentPage: i,
+										baseUrl
+									}
+								}
+							});
+						}
+					} else {
+						createPage({
+							path: baseUrl,
+							component: path.resolve(overviewTemplate),
+							context: {
+								pagePath: baseUrl,
+								...context,
+								title: baseTitle,
+								breadcrumb,
+								themes
+							}
+						});
+					}
+				};
+				createThemeArhcivePages({
+					themes: parentIds.themes.children,
+					baseUrl: themePage.to,
+					createPage,
+					baseTitle: themePage.name,
+					breadcrumb: [themePage],
+					context: {}
 				});
 			}
 		})

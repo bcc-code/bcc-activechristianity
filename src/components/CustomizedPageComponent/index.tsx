@@ -12,9 +12,7 @@ const CustomizedPage: React.FC<{ items: IPageCompTypes[]; slug: string; title: s
 						h1={k === 0 ? title : undefined}
 						theme={`${k % 2 == 1 ? (k % 4 == 1 ? 'primary' : 'secondary') : 'light'}`}
 						content={section}
-					>
-						section
-					</BlockWrapper>
+					/>
 				);
 			})}
 		</div>

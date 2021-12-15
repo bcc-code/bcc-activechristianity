@@ -25,7 +25,7 @@ export const PostLayout: React.FC<IPlaylist> = post => {
 		}
 	};
 	return (
-		<div className="flex flex-col md:flex-row py-8 standard-max-w-px mx-auto">
+		<div className="flex flex-col md:flex-row -mt-4 sm:mt-0">
 			<div className=" w-full md:w-4/12 hidden md:block">
 				<div className="sm:px-4 relative py-8 flex justify-center">
 					<div className="w-48">
@@ -33,9 +33,13 @@ export const PostLayout: React.FC<IPlaylist> = post => {
 					</div>
 				</div>
 			</div>
+
 			<div className="flex-1">
 				<PostLabel text={ac_strings.playlist} />
-				<PostH1 title={title} />
+				<div className="w-full sm:hidden py-4">
+					<PlaylistBackground slug={slug} imageUrl={imageUrl} />
+				</div>
+				{/* 				<PostH1 title={title} /> */}
 				<p
 					className="text-ac-slate-dark-dark text-lg font-medium leading-normal"
 					dangerouslySetInnerHTML={{ __html: excerpt }}

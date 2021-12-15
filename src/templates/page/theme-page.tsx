@@ -1,10 +1,9 @@
 import Link from '@/components/CustomLink';
 import CustomizedPageComponent from '@/components/CustomizedPageComponent';
-import { LayoutH1Wide } from '@/components/Headers';
 import MetaTag from '@/components/Meta';
-import RenderFeaturedPost, { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem';
+import { IPageCompTypes } from '@/components/ScrollSection/FeaturedItem';
 import ac_strings from '@/strings/ac_strings.js';
-import { INavItem, IImage } from '@/types';
+import { INavItem } from '@/types';
 import { graphql } from 'gatsby';
 import * as React from 'react';
 
@@ -14,9 +13,9 @@ const CustomizedPage: React.FC<ICustomizedPage> = ({ pageContext, data }) => {
 	const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent);
 
 	return (
-		<div>
+		<div className="pt-8 sm:pt-0">
 			<MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={pagePath} />
-			<LayoutH1Wide title={title} />
+
 			<CustomizedPageComponent items={componentConfig} slug={pagePath} title={title} />
 			<div className="w-full flex justify-center py-6">
 				<Link

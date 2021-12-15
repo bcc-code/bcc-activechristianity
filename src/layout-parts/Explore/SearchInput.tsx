@@ -14,10 +14,12 @@ interface ICustomerSearchBox {
 	searchHistory: string[];
 	setSearchHistory: (string: []) => void;
 	showSearchHistory: boolean;
+	paramQuery?: string|null;
 }
 
 const SearchBox: React.FC<ICustomerSearchBox> = ({
 	setQuery,
+	paramQuery,
 	removeTaxonomyFilter,
 	refine,
 	setInputFocus,
@@ -29,6 +31,11 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
 	const [localQuery, setLocalQuery] = React.useState('');
 	const timerId = React.useRef<NodeJS.Timeout | null>(null);
 
+	React.useEffect(() => {
+		if (paramQuery) {
+			setLocalQuery(paramQuery);
+		}
+	});
 	const onChangeDebounced = (event: any) => {
 		const value = event.currentTarget.value;
 		updateQuery(value);
