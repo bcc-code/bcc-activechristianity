@@ -67,7 +67,8 @@ exports.createPages = ({ page, actions, graphql }) => {
 		generateHomeNew(actions, graphql),
 		generatePages(actions, graphql),
 		generatePosts(actions, graphql),
-		generateExplore(actions, graphql)
+		generateExplore(actions, graphql),
+		generateSeries(actions, graphql)
 	];
 
 	generators.push(generatePlaylists(actions, graphql));

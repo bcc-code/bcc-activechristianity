@@ -113,7 +113,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 							<SimpleBgCardList
 								title={item.title}
 								theme={theme}
-								items={item.content}
+								items={item.content.map(item => ({ ...item, slug: `series/${item.slug}` }))}
 								/* bgImg={TestimonyBg} */
 								cta={{ name: 'All Testimonies', to: item.slug }}
 							/>
@@ -160,7 +160,13 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 					case '113':
 						return <CardListPosts title={item.title} posts={item.content} theme={theme} />;
 					case '114':
-						return <SimpleBgCardList title={item.title} items={item.content} theme={theme} />;
+						return (
+							<SimpleBgCardList
+								title={item.title}
+								items={item.content.map(item => ({ ...item, slug: `series/${item.slug}` }))}
+								theme={theme}
+							/>
+						);
 					case '115':
 						return (
 							<CardListPosts bgImg={item.image} title={item.title} posts={item.content} theme={theme} />

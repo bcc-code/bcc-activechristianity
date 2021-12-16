@@ -13,11 +13,14 @@ const Series: React.FC<IDummy> = props => {
 	const id = '';
 
 	const body = (
-		<div className="flex flex-col">
+		<div className="flex flex-col pb-12">
 			{series.posts.map((p, i) => {
 				return (
-					<li className="w-full px-1 py-2 cursor-pointer flex flex-col sm:flex-row text-sm md:text-base border-b last:border-b-0 hover:bg-gray-100">
-						<Link to={`${p.lsug}`} className="text-left">
+					<li
+						key={i}
+						className="w-full px-1 py-2 cursor-pointer flex flex-col sm:flex-row text-sm md:text-base border-b last:border-b-0 hover:bg-gray-100"
+					>
+						<Link to={`${p.slug}`} className="text-left">
 							{i + 1}. {p.title}
 						</Link>
 					</li>

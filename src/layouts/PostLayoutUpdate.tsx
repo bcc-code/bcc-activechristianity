@@ -336,7 +336,7 @@ export const PostLayout: React.FC<IPostProps> = post => {
 											{adBlockData.title}
 										</h2>
 										<p
-											className="text-sm pb-4"
+											className="text-sm pb-4 text-ac-primary"
 											dangerouslySetInnerHTML={{ __html: adBlockData.content }}
 										/>
 

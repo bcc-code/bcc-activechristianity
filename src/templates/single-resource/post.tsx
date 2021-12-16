@@ -1,7 +1,7 @@
 import MetaTag from '@/components/Meta';
 import { IMediaTypes } from '@/layouts/PostLayoutUpdate';
 import PostLayout from '@/layouts/PostLayoutUpdate';
-import { INavItem, IPostRes, IPostItem, ITopicPostItems, ITopicPostSlugs } from '@/types';
+import { INavItem, IPostRes, IPostItem, ITopicPostSlugs } from '@/types';
 import { graphql } from 'gatsby';
 import React from 'react';
 
