@@ -16,12 +16,12 @@ export const SectionWrapperSmall: React.FC<{
         wrapperStyle.backgroundSize = 'cover';
         wrapperStyle.backgroundPosition = 'center';
     }
-    console.log(title);
-    console.log(wrapperStyle.backgroundImage);
     return (
         <div className={`relative ${themeColorClassname}`} style={wrapperStyle}>
             <div className="relative z-20 standard-max-w px-4 flex flex-col justify-center py-18">
-                <h2 className={` font-extrabold text-center text-4-7xl pb-8 ${dark ? 'text-white' : ''}`}>{title}</h2>
+                <h2 className={` font-extrabold text-center text-4-7xl pb-8 ${dark || bgImg ? 'text-white' : ''}`}>
+                    {title}
+                </h2>
                 {children}
                 {cta && (
                     <div className="w-full flex justify-center mt-4">

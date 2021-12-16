@@ -1,9 +1,11 @@
 import * as React from 'react';
-import {navigate} from 'gatsby'
+import { navigate } from 'gatsby';
 import shortid from 'shortid';
 import { SearchIcon, CloseIcon } from '@/components/Icons/MUI/navIcons';
 import ac_strings from '@/strings/ac_strings.js';
-export const HomeTop: React.FC = () => {
+import { INavItem } from '@/types';
+import Link from '@/components/CustomLink';
+export const HomeTop: React.FC<{ links: INavItem[]; title: string; content: string }> = ({ links, title, content }) => {
 	const inputRef = React.useRef<HTMLInputElement>(null);
 	const [searchTerm, setSearchTerm] = React.useState('');
 	const handleFocus = () => {
@@ -14,9 +16,9 @@ export const HomeTop: React.FC = () => {
 	const onChange = (e: any) => {
 		setSearchTerm(e.target.value);
 	};
-	const onClick=()=>{
+	const onClick = () => {
 		navigate(`/${ac_strings.slug_explore}?search=${searchTerm}`);
-	}
+	};
 	return (
 		<div
 			className="relative w-full overflow-hidden"
@@ -30,23 +32,18 @@ export const HomeTop: React.FC = () => {
 				<div className={`px-4 w-auto md:w-7/12 text-white`}>
 					{/* 	<div className="text-sm lg:text-base uppercase text-white mb-8 ">{label}</div> */}
 					<h2 className="text-2xl md:text-4xl  lg:text-5xl pb-4 sm:pb-8 md:pb-12 leading-relaxed font-extrabold">
-						Helping you LIVE God's Word
+						{title}
 					</h2>
-					<p className="text-base sm:text-lg md:text-2xl pb-12">
-						Life-changing resource for those who are seeking for something more{' '}
-					</p>
+					<p
+						className="text-base sm:text-lg md:text-2xl pb-12"
+						dangerouslySetInnerHTML={{ __html: content }}
+					/>
+
 					<ul className="text-sm sm:text-base md:text-lg grid grid-cols-2">
-						{[
-							'23 Bible Studies',
-							'1,255 Devotional posts',
-							'214 Testimonies',
-							'33 Playlists',
-							'110 Videos',
-							'350 Wallpapers'
-						].map(item => {
+						{links.map(item => {
 							return (
 								<li className="pb-2" key={shortid()}>
-									{item}
+									<Link to={item.to}>{item.name}</Link>
 								</li>
 							);
 						})}
@@ -69,10 +66,11 @@ export const HomeTop: React.FC = () => {
 							value={searchTerm}
 						/>
 					</div>
-					<button 
+					<button
 						onClick={onClick}
 						onKeyDown={onClick}
-					className="bg-ac-slate-dark text-white rounded-r-lg  sm:rounded-r-full px-2 sm:px-4 ">
+						className="bg-ac-slate-dark text-white rounded-r-lg  sm:rounded-r-full px-2 sm:px-4 "
+					>
 						<SearchIcon customSize="6" />
 					</button>
 				</div>

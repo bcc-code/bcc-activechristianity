@@ -12,7 +12,11 @@ const FeatureSection: React.FC<IXScrollItem> = ({ items }) => {
 		<MotionStagger className="scroll-snap-x-container overflow-scroll mb-4 sm:hidden w-full">
 			{items.map((c, i) => {
 				return (
-					<div className="scroll-snap-x-child ml-4" style={{ width: '88%', minWidth: '88%' }} key={shortid()}>
+					<div
+						className="scroll-snap-x-child ml-4 pb-4"
+						style={{ width: '88%', minWidth: '88%' }}
+						key={shortid()}
+					>
 						{c}
 					</div>
 				);

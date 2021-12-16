@@ -151,7 +151,11 @@ export const HScrollBaseLarge: React.FC<IXScrollItem> = ({ items }) => {
 		<div className="scroll-snap-x-container overflow-scroll mb-4 sm:hidden w-full">
 			{items.map((c, i) => {
 				const postEl = (
-					<div key={shortid()} className="scroll-snap-x-child ml-4" style={{ width: '88%', minWidth: '88%' }}>
+					<div
+						key={shortid()}
+						className="scroll-snap-x-child ml-4 pb-4"
+						style={{ width: '88%', minWidth: '88%' }}
+					>
 						{c}
 					</div>
 				);
