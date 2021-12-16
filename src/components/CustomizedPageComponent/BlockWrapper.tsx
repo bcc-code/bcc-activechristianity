@@ -10,7 +10,6 @@ import PostItems from './PostItems';
 import QuoteBlock from './QuoteBlock';
 
 const getContentBlock = (block: IPageCompTypes) => {
-	console.log(block.type);
 	switch (block.type) {
 		case 'featured_items':
 			return (

@@ -26,6 +26,7 @@ import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import shortid from 'shortid';
+import Link from '@/components/CustomLink';
 
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayerNew/VideoPlayer'));
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'));
@@ -186,6 +187,37 @@ export const PostLayout: React.FC<IPostProps> = post => {
 
 	const currentHeigt = defaultHeight[currentMediaType] + (mediaTypesDefault.types.length > 1 ? 39 : 0);
 	const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
+	const adBlockData = {
+		title: "Helping you LIVE God's Word",
+		content: '<p>Life-changing resource for those who are seeking for something more</p>',
+		links: [
+			{
+				name: '25 Bible Studies',
+				to: 'theme'
+			},
+			{
+				name: '1181 Devotional posts',
+				to: 'latest'
+			},
+			{
+				name: '232 Testimonies',
+				to: 'testimonies'
+			},
+			{
+				name: '33 Playlists',
+				to: 'playlist'
+			},
+			{
+				name: '121 Videos',
+				to: 'watch'
+			},
+			{
+				name: '363 Wallpapers',
+				to: 'wallpaper'
+			}
+		]
+	};
 	return (
 		<article className="overflow-scroll sm:overflow-visible w-full relative pt-9 sm:pt-0">
 			{isWindowLoaded === true && (
@@ -293,9 +325,38 @@ export const PostLayout: React.FC<IPostProps> = post => {
 									title={title}
 								/>
 							)}
-							<div className="w-full bg-gray-50 min-h-64 rounded-lg">
-								<div>More after jump! Continue reading below ↓</div>
-								Ad block
+							{contentAdBannerSlot.length > 1 && (
+								<div className="pb-2 text-sm">Continue reading below ↓</div>
+							)}
+							<div className="w-full bg-ac-slate-dark min-h-64 rounded-lg py-4">
+								<div className="z-20 relative standard-max-w text-white">
+									<div className={`px-4 w-auto `}>
+										<span className="uppercase text-sm">ActiveChristianity.org</span>
+										<h2 className="text-ac-primary text-lg md:text-2xl leading-relaxed font-extrabold py-2">
+											{adBlockData.title}
+										</h2>
+										<p
+											className="text-sm pb-4"
+											dangerouslySetInnerHTML={{ __html: adBlockData.content }}
+										/>
+
+										<ul className="text-base grid grid-cols-1 sm:grid-cols-2 py-4">
+											{adBlockData.links.map(item => {
+												return (
+													<li className="pb-2" key={shortid()}>
+														<Link to={item.to}>{item.name}</Link>
+													</li>
+												);
+											})}
+										</ul>
+										<Link
+											className="inline-block bg-ac-secondary px-8 py-3 text-lg font-bold rounded-lg"
+											to="/"
+										>
+											Explore
+										</Link>
+									</div>
+								</div>
 							</div>
 							{contentAdBannerSlot[1] &&
 								contentAdBannerSlot.slice(1).map((block, i) => {

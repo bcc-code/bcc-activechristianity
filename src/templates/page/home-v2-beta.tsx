@@ -62,8 +62,10 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 				}
 				switch (id) {
 					case 'hero':
+						console.log(item);
 						return <HomeTop {...item} />;
 					case '108':
+						console.log(item.content.content);
 						return (
 							<SectionWrapperSmall
 								title={item.title}

@@ -7,7 +7,6 @@ import * as React from 'react';
 
 const Page: React.FC<IAboutProps> = ({ pageContext }) => {
 	const { title, flexibleContent, pagePath } = pageContext;
-	console.log(title);
 	const customLayout: IPageCompTypes[] = JSON.parse(flexibleContent);
 
 	//CustomizedLayoutProps

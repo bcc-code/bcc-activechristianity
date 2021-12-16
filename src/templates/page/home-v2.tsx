@@ -33,18 +33,14 @@ const IndexPage: React.FC<IHomeProps> = props => {
 
 	const mixedBibleStudies = getRandomArray(bibleStudies, bibleStudies.length);
 	const topBibleStudy = mixedBibleStudies[0];
-	console.log(componentConfig);
 	const testimonies = componentConfig[7].data;
 	const pillars = componentConfig[9].data;
 	const messages = componentConfig[13].data;
 	const aboutUs = componentConfig[14].data;
 	const [activeWallpaperIndex, setActiveWallpaperIndex] = React.useState(0);
 	const handleIndexChange = (direction: number) => {
-		console.log(direction);
-		console.log(direction === 1 ? 0 : 1);
 		setActiveWallpaperIndex(direction === 1 ? 0 : 1);
 	};
-	console.log(activeWallpaperIndex);
 	return (
 		<div>
 			<MetaTag
@@ -115,7 +111,7 @@ interface IHomeProps {
 	path: string;
 	pageContext: {
 		featuredPosts: IPostRes[];
-        formats: ITopic[];
+		formats: ITopic[];
 	};
 	data: any;
 }

@@ -38,7 +38,6 @@ const PostAudio: React.FC<IPlaylist> = ({ tracks: allTracks, hideRead, slug }) =
 
 		if (index > -1) {
 			const toAdd = [...tracksToAdd.slice(index + 1), ...tracksToAdd.slice(0, index)];
-			console.log(toAdd);
 			dispatch(addTracks(toAdd));
 		}
 	};

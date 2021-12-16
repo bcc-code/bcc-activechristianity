@@ -9,11 +9,10 @@ import TextSizeTitle from '@/components/PostElements/TextSizeWClamp';
 import ac_strings from '@/strings/ac_strings.js';
 
 const Themes = props => {
-    console.log(props);
     const { data, pagePath } = props;
     const pageInfo = data.ac.allPages;
     const themePages = pageInfo.filter(page => page.parent && `${page.parent.id}` === `75`);
-    console.log(themePages);
+
     const title = 'Bible Studies';
     return (
         <div className="max-w-tablet mx-auto pt-6 px-4 tablet:px-0">

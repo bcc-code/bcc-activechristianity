@@ -10,7 +10,6 @@ import Pagination from '@/components/Pagination';
 import { trimSlug } from '@/helpers/index-js';
 
 const Themes = props => {
-    console.log(props);
     const { pageContext, pagePath } = props;
     const { themes, paginate } = pageContext;
     /*     const pageInfo = data.ac.allPages;

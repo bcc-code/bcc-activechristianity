@@ -319,6 +319,7 @@ const createDummyPost = transformedPost => {
 	dummyContentPost.title = 'dummy-content';
 	dummyContentPost.slug = 'dummy-content';
 	dummyContentPost.contentAdBannerSlot = ['', ''];
+	dummyContentPost.readMorePosts = ['dummy', 'dummy'];
 	dummyContentPost.track = {
 		url: 'dummy-content',
 		title: 'dummy-content',
