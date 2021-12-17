@@ -9,12 +9,12 @@ const PostItemCard: React.FC<IPostItem> = item => {
         <Link to={item.slug} className="flex flex-col shadow rounded-lg overflow-hidden">
             <Image2To1 className="rounded-t-lg" image={item.image} />
             <div style={{ overflow: 'hidden', padding: '25px 14px 14px 14px', backgroundColor: '#fff' }}>
-                <div
+                {/* <div
                     className="uppercase font-bold"
                     style={{ fontSize: '12px', color: '#828282', paddingBottom: '5px' }}
                 >
                     {item.reading_time?.minutes ? item.reading_time?.minutes : '2 mins read'}
-                </div>
+                </div> */}
                 <div style={{ paddingBottom: '20px' }}>
                     <h3
                         className="leading-normal"

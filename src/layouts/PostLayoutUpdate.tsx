@@ -281,7 +281,7 @@ export const PostLayout: React.FC<IPostProps> = post => {
 			</div>
 			<div className="w-full sm:hidden relative" style={{ top: '0px', height: `${currentHeigt}px` }}></div>
 
-			<div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-6 z-50 flex justify-center lg:justify-start standard-max-w ">
+			<div className="relative w-full h-full bg-white rounded-t-2xl sm:mt-12 pt-4 px-4 z-50 flex justify-center lg:justify-start standard-max-w ">
 				<div className="max-w-full sm:max-w-tablet relative">
 					<svg
 						className="mx-auto mb-5 sm:hidden"
@@ -370,7 +370,6 @@ export const PostLayout: React.FC<IPostProps> = post => {
 										/>
 									);
 								})}
-							<PostContent content={content} glossary={glossary} slug={slug} title={title} />
 						</div>
 
 						{credits && (

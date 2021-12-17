@@ -5,6 +5,7 @@ import {
 	HomeIcon,
 	ExploreIcon,
 	DescriptionIcon,
+	BookIcon,
 	LocalOfferIcon,
 	BookmarksIcon,
 	PlayCircleOutlineIcon
@@ -28,7 +29,7 @@ const iconMapNav = {
 	HomeIcon,
 	ExploreIcon,
 	HeadsetIcon,
-	DescriptionIcon,
+	DescriptionIcon: BookIcon,
 	PlayCircleOutlineIcon,
 	BookmarksIcon,
 	LocalOfferIcon
