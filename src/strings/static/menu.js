@@ -7,8 +7,8 @@ module.exports.menusItems = {
 		to: '/'
 	},
 	listen: {
-		name: ac_strings.listen,
-		to: ac_strings.slug_listen
+		name: ac_strings.playlists,
+		to: ac_strings.slug_playlist
 	},
 	explore: {
 		name: ac_strings.explore,
@@ -16,7 +16,7 @@ module.exports.menusItems = {
 	},
 	read: {
 		name: ac_strings.read,
-		to: ac_strings.slug_read
+		to: ac_strings.slug_theme
 	},
 	watch: {
 		name: ac_strings.watch,

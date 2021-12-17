@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { navigate } from 'gatsby';
 import shortid from 'shortid';
-import { SearchIcon, CloseIcon } from '@/components/Icons/MUI/navIcons';
+import { SearchIcon } from '@/components/Icons/MUI/navIcons';
 import ac_strings from '@/strings/ac_strings.js';
 import { INavItem } from '@/types';
 import Link from '@/components/CustomLink';
@@ -34,7 +34,7 @@ export const HomeTop: React.FC<{ links: INavItem[]; title: string; content: stri
 					<h2 className="text-2xl md:text-4xl  lg:text-5xl pb-4 sm:pb-8 md:pb-12 leading-relaxed font-extrabold">
 						{title}
 					</h2>
-					<p
+					<div
 						className="text-base sm:text-lg md:text-2xl pb-12"
 						dangerouslySetInnerHTML={{ __html: content }}
 					/>

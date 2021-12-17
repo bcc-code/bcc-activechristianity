@@ -3,6 +3,7 @@ import { Button } from '@/components/Button';
 import { SectionTitleDesktopAndMobile } from '@/components/Headers';
 import Row3ColHorizontalScroll from '@/components/List/Combo/Row3Col-HorizontalScroll';
 import TopicRowAndHorizontalScroll from '@/components/List/Combo/TopicRowAndHorizontalScroll';
+import CategoriesRowAndHorizontalScroll from '@/components/List/Combo/CategoriesRowAndHorizontalScroll';
 import RightImgPost from '@/components/PostItemCards/RightImg';
 import SquareLeftImg from '@/components/PostItemCards/SquareLeftImg';
 import TitleLink from '@/components/PostItemCards/TitleLink';
@@ -11,6 +12,7 @@ import BookShop from '@/layout-parts/Banner/BookShop';
 import ExplorePopularScripture from '@/layout-parts/Explore/ExplorePopularScripture';
 import ExploreFormatRecommended from '@/layout-parts/Explore/ExploreTopRecommended';
 import FetchRecommendMix from '@/layout-parts/Explore/FetchRecommendMix';
+
 import ac_strings from '@/strings/ac_strings.js';
 import { ITopic, ITopicPostSlugs } from '@/types';
 import * as React from 'react';
@@ -38,6 +40,11 @@ const ExploreLayout: React.FC<{
 			<div className="pt-6">
 				<SectionTitleDesktopAndMobile name={ac_strings.topics} to={ac_strings.slug_topic} />
 				<TopicRowAndHorizontalScroll topics={randomTopics} />
+			</div>
+
+			<div className="pt-6">
+				<SectionTitleDesktopAndMobile name={ac_strings.categories} />
+				<CategoriesRowAndHorizontalScroll topics={allFormats} />
 			</div>
 			{process.env.LANG_CODE === 'en' && (
 				<>

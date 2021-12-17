@@ -1,5 +1,4 @@
 import LazyLoad from '@/components/LazyLoad';
-import ExclusiveContent from '@/layout-parts/Banner/ExclusiveContent copy';
 import NewsLetter from '@/layout-parts/Banner/NewsLetter';
 import TopDesktop from '@/layout-parts/Nav/TopDesktop';
 import { socialLoginlocalStorageKey } from '@/layout-parts/SignInSignUp/Main';
@@ -9,10 +8,10 @@ import checkUser from '@/state/reducer/checkUser';
 import menus from '@/strings/generated/menus.json';
 import loadable from '@loadable/component';
 import { LazyMotion, domAnimation } from 'framer-motion';
-import React, { Profiler } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import shortid from 'shortid';
-
+import InstagramIcon from '@/images/instagram-color.svg';
 import Breadcrumb from './Breadcrumb';
 import './Layout.css';
 
@@ -56,6 +55,15 @@ const App: React.FC<{ pageContext: { title?: string; slug?: string } }> = props 
 				{children}
 			</div>
 
+			<div className="relative z-20 standard-max-w px-4 flex justify-center py-18">
+				<a className="text-ac-secondary flex px-4 " href={'https://www.instagram.com/activechristianity/'}>
+					<img className="w-12 h-12" src={InstagramIcon} />
+					<div className="px-4">
+						<p className="font-extrabold text-center text-4-7xl">Follow Us on Instagram</p>
+						<span className="">@activechristianity</span>
+					</div>
+				</a>
+			</div>
 			<LazyLoad>
 				<NewsLetter />
 				{/*                 <ExclusiveContent /> */}

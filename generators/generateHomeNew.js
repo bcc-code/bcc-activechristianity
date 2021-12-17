@@ -167,7 +167,7 @@ module.exports = async function generatePages(actions, graphql) {
 	if (postCountRes) {
 		heroLinks.push({
 			name: `${postCountRes.paginatorInfo.total} Devotional posts`,
-			to: `${ac_strings.slug_latest}`
+			to: `${ac_strings.slug_explore}`
 		});
 	}
 

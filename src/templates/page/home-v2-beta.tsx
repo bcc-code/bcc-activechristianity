@@ -10,12 +10,10 @@ import { IPostRes, ITopic, IImage } from '@/types';
 import { HomeTop } from '@/layout-parts/HomeNew/HomeBanners';
 import SectionWrapperSmall from '@/layout-parts/HomeNew/SectionWrapperSmall';
 import shortid from 'shortid';
-import { IPageCompTypes } from '@/components/CustomizedPageComponent/BlockWrapper';
 import SimpleBgCardList from '@/layout-parts/HomeNew/SimpleBgCardList';
 import CardListPosts from '@/layout-parts/HomeNew/CardListPost';
 import Image1To1 from '@/components/Images/Image1to1Rounded';
 import Gallery from '@/components/CustomizedPageComponent/Gallery';
-import InstagramIcon from '@/images/instagram-color.svg';
 
 const HomePageNew: React.FC<IHomeProps> = props => {
 	const { pageContext, path } = props;
@@ -62,10 +60,8 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 				}
 				switch (id) {
 					case 'hero':
-						console.log(item);
 						return <HomeTop {...item} />;
 					case '108':
-						console.log(item.content.content);
 						return (
 							<SectionWrapperSmall
 								title={item.title}
@@ -75,7 +71,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 									to: item.slug
 								}}
 							>
-								<p
+								<div
 									className="text-sm sm:text-base md:text-lg"
 									dangerouslySetInnerHTML={{ __html: item.content.content }}
 								/>
@@ -202,15 +198,13 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 						);
 				}
 			})}
-
-			<div className="relative z-20 standard-max-w px-4 flex justify-center py-18">
-				<a className="text-ac-secondary flex px-4 " href={'https://www.instagram.com/activechristianity/'}>
-					<img className="w-12 h-12" src={InstagramIcon} />
-					<div className="px-4">
-						<p className="font-extrabold text-center text-4-7xl">Follow Us on Instagram</p>
-						<span className="">@activechristianity</span>
-					</div>
-				</a>
+			<div className="w-full flex justify-center py-8 border-b">
+				<Link
+					className="m-auto inline-block bg-ac-secondary px-8 py-3 text-lg font-bold rounded-lg text-white"
+					to={ac_strings.slug_explore}
+				>
+					Explore
+				</Link>
 			</div>
 		</div>
 	);

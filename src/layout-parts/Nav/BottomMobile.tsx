@@ -44,9 +44,9 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
 
 	const drawerClass = 'close';
 	/*     if (isSideNavOpen) {
-            drawerClass = 'mobile-open'
-        }
-     */
+			drawerClass = 'mobile-open'
+		}
+	 */
 
 	return (
 		<HOCLoginCheck
@@ -73,12 +73,14 @@ const BottomNavMobile: React.FC<IProps> = ({ isSideNavOpen }) => {
 											<span className="flex-1 flex items-center">
 												<Icon className="fill-slate-light" />
 											</span>
-											<span
-												className="block font-semibold clamp1 mt-1"
-												style={{ fontSize: '10px' }}
-											>
-												{item.name}
-											</span>
+											<div className="h-8 text-center ">
+												<span
+													className="inline-block font-semibold mt-1 align-middle"
+													style={{ fontSize: '10px' }}
+												>
+													{item.name}
+												</span>
+											</div>
 										</Link>
 									);
 								})}
