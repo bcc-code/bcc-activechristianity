@@ -19,6 +19,7 @@ export default function Header() {
             render={data => {
                 const { title, flexibleContent } = data.ac.page;
                 const componentConfig: IPageCompTypes[] = JSON.parse(flexibleContent);
+                console.log(componentConfig[0].data.content);
                 return (
                     <div className="w-full bg-ac-slate-lighter rounded-lg py-4 pb-8 mb-4">
                         <div className="z-20 relative standard-max-w px-4">
