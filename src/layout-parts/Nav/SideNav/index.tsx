@@ -36,7 +36,7 @@ const SideMobile: React.FC<IDrawerNav> = ({ isSideNavOpen, setSideNavOpen }) => 
 		closeUserMenu();
 	};
 	const handleLogout = async () => {
-		if (await confirm('Are your sure?')) {
+		if (await confirm('Are you sure?')) {
 			dispatch(initiateLogout());
 			setOpenUserMenu(false);
 			setSideNavOpen(false);

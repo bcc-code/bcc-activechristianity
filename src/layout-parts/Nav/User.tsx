@@ -39,7 +39,7 @@ const UserNav: React.FC<IUserNav> = ({ className, col, callback }) => {
 	};
 
 	const handleLogout = async () => {
-		if (await confirm('Are your sure?')) {
+		if (await confirm('Are you sure?')) {
 			dispatch(initiateLogout());
 		}
 	};

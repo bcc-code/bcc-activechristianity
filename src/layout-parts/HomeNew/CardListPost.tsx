@@ -14,6 +14,9 @@ export const CardListPosts: React.FC<{
     theme?: IThemeName;
     bgImg?: string;
 }> = ({ posts, title, cta, theme, bgImg }) => {
+    console.log(title);
+    console.log(cta);
+
     return (
         <SectionWrapperSmall title={title} cta={cta} theme={theme} bgImg={bgImg}>
             <div className="-mx-4">

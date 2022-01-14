@@ -15,6 +15,18 @@ import CardListPosts from '@/layout-parts/HomeNew/CardListPost';
 import Image1To1 from '@/components/Images/Image1to1Rounded';
 import Gallery from '@/components/CustomizedPageComponent/Gallery';
 
+const loggedInOrder = [
+	'featured',
+	'latest',
+	'hero',
+	'109'
+	//rest
+];
+
+const notLoggedInOrder = ['hero', '108', '109', 'featured'];
+
+const restSectionsOrder = ['110', '113', '118', '111', '112', '114', '115', '116', '117'];
+
 const HomePageNew: React.FC<IHomeProps> = props => {
 	const { pageContext, path } = props;
 	const dispatch = useDispatch();
@@ -23,7 +35,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 		dispatch(openSignInModal('signInOptions'));
 	};
 
-	const { loggedInOrder, notLoggedInOrder, restSectionsOrder, sectionMap } = pageContext;
+	const { sectionMap } = pageContext;
 
 	const allSections =
 		loggedIn === 'success' ? [...loggedInOrder, ...restSectionsOrder] : [...notLoggedInOrder, ...restSectionsOrder];
@@ -43,9 +55,8 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 						Returning users?{' '}
 						<span className="font-bold" onClick={handleSignUp}>
 							{' '}
-							Login
-						</span>{' '}
-						or Skip to posts
+							Login here
+						</span>
 					</div>
 				</div>
 			)}
@@ -83,7 +94,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 								title={item.title}
 								theme={theme}
 								items={item.content}
-								cta={{ name: 'All Bible studies', to: ac_strings.slug_theme }}
+								cta={{ name: 'All theme page', to: ac_strings.slug_theme }}
 							/>
 						);
 					case 'featured':
@@ -111,7 +122,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 								theme={theme}
 								items={item.content.map(item => ({ ...item, slug: `series/${item.slug}` }))}
 								/* bgImg={TestimonyBg} */
-								cta={{ name: 'All Testimonies', to: item.slug }}
+								cta={{ name: 'All testimonies', to: item.slug }}
 							/>
 						);
 					case '111':
@@ -119,7 +130,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 							<SectionWrapperSmall
 								title={item.title}
 								theme={theme}
-								cta={{ name: 'All playlists', to: ac_strings.playlist }}
+								cta={{ name: 'All songs', to: ac_strings.slug_playlist }}
 							>
 								<div className="mx-auto standard-max-w w-full grid grid-cols-2 md:grid-cols-4 gap-3">
 									{item.content.map(p => {
@@ -139,7 +150,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 							<SectionWrapperSmall
 								title={item.title}
 								theme={theme}
-								cta={{ name: 'All playlists', to: ac_strings.playlist }}
+								cta={{ name: 'All audio articles', to: ac_strings.slug_playlist }}
 							>
 								<div className="mx-auto standard-max-w w-full grid grid-cols-2 md:grid-cols-4 gap-3">
 									{item.content.map(p => {
@@ -154,7 +165,25 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 							</SectionWrapperSmall>
 						);
 					case '113':
-						return <CardListPosts title={item.title} posts={item.content} theme={theme} />;
+						return (
+							<CardListPosts
+								key={id}
+								title={item.title}
+								posts={item.content}
+								theme={theme}
+								cta={{ name: 'All animation', to: 'watch/animation' }}
+							/>
+						);
+					case '118':
+						return (
+							<CardListPosts
+								key={id}
+								title={item.title}
+								posts={item.content}
+								theme={theme}
+								cta={{ name: 'All music videos', to: 'watch/songs' }}
+							/>
+						);
 					case '114':
 						return (
 							<SimpleBgCardList
@@ -165,7 +194,13 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 						);
 					case '115':
 						return (
-							<CardListPosts bgImg={item.image} title={item.title} posts={item.content} theme={theme} />
+							<CardListPosts
+								cta={{ name: 'All messages', to: '`watch/messages`' }}
+								bgImg={item.image}
+								title={item.title}
+								posts={item.content}
+								theme={theme}
+							/>
 						);
 					case '116':
 						return (
@@ -175,25 +210,6 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 								cta={{ name: 'All wallpapers', to: item.slug }}
 							>
 								<Gallery data={item.content} />
-							</SectionWrapperSmall>
-						);
-					case '117':
-						return (
-							<SectionWrapperSmall
-								title={item.title}
-								theme={theme}
-								cta={{ name: 'All playlists', to: ac_strings.playlist }}
-							>
-								<div className="mx-auto standard-max-w w-full grid grid-cols-2 md:grid-cols-4 gap-3">
-									{item.content.map(p => {
-										return (
-											<Link to={`${ac_strings.slug_playlist}/${p.slug}`} key={shortid()}>
-												<Image1To1 className="rounded-lg" {...p.image} />
-											</Link>
-										);
-										// return <BibleStudyItemCard {...item} label="Playlist" />;
-									})}
-								</div>
 							</SectionWrapperSmall>
 						);
 				}

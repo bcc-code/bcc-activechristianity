@@ -27,7 +27,7 @@ import { useSelector } from 'react-redux';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import shortid from 'shortid';
 import Link from '@/components/CustomLink';
-
+import AdBanner from '@/layout-parts/Banner/MidPostBanner';
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayerNew/VideoPlayer'));
 const RecommendedPosts = loadable(() => import('@/layout-parts/PostLayout/RecommendedPostsSectionUpdate'));
 const DesktopRightBar = loadable(() => import('@/layout-parts/PostLayout/DesktopRightBar'));
@@ -328,7 +328,8 @@ export const PostLayout: React.FC<IPostProps> = post => {
 							{contentAdBannerSlot.length > 1 && (
 								<div className="pb-2 text-sm">Continue reading below ↓</div>
 							)}
-							<div className="w-full bg-ac-slate-dark min-h-64 rounded-lg py-4">
+							<AdBanner />
+							{/* 							<div className="w-full bg-ac-slate-dark min-h-64 rounded-lg py-4">
 								<div className="z-20 relative standard-max-w text-white">
 									<div className={`px-4 w-auto `}>
 										<span className="uppercase text-sm">ActiveChristianity.org</span>
@@ -357,7 +358,7 @@ export const PostLayout: React.FC<IPostProps> = post => {
 										</Link>
 									</div>
 								</div>
-							</div>
+							</div> */}
 							{contentAdBannerSlot[1] &&
 								contentAdBannerSlot.slice(1).map((block, i) => {
 									return (

@@ -16,7 +16,8 @@ export const HomeTop: React.FC<{ links: INavItem[]; title: string; content: stri
 	const onChange = (e: any) => {
 		setSearchTerm(e.target.value);
 	};
-	const onClick = () => {
+	const onClick = (e: any) => {
+		e.preventDefault();
 		navigate(`/${ac_strings.slug_explore}?search=${searchTerm}`);
 	};
 	return (
@@ -49,7 +50,7 @@ export const HomeTop: React.FC<{ links: INavItem[]; title: string; content: stri
 						})}
 					</ul>
 				</div>
-				<div className="md:w-7/12 mt-4 mx-4 flex flex-auto">
+				<form className="md:w-7/12 mt-4 mx-4 flex flex-auto" onSubmit={onClick}>
 					<div
 						className={`flex-1 flex border bg-white rounded-l-lg  sm:rounded-l-full items-center pl-2 sm:pl-4 overflow-hidden `}
 						onClick={handleFocus}
@@ -67,13 +68,12 @@ export const HomeTop: React.FC<{ links: INavItem[]; title: string; content: stri
 						/>
 					</div>
 					<button
-						onClick={onClick}
-						onKeyDown={onClick}
+						type="submit"
 						className="bg-ac-slate-dark text-white rounded-r-lg  sm:rounded-r-full px-2 sm:px-4 "
 					>
 						<SearchIcon customSize="6" />
 					</button>
-				</div>
+				</form>
 			</div>
 			<div className={`z-10 absolute inset-0`} style={{ background: '#020203', opacity: '0.3' }}></div>
 			{/* 		<div className="absolute inset-0">

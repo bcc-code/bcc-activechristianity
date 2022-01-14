@@ -10,7 +10,7 @@ export interface IBgImgCard {
     image: IImage;
 }
 
-export const BgImgTwoToOneCard: React.FC<IBgImgCard> = ({ title, slug, image }) => {
+export const BgImgTwoToOneCard: React.FC<IBgImgCard> = ({ title, slug, image, smallText }) => {
     const overlayStyle = {
         dark: { background: '#020203', opacity: '0.3' },
         light: { background: '#9CA6BE', opacity: '0.68' },
@@ -22,7 +22,8 @@ export const BgImgTwoToOneCard: React.FC<IBgImgCard> = ({ title, slug, image }) 
                 {/* <div className="text-xxs pb-4">Bible Study</div> */}
                 <h2
                     style={{ textShadow: '2px 2px 5px rgba(105,105,105,0.7)' }}
-                    className={'text-2xl clamp3 mb-2 font-bold text-center md:text-xl'}
+                    className={`${smallText ? 'text-base sm:text-2xl leading-4' : 'mb-2 text-2xl'
+                        } clamp3 font-bold text-center md:text-xl `}
                 >
                     {title}
                 </h2>

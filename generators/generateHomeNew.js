@@ -120,18 +120,6 @@ module.exports = async function generatePages(actions, graphql) {
 		};
 	});
 
-	const loggedInOrder = [
-		'featured',
-		'latest',
-		'hero',
-		'109'
-		//rest
-	];
-
-	const notLoggedInOrder = ['hero', '108', '109', 'featured'];
-
-	const restSectionsOrder = ['110', '111', '112', '113', '114', '115', '116', '117'];
-
 	const sectionMap = {};
 	homepageV2SectionsData.forEach(element => {
 		sectionMap[element.id] = element;
@@ -166,7 +154,7 @@ module.exports = async function generatePages(actions, graphql) {
 
 	if (postCountRes) {
 		heroLinks.push({
-			name: `${postCountRes.paginatorInfo.total} Devotional posts`,
+			name: `${postCountRes.paginatorInfo.total} Posts`,
 			to: `${ac_strings.slug_explore}`
 		});
 	}
@@ -204,10 +192,7 @@ module.exports = async function generatePages(actions, graphql) {
 		component: path.resolve('./src/templates/page/home-v2-beta.tsx'),
 		context: {
 			sectionMap,
-			featuredPosts,
-			loggedInOrder,
-			notLoggedInOrder,
-			restSectionsOrder
+			featuredPosts
 		}
 	});
 };

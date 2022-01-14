@@ -15,7 +15,7 @@ const PostItemCard: React.FC<IPostItem> = item => {
                 >
                     {item.reading_time?.minutes ? item.reading_time?.minutes : '2 mins read'}
                 </div> */}
-                <div style={{ paddingBottom: '20px' }}>
+                <div style={{ paddingBottom: '20px' }} className="text-black">
                     <h3
                         className="leading-normal"
                         style={{

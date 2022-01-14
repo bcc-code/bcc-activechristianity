@@ -26,7 +26,7 @@ const AccountLayout: React.FC<{ pathname: string; userLinks: INavItem[] }> = ({ 
 	}, [pathname]);
 
 	const handleLogout = async () => {
-		if (await confirm('Are your sure?')) {
+		if (await confirm('Are you sure?')) {
 			dispatch(initiateLogout());
 		}
 	};
