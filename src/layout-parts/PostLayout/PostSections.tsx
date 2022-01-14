@@ -213,9 +213,8 @@ export const ShareBookmarkTopShortCuts: React.FC<IShareLikesViewsProps & { isPla
 
 	return (
 		<div
-			className={`flex flex-col mx-3 py-2 fixed right-0 bottom-0 ${
-				isPlayingAudio ? 'mb-40' : 'mb-24'
-			} bg-white shadow rounded-full text-white text-sm`}
+			className={`flex flex-col mx-3 py-2 fixed right-0 bottom-0 ${isPlayingAudio ? 'mb-40' : 'mb-24'
+				} bg-white shadow rounded-full text-white text-sm`}
 			style={{ zIndex: 60 }}
 		>
 			<button className="px-2 py-1" key={shortid()}>
@@ -287,7 +286,7 @@ export const DesktopPostMain: React.FC<IDesktopPostMain> = ({
 					{headerLeft && <div className=" w-1/3 lg:w-4/12">{headerLeft}</div>}
 					<div className="flex-1">
 						<PostH1 title={title} />
-						<p
+						<div
 							className="text-ac-slate-dark-dark text-lg font-medium leading-normal"
 							dangerouslySetInnerHTML={{ __html: excerpt }}
 						/>
