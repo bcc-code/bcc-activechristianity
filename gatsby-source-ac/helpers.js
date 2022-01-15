@@ -276,6 +276,7 @@ module.exports.allPostQueries = queries;
 
 module.exports.getHtmlArray = text => {
 	const blocks = [];
+	const toReturn = [];
 	const root = parse(text);
 	root.childNodes.forEach((child, index) => {
 		let updated = child.childNodes;
@@ -302,10 +303,13 @@ module.exports.getHtmlArray = text => {
 			blocks.push(updated.toString());
 		}
 	});
-
-	return blocks;
+	blocks.forEach(element => {
+		if (typeof element === 'string' && element.trim() !== '') {
+			toReturn.push(element);
+		}
+	});
+	return toReturn;
 };
-
 const getBannerIndex = list => {
 	let h2Index = 0;
 	let index = 0;
