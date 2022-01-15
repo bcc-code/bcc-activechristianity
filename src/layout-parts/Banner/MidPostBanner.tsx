@@ -23,7 +23,7 @@ export default function Header() {
                     <div className="w-full bg-ac-slate-lighter rounded-lg py-4 pb-8 mb-4">
                         <div className="z-20 relative standard-max-w px-4">
                             <h2 className="text-lg md:text-2xl leading-relaxed font-extrabold py-2">{title}</h2>
-                            <p dangerouslySetInnerHTML={{ __html: componentConfig[0].data.content }} />
+                            <div dangerouslySetInnerHTML={{ __html: componentConfig[0].data.content }} />
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 p-4 gap-4">
                             {componentConfig[1].data.map(item => (
