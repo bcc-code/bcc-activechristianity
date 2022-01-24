@@ -147,7 +147,7 @@ module.exports = async function generatePages(actions, graphql) {
 
 	if (bibleStudyCountRes) {
 		heroLinks.push({
-			name: `${bibleStudyCountRes.length} Wallpapers`,
+			name: `${bibleStudyCountRes.length} Theme Pages`,
 			to: `${ac_strings.slug_theme}`
 		});
 	}
