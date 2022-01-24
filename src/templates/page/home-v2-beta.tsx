@@ -207,7 +207,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 							<SectionWrapperSmall
 								title={item.title}
 								theme={theme}
-								cta={{ name: 'All wallpapers', to: item.slug }}
+								cta={{ name: 'All wallpapers', to: ac_strings.wallpaper_slug }}
 							>
 								<Gallery data={item.content} />
 							</SectionWrapperSmall>
