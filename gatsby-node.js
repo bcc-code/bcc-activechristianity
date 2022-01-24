@@ -63,7 +63,7 @@ exports.createPages = ({ page, actions, graphql }) => {
 	const generateWallpapers = require('./generators/generateQuoteWallpapers');
 	const generateHomeNew = require('./generators/generateHomeNew');
 	const generators = [
-		generateHome(actions, graphql),
+		/* 	generateHome(actions, graphql), */
 		generateHomeNew(actions, graphql),
 		generatePages(actions, graphql),
 		generatePosts(actions, graphql),

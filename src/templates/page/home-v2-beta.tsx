@@ -52,7 +52,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 				<div className="text-sm text-blue-500 text-bold bg-blue-100">
 					<div className="standard-max-w p-4 ">
 						{' '}
-						Returning users?{' '}
+						Returning user?{' '}
 						<span className="font-bold" onClick={handleSignUp}>
 							{' '}
 							Login here
@@ -94,7 +94,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 								title={item.title}
 								theme={theme}
 								items={item.content}
-								cta={{ name: 'All theme page', to: ac_strings.slug_theme }}
+								cta={{ name: 'All theme pages', to: ac_strings.slug_theme }}
 							/>
 						);
 					case 'featured':
@@ -171,7 +171,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 								title={item.title}
 								posts={item.content}
 								theme={theme}
-								cta={{ name: 'All animation', to: 'watch/animation' }}
+								cta={{ name: 'All animated videos', to: 'watch/animation' }}
 							/>
 						);
 					case '118':
@@ -195,7 +195,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 					case '115':
 						return (
 							<CardListPosts
-								cta={{ name: 'All messages', to: '`watch/messages`' }}
+								cta={{ name: 'All messages', to: 'watch/messages' }}
 								bgImg={item.image}
 								title={item.title}
 								posts={item.content}
