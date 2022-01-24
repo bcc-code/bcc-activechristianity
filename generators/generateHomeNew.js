@@ -188,7 +188,7 @@ module.exports = async function generatePages(actions, graphql) {
 	}
 
 	return createPage({
-		path: `/v2`,
+		path: `/`,
 		component: path.resolve('./src/templates/page/home-v2-beta.tsx'),
 		context: {
 			sectionMap,
