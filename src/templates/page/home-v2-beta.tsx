@@ -16,9 +16,8 @@ import Image1To1 from '@/components/Images/Image1to1Rounded';
 import Gallery from '@/components/CustomizedPageComponent/Gallery';
 
 const loggedInOrder = [
-	'featured',
-	'latest',
 	'hero',
+	'featured',
 	'109'
 	//rest
 ];
