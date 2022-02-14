@@ -247,3 +247,7 @@ input:focus {
     -webkit-line-clamp: 4 !important;
     -webkit-box-orient: vertical;
 }
+
+.page-content a {
+    text-decoration: underline;
+}
