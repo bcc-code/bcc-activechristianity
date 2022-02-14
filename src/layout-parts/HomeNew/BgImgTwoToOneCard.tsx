@@ -22,8 +22,8 @@ export const BgImgTwoToOneCard: React.FC<IBgImgCard> = ({ title, slug, image, sm
                 {/* <div className="text-xxs pb-4">Bible Study</div> */}
                 <h2
                     style={{ textShadow: '2px 2px 5px rgba(105,105,105,0.7)' }}
-                    className={`${smallText ? 'text-base sm:text-2xl leading-4' : 'mb-2 text-2xl'
-                        } clamp3 font-bold text-center md:text-xl `}
+                    className={`${smallText ? 'text-base sm:text-xl leading-4 font-semibold' : 'mb-2 text-2xl font-bold'
+                        } clamp3 text-center md:text-xl `}
                 >
                     {title}
                 </h2>

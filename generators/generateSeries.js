@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const path = require('path');
-const saveFile = require('./saveFile');
 const ac_strings = require('../src/strings/ac_strings.js');
 const template = 'src/templates/single-resource/serie.tsx';
 const query = `
@@ -24,7 +23,7 @@ const query = `
   }
 `;
 
-module.exports = function generatePlaylists(actions, graphql) {
+module.exports = function generateSeries(actions, graphql) {
 	const { createPage } = actions;
 
 	return graphql(query)
@@ -36,14 +35,25 @@ module.exports = function generatePlaylists(actions, graphql) {
 
 			const series = result.data.ac.series;
 
+			const seriesPage = {
+				name: ac_strings.series,
+				to: ac_strings.slug_series
+			};
 			_.each(series, node => {
-				const basePath = `/series/${node.slug}`;
+				const basePath = `/${ac_strings.slug_series}/${node.slug}`;
 				console.log(basePath);
 				createPage({
 					path: basePath,
 					component: path.resolve(template),
 					context: {
 						pagePath: basePath,
+						breadcrumb: [
+							seriesPage,
+							{
+								name: node.title,
+								to: basePath
+							}
+						],
 						...node
 					}
 				});

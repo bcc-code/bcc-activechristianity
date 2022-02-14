@@ -83,6 +83,14 @@ module.exports = function generatePages(actions, graphql) {
 					});
 				}
 
+				if (process.env.SERIES_SECTON === 'true') {
+					buildPages.push({
+						title: ac_strings.series,
+						slug: ac_strings.slug_series,
+						templateName: 'series'
+					});
+				}
+
 				_.each(buildPages, page => {
 					const pagePath = page.slug;
 					createPage({
@@ -132,7 +140,7 @@ module.exports = function generatePages(actions, graphql) {
 				});
 
 				const themePage = {
-					name: 'Bible Studies',
+					name: ac_strings.theme_pages,
 					to: ac_strings.slug_theme
 				};
 
@@ -144,6 +152,7 @@ module.exports = function generatePages(actions, graphql) {
 						pagePath,
 						...page,
 						breadcrumb: [
+							themePage,
 							{
 								name: page.title,
 								to: page.slug

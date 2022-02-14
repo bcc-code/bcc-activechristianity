@@ -55,7 +55,7 @@ const App: React.FC<{ pageContext: { title?: string; slug?: string } }> = props 
 				{children}
 			</div>
 
-			<div className="relative z-20 standard-max-w px-4 flex justify-center py-18">
+			{/* 			<div className="relative z-20 standard-max-w px-4 flex justify-center py-18">
 				<a className="text-ac-secondary flex px-4 " href={'https://www.instagram.com/activechristianity/'}>
 					<img className="w-12 h-12" src={InstagramIcon} />
 					<div className="px-4">
@@ -63,7 +63,7 @@ const App: React.FC<{ pageContext: { title?: string; slug?: string } }> = props 
 						<span className="">@activechristianity</span>
 					</div>
 				</a>
-			</div>
+			</div> */}
 			<LazyLoad>
 				<NewsLetter />
 				{/*                 <ExclusiveContent /> */}

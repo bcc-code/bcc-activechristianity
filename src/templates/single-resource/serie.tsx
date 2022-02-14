@@ -1,4 +1,5 @@
 import Link from '@/components/CustomLink';
+import MetaTag from '@/components/Meta';
 import Image1To1 from '@/components/Images/Image1to1Rounded';
 import {
 	MobileHeaderBackground,
@@ -9,12 +10,12 @@ import {
 import * as React from 'react';
 
 const Series: React.FC<IDummy> = props => {
-	const series = props.pageContext;
+	const { posts, breadcrumb, title, image, slug, pagePath } = props.pageContext;
 	const id = '';
 
 	const body = (
 		<div className="flex flex-col pb-12">
-			{series.posts.map((p, i) => {
+			{posts.map((p, i) => {
 				return (
 					<li
 						key={i}
@@ -30,22 +31,23 @@ const Series: React.FC<IDummy> = props => {
 	);
 	return (
 		<article className="overflow-scroll">
-			<MobileHeaderBackground imgUrl={series.src}>
+			<MetaTag title={title} translatedUrls={[]} type="page" breadcrumb={breadcrumb} path={pagePath} />
+			<MobileHeaderBackground imgUrl={image.src}>
 				<div className="flex flex-col items-center w-full" style={{ transform: 'translateY(0px)' }}>
 					<div className="w-7/12"></div>
 				</div>
 			</MobileHeaderBackground>
-			<MobilePostMain id={''} height={300} title={series.title} excerpt={''} shareSlug={series.slug}>
+			<MobilePostMain id={''} height={300} title={title} excerpt={''} shareSlug={slug}>
 				{body}
 			</MobilePostMain>
 			<DesktopPostMain
 				id={id}
-				title={series.title}
+				title={title}
 				excerpt={''}
 				shareSlug={''}
 				headerLeft={
 					<div className="pr-8 relative">
-						<Image1To1 {...series.image} className="rounded-lg" />
+						<Image1To1 {...image} className="rounded-lg" />
 					</div>
 				}
 				headerMeta={<div className="flex text-ac-slate-dark">{body}</div>}

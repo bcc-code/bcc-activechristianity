@@ -55,7 +55,7 @@ const HomePageNew: React.FC<IHomeProps> = props => {
 						Returning user?{' '}
 						<span className="font-bold" onClick={handleSignUp}>
 							{' '}
-							Login here
+							Log in here
 						</span>
 					</div>
 				</div>

@@ -8,6 +8,31 @@ interface IFetchLatestPlaylist {
 	layout: 'row' | 'list' | 'one';
 	render: (data: { playlists: IPlaylist[] }) => JSX.Element;
 }
+
+export const FetchLatestSeries: React.FC<IFetchLatestPlaylist> = ({ render, layout }) => {
+	const [playlists, setPlaylists] = React.useState<IPlaylist[]>([]);
+	const [loading, setLoading] = React.useState(true);
+	React.useEffect(() => {
+		setLoading(true);
+		const url = `/page-data/${ac_strings.slug_series}/page-data.json`;
+		fetch(url)
+			.then(res => res.json())
+			.then(res => {
+				setLoading(false);
+				if (res.result && res.result.data.ac && res.result.data.ac.playlists) {
+					const allPlaylist = res.result.data.ac.playlists;
+					setPlaylists(allPlaylist);
+				}
+			})
+			.catch(error => {
+				console.log(error.message);
+			});
+	}, []);
+
+	const CustomPlaceholder = getPlaceholder[layout];
+	return <CustomPlaceholder loading={loading}>{render({ playlists })}</CustomPlaceholder>;
+};
+
 export const FetchLatestPlaylists: React.FC<IFetchLatestPlaylist> = ({ render, layout }) => {
 	const [playlists, setPlaylists] = React.useState<IPlaylist[]>([]);
 	const [loading, setLoading] = React.useState(true);

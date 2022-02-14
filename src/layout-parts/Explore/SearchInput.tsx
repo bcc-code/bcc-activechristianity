@@ -14,7 +14,7 @@ interface ICustomerSearchBox {
 	searchHistory: string[];
 	setSearchHistory: (string: []) => void;
 	showSearchHistory: boolean;
-	paramQuery?: string|null;
+	paramQuery?: string | null;
 }
 
 const SearchBox: React.FC<ICustomerSearchBox> = ({
@@ -33,7 +33,7 @@ const SearchBox: React.FC<ICustomerSearchBox> = ({
 
 	React.useEffect(() => {
 		if (paramQuery) {
-			setLocalQuery(paramQuery);
+			setLocalQuery(decodeURI(paramQuery));
 		}
 	});
 	const onChangeDebounced = (event: any) => {
