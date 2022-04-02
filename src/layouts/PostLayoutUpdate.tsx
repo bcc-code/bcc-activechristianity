@@ -24,7 +24,6 @@ import loadable from '@loadable/component';
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import shortid from 'shortid';
 
 const VideoMediaPlayer = loadable(() => import('@/components/MediaPlayerNew/VideoPlayer'));
@@ -134,8 +133,8 @@ export const PostLayout: React.FC<IPostProps> = post => {
 			if (lastScroll.current < Date.now()) {
 				lastScroll.current = Date.now() + 5000;
 				/* if (showBottomSlider !== true) {
-                    setShowBottomSlider(true)
-                } */
+					setShowBottomSlider(true)
+				} */
 				if (isLoggedIn === 'success') {
 					if (id) {
 						acApiModule.then(res => {
@@ -216,9 +215,8 @@ export const PostLayout: React.FC<IPostProps> = post => {
 						{mediaTypesDefault.types.map((item, i) => (
 							<button
 								key={item}
-								className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${
-									i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'
-								} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
+								className={`border-ac-slate-light text-ac-slate-light px-2 py-1 border-t border-b text-xs sm:text-sm ${i === 0 ? 'rounded-l  border-l' : 'rounded-r  border-r'
+									} ${currentMediaType === item ? 'bg-ac-slate-light text-ac-slate-dark' : ''}`}
 								onClick={() => setCurrentMediaType(item)}
 							>
 								{item}

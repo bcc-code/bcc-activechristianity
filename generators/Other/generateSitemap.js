@@ -60,31 +60,9 @@ const processNodes = (nodes, key) => {
 const pagesQuery = `
     edges {
         node {
-        id
-        slug:path
-        context {
-            pageType
-            updated_at
-            mediaTypes {
-              default
-            }
-            image {
-              src
-            }
-            normalized {
-              
-              title
-              excerpt
-              image {
-                  src
-              }
-              media {
-								video {
-                  src
-                }
-              }
-            }
-        }
+			id
+			slug:path
+			context:pageContext	
         }
     }
 `;

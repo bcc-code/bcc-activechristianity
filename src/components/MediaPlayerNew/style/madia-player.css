@@ -173,21 +173,8 @@ input[type="range"]:not(*:root) {
     overflow: hidden;
 }
 
-input[type="range"]:not(*:root),
-input[type="range"]:not(*:root)::before,
-input[type="range"]:not(*:root)::after {
-    box-sizing: border-box;
-}
 
-@supports (-moz-appearance:meterbar) {
-    /* overflow: hidden; */
 
-    input[type="range"],
-    input[type="range"]::before,
-    input[type="range"]::after {
-        box-sizing: border-box;
-    }
-}
 
 _:-ms-input-placeholder,
 :root {

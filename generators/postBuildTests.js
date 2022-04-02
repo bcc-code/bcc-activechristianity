@@ -9,13 +9,8 @@ exports.onPostBuildTest = async ({ graphql }) => {
             node {
               id
               slug:path
-              context {
-                  pageType
-                  updated_at
-                  mediaTypes {
-                    default
-                  }
-                }
+			  context:pageContext	
+
               }
             }
         }
