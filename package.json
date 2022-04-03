@@ -8,7 +8,6 @@
   "keywords": [
     "gatsby"
   ],
-
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
     "@loadable/component": "^5.15.2",
@@ -19,7 +18,7 @@
     "framer-motion": "^6.2.8",
     "gatsby": "^4.11.1",
     "gatsby-plugin-advanced-sitemap": "file:gatsby-plugin-advanced-sitemap",
-    "gatsby-plugin-algolia-search": "^0.5.7",
+    "gatsby-plugin-algolia-search": "file:gatsby-plugin-algolia-search",
     "gatsby-plugin-feed": "^4.11.1",
     "gatsby-plugin-google-tagmanager": "^4.11.1",
     "gatsby-plugin-loadable-components-ssr": "^4.2.0",
@@ -75,7 +74,6 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "build-tailwind": "npx tailwind build src/styles/tailwind.css -o src/styles/tailwind-output.css",
     "lint": "eslint . --ext ts --ext tsx --ext js --ext jsx --fix"
- 
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
