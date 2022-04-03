@@ -24,7 +24,6 @@ import loadable from '@loadable/component';
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import shortid from 'shortid';
 import Link from '@/components/CustomLink';
 import AdBanner from '@/layout-parts/Banner/MidPostBanner';

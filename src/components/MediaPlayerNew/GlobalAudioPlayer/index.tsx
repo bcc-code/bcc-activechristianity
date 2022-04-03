@@ -5,7 +5,7 @@ import { IMedia } from '@/types';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import '../style/madia-player.css';
+import '../style/madia-player.css'
 import Controller from './Controller';
 import PlaylistInfo from './PlaylistInfo';
 

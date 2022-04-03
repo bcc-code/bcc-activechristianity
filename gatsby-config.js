@@ -48,7 +48,6 @@ const plugins = [
 			slimMode: process.env.SUPER_SLIM_DEV_MODE
 		}
 	},
-	'gatsby-plugin-sass',
 	{
 		resolve: 'gatsby-plugin-root-import',
 		options: {
@@ -162,9 +161,9 @@ if (activeEnv === 'production') {
 			resolve: `gatsby-plugin-advanced-sitemap`,
 			options: SitemapOptions
 		},
-		{
+/* 		{
 			resolve: 'gatsby-plugin-preact'
-		}
+		} */
 	);
 
 	if (process.env.NO_FOLLOW === 'true') {

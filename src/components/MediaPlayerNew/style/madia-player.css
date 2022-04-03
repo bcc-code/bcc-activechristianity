@@ -173,47 +173,14 @@ input[type="range"]:not(*:root) {
     overflow: hidden;
 }
 
-input[type="range"]:not(*:root),
-input[type="range"]:not(*:root) /deep/ *,
-input[type="range"]:not(*:root)::before,
-input[type="range"]:not(*:root) /deep/ *::before,
-input[type="range"]:not(*:root)::after,
-input[type="range"]:not(*:root) /deep/ *::after {
-    box-sizing: border-box;
-}
 
-@supports (-moz-appearance:meterbar) {
-    /* overflow: hidden; */
 
-    input[type="range"],
-    input[type="range"] /deep/ *,
-    input[type="range"]::before,
-    input[type="range"] /deep/ *::before,
-    input[type="range"]::after,
-    input[type="range"] /deep/ *::after {
-        box-sizing: border-box;
-    }
-}
 
 _:-ms-input-placeholder,
 :root {
     overflow: hidden;
 }
 
-_:-ms-input-placeholder,
-:root,
-_:-ms-input-placeholder /deep/ *,
-:root /deep/ *,
-_:-ms-input-placeholder::before,
-:root ::before,
-_:-ms-input-placeholder /deep/ *::before,
-:root /deep/ *::before,
-_:-ms-input-placeholder::after,
-:root ::after,
-_:-ms-input-placeholder /deep/ *::after,
-:root /deep/ *::after {
-    box-sizing: border-box;
-}
 
 input[type="range"]:not(*:root) {
     font-size: 1em;

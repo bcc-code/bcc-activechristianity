@@ -24,7 +24,6 @@ const ContactPage = () => {
 			<div className="w-full hidden sm:flex justify-center p-12 bg-gray-200">
 				<div className="max-w-tablet m-auto bg-white rounded-xl overflow-hidden shadow-lg">
 					<Header className={`hidden sm:block h-48 w-full px-4`} imageUrl={imageUrl} style={{}} />
-
 					<div className="p-4">
 						<ContactForm />
 					</div>
