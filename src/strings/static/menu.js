@@ -7,7 +7,7 @@ module.exports.menusItems = {
 		to: '/'
 	},
 	listen: {
-		name: ac_strings.audio_playlists,
+		name: ac_strings.playlists,
 		to: ac_strings.slug_playlist
 	},
 	explore: {
