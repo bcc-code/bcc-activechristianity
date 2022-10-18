@@ -22,7 +22,7 @@ jobs:
   deploy_en_US:
     if: github.event_name == 'workflow_dispatch' && (!inputs.site || inputs.site == 'en_US')
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Deploy US English
     steps:
       - uses: actions/checkout@v3
         with:
@@ -59,7 +59,7 @@ jobs:
   deploy_ru_RU:
     if: github.event_name == 'workflow_dispatch' && (!inputs.site || inputs.site == 'en_US')
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Deploy RU Russian
     steps:
       - uses: actions/checkout@v3
         with:
