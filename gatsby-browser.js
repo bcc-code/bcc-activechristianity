@@ -1,4 +1,4 @@
-import 'react-placeholder/lib/reactPlaceholder.css';
+import '@oscar-21/react-placeholder/lib/reactPlaceholder.css';
 import 'normalize.css/normalize.css'; 
 import './src/styles/reset.css';
 import './src/styles/tailwind-output.css';

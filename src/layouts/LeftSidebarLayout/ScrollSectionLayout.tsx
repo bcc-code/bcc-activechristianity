@@ -2,8 +2,7 @@ import Video16to9 from '@/components/Images/Video16to9';
 import ScrollSectionChild, { IScrollSectionChildProps } from '@/components/ScrollSection/Section';
 import endpoints from '@/strings/static/endpoints';
 import React from 'react';
-import { ScrollingProvider, SectionLink, Si } from 'react-scroll-section';
-import { Section } from 'react-scroll-section';
+import { Section, ScrollingProvider, SectionLink } from 'react-scroll-section';
 
 import LeftSidebarLayout, { ISiderbar } from './index';
 

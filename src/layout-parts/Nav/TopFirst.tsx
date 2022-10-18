@@ -4,7 +4,7 @@ import UserNav from '@/layout-parts/Nav/User';
 import ac_strings from '@/strings/ac_strings';
 import menus from '@/strings/generated/menus.json';
 import { graphql } from 'gatsby';
-import React, { Profiler } from 'react';
+import React from 'react';
 
 const { topLink } = menus;
 const TopDesktop: React.FC = () => {

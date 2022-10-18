@@ -1,4 +1,4 @@
-import { IRootState, ILogginStatus } from '@/state/types';
+import { IRootState } from '@/state/types';
 import { createSelector } from 'reselect';
 
 const stateSelector = (state: IRootState) => state;

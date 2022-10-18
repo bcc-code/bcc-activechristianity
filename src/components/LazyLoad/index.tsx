@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad from 'parm-react-lazyload';
 
 interface ICustomLazyLoad {
 	height?: number;

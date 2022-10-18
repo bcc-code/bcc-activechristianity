@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactPlaceholder from 'react-placeholder';
+import ReactPlaceholder from '@oscar-21/react-placeholder';
 
 import { ScriptureBookBlock } from './PlaceHolders';
 

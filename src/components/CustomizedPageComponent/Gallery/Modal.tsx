@@ -4,7 +4,7 @@ import WallpaperModalContent from '@/components/QuoteImage/QuoteModalContent';
 import { IGalleryImage, IQuote } from '@/types';
 import * as React from 'react';
 import Modal from 'react-modal';
-import SwipeableViews from 'react-swipeable-views';
+import SwipeableViews from 'react-swipeable-views-react-18-fix';
 
 interface IWallpaperModal {
 	startIndex?: number;

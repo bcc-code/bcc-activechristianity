@@ -1,6 +1,6 @@
 import * as React from 'react';
-import ReactPlaceholder from 'react-placeholder';
-import { TextBlock, RectShape, TextRow } from 'react-placeholder/lib/placeholders';
+import ReactPlaceholder from '@oscar-21/react-placeholder';
+import { TextBlock, RectShape, TextRow } from '@oscar-21/react-placeholder/lib/placeholders';
 
 export const RowPlaceholder: React.FC<{ loading: boolean }> = ({ loading, children }) => {
 	const customerPlaceholder = (

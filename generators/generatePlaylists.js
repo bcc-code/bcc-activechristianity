@@ -3,8 +3,7 @@ const path = require('path');
 const ac_strings = require('../src/strings/ac_strings.js');
 const template = 'src/templates/single-resource/playlist.tsx';
 
-const query = `
-    {
+const query = `{
     ac {
       playlists {
         id
@@ -29,11 +28,8 @@ const query = `
           alt
         }
       }
-
-
     }
-  }
-`;
+}`;
 
 module.exports = function generatePlaylists(actions, graphql) {
 	const { createPage } = actions;
