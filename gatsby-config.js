@@ -79,8 +79,6 @@ const plugins = [
   } */
 	/*   
   "gatsby-plugin-webpack-bundle-analyser-v2", */
-
-	'gatsby-plugin-loadable-components-ssr'
 ];
 
 if (process.env.LISTEN_SECTION === 'all' || process.env.LISTEN_SECTION === 'podcast_only') {

@@ -1,4 +1,4 @@
-import { FetchTopics } from '@/HOC/FetchTopicFormatType';
+import { FetchTopicPostItems } from '@/HOC/FetchTopicFormatType';
 import { filterTopics } from '@/helpers/normalizers';
 import { ITopic } from '@/types';
 import { StaticQuery, graphql } from 'gatsby';
@@ -17,7 +17,7 @@ const QPopularAndFeaturedTopics: React.FC<QProps> = ({ render, excludeFollowed }
 				const { featuredTopics, popularTopics } = props.ac;
 				const topicsSlugs = filterTopics({ topics: [featuredTopics, popularTopics], returnSlugs: true });
 				return (
-					<FetchTopics
+					<FetchTopicPostItems
 						topics={topicsSlugs}
 						layout="list"
 						render={({ topics }) => {

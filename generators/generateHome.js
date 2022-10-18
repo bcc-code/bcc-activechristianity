@@ -138,12 +138,7 @@ module.exports = function generatePages(actions, graphql) {
 
 									await graphql(getTopicQuery)
 										.then(async res => {
-											if (
-												res.data &&
-												res.data.ac &&
-												res.data.ac.topic &&
-												res.data.ac.topic.somePosts.data
-											) {
+											if (res.data?.ac?.topic?.somePosts.data) {
 												const { somePosts, ...topic } = res.data.ac.topic;
 												const allPosts = somePosts.data;
 												popularTopicsAll['dynamic'].push({ ...topic, posts: allPosts });
@@ -151,7 +146,9 @@ module.exports = function generatePages(actions, graphql) {
 												console.log(getTopicQuery);
 												console.log(res.data.ac.topic);
 												console.log(item);
-												throw new Error('not able to find posts for this topic');
+												if (! process.env.SUPER_SLIM_DEV_MODE) {
+													throw new Error('not able to find posts for this topic');
+												}
 											}
 										})
 										.catch(err => {

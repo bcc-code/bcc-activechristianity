@@ -22,7 +22,7 @@ import ac_strings from '@/strings/ac_strings.js';
 import { IPostItem, ITopicPostSlugs, INavItem } from '@/types';
 import loadable from '@loadable/component';
 import React from 'react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad from 'parm-react-lazyload';
 import { useSelector } from 'react-redux';
 import shortid from 'shortid';
 

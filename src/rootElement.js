@@ -35,7 +35,7 @@ export const preloadedState = {
     }
 }
 
-import "react-placeholder/lib/reactPlaceholder.css"
+import "@oscar-21/react-placeholder/lib/reactPlaceholder.css"
 import "normalize.css/normalize.css"
 import "./styles/reset.css"
 import "./styles/tailwind-output.css"
