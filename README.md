@@ -6,13 +6,13 @@
 
     ```sh
     cd ac-static/
-    npm install
+    yarn install
     ```
 
 1.  **Start developing.**
 
     ```sh
-    gatsby develop
+    yarn run start
     ```
 
 1.  **Open the source code and start editing!**
