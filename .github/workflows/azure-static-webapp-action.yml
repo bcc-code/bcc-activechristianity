@@ -50,7 +50,7 @@ jobs:
           output_location: "public"
 
   deploy_ru_RU:
-    if: github.event_name == 'workflow_dispatch' && (!inputs.site || inputs.site == 'en_US')
+    if: github.event_name == 'workflow_dispatch' && (!inputs.site || inputs.site == 'ru_RU')
     runs-on: ubuntu-latest
     name: Deploy RU Russian
     steps:
