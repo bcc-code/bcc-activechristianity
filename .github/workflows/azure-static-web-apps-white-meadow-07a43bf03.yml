@@ -22,22 +22,18 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         env:
-          TITLE: ${{ secrets.TITLE }}
-          SITE_URL: ${{ secrets.SITE_URL }}
-          LANG: ${{ secrets.LANG }}
-          LOCALE: ${{ secrets.LOCALE }}
-          LANG_CODE: ${{ secrets.LANG_CODE }}
-          ENABLE_ALGOLIA: ${{ secrets.ENABLE_ALGOLIA }}
-          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-          ALGOLIA_SEARCH_KEY: ${{ secrets.ALGOLIA_SEARCH_KEY }}
-          CLOUDFRONT_DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION }}
-          GA_ID: ${{ secrets.GA_ID }}
-          LISTEN_SECTION: ${{ secrets.LISTEN_SECTION }}
-          NO_FOLLOW: ${{ secrets.NO_FOLLOW }}
-          CLICKY_ID: ${{ secrets.CLICKY_ID }}
-          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
-          S3_BUCKET_REGION: ${{ secrets.S3_BUCKET_REGION }}
+          SITE_URL: https://aktivnoyekhristianstvo.ru
+          TITLE: Активное Христианство
+          LANG: Русский
+          LANG_CODE: ru
+          LOCALE: ru_RU
+          LISTEN_SECTION: na
+          ENABLE_ALGOLIA: yes
+          ALGOLIA_APP_ID: ${{ secrets.RU_ALGOLIA_APP_ID}}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.RU_ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_SEARCH_KEY: ${{ secrets.RU_ALGOLIA_SEARCH_KEY }}
+          GA_ID: UA-80420826-12
+          CLICKY_ID: 101298122
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_MEADOW_07A43BF03 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
