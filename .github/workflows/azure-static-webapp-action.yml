@@ -8,12 +8,13 @@ on:
         required: false
         type: choice
         options:
+        - all
         - en_US
         - ru_RU
 
 jobs:
   deploy_en_US:
-    if: github.event_name == 'workflow_dispatch' && (!inputs.site || inputs.site == 'en_US')
+    if: github.event_name == 'workflow_dispatch' && (inputs.site == 'all' || inputs.site == 'en_US')
     runs-on: ubuntu-latest
     name: Deploy US English
     steps:
@@ -50,7 +51,7 @@ jobs:
           output_location: "public"
 
   deploy_ru_RU:
-    if: github.event_name == 'workflow_dispatch' && (!inputs.site || inputs.site == 'ru_RU')
+    if: github.event_name == 'workflow_dispatch' && (inputs.site == 'all' || inputs.site == 'ru_RU')
     runs-on: ubuntu-latest
     name: Deploy RU Russian
     steps:
