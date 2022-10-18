@@ -10,13 +10,6 @@ on:
         options:
         - en_US
         - ru_RU
-  push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
 
 jobs:
   deploy_en_US:
