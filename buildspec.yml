@@ -2,14 +2,11 @@ version: 0.2
 CODEBUILD_BUILD_SUCCEEDING: 0
 phases:
     install:
+        runtime-versions:
+            nodejs: 16
         commands:
-            - nvm install --lts
             - 'touch .npmignore'
             - 'npm install -g yarn gatsby gatsby-cli'
-    pre_build:
-        commands:
-            - n 16
-            - 'yarn install'
     build:
         commands:
         
