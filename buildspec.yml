@@ -4,7 +4,7 @@ phases:
     install:
         commands:
             - 'touch .npmignore'
-            - 'npm install -g yarn gatsby@4.25.2 gatsby-cli@4.24.0'
+            - 'npm install --unsafe-perm -g yarn gatsby@4.25.2 gatsby-cli@4.24.0'
     pre_build:
         commands:
             - n 16
