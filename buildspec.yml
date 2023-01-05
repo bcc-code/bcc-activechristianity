@@ -5,7 +5,7 @@ phases:
         commands:
             - n 16
             - 'touch .npmignore'
-            - 'npm install -g yarn'
+            - 'npm install -g yarn gatsby gatsby-cli'
     pre_build:
         commands:
             - n 16
