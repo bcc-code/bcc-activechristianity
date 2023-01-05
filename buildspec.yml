@@ -2,7 +2,7 @@ version: 0.2
 CODEBUILD_BUILD_SUCCEEDING: 0
 phases:
     install:
-        commands:z
+        commands:
             - 'touch .npmignore'
             - 'npm install -g yarn gatsby@4.25.2 gatsby-cli@4.24.0'
     pre_build:
