@@ -3,7 +3,7 @@ CODEBUILD_BUILD_SUCCEEDING: 0
 phases:
     install:
         commands:
-            - n lts
+            - nvm install --lts
             - 'touch .npmignore'
             - 'npm install -g yarn gatsby gatsby-cli'
     pre_build:
