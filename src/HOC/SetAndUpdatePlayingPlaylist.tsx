@@ -1,6 +1,6 @@
 import { fetchTracksFromSlug } from '@/helpers/fetchLocalData';
 import { setCurrentMedia, setAutoPlay, addTracks } from '@/state/action';
-import { isPlaySelector, currentMediaSelector } from '@/state/selectors/other';
+import { currentMediaSelector } from '@/state/selectors/other';
 import { IRootState } from '@/state/types';
 import { IMedia } from '@/types';
 import React from 'react';

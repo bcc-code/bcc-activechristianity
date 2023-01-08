@@ -8,7 +8,6 @@ import ac_strings from '@/strings/ac_strings.js';
 // Type
 import { INavItem, IBibleBook, IBible } from '@/types';
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 
 interface IBibleNavProps {
 	path: string;
@@ -146,15 +145,9 @@ const BibleNav: React.FC<IBibleNavProps> = props => {
 										</div>
 									);
 								})}
-							<CSSTransition
-								timeout={500}
-								classNames="fade"
-								style={{ order: activeBookOrder }}
-								in={activeBookOrder !== undefined && activeBookOrder > bible.old.length}
-								unmountOnExit
-							>
+							<div>
 								{result}
-							</CSSTransition>
+							</div>
 						</PlaceHolder>
 					</div>
 				</div>
