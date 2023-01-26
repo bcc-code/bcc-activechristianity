@@ -8,11 +8,8 @@ require('dotenv').config({
 	path: `.env.${activeEnv}`
 });
 
+require('./check_env_var')();
 const targetAddress = activeEnv === 'production' ? new URL(process.env.SITE_URL) : process.env.SITE_URL;
-
-const checkEnvVar = require('./check_env_var');
-
-checkEnvVar();
 
 const plugins = [
 	'gatsby-plugin-typescript',
@@ -137,22 +134,6 @@ if (activeEnv === 'production') {
 				] // Enable tailwindcss support
 				// whitelist: ['whitelist'], // Don't remove this selector
 				// ignore: ['/ignored.css', 'prismjs/', 'docsearch.js/'], // Ignore files/folders
-			}
-		},
-		{
-			resolve: `gatsby-plugin-s3`,
-			options: {
-				bucketName: process.env.S3_BUCKET_NAME,
-				region: process.env.S3_BUCKET_REGION,
-				protocol: targetAddress.protocol.slice(0, -1),
-				hostname: targetAddress.hostname,
-				acl: null,
-				params: {
-					// In case you want to add any custom content types: https://github.com/jariz/gatsby-plugin-s3/blob/master/recipes/custom-content-type.md
-				},
-				generateRoutingRules: false,
-				generateRedirectObjectsForPermanentRedirects: true,
-				enableS3StaticWebsiteHosting: false
 			}
 		},
 		{
