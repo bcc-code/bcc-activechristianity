@@ -67,6 +67,7 @@
   },
   "scripts": {
     "build": "gatsby build",
+    "deploy": "gatsby-plugin-s3 deploy --yes && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION --paths \"/*\"",
     "develop": "ACTIVE_ENV=ru_development gatsby develop",
     "slim_develop": "SUPER_SLIM_DEV_MODE=true ACTIVE_ENV=ru_development gatsby develop",
     "slim_build": "SUPER_SLIM_DEV_MODE=true gatsby build",
