@@ -33,6 +33,7 @@
     "gatsby-plugin-react-helmet": "^5.11.0",
     "gatsby-plugin-robots-txt": "^1.7.0",
     "gatsby-plugin-root-import": "^2.0.8",
+    "gatsby-plugin-s3": "^0.4.1",
     "gatsby-plugin-typescript": "^4.11.1",
     "gatsby-source-ac": "file:gatsby-source-ac",
     "gatsby-source-graphql": "^4.11.1",
