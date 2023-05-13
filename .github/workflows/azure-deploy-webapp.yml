@@ -1,18 +1,21 @@
 name: Reusable deployment workflow
 
 on:
-  workflow_call:
+  workflow_dispatch:
+    branches:
+      - 'azure-static'
     inputs:
-      target-env:
+      environment:
+        description: 'Environment to deploy'
+        type: environment
         required: true
-        type: string
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy to ${{ inputs.target-env }}
+    name: Deploy to ${{ inputs.environment }}
     environment:
-      name: ${{ inputs.target-env }}
+      name: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v3
         with:
