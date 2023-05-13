@@ -1,0 +1,46 @@
+name: Reusable deployment workflow
+
+on:
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to ${{ inputs.target-env }}
+    environment:
+      name: ${{ inputs.target-env }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        env:
+          TITLE: ${{ vars.TITLE }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          LANG: ${{ vars.LANG }}
+          LANG_CODE: ${{ vars.LANG_CODE }}
+          LOCALE: ${{ vars.LOCALE }}
+          ENABLE_ALGOLIA: ${{ vars.ENABLE_ALGOLIA }}
+          ALGOLIA_APP_ID: ${{ vars.ALGOLIA_APP_ID }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_SEARCH_KEY: ${{ vars.ALGOLIA_SEARCH_KEY }}
+          GA_ID: ${{ vars.GA_ID }}
+          CLICKY_ID: ${{ vars.CLICKY_ID }}
+          LISTEN_SECTION: ${{ vars.LISTEN_SECTION }}
+          GLOSSARY_SECTION: ${{ vars.GLOSSARY_SECTION }}
+          SCRIPTURE_SECTION: ${{ vars.SCRIPTURE_SECTION }}
+          WALLPAPER_SECTION: ${{ vars.WALLPAPER_SECTION }}
+          SERIES_SECTON: ${{ vars.SERIES_SECTON }}
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/"
+          api_location: ""
+          output_location: "public"
