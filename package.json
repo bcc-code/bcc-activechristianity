@@ -8,10 +8,6 @@
   "keywords": [
     "gatsby"
   ],
-  "engines": {
-    "node": "16.x.x",
-    "npm": "8.x.x"
-  },
   "dependencies": {
     "@gatsbyjs/reach-router": "^1.3.9",
     "@hookform/resolvers": "^2.8.8",

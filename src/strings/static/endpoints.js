@@ -1,7 +1,7 @@
 module.exports = {
 	ebooks: 'https://acadmin.net/ebooks',
-	contact_hero: 'https://media.activechristianity.org/2019/08/ac-home-hero-bg.jpg',
-	podcast_logo: 'https://media.activechristianity.org/2020/08/living-the-gospel-season-2-logo-compress.jpg',
+	contact_hero: 'https://cdn.activechristianity.org/bymnzyzb3dqxb1bjunj9.jpg',
+	podcast_logo: 'https://cdn.activechristianity.org/en/13359e9185313f4724f67a18b332189b.jpg',
 	facebook_login_redirect: 'https://acadmin.net/social/facebook/redirect',
 	google_login_redirect: 'https://acadmin.net/social/google/redirect',
 	contact_form_api: 'https://q4jq50xsab.execute-api.us-east-1.amazonaws.com/prod',

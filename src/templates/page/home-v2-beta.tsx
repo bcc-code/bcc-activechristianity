@@ -1,19 +1,18 @@
-import * as React from 'react';
-import { graphql } from 'gatsby';
-import MetaTag from '@/components/Meta';
-import { openSignInModal } from '@/state/action';
-import { useSelector, useDispatch } from 'react-redux';
-import { loggedInSelector } from '@/state/selectors/user';
 import Link from '@/components/CustomLink';
-import ac_strings from '@/strings/ac_strings.js';
-import { IPostRes, ITopic, IImage } from '@/types';
+import Gallery from '@/components/CustomizedPageComponent/Gallery';
+import Image1To1 from '@/components/Images/Image1to1Rounded';
+import MetaTag from '@/components/Meta';
+import CardListPosts from '@/layout-parts/HomeNew/CardListPost';
 import { HomeTop } from '@/layout-parts/HomeNew/HomeBanners';
 import SectionWrapperSmall from '@/layout-parts/HomeNew/SectionWrapperSmall';
-import shortid from 'shortid';
 import SimpleBgCardList from '@/layout-parts/HomeNew/SimpleBgCardList';
-import CardListPosts from '@/layout-parts/HomeNew/CardListPost';
-import Image1To1 from '@/components/Images/Image1to1Rounded';
-import Gallery from '@/components/CustomizedPageComponent/Gallery';
+import { openSignInModal } from '@/state/action';
+import { loggedInSelector } from '@/state/selectors/user';
+import ac_strings from '@/strings/ac_strings.js';
+import { IImage, IPostRes, ITopic } from '@/types';
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import shortid from 'shortid';
 
 const loggedInOrder = [
 	'hero',
@@ -244,18 +243,3 @@ interface IHomeProps {
 	};
 	data: any;
 }
-
-export const pageQuery = graphql`
-	query homeV2 {
-		ac {
-			page(id: "106") {
-				image {
-					src
-					srcset
-					dataUri
-				}
-				flexibleContent
-			}
-		}
-	}
-`;
