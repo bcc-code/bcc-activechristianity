@@ -81,8 +81,8 @@ module.exports = function generateTopics(actions, graphql) {
 				};
 
 				const popularTopicsRes = await graphql(`{
-					ac {
-                        popularTopics: topics(ids:[${popularTopicsSlugs ? popularTopicsSlugs.map(t => t.id).join(','):[]}]) {
+                    ac {
+                        popularTopics: topics(ids:[${(popularTopicsSlugs ?? []).map(t => t.id).join(',')}]) {
                             ${topicQuery}
                         } 
                     }

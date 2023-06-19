@@ -1,18 +1,13 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 exports.__esModule = true;
-exports.sitemapsUtils = exports.readFile = exports.renameFile = exports.writeFile = exports.withoutTrailingSlash = void 0;
-
+exports.writeFile = exports.withoutTrailingSlash = exports.sitemapsUtils = exports.renameFile = exports.readFile = void 0;
 var _fsExtra = _interopRequireDefault(require("fs-extra"));
-
 var _pify = _interopRequireDefault(require("pify"));
-
 var withoutTrailingSlash = function withoutTrailingSlash(path) {
   return path === "/" ? path : path.replace(/\/$/, "");
 };
-
 exports.withoutTrailingSlash = withoutTrailingSlash;
 var writeFile = (0, _pify.default)(_fsExtra.default.writeFile);
 exports.writeFile = writeFile;
