@@ -1,12 +1,11 @@
 import Link from '@/components/CustomLink';
-import { SearchIcon, MenuIcon } from '@/components/Icons/MUI/navIcons';
+import { MenuIcon, SearchIcon } from '@/components/Icons/MUI/navIcons';
 import LogoFull from '@/images/ACLogo';
 import BottomMobile from '@/layout-parts/Nav/BottomMobile';
-import { IDrawerNav } from '@/layouts/AppWrapper';
 import menus from '@/strings/generated/menus.json';
 import { INavItem } from '@/types';
 import loadable from '@loadable/component';
-import React, { Profiler } from 'react';
+import React from 'react';
 import shortid from 'shortid';
 
 import TopFirst from './TopFirst';
