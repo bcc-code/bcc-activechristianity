@@ -483,6 +483,16 @@ export const unsubscribeMutation = (email: string) => `
   }
 `;
 
+export const formSubmitMutation = `
+mutation ($formId: ID!, $fields: [FormField!]!) {
+  submit(formId: $formId, fields: $fields) {
+    success
+    msg
+    errors
+  }
+}
+`
+
 interface IUpdateProfile {
 	email?: string;
 	lang?: string;

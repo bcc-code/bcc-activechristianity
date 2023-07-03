@@ -7,8 +7,9 @@ interface IProps {
 	onChange: (e: any) => void;
 	error?: string;
 	required?: boolean;
+	placeholder?: string;
 }
-const InputText: React.FC<IProps> = ({ value, label, onChange, error, name, required }) => {
+const InputText: React.FC<IProps> = ({ value, label, onChange, error, name, required, placeholder }) => {
 	return (
 		<div className="my-4 w-full">
 			<label htmlFor={name} className="block w-full text-sm sm:text-base pb-2">
@@ -17,11 +18,12 @@ const InputText: React.FC<IProps> = ({ value, label, onChange, error, name, requ
 			</label>
 
 			<textarea
-				className={`block w-full border border-gray-500 focus:${error ? 'border-red-600' : 'border-gray-900'}`}
+				className={`block w-full border rounded-lg border-gray-300 p-2 focus:${error ? 'border-red-600' : 'border-gray-900'}`}
 				value={value}
 				onChange={onChange}
 				name={name}
 				required={required}
+				placeholder={label}
 				rows={8}
 			/>
 

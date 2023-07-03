@@ -1,5 +1,5 @@
 import { FormSubmitButton } from '@/components/Button';
-import { InputText, InputCheckbox, InputTextArea } from '@/components/Input';
+import { InputCheckbox, InputText, InputTextArea } from '@/components/Input';
 import Snackbar from '@/components/Snackbar';
 import { validateEmail } from '@/helpers/index-js';
 import ac_strings from '@/strings/ac_strings.js';
@@ -30,27 +30,33 @@ const initialFields = {
 	message: ''
 };
 
+const requiredFields: Record<string, boolean> = {
+	name: false,
+	email: false,
+	message: false
+};
+
+
 const ContactForm = () => {
 	const [fields, setFields] = React.useState<IContactFrom>(initialFields);
-	const [errors, setErrors] = React.useState(initialFields);
+	const [errors, setErrors] = React.useState(requiredFields);
 	const [success, setSuccess] = React.useState(false);
 	const [errorMessage, setErrorMessage] = React.useState<undefined | string>(undefined);
 	const [canSent, setCanSet] = React.useState(false);
 	const validate = () => {
-		const fieldNames = ['email', 'name', 'message'];
 		const result = { ...errors };
 		let pass = true;
-		for (const field of fieldNames) {
-			if (field === 'email') {
+		for (const field in result) {
+			if ((fields[field as keyof IContactFrom] as string).trim() === '') {
+				result[field] = true;
+				pass = false;
+			} else if (field === 'email') {
 				if (!validateEmail(fields[field])) {
 					result[field] = true;
 					pass = false;
 				} else {
 					result[field] = false;
 				}
-			} else if (fields[field].trim() === '') {
-				result[field] = true;
-				pass = false;
 			} else {
 				result[field] = false;
 			}
@@ -77,9 +83,10 @@ const ContactForm = () => {
 			/*     const dataLayer = (window as any).dataLayer = (window as any).dataLayer || []; */
 
 			fetch(endpoints.contact_form_api, {
-				method: 'POST', // or 'PUT'
+				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer FNuU0lnQkiERUe6jTdVDuSowc61VEX'
 				},
 				body: JSON.stringify(data)
 			})
@@ -129,6 +136,7 @@ const ContactForm = () => {
 						label={ac_strings.full_name}
 						type="text"
 						name="name"
+						placeholder="John Doe"
 						required
 						value={fields.name}
 						error={errors.name ? ac_strings.error_required : undefined}
@@ -140,6 +148,7 @@ const ContactForm = () => {
 						label={ac_strings.location}
 						type="text"
 						name="location"
+						placeholder="City | Country"
 						value={fields.location}
 						error={errors.location}
 						onChange={e => handleChange(e, 'location')}
@@ -151,6 +160,7 @@ const ContactForm = () => {
 				label={ac_strings.email}
 				type="email"
 				name="email"
+				placeholder="example@email.com"
 				required
 				value={fields.email}
 				error={errors.email ? ac_strings.error_required : undefined}
@@ -160,6 +170,7 @@ const ContactForm = () => {
 				label={ac_strings.subject}
 				type="text"
 				name="subject"
+				placeholder="Topic or reason for contact"
 				value={fields.subject}
 				error={errors.subject ? ac_strings.error_required : undefined}
 				onChange={e => handleChange(e, 'subject')}

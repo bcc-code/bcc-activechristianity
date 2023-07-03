@@ -4,7 +4,7 @@ import * as request from './requests';
 import { IGetPostsAndTopics } from './requests';
 
 const baseUrl = endpoints.api_url;
-const sendQuery = (query: string) => {
+const sendQuery = (query: string, variables: any = null) => {
 	const options = {
 		method: 'POST',
 		credentials: 'include',
@@ -13,7 +13,7 @@ const sendQuery = (query: string) => {
 			'Content-Type': 'application/json',
 			'x-lang': process.env.LANG_CODE
 		},
-		body: JSON.stringify({ query })
+		body: JSON.stringify({ query, variables })
 	};
 	return fetch(baseUrl, options)
 		.then(response => response.json())
@@ -180,5 +180,11 @@ export default {
 	subscribeNewsletter: (email: string) => {
 		const query = request.subscribeMutation(email);
 		return sendQuery(query);
+	},
+	submitForm: (id: number, fields: any) => {
+		return sendQuery(request.formSubmitMutation, {
+			formId: id,
+			fields,
+		});
 	}
 };

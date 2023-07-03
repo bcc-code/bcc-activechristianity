@@ -11,8 +11,9 @@ interface IProps {
 	type?: 'text' | 'password' | 'hidden' | 'email';
 	required?: boolean;
 	hideLabel?: boolean;
+	placeholder?: string;
 }
-const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name, required, hideLabel }) => {
+const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name, required, hideLabel, placeholder }) => {
 	const inputType = type ? type : 'text';
 	const [focused, setFocused] = React.useState(false);
 
@@ -42,7 +43,7 @@ const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name
 					onBlur={() => {
 						setFocused(false);
 					}}
-					placeholder={hideLabel === true ? label : ''}
+					placeholder={hideLabel === true ? label : placeholder}
 				/>
 			</div>
 			{<div className="w-full text-xs py-2 text-red-700 text-left">{error}</div>}

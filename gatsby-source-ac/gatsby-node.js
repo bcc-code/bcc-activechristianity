@@ -254,41 +254,23 @@ exports.onPostBuild = async ({ cache }) => {
 
 const removeUnwantedNodes = text => {
 	const root = parse(text);
-	const scripts = root.querySelector('script');
-	const audio = root.querySelectorAll('audio');
-	const wpAudio = root.querySelector('.powerpress_player');
-	const podcastLinks = root.querySelectorAll('.powerpress_links');
-	const playlist = root.querySelector('.cue-playlist-container');
-	const quotes = root.querySelectorAll('.wp-embedded-content');
-	if (scripts) {
-		scripts.remove();
-	}
 
-	if (wpAudio) {
-		wpAudio.remove();
-	}
-
-	if (podcastLinks.length > 0) {
-		podcastLinks.forEach(node => {
-			node.remove();
-		});
-	}
-
-	if (playlist) {
-		playlist.remove();
-	}
-
-	if (quotes.length > 0) {
-		quotes.forEach(node => {
-			node.remove();
-		});
-	}
-
-	if (audio.length > 0) {
-		audio.forEach(node => {
-			node.remove();
-		});
-	}
+	const querySelectors = [
+		'script',
+		'audio',
+		'.powerpress_player', // wpAudio
+		'.powerpress_links', // podcastLinks
+		'.cue-playlist-container', // playlist
+		'.wp-embedded-content' // quotes
+	]
+	querySelectors.forEach(selector => {
+		const nodes = root.querySelectorAll(selector);
+		if (nodes.length > 0) {
+			nodes.forEach(node => {
+				node.remove();
+			});
+		}
+	});
 
 	return root.toString();
 };

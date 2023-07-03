@@ -71,7 +71,7 @@
     "develop": "ACTIVE_ENV=en_development gatsby develop",
     "slim_develop": "SUPER_SLIM_DEV_MODE=true ACTIVE_ENV=en_development gatsby develop",
     "slim_build": "SUPER_SLIM_DEV_MODE=true gatsby build",
-    "start": "npm run develop",
+    "start": "npm run slim_develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
