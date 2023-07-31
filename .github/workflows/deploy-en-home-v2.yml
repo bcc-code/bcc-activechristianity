@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Deploy English home-v2
 
 on:
   workflow_dispatch:
