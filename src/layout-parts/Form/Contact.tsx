@@ -86,7 +86,7 @@ const ContactForm = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': 'Bearer FNuU0lnQkiERUe6jTdVDuSowc61VEX'
+					'Authorization': 'Bearer xDTc1aQ46hUMTgn9MeI88Kwqw6nx3p'
 				},
 				body: JSON.stringify(data)
 			})
