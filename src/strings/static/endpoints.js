@@ -4,7 +4,7 @@ module.exports = {
 	podcast_logo: 'https://cdn.activechristianity.org/en/13359e9185313f4724f67a18b332189b.jpg',
 	facebook_login_redirect: 'https://acadmin.net/social/facebook/redirect',
 	google_login_redirect: 'https://acadmin.net/social/google/redirect',
-	contact_form_api: 'https://q4jq50xsab.execute-api.us-east-1.amazonaws.com/prod',
+	contact_form_api: 'https://cors-proxy.gerard-lamusse.workers.dev/?url=https://app.windmill.dev/api/w/bcc-active-christianity/jobs/run_wait_result/f/f/forms/submit-contact',
 	dummy_image_api: 'https://dummyimage.com',
 	random_image_api: 'https://source.unsplash.com/collection/1308823',
 	about_us_video: 'https://www.youtube.com/embed/sAbW36EzKIc',

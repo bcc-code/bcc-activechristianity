@@ -25,7 +25,7 @@ const InputText: React.FC<IProps> = ({ value, label, onChange, type, error, name
 				</label>
 			)}
 			<div
-				className={`w-full rounded-lg border overflow-hidden input-wrap ${focused ? ' border-gray-500' : ''} ${
+				className={`w-full rounded-lg border overflow-hidden input-wrap p-2 ${focused ? ' border-gray-500' : ''} ${
 					error ? ' border-red-700' : ''
 				}`}
 			>

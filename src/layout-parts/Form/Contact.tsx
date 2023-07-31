@@ -1,5 +1,5 @@
 import { FormSubmitButton } from '@/components/Button';
-import { InputText, InputCheckbox, InputTextArea } from '@/components/Input';
+import { InputCheckbox, InputText, InputTextArea } from '@/components/Input';
 import Snackbar from '@/components/Snackbar';
 import { validateEmail } from '@/helpers/index-js';
 import ac_strings from '@/strings/ac_strings.js';
@@ -79,7 +79,8 @@ const ContactForm = () => {
 			fetch(endpoints.contact_form_api, {
 				method: 'POST', // or 'PUT'
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					'Authorization': 'Bearer xDTc1aQ46hUMTgn9MeI88Kwqw6nx3p'
 				},
 				body: JSON.stringify(data)
 			})

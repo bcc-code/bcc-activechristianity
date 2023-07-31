@@ -1,8 +1,7 @@
 import { LayoutH1 } from '@/components/Headers';
 import PostList from '@/components/List/PostList';
 import MetaTag from '@/components/Meta';
-import { IPaginate, INavItem } from '@/types';
-import loadable from '@loadable/component';
+import { INavItem, IPaginate } from '@/types';
 import React from 'react';
 
 const TaxonomyPage: React.FC<ITaxonomyPageProps> = props => {
