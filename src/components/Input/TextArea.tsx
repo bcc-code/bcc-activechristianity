@@ -17,7 +17,7 @@ const InputText: React.FC<IProps> = ({ value, label, onChange, error, name, requ
 			</label>
 
 			<textarea
-				className={`block w-full border border-gray-500 focus:${error ? 'border-red-600' : 'border-gray-900'}`}
+				className={`block w-full border border-gray-500 p-2 focus:${error ? 'border-red-600' : 'border-gray-900'}`}
 				value={value}
 				onChange={onChange}
 				name={name}
