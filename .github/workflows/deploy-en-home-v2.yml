@@ -4,14 +4,19 @@ on:
   workflow_dispatch:
     branches:
       - 'update/home-v2'
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        type: environment
+        required: true
 
 jobs:
   deploy_en_US:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    name: Deploy US English
+    name: Deploy to ${{ inputs.environment }}
     environment:
-      name: Azure en_US
+      name: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v3
         with:
