@@ -1,0 +1,52 @@
+name: Deploy AC Home-V2
+
+on:
+  workflow_dispatch:
+    branches:
+      - 'update/home-v2'
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        type: environment
+        required: true
+
+jobs:
+  deploy_en_US:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    name: Deploy to ${{ inputs.environment }}
+    environment:
+      name: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          ref: 'update/home-v2'
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        env:
+          TITLE: ${{ vars.TITLE }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          LANG: ${{ vars.LANG }}
+          LANG_CODE: ${{ vars.LANG_CODE }}
+          LOCALE: ${{ vars.LOCALE }}
+          ENABLE_ALGOLIA: ${{ vars.ENABLE_ALGOLIA }}
+          ALGOLIA_APP_ID: ${{ vars.ALGOLIA_APP_ID }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_SEARCH_KEY: ${{ vars.ALGOLIA_SEARCH_KEY }}
+          GA_ID: ${{ vars.GA_ID }}
+          CLICKY_ID: ${{ vars.CLICKY_ID }}
+          LISTEN_SECTION: ${{ vars.LISTEN_SECTION }}
+          GLOSSARY_SECTION: ${{ vars.GLOSSARY_SECTION }}
+          SCRIPTURE_SECTION: ${{ vars.SCRIPTURE_SECTION }}
+          WALLPAPER_SECTION: ${{ vars.WALLPAPER_SECTION }}
+          SERIES_SECTON: ${{ vars.SERIES_SECTON }}
+          BIBLE_VERSION: ${{ vars.BIBLE_VERSION }}
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/"
+          api_location: ""
+          output_location: "public"
