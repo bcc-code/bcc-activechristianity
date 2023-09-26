@@ -1,4 +1,4 @@
-import { updateTranslationUrl, updateBreadcrumb } from '@/state/action';
+import { updateBreadcrumb, updateTranslationUrl } from '@/state/action';
 import ac_strings from '@/strings/ac_strings.js';
 import { INavItem, ITranslations } from '@/types';
 import { Location } from '@reach/router';
@@ -86,6 +86,7 @@ const MetaTag: React.FC<MetaTagProps> = ({ title, type, meta, translatedUrls, br
 						<meta property="twitter:card" content="summary" />
 						<meta property="twitter:title" content={title} />
 						<meta property="twitter:description" content={description} />
+						<script defer data-domain={String(process.env.SITE_URL).replace(/http(s)?:\/\//, '')} src="https://plausible.io/js/script.js"></script>
 					</Helmet>
 				</div>
 			)}
