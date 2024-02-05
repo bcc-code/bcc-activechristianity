@@ -14,7 +14,6 @@ module.exports = async function generateTopic(data) {
 
 		// create recommend
 		const pagePath = `${ac_strings.slug_topic}/${topic.slug}`;
-		console.log(`creating topic recommendation' ${pagePath}`);
 
 		if (hasRecommendPage) {
 			return createPage({

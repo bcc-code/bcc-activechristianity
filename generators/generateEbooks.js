@@ -72,7 +72,7 @@ module.exports = function generateEbooks(actions, graphql) {
 			});
 		})
 		.catch(err => {
-			console.log(query);
-			console.log(err);
+			console.warn(query);
+			console.error(err);
 		});
 };

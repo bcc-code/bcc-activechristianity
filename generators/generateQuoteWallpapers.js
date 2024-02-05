@@ -135,7 +135,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
 				for (let i = 1; i <= totalPages; i++) {
 					let pagePath = i === 1 ? wallpapersPage.slug : `${baseUrl}/${i}`;
 					const quotes = sortedRgbAllQuotes.slice((i - 1) * perPage, i * perPage);
-					console.log(pagePath);
 					createPage({
 						path: pagePath,
 						component: path.resolve(overviewTemplate),

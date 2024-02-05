@@ -41,7 +41,6 @@ module.exports = function generateSeries(actions, graphql) {
 			};
 			_.each(series, node => {
 				const basePath = `/${ac_strings.slug_series}/${node.slug}`;
-				console.log(basePath);
 				createPage({
 					path: basePath,
 					component: path.resolve(template),
@@ -60,7 +59,7 @@ module.exports = function generateSeries(actions, graphql) {
 			});
 		})
 		.catch(err => {
-			console.log(query);
-			console.log(err);
+			console.warn(query);
+			console.error(err);
 		});
 };

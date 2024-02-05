@@ -138,15 +138,13 @@ module.exports.createArchivePages = async function ({
 					}
 					return res.data.ac.topic.allPosts.data;
 				} else {
-					console.log(query);
 					throw new Error('not able to get pages');
 				}
 			})
 			.catch(err => {
-				console.log(query);
-				console.log(err);
+				console.warn(query);
+				console.error(err);
 			});
-		console.log(`createArchivePages ${pagePath}`);
 		createPage({
 			path: pagePath,
 			component,
@@ -181,7 +179,6 @@ module.exports.createSubTopicPages = ({
 		console.log('No posts for this topic' + topic.name + '/' + subTopic.name);
 	} else {
 		const baseUrl = `${isTopic === true ? `${ac_strings.slug_topic}/` : ''}${topic.slug}/${subTopic.slug}`;
-		console.log(`createSubTopicPages ${baseUrl}`);
 		const pageBreadcrumb = breadcrumb ? [...breadcrumb] : [];
 		pageBreadcrumb.push({
 			name: subTopic.name,

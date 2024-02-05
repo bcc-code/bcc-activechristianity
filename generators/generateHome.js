@@ -119,7 +119,7 @@ module.exports = function generatePages(actions, graphql) {
 							baseUrl,
 							headers
 						).catch(err => {
-							console.log(err);
+							console.error(err);
 							throw new Error(err.message);
 						});
 					}
@@ -143,9 +143,6 @@ module.exports = function generatePages(actions, graphql) {
 												const allPosts = somePosts.data;
 												popularTopicsAll['dynamic'].push({ ...topic, posts: allPosts });
 											} else {
-												console.log(getTopicQuery);
-												console.log(res.data.ac.topic);
-												console.log(item);
 												if (! process.env.SUPER_SLIM_DEV_MODE) {
 													throw new Error('not able to find posts for this topic');
 												}

@@ -95,7 +95,6 @@ exports.onPostBuildTest = async ({ graphql }) => {
 		const pageCount = Math.ceil(postTotal / 12);
 		slugsToValidateArray.push(`${ac_strings.slug_latest}/2`, `${ac_strings.slug_latest}/${pageCount}`);
 		formats.forEach(node => {
-			console.log(node);
 			const find = formatScope.find(f => `${f.keyId}` === `${node.id}`);
 			if (find && node.noOfPosts > 0) {
 				slugsToValidateArray.push(`${node.slug}`, `${node.slug}/${ac_strings.slug_latest}`);
@@ -134,7 +133,7 @@ exports.onPostBuildTest = async ({ graphql }) => {
 							slugsToValidateArray.push(`${node.slug}/${subTopic.slug}`);
 						}
 					} else {
-						console.log(`cannot find number of posts for this topic: ${node.slug}/${subTopic.slug}`);
+						console.warn(`cannot find number of posts for this topic: ${node.slug}/${subTopic.slug}`);
 					}
 				}
 			}

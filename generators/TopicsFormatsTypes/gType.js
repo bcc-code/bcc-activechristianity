@@ -81,13 +81,12 @@ module.exports = async function generateTypes(data) {
 		const result = await graphql(query)
 			.then(res => {
 				if (res.errors) {
-					console.log(res.errors);
 					throw new Error(res.errors.join);
 				}
 				return res;
 			})
 			.catch(error => {
-				console.log(error);
+				console.error(error);
 			});
 
 		if (result.data && result.data.ac) {

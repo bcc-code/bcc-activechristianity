@@ -49,7 +49,6 @@ module.exports = function generatePlaylists(actions, graphql) {
 			console.log('Generating playlist');
 			_.each(playlists, playlist => {
 				const pagePath = `/${ac_strings.slug_playlist}/${playlist.slug}`;
-				console.log(pagePath);
 				createPage({
 					path: pagePath,
 					component: path.resolve(template),
@@ -65,7 +64,7 @@ module.exports = function generatePlaylists(actions, graphql) {
 			});
 		})
 		.catch(err => {
-			console.log(query);
-			console.log(err);
+			console.warn(query);
+			console.error(err);
 		});
 };

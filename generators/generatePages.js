@@ -106,8 +106,6 @@ module.exports = function generatePages(actions, graphql) {
 
 				_.each(pageInfo, page => {
 					if (page.parent) {
-						console.log(page.title);
-						console.log(page.parent.id);
 						if (`${page.parent.id}` == `${parentIds.about.id}`) {
 							parentIds.about.children.push(page);
 						} else if (`${page.parent.id}` == `${parentIds.themes.id}`) {
@@ -236,7 +234,7 @@ module.exports = function generatePages(actions, graphql) {
 			}
 		})
 		.catch(err => {
-			console.log(query);
-			console.log(err);
+			console.warn(query);
+			console.error(err);
 		});
 };

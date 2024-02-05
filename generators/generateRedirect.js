@@ -29,7 +29,7 @@ module.exports = function generateRedirects(actions, graphql) {
 			});
 		})
 		.catch(err => {
-			console.log(query);
-			console.log(err);
+			console.warn(query);
+			console.error(err);
 		});
 };
