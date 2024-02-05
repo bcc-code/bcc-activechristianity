@@ -152,7 +152,6 @@ module.exports = async function generatePosts(actions, graphql) {
 	const pageCount = Math.ceil(total / count);
 
 	for (let i = 1; i <= pageCount; i++) {
-		console.log(i);
 		const eachPageQuery = getauthorsPosts(i);
 		const res = await graphql(eachPageQuery);
 
@@ -166,9 +165,7 @@ module.exports = async function generatePosts(actions, graphql) {
 				};
 			});
 		} else {
-			console.log(eachPageQuery);
-			console.log('unexpected response');
-			console.log(res);
+			console.warn('unexpected post response');
 		}
 	}
 
@@ -247,7 +244,7 @@ module.exports = async function generatePosts(actions, graphql) {
 								}
 								return authorsWPosts[a.slug];
 							} else {
-								console.log(a);
+								console.warn(a);
 								throw Error('Unable to find author');
 							}
 						});
@@ -349,11 +346,7 @@ module.exports = async function generatePosts(actions, graphql) {
 							updated_at: node.updated_at,
 							pageType: 'post'
 						};
-						if (process.env.SUPER_SLIM_DEV_MODE === 'true') {
-							console.log(normalized.slug);
-						}
-						/*                               console.log(normalized.slug)
-                              console.log(data.mediaTypes.types) */
+
 						const pagePathPost = `${normalized.slug}`;
 						createPage({
 							path: pagePathPost,

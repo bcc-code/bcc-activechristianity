@@ -42,7 +42,7 @@ module.exports = async function generateTypes(data) {
 
 			await graphql(geFormatPostsQuery).then(subTopicPostRes => {
 				if (subTopicPostRes.errors) {
-					console.log(subTopicPostRes.errors);
+					console.warn(subTopicPostRes.errors);
 					throw new Error(subTopicPostRes.errors);
 				}
 				const allPosts = subTopicPostRes.data.ac.topic.somePosts.data;

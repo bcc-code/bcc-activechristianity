@@ -72,7 +72,7 @@ module.exports = function generateTaxonomies(actions, graphql) {
 			});
 		})
 		.catch(err => {
-			console.log(allBooksQuery);
-			console.log(err);
+			console.warn(allBooksQuery);
+			console.error(err);
 		});
 };

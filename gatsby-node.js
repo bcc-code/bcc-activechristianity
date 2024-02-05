@@ -89,7 +89,7 @@ exports.createPages = ({ page, actions, graphql }) => {
 		}
 
 		if (process.env.GLOSSARY_SECTION === 'true') {
-			console.log('generating glossry');
+			console.log('generating glossary');
 			generators.push(generateGlossary(actions, graphql));
 		}
 

@@ -138,15 +138,15 @@ module.exports.createArchivePages = async function ({
 					}
 					return res.data.ac.topic.allPosts.data;
 				} else {
-					console.log(query);
+					console.warn(query);
 					throw new Error('not able to get pages');
 				}
 			})
 			.catch(err => {
-				console.log(query);
-				console.log(err);
+				console.warn(query);
+				console.warn(err);
 			});
-		console.log(`createArchivePages ${pagePath}`);
+		console.debug(`createArchivePages ${pagePath}`);
 		createPage({
 			path: pagePath,
 			component,

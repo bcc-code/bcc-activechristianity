@@ -9,7 +9,7 @@ module.exports = async function generateFormat(data) {
 		info: nodeInfo,
 		items: []
 	};
-	console.log(format.slug);
+	
 	const today = new Date();
 	createPage({
 		path: format.slug,

@@ -95,7 +95,6 @@ exports.onPostBuildTest = async ({ graphql }) => {
 		const pageCount = Math.ceil(postTotal / 12);
 		slugsToValidateArray.push(`${ac_strings.slug_latest}/2`, `${ac_strings.slug_latest}/${pageCount}`);
 		formats.forEach(node => {
-			console.log(node);
 			const find = formatScope.find(f => `${f.keyId}` === `${node.id}`);
 			if (find && node.noOfPosts > 0) {
 				slugsToValidateArray.push(`${node.slug}`, `${node.slug}/${ac_strings.slug_latest}`);
@@ -173,8 +172,7 @@ exports.onPostBuildTest = async ({ graphql }) => {
 		}
 
 		if (process.env.GLOSSARY_SECTION === 'true') {
-			console.log(Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length);
-			console.log('check glossry');
+			console.log('check glossry', Array.isArray(nodeMaps.glossary) && nodeMaps.glossary.length);
 		}
 
 		// generate slug map to validate all pages

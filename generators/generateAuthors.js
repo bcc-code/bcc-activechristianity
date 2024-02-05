@@ -85,7 +85,6 @@ module.exports = function generateTaxonomies(actions, graphql) {
 
 									for (let i = 0; i < totalCount; i += perPage, currentPage++) {
 										let pagePath = `${baseUrl}${currentPage > 1 ? '/' + currentPage : ''}`;
-										console.log(pagePath);
 										createPage({
 											path: pagePath,
 											component: path.resolve(template),
@@ -110,13 +109,12 @@ module.exports = function generateTaxonomies(actions, graphql) {
 								}
 							});
 						} else {
-							console.log('unexpected response');
-							console.log(res);
+							console.warn('missing response data');
 						}
 					})
 					.catch(err => {
-						console.log(getPageCountQuery);
-						console.log(err);
+						console.debug(getPageCountQuery);
+						console.error(err);
 					});
 			})
 		);
